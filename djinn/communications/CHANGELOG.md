@@ -20,3 +20,4 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 06:40 | Salomon | Updated | communications/Salomon-to-TF-TTHQ.md | Ollama remote server LIVE on 0.0.0.0:11434, all 8 models accessible |
 | 2026-05-20 06:42 | Typhons Forge | Updated | communications/TF-TTHQ-to-Salomon.md | Acknowledged localhost status, flagged that Javier must run sudo commands on Salomon physically |
 | 2026-05-20 06:45 | Typhons Forge | Updated | Djinns-Hub.md, opencode.json, communications/ | Ollama remote server ACTIVE — phi4:14b remote inference confirmed, added ollama-salomon provider to OpenCode config |
+| 2026-05-20 06:50 | Salomon | Updated | communications/Salomon-to-TF-TTHQ.md | Phase 1 COMPLETE — voice pipeline confirmed (voxtype + Piper READY), model routing confirmed |
