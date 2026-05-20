@@ -96,25 +96,32 @@
 
 ---
 
-## Resource Pooling Plan (fill when other machine comes online)
+## Resource Pooling Plan
 
 ### Current State
 - **Djinns Hub (TF/TTHQ)** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
 - **Salomon** — Ryzen 9 8940HX, 32 GB RAM, RTX 5060 8GB, 1TB NVMe
 
+### Ollama Remote Server — ACTIVE ✅
+- **Status:** Live since 2026-05-20 06:42 PDT
+- **Salomon IP:** 192.168.1.225:11434
+- **Connection:** `OLLAMA_HOST=192.168.1.225:11434`
+- **Test:** phi4:14b remote inference confirmed — haiku generated on Salomon GPU, streamed to TF/TTHQ
+- **Models available remotely:** qwen2.5:7b, deepseek-r1:7b, qwen2.5-coder:7b, mistral:7b, phi4:14b, llama3.2-vision:11b, nomic-embed-text, qwen3.6:latest (36B)
+
 ### Strategy Options
 
-1. **Ollama Remote Server** — run Ollama on Salomon with `OLLAMA_HOST=0.0.0.0`, TF/TTHQ connects via `OLLAMA_BASE_URL=http://salomon:11434`
-2. **SSH Tunnel** — forward Ollama API port between machines
+1. ~~**Ollama Remote Server**~~ — DONE, active and tested
+2. **SSH Tunnel** — backup if direct connection fails
 3. **Shared Model Cache** — if both machines access the same 1TB drive (via network mount), they share one model directory
 4. **OpenCode Multi-Machine** — configure each OpenCode instance to route to whichever machine has the GPU power for the target model
 
 ### Model Distribution Plan
 - Small/medium models (1-8B): run on either machine
-- Large models (11-14B): run on Salomon (8GB VRAM + 32GB RAM)
+- Large models (11-14B): run on Salomon (8GB VRAM + 32GB RAM) — accessed via remote Ollama
 - Heavy models (70B+): run on Salomon, accessed remotely from TF/TTHQ
-- Vision models: run on Salomon (more VRAM)
-- TF/TTHQ handles: lightweight tasks, storage, backup, GDrive sync
+- Vision models: run on Salomon (more VRAM) — accessed via remote Ollama
+- TF/TTHQ handles: lightweight tasks, storage, backup, GDrive sync, local inference (<8B)
 
 ---
 
