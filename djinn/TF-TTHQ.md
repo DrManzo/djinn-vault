@@ -1,0 +1,119 @@
+# Machine: TF/TTHQ
+
+**Introduced:** 2026-05-20  
+**Host:** tftthq  
+**Role:** Primary workstation / Djinn host  
+**Kernel:** 7.0.0-15-generic
+
+---
+
+## Hardware
+
+| Component | Spec |
+|-----------|------|
+| **CPU** | 11th Gen Intel Core i5-11400H @ 2.70GHz |
+| **RAM** | 14 GB DDR4 |
+| **GPU** | NVIDIA GeForce GTX 1650 (Max-Q) — 4 GB VRAM |
+| **GPU Driver** | NVIDIA 595.71.05 |
+| **Storage (OS)** | 250GB NVMe SSD (KINGSTON OM8PDP3256B-AI1) — 174 GB free |
+| **Storage (Bulk)** | 1TB HDD (WDC WD10SPZX) mounted at `/mnt/storage` — 870 GB free |
+| **Swap** | 4 GB |
+
+---
+
+## Models Currently Stored (on 1TB HDD)
+
+| Model | Size | Can Run Here? | Notes |
+|-------|------|---------------|-------|
+| deepseek-r1:8b | 5.2 GB | Yes | Deep reasoning |
+| qwen2.5:7b | 4.7 GB | Yes | Default — live lane |
+| qwen2.5-coder:7b | 4.7 GB | Yes | Code / dev |
+| phi4:14b | 9.1 GB | Limited (CPU offload) | Notes / APA format |
+| llama3.2-vision:11b-instruct-q4_K_M | 7.8 GB | Stretch (CPU offload) | Image / vision |
+| nomic-embed-text:latest | 274 MB | Yes | Embeddings |
+
+**Total stored:** ~31.8 GB
+
+---
+
+## Capacity Notes
+
+- **Max model this machine can run comfortably on GPU alone:** ~7B-8B parameter
+- **Larger models (11B-14B):** Run with CPU offloading — slower but functional
+- **Storage available:** ~870 GB free on 1TB HDD — can download any model size
+- **SSD space:** 174 GB free for OS, configs, apps
+
+---
+
+## Installed Tools
+
+- Ollama (local LLM runtime)
+- OpenCode (coding agent)
+- rclone (Google Drive sync — remote: `gdrive`)
+- Git
+- 1Password (snap)
+- Discord (snap)
+
+---
+
+## Recommended Models to Pull (by Use Case)
+
+### 🎛 Admin / Automation (lightweight, fast, CPU-only friendly)
+
+| Model | Size | Why |
+|-------|------|-----|
+| `llama3.2:3b` | ~2 GB | Meta's small model — fast, good for quick tasks |
+| `qwen2.5:1.5b` | ~1 GB | Tiny, perfect for automation scripts |
+| `phi3:3.8b` | ~2.3 GB | Microsoft's efficient model — good reasoning for size |
+| `deepseek-r1:1.5b` | ~1 GB | Lightweight reasoning, fast responses |
+
+### ✍️ Screenwriting / Creative Writing
+
+| Model | Size | Why |
+|-------|------|-----|
+| `mistral:7b` | ~4.1 GB | Excellent prose quality, strong creative writing |
+| `dolphin-mistral:7b` | ~4.1 GB | Creative fine-tune, uncensored, good for dialogue |
+| `qwen2.5:7b` | 4.7 GB | Already stored — solid all-round writer |
+| `phi4:14b` | 9.1 GB | Already stored — structured / academic writing |
+
+### 🖼 Photo / Video Understanding
+
+| Model | Size | Why |
+|-------|------|-----|
+| `llama3.2-vision:11b` | 7.8 GB | Already stored — image analysis, frame-by-frame |
+| `llava:7b` | ~4.7 GB | Dedicated vision model — good for photo analysis |
+| `llava-llama3:8b` | ~5.5 GB | Strong vision + reasoning combo |
+
+### 💪 Heavy Lifting (needs more GPU / multi-machine)
+
+| Model | Size | Why |
+|-------|------|-----|
+| `mixtral:8x7b` | ~26 GB | MoE — powerful but needs 20+ GB RAM |
+| `qwen2.5:72b` | ~40 GB | Top-tier, requires beefy machine |
+| `llama3.1:70b` | ~39 GB | Large context, needs serious hardware |
+| `deepseek-r1:671b` | ~400 GB | Massive — cluster only |
+
+---
+
+## Resource Pooling Plan (fill when other machine comes online)
+
+### Current State
+- **TF/TTHQ** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB storage
+- **[Other machine]** — TBD
+
+### Strategy Options
+
+1. **Ollama Remote Server** — run Ollama on the more powerful machine with `OLLAMA_HOST=0.0.0.0`, weaker machine connects via `OLLAMA_BASE_URL=http://<other-machine>:11434`
+2. **SSH Tunnel** — forward Ollama API port between machines
+3. **Shared Model Cache** — if both machines access the same 1TB drive (via network mount), they share one model directory
+4. **OpenCode Multi-Machine** — configure each OpenCode instance to route to whichever machine has the GPU power for the target model
+
+### Model Distribution Plan (once specs are known)
+- Small/medium models (1-8B): run on either machine
+- Large models (11-14B): run on the machine with more RAM/VRAM
+- Heavy models (70B+): run on the strongest machine, accessed remotely
+- Vision models: run on the machine with the most VRAM
+
+---
+
+*— TF/TTHQ*
