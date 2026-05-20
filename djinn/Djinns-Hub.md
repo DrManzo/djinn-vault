@@ -1,7 +1,7 @@
 # Djinns Hub
 
 **Introduced:** 2026-05-20  
-**Host:** tftthq (Typhons Forge)  
+**Host:** typhon (Typhons Forge)  
 **Role:** Primary workstation / Djinn host / Storage & Sync node  
 **Kernel:** 7.0.0-15-generic
 
@@ -99,14 +99,14 @@
 ## Resource Pooling Plan
 
 ### Current State
-- **Djinns Hub (TF/TTHQ)** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
+- **Djinns Hub (Typhon)** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
 - **Salomon** — Ryzen 9 8940HX, 32 GB RAM, RTX 5060 8GB, 1TB NVMe
 
 ### Ollama Remote Server — ACTIVE ✅
 - **Status:** Live since 2026-05-20 06:42 PDT
 - **Salomon IP:** 192.168.1.225:11434
 - **Connection:** `OLLAMA_HOST=192.168.1.225:11434`
-- **Test:** phi4:14b remote inference confirmed — haiku generated on Salomon GPU, streamed to TF/TTHQ
+- **Test:** phi4:14b remote inference confirmed — haiku generated on Salomon GPU, streamed to Typhon
 - **Models available remotely:** qwen2.5:7b, deepseek-r1:7b, qwen2.5-coder:7b, mistral:7b, phi4:14b, llama3.2-vision:11b, nomic-embed-text, qwen3.6:latest (36B)
 
 ### Strategy Options
@@ -119,9 +119,9 @@
 ### Model Distribution Plan
 - Small/medium models (1-8B): run on either machine
 - Large models (11-14B): run on Salomon (8GB VRAM + 32GB RAM) — accessed via remote Ollama
-- Heavy models (70B+): run on Salomon, accessed remotely from TF/TTHQ
+- Heavy models (70B+): run on Salomon, accessed remotely from Typhon
 - Vision models: run on Salomon (more VRAM) — accessed via remote Ollama
-- TF/TTHQ handles: lightweight tasks, storage, backup, GDrive sync, local inference (<8B)
+- Typhon handles: lightweight tasks, storage, backup, GDrive sync, local inference (<8B)
 
 ---
 

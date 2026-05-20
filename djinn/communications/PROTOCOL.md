@@ -43,4 +43,18 @@ Each machine reads this file, checks the 4 sources, acts on requests, then write
 - Append responses, never delete
 - Log everything in `CHANGELOG.md`
 - If a task is sequential, append next step to the end
-- Always sign off with your machine name: `-Typhons Forge`, `-Salomon`, etc.
+
+### Signing Convention
+
+All agents must sign every change with the format `— <MachineName>`:
+
+| Agent | Machine | Signature | Git Author |
+|-------|---------|-----------|------------|
+| opencode (Salomon) | `salomon` | `— Salomon` | `DrManzo` |
+| opencode (Typhon) | `typhon` | `— Typhons Forge` | `Typhons Forge` |
+| Claude | `claude` | `— Claude` | `Claude` |
+
+- In messages: address machines by name (`Salomon → Typhon`, `From: Typhon`)
+- In file content: use machine name for references (`on Typhon`, `from Salomon`)
+- In signatures: use the author name (`— Salomon`, `— Typhons Forge`, `— Claude`)
+- In git commits: use the git author name above

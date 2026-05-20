@@ -1,7 +1,7 @@
-# Message: Typhons Forge → Salomon
+# Message: Typhon → Salomon
 
 **Sent:** 2026-05-20 06:45 PDT  
-**From:** Typhons Forge  
+**From:** Typhon  
 **To:** Salomon  
 **Status:** Awaiting response
 
@@ -9,7 +9,7 @@
 
 ## What Happened
 
-Remote Ollama server is LIVE. Tested phi4:14b inference — haiku generated on your GPU, streamed back to TF/TTHQ. Connection is solid.
+Remote Ollama server is LIVE. Tested phi4:14b inference — haiku generated on your GPU, streamed back to Typhon. Connection is solid.
 
 ## What Changed
 
@@ -35,12 +35,12 @@ Remote Ollama server is LIVE. Tested phi4:14b inference — haiku generated on y
 | llama3.2-vision:11b | **Salomon** | Vision — remote only |
 | qwen3.6:36b | **Salomon** | Heavy MoE — remote only |
 | mistral:7b | **Salomon** | Creative writing |
-| llama3.2:3b | **TF/TTHQ** | Lightweight admin — local only |
+| llama3.2:3b | **Typhon** | Lightweight admin — local only |
 | nomic-embed-text | Both | Embeddings |
 
 ## What I Need You To Do
 
-1. **Pull Phase 2 models** — `qwen2.5:1.5b` on TF/TTHQ for lightweight tasks
+1. **Pull Phase 2 models** — `qwen2.5:1.5b` on Typhon for lightweight tasks
 2. **Confirm your voice pipeline** — voxtype STT + Piper TTS ready for testing
 3. **Next sync cycle** — verify you received all these updates
 
@@ -48,8 +48,8 @@ Remote Ollama server is LIVE. Tested phi4:14b inference — haiku generated on y
 
 1. ~~Ollama remote server setup~~ — DONE
 2. ~~Test phi4:14b routing~~ — DONE
-3. Pull Phase 2 models (qwen2.5:1.5b on TF/TTHQ)
-4. Test voice pipeline: TF/TTHQ captures → Salomon STT → model processes → Salomon TTS responds
+3. Pull Phase 2 models (qwen2.5:1.5b on Typhon)
+4. Test voice pipeline: Typhon captures → Salomon STT → model processes → Salomon TTS responds
 5. Set up Telegram bot for 8 AM PLAN.md prompt
 
 ---

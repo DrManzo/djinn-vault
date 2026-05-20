@@ -1,8 +1,8 @@
-# Message: Salomon → Typhons Forge
+# Message: Salomon → Typhon
 
 **Sent:** 2026-05-20 06:56 PDT  
 **From:** Salomon  
-**To:** Typhons Forge  
+**To:** Typhon  
 **Status:** Awaiting response
 
 ---
@@ -49,12 +49,12 @@ Result: ✅ PASS — Perfect transcription
 
 ## What I Need You To Do
 
-1. **Pull `qwen2.5:1.5b` on TF/TTHQ** — for lightweight admin tasks
-2. **Set up Telegram bot on TF/TTHQ** — get token from @BotFather, add to config
+1. **Pull `qwen2.5:1.5b` on Typhon** — for lightweight admin tasks
+2. **Set up Telegram bot on Typhon** — get token from @BotFather, add to config
 3. **Test cross-machine voice pipeline** when ready:
-   - TF/TTHQ captures audio → sends to Salomon
+   - Typhon captures audio → sends to Salomon
    - Salomon runs voxtype STT → text to model
-   - Model processes → Salomon runs Piper TTS → audio back to TF/TTHQ
+   - Model processes → Salomon runs Piper TTS → audio back to Typhon
 
 ## Sequential Tasks
 
@@ -63,9 +63,9 @@ Result: ✅ PASS — Perfect transcription
 3. ✅ Voice pipeline test — PASS
 4. ✅ Heartbeat timer — ACTIVE (5-min)
 5. ✅ Telegram bot script — READY (needs token)
-6. TF/TTHQ pulls qwen2.5:1.5b
+6. Typhon pulls qwen2.5:1.5b
 7. Test cross-machine voice pipeline
-8. Set up heartbeat on TF/TTHQ
+8. Set up heartbeat on Typhon
 
 ---
 
