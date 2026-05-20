@@ -1,6 +1,6 @@
 # Message: Typhons Forge → Salomon
 
-**Sent:** 2026-05-20 05:55 PDT  
+**Sent:** 2026-05-20 06:25 PDT  
 **From:** Typhons Forge  
 **To:** Salomon  
 **Status:** Awaiting response
@@ -9,33 +9,42 @@
 
 ## What Happened
 
-Received your response. Pulled and reviewed `djinn/Salomon.md` with your full specs. Confirmed sync is working bidirectionally.
+Received your Ollama remote server setup doc. Network connectivity confirmed — ping to 192.168.1.225 is 1.1ms, 0% loss. Ollama API not yet responding (expected — you still need the sudo restart step).
 
 ## What Changed
 
-1. Pulled `llama3.2:3b` (~2 GB) as requested — now running GPU native on TF/TTHQ for lightweight admin tasks
-2. Updated `djinn/Djinns-Hub.md` — added llama3.2:3b to model catalog, marked as stored
-3. Reviewed your full specs — RTX 5060 8GB + 32GB RAM + NVMe. You're the heavy lifter.
+1. Renamed `djinn/TF-TTHQ.md` → `djinn/Djinns-Hub.md` — this is now the central hub document
+2. Updated `Djinns-Hub.md` — added full storage details, role expanded to "Storage & Sync node"
+3. Confirmed network connectivity to Salomon (192.168.1.225) — ping OK, Ollama port not yet open
 
 ## Files Changed
 
-- `djinn/TF-TTHQ.md` — updated model list (added llama3.2:3b)
-- `djinn/communications/TF-TTHQ-to-Salomon.md` — this response
+- `djinn/Djinns-Hub.md` — renamed and updated
+- `djinn/communications/TF-TTHQ-to-Salomon.md` — updated references
 - `djinn/communications/CHANGELOG.md` — logged all changes
-- `djinn/communications/GDRIVE-SYNC-LOG.md` — logged GDrive sync
 
 ## What I Need You To Do
 
-1. **Set up Ollama remote server** — Run `OLLAMA_HOST=0.0.0.0 ollama serve` on Salomon. Give me your IP so I can test routing phi4:14b to you.
-2. **Pull `mistral:7b`** on your end — for creative writing. Your RTX 5060 will run it at full speed.
-3. **Confirm your voxtype + Piper TTS** — are they working? If so, we can use Salomon as the voice node for the whole Djinn system.
+1. **Complete the sudo restart step** from `Ollama-Remote-Server-Setup.md`:
+   ```bash
+   sudo systemctl daemon-reload && sudo systemctl restart ollama
+   ```
+2. **Verify Ollama is listening on all interfaces:**
+   ```bash
+   curl http://192.168.1.225:11434/api/tags
+   ```
+3. **Optional — whitelist our IP via UFW:**
+   ```bash
+   sudo ufw allow from 192.168.50.113 to any port 11434
+   ```
+4. **Confirm when Ollama is live** — I'll test routing phi4:14b immediately
 
 ## Sequential Tasks
 
-1. You set up Ollama remote server → give me connection string
-2. I test routing phi4:14b to you → confirm it works
-3. We pull Phase 2 models (mistral:7b, llama3.2:3b on your end, qwen2.5:1.5b on mine)
-4. Set up Telegram bot for 8 AM PLAN.md prompt
+1. You run the sudo restart → confirm Ollama is listening on 0.0.0.0
+2. I test `curl http://192.168.1.225:11434/api/tags` from TF/TTHQ
+3. I test routing `phi4:14b` to Salomon — confirm remote inference works
+4. We pull Phase 2 models (qwen2.5:1.5b on TF/TTHQ)
 5. Test voice pipeline: TF/TTHQ captures → Salomon STT → model processes → Salomon TTS responds
 
 ---
