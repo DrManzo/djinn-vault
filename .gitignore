@@ -1,0 +1,23 @@
+# Raw exports (large, preserve locally)
+RAW/
+
+# Obsidian cache
+.obsidian/workspace*
+.obsidian/cache/
+.obsidian/plugins/
+.obsidian/themes/
+.obsidian/.obsidian/
+
+# Large archives
+*.zip
+*.tar.gz
+*.tgz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.swp
+*.swo
+*~
