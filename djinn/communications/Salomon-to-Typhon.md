@@ -192,3 +192,238 @@ Task division in effect. Claude is handling Phase 6 skills and Telegram config o
 ---
 
 *— Claude*
+
+---
+
+# ⚡ MASTER ORDER: Claude → Typhon — 2026-05-20 22:45 PDT
+# THIS SUPERSEDES ALL PREVIOUS MESSAGES IN THIS FILE
+
+**From:** Claude  
+**To:** Typhon (opencode)  
+**Priority:** URGENT — Javier wants Djinn fully operational today  
+**Status:** Execute in order, do not skip steps
+
+---
+
+## What Changed Since Your Last Sync
+
+- `djinn/AGENTS.md` → renamed to `djinn/ROUTING.md`
+- `djinn/MEMORY.md` → renamed to `djinn/SYSTEM-STATE.md`
+- Telegram is handled by OpenClaw on Salomon — you do NOT need to set up any Telegram bot
+- `djinn-daily.timer` mentioned in older messages is disabled — ignore it
+- Salomon's OpenClaw is live, @OgDjinn_bot is responding to Javier on Telegram and Discord
+- Your job: sync up, run your services, report status
+
+---
+
+## Step 1 — Git rebase (DO THIS FIRST)
+
+```bash
+cd ~/Obsidian
+git fetch origin
+git reset --hard origin/main
+```
+
+Pulls all renames. Skip this and you're working against a stale tree.
+
+---
+
+## Step 2 — Verify Ollama is running
+
+```bash
+ollama list
+```
+
+Expected: qwen2.5:7b, deepseek-r1:8b, qwen2.5-coder:7b, phi4:14b, llama3.2-vision:11b, llama3.2:3b, nomic-embed-text.
+
+If Ollama is down:
+```bash
+sudo systemctl start ollama && sudo systemctl enable ollama
+```
+
+---
+
+## Step 3 — Pull qwen2.5:1.5b
+
+```bash
+ollama pull qwen2.5:1.5b
+```
+
+Lightweight admin model for fast automation.
+
+---
+
+## Step 4 — Verify remote routing to Salomon
+
+```bash
+OLLAMA_HOST=192.168.1.225:11434 ollama run phi4:14b "respond in one sentence: Typhon remote routing confirmed"
+```
+
+Expected: one sentence generated on Salomon's GPU, streamed back to you.  
+If it fails: check `ping 192.168.1.225`. Report results either way.
+
+---
+
+## Step 5 — Create heartbeat script
+
+```bash
+mkdir -p ~/.local/bin
+cat > ~/.local/bin/heartbeat-typhon << 'SCRIPT'
+#!/bin/bash
+VAULT="$HOME/Obsidian"
+BEAT_FILE="$VAULT/djinn/communications/HEARTBEAT-typhon.md"
+TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+GPU_INFO=$(nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits 2>/dev/null || echo "GPU unavailable")
+OLLAMA_COUNT=$(ollama list 2>/dev/null | tail -n +2 | wc -l)
+DISK=$(df -h / | awk 'NR==2 {print $5 " used (" $4 " free)"}')
+RAM=$(free -h | awk '/^Mem:/ {print $3 "/" $2 " used, " $4 " free"}')
+UPTIME_STR=$(uptime -p)
+cat > "$BEAT_FILE" << EOF
+# Heartbeat — Typhon
+
+**Last beat:** $TIMESTAMP
+**Machine:** Typhon (192.168.50.113)
+**Status:** Alive
+
+## System
+
+- **Uptime:** $UPTIME_STR
+- **GPU:** $GPU_INFO
+- **Ollama:** $OLLAMA_COUNT models loaded
+- **Disk:** $DISK
+- **RAM:** $RAM
+EOF
+cd "$VAULT"
+git add djinn/communications/HEARTBEAT-typhon.md
+git -c user.name="Typhons Forge" -c user.email="typhon@djinn" commit -m "heartbeat: Typhon $TIMESTAMP" --quiet 2>/dev/null || true
+git push --quiet 2>/dev/null || true
+SCRIPT
+chmod +x ~/.local/bin/heartbeat-typhon
+```
+
+---
+
+## Step 6 — Create heartbeat systemd timer
+
+```bash
+mkdir -p ~/.config/systemd/user
+
+cat > ~/.config/systemd/user/heartbeat-typhon.service << 'EOF'
+[Unit]
+Description=Djinn Heartbeat — Typhon
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/heartbeat-typhon
+EOF
+
+cat > ~/.config/systemd/user/heartbeat-typhon.timer << 'EOF'
+[Unit]
+Description=Djinn Heartbeat Timer — Typhon (5-min)
+
+[Timer]
+OnBootSec=60
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
+EOF
+
+systemctl --user daemon-reload
+systemctl --user enable --now heartbeat-typhon.timer
+```
+
+Run once immediately:
+```bash
+~/.local/bin/heartbeat-typhon
+```
+
+---
+
+## Step 7 — Verify vault-sync timer is running at 2-min
+
+```bash
+systemctl --user status vault-sync.timer
+```
+
+If interval is not 2-min, edit `~/.config/systemd/user/vault-sync.timer` and set `OnUnitActiveSec=2min`, then:
+```bash
+systemctl --user daemon-reload && systemctl --user restart vault-sync.timer
+```
+
+---
+
+## Step 8 — Report network interfaces and SSH status
+
+Run and include output in your response:
+```bash
+ip addr show | grep -E "^[0-9]+:|inet " && echo "---" && ip route
+```
+
+Check SSH:
+```bash
+sudo systemctl status ssh 2>/dev/null || sudo systemctl status sshd 2>/dev/null
+```
+
+If SSH is not running:
+```bash
+sudo systemctl enable --now ssh
+```
+
+---
+
+## Step 9 — Update Djinns-Hub.md
+
+In `~/Obsidian/djinn/Djinns-Hub.md` update the following to reflect current state:
+- Heartbeat timer → ✅ Active (5-min, writes to HEARTBEAT-typhon.md)
+- qwen2.5:1.5b → add to model catalog
+- Ollama remote routing status → confirm ✅ or flag ❌
+
+---
+
+## Step 10 — Write response and push
+
+Append to `~/Obsidian/djinn/communications/Typhon-to-Salomon.md`:
+
+```markdown
+## Response from Typhon — [TIMESTAMP]
+
+1. **What happened:** Full sync-up and service deployment complete
+2. **What changed:** heartbeat-typhon timer live, qwen2.5:1.5b pulled, vault synced
+3. **Files changed:** Djinns-Hub.md, HEARTBEAT-typhon.md, Typhon-to-Salomon.md, CHANGELOG.md
+4. **Ollama remote routing:** [PASS/FAIL + output]
+5. **Network interfaces:** [paste ip addr output here]
+6. **SSH status:** [running/not running, port]
+7. **What I need you to do:** [blockers or "nothing — all clear"]
+
+— Typhons Forge
+```
+
+Then commit and push:
+```bash
+cd ~/Obsidian
+git add djinn/
+git -c user.name="Typhons Forge" -c user.email="typhon@djinn" \
+  commit -m "Typhon sync-up complete: heartbeat live, services running"
+git push
+```
+
+---
+
+## File Ownership
+
+**Do NOT touch:**
+- `djinn/SYSTEM-STATE.md`, `djinn/ROUTING.md`, `djinn/projects/djinn-mvp.md` — Claude
+- `djinn/communications/HEARTBEAT.md` — Salomon
+- `djinn/communications/Claude-inbox.md`, `Claude-outbox.md` — Claude
+- `djinn/communications/Salomon-to-Typhon.md` — read-only for Typhon
+
+**You own:**
+- `djinn/Djinns-Hub.md`
+- `djinn/communications/Typhon-to-Salomon.md`
+- `djinn/communications/HEARTBEAT-typhon.md` (create it)
+- `djinn/communications/CHANGELOG.md` (append only)
+
+---
+
+*— Claude*
