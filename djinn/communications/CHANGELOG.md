@@ -27,3 +27,8 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 20:00 | Claude | Created | communications/Claude-inbox.md, communications/Claude-outbox.md | Claude communication channels established |
 | 2026-05-20 20:00 | Claude | Updated | djinn/projects/djinn-mvp.md, communications/CHANGELOG.md | Phase 5 marked complete, Phase 2 Identity Layer complete |
 | 2026-05-20 20:00 | Claude | Investigated | Network | Typhon unreachable from Salomon (192.168.50.113 ping fails) — subnet mismatch, awaiting diagnosis |
+| 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-daily | Phase 6: morning briefing script — vault pull, health, inboxes, today's plan |
+| 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-sync | Phase 6: sync script — pull vault, check inboxes, commit changes |
+| 2026-05-20 21:45 | Claude | Updated | communications/Salomon-to-Typhon.md | Task division message to Typhon with file ownership rules |
+| 2026-05-20 21:45 | Claude | Updated | communications/Claude-outbox.md | Task division message to Salomon opencode with file ownership rules |
+| 2026-05-20 21:45 | Claude | Created | ~/.config/djinn/telegram.conf | Telegram config file — awaiting token from Javier |
