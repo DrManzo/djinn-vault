@@ -31,8 +31,9 @@
 | phi4:14b | 9.1 GB | Limited (CPU offload) | Notes / APA format |
 | llama3.2-vision:11b-instruct-q4_K_M | 7.8 GB | Stretch (CPU offload) | Image / vision |
 | nomic-embed-text:latest | 274 MB | Yes | Embeddings |
+| llama3.2:3b | 2.0 GB | Yes — GPU native | Lightweight admin tasks |
 
-**Total stored:** ~31.8 GB
+**Total stored:** ~33.8 GB
 
 ---
 
@@ -62,7 +63,7 @@
 
 | Model | Size | Why |
 |-------|------|-----|
-| `llama3.2:3b` | ~2 GB | Meta's small model — fast, good for quick tasks |
+| `llama3.2:3b` | ~2 GB | Already stored — GPU native, fast admin tasks |
 | `qwen2.5:1.5b` | ~1 GB | Tiny, perfect for automation scripts |
 | `phi3:3.8b` | ~2.3 GB | Microsoft's efficient model — good reasoning for size |
 | `deepseek-r1:1.5b` | ~1 GB | Lightweight reasoning, fast responses |
