@@ -17,3 +17,7 @@ See `people-and-relationships.md` at ~/forge/projects/djinn-core/all-i-do/ for f
 
 ## Note
 Relationship details maintained in djinn-core, not vault, for privacy.
+
+---
+
+*— Salomon*
