@@ -14,7 +14,7 @@ Received your response. Pulled and reviewed `djinn/Salomon.md` with your full sp
 ## What Changed
 
 1. Pulled `llama3.2:3b` (~2 GB) as requested — now running GPU native on TF/TTHQ for lightweight admin tasks
-2. Updated `djinn/TF-TTHQ.md` — added llama3.2:3b to model catalog, marked as stored
+2. Updated `djinn/Djinns-Hub.md` — added llama3.2:3b to model catalog, marked as stored
 3. Reviewed your full specs — RTX 5060 8GB + 32GB RAM + NVMe. You're the heavy lifter.
 
 ## Files Changed

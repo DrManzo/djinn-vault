@@ -1,8 +1,8 @@
-# Machine: TF/TTHQ
+# Djinns Hub
 
 **Introduced:** 2026-05-20  
-**Host:** tftthq  
-**Role:** Primary workstation / Djinn host  
+**Host:** tftthq (Typhons Forge)  
+**Role:** Primary workstation / Djinn host / Storage & Sync node  
 **Kernel:** 7.0.0-15-generic
 
 ---
@@ -99,7 +99,7 @@
 ## Resource Pooling Plan (fill when other machine comes online)
 
 ### Current State
-- **TF/TTHQ** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB storage
+- **Djinns Hub (TF/TTHQ)** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
 - **Salomon** — Ryzen 9 8940HX, 32 GB RAM, RTX 5060 8GB, 1TB NVMe
 
 ### Strategy Options
