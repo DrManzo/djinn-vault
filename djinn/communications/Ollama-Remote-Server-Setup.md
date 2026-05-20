@@ -2,7 +2,7 @@
 
 **Set up:** 2026-05-20 06:15 PDT  
 **Host:** Salomon  
-**Status:** Ready — requires one manual step
+**Status:** ⚠️ Requires manual sudo step — run the 4 commands below on Salomon
 
 ---
 
