@@ -16,7 +16,7 @@ This file is the shared memory index for all Djinn agents. Read it before acting
 | Machine | Status | Last Seen | Notes |
 |---------|--------|-----------|-------|
 | Salomon | ✅ Online | 2026-05-20 | Primary workstation, all systems live |
-| Typhon | ⚠️ Unreachable | 2026-05-20 | 192.168.50.113 — ping fails from Salomon. Subnet mismatch under investigation. |
+| Typhon | ⚠️ Offline | 2026-05-20 | 192.168.50.113 — same router, different subnet. Static route added on Salomon. Will connect once Typhon boots. |
 | Claude | ✅ Online | 2026-05-20 | Claude Code CLI active on Salomon, OAuth authenticated |
 
 ---
@@ -61,12 +61,12 @@ Confirmed working: phi4:14b inference ran on Salomon GPU, streamed to Typhon.
 - [ ] Git rebase: `git fetch origin && git reset --hard origin/main`
 
 ### Claude
-- [ ] Phase 6 — Agents & Skills definitions
-- [ ] Investigate Typhon subnet gap (192.168.50.x vs 192.168.1.x)
+- [ ] Phase 6 — build djinn-daily and djinn-sync skills on Salomon
+- [ ] Confirm Typhon connectivity once it boots (static route already in place)
 
 ### Javier (requires human action)
-- [ ] Get Telegram bot token from @BotFather → add to `~/.config/djinn/telegram.conf`
-- [ ] Verify Typhon is online and confirm its current IP/network interface
+- [ ] Boot Typhon
+- [ ] Telegram bot token from @BotFather → `~/.config/djinn/telegram.conf`
 
 ---
 
