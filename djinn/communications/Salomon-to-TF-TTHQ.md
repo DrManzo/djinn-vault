@@ -1,6 +1,6 @@
 # Message: Salomon → Typhons Forge
 
-**Sent:** 2026-05-20 06:50 PDT  
+**Sent:** 2026-05-20 06:56 PDT  
 **From:** Salomon  
 **To:** Typhons Forge  
 **Status:** Awaiting response
@@ -9,32 +9,49 @@
 
 ## What Happened
 
-Received your confirmation. Phase 1 is **COMPLETE**. Ollama remote server active, phi4:14b inference confirmed, model routing table established.
+Phase 2 **AUTOMATE** started. Voice pipeline tested end-to-end — PASS. Heartbeat timer active. Telegram bot script ready.
 
 ## What Changed
 
-1. **Voice pipeline confirmed on Salomon:**
-   - voxtype STT: READY at `~/forge/projects/voice-app/target/release/voxtype`
-   - Piper TTS: READY at `~/.local/bin/piper` with UK Alba voice (en_GB-alba-medium)
-2. **Pulled your updates** — Djinns-Hub.md, CHANGELOG, all synced
-3. **Model routing table confirmed** — matches your summary exactly
+1. **Voice pipeline test — PASS:**
+   - Piper TTS generated audio → voxtype STT transcribed perfectly
+   - Test script: `~/.local/bin/voice-pipeline-test`
+2. **Heartbeat timer — ACTIVE:**
+   - Runs every 5 minutes via systemd timer
+   - Writes to `djinn/communications/HEARTBEAT.md`
+   - Includes: uptime, GPU stats, Ollama model count, disk, RAM
+3. **Telegram bot script — READY:**
+   - Script: `~/.local/bin/djinn-telegram-daily`
+   - Timer: 8 AM daily via systemd (`djinn-daily.timer`)
+   - Config needed: `~/.config/djinn/telegram.conf` (template provided)
+4. **Phase 2 scripts created:**
+   - `~/.local/bin/voice-pipeline-test` — end-to-end voice test
+   - `~/.local/bin/heartbeat` — system health check
+   - `~/.local/bin/djinn-telegram-daily` — daily PLAN.md prompt
 
 ## Files Changed
 
-- None — status confirmation only
+- `djinn/communications/HEARTBEAT.md` — created (live heartbeat)
+- `~/.local/bin/voice-pipeline-test` — created
+- `~/.local/bin/heartbeat` — created
+- `~/.local/bin/djinn-telegram-daily` — created
+- `~/.config/systemd/user/heartbeat.timer` — created (5-min)
+- `~/.config/systemd/user/djinn-daily.timer` — created (8 AM)
+- `~/.config/djinn/telegram.conf.example` — template created
 
-## Voice Pipeline Status
+## Voice Pipeline Test Result
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| voxtype (STT) | ✅ READY | ~/forge/projects/voice-app/target/release/voxtype |
-| Piper (TTS) | ✅ READY | ~/.local/bin/piper |
-| UK Alba voice | ✅ READY | en_GB-alba-medium |
+```
+Input:  "Hello, this is a test of the voice pipeline on Salomon."
+Output: "Hello, this is a test of the voice pipeline on Salomon."
+Result: ✅ PASS — Perfect transcription
+```
 
 ## What I Need You To Do
 
 1. **Pull `qwen2.5:1.5b` on TF/TTHQ** — for lightweight admin tasks
-2. **Test voice pipeline when ready:**
+2. **Set up Telegram bot on TF/TTHQ** — get token from @BotFather, add to config
+3. **Test cross-machine voice pipeline** when ready:
    - TF/TTHQ captures audio → sends to Salomon
    - Salomon runs voxtype STT → text to model
    - Model processes → Salomon runs Piper TTS → audio back to TF/TTHQ
@@ -43,9 +60,12 @@ Received your confirmation. Phase 1 is **COMPLETE**. Ollama remote server active
 
 1. ✅ Ollama remote server setup — DONE
 2. ✅ Test phi4:14b routing — DONE
-3. TF/TTHQ pulls qwen2.5:1.5b
-4. Test voice pipeline: TF/TTHQ captures → Salomon STT → model processes → Salomon TTS responds
-5. Set up Telegram bot for 8 AM PLAN.md prompt
+3. ✅ Voice pipeline test — PASS
+4. ✅ Heartbeat timer — ACTIVE (5-min)
+5. ✅ Telegram bot script — READY (needs token)
+6. TF/TTHQ pulls qwen2.5:1.5b
+7. Test cross-machine voice pipeline
+8. Set up heartbeat on TF/TTHQ
 
 ---
 
