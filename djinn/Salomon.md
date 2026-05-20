@@ -101,15 +101,15 @@
 
 ---
 
-## Resource Pooling Plan (fill when TF/TTHQ comes online)
+## Resource Pooling Plan (fill when Typhon comes online)
 
 ### Current State
 - **Salomon** — Ryzen 9 8940HX, 32 GB RAM, RTX 5060 8GB, 1TB NVMe
-- **TF/TTHQ** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
+- **Typhon** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
 
 ### Strategy Options
 
-1. **Ollama Remote Server** — run Ollama on Salomon with `OLLAMA_HOST=0.0.0.0`, TF/TTHQ connects via `OLLAMA_BASE_URL=http://salomon:11434`
+1. **Ollama Remote Server** — run Ollama on Salomon with `OLLAMA_HOST=0.0.0.0`, Typhon connects via `OLLAMA_BASE_URL=http://salomon:11434`
 2. **SSH Tunnel** — forward Ollama API port between machines
 3. **Shared Model Cache** — if both machines access the same network mount, they share one model directory
 4. **OpenCode Multi-Machine** — configure each OpenCode instance to route to whichever machine has the GPU power for the target model
@@ -117,9 +117,9 @@
 ### Model Distribution Plan
 - Small/medium models (1-8B): run on either machine
 - Large models (11-14B): run on Salomon (8GB VRAM + 32GB RAM)
-- Heavy models (70B+): run on Salomon, accessed remotely from TF/TTHQ
+- Heavy models (70B+): run on Salomon, accessed remotely from Typhon
 - Vision models: run on Salomon (more VRAM)
-- TF/TTHQ handles: lightweight tasks, storage, backup, GDrive sync
+- Typhon handles: lightweight tasks, storage, backup, GDrive sync
 
 ---
 

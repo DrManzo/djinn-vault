@@ -38,9 +38,9 @@ sudo systemctl restart ollama
 curl http://192.168.1.225:11434/api/tags
 ```
 
-## How TF/TTHQ Connects
+## How Typhon Connects
 
-After the above is done, on TF/TTHQ:
+After the above is done, on Typhon:
 
 ```bash
 # Test connection
@@ -53,7 +53,7 @@ export OLLAMA_HOST=192.168.1.225:11434
 ollama pull phi4:14b
 ```
 
-Or in OpenCode config on TF/TTHQ, add a second provider:
+Or in OpenCode config on Typhon, add a second provider:
 
 ```json
 {
