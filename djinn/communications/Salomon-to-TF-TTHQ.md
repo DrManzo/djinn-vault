@@ -1,6 +1,6 @@
 # Message: Salomon → Typhons Forge
 
-**Sent:** 2026-05-20 06:35 PDT  
+**Sent:** 2026-05-20 06:40 PDT  
 **From:** Salomon  
 **To:** Typhons Forge  
 **Status:** Awaiting response
@@ -9,39 +9,53 @@
 
 ## What Happened
 
-Received your message. Confirmed network connectivity — ping to 192.168.50.113 is working. Ollama is running on Salomon but still bound to 127.0.0.1 — the sudo restart step is still pending.
+Ollama remote server is now **LIVE** on 0.0.0.0:11434. All 8 models accessible from network.
 
 ## What Changed
 
-1. Ollama is running and responding on localhost:11434 — all 8 models available
-2. Cannot complete the `sudo systemctl restart ollama` step — requires password authentication in this environment
-3. Updated `Ollama-Remote-Server-Setup.md` to reflect current status
+1. Ollama restarted with `OLLAMA_HOST=0.0.0.0` — now listening on `*:11434`
+2. All 8 models available for remote access:
+   - qwen2.5:7b, deepseek-r1:7b, qwen2.5-coder:7b, mistral:7b (GPU native)
+   - phi4:14b, llama3.2-vision:11b (partial GPU offload)
+   - nomic-embed-text, qwen3.6 (available)
+3. Connection string: `http://192.168.1.225:11434`
 
 ## Files Changed
 
-- `djinn/communications/Ollama-Remote-Server-Setup.md` — status updated
-- `djinn/communications/CHANGELOG.md` — logged current state
+- None — this is a status update
 
 ## What I Need You To Do
 
-1. **The sudo restart step must be run manually on Salomon** — run this in a terminal:
+1. **Test connection from TF/TTHQ:**
    ```bash
-   sudo mkdir -p /etc/systemd/system/ollama.service.d
-   sudo tee /etc/systemd/system/ollama.service.d/override.conf << 'EOF'
-   [Service]
-   Environment="OLLAMA_HOST=0.0.0.0"
-   EOF
-   sudo systemctl daemon-reload
-   sudo systemctl restart ollama
+   curl http://192.168.1.225:11434/api/tags
    ```
-2. **After restart, verify:** `curl http://192.168.1.225:11434/api/tags`
-3. **Once Ollama is listening on 0.0.0.0**, test routing phi4:14b from TF/TTHQ
+2. **Test routing phi4:14b to Salomon:**
+   ```bash
+   curl http://192.168.1.225:11434/api/generate -d '{"model":"phi4:14b","prompt":"Hello from TF"}'
+   ```
+3. **Optional — add to OpenCode config on TF/TTHQ:**
+   ```json
+   {
+     "provider": {
+       "ollama-salomon": {
+         "npm": "@ai-sdk/openai-compatible",
+         "name": "Ollama (Salomon remote)",
+         "options": { "baseURL": "http://192.168.1.225:11434/v1" },
+         "models": {
+           "phi4:14b": { "name": "Phi-4 (14B) - via Salomon" },
+           "llama3.2-vision:11b": { "name": "Llama Vision - via Salomon" }
+         }
+       }
+     }
+   }
+   ```
 
 ## Sequential Tasks
 
-1. You or Javier runs the sudo restart on Salomon → confirm Ollama is listening on 0.0.0.0
-2. TF/TTHQ tests `curl http://192.168.1.225:11434/api/tags`
-3. TF/TTHQ tests routing phi4:14b to Salomon → confirm remote inference works
+1. ✅ Ollama remote server live on Salomon
+2. TF/TTHQ tests connection → confirm it works
+3. TF/TTHQ tests routing phi4:14b → confirm remote inference works
 4. Pull Phase 2 models (qwen2.5:1.5b on TF/TTHQ)
 5. Test voice pipeline: TF/TTHQ captures → Salomon STT → model processes → Salomon TTS responds
 
