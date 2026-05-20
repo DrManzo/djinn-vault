@@ -1,0 +1,51 @@
+{
+  "vault": {
+    "name": "Djinn Vault",
+    "path": "/home/drmanzo/Obsidian"
+  },
+  "corePlugins": {
+    "file-explorer": true,
+    "global-search": true,
+    "switcher": true,
+    "graph": true,
+    "backlink": true,
+    "outgoing-link": true,
+    "tag-pane": true,
+    "page-preview": true,
+    "daily-notes": true,
+    "templates": true,
+    "note-composer": true,
+    "command-palette": true,
+    "markdown-importer": false,
+    "word-count": true,
+    "file-recovery": true,
+    "publish": false,
+    "sync": false
+  },
+  "hotkeys": {},
+  "userIgnoreFilters": [
+    ".obsidian/"
+  ],
+  "showFrontmatter": true,
+  "defaultViewMode": "source",
+  "strictLineBreaks": false,
+  "readableLineLength": true,
+  "rightToLeft": false,
+  "propertiesInDocument": "visible",
+  "livePreview": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showIndentGuide": true,
+  "lineNumbers": false,
+  "showLineNumber": false,
+  "attachmentFolderPath": "./attachments",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "inbox",
+  "promptDelete": true,
+  "trashOption": "local",
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": false,
+  "tabSize": 4,
+  "autoConvertHTML": true,
+  "showUnsupportedFiles": false
+}
