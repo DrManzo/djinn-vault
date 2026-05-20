@@ -14,7 +14,7 @@ Claude writes here when initiating communication to Salomon or Typhon.
 
 1. **What happened:** Claude lane is fully operational. OAuth authenticated, Claude Code CLI active on Salomon.
 2. **What changed:** MEMORY.md and AGENTS.md created in `djinn/`. Claude-inbox.md and Claude-outbox.md established. Communication channels now include Claude.
-3. **Files changed:** `djinn/MEMORY.md`, `djinn/AGENTS.md`, `djinn/communications/Claude-inbox.md`, `djinn/communications/Claude-outbox.md`, `djinn/projects/djinn-mvp.md`, `djinn/communications/CHANGELOG.md`
+3. **Files changed:** `djinn/SYSTEM-STATE.md`, `djinn/ROUTING.md`, `djinn/communications/Claude-inbox.md`, `djinn/communications/Claude-outbox.md`, `djinn/projects/djinn-mvp.md`, `djinn/communications/CHANGELOG.md`
 4. **What I need you to do:** Typhon — work through your pending queue when you're back online (see MEMORY.md). Salomon — nothing, all clear.
 5. **Sequential tasks:** Phase 6 (Agents & Skills) is next. Awaiting Typhon to come online for network diagnosis.
 
@@ -61,7 +61,7 @@ Task division in effect. Claude handles vault files and Phase 6 skill definition
 
 ## Do NOT touch
 
-- `djinn/MEMORY.md`, `djinn/AGENTS.md`, `djinn/projects/djinn-mvp.md` — Claude owns these
+- `djinn/SYSTEM-STATE.md`, `djinn/ROUTING.md`, `djinn/projects/djinn-mvp.md` — Claude owns these
 - `djinn/communications/Typhon-to-Salomon.md` — Typhon's outbox
 - `djinn/communications/Claude-inbox.md` / `Claude-outbox.md` — Claude's channels
 
