@@ -19,6 +19,14 @@ created: 2026-05-19
 - Dev lane: Claude (Pro subscription)
 - Research: Perplexity → vault notes
 
+## 2026-05-20: Claude Lane activated (Phase 5)
+- Claude Code CLI installed on Salomon (`~/.local/bin/claude`)
+- Claude identity document created: `djinn/Claude.md`
+- CLAUDE.md config created at `~/.claude/CLAUDE.md`
+- Agent topology updated: opencode (Salomon), opencode (Typhon), Claude (Salomon CLI)
+- Signing convention established: `— Salomon`, `— Typhons Forge`, `— Claude`
+- Auth: OAuth (Claude Pro) — requires interactive login via `claude` in terminal
+
 ---
 
 *— Salomon*

@@ -101,6 +101,15 @@
 ### Current State
 - **Djinns Hub (Typhon)** — i5-11400H, 14 GB RAM, GTX 1650 4GB, 1TB HDD + 250GB SSD
 - **Salomon** — Ryzen 9 8940HX, 32 GB RAM, RTX 5060 8GB, 1TB NVMe
+- **Claude** — Anthropic API (Pro subscription), Claude Code CLI on Salomon
+
+### Agent Topology
+
+| Agent | Machine | Role | Provider |
+|-------|---------|------|----------|
+| opencode | Salomon | Live lane, daily ops, automation | Ollama local |
+| opencode | Typhon | Storage/sync, lightweight tasks | Ollama local |
+| Claude | Salomon (CLI) | Architecture, cross-domain synthesis | Claude API (Pro) |
 
 ### Ollama Remote Server — ACTIVE ✅
 - **Status:** Live since 2026-05-20 06:42 PDT

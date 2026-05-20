@@ -11,7 +11,7 @@ Phase 1 (Core Shell): ✅ Complete
 Phase 2 (Identity Layer): 🔄 In progress
 Phase 3 (Vault Backup): ✅ Complete
 Phase 4 (Inbox & Cleanup): ✅ Complete
-Phase 5 (Claude Lane): ⏳ Waiting on Pro activation
+Phase 5 (Claude Lane): ✅ Claude Code installed, identity created, awaiting OAuth login
 Phase 6 (Agents & Skills): ⏳ Pending
 Phase 7 (Weekly Review): ⏳ Pending
 Phase 8 (Migration Prep): ⏳ Pending
