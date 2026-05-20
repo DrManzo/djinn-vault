@@ -37,3 +37,9 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 22:30 | Claude | Fixed | openclaw sessions cleanup | Pruned missing session transcripts |
 | 2026-05-20 22:30 | Claude | Disabled | djinn-telegram-daily timer | Redundant — OpenClaw handles 8 AM daily prompt via Telegram natively |
 | 2026-05-20 22:45 | Claude | Updated | communications/Salomon-to-Typhon.md | MASTER ORDER sent to Typhon — full sync-up instructions, heartbeat script, all steps copy-paste ready |
+| 2026-05-20 23:00 | Claude | Deleted | djinn-telegram-daily, djinn-daily.service/timer, telegram.conf, telegram.conf.example | Redundant — OpenClaw handles Telegram natively |
+| 2026-05-20 23:00 | Claude | Cleaned | ~/.openclaw/agents/main/sessions | Archived 3 orphan session files, session store at 4 active entries |
+| 2026-05-20 23:00 | Claude | Updated | ~/.openclaw/workspace/TOOLS.md | vault-sync interval corrected 15-min → 2-min |
+| 2026-05-20 23:00 | Claude | Updated | ~/.openclaw/workspace/MEMORY.md | Active context refreshed: Telegram live, Claude live, Typhon pending |
+| 2026-05-20 23:00 | Claude | Updated | ~/.openclaw/workspace/PLAN.md | Today's plan with live system status table |
+| 2026-05-20 23:00 | Claude | Updated | djinn/SYSTEM-STATE.md | Full system state refresh |

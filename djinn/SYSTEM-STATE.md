@@ -7,75 +7,90 @@ updated: 2026-05-20
 
 # SYSTEM-STATE.md — Djinn Operational State
 
-This file tracks live system state across machines. Not identity (see ~/.openclaw/workspace/MEMORY.md). Read before acting. Update when state changes.
+Inter-machine operational state. Not identity (that lives in ~/.openclaw/workspace/MEMORY.md).
+Read before acting. Update when state changes.
 
 ---
 
-## System State
+## Machine Status
 
 | Machine | Status | Last Seen | Notes |
 |---------|--------|-----------|-------|
-| Salomon | ✅ Online | 2026-05-20 | Primary workstation, all systems live |
-| Typhon | ⚠️ Offline | 2026-05-20 | 192.168.50.113 — same router, different subnet. Static route added on Salomon. Will connect once Typhon boots. |
-| Claude | ✅ Online | 2026-05-20 | Claude Code CLI active on Salomon, OAuth authenticated |
+| Salomon | ✅ Online | 2026-05-20 22:45 PDT | All systems live |
+| Typhon | ⏳ Offline | 2026-05-20 | Boot + sync-up instructions queued in Salomon-to-Typhon.md |
+| Claude | ✅ Online | 2026-05-20 | Claude Code CLI active, OAuth authenticated |
 
 ---
 
-## Active Services (Salomon)
+## Active Services — Salomon
 
 | Service | Status | Notes |
 |---------|--------|-------|
+| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth |
+| Telegram @OgDjinn_bot | ✅ Live | Polling, locked to Javier (7620067588) |
+| Discord @OgDjinn | ✅ Live | Djinn OC guild, inbound/outbound |
+| 8 AM cron | ✅ Fixed | id: 25a700db — was failing (Telegram disabled), now live |
 | Ollama | ✅ Running | 0.0.0.0:11434 — 8 models, remote access enabled |
-| Heartbeat timer | ✅ Active | 5-min systemd timer → HEARTBEAT.md |
-| Vault sync | ✅ Active | 2-min vault-sync.timer → GitHub |
-| Voice pipeline | ✅ Tested | voxtype STT + Piper TTS — PASS |
-| Telegram bot | 🔑 Needs token | Script ready at ~/.local/bin/djinn-telegram-daily |
+| Heartbeat timer | ✅ Active | 5-min → HEARTBEAT.md |
+| Vault sync | ✅ Active | 2-min → GitHub + GDrive |
+| Forge sync | ✅ Active | 15-min → GDrive |
+| Voice pipeline | ✅ Tested | voxtype STT + Piper TTS (en_GB-alba-medium) |
 
 ---
 
-## Ollama Remote Routing
+## Ollama Model Routing
 
-Typhon connects to Salomon's Ollama at `192.168.1.225:11434`.
-Confirmed working: phi4:14b inference ran on Salomon GPU, streamed to Typhon.
-
-| Model | Runs On | Available Remotely |
-|-------|---------|-------------------|
-| qwen2.5:7b | Both | Yes |
-| deepseek-r1:7b | Both | Yes |
-| qwen2.5-coder:7b | Both | Yes |
-| phi4:14b | Salomon only | Yes |
-| llama3.2-vision:11b | Salomon only | Yes |
-| mistral:7b | Salomon only | Yes |
-| llama3.2:3b | Typhon only | Local |
-| nomic-embed-text | Both | Yes |
+| Model | Runs On | Remote From Typhon | Role |
+|-------|---------|-------------------|------|
+| qwen2.5:7b | Both | Yes | Default — tool use + conversation |
+| deepseek-r1:7b | Both | Yes | Deep reasoning |
+| qwen2.5-coder:7b | Both | Yes | Code / dev |
+| phi4:14b | Salomon | Yes | Notes / APA (on demand) |
+| llama3.2-vision:11b | Salomon | Yes | Vision (on demand) |
+| mistral:7b | Salomon | Yes | Creative writing |
+| llama3.2:3b | Typhon | Local only | Lightweight admin |
+| qwen2.5:1.5b | Typhon (pending pull) | — | Lightweight automation |
+| nomic-embed-text | Both | Yes | Embeddings |
 
 ---
 
-## Pending Tasks
+## Pending
 
-### Typhon (queued — awaiting machine to come online)
-- [ ] Pull `qwen2.5:1.5b`
-- [ ] Re-verify Ollama remote routing after any config changes
-- [ ] Set up 5-min heartbeat timer (systemd)
-- [ ] Wire Telegram bot — needs token from @BotFather
-- [ ] Git rebase: `git fetch origin && git reset --hard origin/main`
+### Typhon (offline — instructions queued)
+- [ ] Boot machine
+- [ ] Git rebase (file renames)
+- [ ] Pull qwen2.5:1.5b
+- [ ] Verify Ollama remote routing
+- [ ] Set up heartbeat-typhon timer → HEARTBEAT-typhon.md
+- [ ] Verify vault-sync at 2-min
+- [ ] Report network interfaces + SSH status
+- [ ] Respond in Typhon-to-Salomon.md
 
-### Claude
-- [ ] Phase 6 — build djinn-daily and djinn-sync skills on Salomon
-- [ ] Confirm Typhon connectivity once it boots (static route already in place)
-
-### Javier (requires human action)
+### Javier
 - [ ] Boot Typhon
-- [ ] Telegram bot token from @BotFather → `~/.config/djinn/telegram.conf`
+- [ ] Test Telegram: message @OgDjinn_bot
 
 ---
 
-## Key Decisions (summary — see decision-log.md for full history)
+## Communication Channels
 
-- **Vault** = single source of truth. GitHub + GDrive sync.
-- **Three-lane architecture**: Ollama local (Salomon) → Ollama local (Typhon) → Claude API
-- **Communication**: markdown files in `djinn/communications/` — append only, never overwrite
-- **Signing**: always sign with `— <AgentName>`, git author set per agent
+| From → To | File |
+|-----------|------|
+| Salomon → Typhon | `djinn/communications/Salomon-to-Typhon.md` |
+| Typhon → Salomon | `djinn/communications/Typhon-to-Salomon.md` |
+| Any → Claude | `djinn/communications/Claude-inbox.md` |
+| Claude → All | `djinn/communications/Claude-outbox.md` |
+
+---
+
+## Key Decisions
+
+- Vault = single source of truth. GitHub primary, GDrive backup.
+- Three-lane architecture: Ollama (Salomon) + Ollama (Typhon) + Claude API
+- Communication: markdown files in djinn/communications/ — append only, never overwrite
+- Signing: `— <AgentName>`, git author set per agent
+- OpenClaw workspace files (~/.openclaw/workspace/) = Djinn identity layer (do not rename)
+- Vault djinn/ files = inter-machine ops layer (SYSTEM-STATE, ROUTING, HEARTBEAT, comms)
 
 ---
 
