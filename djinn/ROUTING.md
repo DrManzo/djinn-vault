@@ -1,6 +1,6 @@
 ---
 subject: Djinn Operations
-tags: [djinn, agents, routing]
+tags: [djinn, routing, multi-machine]
 created: 2026-05-20
 updated: 2026-05-20
 ---

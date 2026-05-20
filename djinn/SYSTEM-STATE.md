@@ -1,13 +1,13 @@
 ---
 subject: Djinn Operations
-tags: [djinn, memory, agents]
+tags: [djinn, system-state, operations]
 created: 2026-05-20
 updated: 2026-05-20
 ---
 
-# MEMORY.md — Djinn Shared Agent Memory
+# SYSTEM-STATE.md — Djinn Operational State
 
-This file is the shared memory index for all Djinn agents. Read it before acting. Update it when state changes.
+This file tracks live system state across machines. Not identity (see ~/.openclaw/workspace/MEMORY.md). Read before acting. Update when state changes.
 
 ---
 
