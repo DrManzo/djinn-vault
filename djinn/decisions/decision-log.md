@@ -18,3 +18,7 @@ created: 2026-05-19
 - Live lane: Ollama qwen2.5:7b
 - Dev lane: Claude (Pro subscription)
 - Research: Perplexity → vault notes
+
+---
+
+*— Salomon*

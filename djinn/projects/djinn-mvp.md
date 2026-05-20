@@ -20,3 +20,7 @@ Phase 8 (Migration Prep): ⏳ Pending
 - Review/update SOUL.md, USER.md, MEMORY.md
 - Set up Claude project when Pro activates
 - Build OpenCode agents and skills
+
+---
+
+*— Salomon*
