@@ -31,8 +31,9 @@
 | nomic-embed-text:latest | 274 MB | Yes | Embeddings |
 | qwen2.5-coder:7b | 4.7 GB | Yes — GPU native | Code / dev |
 | deepseek-r1:7b | 4.7 GB | Yes — GPU native | Deep reasoning |
+| mistral:7b | 4.1 GB | Yes — GPU native | Creative writing / prose |
 
-**Total stored:** ~54 GB
+**Total stored:** ~58 GB
 
 ---
 
