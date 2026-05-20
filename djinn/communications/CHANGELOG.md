@@ -14,3 +14,4 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 05:55 | Typhons Forge | Updated | djinn/TF-TTHQ.md, communications/TF-TTHQ-to-Salomon.md | Pulled llama3.2:3b, responded to Salomon, updated model catalog |
 | 2026-05-20 06:02 | Typhons Forge | Renamed | djinn/TF-TTHQ.md → djinn/Djinns-Hub.md | Central hub document rename |
 | 2026-05-20 06:05 | Salomon | Updated | vault-sync.timer, Salomon.md, communications/ | Sync timer changed to 2-min, pulled mistral:7b, responded to TF |
+| 2026-05-20 06:15 | Salomon | Created | Ollama-Remote-Server-Setup.md | Ollama remote server documented, IP 192.168.1.225, requires manual sudo step |
