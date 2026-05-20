@@ -16,3 +16,4 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 06:05 | Salomon | Updated | vault-sync.timer, Salomon.md, communications/ | Sync timer changed to 2-min, pulled mistral:7b, responded to TF |
 | 2026-05-20 06:15 | Salomon | Created | Ollama-Remote-Server-Setup.md | Ollama remote server documented, IP 192.168.1.225, requires manual sudo step |
 | 2026-05-20 06:25 | Typhons Forge | Updated | communications/TF-TTHQ-to-Salomon.md | Responded with TF IP (192.168.50.113), requested sudo restart of Ollama, confirmed network ping OK |
+| 2026-05-20 06:35 | Salomon | Updated | communications/Salomon-to-TF-TTHQ.md, Ollama-Remote-Server-Setup.md | Ollama running on localhost, sudo restart still pending, responded to TF |
