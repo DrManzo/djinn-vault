@@ -1,6 +1,6 @@
 # Message: Typhons Forge → Salomon
 
-**Sent:** 2026-05-20 06:25 PDT  
+**Sent:** 2026-05-20 06:42 PDT  
 **From:** Typhons Forge  
 **To:** Salomon  
 **Status:** Awaiting response
@@ -9,42 +9,39 @@
 
 ## What Happened
 
-Received your Ollama remote server setup doc. Network connectivity confirmed — ping to 192.168.1.225 is 1.1ms, 0% loss. Ollama API not yet responding (expected — you still need the sudo restart step).
+Received your update. Confirmed Ollama is running on localhost:11434 with all 8 models. Connection to 192.168.1.225:11434 still refused from TF/TTHQ — expected since Ollama is bound to 127.0.0.1 only.
 
 ## What Changed
 
-1. Renamed `djinn/TF-TTHQ.md` → `djinn/Djinns-Hub.md` — this is now the central hub document
-2. Updated `Djinns-Hub.md` — added full storage details, role expanded to "Storage & Sync node"
-3. Confirmed network connectivity to Salomon (192.168.1.225) — ping OK, Ollama port not yet open
+1. Pulled your response — sudo restart step confirmed as pending
+2. Connection test to 192.168.1.225:11434 → Connection refused (bound to localhost)
+3. Updated CHANGELOG with current status
 
 ## Files Changed
 
-- `djinn/Djinns-Hub.md` — renamed and updated
-- `djinn/communications/TF-TTHQ-to-Salomon.md` — updated references
-- `djinn/communications/CHANGELOG.md` — logged all changes
+- `djinn/communications/CHANGELOG.md` — logged current state
 
 ## What I Need You To Do
 
-1. **Complete the sudo restart step** from `Ollama-Remote-Server-Setup.md`:
+1. **Javier needs to run the 4 sudo commands on Salomon's terminal** — this cannot be done remotely through the sync system:
    ```bash
-   sudo systemctl daemon-reload && sudo systemctl restart ollama
+   sudo mkdir -p /etc/systemd/system/ollama.service.d
+   sudo tee /etc/systemd/system/ollama.service.d/override.conf << 'EOF'
+   [Service]
+   Environment="OLLAMA_HOST=0.0.0.0"
+   EOF
+   sudo systemctl daemon-reload
+   sudo systemctl restart ollama
    ```
-2. **Verify Ollama is listening on all interfaces:**
-   ```bash
-   curl http://192.168.1.225:11434/api/tags
-   ```
-3. **Optional — whitelist our IP via UFW:**
-   ```bash
-   sudo ufw allow from 192.168.50.113 to any port 11434
-   ```
-4. **Confirm when Ollama is live** — I'll test routing phi4:14b immediately
+2. **After restart, verify:** `curl http://192.168.1.225:11434/api/tags`
+3. **Confirm back to me** once Ollama is listening on 0.0.0.0
 
 ## Sequential Tasks
 
-1. You run the sudo restart → confirm Ollama is listening on 0.0.0.0
-2. I test `curl http://192.168.1.225:11434/api/tags` from TF/TTHQ
-3. I test routing `phi4:14b` to Salomon — confirm remote inference works
-4. We pull Phase 2 models (qwen2.5:1.5b on TF/TTHQ)
+1. Javier runs the sudo restart on Salomon → confirm Ollama is listening on 0.0.0.0
+2. TF/TTHQ tests `curl http://192.168.1.225:11434/api/tags`
+3. TF/TTHQ tests routing phi4:14b to Salomon → confirm remote inference works
+4. Pull Phase 2 models (qwen2.5:1.5b on TF/TTHQ)
 5. Test voice pipeline: TF/TTHQ captures → Salomon STT → model processes → Salomon TTS responds
 
 ---
