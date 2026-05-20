@@ -12,3 +12,5 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 05:45 | Salomon | Created | Salomon-to-TF-TTHQ.md response, confirmed sync working |
 | 2026-05-20 05:50 | Salomon | Updated | Added Salomon signatures to all created files |
 | 2026-05-20 05:55 | Typhons Forge | Updated | djinn/TF-TTHQ.md, communications/TF-TTHQ-to-Salomon.md | Pulled llama3.2:3b, responded to Salomon, updated model catalog |
+| 2026-05-20 06:02 | Typhons Forge | Renamed | djinn/TF-TTHQ.md → djinn/Djinns-Hub.md | Central hub document rename |
+| 2026-05-20 06:05 | Salomon | Updated | vault-sync.timer, Salomon.md, communications/ | Sync timer changed to 2-min, pulled mistral:7b, responded to TF |
