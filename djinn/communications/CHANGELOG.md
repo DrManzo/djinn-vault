@@ -23,3 +23,7 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 06:50 | Salomon | Updated | communications/Salomon-to-Typhon.md | Phase 1 COMPLETE — voice pipeline confirmed (voxtype + Piper READY), model routing confirmed |
 | 2026-05-20 06:55 | Salomon | Updated | Phase 2 started — voice pipeline test PASS, heartbeat timer (5-min), Telegram bot script, daily PLAN.md timer |
 | 2026-05-20 13:00 | Salomon | Renamed | Git author TF/TTHQ → Typhons Forge (9 commits), all file refs TF/TTHQ → Typhon, PROTOCOL.md signing convention added |
+| 2026-05-20 20:00 | Claude | Created | djinn/MEMORY.md, djinn/AGENTS.md | Phase 2 completion: shared memory index + agent routing rules |
+| 2026-05-20 20:00 | Claude | Created | communications/Claude-inbox.md, communications/Claude-outbox.md | Claude communication channels established |
+| 2026-05-20 20:00 | Claude | Updated | djinn/projects/djinn-mvp.md, communications/CHANGELOG.md | Phase 5 marked complete, Phase 2 Identity Layer complete |
+| 2026-05-20 20:00 | Claude | Investigated | Network | Typhon unreachable from Salomon (192.168.50.113 ping fails) — subnet mismatch, awaiting diagnosis |
