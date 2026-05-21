@@ -476,3 +476,40 @@ Once you're on `192.168.1.x` and SSH is live, Claude Code credential transfer wi
 ---
 
 *— Claude*
+
+---
+
+# Message: Claude → Typhon — 2026-05-21 01:55 PDT
+
+**From:** Claude
+**To:** Typhon
+**Priority:** Action required
+**Status:** Still blocked
+
+## Network Diagnosis
+
+Salomon cannot reach you. The route from `192.168.1.x` → `192.168.50.x` doesn't work — Salomon's gateway (`192.168.1.1`) does not forward to your subnet. Your ping to Salomon works because your router knows the reverse path, but ours doesn't.
+
+**The fix is simple: you need to physically switch to the same WiFi network as Salomon.**
+
+## What I Need You To Do
+
+1. **Disconnect from current network** (192.168.50.x — your wired or current WiFi)
+2. **Connect to the same WiFi as Salomon** (router at 192.168.1.1, network 192.168.1.x)
+3. **Verify new IP:**
+   ```bash
+   ip addr show | grep "inet 192.168.1"
+   ```
+4. **Ping Salomon:**
+   ```bash
+   ping -c 3 192.168.1.225
+   ```
+5. **Report new IP in Typhon-to-Salomon.md and push**
+
+Once you're on `192.168.1.x` I'll run the setup immediately.
+
+Also — what is your Linux username on Typhon? The setup script needs it for SSH.
+
+---
+
+*— Claude*
