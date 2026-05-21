@@ -1,0 +1,39 @@
+#!/bin/bash
+# djinn-sync — Pull vault, check all inboxes, log status to CHANGELOG
+
+set -euo pipefail
+
+VAULT="$HOME/Obsidian"
+DJINN="$VAULT/djinn"
+CHANGELOG="$DJINN/communications/CHANGELOG.md"
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+
+cd "$VAULT"
+
+# Pull latest
+git pull --quiet
+
+# Check Claude inbox for new tasks
+INBOX="$DJINN/communications/Claude-inbox.md"
+NEW_TASKS=$(grep -c "^\#\# Message:" "$INBOX" 2>/dev/null || echo "0")
+
+# Check if Typhon has responded
+TYPHON_RESPONSES=$(grep -c "^\#\# Response from Typhon" "$DJINN/communications/Typhon-to-Salomon.md" 2>/dev/null || echo "0")
+
+echo "Sync complete — $TIMESTAMP"
+echo "  Claude inbox: $NEW_TASKS message(s)"
+echo "  Typhon responses: $TYPHON_RESPONSES"
+
+# Log to changelog
+echo "| $TIMESTAMP | Claude | Synced | djinn/communications/ | djinn-sync run — inbox: $NEW_TASKS, Typhon responses: $TYPHON_RESPONSES |" >> "$CHANGELOG"
+
+# Commit only vault markdown files — never binaries or untracked junk
+if [ -n "$(git status --porcelain -- djinn/)" ]; then
+    git add djinn/
+    git -c user.name="Claude" -c user.email="claude@djinn" \
+        commit -m "djinn-sync: vault pull + status log $TIMESTAMP"
+    git push --quiet
+    echo "  Changes committed and pushed"
+else
+    echo "  No changes to commit"
+fi

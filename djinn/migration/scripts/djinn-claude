@@ -1,0 +1,14 @@
+#!/bin/bash
+# djinn-claude — Launch Claude Code with Djinn workspace access
+# Usage: djinn-claude [additional args]
+
+WORKSPACE="$HOME"
+VAULT="$HOME/Obsidian"
+WORKSPACE_DIR="$HOME/.openclaw/workspace"
+FORGE="$HOME/forge"
+SCRIPTS="$HOME/.local/bin"
+
+exec claude \
+    --add-dir "$VAULT" "$WORKSPACE_DIR" "$FORGE" "$SCRIPTS" \
+    --settings "$HOME/.claude/settings.json" \
+    "$@"

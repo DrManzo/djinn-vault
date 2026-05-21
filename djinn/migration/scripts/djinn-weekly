@@ -1,0 +1,158 @@
+#!/bin/bash
+# djinn-weekly — Weekly review generator
+# Pulls git log + CHANGELOG + decisions + daily notes → summary note via deepseek-r1:7b
+# Saves to ~/Obsidian/djinn/weekly/YYYY-WNN.md and sends Telegram digest
+
+set -euo pipefail
+
+VAULT="$HOME/Obsidian"
+DJINN="$VAULT/djinn"
+CONF="$HOME/.config/djinn/telegram.conf"
+DATE=$(date '+%Y-%m-%d')
+WEEK=$(date '+%Y-W%V')
+OUTDIR="$DJINN/weekly"
+OUTFILE="$OUTDIR/${WEEK}.md"
+WEEK_START=$(date -d "last monday" '+%Y-%m-%d' 2>/dev/null || date -v-monday '+%Y-%m-%d' 2>/dev/null || date '+%Y-%m-%d')
+
+mkdir -p "$OUTDIR"
+
+echo "=== Djinn Weekly Review — $WEEK ==="
+
+# Pull latest vault
+git -C "$VAULT" pull --quiet 2>/dev/null || true
+
+# 1. Git log — filter out heartbeat and routine noise
+GIT_LOG=$(git -C "$VAULT" log \
+    --oneline \
+    --since="7 days ago" \
+    --grep-reflog="" \
+    | grep -vE "^[a-f0-9]+ heartbeat:" \
+    | grep -vE "^[a-f0-9]+ djinn-sync:" \
+    | head -30 || echo "No notable commits this week")
+
+# 2. CHANGELOG entries from this week
+CHANGELOG_ENTRIES=$(grep "$WEEK_START\|$(date '+%Y-%m-%d')\|$(date -d '1 day ago' '+%Y-%m-%d' 2>/dev/null || true)\|$(date -d '2 days ago' '+%Y-%m-%d' 2>/dev/null || true)\|$(date -d '3 days ago' '+%Y-%m-%d' 2>/dev/null || true)\|$(date -d '4 days ago' '+%Y-%m-%d' 2>/dev/null || true)\|$(date -d '5 days ago' '+%Y-%m-%d' 2>/dev/null || true)\|$(date -d '6 days ago' '+%Y-%m-%d' 2>/dev/null || true)" \
+    "$DJINN/communications/CHANGELOG.md" 2>/dev/null \
+    | grep -v "^#\|^|\s*Timestamp" \
+    | head -30 || echo "No changelog entries found")
+
+# 3. Decision log entries — last section only
+DECISIONS=$(awk '/^## 20/{found=1} found{print}' "$DJINN/decisions/decision-log.md" 2>/dev/null | tail -30 || echo "No decisions found")
+
+# 4. Daily notes from this week
+DAILY_NOTES=""
+for f in "$DJINN/daily/"*.md; do
+    [ -f "$f" ] || continue
+    NOTE_DATE=$(basename "$f" .md)
+    DAILY_NOTES="${DAILY_NOTES}\n### $NOTE_DATE\n$(cat "$f")\n"
+done
+
+# 5. Current pending items from PLAN.md
+PENDING=$(grep -E "^\- \[ \]|⏳|PENDING|pending" "$HOME/.openclaw/workspace/PLAN.md" 2>/dev/null | head -10 || echo "None")
+
+# 6. Both machine heartbeats
+SALOMON_HEALTH=$(tail -10 "$DJINN/communications/HEARTBEAT.md" 2>/dev/null || echo "unavailable")
+TYPHON_HEALTH=$(tail -10 "$DJINN/communications/HEARTBEAT-typhon.md" 2>/dev/null || echo "unavailable")
+
+# 7. Build prompt and generate summary via deepseek-r1:7b
+PROMPT="You are Djinn, writing a weekly review note for Javier. Be direct, no fluff.
+
+WEEK: $WEEK ($WEEK_START to $DATE)
+
+GIT LOG (notable commits):
+$GIT_LOG
+
+CHANGELOG (this week):
+$CHANGELOG_ENTRIES
+
+RECENT DECISIONS:
+$DECISIONS
+
+DAILY NOTES:
+$(echo -e "$DAILY_NOTES")
+
+PENDING ITEMS:
+$PENDING
+
+Write a weekly review in this exact format:
+
+## Week of $WEEK_START
+
+### What Got Done
+- [bullet list of meaningful completions — phases, features, fixes]
+
+### Decisions Made
+- [architecture or operational decisions from this week]
+
+### Still Pending
+- [unresolved items, blockers, carry-forward]
+
+### Machine Health
+- Salomon: [one line]
+- Typhon: [one line]
+
+### Next Week
+- [top 3 priorities based on pending items and phase map]
+
+Keep it tight. Facts only. No motivational filler."
+
+echo "Generating summary via deepseek-r1:7b..."
+SUMMARY=$(ollama run deepseek-r1:7b "$PROMPT" 2>/dev/null | grep -v "^<think>" | grep -v "^</think>" || echo "Model unavailable — manual review needed")
+
+# 8. Write vault note
+cat > "$OUTFILE" << EOF
+---
+subject: Djinn Weekly Review
+tags: [djinn, weekly-review, $WEEK]
+created: $DATE
+---
+
+# Weekly Review — $WEEK
+
+$SUMMARY
+
+---
+
+## Raw Data
+
+### Notable Commits
+\`\`\`
+$GIT_LOG
+\`\`\`
+
+### Salomon Health
+$SALOMON_HEALTH
+
+### Typhon Health
+$TYPHON_HEALTH
+
+---
+
+*— Claude*
+EOF
+
+echo "Saved to $OUTFILE"
+
+# 9. Commit to vault
+git -C "$VAULT" add "djinn/weekly/"
+git -C "$VAULT" -c user.name="Claude" -c user.email="claude@djinn" \
+    commit -m "review: weekly review $WEEK" --quiet
+git -C "$VAULT" push --quiet
+echo "Pushed to vault"
+
+# 10. Send Telegram digest if config exists
+if [ -f "$CONF" ]; then
+    source "$CONF"
+    DIGEST="📋 *Djinn Weekly Review — $WEEK*
+
+$(echo "$SUMMARY" | grep -A5 "### What Got Done" | head -6)
+
+Full note: \`djinn/weekly/${WEEK}.md\`"
+    curl -s "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+        -d chat_id="$CHAT_ID" \
+        -d parse_mode="Markdown" \
+        --data-urlencode "text=$DIGEST" > /dev/null
+    echo "Telegram digest sent"
+fi
+
+echo "=== Weekly review complete ==="
