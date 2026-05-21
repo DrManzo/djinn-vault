@@ -35,8 +35,8 @@ PRINTER_IP=192.168.1.113
 
 ## Safety Notes
 
-- Bed reaches 60–100°C — cat enclosure required before first print
-- Hotend reaches 200°C+ — keep cats away during operation
-- Never leave unattended for first 3 prints
+- Hotend reaches 200°C+ — monitor cats during operation
+- Enclosure: planned for later, not a current blocker
 - WiFi only — no USB cable needed, printer can be placed safely away from Typhon
 - Hardware: flush cutters, nozzle pack, IPA — all on hand ✅
+- First print: ✅ Done
