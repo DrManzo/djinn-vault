@@ -21,3 +21,17 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Never commit these — large files, system junk, unrelated directories
+OLD/
+Obsidian/
+Obsidian_archive/
+backup-Djinn/
+forge/
+forge_archive/
+.Trash-*/
+*.nds
+*.n64
+*.iso
+*.rom
+RAW/
