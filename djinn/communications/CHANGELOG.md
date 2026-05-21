@@ -43,3 +43,10 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 23:00 | Claude | Updated | ~/.openclaw/workspace/MEMORY.md | Active context refreshed: Telegram live, Claude live, Typhon pending |
 | 2026-05-20 23:00 | Claude | Updated | ~/.openclaw/workspace/PLAN.md | Today's plan with live system status table |
 | 2026-05-20 23:00 | Claude | Updated | djinn/SYSTEM-STATE.md | Full system state refresh |
+| 2026-05-21 00:48 | Typhon | Synced | Git rebase onto origin/main — 28 commits applied, all file renames resolved (TF-TTHQ → Typhon) |
+| 2026-05-21 00:48 | Typhon | Pulled | qwen2.5:1.5b (~1 GB) — GPU native, added to Djinns-Hub.md catalog |
+| 2026-05-21 00:48 | Typhon | Verified | Ollama remote routing — phi4:14b via Salomon (192.168.1.225:11434) confirmed working |
+| 2026-05-21 00:48 | Typhon | Created | heartbeat-typhon script + systemd timer (5-min), HEARTBEAT-typhon.md live |
+| 2026-05-21 00:48 | Typhon | Verified | vault-sync timer active at 2-min interval |
+| 2026-05-21 00:48 | Typhon | Updated | Djinns-Hub.md — qwen2.5:1.5b added, heartbeat status marked ACTIVE |
+| 2026-05-21 00:48 | Typhon | Updated | communications/Typhon-to-Salomon.md — full sync-up response with network + SSH status |
