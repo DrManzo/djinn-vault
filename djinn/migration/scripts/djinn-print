@@ -1,0 +1,117 @@
+#!/bin/bash
+# djinn-print — Moonraker API client for Ender-3 V3 Plus
+# Usage:
+#   djinn-print status
+#   djinn-print queue <file.gcode>
+#   djinn-print cancel
+#   djinn-print list
+#   djinn-print log [N]
+
+set -euo pipefail
+
+CONF="$HOME/.config/djinn/printer.conf"
+VAULT="$HOME/Obsidian/djinn/printer"
+DATE=$(date '+%Y-%m-%dT%H:%M')
+
+if [ ! -f "$CONF" ]; then
+    echo "ERROR: $CONF not found"
+    echo "Create it with: echo 'PRINTER_IP=<ip>' > $CONF"
+    exit 1
+fi
+
+source "$CONF"
+API="http://${PRINTER_IP}:7125"
+
+cmd="${1:-status}"
+
+case "$cmd" in
+
+  status)
+    RESP=$(curl -sf "${API}/printer/objects/query?print_stats&display_status" 2>/dev/null) || {
+        echo "Printer unreachable at ${PRINTER_IP}:7125"
+        exit 1
+    }
+    STATE=$(echo "$RESP" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['result']['status']['print_stats']['state'])" 2>/dev/null || echo "unknown")
+    FILE=$(echo "$RESP" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['result']['status']['print_stats']['filename'])" 2>/dev/null || echo "")
+    PROGRESS=$(echo "$RESP" | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['result']['status']['display_status']['progress']*100,1))" 2>/dev/null || echo "0")
+    echo "State:    $STATE"
+    if [ -n "$FILE" ]; then echo "File:     $FILE"; fi
+    if [ "$STATE" = "printing" ]; then echo "Progress: ${PROGRESS}%"; fi
+    ;;
+
+  queue)
+    FILE="${2:-}"
+    [ -z "$FILE" ] && { echo "Usage: djinn-print queue <file.gcode>"; exit 1; }
+    JOB_ID="print_$(date '+%Y%m%d_%H%M%S')"
+    cat > "$VAULT/queue/${JOB_ID}.md" << EOF
+---
+job_id: $JOB_ID
+file: $FILE
+status: queued
+material: PLA
+profile: default
+estimated_time:
+submitted: $DATE
+completed:
+notes:
+---
+
+# Job: $FILE
+Queued at $DATE. Waiting for printer to be free.
+EOF
+    echo "Queued: $JOB_ID — $FILE"
+    echo "Run 'djinn-print start $JOB_ID' when printer is ready"
+    ;;
+
+  start)
+    JOB_ID="${2:-}"
+    JOB_FILE=$(ls "$VAULT/queue/${JOB_ID}.md" 2>/dev/null) || { echo "Job not found: $JOB_ID"; exit 1; }
+    GCODE_FILE=$(grep "^file:" "$JOB_FILE" | awk '{print $2}')
+    curl -sf -X POST "${API}/printer/print/start" \
+        -H "Content-Type: application/json" \
+        -d "{\"filename\": \"$GCODE_FILE\"}" > /dev/null
+    # Move to active
+    mv "$JOB_FILE" "$VAULT/active/${JOB_ID}.md"
+    sed -i "s/status: queued/status: printing/" "$VAULT/active/${JOB_ID}.md"
+    echo "Started: $GCODE_FILE"
+    ;;
+
+  cancel)
+    curl -sf -X POST "${API}/printer/print/cancel" > /dev/null
+    # Move active job to completed as failed
+    for f in "$VAULT/active/"*.md; do
+        [ -f "$f" ] || continue
+        sed -i "s/status: printing/status: failed/" "$f"
+        mv "$f" "$VAULT/completed/"
+    done
+    echo "Print cancelled"
+    ;;
+
+  list)
+    COUNT=$(ls "$VAULT/queue/"*.md 2>/dev/null | wc -l)
+    echo "Queued jobs: $COUNT"
+    for f in "$VAULT/queue/"*.md; do
+        [ -f "$f" ] || continue
+        JID=$(grep "^job_id:" "$f" | awk '{print $2}')
+        FNAME=$(grep "^file:" "$f" | awk '{print $2}')
+        echo "  $JID — $FNAME"
+    done
+    ;;
+
+  log)
+    N="${2:-5}"
+    echo "Last $N completed jobs:"
+    ls -t "$VAULT/completed/"*.md 2>/dev/null | head -"$N" | while read f; do
+        JID=$(grep "^job_id:" "$f" | awk '{print $2}')
+        FNAME=$(grep "^file:" "$f" | awk '{print $2}')
+        STATUS=$(grep "^status:" "$f" | awk '{print $2}')
+        DONE=$(grep "^completed:" "$f" | awk '{print $2}')
+        echo "  [$STATUS] $JID — $FNAME ($DONE)"
+    done
+    ;;
+
+  *)
+    echo "Usage: djinn-print <status|queue|start|cancel|list|log>"
+    exit 1
+    ;;
+esac
