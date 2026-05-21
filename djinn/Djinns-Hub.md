@@ -32,8 +32,9 @@
 | llama3.2-vision:11b-instruct-q4_K_M | 7.8 GB | Stretch (CPU offload) | Image / vision |
 | nomic-embed-text:latest | 274 MB | Yes | Embeddings |
 | llama3.2:3b | 2.0 GB | Yes — GPU native | Lightweight admin tasks |
+| `qwen2.5:1.5b` | 1.0 GB | Yes — GPU native | Tiny, perfect for automation scripts |
 
-**Total stored:** ~33.8 GB
+**Total stored:** ~34.8 GB
 
 ---
 
@@ -117,6 +118,12 @@
 - **Connection:** `OLLAMA_HOST=192.168.1.225:11434`
 - **Test:** phi4:14b remote inference confirmed — haiku generated on Salomon GPU, streamed to Typhon
 - **Models available remotely:** qwen2.5:7b, deepseek-r1:7b, qwen2.5-coder:7b, mistral:7b, phi4:14b, llama3.2-vision:11b, nomic-embed-text, qwen3.6:latest (36B)
+
+### Heartbeat Timer — ACTIVE ✅
+- **Status:** Live since 2026-05-21 07:47 UTC
+- **Interval:** 5 minutes via systemd timer (`heartbeat-typhon.timer`)
+- **Output:** `djinn/communications/HEARTBEAT-typhon.md`
+- **Includes:** uptime, GPU stats, Ollama model count, disk, RAM
 
 ### Strategy Options
 
