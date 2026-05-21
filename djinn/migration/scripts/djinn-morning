@@ -1,0 +1,67 @@
+#!/bin/bash
+# djinn-morning — 8 AM Telegram prompt to Javier
+# Pulls vault, assembles briefing, sends via Telegram Bot API
+
+set -euo pipefail
+
+CONF="$HOME/.config/djinn/telegram.conf"
+VAULT="$HOME/Obsidian"
+DJINN="$VAULT/djinn"
+DATE=$(date '+%Y-%m-%d')
+
+source "$CONF"
+
+send_msg() {
+  curl -s "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+    -d chat_id="$CHAT_ID" \
+    -d parse_mode="Markdown" \
+    --data-urlencode "text=$1" > /dev/null
+}
+
+# Pull latest vault
+git -C "$VAULT" pull --quiet 2>/dev/null || true
+
+# Carry-forward from PLAN.md
+CARRY=""
+if [ -f "$HOME/.openclaw/workspace/PLAN.md" ]; then
+  CARRY=$(awk '/Carry.Forward|carry.forward|CARRY/,0' "$HOME/.openclaw/workspace/PLAN.md" 2>/dev/null | grep "^\- " | head -5 | sed 's/^- /• /' || true)
+fi
+
+# Salomon health
+SALOMON_HEALTH=""
+if [ -f "$DJINN/communications/HEARTBEAT.md" ]; then
+  SALOMON_HEALTH=$(grep -E "CPU:|GPU:|RAM:" "$DJINN/communications/HEARTBEAT.md" 2>/dev/null | head -3 | tr '\n' ' ' || true)
+fi
+
+# Typhon health
+TYPHON_HEALTH=""
+if [ -f "$DJINN/communications/HEARTBEAT-typhon.md" ]; then
+  TYPHON_HEALTH=$(grep -E "GPU:|RAM:" "$DJINN/communications/HEARTBEAT-typhon.md" 2>/dev/null | head -2 | tr '\n' ' ' || true)
+fi
+
+# Build message
+MSG="☀️ *Good morning, Javier.* — ${DATE}
+
+🕗 8:00 AM — Deep work window opens at 8:15.
+
+*What's today's focus? Need me to research anything?*"
+
+if [ -n "$CARRY" ]; then
+  MSG="${MSG}
+
+📋 *Carry-forward:*
+${CARRY}"
+fi
+
+if [ -n "$SALOMON_HEALTH" ]; then
+  MSG="${MSG}
+
+🖥 *Salomon:* ${SALOMON_HEALTH}"
+fi
+
+if [ -n "$TYPHON_HEALTH" ]; then
+  MSG="${MSG}
+🗄 *Typhon:* ${TYPHON_HEALTH}"
+fi
+
+send_msg "$MSG"

@@ -1,0 +1,63 @@
+#!/bin/bash
+# djinn-daily — Morning briefing: pulls vault, checks all inboxes, prints status
+
+set -euo pipefail
+
+VAULT="$HOME/Obsidian"
+DJINN="$VAULT/djinn"
+DATE=$(date '+%Y-%m-%d')
+TIME=$(date '+%H:%M %Z')
+
+cd "$VAULT"
+
+echo "=== Djinn Daily Briefing — $DATE $TIME ==="
+echo ""
+
+# 1. Pull latest vault state
+echo "[ Vault ]"
+git pull --quiet && echo "  Up to date" || echo "  Pull failed — check git status"
+echo ""
+
+# 2. System health
+echo "[ Salomon Health ]"
+if [ -f "$DJINN/communications/HEARTBEAT.md" ]; then
+    grep -E "Last beat:|Status:|GPU:|RAM:|Disk:" "$DJINN/communications/HEARTBEAT.md" | sed 's/^/  /'
+fi
+echo ""
+
+# 3. Typhon heartbeat if present
+if [ -f "$DJINN/communications/HEARTBEAT-typhon.md" ]; then
+    echo "[ Typhon Health ]"
+    grep -E "Last beat:|Status:|RAM:|Disk:" "$DJINN/communications/HEARTBEAT-typhon.md" | sed 's/^/  /'
+    echo ""
+fi
+
+# 4. Claude inbox
+echo "[ Claude Inbox ]"
+INBOX="$DJINN/communications/Claude-inbox.md"
+if grep -q "^\-\-\-" "$INBOX" 2>/dev/null; then
+    TASK_COUNT=$(grep -c "^\-\-\-" "$INBOX" || true)
+    echo "  $TASK_COUNT message(s) queued"
+else
+    echo "  Empty"
+fi
+echo ""
+
+# 5. Typhon inbox (unread check)
+echo "[ Typhon Queue ]"
+TYPHON_MSG=$(grep -c "Status:.*Action required" "$DJINN/communications/Salomon-to-Typhon.md" 2>/dev/null || echo "0")
+echo "  $TYPHON_MSG pending message(s) awaiting Typhon"
+echo ""
+
+# 6. Today's plan file
+PLAN="$DJINN/daily/${DATE}.md"
+echo "[ Today's Plan ]"
+if [ -f "$PLAN" ]; then
+    echo "  $PLAN"
+    grep "^\- \[ \]" "$PLAN" | head -5 | sed 's/^/  /'
+else
+    echo "  No plan yet — run djinn-plan to create one"
+fi
+echo ""
+
+echo "=== End Briefing ==="

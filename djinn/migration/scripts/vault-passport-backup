@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+# Detect Passport mount point
+PASSPORT=""
+for mount in "/media/drmanzo/Passport" "/mnt/passport" "/media/Passport"; do
+    if [ -d "$mount" ]; then
+        PASSPORT="$mount"
+        break
+    fi
+done
+if [ -z "$PASSPORT" ]; then
+    echo "Passport drive not found. Mount it first."
+    echo "Looked in: /media/drmanzo/Passport, /mnt/passport, /media/Passport"
+    exit 1
+fi
+VAULT="$HOME/Obsidian"
+DEST="$PASSPORT/Obsidian-Backup"
+echo "Backing up vault to Passport at $DEST..."
+rsync -avh --delete \
+    --exclude ".obsidian/workspace*" \
+    "$VAULT/" "$DEST/"
+echo "Passport backup complete."
+echo "All files: $(find "$DEST" -type f | wc -l)"
