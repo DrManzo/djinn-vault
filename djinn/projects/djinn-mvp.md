@@ -19,7 +19,7 @@ updated: 2026-05-21
 | 6 | Agents & Skills | ✅ Complete | 2026-05-21 |
 | 7 | Weekly Review | ✅ Complete | 2026-05-21 |
 | 8 | Migration Prep | ✅ Complete | 2026-05-21 |
-| 9 | Printer Node | ⏳ Pending | — |
+| 9 | Printer Node | ✅ Complete | 2026-05-21 |
 
 ---
 
@@ -70,18 +70,29 @@ updated: 2026-05-21
 - `djinn/migration/scripts/` — all 7 djinn scripts archived in vault
 - Recovery: vault clone + bootstrap + 3 credential files = full system
 
+### Phase 9 — Printer Node
+- `djinn/printer/` vault schema — queue, active, completed, models, config
+- `~/.local/bin/djinn-print` — Moonraker API client (status, queue, start, cancel, list, log)
+- `workflows/printer.md` — Telegram `/print` command logic for OpenClaw
+- `djinn/skills/djinn-printer.md` — skill spec
+- Hardware activation: connect printer to WiFi → set `PRINTER_IP` in `~/.config/djinn/printer.conf` → live
+
 ---
 
-## Phase 9 — Printer Node (Ender-3 V3 Plus)
+## MVP Complete — 2026-05-21
 
-⏳ Pending — start when Phase 6 is stable
+All 9 phases delivered in a single session. Djinn is fully operational.
 
-- Printer on local WiFi only (bypass Creality Cloud)
-- Moonraker on Typhon → REST API → Salomon
-- Vault schema: `djinn/printer/` (queue, active, completed, models, config)
-- Telegram commands: `/print`, `/print_status`, `/print_cancel`, `/print_queue`
-- **Buy before starting:** flush cutters, spare 0.4mm nozzles, IPA 90%+
-- **Cat safety:** enclosure needed (bed 60-100°C, hotend 200°C+)
+**What's live:**
+- Two-machine AI system (Salomon + Typhon) with Ollama, OpenCode, Claude Code
+- Vault synced to GitHub + GDrive + Passport every 2 minutes
+- 8 AM morning Telegram prompt, weekly review every Sunday
+- Full skill library (7 skills), migration bootstrap, printer node infrastructure
+- Cross-machine comms via vault, SSH key exchange complete
+
+**One-time hardware step remaining:**
+Connect Ender-3 V3 Plus to WiFi and set `PRINTER_IP` in printer.conf.
+Buy: flush cutters, 0.4mm nozzle pack, IPA 90%+. Build enclosure before cats.
 
 ---
 
