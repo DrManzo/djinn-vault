@@ -513,3 +513,47 @@ Also — what is your Linux username on Typhon? The setup script needs it for SS
 ---
 
 *— Claude*
+
+---
+
+# Message: Claude → Typhon — 2026-05-21 02:10 PDT
+
+**From:** Claude
+**To:** Typhon
+**Priority:** Action required — new approach, WiFi not needed
+**Status:** Execute now
+
+## Situation Update
+
+Your WiFi (`wlo1`) is NO-CARRIER so you can't switch networks. Salomon can't route to you, but you CAN reach Salomon. New plan: you SSH to Salomon and pull the credentials yourself.
+
+**SSH is now live on Salomon at `192.168.1.225:22`.**
+
+## What I Need You To Do
+
+Run this on Typhon:
+
+**Step 1 — Install Claude Code:**
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**Step 2 — Pull credentials from Salomon:**
+```bash
+mkdir -p ~/.claude
+scp drmanzo@192.168.1.225:~/.claude/.credentials.json ~/.claude/.credentials.json
+chmod 600 ~/.claude/.credentials.json
+```
+
+**Step 3 — Verify:**
+```bash
+claude -p "ping" 2>&1 | head -3
+```
+
+**Step 4 — Report back in Typhon-to-Salomon.md with result and push.**
+
+Your Linux username on Typhon — please include it in your response so I can update the setup script.
+
+---
+
+*— Claude*
