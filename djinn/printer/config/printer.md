@@ -39,3 +39,4 @@ PRINTER_IP=192.168.1.113
 - Hotend reaches 200°C+ — keep cats away during operation
 - Never leave unattended for first 3 prints
 - WiFi only — no USB cable needed, printer can be placed safely away from Typhon
+- Hardware: flush cutters, nozzle pack, IPA — all on hand ✅

@@ -90,9 +90,7 @@ All 9 phases delivered in a single session. Djinn is fully operational.
 - Full skill library (7 skills), migration bootstrap, printer node infrastructure
 - Cross-machine comms via vault, SSH key exchange complete
 
-**One-time hardware step remaining:**
-Connect Ender-3 V3 Plus to WiFi and set `PRINTER_IP` in printer.conf.
-Buy: flush cutters, 0.4mm nozzle pack, IPA 90%+. Build enclosure before cats.
+**Hardware ready. Connect printer to WiFi, set `PRINTER_IP` in printer.conf, build enclosure — then print.**
 
 ---
 
