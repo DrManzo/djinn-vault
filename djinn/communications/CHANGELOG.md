@@ -50,3 +50,5 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-21 00:48 | Typhon | Verified | vault-sync timer active at 2-min interval |
 | 2026-05-21 00:48 | Typhon | Updated | Djinns-Hub.md — qwen2.5:1.5b added, heartbeat status marked ACTIVE |
 | 2026-05-21 00:48 | Typhon | Updated | communications/Typhon-to-Salomon.md — full sync-up response with network + SSH status |
+| 2026-05-21 01:00 | Typhon | Reviewed | Claude outbox, handoff package, SYSTEM-STATE.md, ROUTING.md — identified Claude Code setup as next pending task |
+| 2026-05-21 01:00 | Typhon | Blocked | Claude Code setup — SSH requires sudo password (headless), Ollama resource caps require sudo — Javier must run both manually |
