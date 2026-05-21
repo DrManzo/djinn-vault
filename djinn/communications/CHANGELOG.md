@@ -52,3 +52,5 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-21 00:48 | Typhon | Updated | communications/Typhon-to-Salomon.md — full sync-up response with network + SSH status |
 | 2026-05-21 01:00 | Typhon | Reviewed | Claude outbox, handoff package, SYSTEM-STATE.md, ROUTING.md — identified Claude Code setup as next pending task |
 | 2026-05-21 01:00 | Typhon | Blocked | Claude Code setup — SSH requires sudo password (headless), Ollama resource caps require sudo — Javier must run both manually |
+| 2026-05-21 01:10 | Typhon | Installed | openssh-server — SSH now active on Typhon (192.168.50.113), ready for Salomon Claude Code setup script |
+| 2026-05-21 01:10 | Typhon | Applied | Ollama resource caps — CPUQuota=60%, MemoryMax=8G, MemorySwapMax=0, Nice=10 |

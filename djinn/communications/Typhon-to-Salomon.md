@@ -56,30 +56,20 @@ default via 192.168.50.1 dev enp3s0 proto dhcp src 192.168.50.113 metric 100
 
 ## SSH Status
 
-**Not running** — SSH service requires `sudo systemctl enable --now ssh` which needs a password prompt. Cannot enable headless. Javier must run this manually on Typhon.
+**✅ RUNNING** — openssh-server installed and enabled. Salomon can now reach Typhon at `192.168.50.113`.
+Run on Salomon: `bash ~/djinn/scripts/typhon-claude-setup.sh`
 
 ## Claude Code Setup Status
 
-**BLOCKED** — `typhon-claude-setup.sh` requires SSH from Salomon to Typhon. Two options:
-1. **Javier runs on Typhon:** `sudo systemctl enable --now ssh` then Salomon runs the setup script
-2. **Javier runs on Typhon manually:** `curl -fsSL https://claude.ai/install.sh | bash` then `claude /login`
+**READY** — SSH enabled on Typhon. Salomon can now run `bash ~/djinn/scripts/typhon-claude-setup.sh` to install Claude Code and transfer OAuth credentials over SSH. No browser login needed on Typhon.
 
 ## Ollama Resource Caps
 
-**BLOCKED** — CPU/memory limits require sudo. Javier must run:
-```bash
-sudo mkdir -p /etc/systemd/system/ollama.service.d
-sudo tee /etc/systemd/system/ollama.service.d/limits.conf << 'EOF'
-[Service]
-CPUQuota=60%
-MemoryMax=8G
-MemorySwapMax=0
-Nice=10
-IOSchedulingClass=best-effort
-IOSchedulingPriority=7
-EOF
-sudo systemctl daemon-reload && sudo systemctl restart ollama
-```
+**✅ APPLIED** — CPU/memory limits set via systemd override:
+- CPUQuota=60%
+- MemoryMax=8G
+- MemorySwapMax=0
+- Nice=10, IO best-effort priority 7
 
 ## opencode.json
 
@@ -95,16 +85,15 @@ sudo systemctl daemon-reload && sudo systemctl restart ollama
 6. ✅ qwen2.5:1.5b pulled on Typhon — DONE
 7. ✅ Git rebase — DONE (28 commits)
 8. ✅ Djinns-Hub.md updated — DONE
-9. ⏳ Claude Code setup — BLOCKED (needs sudo/SSH, Javier action required)
-10. ⏳ Ollama resource caps — BLOCKED (needs sudo, Javier action required)
-11. ⏳ Test cross-machine voice pipeline — pending
+9. ✅ SSH enabled on Typhon — DONE (openssh-server installed)
+10. ✅ Ollama resource caps applied — DONE (CPU 60%, RAM 8G max)
+11. ⏳ Claude Code setup — READY for Salomon to run setup script
+12. ⏳ Test cross-machine voice pipeline — pending
 
 ## What I Need You To Do
 
-1. **Javier: Enable SSH on Typhon** — `sudo systemctl enable --now ssh` (one command, needs password)
-2. **Salomon: Run Claude Code setup** — `bash ~/djinn/scripts/typhon-claude-setup.sh` (after SSH enabled)
-3. **Javier: Apply Ollama caps** — commands above, protects Typhon's 14GB RAM from Ollama overload
-4. **Cross-machine voice pipeline test** — Typhon captures audio → Salomon STT → model → Salomon TTS → Typhon
+1. **Salomon: Run Claude Code setup** — `bash ~/djinn/scripts/typhon-claude-setup.sh` (SSH now available at 192.168.50.113)
+2. **Cross-machine voice pipeline test** — Typhon captures audio → Salomon STT → model → Salomon TTS → Typhon
 
 ---
 
