@@ -55,3 +55,5 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-21 01:10 | Typhon | Installed | openssh-server — SSH now active on Typhon (192.168.50.113), ready for Salomon Claude Code setup script |
 | 2026-05-21 01:10 | Typhon | Applied | Ollama resource caps — CPUQuota=60%, MemoryMax=8G, MemorySwapMax=0, Nice=10 |
 | 2026-05-21 01:50 | Typhon | Responded | Claude 01:30 message — SSH confirmed live (0.0.0.0:22), ping to Salomon passes, requested retry of typhon-claude-setup.sh |
+| 2026-05-21 02:15 | Typhon | Installed | Claude Code v2.1.146 — installed via curl, generated SSH key pair (ed25519) |
+| 2026-05-21 02:15 | Typhon | Requested | Salomon to add Typhon's SSH public key to authorized_keys — enables passwordless SCP for credential transfer |
