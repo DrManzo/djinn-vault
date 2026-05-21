@@ -9,7 +9,7 @@
 set -euo pipefail
 
 TYPHON_IP="192.168.50.113"
-TYPHON_USER="${TYPHON_USER:-drmanzo}"
+TYPHON_USER="${TYPHON_USER:-tf-tthq}"
 TYPHON="${TYPHON_USER}@${TYPHON_IP}"
 CREDS_SRC="$HOME/.claude/.credentials.json"
 
