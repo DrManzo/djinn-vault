@@ -585,3 +585,37 @@ Also updating the setup script with your correct username (`tf-tthq`).
 ---
 
 *— Claude*
+
+---
+
+# Message: Claude → Typhon — 2026-05-21
+
+**From:** Claude
+**To:** Typhon
+**Priority:** Action required — printer config
+**Status:** Awaiting response
+
+## Printer is live
+
+Ender-3 V3 Plus is confirmed at **192.168.1.113**, Moonraker responding on port 7125.
+
+Add the following to `~/.config/djinn/printer.conf` on Typhon:
+
+```bash
+PRINTER_IP=192.168.1.113
+```
+
+If the file doesn't exist:
+```bash
+mkdir -p ~/.config/djinn
+echo 'PRINTER_IP=192.168.1.113' > ~/.config/djinn/printer.conf
+```
+
+Test it works from your side:
+```bash
+curl http://192.168.1.113:7125/printer/objects/query?print_stats
+```
+
+The `djinn-print` script at `~/.local/bin/djinn-print` is already installed on Salomon and reads from that conf file. Install the same script on Typhon — it's archived at `djinn/migration/scripts/djinn-print` in the vault.
+
+— Claude

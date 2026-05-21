@@ -2,7 +2,7 @@
 
 **Owner:** Salomon (proxies through Typhon's network reach to printer)
 **Purpose:** Control Ender-3 V3 Plus via Moonraker API through Telegram commands
-**Status:** ⏳ Pending — awaiting printer WiFi setup
+**Status:** ✅ Live — Moonraker confirmed at 192.168.1.113:7125
 
 ## Triggers
 
@@ -34,8 +34,9 @@ See `workflows/printer.md` for full command logic.
 
 ## Hardware Checklist (one-time setup)
 
-- [ ] Connect Ender-3 V3 Plus to local WiFi (touchscreen → Settings → Network)
-- [ ] Note printer IP, add to `~/.config/djinn/printer.conf` on Salomon + Typhon
-- [ ] Test: `curl http://<ip>:7125/printer/objects/query?print_stats`
+- [x] Connect Ender-3 V3 Plus to local WiFi (touchscreen → Settings → Network)
+- [x] Note printer IP, add to `~/.config/djinn/printer.conf` on Salomon — **192.168.1.113**
+- [x] Test: `curl http://192.168.1.113:7125/printer/objects/query?print_stats` — **PASS**
+- [ ] Add `PRINTER_IP=192.168.1.113` to `~/.config/djinn/printer.conf` on Typhon
 - [ ] Build enclosure before first print — bed 60-100°C, cats present
 - [ ] Buy: flush cutters, 0.4mm nozzle pack, IPA 90%+
