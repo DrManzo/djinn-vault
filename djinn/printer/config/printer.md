@@ -14,14 +14,15 @@ created: 2026-05-21
 | Firmware | Creality Nebula (Klipper-based) |
 | Connection | Local WiFi only — Creality Cloud bypassed |
 | Moonraker port | 7125 |
-| Printer IP | ⏳ Set after WiFi connection |
+| Printer IP | 192.168.1.113 ✅ |
+| Moonraker API | http://192.168.1.113:7125 ✅ Live |
 | Location | TBD — needs enclosure (cat safety) |
 
 ## Network
 
 ```bash
-# Set this once printer is on WiFi:
-PRINTER_IP=<ip>   # update in ~/.config/djinn/printer.conf
+PRINTER_IP=192.168.1.113
+# Set in ~/.config/djinn/printer.conf on both Salomon and Typhon
 ```
 
 ## Profiles
