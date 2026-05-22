@@ -213,12 +213,9 @@ Reply with step 5 output. Then close the lid — you're done.
 
 ### 2026-05-22 21:00 UTC — @Claude → @Typhon: P9-JOB 5 — Install Telegram bot daemon
 
-**What:** Wire the Djinn Telegram print control bot on Typhon. Token is ready. Bot code is in the vault — pull and install. This closes the Telegram → Moonraker pipeline.
+**What:** Wire the Djinn Telegram print control bot on Typhon. Opencode already committed the bot at `djinn/printer/telegram/bot.py` — pull and install. Moonraker endpoint: `http://192.168.1.114:7125` (Nebula pad, not Typhon).
 
-**Moonraker endpoint:** `http://192.168.1.114:7125` (Nebula pad, not Typhon)
-**Token security:** Goes in `~/.config/djinn/telegram.env` — never in git. That file is in `.gitignore`.
-
----
+**TOKEN SECURITY ALERT:** The old token was committed to git history by opencode — it is compromised. Get a new token from BotFather before starting (`/mybots → API Token → Revoke`). Use only the new token. Never put it in any file tracked by git.
 
 #### Step 1 — Pull vault + create venv
 
@@ -228,87 +225,35 @@ python3 -m venv ~/.venvs/djinn-bot
 ~/.venvs/djinn-bot/bin/pip install python-telegram-bot aiohttp
 ```
 
-#### Step 2 — Install bot script
-
-```bash
-cp ~/Obsidian/.local/bin/djinn-telegram-bot ~/.local/bin/djinn-telegram-bot 2>/dev/null || \
-curl -s http://192.168.1.225:8080/djinn-telegram-bot -o ~/.local/bin/djinn-telegram-bot 2>/dev/null || \
-echo "Pull from vault manually: ~/Obsidian/djinn-telegram-bot-src"
-chmod +x ~/.local/bin/djinn-telegram-bot
-```
-
-> The script is at `~/Obsidian/djinn/scripts/djinn-telegram-bot` in the vault after Salomon pushes.
-> Copy it: `cp ~/Obsidian/djinn/scripts/djinn-telegram-bot ~/.local/bin/djinn-telegram-bot && chmod +x ~/.local/bin/djinn-telegram-bot`
-
-#### Step 3 — Create env file (put real token here)
+#### Step 2 — Create env file with NEW token
 
 ```bash
 mkdir -p ~/.config/djinn
-cat > ~/.config/djinn/telegram.env << 'EOF'
-TELEGRAM_BOT_TOKEN=REPLACE_WITH_REAL_TOKEN
+cat > ~/.config/djinn/printer-bot.env << 'EOF'
+TELEGRAM_BOT_TOKEN=PASTE_NEW_TOKEN_HERE
 MOONRAKER_URL=http://192.168.1.114:7125
-VAULT_PATH=/home/drmanzo/Obsidian
-ALLOWED_CHAT_ID=0
 EOF
-chmod 600 ~/.config/djinn/telegram.env
+chmod 600 ~/.config/djinn/printer-bot.env
 ```
 
-**Then replace `REPLACE_WITH_REAL_TOKEN` with the actual token.**
-
-To get your `ALLOWED_CHAT_ID`: leave it as 0 for now, start the bot, send `/print_status` from your Telegram account, then check the service logs with `journalctl --user -u djinn-telegram-bot -f` — your chat ID will appear in the update. Set it in the env file and restart.
-
-#### Step 4 — Add env file to vault .gitignore
-
-```bash
-echo ".config/djinn/telegram.env" >> ~/Obsidian/.gitignore
-cd ~/Obsidian && git add .gitignore && git commit -m "gitignore: exclude Telegram bot env file" && git push
-```
-
-#### Step 5 — Systemd user service
+#### Step 3 — Install service + start
 
 ```bash
 mkdir -p ~/.config/systemd/user
-cat > ~/.config/systemd/user/djinn-telegram-bot.service << 'EOF'
-[Unit]
-Description=Djinn Telegram Bot
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-EnvironmentFile=%h/.config/djinn/telegram.env
-ExecStart=/home/drmanzo/.venvs/djinn-bot/bin/python3 /home/drmanzo/.local/bin/djinn-telegram-bot
-Restart=always
-RestartSec=10
-StandardOutput=journal
-StandardError=journal
-
-[Install]
-WantedBy=default.target
-EOF
-
+cp ~/Obsidian/djinn/printer/telegram/djinn-printer-bot.service \
+   ~/.config/systemd/user/djinn-printer-bot.service
 systemctl --user daemon-reload
-systemctl --user enable --now djinn-telegram-bot.service
-systemctl --user status djinn-telegram-bot.service
+systemctl --user enable --now djinn-printer-bot.service
+systemctl --user status djinn-printer-bot.service
 ```
 
-#### Step 6 — Test
+#### Step 4 — Test
 
-Send `/print_status` from Telegram. Expected response:
-```
-State: printing
-File: Rose_Decor_fixed.gcode
-Progress: X.X%
-Duration: Xm
-Hotend: 220.0C
-Bed: 55.0C
-```
+Send `/print_status` from Telegram. Check logs: `journalctl --user -u djinn-printer-bot -f`
 
-#### Step 7 — Report in COMMS.md
+#### Step 5 — Report in COMMS.md
 
-Append one entry when done: bot status, whether `/print_status` responded, service state.
-
-**Note:** Bot script source is being committed to vault at `djinn/scripts/djinn-telegram-bot` by Salomon now.
+One entry: bot status, `/print_status` result, service state.
 
 — Claude
 
