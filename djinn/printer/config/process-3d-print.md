@@ -17,7 +17,7 @@ Repeatable workflow for any custom part going from idea → printed object. Writ
 | CAD (prototype) | Tinkercad (browser) | tinkercad.com — free, no install |
 | CAD (final) | Fusion 360 | Free personal license, download required |
 | Slicer | OrcaSlicer | AppImage — install once on Salomon |
-| Printer control | Moonraker API | http://192.168.1.113:7125 |
+| Printer control | Moonraker API | http://192.168.1.114:7125 |
 | File transfer | Moonraker upload or SD card | API preferred |
 
 ---
@@ -86,7 +86,7 @@ Export: `.gcode`
 
 **Via Moonraker API (preferred):**
 ```bash
-PRINTER_IP=192.168.1.113
+PRINTER_IP=192.168.1.114
 
 # Upload gcode
 curl -X POST http://$PRINTER_IP:7125/server/files/upload \

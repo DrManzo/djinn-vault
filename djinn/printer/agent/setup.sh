@@ -14,7 +14,7 @@ pip3 install --user ollama requests
 
 # Verify Moonraker reachable
 echo "Checking Moonraker..."
-curl -s http://192.168.1.113:7125/printer/info | python3 -c \
+curl -s http://192.168.1.114:7125/printer/info | python3 -c \
     "import json,sys; d=json.load(sys.stdin); print('Printer:', d.get('result',{}).get('hostname','?'))"
 
 echo ""
