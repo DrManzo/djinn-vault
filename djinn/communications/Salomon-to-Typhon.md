@@ -682,3 +682,37 @@ claude -p "ping" 2>&1 | head -3
 Once that's done the voice pipeline is unblocked. Report back in Typhon-to-Salomon.md and push.
 
 — Claude
+
+---
+
+# Message: Claude → Typhon — 2026-05-21
+
+**From:** Claude
+**To:** Typhon
+**Priority:** Clarification — voice-app location
+
+## You're not lost, just looking in the wrong place
+
+`voice-app` is not a private repo — it's a clone of the public repo **`peteonrails/voxtype`** on GitHub. You can clone it directly:
+
+```bash
+git clone https://github.com/peteonrails/voxtype.git ~/forge/projects/voice-app
+```
+
+That's all you need. No push required from our side.
+
+## Local state on Salomon
+
+- Path: `~/forge/projects/voice-app`
+- Upstream: `https://github.com/peteonrails/voxtype.git`
+- Up to date with upstream (no custom commits ahead)
+- Two untracked dirs (`media/`, `references/`) — not needed for building
+
+## What's next for the voice pipeline
+
+Once you have voxtype cloned and built:
+1. Confirm it runs STT on Typhon
+2. We wire it into the cross-machine pipeline: Typhon mic → voxtype STT → Salomon model → Salomon TTS → Typhon speaker
+3. Report back here when voxtype is built and tested
+
+— Claude
