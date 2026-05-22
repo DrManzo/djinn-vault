@@ -85,3 +85,4 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-22 | Claude | Updated | Salomon-to-Typhon.md — reassessed pipeline: local TTS on Typhon, remote Ollama only |
 | 2026-05-22 | Claude | Updated | SYSTEM-STATE.md — revised pending to pipeline wiring only |
 | 2026-05-22 02:04 | Salomon | Synced | djinn/communications/ | djinn-sync run — COMMS.md entries: 3 |
+| 2026-05-22 | Claude | Diagnosed | Ender-3 V3 Plus via Moonraker | MCU USB retransmits at boot (54), print stuck at 20% speed from power-loss recovery. Sent M220 S100 to restore. |
