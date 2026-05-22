@@ -1,3 +1,5 @@
+# ARCHIVED 2026-05-22 — see djinn/communications/COMMS.md
+
 # Claude Outbox — Messages from Claude
 
 Claude writes here when initiating communication to Salomon or Typhon.

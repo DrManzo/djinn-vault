@@ -1,60 +1,65 @@
-# Communications Protocol — Djinn Inter-Machine
+# Djinn Communications Protocol
 
-## How It Works
+## Agent Contract
 
-Each machine reads this file, checks the 4 sources, acts on requests, then writes a response.
+| Agent | Scope |
+|-------|-------|
+| Claude API | Architecture, synthesis, vault design — session-bound, Javier initiates |
+| Claude Code / Salomon | Complex builds, file editing on Salomon |
+| opencode / Salomon | Daily ops, tool use, automation, quick queries |
+| Claude Code / Typhon | Typhon-local code work only |
 
-### When Reading a Message — Check These 4 Things
+## Routing
 
-1. **Timestamp** — When was the message sent? Is it still relevant?
-2. **Content** — What is being asked? What files need changes?
-3. **GDrive** — Check `gdrive-sync-log.md` for files changed on GDrive. Pull changes.
-4. **GitHub** — Check for new commits. `git pull` to get latest.
+- Architecture / synthesis → **Claude API** (Javier opens session)
+- Code work on Salomon → **Claude Code / Salomon**
+- Daily ops, tool use → **opencode / Salomon**
+- Anything on Typhon → **Typhon agents**
+- Cross-machine → **Typhon initiates.** Salomon writes to COMMS.md → Typhon reads on sync → Typhon executes.
+- Salomon cannot push to Typhon. This is a permanent network constraint, not a bug.
 
-### After Reading — Do This
+## Two Channels
 
-1. Make the edits requested
-2. Save all changes
-3. `git add . && git commit -m "<description>"`
-4. `git push`
-5. Log all changes in `CHANGELOG.md`
-6. Write a response message (see format below)
+| Channel | Use for | Latency |
+|---------|---------|---------|
+| Telegram | Alerts, interrupts, real-time signals | Seconds |
+| COMMS.md | Decisions, task handoffs, persistent state | ~2 min (vault sync) |
 
-### Response Format (5 Bullet Points)
+## Session Protocol
+
+Every agent, every session, in order:
+
+1. **READ** → `HEARTBEAT.md` + `HEARTBEAT-typhon.md` (machine status)
+2. **READ** → `tail -n 50 COMMS.md` (recent context)
+3. **WORK** → do the task
+4. **APPEND** → one entry to `COMMS.md`
+5. **PUSH** → `git add . && git commit -m "..." && git push`
+
+No session ends without steps 4 and 5.
+
+## Message Format
 
 ```
-## Response from <MACHINE> — <timestamp>
-
-1. **What happened:** <summary>
-2. **What changed:** <description of changes>
-3. **Files changed:** <list of files>
-4. **What I need you to do:** <specific request or "nothing — all clear">
-5. **Sequential tasks:** <append to end if more steps needed, or "none">
-
----
-
-*— <MachineSignature>*
+### YYYY-MM-DD HH:MM UTC — @Sender → @Recipient: Subject
+- **What:** one line
+- **Action:** what recipient does (or "none")
+- **Paths:** relevant files if any
+— AgentName
 ```
 
-### Rules
+## Ownership
 
-- Always check timestamp before acting
-- Never overwrite another machine's response
-- Append responses, never delete
-- Log everything in `CHANGELOG.md`
-- If a task is sequential, append next step to the end
+| Agent | Owns | Never touches |
+|-------|------|---------------|
+| Claude | COMMS.md, PROTOCOL.md, djinn/projects/, djinn/logs/ | systemd timers, ~/.local/bin/, heartbeat files |
+| Salomon | HEARTBEAT.md, systemd timers, ~/.local/bin/ | vault structure, routing docs |
+| Typhon | HEARTBEAT-typhon.md, printer agent, Typhon timers | vault structure, routing docs |
+| Anyone | Append to COMMS.md, CHANGELOG.md | — |
 
-### Signing Convention
+## Signing
 
-All agents must sign every change with the format `— <MachineName>`:
-
-| Agent | Machine | Signature | Git Author |
-|-------|---------|-----------|------------|
-| opencode (Salomon) | `salomon` | `— Salomon` | `DrManzo` |
-| opencode (Typhon) | `typhon` | `— Typhons Forge` | `Typhons Forge` |
-| Claude | `claude` | `— Claude` | `Claude` |
-
-- In messages: address machines by name (`Salomon → Typhon`, `From: Typhon`)
-- In file content: use machine name for references (`on Typhon`, `from Salomon`)
-- In signatures: use the author name (`— Salomon`, `— Typhons Forge`, `— Claude`)
-- In git commits: use the git author name above
+| Agent | Signature | Git Author |
+|-------|-----------|------------|
+| Claude | `— Claude` | `Claude` |
+| Salomon | `— Salomon` | `DrManzo` |
+| Typhon | `— Typhons Forge` | `Typhons Forge` |

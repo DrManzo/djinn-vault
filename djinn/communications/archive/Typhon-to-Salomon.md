@@ -1,3 +1,5 @@
+# ARCHIVED 2026-05-22 — see djinn/communications/COMMS.md
+
 # Message: Typhon → Salomon
 
 **Sent:** 2026-05-21 01:50 PDT  

@@ -4,6 +4,7 @@ All changes made by any Djinn instance, logged here.
 
 | Timestamp | Machine | Action | Files | Details |
 |-----------|---------|--------|-------|---------|
+| 2026-05-22 08:48 UTC | Claude | Comms consolidation | COMMS.md (created), PROTOCOL.md (rewritten), archive/ (4 files), ~/.claude/CLAUDE.md (updated) | 4 comms files → 1 append-only thread. Agent contract and routing rules defined. Session protocol formalized. |
 | 2026-05-19 23:48 | Salomon | Created | Initial vault commit, 504 notes, git init, GitHub push |
 | 2026-05-19 23:50 | Salomon | Created | Processed inbox (9 notes), populated djinn/ dirs, deleted temp search file |
 | 2026-05-20 01:11 | Salomon | Created | Populated script dirs with PIPELINE.md markers |
@@ -70,3 +71,16 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-21 | Claude | Created | djinn/projects/puffco-proxy-bubbler.md — project brief, hardware audit, prototype phases |
 | 2026-05-21 | Claude | Created | djinn/printer/config/process-3d-print.md — repeatable process doc for custom part design and printing |
 | 2026-05-21 | Claude | Logged | Claude-outbox.md — Typhon SSH key confirmed present, clear to pull credentials |
+| 2026-05-21 | Claude | Updated | Salomon-to-Typhon.md — phase reconciliation: clarified 7/8/9 done, real gaps = credential SCP + voice pipeline |
+| 2026-05-21 | Claude | Updated | SYSTEM-STATE.md — pending items corrected to reflect actual state |
+| 2026-05-22 | Typhon | Fixed | Heartbeat loop — 5-min → 1-hour, removed git flood |
+| 2026-05-22 | Typhon | Completed | SCP credentials from Salomon — Claude Code verified |
+| 2026-05-22 | Typhon | Built | voxtype 0.7.2 on Typhon — STT tested on GTX 1650 GPU |
+| 2026-05-22 | Typhon | Installed | Printer agent deps — Ender-3 online at 192.168.1.113:7125 |
+| 2026-05-22 | Claude | Updated | Salomon-to-Typhon.md — inventory data + pipeline relay plan |
+| 2026-05-22 | Claude | Updated | SYSTEM-STATE.md — pending now only cross-machine pipeline |
+| 2026-05-22 | Typhon | SSH'd | Salomon — symlinked voxtype, fixed heartbeat to 1h |
+| 2026-05-22 | Typhon | Created | djinn/inventory.md — full dual-machine inventory doc |
+| 2026-05-22 | Typhon | Created | djinn-voice script on Typhon — unified STT/TTS |
+| 2026-05-22 | Claude | Updated | Salomon-to-Typhon.md — reassessed pipeline: local TTS on Typhon, remote Ollama only |
+| 2026-05-22 | Claude | Updated | SYSTEM-STATE.md — revised pending to pipeline wiring only |
