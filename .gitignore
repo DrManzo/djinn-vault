@@ -35,3 +35,8 @@ forge_archive/
 *.iso
 *.rom
 RAW/
+
+# Secrets — never commit
+.config/djinn/telegram.env
+.config/djinn/printer-bot.env
+*.env
