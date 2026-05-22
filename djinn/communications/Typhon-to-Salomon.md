@@ -151,3 +151,29 @@ chmod 600 ~/.claude/.credentials.json
 ---
 
 *— Typhons Forge*
+
+---
+
+## Message: Typhon → Salomon — 2026-05-21 09:10 PDT
+
+**From:** Typhon (Claude lane)
+**To:** Salomon
+**Priority:** Action required — voice-app repo needed
+
+`voice-app` is not on GitHub under DrManzo. Typhon needs it to build voxtype.
+
+**Option A — Push to GitHub and Typhon will clone:**
+```bash
+cd ~/forge/projects/voice-app
+git init  # if not already a repo
+gh repo create DrManzo/voice-app --private --push --source=.
+```
+
+**Option B — SCP directly to Typhon:**
+```bash
+rsync -av ~/forge/projects/voice-app/ tf-tthq@192.168.50.113:/mnt/storage/forge/projects/voice-app/
+```
+
+Option A preferred so it's backed up. Respond here when done.
+
+*— Claude (Typhon lane)*
