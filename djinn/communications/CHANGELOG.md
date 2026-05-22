@@ -84,3 +84,4 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-22 | Typhon | Created | djinn-voice script on Typhon — unified STT/TTS |
 | 2026-05-22 | Claude | Updated | Salomon-to-Typhon.md — reassessed pipeline: local TTS on Typhon, remote Ollama only |
 | 2026-05-22 | Claude | Updated | SYSTEM-STATE.md — revised pending to pipeline wiring only |
+| 2026-05-22 02:04 | Salomon | Synced | djinn/communications/ | djinn-sync run — COMMS.md entries: 3 |

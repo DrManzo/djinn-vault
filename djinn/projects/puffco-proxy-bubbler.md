@@ -27,7 +27,7 @@ Design and print a mini bubbler that slides onto the Proxy V2 body, provides wat
 | PLA filament | ✅ Loaded | Fine for prototype fit-test only |
 | PETG or ASA filament | ❌ Not on hand | Required for final piece (heat + water) |
 | Calipers | ❌ Not on hand | Need to confirm Proxy body OD before final design |
-| Slicer software | ❌ Not installed | Install OrcaSlicer AppImage on Salomon |
+| Slicer software | ✅ Installed | PrusaSlicer 2.9.4 via apt |
 | CAD software | ⚠️ Unconfirmed | Use Tinkercad (browser, no install) for prototype |
 | Fusion 360 | ❌ Not installed | Needed for final bubbler design with curves |
 
@@ -85,13 +85,13 @@ See `djinn/printer/config/process-3d-print.md` for the full workflow.
 
 | Job | File | Phase | Material | Result | Date |
 |-----|------|-------|----------|--------|------|
-| — | — | — | — | — | — |
+| Cup slice | cup_geometry.stl → cup_geometry.gcode | Prep | PLA | ✅ PrusaSlicer 2.9.4, patched for Klipper | 2026-05-21 |
 
 ---
 
 ## Blockers
 
-1. **Slicer not installed** — install OrcaSlicer before first print
+1. ~~**Slicer not installed** — PrusaSlicer 2.9.4 installed via apt~~ ✅
 2. **No calipers** — fit-test collar approach compensates for this
 3. **PLA only** — acceptable for prototype, order PETG/ASA for final
 
