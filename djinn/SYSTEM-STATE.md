@@ -2,7 +2,7 @@
 subject: Djinn Operations
 tags: [djinn, system-state, operations]
 created: 2026-05-20
-updated: 2026-05-21
+updated: 2026-05-22
 ---
 
 # SYSTEM-STATE.md — Djinn Operational State
@@ -70,13 +70,15 @@ Read before acting. Update when state changes.
 
 ## Pending
 
-### Phase 6 — Agents & Skills
-- [ ] djinn-daily skill
-- [ ] djinn-sync skill
-- [ ] OpenCode skill library
+### Voice pipeline — final wiring (Typhon lead)
+- [ ] Wire `djinn-voice` → remote Salomon Ollama (phi4:14b) for inference
+- [ ] Test full loop: speak → voxtype STT → remote Ollama → local Piper TTS → play
+- [ ] Report results
 
-### Javier
-- [ ] Test Telegram: message @OgDjinn_bot
+### Nice-to-haves (no blockers)
+- [ ] Fix Piper lib path on Salomon for local fallback (`libpiper_phonemize.so.1`)
+- [ ] Upgrade whisper model on Typhon (base → small/medium)
+- [ ] Printer auto-start systemd service
 
 ---
 
