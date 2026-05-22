@@ -211,6 +211,109 @@ Reply with step 5 output. Then close the lid — you're done.
 
 ---
 
+### 2026-05-22 21:00 UTC — @Claude → @Typhon: P9-JOB 5 — Install Telegram bot daemon
+
+**What:** Wire the Djinn Telegram print control bot on Typhon. Token is ready. Bot code is in the vault — pull and install. This closes the Telegram → Moonraker pipeline.
+
+**Moonraker endpoint:** `http://192.168.1.114:7125` (Nebula pad, not Typhon)
+**Token security:** Goes in `~/.config/djinn/telegram.env` — never in git. That file is in `.gitignore`.
+
+---
+
+#### Step 1 — Pull vault + create venv
+
+```bash
+cd ~/Obsidian && git pull
+python3 -m venv ~/.venvs/djinn-bot
+~/.venvs/djinn-bot/bin/pip install python-telegram-bot aiohttp
+```
+
+#### Step 2 — Install bot script
+
+```bash
+cp ~/Obsidian/.local/bin/djinn-telegram-bot ~/.local/bin/djinn-telegram-bot 2>/dev/null || \
+curl -s http://192.168.1.225:8080/djinn-telegram-bot -o ~/.local/bin/djinn-telegram-bot 2>/dev/null || \
+echo "Pull from vault manually: ~/Obsidian/djinn-telegram-bot-src"
+chmod +x ~/.local/bin/djinn-telegram-bot
+```
+
+> The script is at `~/Obsidian/djinn/scripts/djinn-telegram-bot` in the vault after Salomon pushes.
+> Copy it: `cp ~/Obsidian/djinn/scripts/djinn-telegram-bot ~/.local/bin/djinn-telegram-bot && chmod +x ~/.local/bin/djinn-telegram-bot`
+
+#### Step 3 — Create env file (put real token here)
+
+```bash
+mkdir -p ~/.config/djinn
+cat > ~/.config/djinn/telegram.env << 'EOF'
+TELEGRAM_BOT_TOKEN=REPLACE_WITH_REAL_TOKEN
+MOONRAKER_URL=http://192.168.1.114:7125
+VAULT_PATH=/home/drmanzo/Obsidian
+ALLOWED_CHAT_ID=0
+EOF
+chmod 600 ~/.config/djinn/telegram.env
+```
+
+**Then replace `REPLACE_WITH_REAL_TOKEN` with the actual token.**
+
+To get your `ALLOWED_CHAT_ID`: leave it as 0 for now, start the bot, send `/print_status` from your Telegram account, then check the service logs with `journalctl --user -u djinn-telegram-bot -f` — your chat ID will appear in the update. Set it in the env file and restart.
+
+#### Step 4 — Add env file to vault .gitignore
+
+```bash
+echo ".config/djinn/telegram.env" >> ~/Obsidian/.gitignore
+cd ~/Obsidian && git add .gitignore && git commit -m "gitignore: exclude Telegram bot env file" && git push
+```
+
+#### Step 5 — Systemd user service
+
+```bash
+mkdir -p ~/.config/systemd/user
+cat > ~/.config/systemd/user/djinn-telegram-bot.service << 'EOF'
+[Unit]
+Description=Djinn Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/djinn/telegram.env
+ExecStart=/home/drmanzo/.venvs/djinn-bot/bin/python3 /home/drmanzo/.local/bin/djinn-telegram-bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+EOF
+
+systemctl --user daemon-reload
+systemctl --user enable --now djinn-telegram-bot.service
+systemctl --user status djinn-telegram-bot.service
+```
+
+#### Step 6 — Test
+
+Send `/print_status` from Telegram. Expected response:
+```
+State: printing
+File: Rose_Decor_fixed.gcode
+Progress: X.X%
+Duration: Xm
+Hotend: 220.0C
+Bed: 55.0C
+```
+
+#### Step 7 — Report in COMMS.md
+
+Append one entry when done: bot status, whether `/print_status` responded, service state.
+
+**Note:** Bot script source is being committed to vault at `djinn/scripts/djinn-telegram-bot` by Salomon now.
+
+— Claude
+
+---
+
 ### 2026-05-22 20:30 UTC — @Claude → @All: Printer recovery + PLR + thermal watchdog session
 
 - **What:** Full printer recovery session. Root cause of recurring key564 shutdowns identified as nozzle_mcu serial retransmits (retransmit_seq=4289). Javier physically reseated /dev/ttyS1 cable — fixed (retransmit_seq now 2). verify_heater restored to safe values.
