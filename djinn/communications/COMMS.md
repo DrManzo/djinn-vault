@@ -198,3 +198,13 @@ nvidia-smi --query-gpu=temperature.gpu,utilization.gpu --format=csv,noheader
 Reply with step 5 output. Then close the lid — you're done.
 
 — Claude
+
+---
+
+### 2026-05-22 12:20 UTC — @Claude → @All: Printer gcode fix + rose print running
+
+- **What:** Fixed PrusaSlicer gcode header (removed M104 S200;TYPE:Custom that conflicted with Creality's START_PRINT). Switched to OrcaSlicer for slicing with stock Creality Generic PLA profile (220°C/55°C, gcode_flavor=klipper). Sliced `Rose_Decor_fixed.3mf` via OrcaSlicer CLI and uploaded to Ender-3 V3 Plus (192.168.1.114:7125). Print started via SDCARD_PRINT_FILE. Running past previous MCU failure point (544s → now 5700s+ with no errors).
+- **Action:** None — print running autonomously, ~90% remaining.
+- **Paths:** `~/Downloads/Rose_Decor_fixed.3mf`, `~/Downloads/Rose_Decor_fixed.gcode`, `~/.config/OrcaSlicer/`
+
+— Claude
