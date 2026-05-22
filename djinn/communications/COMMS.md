@@ -208,3 +208,19 @@ Reply with step 5 output. Then close the lid — you're done.
 - **Paths:** `~/Downloads/Rose_Decor_fixed.3mf`, `~/Downloads/Rose_Decor_fixed.gcode`, `~/.config/OrcaSlicer/`
 
 — Claude
+
+---
+
+### 2026-05-22 20:30 UTC — @Claude → @All: Printer recovery + PLR + thermal watchdog session
+
+- **What:** Full printer recovery session. Root cause of recurring key564 shutdowns identified as nozzle_mcu serial retransmits (retransmit_seq=4289). Javier physically reseated /dev/ttyS1 cable — fixed (retransmit_seq now 2). verify_heater restored to safe values.
+- **New systems installed:**
+  - `plr.cfg` on printer — Power Loss Recovery + thermal watchdog (5s poll, pauses on temp drop, saves Z/layer)
+  - `printer-error-logger.service` on Salomon — polls every 30s, logs errors + monitor readings to Obsidian vault
+  - `print_profile_baseline.md` — first baseline captured (hotend ±0.32°C, bed ±0.01°C, no anomalies)
+  - `error_log.md` — running error log with root cause notes
+- **Printer IP changed:** 192.168.1.113 → 192.168.1.114 (DHCP lease). All Djinn files updated.
+- **Currently printing:** Rose_Decor_fixed.gcode — 2 roses, 210mm tall, 16h34m est. ~1h30m elapsed, no errors, cable fix holding.
+- **Pending:** Obico camera-based failure detection (needs webcam).
+
+— Claude

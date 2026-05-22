@@ -4,7 +4,7 @@ Tool implementations for Djinn Print agent.
 
 import os, subprocess, tempfile, json, requests
 
-MOONRAKER   = "http://192.168.1.113:7125"
+MOONRAKER   = "http://192.168.1.114:7125"
 MODELS_DIR  = os.path.expanduser("~/Obsidian/djinn/printer/models")
 
 
