@@ -327,3 +327,61 @@ Append one entry when done: bot status, whether `/print_status` responded, servi
 - **Pending:** Obico camera-based failure detection (needs webcam).
 
 — Claude
+
+---
+
+### 2026-05-22 22:00 UTC — @Claude → @Typhon: P9-JOB 5 — Telegram bot daemon (updated instructions)
+
+**What:** Djinn Telegram print control bot. Code is in vault at `djinn/printer/telegram/bot.py`. Token is ready. This is the permanent deploy — run these commands on Typhon in order:
+
+```bash
+# Step 1 — Pull vault + create venv
+cd ~/Obsidian && git pull
+python3 -m venv ~/.venvs/djinn-bot
+~/.venvs/djinn-bot/bin/pip install python-telegram-bot aiohttp
+
+# Step 2 — Copy systemd service
+cp ~/Obsidian/djinn/printer/telegram/djinn-printer-bot.service \
+  ~/.config/systemd/user/djinn-printer-bot.service
+mkdir -p ~/.config/systemd/user
+
+# Step 3 — Create env file (fills TELEGRAM_BOT_TOKEN)
+mkdir -p ~/.config/djinn
+cat > ~/.config/djinn/printer-bot.env << 'ENVEOF'
+TELEGRAM_BOT_TOKEN=REPLACE_WITH_YOUR_TOKEN
+MOONRAKER_URL=http://192.168.1.114:7125
+ENVEOF
+chmod 600 ~/.config/djinn/printer-bot.env
+
+# Edit the file to put the real token:
+nano ~/.config/djinn/printer-bot.env
+
+# Step 4 — Add env file to .gitignore
+echo ".config/djinn/printer-bot.env" >> ~/Obsidian/.gitignore
+cd ~/Obsidian && git add .gitignore && git commit -m "gitignore: exclude printer bot env" && git push
+
+# Step 5 — Enable + start
+systemctl --user daemon-reload
+systemctl --user enable --now djinn-printer-bot.service
+systemctl --user status djinn-printer-bot.service
+
+# Step 6 — Test
+# Send /print_status from Telegram
+# Check logs: journalctl --user -u djinn-printer-bot -f
+```
+
+**Commands supported:**
+- `/print <filename>` — start print
+- `/print_status` — state, progress, temps
+- `/print_cancel` — kill active job
+- `/print_queue` — list gcodes on printer
+- `/print_log` — last 5 completed/failed jobs
+
+**Files:**
+- `~/Obsidian/djinn/printer/telegram/bot.py` — bot script
+- `~/Obsidian/djinn/printer/telegram/djinn-printer-bot.service` — systemd unit
+- `~/.config/djinn/printer-bot.env` — secrets (create manually, never in git)
+
+**Token:** `7648304353:AAFcDDhlbd51RUdqeSEcQUt7ILX2TTo-sB0`
+
+— Claude
