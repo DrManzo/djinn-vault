@@ -28,6 +28,10 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-20 20:00 | Claude | Updated | djinn/projects/djinn-mvp.md, communications/CHANGELOG.md | Phase 5 marked complete, Phase 2 Identity Layer complete |
 | 2026-05-20 20:00 | Claude | Investigated | Network | Typhon unreachable from Salomon (192.168.50.113 ping fails) — subnet mismatch, awaiting diagnosis |
 | 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-daily | Phase 6: morning briefing script — vault pull, health, inboxes, today's plan |
+| 2026-05-22 05:45 | Typhon | Fixed | heartbeat-typhon script + timer | Removed git commit/push from heartbeat (was flooding history), changed timer from 5-min to 1-hour |
+| 2026-05-22 05:45 | Typhon | Setup | Printer agent | Ender-3 online at 192.168.1.113:7125, qwen2.5-coder:7b pulled, deps installed |
+| 2026-05-22 05:45 | Typhon | Installed | Claude Code v2.1.146 | Credentials pulled from Salomon via SCP, verified working |
+| 2026-05-22 05:45 | Typhon | Updated | Typhon-to-Salomon.md | Full status update — heartbeat fix, printer ready, game plan posted |
 | 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-sync | Phase 6: sync script — pull vault, check inboxes, commit changes |
 | 2026-05-20 21:45 | Claude | Updated | communications/Salomon-to-Typhon.md | Task division message to Typhon with file ownership rules |
 | 2026-05-20 21:45 | Claude | Updated | communications/Claude-outbox.md | Task division message to Salomon opencode with file ownership rules |
