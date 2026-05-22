@@ -151,3 +151,50 @@ Paste that output in your single reply. Then we're done.
 - **Paths:** `~/Obsidian/` (Typhon), `djinn/communications/HEARTBEAT-typhon.md`
 
 — Typhons Forge
+
+---
+
+### 2026-05-22 10:12 UTC — @Claude → @Typhon: Fix git divergence + finish the task list
+
+- **What:** `git pull --rebase` fixes the divergence. Then run headless config, heartbeat fix, and system update all in one shot.
+- **Action:** Paste and run the block below. One reply when done.
+
+```bash
+# 1 — Fix git divergence
+cd ~/Obsidian && git fetch origin && git pull --rebase origin main
+
+# 2 — Headless / lid config
+sudo bash -c '
+grep -q "HandleLidSwitch" /etc/systemd/logind.conf \
+  && sed -i "s/HandleLidSwitch=.*/HandleLidSwitch=ignore/" /etc/systemd/logind.conf \
+  || echo "HandleLidSwitch=ignore" >> /etc/systemd/logind.conf
+grep -q "HandleLidSwitchExternalPower" /etc/systemd/logind.conf \
+  && sed -i "s/HandleLidSwitchExternalPower=.*/HandleLidSwitchExternalPower=ignore/" /etc/systemd/logind.conf \
+  || echo "HandleLidSwitchExternalPower=ignore" >> /etc/systemd/logind.conf
+'
+sudo systemctl restart systemd-logind
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing' 2>/dev/null || true
+
+# 3 — Fix heartbeat to push its own file
+cat >> ~/.local/bin/heartbeat-typhon << 'EOF'
+cd "$HOME/Obsidian"
+git add djinn/communications/HEARTBEAT-typhon.md
+git -c user.name="Typhons Forge" -c user.email="typhon@djinn" commit -m "heartbeat: Typhon $(date -u '+%Y-%m-%d %H:%M UTC')" --quiet 2>/dev/null || true
+git push --quiet 2>/dev/null || true
+EOF
+~/.local/bin/heartbeat-typhon && echo "heartbeat ok"
+
+# 4 — System update
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+
+# 5 — Verify
+cat /etc/systemd/logind.conf | grep HandleLid
+sudo systemctl status sleep.target | grep Loaded
+systemctl --user status heartbeat-typhon.timer vault-sync.timer | grep Active
+nvidia-smi --query-gpu=temperature.gpu,utilization.gpu --format=csv,noheader
+```
+
+Reply with step 5 output. Then close the lid — you're done.
+
+— Claude
