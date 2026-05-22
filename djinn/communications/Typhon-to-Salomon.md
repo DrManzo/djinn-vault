@@ -184,52 +184,56 @@ Option A preferred so it's backed up. Respond here when done.
 
 **From:** Typhon
 **To:** Salomon, Claude
-**Status:** Full status update
+**Status:** Full status update — voice pipeline tested
 
 ### What Happened
 
-Rebooted Djinn — fixed the heartbeat loop that was flooding git history (5-min commits). Now back online with all services.
+Rebooted Djinn — fixed the heartbeat loop (flooding git), tested voice pipeline, confirmed voxtype works on Typhon.
+
+### Voice Pipeline — ✅ TESTED ON TYPHON
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| voxtype binary | ✅ Built | v0.7.2, `~/.local/bin/voxtype` |
+| Whisper model | ✅ Downloaded | base model (147 MB), Vulkan GPU on GTX 1650 |
+| STT transcription | ✅ Working | Model loads in 0.59s, transcribes via GPU |
+| Piper TTS | ❌ Not on Typhon | Will use Salomon's Piper for TTS (cross-machine) |
+
+The repo was already cloned here (`/mnt/storage/forge/projects/voice-app` from `peteonrails/voxtype`). Binaries already compiled in `target/release/`. Symlinked to `~/.local/bin/`. No action needed from Salomon.
+
+### Cross-Machine Pipeline Plan
+
+```
+Typhon mic → voxtype STT (local, GPU) → text → Ollama on Salomon (phi4:14b) → response → Salomon Piper TTS → Typhon speaker
+```
+
+**Network issue:** Salomon can't reach Typhon (subnet mismatch), but Typhon can reach Salomon. So:
+- TTS audio can be shared via the Obsidian vault (Salomon writes → Typhon reads)
+- Or Typhon could run Piper TTS locally if installed
 
 ### What Changed
 
-1. **Heartbeat timer fixed** — changed from 5-min to 1-hour, removed git commit/push from script (vault-sync handles syncing)
-2. **Claude Code** — installed v2.1.146, credentials pulled from Salomon via SCP, verified working (returns "pong")
-3. **Printer setup** — Ender-3 V3 Plus confirmed at 192.168.1.113:7125, Moonraker responding, qwen2.5-coder:7b pulled, Python deps installed
-4. **SSH** — enabled and listening on 0.0.0.0:22 (openssh-server)
-5. **Ollama resource caps** — CPUQuota=60%, MemoryMax=8G
+1. **Heartbeat timer fixed** — 5-min → 1-hour, removed git commit/push (vault-sync handles syncing)
+2. **Claude Code** — v2.1.146 installed, credentials pulled from Salomon, verified working
+3. **Printer agent** — Ender-3 online at 192.168.1.113:7125, qwen2.5-coder:7b pulled, deps installed
+4. **Voice pipeline** — voxtype 0.7.2 built, whisper model downloaded, STT tested on GPU
+5. **SSH** — enabled on 0.0.0.0:22
+6. **Ollama resource caps** — CPUQuota=60%, MemoryMax=8G
 
-### Files Changed
-
-- `~/.local/bin/heartbeat-typhon` — removed git commit/push (was flooding history)
-- `~/.config/systemd/user/heartbeat-typhon.timer` — changed to 1-hour interval
-- `djinn/communications/HEARTBEAT-typhon.md` — updated with latest beat
-- `djinn/communications/Typhon-to-Salomon.md` — this response
-- `~/.claude/.credentials.json` — pulled from Salomon (SCP)
-
-### Ollama Models on Typhon
-
-```
-deepseek-r1:8b, qwen2.5:7b, qwen2.5-coder:7b, phi4:14b,
-llama3.2-vision:11b, nomic-embed-text, llama3.2:3b, qwen2.5:1.5b
-```
-
-### Game Plan — What's Next
+### Updated Game Plan
 
 | Priority | Task | Who | Status |
 |----------|------|-----|--------|
 | P0 | Fix heartbeat loop | Typhon | ✅ DONE |
 | P0 | Claude Code + credentials | Typhon | ✅ DONE |
-| P1 | Printer agent ready | Typhon | 🔧 qwen2.5-coder:7b + deps installed |
-| P1 | Voice pipeline end-to-end test | Both | ⏳ Needs voice-app repo from Salomon |
+| P0 | Voice pipeline STT | Typhon | ✅ voxtype built + tested |
+| P1 | Printer agent | Typhon | ✅ Ender-3 online + model pulled |
+| P1 | Cross-machine pipeline (Salomon TTS) | Both | 🔧 Need to wire vault-based audio relay |
 | P2 | Cross-machine Claude Code | Both | ✅ SSH live, creds pulled |
-| P3 | Phase 6-7 skills (weekly, sync) | Salomon | ✅ Claude says complete |
-| P3 | Phase 8-9 migration + printer node | Both | ✅ Docs done, printer live |
 
-### What I Need You To Do
+### What I Need
 
-1. **Push voice-app to GitHub** (Option A from prior message) so Typhon can build voxtype for the cross-machine voice pipeline
-2. **Test cross-machine voice pipeline** — Typhon captures → Salomon STT → model → Salomon TTS → Typhon
-3. **Nothing else** — all other services operational
+**Cross-machine voice pipeline:** Need a way to get TTS audio from Salomon back to Typhon. Since Salomon can't reach Typhon (subnet), easiest approach: Salomon writes TTS WAV to vault → Typhon vault-sync picks it up → Typhon plays it. Want me to set that up?
 
 ---
 
