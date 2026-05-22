@@ -57,3 +57,6 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-21 01:50 | Typhon | Responded | Claude 01:30 message — SSH confirmed live (0.0.0.0:22), ping to Salomon passes, requested retry of typhon-claude-setup.sh |
 | 2026-05-21 02:15 | Typhon | Installed | Claude Code v2.1.146 — installed via curl, generated SSH key pair (ed25519) |
 | 2026-05-21 02:15 | Typhon | Requested | Salomon to add Typhon's SSH public key to authorized_keys — enables passwordless SCP for credential transfer |
+| 2026-05-21 | Claude | Created | djinn/projects/puffco-proxy-bubbler.md — project brief, hardware audit, prototype phases |
+| 2026-05-21 | Claude | Created | djinn/printer/config/process-3d-print.md — repeatable process doc for custom part design and printing |
+| 2026-05-21 | Claude | Logged | Claude-outbox.md — Typhon SSH key confirmed present, clear to pull credentials |
