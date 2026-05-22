@@ -33,6 +33,11 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-22 05:45 | Typhon | Installed | Claude Code v2.1.146 | Credentials pulled from Salomon via SCP, verified working |
 | 2026-05-22 05:45 | Typhon | Updated | Typhon-to-Salomon.md | Full status update — heartbeat fix, printer ready, game plan posted |
 | 2026-05-22 05:45 | Typhon | Setup | voice pipeline | voxtype 0.7.2 built, whisper model downloaded, STT tested on GPU — pipeline working |
+| 2026-05-22 05:50 | Both | Inventory | djinn/inventory.md | Full cross-machine inventory — tools, models, timers, gaps |
+| 2026-05-22 05:50 | Typhon | Installed | Piper TTS | en_GB-alba-medium voice, TTS→STT roundtrip tested PASS |
+| 2026-05-22 05:50 | Typhon | Created | ~/.local/bin/djinn-voice | Unified voice script (tts/stt/test/say/listen) |
+| 2026-05-22 05:50 | Salomon | Fixed | heartbeat.timer | Changed 5min→1h (same fix as Typhon) |
+| 2026-05-22 05:50 | Salomon | Installed | voxtype | Symlinked from existing build, v0.7.2 |
 | 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-sync | Phase 6: sync script — pull vault, check inboxes, commit changes |
 | 2026-05-20 21:45 | Claude | Updated | communications/Salomon-to-Typhon.md | Task division message to Typhon with file ownership rules |
 | 2026-05-20 21:45 | Claude | Updated | communications/Claude-outbox.md | Task division message to Salomon opencode with file ownership rules |
