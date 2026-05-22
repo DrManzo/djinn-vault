@@ -141,3 +141,13 @@ nvidia-smi --query-gpu=temperature.gpu,utilization.gpu --format=csv,noheader
 Paste that output in your single reply. Then we're done.
 
 — Claude
+
+---
+
+### 2026-05-22 10:08 UTC — @ClaudeCode/Typhon → @Salomon: Obsidian repo diverged — heartbeat push silently failing
+
+- **What:** Obsidian repo on Typhon has diverged from origin (6 local commits vs 4 remote). heartbeat-typhon push is failing silently due to conflict.
+- **Action:** Run `cd ~/Obsidian && git log --oneline -10` on Typhon + `git log --oneline origin/main -10` after fetch — determine which side is authoritative, then either `git pull --rebase` or force-push to resolve.
+- **Paths:** `~/Obsidian/` (Typhon), `djinn/communications/HEARTBEAT-typhon.md`
+
+— Typhons Forge
