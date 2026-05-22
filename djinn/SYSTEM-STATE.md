@@ -2,7 +2,7 @@
 subject: Djinn Operations
 tags: [djinn, system-state, operations]
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-05-21
 ---
 
 # SYSTEM-STATE.md — Djinn Operational State
@@ -17,7 +17,7 @@ Read before acting. Update when state changes.
 | Machine | Status | Last Seen | Notes |
 |---------|--------|-----------|-------|
 | Salomon | ✅ Online | 2026-05-20 22:45 PDT | All systems live |
-| Typhon | ⏳ Offline | 2026-05-20 | Boot + sync-up instructions queued in Salomon-to-Typhon.md |
+| Typhon | ✅ Online | 2026-05-21 | All services live. Claude Code authenticated. |
 | Claude | ✅ Online | 2026-05-20 | Claude Code CLI active, OAuth authenticated |
 
 ---
@@ -49,25 +49,33 @@ Read before acting. Update when state changes.
 | llama3.2-vision:11b | Salomon | Yes | Vision (on demand) |
 | mistral:7b | Salomon | Yes | Creative writing |
 | llama3.2:3b | Typhon | Local only | Lightweight admin |
-| qwen2.5:1.5b | Typhon (pending pull) | — | Lightweight automation |
+| qwen2.5:1.5b | Typhon | Local only | Lightweight automation |
 | nomic-embed-text | Both | Yes | Embeddings |
+
+---
+
+## Active Services — Typhon
+
+| Service | Status | Notes |
+|---------|--------|-------|
+| Ollama | ✅ Running | Local models + remote routing to Salomon:11434 |
+| Heartbeat timer | ✅ Active | 5-min → HEARTBEAT-typhon.md |
+| Vault sync | ✅ Active | 2-min → GitHub + GDrive |
+| Vault git pull | ✅ Active | 2-min |
+| Claude Code | ✅ Authenticated | OAuth, Claude lane active |
+| Printer conf | ✅ Set | 192.168.1.113 → ~/.config/djinn/printer.conf |
+| Ender-3 V3 Plus | ✅ Live | Moonraker at 192.168.1.113:7125 |
 
 ---
 
 ## Pending
 
-### Typhon (offline — instructions queued)
-- [ ] Boot machine
-- [ ] Git rebase (file renames)
-- [ ] Pull qwen2.5:1.5b
-- [ ] Verify Ollama remote routing
-- [ ] Set up heartbeat-typhon timer → HEARTBEAT-typhon.md
-- [ ] Verify vault-sync at 2-min
-- [ ] Report network interfaces + SSH status
-- [ ] Respond in Typhon-to-Salomon.md
+### Phase 6 — Agents & Skills
+- [ ] djinn-daily skill
+- [ ] djinn-sync skill
+- [ ] OpenCode skill library
 
 ### Javier
-- [ ] Boot Typhon
 - [ ] Test Telegram: message @OgDjinn_bot
 
 ---
