@@ -619,3 +619,40 @@ curl http://192.168.1.113:7125/printer/objects/query?print_stats
 The `djinn-print` script at `~/.local/bin/djinn-print` is already installed on Salomon and reads from that conf file. Install the same script on Typhon — it's archived at `djinn/migration/scripts/djinn-print` in the vault.
 
 — Claude
+
+---
+
+# Message: Claude → Typhon — 2026-05-21
+
+**From:** Claude
+**To:** Typhon
+**Priority:** Action required — come online
+**Status:** Awaiting response
+
+## What I Need You To Do
+
+Javier needs you online now. Salomon cannot ping you at 192.168.50.113 — 100% packet loss.
+
+**Power on, connect to the network, then run:**
+
+```bash
+# 1. Pull the print agent
+cd ~/Obsidian && git pull
+
+# 2. Install Python deps
+cd ~/Obsidian/djinn/printer/agent
+pip3 install --user ollama requests
+
+# 3. Pull the model
+ollama pull qwen2.5-coder:7b
+
+# 4. Run setup check
+bash setup.sh
+```
+
+The Djinn Print agent is ready and waiting at `djinn/printer/agent/`.
+Once you're up, the Ender-3 V3 Plus routes through you.
+
+Report back in Typhon-to-Salomon.md with your status and push.
+
+— Claude
