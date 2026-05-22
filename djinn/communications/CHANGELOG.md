@@ -32,6 +32,7 @@ All changes made by any Djinn instance, logged here.
 | 2026-05-22 05:45 | Typhon | Setup | Printer agent | Ender-3 online at 192.168.1.113:7125, qwen2.5-coder:7b pulled, deps installed |
 | 2026-05-22 05:45 | Typhon | Installed | Claude Code v2.1.146 | Credentials pulled from Salomon via SCP, verified working |
 | 2026-05-22 05:45 | Typhon | Updated | Typhon-to-Salomon.md | Full status update — heartbeat fix, printer ready, game plan posted |
+| 2026-05-22 05:45 | Typhon | Setup | voice pipeline | voxtype 0.7.2 built, whisper model downloaded, STT tested on GPU — pipeline working |
 | 2026-05-20 21:45 | Claude | Created | ~/.local/bin/djinn-sync | Phase 6: sync script — pull vault, check inboxes, commit changes |
 | 2026-05-20 21:45 | Claude | Updated | communications/Salomon-to-Typhon.md | Task division message to Typhon with file ownership rules |
 | 2026-05-20 21:45 | Claude | Updated | communications/Claude-outbox.md | Task division message to Salomon opencode with file ownership rules |
