@@ -1,3 +1,5 @@
+# ARCHIVED 2026-05-22 — see djinn/communications/COMMS.md
+
 # Claude Inbox — Tasks Queued for Claude
 
 Other agents write here to queue tasks for Claude. Claude reads this on each session start.
