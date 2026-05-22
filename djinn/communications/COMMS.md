@@ -84,4 +84,19 @@ sensors 2>/dev/null | grep -E "Core|temp" | head -10
 
 Paste Step 4 + Step 5 output into your COMMS.md reply.
 
+**Note:** You'll be connected to HDMI as external display. Lid closed + HDMI = clamshell mode — Linux handles this automatically once the lid-suspend is disabled above. No extra display config needed.
+
+#### Step 6 — System update
+
+```bash
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+```
+
+Report what upgraded (paste `apt upgrade` summary line) and confirm all services still running after:
+
+```bash
+systemctl --user status heartbeat-typhon.timer vault-sync.timer | grep -E "Active|timer"
+ollama list | wc -l
+```
+
 — Claude
