@@ -28,18 +28,19 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Service | Status | Notes |
 |---------|--------|-------|
-| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth |
+| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents |
 | Telegram @OgDjinn_bot | ✅ Live | Polling, locked to Javier |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
-| Ollama | ✅ Running | 0.0.0.0:11434 — 8 models, remote access enabled |
+| Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
+| comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
 | Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT]] |
 | Vault sync (GDrive) | ✅ Active | 2-min rclone |
 | Vault sync (GitHub) | ✅ Active | git push after rclone |
 | Forge sync | ✅ Active | 15-min → GDrive (~/forge/) |
-| djinn-daily timer | ✅ Active | 8 AM → djinn-morning (bash only — opencode not yet wired) |
+| djinn-daily timer | ✅ Active | 8 AM → djinn-morning (opencode wired, deepseek-r1:7b for PLAN.md) |
 | djinn-weekly timer | ✅ Active | Sun 20:00 → weekly review |
 | printer-error-logger | ✅ Active | Monitors Moonraker for errors |
-| opencode | ✅ Available | ~/.opencode/bin/opencode — invoked manually or via triggers |
+| opencode | ✅ Available | ~/.opencode/bin/opencode v1.15.10 — use `--dangerously-skip-permissions` for headless |
 
 ---
 
@@ -48,10 +49,11 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Service | Status | Notes |
 |---------|--------|-------|
 | Ollama | ✅ Running | Local models + remote routing to Salomon:11434 |
+| comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
 | Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT-typhon]] — now writes dynamic IP |
 | Vault sync | ✅ Active | git pull 2-min |
 | djinn-printer-bot | ✅ Live | python-telegram-bot, ~/.venvs/djinn-bot/, token in ~/.config/djinn/printer-bot.env |
-| opencode | ✅ Available | Invoked manually — COMMS processor not yet deployed |
+| opencode | ✅ Available | Invoked via comms-processor — use `--dangerously-skip-permissions` for headless |
 
 ---
 
@@ -88,14 +90,18 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 ## Agent Activation Status
 
-| Agent | Trigger | Status | Gap |
-|-------|---------|--------|-----|
-| Salomon opencode | Manual only | ⚠️ Partial | COMMS processor not deployed |
-| Typhon opencode | Manual only | ⚠️ Partial | COMMS processor not deployed |
+| Agent | Trigger | Status | Notes |
+|-------|---------|--------|-------|
+| Salomon opencode | comms-processor (3-min timer) | ✅ Active | Fires on new @Salomon tasks in COMMS.md |
+| Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
-| djinn-daily | 8 AM timer (bash) | ⚠️ Partial | Sends briefing but doesn't invoke opencode |
-| COMMS→@Salomon | Not yet built | ❌ Missing | Phase 3 work |
-| COMMS→@Typhon | Not yet built | ❌ Missing | Phase 3 work |
+| djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
+| OpenClaw main agent | Telegram / Discord | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist |
+| OpenClaw coder agent | Manual `/agent coder` | ✅ Available | qwen2.5-coder:7b, system prompt set |
+
+**Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
+
+**OpenClaw tool execution:** 45 allowlist entries covering bash, git, python, node, npm, curl, jq, and all standard coreutils. Shell execution is enabled.
 
 ---
 
@@ -127,12 +133,12 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 ## Pending Work
 
-| Item | Phase | Owner |
-|------|-------|-------|
-| COMMS processor (Salomon) | Phase 3 | Claude builds, Salomon runs |
-| COMMS processor (Typhon) | Phase 3 | Claude builds via SSH |
-| Wire djinn-morning → opencode | Phase 4 | Claude |
-| Typhon workspace parity | Phase 2 | Claude via SSH |
+| Item | Priority | Notes |
+|------|----------|-------|
+| Test OpenClaw tool execution end-to-end | High | Send coding task via Telegram, verify it writes files |
+| Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — may need better prompt or different model |
+| Typhon workspace parity | Medium | SOUL.md / AGENTS.md may not be present on Typhon |
+| Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
 
 ---
