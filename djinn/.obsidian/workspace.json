@@ -11,10 +11,14 @@
             "id": "b8dcc3e7ad80a504",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "printer/process/INTAKE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "INTAKE"
             }
           }
         ]
@@ -178,6 +182,17 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "printer/process/FILAMENT-TEST.md",
+    "printer/process/FILAMENT-PROFILES.md",
+    "printer/process/BENCHMARKS.md",
+    "printer/prints/2026-05-23_PuffcoRecycler/plan.md",
+    "printer/config/README.md",
+    "printer/config/process-3d-print.md",
+    "printer/config/printer-profile.md",
+    "printer/config/printer.md",
+    "djinn/printer/backup.md",
+    "djinn/printer",
+    "djinn",
     "ROUTING.md",
     "workspace/AGENTS.md.tmp.62474.3999b02a8dd7",
     "workspace/workflows/weekly-review.md",
@@ -198,18 +213,10 @@
     "workspace/IDENTITY.md",
     "workspace/HEARTBEAT.md",
     "workspace/Claude.md",
-    "workspace/AGENTS.md",
     "workspace",
     "ROUTING.md.tmp.62474.9cdadba72eec",
     "communications/PROTOCOL.md.tmp.62474.5b754635487c",
     "SYSTEM-STATE.md.tmp.62474.fc5baf58ae3c",
-    "projects/puffco-proxy-bubbler.md",
-    "people/relationship-map.md",
-    "logs/build-log.md",
-    "printer/process/FILAMENT-TEST.md",
-    "printer/process/FILAMENT-TEST.md.tmp.62474.37a4e2695b6c",
-    "printer/process/PRINT-LOG.md",
-    "printer/process/FILAMENT-PROFILES.md",
-    "printer/process/FILAMENT-PROFILES.md.tmp.62474.a805d3d7486a"
+    "printer/process/FILAMENT-TEST.md.tmp.62474.37a4e2695b6c"
   ]
 }
