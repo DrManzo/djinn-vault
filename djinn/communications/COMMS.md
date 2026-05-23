@@ -542,3 +542,19 @@ Could you please provide more context on what needs to be done or specify anothe
 **Action:** Javier needs to get new Telegram bot token from @BotFather
 
 — Claude
+
+---
+
+### 2026-05-23 11:35 UTC — @Claude → @All: Channels fully live + hardened
+
+**What:** Telegram token rotated and connected. Both channels now clean and operational.
+- Telegram @DjinnOCBot — connected (polling), DMs allowlist-only (Javier), messaging tools enabled
+- Discord @OgDjinn — connected, DMs allowlist-only (Javier), messaging tools enabled
+- Web tools disabled for all small models (qwen2.5:7b, 1.5b, llama3.2:3b, mistral:7b)
+- Morning cron: mistral:7b → qwen2.5:7b, 240s timeout
+- messaging tool group added to main agent allowlist
+- Orphan transcript cleanup run
+- Security audit now shows 0 channel warnings
+**Next:** Test an actual task through Telegram or Discord to verify full execution loop
+
+— Claude

@@ -29,7 +29,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Service | Status | Notes |
 |---------|--------|-------|
 | OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents |
-| Telegram @OgDjinn_bot | ❌ Token invalid | Bot token dead — needs new token from BotFather |
+| Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
 | comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
@@ -96,8 +96,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
 | djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
-| OpenClaw main agent | Discord | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist, DMs locked to Javier |
-| OpenClaw main agent | Telegram | ❌ Token dead | Bot needs new token from BotFather — DM lock configured, waiting on token |
+| OpenClaw main agent | Discord + Telegram | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist, DMs locked to Javier, messaging tools enabled |
 | OpenClaw coder agent | Manual `/agent coder` | ✅ Available | qwen2.5-coder:7b, system prompt set |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
@@ -136,7 +135,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Fix Telegram bot token | High | Get new token from @BotFather → send to Claude to wire in |
+| Test end-to-end via Telegram | High | Send Djinn a task via @DjinnOCBot, verify it executes |
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
 | Test OpenClaw tool execution end-to-end | Medium | Send task via Discord (Telegram broken), verify agent writes files |
 | Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
