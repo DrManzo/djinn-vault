@@ -1,0 +1,25 @@
+{
+  "model_name": "Puffco Proxy Quad Uptake Recycler",
+  "source_file": "Proxy+Tornado+Recycler.3mf",
+  "bounding_box_mm": {
+    "x": 85.0,
+    "y": 153.0,
+    "z": 219.5
+  },
+  "triangle_count": 25362,
+  "overhang_ratio_pct": 34.2,
+  "supports_needed": true,
+  "needs_repair": true,
+  "original_open_edges": 17,
+  "original_part_count": 2,
+  "estimated_volume_cm3": 147.2,
+  "estimated_weight_pla_g": 182.5,
+  "estimated_filament_m": 61.5,
+  "suggested_orientation": "upright (Z-axis height = 219.5mm)",
+  "fits_ender_v3": {
+    "fits": true,
+    "clearance_x_mm": 215.0,
+    "clearance_y_mm": 147.0,
+    "clearance_z_mm": 115.5
+  }
+}
