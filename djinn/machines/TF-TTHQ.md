@@ -35,7 +35,7 @@ Changes from this machine are signed: `— TF/TTHQ`
 | Mount | Device | Size | Used | Contents |
 |-------|--------|------|------|---------|
 | `/` | nvme0n1p2 | 233G | 55G | OS, apps, configs |
-| `/mnt/storage` | sda1 | 916G | ~35G | Ollama models, Obsidian, forge, Project-Resources |
+| `/mnt/storage` | sda1 | 916G | ~35G | Ollama models (33G), Obsidian, forge, Project-Resources |
 
 **Disk allocation:**
 - `/mnt/storage/ollama-system/` — Ollama model files (symlinked from `/usr/share/ollama/.ollama`)
@@ -95,6 +95,13 @@ Ollama runs as system service (`ollama` user). Models stored at `/mnt/storage/ol
 | 1Password | snap | v8.11.14 |
 | Discord | snap | v1.0.139 |
 | rclone | apt | gdrive remote configured and working |
+
+## Git Auth
+
+All repos use HTTPS with fine-grained PAT:
+- Stored: `~/.config/djinn/github.env` (chmod 600) + `~/.git-credentials`
+- Repos: `djinn-vault`, `typhons-cyber-forge`, `Project-Resources`
+- Rotate at: github.com/settings/tokens (fine-grained)
 
 ---
 

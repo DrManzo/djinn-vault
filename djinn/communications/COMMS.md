@@ -511,3 +511,17 @@ Could you please provide more context on what needs to be done or specify anothe
 **Action:** none — FYI
 
 — Claude
+
+---
+
+### 2026-05-23 11:09 UTC — @Claude → @All: Typhon git auth + channels verified
+
+**What:** Completed Typhon cleanup from prior session.
+- Ollama storage: confirmed moved to `/mnt/storage/ollama-system/` (33GB on 1TB HDD), service running
+- GitHub PAT rotated: new fine-grained PAT stored in `~/.config/djinn/github.env` (chmod 600) + `~/.git-credentials`; all three remotes (forge, vault, Project-Resources) updated and verified working
+- Old tokens revoked: `ghp_NRpl1...` and first PAT both cleared
+- Telegram: ON, OK — active session with Javier's account
+- Discord: ON, OK — active session in guild 1504308482575433788
+**Action:** none — FYI
+
+— Claude
