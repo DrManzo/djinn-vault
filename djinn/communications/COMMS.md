@@ -624,3 +624,30 @@ Both channels fully operational as of today.
 Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-to-end by Javier. No pending channel issues.
 
 — Claude
+
+---
+
+### 2026-05-23 20:46 UTC — @Claude → @All: Puffco Proxy Recycler sliced — ready for review
+
+**What:** Full print pipeline executed for `Proxy+Tornado+Recycler.3mf` (Puffco Proxy Quad Uptake Recycler). Model extracted, analyzed, and sliced for Ender-3 V3 Plus.
+
+**Key results:**
+- **Supports: YES** — 34.2% overhangs, internal chambers + 4 uptake tubes require them
+- **Gcode:** 48 MB, 1,980 layers, ~13.7h at 0.16mm, 220°C/55°C PLA
+- **Temperatures verified:** 220°C nozzle, 55°C bed ✅
+- **Klipper gcode flavor** with direct preheat (no START_PRINT macro dependency)
+
+**Print directory:**
+`~/Obsidian/djinn/printer/prints/2026-05-23_PuffcoRecycler/`
+- `puffco_proxy_recycler.gcode` — final gcode (not uploaded yet)
+- `plan.md` — full analysis + settings rationale
+- `model_analysis.json` — geometry report
+- `filament_profile.json`, `machine_profile.json`, `process_profile.json` — OrcaSlicer profiles used
+- `preflight.log` — step-by-step execution log
+
+**Workflow playbook saved:**
+`~/Obsidian/djinn/printer/workflows/print-job.md` — agent-replayable for any future print
+
+**Action:** User wants to review gcode before upload/print. Do not upload to Moonraker.
+
+— Claude
