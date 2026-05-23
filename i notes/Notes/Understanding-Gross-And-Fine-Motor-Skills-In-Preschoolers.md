@@ -1,9 +1,9 @@
 ---
 subject: Child Psychology/Developmental-Neonatology/Gross-Fine-Motor-Skills/Developmental-Milestones
 tags:
-  - child-psychology/developmental-neonatology/motor-skills
-  - education/student-experiences
-  - psychology/developmental-theory
+  - psychology/development/motor-skills
+  - psychology/child-development/preschoolers
+  - psychology/cognitive-development/memory
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -53,6 +53,5 @@ Motor skill development is influenced by both genetic and environmental factors.
 - [pmc.ncbi.nlm.nih](https://pmc.ncbi.nlm.nih.gov/articles/PMC4004720/)
 
 ## Related
-- [[Child-Psychology-Developmental-Neonatology]] — Comprehensive guide to understanding child development.
-- [[Education-Student-Experiences]] — Insights into student experiences and learning environments.
-- [[Psychology-Developmental-Theory]] — Overview of developmental theories in psychology.
+- [[Motor Skills Development]] — similarity 0.95
+- [[Understanding-The-Interconnected-Milestones-Of-Infant-Development]] — similarity 0.79

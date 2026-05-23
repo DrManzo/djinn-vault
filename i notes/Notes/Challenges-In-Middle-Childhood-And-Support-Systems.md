@@ -1,8 +1,10 @@
 ---
 subject: Child Psychology/Developmental-Neonatology/Middle-Childhood-Challenges
 tags:
-  - psychology/child-development/middle-childhood-challenges
-  - psychology/disabilities-support-systems
+  - psychology/child-development/middle-childhood
+  - psychology/social-psychology/peer-relations
+  - psychology/cognitive-development/cognitive-demands
+  - psychology/developmental-disabilities/support-systems
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -49,3 +51,7 @@ Examples like Washington D.C.’s Children’s School Services demonstrate the i
 > Proverbs 13:24, "Whoever spares the rod hates their children, but he who loves them is careful to discipline them." (New International Version)
 
 ---
+
+## Related
+- [[Parenting Challenges In Middle Childhood]] — similarity
+- [[Families With Children With Disabilities]] — similarity

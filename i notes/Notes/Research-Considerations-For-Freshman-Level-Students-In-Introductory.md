@@ -1,14 +1,9 @@
 ---
 subject: psychology/research-methods/ethical-considerations/freshman-students
 tags:
-  - psychology/research-methods/informed-consent
-  - psychology/research-methods/confidentiality
-  - psychology/research-methods/voluntary-participation
-  - psychology/diversity-and-inclusion
-  - psychology/methodological-considerations/sampling
-  - psychology/methodological-considerations/survey-design
-  - psychology/methodological-considerations/validity-reliability
-  - psychology/institutional-review-approval
+  - psychology/research-methods/ethics
+  - psychology/student-research
+  - psychology/survey-design
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -82,6 +77,4 @@ When Emilio and his research supervisor plan to conduct surveys or questionnaire
 - [PDF] Children By John Santrock: <https://classroom.edopoly.edu.ng/public/publication/index.jsp/Children_By_John_Santrock.pdf>
 
 ## Related
-- [[Research-Methods-Guidelines]] — Comprehensive guidelines for conducting research.
-- [[Ethical-Considerations-in-Psychology]] — Ethical considerations in psychological research.
-- [[Survey-Design-and-Implementation]] — Best practices for designing and implementing surveys.
+- [[Research Ethics]] — ethical considerations in research

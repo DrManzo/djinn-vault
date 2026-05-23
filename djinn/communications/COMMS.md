@@ -1668,3 +1668,649 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-The-Interconnected-Milestones-Of-Infant-Development.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 22:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Middle-Childhood-Development-Through-Erikson-And-Piaget.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:17 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Stacking-Rings-Toy-For-Infant-Development.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Analysis-Of-Families-With-Children-Who-Have-Disabilities.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:17 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Definitions-For-Psy-355-Q-T4-Examstudyguide.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Risk-Factors-And-Prevention-Strategies-For-Teenage.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:18 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Research-Methods-For-Pharmaceutical-Studies-In-Psychology.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Factors-Protecting-Adolescents-From-Health-Risks.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:18 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Research-Considerations-For-Freshman-Level-Students-In-Introductory.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Neurons-Communication-Mechanism.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:19 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Scholarly-Research-On-Developmental-Milestones-In-Infancy.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Brain-And-Nervous-System-Functions-Infographic-Assignment-Guide.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:19 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Gross-And-Fine-Motor-Skills-In-Preschoolers.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Might-Abnormalities-In-Multisensory-Processing-Be-Important.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:20 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Rhoda-Kellogg's-Theory-On-Children's-Art.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Differences-In-Processing-Between-Dorsal-And-Ventral-Visual.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:20 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Challenges-In-Middle-Childhood-And-Support-Systems.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Complete-Guide-For-Psy-402-Topic-3-Matrix.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:20 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Middle-Childhood-Development-Through-Erikson-And-Piaget.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dorsal-Attention-Network-And-Its-Interactions-With-Ventral.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Analysis-Of-Families-With-Children-Who-Have-Disabilities.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Validity-Of-Subliminal-Messaging-A-Cognitive-Neuroscience.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Risk-Factors-And-Prevention-Strategies-For-Teenage.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Brain-Injury-And-Movement-Disorders.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Factors-Protecting-Adolescents-From-Health-Risks.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Compare-And-Contrast-Memory-Types-In-Cognitive-Neuroscience.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:22 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Neurons-Communication-Mechanism.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Evaluating-The-Accuracy-Of-Human-Memory.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:22 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Brain-And-Nervous-System-Functions-Infographic-Assignment-Guide.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Interplay-Of-Brain-And-Memory-Neuroscientific-Insights.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:23 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Might-Abnormalities-In-Multisensory-Processing-Be-Important.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Effects-Of-Metacognitive-Regulation-On-Memory-Performance.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:23 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Differences-In-Processing-Between-Dorsal-And-Ventral-Visual.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-To-Use-Cognitive-Mapping-As-A-Young.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:23 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Complete-Guide-For-Psy-402-Topic-3-Matrix.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Mapping-Worksheet-Guide.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:24 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dorsal-Attention-Network-And-Its-Interactions-With-Ventral.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Comparative-Analysis-Of-Broca's-And-Wernicke's-Aphasia-Neurological.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:24 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Validity-Of-Subliminal-Messaging-A-Cognitive-Neuroscience.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chomsky's-Theory-On-The-Evolution-Of-Language-And.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Brain-Injury-And-Movement-Disorders.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Using-The-Course-Book-To-Answer-Questions.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Compare-And-Contrast-Memory-Types-In-Cognitive-Neuroscience.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Neurobiology-Of-Self-Distinction-Why-Your-Brain.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Evaluating-The-Accuracy-Of-Human-Memory.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:26 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fluid-Vs-Crystallized-Intelligence.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:26 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Interplay-Of-Brain-And-Memory-Neuroscientific-Insights.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:26 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Critical-Thinking-As-A-Mechanism-For-Situation-Handling.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:26 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Effects-Of-Metacognitive-Regulation-On-Memory-Performance.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:27 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Working-Memory-And-Learning.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:27 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-To-Use-Cognitive-Mapping-As-A-Young.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:27 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Detailed-Components-Of-The-Hermes-Model.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:27 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Mapping-Worksheet-Guide.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:28 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Twisted-Premise-For-A-One-Shot-In-Curse.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:28 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Comparative-Analysis-Of-Broca's-And-Wernicke's-Aphasia-Neurological.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:28 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Thc-Infused-D-D-Campaign.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:28 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chomsky's-Theory-On-The-Evolution-Of-Language-And.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Component-Based-Architecture-Specification.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:29 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Using-The-Course-Book-To-Answer-Questions.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Step-3-Plan-End-To-End-Ollama-Integration.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:29 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Neurobiology-Of-Self-Distinction-Why-Your-Brain.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-3-Summary-End-To-End-Ollama.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:30 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fluid-Vs-Crystallized-Intelligence.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Continuing-Faust-Development.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:30 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Critical-Thinking-As-A-Mechanism-For-Situation-Handling.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-6-Memory-Router-Development.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Working-Memory-And-Learning.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-7-Kickoff-Prompt.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Detailed-Components-Of-The-Hermes-Model.md`
+
+— Slipbox
