@@ -1,11 +1,12 @@
 ---
 subject: psychology/developmental-theory/life-cycle/relationships
 tags:
-  - psychology/developmental-theory/life-cycle/relationships
-  - psychology/cognitive-skill/logical-reasoning
+  - psychology/development-and-aging
+  - psychology/relationships/emotional-well-being
+  - personal/life-stages/adult-development
+  - commonality/research-findings
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # PSY-358 Adult Development and Aging: Relationships Chart
@@ -79,7 +80,5 @@ The chart provides a structured overview of the emotional well-being effects of 
 - HelpGuide. (n.d.). Social Connection: Relationship Help. [URL](https://www.helpguide.org/relationships/social-connection/relationship-help)
 
 ## Related
-- [[PSY-358-Adult-Development-and-Aging]] — Comprehensive overview of adult development and aging.
-- [[Relationship-Success-Tips]] — Additional tips for maintaining successful relationships.
-
----
+- [[How-Relationships-Change-With-Age-And-The-Impact]] — similarity 0.77
+- [[PSY-358 Hub]] — similarity 0.75

@@ -1,9 +1,10 @@
 ---
 subject: psychology/developmental-theory/life-cycle/ageism
 tags:
-  - psychology/developmental-theory/life-cycle
-  - psychology/economics/access-to-care/labour-market
-  - personal/raw/unprocessed
+  - personal/aging/relationships
+  - psychology/developmental-psychology/adult-development
+  - psychology/personal-growth/relationship-evolution
+  - psychology/social-psychology/interpersonal-relations
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -55,5 +56,5 @@ These factors contribute to creating a supportive and fulfilling relationship en
 - thriveworks.com/help-with/relationships/relationship-dynamics/
 
 ## Related
-- [[Adult-Pysch]] — Course material and discussions related to adult development and aging.
-- [[Healthy-Relationship-Dynamics]] — Additional insights into maintaining strong relationships.
+- [[Theoretical Frameworks for Relationships]] — similarity 0.81
+- [[Attraction and Relationships]] — similarity 0.81

@@ -1,12 +1,13 @@
 ---
 subject: psychology/developmental-theory/life-cycle/personality-fit
 tags:
-  - psychology/cognitive-skill/logical-reasoning
-  - psychology/developmental-theory/life-cycle
-  - psychology/economics/access-to-care/labour-market
+  - psychology/personality-stability
+  - psychology/developmental-psychology
+  - psychology/adulthood
+  - psychology/egocentric-integrity
+  - specific-personality-traits
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Personality Stability and Erikson's Theory in Late Adulthood
@@ -36,13 +37,5 @@ These modifications could provide a more comprehensive framework for understandi
   - ISBN-13: 9780357796276
 
 ## Related
-- [[Erikson-Stages-of-Psychosocial-Development]] — A deeper dive into Erikson's theory.
-- [[Personality-Stability-Over-Time]] — Exploring the stability of personality traits in older adults.
-
----
-
-[1] CaringseniorService. (2023). *Personality Changes with Age*. Retrieved from <https://caringseniorservice.com/blog/personality-changes-with-age/>
-
-[2] WebMD. (2024). *What to Know About Erikson's 8 Stages of Development*. Retrieved from <https://www.webmd.com/children/what-to-know-eriksons-8-stages-development>
-
-[3] PMC. (2021). *Erikson’s Theory and Personality Development: A Review*. Retrieved from <https://pmc.ncbi.nlm.nih.gov/articles/PMC8472379/>
+- [[Personality-Stability-and-Erikson]] — Erikson's theory connection
+- [[How-Relationships-Change-With-Age-And-The-Impact]] — age-related changes

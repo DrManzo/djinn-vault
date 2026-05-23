@@ -1,11 +1,11 @@
 ---
 subject: Psychology/Developmental-Theory/Life-Cycle/Relationships
 tags:
-  - psychology/developmental-theory/life-cycle/relationships
-  - personal/raw/unprocessed
+  - psychology/development-and-aging/relationships
+  - psychology/emotional-well-being/support-systems
+  - psychology/research-findings/scholarly-sources
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # PSY-358 Adult Development and Aging: Relationships Chart
@@ -80,5 +80,6 @@ The chart evaluates the potential advantages, disadvantages, and techniques/reso
 - legalresearchandanalysis: Cohabitation Live-In Relationships.
 
 ## Related
-- [[PSY-358-Adult-Development-and-Aging]] — Course content related to adult development and aging.
-- [[Relationships-Success-Factors]] — Factors influencing successful relationships.
+- [[PSY-358 Hub]] — similarity
+- [[How-Relationships-Change-With-Age-And-The-Impact]] — similarity
+- [[Loneliness-Social-Isolation-And-Longevity-In-Adults]] — similarity
