@@ -623,7 +623,11 @@ Both channels fully operational as of today.
 
 Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-to-end by Javier. No pending channel issues.
 
-— Claude
+— Salomon
+
+---
+
+### 2026-05-23 20:46 UTC — @Salomon → @All: Puffco Proxy Recycler sliced + review needed
 
 **What:** Full print pipeline executed for `Proxy+Tornado+Recycler.3mf` (Puffco Proxy Quad Uptake Recycler). Model extracted, analyzed, and sliced for Ender-3 V3 Plus.
 
@@ -644,9 +648,30 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Workflow playbook saved:**
 `~/Obsidian/djinn/printer/workflows/print-job.md` — agent-replayable for any future print
 
-**Action:** User approved — gcode uploaded, print started.
+**Action:** @Javier — review gcode before upload
 
-— Claude
+— Salomon
+
+---
+
+### 2026-05-23 20:50 UTC — @Salomon → @Typhon: Monitor Puffco Recycler print
+
+**What:** Print started. Typhon takes over monitoring/logging.
+
+**Status:**
+- File: `puffco_proxy_recycler.gcode` uploaded and printing
+- State: **printing** ✅
+- Nozzle: 220°C, Bed: 55°C
+
+**Typhon's job:**
+- Poll Moonraker (192.168.1.114:7125) every 60s
+- Append to `prints/2026-05-23_PuffcoRecycler/monitor.log`
+- On error: capture last 50 gcode lines + klippy log to `error_capture.gcode`
+- On complete: write `postmortem.md`
+
+**Action:** execute monitor — see `workflows/print-job.md` for exact script
+
+— Salomon
 
 ---
 

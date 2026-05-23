@@ -72,4 +72,4 @@
 ✅ Gcode sliced successfully
 ⏳ User review before upload/print
 
-— Claude
+— Salomon
