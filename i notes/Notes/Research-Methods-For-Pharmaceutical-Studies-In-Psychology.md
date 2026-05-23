@@ -1,9 +1,9 @@
 ---
 subject: psychology/research-methods/pharmaceutical-research
 tags:
-  - psychology/research-methods/naturalistic-observation
-  - psychology/research-methods/surveys
-  - psychology/ethical-considerations/informed-consent
+  - psychology/research-methods/pharmaceutical-studies
+  - psychology/advantages/disadvantages
+  - psychology/ethical-considerations
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -71,3 +71,8 @@ When conducting research on a new medication, two research methods from developm
 - **Method triangulation**: Combine surveys with physiological measures (e.g., blood tests) to validate self-reported data.
 
 By weighing these factors, your colleague can make an informed decision on the most appropriate research method for their study.
+
+## Related
+- [[Research Methods In Psychology]] — similarity 0.93
+- [[Threats to Validity]] — similarity 0.82
+- [[Research Ethics]] — similarity 0.82

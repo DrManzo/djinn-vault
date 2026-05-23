@@ -1,8 +1,10 @@
 ---
 subject: psychology/child-psychology/neonatal-development/artistic-expression
 tags:
-  - psychology/child-psychology/neonatal-development/artistic-inspiration
-  - psychology/child-psychology/neonatal-development/research-findings
+  - psychology/art-development
+  - psychology/child-psychology
+  - psychology/cognitive-development
+  - psychology/emotional-growth
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -32,13 +34,5 @@ Kellogg’s work is significant because it provided educators and psychologists 
 - Kellogg, R. (1967). *The Psychology of Children’s Art*. Creative Education Foundation.
 
 ## Related
-- [[Child-Psychology-Developmental-Neonatology]] — Rhoda Kellogg's contributions to understanding children's development through art.
-- [[Artistic-Inspiration-Childhood-Expression]] — Insights into how artistic expression can be used in educational settings.
-- [[Rhoda-Kelloggs-Work-Studies]] — Further details on her research and findings.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference
+- [[Child Art And Development]] — similarity
+- [[Developmental Theories And Theorists]] — similarity

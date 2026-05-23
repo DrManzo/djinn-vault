@@ -1,8 +1,10 @@
 ---
 subject: child-psychology/developmental-neonatology/fine-motor-skills/gross-motor-skills
 tags:
-  - child-psychology/developmental-neonatology/toy-recommendations
-  - education/presentation-skills
+  - child-psychology/developmental-tools
+  - psychology/early-childhood-development
+  - psychology/motor-skills-development
+  - business/marketing-revenue-models/toy-industry
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -26,3 +28,8 @@ The toy's design—bright colors and varied textures—also enhances sensory eng
 - UnityPoint Health. (n.d.). Early childhood development toys by age.
 
 In summary, stacking rings are effective developmental tools that support both fine and gross motor skill development in infants through play-based learning.
+
+## Related
+- [[Developmental Toy Analysis]] — similarity 0.96
+- [[Motor Skills Development]] — similarity 0.77
+- [[Infant Developmental Milestones]] — similarity 0.77

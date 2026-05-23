@@ -1,4 +1,10 @@
 ---
+tags:
+  - psychology/research-findings/commonality/developmental-neonatology
+  - psychology/child-psychology/neonatal-development/milestones
+---
+
+---
 subject: child-psychology/neonatal-development/milestones
 tags:
   - psychology/research-findings/commonality/developmental-neonatology
