@@ -1,15 +1,13 @@
 # Heartbeat — Salomon
 
-**Last beat:** 2026-05-22 20:29:17 UTC  
+**Last beat:** 2026-05-23 07:36:04 UTC  
 **Machine:** Salomon (192.168.1.225)  
 **Status:** Alive
 
 ## System
 
-- **Uptime:** up 10 hours, 4 minutes
-- **GPU:** Failed to initialize NVML: Driver/library version mismatch
-NVML library version: 580.159
-N/A
+- **Uptime:** up 4 hours, 1 minute
+- **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU, 54, 13, 279, 8151
 - **Ollama:** 8 models loaded
-- **Disk:** 32% used (607G free)
-- **RAM:** 8.0Gi/29Gi used, 10Gi free
+- **Disk:** 35% used (587G free)
+- **RAM:** 14Gi/29Gi used, 8.9Gi free
