@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "logs/build-log.md",
+                "file": "ROUTING.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "build-log"
+              "title": "ROUTING"
             }
           }
         ]
@@ -182,6 +182,9 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "projects/puffco-proxy-bubbler.md",
+    "people/relationship-map.md",
+    "logs/build-log.md",
     "printer/process/FILAMENT-TEST.md",
     "printer/process/FILAMENT-TEST.md.tmp.62474.37a4e2695b6c",
     "printer/process/PRINT-LOG.md",
