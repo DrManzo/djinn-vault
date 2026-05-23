@@ -1,7 +1,10 @@
 ---
 subject: business/branding-strategies/identity
 tags:
-  - personal-branding/ascii-art/meance-llc
+  - creative/design
+  - personal/branding
+  - business/marketing
+  - cs/programming
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -135,5 +138,5 @@ console.log(signature);
 - [Kammerl's ASCII Signature Generator](https://kammerl.github.io/ascii-signature-generator/)
 
 ## Related
-- [[Discord-Setup-Guide]] — A comprehensive guide for setting up a professional Discord profile.
-- [[ASCII-Art-Tips]] — Tips and tricks for creating effective ASCII art signatures.
+- [[Python-Programming-Hub]] — similarity 0.67
+- [[CiteAssist-and-GhostCite-Project]] — similarity 0.64

@@ -1,8 +1,9 @@
 ---
 subject: business/career-strategies/python-project-development
 tags:
-  - business/career-growth/skills-development
-  - business/investment-strategy/dividend-investing
+  - personal/finance-management
+  - cs/python-programming
+  - business/accounting-systems
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -116,5 +117,5 @@ while True:
 - [bitemyapp.com/blog/review-learn-python-hard-way/]
 
 ## Related
-- [[Python-Basics-Guide]] — For more Python basics.
-- [[Data-Structures-and-Algorithms]] — To deepen understanding of data structures.
+- [[Faust-Cli-Product-Overview]] — finance management similarities
+- [[Financial-Management-With-Free-Software-On-Macos]] — software for financial management
