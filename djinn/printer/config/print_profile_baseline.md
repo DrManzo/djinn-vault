@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-22 19:50 UTC
-Source file: gcodes/Rose_Decor_fixed.gcode
-Readings: 10
+Generated: 2026-05-23 06:09 UTC
+Source file: cup_geometry_creality_fixed.gcode
+Readings: 82
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
-| Target | 220°C | 55°C |
-| Mean | 220.0°C | 55.0°C |
-| Std dev | ±0.32°C | ±0.01°C |
-| Range | 219.6–220.5°C | 55.0–55.0°C |
+| Target | 140°C | 60°C |
+| Mean | 175.4°C | 59.7°C |
+| Std dev | ±37.20°C | ±1.49°C |
+| Range | 92.5–218.1°C | 50.8–61.1°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,7 +21,8 @@ Readings: 10
 - Max: 0 mm/s
 
 ## Anomalies
-None detected
+- 
+hotend temp variance high: ±37.2°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
