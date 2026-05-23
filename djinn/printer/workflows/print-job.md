@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Standardized end-to-end workflow for any 3D print job on the Ender-3 V3 Plus. Any Djinn agent (Salomon, Typhon, Claude) can follow this to produce consistent gcode with full logging.
+Standardized end-to-end workflow for any 3D print job on the Ender-3 V3 Plus. Any Djinn agent (Salomon, Typhon) can follow this to produce consistent gcode with full logging.
 
 ## Inputs
 
@@ -150,18 +150,22 @@ curl -X POST \
   -d '{"filename":"modelname.gcode"}'
 ```
 
-### Step 8 — Monitor (during print)
-Poll every 30s and log to `monitor.log`:
+### Step 8 — Monitor via Typhon (during print)
+
+**This step runs on Typhon, NOT Salomon.** Typhon polls and logs to the shared vault.
+
+Push the monitor script from Salomon:
 ```bash
-while true; do
-  curl -s "http://192.168.1.114:7125/printer/objects/query?print_stats&extruder&heater_bed" \
-    >> monitor.log 2>&1
-  echo "---" >> monitor.log
-  sleep 30
-done
+scp -i ~/.ssh/id_ed25519 workflows/monitor-typhon.sh \
+  tf-tthq@192.168.1.113:~/.local/bin/print-monitor.sh
+
+ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113 \
+  "chmod +x ~/.local/bin/print-monitor.sh && nohup ~/.local/bin/print-monitor.sh > /dev/null 2>&1 &"
 ```
 
-### Step 9 — Error Capture (on failure)
+The monitor script polls Moonraker every 60s, writes to `prints/YYYY-MM-DD_ModelName/monitor.log`, commits and pushes to the vault after each write.
+
+### Step 9 — Error Capture (on failure, Typhon)
 ```bash
 # Get last 50 gcode lines before failure
 tail -50 plate_1.gcode > error_capture.gcode
