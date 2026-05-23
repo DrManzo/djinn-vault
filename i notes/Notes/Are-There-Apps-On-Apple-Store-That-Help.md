@@ -1,7 +1,10 @@
 ---
 subject: business/technology/software-development
 tags:
-  - technology/apps/shorthand-learning/apple-store
+  - business/technology-tools
+  - personal/productivity
+  - cs/software-applications
+  - cs/human-computer-interaction
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -35,6 +38,4 @@ Stenotation allows creating custom dictations at various speeds, useful for prac
 - [Stenotation App](https://apps.apple.com/us/app/stenotation/id1635407873)
 
 ## Related
-- [[Faust-Step-12-Operator-Prompt]] — Faust CLI repository context
-- [[Lucius-Verus-Writing-Sytem]] — Writing system space for reference
-- [[Apple-App-Store-Resources]] — General resources for Apple App Store apps
+- [[Smart-Pens-Handwritten-Note-Digitization]] — similarity in digitizing handwritten notes

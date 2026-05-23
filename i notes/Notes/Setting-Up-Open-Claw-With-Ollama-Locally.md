@@ -1,4 +1,11 @@
 ---
+tags:
+  - ai/models/performance-analysis
+  - ai/development/fedora/workstation
+  - cs/software-development
+---
+
+---
 subject: technology/software-development
 tags:
   - ai/models/performance-analysis-ollama-openclaw

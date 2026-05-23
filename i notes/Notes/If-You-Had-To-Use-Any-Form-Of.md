@@ -1,4 +1,11 @@
 ---
+tags:
+  - business/management-methods/faust/cli/core/adapters
+  - ai/models/performance-analysis
+  - probability
+---
+
+---
 subject: business/management-methods/faust/cli/core/adapters
 tags:
   - ai/models/performance-analysis

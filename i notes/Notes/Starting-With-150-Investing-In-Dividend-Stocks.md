@@ -1,10 +1,8 @@
 ---
 subject: business/investment/dividends/safety-first/initial-investments
 tags:
-  - investment/uPAzew4jTvqM39rTRwx9tA
-  - finance/dividend-stocks
-  - finance/chase-brokerage-account
-  - finance/drip-plan
+  - business/investment-strategy/dividend-investing
+  - finance/stocks/safe-investments
 created: 2026-05-20
 source: Perplexity export
 ---
@@ -78,7 +76,5 @@ By following these steps and focusing on safety, you’ll be on track to steadil
 - [High-Risk Stocks](https://www.nerdwallet.com/article/investing/how-to-invest-dividend-stocks)
 
 ## Related
-- [[Investment-uPAzew4jTvqM39rTRwx9tA]] — Initial investment strategies
-- [[Finance-Dividend-Stocks]] — Comprehensive guide to dividend stocks
-- [[Chase-Brokerage-Account]] — Setting up and managing a Chase brokerage account
-- [[DRIP-Plan-Setup]] — Detailed steps for setting up a Dividend Reinvestment Plan (DRIP)
+- [[Small-Start-Investment-Strategy-ARCC-EPD]] — similar dividend investing strategy
+- [[ARCC-Dividend-Investment-Analysis]] — detailed analysis of ARCC and EPD
