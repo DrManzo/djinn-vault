@@ -1,10 +1,9 @@
 ---
 subject: technology/recording/parrot-os/youtube
 tags:
-  - technology/recording/screen-capture
-  - technology/recording/webcam
-  - technology/security/redaction
-  - technology/video-editing
+  - business/technology/content-creation
+  - cs/software-development
+  - personal/privacy-security
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -83,6 +82,4 @@ Avoid step-by-step exploitation of live real-world services that are not your ow
 - [YouTube Hacking Content Policies](https://danielmiessler.com/blog/youtubes-ban-of-hacking-videos-moves-us-closer-to-an-entertainment-only-world)
 
 ## Related
-- [[OBS-Setup-Guide]] — Step-by-step setup for OBS Studio.
-- [[Redaction-Tips]] — Best practices for redacting sensitive information in videos.
-- [[Ethical-Hacking-Guidelines]] — Guidelines for ethical hacking content on YouTube.
+- [[Building-A-Professional-Content-Creation-Studio-A-Comprehensive]] — workflow-similarities

@@ -1,8 +1,9 @@
 ---
 subject: programming/automation/portfolio-scripts
 tags:
-  - cs/programming/scripts/portfolio
-  - personal/development/portfolios
+  - business/development/portfolio
+  - cs/scripting
+  - personal/productivity
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -53,6 +54,5 @@ Several practical and useful scripts can be created to enhance a developer's por
 - [python.plainenglish.io/7-python-scripts-i-built-just-to-experiment-one-turned-into-a-daily-tool-0b4b68af9d33](https://python.plainenglish.io/7-python-scripts-i-built-just-to-experiment-one-turned-into-a-daily-tool-0b4b68af9d33)
 
 ## Related
-- [[CS-Portfolio-Building]] — General portfolio building strategies for developers.
-- [[Python-Scripting-Guide]] — Detailed guide on Python scripting and automation.
-- [[NodeJS-Tutorials]] — Tutorials and resources for Node.js development.
+- [[Understanding-And-Implementing-Git-For-Portfolio-Projects]] — portfolio value
+- [[Computer-Science-Index]] — related scripts

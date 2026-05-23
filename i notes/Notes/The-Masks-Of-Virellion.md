@@ -1,9 +1,10 @@
 ---
 subject: gaming/dnd/campaigns/role-play-heavy
 tags:
-  - dnd/5e/published-campaigns
-  - dnd/5e/custom-campaigns
-  - gaming/mature-content
+  - creative/dungeons-and-dragons
+  - creative/role-play
+  - psychology/moral-ambiguity
+  - business/corporate-intrigue
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -64,7 +65,6 @@ A custom D&D campaign for levels 3–8, focusing on heavy role-play and mature t
 ---
 
 ## Related
-- [[Waterdeep-Dragon-Heist]] — Urban heist + politics in Waterdeep; tons of factions, investigation.
-- [[The-Wild-Beyond-the-Witchlight]] — Designed for minimal combat; can be reskinned into darker fairy-tale horror.
-- [[Journeys-Through-the-Radiant-Citadel]] — Short adventures centered on culture and diplomacy.
-- [[Courts-of-the-Shadow-Fey]] — Courtly intrigue with deep character play and mature themes.
+- [[Character-Profiles-In-The-Malazan-Book-Of-The]] — character development
+- [[Aurelius-Identity-Evolution]] — identity and transformation
+- [[Deindividuation Disinhibition and Anonymity]] — psychological themes

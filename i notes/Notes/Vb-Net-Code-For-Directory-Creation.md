@@ -1,7 +1,10 @@
 ---
 subject: cs/programming/vbnet/file-management
 tags:
-  - cs/code-review/vbnet - file-system - directory-creation
+  - cs/vb-net
+  - cs/directory-management
+  - cs/user-input-processing
+  - personal/project-management
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -122,5 +125,5 @@ In this corrected version:
 - [System.IO.Directory.CreateDirectory](https://learn.microsoft.com/en-us/dotnet/api/system.io.directory.createdirectory?view=net-10.0)
 
 ## Related
-- [[cs/programming/vbnet/file-system]] - File System Operations in VB.NET
-- [[cs/code-review/best-practices]] - Best Practices for Code Review
+- [[Understanding-And-Implementing-Git-For-Portfolio-Projects]] — similarity
+- [[PyQt6-Modular-UI-Architecture]] — similarity

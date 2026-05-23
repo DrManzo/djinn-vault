@@ -1,9 +1,10 @@
 ---
 subject: game-design/campaigns/adult-oriented-dnd-mod
 tags:
-  - game-design/dnd/5e/modifications
-  - game-design/storytelling/narrative-hooks
-  - game-design/mechanics/magic-system
+  - creative/dungeons-and-dragons
+  - creative/magic-systems
+  - creative/world-building
+  - creative/thc-mechanics
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -81,5 +82,4 @@ You are Level 5 Initiates of the **Order of the Verdant Flame**, trained specifi
 - [Perplexity](https://www.perplexity.ai/search/6040d59e-a58a-469c-9053-b41b58704a2f)
 
 ## Related
-- [[LP3THW]] — Base game for the campaign.
-- [[DnD-Classes-and-Races]] — Detailed class and race mechanics.
+- [[Thc-Infused-D-D-Campaign]] — similar campaign mechanics

@@ -1,9 +1,10 @@
 ---
 subject: technology/computer-security/dual-boot-setup
 tags:
-  - technology/security-dev-tools/parrot-os
-  - technology/windows-11-dual-boot
-  - technology/storage-allocation
+  - business/technology/software
+  - cs/security/pentesting
+  - personal/computing
+  - topic/dual-boot-setup
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -72,5 +73,5 @@ For a dual boot setup on an Omen 016 Ryzen 9 laptop with Parrot OS Security Edit
 - [Community Frame Laptop Experience](https://community.frame.work/t/parrot-os-home-edition-5-1-on-the-framework-12th-gen-the-story-so-far/21648)
 
 ## Related
-- [[Parrot-OS-Guide]] — Detailed guide for Parrot OS installation and setup.
-- [[Windows-11-Dual-Boot]] — Tips for dual booting Windows 11 with other operating systems.
+- [[Equipment-And-Infrastructure-Setup-For-Meanas-Systems]] — similarity 0.71
+- [[HTB-Lab-Access-Strategy]] — similarity 0.68
