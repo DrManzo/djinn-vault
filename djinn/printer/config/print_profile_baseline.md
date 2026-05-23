@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-23 06:09 UTC
-Source file: cup_geometry_creality_fixed.gcode
-Readings: 82
+Generated: 2026-05-23 11:39 UTC
+Source file: 
+Readings: 398
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 140°C | 60°C |
-| Mean | 175.4°C | 59.7°C |
-| Std dev | ±37.20°C | ±1.49°C |
-| Range | 92.5–218.1°C | 50.8–61.1°C |
+| Mean | 206.0°C | 59.9°C |
+| Std dev | ±24.23°C | ±0.69°C |
+| Range | 92.5–218.1°C | 50.8–61.2°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 82
 
 ## Anomalies
 - 
-hotend temp variance high: ±37.2°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±24.2°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
