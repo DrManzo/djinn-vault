@@ -1,9 +1,10 @@
 ---
 subject: fantasy/world-building/gods/active-presence
 tags:
-  - fantasy/world-building/gods/active-presence
-  - fantasy/world-building/magic/systems
-  - fantasy/world-building/storytelling/narrative
+  - creative/fantasy/world-building
+  - creative/fantasy/gods
+  - creative/fantasy/pantheon
+  - creative/fantasy/conflict
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -77,6 +78,5 @@ By incorporating these elements, you can create a rich, dynamic world where gods
 - [reddit.com/r/worldbuilding/comments/8jzq5o/creating_religion_what_gods_of_are_common_in_most/](https://www.reddit.com/r/worldbuilding/comments/8jzq5o/creating_religion_what_gods_of_are_common_in_most/)
 
 ## Related
-- [[Faust-CLI-Guide]] — Guide to using Faust CLI for world-building.
-- [[Essence-Magic-System]] — Detailed magic system for your fantasy world.
-- [[High-Magic-World]] — World with high magic and divine intervention.
+- [[Pros-And-Cons-Of-Active-Gods-In-Aethoria]] — similarity of approach
+- [[Character-Profiles-In-The-Malazan-Book-Of-The]] — source material

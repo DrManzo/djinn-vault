@@ -1,7 +1,11 @@
 ---
 subject: Writing/WritingMyBook
 tags:
-  - writing/plot/worldbuilding/gods/aethoria
+  - creative/writing/worldbuilding
+  - creative/writing/storytelling
+  - creative/writing/character-development
+  - creative/writing/thematic-depth
+  - creative/writing/narrative-complexity
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -44,5 +48,5 @@ Exploring the incorporation of active gods into the world of Aethoria, similar t
 - [Google Favicons](https://www.google.com/s2/favicons?sz=128&domain=greek.mythologyworldwide.com)
 
 ## Related
-- [[WritingMyBook]] — Core narrative and character development.
-- [[AethoriaWorldbuilding]] — Existing world rules and lore.
+- [[Character-Profiles-In-The-Malazan-Book-Of-The]] — similarity of worldbuilding and character development
+- [[Malazan-Book-Of-The-Fallen-Series-Recommendations]] — similar themes and narrative techniques

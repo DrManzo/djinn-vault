@@ -1,10 +1,11 @@
 ---
 subject: entertainment/audio-books/fantasy/dark-adult
 tags:
-  - entertainment/audio-books/fantasy/dark-adult/sagas/long-completed
+  - creative/fantasy/adult
+  - media/audio-books
+  - literature/classic-contemporary
 created: 2026-05-19
 source: Perplexity export
-
 ---
 
 # Dark Adult Fantasy Audiobook Recommendations
@@ -64,12 +65,5 @@ The recommendations are based on a variety of dark, adult fantasy series that of
 - [reedsy](https://reedsy.com/discovery/blog/best-fantasy-audiobooks/)
 
 ## Related
-- [[Writing-My-Book]] — Notes on writing and publishing a book
-- [[Faust-Step-12-Operator-Prompt]] — Steps for working with Faust CLI
-
-TAG RULES:
-- topic MUST be one of: entertainment, psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/accounting-systems, business/branding-strategies/identity, business/career-factors/accountability, business/career-factors/benefits, business/career-factors/commitment, business/career-factors/communication, business/career-factors/income-stability, business/career-factors/personal-growth, business/career-factors/planning, business/career-factors/productivity, business/career-factors/professionalism, business/career-factors/successful-admission, business/career-growth/skills-development, business/career-strategies, business/collaboration-strategies, business/communication-strategies, business/control-strategies, business/corporate-intrigue, business/education/training, business/entrepreneurship, business/equipment-setup, business/finance-management/tools/free, business/hacking/htb, business/hosting, business/human-resources, business/infrastructure
+- [[Malazan-Book-Of-The-Fallen-Series-Recommendations]] — similarity
+- [[The-Haze-Of-The-Green-Serpent]] — similarity

@@ -1,10 +1,11 @@
 ---
 subject: fantasy/laws/political-structure
 tags:
-  - fantasy/political-structure/crown/nominal-power
-  - fantasy/political-structure/assembly-of-lords/noble-houses
-  - fantasy/political-structure/shadow-council/powerful-individuals
-  - fantasy/political-structure/guild-of-artisans/economic-control
+  - fiction/political-system
+  - fiction/structure
+  - fiction/power-dynamics
+  - fiction/noble-houses
+  - fiction/secrets
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -50,5 +51,5 @@ The political structure of Aethoria is dominated by the Crown, the Assembly of L
 - [Book-notes.pdf](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_a819825c-29a1-465a-b28d-53c3feb56c77/fa0bc916-ccbb-4ef6-9486-b9794a97e353/Book-notes.pdf)
 
 ## Related
-- [[Writing-My-Book]] — For detailed story development and character alignment.
-- [[Faust-Step-12-Operator-Prompt]] — For specific prompts related to political structures in the story.
+- [[Character-Profiles-In-The-Malazan-Book-Of-The]] — similarity
+- [[The-Masks-Of-Virellion]] — similarity
