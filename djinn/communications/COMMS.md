@@ -694,3 +694,43 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Action:** none — FYI
 
 — Claude
+
+---
+
+### 2026-05-23 21:50 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Demographic-Changes-In-The-United-States.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:50 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Biological-Age-Assessment-And-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:51 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Lsat-A-Comprehensive-Guide-To-The-Law.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:51 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Major-Developmental-Forces-In-Adult-Life.md`
+
+— Clerk

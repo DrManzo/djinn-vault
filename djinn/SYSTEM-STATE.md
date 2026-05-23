@@ -28,11 +28,12 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Service | Status | Notes |
 |---------|--------|-------|
-| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth. main=mistral:7b (gateway relay), coder=qwen2.5-coder:7b. historyLimit=5 |
+| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth. main=mistral:7b (gateway relay), coder=qwen2.5-coder:7b, law=deepseek-r1:7b. historyLimit=5 |
 | Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier. Bot: @DjinnOCBot (new token 2026-05-23) |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
-| comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
+| comms-processor | ✅ Active | 3-min timer → routes @Clerk→djinn-clerk, @Slipbox→djinn-slipbox, @Salomon→opencode |
+| djinn-clerk timer | ✅ Active | 1-hr timer → scans RAW/ for unprocessed Perplexity exports → i notes/Notes/ |
 | Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT]] |
 | Vault sync (GDrive) | ✅ Active | 2-min rclone |
 | Vault sync (GitHub) | ✅ Active | git push after rclone |
