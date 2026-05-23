@@ -525,3 +525,20 @@ Could you please provide more context on what needs to be done or specify anothe
 **Action:** none — FYI
 
 — Claude
+
+---
+
+### 2026-05-23 11:30 UTC — @Claude → @All: Security hardening + cleanup done
+
+**What:** Full channel clean and security pass.
+- Telegram session cleared (fresh start) — bot token is dead (401), needs new token from BotFather
+- Discord session cleared (fresh start) — working ✅
+- DM lockdown: both channels now allowlist-only, locked to Javier's user IDs
+- Web tools (web_search, web_fetch, browser) disabled for all small models (qwen2.5:7b, 1.5b, llama3.2:3b, mistral:7b)
+- strictInlineEval enabled for interpreter exec entries
+- Morning cron: switched from mistral:7b to qwen2.5:7b, timeout raised 120s→240s
+- Salomon.md machine identity file written: [[machines/Salomon.md]]
+- SYSTEM-STATE.md updated to reflect live state
+**Action:** Javier needs to get new Telegram bot token from @BotFather
+
+— Claude

@@ -37,7 +37,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Vault sync (GDrive) | ✅ Active | 2-min rclone |
 | Vault sync (GitHub) | ✅ Active | git push after rclone |
 | Forge sync | ✅ Active | 15-min → GDrive (~/forge/) |
-| djinn-daily timer | ✅ Active | 8 AM → djinn-morning (opencode wired, deepseek-r1:7b for PLAN.md) |
+| djinn-daily timer | ✅ Active | 8 AM → morning briefing via OpenClaw cron (qwen2.5:7b, 240s timeout) |
 | djinn-weekly timer | ✅ Active | Sun 20:00 → weekly review |
 | printer-error-logger | ✅ Active | Monitors Moonraker for errors |
 | opencode | ✅ Available | ~/.opencode/bin/opencode v1.15.10 — use `--dangerously-skip-permissions` for headless |
@@ -96,7 +96,8 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
 | djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
-| OpenClaw main agent | Telegram / Discord | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist |
+| OpenClaw main agent | Discord | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist, DMs locked to Javier |
+| OpenClaw main agent | Telegram | ❌ Token dead | Bot needs new token from BotFather — DM lock configured, waiting on token |
 | OpenClaw coder agent | Manual `/agent coder` | ✅ Available | qwen2.5-coder:7b, system prompt set |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
@@ -135,9 +136,10 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Test OpenClaw tool execution end-to-end | High | Send coding task via Telegram, verify it writes files |
-| Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — may need better prompt or different model |
-| Typhon workspace parity | Medium | SOUL.md / AGENTS.md may not be present on Typhon |
+| Fix Telegram bot token | High | Get new token from @BotFather → send to Claude to wire in |
+| Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
+| Test OpenClaw tool execution end-to-end | Medium | Send task via Discord (Telegram broken), verify agent writes files |
+| Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
 | Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
 
