@@ -929,3 +929,15 @@
 | 2026-05-23 11:27 UTC | printing | 0.0% | 214.9 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
 | 2026-05-23 11:28 UTC | printing | 0.0% | 214.9 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
 | 2026-05-23 11:29 UTC | printing | 0.0% | 215.2 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:30 UTC | printing | 0.0% | 215.3 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:31 UTC | printing | 0.0% | 215.2 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:32 UTC | printing | 0.0% | 214.4 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:33 UTC | printing | 0.0% | 214.9 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:34 UTC | printing | 0.0% | 215.5 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:35 UTC | printing | 0.0% | 215.5 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:36 UTC | printing | 0.0% | 214.9 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:37 UTC | printing | 0.0% | 215.2 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:38 UTC | printing | 0.0% | 215.6 | 215 | 60.0 | 60 | 0% | 0 | cup_geometry_creality_fixed.gcode |
+| 2026-05-23 11:39 UTC | standby | 0.0% | 157.9 | 0 | 58.5 | 0 | 0% | 0 |  |
+| 2026-05-23 11:40 UTC | standby | 0.0% | 115.0 | 0 | 55.8 | 0 | 0% | 0 |  |
+| 2026-05-23 11:42 UTC | standby | 0.0% | 86.0 | 0 | 53.2 | 0 | 0% | 0 |  |
