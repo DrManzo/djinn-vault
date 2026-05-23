@@ -28,7 +28,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Service | Status | Notes |
 |---------|--------|-------|
-| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents. historyLimit=5 |
+| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth. main=mistral:7b (gateway relay), coder=qwen2.5-coder:7b. historyLimit=5 |
 | Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier. Bot: @DjinnOCBot (new token 2026-05-23) |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
@@ -96,7 +96,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
 | djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
-| OpenClaw main agent | Discord + Telegram | ✅ Active | qwen2.5:7b, system prompt set, 45-entry allowlist, DMs locked to Javier, messaging tools enabled |
+| OpenClaw main agent | Discord + Telegram | ✅ Active | mistral:7b (200k ctx, thin relay), 45-entry allowlist, DMs locked to Javier. No tool use by design. |
 | OpenClaw coder agent | Manual `/agent coder` | ✅ Available | qwen2.5-coder:7b, system prompt set |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
@@ -149,9 +149,9 @@ Fixed 2026-05-23 — original 131072 num_ctx caused VRAM overflow (14GB KV cache
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Confirm Discord/Telegram end-to-end reply | High | Model calls work; session race on first msg post-restart — bot will self-heal |
+| Test Discord end-to-end with mistral:7b | High | Telegram confirmed working. Discord needs @mention test. |
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
-| Test OpenClaw tool execution end-to-end | Medium | Send task, verify agent writes files |
+| Test OpenClaw tool execution end-to-end | Medium | Tool use routes to coder agent now, not main |
 | Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
 | Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
