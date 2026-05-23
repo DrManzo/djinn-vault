@@ -2,23 +2,25 @@
 subject: Djinn Operations
 tags: [djinn, system-state, operations]
 created: 2026-05-20
-updated: 2026-05-22
+updated: 2026-05-23
 ---
 
 # SYSTEM-STATE.md — Djinn Operational State
 
-Inter-machine operational state. Not identity (that lives in ~/.openclaw/workspace/MEMORY.md).
-Read before acting. Update when state changes.
+Inter-machine operational state. Read before acting. Update when state changes.
+**Related:** [[ROUTING]] | [[PROTOCOL]] | [[HEARTBEAT]] | [[HEARTBEAT-typhon]] | [[COMMS]]
 
 ---
 
 ## Machine Status
 
-| Machine | Status | Last Seen | Notes |
-|---------|--------|-----------|-------|
-| Salomon | ✅ Online | 2026-05-20 22:45 PDT | All systems live |
-| Typhon | ✅ Online | 2026-05-21 | All services live. Claude Code authenticated. |
-| Claude | ✅ Online | 2026-05-20 | Claude Code CLI active, OAuth authenticated |
+| Machine | Status | IP | User | Last Verified |
+|---------|--------|----|------|--------------|
+| Salomon | ✅ Online | 192.168.1.225 | `drmanzo` | 2026-05-23 |
+| Typhon | ✅ Online | 192.168.1.113 | `tf-tthq` | 2026-05-23 |
+| Claude | ✅ Online | — (API) | — | 2026-05-23 |
+
+**Network:** Both machines on same subnet (192.168.1.x) as of 2026-05-23. SSH from Salomon→Typhon: `ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113`. Passwordless via ed25519 key.
 
 ---
 
@@ -27,20 +29,35 @@ Read before acting. Update when state changes.
 | Service | Status | Notes |
 |---------|--------|-------|
 | OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth |
-| Telegram @OgDjinn_bot | ✅ Live | Polling, locked to Javier (7620067588) |
-| Discord @OgDjinn | ✅ Live | Djinn OC guild, inbound/outbound |
-| 8 AM cron | ✅ Fixed | id: 25a700db — was failing (Telegram disabled), now live |
+| Telegram @OgDjinn_bot | ✅ Live | Polling, locked to Javier |
+| Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — 8 models, remote access enabled |
-| Heartbeat timer | ✅ Active | 5-min → HEARTBEAT.md |
-| Vault sync | ✅ Active | 2-min → GitHub + GDrive |
-| Forge sync | ✅ Active | 15-min → GDrive |
-| Voice pipeline | ✅ Tested | voxtype STT + Piper TTS (en_GB-alba-medium) |
+| Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT]] |
+| Vault sync (GDrive) | ✅ Active | 2-min rclone |
+| Vault sync (GitHub) | ✅ Active | git push after rclone |
+| Forge sync | ✅ Active | 15-min → GDrive (~/forge/) |
+| djinn-daily timer | ✅ Active | 8 AM → djinn-morning (bash only — opencode not yet wired) |
+| djinn-weekly timer | ✅ Active | Sun 20:00 → weekly review |
+| printer-error-logger | ✅ Active | Monitors Moonraker for errors |
+| opencode | ✅ Available | ~/.opencode/bin/opencode — invoked manually or via triggers |
+
+---
+
+## Active Services — Typhon
+
+| Service | Status | Notes |
+|---------|--------|-------|
+| Ollama | ✅ Running | Local models + remote routing to Salomon:11434 |
+| Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT-typhon]] — now writes dynamic IP |
+| Vault sync | ✅ Active | git pull 2-min |
+| djinn-printer-bot | ✅ Live | python-telegram-bot, ~/.venvs/djinn-bot/, token in ~/.config/djinn/printer-bot.env |
+| opencode | ✅ Available | Invoked manually — COMMS processor not yet deployed |
 
 ---
 
 ## Ollama Model Routing
 
-| Model | Runs On | Remote From Typhon | Role |
+| Model | Primary | Remote from Typhon | Role |
 |-------|---------|-------------------|------|
 | qwen2.5:7b | Both | Yes | Default — tool use + conversation |
 | deepseek-r1:7b | Both | Yes | Deep reasoning |
@@ -54,54 +71,70 @@ Read before acting. Update when state changes.
 
 ---
 
-## Active Services — Typhon
+## Printer
 
-| Service | Status | Notes |
-|---------|--------|-------|
-| Ollama | ✅ Running | Local models + remote routing to Salomon:11434 |
-| Heartbeat timer | ✅ Active | 5-min → HEARTBEAT-typhon.md |
-| Vault sync | ✅ Active | 2-min → GitHub + GDrive |
-| Vault git pull | ✅ Active | 2-min |
-| Claude Code | ✅ Authenticated | OAuth, Claude lane active |
-| Printer conf | ✅ Set | 192.168.1.113 → ~/.config/djinn/printer.conf |
-| Ender-3 V3 Plus | ✅ Live | Moonraker at 192.168.1.113:7125 |
-
----
-
-## Pending
-
-### Voice pipeline — final wiring (Typhon lead)
-- [ ] Wire `djinn-voice` → remote Salomon Ollama (phi4:14b) for inference
-- [ ] Test full loop: speak → voxtype STT → remote Ollama → local Piper TTS → play
-- [ ] Report results
-
-### Nice-to-haves (no blockers)
-- [ ] Fix Piper lib path on Salomon for local fallback (`libpiper_phonemize.so.1`)
-- [ ] Upgrade whisper model on Typhon (base → small/medium)
-- [ ] Printer auto-start systemd service
+| Field | Value |
+|-------|-------|
+| Machine | Ender-3 V3 Plus |
+| IP | 192.168.1.114:7125 (Moonraker) |
+| Control | Klipper + Moonraker |
+| Bot | Telegram bot on Typhon — `/print_status`, `/print`, `/print_cancel` |
+| Config backup | [[djinn/printer/backup/]] |
+| Process docs | [[printer/process/INTAKE]] |
+| Error history | [[error_log]] |
+| Current print | cup_geometry_creality_fixed.gcode — in progress 2026-05-23 |
 
 ---
 
-## Communication Channels
+## Agent Activation Status
 
-| From → To | File |
-|-----------|------|
-| Salomon → Typhon | `djinn/communications/Salomon-to-Typhon.md` |
-| Typhon → Salomon | `djinn/communications/Typhon-to-Salomon.md` |
-| Any → Claude | `djinn/communications/Claude-inbox.md` |
-| Claude → All | `djinn/communications/Claude-outbox.md` |
-
----
-
-## Key Decisions
-
-- Vault = single source of truth. GitHub primary, GDrive backup.
-- Three-lane architecture: Ollama (Salomon) + Ollama (Typhon) + Claude API
-- Communication: markdown files in djinn/communications/ — append only, never overwrite
-- Signing: `— <AgentName>`, git author set per agent
-- OpenClaw workspace files (~/.openclaw/workspace/) = Djinn identity layer (do not rename)
-- Vault djinn/ files = inter-machine ops layer (SYSTEM-STATE, ROUTING, HEARTBEAT, comms)
+| Agent | Trigger | Status | Gap |
+|-------|---------|--------|-----|
+| Salomon opencode | Manual only | ⚠️ Partial | COMMS processor not deployed |
+| Typhon opencode | Manual only | ⚠️ Partial | COMMS processor not deployed |
+| Claude | Javier initiates session | ✅ Working | Session-bound by design |
+| djinn-daily | 8 AM timer (bash) | ⚠️ Partial | Sends briefing but doesn't invoke opencode |
+| COMMS→@Salomon | Not yet built | ❌ Missing | Phase 3 work |
+| COMMS→@Typhon | Not yet built | ❌ Missing | Phase 3 work |
 
 ---
 
-*— Claude*
+## Key Paths
+
+| Path | Purpose |
+|------|---------|
+| `~/Obsidian/` | Vault — single source of truth |
+| `~/.openclaw/workspace/` | Djinn identity + agent config files |
+| `~/Obsidian/djinn/workspace/` | Symlink → ~/.openclaw/workspace/ (Obsidian visibility) |
+| `~/Obsidian/djinn/communications/` | Inter-agent comms — COMMS.md is active channel |
+| `~/Obsidian/djinn/skills/` | Skill specs — [[skills/README]] |
+| `~/Obsidian/djinn/printer/process/` | Print intake SOP, log, benchmarks, filament profiles |
+| `~/.config/djinn/` | Secrets — env files, chmod 600, never in git |
+| `~/.opencode/bin/opencode` | opencode binary |
+| `~/.local/bin/` | Operational scripts — heartbeat, vault-sync, djinn-* |
+
+---
+
+## Communications — Active Channels
+
+| Channel | File | Use |
+|---------|------|-----|
+| Primary | [[COMMS]] | All inter-agent messages — append only |
+| Alerts | Telegram | Real-time signals, interrupts |
+| Archived | `communications/archive/` | Old Salomon-to-Typhon.md etc. — superseded by COMMS.md |
+
+---
+
+## Pending Work
+
+| Item | Phase | Owner |
+|------|-------|-------|
+| COMMS processor (Salomon) | Phase 3 | Claude builds, Salomon runs |
+| COMMS processor (Typhon) | Phase 3 | Claude builds via SSH |
+| Wire djinn-morning → opencode | Phase 4 | Claude |
+| Typhon workspace parity | Phase 2 | Claude via SSH |
+| Voice pipeline final wiring | Backlog | Typhon |
+
+---
+
+*— Claude, 2026-05-23*
