@@ -1,10 +1,11 @@
 ---
 subject: business/accounting-systems/financial-reporting/statistics
 tags:
-  - statistics/data-analysis/excel/frequency-distribution/ratio-level-measurement
+  - cs/excel/data-analysis
+  - education/statistics/classwork
+  - statistics/frequency-distribution
 created: 2026-05-20
 source: Perplexity export
-
 ---
 
 # Excel Assignment for Statistics Class
@@ -42,9 +43,5 @@ The assignment involves analyzing data on the hours of television watched by ele
 - [Perplexity Export](https://www.perplexity.ai/search/fe789674-3770-4a1a-ae36-d6fe98bd8685)
 
 ## Related
-- [[Excel-Data-Analysis-Guide]] — Comprehensive guide to Excel for data analysis.
-- [[Statistics-Basics]] — Introduction to basic statistical concepts and methods.
-
----
-
-This note captures the assignment details, including the specific steps for creating a frequency distribution in Excel. It also notes that the level of measurement is ratio, which allows for various statistical analyses.
+- [[Excel-Data-Analysis-Guide]] — Comprehensive guide to Excel for data analysis
+- [[Homework-Help-For-Descriptive-Statistics]] — similarity 0.86

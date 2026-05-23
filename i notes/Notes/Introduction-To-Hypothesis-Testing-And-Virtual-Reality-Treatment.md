@@ -1,4 +1,11 @@
 ---
+tags:
+  - psychology/hypothesis-testing/evidence-based-practice
+  - psychology/treatment-methods/virtual-reality-exposure-therapy
+  - psychology/statistical-analysis/sample-size
+---
+
+---
 subject: psychology/hypothesis-testing/virtual-reality-treatment/anxiety-disorders
 tags:
   - psychology/hypothesis-testing/evidence-based-practice

@@ -1,8 +1,11 @@
 ---
 subject: psychology/statistics/z-distribution/z-scores
 tags:
-  - psychology/statistics/z-distribution/significance/magnitude
-  - psychology/statistics/z-distribution/standardization/process
+  - cs/statistics
+  - cs/data-analysis
+  - psych/understanding
+  - business/analytics
+  - commonality/concepts
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -30,11 +33,5 @@ Understanding both the sign and magnitude of z-scores allows researchers and pra
 - Andrade, C. (2021). Z scores, standard scores, and composite test scores explained. *Indian Journal of Psychological Medicine*, *43*(6), 555–557. https://doi.org/10.1177/02537176211046525
 
 ## Related
-- [[Psych Stats]] — For more detailed statistical concepts and applications.
-- [[Z-Score Calculations]] — Steps to calculate z-scores for practical use.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
+- [[Z-Scores]] — similarity 0.90
+- [[Population Distributions]] — similarity 0.83

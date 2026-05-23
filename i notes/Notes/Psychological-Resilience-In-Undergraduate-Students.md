@@ -1,8 +1,9 @@
 ---
 subject: psychology/resilience/academic/performance/student-support
 tags:
-  - psychology/career-factors/personal-growth
-  - psychology/career-strategies
+  - psychology/resilience/undergraduate
+  - psychology/stress-management
+  - education/university/student-support
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -30,6 +31,5 @@ Additionally, a sense of life purpose plays a vital role in building resilience.
 - Yeung, W., & Martin, A. J. (2022). *The Role of Life Purpose in Enhancing Resilience Among College Students*. Psychological Bulletin.
 
 ## Related
-- [[Soft-Skills-Training-Guide]] — Comprehensive guide on soft skills development for students.
-- [[Mentoring-Programs-Implementation]] — Strategies for effective mentoring programs in universities.
-- [[Purpose-Driven-Learning-Initiatives]] — Initiatives to foster life purpose and resilience among undergraduate students.
+- [[Key-Factors-Protecting-Adolescents-From-Health-Risks]] — similarity 0.80
+- [[Factors Influencing Health Psychology Growth]] — similarity 0.75

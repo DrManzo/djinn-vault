@@ -1,7 +1,10 @@
 ---
 subject: statistics/mean-comparison
 tags:
-  - statistics/mean-analysis/weighted/arithmetic
+  - cs/statistics
+  - cs/data-analysis
+  - cs/mean-calculations
+  - specific-weighted-mean
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -41,5 +44,5 @@ The weighted mean excels in research contexts where stratified sampling is emplo
 - Scheaffer, R. L. (2011). *Stratified Sampling: An Introduction to the Weighted Mean*. American Statistician, 65(4), 278-282.
 
 ## Related
-- [[Statistics-Guides]] — Comprehensive guides on statistical methods and analysis.
-- [[Data-Analysis-Methods]] — Various techniques for data interpretation and representation.
+- [[Weighted Mean And Central Tendency]] — similarity 0.82
+- [[Population Distributions]] — similarity 0.73

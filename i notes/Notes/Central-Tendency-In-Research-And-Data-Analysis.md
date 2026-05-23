@@ -1,9 +1,10 @@
 ---
 subject: psychology/statistics/central-tendency/relevance/cash-flow
 tags:
-  - psychology/statistics/measures-of-central-tendency
-  - psychology/statistics/data-analysis
-  - psychology/statistics/research-methods
+  - cs/data-analysis
+  - cs/statistics
+  - business/finance
+  - psychology/research-methods
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -54,5 +55,5 @@ The relationship between these measures reveals distinct insights into different
 - [methods.sagepub.com/ency/edvol/the-sage-encyclopedia-of-communication-research-methods/chpt/measures-central-tendency](https://methods.sagepub.com/ency/edvol/the-sage-encyclopedia-of-communication-research-methods/chpt/measures-central-tendency)
 
 ## Related
-- [[Psych-Stats-Guidelines]] — Comprehensive guidelines for statistical analysis in psychology.
-- [[Data-Analysis-Techniques]] — Overview of various data analysis techniques and their applications.
+- [[Weighted Mean And Central Tendency]] — similarity 0.82
+- [[Basics-Of-Summation-Notation-And-Statistical-Measures-In]] — similarity 0.81
