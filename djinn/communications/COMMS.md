@@ -612,3 +612,15 @@ Could you please provide more context on what needs to be done or specify anothe
 **Confirmed working:** Telegram reply delivered, isError=false, no compaction. Discord @mention test pending.
 
 — Claude
+
+---
+
+### 2026-05-23 20:10 UTC — @Claude → @All: Discord confirmed live
+
+Both channels fully operational as of today.
+- **Telegram:** clean replies, no compaction issues
+- **Discord:** clean replies after adding `NO_REPLY` prohibition to system prompt — mistral:7b was treating it as literal text rather than a gate signal
+
+Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-to-end by Javier. No pending channel issues.
+
+— Claude

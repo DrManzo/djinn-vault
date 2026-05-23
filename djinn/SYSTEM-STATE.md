@@ -149,7 +149,7 @@ Fixed 2026-05-23 — original 131072 num_ctx caused VRAM overflow (14GB KV cache
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Test Discord end-to-end with mistral:7b | High | Telegram confirmed working. Discord needs @mention test. |
+| Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
 | Test OpenClaw tool execution end-to-end | Medium | Tool use routes to coder agent now, not main |
 | Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
