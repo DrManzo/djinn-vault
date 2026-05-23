@@ -1,8 +1,9 @@
 ---
 subject: tech/networking/openvpn/installation-usage
 tags:
-  - tech/networking/htb-challenges
-  - tech/security/vpn
+  - business/hacking/htb
+  - cs/networking/openvpn
+  - personal/security
 created: 2026-05-20
 source: Perplexity export
 ---
@@ -112,6 +113,5 @@ telnet 10.10.10.10 23
 - [Telnet Default Port 23](https://www.netcomlearning.com/tutorials/what-is-telnet-and-how-does-it-work/)
   
 ## Related
-- [[HTB-VPN-Guide]] — Detailed guide for HTB-specific setup.
-- [[Nmap-Scanning-Guide]] — Comprehensive Nmap scanning techniques.
-- [[Telnet-Usage-Guide]] — Telnet connection and usage instructions.
+- [[OpenVPN-Kali-Linux-Setup]] — similar setup process
+- [[HTB-Lab-Access-Strategy]] — related to accessing HTB labs

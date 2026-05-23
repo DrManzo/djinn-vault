@@ -4198,3 +4198,194 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Maximum-Note-Sizes-In-Lab-Mode-For-Testing.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 23:14 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-App-Code-Cleanup.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:14 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Phase-1-Requirements-And-Next-Steps-For-Faust.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:14 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dual-Boot-Setup-With-Parrot-Os-And-Windows.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:16 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Development-Update.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:16 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Vb-Net-Code-For-Directory-Creation.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:16 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Python-Game-Development-Placing-A-Ship-On-A.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:16 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-To-Install-And-Use-Openvpn-For-Hack.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:16 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Install-Postman-On-Parrot-Os.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:16 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Recording-Challenges-On-Parrot-Os-For-Youtube.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-An-Apk-On-Parrot-Os.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:17 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Masks-Of-Virellion.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-A-Different-Linux-Distro-On-An-Omen.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:17 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Courts-Of-The-Shadow-Fey-Dm-Manager.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dark-Adult-Fantasy-Audiobook-Recommendations.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:18 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Haze-Of-The-Green-Serpent.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/In-Depth-Analysis-And-Building-Ideas-For-Geography.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Political-Structure-Of-Aethoria.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:18 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Portfolio-Scripts-For-Developers.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Expanding-Societal-Structure-Class-Distinctions.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:19 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fun-And-Useful-Python-Projects-For-A-Cybersecurity.md`
+
+— Slipbox

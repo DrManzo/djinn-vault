@@ -1,9 +1,10 @@
 ---
 subject: cs/cybersecurity/portfolio-projects
 tags:
-  - cs/cybersecurity/student-life-tools
-  - cs/cybersecurity/beginner-cybersec-flavored
-  - cs/cybersecurity/intermediate-portfolio-worthy
+  - cs/python
+  - cs/cybersecurity
+  - personal/education
+  - personal/portfolio
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -69,5 +70,4 @@ This note provides a list of fun, engaging, and useful Python projects that can 
 - [softteco](https://softteco.com/blog/python-for-cybersecurity)
 
 ## Related
-- [[cybersecurity-basics]] — Basic cybersecurity concepts and tools.
-- [[python-project-ideas]] — Additional Python project ideas for beginners.
+- [[Portfolio-Scripts-For-Developers]] — similarity
