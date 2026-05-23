@@ -1,4 +1,12 @@
 ---
+tags:
+  - psychology/research-methods/statistics/independent-measures-studies
+  - psychology/research-methods/analysis/methods
+  - psychology/research-methods/t-tests
+  - psychology/research-design/between-subjects
+---
+
+---
 subject: psychology/research-methods/statistics/independent-measures-studies
 tags:
   - psychology/research-methods/analysis/methods

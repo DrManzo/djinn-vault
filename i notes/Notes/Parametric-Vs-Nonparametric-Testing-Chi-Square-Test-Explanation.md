@@ -1,8 +1,10 @@
 ---
 subject: psychology/statistics/nonparametric-testing/chi-square-test
 tags:
-  - psychology/statistics/parametric-vs-nonparametric
-  - psychology/statistics/chi-square-analysis
+  - cs/statistics
+  - cs/testing/nonparametric
+  - cs/testing/chi-square
+  - cs/testing/distributions
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -33,5 +35,5 @@ To conduct a chi-square analysis, several key conditions must be met:
 - Mayo Clinic. (n.d.). Parametric and nonparametric: Demystifying the terms [PDF]. Mayo Clinic Division of Biomedical Statistics and Informatics. <https://www.mayo.edu/research/documents/parametric-and-nonparametric-demystifying-the-terms/doc-20408960>
 
 ## Related
-- [[Statistical-Hypothesis-Testing]] — Overview of statistical testing methods.
-- [[Contingency-Tables]] — Understanding and interpreting contingency tables.
+- [[Parametric Vs Nonparametric Tests]] — similarity 0.92
+- [[Hypothesis Testing]] — similarity 0.76

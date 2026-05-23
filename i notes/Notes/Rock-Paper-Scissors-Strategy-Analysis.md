@@ -1,4 +1,11 @@
 ---
+tags:
+  - psychology/probability/game-strategy
+  - probability/strategy/rock-paper-scissors
+  - psychology/human-behavior/predictive-analysis
+---
+
+---
 subject: psychology/probability/game-strategy
 tags:
   - probability/strategy/rock-paper-scissors

@@ -1,10 +1,12 @@
 ---
 subject: business/career-factors/ethics/research-standards
 tags:
-  - ethics/business-research/animal-testing/three-rs/peta/amp
+  - bio/neuroscience/memories
+  - personal/ethics
+  - cs/research-methods
+  - business/marketing-strategy
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Ethical Guidelines and Alternatives in Animal Research
@@ -42,5 +44,5 @@ The ethical use of animals in scientific research involves balancing medical pro
 - AMP: <https://www.amprogress.org/animal-research/position-statement/>
 
 ## Related
-- [[Animal-Research-Guidelines]] — Comprehensive overview of regulatory frameworks.
-- [[Alternatives-to-Animal-Testing]] — Exploring non-animal methods in research.
+- [[PETA Website Review]] — similarity 0.95
+- [[Research Ethics]] — similarity 0.73

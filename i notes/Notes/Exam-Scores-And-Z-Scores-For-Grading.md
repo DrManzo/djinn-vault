@@ -1,8 +1,9 @@
 ---
 subject: psychology/statistics/central-extreme/scores/z-scores
 tags:
-  - statistics/scores/z-scores/performance
-  - statistics/scores/z-scores/exam-grading
+  - psychology/statistics/z-scores/random-sample
+  - statistics/sampling/methods/random
+  - statistics/scores/z-scores/classification
 created: 2026-05-23
 source: Perplexity export
 
@@ -38,7 +39,6 @@ This note provides the z-scores for different exam scores to determine which sho
 - [Simply Psychology](https://www.simplypsychology.org/)
 - [Scribbr](https://www.scribbr.com/)
 - [Wikipedia](https://en.wikipedia.org/)
-
 ---
 
 subject: psychology/statistics/z-scores/random-sample
@@ -111,3 +111,7 @@ This note classifies scores as central or extreme based on their z-scores.
 - [JMP](https://www.jmp.com/)
 - [LibreTexts](https://stats.libretexts.org/)
 - [Scribbr](https://www.scribbr.com/)
+
+## Related
+- [[Understanding-Z-Scores-And-Standard-Normal-Distribution]] — z-scores-relation
+- [[Psych Stats Hub]] — sampling-methods

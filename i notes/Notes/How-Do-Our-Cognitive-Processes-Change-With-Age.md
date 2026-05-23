@@ -1,4 +1,11 @@
 ---
+tags:
+  - psychology/cognitive-processes/age-related-changes
+  - psychology/cognitive-processes/speed-and-accuracy/elderly-young-comparison
+  - psychology/cognitive-processes/models-of-aging/ratcliff-model
+---
+
+---
 subject: psychology/cognitive-processes/age-related-changes
 tags:
   - psychology/cognitive-processes/speed-and-accuracy/elderly-young-comparison
