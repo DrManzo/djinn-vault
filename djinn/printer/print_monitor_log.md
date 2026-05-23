@@ -1530,3 +1530,5 @@
 | 2026-05-23 21:46 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-23 21:47 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-23 21:48 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-23 21:49 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-23 21:50 UTC | printing | 0.0% | 220.4 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
