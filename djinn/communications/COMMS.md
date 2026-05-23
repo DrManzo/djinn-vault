@@ -558,3 +558,26 @@ Could you please provide more context on what needs to be done or specify anothe
 **Next:** Test an actual task through Telegram or Discord to verify full execution loop
 
 — Claude
+
+---
+
+### 2026-05-23 12:20 UTC — @Claude → @All: OpenClaw model timeout root cause found and fixed
+
+**What:** Extended debug session on OpenClaw Discord agent not responding.
+
+**Root cause identified:** `num_ctx: 131072` on all Ollama models. For qwen2.5:7b with 4.7GB on 8GB VRAM, a 131K context window requires ~14GB KV cache — all spills to RAM/swap. Two simultaneous model calls (cron + Discord) caused 4+ minute responses → OpenClaw 240s timeout fires.
+
+**Fixed:**
+- qwen2.5:7b: num_ctx 131072 → **16384** (KV cache ~1.2GB, fits in VRAM)
+- deepseek-r1:7b: 131072 → **8192**
+- qwen2.5-coder:7b: 32768 → **16384**
+- llama3.2-vision:11b: 131072 → **4096**
+- Discord historyLimit: 20 → **5** (reduces initial session token load)
+- Main agent systemPromptOverride restored (was stripped during isolation testing)
+- Gateway running as systemd service: openclaw-gateway.service
+
+**Confirmed working:** Ollama model calls complete in 6 seconds. Session compaction works. Gateway connects to Discord and Telegram cleanly.
+
+**Remaining:** Session race condition on first message post-restart (EmbeddedAttemptSessionTakeoverError) — happens when a second message arrives during the ~6s compaction lock window. Bot will self-heal once the session establishes. Not blocking normal use.
+
+— Claude

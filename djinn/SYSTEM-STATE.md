@@ -2,7 +2,7 @@
 subject: Djinn Operations
 tags: [djinn, system-state, operations]
 created: 2026-05-20
-updated: 2026-05-23
+updated: 2026-05-23T05:20
 ---
 
 # SYSTEM-STATE.md — Djinn Operational State
@@ -28,8 +28,8 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Service | Status | Notes |
 |---------|--------|-------|
-| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents |
-| Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier |
+| OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents. historyLimit=5 |
+| Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier. Bot: @DjinnOCBot (new token 2026-05-23) |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
 | comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
@@ -131,13 +131,27 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 ---
 
+## Ollama Context Windows (Salomon)
+
+Fixed 2026-05-23 — original 131072 num_ctx caused VRAM overflow (14GB KV cache) → LLM timeout.
+
+| Model | num_ctx | VRAM est | Notes |
+|-------|---------|----------|-------|
+| qwen2.5:7b | 16384 | ~5.9GB | Main agent — fits with headroom |
+| deepseek-r1:7b | 8192 | ~4.7GB | Reasoning |
+| qwen2.5-coder:7b | 16384 | ~5.9GB | Coder agent |
+| llama3.2-vision:11b | 4096 | ~8GB | Vision — tight, needs offload |
+| phi4:14b | 16384 | 9.1GB+ | CPU offload required |
+
+---
+
 ## Pending Work
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Test end-to-end via Telegram | High | Send Djinn a task via @DjinnOCBot, verify it executes |
+| Confirm Discord/Telegram end-to-end reply | High | Model calls work; session race on first msg post-restart — bot will self-heal |
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
-| Test OpenClaw tool execution end-to-end | Medium | Send task via Discord (Telegram broken), verify agent writes files |
+| Test OpenClaw tool execution end-to-end | Medium | Send task, verify agent writes files |
 | Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
 | Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
