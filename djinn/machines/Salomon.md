@@ -75,7 +75,7 @@ Ollama runs as system service, exposed on `0.0.0.0:11434` (reachable by Typhon v
 **Gateway:** `127.0.0.1:18789`, token auth
 **Agents:** `main` (qwen2.5:7b), `coder` (qwen2.5-coder:7b)
 **Channels:**
-- Telegram `@OgDjinn_bot` — DM policy: allowlist (Javier only)
+- Telegram `@DjinnOCBot` — DM policy: allowlist (Javier only)
 - Discord `@OgDjinn` — DM policy: allowlist (Javier only)
 
 **Exec allowlist:** 45 entries covering bash, git, python, node, npm, curl, jq, coreutils
@@ -87,7 +87,7 @@ Ollama runs as system service, exposed on `0.0.0.0:11434` (reachable by Typhon v
 | Service | Status | Notes |
 |---------|--------|-------|
 | OpenClaw gateway | ✅ Live | systemd user service, port 18789 |
-| Telegram @OgDjinn_bot | ⚠️ Token invalid | Bot token needs regeneration via BotFather |
+| Telegram @DjinnOCBot | ✅ Live | Polling connected, DMs locked to Javier |
 | Discord @OgDjinn | ✅ Live | Connected, guild 1504308482575433788 |
 | Ollama | ✅ Running | 0.0.0.0:11434, 8 models |
 | comms-processor | ✅ Active | 3-min timer → scans COMMS.md → invokes opencode |
