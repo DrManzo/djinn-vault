@@ -29,7 +29,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Service | Status | Notes |
 |---------|--------|-------|
 | OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth, system prompts set for main+coder agents |
-| Telegram @OgDjinn_bot | ✅ Live | Polling, locked to Javier |
+| Telegram @OgDjinn_bot | ❌ Token invalid | Bot token dead — needs new token from BotFather |
 | Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
 | comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
