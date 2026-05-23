@@ -1,4 +1,11 @@
 ---
+tags:
+  - ai/development/faust/cli
+  - cs/software-engineering
+  - business/infrastructure/equipment
+---
+
+---
 subject: Faust/Development
 tags:
   - ai/development/faust/cli

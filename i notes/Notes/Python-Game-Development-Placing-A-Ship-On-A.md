@@ -1,11 +1,11 @@
 ---
 subject: cs/gaming/programming-tutorials
 tags:
-  - cs/game-development/ship-placement
-  - programming/tutorials/beginner
+  - cs/game-development
+  - cs/algorithms
+  - cs/basic-programming
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Python Game Development: Placing a Ship on a 10x10 Grid
@@ -89,6 +89,4 @@ The provided Python code demonstrates how to set up a simple 10x10 grid-based ga
 - No specific sources or URLs are mentioned in this content.
 
 ## Related
-- [[Python-Basics]] — Introduction to Python programming.
-- [[Game-Development-Concepts]] — Overview of basic game development principles.
-- [[Grid-Based-Games]] — Examples and tutorials for grid-based games.
+- [[Building-A-Tetris-Game-In-Python]] — grid-based-game
