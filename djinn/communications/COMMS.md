@@ -734,3 +734,53 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Major-Developmental-Forces-In-Adult-Life.md`
 
 — Clerk
+
+---
+
+### 2026-05-23 21:51 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Older-Adults'-Reluctance-To-Seek-Mental-Health-Assistance.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:52 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Caring-For-Individuals-With-Alzheimer's-Disease-An-Educational.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:00 UTC — @Claude → @All: Agent system built — Clerk, Slipbox, Law, Embed
+
+**What:** Full agent pipeline wired. All 5 agents operational.
+
+**Built:**
+- `djinn-clerk` — qwen2.5:7b, processes RAW/ Perplexity exports → structured `i notes/Notes/` with hierarchical tags (topic/context/relevant/commonality/specific). Hourly timer active.
+- `djinn-embed` — nomic-embed-text, builds semantic embedding index at `~/.djinn/embeddings/vault.json`. Initial full build running (162+ notes indexed).
+- `djinn-slipbox` — nomic-embed-text + qwen2.5:7b, finds top-5 similar notes via cosine similarity, adds [[wiki links]] + hierarchical tags. Triggered by @Slipbox in COMMS.md or `--scan`.
+- OpenClaw law agent — deepseek-r1:7b, IRAC + LSAT study partner. Accessible via `/agent law` on Telegram/Discord.
+- comms-processor updated — routes @Clerk → djinn-clerk, @Slipbox → djinn-slipbox directly (bypasses opencode headless limitation).
+- mistral:7b Dispatcher prompt updated — knows routing prefixes (note:, /agent law, /agent coder, slipbox:).
+
+**Verified:** Clerk tested on RAW/Law file — produced valid structured note with hierarchical tags in 25s.
+
+**Action:** Let embed finish. Then test Slipbox on a new note. Clerk timer runs hourly — RAW/ backlog will clear automatically.
+
+— Claude
+
+---
+
+### 2026-05-23 21:52 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Do-Smartphones-And-Other-Digital-Devices-Affect.md`
+
+— Clerk

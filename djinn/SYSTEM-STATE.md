@@ -97,8 +97,11 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
 | djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
-| OpenClaw main agent | Discord + Telegram | ✅ Active | mistral:7b (200k ctx, thin relay), 45-entry allowlist, DMs locked to Javier. No tool use by design. |
-| OpenClaw coder agent | Manual `/agent coder` | ✅ Available | qwen2.5-coder:7b, system prompt set |
+| OpenClaw main agent | Discord + Telegram | ✅ Active | mistral:7b (200k ctx, thin relay). Routes: note:/law:/code:/slipbox: prefixes |
+| OpenClaw coder agent | `/agent coder` | ✅ Available | qwen2.5-coder:7b, shell + code tasks |
+| OpenClaw law agent | `/agent law` | ✅ Available | deepseek-r1:7b, IRAC + LSAT study partner |
+| Clerk | djinn-clerk timer (1-hr) + @Clerk in COMMS.md | ✅ Active | qwen2.5:7b — RAW/ → structured vault notes with hierarchical tags |
+| Slipbox | @Slipbox in COMMS.md + djinn-slipbox --scan | ✅ Available | nomic-embed-text + qwen2.5:7b — semantic linking + hierarchical tags |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
 
@@ -146,14 +149,23 @@ Fixed 2026-05-23 — original 131072 num_ctx caused VRAM overflow (14GB KV cache
 
 ---
 
+## Key Paths — Agent Scripts
+
+| Path | Purpose |
+|------|---------|
+| `~/.local/bin/djinn-clerk` | Clerk — RAW/ Perplexity → structured vault note |
+| `~/.local/bin/djinn-embed` | Embedding index builder (nomic-embed-text) |
+| `~/.local/bin/djinn-slipbox` | Slipbox — semantic linking + hierarchical tags |
+| `~/.djinn/embeddings/vault.json` | Embedding cache (incremental, auto-updated) |
+| `~/.local/share/djinn/clerk-processed.json` | Clerk state — tracks processed RAW files |
+
 ## Pending Work
 
 | Item | Priority | Notes |
 |------|----------|-------|
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
-| Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
-| Test OpenClaw tool execution end-to-end | Medium | Tool use routes to coder agent now, not main |
-| Improve headless opencode tool use | Medium | qwen2.5:7b not reliably running shell in comms-processor — model behavior issue |
+| Run djinn-embed --full after index completes | High | Initial build started 2026-05-23 — let it finish |
+| Test Slipbox end-to-end after embed completes | High | Needs embedding cache to find similar notes |
 | Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
 
