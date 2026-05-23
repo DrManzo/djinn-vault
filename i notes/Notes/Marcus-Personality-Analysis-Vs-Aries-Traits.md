@@ -1,9 +1,11 @@
 ---
 subject: psychology/personality-analysis/aries-characteristics/marcus-personality
 tags:
-  - psychology/personality-analysis/aries-characteristics/marcus-personality
-  - psychology/personality-theories/astrology
-  - psychology/personality-theories/traits-comparison
+  - personality/analysis/comparison
+  - psychology/personality-types
+  - creativity/persona-analysis
+  - specific/marcus-personality
+  - specific/aries-traits
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -32,12 +34,5 @@ Aries traits are typically described as energetic, dynamic, initiative-taking, n
 - [Times of India](https://timesofindia.indiatimes.com/aries-personality-traits-positive-vs-negative-you-should-be-aware-of/articleshow/85204806.cms)
 
 ## Related
-- [[Will-1]] — Strategic thinking and power dynamics analysis.
-- [[Marcus-core-Files]] — Detailed personality framework of Marcus.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/career-factors/income-stability, business/career-factors/personality-fit, business/career-strategies, business/collaboration-strategies, business/human-resources, business/leadership/critical-thinking, business/llc-formation/california/software-development-company, business/management-methods, business/management-methods/faust/cli/core/adapters, business/marketing-revenue-models, business/marketing-revenue-models/toy-industry, business/passive-income-strategies/neuro-architecture-assets, business/passive-income-strategies/power-user-bluebeam-market, business/project-management, business/project-management/data-models/faust/core/models, business/project-management/modules/roles/faust/cli/core/adapters, business/project-management/tasks/results/faust/chat, business/strategic-planning, business/technology/integration, business/technology/software-architecture, business/technology/software-development, business/technology/startup, career/career-factors/growth-opportunities, career/career-factors/income-stability, career/career-factors/job-security, career/career-factors/personality-fit, career/career-factors/work-life-balance
+- [[Strategic-And-Emotional-Interaction-With-Marcus]] — strategic guidance vs. natural leadership
+- [[Personality-Stability-And-Erikson's-Theory-In-Late-Adulthood]] — stability and development

@@ -1,8 +1,9 @@
 ---
 subject: literature/fantasy-series/malazan-book-of-the-fallen
 tags:
-  - fantasy/series/malazan-book-of-the-fallen/complete-series
-  - fantasy/series/malazan-book-of-the-fallen/recommendations
+  - creative/fantasy-literature/worldbuilding
+  - creative/fantasy-literature/series-recommendations
+  - business/marketing/book-promotion
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -48,11 +49,5 @@ The Malazan Book of the Fallen series is known for its complex worldbuilding and
 - [manybooks](https://manybooks.net/articles/9-dark-fantasy-series-to-read-while-waiting-for-george-rr-martins-winds-of-winter)
 
 ## Related
-- [[Assassin's Apprentice]] — #Fantasy #Epic #Farseer
-- [[Royal Assassin]] — #Fantasy #Epic #Farseer
-- [[Assassin's Quest]] — #Fantasy #Epic #Farseer
-- [[Fool's Errand]] — #Fantasy #Epic #TawnyMan
-- [[Golden Fool]] — #Fantasy #Epic #TawnyMan
-- [[Fool's Fate]] — #Fantasy #Epic #TawnyMan
-- [[Fool's Assassin]] — #Fantasy #Epic #FitzAndFool
-- [[Fool's Quest]] — #Fantasy #Epic #FitzAndFool
+- [[The-Wheel-of-Time]] — extensive worldbuilding
+- [[First-Law-Series]] — complex plot and universe

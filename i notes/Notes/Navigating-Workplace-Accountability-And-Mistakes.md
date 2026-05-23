@@ -1,7 +1,9 @@
 ---
 subject: business/career-factors/accountability
 tags:
-  - psychology/conflict-resolution/communication-strategies
+  - business/career-factors/accountability
+  - business/career-factors/communication
+  - business/career-factors/professionalism
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -43,11 +45,4 @@ The situation involves a mistake in an estimate due to incomplete or incorrect n
 - [Perplexity](https://www.perplexity.ai/search/cb33ae2f-0d1c-4c16-8450-3ad68a5b1134)
 
 ## Related
-- [[Career-Career-Factors/Accountability]] — Strategies for handling workplace accountability issues.
-- [[Business-Human-Resources/Communication-Policies]] — Policies and guidelines for effective communication in the workplace.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
+- [[Workplace-Accountability-Conflict]] — similarity in handling accountability issues

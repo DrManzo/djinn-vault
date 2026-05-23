@@ -1,6 +1,7 @@
 ---
 subject: psychology/mythology/evolution-of-divinity
 tags:
+  - psychology/mythology/evolution-of-divinity
   - psychology/mythology/ancient-civilizations/modern-times
   - psychology/mythology/deity-representation/human-condition
 created: 2026-05-19
@@ -75,5 +76,7 @@ The progression from constant physical presence to abstract manifestation and sa
 ## Related
 - [[My-Conscience]] — Personal reflections on divine presence
 - [[Faust-Step12-GDD]] — Detailed guide for Faust Step 12 project
-
 ---
+
+## Related
+- [[We_needto_write_a_paper_in_apa_format_that_follows_this_para]] — similarity in topic structure
