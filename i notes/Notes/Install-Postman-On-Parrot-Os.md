@@ -1,7 +1,9 @@
 ---
 subject: technology/software/postman/installation/parrot-os
 tags:
-  - technology/software/postman/installation/parrot-os
+  - cs/installation
+  - ai/development/cli
+  - software/postman
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -92,5 +94,4 @@ If you prefer not to use Snap, you can download and unpack the official Linux bu
 - [Gist.github](https://gist.github.com/)
 
 ## Related
-- [[Linux-Basics]] — Basic Linux commands and setup
-- [[Postman-Guide]] — Comprehensive guide to using Postman
+- [[Installing-Homebrew-On-Fedora-Workstation]] — similarity 0.74

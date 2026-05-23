@@ -4389,3 +4389,127 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fun-And-Useful-Python-Projects-For-A-Cybersecurity.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 23:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Economic-System-Guild-System-And-Major-Industries.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:19 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Clarifying-Architectural-Choices-For-Faust-Cli.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Expanding-On-Education-And-Healthcare-In-Aethoria.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:20 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-App-Code-Cleanup.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Examples-And-Recommendations-For-World-Building-Transportation-And.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/International-Relations-Tension-With-The-Sundered-Isles.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Development-Update.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/World-Building-Comparison.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Python-Game-Development-Placing-A-Ship-On-A.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Pros-And-Cons-Of-Active-Gods-In-Aethoria.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:22 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Install-Postman-On-Parrot-Os.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Creating-An-Active-Pantheon-In-A-Fantasy-World.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:22 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-An-Apk-On-Parrot-Os.md`
+
+— Slipbox

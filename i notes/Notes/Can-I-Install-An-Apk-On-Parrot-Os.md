@@ -1,7 +1,11 @@
 ---
 subject: technology/software-development
 tags:
-  - tech/apk/installation/parrot-os/android-emulation
+  - cs/software-development
+  - cs/linux
+  - cs/mobile-apps
+  - cs/adb
+  - cs/android-emulation
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -36,5 +40,5 @@ To use APK files on Parrot OS, you have two main options:
 - [Anbox Setup Guide](https://github.com/0x0012637/android/blob/master/AndroidLab_Installation_In_Parrot_Security_OS.md)
 
 ## Related
-- [[ADB-Guide]] — ADB setup and usage.
-- [[Anbox-Setup]] — Setting up Anbox for Android apps on Parrot OS.
+- [[Install-Postman-On-Parrot-Os]] — ADB usage
+- [[Understanding-And-Implementing-Git-For-Portfolio-Projects]] — Software development context

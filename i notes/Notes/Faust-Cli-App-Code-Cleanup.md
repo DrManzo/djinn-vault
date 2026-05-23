@@ -1,8 +1,10 @@
 ---
 subject: business/career-factors/productivity
 tags:
-  - ai/development/fedora/workstation
-  - cs/cli-apps
+  - cs/code-quality
+  - cs/python
+  - business/software-development
+  - personal/coding-practices
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -69,13 +71,5 @@ The Faust app is a local-first CLI tool that uses a verb-first command grammar. 
 - [Faust CLI App Code Cleanup](https://www.skool.com/aianswers)
 
 ## Related
-- [[CLI-App-Development]] — General guidelines for developing local-first CLI applications.
-- [[Python-Code-Quality]] — Best practices for Python code quality and documentation.
-- [[Click-Documentation]] — Official Click library documentation for consistent usage.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/accounting-systems, business/branding-strategies/identity, business/career-factors/accountability, business/career-factors/benefits, business/career-factors/commitment, business/career-factors/communication, business/career-factors/income-stability, business/career-factors/personal-growth, business/career-factors/planning, business/career-factors/productivity, business/career-factors/professionalism, business/career-factors/successful-admission, business/career-growth/skills-development, business/career-strategies, business/collaboration-strategies, business/communication-strategies, business/control-strategies, business/education/training, business/entrepreneurship, business/equipment-setup, business/finance-management/tools/free, business/hosting, business/human-resources, business/infrastructure, business/infrastructure/equipment
+- [[Clarifying-Architectural-Choices-For-Faust-Cli]] — architectural choices
+- [[Faust-Step-10-Operator-Prompt]] — related step
