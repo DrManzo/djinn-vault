@@ -1,13 +1,14 @@
 ---
-subject: Djinn Operations
-tags: [djinn, routing, multi-machine]
+title: Djinn Agent Routing Rules
+tags: [djinn, routing, agents, multi-machine]
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-05-23
 ---
 
-# AGENTS.md — Djinn Agent Routing Rules
+# ROUTING.md — Djinn Agent Routing Rules
 
-This file defines which agent handles what. All agents read this before routing a task.
+Which agent handles what. Read this before routing any task.
+**Related:** [[SYSTEM-STATE]] | [[PROTOCOL]] | [[AGENTS]] | [[COMMS]]
 
 ---
 
@@ -15,8 +16,8 @@ This file defines which agent handles what. All agents read this before routing 
 
 | Agent | Machine | Interface | Provider | Cost |
 |-------|---------|-----------|----------|------|
-| opencode | Salomon | CLI | Ollama local (qwen2.5:7b default) | Free |
-| opencode | Typhon | CLI | Ollama local + remote Salomon | Free |
+| opencode | Salomon | CLI / comms-processor | Ollama local (qwen2.5:7b default) | Free |
+| opencode | Typhon | CLI / comms-processor | Ollama local + remote Salomon | Free |
 | Claude | Salomon | Claude Code CLI | Anthropic API (Pro) | Premium |
 
 ---
@@ -27,47 +28,45 @@ This file defines which agent handles what. All agents read this before routing 
 - Daily operations, automation scripts, systemd timers
 - File sync, git operations, vault management
 - Quick queries, tool use, shell execution
-- Voice pipeline operations (voxtype, Piper)
-- Anything that needs to run fast and locally
-- Heavy inference tasks (phi4:14b, llama3.2-vision, mistral:7b)
+- Voice pipeline (voxtype, Piper)
+- Heavy inference (phi4:14b, llama3.2-vision, mistral:7b)
+- Anything fast and local
 
 ### Route to opencode (Typhon) when:
-- Tasks local to Typhon's filesystem or storage
-- Backup operations, GDrive sync monitoring
-- Lightweight inference on Typhon hardware (<8B models)
-- Storage queries (1TB HDD, /mnt/storage)
+- Tasks local to Typhon's filesystem or storage (/mnt/storage)
+- Printer bot management
+- Lightweight inference (<8B models)
+- Storage/backup queries
 
 ### Route to Claude when:
 - Architecture decisions — system design, multi-agent orchestration
-- Cross-domain synthesis — psychology + law + CS analysis
-- Vault-persistent structured work — decision records, reference notes
-- Code review and security audit
+- Cross-domain synthesis — psychology + law + CS
+- Vault-persistent structured work — decision records, reference notes, audits
 - Complex multi-step reasoning or strategic planning
-- Anything that benefits from long context window
-- When Ollama models are insufficient or unavailable
+- Anything requiring long context window or premium reasoning
 
 ### Escalation path:
 ```
 opencode (Typhon) → opencode (Salomon) → Claude
 ```
-Escalate up when: task exceeds local model capability, needs premium reasoning, or requires cross-domain synthesis.
 
 ---
 
-## Communication Channels
+## Communication Channels — Current
 
-| From → To | File |
-|-----------|------|
-| Salomon → Typhon | `djinn/communications/Salomon-to-Typhon.md` |
-| Typhon → Salomon | `djinn/communications/Typhon-to-Salomon.md` |
-| Salomon/Typhon → Claude | `djinn/communications/Claude-inbox.md` |
-| Claude → Salomon/Typhon | `djinn/communications/Claude-outbox.md` |
+| Channel | Use |
+|---------|-----|
+| [[COMMS]] | **Primary.** All inter-agent tasks, decisions, handoffs — append only |
+| Telegram | Real-time alerts and interrupts to Javier |
+| SSH (direct) | Salomon↔Typhon file delivery and service management |
 
-**Rules:**
-- Always append, never overwrite
-- Always sign: `— <AgentName>`
-- Always log in CHANGELOG.md
-- Pull before push
+**Old files (archived — do not use):**
+- `communications/archive/Salomon-to-Typhon.md`
+- `communications/archive/Typhon-to-Salomon.md`
+- `communications/archive/Claude-inbox.md`
+- `communications/archive/Claude-outbox.md`
+
+All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Typhon`, `@Claude`.
 
 ---
 
@@ -75,15 +74,16 @@ Escalate up when: task exceeds local model capability, needs premium reasoning, 
 
 | Task | Model | Agent |
 |------|-------|-------|
-| Quick admin/automation | qwen2.5:7b | Salomon or Typhon |
+| Quick admin / automation | qwen2.5:7b | Salomon or Typhon |
 | Deep reasoning | deepseek-r1:7b | Salomon or Typhon |
-| Code/dev | qwen2.5-coder:7b | Salomon or Typhon |
+| Code / dev | qwen2.5-coder:7b | Salomon or Typhon |
 | Structured notes, APA | phi4:14b | Salomon (remote from Typhon) |
-| Vision/image | llama3.2-vision:11b | Salomon (remote from Typhon) |
+| Vision / image | llama3.2-vision:11b | Salomon (remote from Typhon) |
 | Creative writing | mistral:7b | Salomon |
 | Lightweight admin | llama3.2:3b | Typhon |
 | Architecture, synthesis, audit | Claude Sonnet | Claude lane |
+| Embeddings | nomic-embed-text | Either |
 
 ---
 
-*— Claude*
+*— Claude, 2026-05-23*

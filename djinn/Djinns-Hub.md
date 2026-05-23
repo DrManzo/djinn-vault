@@ -1,7 +1,17 @@
-# Djinns Hub
+---
+title: Typhon — Machine Profile
+tags: [djinn, machine, typhon, hardware]
+updated: 2026-05-23
+---
 
-**Introduced:** 2026-05-20  
-**Host:** typhon (Typhons Forge)  
+# Typhon — Machine Profile (Djinn's Hub)
+
+**Host:** Typhon (tf-tthq) — 192.168.1.113
+**Role:** Storage, sync, printer bot, lightweight inference node
+**Related:** [[SYSTEM-STATE]] | [[Salomon]] | [[HEARTBEAT-typhon]] | [[ROUTING]] | [[COMMS]]
+
+**Introduced:** 2026-05-20
+**Host:** typhon (Typhons Forge)
 **Role:** Primary workstation / Djinn host / Storage & Sync node  
 **Kernel:** 7.0.0-15-generic
 

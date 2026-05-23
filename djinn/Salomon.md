@@ -1,8 +1,18 @@
-# Machine: Salomon
+---
+title: Salomon — Machine Profile
+tags: [djinn, machine, salomon, hardware]
+updated: 2026-05-23
+---
 
-**Introduced:** 2026-05-20  
-**Host:** Djinn  
-**Role:** Primary workstation / Djinn host / Dev machine  
+# Salomon — Machine Profile
+
+**Host:** Salomon (drmanzo) — 192.168.1.225
+**Role:** Heavy lifter — primary dev, Ollama hub, Claude Code lane
+**Related:** [[SYSTEM-STATE]] | [[Djinns-Hub]] | [[HEARTBEAT]] | [[ROUTING]] | [[COMMS]]
+
+**Introduced:** 2026-05-20
+**Host:** Djinn
+**Role:** Primary workstation / Djinn host / Dev machine
 **Kernel:** 7.0.0-15-generic
 
 ---
