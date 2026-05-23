@@ -5,8 +5,8 @@ tags:
   - career/career-factors/income-stability
   - career/career-factors/personality-fit
   - career/career-factors/growth-opportunities
-  - career/career-factors/work-environment
   - career/career-factors/job-security
+  - personal/retirement-planning
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -55,5 +55,5 @@ Retirement is a significant life transition that involves moving away from full-
 - ameriprise: [7 Top Retirement Tips](https://www.ameriprise.com/financial-goals-priorities/retirement/7-top-retirement-tips)
 
 ## Related
-- [[Career-Development-Guidelines]] — Comprehensive guide to career development and growth.
-- [[Retirement-Planning-Strategies]] — Strategies for successful retirement planning.
+- [[Successful-Retirement]] — similarity 0.78
+- [[Workplace-Discrimination-And-Ageism-In-Employment]] — similarity 0.78

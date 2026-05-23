@@ -1,9 +1,10 @@
 ---
 subject: psychology/developmental-theory/life-cycle/workplace-discrimination
 tags:
-  - psychology/developmental-theory/life-cycle/ageism
-  - psychology/economics/access-to-care/labour-market
-  - psychology/sociology/stigma/mature-workers
+  - law/employment-law
+  - psychology/cognitive-skill/analytical-thinking
+  - business/human-resources
+  - personal/raw/unprocessed
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -35,5 +36,5 @@ In conclusion, while age discrimination remains a concern in the workplace, laws
 - aseonline.org/News-Events/Articles/the-impact-of-ageism-in-the-workplace/
 
 ## Related
-- [[LSAT-Comprehensive-Guide]] — Comprehensive guide to understanding legal and ethical issues in employment.
-- [[Adult-Pysch]] — Resources and studies on adult development and aging.
+- [[PSY-358 Hub]] — similarity 0.68
+- [[Biological-Age]] — similarity 0.66

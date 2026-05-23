@@ -178,6 +178,8 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "SYSTEM-STATE.md.tmp.16025.1d45faf51f0d",
+    "SYSTEM-STATE.md.tmp.16025.a154569ec6e7",
     "SYSTEM-STATE.md.tmp.16025.c2e2d4d738b3",
     "printer/process/PRINT-LOG.md",
     "printer/process/INTAKE.md",
@@ -211,8 +213,6 @@
     "workspace/MEMORY.md",
     "workspace",
     "ROUTING.md.tmp.62474.9cdadba72eec",
-    "communications/PROTOCOL.md.tmp.62474.5b754635487c",
-    "SYSTEM-STATE.md.tmp.62474.fc5baf58ae3c",
-    "printer/process/FILAMENT-TEST.md.tmp.62474.37a4e2695b6c"
+    "communications/PROTOCOL.md.tmp.62474.5b754635487c"
   ]
 }

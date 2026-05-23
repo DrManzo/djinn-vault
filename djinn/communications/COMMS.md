@@ -784,3 +784,268 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Do-Smartphones-And-Other-Digital-Devices-Affect.md`
 
 — Clerk
+
+---
+
+### 2026-05-23 21:53 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/2026-05-19-17-04-09-Perplexity-you-are-going-to-help-me-answ.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:53 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Demographic-Changes-In-The-United-States.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:53 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Academic-Discussion-Post-Template.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:54 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Biological-Age-Assessment-And-Analysis.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:54 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Plan-For-Age-Related-Physical-Changes-Paper.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:54 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Lsat-A-Comprehensive-Guide-To-The-Law.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:55 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Workplace-Discrimination-And-Ageism-In-Employment.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:55 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Major-Developmental-Forces-In-Adult-Life.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:55 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Holland-Code-Career-Test-And-Personal-Identity.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:56 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/2026-05-19-17-04-09-Perplexity-you-are-going-to-help-me-answ.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:56 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Older-Adults'-Reluctance-To-Seek-Mental-Health-Assistance.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:57 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Career-Factors-And-Retirement-Planning-A-Comprehensive.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:57 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Caring-For-Individuals-With-Alzheimer's-Disease-An-Educational.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:57 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Successful-Career-And-Retirement-Plan-Assignment.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:58 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Do-Smartphones-And-Other-Digital-Devices-Affect.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:58 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Holland-Code-Career-Test-And-Personal-Identity.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 21:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Relationships-Change-With-Age-And-The-Impact.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 21:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/2026-05-19-17-04-09-Perplexity-you-are-going-to-help-me-answ.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Loneliness-Social-Isolation-And-Longevity-In-Adults.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Lsat-A-Comprehensive-Guide-To-The-Law.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Academic-Discussion-Post-Template.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Psy-358-Adult-Development-And-Aging-Relationships-Chart.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Plan-For-Age-Related-Physical-Changes-Paper.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Psy-358-Adult-Development-And-Aging-Relationships-Chart-2026-05-23.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:01 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Workplace-Discrimination-And-Ageism-In-Employment.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personality-Stability-And-Erikson's-Theory-In-Late-Adulthood.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:02 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Midlife-Crisis-An-Analysis-Of-Media-Portrayal-Vs.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:02 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Career-Factors-And-Retirement-Planning-A-Comprehensive.md`
+
+— Slipbox
