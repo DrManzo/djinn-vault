@@ -11,10 +11,14 @@
             "id": "b8dcc3e7ad80a504",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "logs/build-log.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "build-log"
             }
           }
         ]
@@ -176,6 +180,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "a68bfeb67af35558",
-  "lastOpenFiles": []
+  "active": "b8dcc3e7ad80a504",
+  "lastOpenFiles": [
+    "printer/process/FILAMENT-TEST.md",
+    "printer/process/FILAMENT-TEST.md.tmp.62474.37a4e2695b6c",
+    "printer/process/PRINT-LOG.md",
+    "printer/process/FILAMENT-PROFILES.md",
+    "printer/process/FILAMENT-PROFILES.md.tmp.62474.a805d3d7486a"
+  ]
 }
