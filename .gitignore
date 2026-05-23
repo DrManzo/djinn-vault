@@ -40,3 +40,6 @@ RAW/
 .config/djinn/telegram.env
 .config/djinn/printer-bot.env
 *.env
+
+# Workspace symlink — tracked as symlink, not content
+djinn/workspace

@@ -1,10 +1,16 @@
 ---
-subject: 3D Print Process — Custom Parts
-tags: [djinn, printer, process]
+title: 3D Print Process — Custom Part Design
+tags: [djinn, printer, process, cad, custom]
 created: 2026-05-21
+updated: 2026-05-23
 ---
 
 # Process: Designing and Printing a Custom Part
+
+> **Scope:** This doc covers the **design → CAD → slice → print** workflow for custom parts you build yourself.
+> For intake of external files and general print standards, see [[INTAKE]].
+> For print history and outcomes, see [[PRINT-LOG]].
+> **Related:** [[INTAKE]] | [[PRINT-LOG]] | [[BENCHMARKS]] | [[FILAMENT-PROFILES]] | [[error_log]]
 
 Repeatable workflow for any custom part going from idea → printed object. Written from the Puffco Proxy bubbler project as the first run-through.
 
