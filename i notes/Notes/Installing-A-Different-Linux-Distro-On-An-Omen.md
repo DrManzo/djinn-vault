@@ -1,11 +1,11 @@
 ---
 subject: technology/linux/distributions/arch-linux
 tags:
-  - linux/distributions/arch-linux/ai-workflows
-  - linux/distributions/arch-linux/video-editing
-  - linux/distributions/arch-linux/streaming-coding
-  - linux/distributions/arch-linux/gaming
-  - linux/distributions/arch-linux/customization
+  - cs/linux-distributions
+  - cs/ai-development
+  - personal/computing
+  - cs/gaming
+  - cs/video-editing
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -53,6 +53,5 @@ Given your hardware, interests (AI, creative work, coding, gaming), and that you
 - [community.frame](https://community.frame.work/t/advice-please-for-considering-distros-for-amd-ai-300-laptop-13/75658)
 
 ## Related
-- [[linux/distributions/arch-linux/installation-guide]] — Step-by-step guide for installing Arch Linux.
-- [[linux/distributions/fedora/gaming-friendly-setup]] — Setup guide for Fedora-based gaming-focused distributions.
-- [[linux/distributions/cachyos-overview]] — Overview of CachyOS, an Arch-based distribution with pre-tuned drivers and game mode tools.
+- [[Fedora-Workstation-Ide-Recommendations-For-Ai-Development]] — ai-development
+- [[Faust-Cli-Core-Adapters]] — cli

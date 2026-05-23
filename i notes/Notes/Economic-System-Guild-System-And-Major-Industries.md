@@ -1,7 +1,9 @@
 ---
 subject: Fantasy/Lore/Economic-System/Guilds
 tags:
-  - fantasy/economy/guild-system/artisans-merchants-essence-workers-banking-houses-major-industries
+  - business/guilds
+  - business/industries
+  - business/economic-system
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -78,5 +80,5 @@ The economic system of Aethoria is structured around guilds and banking houses, 
 - [Steampunk 101: Blending Sci-Fi and Fantasy in a Victorian Setting](https://myersfiction.com/2024/08/13/steampunk-101-blending-sci-fi-and-fantasy-in-a-victorian-setting/)
 
 ## Related
-- [[Fantasy-Economy-Guidelines]] — Provides additional guidelines for building fantasy economies.
-- [[Guild-Politics]] — Explores political dynamics within guilds and their impact on the economy.
+- [[Expanding-Societal-Structure-Class-Distinctions]] — similarity
+- [[Political-Structure-Of-Aethoria]] — structure

@@ -1,9 +1,10 @@
 ---
 subject: Writing/WritingProcess/WorldBuilding
 tags:
-  - writing/process/world-building/core-concepts
-  - writing/process/world-building/expansion-plan
-  - writing/process/world-building/benchmarks
+  - creative/world-building
+  - creative/core-concepts
+  - creative/relationships
+  - creative/expansion-plan
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -53,13 +54,5 @@ Both approaches are valuable for different stages of world-building, but they ca
 - [Perplexity](https://www.perplexity.ai/search/e882998b-46e5-4ac1-a38b-f6d228a2c1bd)
 
 ## Related
-- [[World-Building-Guide]] — Comprehensive guide to world-building techniques.
-- [[Character-Development-Process]] — Tips for developing characters in a story.
-- [[Historical-Research-Methods]] — Methods for researching and integrating historical elements into fiction.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/accounting-systems, business/branding-strategies/identity, business/career-factors/accountability, business/career-factors/benefits, business/career-factors/commitment, business/career-factors/communication, business/career-factors/income-stability, business/career-factors/personal-growth, business/career-factors/planning, business/career-factors/productivity, business/career-factors/professionalism, business/career-factors/successful-admission, business/career-growth/skills-development, business/career-strategies, business/collaboration-strategies, business/communication-strategies, business/control-strategies, business/corporate-intrigue, business/development-strategy, business/development/portfolio, business/education/training, business/entrepreneurship, business/equipment-setup, business/finance-management/tools/free, business/hacking/htb, business/hosting
+- [[In-Depth-Analysis-And-Building-Ideas-For-Geography]] — similarity
+- [[Economic-System-Guild-System-And-Major-Industries]] — economy

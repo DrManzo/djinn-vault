@@ -4513,3 +4513,659 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-An-Apk-On-Parrot-Os.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 23:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Gods-In-The-Belgariad-Series-And-Their-Attributes.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:23 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-A-Different-Linux-Distro-On-An-Omen.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Aspects-Of-World-Building-For-Aethoria.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:23 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dark-Adult-Fantasy-Audiobook-Recommendations.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Military-Structure-Of-Aethoria.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:24 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/In-Depth-Analysis-And-Building-Ideas-For-Geography.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Magic-And-Technology-Breakdown.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:24 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Political-Structure-Of-Aethoria.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Development-Specification.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Expanding-Societal-Structure-Class-Distinctions.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Building-A-6'-X-6'-L-Shaped-Desk.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Economic-System-Guild-System-And-Major-Industries.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:25 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Build-A-6'-X-6'-L-Shaped-Desk.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:25 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Expanding-On-Education-And-Healthcare-In-Aethoria.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:26 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Apps-For-Ios-And-Windows.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:26 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Examples-And-Recommendations-For-World-Building-Transportation-And.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:26 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Time-Management-Accountability-System-For-Adhd.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:26 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/International-Relations-Tension-With-The-Sundered-Isles.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:26 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Basics-Of-Summation-Notation-And-Statistical-Measures-In.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:26 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/World-Building-Comparison.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:27 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-The-Balance-Sheet-A-Complete-Guide.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:27 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Pros-And-Cons-Of-Active-Gods-In-Aethoria.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:27 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/3-Apprentice-Level-Portfolio-Projects-For-Freecodecamp-Cs50.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:27 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Creating-An-Active-Pantheon-In-A-Fantasy-World.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:27 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Finance-Questions-Assistance.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:27 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Gods-In-The-Belgariad-Series-And-Their-Attributes.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:28 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Accrual-Accounting-And-Adjusting-Entries.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:28 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Key-Aspects-Of-World-Building-For-Aethoria.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:28 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Adjusting-Entry-For-Supplies-Expense.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:28 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Military-Structure-Of-Aethoria.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-The-Multiple-Step-Income-Statement.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:29 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Magic-And-Technology-Breakdown.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Comprehensive-Foundation-In-Algorithms-For-Computer-Science.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:29 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Development-Specification.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Revised-Message-For-Statistics-In-Psychology.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:29 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Building-A-6'-X-6'-L-Shaped-Desk.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ranking-Bungee-Jumping-Safety-Assessment.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:30 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Build-A-6'-X-6'-L-Shaped-Desk.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Why-Is-It-Important-To-Learn-Statistics-In.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:30 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Apps-For-Ios-And-Windows.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Dissonance-Empirical-Studies-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Time-Management-Accountability-System-For-Adhd.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Divided-Visual-Field-Experiment-In-Psychology.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Basics-Of-Summation-Notation-And-Statistical-Measures-In.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Homework-Help-For-Descriptive-Statistics.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-The-Balance-Sheet-A-Complete-Guide.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Central-Tendency-In-Research-And-Data-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/3-Apprentice-Level-Portfolio-Projects-For-Freecodecamp-Cs50.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/When-To-Use-Weighted-Mean-Vs-Arithmetic-Mean.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Finance-Questions-Assistance.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Do-Our-Cognitive-Processes-Change-With-Age.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Accrual-Accounting-And-Adjusting-Entries.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Excel-Assignment-For-Statistics-Class.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Adjusting-Entry-For-Supplies-Expense.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Z-Scores-And-Standard-Normal-Distribution.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-The-Multiple-Step-Income-Statement.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Rock-Paper-Scissors-Strategy-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Comprehensive-Foundation-In-Algorithms-For-Computer-Science.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Exam-Scores-And-Z-Scores-For-Grading.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Revised-Message-For-Statistics-In-Psychology.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Introduction-To-Hypothesis-Testing-And-Virtual-Reality-Treatment.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Psychological-Resilience-In-Undergraduate-Students.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Why-Is-It-Important-To-Learn-Statistics-In.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chapter-Review-Problems-For-Independent-Measures-Studies.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Dissonance-Empirical-Studies-Analysis.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Parametric-Vs-Nonparametric-Testing-Chi-Square-Test-Explanation.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Divided-Visual-Field-Experiment-In-Psychology.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ethical-Guidelines-And-Alternatives-In-Animal-Research.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Homework-Help-For-Descriptive-Statistics.md`
+
+— Slipbox

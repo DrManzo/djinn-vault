@@ -1,11 +1,11 @@
 ---
 subject: fantasy/lore/world-building
 tags:
-  - fantasy/education-system/shadow-council - specific
-  - fantasy/healthcare-system/magic-technology - relevant
+  - creative/fantasy/world-building
+  - creative/fantasy/education
+  - creative/fantasy/healthcare
 created: 2026-05-19
 source: Perplexity export
-
 ---
 
 # Expanding on Education and Healthcare in Aethoria
@@ -55,7 +55,5 @@ By expanding on these aspects, you can create a rich and immersive setting that 
 - [Perplexity](https://www.perplexity.ai/search/0788a224-0315-47eb-a456-ac156c7a3fe3)
 
 ## Related
-- [[Writing-My-Book]] — Lore development for the story
-- [[Fantasy-Lore-Guide]] — General guide for world-building in fantasy settings
-
----
+- [[In-Depth-Analysis-And-Building-Ideas-For-Geography]] — similarity
+- [[The-Wounded-Healer-And-The-Fool-Strategic-Integration]] — similarity

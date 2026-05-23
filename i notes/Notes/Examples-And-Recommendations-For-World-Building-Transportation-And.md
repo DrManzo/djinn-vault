@@ -1,9 +1,9 @@
 ---
 subject: fantasy/world-building/transportation-and-communication
 tags:
-  - fantasy/world-building/transportation
-  - fantasy/world-building/communication
-  - fantasy/technology/magic
+  - creative/world-building/transportation
+  - creative/world-building/communication
+  - creative/fantasy-elements
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -67,5 +67,5 @@ By integrating these transportation and communication methods into your world bu
 - [prostorybuilders.com](https://prostorybuilders.com/5-cliches-in-portal-fantasy-that-need-to-stop/)
 
 ## Related
-- [[Writing-My-Book]] — Notes on writing a book in this world.
-- [[Fantasy-World-Building-Guide]] — Comprehensive guide to building a fantasy world.
+- [[In-Depth-Analysis-And-Building-Ideas-For-Geography]] — similarity
+- [[Economic-System-Guild-System-And-Major-Industries]] — transportation and economy

@@ -1,7 +1,9 @@
 ---
 subject: Fantasy/World-Building/Geography-Climate
 tags:
-  - fantasy/world-building/geography/climate/aethoria
+  - creative/fantasy/world-building
+  - creative/fantasy/climate
+  - creative/fantasy/geography
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -59,5 +61,5 @@ By expanding on these geographical and climatic features, you can create a rich,
 - [Book-notes.pdf](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_a819825c-29a1-465a-b28d-53c3feb56c77/fa0bc916-ccbb-4ef6-9486-b9794a97e353/Book-notes.pdf)
 
 ## Related
-- [[Fantasy-World-Building-Guide]] — Comprehensive guide for creating detailed fantasy worlds.
-- [[Victorian-Fantasy-Inspiration]] — Resources and ideas for Victorian-inspired fantasy settings.
+- [[The-Haze-Of-The-Green-Serpent]] — similarity
+- [[Malazan-Book-Of-The-Fallen-Series-Recommendations]] — similarity
