@@ -1,7 +1,10 @@
 ---
 subject: business/career-factors/productivity
 tags:
-  - cs/git/version-control/essential-commands/project-management
+  - cs/version-control
+  - cs/software-development
+  - personal/professional-growth
+  - business/entrepreneurship
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -92,5 +95,4 @@ Use a phase-based Git workflow to document your problem-solving process:
 - [LinkedIn](https://www.linkedin.com/)
 
 ## Related
-- [[CS-Git-Basics]] — Detailed guide on Git basics.
-- [[Portfolio-Development-Strategies]] — Strategies for building a professional portfolio.
+- [[Integrating-Open-Claude-Into-Faust-Project]] — version-control-similarities

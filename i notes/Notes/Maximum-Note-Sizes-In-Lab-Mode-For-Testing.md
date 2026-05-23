@@ -1,4 +1,12 @@
 ---
+tags:
+  - ai/models/performance-analysis
+  - lab-mode
+  - note-generation
+  - ai/development/fedora/workstation
+---
+
+---
 subject: ai/development/fedora/workstation
 tags:
   - ai/models/performance-analysis

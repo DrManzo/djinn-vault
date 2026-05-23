@@ -4122,3 +4122,79 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Building-A-Tetris-Game-In-Python.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 23:12 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/College-Area-Abductions-Case-Pattern.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:12 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personal-Expense-Tracker-Python-Project.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:12 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Portfolio-Scripts-For-Developers.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:12 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-And-Implementing-Git-For-Portfolio-Projects.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:12 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fun-And-Useful-Python-Projects-For-A-Cybersecurity.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:12 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ascii-Art-Signature-For-Drmanzo.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:13 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Clarifying-Architectural-Choices-For-Faust-Cli.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:13 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Maximum-Note-Sizes-In-Lab-Mode-For-Testing.md`
+
+— Slipbox
