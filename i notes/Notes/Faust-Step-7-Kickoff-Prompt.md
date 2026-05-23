@@ -1,7 +1,12 @@
 ---
 subject: business/project-management/modules/roles/faust/cli/core/adapters
 tags:
-  - business/project-management/tasks/results/faust/chat
+  - business/technology/software-development
+  - cs/algorithms/data-structures
+  - cs/architecture/design-patterns
+  - faust/memory-management
+  - faust/role-routing
+  - faust/state-management
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -50,5 +55,5 @@ Step 7 is structured into three main phases:
 - [Perplexity](https://www.perplexity.ai/search/6495b70c-138b-4f1b-ab00-d205ee87d8d3)
 
 ## Related
-- [[Faust-Step-6-Kickoff-Prompt]] — Context and background for the Faust project.
-- [[Faust-Core-Models]] — Detailed documentation on `FaustState` structure.
+- [[Faust-Memory-Buckets-Role-Routing]] — similarity 0.93
+- [[Faust-Memory-Router]] — similarity 0.79

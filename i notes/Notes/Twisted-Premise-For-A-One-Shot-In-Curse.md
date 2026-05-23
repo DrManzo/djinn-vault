@@ -1,9 +1,11 @@
 ---
 subject: fiction/barovia-horror/curse-of-strahd/marcus-ravenlord-advice
 tags:
-  - fiction/horror/barovia/marcus-ravenlord
-  - fiction/campaign-design/oneshot
-  - fiction/dungeon-mastering/twisted-premise
+  - creative/storytelling
+  - psychology/human-emotions
+  - fantasy/campaign-design
+  - mythology/gods
+  - betrayal/trust
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -55,9 +57,5 @@ The Death House itself becomes a metaphor for their fall from grace:
 - [Curse of Strahd](https://www.dmsguild.com/product/213578/Curse-of-Strahd)
 
 ## Related
-- [[Dungeon-Master-Guide]] — Tips for running a one-shot campaign.
-- [[Barovia-Horror-Twists]] — Additional horror elements to enhance the experience.
-
----
-
-This note provides a structured approach to creating a compelling and terrifying one-shot campaign in *Curse of Strahd*, starting with players as dethroned gods in the Death House.
+- [[Faust-Creative-Writing]] — similarity 0.73
+- [[Dream-Sequence-And-Godfather-Dream]] — similarity 0.70

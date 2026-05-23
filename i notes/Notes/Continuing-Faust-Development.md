@@ -1,8 +1,12 @@
 ---
 subject: business/project-management/data-model/outcome-orientation
 tags:
-  - business/project-management/modules/roles/faust/cli/core/adapters
-  - business/project-management/tasks/results/faust/chat
+  - business/management-methods
+  - cs/persistence
+  - cs/data-structures
+  - cs/graph-databases
+  - personal/productivity
+  - topic/long-term-memory
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -38,12 +42,5 @@ To implement long-term memory, the following steps are required:
 - [LangChain Documentation](https://docs.langchain.com/oss/python/langchain/long-term-memory)
 
 ## Related
-- [[Faust-Final]] — Current state of Faust development
-- [[LangGraph-Integration]] — Integration details and best practices
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/career-strategies, business/human-resources, business/llc-formation/california/software-development-company, business/marketing-revenue-models, business/marketing-revenue-models/toy-industry, business/passive-income-strategies/neuro-architecture-assets, business/passive-income-strategies/power-user-bluebeam-market, business/project-management/data-model/outcome-orientation, business/project-management/data-models/faust/core/models, business/project-management/milestones/scenarios, business/project-management/modules/roles, business/project-management/modules/roles/faust/cli/core/adapters, business/project-management/structure/phases, business/project-management/tasks/results, business/project-management/tasks/results/faust/chat
+- [[Faust-Long-Term-Memory-Foundation]] — similarity 0.85
+- [[Memory Duration And Retention]] — similarity 0.77

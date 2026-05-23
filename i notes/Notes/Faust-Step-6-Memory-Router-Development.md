@@ -1,8 +1,10 @@
 ---
 subject: business/project-management/modules/roles/faust/cli/core/adapters
 tags:
-  - faust/cli/memory-routing/architecture
-  - project-management/data-models/faust-step-6
+  - business/llc-formation/california/software-development-company
+  - cs/algorithms/routing
+  - cs/architecture/design
+  - personal/productivity-tools
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -34,12 +36,5 @@ For Step 6, the focus should be on making routing stricter, earlier, and more no
 - [Perplexity Export](https://www.perplexity.ai/search/304cced7-b838-4c12-a09d-03b20e813bbd)
 
 ## Related
-- [[Faust-Step-5-Architecture]] — Architecture details from Step 5.
-- [[LangGraph-Core-Concepts]] — Core concepts and usage of LangGraph in Faust.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/career-strategies, business/human-resources, business/llc-formation/california/software-development-company, business/marketing-revenue-models, business/marketing-revenue-models/toy-industry, business/passive-income-strategies/neuro-architecture-assets, business/passive-income-strategies/power-user-bluebeam-market, business/project-management/data-model/outcome-orientation, business/project-management/data-models/faust/core/models, business/project-management/milestones/scenarios, business/project-management/modules/roles, business/project-management/modules/roles/faust/cli/core/adapters, business/project-management/structure/phases, business/project-management/tasks/results, business/project-management/tasks/results/faust/chat, business/strategic-planning, career/career-factors/growth-opportunities, career/career-factors/income-stability, career/career-factors/job-security, career/career-factors/personality-fit, career/career-factors/work-life-balance, caregiving-support/adult-development, caregiving-support/adult-development/loss-of-autonomy, caregiving-support/postpartum-period, child-psychology/cognitive-development/piaget, child-psychology/community-resources, child-psychology/developmental-neonatology, child-psychology/developmental-neonatology/disability-awareness, child-psychology/developmental-tools, commonality/memory-classification, commonality/reconstructive-memory
+- [[Faust-Memory-Router]] — similarity 0.91
+- [[Faust-Memory-Buckets-Role-Routing]] — similarity 0.80

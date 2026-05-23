@@ -1,7 +1,9 @@
 ---
 subject: business/project-management/modules/roles
 tags:
-  - business/project-management/modules/roles/faust/cli/core/adapters
+  - business/technology/software-architecture
+  - cs/architecture/design-patterns
+  - cs/architecture/component-based
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -108,5 +110,5 @@ faust/
 - [Perplexity](https://www.perplexity.ai/search/aa2a035c-eed1-408b-84b4-0848e9f685c5)
 
 ## Related
-- [[Faust-Final]] — Detailed final architecture and documentation for Faust CLI LLM Local AI.
-- [[Project-Management-Strategies]] — General strategies for project management in software development.
+- [[Faust-Project-Setup-Architecture]] — similarity 0.82
+- [[PyQt6-Modular-UI-Architecture]] — similarity 0.76
