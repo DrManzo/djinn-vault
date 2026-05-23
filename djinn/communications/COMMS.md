@@ -2314,3 +2314,356 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Detailed-Components-Of-The-Hermes-Model.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 22:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-8-Retrieval-Layer-Implementation.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Twisted-Premise-For-A-One-Shot-In-Curse.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Core-Adapters.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Thc-Infused-D-D-Campaign.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-9-Refactoring-Guidelines.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Component-Based-Architecture-Specification.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-10-Operator-Prompt.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Step-3-Plan-End-To-End-Ollama-Integration.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-11-Operator-Prompt.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Integrating-Open-Claude-Into-Faust-Project.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Continuing-Faust-Development.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-12-Operator-Prompt.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-6-Memory-Router-Development.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fedora-Workstation-Ide-Recommendations-For-Ai-Development.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-Homebrew-On-Fedora-Workstation.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-7-Kickoff-Prompt.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ollama-Model-Installation-On-Fedora-Workstation.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Comparison-Of-Open-Code-Models-For-Coding-And.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-8-Retrieval-Layer-Implementation.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:37 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Setting-Up-Open-Claw-With-Ollama-Locally.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Core-Adapters.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:37 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/If-You-Had-To-Use-Any-Form-Of.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:38 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-9-Refactoring-Guidelines.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:38 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Starting-With-150-Investing-In-Dividend-Stocks.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:38 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-10-Operator-Prompt.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:39 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Smart-Pens-And-Devices-For-Digitizing-Handwritten-Notes.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:39 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-11-Operator-Prompt.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:39 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Understanding-Your-Logical-Reasoning-Question.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:39 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Integrating-Open-Claude-Into-Faust-Project.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:39 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Lsat-A-Comprehensive-Guide-To-The-Law-2026-05-23.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:39 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Step-12-Operator-Prompt.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:39 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Are-There-Apps-On-Apple-Store-That-Help.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:39 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fedora-Workstation-Ide-Recommendations-For-Ai-Development.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:40 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Grounding-Techniques-For-Stress-And-Anxiety.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:40 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-Homebrew-On-Fedora-Workstation.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 22:40 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Lucius-Writing-Method-Worksheets.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 22:40 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ollama-Model-Installation-On-Fedora-Workstation.md`
+
+— Slipbox

@@ -1,7 +1,10 @@
 ---
 subject: business/project-management/modules/roles/faust/cli/core/adapters
 tags:
-  - faust/cli/integration/ollama/step3
+  - business/technology/integration
+  - cs/software-engineering
+  - cs/api-integration
+  - business/career-strategies
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -60,5 +63,5 @@ This note outlines the steps to integrate `llama3:8b` via the OllamaAdapter into
 - [Ollama Adapter Implementation](src/faust/adapters/ollama.py)
 
 ## Related
-- [[Faust-Step12-Operator-Prompt]] — Detailed plan for Step 3 integration.
-- [[Faust-Core-Structure]] — Overview of the Faust project architecture.
+- [[Faust-Ollama-Integration]] — integration details
+- [[Faust-Project-Setup-Architecture]] — project setup context
