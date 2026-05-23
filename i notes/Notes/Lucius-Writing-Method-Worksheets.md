@@ -1,10 +1,9 @@
 ---
 subject: business/technology/shorthand-methods/lucius-writing-system
 tags:
-  - business/technology/integration
-  - business/technology/software-development
-  - business/project-management/modules/roles/faust/cli/core/adapters
-  - business/career-factors/personality-fit
+  - business/education/training
+  - cs/shorthand/methods
+  - personal/productivity
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -106,12 +105,4 @@ These worksheets are designed to help you master the Lucius writing method, a hy
 - [Gregg Shorthand](https://www.greggshorthand.com/)
 
 ## Related
-- [[Shorthand-Basics]] — Introduction to shorthand methods
-- [[Faust-CLI-Core-Adapters]] — Integration of shorthand in software development
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: ai/development/fedora/workstation, ai/models/integration, business/career-factors/income-stability, business/project-management/modules/roles/faust/cli/core/adapters
+- [[Smart-Pens-And-Devices-For-Digitizing-Handwritten-Notes]] — digitization of handwritten notes

@@ -1,9 +1,9 @@
 ---
 subject: philosophy/personal-growth/transformation
 tags:
-  - philosophy/marcus-aurelius/evolution/self-awareness
-  - psychology/growth-mindset/physical-presence
-  - business/career-factors/income-stability
+  - personal/growth/philosophy/stoicism
+  - personal/growth/mindfulness
+  - personal/growth/body-mind-integration
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -54,7 +54,5 @@ Your friend stands at a pivotal moment in their journey of transformation, havin
 - [symbosity.com/shadow-self/]
 
 ## Related
-- [[Personal-Growth-Strategies]] — Strategies for navigating personal transformation.
-- [[Philosophical-Influences]] — Insights from Marcus Aurelius and other philosophers on self-improvement.
-
----
+- [[Aurelius-Identity-Evolution]] — similarity 0.84
+- [[Grounding-Techniques-For-Stress-And-Anxiety]] — similarity 0.78

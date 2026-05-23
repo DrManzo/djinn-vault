@@ -1,4 +1,10 @@
 ---
+tags:
+  - personal/identity/de-marcus
+  - ai/development/fedora/workstation
+---
+
+---
 subject: personal/identity/marcus/perplexity-ai
 tags:
   - personal/identity/de-marcus

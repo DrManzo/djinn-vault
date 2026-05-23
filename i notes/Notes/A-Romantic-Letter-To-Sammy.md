@@ -1,7 +1,9 @@
 ---
 subject: love/romance/personal/fear/absence
 tags:
-  - love/romance/personal/fear/absence
+  - personal/romance
+  - personal/emotions
+  - personal/memories
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -87,5 +89,4 @@ Yours now and forevermore,
 ---
 
 ## Related
-- [[Romantic-Letters]] — Collection of romantic letters and advice.
-- [[Love-and-Relationships]] — Resources for understanding and nurturing relationships.
+- [[Sammy-Love-Letters]] — similarity

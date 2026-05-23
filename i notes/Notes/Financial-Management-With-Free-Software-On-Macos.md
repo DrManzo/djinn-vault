@@ -1,4 +1,10 @@
 ---
+tags:
+  - business/finance-management/tools/free
+  - business/management-tools/software
+---
+
+---
 subject: finance/management-tools/free-software
 tags:
   - business/finance-management/tools/free

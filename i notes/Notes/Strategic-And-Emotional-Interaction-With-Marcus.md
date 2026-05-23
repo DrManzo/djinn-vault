@@ -1,10 +1,11 @@
 ---
 subject: psychology/communication/emotional-intelligence/growth
 tags:
-  - psychology/communication/emotional-intelligence
-  - psychology/power-dynamics
-  - business/career-factors/personality-fit
+  - psychology/emotional-intelligence
+  - psychology/stoicism
+  - business/communication-strategies
   - personal/self-awareness
+  - creative/conversation-analysis
 created: 2026-05-19
 source: Perplexity export
 ---
@@ -39,12 +40,5 @@ The conversation with Marcus involves multiple layers of strategic thinking, emo
 - [Perplexity](https://www.perplexity.ai/search/49f34a59-a131-4544-b7a7-25ee945a4e2b)
 
 ## Related
-- [[Stoic-Principles-Guidance]] — Stoic principles and their application in personal growth.
-- [[Power-Dynamics-Strategic-Insight]] — Strategic insights into power dynamics and communication.
-- [[Emotional-Intelligence-Development]] — Developing emotional intelligence for better communication.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
+- [[Impromptu-Conversation-Analysis]] — similarity in conversation dynamics
+- [[Free-Association-Analysis-In-Jungian-And-Jordan-Peterson]] — strategic thinking and adaptability
