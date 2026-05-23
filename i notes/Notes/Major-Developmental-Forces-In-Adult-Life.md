@@ -24,7 +24,7 @@ This note defines the major developmental forces—biological, psychological, so
 
 ### Biological
 **Definition:**
-Biological forces are physiological changes and genetic influences that affect growth, development, and behavior throughout adulthood.
+Biological forces are physiological changes and genetic influences that affect growth, development, and behavior throughout adulthood. [[Developmental-Forces]]
 
 **Examples:**
 1. Age-related changes in sensory acuity (e.g., declining vision or hearing).
@@ -33,7 +33,7 @@ Biological forces are physiological changes and genetic influences that affect g
 
 ### Psychological
 **Definition:**
-Psychological forces involve cognitive, emotional, and personality developments that shape an individual's mental processes and behaviors as they age.
+Psychological forces involve cognitive, emotional, and personality developments that shape an individual's mental processes and behaviors as they age. [[Developmental-Forces]]
 
 **Examples:**
 1. Changes in cognitive abilities (e.g., crystallized and fluid intelligence).
@@ -42,7 +42,7 @@ Psychological forces involve cognitive, emotional, and personality developments 
 
 ### Sociocultural
 **Definition:**
-Sociocultural forces encompass the social and cultural influences that impact an individual's development, including relationships, societal expectations, and cultural norms.
+Sociocultural forces encompass the social and cultural influences that impact an individual's development, including relationships, societal expectations, and cultural norms. [[Developmental-Forces]]
 
 **Examples:**
 1. The impact of retirement on social roles and identity.
@@ -51,7 +51,7 @@ Sociocultural forces encompass the social and cultural influences that impact an
 
 ### Life Cycle
 **Definition:**
-Life cycle forces refer to the expected events, transitions, and experiences that occur across the adult lifespan, shaping development at different stages.
+Life cycle forces refer to the expected events, transitions, and experiences that occur across the adult lifespan, shaping development at different stages. [[Developmental-Forces]]
 
 **Examples:**
 1. Transitioning from early adulthood to midlife, including career advancement and family formation.
@@ -68,3 +68,5 @@ Life cycle forces refer to the expected events, transitions, and experiences tha
 - [[Biological-Changes-in-Adulthood]] — Focus on physiological changes during adulthood.
 - [[Psychological-Changes-in-Adulthood]] — Examination of cognitive, emotional, and personality developments in adults.
 - [[Sociocultural-Impact-on-Development]] — Analysis of social and cultural influences on adult development.
+
+---

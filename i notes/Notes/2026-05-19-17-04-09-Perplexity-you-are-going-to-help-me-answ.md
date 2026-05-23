@@ -1,7 +1,11 @@
 ---
 subject: personal/uncategorized
 tags:
-  - personal/raw/unprocessed
+  - psychology/developmental-theory/life-cycle
+  - psychology/developmental-theory/life-cycle/ageism
+  - psychology/health/aging-population/us-demographics
+  - technology-and-memory
+
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -61,3 +65,13 @@ Your approach seems well-rounded and effective. Let's continue to explore these 
 Best regards,
 
 [Your Name]
+
+[[Memory Duration And Retention]]
+[[Memory Types]]
+[[Working Memory]]
+[[Technology-and-Memory]]
+[[Brain Mechanisms In Memory]]
+
+tags:
+  - psychology/developmental-theory/life-cycle
+  - psychology/economics/access-to-care/labour-market

@@ -1,7 +1,11 @@
 ---
 subject: law/lsat/test-preparation
 tags:
-  - law/entrance-exams/lsat/comprehensive-guide/testing-process
+  - law/entrance-exams/lsat/comprehensive-guide
+  - law/entrance-exams/lsat/test-format
+  - psychology/cognitive-skill/analytical-thinking
+  - psychology/cognitive-skill/logical-reasoning
+  - education/testing-and-assessment
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -50,11 +54,12 @@ The LSAT is crucial for law school admissions. It evaluates essential skills lik
 Every section must be approached with full effort, as every question is scored. The experimental section cannot be identified during the exam.
 
 ## References
-- [LSAC](https://www.lsac.org/)
-- [Manhattan Review](https://www.manhattanreview.com/lsat/)
-- [Collegesimplified](https://collegesimplified.com/blog/lsat/)
-- [Trainertestprep](http://www.trainertestprep.com/lsat/blog/logical-reasoning-question-types)
+- [[LSAC]](https://www.lsac.org/)
+- [[Manhattan Review]](https://www.manhattanreview.com/lsat/)
+- [[Collegesimplified]](https://collegesimplified.com/blog/lsat/)
+- [[Trainertestprep]](http://www.trainertestprep.com/lsat/blog/logical-reasoning-question-types)
 
 ## Related
-- [[Law-School-Admissions-Guide]] — Comprehensive guide to law school admissions.
-- [[LSAT-Preparation-Resources]] — Additional resources for LSAT preparation.
+- [[LSAT-Comprehensive-Guide]] — similarity 0.83
+- [[Law-Notes-Hub]] — similarity 0.71
+- [[Practice Tests and Study Guides]] — similarity 0.71

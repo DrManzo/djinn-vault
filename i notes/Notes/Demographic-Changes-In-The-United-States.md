@@ -40,9 +40,7 @@ The U.S. Census Bureau reports significant demographic shifts, including an agin
 - Exploding Topics (n.d.). [Fastest Growing Cities in the United States](https://explodingtopics.com/blog/fastest-growing-cities)
 - CNBC (2024). [Fastest-Growing U.S. Suburbs and Home Values](https://www.cnbc.com/2024/09/05/fastest-growing-us-suburbs-home-values-gobankingrates-study.html)
 
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: none yet
+[[Demographics-of-Aging]]
+[[Prenatal-Development-and-Biological-Beginnings]]
+
+---
