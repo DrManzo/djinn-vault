@@ -178,6 +178,8 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "TROUBLESHOOT.md",
+    "TROUBLESHOOT.md.tmp.16025.068525dfa2ff",
     "SYSTEM-STATE.md.tmp.16025.1d45faf51f0d",
     "SYSTEM-STATE.md.tmp.16025.a154569ec6e7",
     "SYSTEM-STATE.md.tmp.16025.c2e2d4d738b3",
@@ -211,8 +213,6 @@
     "workspace/SCHEDULE.md",
     "workspace/PLAN.md",
     "workspace/MEMORY.md",
-    "workspace",
-    "ROUTING.md.tmp.62474.9cdadba72eec",
-    "communications/PROTOCOL.md.tmp.62474.5b754635487c"
+    "workspace"
   ]
 }

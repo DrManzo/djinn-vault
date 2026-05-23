@@ -1,12 +1,14 @@
 ---
 subject: psychology/developmental-theory/life-cycle/career-retirement-planning
 tags:
+  - career/career-factors/income-stability
+  - career/career-factors/personality-fit
   - career/career-factors/growth-opportunities
-  - psychology/economics/access-to-care/labour-market
   - personal/raw/unprocessed
+  - retirement/financial-needs
+  - retirement/planning
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Successful Career and Retirement Plan Assignment
@@ -95,12 +97,5 @@ Interview at least one retired person (or couple) to gather practical advice on 
 - [3] Additional sources from AARP, CNN Money, Bloomberg, and the Social Security website
 
 ## Related
-- [[Career-Planning-Guide]] — Comprehensive guide to career planning
-- [[Retirement-Calculator-Assistance]] — Resources for using retirement calculators effectively
-- [[Post-Retirement-Life-Strategies]] — Strategies for structuring life post-retirement
-
----
-
-[1] Forbes: <https://www.forbes.com/sites/stevevernon/2023/11/17/whats-the-best-age-when-to-retire/>
-[2] T. Rowe Price Retirement Calculator: <https://www.troweprice.com/investments/retirement-planning/calculator>
-[3] AARP, CNN Money, Bloomberg, Social Security website
+- [[Successful-Retirement]] — similarity 0.87
+- [[Key-Career-Factors-And-Retirement-Planning-A-Comprehensive]] — similarity 0.85

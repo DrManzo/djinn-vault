@@ -1,4 +1,11 @@
 ---
+tags:
+  - psychology/developmental-theory/life-cycle/ageism
+  - psychology/economics/access-to-care/labour-market
+  - personal/raw/unprocessed
+---
+
+---
 subject: psychology/developmental-theory/life-cycle/ageism
 tags:
   - psychology/economics/access-to-care/labour-market
