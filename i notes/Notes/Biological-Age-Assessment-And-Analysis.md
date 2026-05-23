@@ -2,6 +2,8 @@
 subject: psychology/health/aging-population/us-demographics
 tags:
   - health/aging/biological-age/chronological-age
+  - psychology/developmental-theory/life-cycle
+
 created: 2026-05-23
 source: Perplexity export
 
@@ -60,3 +62,10 @@ The individual's biological age is higher than their chronological age, suggesti
 ## Related
 - [[Health-and-Aging]] — Comprehensive guide to understanding and managing aging.
 - [[Lifestyle-Changes-for-Better-Ageing]] — Detailed steps for improving lifestyle choices.
+- [[Biological-Age]] — Understanding the difference between chronological and biological age.
+- [[PSY-358 Hub]] — Overview of psychological theories related to aging.
+- [[Personality-Stability-and-Erikson]] — Exploring personality development across the life cycle.
+- [[Relationships-Overview-Chart]] — Charting key relationships in life stages.
+- [[Dangers Of Steroid Use]] — Risks associated with steroid use and their impact on health.
+
+---

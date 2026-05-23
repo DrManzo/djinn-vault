@@ -42,8 +42,11 @@ By addressing both the psychological and practical barriers, we can create a mor
 - WHO. (2024). Mental health of older adults. Retrieved from [URL]
 
 ## Related
-- [[LSAT-Comprehensive-Guide]] — Comprehensive guide to understanding and addressing mental health challenges.
-- [[Adult-Pysch]] — Resources and discussions on adult psychology, including aging and mental health.
+- [[Factors Influencing Health Psychology Growth]] — Examines factors that influence the growth of health psychology.
+- [[PSY-358 Hub]] — Comprehensive resources and discussions on adult psychology, including aging and mental health.
+- [[Families With Children With Disabilities]] — Insights into families with children with disabilities, which can be relevant to understanding broader social issues.
+- [[Stoic Perspectives On Independence And Boundaries]] — Stoic perspectives that may offer insights into personal resilience and independence.
+- [[Substance Use And Health Effects]] — Information on substance use and its health effects, which could intersect with mental health in older adults.
 
 ---
 

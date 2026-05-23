@@ -3,6 +3,7 @@ subject: psychology/health/alzheimer's-disease/caregiver-support
 tags:
   - health/dementia/alzheimers-caregivers/support
   - psychology/health/alzheimer's-disease/information
+
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -82,3 +83,11 @@ The presentation aims to provide caregivers with essential information on Alzhei
 - [[Alzheimer's-Disease-Education-Guide]] — Comprehensive guide to Alzheimer's care.
 - [[Caregiver-Support-Resources]] — Additional support and resources for caregivers.
 - [[Neurocognitive-Disorders-Overview]] — Overview of other neurocognitive disorders.
+- [[Alzheimers-Caregiving]] — Support for caregivers dealing with Alzheimer's patients.
+
+[[Alzheimer's-Disease-Education-Guide]]
+[[Caregiver-Support-Resources]]
+[[Neurocognitive-Disorders-Overview]]
+[[Alzheimers-Caregiving]]
+
+---

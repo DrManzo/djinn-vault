@@ -25,6 +25,9 @@ However, it's important to note that reliance on technology for memory support i
 
 Current research aligns with the idea that technology can be a valuable tool for memory enhancement when used judiciously. For instance, smartphone apps designed for cognitive training and memory exercises have shown promise in improving memory function, particularly in older adults (Klimova, 2019). These findings suggest that technology, when used as a supplement to, rather than a replacement for, cognitive effort, can contribute positively to memory maintenance and improvement across the lifespan.
 
+[[Memory-Technological-Impact]] — Comprehensive overview of memory and technology interaction.
+[[Cognitive-Training-Apps]] — Information on apps designed for cognitive enhancement.
+
 ## References
 Cavanaugh, J. C. (2024). Adult development and aging (9th ed.). Cengage Learning.
 
@@ -60,11 +63,12 @@ The relationship between technology and memory is indeed complex and evolving. W
 
 However, studies suggest that overreliance on technology for memory support may reduce cognitive effort for long-term memory formation. This can lead to a decline in the ability to recall information without technological assistance (Risko & Gilbert, 2016). Therefore, it is crucial to maintain a balanced approach, combining technology use with traditional memory strategies.
 
+[[Memory-Technological-Impact]] — Comprehensive overview of memory and technology interaction.
+[[Cognitive-Training-Apps]] — Information on apps designed for cognitive enhancement.
+
 ## References
 Risko, E. F., & Gilbert, S. J. (2016). The impact of mobile devices on memory: A review and future directions. Memory, 24(5), 739-758. https://doi.org/10.1080/09658211.2015.1076462
 
 ## Related
 - [[Memory-Technological-Impact]] — Comprehensive overview of memory and technology interaction.
 - [[Cognitive-Training-Apps]] — Information on apps designed for cognitive enhancement.
-
----
