@@ -1,12 +1,12 @@
 ---
 subject: business/management-methods/faust/cli/core/adapters
 tags:
-  - business/passive-income-strategies/power-user-bluebeam-market
-  - business/marketing-revenue-models/toy-industry
-  - business/career-factors/income-stability
+  - law/standardized-testing
+  - law/admissions
+  - psychology/critical-thinking
+  - business/career-factors/successful-admission
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # The LSAT: A Comprehensive Guide to the Law School Admission Test
@@ -45,5 +45,6 @@ The LSAT is designed to assess skills essential for legal education. It consists
 - [Trainertestprep](http://www.trainertestprep.com/lsat/blog/logical-reasoning-question-types)
 
 ## Related
-- [[LSAT-Comprehensive-Guide]] — Detailed breakdown of LSAT sections and strategies.
-- [[Law-School-Acceptance-Rates-and-Factors]] — Factors influencing law school admissions.
+- [[LSAT-Comprehensive-Guide]] — similarity
+- [[Law-Notes-Hub]] — related content
+- [[Practice Tests and Study Guides]] — preparation resources

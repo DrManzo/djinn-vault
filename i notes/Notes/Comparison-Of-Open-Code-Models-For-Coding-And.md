@@ -1,11 +1,11 @@
 ---
 subject: business/technology/software-development
 tags:
-  - technology/software-development/models/comparison
-  - ai/models/performance-analysis
+  - cs/ai/models/performance-analysis
+  - cs/ai/models/integration
+  - business/career-factors/income-stability
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Comparison of Open Code Models for Coding and Agentic Behavior
@@ -88,5 +88,5 @@ This note provides a detailed comparison of several open-code AI models, focusin
 - [avenchat](https://avenchat.com/blog/kimi-k2-6-vs-glm-5-1)
 
 ## Related
-- [[Faust-CLI-Step-12-Guide]] — Step 12 of the Faust CLI project.
-- [[Open-Code-Models-Overview]] — Overview of open-code AI models.
+- [[Fedora-Workstation-Ide-Recommendations-For-Ai-Development]] — similarity in AI development
+- [[Integrating-Open-Claude-Into-Faust-Project]] — related to model integration

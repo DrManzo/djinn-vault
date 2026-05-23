@@ -1,9 +1,10 @@
 ---
 subject: law/education-special-needs/logical-reasoning/necessary-assumption
 tags:
-  - law/education-special-needs/logical-reasoning
-  - law/education-special-needs/real-world-nuance
-  - law/education-special-needs/lsat-preparation
+  - logic/argument-analysis
+  - law/education-law
+  - psychology/neurodevelopmental-disorders
+  - specific/logical-assumption
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -33,5 +34,5 @@ The argument's structure relies on a necessary assumption that all students with
 - [IDEA Disability Categories](https://disabilityrightsca.org/disabilities-covered-under-idea)
 
 ## Related
-- [[LSAT-Comprehensive-Guide]] — Comprehensive resources for LSAT preparation.
-- [[Special-Education-Legal-Implications]] — Legal implications of special education in schools.
+- [[LSAT-Logical-Reasoning-Necessary-Assumption]] — necessary assumption analysis
+- [[Families-With-Children-With-Disabilities]] — real-world context

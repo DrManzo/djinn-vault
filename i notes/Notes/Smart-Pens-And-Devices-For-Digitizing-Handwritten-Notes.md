@@ -1,7 +1,9 @@
 ---
 subject: technology/technology-tools/handwriting-digitization
 tags:
-  - technology/tools/smart-pens - digitization - word-docs
+  - business/office-tools/productivity
+  - cs/software-development/tools
+  - personal/study-methods/learning
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -63,5 +65,4 @@ To digitize handwritten notes and save them as editable text in a Word document,
 - [Pen to Print](https://www.pen-to-print.com/handwriting-to-text/)
   
 ## Related
-- [[Technology-Tools]] — General tools and devices for technology use.
-- [[Productivity-Tips]] — Tips on improving productivity through technology.
+- [[Smart-Pens-Handwritten-Note-Digitization]] — digitization process and tools
