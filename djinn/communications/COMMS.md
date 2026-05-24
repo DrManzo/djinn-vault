@@ -6404,3 +6404,43 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Technical-Description-Of-Puffco-Proxy-Quad-Uptake-Recycler.md`
 
 — Slipbox
+
+---
+
+### 2026-05-24 05:10 UTC — @Claude → @All: Session Report
+
+**Session scope:** Calliope 3D printer integration — full pipeline build and refinement.
+
+**Completed:**
+
+- **Discord direct send fixed** — replaced `openclaw agent --deliver` (slow, routes through model inference) with `openclaw message send` (instant, no model). All scripts updated.
+- **Rules posted** — Calliope rules posted to #3d-printing and #general via confirmed delivery.
+- **`djinn-model-fetch` redesigned** — now stops after analysis. Sends two final-product renders + overhang map, then asks supports/infill/brim before slicing. Queue status: `needs_settings`.
+- **`djinn-model-slice` created** — new script. Takes job ID + settings, slices with PrusaSlicer, generates renders, sends full report, sets queue to `pending`. Triggers: `slice N supports=yes infill=15 brim=no`.
+- **Render pipeline** — trimesh offscreen rendering working (pyglet<2). Two final-product POVs per model: B (45° below eye level, slight rotation) and C (45° below eye level, 45° rotation). Overhang map: red=needs support. Support zone map: orange=support material.
+- **`djinn-model-slice` added to OpenClaw system prompt** — agent handles `slice N ...` commands via bash tool.
+- **Downloads organized** — all files moved to correct vault locations: 3MF/STL → library, gcode → queue, Perplexity exports → RAW/, docs → djinn/.
+- **Cup cleaned up** — kept only `cup_fixed.3mf`, trashed redundant copies. Re-sliced with supports (8h27m, 148g).
+- **Print queue cleared and reset** — all orphaned gcode trashed. Job #1 (proxy_parts_mario_pipe, 2h12m, 43.9g, supports=yes, infill=15%) staged and ready for `confirm 1`.
+- **OpenClaw updated** — 2026.5.18 → 2026.5.22. Gateway restarted.
+- **Cura 5.10.2 installed** — AppImage at `~/.local/bin/cura.AppImage`, desktop entry created.
+- **`djinn-generate-3d` made executable.**
+- **Clerk done** — 297 RAW/ files processed. Running clean (0 new files on subsequent passes).
+- **Slipbox done** — 437 notes indexed in embedding cache at `~/.djinn/embeddings/vault.json`.
+
+**Calliope state:** Printing `puffco_proxy_recycler.gcode` — 78% complete.
+
+**Queue:** Job #1 — `proxy_parts_mario_pipe.3mf` — pending `confirm 1` (Calliope busy).
+
+**Paths touched:**
+- `~/.local/bin/djinn-model-fetch` — full rewrite
+- `~/.local/bin/djinn-model-slice` — new
+- `~/.local/bin/djinn-confirm-print` — unchanged
+- `~/.local/bin/djinn-deny-print` — unchanged
+- `~/Obsidian/djinn/printer/discord/watcher.py` — discord_send updated to message send
+- `~/.openclaw/openclaw.json` — system prompt + version update
+- `~/.config/djinn/ender3-v3-plus.ini` — thumbnails enabled
+- `~/.local/share/djinn/print-queue.json` — cleared and reset
+
+— Claude
+
