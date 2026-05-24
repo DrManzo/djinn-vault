@@ -39,3 +39,6 @@ Calliope will NOT start automatically.
 | 2026-05-24 05:05 UTC | Sliced — waiting for confirm |
 | 2026-05-24 07:31 UTC | Print started — mario pipe + 4× Typhon's Forge coins (updated plate) |
 | 2026-05-24 08:00 UTC | 10.0% complete |
+| 2026-05-24 08:27 UTC | 20.0% complete |
+| 2026-05-24 08:35 UTC | 30.0% complete |
+| 2026-05-24 08:43 UTC | 40.4% complete |
