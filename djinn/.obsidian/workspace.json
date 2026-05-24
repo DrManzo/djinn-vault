@@ -11,10 +11,14 @@
             "id": "b8dcc3e7ad80a504",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "logs/audit-2026-05-23.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "audit-2026-05-23"
             }
           }
         ]
@@ -178,6 +182,7 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "skills/djinn-daily.md",
     "printer/agent/orchestrator/cli.py.tmp.303979.d234cbb3c478",
     "printer/agent/orchestrator/__pycache__/orchestrator.cpython-311.pyc",
     "printer/agent/orchestrator/agents/__pycache__/proto_opt.cpython-311.pyc",
@@ -188,7 +193,6 @@
     "printer/agent/orchestrator/agents/__pycache__/__init__.cpython-311.pyc",
     "printer/agent/orchestrator/agents/__pycache__",
     "printer/agent/orchestrator/__pycache__/llm.cpython-311.pyc",
-    "printer/agent/orchestrator/__pycache__/project_state.cpython-311.pyc",
     "printer/agent/AGENT_STACK_SPEC.md",
     "printer/commissions/PRICING_SPEC.md",
     "printer/library/typhons-forge-coin/COIN_BUILD_REPORT.md",
