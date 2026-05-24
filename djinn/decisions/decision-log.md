@@ -74,3 +74,22 @@ created: 2026-05-19
 **Why DOE:** Prototype efficiency optimization is a process/slicer problem, not a geometry problem. Taguchi screening tests multiple factors together and outperforms one-factor-at-a-time when minimizing time+energy+material.
 
 — Claude
+
+---
+
+## 2026-05-24 — 9-Agent Media Stack Architecture
+
+**Decision:** Build a multi-agent Instagram production pipeline with one agent per pipeline stage, not a single monolithic editor agent.
+
+**Agents:** ingest → photo-edit / video-edit → caption → repurpose → thumbnail → qa → publish-prep, orchestrated by content-orchestrator.
+
+**Key choices:**
+- All bash-tool agents use qwen2.5:7b (tool support required); publish-prep uses phi4:14b (text quality, no tools needed)
+- llama3.2-vision called via HTTP from scripts — not wired as an agent, because it has no tool support and loads 7.8GB on demand
+- faster-whisper for caption transcription — voxtype is push-to-talk only, not suitable for batch file processing
+- ffmpeg filter chains for color grading — no LUT files, no external dependencies; 4 presets cover the full aesthetic range
+- Project manifest.json as shared state — same pattern as manufacturing orchestrator's ProjectState
+
+**Why separate agents:** Each stage has distinct tool dependencies, model needs, and handoff contracts. Separating them makes each agent's workspace instructions lean and unambiguous. Content-orchestrator handles routing without each agent needing to know the full pipeline.
+
+— Claude
