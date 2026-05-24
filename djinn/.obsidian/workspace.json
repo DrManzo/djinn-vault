@@ -178,6 +178,8 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "printer/library/54513202_LEDTeaLightHolderLogikerIra_3mf/model.3mf",
+    "printer/library/54513202_LEDTeaLightHolderLogikerIra_3mf",
     "TROUBLESHOOT.md",
     "TROUBLESHOOT.md.tmp.16025.068525dfa2ff",
     "SYSTEM-STATE.md.tmp.16025.1d45faf51f0d",
@@ -211,8 +213,6 @@
     "workspace/TOOLS.md",
     "workspace/SOUL.md",
     "workspace/SCHEDULE.md",
-    "workspace/PLAN.md",
-    "workspace/MEMORY.md",
-    "workspace"
+    "workspace/PLAN.md"
   ]
 }
