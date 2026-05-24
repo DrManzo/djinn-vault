@@ -44,3 +44,4 @@ Dims: 43.8x61.1x51.8mm | Volume: 19.68cm³
 | 2026-05-24 18:35 UTC | Sliced — 1h 25m / 26.06g |
 | 2026-05-24 18:38 UTC | Confirmed + uploaded to Calliope |
 | 2026-05-24 18:40 UTC | Print started |
+| 2026-05-24 18:55 UTC | 10.1% complete |
