@@ -1,0 +1,31 @@
+{
+  "project_id": "2026-05-24_typhon_s_forge_logo",
+  "created_at": "2026-05-24T21:09:49.518427+00:00",
+  "updated_at": "2026-05-24T21:09:55.405135+00:00",
+  "source_path": "/home/drmanzo/Downloads/TYPHON'S FORGE LOGO.png",
+  "status": "publish_ready",
+  "media_type": "photo",
+  "files": {
+    "raw": [
+      "raw/TYPHON'S FORGE LOGO.png"
+    ],
+    "selects": [],
+    "edits": [],
+    "exports": {
+      "feed": [
+        "exports/feed/TYPHON'S FORGE LOGO_feed_4x5.jpg",
+        "exports/feed/TYPHON'S FORGE LOGO_feed_1x1.jpg"
+      ],
+      "reel": [],
+      "story": [
+        "exports/story/TYPHON'S FORGE LOGO_story.jpg"
+      ],
+      "thumbnail": []
+    }
+  },
+  "video_info": {},
+  "photo_count": 1,
+  "captions": {},
+  "next_agent": "publish-prep-agent",
+  "notes": ""
+}
