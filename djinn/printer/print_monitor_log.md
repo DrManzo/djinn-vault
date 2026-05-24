@@ -1729,3 +1729,8 @@
 | 2026-05-24 01:11 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 01:12 UTC | printing | 0.0% | 219.5 | 220 | 55.1 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 01:13 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 01:14 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 01:16 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 01:17 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 01:18 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 01:19 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
