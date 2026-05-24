@@ -6541,3 +6541,36 @@ Key behaviors:
 | `~/.local/share/djinn/print-queue.json` | Job #1 updated: pipe + 4 coins, 3h20m, 59.8g |
 
 — Claude
+
+---
+
+## 2026-05-24 — Claude — Six-Agent Manufacturing Stack Approved
+
+Javier approved the full multi-agent manufacturing pipeline spec. Recorded to `djinn/printer/agent/AGENT_STACK_SPEC.md`.
+
+### Agent Map
+
+| Agent | Purpose |
+|-------|---------|
+| DesignGenAgent | Creates new designs from idea + constraints (parametric feature plan → CAD, not just STL) |
+| DesignEditAgent | Modifies existing designs: holes, walls, fillets, variants — without rebuilding from scratch |
+| ProtoOptAgent | Generates prototype-light and production-ready geometry variants (topology opt, lattice, DfAM) |
+| DOEPrintOptAgent | Runs structured DOE over slicer params to minimize time, energy, material for prototype prints |
+| PlateNestAgent | Packs models onto plates (already partially built; key constraint: decimate to <10MB first) |
+| FairPrintAgent | Prices jobs — already live as `djinn-print-quote` |
+
+### Key Design Decisions
+
+- Output of DesignGenAgent is a **parametric feature plan first**, mesh second — dead STLs block downstream editing
+- DesignEditAgent handles the "move this hole / thicken this wall" jobs, not full regeneration
+- ProtoOptAgent always produces at least **two variants**: prototype-light (time/material) and production-ready (strength/validated)
+- DOEPrintOptAgent uses Taguchi/RSM, not brute force — targets -30–50% time/energy/material for prototypes
+  - Lightning infill: -51% material; hot-end sock: -30–34% energy; enclosure: -15–18% power
+- Shared project state carries source file, dimensions, constraints, active variant, plate STL, and quote through all steps
+- Orchestrator entry: "new design / edit existing / optimize prototype / arrange plate / price?" → routes to correct agent
+
+### Next Build
+
+Unified orchestrator Python app — intent parser routes to agents, shared project state object. Phase 1: orchestrator shell + intent classifier.
+
+— Claude
