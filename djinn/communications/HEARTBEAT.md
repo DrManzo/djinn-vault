@@ -1,13 +1,13 @@
 # Heartbeat — Salomon
 
-**Last beat:** 2026-05-24 03:41:27 UTC  
+**Last beat:** 2026-05-24 04:41:27 UTC  
 **Machine:** Salomon (192.168.1.225)  
 **Status:** Alive
 
 ## System
 
-- **Uptime:** up 9 hours, 1 minute
-- **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU, 49, 0, 279, 8151
+- **Uptime:** up 10 hours, 1 minute
+- **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU, 51, 0, 5847, 8151
 - **Ollama:** 7 models loaded
-- **Disk:** 33% used (599G free)
-- **RAM:** 12Gi/29Gi used, 1.2Gi free
+- **Disk:** 33% used (598G free)
+- **RAM:** 13Gi/29Gi used, 1.1Gi free
