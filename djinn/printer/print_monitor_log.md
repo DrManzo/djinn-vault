@@ -2091,3 +2091,8 @@
 | 2026-05-24 07:26 UTC | complete | 0.0% | 108.1 | 0 | 51.2 | 0 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 07:28 UTC | complete | 0.0% | 85.5 | 0 | 49.5 | 0 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 07:29 UTC | complete | 0.0% | 69.6 | 0 | 46.6 | 0 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 07:30 UTC | complete | 0.0% | 58.0 | 0 | 43.8 | 0 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 07:31 UTC | printing | 0.0% | 49.5 | 0 | 42.5 | 55 | 0% | 0 | model_job1.gcode |
+| 2026-05-24 07:32 UTC | printing | 0.0% | 45.2 | 0 | 49.4 | 55 | 0% | 0 | model_job1.gcode |
+| 2026-05-24 07:33 UTC | printing | 0.0% | 151.4 | 220 | 54.9 | 55 | 0% | 0 | model_job1.gcode |
+| 2026-05-24 07:34 UTC | printing | 0.0% | 131.0 | 220 | 55.7 | 55 | 0% | 0 | model_job1.gcode |
