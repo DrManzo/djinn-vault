@@ -178,6 +178,8 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "printer/agent/AGENT_STACK_SPEC.md",
+    "printer/agent/AGENT_STACK_SPEC.md.tmp.303979.0a93e443da84",
     "printer/commissions/PRICING_SPEC.md",
     "printer/commissions/PRICING_SPEC.md.tmp.303979.3ff19a3c80e8",
     "printer/commissions/quote-history.jsonl",
@@ -189,7 +191,6 @@
     "printer/library/typhons-forge-coin/COIN_BUILD_REPORT.md.tmp.303979.3c7acc8f9dbf",
     "printer/library/typhons-forge-coin/coin_preview_combined.scad.tmp.303979.4a4824547fbf",
     "printer/library/typhons-forge-coin/coin_preview_combined.scad.tmp.303979.b82409c60a50",
-    "printer/library/typhons-forge-coin/coin_base_38.scad.tmp.303979.8e927f0dc683",
     "printer/puffco_proxy_quad_uptake_recycler_specs.md",
     "djinn-handoff-package.md",
     "TROUBLESHOOT.md",
@@ -212,7 +213,6 @@
     "workspace/workflows/notes-command.md",
     "workspace/workflows/djinn-sync.md",
     "workspace/workflows/djinn-daily.md",
-    "workspace/USER.md",
-    "workspace/TOOLS.md"
+    "workspace/USER.md"
   ]
 }
