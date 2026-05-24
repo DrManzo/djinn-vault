@@ -6470,3 +6470,74 @@ Coin approved at current state. Final specs:
 - Ready to queue to Calliope: `slice coin supports=no infill=40 brim=no`
 
 — Claude
+
+---
+**2026-05-23 — Claude — Full session report**
+
+## Typhon's Forge Challenge Coin — APPROVED & READY
+
+38mm challenge coin built from PNG logo. Final specs:
+- `coin_38_final.stl` — 1,055,372 faces, 38×38×4.5mm
+- Front: Typhon's Forge SVG logo relief (LOGO_SCALE=0.0448 — 20% shrink from 0.056 to stop logo text clipping coin edge)
+- Back: "THE TERP TRIBE" recessed 0.6mm, size=3.8, mirrored on X for correct orientation
+- All source files: `djinn/printer/library/typhons-forge-coin/`
+- Build report: `COIN_BUILD_REPORT.md` — full pipeline documented for any agent to rebuild from scratch
+- STLs gitignored (>50MB) — rebuild with: `openscad --render coin_base_38.scad` + `openscad --render logo_38.scad` then `trimesh.util.concatenate()`
+- Ready to print: no supports, logo face up, 40% infill recommended
+
+## Print Queue — Job #1 Updated
+
+Job #1 was modified to include 4 challenge coins on the same plate as the mario pipe:
+- **Contents:** proxy_parts_mario_pipe + 4× Typhon's Forge coin (38mm)
+- **Plate STL:** `/tmp/plate_job1_light.stl` (decimated coins, 3.3MB)
+- **Print time:** 3h 20m (was 2h 12m)
+- **Filament:** 59.8g (was 43.9g)
+- **Status:** `pending` — waiting for `confirm 1` after current print finishes
+- **Note:** Calliope does NOT auto-start. Send `confirm 1` when bed is clear.
+- Coins placed in 2×2 grid at X:160–205, Y:130–175. Pipe at X:80, Y:150.
+- PrusaSlicer silently drops objects when face count exceeds ~200MB — workaround: decimate coins to 15k faces with pymeshlab before building plate STL.
+
+## FairPrintAgent — Commission Pricing Tool
+
+`djinn-print-quote` CLI built for when commissions open. Two modes:
+
+**Simple mode** — Javier's formula: `(material + time + design) / 0.60`
+```
+djinn-print-quote --simple --name "typhons forge coin" --grams 8 --hours 0.3 --design 3
+→ $10.32 (design auto-detected in library → $0 charged)
+
+djinn-print-quote --simple --name "new dragon" --grams 45 --hours 4.5 --design 2
+→ $218.48 (new design, 2hr charged)
+```
+
+**Full agent mode** — weighted cost+market blend:
+```
+djinn-print-quote '<json>'    # full spec
+djinn-print-quote --coin      # Typhon's Forge coin preset
+quote <json>                  # from Telegram/Discord via OpenClaw
+quick quote <name> <g>g <h>h  # simple mode from Telegram/Discord
+```
+
+Key behaviors:
+- **Library check:** scans `djinn/printer/library/` for piece name match → if found, design cost = $0 automatically
+- **Market fetch:** auto-searches DuckDuckGo/Etsy for comparable listings when no comps provided (uses `ddgs` package)
+- **Three outputs:** cost floor (never go below), fair market (recommended ask), premium ceiling (+15%)
+- History logged to: `djinn/printer/commissions/quote-history.jsonl`
+- Spec doc: `djinn/printer/commissions/PRICING_SPEC.md`
+- OpenClaw updated with `quote` and `quick quote` command handlers
+
+## Files Changed This Session
+
+| File | Change |
+|------|--------|
+| `djinn/printer/library/typhons-forge-coin/coin_base_38.scad` | Text size=3.8, spacing=1.05 (reverted); LOGO_SCALE=0.0448 |
+| `djinn/printer/library/typhons-forge-coin/logo_38.scad` | LOGO_SCALE 0.056→0.0448 |
+| `djinn/printer/library/typhons-forge-coin/coin_preview_combined.scad` | Combined preview, all params current |
+| `djinn/printer/library/typhons-forge-coin/COIN_BUILD_REPORT.md` | Full build pipeline doc |
+| `djinn/printer/commissions/PRICING_SPEC.md` | FairPrintAgent spec and usage |
+| `djinn/printer/commissions/quote-history.jsonl` | Quote log (auto-appended) |
+| `~/.local/bin/djinn-print-quote` | New CLI — simple + full agent modes |
+| `~/.openclaw/openclaw.json` | Added `quote`, `quick quote` command handlers |
+| `~/.local/share/djinn/print-queue.json` | Job #1 updated: pipe + 4 coins, 3h20m, 59.8g |
+
+— Claude
