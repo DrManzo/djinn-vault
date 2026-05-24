@@ -1,9 +1,9 @@
 ---
 subject: fantasy/laws/government/systems
 tags:
-  - fantasy/empire/corporate-governance/political-system
-  - fantasy/rebellion/politics-of-power
-  - fantasy/magic/legal-system
+  - creative/fiction/world-building
+  - creative/fiction/government
+  - creative/fiction/seasons-months
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -99,13 +99,5 @@ Soldiers
 - [Story - TBD](/spaces/story-tbd-il79KVlUSMOFi1E7_TShxw)
 
 ## Related
-- [[Fantasy-Government-Structure]] — Detailed structure of the fictional empire.
-- [[Pyraxis-Reckoning-History]] — Historical context and events leading to current state.
-- [[Coravian-Society-Culture]] — Cultural aspects and societal norms in Coravian society.
-
-TAG RULES:
-- topic MUST be one of: fantasy, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: academic-writing/apa-style, accounting/systems/adjusting-entries/supplies, accounting/systems/trial-balance/order-structure, ai/development/cli, ai/development/faust/cli, ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/accounting-systems, business/accounting-systems/governing-bodies/principles, business/accounting-systems/legal-entities/corporations, business/analytics, business/behavioral-economics, business/branding-strategies/identity, business/career-factors/accountability, business/career-factors/benefits, business/career-factors/commitment, business/career-factors/communication, business/career-factors/income-stability, business/career-factors/personal-growth, business/career-factors/planning, business/career-factors/productivity, business/career-factors/professionalism, business/career-factors/successful-admission, business/career-growth/skills-development, business/career-strategies, business/career-strategies/study-methods, business/collaboration-strategies, business/communication-strategies
+- [[The-Haze-Of-The-Green-Serpent]] — similarity
+- [[Political-Structure-Of-Aethoria]] — government structure comparison

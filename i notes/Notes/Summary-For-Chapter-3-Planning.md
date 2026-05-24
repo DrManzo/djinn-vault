@@ -1,10 +1,10 @@
 ---
 subject: fiction/writing/story-planning
 tags:
-  - fiction/writing/character-development
-  - fiction/writing/world-building
-  - fiction/themes/political-intrigue
-  - fiction/themes/queer-representation
+  - creative/fantasy/story-planning
+  - creative/themes/duty-vs-desire
+  - creative/themes/performance-authenticity
+  - creative/writing/style-prose
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -106,6 +106,5 @@ This document provides a revised summary of the story planning for "What the Emp
 - [Perplexity](https://www.perplexity.ai/search/74906b13-bd11-4564-81d6-1b18e101d7a0)
 
 ## Related
-- [[Character-Development-Guide]] — Comprehensive guide for character creation and development
-- [[World-Building-Blueprints]] — Tips and strategies for building rich, immersive fantasy worlds
-- [[Queer-Representation-In-Fantasy]] — Best practices for queer representation in fiction
+- [[Fantasy-Book-Magic-And-Worldbuilding]] — worldbuilding and themes
+- [[The-Masks-Of-Virellion]] — similar thematic elements

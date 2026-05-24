@@ -1,12 +1,11 @@
 ---
 subject: business/career-strategies/business-model-complexity/bank-perception/complexity-management
 tags:
-  - business/career-strategies/business-model-complexity
-  - business/accounting-systems/legal-entities/subsidiaries
-  - business/analytics/financial-projections
+  - business/finance/perception
+  - business/model/complexity
+  - banking/evaluation/factors
 created: 2026-05-23
 source: Perplexity export
-
 ---
 
 # Assessing Business Model Complexity for Bank Perception
@@ -40,9 +39,5 @@ To ensure the business is perceived positively by banks, focus on:
 - Additional sources not directly linked but relevant for comprehensive analysis
 
 ## Related
-- [[Typhons-Forge-LLC]] — Current business structure and operations.
-- [[Business-Plan-Viability-Assessment]] — Steps to ensure a robust business plan.
-
----
-
-This note captures the essence of the provided content, focusing on key points related to business model complexity and bank perception. It maintains the context and details necessary for strategic planning and decision-making.
+- [[Principles-Of-Finance]] — financial-projections
+- [[Strategic-Framework-For-Meance-Llc]] — business-plan-viability

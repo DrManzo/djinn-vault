@@ -1,11 +1,10 @@
 ---
 subject: fantasy-literature/magic-systems/inspired-by-universes
 tags:
-  - fantasy-literature/magic-systems/malazan-book-of-the-fallen
-  - fantasy-literature/magic-systems/mistborn-universe
-  - fantasy-literature/magic-systems/harry-potter-universe
-  - fantasy-literature/politics-and-conflict
-  - fantasy-literature/class-systems
+  - creative/fantasy/worldbuilding
+  - creative/fantasy/magic-systems
+  - creative/fantasy/politics
+  - creative/fantasy/class-system
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -58,9 +57,5 @@ Javier is working on a fantasy book that draws heavily from established universe
 - [Harry Potter Universe](https://harrypotter.fandom.com/wiki/Hogwarts_School_of_Witchcraft_and_Wizardry)
 
 ## Related
-- [[Fantasy-Writing-Guidelines]] — General tips for fantasy writing.
-- [[World-Building-Techniques]] — Techniques to build complex and immersive worlds.
-
----
-
-This structured note captures the essence of Javier's project, providing a clear roadmap for further development.
+- [[Fantasy-Book-Proposal]] — similarity
+- [[Key-Aspects-Of-World-Building-For-Aethoria]] — worldbuilding techniques

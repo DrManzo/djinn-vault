@@ -1,4 +1,11 @@
 ---
+tags:
+  - business/accounting-systems/legal-entities/subsidiaries
+  - business/career-factors/planning
+  - business/business-planning/tactics
+---
+
+---
 subject: business/accounting-systems/legal-entities/subsidiaries
 tags:
   - business/career-factors/planning

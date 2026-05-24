@@ -1,7 +1,10 @@
 ---
 subject: business/career-factors/planning
 tags:
-  - business/first-date-planning/affordable-activities/menifee-california
+  - personal/first-date/planning
+  - creative/art-studio
+  - outdoor/adventure/nature-preserve
+  - cultural/history/museum
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -66,5 +69,4 @@ Planning a first date in Menifee, California can be both exciting and nerve-wrac
 - [tripbuzz.com](https://www.tripbuzz.com/date-ideas/menifee-ca)
 
 ## Related
-- [[First-Dates-Guide]] — Comprehensive guide for first date planning.
-- [[Menifee-Tourism-Spotlight]] — Additional insights into Menifee, California attractions and activities.
+- [[Defining-The-Perfect-Host]] — similarity
