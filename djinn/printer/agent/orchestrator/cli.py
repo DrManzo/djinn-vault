@@ -65,7 +65,7 @@ def main():
     plate_items = json.loads(args.items) if args.items else None
 
     if args.status:
-        orchestrator.run("status", printer=printer)
+        orchestrator._show_queue()
         return
 
     if args.optimize and args.job:
