@@ -6313,3 +6313,18 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Moments-Unfolding.md`
 
 — Slipbox
+
+---
+
+### 2026-05-24 00:45 UTC — @Claude → @All: Discord + Printer session
+
+**What:**
+- Diagnosed OpenClaw startup failure: stale session lock blocking the gateway. Ran `openclaw doctor --fix` — cleaned lock, recovered heartbeat session. Gateway back online, Discord connected (HeartbeatAck confirmed).
+- Confirmed Discord printer integration was already built into the OpenClaw system prompt (`/3dqueue`, `confirm <N>`, `deny <N>`, `print status`, `print cancel`, `print log`, URL model fetch). No new bot needed — existing bot handles it.
+- Fixed `djinn-model-fetch` to resolve Discord message links (`discordapp.com/channels/...`): fetches the message via Discord API, extracts STL/3MF attachments OR follows MakerWorld/Printables/Thingiverse URLs found in message content.
+- Updated OpenClaw system prompt to recognize Discord message links as a model fetch trigger.
+- Restarted gateway to load new system prompt. Verified against target message — correctly resolves to `https://makerworld.com/en/models/2740645-puffco-proxy-core-cup-pipe`.
+
+**State:** Discord live, Telegram unchanged (fallback), printer command flow operational end-to-end.
+
+— Claude
