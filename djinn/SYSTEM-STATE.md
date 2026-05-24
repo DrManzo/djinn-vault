@@ -78,14 +78,18 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 | Field | Value |
 |-------|-------|
-| Machine | Ender-3 V3 Plus |
+| Machine | Ender-3 V3 Plus (Calliope) |
 | IP | 192.168.1.114:7125 (Moonraker) |
 | Control | Klipper + Moonraker |
 | Bot | Telegram bot on Typhon — `/print_status`, `/print`, `/print_cancel` |
 | Config backup | [[djinn/printer/backup/]] |
 | Process docs | [[printer/process/INTAKE]] |
 | Error history | [[error_log]] |
-| Current print | cup_geometry_creality_fixed.gcode — in progress 2026-05-23 |
+| Current print | model_job1.gcode — mario pipe + 4× Typhon's Forge coins — started 2026-05-24 |
+| Queue | `~/.local/share/djinn/print-queue.json` — 1 job (Job #1 in progress) |
+| Print agent stack | `djinn/printer/agent/orchestrator/` — 6-agent pipeline live |
+| Commission pricing | `djinn-print-quote` — `~/.local/bin/djinn-print-quote` |
+| Design CLI | `djinn-design` — `~/.local/bin/djinn-design` |
 
 ---
 
@@ -102,6 +106,12 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | OpenClaw law agent | `/agent law` | ✅ Available | deepseek-r1:7b, IRAC + LSAT study partner |
 | Clerk | djinn-clerk timer (1-hr) + @Clerk in COMMS.md | ✅ Active | qwen2.5:7b — RAW/ → structured vault notes with hierarchical tags |
 | Slipbox | @Slipbox in COMMS.md + djinn-slipbox --scan | ✅ Available | nomic-embed-text + qwen2.5:7b — semantic linking + hierarchical tags |
+| DesignGenAgent | `djinn-design "<brief>"` or `design <brief>` in Discord/Telegram | ✅ Live | phi4:14b (local) → Claude if API key set. Outputs concept JSON + parametric OpenSCAD |
+| DesignEditAgent | `djinn-design --job N --edit "<req>"` | ✅ Live | Modifies existing SCAD without rebuilding |
+| ProtoOptAgent | `djinn-design --job N --optimize` | ✅ Live | Renders prototype-light + production-ready STLs |
+| DOEPrintOptAgent | `djinn-design --job N --doe [fast\|cheap\|balanced]` | ✅ Live | Taguchi factor grid → slicer profile, no test prints needed |
+| PlateNestAgent | `djinn-design --job N --plate` | ✅ Live | Decimate → arrange → export plate STL (auto-handles >200MB) |
+| FairPrintAgent | `djinn-print-quote` / `quote <json>` Discord/Telegram | ✅ Live | Commission pricing: (material+time+design)/0.60, library auto-detect |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
 
@@ -119,9 +129,18 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | `~/Obsidian/djinn/communications/` | Inter-agent comms — COMMS.md is active channel |
 | `~/Obsidian/djinn/skills/` | Skill specs — [[skills/README]] |
 | `~/Obsidian/djinn/printer/process/` | Print intake SOP, log, benchmarks, filament profiles |
+| `~/Obsidian/djinn/printer/agent/` | Print agent stack — print_agent.py + orchestrator/ |
+| `~/Obsidian/djinn/printer/agent/orchestrator/` | 6-agent manufacturing pipeline (DesignGen→Plate→Price) |
+| `~/Obsidian/djinn/printer/commissions/` | FairPrintAgent pricing spec + quote history log |
+| `~/Obsidian/djinn/printer/library/` | Model library — vault-backed, design-cost auto-detection |
 | `~/.config/djinn/` | Secrets — env files, chmod 600, never in git |
+| `~/.config/djinn/claude.env` | Anthropic API key (optional) — enables Claude routing in djinn-design |
+| `~/.local/share/djinn/print-queue.json` | Print queue — extended with design/DOE/plate phase fields |
+| `~/.venvs/djinn-orchestrator/` | Python 3.11 venv — anthropic, pyDOE2, trimesh, pymeshlab, scipy |
 | `~/.opencode/bin/opencode` | opencode binary |
-| `~/.local/bin/` | Operational scripts — heartbeat, vault-sync, djinn-* |
+| `~/.local/bin/djinn-design` | Manufacturing orchestrator CLI |
+| `~/.local/bin/djinn-print-quote` | Commission pricing CLI (FairPrintAgent) |
+| `~/.local/bin/` | All operational scripts — heartbeat, vault-sync, djinn-* |
 
 ---
 
@@ -163,11 +182,13 @@ Fixed 2026-05-23 — original 131072 num_ctx caused VRAM overflow (14GB KV cache
 
 | Item | Priority | Notes |
 |------|----------|-------|
+| Add Anthropic API key | High | `~/.config/djinn/claude.env` — enables Claude routing in djinn-design (currently phi4:14b) |
 | Add Salomon OpenRouter key | Medium | Placeholder in ~/.opencode/opencode.json — get key at openrouter.ai |
 | Run djinn-embed --full after index completes | High | Initial build started 2026-05-23 — let it finish |
 | Test Slipbox end-to-end after embed completes | High | Needs embedding cache to find similar notes |
 | Benchmark prints | Low | CRtestcube + ksr_fdmtest to establish stock baselines |
 | Voice pipeline final wiring | Backlog | Typhon |
+| 1TB Passport SSD integration | Low | Javier mentioned it — available for large model/STL storage if needed |
 
 ---
 

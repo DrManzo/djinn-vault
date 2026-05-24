@@ -33,9 +33,10 @@ Changes from this machine are signed: `— Claude`
 
 | Mount | Device | Size | Used | Contents |
 |-------|--------|------|------|---------|
-| `/` | nvme0n1p2 | 937G | 288G | OS, apps, configs, vault, models |
+| `/` | nvme0n1p2 | 937G | ~340G | OS, apps, configs, vault, models |
+| External (available) | WD Passport 1TB | 1TB | — | Available for large STL/model overflow if needed |
 
-All repos and model files live on the NVMe — no secondary drive.
+All primary repos and model files live on the NVMe.
 
 ---
 
@@ -89,13 +90,34 @@ Ollama runs as system service, exposed on `0.0.0.0:11434` (reachable by Typhon v
 | OpenClaw gateway | ✅ Live | systemd user service, port 18789 |
 | Telegram @DjinnOCBot | ✅ Live | Polling connected, DMs locked to Javier |
 | Discord @OgDjinn | ✅ Live | Connected, guild 1504308482575433788 |
-| Ollama | ✅ Running | 0.0.0.0:11434, 8 models |
+| Ollama | ✅ Running | 0.0.0.0:11434, 7 models loaded |
 | comms-processor | ✅ Active | 3-min timer → scans COMMS.md → invokes opencode |
 | Heartbeat | ✅ Active | 5-min → [[HEARTBEAT]] |
 | Vault sync (GDrive) | ✅ Active | 2-min rclone |
 | Vault sync (GitHub) | ✅ Active | git push via `gh auth` |
 | djinn-daily | ✅ Active | 8 AM → morning briefing (qwen2.5:7b, 240s timeout) |
 | djinn-weekly | ✅ Active | Sun 20:00 → weekly review |
+| printer-error-logger | ✅ Active | Polls Moonraker every 30s → error_log.md |
+| djinn-discord-watch | ✅ Active | Polls #3d-printing every 20s for .stl/.3mf attachments |
+| djinn-print-monitor | ✅ Active | Monitors active prints → cup_trace/print_monitor_log |
+
+## Manufacturing CLI Tools
+
+| Tool | Path | Purpose |
+|------|------|---------|
+| `djinn-design` | `~/.local/bin/djinn-design` | 6-agent manufacturing orchestrator |
+| `djinn-print-quote` | `~/.local/bin/djinn-print-quote` | Commission pricing (FairPrintAgent) |
+| `djinn-confirm-print` | `~/.local/bin/djinn-confirm-print` | Upload gcode + start print on Calliope |
+| `djinn-model-fetch` | `~/.local/bin/djinn-model-fetch` | Fetch .stl/.3mf from URL → queue |
+| `djinn-model-slice` | `~/.local/bin/djinn-model-slice` | Slice queued model → gcode |
+
+## Python Environments
+
+| Venv | Path | Contents |
+|------|------|---------|
+| djinn-orchestrator | `~/.venvs/djinn-orchestrator/` | anthropic, pyDOE2, trimesh, pymeshlab, scipy, ollama (Python 3.11) |
+| djinn-bot | `~/.venvs/djinn-bot/` | python-telegram-bot, aiohttp (Typhon) |
+| hunyuan3d-2 | `~/.pyenv/versions/3.11.11/envs/hunyuan3d-2/` | Hunyuan3D-2 generation pipeline |
 
 ---
 

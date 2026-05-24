@@ -19,6 +19,8 @@ Which agent handles what. Read this before routing any task.
 | opencode | Salomon | CLI / comms-processor | Ollama local (qwen2.5:7b default) | Free |
 | opencode | Typhon | CLI / comms-processor | Ollama local + remote Salomon | Free |
 | Claude | Salomon | Claude Code CLI | Anthropic API (Pro) | Premium |
+| djinn-design (orchestrator) | Salomon | CLI + Discord/Telegram | phi4:14b local → Claude if API key set | Free/Premium |
+| djinn-print-quote | Salomon | CLI + Discord/Telegram | Local (no LLM needed) | Free |
 
 ---
 
@@ -37,6 +39,17 @@ Which agent handles what. Read this before routing any task.
 - Printer bot management
 - Lightweight inference (<8B models)
 - Storage/backup queries
+
+### Route to djinn-design when:
+- Creating a new 3D part from a description
+- Editing an existing parametric design
+- Generating prototype-light or production variants
+- Optimizing slicer settings for a prototype (DOE)
+- Arranging a print plate
+
+### Route to djinn-print-quote when:
+- Estimating commission pricing for a print job
+- From Discord/Telegram: `quote <json>`, `quote coin`, `quick quote <name> <g>g <h>h`
 
 ### Route to Claude when:
 - Architecture decisions — system design, multi-agent orchestration
@@ -83,6 +96,10 @@ All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Ty
 | Lightweight admin | llama3.2:3b | Typhon |
 | Architecture, synthesis, audit | Claude Sonnet | Claude lane |
 | Embeddings | nomic-embed-text | Either |
+| 3D design generation | phi4:14b → Claude | djinn-design |
+| 3D design editing | phi4:14b → Claude | djinn-design |
+| Slicer DOE optimization | Python (no LLM) | djinn-design --doe |
+| Commission pricing | Python (no LLM) | djinn-print-quote |
 
 ---
 
