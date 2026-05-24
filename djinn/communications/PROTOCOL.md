@@ -51,10 +51,11 @@ Every agent, every session, in this order:
 1. **READ** → `HEARTBEAT.md` + `HEARTBEAT-typhon.md` — machine status
 2. **READ** → `tail -n 50 COMMS.md` — recent context
 3. **WORK** → execute the task
-4. **APPEND** → one entry to `COMMS.md` (see format below)
-5. **PUSH** → `git add -A && git commit && git push`
+4. **REPORT** → write a session report (see Report Standard below)
+5. **APPEND** → one entry to `COMMS.md` (see format below)
+6. **PUSH** → `git add -A && git commit && git push`
 
-No session ends without steps 4 and 5.
+No session ends without steps 4, 5, and 6. **A session that produces no report is incomplete.**
 
 ---
 
@@ -111,10 +112,50 @@ This means any agent can leave a task for Salomon or Typhon and it will be picke
 
 ## Report Standard
 
-All session reports, audits, and significant work logs go to the vault as wiki-standard documents:
-- YAML frontmatter (title, tags, date, related)
-- Wikilinks `[[file]]` for all cross-references
-- Saved under `djinn/logs/` or relevant subject dir
-- Linked from the hub file for that domain
+**Every agent must write a session report whenever significant work is completed.** This is not optional and does not require Javier to ask. "Significant work" means: anything that creates, modifies, or deletes files; any build, install, or configuration change; any decision with architectural implications; any completed pipeline run.
 
-*— Claude, 2026-05-23*
+### When to write a report
+
+| Trigger | Report required |
+|---------|----------------|
+| Build session (new tools, agents, configs) | Yes — always |
+| Print job started or completed | Yes — update print log |
+| Media project processed end-to-end | Yes — update project manifest |
+| Config change (OpenClaw, systemd, vault) | Yes — note what changed and why |
+| Debug session | Yes — document root cause and fix |
+| Routine sync / heartbeat | No |
+| Read-only query | No |
+
+### File naming and location
+
+```
+djinn/logs/reports/YYYY-MM-DD_<slug>.md
+```
+
+One file per session or per significant topic. If a session covers multiple unrelated topics, write one file per topic.
+
+### Required format
+
+Use `djinn/logs/REPORT-TEMPLATE.md` as the base. Every report must have:
+
+1. **YAML frontmatter** — title, agent, date, tags, related wikilinks
+2. **Summary** — 2–4 sentences: what, why, key outcome
+3. **What Was Built or Changed** — specifics: names, paths, commands
+4. **Technical Decisions** — non-obvious choices with rationale
+5. **Files Created or Modified** — explicit list
+6. **Tests & Validation** — what was run, what passed
+7. **Known Issues** — caveats and limitations (write "None" if clean)
+8. **What's Next** — checkbox list, assign to agent where known
+9. **Signature** — `— AgentName, YYYY-MM-DD`
+
+### Build log and decision log
+
+After writing the full report, also append a **short summary entry** (3–8 bullet points) to:
+- `djinn/logs/build-log.md` — what was done
+- `djinn/decisions/decision-log.md` — if any architectural decision was made
+
+### Enforcement
+
+Any AI agent — Claude, Salomon opencode, Typhon opencode, or any media/design agent — is expected to produce a report unprompted. If Javier has to ask for a report, the session protocol was not followed.
+
+*— Claude, 2026-05-24*
