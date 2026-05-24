@@ -2768,3 +2768,7 @@
 | 2026-05-24 19:04 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-24 19:05 UTC | printing | 0.0% | 220.4 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-24 19:06 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 19:07 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 19:08 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 19:09 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 19:10 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
