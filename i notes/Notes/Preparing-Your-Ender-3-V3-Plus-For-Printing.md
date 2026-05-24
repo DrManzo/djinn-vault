@@ -1,7 +1,9 @@
 ---
 subject: 3d-printing/printer-setup/filament-preparation
 tags:
-  - 3d-printing/printer-setup/beginner-guide/bed-preparation/filament-type
+  - 3d-printing/printer-setup/beginner-guide
+  - 3d-printing/filament/preparation
+  - 3d-printing/printer-maintenance
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -56,12 +58,4 @@ If you still experience adhesion issues after cleaning and leveling, enable a br
 - [Tom's 3D](https://toms3d.org/2020/11/11/how-i-tune-in-new-filaments/)
 
 ## Related
-- [[Ender-3-V3-Plus-Guide]] — Comprehensive guide for setting up and using the Ender 3 V3 Plus.
-- [[Filament-Troubleshooting]] — Tips for resolving common filament-related issues in 3D printing.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: academic-writing/apa-style, academic-writing/study-strategies, accounting/cycle/close, accounting/principles/governance, accounting/ratios/performance-analysis, accounting/systems/adjusting-entries/supplies, accounting/systems/trial-balance/order-structure, ai/development/cli, ai/development/faust/cli, ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, banking/evaluation/factors, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/accounting-systems, business/accounting-systems/legal-entities/subsidiaries, business/analytics, business/behavioral-economics, business/branding-strategies/identity, business/business-plan, business/business-planning/tactics, business/career-factors/accountability, business/career-factors/benefits, business/career-factors/commitment, business/career-factors/communication, business/career-factors/income-stability, business/career-factors/personal-growth, business/career-factors/planning, business/career-factors/productivity, business/career-factors/professionalism
+- [[3-Apprentice-Level-Portfolio-Projects-For-Freecodecamp-Cs50]] — similarity
