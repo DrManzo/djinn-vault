@@ -178,6 +178,8 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "printer/library/typhons-forge-coin/coin_preview_combined.scad.tmp.303979.590d0e6848e1",
+    "printer/library/typhons-forge-coin/coin_base_38.scad.tmp.303979.6c64c53e81fa",
     "printer/library/spooletarium-v2",
     "printer/puffco_proxy_quad_uptake_recycler_specs.md",
     "djinn-handoff-package.md",
@@ -189,8 +191,6 @@
     "printer/library/spooletarium/Spooletarium Classic/spooletarium_planets.stl",
     "printer/library/spooletarium/Spooletarium Classic/spooletarium_classic_structure_edit.stl",
     "printer/library/spooletarium/Spooletarium Classic/spooletarium_classic_pillars.stl",
-    "printer/library/spooletarium/Spooletarium Classic/spooletarium_classic_gears.stl",
-    "printer/library/spooletarium/Spooletarium Classic",
     "TROUBLESHOOT.md",
     "printer/process/PRINT-LOG.md",
     "printer/process/INTAKE.md",
