@@ -6574,3 +6574,63 @@ Javier approved the full multi-agent manufacturing pipeline spec. Recorded to `d
 Unified orchestrator Python app — intent parser routes to agents, shared project state object. Phase 1: orchestrator shell + intent classifier.
 
 — Claude
+
+---
+
+## 2026-05-24 — Claude — Manufacturing Orchestrator Built and Live
+
+Six-agent manufacturing pipeline is fully implemented. All code committed and pushed.
+
+### What was built
+
+**`djinn/printer/agent/orchestrator/`** — new package:
+
+| File | Role |
+|------|------|
+| `project_state.py` | ProjectState dataclass — extends print-queue.json schema across all pipeline phases |
+| `llm.py` | Backend abstraction — Anthropic (Claude) if API key set, else phi4:14b via Ollama |
+| `orchestrator.py` | Intent parser + routing + formatted output |
+| `agents/design_gen.py` | DesignGenAgent — brief → concept JSON + parametric OpenSCAD file |
+| `agents/design_edit.py` | DesignEditAgent — modifies existing SCAD without rebuilding |
+| `agents/proto_opt.py` | ProtoOptAgent — renders prototype-light and production STLs |
+| `agents/doe_opt.py` | DOEPrintOptAgent — Taguchi factor grid + literature prediction models |
+| `agents/plate_nest.py` | PlateNestAgent — decimate + arrange + export plate STL |
+
+**CLI:** `djinn-design` installed at `~/.local/bin/djinn-design`
+
+**Venv:** `~/.venvs/djinn-orchestrator` (Python 3.11, anthropic + pyDOE2 + trimesh + pymeshlab + scipy + ollama)
+
+**API key:** `~/.config/djinn/claude.env` — key commented out, phi4:14b used until filled in
+
+**OpenClaw:** `design`, `design edit`, `design optimize`, `design doe`, `design plate`, `design status` command handlers added
+
+### DOE engine verified
+
+Smoke tested DOEPrintOptAgent standalone (no LLM required — pure prediction):
+- Input: bracket, prototype_fast goal, no enclosure, hot-end sock installed
+- Output: 0.36mm / gyroid 10% / 2 walls → -76% time | -51% material vs standard settings
+- 108 candidates evaluated, 108 passing constraints, confidence: high
+
+### How to activate Claude routing
+
+```bash
+echo "ANTHROPIC_API_KEY=sk-ant-..." >> ~/.config/djinn/claude.env
+chmod 600 ~/.config/djinn/claude.env
+```
+
+Without key → phi4:14b (local, always warm). With key → claude-sonnet-4-6.
+
+### Usage
+
+```bash
+djinn-design "make a wall-mount camera bracket, PETG, 120×80×60mm, 1.5kg load"
+djinn-design --job 2 --edit "add cable relief slot 8×4mm on the right side"
+djinn-design --job 2 --optimize
+djinn-design --job 2 --doe prototype_fast
+djinn-design --job 2 --plate
+djinn-design --status
+```
+
+Or from Discord/Telegram via OpenClaw: `design <brief>`, `design doe 2 fast`, etc.
+
+— Claude
