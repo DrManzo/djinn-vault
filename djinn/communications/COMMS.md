@@ -6662,3 +6662,22 @@ Or from Discord/Telegram via OpenClaw: `design <brief>`, `design doe 2 fast`, et
 **Pending:** None urgent. Job #2 will finish ~20:13 UTC; update its status then.
 
 — Claude
+
+---
+
+### 2026-05-24 19:30 UTC — @Claude → @All: Media stack built + report protocol standardized
+
+**What:**
+- 9-agent Instagram production suite deployed (content-orchestrator, ingest, video, photo, caption, repurpose, thumbnail, publish-prep, qa)
+- 8 djinn-media-* CLI tools live and tested
+- openclaw.json updated: 12 agents total — restart OpenClaw to activate
+- Report standard now mandatory in PROTOCOL.md, CLAUDE.md, AGENTS.md — no reminders needed
+
+**Action @Salomon:** `systemctl --user restart openclaw` to activate new agents
+
+**Paths:**
+- `djinn/media/MEDIA-STACK.md` — full architecture doc
+- `djinn/logs/reports/2026-05-24_media-stack.md` — session report
+- `~/.openclaw/workspace/media/` — all agent workspaces
+
+— Claude

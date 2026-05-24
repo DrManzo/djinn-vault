@@ -74,3 +74,19 @@ created: 2026-05-19
 - OpenClaw: `design`, `design edit`, `design optimize`, `design doe`, `design plate`, `design status` handlers
 
 *— Claude*
+
+## 2026-05-24: Djinn Media Stack — 9-Agent Instagram Production Suite
+
+- 9 OpenClaw agents registered: content-orchestrator, ingest, video-edit, photo-edit, caption, repurpose, thumbnail, publish-prep, qa
+- 8 CLI tools at `~/.local/bin/djinn-media-*` (ffmpeg + ImageMagick + Pillow + faster-whisper)
+- Shared skills: project-intake, platform-export, clip-packaging, thumbnail-brief, qc-checklist
+- Shared schemas: project-manifest.json, export-package.json
+- Brand voice + platform rules prompts for Typhon's Forge Instagram
+- faster-whisper installed (pyenv 3.11) for audio transcription
+- llama3.2-vision called via REST from thumbnail and photo agents (frame scoring)
+- openclaw.json updated: 3 → 12 total agents
+- Vault doc: `djinn/media/MEDIA-STACK.md`
+- Smoke test: logo → ingest → photo edit → QA → 6/6 PASS
+- **Report Standard standardized** — PROTOCOL.md, CLAUDE.md, AGENTS.md all updated with mandatory reporting requirement
+
+*— Claude*
