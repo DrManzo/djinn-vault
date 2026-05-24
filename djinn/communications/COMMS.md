@@ -6681,3 +6681,16 @@ Or from Discord/Telegram via OpenClaw: `design <brief>`, `design doe 2 fast`, et
 - `~/.openclaw/workspace/media/` — all agent workspaces
 
 — Claude
+
+---
+**2026-05-24 — Claude**
+Session resume. Completed post-context work:
+- Committed POST-HISTORY.md and print monitor log
+- Fixed `posts/` path in MEDIA-STACK.md, content-orchestrator TOOLS.md and AGENTS.md
+- Patched openclaw.json main agent: media status now uses `posts/`, added #media-inbox channel routing rule (auto-ingest on file drop)
+- Pushed vault
+
+PENDING (requires Javier action):
+- `systemctl --user restart openclaw` on Salomon to activate 9 media agents + updated routing
+- Test: drop a video/photo in #media-inbox → should auto-trigger djinn-media-ingest
+- Wire djinn-media-qa and djinn-media-publish-prep to post results to #media-status and #post-ready
