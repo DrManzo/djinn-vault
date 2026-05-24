@@ -1,10 +1,10 @@
 ---
 subject: literature/character-analysis/moral-disengagement
 tags:
-  - psychology/moral-disengagement/displacement-of-responsibility
-  - psychology/moral-disengagement/compartamentalization
-  - psychology/moral-disengagement/moral-justification
-  - literature/character-development/empathy-deficits
+  - psychology/defense-mechanisms/displacement-of-responsibility
+  - psychology/defense-mechanisms/compartamentalization
+  - psychology/moral-disengagement
+  - psychology/cognitive-psychology
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -57,6 +57,6 @@ The calculated nature suggests high cognitive function combined with profound em
 - [ebsco](https://www.ebsco.com/research-starters/religion-and-philosophy/moral-disengagement)
 
 ## Related
-- [[character-development/empathy-deficits]] — Understanding the psychological impact of empathy deficits.
-- [[moral-psychology/displacement-of-responsibility]] — Exploring how individuals distance themselves from their actions.
-- [[transactional-morality]] — Analyzing moral frameworks based on cost-benefit calculations.
+- [[Cognitive Dissonance]] — similarity 0.76
+- [[Displacement of Responsibility]] — similarity 0.85
+- [[Compartmentalization]] — similarity 0.92

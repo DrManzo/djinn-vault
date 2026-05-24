@@ -1,11 +1,10 @@
 ---
 subject: fiction/writing/creative/story-creation
 tags:
-  - fiction/writing/creative/prompts
-  - fiction/writing/creative/pyraxis
-  - fiction/writing/creative/big-brain-invasion
-  - fiction/writing/creative/character-development
-
+  - creative/fantasy/story-telling
+  - creative/world-building
+  - creative/character-development
+  - creative/conflict-resolution
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -44,9 +43,5 @@ The assignment involves crafting a short story that aligns with the "Big Brain" 
 - [Perplexity](https://www.perplexity.ai/search/c92cfc93-d3bf-478d-895d-a05758c36dc4)
 
 ## Related
-- [[Dominion-of-Pyraxis-World-Building]] — Detailed world-building for *The Dominion of Pyraxis*.
-- [[Character-Development-Guide]] — Guide on developing characters in fantasy settings.
-
----
-
-This note captures the essence of the assignment and provides a structured approach to addressing the prompt. It aligns with the creative writing context, maintains world consistency, and outlines key elements for character development and scene creation.
+- [[Fantasy-Book-Magic-And-Worldbuilding]] — similarity
+- [[The-Haze-Of-The-Green-Serpent]] — similarity

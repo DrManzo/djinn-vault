@@ -1,8 +1,9 @@
 ---
 subject: business/strategy/growth-planning
 tags:
-  - business/marketing/research
-  - business/business-planning/tactics
+  - business/strategy/planning
+  - business/guidance/implement
+  - business/business-plan
 created: 2026-05-23
 source: Perplexity export
 
@@ -52,7 +53,10 @@ Typhons Forge LLC is a multi-faceted company aiming to maximize profitability th
 - [[Business-Strategy-Guidance]] — Comprehensive business strategy advice.
 - [[Market-Research-Tools]] — Tools and methods for conducting market research.
 - [[Competitor-Analysis-Methods]] — Detailed methods for analyzing competitors.
-
 ---
 
 This note captures the essential elements of Typhons Forge LLC's business plan, focusing on strategic guidance provided by Marcus. It can be used as a reference for further development and implementation in the business planning process.
+
+## Related
+- [[Strategic-Framework-For-Meance-Llc]] — strategic-similarity
+- [[Identifying-Core-Business-Problems]] — problem-similarity

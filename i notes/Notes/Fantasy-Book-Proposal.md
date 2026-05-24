@@ -1,9 +1,9 @@
 ---
 subject: creative/fantasy-writing/magic-system/inspiration
 tags:
-  - fantasy-writing/story-structure
-  - fantasy-writing/magic-mechanics
-  - fantasy-writing/universe-building
+  - creative/fantasy/world-building
+  - creative/fantasy/magic-system
+  - creative/fantasy/political-dynamics
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -38,9 +38,5 @@ The proposal aims to create a rich, multi-layered universe where magic is woven 
 - [Harry Potter Series](https://www.goodreads.com/series/11911.harry-potter)
 
 ## Related
-- [[Fantasy-Universe-Building]] — Comprehensive guide to creating a rich fantasy world.
-- [[Magic-System-Design]] — Detailed steps for designing a magic system in fantasy writing.
-
----
-
-This structured note captures the essence of the proposal, ensuring clarity and coherence as you develop your narrative.
+- [[Key-Aspects-Of-World-Building-For-Aethoria]] — similarity
+- [[World-Building-Comparison]] — similarity

@@ -6167,3 +6167,149 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personal-Finance-Budget-And-Planning.md`
 
 — Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Business-Assistance-For-Typhons-Forge-Llc.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fantasy-Book-Proposal.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Moments-Unfolding.md`
+
+— Clerk
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Fantasy-Book-Magic-And-Worldbuilding.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Summary-For-Chapter-3-Planning.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Psychological-Analysis-Of-A-Quote-For-Character-Development.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Dominion-Of-Pyraxus-Big-Brain-Invasion-Prompt-Analysis.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Dominion-Of-Pyraxis-Quick-Reference-Guide.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Story-So-Far-In-Pyraxis.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/First-Date-Planning-In-Menifee-California.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Assessing-Business-Model-Complexity-For-Bank-Perception.md`
+
+— Slipbox
+
+---
+
+### 2026-05-23 23:59 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Typhons-Forge-Llc-Business-Plan-Guidance.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 00:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Marcus-I-Needs-You.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 00:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Comprehensive-Business-Plan-For-Typhons-Forge-Llc.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 00:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Business-Assistance-For-Typhons-Forge-Llc.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 00:00 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Moments-Unfolding.md`
+
+— Slipbox

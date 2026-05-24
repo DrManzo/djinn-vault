@@ -1,4 +1,11 @@
 ---
+tags:
+  - fiction/plot-development/character-interactions
+  - fiction/world-building/magic-systems
+  - fiction/conflict/political-drama
+---
+
+---
 subject: fiction/story-telling/fantasy
 tags:
   - fiction/plot-development/character-interactions
