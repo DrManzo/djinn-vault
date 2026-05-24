@@ -36,5 +36,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-24 04:59 UTC | Sliced — waiting for confirm |
+| 2026-05-24 05:05 UTC | Sliced — waiting for confirm |
 

@@ -1,11 +1,11 @@
 ---
 subject: 3d-printing/filament-selection/compatible-types
 tags:
-  - 3d-printing/filament/pla
-  - 3d-printing/filament/petg
-  - 3d-printing/filament/carbon-fiber
-  - 3d-printing/filament/toys
-  - 3d-printing/filament/prototypes
+  - 3d-printing/filament/compatible
+  - 3d-printing/filament/types
+  - 3d-printing/filament/recommendations
+  - 3d-printing/printer-models/ender-3-v3-plus
+  - personal/hobby/printing
 created: 2026-05-23
 source: Perplexity export
 ---
@@ -66,5 +66,4 @@ Use PLA for rapid prototyping and switch to PETG for final functional parts. Bot
 - [Eufymake](https://www.eufymake.com/blogs/buying-guides/petg-vs-pla-filament)
 
 ## Related
-- [[3d-printing/filament-selection/compatible-types]] — Filaments for Creality Ender 3 V3 Plus
-- [[3d-printing/materials-guide/proxy-erigs]] — Guide on materials for Puffco Proxy-style erigs
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing]] — preparation guide

@@ -6367,3 +6367,40 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Filaments-For-Creality-Ender-3-V3-Plus.md`
 
 — Clerk
+
+---
+
+### 2026-05-24 05:04 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Technical-Description-Of-Puffco-Proxy-Quad-Uptake-Recycler.md`
+
+— Clerk
+
+---
+
+### 2026-05-24 05:05 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 05:05 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Filaments-For-Creality-Ender-3-V3-Plus.md`
+
+— Slipbox
+
+---
+
+### 2026-05-24 05:05 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Technical-Description-Of-Puffco-Proxy-Quad-Uptake-Recycler.md`
+
+— Slipbox
