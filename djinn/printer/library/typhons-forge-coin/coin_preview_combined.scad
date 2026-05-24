@@ -24,7 +24,7 @@ module back_text() {
     mirror([1, 0, 0])
     linear_extrude(height=TEXT_DEPTH + 0.01)
     text("THE TERP TRIBE",
-         size=2.2, halign="center", valign="center",
+         size=1.8, halign="center", valign="center",
          font="Liberation Serif:style=Bold", spacing=1.0);
 }
 
