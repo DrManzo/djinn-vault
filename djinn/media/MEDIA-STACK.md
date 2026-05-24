@@ -91,7 +91,7 @@ All at `~/.local/bin/` — pre-approved for all OpenClaw agents.
 ## Project Structure
 
 ```
-~/Obsidian/djinn/media/projects/<project_id>/
+~/Obsidian/djinn/media/posts/<project_id>/
 ├── manifest.json
 ├── raw/                ← originals, never modified
 ├── selects/
