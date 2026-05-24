@@ -4,7 +4,7 @@ date: 2026-05-23
 source: https://cdn.discordapp.com/attachments/1507882513891065876/1507968485693849600/proxy_parts_mario_pipe.3mf?ex=6a13d497&is=6a128317&hm=4cde85f0f96daf36fc41e2cd2642810dff9cbb47ddea0f7b00d723c1f6afcf51&
 model: /home/drmanzo/Obsidian/djinn/printer/library/8485693849600_proxy_parts_mario_pipe_3mf/model.3mf
 gcode: /home/drmanzo/Obsidian/djinn/printer/queue/model_job1.gcode
-status: pending
+status: printing
 supports: True
 infill: 15%
 brim: False
@@ -37,5 +37,4 @@ Calliope will NOT start automatically.
 | Time | Event |
 |------|-------|
 | 2026-05-24 05:05 UTC | Sliced — waiting for confirm |
-
-| 2026-05-24 07:31 UTC | Print started |
+| 2026-05-24 07:31 UTC | Print started — mario pipe + 4× Typhon's Forge coins (updated plate) |

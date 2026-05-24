@@ -42,3 +42,35 @@ created: 2026-05-19
 ---
 
 *— Claude*
+
+## 2026-05-24: Manufacturing Orchestrator + Coin + FairPrintAgent
+
+**Typhon's Forge Challenge Coin (2026-05-23)**
+- 38mm × 4.5mm challenge coin designed from PNG logo
+- Pipeline: PNG → PBM (ImageMagick) → SVG (potrace) → OpenSCAD parts → trimesh merge
+- Final: LOGO_SCALE=0.0448 (20% reduction to stop corner text clipping), text size=3.8
+- Key discoveries: OpenSCAD CGAL union() silently fails on 1M-face meshes; SVG center must be measured from rendered STL not SVG header
+- Build report: `djinn/printer/library/typhons-forge-coin/COIN_BUILD_REPORT.md`
+
+**FairPrintAgent / djinn-print-quote (2026-05-23)**
+- Commission pricing CLI: `(material + time + design) / 0.60`
+- Library auto-detect: design cost → $0 if piece name matches library folder
+- Market fetch: ddgs DuckDuckGo/Etsy search
+- Full agent mode: weighted cost+market blend, 4 job types
+- OpenClaw: `quote`, `quick quote` command handlers added
+
+**Print Job #1 — mario pipe + 4 coins (2026-05-24)**
+- Combined plate: proxy_parts_mario_pipe + 4× Typhon's Forge coins
+- PrusaSlicer silently dropped pipe when combined STL exceeded ~200MB
+- Fix: decimate coins to 15k faces with pymeshlab → plate = 3.3MB → sliced correctly
+- 3h 20m / 59.8g — started 2026-05-24
+
+**Six-Agent Manufacturing Orchestrator (2026-05-24)**
+- Package: `djinn/printer/agent/orchestrator/`
+- Agents: DesignGenAgent, DesignEditAgent, ProtoOptAgent, DOEPrintOptAgent, PlateNestAgent (all live)
+- CLI: `djinn-design` at `~/.local/bin/djinn-design`
+- Venv: `~/.venvs/djinn-orchestrator/` (Python 3.11 — anthropic, pyDOE2, trimesh, pymeshlab, scipy)
+- DOE engine verified: -76% time / -51% material for prototype_fast vs standard settings
+- OpenClaw: `design`, `design edit`, `design optimize`, `design doe`, `design plate`, `design status` handlers
+
+*— Claude*

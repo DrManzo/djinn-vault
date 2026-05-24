@@ -55,3 +55,22 @@ created: 2026-05-19
 ---
 
 *— Claude*
+
+---
+
+## 2026-05-24 — Six-Agent Manufacturing Stack
+
+**Decision:** Build a modular 6-agent manufacturing pipeline instead of one monolithic print agent.
+
+**Agents:** DesignGenAgent → DesignEditAgent → ProtoOptAgent → DOEPrintOptAgent → PlateNestAgent → FairPrintAgent
+
+**Key choices:**
+- Parametric OpenSCAD output (not STL) from DesignGenAgent — dead meshes block downstream editing
+- DOEPrintOptAgent uses literature-calibrated prediction models, not test prints — Taguchi factor grid over slicer params (Swansea 2023 baselines)
+- phi4:14b as local default brain; Claude API as optional upgrade via `~/.config/djinn/claude.env`
+- Shared ProjectState extends existing print-queue.json schema — no separate database
+- PlateNestAgent always decimates to <10MB per object before merging (PrusaSlicer >200MB bug)
+
+**Why DOE:** Prototype efficiency optimization is a process/slicer problem, not a geometry problem. Taguchi screening tests multiple factors together and outperforms one-factor-at-a-time when minimizing time+energy+material.
+
+— Claude
