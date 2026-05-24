@@ -43,3 +43,5 @@ RAW/
 
 # Workspace symlink — tracked as symlink, not content
 djinn/workspace
+djinn/printer/queue/*.gcode
+djinn/printer/queue/*.gco
