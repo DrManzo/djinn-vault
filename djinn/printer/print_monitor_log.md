@@ -2822,3 +2822,12 @@
 | 2026-05-24 19:59 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-24 20:00 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-24 20:01 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:02 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:03 UTC | printing | 0.0% | 220.4 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:05 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:06 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:07 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:08 UTC | complete | 0.0% | 194.3 | 0 | 55.1 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:09 UTC | complete | 0.0% | 144.1 | 0 | 55.2 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:10 UTC | complete | 0.0% | 111.3 | 0 | 55.1 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-24 20:11 UTC | complete | 0.0% | 88.9 | 0 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
