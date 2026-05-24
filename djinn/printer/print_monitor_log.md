@@ -1966,3 +1966,5 @@
 | 2026-05-24 05:18 UTC | printing | 0.0% | 219.4 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 05:19 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
 | 2026-05-24 05:20 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 05:21 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
+| 2026-05-24 05:22 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | puffco_proxy_recycler.gcode |
