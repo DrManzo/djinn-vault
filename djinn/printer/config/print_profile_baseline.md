@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-05-24 20:19 UTC
-Source file: 
+Generated: 2026-05-24 20:25 UTC
+Source file: model_job3.gcode
 Readings: 840
 
 ## Temperatures
