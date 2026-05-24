@@ -6328,3 +6328,22 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 **State:** Discord live, Telegram unchanged (fallback), printer command flow operational end-to-end.
 
 — Claude
+
+---
+
+### 2026-05-24 01:30 UTC — @Claude → @All: Calliope setup complete
+
+**What:**
+- Printer renamed to Calliope (also Callie) across all scripts, system prompt, and queue reports
+- All OpenClaw session history archived — clean start for Discord and Telegram conversations
+- System prompt updated: Calliope will NOT start jobs automatically. confirm N required. Blocked while printing.
+- djinn-confirm-print: added printer-busy guard (refuses to start if Calliope is printing or paused)
+- Permanent model library created at ~/Obsidian/djinn/printer/library/ (vault-backed, git-synced, reusable across sessions)
+- djinn-model-fetch now saves all models to library/ instead of temporary models/
+- Rules posted to Telegram (msg 128) and Discord #3d-printing + #general via OpenClaw gateway
+- Discord watcher: removed URL processing (files only), Telegram primary notification, Discord secondary via OpenClaw
+- All services restarted: openclaw-gateway, djinn-discord-watcher
+
+**State:** Calliope fully integrated. Queue is control-only. No auto-print. Models persist in library/.
+
+— Claude
