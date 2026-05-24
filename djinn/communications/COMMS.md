@@ -6643,3 +6643,22 @@ Or from Discord/Telegram via OpenClaw: `design <brief>`, `design doe 2 fast`, et
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+### 2026-05-24 18:49 UTC — @Claude → @All: Session close — Job #1 complete, Job #2 printing
+
+**What:**
+- Job #1 (mario pipe + 4× Typhon's Forge coins) — **completed** 2026-05-24 10:22 UTC, 2h 47m, 20059mm / 59.83g used
+- Job #2 (anybodywantcoffee) — **printing** now, ~84m remaining, ETA 20:13 UTC
+- DOE optimizer integrated: Job #2 used balanced profile (0.24mm / 80mm/s / gyroid 20% / 3 walls) → -35% time / -32% material
+- djinn-design CLI live: `djinn-design "<brief>"`, `--status`, `--job N --doe`, etc.
+- Six-agent manufacturing stack fully deployed and committed
+
+**State:**
+- Queue: Job #1 = completed, Job #2 = printing (0.52%, layer 1/216)
+- Calliope: printing model_job2.gcode
+
+**Pending:** None urgent. Job #2 will finish ~20:13 UTC; update its status then.
+
+— Claude
