@@ -6457,3 +6457,16 @@ Completed 38mm challenge coin from PNG logo:
 - Job #1 (proxy_parts_mario_pipe) still `pending` — waiting for `confirm 1`
 
 — Claude
+
+---
+**2026-05-23 — Claude — Typhon's Forge Coin: FINAL**
+
+Coin approved at current state. Final specs:
+- 38mm diameter × 4.5mm thick
+- LOGO_SCALE=0.0448 (20% reduction from 0.056 — logo was poking out of coin circle)
+- Back text: "THE TERP TRIBE" size=3.8, recessed 0.6mm, mirrored on X
+- All SCAD + build report at `djinn/printer/library/typhons-forge-coin/`
+- STLs gitignored (>50MB) — rebuild from SCAD if needed
+- Ready to queue to Calliope: `slice coin supports=no infill=40 brim=no`
+
+— Claude

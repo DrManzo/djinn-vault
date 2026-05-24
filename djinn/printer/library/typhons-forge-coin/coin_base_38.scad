@@ -17,11 +17,11 @@ module back_text() {
     mirror([1, 0, 0])
     linear_extrude(height=TEXT_DEPTH + 0.01)
     text("THE TERP TRIBE",
-         size=1.8,
+         size=3.8,
          halign="center",
          valign="center",
          font="Liberation Serif:style=Bold",
-         spacing=1.0);
+         spacing=1.05);
 }
 
 difference() {

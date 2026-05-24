@@ -6,7 +6,7 @@ RIM_W      = 1.5;
 RIM_H      = 0.8;
 TEXT_DEPTH = 0.6;
 FN         = 128;
-LOGO_SCALE = 0.0560;
+LOGO_SCALE = 0.0448;
 SVG_CX     = 523.0;
 SVG_CY     = 373.6;
 
@@ -24,7 +24,7 @@ module back_text() {
     mirror([1, 0, 0])
     linear_extrude(height=TEXT_DEPTH + 0.01)
     text("THE TERP TRIBE",
-         size=1.8, halign="center", valign="center",
+         size=3.8, halign="center", valign="center",
          font="Liberation Serif:style=Bold", spacing=1.0);
 }
 
