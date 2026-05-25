@@ -2,12 +2,12 @@
 title: Djinn Media Stack
 tags: [djinn, media, instagram, agents, social]
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-05-25
 ---
 
 # Djinn Media Stack — Instagram Production Suite
 
-9-agent pipeline for photo and video post-production targeting Instagram.
+14-agent pipeline for photo and video post-production targeting Instagram. All color grading uses `.cube` LUT files shared between photo and video tools — identical look across every export.
 
 **Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[AGENTS]]
 
@@ -16,15 +16,16 @@ updated: 2026-05-24
 ## Architecture
 
 ```
-Raw Media (photo / video / audio)
+Raw Media (photo / video / audio)  +  notes (optional quoted draft)
         ↓
-  djinn-media-ingest          ← creates project, writes manifest
+  djinn-media-ingest          ← creates project, writes manifest, stores --notes
         ↓
   ┌─────┴──────┐
   │            │
 photo      video/audio
   │            │
-photo-edit  video-edit       ← color grade, crop, export 9:16 Reel
+photo-edit  video-edit       ← ffmpeg + lut3d grade, crop, export 9:16 Reel
+  │          (--combine       ← concat multiple clips in upload order)
   │            │
   │        caption-agent     ← faster-whisper transcription + SRT burn
   │            │
@@ -35,7 +36,9 @@ photo-edit  video-edit       ← color grade, crop, export 9:16 Reel
         ↓
   qa-agent                   ← spec checks (resolution, codec, duration, size)
         ↓
-  publish-prep-agent         ← phi4:14b → caption, hashtags, alt text, checklist
+  publish-prep-agent         ← draft-polish or cold-generate → caption, hashtags
+        ↓
+  Google Drive upload + Discord notification (#post-ready, #media-status)
 ```
 
 ---
@@ -46,15 +49,23 @@ photo-edit  video-edit       ← color grade, crop, export 9:16 Reel
 |-------|-------|------|
 | `content-orchestrator` | qwen2.5:7b | Routes jobs to specialist agents |
 | `ingest-agent` | qwen2.5:7b | Creates project structure + manifest |
-| `video-edit-agent` | qwen2.5:7b | ffmpeg Reel export, color grading |
-| `photo-edit-agent` | qwen2.5:7b | ImageMagick + Pillow photo editing |
+| `video-edit-agent` | qwen2.5:7b | ffmpeg Reel export, LUT color grading, --combine |
+| `photo-edit-agent` | qwen2.5:7b | ffmpeg + LUT photo editing, vision QC |
 | `caption-agent` | qwen2.5:7b | faster-whisper STT → SRT → burn |
 | `repurpose-agent` | qwen2.5:7b | Long-form → Reel clips |
 | `thumbnail-agent` | qwen2.5:7b | Frame scoring + cover compositing |
-| `publish-prep-agent` | phi4:14b | Instagram captions, hashtags, checklist |
+| `publish-prep-agent` | qwen2.5:7b / phi4:14b | Captions, hashtags, Drive upload, Discord |
 | `qa-agent` | qwen2.5:7b | Platform spec QC gate |
+| `hashtag-agent` | phi4:14b | Hashtag bank management + trend research |
+| `style-scraper-agent` | qwen2.5:7b | DuckDuckGo aesthetic reference scraper |
 
-Vision: `llama3.2-vision:11b` called via REST from photo-edit + thumbnail agents.
+Plus: `main`, `law`, `coder` agents (general purpose). **Total: 14 agents.**
+
+Vision: `llama3.2-vision:11b` called via REST from photo-edit + thumbnail agents for QC scoring.
+
+**Caption model routing:**
+- Draft present (quoted text in notes → "like this") → `qwen2.5:7b` polish pass
+- No draft → `phi4:14b` cold generation
 
 ---
 
@@ -64,27 +75,117 @@ All at `~/.local/bin/` — pre-approved for all OpenClaw agents.
 
 | Command | Purpose |
 |---------|---------|
-| `djinn-media-ingest <path>` | Create project from file or folder |
-| `djinn-media-photo <id> [--style forge\|clean\|dark\|bright]` | Edit photos → feed + story exports |
-| `djinn-media-reel <id> [--style forge\|clean\|moody] [--duration 90]` | Export 9:16 Reel |
+| `djinn-media-ingest <path> [--notes "text"]` | Create project from file or folder |
+| `djinn-lut-gen` | Regenerate forge/clean/moody .cube LUT files |
+| `djinn-media-photo <id> [--style forge\|clean\|moody\|raw] [--format feed\|story\|both]` | Edit photos → feed + story exports |
+| `djinn-media-reel <id> [--style forge\|clean\|moody\|raw] [--combine] [--duration 90] [--start 0]` | Export 9:16 Reel |
 | `djinn-media-caption <id> [--model medium\|large-v3] [--burn]` | Transcribe + burn captions |
 | `djinn-media-repurpose <id> [--clips 5]` | Slice into Reel clips |
 | `djinn-media-thumbnail <id> [--text "title"] [--style bold\|band]` | Generate thumbnails |
 | `djinn-media-qa <id>` | Platform compliance check |
-| `djinn-media-publish-prep <id> [--notes "context"]` | Caption + hashtag package |
+| `djinn-media-publish-prep <id>` | Caption + hashtag package + Drive upload + Discord |
+| `djinn-hashtag-update [--report] [--research] [--add #tag --category cat --tier mid] [--dump]` | Hashtag bank manager |
+| `djinn-style-scrape [--query "text"] [--max N]` | Scrape DuckDuckGo for aesthetic reference images |
 
 ---
 
-## Color Grade Presets
+## LUT Color Grading System
 
-| Preset | Description |
-|--------|-------------|
-| `forge` | High contrast, warm shadows, desaturated mids — dark cinematic |
-| `clean` | Neutral, lifted shadows, natural color |
-| `moody` | Crushed blacks, teal shadows, warm highlights |
-| `dark` | Low-key, rich blacks, desaturated |
-| `bright` | Airy, high-key, lifted midtones |
-| `raw` | Resize/crop only — no color changes |
+LUT files at `~/.openclaw/workspace/media/shared/luts/` — generated by `djinn-lut-gen`.
+
+| Preset | Description | Use When |
+|--------|-------------|----------|
+| `forge` | Warm tungsten (3900K), copper shadows, S-curve, 15% desaturation | Default — dark maker aesthetic |
+| `clean` | Cool daylight (5600K), +10% saturation, gentle contrast | Product detail shots |
+| `moody` | Teal shadows, blue push, 25% desaturation, cinematic | Atmospheric/mood content |
+| `raw` | Resize/crop only — no color changes | Neutral baseline |
+
+Photos and videos use the **same .cube files** via ffmpeg `lut3d` filter — consistent look guaranteed.
+
+---
+
+## Reference Library & Vision QC
+
+`~/.openclaw/workspace/media/shared/references/`
+
+```
+references/
+├── approved/     ← Drop your own examples here (JPEG/PNG). Ground truth for QC.
+└── scraped/      ← Auto-populated by djinn-style-scrape (currently 32 images)
+```
+
+`djinn-media-photo` scores every export against `approved/` + first 3 `scraped/` images using `llama3.2-vision`. Score 1–10 printed at export time. Score < 6 triggers a manual review warning.
+
+**Trigger a rescrape:**
+```bash
+djinn-style-scrape                          # all 8 default queries
+djinn-style-scrape --query "your search"   # specific query
+# or from Discord/Telegram: style scrape
+```
+
+Default queries: dark industrial 3d printing, gothic maker workshop, 3d printed cannabis accessories dark, industrial forge metal, dark moody product photography, typhons forge dark craft, cannabis accessories custom 3d print, dark maker studio.
+
+---
+
+## Hashtag Bank
+
+`~/Obsidian/djinn/media/hashtag-bank/` — 11 files, 236 tags, 3 tiers (broad/mid/micro).
+
+```
+hashtag-bank/
+├── 3d-printing/
+│   ├── general.md      (13 tags)
+│   ├── materials.md    (20 tags)
+│   ├── tools.md        (23 tags)
+│   └── community.md    (16 tags)
+├── cannabis/
+│   ├── general.md      (26 tags)
+│   ├── culture.md      (18 tags)
+│   ├── education.md    (21 tags)
+│   └── industry.md     (19 tags)
+├── typhons-forge/
+│   └── brand.md        (27 tags)
+├── crossover/
+│   └── maker-culture.md (36 tags)
+└── platform-rules/
+    └── instagram.md    (shadowban guidance, rotation strategy)
+```
+
+Tag selection is keyword-driven: publish-prep matches words from project notes/manifest against tag slugs to pick relevant tags. All tags validated against bank before writing POST.txt — hallucinated tags stripped.
+
+**Manage the bank:**
+```bash
+djinn-hashtag-update --report                           # audit all tags
+djinn-hashtag-update --research                         # phi4:14b trend research
+djinn-hashtag-update --add #newtag --category cannabis/culture --tier mid
+```
+
+Weekly research timer: `systemctl --user status djinn-hashtag-research.timer`
+
+---
+
+## Publish Output
+
+`publish/` folder per project — uploaded to Google Drive + Discord on completion.
+
+```
+publish/
+├── instagram_post.md     ← Obsidian-readable full package
+├── caption_feed.txt      ← Feed caption, plain text, phone copy-paste ready
+├── caption_reel.txt      ← Reel caption, plain text
+└── POST.txt              ← Everything in one file: captions + hashtags + checklist
+```
+
+**Google Drive layout:** `gdrive:Typhons-Forge/posts/<project_id>/`
+```
+publish/     ← all .txt + .md files
+video/       ← final reel .mp4
+feed/        ← 4:5 and 1:1 JPEG exports
+```
+
+**Discord posts:**
+- `#media-status` — pipeline summary + Drive link
+- `#post-ready` — full posting package (plain text) + Drive link
 
 ---
 
@@ -97,16 +198,16 @@ All at `~/.local/bin/` — pre-approved for all OpenClaw agents.
 ├── selects/
 ├── edits/
 ├── exports/
-│   ├── feed/           ← 1080×1080, 1080×1350 JPEG
-│   ├── reel/           ← 1080×1920 H.264 ≤90s
+│   ├── feed/           ← 1080×1080 (1:1), 1080×1350 (4:5) JPEG
+│   ├── reel/           ← 1080×1920 H.264+AAC ≤90s
 │   ├── story/          ← 1080×1920
-│   └── thumbnail/      ← 1280×720, 1080×1080, 1080×1920
+│   └── thumbnail/      ← 1280×720 (16:9), 1080×1080 (1:1), 1080×1920 (9:16)
 ├── captions/           ← SRT + transcript.txt
 └── publish/
-    ├── manifest.json
-    ├── qa_report.md
-    ├── instagram_post.md   ← feed caption, reel caption, story text, alt text
-    └── clips_manifest.json (if repurposed)
+    ├── instagram_post.md
+    ├── caption_feed.txt
+    ├── caption_reel.txt
+    └── POST.txt
 ```
 
 ---
@@ -115,38 +216,44 @@ All at `~/.local/bin/` — pre-approved for all OpenClaw agents.
 
 | Format | Resolution | Max Size | Codec | Notes |
 |--------|-----------|----------|-------|-------|
-| Feed photo | 1080×1080 (1:1) or 1080×1350 (4:5) | 8MB | JPEG | Strip EXIF |
+| Feed photo 4:5 | 1080×1350 | 8MB | JPEG | Primary crop |
+| Feed photo 1:1 | 1080×1080 | 8MB | JPEG | Square fallback |
 | Reel | 1080×1920 (9:16) | 3.6GB | H.264+AAC | ≤90s |
 | Story | 1080×1920 (9:16) | 4GB video | H.264+AAC | ≤60s |
-| Thumbnail | 1280×720 min | 8MB | JPEG Q≥85 | |
+| Reel cover | 1080×1920 | 8MB | JPEG | |
 
 ---
 
 ## Dependencies
 
-- `ffmpeg` — video (installed)
-- `convert` (ImageMagick 7.1.2) — photo editing (installed)
-- `python3` + `Pillow` — image processing (installed)
+- `ffmpeg` — video + photo processing (installed)
+- `python3` stdlib — all tools are pure stdlib or use ffmpeg subprocess
 - `faster-whisper` — audio transcription (installed via pyenv 3.11)
-- `llama3.2-vision:11b-instruct-q4_K_M` — frame analysis (Ollama, loaded on demand)
-- `phi4:14b` — caption writing (Ollama, loaded on demand)
+- `rclone` — Google Drive upload (installed, configured with gdrive remote)
+- `llama3.2-vision:11b-instruct-q4_K_M` — vision QC scoring (Ollama, on demand)
+- `phi4:14b` — cold caption generation + hashtag research (Ollama, on demand)
+- `qwen2.5:7b` — draft polish, tool routing (Ollama, always warm)
+- **Removed:** ImageMagick (replaced by ffmpeg)
 
 ---
 
 ## Telegram / Discord Triggers
 
-From `@DjinnOCBot` or Discord:
+From `@DjinnOCBot` or Discord `#media-inbox`:
 - `media <path>` — ingest
 - `photo <project_id>` — edit photos
 - `reel <project_id>` — export Reel
+- `reel <project_id> combine` — concat all raw clips
 - `caption <project_id>` — transcribe + captions
 - `repurpose <project_id>` — slice into clips
 - `thumbnail <project_id> [text]` — generate covers
 - `qa <project_id>` — quality check
-- `publish <project_id>` — generate posting package
+- `publish <project_id>` — generate posting package + upload + Discord notify
 - `media full <path>` — run entire pipeline end-to-end
 - `media status` — list all projects
+- `style scrape` — trigger djinn-style-scrape
+- `style scrape <query>` — targeted scrape
 
 ---
 
-*— Claude, 2026-05-24*
+*— Claude, 2026-05-25*
