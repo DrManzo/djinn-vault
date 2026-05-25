@@ -173,3 +173,11 @@ created: 2026-05-19
 - Fixed argparse crash on Python 3.14 (≤ char in help string → pct)
 
 *— Claude*
+
+## 2026-05-25: FairPrintAgent — expanded smoking source list
+
+- Added 7 new trusted retailers: geewestglass.com, 420trinkets.com, kaydmayd.com, dankgeek.com, smokecartel.com, smok3designs.com + 2 Etsy market URLs
+- Updated search queries to hit new retailers
+- Platform content rules added to monetization plan (Etsy/IG/TikTok — herb/tobacco language only)
+
+*— Claude*

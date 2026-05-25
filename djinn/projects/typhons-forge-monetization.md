@@ -87,6 +87,23 @@ Now          → Shift Instagram content toward pricing/business angle.
 
 ---
 
+## Platform Content Rules — Smoking Niche
+
+Critical for the media stack. Every caption and post touching smoking/dab content must follow these rules or risk account flags/bans.
+
+| Platform | Rule |
+|----------|------|
+| Etsy | List as "herb" or "tobacco" accessories — never "cannabis" or "weed" in listings |
+| Instagram | No direct smoking product promotion — show the print, not the use |
+| TikTok | Same as Instagram — flag-happy, stricter than IG |
+| YouTube | Gray area — educational framing ("3D printing accessories") is safer |
+
+**Action:** `PublishPrepAgent` and `CaptionAgent` must use platform-safe language for all smoking-adjacent content. "Dab station," "concentrate accessory," "herb storage" — not "weed," "cannabis," "stoner."
+
+**Competitors using this correctly:** SMOK3DESIGNS (smok3designs.com), Kayd Mayd — study their Etsy listing language.
+
+---
+
 ## Open Questions
 
 - [ ] What's the Instagram handle / exact URL? — @Javier to confirm
