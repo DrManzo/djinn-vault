@@ -154,6 +154,15 @@ created: 2026-05-19
 
 *— Claude*
 
+## 2026-05-25: Slice + Quote Pipeline Integration
+
+- `djinn-model-slice`: added `analyze_mesh()` (inline trimesh analysis for manually-added jobs), `parse_print_hours()`, `run_quote()` — commission quote now auto-generated and sent to Telegram/Discord on every slice
+- `djinn-print-quote`: added qty-tiered test-run fee — 30% (qty ≤5), 15% (qty 6–12), waived (qty 13+); fee based on material+machine cost; `--qty` CLI arg
+- pyglet downgraded to 1.5.31 in djinn-orchestrator venv (trimesh requires <2)
+- Job #6 GoPro_Tripod_flipped.3mf: sliced, quoted $15.60, confirmed, printing on Calliope
+
+*— Claude*
+
 ## 2026-05-25: FairPrintAgent — --size small|large for smoking pieces
 
 - Added `--size small|large` flag — splits fetched comps into bottom/top half

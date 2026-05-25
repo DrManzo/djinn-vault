@@ -47,3 +47,4 @@ Calliope will NOT start automatically.
 |------|-------|
 | 2026-05-25 13:06 UTC | Sliced — waiting for confirm |
 
+| 2026-05-25 13:17 UTC | Print started |
