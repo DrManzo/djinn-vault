@@ -85,8 +85,8 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Config backup | [[djinn/printer/backup/]] |
 | Process docs | [[printer/process/INTAKE]] |
 | Error history | [[error_log]] |
-| Current print | model_job1.gcode — mario pipe + 4× Typhon's Forge coins — started 2026-05-24 |
-| Queue | `~/.local/share/djinn/print-queue.json` — 1 job (Job #1 in progress) |
+| Current print | None — idle |
+| Queue | Job #1 (mario pipe + 4× coins) ✅ completed 2026-05-24 10:22 UTC. Job #2 (anybodywantcoffee) ✅ completed 2026-05-24 ~20:13 UTC. Queue empty. |
 | Print agent stack | `djinn/printer/agent/orchestrator/` — 6-agent pipeline live |
 | Commission pricing | `djinn-print-quote` — `~/.local/bin/djinn-print-quote` |
 | Design CLI | `djinn-design` — `~/.local/bin/djinn-design` |
@@ -111,7 +111,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | ProtoOptAgent | `djinn-design --job N --optimize` | ✅ Live | Renders prototype-light + production-ready STLs |
 | DOEPrintOptAgent | `djinn-design --job N --doe [fast\|cheap\|balanced]` | ✅ Live | Taguchi factor grid → slicer profile, no test prints needed |
 | PlateNestAgent | `djinn-design --job N --plate` | ✅ Live | Decimate → arrange → export plate STL (auto-handles >200MB) |
-| FairPrintAgent | `djinn-print-quote` / `quote <json>` Discord/Telegram | ✅ Live | Commission pricing: (material+time+design)/0.60, library auto-detect |
+| FairPrintAgent | `djinn-print-quote` / `quote <json>` Discord/Telegram | ✅ Live | Commission pricing: (material+machine+labor+design)/0.60 — machine runtime (~$0.20/hr) separate from labor. --quick requires TTY. |
 
 **Known limitation:** opencode in headless mode (comms-processor) generates text responses but does not reliably execute shell tools — model treats tasks as conversation, not execution. Best for: summaries, file writes, status reports. For real shell execution: route to Claude or use direct SSH.
 
