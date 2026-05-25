@@ -115,3 +115,12 @@ created: 2026-05-19
 - Gateway restarted, all 14 agents active
 
 *— Claude*
+
+## 2026-05-25: FairPrintAgent — --simple mode labor/machine fix
+
+- Added `MACHINE_RATE_PER_HOUR` constant (~$0.20/hr: electricity + depreciation + maintenance)
+- `--simple` now separates machine runtime cost from human labor cost
+- Added `--labor` flag (minutes, default 20) for hands-on prep/post time
+- Mario Pipe result: $112.77 → $14.01 (aligned with full formula $11.70 and market $15.09)
+
+*— Claude*
