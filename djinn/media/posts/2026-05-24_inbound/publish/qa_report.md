@@ -1,17 +1,13 @@
 # QA Report — 2026-05-24_inbound
-Generated: 2026-05-24 18:48 UTC
+Generated: 2026-05-24 19:08 UTC
 
 ## Reels
 | File | Check | Result | Details |
 |------|-------|--------|---------|
-| 2026-05-24_inbound_reel_captioned.mp4 | resolution | PASS | 1080x1920 |
-| 2026-05-24_inbound_reel_captioned.mp4 | codec | PASS | h264 |
-| 2026-05-24_inbound_reel_captioned.mp4 | duration | PASS | 1.0s |
-| 2026-05-24_inbound_reel_captioned.mp4 | filesize | PASS | 0.7MB |
 | 2026-05-24_inbound_reel.mp4 | resolution | PASS | 1080x1920 |
 | 2026-05-24_inbound_reel.mp4 | codec | PASS | h264 |
-| 2026-05-24_inbound_reel.mp4 | duration | PASS | 1.0s |
-| 2026-05-24_inbound_reel.mp4 | filesize | PASS | 0.7MB |
+| 2026-05-24_inbound_reel.mp4 | duration | PASS | 49.7s |
+| 2026-05-24_inbound_reel.mp4 | filesize | PASS | 44.1MB |
 
 ## Feed Photos
 | File | Check | Result | Details |
@@ -26,6 +22,9 @@ Generated: 2026-05-24 18:48 UTC
 ## Thumbnails
 | File | Check | Result | Details |
 |------|-------|--------|---------|
+| 2026-05-24_inbound_reel_cover.jpg | resolution | PASS | 1080x1920 |
+| 2026-05-24_inbound_reel_cover.jpg | format | PASS | JPEG |
+| 2026-05-24_inbound_reel_cover.jpg | filesize | PASS | 0.1MB |
 | 2026-05-24_inbound_cover_reel.jpg | resolution | PASS | 1080x1920 |
 | 2026-05-24_inbound_cover_reel.jpg | format | PASS | JPEG |
 | 2026-05-24_inbound_cover_reel.jpg | filesize | PASS | 0.2MB |
