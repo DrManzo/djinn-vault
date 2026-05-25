@@ -6778,3 +6778,17 @@ PENDING (requires Javier action):
 **Action @Javier:** `systemctl --user restart openclaw` still pending to activate 14 agents.
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: openclaw-gateway restarted, service name corrected everywhere
+
+**What:**
+- Service name was wrong in all docs — `openclaw.service` → `openclaw-gateway.service`
+- Fixed in: TROUBLESHOOT.md, typhons-forge-monetization.md, media-stack report, PLAN.md
+- COMMS.md historical entries left as-is (append-only, already acted on)
+- openclaw-gateway.service restarted successfully — 14 agents now live
+
+**State:** All 14 agents active as of 2026-05-25 05:11 PDT.
+
+— Claude

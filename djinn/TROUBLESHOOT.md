@@ -37,7 +37,7 @@ cd ~/Obsidian && git status --short
 
 ### Restart
 ```bash
-systemctl --user restart openclaw
+systemctl --user restart openclaw-gateway.service
 ```
 
 ### Logs (last 100 lines)
@@ -77,7 +77,7 @@ f.write_text(json.dumps(d, indent=2))
 print('reset done')
 "
 ```
-5. Restart gateway: `systemctl --user restart openclaw`
+5. Restart gateway: `systemctl --user restart openclaw-gateway.service`
 
 ### NO_REPLY appearing in responses
 - mistral:7b is hallucinating the gate signal as literal text

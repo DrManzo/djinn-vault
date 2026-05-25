@@ -99,7 +99,7 @@ Now          → Shift Instagram content toward pricing/business angle.
 
 - [ ] Run `djinn-print-quote` on every completed print — build a real price sheet — @Javier
 - [ ] Film first "pricing a real print" Reel on Instagram — @Javier
-- [ ] `systemctl --user restart openclaw` on Salomon to activate media agents — @Javier
+- [ ] `systemctl --user restart openclaw-gateway.service` on Salomon to activate media agents — @Javier
 - [ ] Scope web version UI (form fields, output display) — @Claude when ready
 
 ---

@@ -178,13 +178,13 @@ djinn-media-qa 2026-05-24_typhon_s_forge_logo
 
 **publish-prep-agent uses phi4:14b which loads on demand (9.1GB).** First call after model eviction (22:00 nightly) will have a cold start delay of ~60s while Ollama loads the model.
 
-**OpenClaw must be restarted to pick up new agents.** The `openclaw.json` has been updated but OpenClaw reads it at startup. Javier needs to restart the OpenClaw gateway service for the 9 new agents to appear: `systemctl --user restart openclaw`.
+**OpenClaw must be restarted to pick up new agents.** The `openclaw.json` has been updated but OpenClaw reads it at startup. Javier needs to restart the OpenClaw gateway service for the 9 new agents to appear: `systemctl --user restart openclaw-gateway.service`.
 
 ---
 
 ## What's Next
 
-- [ ] `systemctl --user restart openclaw` — activate the 9 new agents
+- [ ] `systemctl --user restart openclaw-gateway.service` — activate the 9 new agents
 - [ ] Test with a real Reel: `media full <path>` end-to-end on actual footage
 - [ ] Test `djinn-media-caption` with real audio (need a video file with speech)
 - [ ] Add `djinn-media-story` for Story-specific processing (text overlays, poll sticker suggestions)
