@@ -90,3 +90,13 @@ created: 2026-05-19
 - **Report Standard standardized** — PROTOCOL.md, CLAUDE.md, AGENTS.md all updated with mandatory reporting requirement
 
 *— Claude*
+
+## 2026-05-25: FairPrintAgent — Bug Fix + First Live Validation
+
+- First end-to-end test against real print data (Mario Pipe: 44g, 3.33h)
+- Full JSON mode: $11.70 fair market, 5 Etsy comps fetched live
+- Coin preset: $92.91 cost floor, 3 comps — confirmed functional
+- Fixed `--quick` crash on piped stdin: TTY guard + EOF handling added
+- `--simple` mode confirmed working; noted labor/machine-time conflation issue
+
+*— Claude*
