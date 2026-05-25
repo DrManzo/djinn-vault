@@ -133,3 +133,13 @@ created: 2026-05-19
 - **`djinn-model-slice`** — added `preflight_3mf_check()`: runs on every .3mf before slice, flags support threshold <35°, supports-on + aggressive threshold, layer height extremes, no brim, very low infill — sends warnings to Telegram + Discord before job starts
 
 *— Claude*
+
+## 2026-05-25: djinn-model-slice — Extended preflight to all file types
+
+- Added `parse_ini_settings()` + `preflight_profile_check()` for STL/OBJ/STEP files
+- Profile check reads `ender3-v3-plus.ini` and applies same flags: support threshold, supports+threshold combo, layer height, brim, infill
+- `.gcode` files get a "settings baked in" advisory
+- `.3mf` still uses embedded settings (those override the profile)
+- Smoke test: profile reads clean except expected brim_width=0 warning
+
+*— Claude*
