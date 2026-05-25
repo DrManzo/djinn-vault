@@ -3996,3 +3996,6 @@
 | 2026-05-25 16:08 UTC | cancelled | 0.0% | 23.7 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
 | 2026-05-25 16:09 UTC | cancelled | 0.0% | 23.6 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
 | 2026-05-25 16:10 UTC | cancelled | 0.0% | 23.5 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
+| 2026-05-25 16:11 UTC | cancelled | 0.0% | 23.6 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
+| 2026-05-25 16:12 UTC | cancelled | 0.0% | 23.6 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
+| 2026-05-25 16:13 UTC | cancelled | 0.0% | 23.7 | 0 | 21.8 | 0 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
