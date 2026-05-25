@@ -6735,3 +6735,14 @@ PENDING (requires Javier action):
 - Run `djinn-media-photo <project> --style forge` on real content to verify LUT look
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: FairPrintAgent --simple mode fixed
+
+**What:**
+- `--simple` was charging hourly rate for all print time (machine runs unattended — wrong)
+- Added `MACHINE_RATE_PER_HOUR` (~$0.20/hr) for runtime cost, `--labor` flag for hands-on minutes
+- Mario Pipe: $112.77 → $14.01, now consistent with full formula ($11.70) and market ($15.09)
+
+— Claude
