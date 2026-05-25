@@ -1,7 +1,7 @@
 {
   "project_id": "2026-05-24_inbound",
   "created_at": "2026-05-25T01:12:00.477629+00:00",
-  "updated_at": "2026-05-25T02:34:40.759961+00:00",
+  "updated_at": "2026-05-25T11:06:02.590828+00:00",
   "source_path": "/home/drmanzo/.openclaw/media/inbound",
   "status": "published",
   "media_type": "mixed",
@@ -17,12 +17,22 @@
     "selects": [],
     "edits": [],
     "exports": {
-      "feed": [],
+      "feed": [
+        "exports/feed/IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_feed_1x1.jpg",
+        "exports/feed/IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_feed_4x5.jpg"
+      ],
       "reel": [
         "exports/reel/2026-05-24_inbound_reel.mp4"
       ],
-      "story": [],
-      "thumbnail": []
+      "story": [
+        "exports/story/IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_story.jpg"
+      ],
+      "thumbnail": [
+        "exports/thumbnail/2026-05-24_inbound_cover_reel.jpg",
+        "exports/thumbnail/2026-05-24_inbound_reel_cover.jpg",
+        "exports/thumbnail/2026-05-24_inbound_thumb_16x9.jpg",
+        "exports/thumbnail/2026-05-24_inbound_thumb_1x1.jpg"
+      ]
     }
   },
   "video_info": {
