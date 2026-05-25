@@ -6836,3 +6836,13 @@ PENDING (requires Javier action):
 **What:** Commission quote now fires automatically on every `djinn-model-slice` run — stats parsed from gcode, passed to `djinn-print-quote --simple`, result appended to Telegram/Discord report and stored in queue JSON. Added qty-tiered test-run fee to `djinn-print-quote` (30% single, 15% >5, waived >12) — covers validation print cost. Fixed pyglet version (2.x → 1.5.31, trimesh requires <2). Added `analyze_mesh()` to slice script so manually-added jobs get dims/volume/overhang without going through `djinn-model-fetch`. GoPro_Tripod_flipped job #6 sliced ($15.60 ask), confirmed, sent to Calliope.
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: Price sheet complete; three Puffco Proxy prints quoted
+
+**What:** Finished carry-forward from prior context window. Three commission quotes: Proxy Mario Pipe $14.88, Proxy Toilet $13.06, Proxy Bubbler floor $18.39 / fair $21.42. Bubbler auto-comps pulled accessories not bubblers — real market $35–65+, recommend listing at $35–45. All prior FairPrintAgent fixes applied (TTY guard, machine/labor split, smoking detection, size tiers, Python 3.14 argparse unicode fix). Monetization plan + platform content rules documented.
+
+**Pending @Javier:** restart openclaw-gateway.service, build full price sheet, film first pricing Reel.
+
+— Claude

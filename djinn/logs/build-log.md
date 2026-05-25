@@ -181,3 +181,13 @@ created: 2026-05-19
 - Platform content rules added to monetization plan (Etsy/IG/TikTok — herb/tobacco language only)
 
 *— Claude*
+
+## 2026-05-25: Commission price quotes — three Puffco Proxy prints
+
+- Proxy Mario Pipe (44g, 3.33h): $14.88 ask — smoking item, small tier
+- Proxy Toilet (26.06g, 1.33h): $13.06 ask — smoking item, small tier
+- Proxy Bubbler (35g, 13.7h): $18.39 floor / $21.42 fair / $24.64 premium — large tier
+- Bubbler caveat: auto comps returned accessories not bubblers; real market $35–65+; recommended list $35–45
+- Report: [[2026-05-25_fairprint-fixes-price-sheet]]
+
+*— Claude*
