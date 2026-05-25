@@ -6746,3 +6746,20 @@ PENDING (requires Javier action):
 - Mario Pipe: $112.77 → $14.01, now consistent with full formula ($11.70) and market ($15.09)
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: Typhon's Forge monetization plan locked
+
+**What:**
+- Created `djinn/projects/typhons-forge-monetization.md`
+- Two-track strategy: content first (brand), product second (FairPrintAgent web app)
+- Hook: "I built an AI pricing tool so I'd stop underselling my prints"
+- Sequence: content cadence now → web version in 4–8 weeks → launch to warm audience
+
+**Pending @Javier:**
+- Run djinn-print-quote on all completed prints → build price sheet
+- Film first pricing Reel
+- `systemctl --user restart openclaw` to activate media agents
+
+— Claude
