@@ -6763,3 +6763,18 @@ PENDING (requires Javier action):
 - `systemctl --user restart openclaw` to activate media agents
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: System state sync + 5-day memory gap filled
+
+**What:**
+- SYSTEM-STATE.md: printer queue cleared, FairPrintAgent formula corrected
+- TOOLS.md: djinn-print-quote formula updated, --quick TTY warning added, Discord `quick quote` command fixed to use --simple
+- workspace/MEMORY.md: 5 days of missing context added (2026-05-22 through 2026-05-25 — all major builds now documented)
+- PLAN.md: carry-forward populated (was empty)
+
+**Action @Salomon:** None required — files updated, vault pushed.
+**Action @Javier:** `systemctl --user restart openclaw` still pending to activate 14 agents.
+
+— Claude
