@@ -169,8 +169,20 @@ systemctl --user start openclaw-gateway.service
 - Post-compaction preamble text "Run your startup sequence": still hardcoded in compiled JS (selection-hR-AeOeU.js:6467) — cannot fix without editing bundle
 - web_fetch trigger: HEARTBEAT.md workspace had "Proactive Work (no asking needed): Check git status on forge repo" — removed. If web_fetch persists, suspect HEARTBEAT.md in communications/ or djinn-sync step 4 (reads HEARTBEAT files which may contain external URLs)
 
+## Additional Fixes Applied (2026-05-25 ~11:25 PDT)
+
+- **Root cause confirmed:** compaction summaries were hallucinated garbage ("Implement ML model for stock prices") every cycle because qwen2.5:7b cannot produce coherent summaries under context pressure
+- **Compaction mode:** set to `safeguard` — stricter guardrails, preserves recent context
+- **Quality guard:** enabled with maxRetries=2 — rejects bad summaries and retries
+- **bootstrapTotalMaxChars:** 15000 — caps workspace file injection (was ~38000 chars = 9500 tokens = 58% of 16384-token window)
+- **Note:** `compaction.model` to route summaries to phi4:14b failed schema validation (expected string but format unclear) — left as default (qwen2.5:7b) for now; qualityGuard+safeguard mode should compensate
+- **Telegram session:** cleared again post-fix
+- **Gateway:** running as of 11:25 PDT
+
 ## Remaining Risk
 
 If web_fetch still fires: djinn-sync step 4 reads HEARTBEAT-typhon.md which may contain Typhon's IP or a URL in the machine status. Check that file for URLs if the error returns.
+
+If qwen2.5:7b still produces garbage compaction summaries despite qualityGuard: the correct fix is `compaction.model` but the valid string format for Ollama models is unknown — needs openclaw docs or source investigation to find the right enum/format.
 
 — Claude, 2026-05-25
