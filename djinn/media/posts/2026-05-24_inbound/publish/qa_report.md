@@ -1,5 +1,5 @@
 # QA Report — 2026-05-24_inbound
-Generated: 2026-05-24 18:12 UTC
+Generated: 2026-05-24 18:48 UTC
 
 ## Reels
 | File | Check | Result | Details |
@@ -26,10 +26,10 @@ Generated: 2026-05-24 18:12 UTC
 ## Thumbnails
 | File | Check | Result | Details |
 |------|-------|--------|---------|
-| 2026-05-24_inbound_cover_reel.jpg | resolution | FAIL | 1080x1920 below minimum 1280x720 |
+| 2026-05-24_inbound_cover_reel.jpg | resolution | PASS | 1080x1920 |
 | 2026-05-24_inbound_cover_reel.jpg | format | PASS | JPEG |
 | 2026-05-24_inbound_cover_reel.jpg | filesize | PASS | 0.2MB |
-| 2026-05-24_inbound_thumb_1x1.jpg | resolution | FAIL | 1080x1080 below minimum 1280x720 |
+| 2026-05-24_inbound_thumb_1x1.jpg | resolution | PASS | 1080x1080 |
 | 2026-05-24_inbound_thumb_1x1.jpg | format | PASS | JPEG |
 | 2026-05-24_inbound_thumb_1x1.jpg | filesize | PASS | 0.2MB |
 | 2026-05-24_inbound_thumb_16x9.jpg | resolution | PASS | 1280x720 |
@@ -38,4 +38,4 @@ Generated: 2026-05-24 18:12 UTC
 
 ## Result
 
-❌ FAILURES DETECTED — see report above
+✅ ALL PASS — ready for publish-prep
