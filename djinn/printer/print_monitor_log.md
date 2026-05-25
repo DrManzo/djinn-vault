@@ -3829,3 +3829,5 @@
 | 2026-05-25 13:16 UTC | standby | 0.0% | 22.1 | 0 | 20.8 | 0 | 0% | 0 |  |
 | 2026-05-25 13:17 UTC | standby | 0.0% | 22.1 | 0 | 20.8 | 0 | 0% | 0 |  |
 | 2026-05-25 13:18 UTC | printing | 0.0% | 22.1 | 0 | 28.1 | 55 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
+| 2026-05-25 13:19 UTC | printing | 0.0% | 22.2 | 0 | 38.4 | 55 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
+| 2026-05-25 13:20 UTC | printing | 0.0% | 22.4 | 0 | 48.0 | 55 | 0% | 0 | GoPro_Tripod_flipped_job6.gcode |
