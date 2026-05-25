@@ -1,41 +1,34 @@
 # Posting Package — 2026-05-24_inbound
-Generated: 2026-05-24 19:32 UTC
+Generated: 2026-05-24 19:34 UTC
 
 ---
 
 ## Instagram Feed Caption
 
-Prototype five. Still doesn't look like a mug. 🔥  
-Sold it anyway, now it's your turn to proxy tea time. 💧  
-Drop a ❤️ if you're game. #typhonsforge
-
-#maker #diycommunity #makerspace #hackerspace #fdm #additivemaufacturing #makerlife #pla #resin #filament #petg #tpu
-#makersmovement #printfarm #makerstudio #opensoure3d #printlife #fdmprinting #makersofinstagram #diy3dprinting #petgprint #resinprint #carbonfiber3d
-#enderprinter #crealityprinter #blender3d #makerpreneur #printboss #hobbyist3d #makersgarage #dgaragebuild #fdmlife #printnerds #layerbylaer #gcodenerds
-#slicerlife #filamentreview #filamentoftheday #purefila #resinart3d #hightemppla #engineeringfilament #orcaslicertips #prusax1 #bambucarbon #crealityender
-#typhonsforge #forgelife #darkmaker #gothicmaker #darkcraft #darkart #darkdesign #shadowcraft
+Prototype two. Still dirty, still sold.
+That's what I call proxy tea time.
+Drop a 🔧 if you've got something to hide.
+#typhonsforge #maker #fdmprinting #3dprintingcommunity #makersmovement #printfarm #makerstudio #opensoure3d #printlife #makerofinstagram #diy3dprinting #petgprint #resinprint #hightemppla #engineeringfilament #orcaslicertips #prusax1 #bambucarbon #crealityender
 
 ---
 
 ## Instagram Reel Caption
 
-Proxy mug. Sold it. Now you try. #typhonsforge
-
-#maker #diycommunity #fdmprinting #printfarm #makersmovement #opensoure3d #resinprint #petgprint #enderprinter #makerpreneur #layerbylaer #filamentreview
+Sold another dirty prototype. 🔥
+#typhonsforge #maker #fdmprinting #3dprintingcommunity
 
 ---
 
 ## Story Text
 
-Another mug experiment.
-
-Proxy tea time.
+Another proxy time mug.
+For when you need a little privacy.
 
 ---
 
 ## Alt Text
 
-A 3D printed mug prototype ready for testing.
+Prototype two sold, still dirty.
 
 ---
 
