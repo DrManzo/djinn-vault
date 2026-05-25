@@ -3297,3 +3297,7 @@
 | 2026-05-25 04:09 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
 | 2026-05-25 04:10 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
 | 2026-05-25 04:11 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
+| 2026-05-25 04:12 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
+| 2026-05-25 04:13 UTC | printing | 0.0% | 219.5 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
+| 2026-05-25 04:14 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
+| 2026-05-25 04:15 UTC | printing | 0.0% | 220.4 | 220 | 55.0 | 55 | 0% | 0 | gopro_part1_job5.gcode |
