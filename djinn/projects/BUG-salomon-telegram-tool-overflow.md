@@ -157,14 +157,20 @@ systemctl --user start openclaw-gateway.service
 
 ---
 
-## Current State (as of 2026-05-25 ~10:10 PDT)
+## Current State (as of 2026-05-25 ~11:00 PDT)
 
 - Gateway: running, 9 plugins (memory-core disabled)
-- Telegram session: cleared
 - reserveTokensFloor: 3000
-- AGENTS.md startup: fixed
-- SOUL.md: NOT fixed
-- web_fetch trigger: NOT identified/fixed
-- Post-compaction message: NOT fixed
+- AGENTS.md startup: fixed (OVERRIDE text added to counter compaction preamble)
+- SOUL.md: fixed ("Read them. Update them." → "auto-loaded, do NOT read with bash")
+- djinn-sync.md: fixed (removed "Always: At session start" trigger)
+- HEARTBEAT.md workspace: fixed ("Proactive Work (no asking needed)" → "only when asked")
+- Post-compaction message: partially mitigated — postCompactionSections set explicitly to ["Session Startup", "Red Lines"]; Session Startup now starts with OVERRIDE instruction countering the preamble
+- Post-compaction preamble text "Run your startup sequence": still hardcoded in compiled JS (selection-hR-AeOeU.js:6467) — cannot fix without editing bundle
+- web_fetch trigger: HEARTBEAT.md workspace had "Proactive Work (no asking needed): Check git status on forge repo" — removed. If web_fetch persists, suspect HEARTBEAT.md in communications/ or djinn-sync step 4 (reads HEARTBEAT files which may contain external URLs)
+
+## Remaining Risk
+
+If web_fetch still fires: djinn-sync step 4 reads HEARTBEAT-typhon.md which may contain Typhon's IP or a URL in the machine status. Check that file for URLs if the error returns.
 
 — Claude, 2026-05-25
