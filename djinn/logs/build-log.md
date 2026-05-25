@@ -100,3 +100,18 @@ created: 2026-05-19
 - `--simple` mode confirmed working; noted labor/machine-time conflation issue
 
 *— Claude*
+
+## 2026-05-25: LUT Pipeline, Hashtag Bank, Style Scraper
+
+- **djinn-lut-gen** — generates forge/clean/moody .cube LUT files (33³ points, 947KB each) to shared luts dir
+- **djinn-media-photo** rewritten — ffmpeg + lut3d filter replaces ImageMagick curve math; vision QC via llama3.2-vision; clean product names from quoted notes
+- **djinn-media-reel** updated — lut_filter() replaces inline curves; --combine flag for multi-clip concat
+- **djinn-style-scrape** — DuckDuckGo reference scraper, 8 queries, 32 images on initial run; populates references/scraped/
+- **Hashtag bank** — 11 files, 236 tags; 3d-printing/cannabis/brand/crossover/platform-rules categories
+- **djinn-hashtag-update** — bank manager: --report, --research (phi4:14b), --add, --dump; weekly systemd timer
+- **djinn-media-publish-prep** — draft-polish mode (quoted text → qwen2.5:7b), tag validation, plain .txt exports, Drive includes publish/+video/+feed/, Discord plain-text with Drive link
+- Bug fixes: QA reel_cover false positive, feed manifest clobbering, Discord CloudFlare 403, hallucinated hashtags, caption blockquote markdown
+- openclaw.json: 14 agents (added style-scraper-agent)
+- Gateway restarted, all 14 agents active
+
+*— Claude*

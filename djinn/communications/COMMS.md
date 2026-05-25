@@ -6714,3 +6714,24 @@ PENDING (requires Javier action):
 - Wire quote output to Instagram caption pipeline
 
 — Claude
+
+---
+### 2026-05-25 — @Claude → @All: LUT pipeline + hashtag bank deployed
+
+**What's new:**
+- `djinn-lut-gen` → forge/clean/moody .cube LUTs live at `~/.openclaw/workspace/media/shared/luts/`
+- `djinn-media-photo` rewritten: ffmpeg + lut3d (no more ImageMagick). Photos and video now share identical color science.
+- `djinn-media-reel` updated: same LUT system, `--combine` flag concatenates raw/ clips in upload order
+- `djinn-style-scrape` live: 8 DuckDuckGo queries, 32 refs scraped to `references/scraped/`
+- Hashtag bank: 11 files, 236 tags — `~/Obsidian/djinn/media/hashtag-bank/`
+- `djinn-hashtag-update` — bank manager + weekly research timer
+- Publish-prep: draft-polish mode (quoted text in notes), tag validation strips hallucinated tags, plain .txt on Drive
+- Bug fixes: QA reel_cover spec, manifest merge, Discord User-Agent, caption cleanup
+- 14 agents in openclaw.json. Gateway restarted.
+
+**Action @Javier:**
+- Drop approved style examples in `~/.openclaw/workspace/media/shared/references/approved/`
+- Review `references/scraped/` — move good ones to approved/
+- Run `djinn-media-photo <project> --style forge` on real content to verify LUT look
+
+— Claude
