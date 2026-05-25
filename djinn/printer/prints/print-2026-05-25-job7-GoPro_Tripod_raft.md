@@ -34,10 +34,10 @@ Dims: 105.49x32.5x116.33mm | Volume: 60.99cm³
   Machine:   $0.84
   Labor:     $6.67
   Design:    $0.00
-  Test run:  $0.64  ← Test run 30% of print cost (single/small run) — $0.64.
+  Test run:  $1.07  ← Test run 50% of print cost (single/small run qty 1–6) — $1.07.
   ─────────────────
-  Cost:      $9.44  (÷ 0.60)
-  💰 Ask:    $15.73
+  Cost:      $9.87  (÷ 0.60)
+  💰 Ask:    $16.45
   No design time specified.
 
 Reply `confirm 7` to send to Calliope.
@@ -48,5 +48,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-25 13:52 UTC | Sliced — waiting for confirm |
+| 2026-05-25 15:53 UTC | Sliced — waiting for confirm |
 
