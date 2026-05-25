@@ -5,28 +5,38 @@ Generated: 2026-05-24 19:09 UTC
 
 ## Instagram Feed Caption
 
-> Spend a minute and save five — print your own mug.
-> The proxy time mug proxy tea time.
-> No excuses, just prints. 🔥
-> #3dprinting #typhonsforge #fdm #printfarm #maker
+Prototype complete. Still a little rough — but it works.
+
+Meet the Proxy Time Mug. Built for a very specific kind of tea time. You know the one.
+
+Not quite finished. A few more iterations and this goes out to anyone who wants their own. Until then it stays in the forge.
+
+Drop a 🔧 if you want one when it's ready.
+
+
+#3dprinting #typhonsforge #fdmprinting #3dprintedaccessories #makerlife #3dprintingcommunity #customprints #cannabisaccessories #cannabiscommunity #420 #cannafam #stonedandmaking #crossover #maker #diycommunity #printlife #handcraftedprint #cannabisculture #3dmaker #3dprintgang
 
 ---
 
 ## Instagram Reel Caption
 
-> Spend a minute and save five — print your own mug. #3dprinting #typhonsforge
+Prototype. Rough edges. Still sold. The Proxy Time Mug is coming.
+
+#3dprinting #typhonsforge #cannabisaccessories #420 #makerlife #fdmprinting #3dprintedaccessories #cannabiscommunity #maker
 
 ---
 
 ## Story Text
 
-> Check out the new mug!
+Prototype alert.
+The Proxy Time Mug.
+Tea time, forge style. 🔥
 
 ---
 
 ## Alt Text
 
-> 3D printed mug from Typhon's Forge.
+A 3D printed mug prototype from Typhon's Forge, shown across multiple angles with forge-style color grading.
 
 ---
 
