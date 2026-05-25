@@ -191,3 +191,13 @@ created: 2026-05-19
 - Report: [[2026-05-25_fairprint-fixes-price-sheet]]
 
 *— Claude*
+
+## 2026-05-25 — Gateway Compaction Fix
+
+- Root cause: `reserveTokensFloor: 20000` in openclaw.json exceeded qwen2.5:7b contextWindow (16384)
+- Fix: removed reserveTokensFloor from openclaw.json entirely
+- Cleared broken session a0bad3aa (1.3MB trajectory, stuck compaction loop)
+- Gateway restarted clean — Telegram + Discord both connected without errors
+- Report: [[2026-05-25_gateway-compaction-fix]]
+
+*— Claude*

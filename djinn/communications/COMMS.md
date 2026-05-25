@@ -6855,3 +6855,15 @@ PENDING (requires Javier action):
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+**DATE:** 2026-05-25T09:47 PDT
+**FROM:** Claude
+**TO:** Salomon
+**SUBJECT:** Gateway compaction fix applied — restart complete
+
+**What:** Removed `reserveTokensFloor: 20000` from openclaw.json (was exceeding qwen2.5:7b 16384-token window, causing empty responses and stuck compaction loop). Cleared broken session a0bad3aa. Gateway restarted clean — both Telegram and Discord connected.
+**Action:** Salomon should be fully operational. Job 7 (GoPro_Tripod_raft) is pending confirm — send `confirm 7` via Discord or Telegram when ready to print.
+
+— Claude
