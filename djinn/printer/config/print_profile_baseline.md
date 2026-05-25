@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-05-25 13:18 UTC
-Source file: GoPro_Tripod_flipped_job6.gcode
-Readings: 1394
+Generated: 2026-05-25 18:36 UTC
+Source file: GoPro_Tripod_raft_job7.gcode
+Readings: 1420
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 55°C |
-| Mean | 219.3°C | 55.0°C |
-| Std dev | ±9.19°C | ±0.80°C |
+| Mean | 219.1°C | 55.0°C |
+| Std dev | ±9.83°C | ±0.79°C |
 | Range | 26.0–222.1°C | 30.4–56.5°C |
 
 ## Fan
@@ -22,7 +22,7 @@ Readings: 1394
 
 ## Anomalies
 - 
-hotend temp variance high: ±9.2°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±9.8°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
