@@ -18,8 +18,8 @@ brim: False
 File: `GoPro_Tripod_raft.3mf`
 Dims: 105.49x32.5x116.33mm | Volume: 60.99cm³
 
-*Print time:* 4h 3m 56s
-*Filament:* 17279mm / 51.5g
+*Print time:* 4h 9m 0s
+*Filament:* 17839mm / 53.2g
 *Hotend:* 220°C  *Bed:* 55°C
 *Layer height:* 0.2mm
 
@@ -27,16 +27,17 @@ Dims: 105.49x32.5x116.33mm | Volume: 60.99cm³
   Supports: no
   Infill: 15%
   Brim: no
+  Raft: YES (3 layers)
 
 *Commission estimate (qty 1):*
-  Material:  $1.25
-  Machine:   $0.83
+  Material:  $1.29
+  Machine:   $0.84
   Labor:     $6.67
   Design:    $0.00
-  Test run:  $0.62  ← Test run 30% of print cost (single/small run) — $0.62.
+  Test run:  $0.64  ← Test run 30% of print cost (single/small run) — $0.64.
   ─────────────────
-  Cost:      $9.36  (÷ 0.60)
-  💰 Ask:    $15.60
+  Cost:      $9.44  (÷ 0.60)
+  💰 Ask:    $15.73
   No design time specified.
 
 Reply `confirm 7` to send to Calliope.
@@ -47,5 +48,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-25 13:51 UTC | Sliced — waiting for confirm |
+| 2026-05-25 13:52 UTC | Sliced — waiting for confirm |
 
