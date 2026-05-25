@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-05-25 06:41 UTC
-Source file: 
+Generated: 2026-05-25 13:18 UTC
+Source file: GoPro_Tripod_flipped_job6.gcode
 Readings: 1394
 
 ## Temperatures

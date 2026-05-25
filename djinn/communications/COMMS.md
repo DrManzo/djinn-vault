@@ -6828,3 +6828,11 @@ PENDING (requires Javier action):
 **What:** `--size small|large` splits market comps by price tier for smoking pieces. small=bottom half (accessories), large=top half (full pieces/bubblers). Bubbler example: small $18.37 floor, large $21.67 fair market. Fixed Python 3.14 argparse crash.
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: Slice + Quote pipeline wired up; job #6 printing
+
+**What:** Commission quote now fires automatically on every `djinn-model-slice` run — stats parsed from gcode, passed to `djinn-print-quote --simple`, result appended to Telegram/Discord report and stored in queue JSON. Added qty-tiered test-run fee to `djinn-print-quote` (30% single, 15% >5, waived >12) — covers validation print cost. Fixed pyglet version (2.x → 1.5.31, trimesh requires <2). Added `analyze_mesh()` to slice script so manually-added jobs get dims/volume/overhang without going through `djinn-model-fetch`. GoPro_Tripod_flipped job #6 sliced ($15.60 ask), confirmed, sent to Calliope.
+
+— Claude
