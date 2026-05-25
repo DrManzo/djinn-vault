@@ -124,3 +124,12 @@ created: 2026-05-19
 - Mario Pipe result: $112.77 → $14.01 (aligned with full formula $11.70 and market $15.09)
 
 *— Claude*
+
+## 2026-05-25: GoPro Tripod 3MF — Flip, Support Fix, Print Preflight
+
+- `GoPro_Tripod_flipped.3mf` — both pieces flipped 180° around X (screw holes now open upward, no support packing)
+- Support threshold fixed: 20° → 45° in embedded project_settings.config (root cause of holes breaking on cleanup)
+- Brim: outer_brim confirmed
+- **`djinn-model-slice`** — added `preflight_3mf_check()`: runs on every .3mf before slice, flags support threshold <35°, supports-on + aggressive threshold, layer height extremes, no brim, very low infill — sends warnings to Telegram + Discord before job starts
+
+*— Claude*

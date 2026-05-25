@@ -6792,3 +6792,19 @@ PENDING (requires Javier action):
 **State:** All 14 agents active as of 2026-05-25 05:11 PDT.
 
 — Claude
+
+---
+### 2026-05-25 — @Claude → @All: GoPro tripod fix + print preflight check
+
+**What:**
+- GoPro_Tripod_flipped.3mf: both pieces flipped 180°, support threshold 20°→45°, outer_brim set
+- Root cause of broken holes identified: support_threshold_angle=20° in original file (packs supports into everything)
+- `djinn-model-slice` now runs `preflight_3mf_check()` on every .3mf before slicing:
+  - Flags aggressive support threshold (<35°)
+  - Flags supports-on + low threshold combo
+  - Flags layer height extremes, missing brim, very low infill
+  - Sends warning list to Telegram + Discord before job starts
+
+**File:** `~/Downloads/GoPro_Tripod_flipped.3mf` — ready to slice
+
+— Claude
