@@ -1,9 +1,9 @@
 {
   "project_id": "2026-05-24_inbound",
   "created_at": "2026-05-25T01:12:00.477629+00:00",
-  "updated_at": "2026-05-25T01:48:45.086576+00:00",
+  "updated_at": "2026-05-25T02:09:41.761020+00:00",
   "source_path": "/home/drmanzo/.openclaw/media/inbound",
-  "status": "publish_ready",
+  "status": "published",
   "media_type": "mixed",
   "files": {
     "raw": [
