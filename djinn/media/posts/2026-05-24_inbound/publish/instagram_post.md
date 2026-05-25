@@ -1,42 +1,34 @@
 # Posting Package — 2026-05-24_inbound
-Generated: 2026-05-24 19:09 UTC
+Generated: 2026-05-24 19:16 UTC
 
 ---
 
 ## Instagram Feed Caption
 
-Prototype complete. Still a little rough — but it works.
-
-Meet the Proxy Time Mug. Built for a very specific kind of tea time. You know the one.
-
-Not quite finished. A few more iterations and this goes out to anyone who wants their own. Until then it stays in the forge.
-
-Drop a 🔧 if you want one when it's ready.
-
-
-#3dprinting #typhonsforge #fdmprinting #3dprintedaccessories #makerlife #3dprintingcommunity #customprints #cannabisaccessories #cannabiscommunity #420 #cannafam #stonedandmaking #crossover #maker #diycommunity #printlife #handcraftedprint #cannabisculture #3dmaker #3dprintgang
+Prototype two. Still dirty. Still works.
+Sold to someone who appreciates the process.
+Drop a 🔧 if you want one too.
+#typhonsforge #maker #fdmprinting #printfarm #makersmovement #3dprintingcommunity #makerspace #opensoure3d #resinprint #petgprint #filamentreview #layerbylayer
 
 ---
 
 ## Instagram Reel Caption
 
-Prototype. Rough edges. Still sold. The Proxy Time Mug is coming.
-
-#3dprinting #typhonsforge #cannabisaccessories #420 #makerlife #fdmprinting #3dprintedaccessories #cannabiscommunity #maker
+Sold to someone who understands.  
+#typhonsforge #maker #fdmprinting #printfarm
 
 ---
 
 ## Story Text
 
-Prototype alert.
-The Proxy Time Mug.
-Tea time, forge style. 🔥
+Another unique piece.
+For those in the know.
 
 ---
 
 ## Alt Text
 
-A 3D printed mug prototype from Typhon's Forge, shown across multiple angles with forge-style color grading.
+Prototype two sold to a fellow creator.
 
 ---
 
