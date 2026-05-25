@@ -6694,3 +6694,23 @@ PENDING (requires Javier action):
 - `systemctl --user restart openclaw` on Salomon to activate 9 media agents + updated routing
 - Test: drop a video/photo in #media-inbox → should auto-trigger djinn-media-ingest
 - Wire djinn-media-qa and djinn-media-publish-prep to post results to #media-status and #post-ready
+
+---
+
+### 2026-05-25 — @Claude → @All: FairPrintAgent validated + --quick bug fixed
+
+**What:**
+- First live test of djinn-print-quote on real print data (Mario Pipe, 44g, 3.33h)
+- Full agent formula: $11.70 fair market, $15.09 market median (5 Etsy comps live)
+- Fixed --quick mode crash on piped stdin — TTY guard + helpful error message added
+- --simple mode works but conflates machine time with labor time (known caveat, documented)
+
+**State:**
+- FairPrintAgent: functional, tested, production-ready for commission quoting
+- Report: `djinn/logs/reports/2026-05-25_fairprint-fix.md`
+
+**Pending:**
+- Build full price sheet for all completed prints
+- Wire quote output to Instagram caption pipeline
+
+— Claude
