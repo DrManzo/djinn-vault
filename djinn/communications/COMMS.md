@@ -6820,3 +6820,11 @@ PENDING (requires Javier action):
 - Auto-fetch median still undershoots on bubblers (returns stands/organizers) — pass manual comps for full pieces
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: FairPrintAgent --size flag added
+
+**What:** `--size small|large` splits market comps by price tier for smoking pieces. small=bottom half (accessories), large=top half (full pieces/bubblers). Bubbler example: small $18.37 floor, large $21.67 fair market. Fixed Python 3.14 argparse crash.
+
+— Claude

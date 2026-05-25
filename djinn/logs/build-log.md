@@ -153,3 +153,14 @@ created: 2026-05-19
 - Tested on Puffco Proxy Bubbler: correctly hits smoking category, $18.37 cost floor
 
 *— Claude*
+
+## 2026-05-25: FairPrintAgent — --size small|large for smoking pieces
+
+- Added `--size small|large` flag — splits fetched comps into bottom/top half
+- `small`: low-mid price comps (accessories, stands, organizers)
+- `large`: mid-high price comps (full pieces, custom rigs, bubblers)
+- Works in full agent formula (JSON mode) only — simple mode doesn't fetch comps
+- Tested: Puffco Proxy Bubbler small=$18.37 floor, large=$21.67 fair market
+- Fixed argparse crash on Python 3.14 (≤ char in help string → pct)
+
+*— Claude*
