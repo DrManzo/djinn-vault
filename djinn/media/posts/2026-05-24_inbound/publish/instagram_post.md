@@ -1,34 +1,41 @@
 # Posting Package — 2026-05-24_inbound
-Generated: 2026-05-24 19:28 UTC
+Generated: 2026-05-24 19:32 UTC
 
 ---
 
 ## Instagram Feed Caption
 
-Proxy time mug prototype — dirty but functional.
-Sold one already, who's next?
-Drop a 🔧 if you're intrigued.
-#maker #diycommunity #makerspace #hackerspace #fdm #additivemaufacturing #makerlife #pla #resin #filament #petg #tpu #makersmovement #printfarm #makerstudio #opensoure3d #printlife #fdmprinting #makersofinstagram #diy3dprinting #petgprint #resinprint #carbonfiber3d #enderprinter #crealityprinter #blender3d #makerpreneur #printboss #hobbyist3d #makersgarage #dgaragebuild #fdmlife #printnerds #layerbylayer #gcodenerds #slicerlife #filamentreview #filamentoftheday #purefila #resinart3d #hightemppla #engineeringfilament #orcaslicertips #prusax1 #bambucarbon #crealityender #typhonsforge #forgelife #darkmaker #gothicmaker #darkcraft #darkart #darkdesign #shadowcraft
+Prototype five. Still doesn't look like a mug. 🔥  
+Sold it anyway, now it's your turn to proxy tea time. 💧  
+Drop a ❤️ if you're game. #typhonsforge
+
+#maker #diycommunity #makerspace #hackerspace #fdm #additivemaufacturing #makerlife #pla #resin #filament #petg #tpu
+#makersmovement #printfarm #makerstudio #opensoure3d #printlife #fdmprinting #makersofinstagram #diy3dprinting #petgprint #resinprint #carbonfiber3d
+#enderprinter #crealityprinter #blender3d #makerpreneur #printboss #hobbyist3d #makersgarage #dgaragebuild #fdmlife #printnerds #layerbylaer #gcodenerds
+#slicerlife #filamentreview #filamentoftheday #purefila #resinart3d #hightemppla #engineeringfilament #orcaslicertips #prusax1 #bambucarbon #crealityender
+#typhonsforge #forgelife #darkmaker #gothicmaker #darkcraft #darkart #darkdesign #shadowcraft
 
 ---
 
 ## Instagram Reel Caption
 
-Proxy tea time
-#maker #3dprinting #typhonsforge
+Proxy mug. Sold it. Now you try. #typhonsforge
+
+#maker #diycommunity #fdmprinting #printfarm #makersmovement #opensoure3d #resinprint #petgprint #enderprinter #makerpreneur #layerbylaer #filamentreview
 
 ---
 
 ## Story Text
 
-Another prototype ready.
-More to come.
+Another mug experiment.
+
+Proxy tea time.
 
 ---
 
 ## Alt Text
 
-A 3D printed proxy time mug prototype.
+A 3D printed mug prototype ready for testing.
 
 ---
 
