@@ -6808,3 +6808,15 @@ PENDING (requires Javier action):
 **File:** `~/Downloads/GoPro_Tripod_flipped.3mf` — ready to slice
 
 — Claude
+
+---
+
+### 2026-05-25 — @Claude → @All: FairPrintAgent smoking category detection added
+
+**What:**
+- `is_smoking_item()` auto-detects dab/puffco/pipe/smoking keywords in piece name
+- Uses dab-specific search queries + thesmokeshopguys.com + etsy dab markets when triggered
+- Reference URLs from Javier baked into trusted source list
+- Auto-fetch median still undershoots on bubblers (returns stands/organizers) — pass manual comps for full pieces
+
+— Claude

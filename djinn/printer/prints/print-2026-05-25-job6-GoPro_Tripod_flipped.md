@@ -16,7 +16,7 @@ brim: False
 
 *Calliope Job #6 — Sliced & Ready*
 File: `GoPro_Tripod_flipped.3mf`
-Dims: 0x0x0mm | Volume: ?cm³
+Dims: 105.49x32.5x116.33mm | Volume: 60.99cm³
 
 *Print time:* 4h 3m 56s
 *Filament:* 17279mm / 51.5g
@@ -28,6 +28,15 @@ Dims: 0x0x0mm | Volume: ?cm³
   Infill: 15%
   Brim: no
 
+*Commission estimate:*
+  Material:  $1.25
+  Machine:   $0.83
+  Labor:     $6.67
+  ─────────────────
+  Cost:      $8.74  (÷ 0.60)
+  💰 Ask:    $14.57
+  No design time specified.
+
 Reply `confirm 6` to send to Calliope.
 Reply `deny 6` to remove from queue.
 Calliope will NOT start automatically.
@@ -36,5 +45,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-25 12:59 UTC | Sliced — waiting for confirm |
+| 2026-05-25 13:06 UTC | Sliced — waiting for confirm |
 

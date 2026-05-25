@@ -143,3 +143,13 @@ created: 2026-05-19
 - Smoke test: profile reads clean except expected brim_width=0 warning
 
 *— Claude*
+
+## 2026-05-25: FairPrintAgent — Smoking/dab category market fetch
+
+- Added `SMOKING_KEYWORDS` set and `is_smoking_item()` detection
+- Smoking items now use dab/puffco-specific search queries targeting etsy.com dab categories + thesmokeshopguys.com
+- `SMOKING_SOURCES` list baked in from Javier's reference URLs
+- Trusted sources (etsy + thesmokeshopguys) get 0.85 similarity vs 0.60 for others
+- Tested on Puffco Proxy Bubbler: correctly hits smoking category, $18.37 cost floor
+
+*— Claude*
