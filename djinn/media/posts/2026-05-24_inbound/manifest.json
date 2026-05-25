@@ -1,0 +1,45 @@
+{
+  "project_id": "2026-05-24_inbound",
+  "created_at": "2026-05-25T01:12:00.477629+00:00",
+  "updated_at": "2026-05-25T01:12:54.386912+00:00",
+  "source_path": "/home/drmanzo/.openclaw/media/inbound",
+  "status": "editing",
+  "media_type": "mixed",
+  "files": {
+    "raw": [
+      "raw/IMG_7207---fe66c05b-1197-424f-8997-f8566664d4b7.mov",
+      "raw/IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c.jpg",
+      "raw/IMG_7210---18d128cb-cc71-4dd2-8f90-779170db9e15.mov",
+      "raw/IMG_7209---3f6dcbf4-c4bb-4356-b12b-82553037f537.mov",
+      "raw/IMG_7208---9d815b47-5f44-4998-a094-bcf2516a2f48.mov",
+      "raw/IMG_7211---7d227fd3-ff40-4106-93e6-e2a2e8748dd5.mov"
+    ],
+    "selects": [],
+    "edits": [],
+    "exports": {
+      "feed": [],
+      "reel": [
+        "exports/reel/2026-05-24_inbound_reel.mp4"
+      ],
+      "story": [],
+      "thumbnail": []
+    }
+  },
+  "video_info": {
+    "duration_s": 1.0,
+    "resolution": "720x1280",
+    "fps": 30.0,
+    "codec": "h264",
+    "has_audio": true,
+    "file_size_mb": 0.29
+  },
+  "photo_count": 1,
+  "captions": {
+    "srt_path": "captions/captions.srt",
+    "transcript_path": "captions/transcript.txt",
+    "style": "bold",
+    "burned": true
+  },
+  "next_agent": "qa-agent",
+  "notes": ""
+}
