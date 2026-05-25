@@ -4277,3 +4277,15 @@
 | 2026-05-25 20:57 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
 | 2026-05-25 20:58 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
 | 2026-05-25 20:59 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:00 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:02 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:03 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:04 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:05 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:06 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:07 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:08 UTC | printing | 0.0% | 219.5 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:09 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:10 UTC | printing | 0.0% | 220.4 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:11 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
+| 2026-05-25 21:12 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | GoPro_Tripod_raft_job7.gcode |
