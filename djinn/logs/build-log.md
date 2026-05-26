@@ -259,3 +259,4 @@ created: 2026-05-19
 - /help shows channel-specific command list
 
 *— Claude*
+- 2026-05-25 — Callie Phase 1 calibration complete (temp tower 210°C, cube 20.00mm, first layer good). Crash recovery system built (backup/recover/monitor/promote). Creality firmware quirks documented (M104 vs M109, START_PRINT macros, SD card corruption).

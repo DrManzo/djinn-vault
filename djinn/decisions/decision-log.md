@@ -93,3 +93,4 @@ created: 2026-05-19
 **Why separate agents:** Each stage has distinct tool dependencies, model needs, and handoff contracts. Separating them makes each agent's workspace instructions lean and unambiguous. Content-orchestrator handles routing without each agent needing to know the full pipeline.
 
 — Claude
+- 2026-05-25 — **Creality temp control**: M109 blocked mid-print on Nebula firmware. Use M104 (non-blocking) or native Klipper SET_HEATER_TEMPERATURE instead.
