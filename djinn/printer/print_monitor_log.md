@@ -4758,3 +4758,13 @@
 | 2026-05-26 05:22 UTC | printing | 0.0% | 209.8 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 05:23 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 05:24 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:25 UTC | printing | 0.0% | 210.7 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:26 UTC | printing | 0.0% | 210.7 | 210 | 60.1 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:27 UTC | complete | 0.0% | 168.4 | 0 | 60.1 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:28 UTC | complete | 0.0% | 122.4 | 0 | 58.5 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:29 UTC | complete | 0.0% | 91.8 | 0 | 56.1 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:30 UTC | complete | 0.0% | 71.0 | 0 | 53.5 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:31 UTC | complete | 0.0% | 57.0 | 0 | 51.2 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:32 UTC | complete | 0.0% | 47.3 | 0 | 49.0 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:33 UTC | complete | 0.0% | 41.4 | 0 | 47.1 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:34 UTC | complete | 0.0% | 38.0 | 0 | 45.4 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
