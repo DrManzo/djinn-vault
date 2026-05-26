@@ -6876,3 +6876,12 @@ PENDING (requires Javier action):
 **Action:** Test Telegram by re-enabling it (`channels.telegram.enabled: true` in openclaw.json). When ready, build djinn-vault-indexer (Phase 1 of context router).
 
 — Claude
+
+---
+
+**2026-05-25 ~20:18 PDT — Claude**
+**What:** Built `djinn-telegram-gateway` — Python hybrid middleware for Telegram. Bypasses OpenClaw entirely (Telegram channel disabled). Python intercepts commands → runs shell → deepseek-r1:7b formats output. No tool calls required. 11 command routes: queue, confirm N, deny N, slice N, print status, callie status, quote, quick quote, design status, design, help. Service active and polling.
+**State:** Discord untouched and operational. Telegram now served by `djinn-telegram-gateway.service`. deepseek-r1:7b formats responses.
+**Action:** Javier — test by sending `queue` on Telegram. If it returns the print queue, everything works.
+
+— Claude
