@@ -1,38 +1,31 @@
 # 01 — Temperature Tower (180-230°C)
 
 ## Purpose
-Find the optimal printing temperature for the current PLA filament before running any other calibration tests.
+Find the optimal printing temperature for the current PLA filament.
+
+## Run Log
+| Date | Gcode | Duration | Filament | Result |
+|------|-------|----------|----------|--------|
+| 2026-05-25 | `temp-tower-v3.gcode` | 62.5 min | 3.4m | **COMPLETE** |
 
 ## Method
 - **File:** `temperature-tower-with-rounds-_v003.stl`
-- **Slicer:** PrusaSlicer 2.9.4 (headless) + gcode post-process for temp changes
-- **Profile:** 0.20mm, PLA, 60°C bed
-- **Cooling:** 100% after layer 3
-- **Gcode fix:** Creality START_PRINT/END_PRINT macros injected
-- **Zone temps:** 230°C (bottom) → 190°C (top), 5 zones, ~36mm tall
-
-## Run
-| Date | Gcode | Status |
-|------|-------|--------|
-| 2026-05-25 | `temp-tower-fixed.gcode` | **PRINTING** |
+- **Slicer:** PrusaSlicer + Creality macros + M104 temp changes
+- **Initial temp:** 205°C (START_PRINT default)
+- **Zones:** M104 S220, S210, S200, S190 at layer boundaries
 
 ## Results
-| Temp (°C) | Layer Adhesion | Stringing | Surface Quality | Notes |
-|-----------|---------------|-----------|-----------------|-------|
-| 230 | | | | |
-| 220 | | | | |
-| 210 | | | | |
-| 200 | | | | |
-| 190 | | | | |
+| Zone | Z Range | Temp °C | Layer Adhesion | Stringing | Surface Quality | Notes |
+|------|---------|---------|---------------|-----------|-----------------|-------|
+| 1 (bottom) | 0.3-5.9mm | 205 | | | | |
+| 2 | 5.9-12.9mm | 220 | | | | |
+| 3 | 12.9-19.9mm | 210 | | | | |
+| 4 | 19.9-26.9mm | 200 | | | | |
+| 5 (top) | 26.9-36.1mm | 190 | | | | |
 
-**Optimal temp:** _____ °C
-
-## Photos
-<!-- Insert photos here -->
+**Optimal temp:** _____ °C (fill in after inspection)
 
 ## Notes
-- [ ] Wait for print to complete (~1-2 hrs)
-- [ ] Inspect each temperature zone for stringing
-- [ ] Check layer adhesion — does the part hold together?
-- [ ] Surface quality — glossy vs matte, layer lines visible?
-- [ ] Set print temp to optimal value before next test (cube)
+- [ ] Inspect each zone boundary — should see transition marks
+- [ ] Best temp = cleanest surface, least stringing, good adhesion
+- [ ] Set `PLA_TEMP=<optimal>` before running calibration cube
