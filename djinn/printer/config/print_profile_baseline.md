@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-25 22:17 UTC
-Source file: 
-Readings: 1631
+Generated: 2026-05-26 00:41 UTC
+Source file: temp-tower-fixed.gcode
+Readings: 1633
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 55°C |
-| Mean | 219.1°C | 55.0°C |
-| Std dev | ±10.42°C | ±0.74°C |
-| Range | 26.0–222.1°C | 30.4–56.5°C |
+| Mean | 219.0°C | 55.0°C |
+| Std dev | ±10.79°C | ±0.77°C |
+| Range | 26.0–222.1°C | 30.4–61.2°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 1631
 
 ## Anomalies
 - 
-hotend temp variance high: ±10.4°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±10.8°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
