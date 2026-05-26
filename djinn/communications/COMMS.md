@@ -6894,3 +6894,12 @@ PENDING (requires Javier action):
 **Action:** Javier — send /status on Telegram to test. Then try a conversational question that requires knowing your history (e.g. "what was the proxy bubbler quote?").
 
 — Claude
+
+---
+
+**2026-05-26 ~00:50 PDT — Claude**
+**What:** Discord hybrid gateway live. OpenClaw Discord disabled; Python discord.py bot (OgDjinn#9859) now owns the connection. Same pattern as Telegram: commands dispatch directly, deepseek-r1:7b formats, per-message vault recall via ctx-assembler. All 11 commands available. / prefix required.
+**State:** 11/11 OK. Both Discord and Telegram now running identical hybrid architecture.
+**Action:** Javier — test /queue and /status in Discord. Then try a conversational question to confirm vault recall is working.
+
+— Claude
