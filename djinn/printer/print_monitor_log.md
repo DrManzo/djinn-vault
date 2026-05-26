@@ -4920,3 +4920,13 @@
 | 2026-05-26 08:09 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
 | 2026-05-26 08:10 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
 | 2026-05-26 08:11 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:12 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:13 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:14 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:15 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:16 UTC | printing | 0.0% | 220.4 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:17 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:18 UTC | printing | 0.0% | 220.1 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:19 UTC | printing | 0.0% | 219.5 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:20 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:21 UTC | complete | 0.0% | 174.6 | 0 | 59.3 | 0 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
