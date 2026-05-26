@@ -54,7 +54,7 @@ upload_and_print() {
 
 slice_cube() {
     local temp="${1:-$PLA_TEMP}"
-    local out="$GCODE_DIR/calibration-cube-20mm.gcode"
+    local out="$GCODE_DIR/calibration-cube-20mm-fixed.gcode"
     local stl="$MODEL_DIR/20mm_XYZ_EdgelessSafetyCalibrationCube.stl"
 
     echo "=== Slicing Calibration Cube (20mm) at ${temp}°C ==="
@@ -77,7 +77,7 @@ slice_cube() {
 
 slice_first_layer() {
     local temp="${1:-$PLA_TEMP}"
-    local out="$GCODE_DIR/first-layer-200x200mm.gcode"
+    local out="$GCODE_DIR/first-layer-200x200mm-fixed.gcode"
     local stl="$MODEL_DIR/first_layer_200x200mm.stl"
 
     echo "=== Slicing First Layer Square (200×200mm) at ${temp}°C ==="
@@ -116,12 +116,12 @@ slice_temp_tower() {
     echo "  5. Calibration → Temperature → select tower STL"
     echo "  6. Range: 180-230°C, 5°C steps (PLA)"
     echo "  7. Slice → Export gcode"
-    echo "  8. mv exported.gcode $GCODE_DIR/temp-tower.gcode"
-    echo "  9. Run: $0 upload $GCODE_DIR/temp-tower.gcode"
+    echo "  8. mv exported.gcode $GCODE_DIR/temp-tower-fixed.gcode"
+    echo "  9. Run: $0 upload $GCODE_DIR/temp-tower-fixed.gcode"
     echo ""
     echo "Or manually upload via Moonraker:"
-    echo "  curl -F \"file=@your-temp-tower.gcode\" $MOONRAKER/server/files/upload"
-    echo "  curl -X POST $MOONRAKER/printer/print/start -d '{\"filename\":\"temp-tower.gcode\"}'"
+    echo "  curl -F \"file=@your-temp-tower-fixed.gcode\" $MOONRAKER/server/files/upload"
+    echo "  curl -X POST $MOONRAKER/printer/print/start -d '{\"filename\":\"temp-tower-fixed.gcode\"}'"
 }
 
 list_queue() {
