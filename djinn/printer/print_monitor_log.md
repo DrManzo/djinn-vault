@@ -4771,3 +4771,6 @@
 | 2026-05-26 05:35 UTC | complete | 0.0% | 36.4 | 0 | 43.9 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 05:36 UTC | complete | 0.0% | 35.3 | 0 | 41.1 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 05:37 UTC | complete | 0.0% | 34.5 | 0 | 39.8 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:38 UTC | printing | 0.0% | 131.6 | 130 | 43.8 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 05:39 UTC | printing | 0.0% | 173.0 | 170 | 52.7 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 05:40 UTC | printing | 0.0% | 170.1 | 130 | 59.3 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
