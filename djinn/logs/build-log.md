@@ -245,3 +245,17 @@ created: 2026-05-19
 - Health check: 11/11 OK
 
 *— Claude*
+
+## 2026-05-26: Discord Gateway — Channel-Aware Routing
+
+- 7 channels mapped with distinct command sets + system prompts
+- `#djinn-command-center` — all commands (print + design + media + system)
+- `#3d-printing` — print commands only (/queue, /confirm, /deny, /slice, /print status, /quote)
+- `#media-inbox` — media pipeline (/ingest, /reel, /photo, /caption, /publish, /qa, /thumbnail)
+- `#general` + `#djinn-devlog` — conversation + /status /help only
+- `#media-status` + `#post-ready` — readonly (bot posts here, ignores incoming)
+- All others — silently ignored
+- Per-channel system prompts tailored to context (print ops vs media vs general conciliary)
+- /help shows channel-specific command list
+
+*— Claude*
