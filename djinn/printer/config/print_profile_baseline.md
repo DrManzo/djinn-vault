@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-05-26 04:41 UTC
-Source file: 
-Readings: 1819
+Generated: 2026-05-26 04:55 UTC
+Source file: calibration-cube-20mm.gcode
+Readings: 1820
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 55°C |
-| Mean | 216.6°C | 55.5°C |
-| Std dev | ±15.09°C | ±1.72°C |
+| Mean | 216.5°C | 55.5°C |
+| Std dev | ±15.68°C | ±1.81°C |
 | Range | 26.0–222.1°C | 30.4–61.3°C |
 
 ## Fan
@@ -22,7 +22,7 @@ Readings: 1819
 
 ## Anomalies
 - 
-hotend temp variance high: ±15.1°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±15.7°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
