@@ -4715,3 +4715,5 @@
 | 2026-05-26 04:30 UTC | standby | 0.0% | 76.9 | 0 | 53.9 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 04:31 UTC | standby | 0.0% | 60.7 | 0 | 52.2 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
 | 2026-05-26 04:32 UTC | standby | 0.0% | 49.8 | 0 | 50.5 | 0 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 04:41 UTC | standby | 0.0% | 32.6 | 0 | 40.1 | 0 | 0% | 0 |  |
+| 2026-05-26 04:42 UTC | standby | 0.0% | 32.2 | 0 | 39.3 | 0 | 0% | 0 |  |
