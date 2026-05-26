@@ -21,9 +21,9 @@ Verify dimensional accuracy of X, Y, and Z axes. Adjust steps-per-mm if needed.
 ## Results
 | Axis | Expected | Measured | Deviation | Steps/mm (before) | Steps/mm (after) |
 |------|----------|----------|-----------|-------------------|------------------|
-| X | 20.00mm | | | | |
-| Y | 20.00mm | | | | |
-| Z | 20.00mm | | | | |
+| X | 20.00mm | 20.00mm | 0.00mm | stock | stock |
+| Y | 20.00mm | 20.00mm | 0.00mm | stock | stock |
+| Z | 20.00mm | 20.00mm | 0.00mm | stock | stock |
 
 ## Adjustment Calculation
 New steps/mm = Current steps/mm × (Expected / Measured)
