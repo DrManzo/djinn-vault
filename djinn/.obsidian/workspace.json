@@ -182,6 +182,7 @@
   },
   "active": "b8dcc3e7ad80a504",
   "lastOpenFiles": [
+    "logs/audit-2026-05-23.md",
     "skills/djinn-daily.md",
     "printer/agent/orchestrator/cli.py.tmp.303979.d234cbb3c478",
     "printer/agent/orchestrator/__pycache__/orchestrator.cpython-311.pyc",
@@ -216,7 +217,6 @@
     "workspace/workflows/research.md",
     "workspace/workflows/printer.md",
     "workspace/workflows/notes-command.md",
-    "workspace/workflows/djinn-sync.md",
-    "workspace/workflows/djinn-daily.md"
+    "workspace/workflows/djinn-sync.md"
   ]
 }
