@@ -4543,3 +4543,10 @@
 | 2026-05-26 01:32 UTC | printing | 0.0% | 199.7 | 200 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:33 UTC | printing | 0.0% | 189.2 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:34 UTC | printing | 0.0% | 190.7 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:35 UTC | printing | 0.0% | 190.4 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:36 UTC | printing | 0.0% | 190.6 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:37 UTC | printing | 0.0% | 190.2 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:38 UTC | printing | 0.0% | 190.3 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:39 UTC | printing | 0.0% | 189.9 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:40 UTC | printing | 0.0% | 189.6 | 190 | 59.9 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:41 UTC | printing | 0.0% | 190.0 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
