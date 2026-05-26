@@ -6867,3 +6867,12 @@ PENDING (requires Javier action):
 **Action:** Salomon should be fully operational. Job 7 (GoPro_Tripod_raft) is pending confirm — send `confirm 7` via Discord or Telegram when ready to print.
 
 — Claude
+
+---
+
+**2026-05-25 ~19:10 PDT — Claude**
+**What:** Fixed Salomon silent/NO_REPLY bug on Discord. Root cause: OpenClaw injects group-chat "lurk mode" instructions by default (`silentReply.group: "allow"`), telling qwen2.5:7b to suppress replies it deems unnecessary. Also removed conflicting NO_REPLY-triggering instructions from AGENTS.md and SOUL.md. Disabled broken active-memory plugin. Changed `/3dqueue` trigger to `queue` (plain text) — Discord slash command UI intercepts `/` prefix.
+**State:** Salomon responding correctly in #general and 3D printing channel. Telegram still disabled (re-enable when ready). Context window still 66% static overhead — djinn-context-router (Phase 1) is the next architecture task.
+**Action:** Test Telegram by re-enabling it (`channels.telegram.enabled: true` in openclaw.json). When ready, build djinn-vault-indexer (Phase 1 of context router).
+
+— Claude

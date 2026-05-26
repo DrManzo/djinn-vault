@@ -200,4 +200,12 @@ created: 2026-05-19
 - Gateway restarted clean — Telegram + Discord both connected without errors
 - Report: [[2026-05-25_gateway-compaction-fix]]
 
+**2026-05-25 — Discord NO_REPLY fix**
+- Found and removed 3 compounding NO_REPLY sources in AGENTS.md and SOUL.md
+- Root cause: OpenClaw injects group-chat "lurk mode" by default → fixed with `agents.defaults.silentReply.group: "disallow"`
+- Disabled active-memory plugin (broken tool chain with memory-wiki)
+- Fixed `/3dqueue` → `queue` plain text (Discord slash command UI intercepts `/` prefix)
+- Salomon confirmed responding in Discord #general and 3D printing channel
+- Report: [[2026-05-25_discord-noreply-fix]]
+
 *— Claude*
