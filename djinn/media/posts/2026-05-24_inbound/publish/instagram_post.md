@@ -1,65 +1,66 @@
 # Posting Package — 2026-05-24_inbound
-Generated: 2026-05-25 04:06 UTC
-
----
-
-## Instagram Feed Caption
-
-Proxy tea time is a thing.
-Dirty prototype, sold concept.
-Keep tinkering, who knows what you'll get.
-
-#typhonsforge #maker #diycommunity #makerspace #hackerspace #fdm #additivemaufacturing #makerlife #pla #resin #filament #petg #tpu #makersmovement #printfarm #makerstudio #opensource3d #printlife #fdmprinting #makersofinstagram #diy3dprinting #petgprint #resinprint #carbonfiber3d #enderprinter #crealityprinter #blender3d #makerpreneur #printboss #hobbyist3d #makersgarage #dgaragebuild #fdmlife #printnerds #layerbylaer #gcodenerds #slicerlife #filamentreview #filamentoftheday #purefila #resinart3d #hightemppla #engineeringfilament #orcaslicertips #prusax1 #bambucarbon #crealityender #forgelife #darkmaker #gothicmaker #darkcraft #darkart #darkdesign #shadowcraft
+Generated: 2026-05-26 02:45 UTC
 
 ---
 
 ## Instagram Reel Caption
 
-Proxy tea time.
-Tinker, tweak, repeat. 🌿
+Whispers of creativity echo through Typhon's Forge — where artistry meets precision in shadowed elegance. Witness the birth of bespoke masterpieces, each a testament to our dark craft.
 
-#maker #diycommunity #fdmprinting #printfarm #makersmovement #makersofinstagram #petgprint #resinprint #enderprinter #crealityprinter #blender3d #typhonsforge
+#typhonsforge #forgelife #darkmaker #darkcraft #gothicmaker #3dprinting #3dprinted #fdm #makerlife #customprints #smallbatch #darkartisan #handcraftedprint #forgecustom #3dprintedaccessories
+
+---
+
+## Instagram Feed Caption
+
+Built in the dark. Refined in the forge.
+Custom pieces, made to order. 🔥
+
+#typhonsforge #darkmaker #3dprinting #customprints #forgelife #smallbatch
 
 ---
 
 ## Story Text
 
-Another prototype.
-More to come.
+New drop incoming.
+Custom work. Dark craft. Typhon's Forge. 🔥
 
 ---
 
-## Alt Text
+## Alt Text (accessibility)
 
-A 3D printed mug prototype in progress.
+Reel: Time-lapse of 3D printed custom pieces being created at Typhon's Forge studio.
+Feed: Custom 3D printed piece from Typhon's Forge, dark aesthetic handcrafted design.
 
 ---
 
 ## Export Checklist
 
-### Feed
-- [ ] `IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_feed_1x1.jpg`
-- [ ] `IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_feed_4x5.jpg`
-
 ### Reel
-- [ ] `2026-05-24_inbound_reel.mp4`
+- [ ] `exports/reel/2026-05-24_inbound_reel.mp4`
+- [ ] Cover: `exports/thumbnail/2026-05-24_inbound_cover_reel.jpg`
+- [ ] Paste Reel caption above
+- [ ] Add alt text
+
+### Feed
+- [ ] `exports/feed/IMG_7204_feed_4x5.jpg` (portrait)
+- [ ] `exports/feed/IMG_7204_feed_1x1.jpg` (square)
+- [ ] Paste Feed caption above
 
 ### Story
-- [ ] `IMG_7204---5b602cd7-ae72-4019-a614-9d9ae963e52c_story.jpg`
-
-### Thumbnail
-- [ ] `2026-05-24_inbound_cover_reel.jpg`
-- [ ] `2026-05-24_inbound_reel_cover.jpg`
-- [ ] `2026-05-24_inbound_thumb_16x9.jpg`
-- [ ] `2026-05-24_inbound_thumb_1x1.jpg`
+- [ ] `exports/story/IMG_7204_story.jpg`
+- [ ] Add Story text overlay manually
 
 ---
 
 ## Posting Order
 
-1. [ ] QA passed (check `qa_report.md`)
-2. [ ] Upload Reel → set cover from `exports/thumbnail/`
+1. [ ] Review reel in exports/reel/ — confirm footage looks right
+2. [ ] Upload Reel to Instagram → set cover from thumbnail/
 3. [ ] Paste Reel caption
-4. [ ] Upload feed post(s)
-5. [ ] Add alt text to each image
-6. [ ] Post Story if applicable
+4. [ ] Upload feed photo
+5. [ ] Post Story
+
+---
+
+*Drive: https://drive.google.com/open?id=1Qc-4zHsP6OfvEudMqXvT3wY2DJ69uHxv*
