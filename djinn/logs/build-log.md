@@ -220,3 +220,17 @@ created: 2026-05-19
 - Report: [[2026-05-25_discord-noreply-fix]]
 
 *— Claude*
+
+## 2026-05-25: Context Router — Phase 1
+
+- **djinn-vault-indexer**: indexes 688-file vault into ChromaDB (8,284 chunks via nomic-embed-text)
+- **djinn-ctx-assembler**: per-message context assembler — User → Memory → Agent State, query-specific vault recall
+- **djinn-ctx-router**: service (5-min timer) — writes CONTEXT.md + STATE.md, triggers incremental reindex
+- **djinn-agent-doctor**: system health check — 11 checks, plain text + `--short` for Telegram /status
+- **Salomon agent dir**: `~/.openclaw/agents/salomon/` — IDENTITY.md, SKILLS.md, STATE.md (machine-written)
+- **AGENTS.md trimmed**: 11,490 → 1,904 chars (tool docs moved to agent dir)
+- **Workspace budget fixed**: CONTEXT.md now carries SOUL + USER (2500 chars) + IDENTITY + SKILLS + STATE = 8,743 chars. All critical context guaranteed within 15K budget.
+- **Telegram gateway updated**: `/status` command added (calls djinn-agent-doctor --short); ctx-assembler wired for per-message vault recall
+- All services: 11/11 OK
+
+*— Claude*
