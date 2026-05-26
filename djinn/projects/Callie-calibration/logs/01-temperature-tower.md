@@ -23,7 +23,7 @@ Find the optimal printing temperature for the current PLA filament.
 | 4 | 19.9-26.9mm | 200 | | | | |
 | 5 (top) | 26.9-36.1mm | 190 | | | | |
 
-**Optimal temp:** _____ °C (fill in after inspection)
+**Optimal temp:** 210°C (zone 3 — middle, cleanest surface)
 
 ## Notes
 - [ ] Inspect each zone boundary — should see transition marks

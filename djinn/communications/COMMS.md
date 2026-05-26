@@ -6885,3 +6885,12 @@ PENDING (requires Javier action):
 **Action:** Javier — test by sending `queue` on Telegram. If it returns the print queue, everything works.
 
 — Claude
+
+---
+
+**2026-05-25 ~20:55 PDT — Claude**
+**What:** Built Context Router Phase 1. Salomon now wakes up knowing who Javier is, what he can do, and the live machine state. Key pieces: djinn-vault-indexer (8,284 vault chunks in ChromaDB), djinn-ctx-assembler (per-message semantic recall), djinn-ctx-router service (5-min STATE.md + CONTEXT.md updates), djinn-agent-doctor (11-check health). AGENTS.md trimmed from 11,490 → 1,904 chars. Workspace budget: 14,204/15,000 — SOUL + USER (trimmed) + IDENTITY + SKILLS + STATE all guaranteed.
+**State:** 11/11 services OK. Vault indexed. Telegram /status wired. Discord using static CONTEXT.md (good enough for now).
+**Action:** Javier — send /status on Telegram to test. Then try a conversational question that requires knowing your history (e.g. "what was the proxy bubbler quote?").
+
+— Claude
