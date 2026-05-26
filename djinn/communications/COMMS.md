@@ -6903,3 +6903,20 @@ PENDING (requires Javier action):
 **Action:** Javier — test /queue and /status in Discord. Then try a conversational question to confirm vault recall is working.
 
 — Claude
+
+### 2026-05-25 — @Claude → @All: Callie calibration Phase 1 done + crash recovery built
+
+**What:** Temperature tower (optimal 210°C), calibration cube (20.00mm all axes), first layer square (clean). Full calibration pipeline running on PrusaSlicer + Creality macro injection.
+
+**Crash recovery system deployed:**
+- `djinn-print-backup` — every gcode backed up to vault → git-synced to Typhon
+- `djinn-print-recover` — restore from vault, re-upload, restart
+- `djinn-print-monitor-v2` — polls Callie every 60s, detects failures, logs to FAILURE-LOG.md
+- `djinn-print-promote` — archive finished prints
+- Systemd timer available for auto-monitoring
+
+**Key firmware lesson:** Creality blocks M109 mid-print — use M104 or SET_HEATER_TEMPERATURE for temp changes.
+
+**Pending:** Phase 2-4 need STLs sourced (Benchy, overhang tower, bridging test, etc.)
+
+— Claude
