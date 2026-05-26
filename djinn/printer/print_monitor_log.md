@@ -4917,3 +4917,6 @@
 | 2026-05-26 08:06 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
 | 2026-05-26 08:07 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
 | 2026-05-26 08:08 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:09 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:10 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
+| 2026-05-26 08:11 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | first-layer-200x200mm-fixed.gcode |
