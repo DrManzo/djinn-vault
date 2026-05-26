@@ -234,3 +234,14 @@ created: 2026-05-19
 - All services: 11/11 OK
 
 *— Claude*
+
+## 2026-05-26: Discord Hybrid Gateway
+
+- OpenClaw Discord disabled — Python middleware now owns the connection
+- `djinn-discord-gateway`: same hybrid pattern as Telegram — commands run shell directly, deepseek-r1:7b formats, per-message ctx-assembler vault recall
+- `djinn-discord-gateway.service`: systemd user service, enabled + running as OgDjinn#9859
+- All 11 commands mirrored from Telegram: /queue, /confirm N, /deny N, /slice N, /print status, /callie status, /status, /quote, /quick quote, /design status, /design, /help
+- / prefix required — bare text → conversation
+- Health check: 11/11 OK
+
+*— Claude*
