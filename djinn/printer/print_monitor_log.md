@@ -4519,3 +4519,8 @@
 | 2026-05-26 01:07 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:08 UTC | printing | 0.0% | 220.4 | 220 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:09 UTC | printing | 0.0% | 209.5 | 210 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:10 UTC | printing | 0.0% | 210.8 | 210 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:11 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:12 UTC | printing | 0.0% | 211.0 | 210 | 60.1 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:13 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:14 UTC | printing | 0.0% | 210.0 | 210 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
