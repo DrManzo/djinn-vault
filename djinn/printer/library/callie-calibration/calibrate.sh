@@ -4,10 +4,12 @@
 #
 # Usage:
 #   ./calibrate.sh status          — check printer state
-#   ./calibrate.sh temp-tower      — slice & queue temp tower (OrcaSlicer GUI needed)
+#   ./calibrate.sh monitor         — watch live print progress (poll every 10s)
+#   ./calibrate.sh temp-tower      — instructions to slice temp tower
 #   ./calibrate.sh cube            — slice & queue calibration cube
 #   ./calibrate.sh first-layer     — slice & queue first layer square
 #   ./calibrate.sh upload <gcode>  — upload gcode to Moonraker and start print
+#   ./calibrate.sh start <file>    — upload & start a fixed gcode file
 #   ./calibrate.sh list            — list queued/completed jobs
 
 MOONRAKER="http://192.168.1.114:7125"
@@ -33,6 +35,28 @@ print(f'State: {s[\"state\"]}')
 print(f'File: {s[\"filename\"] or \"(none)\"}')
 print(f'Progress: {s.get(\"print_duration\",0):.0f}s')
 " 2>/dev/null || echo "Moonraker unreachable"
+}
+
+monitor() {
+    echo "=== Monitoring Callie (refresh every 10s) ==="
+    while true; do
+        clear 2>/dev/null || true
+        curl -s "$MOONRAKER/printer/objects/query?print_stats&display_status&heater_bed&extruder" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+s=d['result']['status']
+ps=s['print_stats']; disp=s['display_status']
+bed=s['heater_bed']; ext=s['extruder']
+pct = disp['progress'] * 100
+print(f'  State:     {ps[\"state\"]}')
+print(f'  File:      {ps[\"filename\"]}')
+print(f'  Progress:  {pct:.2f}%')
+print(f'  Bed:       {bed[\"temperature\"]:.0f}/{bed[\"target\"]:.0f}')
+print(f'  Hotend:    {ext[\"temperature\"]:.0f}/{ext[\"target\"]:.0f}')
+print(f'  Duration:  {ps[\"print_duration\"]:.0f}s')
+" 2>/dev/null || echo "Moonraker unreachable"
+        sleep 10
+    done
 }
 
 upload_and_print() {
@@ -139,13 +163,15 @@ for j in q['jobs']:
 
 case "${1:-help}" in
     status)      status ;;
+    monitor)     monitor ;;
     cube)        slice_cube "$2" ;;
     first-layer) slice_first_layer "$2" ;;
     temp-tower)  slice_temp_tower ;;
     upload)      upload_and_print "$2" ;;
+    start)       upload_and_print "$2" ;;
     list)        list_queue ;;
     *)
-        echo "Usage: $0 {status|cube|first-layer|temp-tower|upload <gcode>|list}"
+        echo "Usage: $0 {status|monitor|cube|first-layer|temp-tower|upload <gcode>|start <gcode>|list}"
         echo ""
         echo "Environment:"
         echo "  PLA_TEMP=<temp>    Print temperature (default: 220)"
