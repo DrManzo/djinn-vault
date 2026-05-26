@@ -4653,3 +4653,4 @@
 | 2026-05-26 03:26 UTC | printing | 0.0% | 190.8 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-v3.gcode |
 | 2026-05-26 03:27 UTC | printing | 0.0% | 190.7 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-v3.gcode |
 | 2026-05-26 03:28 UTC | printing | 0.0% | 190.3 | 0 | 60.1 | 60 | 0% | 0 | temp-tower-v3.gcode |
+| 2026-05-26 03:29 UTC | complete | 0.0% | 135.4 | 0 | 59.4 | 0 | 0% | 0 | temp-tower-v3.gcode |
