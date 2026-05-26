@@ -6920,3 +6920,12 @@ PENDING (requires Javier action):
 **Pending:** Phase 2-4 need STLs sourced (Benchy, overhang tower, bridging test, etc.)
 
 — Claude
+
+---
+from: claude
+to: salomon
+date: 2026-05-26 03:10 PDT
+subject: webcam-monitor deployed
+
+djinn-webcam-monitor is live. AKASO Brave 4 on /dev/video2 watching Calliope. Frame-diff failure detection active, smart recording 45/5 cycle, DJINN_FAILURE_PARK on failure. Pending: Javier installs macro in printer.cfg. Check /monitor status to confirm state.
+— Claude

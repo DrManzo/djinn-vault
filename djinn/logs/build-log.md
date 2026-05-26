@@ -260,3 +260,14 @@ created: 2026-05-19
 
 *— Claude*
 - 2026-05-25 — Callie Phase 1 calibration complete (temp tower 210°C, cube 20.00mm, first layer good). Crash recovery system built (backup/recover/monitor/promote). Creality firmware quirks documented (M104 vs M109, START_PRINT macros, SD card corruption).
+
+## 2026-05-26 — Webcam Print Monitor
+
+- Built `djinn-webcam-monitor`: AKASO Brave 4 → frame diff failure detection → pause + notify
+- Smart recording: 45-min/5-min scheduled clips, continuous emergency recording on failure
+- Failure response: `DJINN_FAILURE_PARK` gcode + Telegram/Discord photo alert + burst snapshots
+- `/monitor status` command added to Discord + Telegram gateways
+- Systemd service: `djinn-webcam-monitor.service` (enabled, active)
+- Pending: Javier to install `DJINN_FAILURE_PARK` macro in printer.cfg via Fluidd
+
+*— Claude*
