@@ -192,6 +192,17 @@ created: 2026-05-19
 
 *— Claude*
 
+## 2026-05-25: Telegram Hybrid Gateway
+
+- Root cause: qwen2.5:7b crashes with `non_deliverable_terminal_turn` on malformed tool calls; mistral:7b echoes system prompt instead of executing commands
+- Solution: Python middleware bypasses OpenClaw entirely for Telegram — intercepts commands, runs shell directly, uses deepseek-r1:7b for formatting only (no tool dispatch)
+- `djinn-telegram-gateway`: 11 command routes (queue, confirm N, deny N, slice N, print status, callie status, quote, quick quote, design status, design, help)
+- `djinn-telegram-gateway.service`: systemd user service, enabled + running
+- OpenClaw: `channels.telegram.enabled: false` (Discord completely untouched)
+- Report: [[2026-05-25_telegram-hybrid-gateway]]
+
+*— Claude*
+
 ## 2026-05-25 — Gateway Compaction Fix
 
 - Root cause: `reserveTokensFloor: 20000` in openclaw.json exceeded qwen2.5:7b contextWindow (16384)
