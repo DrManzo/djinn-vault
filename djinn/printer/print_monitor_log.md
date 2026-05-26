@@ -4555,3 +4555,5 @@
 | 2026-05-26 01:44 UTC | printing | 0.0% | 189.5 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:45 UTC | printing | 0.0% | 189.9 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
 | 2026-05-26 01:46 UTC | printing | 0.0% | 190.2 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:47 UTC | printing | 0.0% | 190.1 | 190 | 60.0 | 60 | 0% | 0 | temp-tower-fixed.gcode |
+| 2026-05-26 01:48 UTC | standby | 0.0% | 170.4 | 0 | 60.1 | 0 | 0% | 0 |  |
