@@ -4729,3 +4729,19 @@
 | 2026-05-26 04:52 UTC | standby | 0.0% | 29.4 | 0 | 33.5 | 0 | 0% | 0 |  |
 | 2026-05-26 04:53 UTC | standby | 0.0% | 29.2 | 0 | 33.1 | 0 | 0% | 0 |  |
 | 2026-05-26 04:54 UTC | standby | 0.0% | 29.1 | 0 | 32.6 | 0 | 0% | 0 |  |
+| 2026-05-26 04:55 UTC | printing | 0.0% | 34.2 | 120 | 32.3 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 04:56 UTC | printing | 0.0% | 119.8 | 120 | 40.7 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 04:57 UTC | printing | 0.0% | 191.6 | 190 | 50.1 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 04:58 UTC | printing | 0.0% | 120.8 | 120 | 57.5 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 04:59 UTC | printing | 0.0% | 120.6 | 210 | 60.5 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:00 UTC | printing | 0.0% | 210.3 | 210 | 61.1 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:01 UTC | printing | 0.0% | 209.0 | 210 | 60.7 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:02 UTC | printing | 0.0% | 210.4 | 210 | 59.6 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:03 UTC | printing | 0.0% | 210.5 | 210 | 59.8 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:04 UTC | printing | 0.0% | 209.4 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:05 UTC | printing | 0.0% | 209.4 | 210 | 60.1 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:06 UTC | printing | 0.0% | 209.8 | 210 | 60.1 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:07 UTC | printing | 0.0% | 209.4 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:08 UTC | printing | 0.0% | 209.8 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:09 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
+| 2026-05-26 05:10 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | calibration-cube-20mm.gcode |
