@@ -6677,3 +6677,8 @@
 | 2026-05-27 19:32 UTC | printing | 0.0% | 208.9 | 210 | 55.0 | 55 | 0% | 0 | javi_vase_creality.gcode |
 | 2026-05-27 19:34 UTC | printing | 0.0% | 210.3 | 210 | 55.0 | 55 | 0% | 0 | javi_vase_creality.gcode |
 | 2026-05-27 19:35 UTC | cancelled | 0.0% | 191.9 | 0 | 54.9 | 0 | 0% | 0 | javi_vase_creality.gcode |
+| 2026-05-27 19:36 UTC | cancelled | 0.0% | 121.2 | 0 | 53.0 | 0 | 0% | 0 | javi_vase_creality.gcode |
+| 2026-05-27 19:37 UTC | cancelled | 0.0% | 81.0 | 0 | 50.2 | 0 | 0% | 0 | javi_vase_creality.gcode |
+| 2026-05-27 19:38 UTC | cancelled | 0.0% | 57.7 | 0 | 47.5 | 0 | 0% | 0 | javi_vase_creality.gcode |
+| 2026-05-27 19:39 UTC | printing | 0.0% | 47.5 | 120 | 45.2 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 19:40 UTC | printing | 0.0% | 119.5 | 120 | 52.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
