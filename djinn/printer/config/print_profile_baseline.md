@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-26 09:15 UTC
+Generated: 2026-05-27 02:20 UTC
 Source file: 
-Readings: 2008
+Readings: 13
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
-| Target | 220°C | 55°C |
-| Mean | 216.4°C | 55.9°C |
-| Std dev | ±15.74°C | ±2.21°C |
-| Range | 26.0–222.1°C | 30.4–61.3°C |
+| Target | 120°C | 60°C |
+| Mean | 178.6°C | 53.5°C |
+| Std dev | ±45.69°C | ±12.08°C |
+| Range | 96.0–210.8°C | 23.8–60.9°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 2008
 
 ## Anomalies
 - 
-hotend temp variance high: ±15.7°C (check nozzle_mcu cable)- bed temp variance high: ±2.2°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±45.7°C (check nozzle_mcu cable)- bed temp variance high: ±12.1°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
