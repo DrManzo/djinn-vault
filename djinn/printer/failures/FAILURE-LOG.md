@@ -473,3 +473,12 @@ Each entry: one incident. Append only.
   Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
 === ERROR STATE ===
   Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== FAILURE DETECTED ===
+  File: javi_vase_creality.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-05-27 19:35:56 UTC

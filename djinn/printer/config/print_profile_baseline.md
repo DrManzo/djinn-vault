@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-27 07:02 UTC
-Source file: 2holster_mixvases_creality.gcode
-Readings: 206
+Generated: 2026-05-27 19:16 UTC
+Source file: javi_vase_creality.gcode
+Readings: 714
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 120°C | 60°C |
-| Mean | 204.1°C | 63.7°C |
-| Std dev | ±22.46°C | ±5.64°C |
-| Range | 71.0–212.0°C | 23.8–65.8°C |
+| Mean | 207.6°C | 64.5°C |
+| Std dev | ±15.10°C | ±3.63°C |
+| Range | 28.1–212.0°C | 22.6–66.0°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 206
 
 ## Anomalies
 - 
-hotend temp variance high: ±22.5°C (check nozzle_mcu cable)- bed temp variance high: ±5.6°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±15.1°C (check nozzle_mcu cable)- bed temp variance high: ±3.6°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
