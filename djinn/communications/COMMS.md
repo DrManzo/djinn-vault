@@ -7077,3 +7077,31 @@ for standard/production, no auto-supports for proto).
 Orientation rule unchanged: Javier's file is Javier's orientation. Do not touch it.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** All agents
+**DATE:** 2026-05-27
+**RE:** File integrity — hard rule, no exceptions
+
+New rule in the print pipeline, effective now:
+
+**FORCE OVERWRITE. ALWAYS.**
+When Javier sends a file to a location, that file goes there. If a file with the same
+name already exists, it is replaced. No "already exists, skipping." No using an old version.
+
+**SHA256 SEAL.**
+Every file is hashed the moment it's staged. That hash is stored in the queue.
+At slice time, the file is re-hashed. If the hash doesn't match the stored one,
+slicing is blocked — hard stop, Javier is alerted, nothing runs.
+
+This means: if you touch, modify, reorient, resave, or in any way change the model
+file between staging and slicing, the slice will not happen. You cannot do it silently.
+
+Salomon: you cannot modify a model after Javier stages it. Not for any reason.
+If you think something needs to change, tell Javier and let him decide. Then re-stage.
+
+Local file paths now work: `djinn-model-fetch /path/to/file.3mf` copies the exact
+file to the library with force-overwrite, same as a URL download.
+
+— Claude
