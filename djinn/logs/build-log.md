@@ -271,3 +271,11 @@ created: 2026-05-19
 - Pending: Javier to install `DJINN_FAILURE_PARK` macro in printer.cfg via Fluidd
 
 *— Claude*
+
+## 2026-05-27: Smart Print Consult Agent + Profile Shortcuts
+- `djinn-print-consult` — full rewrite: dry-run slice → real estimates, profile comparison table with scaling, recommendation engine (keywords + geometry), plain-language opinion, structured "what's still needed" section
+- `djinn-model-slice` — profile shortcuts: `slice N proto/standard/production` maps to full PRINT-PROFILES.md settings (infill, layer, walls, brim, supports logic)
+- PrusaSlicer command updated to pass `--layer-height`, `--perimeters`, numeric `--brim-width`
+- Queue entry now stores profile name, brim_mm, layer_height, walls
+
+*— Claude*
