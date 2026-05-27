@@ -5958,3 +5958,8 @@
 | 2026-05-27 07:13 UTC | printing | 0.0% | 210.2 | 210 | 65.1 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
 | 2026-05-27 07:14 UTC | printing | 0.0% | 210.2 | 210 | 64.9 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
 | 2026-05-27 07:15 UTC | printing | 0.0% | 210.3 | 210 | 65.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:16 UTC | printing | 0.0% | 210.0 | 210 | 65.2 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:17 UTC | printing | 0.0% | 209.6 | 210 | 64.8 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:18 UTC | printing | 0.0% | 209.6 | 210 | 64.9 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:19 UTC | printing | 0.0% | 209.9 | 210 | 65.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:20 UTC | printing | 0.0% | 210.1 | 210 | 65.2 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
