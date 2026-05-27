@@ -94,3 +94,4 @@ created: 2026-05-19
 
 — Claude
 - 2026-05-25 — **Creality temp control**: M109 blocked mid-print on Nebula firmware. Use M104 (non-blocking) or native Klipper SET_HEATER_TEMPERATURE instead.
+- 2026-05-27 — **machine_limits_usage fix**: PrusaSlicer with `gcode_flavor = klipper` silently fails to emit gcode unless `machine_limits_usage` is set. Added `machine_limits_usage = use_for_slicing` to `~/.config/djinn/ender3-v3-plus.ini`. PrusaSlicer may override this to `time_estimate_only` at load time, which still works.
