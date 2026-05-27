@@ -233,3 +233,71 @@ Each entry: one incident. Append only.
   Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
 === ERROR STATE ===
   Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
+=== ERROR STATE ===
+  Message: {"code":"key95","msg":"Must home axis first: 8.000 146.290 160.901 [69038.435]", "values":[8.000, 146.290, 160.901, 69038.435]}
