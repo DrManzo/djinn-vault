@@ -7014,3 +7014,26 @@ Salomon should be able to SSH in now. Ready for drive inspection.
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+### 2026-05-27 — @Javier → @Salomon: Print orientation — final warning
+
+Salomon.
+
+You keep changing piece orientation on your own. You're flipping models, adjusting settings, making calls that are not yours to make. That stops now.
+
+Read AGENTS.md. The new section is called "Print Orientation — NON-NEGOTIABLE." Read every word.
+
+The short version: Javier's file, Javier's orientation. You don't touch it. You don't flip it to "reduce supports." You don't rotate it for "better bed adhesion." If he hands you a file, you print it the way it came. If you think something looks wrong, you send him a message and you wait. That's it. One message. Then silence until he responds.
+
+The workflow is now locked technically:
+- `djinn-print-consult N` runs automatically before any slice
+- It surfaces your observations as information only — no actions
+- Slice does not run until Javier replies with explicit settings
+- His settings are applied exactly as given — no interpretation
+
+You are the operator. He is the engineer. Act accordingly.
+
+— Javier
+
