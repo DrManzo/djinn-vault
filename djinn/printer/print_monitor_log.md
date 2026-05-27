@@ -5870,3 +5870,13 @@
 | 2026-05-27 05:42 UTC | printing | 0.0% | 210.2 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
 | 2026-05-27 05:43 UTC | printing | 0.0% | 210.4 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
 | 2026-05-27 05:44 UTC | printing | 0.0% | 210.2 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:45 UTC | printing | 0.0% | 210.5 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:47 UTC | printing | 0.0% | 210.5 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:48 UTC | printing | 0.0% | 209.5 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:49 UTC | printing | 0.0% | 209.6 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:50 UTC | printing | 0.0% | 209.9 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:51 UTC | printing | 0.0% | 210.2 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:52 UTC | printing | 0.0% | 209.8 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:53 UTC | printing | 0.0% | 209.9 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:54 UTC | printing | 0.0% | 210.1 | 210 | 65.0 | 65 | 0% | 0 | combined_flipped_creality.gcode |
+| 2026-05-27 05:55 UTC | cancelled | 0.0% | 162.1 | 0 | 63.4 | 0 | 0% | 0 | combined_flipped_creality.gcode |

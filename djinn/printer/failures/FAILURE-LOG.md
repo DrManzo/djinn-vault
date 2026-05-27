@@ -44,3 +44,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-05-27 02:12:55 UTC
+=== FAILURE DETECTED ===
+  File: combined_flipped_creality.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-05-27 05:55:05 UTC
