@@ -482,3 +482,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-05-27 19:35:56 UTC
+=== FAILURE DETECTED ===
+  File: 2holster_mixvases_creality.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-05-27 19:41:58 UTC

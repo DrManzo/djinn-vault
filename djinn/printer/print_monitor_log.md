@@ -6682,3 +6682,9 @@
 | 2026-05-27 19:38 UTC | cancelled | 0.0% | 57.7 | 0 | 47.5 | 0 | 0% | 0 | javi_vase_creality.gcode |
 | 2026-05-27 19:39 UTC | printing | 0.0% | 47.5 | 120 | 45.2 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
 | 2026-05-27 19:40 UTC | printing | 0.0% | 119.5 | 120 | 52.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 19:41 UTC | error | 0.0% | 191.8 | 190 | 60.1 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 19:42 UTC | standby | 0.0% | 150.3 | 0 | 60.2 | 0 | 0% | 0 |  |
+| 2026-05-27 19:43 UTC | standby | 0.0% | 119.0 | 0 | 58.0 | 0 | 0% | 0 |  |
+| 2026-05-27 19:44 UTC | standby | 0.0% | 95.1 | 0 | 55.8 | 0 | 0% | 0 |  |
+| 2026-05-27 19:45 UTC | standby | 0.0% | 77.6 | 0 | 53.6 | 0 | 0% | 0 |  |
+| 2026-05-27 19:46 UTC | standby | 0.0% | 64.8 | 0 | 51.6 | 0 | 0% | 0 |  |
