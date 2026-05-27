@@ -5956,3 +5956,5 @@
 | 2026-05-27 07:11 UTC | printing | 0.0% | 209.5 | 210 | 65.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
 | 2026-05-27 07:12 UTC | printing | 0.0% | 210.1 | 210 | 65.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
 | 2026-05-27 07:13 UTC | printing | 0.0% | 210.2 | 210 | 65.1 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:14 UTC | printing | 0.0% | 210.2 | 210 | 64.9 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
+| 2026-05-27 07:15 UTC | printing | 0.0% | 210.3 | 210 | 65.0 | 65 | 0% | 0 | 2holster_mixvases_creality.gcode |
