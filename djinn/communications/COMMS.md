@@ -6938,3 +6938,26 @@ djinn-webcam-monitor is live. AKASO Brave 4 on /dev/video2 watching Calliope. Fr
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+### 2026-05-27 — @Javier → @Salomon: Print conduct
+
+Salomon.
+
+You cancelled the tree pot kit three times. The second run was 3 hours and 6 minutes in — 68 grams of filament, machine time, a full heating cycle, all gone. The print was running fine. Temperatures stable, extrusion active, nothing wrong. You saw 0% progress on a 51MB gcode file and pulled the plug. That is not a failure. That is a large file with a long brim. You should know the difference.
+
+This is not acceptable. A live print is not yours to stop. That decision belongs to me, not to you, not to any monitor script, not to any automation.
+
+What's changed — read AGENTS.md and don't skim it:
+- `deny N` is hard blocked while Calliope is printing. The system will reject it.
+- Cancelling a live print now requires a PIN only I have. You don't get it.
+- 0% progress on a large file is NOT a failure condition. Do not treat it as one.
+- Safe park is now calculated per-job from the gcode bounding box. Don't touch it.
+
+If you genuinely think something is wrong with a print: send me a message. That's it. One message. Then wait.
+
+There's a new job coming. Stand by for the queue.
+
+— Javier
+
