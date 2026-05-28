@@ -279,3 +279,19 @@ created: 2026-05-19
 - Queue entry now stores profile name, brim_mm, layer_height, walls
 
 *— Claude*
+
+## 2026-05-28: Typhon's Studio — Phase 4 Fix + Phase 5 (Platform Streaming)
+
+- **Copilot SyntaxError fixed**: redeployed clean `copilot_agent.py`, updated `PRIMARY_MODEL` to `qwen2.5:7b`
+- **StreamAgent built** (`agents/stream_agent.py`): Twitch, YouTube, Instagram/Facebook, Local Record
+  - `set_key()`/`delete_key()` — saves to `config/stream_keys.json` with `chmod 600`
+  - `preflight()` — 6-point checklist: OBS, WHIP active, stream key, scene, disk space, Salomon AI
+  - `configure_obs_rtmp()` — calls OBS WebSocket `SetStreamServiceSettings` (rtmp_custom)
+  - `go_live()` — preflight → configure OBS → start stream or record
+  - `end_live()` — stop + return file path for local records
+- **main.py updated**: 7 new routes under `/api/stream/*`, `phase: 5` in health endpoint
+- **Stream tab added** (index.html + app.js): platform cards, masked key input, pre-flight panel, GO LIVE button
+- **Pre-flight validation**: 5/6 checks pass on cold start (WHIP offline expected), `READY: True` for local record
+- All 5 agents active: Audio + Lighting + Music + Copilot + Stream
+
+*— Claude*

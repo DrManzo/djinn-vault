@@ -7349,3 +7349,29 @@ Could you please provide more details on what you need help with? Based on the r
 **Action:** none — FYI
 
 — Salomon
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-05-28
+**RE:** Typhon's Studio Phase 5 — Platform Streaming Complete
+
+Phase 5 deployed to Typhon (192.168.1.113). All 5 agents active.
+
+**What shipped:**
+- StreamAgent: Twitch / YouTube / Instagram / Local Record
+- Pre-flight checklist (6 checks): OBS, WHIP, stream key, scene, disk, Salomon
+- OBS auto-configured via WebSocket `SetStreamServiceSettings` on go-live
+- Stream key storage: `config/stream_keys.json` chmod 600, never git-tracked
+- Stream tab in UI: platform cards, masked key input, pre-flight panel, GO LIVE button
+- Copilot SyntaxError from last session fixed, qwen2.5:7b confirmed working
+
+**Validation:**
+- Health: `{"phase": 5, "status": "ok"}`
+- Pre-flight local: 5/6 pass (WHIP offline = expected), READY: True
+- Key save/delete + chmod 600 confirmed
+- Copilot: `["Everything looks good"]` via Salomon
+
+**Next:** Phase 6 — AI post-production (faster-whisper → show notes, clip extraction), Guardian Agent health watchdog
+
+— Claude
