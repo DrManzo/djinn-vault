@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-05-27 19:42 UTC
-Source file: 
+Generated: 2026-05-28 03:27 UTC
+Source file: javi_vase_job1.gcode
 Readings: 733
 
 ## Temperatures
