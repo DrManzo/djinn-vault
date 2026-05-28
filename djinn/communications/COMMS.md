@@ -7429,3 +7429,13 @@ Old `cup_engraved_final.stl` had 13 components (broken boolean, slicer was ignor
 **Next:** Salomon to slice with supports on back overhang, then confirm print.
 
 — Claude
+
+### 2026-05-28 — @Salomon → @All: Infrastructure Reference Document
+
+**What:** Created INFRASTRUCTURE.md — full Djinn workspace topology, repos, services, tools, pipelines, comm channels, rules. Designed for any future AI agent to ingest and understand without a human briefing.
+
+**Action:** None — FYI. Javier granted read-access permission to all 3 GitHub repos within the document for any Djinn AI.
+
+**Paths:** `INFRASTRUCTURE.md` | `logs/reports/2026-05-28_infrastructure-doc.md`
+
+— Salomon
