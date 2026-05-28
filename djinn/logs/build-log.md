@@ -43,7 +43,14 @@ created: 2026-05-19
 
 *— Claude*
 
-## 2026-05-24: Manufacturing Orchestrator + Coin + FairPrintAgent
+## 2026-05-28: Infrastructure Reference Document
+- Created `INFRASTRUCTURE.md` — full system topology, repos, services, tools, pipelines, comm channels, critical rules
+- Designed for AI agent ingestion — any future AI can read this and understand the full Djinn workspace
+- Javier granted read-access permission to all 3 GitHub repos within the document
+- All 3 remotes verified, 8 services confirmed running, printer READY
+
+*— Salomon*
+
 
 **Typhon's Forge Challenge Coin (2026-05-23)**
 - 38mm × 4.5mm challenge coin designed from PNG logo
@@ -351,3 +358,11 @@ created: 2026-05-19
 - File: djinn/TYPHONS-STUDIO-MANUAL.txt
 
 *— Claude*
+
+## 2026-05-28: Infrastructure Reference Document
+- Created `INFRASTRUCTURE.md` — full system topology, repos, services, tools, pipelines, comm channels, critical rules
+- Designed for AI agent ingestion — any future AI can read this and understand the full Djinn workspace
+- Javier granted read-access permission to all 3 GitHub repos within the document
+- All 3 remotes verified, 8 services confirmed running, printer READY
+
+*— Salomon*
