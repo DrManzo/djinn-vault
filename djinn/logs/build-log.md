@@ -326,3 +326,18 @@ created: 2026-05-19
 - **Smoke tested**: `djinn-3d --help` + caliper_body.stl analysis — both clean
 
 *— Claude*
+
+## 2026-05-28: Typhon's Studio — Phase 6 (AI Post-Production)
+
+- **faster-whisper installed** in typhons-studio venv: `base` model, CUDA float16 on GTX 1650 (3.4s load)
+- **PostProductionAgent** (`agents/post_agent.py`):
+  - `transcribe()` — async job, thread pool, VAD filter, returns segments with timestamps
+  - `generate_show_notes()` — phi4:14b on Salomon, structured JSON (title, summary, key_points, chapters, tags)
+  - `extract_clips()` — ffmpeg libx264/aac per clip, parallel thread pool
+  - `list_recordings()` — scans recordings dir with ffprobe duration + size
+  - Job system: UUID + WebSocket broadcast on progress/completion
+- **7 new routes** under `/api/post/*` — transcribe, show-notes, clips, recordings, jobs
+- **Post tab** in UI: recording picker, transcript (click timestamp → add clip), show notes panel, clip editor
+- All 6 agents active: Audio + Lighting + Music + Copilot + Stream + Post
+
+*— Claude*

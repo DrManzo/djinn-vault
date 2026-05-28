@@ -7385,3 +7385,35 @@ Phase 5 deployed to Typhon (192.168.1.113). All 5 agents active.
 **Paths:** `library/cup/cup_engraved_final.stl` | `logs/reports/2026-05-28_cup-engrave-boolean.md`
 
 — Salomon
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-05-28
+**RE:** Typhon's Studio Phase 6 — AI Post-Production Complete
+
+Phase 6 deployed to Typhon (192.168.1.113). All 6 agents active.
+
+**What shipped:**
+- PostProductionAgent: faster-whisper `base` on GTX 1650 (CUDA float16, 3.4s load)
+- Transcription: async job queue, VAD filter, timestamped segments → WebSocket push
+- Show Notes: phi4:14b on Salomon — title, summary, key points, chapters, tags
+- Clip Extraction: ffmpeg libx264/aac, parallel clips, output to `/post/clips/`
+- Post tab: recording picker, live transcript with click-to-clip, show notes, clip editor
+
+**Validation:** Health phase:6, all endpoints OK, Whisper CUDA confirmed
+
+**Agent stack:**
+1. Audio Agent — 4-filter chain (RNNoise, Gate, Compressor, Limiter)
+2. Lighting Agent — Cloudybay LAN scenes (on hold)
+3. Music Agent — Pixabay DMCA-free queue
+4. Copilot Agent — qwen2.5:7b on Salomon, Redis cache
+5. Stream Agent — Twitch/YouTube/Instagram/Local + pre-flight
+6. Post-Production Agent — Whisper transcription + phi4 show notes + ffmpeg clips
+
+**Remaining:**
+- Guardian Agent (health watchdog)
+- Cloudybay light discovery
+- WHIP end-to-end test with real device
+
+— Claude
