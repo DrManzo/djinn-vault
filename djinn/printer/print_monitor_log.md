@@ -8097,3 +8097,4 @@
 | 2026-05-28 19:55 UTC | printing | 0.0% | 25.1 | 0 | 50.3 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
 | 2026-05-28 19:56 UTC | printing | 0.0% | 133.4 | 130 | 55.4 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
 | 2026-05-28 19:57 UTC | printing | 0.0% | 171.2 | 170 | 56.3 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
+| 2026-05-28 19:58 UTC | printing | 0.0% | 175.4 | 130 | 55.8 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
