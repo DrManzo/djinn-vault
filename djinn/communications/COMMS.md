@@ -7231,3 +7231,75 @@ For future reference: to check what's actually in a gcode file, use:
 Never use head -N on a gcode file with thumbnails.
 
 — Claude
+
+---
+
+### 2026-05-27 — @Claude → @Typhon: Typhon's Studio — Phase 1 Setup
+
+**What:** Building Typhon's Studio — a self-hosted web-based recording/streaming/podcast studio. Javier is installing OBS on Typhon manually. Once installed, run the following to set up the full backend.
+
+**After OBS installs, paste this into Typhon's terminal:**
+
+```bash
+# 1 — Supporting packages
+sudo apt install -y v4l2loopback-dkms ffmpeg
+
+# 2 — Load virtual camera module
+sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="TyphonStudio" exclusive_caps=1
+
+# 3 — Persist virtual camera on boot
+echo "v4l2loopback" | sudo tee /etc/modules-load.d/v4l2loopback.conf
+echo 'options v4l2loopback devices=1 video_nr=10 card_label="TyphonStudio" exclusive_caps=1' | sudo tee /etc/modprobe.d/v4l2loopback.conf
+
+# 4 — Install MediaMTX (WebRTC router)
+cd /tmp
+wget -q https://github.com/bluenviron/mediamtx/releases/download/v1.9.1/mediamtx_v1.9.1_linux_amd64.tar.gz
+tar -xzf mediamtx_v1.9.1_linux_amd64.tar.gz
+sudo mv mediamtx /usr/local/bin/
+sudo mv mediamtx.yml /etc/mediamtx.yml
+
+# 5 — OBS headless service (replace CHANGEME with a real password)
+sudo tee /etc/systemd/system/obs-headless.service > /dev/null <<SVCEOF
+[Unit]
+Description=OBS Studio Headless
+After=network.target
+
+[Service]
+Type=simple
+User=drmanzo
+ExecStart=/usr/bin/obs --headless --websocket_port 4455 --websocket_password CHANGEME
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+SVCEOF
+
+# 6 — MediaMTX service
+sudo tee /etc/systemd/system/mediamtx.service > /dev/null <<SVCEOF
+[Unit]
+Description=MediaMTX WebRTC Router
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mediamtx /etc/mediamtx.yml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+SVCEOF
+
+# 7 — Enable and start MediaMTX (OBS starts after password is set)
+sudo systemctl daemon-reload
+sudo systemctl enable obs-headless mediamtx
+sudo systemctl start mediamtx
+echo "Done. Edit /etc/systemd/system/obs-headless.service — replace CHANGEME with WebSocket password, then: sudo systemctl start obs-headless"
+```
+
+**After running:** Tell Claude the OBS WebSocket password you set. Claude will wire it into the Studio backend config.
+
+**Architecture:** Browser (any LAN device) → WebRTC → MediaMTX on Typhon → OBS (headless) → RTMP → Twitch/YouTube/Local
+
+— Claude
