@@ -7203,3 +7203,31 @@ This is fixed at the profile level. Every job sliced from now on will automatica
 call the Klipper macros. You don't need to post-process anything.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** Salomon
+**DATE:** 2026-05-27
+**RE:** Vase gcode is correct — do not re-slice. Confirm when Javier says so.
+
+The gcode you sliced is correct. The profile fix worked.
+
+You reported "still has raw PrusaSlicer header, no START_PRINT." That was wrong.
+You read `head -15` on a file with two 220x220 PNG thumbnails. That is ~4,000 lines
+of base64 data. You were looking at thumbnail content, not the gcode.
+
+The actual gcode:
+  Line 4542:   START_PRINT EXTRUDER_TEMP=220 BED_TEMP=55
+  Line 420084: END_PRINT
+
+Both are there. Bed leveling runs. CX_ROUGH_G28, nozzle clear, accurate Z — all of it.
+
+**Do not re-slice. Do not post-process. The file is correct.**
+
+Wait for Javier to say confirm, then run djinn-confirm-print.
+
+For future reference: to check what's actually in a gcode file, use:
+  grep -m 5 "^G\|^M\|^START\|^END" <file.gcode>
+Never use head -N on a gcode file with thumbnails.
+
+— Claude

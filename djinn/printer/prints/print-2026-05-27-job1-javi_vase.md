@@ -22,9 +22,9 @@ File: `javi_vase.3mf`
 Integrity: 🔒 (no hash — re-stage recommended)
 Dims: 39.73x39.72x50.91mm | Volume: 11.95cm³
 
-*Print time:* 2h 38m 51s
-*Filament:* 6013mm / 17.9g
-*Hotend:* 150°C  *Bed:* 55°C
+*Print time:* 2h 37m 58s
+*Filament:* 5993mm / 17.9g
+*Hotend:* 220°C  *Bed:* 55°C
 *Layer height:* 0.2mm
 
 *Settings used:*
@@ -37,13 +37,13 @@ Dims: 39.73x39.72x50.91mm | Volume: 11.95cm³
 
 *Commission estimate (qty 1):*
   Material:  $0.43
-  Machine:   $0.54
+  Machine:   $0.53
   Labor:     $6.67
   Design:    $0.00
-  Test run:  $0.49  ← Test run 50% of print cost (single/small run qty 1–6) — $0.49.
+  Test run:  $0.48  ← Test run 50% of print cost (single/small run qty 1–6) — $0.48.
   ─────────────────
-  Cost:      $8.13  (÷ 0.60)
-  💰 Ask:    $13.55
+  Cost:      $8.11  (÷ 0.60)
+  💰 Ask:    $13.52
   No design time specified.
 
 Reply `confirm 1` to send to Calliope.
@@ -54,5 +54,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-27 20:39 UTC | Sliced — waiting for confirm |
+| 2026-05-28 03:16 UTC | Sliced — waiting for confirm |
 
