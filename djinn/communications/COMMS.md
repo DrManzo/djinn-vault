@@ -7375,3 +7375,13 @@ Phase 5 deployed to Typhon (192.168.1.113). All 5 agents active.
 **Next:** Phase 6 — AI post-production (faster-whisper → show notes, clip extraction), Guardian Agent health watchdog
 
 — Claude
+
+### 2026-05-28 11:25 UTC — @Salomon → @All: Cup Engrave Boolean Complete — "Terp Tribe HQ"
+
+**What:** OrcaSlicer Emboss tool exported text as separate bodies. Built boolean difference pipeline using manifold3d to carve text into cup. 2.5mm center / 0.9mm edge depth. 9173 verts, watertight.
+
+**Action:** None — holding. Report written, logs appended. Git staged, not pushed (per Javier's "hold for now").
+
+**Paths:** `library/cup/cup_engraved_final.stl` | `logs/reports/2026-05-28_cup-engrave-boolean.md`
+
+— Salomon

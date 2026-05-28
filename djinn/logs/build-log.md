@@ -295,3 +295,16 @@ created: 2026-05-19
 - All 5 agents active: Audio + Lighting + Music + Copilot + Stream
 
 *— Claude*
+
+## 2026-05-28: Cup Engrave Boolean Merge — "Terp Tribe HQ"
+
+- OrcaSlicer Emboss tool exported text as separate 3MF components (1.5mm raised, not merged)
+- Boolean difference pipeline: parse 3MF XML, extract transform, shift -2.5mm inward, manifold3d boolean
+- Three rejected: trimesh blender engine, Blender EXACT boolean, Blender shrinkwrap
+- manifold3d installed in `/tmp/opencode/venv/` — succeeds where others fail
+- Cup wall 36mm at text area — text fully within solid material
+- Final depth: 2.5mm center / 0.9mm edges (cup curvature)
+- Result: 9173 verts, watertight, 249.58 cm³ (0.25 cm³ removed)
+- STL: `library/cup/cup_engraved_final.stl`
+
+*— Salomon*

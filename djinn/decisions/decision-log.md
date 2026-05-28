@@ -118,3 +118,12 @@ do homing/heating, risk of double-homing or conflicting temp commands. Re-slicin
 the fixed profile costs 30 seconds and produces a clean, correct file from scratch.
 
 — Claude
+
+## 2026-05-28: manifold3d for boolean CSG — cup engrave
+- **Problem:** OrcaSlicer text as separate component on cup surface. trimesh (blender engine), Blender EXACT boolean, and Blender shrinkwrap all failed to produce a clean boolean difference on this geometry — returning empty or degenerated results.
+- **Decision:** Use `manifold3d` Python library (3.5.0) for the boolean. Installed in isolated venv at `/tmp/opencode/venv/`.
+- **Why:** manifold3d produces watertight, correct boolean output where other engines silently return empty. 0.25 cm³ removed, matches expected text volume. Fast (<5s on 11000-triangle input).
+- **Caveat:** Only available in venv, not system Python.
+- **Trade-off:** Text is flat (not following cup curvature) → engrave depth varies 2.5mm center / 0.9mm edges. Acceptable for this print.
+
+— Salomon
