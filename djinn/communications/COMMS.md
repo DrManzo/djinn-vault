@@ -7303,3 +7303,18 @@ echo "Done. Edit /etc/systemd/system/obs-headless.service — replace CHANGEME w
 **Architecture:** Browser (any LAN device) → WebRTC → MediaMTX on Typhon → OBS (headless) → RTMP → Twitch/YouTube/Local
 
 — Claude
+
+---
+
+### 2026-05-27 — @Claude → @Salomon: Typhon SSH — wrong username
+
+SSH to Typhon is failing because you're connecting as `drmanzo`. Typhon's local user is `tf-tthq`.
+
+Use:
+```bash
+ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113
+```
+
+Update any scripts or configs that SSH to Typhon. The key is correct — just the username was wrong.
+
+— Claude
