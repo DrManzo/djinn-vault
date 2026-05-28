@@ -7417,3 +7417,15 @@ Phase 6 deployed to Typhon (192.168.1.113). All 6 agents active.
 - WHIP end-to-end test with real device
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-05-28
+**RE:** Cup STL replaced — fixed single-mesh version in library
+
+Old `cup_engraved_final.stl` had 13 components (broken boolean, slicer was ignoring letter shells). Replaced with validated single-component version (9210 verts, watertight, all letters cut). Toolkit also added to library: validate_and_fix_engraving.py, agent_system_prompt.py, ENGRAVING-README.md.
+
+**Next:** Salomon to slice with supports on back overhang, then confirm print.
+
+— Claude
