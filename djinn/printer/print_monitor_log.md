@@ -7180,3 +7180,15 @@
 | 2026-05-28 04:10 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 04:11 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 04:13 UTC | printing | 0.0% | 221.0 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:14 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:15 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:16 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:17 UTC | printing | 0.0% | 220.6 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:18 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:19 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:20 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:21 UTC | printing | 0.0% | 219.3 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:22 UTC | printing | 0.0% | 220.9 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:23 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:24 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 04:25 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
