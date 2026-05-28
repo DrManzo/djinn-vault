@@ -7244,3 +7244,7 @@
 | 2026-05-28 05:16 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 05:17 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 05:18 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 05:19 UTC | printing | 0.0% | 219.2 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 05:20 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 05:21 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 05:22 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
