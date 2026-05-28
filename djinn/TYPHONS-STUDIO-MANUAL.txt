@@ -1,0 +1,1060 @@
+================================================================================
+                         TYPHON'S STUDIO — USER MANUAL
+                              Version 1.0  |  2026-05-28
+================================================================================
+
+  A self-hosted, browser-based production studio running on Typhon.
+  Handles live streaming, recording, podcasting, and AI post-production
+  without any third-party subscription services.
+
+  Maintained by: Djinn / Typhon's Forge
+  Access: https://192.168.1.113  (LAN only)
+  Built by: Claude (Anthropic) + Javier (Typhon's Forge)
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+  1.  What Is Typhon's Studio?
+  2.  Before You Start — Requirements
+  3.  Opening the Studio
+  4.  The Interface At a Glance
+  5.  STUDIO TAB — Camera, Mic, and Preview
+  6.  STREAM TAB — Platforms and Going Live
+  7.  AUDIO TAB — Filters and Calibration
+  8.  MUSIC TAB — Background Music
+  9.  LIGHTING TAB — Scene Control
+  10. POST TAB — Transcription, Show Notes, and Clips
+  11. COPILOT TAB — AI Session Assistant
+  12. Common Workflows (Step-by-Step)
+  13. Troubleshooting
+  14. Frequently Asked Questions
+  15. Technical Reference (for engineers)
+
+================================================================================
+1. WHAT IS TYPHON'S STUDIO?
+================================================================================
+
+Typhon's Studio is a self-hosted alternative to StreamYard, Riverside, and
+similar cloud services. Everything runs on a machine called Typhon
+(192.168.1.113) inside your local network. You access it from any computer,
+phone, or tablet on the same WiFi using a regular web browser — no app
+downloads, no subscriptions.
+
+WHAT IT CAN DO:
+  - Capture your camera and microphone from any device on the LAN
+  - Send that capture to Typhon, where OBS composites and encodes it
+  - Live stream to Twitch, YouTube, or Instagram/Facebook
+  - Record locally to a file on Typhon's hard drive (191 GB free)
+  - Play DMCA-free background music during streams and recordings
+  - Control smart lights (Cloudybay) from the browser
+  - Run AI audio filters in real time (noise removal, compression)
+  - Automatically transcribe recordings after the session
+  - Generate show notes, chapters, and tags using AI
+  - Cut clips from recordings for social media repurposing
+
+WHAT IT CANNOT DO (yet):
+  - Remote access from outside your LAN
+  - Apple Music or Spotify integration (copyright rules)
+  - Multiple simultaneous stream destinations
+  - Edit video in the browser (export to your editor of choice)
+
+================================================================================
+2. BEFORE YOU START — REQUIREMENTS
+================================================================================
+
+DEVICES THAT WORK:
+  Any computer, phone, or tablet on the same WiFi as Typhon.
+  Tested on: Windows (Chrome/Edge), Mac (Safari/Chrome), Android (Chrome),
+             iOS (Safari — iOS 15+)
+
+BROWSER REQUIREMENTS:
+  - Chrome 90+ or Edge 90+  (recommended — best WebRTC support)
+  - Safari 15+              (works, occasional quirks)
+  - Firefox 90+             (works)
+  NOTE: The browser must be on HTTPS to access your camera and microphone.
+        Typhon's Studio uses a self-signed certificate. Your browser will
+        show a security warning on first visit — this is expected and safe.
+        Click "Advanced" then "Proceed to 192.168.1.113 (unsafe)" to continue.
+        You only have to do this once per browser.
+
+HARDWARE ON YOUR DEVICE:
+  - A camera (built-in webcam, phone camera, or USB camera)
+  - A microphone (built-in, headset, or USB mic)
+  - Speakers or headphones (optional — for audio monitoring)
+
+ON THE TYPHON SIDE (already set up, no action needed):
+  - Typhon (192.168.1.113) must be powered on
+  - All services start automatically on boot:
+      OBS Studio (headless, port 4455)
+      MediaMTX WebRTC router (ports 8889 / 8554)
+      Studio backend (port 8080, proxied through nginx on 443)
+      Redis cache (port 6379)
+
+================================================================================
+3. OPENING THE STUDIO
+================================================================================
+
+STEP 1: Make sure your device is on the same WiFi as Typhon.
+
+STEP 2: Open your browser and go to:
+          https://192.168.1.113
+
+STEP 3: Accept the security warning.
+          Chrome: click "Advanced" → "Proceed to 192.168.1.113 (unsafe)"
+          Safari: click "Show Details" → "visit this website"
+          Firefox: click "Advanced" → "Accept the Risk and Continue"
+
+STEP 4: The studio loads. You will see a dark interface with tabs across the
+        top. The header will show:
+          OBS READY  — Typhon's OBS is connected and running
+          STREAM IDLE — no camera/mic connected yet
+          TYPHON LIVE — WebSocket connected, real-time updates active
+
+If any of those indicators are red or yellow, see Section 13 (Troubleshooting).
+
+================================================================================
+4. THE INTERFACE AT A GLANCE
+================================================================================
+
+HEADER BAR (always visible at the top):
+  - Studio name and current mode badge (STANDBY / SETUP / LIVE)
+  - Live status indicators: OBS, STREAM, TYPHON
+  - When broadcasting: shows "LIVE Twitch" or "REC Local Record"
+
+LEFT SIDEBAR (always visible):
+  - Scene shortcuts (Podcast, Video Essay, Interview, Gaming, Local Record)
+  - GO LIVE / END BROADCAST button
+  - RECORD LOCAL / STOP REC button
+  - VCAM toggle (virtual camera for use in other apps)
+  - Platform quick-select (Twitch, YouTube, Instagram, Local Record)
+
+TABS (main content area):
+  Studio   — camera/mic setup and preview
+  Stream   — platform selection, stream keys, pre-flight checklist
+  Audio    — filter chain and mic calibration
+  Music    — background music search and queue
+  Lighting — smart light scenes
+  Post     — AI transcription, show notes, clip extraction
+  Copilot  — AI session assistant
+
+STATUS BAR:
+  Appears at the bottom of the Studio preview when something happens.
+  Green = good news, Yellow = warning, Red = error.
+
+================================================================================
+5. STUDIO TAB — CAMERA, MIC, AND PREVIEW
+================================================================================
+
+This is your main view. The large area shows a preview of your camera.
+The right panel is where you pick your inputs.
+
+---- PICKING YOUR CAMERA ---------------------------------------------------
+
+In the right panel under "Camera":
+  - Top dropdown: your primary camera (this is what goes into the stream)
+  - Bottom dropdown: secondary camera (reserved for future multi-cam support)
+
+Your browser will ask permission to access the camera and microphone the
+first time. Click "Allow". If you accidentally denied permission, go to your
+browser's site settings for https://192.168.1.113 and reset permissions.
+
+---- PICKING YOUR MICROPHONE -----------------------------------------------
+
+Under "Microphone":
+  - Top dropdown: your primary microphone
+  - Bottom dropdown: secondary microphone (future use)
+
+Once selected, the camera preview appears and the audio meter lights up.
+
+---- AUDIO METER -----------------------------------------------------------
+
+The bar at the bottom of the preview shows your mic level in real time.
+  - Green bars: good signal
+  - Yellow/Orange bars: getting loud, watch it
+  - Red bars with "CLIPPING" warning: too hot — move back from the mic
+                                      or reduce gain in Audio tab
+
+Aim to peak in the green-to-yellow range when speaking normally.
+
+---- MONITOR / SPEAKER -----------------------------------------------------
+
+Under "Monitor":
+  - Select a speaker/headphone output to hear your own audio back
+  - Toggle ON/OFF to enable or disable monitoring
+  Note: Monitoring lets you hear yourself in the headphones.
+        Leave it OFF if you don't have headphones — it will cause echo.
+
+---- CONNECTING TO TYPHON (REQUIRED BEFORE GOING LIVE) --------------------
+
+Once your camera and mic are selected, you MUST click:
+
+  [ CONNECT TO TYPHON ]
+
+This sends your camera and mic over WebRTC (a direct browser-to-server
+connection) to Typhon's MediaMTX server. OBS on Typhon then reads this
+stream and composites it.
+
+When connected, the button turns green and shows "CONNECTED → OBS".
+The header shows "STREAM CONNECTED".
+
+You MUST connect before going live or recording. If you forget, the
+pre-flight check will catch it.
+
+---- SCENES ----------------------------------------------------------------
+
+Under "OBS Scenes" in the right panel (or via the left sidebar shortcuts):
+
+  Podcast       — audio-focused, single talking head
+  Video Essay   — clean layout for voiceover-style content
+  Interview     — split-screen layout (future multi-cam)
+  Gaming        — game capture layout (future)
+  Local Record  — local file recording, no stream overlay
+
+Click a scene to switch OBS to that layout. The current scene is
+highlighted in blue.
+
+---- VCAM (VIRTUAL CAMERA) ------------------------------------------------
+
+The VCAM button in the left sidebar creates a virtual camera device
+at /dev/video10 called "TyphonStudio". This lets you use OBS's output
+as a camera source in Zoom, Teams, Discord, or any other app on Typhon.
+
+================================================================================
+6. STREAM TAB — PLATFORMS AND GOING LIVE
+================================================================================
+
+This is where you choose where to broadcast and manage your stream keys.
+
+---- SELECTING A PLATFORM --------------------------------------------------
+
+Four options:
+  🎮 Twitch            — live gaming/streaming platform
+  ▶️  YouTube           — live streaming and premiere
+  📸 Instagram/Facebook — RTMPS live streaming
+  💾 Local Record       — save directly to Typhon's drive, no internet needed
+
+Click the card to select it. The selected card highlights in purple.
+
+---- STREAM KEYS -----------------------------------------------------------
+
+For Twitch, YouTube, and Instagram you need a stream key.
+Your key is NEVER shared with anyone — it stays on Typhon.
+
+HOW TO GET YOUR KEY:
+
+  Twitch:
+    1. Go to https://dashboard.twitch.tv
+    2. Settings → Stream
+    3. Copy "Primary Stream Key"
+    Key looks like: live_xxxxxxxxxxxxxxxxxxxx
+
+  YouTube:
+    1. Go to https://studio.youtube.com
+    2. Click "Go Live" → Stream tab
+    3. Copy "Stream key"
+    Key looks like: xxxx-xxxx-xxxx-xxxx-xxxx
+
+  Instagram / Facebook:
+    1. Open Instagram app → Create → Live
+    2. Tap the settings gear → Advanced settings
+    3. Copy the server URL and stream key (paste together if needed)
+    OR:
+    Go to https://www.facebook.com/live/producer
+    Click "Use stream key" and copy it
+
+HOW TO SAVE YOUR KEY:
+  1. Select the platform card
+  2. The key input box appears with a hint showing what format to expect
+  3. Paste your key
+  4. Click SHOW to verify it looks right, then HIDE again
+  5. Click SAVE
+
+  The key is saved to Typhon's disk at:
+    /home/tf-tthq/typhons-studio/config/stream_keys.json
+  It is NOT stored in the browser and NOT sent to any external server.
+  The file is readable only by Typhon's service account.
+
+  Once saved, the platform card shows "KEY SET ✓" in green.
+
+  To remove a key: click "× Remove saved key" under the input box.
+
+---- PRE-FLIGHT CHECKLIST -------------------------------------------------
+
+Click [ ✓ CHECK ] to run a pre-flight check before going live.
+The right panel shows the results:
+
+  ✓ OBS Studio           — OBS is running and connected
+  ✓ Camera/Mic connected — your WHIP stream from the browser is active
+  ✓ Stream key           — key is saved for the selected platform
+  ✓ OBS scene selected   — a scene is loaded (not the default empty scene)
+  ✓ Disk space           — at least 5 GB free on Typhon
+  ✓ Copilot (Salomon AI) — Salomon AI server is reachable
+
+IMPORTANT: Only OBS and Stream Key are hard blockers. If those two pass,
+you can go live even if other checks have warnings.
+
+The Camera/Mic check is a soft warning — it tells you to connect your
+browser stream first, but you can technically start OBS streaming before
+your browser reconnects (useful if you reload the page mid-session).
+
+---- GOING LIVE ------------------------------------------------------------
+
+After pre-flight passes, click the big red [ ▶ GO LIVE ] button.
+
+What happens automatically:
+  1. Pre-flight runs one more time
+  2. OBS is configured with your platform's RTMP server and key
+  3. OBS starts streaming (or recording for Local Record)
+  4. Studio mode switches to LIVE (header turns red and pulses)
+  5. Lights lock (can't accidentally change scenes while on air)
+  6. Copilot enters live mode (analyzes every 60 seconds)
+
+The header shows "● LIVE Twitch" (or whichever platform).
+
+To end the broadcast: click [ ■ END BROADCAST ]
+  - Stream stops
+  - Mode returns to SETUP
+  - Lights unlock
+  - For Local Record: the file path appears with a "→ Post-Produce" button
+
+You can also use GO LIVE from the left sidebar shortcut — it always uses
+whatever platform is currently selected in the Stream tab.
+
+================================================================================
+7. AUDIO TAB — FILTERS AND CALIBRATION
+================================================================================
+
+Typhon applies a professional audio processing chain to your microphone
+inside OBS. These run on Typhon's hardware, not your device.
+
+---- THE FILTER CHAIN (in order) ------------------------------------------
+
+  1. NOISE SUPPRESS (RNNoise AI)
+     What it does: Removes background noise using an AI model.
+     Removes: fan hum, air conditioning, keyboard clicks, room noise.
+     Toggle: ON recommended at all times.
+
+  2. NOISE GATE
+     What it does: Silences the mic when you're not speaking.
+     Opens at -32dB, closes at -42dB.
+     Result: No low-level room noise bleeds in between sentences.
+     Toggle: ON for podcasts and streams. Turn OFF if your voice is quiet
+             and the gate is cutting off the start of your words.
+
+  3. COMPRESSOR
+     What it does: Reduces the difference between loud and quiet speech.
+     Settings: 4:1 ratio, -18dB threshold.
+     Result: Consistent, broadcast-quality vocal level.
+     Toggle: ON always recommended.
+
+  4. LIMITER
+     What it does: Hard ceiling at -2dB. Prevents digital clipping.
+     Toggle: ON always. Never turn this off while live.
+
+To toggle any filter on or off, click the ON/OFF button on its card.
+Changes take effect immediately in OBS.
+
+---- AUTO GAIN STAGING (MIC CALIBRATION) ----------------------------------
+
+If your mic sounds too quiet or too loud, use Auto Gain Staging:
+
+  1. Click [ CALIBRATE MIC ]
+  2. Speak normally into your mic for 5 seconds
+     (talk as you would during a real session)
+  3. Typhon samples your mic level and calculates the gain offset
+     needed to hit -12dBFS (broadcast standard target)
+  4. The gain is applied automatically
+  5. A message shows the adjustment made (e.g., "Done — gain set +6.0 dB")
+
+Do this once per session before going live. If you change your mic
+position significantly, run it again.
+
+================================================================================
+8. MUSIC TAB — BACKGROUND MUSIC
+================================================================================
+
+Play DMCA-free background music during your session. All tracks are sourced
+from Pixabay (royalty-free) or Bensound (Creative Commons).
+
+---- SEARCHING FOR MUSIC ---------------------------------------------------
+
+  - Type a keyword in the search bar (e.g., "chill beats", "lofi", "upbeat")
+  - Or select a mood from the dropdown:
+      Chill      — relaxed, low energy, background feel
+      Energetic  — high tempo, hype music
+      Focus      — concentration, ambient, study vibes
+      Podcast    — clean background, doesn't compete with voice
+      Dramatic   — cinematic, intense
+      Gaming     — game stream background music
+
+  Click [ SEARCH ] or press Enter.
+  Results show: track title, source, duration, and DMCA-safe badge.
+
+---- QUEUING TRACKS --------------------------------------------------------
+
+  Click [ + QUEUE ] on any result to add it to your queue.
+  The queue shows in the right panel. Current track is shown with "▶".
+  Click [ ▶ PLAY NEXT ] to advance to the next track.
+  Click [ clear ] to empty the queue.
+
+---- VOLUME CONTROL --------------------------------------------------------
+
+  The volume slider controls how loud the background music is.
+  Drag left for quieter, right for louder.
+  Range: 0% (mute) to 100% (full volume)
+  Default starting volume: 40%
+
+---- DUCK AND RESTORE ------------------------------------------------------
+
+These are one-click shortcuts for talking over music:
+
+  [ 🎙 DUCK ]    — instantly drops music to 20% while you speak
+  [ 🎵 RESTORE ] — returns music to 40% when you're done talking
+
+Use DUCK before speaking, RESTORE after. The Copilot will remind you
+if music is too loud while your mic is active.
+
+IMPORTANT: Background music plays on Typhon's audio system, not through
+your device speakers. Viewers hear it mixed into the stream automatically.
+You will NOT hear it unless you monitor the OBS output separately.
+
+================================================================================
+9. LIGHTING TAB — SCENE CONTROL
+================================================================================
+
+Control Cloudybay smart lights on your LAN from the browser.
+
+NOTE: Lights must be discovered before they can be controlled.
+      See "Discovering Lights" below.
+
+---- LIGHTING SCENES -------------------------------------------------------
+
+  🎙 Podcast    — 4000K warm white, full brightness
+                  Good for: solo talking head, professional look
+  🌆 Moody      — 2700K amber, 40% brightness
+                  Good for: atmospheric content, evening streams
+  💥 Dramatic   — 6500K cool white + blue accent, maximum brightness
+                  Good for: gaming, hype content, reveals
+  👥 Interview  — 5000K neutral daylight, 90% brightness
+                  Good for: two-person format, balanced color
+  ⚫ Off        — All lights off
+
+Click a scene button to apply it immediately.
+
+---- DISCOVERING LIGHTS ----------------------------------------------------
+
+  1. Make sure your Cloudybay lights are:
+     - Powered on
+     - Connected to the same WiFi network as Typhon
+     - Set up via the Cloudybay app on your phone first
+
+  2. Click [ DISCOVER LIGHTS ]
+  3. Typhon scans the network using the tinytuya protocol
+  4. Found devices show as "X device(s) found"
+
+  If no lights are found:
+  - Check the Cloudybay app is connected and lights are online
+  - Make sure lights are on the same network as Typhon (not guest WiFi)
+  - Try toggling a light in the app to wake it up, then re-discover
+
+---- LIGHTING LOCK ---------------------------------------------------------
+
+When you go live (stream or record), lights automatically LOCK.
+This prevents accidentally changing your lighting mid-session.
+
+A yellow banner appears: "Lighting locked during live session"
+
+Lights unlock automatically when you click END BROADCAST.
+You can also manually unlock from the left sidebar if needed.
+
+================================================================================
+10. POST TAB — TRANSCRIPTION, SHOW NOTES, AND CLIPS
+================================================================================
+
+After a recording session, use the Post tab to automatically generate
+transcripts, show notes, and social media clips using AI.
+
+All processing runs on Typhon (GTX 1650 GPU) and Salomon (AI server).
+This does NOT upload your content to any cloud service.
+
+---- SELECTING A RECORDING -------------------------------------------------
+
+  1. Click the Post tab
+  2. Under "Recordings", all files in Typhon's recordings folder appear
+     Each shows: filename, duration, file size
+  3. Click a file to select it (highlighted in purple)
+
+  If the list is empty:
+  - You haven't recorded a session yet, OR
+  - Click [ ↻ Refresh ] to rescan the folder
+
+  Recordings are stored at:
+    /home/tf-tthq/typhons-studio/recordings/
+
+  Supported formats: .mkv, .mp4, .flv, .mov, .ts
+
+  Quick shortcut: After ending a Local Record session, the Stream tab
+  shows the saved file with a "→ Post-Produce" button that jumps directly
+  to the Post tab with that file selected.
+
+---- TRANSCRIBING A RECORDING ----------------------------------------------
+
+  1. Select a recording
+  2. Click [ 🎙 TRANSCRIBE ]
+
+  What happens:
+  - Typhon loads the Whisper AI speech recognition model (first load ~3-4s)
+  - Audio is extracted from your recording
+  - Whisper transcribes every word with precise timestamps
+  - Progress appears via real-time updates
+
+  Time estimates (approximate):
+    10 min recording  → ~1-2 min to transcribe
+    30 min recording  → ~3-5 min
+    60 min recording  → ~8-12 min
+
+  When done, the transcript appears in the main panel:
+  - Each line shows a timestamp (00:01:23) and the spoken text
+  - You can scroll through the full transcript
+  - Click [ copy ] to copy the full text to your clipboard
+
+  IMPORTANT: The first transcription ever will download the Whisper model
+  (~150MB) from the internet. This takes a few minutes on first run only.
+  All future transcriptions use the cached model instantly.
+
+---- READING THE TRANSCRIPT ------------------------------------------------
+
+  Each line in the transcript shows:
+    00:01:23   And here's where we talk about the product launch...
+
+  The gray timestamp on the left is clickable — clicking any transcript
+  line adds a clip starting at that point to the Clip Editor on the right.
+  (See "Extracting Clips" below.)
+
+---- GENERATING SHOW NOTES -------------------------------------------------
+
+  After transcription is complete, click [ 🤖 SHOW NOTES ]
+  (This button stays grayed out until you have a transcript.)
+
+  Typhon sends your transcript to Salomon's phi4:14b AI model, which
+  reads the content and generates:
+
+    Title        — A concise, engaging episode title (under 60 chars)
+    Summary      — 2-3 sentence description of the episode
+    Key Points   — 5-8 main takeaways from the session
+    Chapters     — Natural topic shifts with timestamps
+                   (e.g., "00:00:00 Introduction", "00:08:45 Main Topic")
+    Description  — Full YouTube/podcast description (200-300 words)
+    Tags         — 8-12 relevant hashtags/keywords
+
+  Time estimate: 30-90 seconds depending on transcript length.
+
+  Show notes appear in the right panel. Click [ copy JSON ] to copy the
+  entire output as a JSON file you can paste into your editor or CMS.
+
+  Tip: The chapters are especially useful for YouTube — paste them into
+  your video description and YouTube creates a clickable chapter menu.
+
+---- EXTRACTING CLIPS ------------------------------------------------------
+
+  Clips let you cut specific moments from your recording for social media,
+  trailers, or highlights without editing software.
+
+  METHOD 1: Click timestamps in the transcript
+    Click any line in the transcript.
+    A 30-second clip is added to the Clip Editor starting at that moment.
+    Adjust the end time in the Clip Editor if needed.
+
+  METHOD 2: Manual entry
+    Click [ + add ] in the Clip Editor header.
+    Fill in: Label (what the clip is called), Start time, End time.
+    Format: HH:MM:SS (e.g., 00:05:30 to 00:06:15)
+
+  You can add as many clips as you want before extracting.
+  To remove a clip: click the × button on that clip's card.
+
+  When your clips are ready, click [ ✂️ EXTRACT CLIPS ]
+
+  What happens:
+  - ffmpeg runs on Typhon for each clip
+  - Clips are encoded as H.264/AAC .mp4 files
+  - Each clip saves to: /home/tf-tthq/typhons-studio/post/clips/
+
+  Results appear below the clip editor:
+    Green = success, shows the filename
+    Red = error message (bad timestamps, etc.)
+
+  Time estimate: about 30 seconds per clip of any length (fast encode).
+
+---- OUTPUT FILES ----------------------------------------------------------
+
+  All post-production output is saved on Typhon at:
+
+    Transcripts:  /home/tf-tthq/typhons-studio/post/notes/{name}_transcript.json
+    Show notes:   /home/tf-tthq/typhons-studio/post/notes/{name}_show_notes.json
+    Clips:        /home/tf-tthq/typhons-studio/post/clips/{name}_{label}.mp4
+
+  To access these files:
+  - SSH into Typhon: ssh tf-tthq@192.168.1.113
+  - Or use a file manager that supports SFTP/SSH (e.g., Cyberduck, WinSCP)
+  - Recordings folder can also be shared via Samba if configured
+
+================================================================================
+11. COPILOT TAB — AI SESSION ASSISTANT
+================================================================================
+
+Copilot is an AI that watches your session and gives you real-time tips.
+It runs automatically in the background — you don't have to do anything.
+
+---- HOW IT WORKS ----------------------------------------------------------
+
+  Every 30 seconds (in setup mode) or every 60 seconds (when live):
+  - Copilot checks your mic level, music volume, lighting, stream status
+  - It runs fast rule-based checks first (instant, no AI cost)
+  - If nothing obvious is wrong, it sends context to Salomon's AI for deeper analysis
+  - Suggestions appear in the Copilot tab and the tab badge updates
+
+  The source badge shows where the suggestion came from:
+    "rules"   — instant rule-based check, very fast
+    "cache"   — same situation as a few minutes ago, reusing cached answer
+    "salomon" — fresh AI analysis from phi4/qwen2.5 on Salomon
+
+---- EXAMPLE SUGGESTIONS ---------------------------------------------------
+
+  "⚠️ Mic clipping — reduce your input gain or move back from the mic"
+  "🎵 Music too loud — duck it while speaking (tap Duck)"
+  "🔴 Streaming but no camera/mic connected to Typhon — connect first"
+  "💡 Lights are off during live session — was that intentional?"
+  "🎵 Music queue empty — search for more tracks"
+  "Everything looks good"
+
+---- MANUAL ANALYSIS -------------------------------------------------------
+
+  Click [ ANALYZE NOW ] to trigger an immediate analysis at any time.
+  Useful if you changed something and want instant feedback.
+
+---- SESSION STATE GRID ----------------------------------------------------
+
+  At the bottom of the Copilot tab, a grid shows exactly what Copilot sees:
+    Mode, Scene, Mic level, Music volume, Platform, Typhon link status
+
+  This is useful for debugging if Copilot gives unexpected suggestions.
+
+---- COPILOT BADGE ---------------------------------------------------------
+
+  The Copilot tab shows a red number badge when there are active warnings.
+  "Everything looks good" doesn't count — only real issues increment the badge.
+
+================================================================================
+12. COMMON WORKFLOWS (STEP-BY-STEP)
+================================================================================
+
+---- WORKFLOW A: LIVE STREAM TO TWITCH ------------------------------------
+
+  BEFORE YOUR SESSION:
+  1. Save your Twitch stream key in Stream tab (one-time setup)
+  2. Power on your lights (if using Cloudybay)
+
+  SESSION START:
+  1. Open https://192.168.1.113 on your streaming computer
+  2. Go to Studio tab → select camera + mic
+  3. Click "Connect to Typhon" — wait for green confirmation
+  4. Select your scene (left sidebar) — e.g., "Podcast"
+  5. Optional: Go to Lighting tab → click a lighting scene
+  6. Optional: Go to Music tab → search for background music, add to queue
+  7. Go to Audio tab → click "Calibrate Mic" → speak for 5 seconds
+  8. Go to Stream tab → select Twitch card
+  9. Click [ ✓ CHECK ] → verify all checks pass
+  10. Click [ ▶ GO LIVE ]
+  11. You're live on Twitch
+
+  DURING SESSION:
+  - Switch scenes with left sidebar buttons
+  - Duck/Restore music in Music tab when speaking over it
+  - Watch Copilot tab for any warnings
+  - Audio meter in Studio tab shows your mic level at all times
+
+  ENDING:
+  1. Click [ ■ END BROADCAST ]
+  2. Done
+
+---- WORKFLOW B: RECORD A PODCAST LOCALLY ---------------------------------
+
+  BEFORE YOUR SESSION:
+  1. Select "Local Record" in the platform quick-select (left sidebar)
+
+  SESSION START:
+  1. Open https://192.168.1.113
+  2. Studio tab → select camera + mic → Connect to Typhon
+  3. Select "Podcast" scene
+  4. Audio tab → Calibrate Mic
+  5. Click [ ⏺ RECORD LOCAL ] in the left sidebar
+     OR go to Stream tab → select Local Record → [ ▶ GO LIVE ]
+  6. Recording begins
+
+  ENDING:
+  1. Click [ ■ STOP REC ] or [ ■ END BROADCAST ]
+  2. The file path appears in the Stream tab
+  3. Click "→ Post-Produce" to jump straight to the Post tab
+
+  POST-PRODUCTION:
+  1. Post tab → recording is pre-selected
+  2. Click [ 🎙 TRANSCRIBE ] → wait for completion
+  3. Click [ 🤖 SHOW NOTES ] → review generated content
+  4. Click timestamps in transcript to mark clip points
+  5. Click [ ✂️ EXTRACT CLIPS ] to cut them out
+  6. SSH into Typhon to retrieve your files
+
+---- WORKFLOW C: PODCAST AUDIO ONLY (NO VIDEO) ----------------------------
+
+  1. Studio tab → select "None" for Camera, select your Mic only
+  2. Click Connect to Typhon
+  3. Select "Podcast" scene
+  4. Calibrate mic in Audio tab
+  5. Record or stream as normal
+  6. The stream/recording will have a static image or blank video
+     with your audio — swap the OBS scene to a static image in OBS
+     if desired
+
+---- WORKFLOW D: VIDEO ESSAY / VOICEOVER ----------------------------------
+
+  1. Studio tab → select camera + mic, Connect to Typhon
+  2. Select "Video Essay" scene in left sidebar
+  3. Calibrate mic
+  4. Optionally add background music (Podcast mood works well)
+  5. Record locally
+  6. Post tab: transcribe → use transcript to write your script or
+     generate chapters for the video description
+
+---- WORKFLOW E: SWITCHING PLATFORMS MID-SERIES ---------------------------
+
+  Stream keys are saved per platform. You can switch freely between sessions:
+  1. Go to Stream tab
+  2. Click the platform card you want
+  3. Pre-flight → GO LIVE
+  OBS automatically reconfigures for whichever platform you select.
+  No manual OBS settings needed.
+
+================================================================================
+13. TROUBLESHOOTING
+================================================================================
+
+---- "OBS OFFLINE" in header -----------------------------------------------
+
+  CAUSE: Typhon's OBS service is not running, or the WebSocket connection
+         between the Studio backend and OBS failed.
+
+  FIX:
+  1. SSH into Typhon: ssh tf-tthq@192.168.1.113
+  2. Run: sudo systemctl restart obs-headless
+  3. Wait 10 seconds, then refresh the Studio in your browser
+
+  If that doesn't help:
+  3. Run: sudo systemctl status obs-headless
+  4. If it shows "failed", run: sudo systemctl restart xvfb obs-headless
+  5. Check logs: sudo journalctl -u obs-headless -n 50
+
+---- "TYPHON RECONNECTING" in header ---------------------------------------
+
+  CAUSE: The WebSocket between your browser and Typhon dropped.
+  Usually happens if Typhon's backend service restarted or network blipped.
+
+  FIX: Wait 3 seconds — the browser reconnects automatically.
+  If it stays yellow for more than 30 seconds, refresh the page.
+
+  If refresh doesn't help:
+  1. SSH: sudo systemctl restart typhons-studio
+  2. Wait 5 seconds, refresh browser
+
+---- Camera/mic not showing up in dropdowns --------------------------------
+
+  CAUSE: Browser doesn't have camera/mic permission, or no device connected.
+
+  FIX:
+  1. Click the lock/camera icon in your browser's address bar
+  2. Make sure camera and microphone are set to "Allow"
+  3. Refresh the page
+
+  If dropdowns are empty after allowing permission:
+  - Try unplugging and replugging your camera/mic
+  - On phone: make sure no other app has the camera open
+  - Click the "↻" icon next to the dropdown (if available) to rescan
+
+---- "WHIP error" when connecting to Typhon --------------------------------
+
+  CAUSE: WebRTC connection to MediaMTX failed.
+  Common causes:
+    a) Browser doesn't trust the HTTPS certificate
+    b) MediaMTX service is down
+    c) Port 8889 not reachable
+
+  FIX a): Make sure you accepted the HTTPS certificate warning (Section 3).
+           Try navigating to https://192.168.1.113:8889 directly in your
+           browser — accept any certificate warning there too.
+
+  FIX b): SSH → sudo systemctl restart mediamtx → refresh browser
+
+  FIX c): Make sure your device is on the same WiFi as Typhon (not VPN,
+           not cellular data)
+
+---- Pre-flight shows Camera/Mic NOT connected even after connecting --------
+
+  CAUSE: MediaMTX doesn't see your browser stream yet.
+  This is normal if you just connected — it can take up to 10 seconds.
+
+  FIX: Click [ ✓ CHECK ] again after a few seconds.
+  If it still shows disconnected, click "Connect to Typhon" again in Studio tab.
+
+---- Stream key says "NEEDS KEY" even after saving -------------------------
+
+  FIX: Refresh the page. The platform list reloads on page open.
+  If still showing after refresh, click a different platform then click back.
+
+---- Transcription stuck at "TRANSCRIBING..." for more than 15 minutes -----
+
+  CAUSE: First-time model download, or Whisper hit an error.
+
+  FIX:
+  1. Check Copilot tab — if it shows an error, the job failed
+  2. SSH → check logs: sudo journalctl -u typhons-studio -n 100 | grep -i whisper
+  3. If model is downloading, give it time (150MB on first run)
+  4. If it errored, click Transcribe again
+
+---- Show Notes says "AI offline" or takes forever -------------------------
+
+  CAUSE: Salomon server (192.168.1.225) is unreachable or model is loading.
+
+  FIX:
+  1. Make sure Salomon is powered on
+  2. Test: from Typhon SSH, run: curl http://192.168.1.225:11434/api/tags
+  3. If no response, Ollama isn't running on Salomon — start it:
+     ssh drmanzo@192.168.1.225 → ollama serve
+  4. phi4:14b takes ~60s to load the first time after Salomon boots
+
+---- Lights not responding / no devices found ------------------------------
+
+  FIX:
+  1. Open the Cloudybay app on your phone
+  2. Confirm the lights are online in the app
+  3. Make sure the lights and Typhon are on the same network segment
+     (both on your main WiFi, not one on guest network)
+  4. Go to Lighting tab → click Discover again
+  5. If still nothing, check: /home/tf-tthq/typhons-studio/config/cloudybay_devices.json
+     exists and has content
+
+---- Recordings folder is not showing any files ----------------------------
+
+  FIX:
+  1. Confirm you actually completed a recording (END BROADCAST)
+  2. SSH → ls /home/tf-tthq/typhons-studio/recordings/
+  3. If files are there but not showing in UI, click [ ↻ Refresh ] in Post tab
+  4. OBS may be saving to a different directory — check OBS recording path
+     via SSH: grep -i record /home/tf-tthq/.config/obs-studio/global.ini
+
+================================================================================
+14. FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Can I use this from outside my house / over the internet?
+A: Not currently. The studio is LAN-only for security and performance.
+   Remote access via VPN (WireGuard or Tailscale) to your LAN would work
+   but requires additional setup on your router.
+
+Q: Can two people use the studio from different devices at the same time?
+A: The UI can be open on multiple devices simultaneously — they all stay
+   in sync via WebSocket. However, only ONE device can be the camera/mic
+   source at a time. If two browsers try to CONNECT TO TYPHON, the second
+   one will take over. Multi-guest support is a future feature.
+
+Q: What happens to my stream key if I reinstall or reset Typhon?
+A: Keys are stored at /home/tf-tthq/typhons-studio/config/stream_keys.json.
+   Back up this file. If you lose it, just paste your keys in again from
+   your streaming platform dashboards.
+
+Q: Will the Whisper transcription work in languages other than English?
+A: Yes. Whisper supports 99 languages. It auto-detects the language by
+   default. For best results with non-English content, the AI show notes
+   generation (phi4:14b) may be less accurate depending on the language.
+
+Q: How long does it take to transcribe an hour-long recording?
+A: Approximately 8-15 minutes on Typhon's GTX 1650 in CUDA mode.
+   The first transcription of a session takes slightly longer (~15s extra)
+   because the model needs to load from disk into GPU memory.
+
+Q: What video format are the extracted clips in?
+A: H.264 video + AAC audio, wrapped in an .mp4 container.
+   Compatible with all major platforms (YouTube, Instagram, TikTok, etc.)
+   and video editors (Premiere, DaVinci, Final Cut, etc.)
+
+Q: Why can't I use Spotify or Apple Music?
+A: Copyright restrictions. Streaming copyrighted music while broadcasting
+   will trigger DMCA takedowns on Twitch/YouTube. Typhon's Studio uses
+   Pixabay (royalty-free, no attribution required) and Bensound
+   (Creative Commons) to keep your content safe.
+
+Q: The Copilot tab shows "Copilot offline — Salomon unreachable". Help.
+A: Salomon (192.168.1.225) is the AI server. Check that it's powered on.
+   The studio still works fully without Copilot — it's an enhancement,
+   not a requirement.
+
+Q: Can I use OBS on my own computer instead of Typhon's?
+A: No — Typhon's Studio is designed around Typhon's headless OBS instance.
+   The browser's WebRTC stream goes specifically to Typhon's MediaMTX server.
+   Your local OBS would not receive it.
+
+Q: My audio sounds robotic or choppy after noise suppression.
+A: RNNoise can be aggressive on certain microphones. Try:
+   1. Audio tab → turn OFF "Noise Suppress"
+   2. Move your mic closer to your mouth (reduces background noise naturally)
+   3. Or try with Noise Gate OFF if your room is quiet
+
+Q: Where are my recordings stored?
+A: /home/tf-tthq/typhons-studio/recordings/ on Typhon's NVMe drive.
+   191 GB available. Recordings are NOT automatically deleted.
+   For very long sessions, check available space before recording.
+
+Q: Can I change the OBS recording format (MKV vs MP4)?
+A: Not from the UI currently. SSH into Typhon and edit OBS settings, or
+   change the recording format in OBS via a custom WebSocket script.
+   Default is MKV (crash-safe) — you can remux to MP4 with ffmpeg at any time:
+   ffmpeg -i recording.mkv -c copy output.mp4
+
+================================================================================
+15. TECHNICAL REFERENCE (FOR ENGINEERS)
+================================================================================
+
+NETWORK TOPOLOGY:
+  Typhon IP:         192.168.1.113
+  Salomon IP:        192.168.1.225
+  Studio URL:        https://192.168.1.113
+  OBS WebSocket:     ws://localhost:4455  (password: TheForge420)
+  MediaMTX WHIP:     https://192.168.1.113:8889/studio/whip
+  MediaMTX RTSP:     rtsp://localhost:8554/studio
+  Backend API:       http://localhost:8080  (proxied by nginx on 443)
+
+SERVICES ON TYPHON:
+  xvfb.service          — virtual display for OBS (DISPLAY=:99)
+  obs-headless.service  — OBS Studio 32.1.2, no GUI
+  mediamtx.service      — WebRTC/RTSP router (v1.9.1)
+  redis-server.service  — caching for Copilot suggestions
+  typhons-studio.service — FastAPI backend (uvicorn on 0.0.0.0:8080)
+  nginx                 — HTTPS reverse proxy (443 → 8080, WSS → 8080/ws)
+
+STUDIO DIRECTORY LAYOUT:
+  /home/tf-tthq/typhons-studio/
+    backend/
+      main.py                   — FastAPI app (6 agents, all routes)
+      config.py                 — connection parameters
+      agents/
+        audio_agent.py          — OBS filter chain + gain calibration
+        lighting_agent.py       — tinytuya Cloudybay LAN control
+        music_agent.py          — Pixabay search + queue
+        copilot_agent.py        — rule-based + Salomon AI analysis
+        stream_agent.py         — platform configs + pre-flight + RTMP
+        post_agent.py           — Whisper transcription + show notes + ffmpeg
+    frontend/
+      index.html                — Vue 3 SPA (all tabs)
+      js/app.js                 — Vue 3 setup() with all state and methods
+      css/studio.css            — custom styles
+    config/
+      stream_keys.json          — saved platform keys (chmod 600)
+      cloudybay_devices.json    — discovered light devices
+      music_cache.json          — Pixabay search cache
+    recordings/                 — OBS output files (.mkv)
+    post/
+      clips/                    — extracted clip .mp4 files
+      notes/                    — transcript and show notes .json files
+    logs/
+      studio.log                — structured JSON log
+
+API REFERENCE:
+  GET  /api/health                          — service status
+  GET  /api/obs/status                      — OBS streaming/recording state
+  POST /api/obs/scene/{name}                — switch OBS scene
+  POST /api/obs/stream/start                — start RTMP stream
+  POST /api/obs/stream/stop                 — stop stream
+  POST /api/obs/record/start                — start local recording
+  POST /api/obs/record/stop                 — stop recording
+  POST /api/obs/virtual-cam/toggle          — toggle virtual camera
+  GET  /api/audio/status                    — levels and gain state
+  POST /api/audio/calibrate/{input}         — auto gain staging
+  POST /api/audio/filter/{input}/{name}/toggle — toggle OBS filter
+  GET  /api/lighting/status                 — current scene and lock state
+  POST /api/lighting/discover               — scan for Cloudybay devices
+  POST /api/lighting/scene/{name}           — apply a lighting scene
+  GET  /api/music/status                    — queue, volume, moods
+  GET  /api/music/search?q=&mood=           — search Pixabay
+  POST /api/music/queue                     — add track to queue
+  POST /api/music/next                      — advance queue
+  POST /api/music/volume/{0.0-1.0}          — set volume
+  POST /api/music/duck                      — duck to 0.2
+  POST /api/music/unduck                    — restore to 0.4
+  GET  /api/copilot/status                  — suggestions + state keys
+  POST /api/copilot/analyze                 — trigger immediate analysis
+  POST /api/copilot/state                   — push state from UI
+  GET  /api/stream/platforms                — list platforms with key status
+  POST /api/stream/platform/{id}/key        — save stream key (body: {key})
+  DELETE /api/stream/platform/{id}/key      — delete key
+  GET  /api/stream/preflight?platform=      — run pre-flight checklist
+  POST /api/stream/go-live                  — start broadcast (body: {platform})
+  POST /api/stream/end                      — stop broadcast
+  GET  /api/post/recordings                 — list recording files
+  POST /api/post/transcribe                 — start transcription job
+  POST /api/post/show-notes                 — start show notes job
+  POST /api/post/clips                      — start clip extraction
+  GET  /api/post/jobs                       — list all jobs
+  GET  /api/post/jobs/{id}                  — get job status
+  WS   /ws                                  — WebSocket (real-time events)
+
+WEBSOCKET EVENTS (server → client):
+  obs_status           — streaming, recording, scene, virtual_cam
+  mode_change          — mode, streaming, recording, platform, file
+  scene_change         — scene name
+  music_volume         — volume level, state (ducked/normal)
+  music_track          — track metadata
+  copilot_suggestions  — suggestions array, source (rules/cache/salomon)
+  post_job_update      — job id, type, status, progress, result, error
+  lighting_scene       — scene name
+
+SALOMON AI MODELS USED:
+  qwen2.5:7b   — Copilot real-time suggestions (fast, low resource)
+  phi4:14b     — Show notes generation (higher quality, longer context)
+  Both served via Ollama at http://192.168.1.225:11434
+
+WHISPER ON TYPHON:
+  Model: base (74M parameters)
+  Device: CUDA (GTX 1650 Max-Q, 4GB VRAM)
+  Compute type: float16
+  Load time: ~3.4 seconds (cached after first load)
+  Language: auto-detect (supports 99 languages)
+
+ADDING NEW PLATFORMS:
+  Edit /home/tf-tthq/typhons-studio/backend/agents/stream_agent.py
+  Add entry to the PLATFORMS dict with:
+    name, icon, rtmp_server, key_hint, requires_key
+  Restart the service: sudo systemctl restart typhons-studio
+
+RESTARTING ALL SERVICES:
+  sudo systemctl restart xvfb obs-headless mediamtx typhons-studio
+
+CHECKING ALL SERVICE STATUS:
+  systemctl status xvfb obs-headless mediamtx typhons-studio redis-server
+
+VIEWING LOGS:
+  sudo journalctl -u typhons-studio -f   (live log stream)
+  cat /home/tf-tthq/typhons-studio/logs/studio.log   (structured JSON)
+
+================================================================================
+END OF MANUAL
+================================================================================
+
+  Typhon's Studio is part of the Djinn AI operating system.
+  Built for Typhon's Forge — self-hosted, self-owned, no subscriptions.
+
+  Questions? Open COMMS.md in the Djinn vault or ask Claude.
+
+  Version 1.0 — 2026-05-28
+  — Claude (Anthropic) for Typhon's Forge / Javier
+
+================================================================================

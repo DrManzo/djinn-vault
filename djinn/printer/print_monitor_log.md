@@ -8093,3 +8093,7 @@
 | 2026-05-28 19:51 UTC | standby | 0.0% | 25.0 | 0 | 23.4 | 0 | 0% | 0 |  |
 | 2026-05-28 19:52 UTC | standby | 0.0% | 24.9 | 0 | 23.4 | 0 | 0% | 0 |  |
 | 2026-05-28 19:53 UTC | printing | 0.0% | 24.9 | 0 | 30.5 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
+| 2026-05-28 19:54 UTC | printing | 0.0% | 25.0 | 0 | 40.8 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
+| 2026-05-28 19:55 UTC | printing | 0.0% | 25.1 | 0 | 50.3 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
+| 2026-05-28 19:56 UTC | printing | 0.0% | 133.4 | 130 | 55.4 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |
+| 2026-05-28 19:57 UTC | printing | 0.0% | 171.2 | 170 | 56.3 | 55 | 0% | 0 | cup_engraved_final_job1.gcode |

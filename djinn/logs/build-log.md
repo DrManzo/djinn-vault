@@ -341,3 +341,13 @@ created: 2026-05-19
 - All 6 agents active: Audio + Lighting + Music + Copilot + Stream + Post
 
 *— Claude*
+
+## 2026-05-28: Typhon's Studio — User Manual
+
+- Written full plain-text user manual for Typhon's Studio (all 6 phases)
+- Covers: all 6 tabs, 5 step-by-step workflows, troubleshooting, FAQ, technical reference
+- 15 sections, ~600 lines, designed for non-technical users and engineers alike
+- Saved as plain text for easy sharing with anyone
+- File: djinn/TYPHONS-STUDIO-MANUAL.txt
+
+*— Claude*
