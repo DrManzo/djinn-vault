@@ -308,3 +308,21 @@ created: 2026-05-19
 - STL: `library/cup/cup_engraved_final.stl`
 
 *— Salomon*
+
+## 2026-05-28: djinn-3d — Interview-First 3D Modeling Assistant
+
+- **Script**: `~/.local/bin/djinn-3d` (Typhon)
+- **Problem solved**: existing DesignGenAgent couldn't handle detailed/nuanced briefs — communication gap between intent and generated code
+- **Resource strategy**: all LLM calls routed to Salomon Ollama (192.168.1.225:11434); Typhon GPU not used
+  - Interview/routing: Salomon `qwen2.5:7b`
+  - Design generation: Salomon `phi4:14b`
+  - Fallback if Salomon down: local `deepseek-r1:8b`
+- **Modes:**
+  - `djinn-3d design` — new part: interview → gap-check → spec confirm → OpenSCAD via phi4:14b
+  - `djinn-3d edit <file.scad>` — structured edit: clarifies dimensions/position/fit before applying, keeps .bak backup
+  - `djinn-3d analyze <file>` — trimesh printability analysis (watertight, winding, degenerate faces, overhangs, min dimension) + optional LLM repair advice
+  - `djinn-3d consult` — slicer profile Q&A → full recommendation (layer height, speed, infill, temps, Klipper macro)
+- **Output**: SCAD files → `/mnt/storage/Obsidian/djinn/printer/models/`
+- **Smoke tested**: `djinn-3d --help` + caliper_body.stl analysis — both clean
+
+*— Claude*

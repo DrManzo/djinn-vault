@@ -1,0 +1,744 @@
+#!/usr/bin/env python3
+"""
+djinn-3d — Interview-first 3D modeling assistant for Djinn
+
+Usage:
+  djinn-3d                    interactive menu
+  djinn-3d design             new part: interview → OpenSCAD
+  djinn-3d edit <file.scad>   structured edit of existing design
+  djinn-3d analyze <file>     printability analysis (STL / 3MF / OBJ)
+  djinn-3d consult            slicer profile recommendation
+
+Resource strategy:
+  All LLM calls → Salomon Ollama (192.168.1.225:11434).
+  Typhon GPU is NOT used for inference.
+  Mesh analysis is pure Python (trimesh) — no LLM required.
+
+Interview pattern:
+  Every design or edit mode gathers your full spec via Q&A BEFORE
+  calling the model.  Vague → clarify → confirm → generate.
+"""
+import sys
+import os
+import json
+import re
+import pathlib
+import argparse
+import textwrap
+
+import requests
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+SALOMON_HOST   = "http://192.168.1.225:11434"
+LOCAL_HOST     = "http://localhost:11434"
+MODEL_FAST     = "qwen2.5:7b"       # interview / routing / summaries
+MODEL_HEAVY    = "phi4:14b"         # OpenSCAD generation (on Salomon)
+MODEL_FALLBACK = "deepseek-r1:8b"   # local fallback when Salomon unreachable
+
+MODELS_DIR = pathlib.Path("/mnt/storage/Obsidian/djinn/printer/models")
+if not MODELS_DIR.exists():
+    MODELS_DIR = pathlib.Path.home() / "Obsidian/djinn/printer/models"
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+
+HR = "─" * 60
+
+# ── LLM client ────────────────────────────────────────────────────────────────
+
+class LLM:
+    """Routes to Salomon Ollama first; falls back to local Typhon Ollama."""
+
+    def __init__(self):
+        self.host, self.fast, self.heavy = self._pick_host()
+
+    def _pick_host(self):
+        try:
+            r = requests.get(f"{SALOMON_HOST}/api/tags", timeout=3)
+            if r.ok:
+                names = {m["name"].split(":")[0] for m in r.json().get("models", [])}
+                heavy = MODEL_HEAVY if "phi4" in names else MODEL_FAST
+                return SALOMON_HOST, MODEL_FAST, heavy
+        except Exception:
+            pass
+        print("  [LLM] Salomon unreachable — using local Typhon Ollama")
+        return LOCAL_HOST, MODEL_FALLBACK, MODEL_FALLBACK
+
+    def chat(self, system: str, messages: list, *, heavy: bool = False,
+             max_tokens: int = 6000) -> str:
+        model = self.heavy if heavy else self.fast
+        payload = {
+            "model": model,
+            "messages": [{"role": "system", "content": system}] + messages,
+            "stream": False,
+            "options": {"temperature": 0.2, "num_predict": max_tokens},
+        }
+        try:
+            r = requests.post(
+                f"{self.host}/api/chat", json=payload, timeout=180
+            )
+            r.raise_for_status()
+            return r.json()["message"]["content"]
+        except Exception as e:
+            return f"[LLM error: {e}]"
+
+    @property
+    def info(self) -> str:
+        host_label = "Salomon" if "225" in self.host else "Typhon-local"
+        return f"{host_label} | talk={self.fast} | gen={self.heavy}"
+
+
+# ── UI helpers ────────────────────────────────────────────────────────────────
+
+def hdr(title: str):
+    print(f"\n{HR}")
+    print(f"  Djinn 3D — {title}")
+    print(HR)
+
+
+def ask(prompt: str, default: str = "") -> str:
+    suffix = f" [{default}]" if default else ""
+    try:
+        val = input(f"\n  {prompt}{suffix}\n  > ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print()
+        sys.exit(0)
+    return val or default
+
+
+def pick(prompt: str, choices: list) -> str:
+    print(f"\n  {prompt}")
+    for i, c in enumerate(choices, 1):
+        print(f"    {i}) {c}")
+    while True:
+        raw = ask("Pick (number or type)").lower()
+        if raw.isdigit() and 1 <= int(raw) <= len(choices):
+            return choices[int(raw) - 1]
+        for c in choices:
+            if raw in c.lower():
+                return c
+        print("  Invalid — try again.")
+
+
+def show_block(lines: str, indent: int = 2):
+    for line in lines.strip().splitlines():
+        print(" " * indent + line)
+
+
+# ── Design interview → OpenSCAD ───────────────────────────────────────────────
+
+_DESIGN_GEN_SYSTEM = """\
+You are DesignGenAgent. You create parametric OpenSCAD files for FDM 3D printing.
+
+Rules:
+- Every dimension is a named variable at the top — NO magic numbers in geometry
+- FDM-first: minimize overhangs, prefer flat orientation, no unsupported bridges >15mm
+- Wall thickness: min 1.2mm (3× 0.4mm nozzle), functional parts 2.4–4mm
+- Hole clearance: +0.2mm loose fit, +0.1mm press fit
+- Fillets on stress-risers: r=1.5–3mm typical
+- $fn=64 for all circles
+- Include a bounding box comment
+
+Reply with EXACTLY this structure — nothing before or after:
+
+```json
+{
+  "concept_summary": "one sentence",
+  "key_features": ["feature 1", "feature 2"],
+  "print_orientation": "flat|upright|angled",
+  "supports_needed": false,
+  "estimated_print_time_h": 2.0,
+  "material_g_estimate": 30,
+  "printability_notes": ["note 1"]
+}
+```
+
+```openscad
+// ============================================================
+// PARAMETERS
+// ============================================================
+// all named variables here
+
+// ============================================================
+// GEOMETRY
+// ============================================================
+// modules and final render
+```
+"""
+
+_CLARIFY_SYSTEM = """\
+You are helping a 3D print designer nail down a vague brief before any model is generated.
+
+Given the brief, ask 3–5 targeted questions to resolve ambiguity about:
+- Exact dimensions (mm)
+- Fit type (loose / press / snap-fit / friction)
+- Feature positions (which face or edge? inside or outside?)
+- Interface dimensions (what does it attach to — give exact sizes)
+- Material-specific concerns (flex, temperature, layer bonding)
+
+Be direct. Numbered list only. No preamble. Skip questions that are already answered.
+"""
+
+_BRIEF_SUMMARY_SYSTEM = """\
+Summarize this 3D print design brief in 3–6 plain bullet points.
+Be specific about dimensions and key features. No fluff, no hedging.
+"""
+
+
+def design_interview(llm: LLM):
+    hdr("New Design — Interview Mode")
+    print(f"  [{llm.info}]")
+    print("\n  Answer each question. Press Enter to skip optional ones.\n")
+
+    name     = ask("What are you making? (name + one-line function)")
+    size     = ask("Approximate size? (e.g. 80×40×20mm or 'fits in palm')", "not specified")
+    material = pick("Material?", ["PLA", "PETG", "ABS", "TPU", "ASA"])
+    purpose  = pick("Purpose?", [
+        "Decorative",
+        "Functional / structural",
+        "Replacement part",
+        "Prototype / test fit",
+    ])
+    attaches = ask(
+        "Does it attach to or mate with anything? (describe + dimensions)",
+        "standalone",
+    )
+    features = ask(
+        "Special features? (threads, snap-fits, magnets, cutouts, hinges, slots…)",
+        "none",
+    )
+    extra    = ask(
+        "Constraints? (tolerances, print orientation, must-avoid angles)",
+        "",
+    )
+
+    brief = {
+        "piece_name":        name,
+        "size":              size,
+        "material":          material,
+        "purpose":           purpose,
+        "attaches_to":       attaches,
+        "features":          features,
+        "extra_constraints": extra,
+    }
+
+    # ── Clarify gaps ──────────────────────────────────────────────────────────
+    print("\n  Checking for gaps...")
+    clarify_reply = llm.chat(
+        _CLARIFY_SYSTEM,
+        [{"role": "user", "content": f"Brief:\n{json.dumps(brief, indent=2)}"}],
+        heavy=False,
+        max_tokens=500,
+    )
+    questions = [
+        ln.strip()
+        for ln in clarify_reply.splitlines()
+        if ln.strip() and ln.strip()[0].isdigit()
+    ]
+
+    if questions:
+        print("\n  A few more specifics:\n")
+        for i, q in enumerate(questions[:5], 1):
+            ans = ask(q)
+            if ans:
+                brief[f"clarify_{i}"] = f"{q} → {ans}"
+
+    # ── Confirm spec ──────────────────────────────────────────────────────────
+    print("\n  Summarising spec...")
+    summary = llm.chat(
+        _BRIEF_SUMMARY_SYSTEM,
+        [{"role": "user", "content": json.dumps(brief, indent=2)}],
+        heavy=False,
+        max_tokens=400,
+    )
+    print(f"\n{HR}")
+    print("  SPEC SUMMARY")
+    print(HR)
+    show_block(summary)
+    print()
+
+    confirm = ask("Generate OpenSCAD from this spec? (y / n / revise)", "y").lower()
+    if confirm == "n":
+        print("  Cancelled.")
+        return
+    if "rev" in confirm:
+        note = ask("What to revise?")
+        brief["revision"] = note
+
+    # ── Generate ──────────────────────────────────────────────────────────────
+    print(f"\n  Generating via {llm.heavy} — this takes ~30–90s...")
+    gen_prompt = (
+        f"Design brief:\n{json.dumps(brief, indent=2)}\n\n"
+        "Generate the concept JSON and full parametric OpenSCAD file."
+    )
+    reply = llm.chat(
+        _DESIGN_GEN_SYSTEM,
+        [{"role": "user", "content": gen_prompt}],
+        heavy=True,
+        max_tokens=6000,
+    )
+
+    json_m = re.search(r"```json\s*(.*?)\s*```", reply, re.DOTALL)
+    scad_m = re.search(r"```openscad\s*(.*?)\s*```", reply, re.DOTALL)
+
+    concept   = {}
+    if json_m:
+        try:
+            concept = json.loads(json_m.group(1))
+        except json.JSONDecodeError:
+            pass
+    scad_code = scad_m.group(1) if scad_m else reply
+
+    # Save SCAD
+    safe = re.sub(r"[^a-z0-9_]", "_", name.lower())[:40]
+    scad_path = MODELS_DIR / f"{safe}.scad"
+    n = 1
+    while scad_path.exists():
+        scad_path = MODELS_DIR / f"{safe}_{n}.scad"
+        n += 1
+    scad_path.write_text(scad_code)
+
+    # Report
+    print(f"\n{HR}")
+    print("  DONE")
+    print(HR)
+    if concept:
+        print(f"  {concept.get('concept_summary', '')}")
+        for feat in concept.get("key_features", []):
+            print(f"    · {feat}")
+        print(
+            f"  Orientation: {concept.get('print_orientation', '?')}  "
+            f"Supports: {concept.get('supports_needed', '?')}  "
+            f"~{concept.get('material_g_estimate', '?')}g  "
+            f"~{concept.get('estimated_print_time_h', '?')}h"
+        )
+        for note in concept.get("printability_notes", []):
+            print(f"  ! {note}")
+    print(f"\n  SCAD → {scad_path}\n")
+
+
+# ── Edit interview ────────────────────────────────────────────────────────────
+
+_EDIT_GEN_SYSTEM = """\
+You are DesignEditAgent. You modify existing OpenSCAD designs.
+
+Rules:
+- Prefer changing PARAMETER VALUES at the top — avoid restructuring geometry
+- Keep every unrelated module and comment exactly as-is
+- No magic numbers — add a named variable for any new dimension
+- Maintain $fn, fillets, and wall thickness from the original
+- If position is ambiguous, pick the most FDM-friendly interpretation
+
+Reply with EXACTLY:
+
+```changes
+Changed: [what changed]
+Preserved: [what was left alone]
+Notes: [printability impact or warnings]
+```
+
+```openscad
+// full modified file — every line, not just changed sections
+```
+"""
+
+_EDIT_CLARIFY_SYSTEM = """\
+You are helping resolve ambiguity in an edit request for a 3D model.
+
+Given the current OpenSCAD file and the edit request, ask 3–5 targeted questions about:
+- Exact dimensions for new features (height, width, depth in mm)
+- Position (which face / edge / corner? inside or outside current geometry?)
+- Fit type for new holes or mating features (loose / press / snap)
+- Effect on adjacent features
+
+Direct. Numbered questions only. No preamble. Skip anything already clear.
+"""
+
+
+def edit_interview(llm: LLM, scad_file: str):
+    scad_path = pathlib.Path(scad_file).expanduser().resolve()
+    if not scad_path.exists():
+        sys.exit(f"  File not found: {scad_path}")
+
+    hdr(f"Edit — {scad_path.name}")
+    print(f"  [{llm.info}]")
+    print(f"  File: {scad_path}  ({scad_path.stat().st_size} bytes)\n")
+
+    current_code = scad_path.read_text()
+    request = ask("What do you want to add, change, or fix?")
+
+    # ── Clarify ───────────────────────────────────────────────────────────────
+    print("\n  Checking for ambiguity...")
+    clarify_ctx = (
+        f"Current SCAD (first 3000 chars):\n{current_code[:3000]}\n\n"
+        f"Edit request: {request}"
+    )
+    clarify_reply = llm.chat(
+        _EDIT_CLARIFY_SYSTEM,
+        [{"role": "user", "content": clarify_ctx}],
+        heavy=False,
+        max_tokens=500,
+    )
+    questions = [
+        ln.strip()
+        for ln in clarify_reply.splitlines()
+        if ln.strip() and ln.strip()[0].isdigit()
+    ]
+
+    clarifications = []
+    if questions:
+        print("\n  Clarifying:\n")
+        for q in questions[:5]:
+            ans = ask(q)
+            if ans:
+                clarifications.append(f"{q} → {ans}")
+
+    # Build full spec text
+    spec = request
+    if clarifications:
+        spec += "\n\nClarifications:\n" + "\n".join(clarifications)
+
+    # ── Confirm ───────────────────────────────────────────────────────────────
+    print(f"\n  Edit spec:\n    {spec.replace(chr(10), chr(10) + '    ')}")
+    confirm = ask("\nApply this edit? (y / n)", "y").lower()
+    if confirm != "y":
+        print("  Cancelled.")
+        return
+
+    # ── Apply ─────────────────────────────────────────────────────────────────
+    print(f"\n  Applying via {llm.heavy} — this takes ~30–90s...")
+    user_msg = (
+        f"Current design ({scad_path.name}):\n\n"
+        f"```openscad\n{current_code}\n```\n\n"
+        f"Edit spec:\n{spec}\n\n"
+        "Apply the edit and return the complete modified file."
+    )
+    reply = llm.chat(
+        _EDIT_GEN_SYSTEM,
+        [{"role": "user", "content": user_msg}],
+        heavy=True,
+        max_tokens=6000,
+    )
+
+    changes_m = re.search(r"```changes\s*(.*?)\s*```", reply, re.DOTALL)
+    scad_m    = re.search(r"```openscad\s*(.*?)\s*```", reply, re.DOTALL)
+
+    if not scad_m:
+        print("  [WARN] Could not extract OpenSCAD block — raw reply saved to .djinn-edit.tmp")
+        pathlib.Path(".djinn-edit.tmp").write_text(reply)
+        return
+
+    new_code = scad_m.group(1)
+
+    # Backup original
+    backup = scad_path.with_suffix(".scad.bak")
+    backup.write_text(current_code)
+
+    scad_path.write_text(new_code)
+
+    print(f"\n{HR}")
+    print("  DONE")
+    print(HR)
+    if changes_m:
+        show_block(changes_m.group(1))
+    print(f"\n  SCAD → {scad_path} (backup → {backup.name})\n")
+
+
+# ── Mesh analysis ─────────────────────────────────────────────────────────────
+
+_REPAIR_SYSTEM = """\
+You are a 3D printing mesh repair expert. Give concise, tool-specific advice.
+Format: bullet points, tool name first, then step. 3–5 bullets max. No preamble.
+"""
+
+
+def analyze_mesh(filepath: str, llm: LLM = None):
+    try:
+        import trimesh
+        import numpy as np
+    except ImportError:
+        sys.exit("  trimesh not installed — run: pip install trimesh numpy")
+
+    path = pathlib.Path(filepath).expanduser().resolve()
+    if not path.exists():
+        sys.exit(f"  File not found: {path}")
+
+    hdr(f"Mesh Analysis — {path.name}")
+    print(f"  Loading {path.suffix.upper()} file...")
+
+    try:
+        loaded = trimesh.load(str(path), force="mesh")
+    except Exception as e:
+        sys.exit(f"  Failed to load: {e}")
+
+    # Handle scene vs mesh
+    if not hasattr(loaded, "faces"):
+        geoms = list(loaded.geometry.values())
+        if not geoms:
+            sys.exit("  No geometry found in file.")
+        loaded = trimesh.util.concatenate(geoms)
+
+    mesh = loaded
+
+    # ── Geometry stats ────────────────────────────────────────────────────────
+    verts = len(mesh.vertices)
+    faces = len(mesh.faces)
+    dims  = mesh.bounds[1] - mesh.bounds[0]   # [dx, dy, dz]
+    vol   = mesh.volume if mesh.is_volume else float("nan")
+    sa    = mesh.area
+
+    print(f"\n{HR}")
+    print("  GEOMETRY")
+    print(HR)
+    print(f"  Vertices   : {verts:,}")
+    print(f"  Faces      : {faces:,}")
+    print(f"  Dimensions : {dims[0]:.1f} × {dims[1]:.1f} × {dims[2]:.1f} mm")
+    if vol == vol:  # not NaN
+        print(f"  Volume     : {vol:.1f} mm³  ({vol / 1000:.2f} cm³)")
+    else:
+        print("  Volume     : N/A (open/non-manifold mesh)")
+    print(f"  Surface    : {sa:.1f} mm²")
+
+    # ── Printability checks ───────────────────────────────────────────────────
+    print(f"\n{HR}")
+    print("  PRINTABILITY CHECKS")
+    print(HR)
+
+    issues = []
+
+    # 1. Watertight
+    if mesh.is_watertight:
+        print("  OK  Watertight (manifold)")
+    else:
+        try:
+            bnd = int(np.sum(mesh.is_boundary_edge if hasattr(mesh, "is_boundary_edge")
+                             else np.zeros(1, dtype=bool)))
+        except Exception:
+            bnd = 0
+        label = f"{bnd} boundary edges" if bnd else "open edges detected"
+        issues.append(f"not watertight ({label})")
+        print(f"  !!  NOT watertight — {label}")
+
+    # 2. Winding consistency
+    if mesh.is_winding_consistent:
+        print("  OK  Winding consistent")
+    else:
+        issues.append("inconsistent face winding (normals flipped)")
+        print("  !!  Winding INCONSISTENT — normals may be flipped")
+
+    # 3. Degenerate faces
+    try:
+        n_deg = int(np.sum(mesh.triangles_area < 1e-10))
+    except Exception:
+        n_deg = 0
+    if n_deg == 0:
+        print("  OK  No degenerate faces")
+    else:
+        issues.append(f"{n_deg} degenerate (zero-area) faces")
+        print(f"  !!  {n_deg} degenerate faces")
+
+    # 4. Overhangs (faces with normal.z < -0.707 → past 45° from horizontal)
+    try:
+        normals = mesh.face_normals
+        oh_mask = normals[:, 2] < -0.707
+        oh_pct  = 100.0 * int(np.sum(oh_mask)) / max(faces, 1)
+        if oh_pct < 5:
+            print(f"  OK  Overhangs: {oh_pct:.1f}% of faces")
+        elif oh_pct < 20:
+            issues.append(f"moderate overhangs ({oh_pct:.1f}% of faces — consider supports)")
+            print(f"  WN  Overhangs: {oh_pct:.1f}% — supports may be needed")
+        else:
+            issues.append(f"heavy overhangs ({oh_pct:.1f}% of faces — supports or reorient)")
+            print(f"  !!  Overhangs: {oh_pct:.1f}% — supports required or reorient model")
+    except Exception:
+        print("  --  Overhang check skipped")
+
+    # 5. Minimum dimension vs nozzle width
+    min_dim = float(np.min(dims))
+    if min_dim < 1.2:
+        issues.append(f"minimum dimension {min_dim:.2f}mm < 1.2mm nozzle threshold")
+        print(f"  !!  Min dimension {min_dim:.2f}mm — check wall thickness")
+    else:
+        print(f"  OK  Min dimension {min_dim:.2f}mm (above 1.2mm threshold)")
+
+    # ── Summary ───────────────────────────────────────────────────────────────
+    print(f"\n{HR}")
+    print("  SUMMARY")
+    print(HR)
+    if not issues:
+        print("  PASS — no issues detected, model appears printable\n")
+    else:
+        grade = "WARN" if (len(issues) <= 2 and mesh.is_watertight) else "FAIL"
+        print(f"  {grade} — {len(issues)} issue(s):")
+        for iss in issues:
+            print(f"    · {iss}")
+
+        if llm:
+            print(f"\n  Getting repair suggestions via {llm.fast}...")
+            issue_text = "\n".join(f"- {i}" for i in issues)
+            repair_prompt = (
+                f"Mesh: {path.name}  ({verts:,} verts, {faces:,} faces, "
+                f"{dims[0]:.0f}×{dims[1]:.0f}×{dims[2]:.0f}mm)\n\n"
+                f"Issues:\n{issue_text}\n\n"
+                "Repair recommendations — tool names + steps."
+            )
+            advice = llm.chat(
+                _REPAIR_SYSTEM,
+                [{"role": "user", "content": repair_prompt}],
+                heavy=False,
+                max_tokens=500,
+            )
+            print(f"\n{HR}")
+            print("  REPAIR ADVICE")
+            print(HR)
+            show_block(advice)
+
+    print()
+
+
+# ── Slicer consult ────────────────────────────────────────────────────────────
+
+_CONSULT_SYSTEM = """\
+You are a slicer expert for an Ender-3 V3 Plus (0.4mm nozzle, Klipper firmware, Moonraker API).
+Printer note: nozzle_mcu cable may need reseating — hotend temp variance can be ±17°C; verified workaround is active.
+
+Given a print description + material + purpose, recommend:
+1. Layer height (mm)
+2. Print speed (mm/s)
+3. Infill % and pattern
+4. Wall / perimeter count
+5. Supports (yes/no — type if yes)
+6. Brim (yes/no — width if yes)
+7. Hotend / bed temperature (°C)
+8. Klipper START_PRINT call (show the full macro invocation)
+9. Any cautions specific to this material or geometry
+
+One line per item. Concise. No preamble.
+Profiles: prototype_fast / standard / production (quality-first).
+"""
+
+
+def slicer_consult(llm: LLM):
+    hdr("Slicer Consult")
+    print(f"  [{llm.info}]\n")
+
+    what     = ask("What are you printing? (describe the part)")
+    material = pick("Material?", ["PLA", "PETG", "ABS", "TPU", "ASA"])
+    purpose  = pick("Purpose?", [
+        "Prototype / test fit",
+        "Functional part",
+        "Presentation / final",
+    ])
+    priority = pick("Priority?", [
+        "Speed (fast print)",
+        "Quality (best surface finish)",
+        "Balanced",
+    ])
+    concerns = ask("Any overhangs, bridges, or bed adhesion concerns?", "none")
+    history  = ask("Previous failures or known issues with this part?", "none")
+
+    prompt = (
+        f"Part: {what}\n"
+        f"Material: {material}\n"
+        f"Purpose: {purpose}\n"
+        f"Priority: {priority}\n"
+        f"Concerns: {concerns}\n"
+        f"History: {history}\n\n"
+        "Provide slicer profile recommendation."
+    )
+
+    print(f"\n  Generating recommendation via {llm.fast}...")
+    reply = llm.chat(
+        _CONSULT_SYSTEM,
+        [{"role": "user", "content": prompt}],
+        heavy=False,
+        max_tokens=800,
+    )
+
+    print(f"\n{HR}")
+    print("  SLICER RECOMMENDATION")
+    print(HR)
+    show_block(reply)
+    print()
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    ap = argparse.ArgumentParser(
+        prog="djinn-3d",
+        description="Interview-first 3D modeling assistant (resource-light, Salomon-routed)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=textwrap.dedent("""\
+          Commands:
+            design              new part from scratch → OpenSCAD
+            edit <file.scad>    structured edit of existing design
+            analyze <file>      printability analysis (STL / 3MF / OBJ)
+            consult             slicer profile recommendation
+        """),
+    )
+    ap.add_argument(
+        "command",
+        nargs="?",
+        choices=["design", "edit", "analyze", "consult"],
+        help="Mode to run (optional — interactive menu if omitted)",
+    )
+    ap.add_argument(
+        "file",
+        nargs="?",
+        help="File path for edit or analyze commands",
+    )
+    ap.add_argument(
+        "--no-llm-repair",
+        action="store_true",
+        help="Skip LLM repair suggestions in analyze mode",
+    )
+
+    args = ap.parse_args()
+
+    if not args.command:
+        print(f"\n{HR}")
+        print("  Djinn 3D — 3D Modeling Assistant")
+        print(HR)
+        print("  1) design   — new part (interview → OpenSCAD)")
+        print("  2) edit     — modify existing .scad")
+        print("  3) analyze  — printability analysis (STL / 3MF / OBJ)")
+        print("  4) consult  — slicer profile recommendation")
+        print()
+        choice = ask("Pick (1–4 or name)").lower()
+        if choice in ("1", "design"):
+            args.command = "design"
+        elif choice in ("2", "edit"):
+            args.command = "edit"
+            if not args.file:
+                args.file = ask("Path to .scad file")
+        elif choice in ("3", "analyze"):
+            args.command = "analyze"
+            if not args.file:
+                args.file = ask("Path to STL / 3MF / OBJ file")
+        elif choice in ("4", "consult"):
+            args.command = "consult"
+        else:
+            ap.print_help()
+            sys.exit(0)
+
+    llm = LLM()
+
+    if args.command == "design":
+        design_interview(llm)
+
+    elif args.command == "edit":
+        if not args.file:
+            ap.error("edit requires a file path: djinn-3d edit <file.scad>")
+        edit_interview(llm, args.file)
+
+    elif args.command == "analyze":
+        if not args.file:
+            ap.error("analyze requires a file path: djinn-3d analyze <file>")
+        analyze_mesh(args.file, llm=None if args.no_llm_repair else llm)
+
+    elif args.command == "consult":
+        slicer_consult(llm)
+
+
+if __name__ == "__main__":
+    main()
