@@ -7321,3 +7321,12 @@
 | 2026-05-28 06:35 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 06:36 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | javi_vase_job1.gcode |
 | 2026-05-28 06:37 UTC | printing | 0.0% | 220.3 | 0 | 55.0 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:38 UTC | complete | 0.0% | 155.9 | 0 | 53.4 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:39 UTC | complete | 0.0% | 114.0 | 0 | 51.5 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:40 UTC | complete | 0.0% | 85.5 | 0 | 49.7 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:41 UTC | complete | 0.0% | 66.4 | 0 | 48.1 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:42 UTC | complete | 0.0% | 53.4 | 0 | 46.6 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:43 UTC | complete | 0.0% | 45.0 | 0 | 45.3 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:44 UTC | complete | 0.0% | 39.5 | 0 | 44.0 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:46 UTC | complete | 0.0% | 37.0 | 0 | 42.9 | 0 | 0% | 0 | javi_vase_job1.gcode |
+| 2026-05-28 06:47 UTC | complete | 0.0% | 35.5 | 0 | 41.8 | 0 | 0% | 0 | javi_vase_job1.gcode |

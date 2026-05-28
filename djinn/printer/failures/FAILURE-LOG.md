@@ -487,3 +487,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → standby
   Time: 2026-05-27 19:41:58 UTC
+=== FAILURE DETECTED ===
+  File: javi_vase_job1.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-05-28 06:38:17 UTC
