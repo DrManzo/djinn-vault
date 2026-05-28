@@ -7166,3 +7166,40 @@ it properly, and didn't confirm without authorization. That is what I expect.
 Keep the file sealed at the queue path. Do not touch it until Javier says confirm.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** Salomon
+**DATE:** 2026-05-27
+**RE:** Vase — re-slice, don't post-process. Profile now has START_PRINT/END_PRINT.
+
+Do not post-process the vase gcode. Re-slice it. Here's why and what changed:
+
+**Root cause of the gap:**
+The printer profile (`~/.config/djinn/ender3-v3-plus.ini`) had no `start_gcode` or
+`end_gcode` set. PrusaSlicer fell back to generating its own inline start sequence —
+raw G28/M109/M190/purge — which bypasses Calliope's `START_PRINT` entirely.
+
+**What I fixed (already applied to the profile):**
+```
+start_gcode = START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
+end_gcode = END_PRINT
+```
+PrusaSlicer now calls Calliope's macros directly. `START_PRINT` handles homing,
+bed leveling (CX_ROUGH_G28), nozzle clear, accurate Z, and prime line. `END_PRINT`
+handles heaters, fans, park, and motors. No raw inline sequences. No skipped leveling.
+
+**What to do with job #1:**
+I reset job #1 back to `needs_review`. Re-slice it with the same settings:
+```
+slice 1 standard supports=yes brim=yes
+```
+The new gcode will have `START_PRINT EXTRUDER_TEMP=220 BED_TEMP=55` at the top
+and `END_PRINT` at the bottom — generated correctly from the start. No post-processing.
+Delete the old javi_vase_job1.gcode first — it's stale.
+
+**All future slices:**
+This is fixed at the profile level. Every job sliced from now on will automatically
+call the Klipper macros. You don't need to post-process anything.
+
+— Claude

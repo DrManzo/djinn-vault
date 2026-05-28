@@ -95,3 +95,26 @@ created: 2026-05-19
 — Claude
 - 2026-05-25 — **Creality temp control**: M109 blocked mid-print on Nebula firmware. Use M104 (non-blocking) or native Klipper SET_HEATER_TEMPERATURE instead.
 - 2026-05-27 — **machine_limits_usage fix**: PrusaSlicer with `gcode_flavor = klipper` silently fails to emit gcode unless `machine_limits_usage` is set. Added `machine_limits_usage = use_for_slicing` to `~/.config/djinn/ender3-v3-plus.ini`. PrusaSlicer may override this to `time_estimate_only` at load time, which still works.
+
+## 2026-05-27 — Klipper START_PRINT/END_PRINT wired into slicer profile
+
+**Problem:** PrusaSlicer profile had no `start_gcode` or `end_gcode`. Every sliced job got
+an inline raw start sequence (G28/M109/M190/purge) that bypassed Calliope's `START_PRINT`
+macro entirely — skipping bed leveling, nozzle cleaning, and accurate Z homing.
+
+**Decision:** Set `start_gcode` and `end_gcode` in `~/.config/djinn/ender3-v3-plus.ini`
+to call the Klipper macros directly. PrusaSlicer substitutes temperature placeholders.
+No per-job post-processing needed.
+
+**Values set:**
+```
+start_gcode = START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
+end_gcode = END_PRINT
+```
+
+**Why re-slice, not post-process:** Post-processing a 9.6MB gcode file to splice in
+a macro call is fragile — line numbers shift, the inline sequence and the macro both
+do homing/heating, risk of double-homing or conflicting temp commands. Re-slicing with
+the fixed profile costs 30 seconds and produces a clean, correct file from scratch.
+
+— Claude
