@@ -1,0 +1,82 @@
+SUPPORT SETTINGS — CALLIOPE PRINT GUIDE
+Ender-3 V3 Plus | PLA | Updated 2026-05-27
+========================================
+
+WHEN TO USE SUPPORTS
+--------------------
+Use supports:
+  - Overhangs steeper than 45° from vertical
+  - Bridging spans longer than ~50mm with nothing below
+  - Floating geometry (parts of the model with no base underneath)
+
+Skip supports:
+  - Vases, cups, cylinders, bowls — hollow parts with narrow openings
+  - Gradual curves with overhangs under ~20% — bridge clean at 0.20mm
+  - Any part where the only overhang is a gentle shoulder or taper
+
+
+THE HOLLOW PART PROBLEM
+-----------------------
+Supports inside hollow parts cannot be removed if the opening is too
+narrow to reach inside with pliers or a finger.
+
+When a vase has an inward-curving shoulder (the classic shape where the
+body narrows toward the neck), the overhang faces into the hollow interior.
+The slicer places supports inside the part, directly below that overhang.
+
+This happens regardless of orientation — there is no way to rotate a vase
+so that a shoulder overhang ends up on the outside.
+
+RULE: For any hollow part with a narrow opening, always use supports=no.
+A 5–15% shoulder overhang bridges cleanly at 0.20mm PLA layer height.
+The inside surface will be slightly rough. Nobody sees it.
+
+
+MAKING SUPPORTS EASIER TO REMOVE
+---------------------------------
+Three settings control how hard supports are to pull out:
+
+  Contact distance (default 0.2mm → easy-remove 0.25mm)
+    Air gap between the support top and the model surface.
+    Larger gap = less fusing = support snaps off cleaner.
+
+  Interface spacing (default 0mm solid → easy-remove 0.2mm)
+    Density of the interface layer at the contact point.
+    0mm = solid sheet that grips hard.
+    0.2mm = sparse grid that pops off cleanly.
+
+  Interface layers (default 2 → easy-remove 1)
+    Number of dense layers at the contact point.
+    Fewer layers = less bonded material = easier break.
+
+
+SLICE COMMANDS
+--------------
+  slice N standard supports=no brim=yes      (vases, cylinders, hollow parts)
+  slice N standard supports=yes brim=yes     (structural parts with real overhangs)
+  slice N production supports=yes brim=yes   (commission parts, full strength)
+  slice N proto supports=no                  (quick fit check)
+
+
+CALLIOPE PROFILE DEFAULTS
+-------------------------
+  Support threshold:   45° (standard/production), 60° (proto)
+  Contact distance:    0.2mm
+  Interface layers:    2
+  Interface spacing:   0mm (solid)
+  Pattern:             Rectilinear
+
+
+WILL THE SLICER FILL THE INSIDE?
+---------------------------------
+  Solid cylinder / block    → Yes, infill fills the interior volume
+  Hollow shell (vase, cup)  → No infill, but YES supports if overhangs detected
+  Vase mode (spiral)        → No infill, no supports — single continuous wall only
+
+The supports inside a hollow part look exactly like infill while printing.
+Same head movement, same pattern. The difference: infill is structural and
+bonded to the walls. Supports are intentionally weak so they break free.
+If the opening is too small to reach them, they stay inside permanently.
+
+========================================
+Djinn — Calliope (192.168.1.114)
