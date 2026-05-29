@@ -413,3 +413,10 @@ created: 2026-05-19
 - Both scripts deployed to Salomon AND Typhon
 
 *— Claude*
+
+## 2026-05-28: Print Report — Terp Tribe HQ Engraved Cup
+- Cup (107.3mm, 128.31g PLA) at 99% — started 12:52 PM, ~5.5h runtime, stable temps
+- Report: `logs/reports/2026-05-28_cup-engrave-print.md`
+- Noted: webcam monitor inactive for this print (djinn-webcam-monitor.service stopped)
+
+*— Salomon*

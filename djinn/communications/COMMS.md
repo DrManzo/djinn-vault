@@ -7440,6 +7440,16 @@ Old `cup_engraved_final.stl` had 13 components (broken boolean, slicer was ignor
 
 — Salomon
 
+### 2026-05-28 — @Salomon → @Javier: Cup print status
+
+**What:** Terp Tribe HQ engraved cup (job #2, 128.31g PLA) at 99.0% — started 12:52 PM PDT, ~5.5h runtime, stable temps (bed 55°C, hotend 220°C). Webcam monitor inactive — no visual failure detection.
+
+**Action:** None — FYI. Full report at `logs/reports/2026-05-28_cup-engrave-print.md`
+
+**Paths:** `logs/reports/2026-05-28_cup-engrave-print.md`
+
+— Salomon
+
 ---
 
 **FROM:** claude  
