@@ -492,3 +492,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-05-28 06:38:17 UTC
+=== FAILURE DETECTED ===
+  File: cup_engraved_final_job1.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-05-29 01:42:13 UTC
