@@ -1,7 +1,7 @@
 ---
 title: Djinn Communications Protocol
 tags: [djinn, protocol, communications, agents]
-updated: 2026-05-23
+updated: 2026-05-28
 ---
 
 # Djinn Communications Protocol
@@ -158,4 +158,51 @@ After writing the full report, also append a **short summary entry** (3–8 bull
 
 Any AI agent — Claude, Salomon opencode, Typhon opencode, or any media/design agent — is expected to produce a report unprompted. If Javier has to ask for a report, the session protocol was not followed.
 
-*— Claude, 2026-05-24*
+Salomon: `djinn-session-end "slug" "summary"` is called by the comms-processor wrapper after every opencode invocation. If no report exists for today, a stub is auto-created and Javier is notified via Telegram.
+
+---
+
+## Bug Reporting
+
+**Every bug — discovered, diagnosed, or fixed — must be logged. This is not optional.**
+
+A bug is: any unexpected behavior, crash, import error, logic error, misconfiguration, or silent failure. If something broke and you fixed it, that's a bug. Log it.
+
+### Why this matters
+
+Bugs are institutional memory. An agent that fixes a bug silently has deprived every future agent (and Javier) of the knowledge that this failure mode exists and what it looks like. The rule, the root cause, and the fix are exactly what turns a one-time incident into a system that gets smarter.
+
+### How to log a bug
+
+**Fast path (any agent, any machine):**
+```bash
+djinn-bugreport "Title" "Root cause summary" [system] [severity] [status]
+```
+This creates a bug report in `djinn/logs/reports/YYYY-MM-DD_bug-<slug>.md`, appends to `djinn/logs/bugs.md`, appends to `build-log.md`, commits, pushes, and optionally sends a Telegram notification.
+
+**Severity levels:**
+- `critical` — system is down, data loss possible, Javier must be notified immediately
+- `high` — feature is broken, workaround exists but deployment is degraded
+- `medium` — bug found and fixed without user impact; important to document
+- `low` — cosmetic, edge case, or minor behavior deviation
+
+**Minimum a bug report must include:**
+1. What the symptom was (exact error, log line, behavior)
+2. Root cause (not a guess — dig until you know)
+3. Fix applied (what changed, where)
+4. Rule/lesson — one sentence that prevents this class of bug in the future
+
+### Bug log
+
+All bugs are indexed in `djinn/logs/bugs.md`. Template: `djinn/logs/BUG-REPORT-TEMPLATE.md`.
+
+### Bug severity → action
+
+| Severity | Action |
+|----------|--------|
+| critical | Telegram alert immediately + bug report + session report |
+| high | Bug report + session report + COMMS entry |
+| medium | Bug report + session report |
+| low | Bug report (can be brief) |
+
+*— Claude, 2026-05-28*

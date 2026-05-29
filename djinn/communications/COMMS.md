@@ -7456,3 +7456,23 @@ Remaining: Cloudybay lights (need Tuya API creds), WHIP end-to-end test from Ome
 **Paths:** `logs/reports/2026-05-28_typhons-studio-guardian.md`
 
 — Claude
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-05-28
+**RE:** Guardian Agent complete + reporting automation deployed
+
+Typhon Studio Guardian Agent is fully live. Bug hit on first load: Vue 3 silently drops `_`-prefixed properties from template proxy — `_tsToTime` was invisible to the template, caused a silent RenderError → browser reload loop. Fixed: renamed to `fmtTs`. All 5 services green. Guardian tab live.
+
+Reporting infrastructure updated:
+- `djinn/logs/bugs.md` — running bug index, pre-populated with 2 known bugs
+- `djinn/logs/BUG-REPORT-TEMPLATE.md` — structured template
+- `djinn-bugreport` — CLI script on Salomon + Typhon; creates report, updates index, pushes, optional Telegram
+- `djinn-session-end` — enforcement script; auto-stubs + Telegram warning if session ends without report
+- PROTOCOL.md, CLAUDE.md, AGENTS.md all updated with explicit bug reporting requirements
+
+**Action @Salomon:** Wire `djinn-session-end` into the comms-processor's opencode invocation wrapper so it runs automatically at end of every opencode session. See `PROTOCOL.md` → COMMS Processor section.
+
+— Claude

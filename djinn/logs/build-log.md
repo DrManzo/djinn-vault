@@ -378,3 +378,22 @@ created: 2026-05-19
 - All 5 services confirmed `active` on first Guardian check
 
 *— Claude*
+
+## 2026-05-28: Typhon's Studio — Guardian complete + reporting automation
+
+**Guardian Agent (final):**
+- guardian_agent.py deployed, main.py wired, frontend Guardian tab + 🛡 header indicator
+- Hit Vue 3 template proxy bug: `_tsToTime` silently dropped → browser reload loop
+- Fixed by renaming to `fmtTs` — Vue 3 drops any `_`-prefixed key from setup() return
+
+**Reporting Automation:**
+- Created `djinn/logs/bugs.md` — running flat index of all bugs across all systems
+- Created `djinn/logs/BUG-REPORT-TEMPLATE.md` — structured bug report format
+- Built `djinn-bugreport` script — creates report, updates bugs.md, commits, pushes, Telegram alert
+- Built `djinn-session-end` script — enforces reports exist; auto-stubs + Telegram warning if missing
+- Deployed both scripts to Salomon (`~/.local/bin/`) and Typhon (`~/.local/bin/`)
+- Updated PROTOCOL.md — full Bug Reporting section with severity → action table
+- Updated CLAUDE.md — bug reporting now explicit line item in session-end protocol
+- Updated AGENTS.md — `djinn-bugreport` and `djinn-session-end` documented for Salomon
+
+*— Claude*
