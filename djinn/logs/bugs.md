@@ -16,3 +16,4 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 ---
 
 *Auto-updated by `djinn-bugreport`. Full reports in `reports/`.*
+| 2026-05-28 | Claude | djinn-discord-watcher | high | fixed | openclaw not in systemd PATH — Discord sends fail | [[2026-05-28_bug-openclaw-not-in-systemd-path-discord-sends-fail]] |

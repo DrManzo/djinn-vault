@@ -69,15 +69,19 @@ def run_model_fetch(url: str, label: str):
 
 
 def discord_send(token: str, text: str):
-    """Send via openclaw message send (bypasses Cloudflare block on direct REST POST)."""
+    """Send a message to the 3d-printing channel via Discord REST API."""
+    data = json.dumps({"content": text}).encode()
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/channels/{CHANNEL_ID}/messages",
+        data=data,
+        headers={
+            "Authorization": f"Bot {token}",
+            "Content-Type": "application/json",
+            "User-Agent": "DiscordBot (djinn-watcher, 1.0)",
+        },
+    )
     try:
-        subprocess.run(
-            ["openclaw", "message", "send",
-             "--channel", "discord",
-             "--target", f"channel:{CHANNEL_ID}",
-             "--message", text],
-            timeout=15, capture_output=True,
-        )
+        urllib.request.urlopen(req, timeout=15)
     except Exception as e:
         log.error(f"discord_send failed: {e}")
 

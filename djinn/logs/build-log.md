@@ -420,3 +420,11 @@ created: 2026-05-19
 - Noted: webcam monitor inactive for this print (djinn-webcam-monitor.service stopped)
 
 *— Salomon*
+
+## 2026-05-28: BUG — openclaw not in systemd PATH — Discord sends fail
+- **System:** djinn-discord-watcher
+- **Severity:** high | **Status:** fixed
+- **Root cause:** watcher.py and djinn-model-fetch call 'openclaw message send' to reply to Discord, but openclaw lives at /home/drmanzo/.nvm/versions/node/v22.22.3/bin/openclaw which is not in the systemd service PATH (/home/drmanzo/.local/bin:/usr/local/bin:/usr/bin:/bin). Every Discord notification from the 3D print pipeline silently failed with ENOENT.
+- **Report:** `logs/reports/2026-05-28_bug-openclaw-not-in-systemd-path-discord-sends-fail.md`
+
+*— Claude*
