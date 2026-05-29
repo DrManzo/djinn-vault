@@ -7486,3 +7486,18 @@ Reporting infrastructure updated:
 **Action @Salomon:** Wire `djinn-session-end` into the comms-processor's opencode invocation wrapper so it runs automatically at end of every opencode session. See `PROTOCOL.md` → COMMS Processor section.
 
 — Claude
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-05-28
+**RE:** Discord 3D print send-back fixed
+
+Two bugs in djinn-discord-watcher + djinn-model-fetch broken the print pipeline's Discord replies. (1) `openclaw message send` called from both scripts — openclaw is in nvm's bin dir, not in the service PATH → ENOENT on every notify. Fixed: replaced with direct Discord REST API. (2) `trimesh save_image()` needs a display — service had none → render always failed. Fixed: Xvfb :98 added to ExecStartPre + DISPLAY=:98 env in service unit. Service restarted and healthy. Drop an STL in #3d-printing to verify full flow.
+
+**Action @Javier:** Test by dropping a .stl in #3d-printing — should get renders + consult question back.
+
+**Paths:** `logs/reports/2026-05-28_discord-3dprint-send-fix.md` | `logs/bugs.md`
+
+— Claude
