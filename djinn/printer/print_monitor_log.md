@@ -9068,3 +9068,6 @@
 | 2026-05-29 12:34 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
 | 2026-05-29 12:36 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
 | 2026-05-29 12:37 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-29 12:38 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-29 12:39 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-29 12:40 UTC | cancelled | 0.0% | 22.5 | 0 | 20.8 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
