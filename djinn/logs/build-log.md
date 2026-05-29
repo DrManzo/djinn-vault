@@ -397,3 +397,19 @@ created: 2026-05-19
 - Updated AGENTS.md — `djinn-bugreport` and `djinn-session-end` documented for Salomon
 
 *— Claude*
+
+## 2026-05-28: Reporting automation wired into all agents
+
+**comms-processor (Salomon + Typhon):**
+- djinn-session-end now fires after every opencode invocation
+- djinn-session-end now fires after every djinn-clerk dispatch
+- djinn-session-end now fires after every djinn-slipbox dispatch
+- PROMPT updated to explicitly instruct opencode to write a session report + bugreport if bugs found
+
+**Enforcement chain now complete:**
+- opencode runs → told to write report in prompt → if it skips, session-end stubs it + Telegrams Javier
+- clerk runs → session-end checks report exists, stubs if not
+- slipbox runs → session-end checks report exists, stubs if not
+- Both scripts deployed to Salomon AND Typhon
+
+*— Claude*
