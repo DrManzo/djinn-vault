@@ -428,3 +428,11 @@ created: 2026-05-19
 - **Report:** `logs/reports/2026-05-28_bug-openclaw-not-in-systemd-path-discord-sends-fail.md`
 
 *— Claude*
+
+## 2026-05-28: BUG — trimesh headless render fails — no DISPLAY in systemd service
+- **System:** djinn-discord-watcher
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** djinn-model-fetch uses trimesh scene.save_image() which calls pyglet/OpenGL and requires a display connection. The djinn-discord-watcher systemd service had no DISPLAY env var, causing every render attempt to fail with 'Cannot connect to None'. Xvfb is installed and works — the render succeeds under DISPLAY=:98.
+- **Report:** `logs/reports/2026-05-28_bug-trimesh-headless-render-fails-no-display-in-systemd-service.md`
+
+*— Claude*
