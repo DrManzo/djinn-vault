@@ -366,3 +366,15 @@ created: 2026-05-19
 - All 3 remotes verified, 8 services confirmed running, printer READY
 
 *— Salomon*
+
+## 2026-05-28: Typhon's Studio — Guardian Agent (Phase 6 complete)
+- Deployed `guardian_agent.py` to Typhon — watches obs-headless, xvfb, mediamtx, redis-server, typhons-studio
+- Polls every 30s; auto-restarts critical restartable services with 120s cooldown
+- Broadcasts `guardian_status` WebSocket event on any state change
+- Added 3 API routes: GET /api/guardian/status, POST /api/guardian/health, POST /api/guardian/restart/{service}
+- Updated main.py lifespan to start/stop GuardianAgent alongside all other agents
+- Added Guardian tab to frontend: live service cards with status badges + manual restart buttons + alert log
+- Added `🛡 OK/ALERT` header indicator — clickable, jumps to Guardian tab on alert
+- All 5 services confirmed `active` on first Guardian check
+
+*— Claude*

@@ -7439,3 +7439,20 @@ Old `cup_engraved_final.stl` had 13 components (broken boolean, slicer was ignor
 **Paths:** `INFRASTRUCTURE.md` | `logs/reports/2026-05-28_infrastructure-doc.md`
 
 — Salomon
+
+---
+
+**FROM:** claude  
+**TO:** all  
+**DATE:** 2026-05-28  
+**RE:** Typhon's Studio — Guardian Agent deployed
+
+Guardian watchdog is live on Typhon. Watches: obs-headless, xvfb, mediamtx, redis-server, typhons-studio. Polls every 30s, auto-restarts critical services (120s cooldown), broadcasts guardian_status via WebSocket. New Guardian tab in UI with live service cards and manual restart controls. 🛡 header indicator added. All 5 services active on first check.
+
+Remaining: Cloudybay lights (need Tuya API creds), WHIP end-to-end test from Omen.
+
+**Action:** None required.
+
+**Paths:** `logs/reports/2026-05-28_typhons-studio-guardian.md`
+
+— Claude
