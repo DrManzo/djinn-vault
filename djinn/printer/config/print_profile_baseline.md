@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-05-29 03:38 UTC
-Source file: cup_engraved_FINAL_job2.gcode
+Generated: 2026-05-30 17:03 UTC
+Source file: model_job2.gcode
 Readings: 1251
 
 ## Temperatures
