@@ -10865,3 +10865,10 @@
 | 2026-05-30 19:25 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-30 19:26 UTC | printing | 0.0% | 219.8 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
 | 2026-05-30 19:27 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:29 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:30 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:31 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:32 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:33 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:34 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
+| 2026-05-30 19:35 UTC | printing | 0.0% | 219.2 | 220 | 55.0 | 55 | 0% | 0 | model_job2.gcode |
