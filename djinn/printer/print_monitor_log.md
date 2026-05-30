@@ -10236,3 +10236,13 @@
 | 2026-05-30 08:38 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
 | 2026-05-30 08:39 UTC | cancelled | 0.0% | 22.8 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
 | 2026-05-30 08:40 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:41 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:42 UTC | cancelled | 0.0% | 22.9 | 0 | 21.2 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:43 UTC | cancelled | 0.0% | 22.9 | 0 | 21.2 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:44 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:45 UTC | cancelled | 0.0% | 22.9 | 0 | 21.2 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:46 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:47 UTC | cancelled | 0.0% | 22.8 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:48 UTC | cancelled | 0.0% | 22.8 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:49 UTC | cancelled | 0.0% | 22.9 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
+| 2026-05-30 08:50 UTC | cancelled | 0.0% | 22.8 | 0 | 21.1 | 0 | 0% | 0 | cup_engraved_FINAL_job2.gcode |
