@@ -17,6 +17,7 @@ STATE_FILE    = pathlib.Path.home() / ".local/share/djinn/discord-watcher-state.
 CHANNEL_ID    = "1507882513891065876"
 POLL_INTERVAL = 20  # seconds
 MODEL_EXTS    = {".stl", ".3mf"}
+ALLOWED_USER  = "341840772582211587"  # Javier only
 
 
 def load_token() -> str:
@@ -91,8 +92,10 @@ def process_message(msg: dict, token: str, processed: list) -> bool:
     if msg_id in processed:
         return False
 
-    # Skip bot's own messages
+    # Skip bots and anyone other than Javier
     if msg.get("author", {}).get("bot"):
+        return False
+    if str(msg.get("author", {}).get("id", "")) != ALLOWED_USER:
         return False
 
     acted = False
