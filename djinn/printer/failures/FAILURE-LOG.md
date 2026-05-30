@@ -502,3 +502,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-05-29 03:41:52 UTC
+=== FAILURE DETECTED ===
+  File: model_job2.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-05-30 22:18:21 UTC
