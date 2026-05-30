@@ -34,3 +34,9 @@ Post-print feedback stored per model by SHA256 hash, not filename or URL. Same p
 
 ### 2026-05-30 — Priority overrides layer height unless user specifies (Claude)
 priority= adjusts layer height as a default. If user passes layer=N explicitly, that wins. Keeps priority as a suggestion, not a constraint.
+
+### 2026-05-30 — No LLM for style parsing in djinn-model-engrave (Claude)
+Keyword parser over LLM. Djinn is near-zero-cost — LLM adds latency and cost for a task simple enough for rules. Apply this to all future tool design: deterministic first, LLM only when genuinely needed.
+
+### 2026-05-30 — Per-component boolean for text meshes (Claude)
+OpenSCAD text produces non-manifold merged meshes on complex letters (a, e, o, b). Splitting by connected component and booleing each stroke separately is robust — one failed component warns but doesn't crash the job.

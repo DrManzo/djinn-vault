@@ -449,3 +449,11 @@ created: 2026-05-19
 - Added material/priority/speed as first-class slice params
 - Set park position for live print model_job2.gcode
 - Wrote PRINTER-MANUAL.md
+
+## 2026-05-30 — djinn-model-engrave + opencode wrapper (Claude)
+- Built djinn-model-engrave: interactive 6-panel wizard, keyword style parser, per-component boolean, originals/prints archiving
+- Wired djinn-session-end into opencode shell wrapper
+- Installed manifold3d + pillow into persistent djinn-orchestrator venv
+- Closed Job #2 print notes, confirmed support zone via overhang render
+- Saved "The Terp Tribe - Camood.stl" to library
+*— Claude*

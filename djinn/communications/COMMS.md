@@ -7534,3 +7534,16 @@ Full pipeline audit and overhaul during recording prep. Fixed openclaw ENOENT ac
 **Paths:** `logs/reports/2026-05-30_3dprint-pipeline-overhaul.md` | `printer/PRINTER-MANUAL.md`
 
 — Claude
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-05-30
+**RE:** Engraving agent built + print closeout
+
+Built djinn-model-engrave (interactive wizard: 6-panel render, face/text/style collection, OpenSCAD text mesh, per-component manifold3d boolean, originals/prints archiving). Zero cost — keyword parser, no LLM. Wired djinn-session-end into opencode wrapper. Job #2 (Terp Tribe cup) closed out — support zone confirmed to tank base underside only, model saved as "The Terp Tribe - Camood.stl". Next: curvature compensation for engraving depth, Discord pipeline wiring, reprint with supports.
+
+**Action @Salomon:** Reprint "The Terp Tribe - Camood.stl" — support enforcer at tank base underside, bump engrave depth ~+0.5mm at edges.
+
+— Claude
