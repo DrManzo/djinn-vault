@@ -4,7 +4,7 @@ date: 2026-05-30
 source: https://cdn.discordapp.com/attachments/1507882513891065876/1510327301026615336/cup_engraved_FINAL.stl?ex=6a1c6969&is=6a1b17e9&hm=a1190ccdd8ec42f9245c87fc9b1e20d79b4005ede9d980d187906e986cea8d37&
 model: /home/drmanzo/Obsidian/djinn/printer/library/10327301026615336_cup_engraved_FINAL_stl/model.stl
 gcode: /home/drmanzo/Obsidian/djinn/printer/queue/model_job2.gcode
-status: pending
+status: complete
 profile: production
 supports: False
 infill: 15%
@@ -67,3 +67,17 @@ Calliope will NOT start automatically.
 | 2026-05-30 21:04 UTC | 80.0% complete |
 | 2026-05-30 21:35 UTC | 90.0% complete |
 | 2026-05-30 22:18 UTC | Completed in 5h 6m |
+
+## Post-Print Notes
+
+**Engraving quality:**
+- `T` in "Terp" — messy at the top crossbar and right side of the stem (viewed left to right). Boolean depth likely insufficient at that letter; surface curvature of the cup means the right edge of T sits shallower than center.
+- `e` in "Tribe" — curve incomplete on the left-hand side. The curved counter of the 'e' didn't cut cleanly, likely a manifold issue with that letter component or insufficient intersection depth at that X position.
+
+**Support:**
+- Under the tank (base overhang on sides) — 0.45–0.5mm overhang printed rough on the underside. **Supports required here on next print.** No other areas need support. Everything else came out clean.
+
+**Action items for reprint:**
+- [ ] Enable supports, targeted at underside of tank only
+- [ ] Increase engrave depth by ~0.5mm at edges to compensate for cup curvature (especially T and curved letters)
+- [ ] Verify 'e' component boolean succeeded during slicing prep
