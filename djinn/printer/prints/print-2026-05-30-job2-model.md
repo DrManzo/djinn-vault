@@ -76,8 +76,10 @@ Calliope will NOT start automatically.
 
 **Support:**
 - Under the tank (base overhang on sides) — 0.45–0.5mm overhang printed rough on the underside. **Supports required here on next print.** No other areas need support. Everything else came out clean.
+- Overhang map confirmed via render: one zone only — full underside of the tank base. The front lip/band does NOT need support. All other surfaces are self-supporting.
+- DO NOT use global supports — enforcer targeted at tank base underside only.
 
 **Action items for reprint:**
-- [ ] Enable supports, targeted at underside of tank only
+- [ ] Add support enforcers at tank lip band + tank base underside only — no global supports
 - [ ] Increase engrave depth by ~0.5mm at edges to compensate for cup curvature (especially T and curved letters)
 - [ ] Verify 'e' component boolean succeeded during slicing prep
