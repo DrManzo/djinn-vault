@@ -436,3 +436,16 @@ created: 2026-05-19
 - **Report:** `logs/reports/2026-05-28_bug-trimesh-headless-render-fails-no-display-in-systemd-service.md`
 
 *— Claude*
+
+### 2026-05-30 — 3D Print Pipeline Overhaul (Claude)
+- Fixed openclaw ENOENT in djinn-model-fetch, djinn-model-slice, watcher.py
+- Fixed missing DISCORD_TOKEN in djinn-model-slice
+- Fixed bed dims in djinn-print-consult (220→300mm)
+- Fixed Xvfb headless render for systemd service
+- Fixed gateway routing (slash not required, slice regex extended)
+- Wired djinn-print-consult into model-fetch pipeline
+- Locked Discord watchers to ALLOWED_USER only
+- Added djinn-print-feedback + feedback loop in print-monitor
+- Added material/priority/speed as first-class slice params
+- Set park position for live print model_job2.gcode
+- Wrote PRINTER-MANUAL.md
