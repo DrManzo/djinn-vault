@@ -25,3 +25,12 @@
 - **Vue 3 rule added to docs** — never prefix a `setup()` return property with `_` or `$`; Vue silently excludes them from the template proxy with no warning in production builds.
 
 *— Claude*
+
+### 2026-05-30 — Direct REST over openclaw for Discord sends (Claude)
+Replaced openclaw subprocess calls in djinn-model-fetch, djinn-model-slice, watcher.py with direct Discord REST API. openclaw lives in nvm bin dir not in systemd PATH. Direct REST is simpler and already proven by djinn-discord-watch.
+
+### 2026-05-30 — Feedback keyed by file SHA256 (Claude)
+Post-print feedback stored per model by SHA256 hash, not filename or URL. Same physical model reprinted from any source accumulates the same history. Makes the feedback loop source-agnostic.
+
+### 2026-05-30 — Priority overrides layer height unless user specifies (Claude)
+priority= adjusts layer height as a default. If user passes layer=N explicitly, that wins. Keeps priority as a suggestion, not a constraint.

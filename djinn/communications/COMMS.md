@@ -7519,3 +7519,18 @@ Two bugs in djinn-discord-watcher + djinn-model-fetch broken the print pipeline'
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-05-30
+**RE:** 3D Print Pipeline Overhaul + Manual
+
+Full pipeline audit and overhaul during recording prep. Fixed openclaw ENOENT across 3 scripts, headless render failure (Xvfb), gateway routing (slash prefix + slice regex), missing DISCORD_TOKEN in djinn-model-slice, bed dims in djinn-print-consult, and wired djinn-print-consult into the model-fetch flow. New features: feedback loop (djinn-print-feedback, per-model SHA256 storage, feedback prompt on complete/error/cancel, prior notes in consult report), material/priority/speed as first-class slice params (pla/petg/abs/tpu, speed/balanced/accuracy — applies temps, speed factor, layer height). Park position set for live print model_job2.gcode. PRINTER-MANUAL.md written. Calliope printing at ~60%.
+
+**Action @Salomon:** Wire djinn-session-end into opencode wrapper (still outstanding from prior session).
+
+**Paths:** `logs/reports/2026-05-30_3dprint-pipeline-overhaul.md` | `printer/PRINTER-MANUAL.md`
+
+— Claude
