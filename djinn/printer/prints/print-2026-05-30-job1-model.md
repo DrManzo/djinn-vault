@@ -1,8 +1,8 @@
 ---
 job_id: 1
 date: 2026-05-30
-source: https://cdn.discordapp.com/attachments/1507882513891065876/1510322810776453270/cup_engraved_FINAL.stl?ex=6a1c653a&is=6a1b13ba&hm=945982e749f05c4273e4655889f2f93d908716d8a404b2c7f8cd7326e2875deb&
-model: /home/drmanzo/Obsidian/djinn/printer/library/10322810776453270_cup_engraved_FINAL_stl/model.stl
+source: https://cdn.discordapp.com/attachments/1507882513891065876/1510325136060973177/cup_engraved_FINAL.stl?ex=6a1c6764&is=6a1b15e4&hm=6bbc3bd43f10b92a7c51febd0fb336baf9e29cab5c2b832d694b9b163ce7a84a&
+model: /home/drmanzo/Obsidian/djinn/printer/library/10325136060973177_cup_engraved_FINAL_stl/model.stl
 gcode: /home/drmanzo/Obsidian/djinn/printer/queue/model_job1.gcode
 status: pending
 profile: production
@@ -54,5 +54,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-05-30 16:49 UTC | Sliced — waiting for confirm |
+| 2026-05-30 16:54 UTC | Sliced — waiting for confirm |
 
