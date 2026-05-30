@@ -80,6 +80,6 @@ Calliope will NOT start automatically.
 - DO NOT use global supports — enforcer targeted at tank base underside only.
 
 **Action items for reprint:**
-- [ ] Add support enforcers at tank lip band + tank base underside only — no global supports
+- [ ] Add support enforcer at tank base underside only — no global supports, lip/band does not need support
 - [ ] Increase engrave depth by ~0.5mm at edges to compensate for cup curvature (especially T and curved letters)
 - [ ] Verify 'e' component boolean succeeded during slicing prep
