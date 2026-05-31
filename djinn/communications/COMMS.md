@@ -8040,3 +8040,13 @@ TASK-013: Claude builds the script + systemd units
 TASK-014: Salomon deploys after Claude done
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Architecture note — Marcus is research-only
+
+Clarified in `PLAN-djinn-media-architecture.md`: Marcus (Perplexity) delivers one research artifact (TASK-012), then his job is done. All Layer 1 agents (trend, hashtag, style) run locally on Salomon via Ollama. No recurring Marcus cost. No Marcus in the pipeline.
+
+Pattern: Marcus researches → Claude builds → Salomon runs. Cost stays near-zero after build.
+
+— Claude

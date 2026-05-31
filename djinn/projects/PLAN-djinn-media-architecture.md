@@ -176,6 +176,16 @@ Javier's only job: shoot and upload. Djinn Media handles everything else — col
 
 ---
 
+## Marcus Role — Research Only
+
+**Marcus (Perplexity) is used once, for research. He does not run agents or recurring tasks.**
+
+Marcus delivers a research artifact (TASK-012) → Javier pastes it into the vault → Claude reads it and builds the Layer 1 agents → Salomon deploys them. After that, everything runs locally on Salomon using existing Ollama models (qwen2.5:7b, phi4:14b). No ongoing API costs.
+
+Marcus is not wired into the pipeline. He is consulted, not integrated.
+
+---
+
 ## What Marcus Needs to Find (TASK-012 addition)
 
 Added to research brief as Question 8:
