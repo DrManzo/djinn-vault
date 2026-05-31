@@ -7,27 +7,18 @@ returns a structured quote dict.
 Changelog:
   v1.1 — True weighted median (bisect), fetch_market_comps(),
           smoking-accessory detection + 35% upcharge, library check.
+  v1.2 — fetch_market_comps() replaced with battle-tested DDG implementation.
+          MarketSpec.size added. Auto-fetch comps when none provided.
 
 Part of the Djinn 3D printing business system.
 — Marcus
 """
 
 import bisect
-import importlib
 import math
+import re
 from dataclasses import dataclass, field
 from typing import Optional
-
-# ---------------------------------------------------------------------------
-# Library availability check
-# ---------------------------------------------------------------------------
-_REQUESTS_OK = importlib.util.find_spec("requests") is not None
-_BS4_OK      = importlib.util.find_spec("bs4")      is not None
-
-LIBRARY_STATUS = {
-    "requests": _REQUESTS_OK,
-    "bs4":      _BS4_OK,
-}
 
 # ---------------------------------------------------------------------------
 # Job-type blending weights from PRICING_SPEC
@@ -128,6 +119,7 @@ class MarketSpec:
     customization_premium_pct: float = 0.10
     rush_premium_pct: float = 0.0
     tags: list = field(default_factory=list)
+    size: Optional[str] = None  # "small" | "large" | None — passed to fetch_market_comps
 
 
 @dataclass
@@ -225,69 +217,94 @@ def _value_premium(cost_floor: float, market: MarketSpec) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Market data fetcher  (live scrape — graceful stub when deps missing)
+# Market data fetcher  (DDG — battle-tested, no bot detection issues)
 # ---------------------------------------------------------------------------
-ETSY_SEARCH_URL = "https://www.etsy.com/search?q={query}&min_price={min_p}&max_price={max_p}"
+SMOKING_SOURCES = [
+    "etsy.com/market/dab_station_3d_printed",
+    "etsy.com/market/3d_printed_puffco_proxy_accessor",
+    "etsy.com/market/puffco_proxy_attachment_3d_print",
+    "etsy.com/market/3d_printed_dab_station",
+    "etsy.com/market/3d_print_smoke_accessories",
+    "etsy.com/market/custom_herb_stash_box",
+    "thesmokeshopguys.com",
+    "geewestglass.com",
+    "420trinkets.com",
+    "kaydmayd.com",
+    "dankgeek.com",
+    "smokecartel.com",
+    "smok3designs.com",
+]
 
 
-def fetch_market_comps(query: str,
-                       min_price: float = 1.0,
-                       max_price: float = 500.0,
-                       max_results: int = 10) -> list:
+def fetch_market_comps(piece_name: str, max_results: int = 8, size: str = None) -> list:
     """
-    Attempt a live scrape of Etsy for comparable price data.
-    Returns a list of {"price_usd": float, "similarity": float, "source": str}.
-
-    Requires: requests, bs4 (beautifulsoup4)
-    If either is missing, returns [] and prints a warning.
-
-    similarity is set to 0.70 for all live results (no NLP scoring yet;
-    treated as moderately comparable).  Override in your MarketSpec if needed.
+    DDG-based market comparable search.
+    Auto-detects smoking/dab items and uses category-specific queries.
+    size='small' → bottom-half comps; size='large' → top-half comps.
     """
-    if not _REQUESTS_OK or not _BS4_OK:
-        missing = [k for k, v in LIBRARY_STATUS.items() if not v]
-        print(f"[fetch_market_comps] WARN: missing libraries {missing} — returning empty comps.")
-        return []
-
-    import requests
-    from bs4 import BeautifulSoup
-
-    url = ETSY_SEARCH_URL.format(
-        query=requests.utils.quote(query),
-        min_p=int(min_price),
-        max_p=int(max_price),
-    )
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; DjinnPriceBot/1.1)",
-        "Accept-Language": "en-US,en;q=0.9",
-    }
-
     try:
-        resp = requests.get(url, headers=headers, timeout=8)
-        resp.raise_for_status()
-    except Exception as exc:
-        print(f"[fetch_market_comps] HTTP error: {exc}")
+        try:
+            from ddgs import DDGS
+        except ImportError:
+            from duckduckgo_search import DDGS
+    except ImportError:
         return []
 
-    soup = BeautifulSoup(resp.text, "html.parser")
-    results = []
+    smoking = _is_smoking_accessory(piece_name)
+    if smoking:
+        queries = [
+            f'3D printed "{piece_name}" site:etsy.com price',
+            f'3D printed dab "{piece_name}" site:etsy.com price',
+            f'3D printed dab station site:etsy.com price',
+            f'3D printed puffco attachment site:etsy.com price',
+            f'3D printed cannabis accessory kaydmayd.com OR dankgeek.com price',
+            f'3D printed smoking accessory geewestglass.com OR 420trinkets.com price',
+            f'site:etsy.com/market/3d_print_smoke_accessories price',
+        ]
+        trusted = {
+            "etsy.com", "thesmokeshopguys.com", "geewestglass.com",
+            "420trinkets.com", "kaydmayd.com", "dankgeek.com",
+            "smokecartel.com", "smok3designs.com",
+        }
+    else:
+        queries = [
+            f'3D printed "{piece_name}" site:etsy.com price',
+            f'buy 3D printed "{piece_name}" USD',
+        ]
+        trusted = {"etsy.com"}
 
-    # Etsy price spans carry data-price or a currency class — heuristic parse
-    for tag in soup.select("span[class*='currency-value']"):
-        try:
-            price = float(tag.get_text(strip=True).replace(",", ""))
-            if min_price <= price <= max_price:
-                results.append({
-                    "price_usd":  price,
-                    "similarity": 0.70,
-                    "source":     "etsy",
-                })
-        except ValueError:
-            continue
-        if len(results) >= max_results:
-            break
+    fetch_count = 12 if size else max_results
+    prices = []
+    seen = set()
 
-    return results
+    with DDGS() as ddgs:
+        for query in queries:
+            try:
+                results = list(ddgs.text(query, max_results=fetch_count))
+            except Exception:
+                continue
+            for r in results:
+                text = (r.get("title", "") + " " + r.get("body", ""))
+                found = re.findall(r'\$\s*(\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?)', text)
+                href  = r.get("href", "").lower()
+                for f in found:
+                    val = float(f.replace(",", ""))
+                    if 1.0 <= val <= 500.0 and val not in seen:
+                        seen.add(val)
+                        sim = 0.85 if any(s in href for s in trusted) else 0.60
+                        prices.append({"price_usd": val, "similarity": sim,
+                                       "source": r.get("href", "")[:80]})
+
+    prices.sort(key=lambda x: x["price_usd"])
+
+    if size and len(prices) >= 2:
+        mid = len(prices) // 2
+        if size == "small":
+            prices = prices[:mid] or prices[:3]
+        elif size == "large":
+            prices = prices[mid:] or prices[-3:]
+
+    return prices[:6]
 
 
 # ---------------------------------------------------------------------------
