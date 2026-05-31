@@ -15,6 +15,7 @@ djinn-print-quote --json-out   # machine-readable JSON output
 From Telegram/Discord:
 - `quote <json>` — full quote
 - `quote coin` — coin preset
+- `quote print <name> <grams> <hours>` — standard 3D print preset (PLA, 15% infill, 0.2mm layer)
 - `quote help` — field reference
 
 ---
