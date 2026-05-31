@@ -87,10 +87,11 @@ crontab -l | grep queue-runner
 
 ## TASK-003
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Salomon (per Javier)
+- completed: 2026-05-31 by Claude
 - context: Refactor shipping_agent.py — swap EasyPost SDK for Shippo, make provider configurable
 
 **Commands:**

@@ -533,3 +533,12 @@ created: 2026-05-19
 - Added step 5 to CLAUDE.md: "Write pending handoffs to QUEUE.md (not COMMS)"
 - CLAUDE.md now matches AGENTS.md — both describe the same 6-step close-out
 *— Claude*
+
+## 2026-05-31: Shipping Agent — Shippo refactor (Claude)
+- `shipping_agent.py` refactored to dual-provider: shippo (default) | easypost
+- Provider selected via `SHIPPING_PROVIDER` in shop.env
+- Shippo impl uses REST API directly (no SDK), covers rates + label purchase + tracking
+- `_load_shop_env()` added — auto-loads shop.env at import, no external sourcing needed
+- Public interface unchanged — callers unaffected
+- TASK-003 complete
+*— Claude*
