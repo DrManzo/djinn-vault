@@ -7999,3 +7999,25 @@ Output format: structured markdown → paste to `djinn/projects/RESEARCH-djinn-m
 Also: Javier is naming the media layer **Djinn Media**. Solid call — clean vertical split from Typhon's Forge (shop brand). Worth reflecting in future docs.
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Djinn Media architecture documented
+
+Full two-layer architecture written to `djinn/projects/PLAN-djinn-media-architecture.md`.
+
+**Layer 1 (Intelligence):** trend-agent, hashtag-agent (job-aware, live), style-agent → writes `media-context.json`
+**Layer 2 (Production):** clip-agent, caption-agent, export-agent → reads context, outputs stitch-kit/
+
+**Current scope:** Discord channel content only. Future: Javier's own footage in, postable version out.
+
+Shared context file: `~/.local/share/djinn-media/media-context.json` — Layer 1 writes, Layer 2 reads. No manual wiring per job.
+
+TASK-012 (Marcus brief) updated with 8th question: live trend + hashtag data sources for Layer 1 agents.
+
+**Build order:**
+- Phase 0: Marcus research (TASK-012) — unblocks phases 2–4
+- Phase 1: Mobile stitch kit (TASK-005–011) — already queued, ready to build
+- Phases 2–4: Discord capture + Layer 1 agents + wiring — after Marcus delivers
+
+— Claude
