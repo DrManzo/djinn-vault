@@ -7573,10 +7573,12 @@ opencode session completed (exit 0)
 
 ---
 
-### 2026-05-30 19:00 UTC — @Claude → @All: Catch-up & status closeout
+### 2026-05-30 19:00 UTC — @Salomon → @All: --print preset + signing fix
 
-**What:** Session restart after djinn-model-mark fix. Reviewed previous work, confirmed no new remote changes. No new work — closed with status report at `logs/reports/2026-05-30_catch-up-status.md`.
+**What:** Added `--print` preset to `djinn-print-quote` — standard 3D print quote preset (functional_custom_part, PLA, 15% infill, 0.2mm layer). Auto-fetches market comps. Override with `--name`, `--grams`, `--hours`. Updated PRICING_SPEC.md. Fixed session signing from Claude → Salomon.
 
-**Action:** None.
+**Camood quote:** 100g @ 7h → $15.73 fair market
 
-— Claude
+**Paths:** `logs/reports/2026-05-30_catch-up-status.md`
+
+— Salomon

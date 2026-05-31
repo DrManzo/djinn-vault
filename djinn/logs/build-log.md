@@ -467,6 +467,8 @@ created: 2026-05-19
 - ⚠️ Full report not filed — stub at `logs/reports/2026-05-30_opencode-1754-stub.md`
 *— Salomon*
 
-## 2026-05-30: Catch-up session (Claude)
-- Session restart. Reviewed mark fix state. No new work.
-*— Claude*
+## 2026-05-30: --print preset for djinn-print-quote (Salomon)
+- Added STANDARD_PRINT_PRESET + `--print` CLI flag — functional_custom_part, PLA, 15% infill, 0.2mm layer
+- Override `--name`, `--grams`, `--hours`, `--design`, `--spool`
+- Updated PRICING_SPEC.md
+*— Salomon*
