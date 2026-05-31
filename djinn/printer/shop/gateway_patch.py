@@ -31,7 +31,7 @@ if str(_PRINTER_SHOP) not in sys.path:
 
 
 def _shop_pending_quote(discord_user_id: str) -> dict:
-    """Retrieve the last quoted order for this Discord user."""
+    """Retrieve the last quoted order for this Discord user from shop.db."""
     try:
         import json
         from shop.db import get_db
@@ -52,9 +52,55 @@ def _shop_pending_quote(discord_user_id: str) -> dict:
     return {}
 
 
+def _quote_from_history(discord_user_id: str, discord_username: str) -> dict:
+    """
+    Fallback: read the last entry from quote-history.jsonl and create
+    a shop.db record on-the-fly when ORDER is received.
+    Bridges the old djinn-print-quote CLI flow with the new shop system.
+    """
+    import json, pathlib
+    history = pathlib.Path.home() / "Obsidian/djinn/printer/commissions/quote-history.jsonl"
+    if not history.exists():
+        return {}
+    try:
+        lines = [l for l in history.read_text().strip().splitlines() if l.strip()]
+        if not lines:
+            return {}
+        last = json.loads(lines[-1])
+        # quote-history.jsonl stores {timestamp, input, result} or {timestamp, brief, quote}
+        result = last.get("result") or last.get("quote") or {}
+        total = (result.get("fair_market_estimate")
+                 or result.get("fair_market_usd")
+                 or result.get("recommended_price_usd")
+                 or result.get("price")
+                 or 0.0)
+        if not total or total <= 0:
+            return {}
+        from shop.db import upsert_customer, create_order, add_order_item
+        from shop.accounting import create_invoice
+        from shop.db import save_quote
+        cid = upsert_customer(discord_user_id, discord_username)
+        oid = create_order(cid, float(total), payment_method=None, express=False)
+        piece = result.get("piece_name", "Custom Print")
+        qty   = result.get("quantity", 1)
+        add_order_item(oid, piece, qty,
+                       round(float(total) / max(qty, 1), 2),
+                       smoking_item=bool(result.get("smoking_accessory", False)))
+        save_quote(oid, cid, result)
+        create_invoice(oid, cid, float(total))
+        return {"order_id": oid, "total_usd": float(total), "quote": result}
+    except Exception as e:
+        print(f"[shop] quote-history fallback error: {e}")
+        return {}
+
+
 def handle_order_express(m, _raw, ctx, discord_user_id="", discord_username="") -> str:
     express = _raw.strip().lower().startswith("express")
+    # Try shop.db first (intake_agent flow)
     pending = _shop_pending_quote(discord_user_id)
+    # Fallback: last entry in quote-history.jsonl (CLI quote flow)
+    if not pending:
+        pending = _quote_from_history(discord_user_id, discord_username)
     if not pending:
         return "No pending quote found — drop a file or describe what you want first."
     try:
@@ -70,6 +116,13 @@ def handle_order_express(m, _raw, ctx, discord_user_id="", discord_username="") 
         return "Order received — check your DMs for payment details."
     except Exception as e:
         return f"Order error: {e}"
+
+
+def handle_order_express_route(m, _raw, ctx) -> str:
+    # Called from route table — no user_id available here.
+    # Real handling is in on_message below (has message.author.id).
+    # This stub prevents "unknown command" fallthrough.
+    return ""
 
 
 def handle_inventory_cmd(m, _raw, ctx) -> str:
@@ -109,7 +162,7 @@ def handle_add_filament_cmd(m, _raw, ctx) -> str:
 '''
 
 DISCORD_ROUTES = '''\
-    (re.compile(r"^(order|express)$", re.I),        lambda m,r,c: ""),
+    (re.compile(r"^(order|express)$", re.I),        handle_order_express_route),
     (re.compile(r"^inventory$", re.I),              handle_inventory_cmd),
     (re.compile(r"^low\\s+stock$", re.I),            handle_low_stock_cmd),
     (re.compile(r"^add\\s+filament\\b", re.I),       handle_add_filament_cmd),
@@ -285,12 +338,22 @@ def patch_discord(dry_run: bool = False) -> bool:
                  DISCORD_ROUTES,
                  after=False, dry_run=dry_run)
 
-    # 3. Inject customer message handling into on_message
-    # Target: the line after the guild check
+    # 3. REPLACE the simple ALLOWED_USER check with the customer-aware version.
+    #    Must be a replace (not insert) — DISCORD_ON_MESSAGE_PATCH already
+    #    starts with `if message.author.id != ALLOWED_USER:` so inserting before
+    #    would duplicate the line.
     anchor3 = "    if message.author.id != ALLOWED_USER:\n        return"
-    ok3 = _patch(DISCORD_GW, anchor3,
-                 "\n" + DISCORD_ON_MESSAGE_PATCH,
-                 after=False, dry_run=dry_run)
+    if dry_run:
+        ok3 = anchor3 in DISCORD_GW.read_text()
+        print(f"  [dry-run] on_message replace anchor {'found ✅' if ok3 else 'NOT FOUND ⚠️'}")
+    else:
+        content3 = DISCORD_GW.read_text()
+        if anchor3 in content3:
+            DISCORD_GW.write_text(content3.replace(anchor3, DISCORD_ON_MESSAGE_PATCH, 1))
+            ok3 = True
+        else:
+            print(f"  ⚠️  on_message anchor not found — Discord customer handling not wired")
+            ok3 = False
 
     if ok1 and ok2 and ok3:
         print(f"  Discord gateway patched ✅")
@@ -319,10 +382,10 @@ def patch_telegram(dry_run: bool = False) -> bool:
                  TELEGRAM_IMPORTS,
                  after=False, dry_run=dry_run)
 
-    # 2. Inject shop routes into ROUTES list
-    ok2 = _patch(TELEGRAM_GW,
-                 '    (re.compile(r"^design\\s+status$", re.I),',
-                 TELEGRAM_ROUTES,
+    # 2. Inject shop routes into ROUTES list — anchor is the design_status route
+    #    Exact match: 4-space indent, split across two lines in the file.
+    tg_route_anchor = '    (re.compile(r"^design\\s+status$", re.I),\n        handle_design_status),'
+    ok2 = _patch(TELEGRAM_GW, tg_route_anchor, TELEGRAM_ROUTES,
                  after=False, dry_run=dry_run)
 
     # 3. Patch dispatch() to match paid/shipped without / prefix

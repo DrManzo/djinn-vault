@@ -44,15 +44,37 @@ from shop.db import get_db, init_db, upsert_customer, create_order, add_order_it
 from shop.accounting import create_invoice
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DISCORD_TOKEN    = os.environ.get("DJINN_DISCORD_TOKEN", "")
-DISCORD_API      = "https://discord.com/api/v10"
-DISCORD_HEADERS  = lambda: {"Authorization": f"Bot {DISCORD_TOKEN}",
-                             "Content-Type": "application/json"}
+def _load_env_file(path: str):
+    """Load key=value pairs from an env file into os.environ (no-op if missing)."""
+    p = pathlib.Path(path).expanduser()
+    if not p.exists():
+        return
+    for line in p.read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, _, v = line.partition("=")
+            if k.strip() not in os.environ:
+                os.environ[k.strip()] = v.strip()
 
-TG_TOKEN         = os.environ.get("DJINN_TG_TOKEN",
-                                   "7962428973:AAHzCibu8E0RDDaRF3eHGA7WcOEqMbypOVI")
-TG_API           = f"https://api.telegram.org/bot{TG_TOKEN}"
-OWNER_TG_CHAT    = int(os.environ.get("DJINN_TG_ALLOWED", "7620067588").split(",")[0])
+_load_env_file("~/.config/djinn/shop.env")
+
+DISCORD_TOKEN = os.environ.get("DJINN_DISCORD_TOKEN", "")
+if not DISCORD_TOKEN:
+    import warnings
+    warnings.warn(
+        "DJINN_DISCORD_TOKEN not set — Discord DMs will fail. "
+        "Add it to ~/.config/djinn/shop.env",
+        RuntimeWarning
+    )
+
+DISCORD_API     = "https://discord.com/api/v10"
+DISCORD_HEADERS = lambda: {"Authorization": f"Bot {DISCORD_TOKEN}",
+                            "Content-Type": "application/json"}
+
+TG_TOKEN      = os.environ.get("DJINN_TG_TOKEN",
+                                "7962428973:AAHzCibu8E0RDDaRF3eHGA7WcOEqMbypOVI")
+TG_API        = f"https://api.telegram.org/bot{TG_TOKEN}"
+OWNER_TG_CHAT = int(os.environ.get("DJINN_TG_ALLOWED", "7620067588").split(",")[0])
 
 ZELLE_HANDLE     = os.environ.get("DJINN_ZELLE",    "typhonsforge@gmail.com")
 CASHAPP_TAG      = os.environ.get("DJINN_CASHAPP",  "$TyphonsForge")
