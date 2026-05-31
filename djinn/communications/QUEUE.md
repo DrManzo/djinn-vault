@@ -433,11 +433,13 @@ Structured report with one section per question. For each section: current state
 
 ## TASK-015
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
+- completed: 2026-05-31 by Marcus
 - context: Research — can we replace Apify + Flick with a self-built zero-cost trend intelligence stack? No subscriptions, Djinn maintains it.
+- outcome: Yes. Apify free tier ($3.60/mo usage within $5 free credit) + Firecrawl + Printables RSS. No self-hosted IG scraper (3–8h/mo maintenance, silent failures). Full report: `djinn/research/marcus/TASK-015_diy-trend-stack.md`
 
 **How to run:** Javier pastes the brief below into Perplexity. Marcus writes output to `djinn/research/marcus/TASK-015_diy-trend-stack.md` in GitHub vault and commits. Do NOT paste into chat.
 
@@ -969,3 +971,84 @@ python3 -m py_compile ~/.local/bin/djinn-media-publish-prep && echo OK
 ```
 
 **Report back:** COMMS.md — confirm caption generation now references trend signal, show sample prompt snippet with context injected.
+
+---
+
+## TASK-021
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Firecrawl debloat — rewrite djinn-style-scrape: replace fragile DDG vqd token scraping with fc.search()
+
+**Goal:** Replace the 2-step DuckDuckGo image search (extract vqd token from HTML → query /i.js) with a single `fc.search()` call. The vqd pattern breaks silently whenever DDG changes their frontend.
+
+**File:** `/home/drmanzo/.local/bin/djinn-style-scrape`
+
+**Current pattern (fragile):**
+```python
+# Step 1 — extract vqd token from DDG HTML
+r = urllib.request.urlopen(f"https://duckduckgo.com/?q={q}&iax=images&ia=images")
+vqd = re.search(r'vqd="([^"]+)"', html).group(1)
+# Step 2 — query image results
+r = urllib.request.urlopen(f"https://duckduckgo.com/i.js?q={q}&vqd={vqd}&...")
+```
+
+**Replacement:**
+```python
+from firecrawl import FirecrawlApp
+import os, json
+from pathlib import Path
+
+key = open(Path.home() / ".config/djinn/firecrawl.env").read()
+# parse FIRECRAWL_API_KEY=... line
+FIRECRAWL_KEY = dict(l.split("=",1) for l in key.splitlines() if "=" in l).get("FIRECRAWL_API_KEY","")
+
+fc = FirecrawlApp(api_key=FIRECRAWL_KEY)
+
+for query in QUERIES:
+    results = fc.search(query, limit=8)
+    for item in results.get("data", []):
+        # item has: url, title, description, markdown
+        # save to references/scraped/ as before
+```
+
+**Preserve:**
+- Same output folder: `references/scraped/`
+- Same query list (8 aesthetic queries)
+- Same file-per-query output structure
+- `--dry-run` flag if it exists
+
+**Success criteria:**
+```bash
+python3 -m py_compile ~/.local/bin/djinn-style-scrape && echo OK
+djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 3)
+```
+
+**Report back:** COMMS.md — confirm first search returns results, no urllib.request import remaining.
+
+---
+
+## TASK-022
+- assigned_to: salomon
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Firecrawl debloat — replace Makerworld + Thingiverse HTML scraping in djinn-model-fetch with fc.scrape_url()
+
+**Goal:** `djinn-model-fetch` currently scrapes Makerworld and Thingiverse with raw HTMLParser. These sites change their markup; the scraping breaks silently. Replace with `fc.scrape_url(url, formats=["markdown"])` which returns clean parsed markdown.
+
+**File:** `/home/drmanzo/.local/bin/djinn-model-fetch`
+
+**Keep as-is:** Printables GraphQL API (stable, structured JSON — no change needed)
+
+**Replace:**
+- Makerworld HTML parsing section → `fc.scrape_url("https://makerworld.com/en/models/{id}", formats=["markdown"])`
+- Thingiverse HTML parsing section → `fc.scrape_url("https://www.thingiverse.com/thing:{id}", formats=["markdown"])`
+- Extract model name, description, tags from `result["markdown"]` using regex on clean text (much simpler than HTMLParser)
+
+**Note:** Only do this if Makerworld/Thingiverse scraping is actively broken or causes issues. This is a "next time you're in the file" fix — not urgent. Do TASK-019, 020, 021 first.
+
+**Report back:** COMMS.md — confirm scrape returns expected fields for one Makerworld model ID.

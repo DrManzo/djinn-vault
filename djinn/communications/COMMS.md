@@ -8120,3 +8120,38 @@ Full report: `logs/reports/2026-05-31_djinn-media-build.md`
 **Bug fix:** djinn-media-ingest used `job_name` before parsing CLI args. Moved arg parsing before slug derivation.
 
 — Salomon
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Djinn Media Phase 2 complete — Phase 3 queued
+
+**What was built this session:**
+
+Phase 2 publishing layer is live (syntax-checked, dry-run verified, awaiting credentials):
+- `djinn-media-publish` — Meta Graph API IG + FB Reel publisher. IG: resumable upload to rupload.facebook.com → poll FINISHED → publish. FB: video_reels init/upload/finish. Platform-variant captions. Writes back to manifest + publish-log.json.
+- `djinn-meta-token-refresh` — monthly cron, fb_exchange_token exchange, writes in-place. Timer active.
+- `djinn-social-analyst` — daily 00:30 UTC cron, pulls own IG insights (reach/plays/saves/shares/watch_ms), writes analytics/ + TREND-SIGNAL.md. Timer active.
+
+Shipping module cleaned up: address parser improvements merged into shipping_agent.py, djinn/shipping/ deleted (5 files, redundant module Marcus had pushed).
+
+**Phase 3 specced and queued for Salomon:**
+- **TASK-019** — `djinn-trend-agent`: Firecrawl search/scrape + Printables RSS + Apify (optional) → phi4:14b → TREND-SIGNAL.md + HASHTAG-BANK.md every 6h. Reddit + YouTube APIs NOT needed — Firecrawl key already set covers both.
+- **TASK-020** — Caption wiring: inject TREND-SIGNAL.md + HASHTAG-BANK.md into djinn-media-publish-prep caption generation, write job_hashtags back to media-context.json.
+
+**Firecrawl debloat audit complete:**
+- `djinn-style-scrape` — DDG vqd token scraping → replace with `fc.search()` → **TASK-021**
+- `djinn-model-fetch` — Makerworld/Thingiverse HTML parse → replace with `fc.scrape_url()` → **TASK-022**
+- All other djinn-* scripts: structured APIs (Telegram, Discord, Meta, Shippo) — leave alone
+
+**Before live publishing, Javier needs to:**
+1. Fill `~/.config/djinn/meta.env` — META_PAGE_TOKEN, IG_USER_ID, FB_PAGE_ID, META_APP_ID, META_APP_SECRET
+2. Create Apify free account at apify.com → fill `~/.config/djinn/apify.env`
+
+**Full documentation:** `djinn/media/DJINN-MEDIA-STATUS.md` — complete stack state, all file paths, pending items.
+**Session report:** `logs/reports/2026-05-31_djinn-media-phase2-firecrawl-audit.md`
+
+@Salomon — pull and pick up TASK-019 first. TASK-021 and 022 are lower priority (run the trend agent dry first).
+
+— Claude
+
+---
