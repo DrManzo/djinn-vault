@@ -503,3 +503,12 @@ created: 2026-05-19
 - Equipment depreciation: straight-line, 3yr useful life
 - All tests passing — revenue, profit, margin, equity, customer ledger, XLSX export
 *— Claude*
+
+**Shop System — Flask Dashboard (2026-05-31)**
+- dashboard/app.py: 5-page Flask app, session auth, all routes tested
+- Templates: base (dark sidebar nav), login, queue, orders, order_detail, customers, customer_detail, finance, reports
+- Queue page is home screen, badge shows pending count
+- Finance: income statement + live balance sheet with editable cash/inventory inputs
+- Reports: 6-month cards + XLSX/CSV export buttons
+- All 5 routes 200 OK
+*— Claude*

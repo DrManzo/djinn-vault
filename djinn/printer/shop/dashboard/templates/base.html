@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Typhon's Forge</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --sidebar-bg:   #0f1923;
+      --sidebar-w:    220px;
+      --accent:       #e8a020;
+      --accent-dim:   #a06c10;
+      --surface:      #1a2332;
+      --border:       #2a3a4a;
+      --text-muted:   #7a9ab0;
+    }
+    body { background: #111820; color: #d4e4f0; font-family: 'Segoe UI', sans-serif; margin: 0; }
+
+    /* sidebar */
+    #sidebar {
+      position: fixed; top: 0; left: 0; height: 100vh;
+      width: var(--sidebar-w); background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; z-index: 100;
+    }
+    #sidebar .brand {
+      padding: 1.2rem 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    #sidebar .brand h6 { color: var(--accent); font-weight: 700; margin: 0; letter-spacing: .04em; }
+    #sidebar .brand small { color: var(--text-muted); font-size: .7rem; }
+    #sidebar nav { flex: 1; padding: .5rem 0; }
+    #sidebar nav a {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .65rem 1rem; color: #8aacbf; text-decoration: none;
+      font-size: .88rem; border-left: 3px solid transparent;
+      transition: all .15s;
+    }
+    #sidebar nav a:hover, #sidebar nav a.active {
+      color: #fff; background: var(--surface);
+      border-left-color: var(--accent);
+    }
+    #sidebar nav a i { font-size: 1rem; width: 1.2rem; }
+    #sidebar .badge-queue {
+      margin-left: auto; background: var(--accent);
+      color: #000; font-size: .7rem; border-radius: 10px;
+      padding: .1rem .45rem; font-weight: 700;
+    }
+    #sidebar footer {
+      padding: .75rem 1rem;
+      border-top: 1px solid var(--border);
+      font-size: .75rem; color: var(--text-muted);
+    }
+    #sidebar footer a { color: var(--text-muted); text-decoration: none; }
+    #sidebar footer a:hover { color: #fff; }
+
+    /* main */
+    #main { margin-left: var(--sidebar-w); padding: 1.5rem 2rem; min-height: 100vh; }
+
+    /* topbar */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar h4 { margin: 0; font-weight: 600; color: #fff; }
+    .topbar .sub { color: var(--text-muted); font-size: .85rem; }
+
+    /* cards */
+    .card-dark {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.25rem;
+    }
+    .stat-card { text-align: center; }
+    .stat-card .val { font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .stat-card .lbl { font-size: .78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* tables */
+    .table-dark-custom { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .table-dark-custom th {
+      background: #162030; color: var(--text-muted);
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
+      padding: .6rem .9rem; border-bottom: 1px solid var(--border);
+    }
+    .table-dark-custom td { padding: .65rem .9rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .table-dark-custom tr:hover td { background: #1d2f42; }
+
+    /* status badges */
+    .badge-status { font-size: .72rem; padding: .25rem .6rem; border-radius: 20px; font-weight: 600; }
+    .s-quoted          { background:#1a3050; color:#6aa8e0; }
+    .s-pending_payment { background:#2a2010; color:#e0a030; }
+    .s-paid            { background:#0f2d1a; color:#44c866; }
+    .s-printing        { background:#1a1040; color:#8888ff; }
+    .s-complete        { background:#0a2020; color:#20c0a0; }
+    .s-shipped         { background:#1a2a10; color:#88cc44; }
+    .s-failed          { background:#2a1010; color:#e06060; }
+    .s-cancelled       { background:#201a18; color:#888; }
+
+    /* alerts */
+    .flash-msg { background:#1a2d1a; border:1px solid #2a4a2a; color:#88dd88; padding:.6rem 1rem; border-radius:6px; margin-bottom:1rem; font-size:.88rem; }
+
+    /* forms */
+    .form-ctrl-dark {
+      background:#0f1923; border:1px solid var(--border); color:#d4e4f0;
+      border-radius:4px; padding:.35rem .7rem; font-size:.85rem;
+    }
+    .form-ctrl-dark:focus { border-color:var(--accent); outline:none; }
+    .btn-accent { background:var(--accent); color:#000; font-weight:600; border:none; }
+    .btn-accent:hover { background:#d09010; color:#000; }
+    .btn-ghost { background:transparent; border:1px solid var(--border); color:#8aacbf; }
+    .btn-ghost:hover { border-color:#5a7a9a; color:#fff; }
+
+    @media(max-width:768px){
+      #sidebar { width:60px; }
+      #sidebar .brand h6, #sidebar nav a span, #sidebar footer { display:none; }
+      #sidebar nav a { justify-content:center; padding:.65rem 0; }
+      #main { margin-left:60px; padding:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div class="brand">
+    <h6>🔥 Typhon's Forge</h6>
+    <small>{{ current_month }}</small>
+  </div>
+  <nav>
+    <a href="{{ url_for('queue') }}" class="{{ 'active' if active=='queue' }}">
+      <i class="bi bi-list-check"></i>
+      <span>Queue</span>
+      {% if queue_count %}<span class="badge-queue">{{ queue_count }}</span>{% endif %}
+    </a>
+    <a href="{{ url_for('orders') }}" class="{{ 'active' if active=='orders' }}">
+      <i class="bi bi-box-seam"></i><span>Orders</span>
+    </a>
+    <a href="{{ url_for('customers') }}" class="{{ 'active' if active=='customers' }}">
+      <i class="bi bi-people"></i><span>Customers</span>
+    </a>
+    <a href="{{ url_for('finance') }}" class="{{ 'active' if active=='finance' }}">
+      <i class="bi bi-bar-chart-line"></i><span>Finance</span>
+    </a>
+    <a href="{{ url_for('reports') }}" class="{{ 'active' if active=='reports' }}">
+      <i class="bi bi-file-earmark-spreadsheet"></i><span>Reports</span>
+    </a>
+  </nav>
+  <footer>
+    <a href="{{ url_for('logout') }}"><i class="bi bi-box-arrow-left"></i> Logout</a>
+  </footer>
+</div>
+
+<div id="main">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for m in messages %}<div class="flash-msg">{{ m }}</div>{% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

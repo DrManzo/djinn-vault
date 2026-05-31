@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div>
+    <h4>{{ order.id }}</h4>
+    <div class="sub">
+      <a href="{{ url_for('orders') }}" style="color:#5a8aaa;text-decoration:none">← Orders</a>
+    </div>
+  </div>
+  <span class="badge-status s-{{ order.status }}" style="font-size:.85rem">
+    {{ order.status.replace('_',' ') }}
+  </span>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Customer</div>
+      {% if customer %}
+      <div style="font-size:1rem;font-weight:600;color:#fff">{{ customer.name }}</div>
+      <div style="color:#5a8aaa;font-size:.85rem">{{ customer.discord_id }}</div>
+      {% if customer.shipping_address %}
+      <div style="margin-top:.75rem;font-size:.85rem;color:#8aacbf;white-space:pre-line">{{ customer.shipping_address }}</div>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Payment</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#e8a020">${{ '%.2f'|format(order.total_usd) }}</div>
+      {% if order.payment_method %}
+      <div style="color:#8aacbf;font-size:.85rem;margin-top:.25rem">{{ order.payment_method }}</div>
+      {% endif %}
+      {% if invoice %}
+      <div style="margin-top:.5rem">
+        <span class="badge-status s-{{ invoice.status }}">{{ invoice.status }}</span>
+        {% if invoice.paid_date %}<span style="font-size:.78rem;color:#5a8aaa;margin-left:.5rem">paid {{ invoice.paid_date }}</span>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Items</div>
+      {% for item in order.items %}
+      <div style="padding:.6rem 0;border-bottom:1px solid #2a3a4a;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span style="color:#fff">×{{ item.quantity }}  {{ item.description }}</span>
+          {% if item.smoking_item %}<span style="margin-left:.4rem">🔥</span>{% endif %}
+          <div style="font-size:.78rem;color:#5a8aaa;margin-top:.15rem">
+            {% if item.material %}{{ item.material }}{% endif %}
+            {% if item.color %} · {{ item.color }}{% endif %}
+            {% if item.profile %} · {{ item.profile }}{% endif %}
+          </div>
+          {% if item.customizations %}
+          <div style="font-size:.76rem;color:#7a9ab0;margin-top:.1rem">{{ item.customizations }}</div>
+          {% endif %}
+        </div>
+        <div style="font-weight:600;color:#d4e4f0">${{ '%.2f'|format(item.total_price) }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if order.notes %}
+  <div class="col-12">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Notes</div>
+      <div style="font-size:.88rem;color:#8aacbf;font-style:italic">"{{ order.notes }}"</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="col-12">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Actions</div>
+      <div class="d-flex gap-2 flex-wrap">
+        {% if order.status == 'pending_payment' %}
+        <form method="POST" action="{{ url_for('mark_paid', order_id=order.id) }}">
+          <button class="btn btn-sm btn-accent"><i class="bi bi-check-circle"></i> Confirm Payment Received</button>
+        </form>
+        {% endif %}
+        {% if order.status in ['complete','paid'] %}
+        <form method="POST" action="{{ url_for('mark_shipped', order_id=order.id) }}" class="d-flex gap-2">
+          <input type="text" name="tracking" placeholder="Tracking number" class="form-ctrl-dark">
+          <button class="btn btn-sm btn-accent"><i class="bi bi-truck"></i> Mark Shipped</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

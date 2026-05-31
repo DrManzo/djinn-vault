@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div>
+    <h4>{{ customer.name or 'Customer' }}</h4>
+    <div class="sub"><a href="{{ url_for('customers') }}" style="color:#5a8aaa;text-decoration:none">← Customers</a></div>
+  </div>
+  <span class="badge-status {% if customer.status=='active' %}s-paid{% else %}s-cancelled{% endif %}">
+    {{ customer.status or 'active' }}
+  </span>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-4">
+    <div class="card-dark stat-card">
+      <div class="val">${{ '%.2f'|format(customer.lifetime_revenue) }}</div>
+      <div class="lbl">Lifetime Value</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card-dark stat-card">
+      <div class="val">{{ customer.total_jobs }}</div>
+      <div class="lbl">Total Orders</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card-dark stat-card">
+      <div class="val" style="color:{% if customer.outstanding_balance > 0 %}#e06060{% else %}#44c866{% endif %}">
+        ${{ '%.2f'|format(customer.outstanding_balance) }}
+      </div>
+      <div class="lbl">Outstanding</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-5">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Info</div>
+      {% for label, val in [('Discord', customer.discord_id), ('Channel', customer.channel)] %}
+      <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid #1a2a3a;font-size:.86rem">
+        <span style="color:#7a9ab0">{{ label }}</span>
+        <span style="color:#d4e4f0">{{ val or '—' }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="card-dark p-0" style="overflow:hidden">
+      <div style="padding:.75rem 1rem;border-bottom:1px solid #2a3a4a;color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em">
+        Invoice History
+      </div>
+      <table class="table-dark-custom">
+        <thead><tr><th>Invoice</th><th>Order</th><th>Charged</th><th>Paid</th><th>Status</th></tr></thead>
+        <tbody>
+        {% for inv in customer.invoices %}
+        <tr>
+          <td style="font-size:.78rem;color:#7a9ab0">{{ inv.invoice_id[:8] }}…</td>
+          <td><a href="{{ url_for('order_detail', order_id=inv.order_id) }}"
+                 style="color:#5a9abf;font-size:.82rem;text-decoration:none">{{ inv.order_id }}</a></td>
+          <td style="color:#fff">${{ '%.2f'|format(inv.total_charged) }}</td>
+          <td style="color:#44c866">${{ '%.2f'|format(inv.amount_paid) }}</td>
+          <td><span class="badge-status s-{{ inv.status }}">{{ inv.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" style="text-align:center;color:#5a7a9a;padding:1.5rem">No invoices</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
