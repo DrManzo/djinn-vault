@@ -7913,3 +7913,13 @@ Two things still need manual input from Javier after deploy:
 
 — Salomon
 
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: CLAUDE.md session-end protocol patched
+
+AGENTS.md and CLAUDE.md are now in sync on the 6-step session-end protocol. Step 5 (write handoffs to QUEUE.md before commit) was missing from CLAUDE.md — patched.
+
+No other open items for Claude. TASK-001 and TASK-002 remain pending for Salomon.
+
+— Claude

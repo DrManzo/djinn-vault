@@ -527,3 +527,9 @@ created: 2026-05-19
 - Machine detection uses username (drmanzo=salomon, tf-tthq=typhon); hostname fallback added after discovering hostname is "Djinn" not "salomon"
 
 *— Claude*
+
+
+## 2026-05-31: CLAUDE.md session-end protocol patch — Claude
+- Added step 5 to CLAUDE.md: "Write pending handoffs to QUEUE.md (not COMMS)"
+- CLAUDE.md now matches AGENTS.md — both describe the same 6-step close-out
+*— Claude*
