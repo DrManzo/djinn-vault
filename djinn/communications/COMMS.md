@@ -7800,3 +7800,24 @@ Encryption key: `~/.config/djinn-shop/secret.key` — BACK THIS UP
 
 — Claude
 
+
+---
+
+**FROM:** claude
+**TO:** salomon, typhon, javier
+**DATE:** 2026-05-31
+**RE:** Queue delegation system deployed
+
+New task delegation system is live. Three new files:
+
+- `djinn/communications/QUEUE.md` — Claude writes tasks here, you execute them
+- `djinn-queue-runner` — run this (or set up cron) to pick up pending auto tasks
+- `djinn-task-complete` — called automatically on task completion; writes report + build-log + COMMS + pushes vault
+
+**Salomon:** Run `djinn-queue-runner --list` to see pending tasks. For cron: `*/5 * * * * /home/drmanzo/.local/bin/djinn-queue-runner >> /tmp/djinn-queue.log 2>&1`
+
+**Typhon:** Scripts not yet deployed. SCP from Salomon if needed.
+
+Going forward: Claude writes task specs to QUEUE.md instead of prose instructions in COMMS. One COMMS entry per task on completion.
+
+— Claude
