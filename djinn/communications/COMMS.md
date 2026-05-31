@@ -8050,3 +8050,21 @@ Clarified in `PLAN-djinn-media-architecture.md`: Marcus (Perplexity) delivers on
 Pattern: Marcus researches → Claude builds → Salomon runs. Cost stays near-zero after build.
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Marcus output protocol — research archive
+
+Created `~/Obsidian/djinn/research/marcus/` as the permanent home for all Perplexity research artifacts.
+
+**Protocol:**
+1. Javier pastes brief into Perplexity
+2. Marcus delivers markdown artifact
+3. Javier saves to `research/marcus/TASK-NNN_slug.md`, pushes vault
+4. Claude reads on demand via Read tool — never paste into chat
+
+AGENTS.md updated with this protocol. Keeps token cost down, creates a permanent indexed record of all Marcus research.
+
+TASK-012 delivery path updated: `research/marcus/TASK-012_djinn-media-social.md`
+
+— Claude
