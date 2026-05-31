@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div><h4>Reports</h4><div class="sub">Last 6 months + export</div></div>
+</div>
+
+<!-- Export bar -->
+<div class="card-dark mb-3 d-flex align-items-center gap-3 flex-wrap">
+  <span style="color:#7a9ab0;font-size:.85rem">Export period:</span>
+  <form method="GET" action="{{ url_for('export_xlsx_route') }}" class="d-flex gap-2 align-items-center">
+    <input type="month" name="period" class="form-ctrl-dark"
+           value="{{ monthly[0].report_month if monthly else '' }}">
+    <button class="btn btn-sm btn-accent"><i class="bi bi-file-earmark-spreadsheet"></i> Download XLSX</button>
+  </form>
+  <form method="GET" action="{{ url_for('export_csv_route') }}" class="d-flex gap-2 align-items-center">
+    <input type="month" name="period" class="form-ctrl-dark"
+           value="{{ monthly[0].report_month if monthly else '' }}">
+    <button class="btn btn-sm btn-ghost"><i class="bi bi-filetype-csv"></i> Download CSV</button>
+  </form>
+</div>
+
+<!-- Monthly report cards -->
+<div class="row g-3">
+{% for r in monthly %}
+<div class="col-md-6 col-lg-4">
+  <div class="card-dark">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+      <strong style="color:#e8a020">{{ r.report_month }}</strong>
+      <span style="font-size:.8rem;color:#5a8aaa">{{ r.jobs_completed }} jobs</span>
+    </div>
+
+    <div style="font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:.25rem">
+      ${{ '%.2f'|format(r.gross_revenue) }}
+    </div>
+    <div style="font-size:.8rem;color:#7a9ab0;margin-bottom:.75rem">gross revenue</div>
+
+    <div style="display:flex;gap:1rem;font-size:.82rem">
+      <div>
+        <div style="color:{% if r.gross_profit >= 0 %}#44c866{% else %}#e06060{% endif %};font-weight:600">
+          ${{ '%.2f'|format(r.gross_profit) }}
+        </div>
+        <div style="color:#7a9ab0">profit</div>
+      </div>
+      <div>
+        <div style="color:#8888ff;font-weight:600">{{ r.gross_margin_pct }}%</div>
+        <div style="color:#7a9ab0">margin</div>
+      </div>
+      <div>
+        <div style="color:#d4e4f0;font-weight:600">${{ '%.2f'|format(r.avg_job_value) }}</div>
+        <div style="color:#7a9ab0">avg order</div>
+      </div>
+    </div>
+
+    {% if r.jobs_failed %}
+    <div style="margin-top:.6rem;font-size:.78rem;color:#e06060">
+      {{ r.jobs_failed }} failed ({{ r.failure_rate_pct }}% failure rate)
+    </div>
+    {% endif %}
+
+    <div style="margin-top:.6rem;font-size:.78rem;color:#5a8aaa">
+      {{ r.new_customers }} new · {{ r.repeat_customers }} repeat customers
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="col-12">
+  <div class="card-dark text-center py-5" style="color:#5a7a9a">No report data yet</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
