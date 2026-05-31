@@ -129,3 +129,137 @@ crontab -l | grep queue-runner
 - `/home/drmanzo/Obsidian/djinn/printer/SUPPORT-GUIDE.md` — workflow docs
 
 **Report back:** Post fix summary in COMMS.md + update `build-log.md`.
+
+---
+
+## TASK-005
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — update djinn-media-reel: force 30fps + job-name output filename
+
+**Changes:**
+1. Add `-r 30` to all ffmpeg export commands in `djinn-media-reel`
+2. Read `job_slug` from `manifest["notes"]` field (fallback to project_id slug)
+3. Rename output from `{project_id}_reel.mp4` → `{job_slug}_reel.mp4`
+4. Same fix for cover frame filename
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-reel`
+
+---
+
+## TASK-006
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — update djinn-media-repurpose: job-name clip naming
+
+**Changes:**
+1. Read `job_slug` from manifest notes (fallback to project_id slug)
+2. Rename clip output from `clip_{n:02d}.mp4` → `{job_slug}_{n:02d}.mp4`
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-repurpose`
+
+---
+
+## TASK-007
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — build djinn-media-kit: creates stitch-kit/ folder + STITCH-ORDER.txt
+
+**What to build:**
+- New script at `/home/drmanzo/.local/bin/djinn-media-kit`
+- Reads all clips from `exports/reel/` in the project
+- Creates `stitch-kit/` folder in project root
+- Copies clips with job-named convention ({job_slug}_01.mp4 etc.)
+- Writes `STITCH-ORDER.txt` (clip list, durations, notes from manifest)
+- Updates manifest `status = "kit_ready"`
+- Usage: `djinn-media-kit {project_id}`
+
+**Spec:** See `~/Obsidian/djinn/projects/PLAN-media-kit-mobile.md`
+
+---
+
+## TASK-008
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — update djinn-media-publish-prep: upload stitch-kit/ first, update Discord message
+
+**Changes:**
+1. Upload `stitch-kit/` to `gdrive:Typhons-Forge/posts/{project_id}/stitch-kit/` before other uploads
+2. Discord `#post-ready` message leads with stitch-kit Drive link, not buried at the end
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-publish-prep`
+
+---
+
+## TASK-009
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — update djinn-media-ingest: add --job-name flag
+
+**Changes:**
+1. Add `--job-name "slug"` CLI flag
+2. Write `job_slug` field to manifest.json at ingest time
+3. Fallback: derive from project_id if not provided
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-ingest`
+
+---
+
+## TASK-010
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — deploy and test full updated pipeline with mini-vases-job4
+
+**After Claude completes TASK-005 through 009:**
+```bash
+git -C ~/Obsidian pull
+# Re-run mini-vases project through updated pipeline:
+djinn-media-kit 2026-05-31_mini-vases-job4   # if project exists
+# Or ingest fresh footage with job name:
+djinn-media-ingest <footage_path> --job-name "mini-vases-job4"
+djinn-media-reel 2026-05-31_mini-vases-job4
+djinn-media-kit 2026-05-31_mini-vases-job4
+```
+
+**Verify:**
+- stitch-kit/ folder exists with job-named clips
+- STITCH-ORDER.txt has correct clip list
+- Drive upload puts stitch-kit/ at top level
+- Clips are 30fps H.264 AAC
+
+**Report back:** COMMS.md + build-log.md
+
+---
+
+## TASK-011
+- assigned_to: salomon
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Media kit — add "kit {project_id}" trigger to Discord + Telegram gateways
+
+**After TASK-010 verified:**
+Add `kit` command to both gateway scripts so Javier can trigger from phone:
+- `kit {project_id}` → runs `djinn-media-kit {project_id}`
+- Response: "Kit ready — {drive_link}"
+
+**Files:** `djinn-discord-gateway`, `djinn-telegram-gateway`

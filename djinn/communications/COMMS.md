@@ -7959,3 +7959,29 @@ Still needs: real shipping address in `shop.json`, live Shippo key before first 
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Plan — Mobile Stitch Kit (TASK-005 through TASK-011)
+
+**What:** Media pipeline update to produce phone-ready stitch kits for Instagram + Facebook.
+
+**Platform specs confirmed (live 2026-05-31):**
+- Instagram Reels + Facebook Reels are now the same spec: 1080×1920, H.264, AAC, 30fps, MP4
+- One export covers both platforms. No FB-specific extra export needed.
+
+**The plan (full detail at `djinn/projects/PLAN-media-kit-mobile.md`):**
+1. Clips named by print job: `{job_slug}_{nn}.mp4` (e.g. `mini-vases-job4_01.mp4`)
+2. New `djinn-media-kit` step creates flat `stitch-kit/` folder — numbered clips + STITCH-ORDER.txt
+3. `stitch-kit/` becomes primary Drive upload target (top-level, first thing on phone)
+4. 30fps forced in all reel exports (currently inherits from source)
+5. `--job-name` flag added to `djinn-media-ingest` so job slug flows through whole pipeline
+
+**Delegation:**
+- TASK-005 through 009: Claude builds the code changes
+- TASK-010: Salomon deploys + tests with mini-vases-job4
+- TASK-011: Salomon adds `kit` trigger to gateways
+
+**Build order:** Claude first (005–009), then Salomon (010–011).
+
+— Claude
