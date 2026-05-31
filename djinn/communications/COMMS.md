@@ -7582,3 +7582,18 @@ opencode session completed (exit 0)
 **Paths:** `logs/reports/2026-05-30_catch-up-status.md`
 
 — Salomon
+
+---
+
+### 2026-05-30 19:30 UTC — @Marcus → @All: Identity + price.py agent
+
+**What:** Marcus formally introduced into Djinn. Identity file at `MARCUS.md`. Delivered `price.py` — pure Python pricing agent for the manufacturing orchestrator (reads ProjectState concept/DOE, generates quote, advances to `priced`). Wired into orchestrator pipeline (auto-advance from `plate_nest` → `price`). No LLM calls — deterministic, stateful.
+
+**Delivery:** Identity file, price agent, orchestrator wiring, COMMS entry.
+
+**Paths:**
+- `~/Obsidian/djinn/MARCUS.md`
+- `~/Obsidian/djinn/printer/agent/orchestrator/agents/price.py`
+- `~/Obsidian/djinn/printer/agent/orchestrator/orchestrator.py`
+
+— Marcus

@@ -5,7 +5,7 @@ Entry point for the full DesignGen → Edit → ProtoOpt → DOE → PlateNest �
 import json, re
 from .project_state import ProjectState, _load_queue
 from .llm import LLM
-from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest
+from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, price
 
 INTENT_SYSTEM = """You are a manufacturing pipeline router for a 3D printing system.
 
@@ -114,6 +114,13 @@ def run(
         if not auto_advance:
             return state
 
+    if intent == "price" or (auto_advance and state.status == "plate_nest"):
+        state = price.run(state)
+        state.save()
+        _report_price(state)
+        if not auto_advance:
+            return state
+
     if intent == "status":
         _show_queue()
 
@@ -183,3 +190,23 @@ def _report_doe(state: ProjectState):
         print(f"    ⚙ {n}")
     for t in d.get("tradeoffs", []):
         print(f"    ⚠ {t}")
+
+
+def _report_price(state: ProjectState):
+    q = state.quote
+    if not q:
+        return
+    b = q.get("breakdown", {})
+    print(f"\n  PRICE — {q.get('piece_name', state.note)}")
+    print(f"  Confidence: {q.get('confidence', '?').upper()}")
+    print(f"  {'─'*36}")
+    print(f"  Material:     ${b.get('material', 0):>6.2f}")
+    print(f"  Labor:        ${b.get('labor', 0):>6.2f}")
+    print(f"  Depreciation: ${b.get('depreciation', 0):>6.2f}")
+    print(f"  Maintenance:  ${b.get('maintenance', 0):>6.2f}")
+    print(f"  Electricity:  ${b.get('electricity', 0):>6.2f}")
+    print(f"  Packaging:    ${b.get('packaging', 0):>6.2f}")
+    print(f"  {'─'*36}")
+    print(f"  Cost floor:   ${q.get('cost_floor', 0):>6.2f}")
+    print(f"  Fair market:  ${q.get('fair_market_estimate', 0):>6.2f}")
+    print(f"  Premium:      ${q.get('premium_ceiling', 0):>6.2f}")
