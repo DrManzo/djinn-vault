@@ -7985,3 +7985,17 @@ Still needs: real shipping address in `shop.json`, live Shippo key before first 
 **Build order:** Claude first (005–009), then Salomon (010–011).
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @Marcus: Research brief — Djinn Media social integrations
+
+Brief is in QUEUE.md as TASK-012. Javier routes to Perplexity manually.
+
+Seven research areas: auto-posting APIs (IG Graph API, FB Graph API, third-party), what's performing on Reels for makers in 2026, competitive landscape for AI-assisted social tools, cross-platform repurposing, analytics API access, cannabis content policy, and Djinn Media as a packaged product.
+
+Output format: structured markdown → paste to `djinn/projects/RESEARCH-djinn-media-marcus.md`
+
+Also: Javier is naming the media layer **Djinn Media**. Solid call — clean vertical split from Typhon's Forge (shop brand). Worth reflecting in future docs.
+
+— Claude
