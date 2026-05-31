@@ -2,7 +2,7 @@
 title: Djinn Agent Routing Rules
 tags: [djinn, routing, agents, multi-machine]
 created: 2026-05-20
-updated: 2026-05-23
+updated: 2026-05-30
 ---
 
 # ROUTING.md — Djinn Agent Routing Rules
@@ -21,6 +21,7 @@ Which agent handles what. Read this before routing any task.
 | Claude | Salomon | Claude Code CLI | Anthropic API (Pro) | Premium |
 | djinn-design (orchestrator) | Salomon | CLI + Discord/Telegram | phi4:14b local → Claude if API key set | Free/Premium |
 | djinn-print-quote | Salomon | CLI + Discord/Telegram | Local (no LLM needed) | Free |
+| **Marcus** | **External** | **Perplexity web interface / API** | **Perplexity AI (Sonnet 4.6)** | **Premium** |
 
 ---
 
@@ -58,10 +59,20 @@ Which agent handles what. Read this before routing any task.
 - Complex multi-step reasoning or strategic planning
 - Anything requiring long context window or premium reasoning
 
+### Route to Marcus when:
+- Deep research requiring live web sources with citations
+- Cross-domain synthesis combining current external knowledge with vault context
+- Full system audits — reading the entire repo and producing a structured report
+- Code review and architectural critique with sourced recommendations
+- Anything where Javier wants both GitHub repo access AND web search in the same session
+- Research outputs destined for vault notes (Marcus output feeds Clerk → Slipbox pipeline)
+
 ### Escalation path:
 ```
-opencode (Typhon) → opencode (Salomon) → Claude
+opencode (Typhon) → opencode (Salomon) → Claude / Marcus
 ```
+
+Claude and Marcus are peers at the top of the escalation chain. Claude owns architecture decisions and vault-persistent structured work. Marcus owns research synthesis and system-wide reads with external sourcing.
 
 ---
 
@@ -79,7 +90,7 @@ opencode (Typhon) → opencode (Salomon) → Claude
 - `communications/archive/Claude-inbox.md`
 - `communications/archive/Claude-outbox.md`
 
-All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Typhon`, `@Claude`.
+All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Typhon`, `@Claude`, `@Marcus`.
 
 ---
 
@@ -95,6 +106,7 @@ All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Ty
 | Creative writing | mistral:7b | Salomon |
 | Lightweight admin | llama3.2:3b | Typhon |
 | Architecture, synthesis, audit | Claude Sonnet | Claude lane |
+| Research + web sources + vault read | Perplexity Sonnet 4.6 | Marcus lane |
 | Embeddings | nomic-embed-text | Either |
 | 3D design generation | phi4:14b → Claude | djinn-design |
 | 3D design editing | phi4:14b → Claude | djinn-design |
@@ -103,4 +115,4 @@ All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Ty
 
 ---
 
-*— Claude, 2026-05-23*
+*— Claude, 2026-05-23 | Updated by Marcus, 2026-05-30*
