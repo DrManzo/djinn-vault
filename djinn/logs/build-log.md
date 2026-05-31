@@ -488,3 +488,11 @@ created: 2026-05-19
 - orchestrator/agents/price.py: de-duplicated ~80 lines of smoking/market utils, imports from commissions
 - Single source of truth: commissions/price.py owns all pricing logic, DDG search, smoking detection
 *— Claude*
+
+**Shop System — Foundation Layer (2026-05-31)**
+- `shop/db.py` — SQLite + Fernet column encryption, full CRUD for customers/orders/items/ledger/quotes
+- `shop/quote_formatter.py` — customer view (clean retail) vs owner view (full internal) split
+- `shop/intake_agent.py` — 2-pass customer text → brief: regex/keyword (pass1) + qwen2.5:7b fallback (pass2)
+- DB live at `~/.local/share/djinn-shop/shop.db`, key at `~/.config/djinn-shop/secret.key`
+- All tests passing
+*— Claude*
