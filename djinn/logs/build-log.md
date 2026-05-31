@@ -480,3 +480,11 @@ created: 2026-05-19
 - Added Marcus routing entry to AGENTS.md
 - Updated COMMS.md with Marcus introduction
 *— Marcus*
+
+**FairPrintAgent Integration — commissions/ as canonical engine (2026-05-31)**
+- Marcus delivered true weighted median, smoking detection, terminal table in commissions/{price,brief,report}.py
+- Claude: replaced Etsy scraper in commissions/price.py with DDG (battle-tested); added MarketSpec.size + auto-fetch
+- djinn-print-quote refactored: 678 → ~280 lines, imports pricing engine from commissions
+- orchestrator/agents/price.py: de-duplicated ~80 lines of smoking/market utils, imports from commissions
+- Single source of truth: commissions/price.py owns all pricing logic, DDG search, smoking detection
+*— Claude*

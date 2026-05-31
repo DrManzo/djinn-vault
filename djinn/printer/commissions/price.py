@@ -333,7 +333,12 @@ def calculate_quote(brief: PrintBrief) -> dict:
     risk_adjusted = base_cost / brief.risk.success_rate
     cost_floor    = risk_adjusted * (1 + brief.risk.minimum_margin_pct)
 
-    market_med = _market_median(brief.market.comparables)
+    # Auto-fetch comps if none provided and we have a real piece name
+    comps = brief.market.comparables
+    if not comps and brief.piece_name not in ("unnamed", ""):
+        comps = fetch_market_comps(brief.piece_name, size=brief.market.size)
+
+    market_med = _market_median(comps)
     val_prem   = _value_premium(cost_floor, brief.market)
 
     wc = weights["cost"]
@@ -376,8 +381,9 @@ def calculate_quote(brief: PrintBrief) -> dict:
         "premium_ceiling_usd":   round(premium_ceiling, 2),
         "recommended_price_usd": round(fair_market, 2),
         "market_median_usd":     round(market_med, 2) if market_med else None,
+        "market_comp_count":     len(comps),
+        "market_sources":        [c.get("source", "") for c in comps if c.get("source")],
         "weights_used":          weights,
-        "library_status":        LIBRARY_STATUS,
     }
 
 
@@ -400,6 +406,7 @@ def quote_from_dict(d: dict) -> dict:
             customization_premium_pct = mk.get("customization_premium_pct", 0.10),
             rush_premium_pct          = mk.get("rush_premium_pct", 0.0),
             tags                      = mk.get("tags", []),
+            size                      = mk.get("size", None),
         ) if mk else MarketSpec(),
     )
     return calculate_quote(brief)
