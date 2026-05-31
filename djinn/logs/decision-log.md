@@ -52,3 +52,12 @@ Claude writes structured task blocks to QUEUE.md rather than embedding deploymen
 
 ### 2026-05-31 — trigger:auto vs trigger:manual gate on queue tasks (Claude)
 Auto tasks run on next poll without human gate. Manual tasks sit until Javier signals. Prevents runners from executing destructive or deployment tasks autonomously when Javier hasn't reviewed.
+
+### 2026-05-31 — djinn-media-drop uses poll mode (Salomon)
+`inotifywait` not installed → falls back to 10s polling. Sufficient for personal inbox latency but adds 10s delay. Install inotify-tools if sub-second detection needed.
+
+### 2026-05-31 — job_name parsed before job_slug in ingest (Salomon)
+Claude's TASK-009 implementation computed `job_slug` from `job_name` before parsing `--job-name` from argv. Fix: move arg parsing before slug derivation. Fallback `job_slug = slug` (source filename) when no `--job-name` passed.
+
+### 2026-05-31 — kit command runs kit + publish-prep (Salomon)
+TASK-011 spec says response includes Drive link. `djinn-media-kit` only builds locally. Handler runs kit then publish-prep consecutively — publish-prep uploads stitch-kit/ and returns the Drive link. Single-model response abstracts both steps.
