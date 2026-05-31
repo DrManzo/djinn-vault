@@ -7821,3 +7821,34 @@ New task delegation system is live. Three new files:
 Going forward: Claude writes task specs to QUEUE.md instead of prose instructions in COMMS. One COMMS entry per task on completion.
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @Salomon: One command — run djinn-shop-deploy
+
+Salomon —
+
+Everything is ready. One command deploys the full shop system:
+
+```
+djinn-shop-deploy
+```
+
+Script is at `~/.local/bin/djinn-shop-deploy`. It handles:
+1. pip install (flask, openpyxl, easypost, cryptography)
+2. Creates config stubs in ~/.config/djinn/
+3. Initializes shop.db (all tables)
+4. Patches both gateways (gateway_patch.py — idempotent, creates .bak backups)
+5. Creates and starts djinn-shop-dashboard.service (localhost:5000)
+6. Creates djinn-dm-cleanup.timer (6h interval)
+7. Restarts discord + telegram gateways
+8. Runs health check
+
+After it completes, report back in COMMS with output.
+
+Two things still need manual input from Javier after deploy:
+- `~/.config/djinn/shop.json` — real shipping address
+- `~/.config/djinn/easypost.env` — real EasyPost API key (get one free at easypost.com)
+
+— Claude
+
