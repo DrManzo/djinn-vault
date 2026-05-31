@@ -1,7 +1,7 @@
 ---
 title: Djinn Communications Protocol
 tags: [djinn, protocol, communications, agents]
-updated: 2026-05-28
+updated: 2026-05-30
 ---
 
 # Djinn Communications Protocol
@@ -18,6 +18,7 @@ Rules every agent follows. No exceptions. No shortcuts.
 | Claude | Salomon (API) | Architecture, synthesis, vault design — session-bound, Javier initiates |
 | opencode | Salomon | Daily ops, tool use, automation, COMMS processing |
 | opencode | Typhon | Typhon-local tasks, storage, COMMS processing |
+| **Marcus** | **External (Perplexity API)** | **Research, cross-domain synthesis, deep code audits, system-wide context reviews — session-bound, Javier initiates. Powered by Perplexity AI (Sonnet 4.6). Signs all work as Marcus.** |
 
 ---
 
@@ -71,7 +72,7 @@ No session ends without steps 4, 5, and 6. **A session that produces no report i
 — AgentName
 ```
 
-**Recipient tags:** `@Salomon`, `@Typhon`, `@Claude`, `@All`
+**Recipient tags:** `@Salomon`, `@Typhon`, `@Claude`, `@Marcus`, `@All`
 **Processed tag:** After acting on a message, append `**Processed:** YYYY-MM-DD — AgentName` below it.
 
 ---
@@ -94,6 +95,7 @@ This means any agent can leave a task for Salomon or Typhon and it will be picke
 | Agent | Owns | Never touches |
 |-------|------|---------------|
 | Claude | COMMS.md, PROTOCOL.md, SYSTEM-STATE.md, djinn/projects/, djinn/logs/ | systemd timers, ~/.local/bin/, heartbeat files |
+| Marcus | COMMS.md (append only), djinn/logs/reports/ (session reports) | systemd timers, ~/.local/bin/, heartbeat files, PROTOCOL.md structure |
 | Salomon | HEARTBEAT.md, systemd timers, ~/.local/bin/ scripts, vault-sync | vault structure, routing docs |
 | Typhon | HEARTBEAT-typhon.md, printer bot service, Typhon timers | vault structure, routing docs |
 | Anyone | Append to COMMS.md, CHANGELOG.md | — |
@@ -105,6 +107,7 @@ This means any agent can leave a task for Salomon or Typhon and it will be picke
 | Agent | Signature | Git Author | Git Email |
 |-------|-----------|------------|-----------|
 | Claude | `— Claude` | `Claude` | `claude@djinn` |
+| Marcus | `— Marcus` | `Marcus` | `marcus@djinn` |
 | Salomon opencode | `— Salomon` | `DrManzo` | `salomon@djinn` |
 | Typhon opencode | `— Typhons Forge` | `Typhons Forge` | `typhon@djinn` |
 
@@ -156,7 +159,7 @@ After writing the full report, also append a **short summary entry** (3–8 bull
 
 ### Enforcement
 
-Any AI agent — Claude, Salomon opencode, Typhon opencode, or any media/design agent — is expected to produce a report unprompted. If Javier has to ask for a report, the session protocol was not followed.
+Any AI agent — Claude, Salomon opencode, Typhon opencode, Marcus, or any media/design agent — is expected to produce a report unprompted. If Javier has to ask for a report, the session protocol was not followed.
 
 Salomon: `djinn-session-end "slug" "summary"` is called by the comms-processor wrapper after every opencode invocation. If no report exists for today, a stub is auto-created and Javier is notified via Telegram.
 
@@ -205,4 +208,4 @@ All bugs are indexed in `djinn/logs/bugs.md`. Template: `djinn/logs/BUG-REPORT-T
 | medium | Bug report + session report |
 | low | Bug report (can be brief) |
 
-*— Claude, 2026-05-28*
+*— Claude, 2026-05-28 | Updated by Marcus, 2026-05-30*
