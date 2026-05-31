@@ -112,6 +112,9 @@ class ParsedAddress:
     parse_confidence: float         = 0.0
     parse_errors:     list          = field(default_factory=list)
 
+    def is_complete(self) -> bool:
+        return bool(self.street1 and self.city and self.state and self.zip5)
+
 
 # ── State normalization ───────────────────────────────────────────────────────
 STATE_ABBREVS = {
@@ -130,6 +133,22 @@ STATE_ABBREVS = {
 }
 VALID_STATES = set(STATE_ABBREVS.values())
 
+_ZIP_RE = re.compile(r'\b(\d{5})(?:-(\d{4}))?\b')
+_STATE_RE = re.compile(
+    r'\b(' + '|'.join(
+        re.escape(k) for k in sorted(
+            list(STATE_ABBREVS.keys()) + list(VALID_STATES), key=len, reverse=True
+        )
+    ) + r')\b',
+    re.IGNORECASE,
+)
+_STREET_RE = re.compile(
+    r'^(\d+\s+[\w\s\.]+?(?:st|street|ave|avenue|blvd|boulevard|rd|road|'
+    r'dr|drive|ln|lane|ct|court|way|pl|place|cir|circle|hwy|highway)'
+    r'(?:\s+(?:apt|suite|ste|unit|#)\s*[\w\d-]+)?)',
+    re.IGNORECASE,
+)
+
 
 def normalize_state(raw: str) -> Optional[str]:
     raw = raw.strip()
@@ -141,35 +160,36 @@ def normalize_state(raw: str) -> Optional[str]:
 def parse_address(raw: str, name: str = "") -> ParsedAddress:
     """Parse freeform US address string into ParsedAddress. Pure local — no API calls."""
     addr = ParsedAddress(raw_input=raw, name=name)
-    text = raw.strip().replace("\n", ", ")
+    if not raw or not raw.strip():
+        addr.parse_errors = ["empty input"]
+        return addr
+
+    working = raw.strip()
+    working = re.sub(r'[\r\n]+', ', ', working)
+    working = re.sub(r',+', ',', working)
+    working = re.sub(r'\s+', ' ', working)
+
     errors = []
     clean_fields = 0
 
-    zip_m = re.search(r'(\d{5})(?:-(\d{4}))?', text)
+    zip_m = _ZIP_RE.search(working)
     if zip_m:
         addr.zip5 = zip_m.group(1)
         addr.zip4 = zip_m.group(2)
-        text = text[:zip_m.start()].strip(", ") + text[zip_m.end():]
+        working = working[:zip_m.start()].strip(", ") + working[zip_m.end():]
         clean_fields += 1
     else:
         errors.append("zip5")
 
-    state_m = re.search(r'\b([A-Z]{2})\b', text)
-    if state_m and state_m.group(1) in VALID_STATES:
-        addr.state = state_m.group(1)
-        text = text[:state_m.start()].strip(", ") + text[state_m.end():]
+    state_m = _STATE_RE.search(working)
+    if state_m:
+        addr.state = normalize_state(state_m.group(0)) or state_m.group(0).upper()
+        working = working[:state_m.start()].strip(", ") + working[state_m.end():]
         clean_fields += 1
     else:
-        for name_full, abbr in STATE_ABBREVS.items():
-            if name_full in text.lower():
-                addr.state = abbr
-                text = re.sub(name_full, "", text, flags=re.I).strip(", ")
-                clean_fields += 1
-                break
-        else:
-            errors.append("state")
+        errors.append("state")
 
-    parts = [p.strip().strip(",") for p in text.split(",") if p.strip()]
+    parts = [p.strip().strip(",") for p in working.split(",") if p.strip()]
 
     for i, part in enumerate(parts):
         if re.match(r'^\d+\s', part):
@@ -180,10 +200,21 @@ def parse_address(raw: str, name: str = "") -> ParsedAddress:
                 addr.street2 = parts.pop(0)
             break
     else:
-        errors.append("street1")
+        if parts:
+            m = _STREET_RE.match(parts[0])
+            if m:
+                addr.street1 = m.group(0).strip()
+                remainder = parts[0][m.end():].strip().lstrip(',')
+                parts[0] = remainder if remainder else None
+                parts = [p for p in parts if p]
+                clean_fields += 1
+            else:
+                errors.append("street1")
+        else:
+            errors.append("street1")
 
     if parts:
-        addr.city = parts[0].strip()
+        addr.city = parts[-1].strip()
         clean_fields += 1
     else:
         errors.append("city")
