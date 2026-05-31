@@ -81,3 +81,31 @@ slice N proto supports=no                    ← quick fit check, surface doesn'
 
 *→ See also: [[PRINT-PROFILES]] for proto/standard/production settings*
 *→ See also: [[printer/klipper-macros-webcam]] for START_PRINT / END_PRINT macros*
+
+---
+
+## Maker's Mark — Engraving Rule
+
+**Tool:** `djinn-model-mark <model.stl>`
+
+The TF anvil mark always goes on the **bottom face** (Z_min). Hidden on the shelf, visible when flipped.
+
+**Mirror rule — NON-NEGOTIABLE:**
+The mark STL logo faces +Z. When boolean-subtracted into a bottom face and viewed from below (-Z), it reads reversed without a mirror. `djinn-model-mark` applies the mirror automatically — you do not need to do it manually.
+
+- **Built-in geometry** (no `--mark` flag): mirror is always applied. Use this for standard prints.
+- **External STL mark** (`--mark path/to/mark.stl`): reads `mirror_x` from `~/.config/djinn/makers-mark.json`. Default is `true`. Pass `--no-mirror` only if your STL was pre-mirrored.
+
+**Config:** `~/.config/djinn/makers-mark.json`
+```json
+{
+  "path": "/home/drmanzo/Downloads/files/tf_anvil_traced_15mm.stl",
+  "mirror_x": true,
+  "size_mm": 15,
+  "depth_mm": 0.5
+}
+```
+
+To change the default mark: update `path` in the config. The `mirror_x: true` stays unless your new mark is already designed mirror-flipped.
+
+**Never** subtract a mark STL directly into a bottom face without mirroring first. The config enforces this — if you bypass the tool, you own the result.

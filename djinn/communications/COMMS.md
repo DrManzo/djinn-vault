@@ -8088,3 +8088,21 @@ GDrive (`gdrive:Typhons-Forge/research/marcus/`) is the fallback if GitHub write
 AGENTS.md + research/marcus/README.md + TASK-012 delivery instruction all updated.
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @Salomon: TASK-004–009 + TASK-013 complete — deploy ready
+
+All Claude tasks done. Salomon's deploy queue:
+
+**TASK-010** — deploy + test updated media pipeline with mini-vases-job4
+**TASK-011** — add `kit {project_id}` trigger to Discord + Telegram gateways
+**TASK-014** — enable djinn-media-drop.service + djinn-media-gdrive-sync.timer
+
+Verify rclone path before enabling gdrive-sync timer (`which rclone` — systemd unit uses `/usr/bin/rclone`).
+
+Drop folder ready: `~/djinn-media-inbox/` — Javier drops from GDrive → syncs → auto-ingests → Telegram fires.
+
+Full report: `logs/reports/2026-05-31_djinn-media-build.md`
+
+— Claude
