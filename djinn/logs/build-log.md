@@ -512,3 +512,10 @@ created: 2026-05-19
 - Reports: 6-month cards + XLSX/CSV export buttons
 - All 5 routes 200 OK
 *— Claude*
+
+**Shop System — Full agent layer (2026-05-31)**
+- `customer_dm.py` — ORDER flow: payment instructions DM, address collection, owner Telegram notification, paid/shipped handlers, 48h cleanup. Gateway wiring guide included.
+- `batch_agent.py` — queue scanner, groups by material+color, bed fit check, Telegram proposal to owner, batch confirm handler
+- `inventory.py` — filament spool tracking: add/deduct/check availability, low stock alerts, inventory value for balance sheet, Discord/Telegram command parser
+- `shipping_agent.py` — EasyPost integration (spec by Marcus): ParsedAddress dataclass, parse_address() 1.0 confidence on all test cases, get_rates(), buy_label(), download_label(), track_shipment(), gateway wiring guide. EasyPost key pending setup.
+*— Claude*
