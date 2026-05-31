@@ -4,15 +4,34 @@ price.py — FairPrintAgent core pricing engine
 Reads a ProjectState brief dict, applies the PRICING_SPEC formula,
 returns a structured quote dict.
 
+Changelog:
+  v1.1 — True weighted median (bisect), fetch_market_comps(),
+          smoking-accessory detection + 35% upcharge, library check.
+
 Part of the Djinn 3D printing business system.
 — Marcus
 """
 
+import bisect
+import importlib
 import math
 from dataclasses import dataclass, field
 from typing import Optional
 
+# ---------------------------------------------------------------------------
+# Library availability check
+# ---------------------------------------------------------------------------
+_REQUESTS_OK = importlib.util.find_spec("requests") is not None
+_BS4_OK      = importlib.util.find_spec("bs4")      is not None
+
+LIBRARY_STATUS = {
+    "requests": _REQUESTS_OK,
+    "bs4":      _BS4_OK,
+}
+
+# ---------------------------------------------------------------------------
 # Job-type blending weights from PRICING_SPEC
+# ---------------------------------------------------------------------------
 JOB_WEIGHTS = {
     "commodity_decor":         {"cost": 0.65, "market": 0.30, "value": 0.05},
     "functional_custom_part":  {"cost": 0.55, "market": 0.30, "value": 0.15},
@@ -20,7 +39,29 @@ JOB_WEIGHTS = {
     "urgent_rush":             {"cost": 0.50, "market": 0.20, "value": 0.30},
 }
 
+# ---------------------------------------------------------------------------
+# Smoking-accessory detection
+# ---------------------------------------------------------------------------
+SMOKING_KEYWORDS = {
+    "puffco", "peak", "proxy", "banger", "dab", "rig", "bowl", "pipe",
+    "bubbler", "bong", "carb cap", "carbcap", "vape", "mod", "chamber",
+    "atomizer", "cartridge", "710", "wax", "concentrate", "terp", "nectar",
+    "smoking", "smoke", "herb", "grinder", "ash", "roach",
+}
+SMOKING_UPCHARGE = 0.35  # 35 %
+
+
+def _is_smoking_accessory(piece_name: str, tags: list = None) -> bool:
+    """Return True if name or any tag matches a smoking-accessory keyword."""
+    haystack = piece_name.lower()
+    if tags:
+        haystack += " " + " ".join(t.lower() for t in tags)
+    return any(kw in haystack for kw in SMOKING_KEYWORDS)
+
+
+# ---------------------------------------------------------------------------
 # Calliope (Ender-3 V3 Plus) machine defaults
+# ---------------------------------------------------------------------------
 CALLIOPE_DEFAULTS = {
     "purchase_price_usd":        399.0,
     "lifespan_hours":            5000,
@@ -33,6 +74,9 @@ CALLIOPE_DEFAULTS = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Dataclasses
+# ---------------------------------------------------------------------------
 @dataclass
 class MaterialSpec:
     spool_cost_usd: float = 22.0
@@ -83,6 +127,7 @@ class MarketSpec:
     local_multiplier: float = 1.0
     customization_premium_pct: float = 0.10
     rush_premium_pct: float = 0.0
+    tags: list = field(default_factory=list)
 
 
 @dataclass
@@ -99,6 +144,9 @@ class PrintBrief:
     market: MarketSpec = field(default_factory=MarketSpec)
 
 
+# ---------------------------------------------------------------------------
+# Cost helpers
+# ---------------------------------------------------------------------------
 def _material_cost(m: MaterialSpec) -> float:
     total_g = (m.part_weight_g + m.support_weight_g) * (1 + m.waste_buffer_pct / 100)
     cost_per_g = m.spool_cost_usd / m.spool_weight_g
@@ -127,12 +175,47 @@ def _extras_total(e: ExtrasSpec) -> float:
     return e.hardware_cost_usd + e.packaging_cost_usd + e.shipping_cost_usd
 
 
+# ---------------------------------------------------------------------------
+# TRUE weighted median  (replaces the old weighted mean)
+# ---------------------------------------------------------------------------
 def _market_median(comparables: list) -> Optional[float]:
+    """
+    True weighted median via cumulative-weight bisect.
+
+    Each comparable: {"price_usd": float, "similarity": float}
+    Similarity is treated as the weight (0–1).  Items with weight 0
+    are excluded.  Falls back to a simple sort-median for a single item.
+
+    Algorithm:
+      1. Sort items by price_usd.
+      2. Build a prefix-sum of weights.
+      3. Find the price at which the cumulative weight first reaches
+         >= 50 % of total weight  (lower weighted median).
+    """
     if not comparables:
         return None
-    weighted_sum = sum(c["price_usd"] * c["similarity"] for c in comparables)
-    weight_total = sum(c["similarity"] for c in comparables)
-    return weighted_sum / weight_total if weight_total > 0 else None
+
+    filtered = [c for c in comparables if c.get("similarity", 0) > 0]
+    if not filtered:
+        return None
+    if len(filtered) == 1:
+        return filtered[0]["price_usd"]
+
+    # sort ascending by price
+    items = sorted(filtered, key=lambda c: c["price_usd"])
+    prices  = [c["price_usd"]   for c in items]
+    weights = [c["similarity"]  for c in items]
+
+    total  = sum(weights)
+    target = total / 2.0
+
+    cumulative = 0.0
+    for price, w in zip(prices, weights):
+        cumulative += w
+        if cumulative >= target:
+            return price
+
+    return prices[-1]  # fallback (floating-point edge)
 
 
 def _value_premium(cost_floor: float, market: MarketSpec) -> float:
@@ -141,6 +224,75 @@ def _value_premium(cost_floor: float, market: MarketSpec) -> float:
     return premium
 
 
+# ---------------------------------------------------------------------------
+# Market data fetcher  (live scrape — graceful stub when deps missing)
+# ---------------------------------------------------------------------------
+ETSY_SEARCH_URL = "https://www.etsy.com/search?q={query}&min_price={min_p}&max_price={max_p}"
+
+
+def fetch_market_comps(query: str,
+                       min_price: float = 1.0,
+                       max_price: float = 500.0,
+                       max_results: int = 10) -> list:
+    """
+    Attempt a live scrape of Etsy for comparable price data.
+    Returns a list of {"price_usd": float, "similarity": float, "source": str}.
+
+    Requires: requests, bs4 (beautifulsoup4)
+    If either is missing, returns [] and prints a warning.
+
+    similarity is set to 0.70 for all live results (no NLP scoring yet;
+    treated as moderately comparable).  Override in your MarketSpec if needed.
+    """
+    if not _REQUESTS_OK or not _BS4_OK:
+        missing = [k for k, v in LIBRARY_STATUS.items() if not v]
+        print(f"[fetch_market_comps] WARN: missing libraries {missing} — returning empty comps.")
+        return []
+
+    import requests
+    from bs4 import BeautifulSoup
+
+    url = ETSY_SEARCH_URL.format(
+        query=requests.utils.quote(query),
+        min_p=int(min_price),
+        max_p=int(max_price),
+    )
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; DjinnPriceBot/1.1)",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+
+    try:
+        resp = requests.get(url, headers=headers, timeout=8)
+        resp.raise_for_status()
+    except Exception as exc:
+        print(f"[fetch_market_comps] HTTP error: {exc}")
+        return []
+
+    soup = BeautifulSoup(resp.text, "html.parser")
+    results = []
+
+    # Etsy price spans carry data-price or a currency class — heuristic parse
+    for tag in soup.select("span[class*='currency-value']"):
+        try:
+            price = float(tag.get_text(strip=True).replace(",", ""))
+            if min_price <= price <= max_price:
+                results.append({
+                    "price_usd":  price,
+                    "similarity": 0.70,
+                    "source":     "etsy",
+                })
+        except ValueError:
+            continue
+        if len(results) >= max_results:
+            break
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Main quote calculator
+# ---------------------------------------------------------------------------
 def calculate_quote(brief: PrintBrief) -> dict:
     """
     Core pricing formula from PRICING_SPEC.md:
@@ -148,6 +300,7 @@ def calculate_quote(brief: PrintBrief) -> dict:
         risk_adjusted   = base_cost / success_rate
         cost_floor      = risk_adjusted x (1 + minimum_margin)
         fair_market     = wc*cost_floor + wm*market_median + wv*(cost_floor + value_premium)
+        smoking_upcharge= fair_market * SMOKING_UPCHARGE  (if applicable)
         premium_ceiling = fair_market * 1.15
     """
     weights = JOB_WEIGHTS.get(brief.job_type, JOB_WEIGHTS["functional_custom_part"])
@@ -177,14 +330,21 @@ def calculate_quote(brief: PrintBrief) -> dict:
     else:
         fair_market = ((wc + wm) * cost_floor + wv * (cost_floor + val_prem))
 
-    fair_market    *= brief.quantity
-    premium_ceiling = fair_market * 1.15
-    cost_floor_total = cost_floor * brief.quantity
+    # Smoking-accessory upcharge
+    smoking = _is_smoking_accessory(brief.piece_name, brief.market.tags)
+    if smoking:
+        fair_market *= (1 + SMOKING_UPCHARGE)
+
+    fair_market      *= brief.quantity
+    premium_ceiling   = fair_market * 1.15
+    cost_floor_total  = cost_floor * brief.quantity
 
     return {
         "piece_name":             brief.piece_name,
         "job_type":               brief.job_type,
         "quantity":               brief.quantity,
+        "smoking_accessory":      smoking,
+        "smoking_upcharge_pct":   SMOKING_UPCHARGE if smoking else 0.0,
         "unit_breakdown": {
             "material_usd":      round(mat,   4),
             "labor_usd":         round(lab,   4),
@@ -200,11 +360,13 @@ def calculate_quote(brief: PrintBrief) -> dict:
         "recommended_price_usd": round(fair_market, 2),
         "market_median_usd":     round(market_med, 2) if market_med else None,
         "weights_used":          weights,
+        "library_status":        LIBRARY_STATUS,
     }
 
 
 def quote_from_dict(d: dict) -> dict:
     """Convenience: build a PrintBrief from a raw dict and return a quote."""
+    mk = d.get("market", {})
     brief = PrintBrief(
         job_type   = d.get("job_type", "functional_custom_part"),
         piece_name = d.get("piece_name", "unnamed"),
@@ -215,12 +377,20 @@ def quote_from_dict(d: dict) -> dict:
         labor      = LaborSpec(**d["labor"])       if "labor"    in d else LaborSpec(),
         extras     = ExtrasSpec(**d["extras"])     if "extras"   in d else ExtrasSpec(),
         risk       = RiskSpec(**d["risk"])         if "risk"     in d else RiskSpec(),
-        market     = MarketSpec(**d["market"])     if "market"   in d else MarketSpec(),
+        market     = MarketSpec(
+            comparables               = mk.get("comparables", []),
+            local_multiplier          = mk.get("local_multiplier", 1.0),
+            customization_premium_pct = mk.get("customization_premium_pct", 0.10),
+            rush_premium_pct          = mk.get("rush_premium_pct", 0.0),
+            tags                      = mk.get("tags", []),
+        ) if mk else MarketSpec(),
     )
     return calculate_quote(brief)
 
 
+# ---------------------------------------------------------------------------
 # Presets
+# ---------------------------------------------------------------------------
 PRESET_COIN = {
     "job_type": "design_heavy_oneoff",
     "piece_name": "Typhon's Forge Coin",
@@ -240,6 +410,17 @@ PRESET_STANDARD = {
     "quantity": 1,
 }
 
+PRESET_PUFFCO_CAP = {
+    "job_type": "functional_custom_part",
+    "piece_name": "Puffco Peak Cap",
+    "quantity": 1,
+    "material":  {"part_weight_g": 12, "support_weight_g": 2},
+    "print":     {"print_time_hours": 1.0},
+    "labor":     {"prep_minutes": 10, "postprocess_minutes": 15},
+    "market":    {"comparables": [{"price_usd": 22.00, "similarity": 0.90}],
+                  "customization_premium_pct": 0.15},
+}
+
 
 if __name__ == "__main__":
     import json, sys
@@ -248,6 +429,8 @@ if __name__ == "__main__":
             q = quote_from_dict(PRESET_COIN)
         elif sys.argv[1] == "--standard":
             q = quote_from_dict(PRESET_STANDARD)
+        elif sys.argv[1] == "--puffco":
+            q = quote_from_dict(PRESET_PUFFCO_CAP)
         else:
             raw = json.loads(" ".join(sys.argv[1:]))
             q = quote_from_dict(raw)

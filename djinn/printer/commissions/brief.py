@@ -4,6 +4,10 @@ brief.py — Intake validation layer for the Djinn print pricing pipeline.
 Converts a raw user request (from Telegram, Discord, CLI, or dict)
 into a validated PrintBrief dict ready for price.py.
 
+Changelog:
+  v1.1 — Added smoking keyword matching to _infer_job_type().
+         Smoking jobs coerce to functional_custom_part (highest scrutiny).
+
 — Marcus
 """
 
@@ -28,6 +32,17 @@ VALID_MATERIALS = {
     "resin": {"spool_cost_usd": 45.0, "spool_weight_g": 1000},
 }
 
+# Mirror of SMOKING_KEYWORDS from price.py — kept in sync manually.
+# These trigger job_type → functional_custom_part (not commodity_decor)
+# because smoking accessories require tighter tolerances and carry
+# the 35 % upcharge in price.py.
+SMOKING_KEYWORDS = {
+    "puffco", "peak", "proxy", "banger", "dab", "rig", "bowl", "pipe",
+    "bubbler", "bong", "carb cap", "carbcap", "vape", "mod", "chamber",
+    "atomizer", "cartridge", "710", "wax", "concentrate", "terp", "nectar",
+    "smoking", "smoke", "herb", "grinder", "ash", "roach",
+}
+
 
 @dataclass
 class ValidationError:
@@ -41,16 +56,45 @@ class BriefResult:
     brief: Optional[dict] = None
     errors: list = field(default_factory=list)
     warnings: list = field(default_factory=list)
+    is_smoking: bool = False
+
+
+def _is_smoking_text(text: str) -> bool:
+    """Return True if any smoking keyword appears in text."""
+    lower = text.lower()
+    return any(kw in lower for kw in SMOKING_KEYWORDS)
 
 
 def _infer_job_type(text: str) -> str:
-    text = text.lower()
-    if any(w in text for w in ["rush", "urgent", "asap", "today"]):
-        return "urgent_rush"
-    if any(w in text for w in ["design", "custom", "oneoff", "one-off", "original"]):
-        return "design_heavy_oneoff"
-    if any(w in text for w in ["functional", "bracket", "mount", "enclosure", "jig", "tool"]):
+    """
+    Infer job_type from free-text description.
+    Priority order:
+      1. smoking keywords  → functional_custom_part
+         (smoking accessories need tight tolerances; never commodity_decor)
+      2. urgency keywords  → urgent_rush
+      3. design keywords   → design_heavy_oneoff
+      4. functional part   → functional_custom_part
+      5. default           → commodity_decor
+    """
+    lower = text.lower()
+
+    # 1. Smoking — highest priority route
+    if _is_smoking_text(lower):
         return "functional_custom_part"
+
+    # 2. Urgency
+    if any(w in lower for w in ["rush", "urgent", "asap", "today"]):
+        return "urgent_rush"
+
+    # 3. Design-heavy
+    if any(w in lower for w in ["design", "custom", "oneoff", "one-off", "original"]):
+        return "design_heavy_oneoff"
+
+    # 4. Functional part
+    if any(w in lower for w in ["functional", "bracket", "mount", "enclosure", "jig", "tool"]):
+        return "functional_custom_part"
+
+    # 5. Default
     return "commodity_decor"
 
 
@@ -64,7 +108,7 @@ def _parse_telegram_shorthand(text: str) -> Optional[dict]:
     if m:
         name, grams, hours = m.group(1), float(m.group(2)), float(m.group(3))
         return {
-            "job_type": "commodity_decor",
+            "job_type": _infer_job_type(name),
             "piece_name": name,
             "quantity": 1,
             "material": {"part_weight_g": grams},
@@ -78,15 +122,26 @@ def validate_brief(raw: dict) -> BriefResult:
     warnings = []
     out = {}
 
+    # Detect smoking before job_type resolution so we can warn
+    piece_name_raw = str(raw.get("piece_name", ""))
+    smoking_detected = _is_smoking_text(piece_name_raw)
+    if smoking_detected:
+        warnings.append(
+            "Smoking accessory detected — job_type forced to "
+            "functional_custom_part; 35% upcharge will apply."
+        )
+
     jt = raw.get("job_type", "")
-    if jt not in VALID_JOB_TYPES:
+    if smoking_detected:
+        out["job_type"] = "functional_custom_part"
+    elif jt not in VALID_JOB_TYPES:
         if jt:
             warnings.append(f"Unknown job_type '{jt}', defaulting to functional_custom_part")
         out["job_type"] = "functional_custom_part"
     else:
         out["job_type"] = jt
 
-    out["piece_name"] = str(raw.get("piece_name", "unnamed part")).strip()[:80]
+    out["piece_name"] = piece_name_raw.strip()[:80]
 
     qty = raw.get("quantity", 1)
     if not isinstance(qty, int) or qty < 1:
@@ -95,7 +150,7 @@ def validate_brief(raw: dict) -> BriefResult:
     out["quantity"] = qty
 
     mat = raw.get("material", {})
-    mat_type = mat.pop("type", "pla").lower()
+    mat_type = mat.pop("type", "pla").lower() if isinstance(mat, dict) else "pla"
     defaults = VALID_MATERIALS.get(mat_type, VALID_MATERIALS["pla"])
     out["material"] = {
         "spool_cost_usd":   mat.get("spool_cost_usd",   defaults["spool_cost_usd"]),
@@ -119,9 +174,9 @@ def validate_brief(raw: dict) -> BriefResult:
 
     mc = raw.get("machine", {})
     out["machine"] = {
-        "purchase_price_usd":       mc.get("purchase_price_usd", 399.0),
-        "lifespan_hours":           mc.get("lifespan_hours", 5000),
-        "maintenance_rate_per_hour":mc.get("maintenance_rate_per_hour", 0.10),
+        "purchase_price_usd":        mc.get("purchase_price_usd", 399.0),
+        "lifespan_hours":            mc.get("lifespan_hours", 5000),
+        "maintenance_rate_per_hour": mc.get("maintenance_rate_per_hour", 0.10),
     }
 
     lb = raw.get("labor", {})
@@ -154,11 +209,22 @@ def validate_brief(raw: dict) -> BriefResult:
         "local_multiplier":          mk.get("local_multiplier", 1.0),
         "customization_premium_pct": mk.get("customization_premium_pct", 0.10),
         "rush_premium_pct":          mk.get("rush_premium_pct", 0.0),
+        "tags":                      mk.get("tags", []),
     }
 
     if errors:
-        return BriefResult(valid=False, errors=[asdict(e) for e in errors], warnings=warnings)
-    return BriefResult(valid=True, brief=out, warnings=warnings)
+        return BriefResult(
+            valid=False,
+            errors=[asdict(e) for e in errors],
+            warnings=warnings,
+            is_smoking=smoking_detected,
+        )
+    return BriefResult(
+        valid=True,
+        brief=out,
+        warnings=warnings,
+        is_smoking=smoking_detected,
+    )
 
 
 def intake(source: str) -> BriefResult:
@@ -177,8 +243,14 @@ def intake(source: str) -> BriefResult:
 
 if __name__ == "__main__":
     import sys
-    src = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else '{"job_type":"commodity_decor","material":{"part_weight_g":25},"print":{"print_time_hours":2}}'
+    src = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else \
+        '{"piece_name":"puffco cap","material":{"part_weight_g":12},"print":{"print_time_hours":1}}'
     result = intake(src)
     import json
-    print(json.dumps({"valid": result.valid, "brief": result.brief,
-                      "errors": result.errors, "warnings": result.warnings}, indent=2))
+    print(json.dumps({
+        "valid":      result.valid,
+        "is_smoking": result.is_smoking,
+        "brief":      result.brief,
+        "errors":     result.errors,
+        "warnings":   result.warnings,
+    }, indent=2))
