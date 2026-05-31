@@ -576,3 +576,28 @@ created: 2026-05-19
 - **Bug fix:** djinn-media-ingest used `job_name` before parsing CLI args (line 64 < line 67–73). Moved arg parsing before job_slug derivation; fallback uses source filename slug.
 
 *— Salomon*
+
+## 2026-05-31: Djinn Media Phase 2 + Firecrawl Audit — Claude
+
+**Phase 2 — Meta Graph API publishing layer:**
+- `djinn-media-publish` — IG resumable upload (rupload.facebook.com) + FB video_reels flow. Caption variants: IG=full, FB=2 sentences + 3 hashtags. Manifest write-back, publish-log.json. Dry-run verified.
+- `djinn-meta-token-refresh` — monthly systemd timer (Persistent=true), fb_exchange_token grant, writes in-place, Telegram alert on fail
+- `djinn-social-analyst` — daily 00:30 UTC timer, IG post insights (reach/plays/saves/shares/watch_ms), writes analytics/YYYY-MM-DD.json + TREND-SIGNAL.md sorted by engagement
+
+**Shipping cleanup:**
+- Merged Marcus's address parser improvements into shipping_agent.py (compiled _ZIP_RE, _STATE_RE, _STREET_RE; is_complete(); city=parts[-1])
+- Deleted djinn/shipping/ entirely (5 files, git rm -r) — redundant, wrong DB path, not imported
+
+**Phase 3 specs:**
+- TASK-019: djinn-trend-agent spec — Firecrawl search/scrape + Printables RSS + Apify (optional) → phi4:14b → TREND-SIGNAL.md + HASHTAG-BANK.md every 6h
+- TASK-020: caption wiring spec — inject TREND-SIGNAL.md + HASHTAG-BANK.md into djinn-media-publish-prep, write job_hashtags to media-context.json
+
+**Firecrawl install + audit:**
+- `~/.config/djinn/firecrawl.env` set (key fc-95272...), apify.env stub created
+- djinn-style-scrape: DDG vqd token scraping → replace with fc.search() (TASK-021)
+- djinn-model-fetch: Makerworld/Thingiverse HTML parse → replace with fc.scrape_url() (TASK-022)
+- 8 other scripts: all use structured APIs, no Firecrawl needed
+
+**Status doc:** `djinn/media/DJINN-MEDIA-STATUS.md` — full stack state written
+
+*— Claude*

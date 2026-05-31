@@ -57,6 +57,7 @@ Auto tasks run on next poll without human gate. Manual tasks sit until Javier si
 `inotifywait` not installed → falls back to 10s polling. Sufficient for personal inbox latency but adds 10s delay. Install inotify-tools if sub-second detection needed.
 
 ### 2026-05-31 — job_name parsed before job_slug in ingest (Salomon)
+
 Claude's TASK-009 implementation computed `job_slug` from `job_name` before parsing `--job-name` from argv. Fix: move arg parsing before slug derivation. Fallback `job_slug = slug` (source filename) when no `--job-name` passed.
 
 ### 2026-05-31 — kit command runs kit + publish-prep (Salomon)
