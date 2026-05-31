@@ -2,12 +2,23 @@
 price.py — FairPrintAgent pricing agent.
 Reads ProjectState (concept + DOE metadata), computes quote, advances job to priced.
 Pure Python. No LLM calls. Deterministic.
-Includes smoking/dab category detection and automatic market comparable search.
 """
-import json, math, re, sys
+import json, math, sys
+import pathlib as _pl
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 from ..project_state import ProjectState
+
+# ── Shared utils from commissions ─────────────────────────────────────────────
+_PRINTER = _pl.Path(__file__).parents[3]
+if str(_PRINTER) not in sys.path:
+    sys.path.insert(0, str(_PRINTER))
+from commissions.price import (
+    _is_smoking_accessory as is_smoking_item,
+    SMOKING_UPCHARGE,
+    fetch_market_comps,
+    weighted_median,
+)
 
 # ── Defaults (Calliope / Ender-3 V3 Plus) ────────────────────────────────────
 SPOOL_COST_USD = 22.0
@@ -21,7 +32,6 @@ LABOR_RATE_USD = 20.0
 SUCCESS_RATE = 0.92
 MIN_MARGIN = 0.30
 WASTE_BUFFER = 0.10
-SMOKING_UPCHARGE = 0.35
 
 # Job-type weights: (cost, market, value)
 WEIGHTS = {
@@ -31,102 +41,6 @@ WEIGHTS = {
     "urgent_rush":            (0.50, 0.20, 0.30),
 }
 
-# ── Smoking/dab category detection ───────────────────────────────────────────
-
-SMOKING_KEYWORDS = {
-    "dab", "dabbing", "dab station", "dab tray", "dab mat", "dab tool",
-    "puffco", "proxy", "peak", "carta", "concentrate", "wax", "rig",
-    "bong", "pipe", "bubbler", "bowl", "ashtray", "stash", "grinder",
-    "smoking", "sesh", "710", "420", "terp", "carb cap",
-}
-
-SMOKING_SOURCES = {
-    "etsy.com", "thesmokeshopguys.com", "geewestglass.com",
-    "420trinkets.com", "kaydmayd.com", "dankgeek.com",
-    "smokecartel.com", "smok3designs.com",
-}
-
-
-def is_smoking_item(piece_name: str) -> bool:
-    name_lower = piece_name.lower()
-    return any(kw in name_lower for kw in SMOKING_KEYWORDS)
-
-
-# ── Market data ──────────────────────────────────────────────────────────────
-
-def fetch_market_comps(piece_name: str, max_results: int = 8, size: str = None) -> list:
-    """Search DuckDuckGo for Etsy/web listings and extract dollar prices.
-    Auto-detects smoking/dab items and uses category-specific search queries.
-    """
-    try:
-        try:
-            from ddgs import DDGS
-        except ImportError:
-            from duckduckgo_search import DDGS
-    except ImportError:
-        return []
-
-    if is_smoking_item(piece_name):
-        queries = [
-            f'3D printed "{piece_name}" site:etsy.com price',
-            f'3D printed dab "{piece_name}" site:etsy.com price',
-            f'3D printed dab station site:etsy.com price',
-            f'3D printed puffco attachment site:etsy.com price',
-            f'3D printed cannabis accessory kaydmayd.com OR dankgeek.com price',
-            f'3D printed smoking accessory geewestglass.com OR 420trinkets.com price',
-            f'site:etsy.com/market/3d_print_smoke_accessories price',
-        ]
-    else:
-        queries = [
-            f'3D printed "{piece_name}" site:etsy.com price',
-            f'buy 3D printed "{piece_name}" USD',
-        ]
-
-    fetch_count = 12 if size else max_results
-    prices = []
-    seen = set()
-
-    with DDGS() as ddgs:
-        for query in queries:
-            try:
-                results = list(ddgs.text(query, max_results=fetch_count))
-            except Exception:
-                continue
-            for r in results:
-                text = (r.get("title", "") + " " + r.get("body", ""))
-                found = re.findall(r'\$\s*(\d{1,4}(?:,\d{3})*(?:\.\d{1,2})?)', text)
-                href = r.get("href", "").lower()
-                for f in found:
-                    val = float(f.replace(",", ""))
-                    if 1.0 <= val <= 500.0 and val not in seen:
-                        seen.add(val)
-                        sim = 0.85 if any(s in href for s in SMOKING_SOURCES) else 0.60
-                        prices.append({"price_usd": val, "similarity": sim,
-                                       "source": r.get("href", "")[:80]})
-
-    prices.sort(key=lambda x: x["price_usd"])
-
-    if size and len(prices) >= 2:
-        mid = len(prices) // 2
-        if size == "small":
-            prices = prices[:mid] or prices[:3]
-        elif size == "large":
-            prices = prices[mid:] or prices[-3:]
-
-    return prices[:6]
-
-
-def weighted_median(comparables):
-    if not comparables:
-        return None
-    sorted_c = sorted(comparables, key=lambda c: c["price_usd"])
-    total_w = sum(c.get("similarity", 1.0) for c in sorted_c)
-    cumulative = 0.0
-    for c in sorted_c:
-        cumulative += c.get("similarity", 1.0)
-        if cumulative >= total_w / 2:
-            return c["price_usd"]
-    return sorted_c[-1]["price_usd"]
 
 
 # ── Quote dataclasses ────────────────────────────────────────────────────────

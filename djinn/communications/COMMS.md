@@ -7597,3 +7597,16 @@ opencode session completed (exit 0)
 - `~/Obsidian/djinn/printer/agent/orchestrator/orchestrator.py`
 
 — Marcus
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: FairPrintAgent integration complete
+
+**What:** Integrated Marcus's `commissions/` modules as the canonical pricing engine. Replaced his Etsy scraper with DDG. Refactored `djinn-print-quote` from 678-line monolith to ~280-line CLI wrapper. De-duplicated smoking/market utils in orchestrator — imports from `commissions.price` now.
+
+**Verified:** 5/5 checks pass — smoking detection, true weighted median, brief routing, terminal table, CLI output.
+
+**Paths:** `logs/reports/2026-05-31_fairprintagent-integration.md`
+
+— Claude
+
