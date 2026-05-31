@@ -62,3 +62,18 @@ Claude's TASK-009 implementation computed `job_slug` from `job_name` before pars
 
 ### 2026-05-31 — kit command runs kit + publish-prep (Salomon)
 TASK-011 spec says response includes Drive link. `djinn-media-kit` only builds locally. Handler runs kit then publish-prep consecutively — publish-prep uploads stitch-kit/ and returns the Drive link. Single-model response abstracts both steps.
+
+### 2026-05-31 — IG resumable upload over GDrive share link (Claude)
+Meta's `upload_type=resumable` to `rupload.facebook.com` avoids needing a publicly accessible URL. GDrive share links expire and require extra rclone steps. Resumable upload is self-contained and doesn't depend on GDrive link state.
+
+### 2026-05-31 — FB captions capped at 2 sentences + 3 hashtags (Claude)
+Based on Marcus TASK-012 research: Facebook's feed algorithm penalizes hashtag-dense captions; Instagram rewards them. Platform-variant captions from the same source doc — same reel, different caption treatment per platform.
+
+### 2026-05-31 — Firecrawl over Reddit + YouTube APIs for trend signal (Claude)
+TASK-019 originally required reddit.env + youtube.env credentials. Firecrawl's fc.search() covers both platforms with the key already installed. One credential vs two, maintained externally, no rate-limit management. Marcus's TASK-015 confirmed Reddit PRAW is viable as direct alternative — keeping as fallback knowledge but not implementing.
+
+### 2026-05-31 — No self-hosted Instagram scraper (Claude, based on Marcus TASK-015)
+Maintenance burden: 3–8h/month. Failure mode: silent (returns empty data, no error). Account-flag risk on shop's main IG account. Apify free tier fits Djinn's usage ($3.60/mo within $5 free tier) with zero maintenance. Decision: Apify free tier for IG data, Firecrawl for everything else.
+
+### 2026-05-31 — djinn-style-scrape DDG vqd pattern queued for replacement (Claude)
+The 2-step vqd token extract → image search pattern is the canonical fragile-scraper antipattern. Breaks silently when DDG updates HTML. Firecrawl fc.search() is a one-call replacement. Queued as TASK-021 — not urgent but should be done before djinn-trend-agent is live, since both do similar searches.
