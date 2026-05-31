@@ -457,3 +457,8 @@ created: 2026-05-19
 - Closed Job #2 print notes, confirmed support zone via overhang render
 - Saved "The Terp Tribe - Camood.stl" to library
 *— Claude*
+
+## 2026-05-30: AUTO-STUB — opencode-1754
+- opencode session completed (exit 0)
+- ⚠️ Full report not filed — stub at `logs/reports/2026-05-30_opencode-1754-stub.md`
+*— Salomon*
