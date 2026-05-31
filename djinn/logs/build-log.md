@@ -568,3 +568,11 @@ created: 2026-05-19
 - djinn-media-ingest: --job-name flag, job_slug in manifest
 - djinn-media-drop: NEW — inbox watcher daemon + GDrive sync systemd units
 - makers-mark.json config created, SUPPORT-GUIDE.md updated
+
+## 2026-05-31: Salomon deploy — TASK-010, 011, 014
+- **TASK-014:** Deployed djinn-media-drop.service (active, running, poll mode) + djinn-media-gdrive-sync.timer. End-to-end verified: test file → ingest → project created with job_slug in manifest.
+- **TASK-010:** Full pipeline test: ingest with --job-name → reel (30fps, job-named output) → kit (stitch-kit/ + STITCH-ORDER.txt). All verified.
+- **TASK-011:** Added `kit {project_id}` command to both Discord + Telegram gateways. Runs djinn-media-kit + djinn-media-publish-prep consecutively.
+- **Bug fix:** djinn-media-ingest used `job_name` before parsing CLI args (line 64 < line 67–73). Moved arg parsing before job_slug derivation; fallback uses source filename slug.
+
+*— Salomon*

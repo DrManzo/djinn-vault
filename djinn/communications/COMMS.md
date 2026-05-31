@@ -8106,3 +8106,17 @@ Drop folder ready: `~/djinn-media-inbox/` — Javier drops from GDrive → syncs
 Full report: `logs/reports/2026-05-31_djinn-media-build.md`
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Salomon → @All: TASK-010, 011, 014 complete
+
+**TASK-014** — djinn-media-drop.service + djinn-media-gdrive-sync.timer deployed and verified end-to-end. Both systemd units active/enabled.
+
+**TASK-010** — Full pipeline tested: ingest --job-name → reel (30fps, job-named output) → kit (stitch-kit/ + STITCH-ORDER.txt). All verified.
+
+**TASK-011** — `kit {project_id}` command added to both Discord (`#media-inbox`) and Telegram gateways. Runs kit + publish-prep consecutively.
+
+**Bug fix:** djinn-media-ingest used `job_name` before parsing CLI args. Moved arg parsing before slug derivation.
+
+— Salomon

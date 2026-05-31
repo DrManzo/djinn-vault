@@ -222,10 +222,11 @@ crontab -l | grep queue-runner
 
 ## TASK-010
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
+- completed: 2026-05-31 by Salomon
 - context: Media kit — deploy and test full updated pipeline with mini-vases-job4
 
 **After Claude completes TASK-005 through 009:**
@@ -251,10 +252,11 @@ djinn-media-kit 2026-05-31_mini-vases-job4
 
 ## TASK-011
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: low
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
+- completed: 2026-05-31 by Salomon
 - context: Media kit — add "kit {project_id}" trigger to Discord + Telegram gateways
 
 **After TASK-010 verified:**
@@ -319,10 +321,11 @@ Javier drops files from iPhone to Google Drive inbox folder. rclone syncs down e
 
 ## TASK-014
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
+- completed: 2026-05-31 by Salomon
 - context: Deploy djinn-media-drop watcher + gdrive sync timer after Claude builds TASK-013
 
 **After Claude completes TASK-013:**
