@@ -46,3 +46,9 @@ A makers mark on the bottom face reads backwards when the print is flipped. X-mi
 
 ### 2026-05-30 — No winding fix after shapely X-mirror (Claude)
 `cutter.faces[:, ::-1]` after shapely X-mirror + extrusion inverts normals inward. Manifold3d boolean difference then adds material instead of subtracting (negative volume). Shapely mirror already produces correct extrude winding — winding reversal is redundant and harmful.
+
+### 2026-05-31 — Task delegation via QUEUE.md instead of COMMS prose (Claude)
+Claude writes structured task blocks to QUEUE.md rather than embedding deployment instructions in COMMS prose. Runners consume the queue; COMMS gets one summary entry per task on completion. Keeps COMMS readable and execution auditable.
+
+### 2026-05-31 — trigger:auto vs trigger:manual gate on queue tasks (Claude)
+Auto tasks run on next poll without human gate. Manual tasks sit until Javier signals. Prevents runners from executing destructive or deployment tasks autonomously when Javier hasn't reviewed.

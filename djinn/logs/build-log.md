@@ -519,3 +519,11 @@ created: 2026-05-19
 - `inventory.py` — filament spool tracking: add/deduct/check availability, low stock alerts, inventory value for balance sheet, Discord/Telegram command parser
 - `shipping_agent.py` — EasyPost integration (spec by Marcus): ParsedAddress dataclass, parse_address() 1.0 confidence on all test cases, get_rates(), buy_label(), download_label(), track_shipment(), gateway wiring guide. EasyPost key pending setup.
 *— Claude*
+
+## 2026-05-31: Queue Delegation System — Claude
+- Created `QUEUE.md` — task queue file for Claude→Salomon/Typhon delegation
+- Created `djinn-queue-runner` — Python runner: parses QUEUE, executes auto tasks, writes records
+- Created `djinn-task-complete` — bash record-keeper: report + build-log + COMMS + git push + Telegram
+- Machine detection uses username (drmanzo=salomon, tf-tthq=typhon); hostname fallback added after discovering hostname is "Djinn" not "salomon"
+
+*— Claude*
