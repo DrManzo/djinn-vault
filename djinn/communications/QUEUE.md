@@ -696,3 +696,272 @@ mkdir -p ~/Obsidian/djinn/social/analytics
 ```
 
 **Report back:** COMMS.md — confirm timer active, dirs created, dry-run or syntax check passes.
+
+---
+
+## TASK-019
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Phase 3 — build djinn-trend-agent: multi-source trend poller → TREND-SIGNAL.md + HASHTAG-BANK.md
+
+**Goal:** Poll Reddit, YouTube, Printables RSS, and Apify (Instagram data) every 6 hours. Feed raw results to Ollama phi4:14b. Write synthesized trend signal that Layer 2 caption agent reads before generating content.
+
+**Files:**
+- `/home/drmanzo/.local/bin/djinn-trend-agent`
+- `~/.config/systemd/user/djinn-trend-agent.service`
+- `~/.config/systemd/user/djinn-trend-agent.timer` (every 6h: `OnCalendar=*-*-* 00,06,12,18:05:00`)
+
+**Config files (create stubs, chmod 600, never git-tracked):**
+- `~/.config/djinn/apify.env` → `APIFY_API_TOKEN=`
+- `~/.config/djinn/reddit.env` → `REDDIT_CLIENT_ID=` + `REDDIT_CLIENT_SECRET=`
+- `~/.config/djinn/youtube.env` → `YOUTUBE_API_KEY=`
+
+**Output files:**
+- `~/Obsidian/djinn/social/TREND-SIGNAL.md` — written every 6h run
+- `~/Obsidian/djinn/social/HASHTAG-BANK.md` — written on Sunday runs only (weekly deep audit)
+- `~/.local/share/djinn-media/media-context.json` — updated with `trending_topics`, `recommended_hook_style`, `hashtag_candidates`, `format_signals`
+
+**Dependencies (pip install):** `praw`, `google-api-python-client`, `requests` (already present)
+
+---
+
+**Source 1 — Apify Instagram scraper:**
+```python
+# POST to Apify run-sync endpoint, wait for result
+url = f"https://api.apify.com/v2/acts/apify~instagram-hashtag-scraper/run-sync-get-dataset-items"
+payload = {
+    "hashtags": ["3dprinting", "functionalart", "makersmark"],
+    "resultsLimit": 9,
+}
+headers = {"Authorization": f"Bearer {APIFY_TOKEN}"}
+r = requests.post(url, json=payload, headers=headers, timeout=120)
+# Returns list of posts: each has caption, likesCount, commentsCount, hashtags[]
+```
+Extract: captions (first 100 chars), top hashtags by frequency, avg likes.
+If `APIFY_API_TOKEN` is empty → skip this source silently (don't crash).
+
+**Source 2 — Reddit PRAW:**
+```python
+import praw
+reddit = praw.Reddit(client_id=..., client_secret=..., user_agent="djinn-trend-agent/1.0 by u/djinn_bot")
+subreddits = ["3Dprinting", "glassheads", "PrintedMinis"]
+for sub in subreddits:
+    top = list(reddit.subreddit(sub).top(time_filter="day", limit=10))
+    # extract: title, score, upvote_ratio, num_comments
+```
+If `REDDIT_CLIENT_ID` is empty → skip silently.
+
+**Source 3 — YouTube Data API v3:**
+```python
+from googleapiclient.discovery import build
+yt = build("youtube", "v3", developerKey=YOUTUBE_KEY)
+for query in ["3D printing maker", "functional art craft"]:
+    res = yt.search().list(
+        part="snippet", q=query, type="video",
+        videoDuration="short", order="viewCount",
+        publishedAfter=(datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        maxResults=5
+    ).execute()
+    # extract: title, description, tags (from contentDetails)
+```
+If `YOUTUBE_API_KEY` is empty → skip silently.
+
+**Source 4 — Printables RSS (always runs, no key needed):**
+```python
+import xml.etree.ElementTree as ET
+r = requests.get("https://www.printables.com/rss", timeout=15)
+root = ET.fromstring(r.content)
+items = root.findall(".//item")[:10]
+# extract: title, description, category
+```
+No credentials. This source always runs as the fallback floor.
+
+---
+
+**Ollama synthesis layer:**
+
+After collecting raw data from all sources, build a context string and call Ollama:
+
+```python
+import subprocess, json
+
+prompt = f"""You are the trend intelligence layer for Djinn Media, a 3D print shop social media pipeline (Typhon's Forge).
+
+Raw trend data collected {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}:
+
+{combined_raw_text}
+
+Extract the following and respond ONLY with valid JSON — no explanation, no markdown, just the JSON object:
+{{
+  "trending_topics": ["<3-5 themes resonating in maker/3D printing/cannabis accessory communities>"],
+  "recommended_hook_style": "<one sentence: what hook format is working right now>",
+  "hashtag_candidates": ["<10-15 Instagram-safe hashtags — NEVER include #weed #cannabis #420 #marijuana>"],
+  "format_signals": "<what visual format is performing: timelapse, reveal, POV, text-on-screen, etc.>",
+  "platform_notes": "<any specific IG or FB observations this week>"
+}}"""
+
+result = subprocess.run(
+    ["ollama", "run", "phi4:14b", prompt],
+    capture_output=True, text=True, timeout=120
+)
+# Parse JSON from result.stdout, strip any surrounding text
+```
+
+If Ollama fails or JSON parse fails → keep previous TREND-SIGNAL.md unchanged, send Telegram alert, exit 0 (don't kill the timer).
+
+---
+
+**TREND-SIGNAL.md format** (overwrite every run):
+```markdown
+# Trend Signal — {YYYY-MM-DD HH:MM UTC}
+_Updated by djinn-trend-agent — sources: {which sources ran}_
+
+## Trending Topics
+{trending_topics as bullet list}
+
+## Hook Style
+{recommended_hook_style}
+
+## Format Signal
+{format_signals}
+
+## Hashtag Candidates
+{hashtag_candidates as space-separated line — safe to paste into caption}
+
+## Platform Notes
+{platform_notes}
+
+---
+_Layer 2 caption and hashtag agents read this file before generating content._
+```
+
+**HASHTAG-BANK.md** (Sunday runs only — append/overwrite weekly section):
+Write a dated section with the full hashtag_candidates list + source attribution. Accumulates over time as a historical record of what was trending each week.
+
+**media-context.json** — merge the Ollama output into the existing file:
+```python
+ctx = {}
+if CONTEXT_JSON.exists():
+    ctx = json.loads(CONTEXT_JSON.read_text())
+ctx.update({
+    "updated_at": now_iso,
+    "trending_topics": result["trending_topics"],
+    "recommended_hook_style": result["recommended_hook_style"],
+    "recommended_format": result["format_signals"],
+    "platform_notes": result["platform_notes"],
+})
+# NOTE: do NOT overwrite job_hashtags — that's written by caption agent per job
+CONTEXT_JSON.write_text(json.dumps(ctx, indent=2))
+```
+
+**Monitoring — stale signal detection:**
+After writing TREND-SIGNAL.md, check if `djinn-social-analyst` has also written analytics recently (check mtime of `djinn/social/analytics/` newest file). If newest analytics file is > 48h old, append a warning line to TREND-SIGNAL.md: `⚠️ Own analytics stale — djinn-social-analyst may not have run.`
+
+**Git + Telegram:**
+```bash
+git -C ~/Obsidian add djinn/social/TREND-SIGNAL.md djinn/social/HASHTAG-BANK.md
+git -C ~/Obsidian commit -m "trend: signal update {date} {HH:MM}"
+git -C ~/Obsidian push
+```
+Telegram: `🔮 Trend signal updated — {n} sources, {len(topics)} topics, {len(hashtags)} hashtag candidates`
+
+**Graceful degradation:** If ALL sources fail (no API keys set, all network errors) → do not overwrite TREND-SIGNAL.md. Send Telegram: `⚠️ djinn-trend-agent: all sources failed — signal unchanged`. Exit 0.
+
+**Success criteria:**
+```bash
+# Install deps
+pip install praw google-api-python-client --quiet
+
+# Create config stubs
+for f in apify.env reddit.env youtube.env; do
+  touch ~/.config/djinn/$f && chmod 600 ~/.config/djinn/$f
+done
+
+# Syntax check
+python3 -m py_compile ~/.local/bin/djinn-trend-agent && echo OK
+
+# Printables RSS runs without any API key — smoke test:
+djinn-trend-agent --sources printables --dry-run
+# Should print extracted Printables titles and exit 0
+
+# Timer active:
+systemctl --user list-timers | grep trend-agent
+```
+
+Add `--sources` flag: comma-separated list of `apify,reddit,youtube,printables` (default: all). `--dry-run`: collect data, print synthesis input, skip Ollama and file writes.
+
+**Report back:** COMMS.md — sources that ran successfully, sample trending_topics extracted, Printables smoke test output, timer status.
+
+---
+
+## TASK-020
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Phase 3 — wire TREND-SIGNAL.md + HASHTAG-BANK.md into djinn-media-publish-prep caption generation
+
+**Goal:** The caption agent in `djinn-media-publish-prep` currently generates captions without knowing what's trending. Wire in TREND-SIGNAL.md and HASHTAG-BANK.md so captions reflect current hooks, formats, and hashtags.
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-publish-prep` (modify existing)
+
+**What to find in the file:** The section that calls Ollama to generate a caption. It currently passes job metadata (project_id, notes, media_type) to the model. Find that call.
+
+**Changes:**
+
+1. Before the Ollama caption call, read context:
+```python
+TREND_FILE   = Path.home() / "Obsidian/djinn/social/TREND-SIGNAL.md"
+HASHTAG_BANK = Path.home() / "Obsidian/djinn/social/HASHTAG-BANK.md"
+CONTEXT_JSON = Path.home() / ".local/share/djinn-media/media-context.json"
+
+trend_context = TREND_FILE.read_text() if TREND_FILE.exists() else "No trend signal available."
+hashtag_section = ""
+if HASHTAG_BANK.exists():
+    # pull only the most recent weekly section (last 30 lines)
+    lines = HASHTAG_BANK.read_text().splitlines()
+    hashtag_section = "\n".join(lines[-30:])
+```
+
+2. Inject into the Ollama prompt as a context block:
+```
+## Current Trend Signal
+{trend_context[:800]}  ← truncate to keep prompt lean
+
+## Recent Hashtag Bank
+{hashtag_section[:400]}
+```
+
+3. Update the system prompt instruction to use this context:
+```
+Use the hook style and format from the trend signal above.
+Select hashtags from the hashtag bank that are relevant to this job.
+Do NOT use #weed #cannabis #420 #marijuana or any variant.
+```
+
+4. Also write `job_hashtags` into media-context.json after caption generation:
+```python
+# After Ollama returns hashtags for this job:
+ctx = {}
+if CONTEXT_JSON.exists():
+    try: ctx = json.loads(CONTEXT_JSON.read_text())
+    except: pass
+ctx.setdefault("job_hashtags", {})[job_slug] = selected_hashtags
+CONTEXT_JSON.write_text(json.dumps(ctx, indent=2))
+```
+This makes `djinn-media-publish` find the right hashtags in media-context.json.
+
+**If TREND-SIGNAL.md doesn't exist yet** (trend agent not run yet): proceed normally with generic caption — do not crash. Log: `[publish-prep] No trend signal — generating generic caption`.
+
+**Success criteria:**
+```bash
+python3 -m py_compile ~/.local/bin/djinn-media-publish-prep && echo OK
+# Then: djinn-media-publish-prep {any_project_id} --dry-run
+# Output should include "trend signal loaded" or "no trend signal" line
+```
+
+**Report back:** COMMS.md — confirm caption generation now references trend signal, show sample prompt snippet with context injected.
