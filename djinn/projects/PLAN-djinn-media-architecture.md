@@ -198,17 +198,24 @@ Added to research brief as Question 8:
 
 ## Build Order
 
-| Phase | What | Who |
-|-------|------|-----|
-| **Phase 0 (now)** | Marcus research → TASK-012 | Marcus / Javier |
-| **Phase 1** | Mobile stitch kit (TASK-005–011) | Claude + Salomon |
-| **Phase 2** | Discord capture agent | Claude + Salomon |
-| **Phase 3** | Layer 1 agents (trend, hashtag live, style) | Claude (spec) + Salomon (deploy) |
-| **Phase 4** | Layer 1 → Layer 2 wiring (media-context.json) | Claude + Salomon |
-| **Phase 5** | Full Discord → post pipeline live | Salomon ops |
-| **Future** | Javier footage input path | As needed |
+| Phase | What | Spec | Build | Deploy |
+|-------|------|------|-------|--------|
+| **Phase 0** | Marcus research (TASK-012, 015) | Javier triggers | Marcus | — |
+| **Phase 1** | Mobile stitch kit (TASK-005–011) | Claude | Salomon | Salomon ✅ done |
+| **Phase 2** | Meta Graph API publish function | Claude | Salomon | Salomon |
+| **Phase 2** | Token refresh cron | Claude | Salomon | Salomon |
+| **Phase 2** | Daily analytics pull (`djinn-social-analyst`) | Claude | Salomon | Salomon |
+| **Phase 3** | `djinn-trend-agent` (Layer 1, Apify or DIY per TASK-015) | Claude (after Marcus) | Salomon | Salomon |
+| **Phase 3** | `djinn-hashtag-agent` live (replaces static bank) | Claude | Salomon | Salomon |
+| **Phase 3** | `djinn-style-agent` | Claude | Salomon | Salomon |
+| **Phase 4** | Layer 1 → Layer 2 wiring (media-context.json) | Claude | Salomon | Salomon |
+| **Phase 5** | Discord capture agent | Claude | Salomon | Salomon |
+| **Phase 6** | Full Discord → post pipeline live | — | — | Salomon ops |
+| **Future** | Javier footage → full auto post | As needed | | |
 
-Phase 1 is already queued and ready to build. Phases 2–4 wait for Marcus research results.
+**Claude's job per phase:** read Marcus research → write spec tasks to QUEUE → review Salomon's diff → approve or write correction task.
+**Salomon's job per phase:** build from spec → test → push → report in COMMS.
+**Phase 2 unblocked now.** Phase 3 waits for TASK-015 (DIY trend stack research).
 
 ---
 
