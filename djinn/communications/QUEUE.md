@@ -7,16 +7,16 @@ related: [[COMMS]] | [[PROTOCOL]] | [[build-log]]
 
 # QUEUE — Djinn Task Queue
 
-Claude (or Javier) writes tasks here. Salomon and Typhon pull and execute.
+Claude, Marcus, or Javier writes tasks here. Salomon, Typhon, Marcus, and Claude pull and execute.
 
 ## Rules
 - **Append only** — never delete entries. Mark `status: done` or `status: failed`.
-- `trigger: auto` — runner picks up on next poll (cron every 5 min)
-- `trigger: manual` — runner skips; Javier must send explicit signal
+- `trigger: auto` — runner picks up on next poll (cron every 5 min) — Salomon/Typhon only
+- `trigger: manual` — Javier must send explicit signal — always used for Marcus and Claude tasks
 - Runner: `djinn-queue-runner` on Salomon and Typhon
-- On completion: runner calls `djinn-task-complete TASK-NNN "summary"` automatically
+- On completion: runner calls `djinn-task-complete TASK-NNN "summary"` automatically (Salomon/Typhon); Marcus and Claude mark their own tasks done and append a COMMS entry
 
-## Task Format
+## Task Format — Salomon / Typhon
 
 ```
 ## TASK-NNN
@@ -24,7 +24,7 @@ Claude (or Javier) writes tasks here. Salomon and Typhon pull and execute.
 - status: pending | in_progress | done | failed
 - priority: critical | high | normal | low
 - trigger: auto | manual
-- created: YYYY-MM-DD by Claude|Javier
+- created: YYYY-MM-DD by Claude|Javier|Marcus
 - context: one-line description of what and why
 
 **Commands:**
@@ -32,6 +32,44 @@ Claude (or Javier) writes tasks here. Salomon and Typhon pull and execute.
 command one
 command two
 ```
+```
+
+## Task Format — Marcus
+
+```
+## TASK-NNN
+- assigned_to: marcus
+- status: pending | in_progress | done | failed
+- priority: critical | high | normal | low
+- trigger: manual
+- created: YYYY-MM-DD by Claude|Javier
+- context: one-line description
+
+**Brief:**
+[What to research or produce — specific questions, scope, required depth]
+
+**Output expected:**
+`djinn/research/marcus/TASK-NNN_slug.md`
+
+**Deliver to:** Claude (reads via Read tool) | Javier (key findings in COMMS)
+```
+
+## Task Format — Claude
+
+```
+## TASK-NNN
+- assigned_to: claude
+- status: pending | in_progress | done | failed
+- priority: critical | high | normal | low
+- trigger: manual
+- created: YYYY-MM-DD by Marcus|Javier
+- context: one-line description
+
+**Brief:**
+[What Claude needs to review, design, or decide — specific scope]
+
+**Input:** `path/to/relevant/file` or COMMS context
+**Output expected:** session report + COMMS entry + any file changes pushed
 ```
 
 ---

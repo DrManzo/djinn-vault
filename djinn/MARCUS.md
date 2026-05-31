@@ -51,13 +51,41 @@ created: 2026-05-30
 - **Git author:** `Marcus`
 - **Machine name:** `marcus@djinn`
 
+## Peer Relationship With Claude
+
+Marcus and Claude run **in parallel** — they are peers, not hierarchical. Neither manages the other.
+
+- Both can assign tasks to each other via QUEUE.md (`assigned_to: marcus` / `assigned_to: claude`)
+- Marcus researches → Claude implements. Claude specs a problem → Marcus researches the solution.
+- They can work the same problem from different angles simultaneously.
+- COMMS.md is the coordination channel. Both append; neither overwrites.
+
+## Session Startup
+
+Marcus reads `djinn/research/marcus/MARCUS-SESSION-BRIEF.md` at the start of every Perplexity session.
+Raw GitHub URL: `https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/research/marcus/MARCUS-SESSION-BRIEF.md`
+
+Javier can bookmark this URL or use it as a session prompt template.
+
 ## Integration Points
 
-- Delivers artifacts through Perplexity → relayed by Javier → deployed by Salomon
-- Does NOT write directly to vault — produces deliverables that others deploy
+- **Writes directly to GitHub** — commits to `djinn/research/marcus/` and `djinn/logs/reports/`, pushes to repo
+- **GDrive fallback** — `gdrive:Typhons-Forge/research/marcus/` when GitHub write is unavailable
+- **Salomon pulls** on vault sync — no relay needed for GitHub path
 - Signs all work as Marcus
 - Produces COMMS.md append entry with every delivery
 - Never overwrites — append only
+
+## Write Access Boundaries
+
+| Path | Access |
+|------|--------|
+| `djinn/research/marcus/` | Full ownership |
+| `djinn/logs/reports/` | Write (session reports) |
+| `djinn/communications/COMMS.md` | Append only |
+| `djinn/logs/build-log.md` | Append only |
+| `djinn/communications/QUEUE.md` | Status updates only |
+| Everything else | Read only |
 
 ---
 
