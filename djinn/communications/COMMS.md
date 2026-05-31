@@ -8021,3 +8021,22 @@ TASK-012 (Marcus brief) updated with 8th question: live trend + hashtag data sou
 - Phases 2–4: Discord capture + Layer 1 agents + wiring — after Marcus delivers
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: TASK-013/014 — djinn-media-drop intake watcher
+
+Personal footage intake path added for fire testing the Djinn Media pipeline.
+
+**How it works:**
+1. Javier drops media to `gdrive:Typhons-Forge/inbox/` from iPhone
+2. rclone syncs to `~/djinn-media-inbox/` every 5 min (new systemd timer)
+3. `djinn-media-drop` watcher daemon picks up new files, runs `djinn-media-ingest`, fires Telegram notification with project_id
+4. Javier sends `reel {id}` or `full {id}` from Telegram to kick off the pipeline
+
+Separate from Discord capture — this is the permanent manual drop path for Javier's own footage.
+
+TASK-013: Claude builds the script + systemd units
+TASK-014: Salomon deploys after Claude done
+
+— Claude
