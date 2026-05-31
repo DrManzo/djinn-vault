@@ -428,3 +428,74 @@ The existing media pipeline already handles: video ingest → color grading → 
 Structured report with one section per question. For each section: current state, key findings, specific recommendations or integrations to pursue, and any warnings/gotchas. Cite sources. Flag anything time-sensitive (API changes, policy updates).
 
 **Deliver as:** Write markdown artifact directly to `djinn/research/marcus/TASK-012_djinn-media-social.md` in `github.com/DrManzo/djinn-vault` and commit. Fallback: write to `gdrive:Typhons-Forge/research/marcus/TASK-012_djinn-media-social.md`. Claude reads on demand — do NOT paste into chat.
+
+---
+
+## TASK-015
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Research — can we replace Apify + Flick with a self-built zero-cost trend intelligence stack? No subscriptions, Djinn maintains it.
+
+**How to run:** Javier pastes the brief below into Perplexity. Marcus writes output to `djinn/research/marcus/TASK-015_diy-trend-stack.md` in GitHub vault and commits. Do NOT paste into chat.
+
+---
+
+### Marcus Research Brief — DIY Trend Intelligence Stack
+
+**Context:**
+TASK-012 recommended Apify ($49/mo) + Flick ($30/mo) = $79/mo to power Djinn Media's Layer 1 trend intelligence. Javier wants to know if we can replace all of that with a self-built, self-hosted stack that costs nothing to run and is maintained by us — no third-party subscriptions.
+
+The system is `djinn-trend-agent`: a daemon running every 6 hours on Salomon (Linux, Python, Ollama available), writing to `djinn/social/TREND-SIGNAL.md` and `djinn/social/HASHTAG-BANK.md`, which the Layer 2 caption agent reads before generating post content.
+
+The question: **can a custom Python scraper + free public data sources replace Apify's Instagram scraper and Flick's hashtag tool entirely, with acceptable reliability and reasonable maintenance burden?**
+
+---
+
+**Research questions — go deep on each:**
+
+1. **Self-hosted Instagram scraping in 2026**
+   - What open-source Python libraries can scrape Instagram public data (hashtag pages, trending Reels by keyword, post engagement) without an official API key?
+   - Current state of: `instaloader`, `instagramy`, `instagram-scraper`, `pyinstagram`, and any 2025–2026 forks or replacements
+   - Which can reliably extract: top posts for a given hashtag, engagement metrics (likes/comments/saves where visible), video metadata, caption text?
+   - How often do these break when Meta updates its frontend? Realistic maintenance cadence — days, weeks, or months between fixes?
+   - Anti-scraping posture of Instagram in 2026 — rate limits, CAPTCHA, IP bans, cookie requirements. What does a responsible scraping setup look like?
+   - Is a headless-browser approach (Playwright, Selenium) more stable than requests-based scrapers?
+
+2. **Alternative public data sources for trend signal — not Instagram**
+   - Can we get equivalent trend signal from platforms that are more scrape-friendly?
+   - **Reddit** — r/3Dprinting, r/PrintedMinis, r/weed, r/glassheads: Reddit's official API (PRAW) — what's accessible free in 2026? Post velocity, upvote ratio, comment velocity as trend signal.
+   - **YouTube Data API** (free tier: 10,000 units/day) — can we pull trending shorts/videos by keyword ("3D printing", "functional art", "maker")? Is this a useful proxy for what Instagram will boost next?
+   - **TikTok** — usable public API or scraper for trending content by keyword in 2026? Is TikTok trend signal a leading indicator for Instagram performance?
+   - **Google Trends** — `pytrends` library: keyword velocity for "3D printed", "functional glass", "puffco" etc. How reliable in 2026?
+   - **RSS / web scraping** — Hackaday, Printables, Makerworld trending: do these expose trend data via RSS or scrapeable HTML?
+   - Which combination of these sources gives signal quality equivalent to Apify's Instagram scraper?
+
+3. **Self-hosted hashtag intelligence — replacing Flick**
+   - Flick's core value: hashtag difficulty, volume estimate, average engagement per hashtag. Can we build this?
+   - From Instagram public data: can we infer hashtag volume and engagement by scraping the hashtag page's top posts and computing average likes/comments?
+   - Is this stable enough for a weekly hashtag audit, or does Meta block hashtag page scraping specifically?
+   - Any open-source hashtag analytics tools that already do this?
+
+4. **Realistic maintenance burden**
+   - For a self-built Instagram scraper: what's the realistic failure rate? Hours/month to maintain against Meta's anti-bot updates?
+   - Compare: Apify handles all maintenance for $49/mo vs self-built at $0/mo but X hours/month. What is X, realistically?
+   - What's the failure mode — silent (worse) or loud with clear errors?
+   - Hybrid option: thin wrapper around Apify's free tier (1,000 actor calls/mo). Does Djinn's actual query volume (4 runs/day × 30 days = 120 runs/month) fit in the free tier?
+
+5. **Apify free tier analysis**
+   - What does Apify's free tier actually include in 2026?
+   - Does 120 runs/month fit? If yes, is the answer simply: use Apify free tier + self-maintain a fallback scraper?
+
+6. **Build recommendation**
+   - Optimal zero-cost, self-maintained trend stack for Djinn Media Layer 1
+   - Concrete architecture: which sources, which libraries, query cadence, output format
+   - Realistic risks and mitigations
+   - Estimated build time (hours) and ongoing maintenance time per month
+
+**Output format:**
+Structured report, one section per question. Be specific — name actual library versions, actual API endpoints, actual free tier limits. Flag anything likely to change in the next 6 months. Cite sources.
+
+**Deliver as:** Write markdown artifact directly to `djinn/research/marcus/TASK-015_diy-trend-stack.md` in `github.com/DrManzo/djinn-vault` and commit. Fallback: `gdrive:Typhons-Forge/research/marcus/TASK-015_diy-trend-stack.md`. Claude reads on demand — do NOT paste into chat.
