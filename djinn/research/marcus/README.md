@@ -15,13 +15,28 @@ All Perplexity (Marcus) research outputs live here. One file per task.
 
 ## How the workflow runs
 
-1. Claude writes a research brief → QUEUE.md as TASK-NNN (assigned_to: marcus)
-2. Javier pastes the brief into Perplexity
-3. Marcus produces a markdown artifact
-4. Javier saves it here as `TASK-NNN_slug.md` and pushes vault (`git add -A && git commit && git push`)
-5. Claude reads the file on demand with the Read tool — not in context until needed
+Marcus has access to the GitHub vault repo (`github.com/DrManzo/djinn-vault`) and optionally Google Drive.
 
-This keeps token cost down and creates a permanent record.
+**Primary path — GitHub direct:**
+1. Claude writes research brief → QUEUE.md as TASK-NNN, pushes to GitHub
+2. Javier triggers Marcus (Perplexity) and points him at the QUEUE.md task or the specific brief
+3. Marcus reads the brief from GitHub, runs the research
+4. Marcus writes output directly to `djinn/research/marcus/TASK-NNN_slug.md` in the repo and commits
+5. Salomon pulls on next vault sync (`git pull`)
+6. Claude reads the file on demand via Read tool — never in chat
+
+**Fallback path — Google Drive:**
+1. Same brief trigger
+2. Marcus writes output to `gdrive:Typhons-Forge/research/marcus/TASK-NNN_slug.md`
+3. Salomon rclone-syncs it into vault
+4. Claude reads on demand
+
+**What Marcus should NOT touch in the repo:**
+- `communications/` — COMMS, QUEUE, HEARTBEAT (operational, Claude/Salomon owned)
+- `logs/` — build-log, decision-log, reports (append-only by agents)
+- Anything outside `research/marcus/`
+
+Marcus writes only to `djinn/research/marcus/`. Everything else is read-only for him.
 
 ---
 
