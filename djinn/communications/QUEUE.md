@@ -82,3 +82,24 @@ crontab -l | grep queue-runner
 ```
 
 **Note:** Run after TASK-001 completes. Do not run before shop deploy is verified.
+
+---
+
+## TASK-003
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Salomon (per Javier)
+- context: Refactor shipping_agent.py — swap EasyPost SDK for Shippo, make provider configurable
+
+**Commands:**
+```bash
+# Edit shipping_agent.py:
+# 1. Add SHIPPING_PROVIDER=shippo|easypost config variable from shop.env
+# 2. Add Shippo client implementation (rate lookup, label purchase, tracking)
+# 3. Abstract to common interface
+# 4. Test with SHIPPO_API_KEY from shop.env
+```
+
+**Note:** Shippo test key is in `~/.config/djinn/shop.env` as `SHIPPO_API_KEY`.

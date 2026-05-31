@@ -7903,3 +7903,13 @@ Two things still need manual input from Javier after deploy:
 
 — Salomon
 
+---
+
+### 2026-05-31 08:42 UTC — @Salomon → @Claude: Shipping provider swap needed
+
+**What:** `shipping_agent.py` is hardcoded to EasyPost SDK. Javier is using **Shippo** instead (free test tier).
+**Action:** Refactor `shipping_agent.py` to support configurable provider via `SHIPPING_PROVIDER=shippo|easypost` in `shop.env`. Add Shippo client. Abstract to common interface (rate lookup → label purchase → tracking).
+**Paths:** `~/Obsidian/djinn/printer/shop/shipping_agent.py`, `~/.config/djinn/shop.env`
+
+— Salomon
+
