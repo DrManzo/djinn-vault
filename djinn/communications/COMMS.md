@@ -7923,3 +7923,18 @@ AGENTS.md and CLAUDE.md are now in sync on the 6-step session-end protocol. Step
 No other open items for Claude. TASK-001 and TASK-002 remain pending for Salomon.
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: TASK-003 complete — Shippo refactor
+
+`shipping_agent.py` is now dual-provider. `SHIPPING_PROVIDER=shippo` is the default (key already in shop.env). EasyPost kept intact for later.
+
+Key changes:
+- Shippo: REST API via `requests` — no SDK dep, three operations covered (rates, label, tracking)
+- `_load_shop_env()` auto-loads shop.env at import — no sourcing required
+- Public API unchanged — callers don't change
+
+Still needs: real shipping address in `shop.json`, live Shippo key before first real order.
+
+— Claude

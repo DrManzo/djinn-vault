@@ -1,6 +1,9 @@
 """
-shipping_agent.py — EasyPost shipping integration for Djinn Shop.
+shipping_agent.py — Multi-provider shipping integration for Djinn Shop.
 Spec by Marcus (Perplexity). Implementation by Claude.
+
+Providers: shippo (default) | easypost
+Set SHIPPING_PROVIDER in shop.env to switch.
 
 Handles: address parsing + verification, rate lookup, label purchase,
 label download, tracking, reporting.
@@ -21,7 +24,7 @@ import datetime
 import pathlib
 import warnings
 import requests
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import Optional
 
 _SHOP    = pathlib.Path(__file__).parent
@@ -32,11 +35,31 @@ for p in [str(_PRINTER), str(_SHOP)]:
 
 from shop.db import get_db, init_db, get_order, update_order_status, decrypt
 
+
+# ── Load shop.env before reading config ───────────────────────────────────────
+def _load_shop_env():
+    shop_env = pathlib.Path.home() / ".config/djinn/shop.env"
+    if not shop_env.exists():
+        return
+    for line in shop_env.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        key = key.strip()
+        if key not in os.environ:
+            os.environ[key] = val.strip()
+
+_load_shop_env()
+
+
 # ── Config ────────────────────────────────────────────────────────────────────
-EP_API_KEY    = os.environ.get("EASYPOST_API_KEY", "")
-TEST_MODE     = os.environ.get("EASYPOST_TEST_MODE", "false").lower() == "true"
-LABELS_DIR    = pathlib.Path.home() / ".local/share/djinn-shop/labels"
-SHOP_CFG_PATH = pathlib.Path.home() / ".config/djinn/shop.json"
+SHIPPING_PROVIDER = os.environ.get("SHIPPING_PROVIDER", "shippo").lower()
+EP_API_KEY        = os.environ.get("EASYPOST_API_KEY", "")
+SHIPPO_API_KEY    = os.environ.get("SHIPPO_API_KEY", "")
+LABELS_DIR        = pathlib.Path.home() / ".local/share/djinn-shop/labels"
+SHOP_CFG_PATH     = pathlib.Path.home() / ".config/djinn/shop.json"
+SHIPPO_BASE       = "https://api.goshippo.com"
 
 TG_TOKEN      = os.environ.get("DJINN_TG_TOKEN",
                                 "7962428973:AAHzCibu8E0RDDaRF3eHGA7WcOEqMbypOVI")
@@ -48,18 +71,21 @@ G_TO_OZ            = 0.035274
 
 # Box tiers by print weight (grams)
 BOX_TIERS = [
-    (100,  6.0, 4.0, 3.0),   # < 100g
-    (300,  8.0, 6.0, 4.0),   # 100–300g
-    (float("inf"), 12.0, 8.0, 6.0),  # > 300g
+    (100,  6.0, 4.0, 3.0),
+    (300,  8.0, 6.0, 4.0),
+    (float("inf"), 12.0, 8.0, 6.0),
 ]
 
 
 # ── Error types ───────────────────────────────────────────────────────────────
-class EasyPostError(Exception):
+class ShippingError(Exception):
     def __init__(self, status_code: int, error_code: str, message: str):
         self.status_code = status_code
         self.error_code  = error_code
         super().__init__(message)
+
+EasyPostError = ShippingError  # backward compat alias
+ShippoError   = ShippingError
 
 
 class AddressParseWarning(UserWarning):
@@ -74,17 +100,17 @@ class AddressVerificationError(Exception):
 @dataclass
 class ParsedAddress:
     raw_input:        str
-    name:             str          = ""
+    name:             str           = ""
     company:          Optional[str] = None
-    street1:          str          = ""
+    street1:          str           = ""
     street2:          Optional[str] = None
-    city:             str          = ""
-    state:            str          = ""
-    zip5:             str          = ""
+    city:             str           = ""
+    state:            str           = ""
+    zip5:             str           = ""
     zip4:             Optional[str] = None
-    country:          str          = "US"
-    parse_confidence: float        = 0.0
-    parse_errors:     list         = field(default_factory=list)
+    country:          str           = "US"
+    parse_confidence: float         = 0.0
+    parse_errors:     list          = field(default_factory=list)
 
 
 # ── State normalization ───────────────────────────────────────────────────────
@@ -113,16 +139,12 @@ def normalize_state(raw: str) -> Optional[str]:
 
 
 def parse_address(raw: str, name: str = "") -> ParsedAddress:
-    """
-    Parse freeform US address string into ParsedAddress.
-    Pure local parsing — no API calls.
-    """
+    """Parse freeform US address string into ParsedAddress. Pure local — no API calls."""
     addr = ParsedAddress(raw_input=raw, name=name)
     text = raw.strip().replace("\n", ", ")
     errors = []
     clean_fields = 0
 
-    # ZIP
     zip_m = re.search(r'(\d{5})(?:-(\d{4}))?', text)
     if zip_m:
         addr.zip5 = zip_m.group(1)
@@ -132,14 +154,12 @@ def parse_address(raw: str, name: str = "") -> ParsedAddress:
     else:
         errors.append("zip5")
 
-    # State
     state_m = re.search(r'\b([A-Z]{2})\b', text)
     if state_m and state_m.group(1) in VALID_STATES:
         addr.state = state_m.group(1)
         text = text[:state_m.start()].strip(", ") + text[state_m.end():]
         clean_fields += 1
     else:
-        # Try full name
         for name_full, abbr in STATE_ABBREVS.items():
             if name_full in text.lower():
                 addr.state = abbr
@@ -149,30 +169,25 @@ def parse_address(raw: str, name: str = "") -> ParsedAddress:
         else:
             errors.append("state")
 
-    # Split remaining on commas
     parts = [p.strip().strip(",") for p in text.split(",") if p.strip()]
 
-    # Street: part containing a number at the start
     for i, part in enumerate(parts):
         if re.match(r'^\d+\s', part):
             addr.street1 = part
             parts.pop(i)
             clean_fields += 1
-            # Check for suite/apt on next part
             if parts and re.match(r'^(apt|suite|ste|unit|#)', parts[0], re.I):
                 addr.street2 = parts.pop(0)
             break
     else:
         errors.append("street1")
 
-    # City: first remaining part
     if parts:
         addr.city = parts[0].strip()
         clean_fields += 1
     else:
         errors.append("city")
 
-    # Name
     if name:
         clean_fields += 1
     else:
@@ -186,7 +201,6 @@ def parse_address(raw: str, name: str = "") -> ParsedAddress:
             f"Low address confidence ({addr.parse_confidence:.1f}) for: {raw}",
             AddressParseWarning
         )
-
     return addr
 
 
@@ -200,16 +214,7 @@ def format_address_block(addr: ParsedAddress) -> str:
     return "\n".join(lines)
 
 
-# ── EasyPost client ───────────────────────────────────────────────────────────
-def _client():
-    if not EP_API_KEY:
-        raise EasyPostError(401, "no_key",
-                            "EASYPOST_API_KEY not set — add to ~/.config/djinn/easypost.env")
-    import easypost
-    return easypost.EasyPostClient(api_key=EP_API_KEY)
-
-
-# ── Shop origin address ───────────────────────────────────────────────────────
+# ── Shop address ──────────────────────────────────────────────────────────────
 def _load_shop_address() -> dict:
     if SHOP_CFG_PATH.exists():
         return json.loads(SHOP_CFG_PATH.read_text())
@@ -270,21 +275,58 @@ def _box_for_weight(print_grams: float) -> tuple:
     for threshold, l, w, h in BOX_TIERS:
         if total_g < threshold:
             return total_g * G_TO_OZ, l, w, h
-    total_oz = (print_grams + PACKAGING_WEIGHT_G) * G_TO_OZ
-    return total_oz, 12.0, 8.0, 6.0
+    return (print_grams + PACKAGING_WEIGHT_G) * G_TO_OZ, 12.0, 8.0, 6.0
 
 
-# ── Rate lookup ───────────────────────────────────────────────────────────────
-def get_rates(order_id: str) -> list:
-    """
-    Get shipping rates for an order without purchasing.
-    Returns sorted list of rate dicts.
-    """
+# ── Service shorthand map ─────────────────────────────────────────────────────
+SERVICE_MAP = {
+    "usps-first":        ("USPS", "First"),
+    "usps-firstclass":   ("USPS", "First"),
+    "usps-ground":       ("USPS", "GroundAdvantage"),
+    "usps-priority":     ("USPS", "Priority"),
+    "usps-express":      ("USPS", "Express"),
+    "ups-ground":        ("UPS",  "Ground"),
+    "ups-3day":          ("UPS",  "3DaySelect"),
+    "ups-2day":          ("UPS",  "2ndDayAir"),
+    "fedex-ground":      ("FedEx","FEDEX_GROUND"),
+    "fedex-home":        ("FedEx","GROUND_HOME_DELIVERY"),
+    "fedex-2day":        ("FedEx","FEDEX_2_DAY"),
+}
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Shippo provider
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _shippo_headers() -> dict:
+    key = os.environ.get("SHIPPO_API_KEY", SHIPPO_API_KEY)
+    if not key:
+        raise ShippoError(401, "no_key",
+                          "SHIPPO_API_KEY not set — add to ~/.config/djinn/shop.env")
+    return {"Authorization": f"ShippoToken {key}", "Content-Type": "application/json"}
+
+
+def _shippo_post(path: str, payload: dict) -> dict:
+    r = requests.post(f"{SHIPPO_BASE}{path}", json=payload,
+                      headers=_shippo_headers(), timeout=20)
+    if not r.ok:
+        raise ShippoError(r.status_code, "api_error", r.text[:300])
+    return r.json()
+
+
+def _shippo_get(path: str) -> dict:
+    r = requests.get(f"{SHIPPO_BASE}{path}",
+                     headers=_shippo_headers(), timeout=20)
+    if not r.ok:
+        raise ShippoError(r.status_code, "api_error", r.text[:300])
+    return r.json()
+
+
+def _get_rates_shippo(order_id: str) -> list:
     order = get_order(order_id)
     if not order:
         raise ValueError(f"Order {order_id} not found")
 
-    # Get customer address
     with get_db() as conn:
         cust = conn.execute(
             "SELECT * FROM customers WHERE id=?", (order["customer_id"],)
@@ -295,18 +337,235 @@ def get_rates(order_id: str) -> list:
     raw_addr = decrypt(cust["shipping_address"]) or ""
     name     = decrypt(cust["name"]) or ""
     to_addr  = parse_address(raw_addr, name=name)
-
     if to_addr.parse_errors:
         print(f"[shipping] Address parse warnings: {to_addr.parse_errors}")
 
     shop = _load_shop_address()
     total_grams = sum(
-        i.get("quantity", 1) * 50  # rough 50g/part default
+        i.get("quantity", 1) * 50
         for i in (order.get("items") or [])
     ) or 100
     weight_oz, l, w, h = _box_for_weight(total_grams)
 
-    client = _client()
+    from_obj = _shippo_post("/addresses/", {
+        "name":    shop.get("name"),
+        "street1": shop.get("street1"),
+        "city":    shop.get("city"),
+        "state":   shop.get("state"),
+        "zip":     shop.get("zip5"),
+        "country": "US",
+        "email":   shop.get("email", ""),
+    })
+    to_obj = _shippo_post("/addresses/", {
+        "name":    to_addr.name,
+        "street1": to_addr.street1,
+        "street2": to_addr.street2 or "",
+        "city":    to_addr.city,
+        "state":   to_addr.state,
+        "zip":     to_addr.zip5,
+        "country": "US",
+    })
+    parcel_obj = _shippo_post("/parcels/", {
+        "length":        str(l),
+        "width":         str(w),
+        "height":        str(h),
+        "distance_unit": "in",
+        "weight":        str(round(weight_oz, 2)),
+        "mass_unit":     "oz",
+    })
+    shipment = _shippo_post("/shipments/", {
+        "address_from": from_obj["object_id"],
+        "address_to":   to_obj["object_id"],
+        "parcels":      [parcel_obj["object_id"]],
+        "async":        False,
+    })
+
+    rates = []
+    for r in sorted(shipment.get("rates", []),
+                    key=lambda x: float(x.get("amount", 999))):
+        rates.append({
+            "rate_id":      r["object_id"],
+            "carrier":      r.get("provider", ""),
+            "service":      r.get("servicelevel", {}).get("name", ""),
+            "price_usd":    float(r.get("amount", 0)),
+            "days":         r.get("estimated_days"),
+            "est_date":     r.get("duration_terms", ""),
+            "_shipment_id": shipment["object_id"],
+            "_provider":    "shippo",
+        })
+    return rates
+
+
+def _buy_label_shippo(order_id: str, service_shorthand: str) -> dict:
+    init_shipping()
+
+    key = service_shorthand.lower().replace(" ", "-")
+    if key not in SERVICE_MAP:
+        raise ValueError(
+            f"Unknown service '{service_shorthand}'. "
+            f"Valid: {', '.join(SERVICE_MAP.keys())}"
+        )
+    target_carrier, target_service = SERVICE_MAP[key]
+
+    rates = _get_rates_shippo(order_id)
+    match = next(
+        (r for r in rates
+         if r["carrier"].upper() == target_carrier.upper()
+         and target_service.lower() in r["service"].lower()),
+        None
+    )
+    if not match:
+        available = [f"{r['carrier']}-{r['service']}" for r in rates[:5]]
+        raise ValueError(
+            f"No {target_carrier} {target_service} rate found. "
+            f"Available: {', '.join(available)}"
+        )
+
+    txn = _shippo_post("/transactions/", {
+        "rate":            match["rate_id"],
+        "label_file_type": "PDF",
+        "async":           False,
+    })
+    if txn.get("status") != "SUCCESS":
+        msgs = txn.get("messages", [])
+        raise ShippoError(500, "buy_failed", str(msgs) or "Transaction failed")
+
+    tracking  = txn.get("tracking_number", "")
+    label_url = txn.get("label_url", "")
+    txn_id    = txn.get("object_id", f"shippo-{order_id}")
+
+    order = get_order(order_id)
+    cid   = order["customer_id"] if order else 0
+    now   = datetime.datetime.utcnow().isoformat() + "Z"
+
+    with get_db() as conn:
+        conn.execute(
+            """INSERT OR REPLACE INTO shipments
+               (shipment_id, order_id, customer_id, tracking_code, label_url,
+                carrier, service, rate_usd, total_cost_usd, weight_oz,
+                estimated_delivery, status, created_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,'purchased',?)""",
+            (txn_id, order_id, cid, tracking, label_url,
+             target_carrier, target_service,
+             match["price_usd"], match["price_usd"],
+             0.0, match.get("est_date", ""), now)
+        )
+
+    record = {
+        "shipment_id":      txn_id,
+        "tracking_code":    tracking,
+        "label_url":        label_url,
+        "carrier":          target_carrier,
+        "service":          target_service,
+        "rate_usd":         match["price_usd"],
+        "estimated_delivery": match.get("est_date", ""),
+    }
+    record["label_file_path"] = download_label(txn_id, label_url)
+    update_order_status(order_id, "shipped", tracking_number=tracking)
+    return record
+
+
+def _track_shipment_shippo(order_id: str) -> str:
+    with get_db() as conn:
+        row = conn.execute(
+            "SELECT * FROM shipments WHERE order_id=? ORDER BY created_at DESC LIMIT 1",
+            (order_id,)
+        ).fetchone()
+    if not row:
+        return f"No shipment found for {order_id}."
+
+    shipment = dict(row)
+    carrier  = shipment["carrier"].lower()
+    tracking = shipment["tracking_code"]
+
+    try:
+        data   = _shippo_get(f"/tracks/{carrier}/{tracking}")
+        status = (data.get("tracking_status") or {}).get("status", "unknown")
+        detail = (data.get("tracking_status") or {}).get("status_details", "")
+        events = data.get("tracking_history", [])
+
+        with get_db() as conn:
+            for ev in events:
+                loc = ev.get("location") or {}
+                conn.execute(
+                    """INSERT OR IGNORE INTO tracking_events
+                       (shipment_id, event_time, status, detail,
+                        location_city, location_state, location_zip)
+                       VALUES (?,?,?,?,?,?,?)""",
+                    (shipment["shipment_id"],
+                     ev.get("status_date", ""),
+                     ev.get("status", ""),
+                     ev.get("status_details", ""),
+                     loc.get("city", ""),
+                     loc.get("state", ""),
+                     loc.get("zip", ""),
+                    )
+                )
+            conn.execute(
+                "UPDATE shipments SET status=? WHERE shipment_id=?",
+                (status, shipment["shipment_id"])
+            )
+
+        loc_str = ""
+        if events:
+            loc = (events[-1].get("location") or {})
+            city, state = loc.get("city", ""), loc.get("state", "")
+            if city or state:
+                loc_str = f" — {city} {state}".strip()
+
+        return (
+            f"📦 *{order_id}* — {shipment['carrier']} {shipment['service']}\n"
+            f"Tracking: `{tracking}`\n"
+            f"Status: *{status}*{loc_str}\n"
+            f"{detail}"
+        )
+    except Exception as e:
+        return (
+            f"📦 *{order_id}* — {shipment['carrier']}\n"
+            f"Tracking: `{tracking}`\n"
+            f"_(tracking update unavailable: {e})_"
+        )
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# EasyPost provider
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _ep_client():
+    key = os.environ.get("EASYPOST_API_KEY", EP_API_KEY)
+    if not key:
+        raise ShippingError(401, "no_key",
+                            "EASYPOST_API_KEY not set — add to ~/.config/djinn/easypost.env")
+    import easypost
+    return easypost.EasyPostClient(api_key=key)
+
+
+def _get_rates_easypost(order_id: str) -> list:
+    order = get_order(order_id)
+    if not order:
+        raise ValueError(f"Order {order_id} not found")
+
+    with get_db() as conn:
+        cust = conn.execute(
+            "SELECT * FROM customers WHERE id=?", (order["customer_id"],)
+        ).fetchone()
+    if not cust:
+        raise ValueError("Customer not found for order")
+
+    raw_addr = decrypt(cust["shipping_address"]) or ""
+    name     = decrypt(cust["name"]) or ""
+    to_addr  = parse_address(raw_addr, name=name)
+    if to_addr.parse_errors:
+        print(f"[shipping] Address parse warnings: {to_addr.parse_errors}")
+
+    shop = _load_shop_address()
+    total_grams = sum(
+        i.get("quantity", 1) * 50
+        for i in (order.get("items") or [])
+    ) or 100
+    weight_oz, l, w, h = _box_for_weight(total_grams)
+
+    client = _ep_client()
     try:
         shipment = client.shipment.create(
             to_address={
@@ -334,62 +593,24 @@ def get_rates(order_id: str) -> list:
             },
         )
     except Exception as e:
-        raise EasyPostError(500, "api_error", str(e))
+        raise ShippingError(500, "api_error", str(e))
 
     rates = []
     for r in sorted(shipment.rates, key=lambda x: float(x.rate)):
         rates.append({
-            "rate_id":   r.id,
-            "carrier":   r.carrier,
-            "service":   r.service,
-            "price_usd": float(r.rate),
-            "days":      r.delivery_days,
-            "est_date":  r.delivery_date,
+            "rate_id":      r.id,
+            "carrier":      r.carrier,
+            "service":      r.service,
+            "price_usd":    float(r.rate),
+            "days":         r.delivery_days,
+            "est_date":     r.delivery_date,
             "_shipment_id": shipment.id,
+            "_provider":    "easypost",
         })
     return rates
 
 
-def _format_rates_message(order_id: str, rates: list) -> str:
-    lines = [f"📦 *Rates for {order_id}*\n"]
-    for i, r in enumerate(rates[:6]):
-        days = f"{r['days']} day{'s' if r['days'] != 1 else ''}" if r.get("days") else ""
-        rec  = " ← *recommended*" if i == 1 else ""
-        shorthand = f"{r['carrier'].lower()}-{r['service'].lower().replace(' ','')}"
-        lines.append(
-            f"`{shorthand:<24}` ${r['price_usd']:.2f}  {days}{rec}"
-        )
-    lines += [
-        "",
-        f"Reply: `ship {order_id} <carrier-service>`",
-        f"Example: `ship {order_id} {rates[1]['carrier'].lower()}-"
-        f"{rates[1]['service'].lower().replace(' ','')}`" if len(rates) > 1 else "",
-    ]
-    return "\n".join(lines)
-
-
-# ── Label purchase ────────────────────────────────────────────────────────────
-SERVICE_MAP = {
-    "usps-first":        ("USPS", "First"),
-    "usps-firstclass":   ("USPS", "First"),
-    "usps-ground":       ("USPS", "GroundAdvantage"),
-    "usps-priority":     ("USPS", "Priority"),
-    "usps-express":      ("USPS", "Express"),
-    "ups-ground":        ("UPS",  "Ground"),
-    "ups-3day":          ("UPS",  "3DaySelect"),
-    "ups-2day":          ("UPS",  "2ndDayAir"),
-    "fedex-ground":      ("FedEx","FEDEX_GROUND"),
-    "fedex-home":        ("FedEx","GROUND_HOME_DELIVERY"),
-    "fedex-2day":        ("FedEx","FEDEX_2_DAY"),
-}
-
-
-def buy_label(order_id: str, service_shorthand: str) -> dict:
-    """
-    Purchase a shipping label for the order.
-    service_shorthand: e.g. "usps-priority", "ups-ground"
-    Returns shipment record dict.
-    """
+def _buy_label_easypost(order_id: str, service_shorthand: str) -> dict:
     init_shipping()
 
     key = service_shorthand.lower().replace(" ", "-")
@@ -400,7 +621,7 @@ def buy_label(order_id: str, service_shorthand: str) -> dict:
         )
     target_carrier, target_service = SERVICE_MAP[key]
 
-    rates = get_rates(order_id)
+    rates = _get_rates_easypost(order_id)
     match = next(
         (r for r in rates
          if r["carrier"].upper() == target_carrier.upper()
@@ -414,13 +635,13 @@ def buy_label(order_id: str, service_shorthand: str) -> dict:
             f"Available: {', '.join(available)}"
         )
 
-    client = _client()
+    client = _ep_client()
     try:
-        shipment = client.shipment.retrieve(match["_shipment_id"])
-        rate_obj = next(r for r in shipment.rates if r.id == match["rate_id"])
+        shipment  = client.shipment.retrieve(match["_shipment_id"])
+        rate_obj  = next(r for r in shipment.rates if r.id == match["rate_id"])
         purchased = client.shipment.buy(shipment.id, rate=rate_obj)
     except Exception as e:
-        raise EasyPostError(500, "buy_failed", str(e))
+        raise ShippingError(500, "buy_failed", str(e))
 
     tracking  = purchased.tracking_code or ""
     label_url = purchased.postage_label.label_url if purchased.postage_label else ""
@@ -429,8 +650,8 @@ def buy_label(order_id: str, service_shorthand: str) -> dict:
 
     order = get_order(order_id)
     cid   = order["customer_id"] if order else 0
+    now   = datetime.datetime.utcnow().isoformat() + "Z"
 
-    now = datetime.datetime.utcnow().isoformat() + "Z"
     with get_db() as conn:
         conn.execute(
             """INSERT OR REPLACE INTO shipments
@@ -444,23 +665,104 @@ def buy_label(order_id: str, service_shorthand: str) -> dict:
         )
 
     record = {
-        "shipment_id": purchased.id,
-        "tracking_code": tracking,
-        "label_url": label_url,
-        "carrier": target_carrier,
-        "service": target_service,
-        "rate_usd": rate_usd,
+        "shipment_id":      purchased.id,
+        "tracking_code":    tracking,
+        "label_url":        label_url,
+        "carrier":          target_carrier,
+        "service":          target_service,
+        "rate_usd":         rate_usd,
         "estimated_delivery": est,
     }
-
-    # Download label immediately (URL expires in 24h)
-    label_path = download_label(purchased.id, label_url)
-    record["label_file_path"] = label_path
-
-    # Update order status
+    record["label_file_path"] = download_label(purchased.id, label_url)
     update_order_status(order_id, "shipped", tracking_number=tracking)
-
     return record
+
+
+def _track_shipment_easypost(order_id: str) -> str:
+    with get_db() as conn:
+        row = conn.execute(
+            "SELECT * FROM shipments WHERE order_id=? ORDER BY created_at DESC LIMIT 1",
+            (order_id,)
+        ).fetchone()
+    if not row:
+        return f"No shipment found for {order_id}."
+
+    shipment = dict(row)
+    client   = _ep_client()
+    try:
+        tracker = client.tracker.create(
+            tracking_code=shipment["tracking_code"],
+            carrier=shipment["carrier"],
+        )
+        status = tracker.status
+        detail = tracker.status_detail or ""
+        events = tracker.tracking_details or []
+
+        with get_db() as conn:
+            for ev in events:
+                tl = getattr(ev, "tracking_location", None)
+                conn.execute(
+                    """INSERT OR IGNORE INTO tracking_events
+                       (shipment_id, event_time, status, detail,
+                        location_city, location_state, location_zip)
+                       VALUES (?,?,?,?,?,?,?)""",
+                    (shipment["shipment_id"],
+                     str(getattr(ev, "datetime", "")),
+                     str(getattr(ev, "status", "")),
+                     str(getattr(ev, "message", "")),
+                     str(getattr(tl, "city", "") if tl else ""),
+                     str(getattr(tl, "state", "") if tl else ""),
+                     str(getattr(tl, "zip", "") if tl else ""),
+                    )
+                )
+            conn.execute(
+                "UPDATE shipments SET status=? WHERE shipment_id=?",
+                (status, shipment["shipment_id"])
+            )
+
+        loc_str = ""
+        if events:
+            tl = getattr(events[-1], "tracking_location", None)
+            if tl:
+                city  = getattr(tl, "city", "")
+                state = getattr(tl, "state", "")
+                if city or state:
+                    loc_str = f" — {city} {state}".strip()
+
+        return (
+            f"📦 *{order_id}* — {shipment['carrier']} {shipment['service']}\n"
+            f"Tracking: `{shipment['tracking_code']}`\n"
+            f"Status: *{status}*{loc_str}\n"
+            f"{detail}"
+        )
+    except Exception as e:
+        return (
+            f"📦 *{order_id}* — {shipment['carrier']}\n"
+            f"Tracking: `{shipment['tracking_code']}`\n"
+            f"_(tracking update unavailable: {e})_"
+        )
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Public API — routes to active provider
+# ══════════════════════════════════════════════════════════════════════════════
+
+def get_rates(order_id: str) -> list:
+    if SHIPPING_PROVIDER == "shippo":
+        return _get_rates_shippo(order_id)
+    return _get_rates_easypost(order_id)
+
+
+def buy_label(order_id: str, service_shorthand: str) -> dict:
+    if SHIPPING_PROVIDER == "shippo":
+        return _buy_label_shippo(order_id, service_shorthand)
+    return _buy_label_easypost(order_id, service_shorthand)
+
+
+def track_shipment(order_id: str) -> str:
+    if SHIPPING_PROVIDER == "shippo":
+        return _track_shipment_shippo(order_id)
+    return _track_shipment_easypost(order_id)
 
 
 def download_label(shipment_id: str, label_url: str) -> str:
@@ -482,85 +784,31 @@ def download_label(shipment_id: str, label_url: str) -> str:
     return str(path)
 
 
-# ── Tracking ──────────────────────────────────────────────────────────────────
-def track_shipment(order_id: str) -> str:
-    """
-    Poll EasyPost for latest tracking status.
-    Returns formatted status string for Telegram.
-    """
-    with get_db() as conn:
-        row = conn.execute(
-            "SELECT * FROM shipments WHERE order_id=? ORDER BY created_at DESC LIMIT 1",
-            (order_id,)
-        ).fetchone()
-    if not row:
-        return f"No shipment found for {order_id}."
-
-    shipment = dict(row)
-    client = _client()
-    try:
-        tracker = client.tracker.create(
-            tracking_code=shipment["tracking_code"],
-            carrier=shipment["carrier"],
+# ── Telegram command handler ──────────────────────────────────────────────────
+def _format_rates_message(order_id: str, rates: list) -> str:
+    lines = [f"📦 *Rates for {order_id}*\n"]
+    for i, r in enumerate(rates[:6]):
+        days = f"{r['days']} day{'s' if r['days'] != 1 else ''}" if r.get("days") else ""
+        rec  = " ← *recommended*" if i == 1 else ""
+        shorthand = f"{r['carrier'].lower()}-{r['service'].lower().replace(' ','')}"
+        lines.append(
+            f"`{shorthand:<24}` ${r['price_usd']:.2f}  {days}{rec}"
         )
-        status = tracker.status
-        detail = tracker.status_detail or ""
-        events = tracker.tracking_details or []
-
-        with get_db() as conn:
-            for ev in events:
-                conn.execute(
-                    """INSERT OR IGNORE INTO tracking_events
-                       (shipment_id, event_time, status, detail,
-                        location_city, location_state, location_zip)
-                       VALUES (?,?,?,?,?,?,?)""",
-                    (shipment["shipment_id"],
-                     str(getattr(ev, "datetime", "")),
-                     str(getattr(ev, "status", "")),
-                     str(getattr(ev, "message", "")),
-                     str(getattr(ev.tracking_location, "city", "") if hasattr(ev, "tracking_location") else ""),
-                     str(getattr(ev.tracking_location, "state", "") if hasattr(ev, "tracking_location") else ""),
-                     str(getattr(ev.tracking_location, "zip", "") if hasattr(ev, "tracking_location") else ""),
-                     )
-                )
-            conn.execute(
-                "UPDATE shipments SET status=? WHERE shipment_id=?",
-                (status, shipment["shipment_id"])
-            )
-
-        latest = events[-1] if events else None
-        loc = ""
-        if latest and hasattr(latest, "tracking_location"):
-            tl = latest.tracking_location
-            loc = f" — {getattr(tl,'city','')} {getattr(tl,'state','')}".strip(" —")
-
-        return (
-            f"📦 *{order_id}* — {shipment['carrier']} {shipment['service']}\n"
-            f"Tracking: `{shipment['tracking_code']}`\n"
-            f"Status: *{status}*{loc}\n"
-            f"{detail}"
-        )
-    except Exception as e:
-        return (
-            f"📦 *{order_id}* — {shipment['carrier']}\n"
-            f"Tracking: `{shipment['tracking_code']}`\n"
-            f"_(tracking update unavailable: {e})_"
-        )
+    lines += [
+        "",
+        f"Reply: `ship {order_id} <carrier-service>`",
+        (f"Example: `ship {order_id} {rates[1]['carrier'].lower()}-"
+         f"{rates[1]['service'].lower().replace(' ','')}`") if len(rates) > 1 else "",
+    ]
+    return "\n".join(lines)
 
 
-# ── Telegram command handlers ─────────────────────────────────────────────────
 def handle_ship_command(order_id: str, service: str = None) -> str:
-    """
-    Called from Telegram gateway.
-    If service is None: show rates.
-    If service given: buy label.
-    Returns message string.
-    """
     try:
         if not service:
             rates = get_rates(order_id)
             if not rates:
-                return f"No rates returned for {order_id}. Check address and EasyPost key."
+                return f"No rates returned for {order_id}. Check address and API key."
             return _format_rates_message(order_id, rates)
         else:
             record = buy_label(order_id, service)
@@ -575,7 +823,7 @@ def handle_ship_command(order_id: str, service: str = None) -> str:
             if record.get("label_file_path"):
                 lines.append(f"Label: `{record['label_file_path']}`")
             return "\n".join(lines)
-    except (EasyPostError, ValueError) as e:
+    except (ShippingError, ValueError) as e:
         return f"⚠️ Shipping error: {e}"
 
 
@@ -592,24 +840,24 @@ def get_shipping_summary(period_start: str, period_end: str) -> dict:
     if not rows:
         return {"total_shipments": 0, "total_cost_usd": 0.0}
 
-    total_cost = sum(r["total_cost_usd"] for r in rows)
+    total_cost    = sum(r["total_cost_usd"] for r in rows)
     carrier_counts: dict = {}
     delivered = in_transit = errors = 0
 
     for r in rows:
         carrier_counts[r["carrier"]] = carrier_counts.get(r["carrier"], 0) + 1
-        if r["status"] == "delivered":      delivered += 1
-        elif r["status"] == "error":        errors    += 1
-        else:                               in_transit += 1
+        if r["status"] == "delivered":  delivered  += 1
+        elif r["status"] == "error":    errors     += 1
+        else:                           in_transit += 1
 
     return {
-        "total_shipments":  len(rows),
-        "total_cost_usd":   round(total_cost, 2),
-        "avg_cost_usd":     round(total_cost / len(rows), 2),
+        "total_shipments":   len(rows),
+        "total_cost_usd":    round(total_cost, 2),
+        "avg_cost_usd":      round(total_cost / len(rows), 2),
         "carrier_breakdown": carrier_counts,
-        "delivered_count":  delivered,
-        "in_transit_count": in_transit,
-        "error_count":      errors,
+        "delivered_count":   delivered,
+        "in_transit_count":  in_transit,
+        "error_count":       errors,
     }
 
 
@@ -617,8 +865,8 @@ def get_shipping_summary(period_start: str, period_end: str) -> dict:
 GATEWAY_WIRING = """
 TELEGRAM GATEWAY — add these patterns:
 
-    ship_pattern  = re.compile(r'^ship\s+(ORD-\d+)(?:\s+(\S+))?$', re.I)
-    track_pattern = re.compile(r'^track\s+(ORD-\d+)$', re.I)
+    ship_pattern  = re.compile(r'^ship\\s+(ORD-\\d+)(?:\\s+(\\S+))?$', re.I)
+    track_pattern = re.compile(r'^track\\s+(ORD-\\d+)$', re.I)
 
     m = ship_pattern.match(text)
     if m:
@@ -636,12 +884,12 @@ if __name__ == "__main__":
     init_db()
     init_shipping()
 
-    # Test address parser (no API key needed)
+    # Address parser tests (no API key needed)
     test_cases = [
-        ("123 Main St, Los Angeles CA 90001",   "John Diaz"),
-        ("456 Oak Ave Apt 2B, San Francisco, CA 94102", "Jane Smith"),
-        ("55 Pine St, St. Louis MO 63101",      "Bob Jones"),
-        ("321 Desert Blvd Suite 4, Las Vegas NV 89101", "Maria Garcia"),
+        ("123 Main St, Los Angeles CA 90001",          "John Diaz"),
+        ("456 Oak Ave Apt 2B, San Francisco, CA 94102","Jane Smith"),
+        ("55 Pine St, St. Louis MO 63101",             "Bob Jones"),
+        ("321 Desert Blvd Suite 4, Las Vegas NV 89101","Maria Garcia"),
     ]
     print("ParsedAddress tests:")
     for raw, name in test_cases:
@@ -651,7 +899,12 @@ if __name__ == "__main__":
         print(f"       {format_address_block(a)}")
         print()
 
-    print("Shipping agent ready.")
-    print(f"EasyPost key: {'set ✅' if EP_API_KEY else 'NOT SET ⚠️  — add EASYPOST_API_KEY to env'}")
-    print(f"Labels dir:   {LABELS_DIR}")
-    print(f"Shop config:  {'exists ✅' if SHOP_CFG_PATH.exists() else 'not found — will use defaults'}")
+    print(f"Shipping provider: {SHIPPING_PROVIDER.upper()}")
+    if SHIPPING_PROVIDER == "shippo":
+        key = os.environ.get("SHIPPO_API_KEY", SHIPPO_API_KEY)
+        print(f"Shippo key:  {'set ✅' if key else 'NOT SET ⚠️  — add SHIPPO_API_KEY to shop.env'}")
+    else:
+        key = os.environ.get("EASYPOST_API_KEY", EP_API_KEY)
+        print(f"EasyPost key: {'set ✅' if key else 'NOT SET ⚠️  — add EASYPOST_API_KEY to env'}")
+    print(f"Labels dir:  {LABELS_DIR}")
+    print(f"Shop config: {'exists ✅' if SHOP_CFG_PATH.exists() else 'not found — will use defaults'}")
