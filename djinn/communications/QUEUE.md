@@ -109,7 +109,7 @@ crontab -l | grep queue-runner
 
 ## TASK-004
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Salomon (per Javier)
@@ -134,7 +134,7 @@ crontab -l | grep queue-runner
 
 ## TASK-005
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
@@ -152,7 +152,7 @@ crontab -l | grep queue-runner
 
 ## TASK-006
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
@@ -168,7 +168,7 @@ crontab -l | grep queue-runner
 
 ## TASK-007
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
@@ -189,7 +189,7 @@ crontab -l | grep queue-runner
 
 ## TASK-008
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
@@ -205,7 +205,7 @@ crontab -l | grep queue-runner
 
 ## TASK-009
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
@@ -268,7 +268,7 @@ Add `kit` command to both gateway scripts so Javier can trigger from phone:
 
 ## TASK-013
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Javier

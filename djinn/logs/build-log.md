@@ -558,3 +558,13 @@ created: 2026-05-19
 - **Report:** `logs/reports/2026-05-31_bug-maker-s-mark-engraving-reads-reversed-on-bottom-surfaces.md`
 
 *— Claude*
+
+## 2026-05-31 — Djinn Media build (TASK-004–009, 013) — Claude
+- djinn-model-mark: --mark STL flag, makers-mark.json config, auto-mirror on bottom engrave
+- djinn-media-reel: 30fps forced, job-name output filenames
+- djinn-media-repurpose: job-name clip naming
+- djinn-media-kit: NEW — flat stitch-kit/ folder builder + STITCH-ORDER.txt
+- djinn-media-publish-prep: stitch-kit/ Drive upload first, Discord msg leads with kit link
+- djinn-media-ingest: --job-name flag, job_slug in manifest
+- djinn-media-drop: NEW — inbox watcher daemon + GDrive sync systemd units
+- makers-mark.json config created, SUPPORT-GUIDE.md updated
