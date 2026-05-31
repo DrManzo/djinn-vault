@@ -458,7 +458,11 @@ created: 2026-05-19
 - Saved "The Terp Tribe - Camood.stl" to library
 *— Claude*
 
-## 2026-05-30: AUTO-STUB — opencode-1754
-- opencode session completed (exit 0)
+## 2026-05-30: djinn-model-mark — depth fix + X-mirror + Camood re-stamp (Salomon)
+- Depth: 0.4mm → 0.5mm for better legibility
+- X-mirror added to mark geometry — brand reads correctly from bottom-view angle
+- Winding fix removed (faces[:, ::-1] inverted normals → negative boolean volume)
+- Camood re-stamped at prints/2026-05-30_183442/ — 0.051 cm³ removed, watertight
+*— Salomon*
 - ⚠️ Full report not filed — stub at `logs/reports/2026-05-30_opencode-1754-stub.md`
 *— Salomon*

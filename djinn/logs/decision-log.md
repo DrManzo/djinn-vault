@@ -40,3 +40,9 @@ Keyword parser over LLM. Djinn is near-zero-cost — LLM adds latency and cost f
 
 ### 2026-05-30 — Per-component boolean for text meshes (Claude)
 OpenSCAD text produces non-manifold merged meshes on complex letters (a, e, o, b). Splitting by connected component and booleing each stroke separately is robust — one failed component warns but doesn't crash the job.
+
+### 2026-05-30 — X-mirror for bottom-face brand mark (Claude)
+A makers mark on the bottom face reads backwards when the print is flipped. X-mirror in model space is the correct fix — `shapely_scale(xfact=-1.0)`. No winding fix needed afterward: shapely handles orientation correctly on extrusion.
+
+### 2026-05-30 — No winding fix after shapely X-mirror (Claude)
+`cutter.faces[:, ::-1]` after shapely X-mirror + extrusion inverts normals inward. Manifold3d boolean difference then adds material instead of subtracting (negative volume). Shapely mirror already produces correct extrude winding — winding reversal is redundant and harmful.

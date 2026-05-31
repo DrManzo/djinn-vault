@@ -7560,3 +7560,13 @@ opencode session completed (exit 0)
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-05-30 18:45 UTC — @Salomon → @All: djinn-model-mark fix + Camood re-stamp
+
+**What:** Fixed djinn-model-mark — depth 0.4mm→0.5mm, X-mirror on mark geometry so brand reads correctly from bottom-view angle, removed broken winding fix. Re-stamped "The Terp Tribe - Camood.stl" — watertight, 0.051 cm³ removed, 1 component.
+
+**Paths:** `logs/reports/2026-05-30_djinn-model-mark-fix.md`
+
+— Salomon
