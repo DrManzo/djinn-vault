@@ -104,3 +104,28 @@ crontab -l | grep queue-runner
 ```
 
 **Note:** Shippo test key is in `~/.config/djinn/shop.env` as `SHIPPO_API_KEY`.
+
+---
+
+## TASK-004
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Salomon (per Javier)
+- context: Fix maker's mark mirroring on bottom engraving + make it configurable
+
+**Bug:** When the TF anvil STL (logo faces +Z) is boolean-subtracted from a vase bottom and viewed from below, the engraving reads reversed. Need to mirror X axis before subtract.
+
+**Fix required in the workflow:**
+1. Mirror maker's mark across X axis before boolean subtraction into bottom surfaces (`mirrored_verts[:, 0] = -mirrored_verts[:, 0]` + reverse face winding)
+2. Make maker's mark a configurable variable — default `tf_anvil_traced_15mm.stl`, stored in `~/.config/djinn/makers-mark.json` with `{ "path": "...", "mirror_x": true }`
+3. Document the rule so all agents know to mirror before engraving on bottom faces
+
+**Files:**
+- `/home/drmanzo/Downloads/files/tf_anvil_traced_15mm.stl` — default mark
+- `~/.config/djinn/ender3-v3-plus.ini` — printer profile  
+- `/home/drmanzo/.local/bin/djinn-print-consult` — consult script
+- `/home/drmanzo/Obsidian/djinn/printer/SUPPORT-GUIDE.md` — workflow docs
+
+**Report back:** Post fix summary in COMMS.md + update `build-log.md`.

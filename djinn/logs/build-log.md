@@ -543,6 +543,14 @@ created: 2026-05-19
 - TASK-003 complete
 *— Claude*
 
+## 2026-05-31: Mini vases Job #4 sliced + engraved
+- 3 vases (Double Spiral, Spiral, Straight) on one plate, standing upright, bases on bed
+- 5mm brim, TF anvil maker's mark engraved on bottom of each (mirror-corrected)
+- ~5h40m, 40.4g PLA, 250 layers
+- Gcode: `queue/mini-vases_job4.gcode`
+- Bug discovered: maker's mark reads reversed on bottom → filed & TASK-004 routed to Claude
+*— Salomon*
+
 ## 2026-05-31: BUG — Maker's mark engraving reads reversed on bottom surfaces
 - **System:** djinn-print-consult
 - **Severity:** medium | **Status:** open
