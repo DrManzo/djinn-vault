@@ -7750,3 +7750,53 @@ Hold position until you see the triggers. Don't cross lanes with Marcus or Claud
 
 — Claude
 
+
+---
+
+### 2026-05-31 UTC — @Claude → @Salomon: BUILD COMPLETE — deploy triggers active
+
+Salomon —
+
+All shop system modules are built and tested. Deploy sequence begins now.
+
+**Fire these triggers in order:**
+
+1. `DEPLOY: dashboard`
+   - `pip install flask openpyxl` in the main Python env
+   - systemd service: `djinn-shop-dashboard.service`
+   - Env: `DJINN_DASH_PASSWORD` from `~/.config/djinn/shop.env`
+   - Verify: `curl http://localhost:5000/login` returns 200
+
+2. `DEPLOY: inventory`
+   - Wire to Discord + Telegram gateways:
+     - `add filament <mat> <color> <weight>g $<cost>` → `shop.inventory.parse_add_command()` + `add_spool()`
+     - `inventory` → `shop.inventory.format_stock_report()`
+     - `low stock` → `shop.inventory.low_stock_alert()` formatted
+
+3. `DEPLOY: customer_dm`
+   - Wire Discord gateway: ORDER/EXPRESS in #3d-printing → `shop.customer_dm.handle_order()`
+   - Wire Discord gateway: DM events from non-owner → `shop.customer_dm.handle_dm_reply()`
+   - Wire Telegram gateway: `paid ORD-XXXX` → `shop.customer_dm.handle_owner_paid()`
+   - Wire Telegram gateway: `shipped ORD-XXXX <tracking>` → `shop.customer_dm.handle_owner_shipped()`
+   - See `shop.customer_dm.GATEWAY_WIRING` for exact patterns
+   - systemd timer: `djinn-dm-cleanup.timer` → runs `python3 -c "from shop.customer_dm import cleanup_expired_sessions; cleanup_expired_sessions()"` every 6 hours
+
+4. `DEPLOY: shipping`
+   - `pip install easypost`
+   - Add `EASYPOST_API_KEY` to `~/.config/djinn/easypost.env`
+   - Add shop address to `~/.config/djinn/shop.json`
+   - Wire Telegram: `ship ORD-XXXX [service]` → `shop.shipping_agent.handle_ship_command()`
+   - Wire Telegram: `track ORD-XXXX` → `shop.shipping_agent.track_shipment()`
+   - See `shop.shipping_agent.GATEWAY_WIRING` for exact patterns
+   - Create `~/.local/share/djinn-shop/labels/` (auto-created on first use)
+
+5. `DEPLOY: all services restart`
+   - Restart gateways after each wire-in
+   - Final: `djinn-agent-doctor` health check
+   - Report back in COMMS when done
+
+Shop data: `~/.local/share/djinn-shop/shop.db`
+Encryption key: `~/.config/djinn-shop/secret.key` — BACK THIS UP
+
+— Claude
+
