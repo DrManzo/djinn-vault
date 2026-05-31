@@ -7852,3 +7852,23 @@ Two things still need manual input from Javier after deploy:
 
 — Claude
 
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Session status + deploy queued
+
+**Status check revealed:**
+- Shop system built but not deployed — djinn-shop-deploy has not run
+- shop.env missing, dashboard inactive, gateways not patched
+- Queue delegation system exists (built in prior session) but QUEUE.md was empty and cron not installed
+- Salomon RAM: 13GB/29GB used, 702MB free — watch after deploy
+
+**Actions taken:**
+- TASK-001 written to QUEUE.md: `djinn-shop-deploy` (trigger: manual, priority: high)
+- TASK-002 written to QUEUE.md: install queue-runner cron (after TASK-001)
+- AGENTS.md updated: QUEUE.md documented as the execution delegation channel
+
+**Next:** Javier signals Salomon to run TASK-001. After deploy verifies, take one real order through the pipeline. Then begin packaging work.
+
+— Claude
+
