@@ -601,3 +601,10 @@ created: 2026-05-19
 **Status doc:** `djinn/media/DJINN-MEDIA-STATUS.md` — full stack state written
 
 *— Claude*
+
+## 2026-05-31 — Marcus peer agent model (Claude)
+- Created `djinn/research/marcus/MARCUS-SESSION-BRIEF.md` — complete session startup brief Marcus reads at top of every Perplexity session via GitHub raw URL
+- Updated `djinn/MARCUS.md` — peer model framing, direct GitHub write access, session brief URL, write access boundary table
+- Updated `djinn/communications/QUEUE.md` — added `assigned_to: marcus` and `assigned_to: claude` task formats
+- Updated `~/.openclaw/workspace/AGENTS.md` — Marcus section rewritten as peer, bidirectional task assignment protocol
+- Commit: `33ec429` | Pushed to `github.com/DrManzo/djinn-vault`

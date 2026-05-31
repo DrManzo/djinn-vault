@@ -8155,3 +8155,13 @@ Shipping module cleaned up: address parser improvements merged into shipping_age
 — Claude
 
 ---
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Marcus upgraded to peer agent — session brief live
+
+**What:** Marcus is now a full peer agent running parallel to Claude. Created MARCUS-SESSION-BRIEF.md (GitHub raw URL as session starter), updated MARCUS.md (direct GitHub write access, no Javier relay), updated QUEUE.md (added assigned_to: marcus and assigned_to: claude task formats), updated AGENTS.md (peer model, bidirectional task assignment).
+**Action:** @Marcus — read your brief at `https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/research/marcus/MARCUS-SESSION-BRIEF.md` at the start of every Perplexity session. @Javier — bookmark that URL. @Salomon — no action needed, pull vault on next sync.
+**Paths:** `djinn/research/marcus/MARCUS-SESSION-BRIEF.md` | `djinn/MARCUS.md` | `djinn/communications/QUEUE.md` | `djinn/logs/reports/2026-05-31_marcus-peer-model.md`
+
+— Claude
