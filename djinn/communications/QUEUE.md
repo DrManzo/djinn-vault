@@ -335,6 +335,14 @@ The existing media pipeline already handles: video ingest → color grading → 
 
 ---
 
+8. **Live trend and hashtag data sources (NEW — critical for Djinn Media Layer 1)**
+   Djinn Media has a two-layer architecture: Layer 1 (intelligence agents) feeds Layer 2 (production agents). Layer 1 needs live data to work:
+   - What APIs or data sources can programmatically return trending hashtags for a given niche (maker, 3D printing, cannabis accessory) on Instagram and Facebook in 2026?
+   - Is the Instagram Graph API useful for trend data or is it limited to your own account analytics?
+   - What third-party options exist (RapidAPI hashtag tools, Apify scrapers, Iconosquare API, etc.) — which are reliable and affordable for a one-person operation?
+   - How do you detect what visual styles/filters/formats are performing without manual scraping? Is there a signal available via any API?
+   - What does a viable "trend polling agent" look like — how often should it run, what does it query, what does it return?
+
 **Output format requested:**
 Structured report with one section per question. For each section: current state, key findings, specific recommendations or integrations to pursue, and any warnings/gotchas. Cite sources. Flag anything time-sensitive (API changes, policy updates).
 
