@@ -1,0 +1,9 @@
+- #character
+- #location
+- #scene
+- #chapter
+- #plot_point
+- #world_building
+- #magic_system
+- #research
+- #idea
