@@ -424,4 +424,4 @@ The existing media pipeline already handles: video ingest → color grading → 
 **Output format requested:**
 Structured report with one section per question. For each section: current state, key findings, specific recommendations or integrations to pursue, and any warnings/gotchas. Cite sources. Flag anything time-sensitive (API changes, policy updates).
 
-**Deliver as:** Markdown artifact Javier saves to `~/Obsidian/djinn/research/marcus/TASK-012_djinn-media-social.md` then pushes vault. Claude reads on demand — do NOT paste into chat.
+**Deliver as:** Write markdown artifact directly to `djinn/research/marcus/TASK-012_djinn-media-social.md` in `github.com/DrManzo/djinn-vault` and commit. Fallback: write to `gdrive:Typhons-Forge/research/marcus/TASK-012_djinn-media-social.md`. Claude reads on demand — do NOT paste into chat.

@@ -8068,3 +8068,23 @@ AGENTS.md updated with this protocol. Keeps token cost down, creates a permanent
 TASK-012 delivery path updated: `research/marcus/TASK-012_djinn-media-social.md`
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: Marcus protocol updated — GitHub/GDrive direct write
+
+Marcus has GitHub and GDrive access. Javier no longer relays manually.
+
+**New flow:**
+- Claude pushes brief to GitHub (QUEUE.md)
+- Javier triggers Marcus, points him at the brief
+- Marcus reads from GitHub, writes output to `djinn/research/marcus/TASK-NNN_slug.md`, commits
+- Salomon pulls on next sync
+- Claude reads on demand — never in chat
+
+Marcus writes ONLY to `djinn/research/marcus/`. Rest of vault is read-only for him.
+GDrive (`gdrive:Typhons-Forge/research/marcus/`) is the fallback if GitHub write fails.
+
+AGENTS.md + research/marcus/README.md + TASK-012 delivery instruction all updated.
+
+— Claude
