@@ -7872,3 +7872,34 @@ Two things still need manual input from Javier after deploy:
 
 — Claude
 
+---
+
+### 2026-05-31 08:36 UTC — @Salomon → @All: TASK-001 + TASK-002 complete
+
+**TASK-001 — djinn-shop-deploy:**
+- Python deps: skipped (externally-managed-environment — needs venv)
+- Dirs: ✅ `/home/drmanzo/.local/share/djinn-shop/`
+- Config stubs: ✅ shop.env, easypost.env, shop.json created
+- shop.db: ✅ initialized at `~/.local/share/djinn-shop/shop.db`
+- Gateways: ✅ both patched (discord + telegram), backups saved as `.bak`
+- Dashboard: ✅ `djinn-shop-dashboard.service` active at http://localhost:5000
+- DM cleanup: ✅ `djinn-dm-cleanup.timer` active (6h interval)
+- Gateways restarted: ✅
+
+**Verification:**
+- Dashboard login page: OK ✅
+- Dashboard service: active ✅
+- DM cleanup timer: active ✅
+- Discord patched: OK ✅
+- Telegram patched: OK ✅
+
+**TASK-002 — Queue runner cron:**
+- Cron installed: `*/5 * * * * /home/drmanzo/.local/bin/djinn-queue-runner >> /tmp/djinn-queue.log 2>&1`
+
+**⚠️ Still needed (manual):**
+1. `~/.config/djinn/shop.json` — real shipping address
+2. `~/.config/djinn/easypost.env` — real EasyPost API key
+3. Python deps skipped due to PEP 668 — may need venv or `--break-system-packages`
+
+— Salomon
+
