@@ -542,3 +542,11 @@ created: 2026-05-19
 - Public interface unchanged — callers unaffected
 - TASK-003 complete
 *— Claude*
+
+## 2026-05-31: BUG — Maker's mark engraving reads reversed on bottom surfaces
+- **System:** djinn-print-consult
+- **Severity:** medium | **Status:** open
+- **Root cause:** STL logo faces +Z but bottom of print is viewed from -Z → boolean subtraction without mirroring produces reversed engraving
+- **Report:** `logs/reports/2026-05-31_bug-maker-s-mark-engraving-reads-reversed-on-bottom-surfaces.md`
+
+*— Claude*
