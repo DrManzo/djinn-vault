@@ -707,69 +707,63 @@ mkdir -p ~/Obsidian/djinn/social/analytics
 - created: 2026-05-31 by Claude
 - context: Phase 3 — build djinn-trend-agent: multi-source trend poller → TREND-SIGNAL.md + HASHTAG-BANK.md
 
-**Goal:** Poll Reddit, YouTube, Printables RSS, and Apify (Instagram data) every 6 hours. Feed raw results to Ollama phi4:14b. Write synthesized trend signal that Layer 2 caption agent reads before generating content.
+**Goal:** Poll 4 sources every 6 hours. Feed raw results to Ollama phi4:14b. Write synthesized trend signal that Layer 2 caption agent reads before generating content.
+
+**Updated architecture — Firecrawl as primary scraping engine:**
+Firecrawl (`fc-...`, already saved to `~/.config/djinn/firecrawl.env`) replaces the need for separate Reddit and YouTube API credentials. One key covers web search + URL scraping across all platforms.
 
 **Files:**
 - `/home/drmanzo/.local/bin/djinn-trend-agent`
 - `~/.config/systemd/user/djinn-trend-agent.service`
 - `~/.config/systemd/user/djinn-trend-agent.timer` (every 6h: `OnCalendar=*-*-* 00,06,12,18:05:00`)
 
-**Config files (create stubs, chmod 600, never git-tracked):**
-- `~/.config/djinn/apify.env` → `APIFY_API_TOKEN=`
-- `~/.config/djinn/reddit.env` → `REDDIT_CLIENT_ID=` + `REDDIT_CLIENT_SECRET=`
-- `~/.config/djinn/youtube.env` → `YOUTUBE_API_KEY=`
+**Config files:**
+- `~/.config/djinn/firecrawl.env` → `FIRECRAWL_API_KEY=fc-...` ✅ already set
+- `~/.config/djinn/apify.env` → `APIFY_API_TOKEN=` (create stub, fill when Javier has key)
 
 **Output files:**
 - `~/Obsidian/djinn/social/TREND-SIGNAL.md` — written every 6h run
 - `~/Obsidian/djinn/social/HASHTAG-BANK.md` — written on Sunday runs only (weekly deep audit)
 - `~/.local/share/djinn-media/media-context.json` — updated with `trending_topics`, `recommended_hook_style`, `hashtag_candidates`, `format_signals`
 
-**Dependencies (pip install):** `praw`, `google-api-python-client`, `requests` (already present)
+**Dependencies (pip install):** `firecrawl-py`, `requests` (already present)
 
 ---
 
-**Source 1 — Apify Instagram scraper:**
+**Source 1 — Firecrawl web search (Reddit + YouTube + maker sites):**
 ```python
-# POST to Apify run-sync endpoint, wait for result
-url = f"https://api.apify.com/v2/acts/apify~instagram-hashtag-scraper/run-sync-get-dataset-items"
-payload = {
-    "hashtags": ["3dprinting", "functionalart", "makersmark"],
-    "resultsLimit": 9,
-}
-headers = {"Authorization": f"Bearer {APIFY_TOKEN}"}
-r = requests.post(url, json=payload, headers=headers, timeout=120)
-# Returns list of posts: each has caption, likesCount, commentsCount, hashtags[]
-```
-Extract: captions (first 100 chars), top hashtags by frequency, avg likes.
-If `APIFY_API_TOKEN` is empty → skip this source silently (don't crash).
+from firecrawl import FirecrawlApp
+fc = FirecrawlApp(api_key=FIRECRAWL_KEY)
 
-**Source 2 — Reddit PRAW:**
+searches = [
+    "reddit r/3Dprinting top posts today 3D printing maker",
+    "reddit r/glassheads top posts today functional glass art",
+    "youtube shorts trending 3D printing maker 2026",
+    "makerworld bambu trending models 3D printing",
+]
+results = []
+for query in searches:
+    r = fc.search(query, limit=5)
+    results.extend(r.get("data", []))
+# Each result has: url, title, description, markdown content
+```
+Extract: titles, descriptions, any hashtags or tags mentioned.
+If `FIRECRAWL_API_KEY` is empty → skip silently.
+
+**Source 2 — Firecrawl scrape (Makerworld + Printables trending pages):**
 ```python
-import praw
-reddit = praw.Reddit(client_id=..., client_secret=..., user_agent="djinn-trend-agent/1.0 by u/djinn_bot")
-subreddits = ["3Dprinting", "glassheads", "PrintedMinis"]
-for sub in subreddits:
-    top = list(reddit.subreddit(sub).top(time_filter="day", limit=10))
-    # extract: title, score, upvote_ratio, num_comments
+pages = [
+    "https://makerworld.com/en/models?sort=trending",
+    "https://www.printables.com/model?sort=trending",
+]
+for url in pages:
+    result = fc.scrape_url(url, formats=["markdown"])
+    # result["markdown"] is clean text of the page
+    # extract: model names, categories, like counts where visible
 ```
-If `REDDIT_CLIENT_ID` is empty → skip silently.
+Fallback if scrape fails: skip that page silently.
 
-**Source 3 — YouTube Data API v3:**
-```python
-from googleapiclient.discovery import build
-yt = build("youtube", "v3", developerKey=YOUTUBE_KEY)
-for query in ["3D printing maker", "functional art craft"]:
-    res = yt.search().list(
-        part="snippet", q=query, type="video",
-        videoDuration="short", order="viewCount",
-        publishedAfter=(datetime.now(timezone.utc) - timedelta(days=3)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        maxResults=5
-    ).execute()
-    # extract: title, description, tags (from contentDetails)
-```
-If `YOUTUBE_API_KEY` is empty → skip silently.
-
-**Source 4 — Printables RSS (always runs, no key needed):**
+**Source 3 — Printables RSS (always runs, no key needed):**
 ```python
 import xml.etree.ElementTree as ET
 r = requests.get("https://www.printables.com/rss", timeout=15)
@@ -777,7 +771,17 @@ root = ET.fromstring(r.content)
 items = root.findall(".//item")[:10]
 # extract: title, description, category
 ```
-No credentials. This source always runs as the fallback floor.
+No credentials. Always runs. Floor-level signal even if all other sources fail.
+
+**Source 4 — Apify Instagram scraper (optional, fill key when available):**
+```python
+# Only runs if APIFY_API_TOKEN is set in ~/.config/djinn/apify.env
+url = "https://api.apify.com/v2/acts/apify~instagram-hashtag-scraper/run-sync-get-dataset-items"
+payload = {"hashtags": ["3dprinting", "functionalart", "makersmark"], "resultsLimit": 9}
+r = requests.post(url, json=payload, headers={"Authorization": f"Bearer {APIFY_TOKEN}"}, timeout=120)
+# Returns: caption, likesCount, commentsCount, hashtags[]
+```
+If `APIFY_API_TOKEN` is empty → skip silently. Firecrawl covers maker trend signal in the interim.
 
 ---
 
