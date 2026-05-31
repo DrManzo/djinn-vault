@@ -40,10 +40,11 @@ command two
 
 ## TASK-001
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - context: Deploy full shop system — gateways, dashboard, services, config stubs
 
 **Commands:**
@@ -67,10 +68,11 @@ grep -q "SHOP_PATCH_APPLIED" ~/.local/bin/djinn-telegram-gateway && echo "Telegr
 
 ## TASK-002
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - context: Install cron for queue runner so TASK-NNN auto tasks execute every 5 min
 
 **Commands:**
