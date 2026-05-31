@@ -499,3 +499,197 @@ The question: **can a custom Python scraper + free public data sources replace A
 Structured report, one section per question. Be specific — name actual library versions, actual API endpoints, actual free tier limits. Flag anything likely to change in the next 6 months. Cite sources.
 
 **Deliver as:** Write markdown artifact directly to `djinn/research/marcus/TASK-015_diy-trend-stack.md` in `github.com/DrManzo/djinn-vault` and commit. Fallback: `gdrive:Typhons-Forge/research/marcus/TASK-015_diy-trend-stack.md`. Claude reads on demand — do NOT paste into chat.
+
+---
+
+## TASK-016
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude
+
+**Goal:** Build `djinn-media-publish` — posts a finished reel to Instagram and/or Facebook via Meta Graph API. Zero human steps after the command fires.
+
+**File:** `/home/drmanzo/.local/bin/djinn-media-publish`
+
+**Interface:**
+```
+djinn-media-publish <project_id> [--platform ig|fb|both] [--dry-run]
+```
+- `--platform` defaults to `both`
+- `--dry-run` prints what would happen, makes no API calls
+
+**Config file:** `~/.config/djinn/meta.env` (chmod 600, never git-tracked)
+```
+META_PAGE_TOKEN=<long-lived page token>
+IG_USER_ID=<instagram user id>
+FB_PAGE_ID=<facebook page id>
+```
+
+**Inputs (read from project manifest.json):**
+- `exports/reel/{job_slug}_reel.mp4` — the video to upload (must exist)
+- `captions/caption_reel.txt` — caption text (fallback: manifest `notes` field)
+- `~/.local/share/djinn-media/media-context.json` → `job_hashtags[job_slug]` — hashtag list (fallback: empty)
+
+**Instagram publish flow (two-step per Meta Graph API):**
+1. POST `https://graph.facebook.com/v19.0/{IG_USER_ID}/media`
+   - `media_type=REELS`, `video_url=<public URL or upload>`, `caption=<caption + hashtags>`, `share_to_feed=true`
+   - Returns `creation_id`
+2. POST `https://graph.facebook.com/v19.0/{IG_USER_ID}/media_publish`
+   - `creation_id=<from step 1>`
+   - Returns `ig_media_id`
+
+**Note on video delivery:** Meta requires a publicly accessible URL for the video, not a local path. Use rclone to push the reel to `gdrive:Typhons-Forge/posts/{project_id}/` first, then generate a public link — OR use Meta's resumable upload endpoint. Simpler path: upload to a temporary public URL via rclone + GDrive share link. Document whichever approach works.
+
+**Facebook publish flow:**
+- POST `https://graph.facebook.com/v19.0/{FB_PAGE_ID}/videos`
+  - `file_url=<same public URL>`, `description=<fb_caption>` (shorter, 2–3 hashtags only per Marcus Section 4)
+  - Returns `fb_post_id`
+
+**Caption handling:**
+- IG caption = full caption + all hashtags from `job_hashtags`
+- FB caption = first 2 sentences of caption + 2–3 hashtags max (strip the rest)
+- If `captions/caption_reel.txt` missing → use manifest `notes` field as caption
+
+**Outputs — write back to manifest.json:**
+```json
+"published": {
+  "instagram": { "media_id": "...", "published_at": "ISO8601" },
+  "facebook":  { "post_id":  "...", "published_at": "ISO8601" }
+}
+```
+- Update manifest `status = "published"`
+- Append entry to `~/.local/share/djinn-media/publish-log.json`
+
+**Error handling:**
+- Any API error → print error + exit 1. Do NOT retry automatically.
+- Missing config → print which key is missing + exit 1 with setup instructions
+- Missing reel file → exit 1 with the expected path
+
+**Telegram notification on success:**
+```
+✅ Djinn Media — posted
+Job: {job_slug}
+IG: {ig_media_id}
+FB: {fb_post_id}
+```
+
+**Success criteria:**
+```bash
+# Dry run (no credentials needed to test logic):
+djinn-media-publish 2026-05-31_mini-vases-job4 --dry-run
+# Should print: platform targets, reel path, caption preview, hashtag count
+
+# Syntax check:
+python3 -m py_compile ~/.local/bin/djinn-media-publish && echo OK
+```
+
+**Report back:** COMMS.md — confirm dry-run output looks correct. Real publish test happens when Javier has Meta credentials in meta.env.
+
+---
+
+## TASK-017
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude
+
+**Goal:** Build `djinn-meta-token-refresh` — keeps the Meta Page access token alive. Tokens expire; a silent expiry breaks all publishing. This cron prevents that.
+
+**Files:**
+- `/home/drmanzo/.local/bin/djinn-meta-token-refresh`
+- `~/.config/systemd/user/djinn-meta-token-refresh.service`
+- `~/.config/systemd/user/djinn-meta-token-refresh.timer` (monthly, 1st of each month, 03:00)
+
+**Interface:** `djinn-meta-token-refresh` (no args — reads and writes meta.env in place)
+
+**Logic:**
+1. Read `META_PAGE_TOKEN` from `~/.config/djinn/meta.env`
+2. Call `GET https://graph.facebook.com/v19.0/oauth/access_token` with:
+   - `grant_type=fb_exchange_token`
+   - `client_id={APP_ID}` (read from meta.env as `META_APP_ID`)
+   - `client_secret={APP_SECRET}` (read from meta.env as `META_APP_SECRET`)
+   - `fb_exchange_token={current token}`
+3. On success: overwrite `META_PAGE_TOKEN=<new_token>` in meta.env (preserve all other lines)
+4. Send Telegram: `✅ Meta token refreshed — expires in 60 days`
+5. On failure: send Telegram alert + exit 1, do NOT overwrite the existing token
+
+**Config added to `~/.config/djinn/meta.env`:**
+```
+META_APP_ID=<from Meta Developer Console>
+META_APP_SECRET=<from Meta Developer Console>
+```
+
+**Success criteria:**
+```bash
+python3 -m py_compile ~/.local/bin/djinn-meta-token-refresh && echo OK
+systemctl --user list-timers | grep meta-token
+```
+
+**Report back:** COMMS.md — confirm timer is active. Real token exchange test happens when Javier has app credentials.
+
+---
+
+## TASK-018
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude
+
+**Goal:** Build `djinn-social-analyst` — daily analytics pull from Meta Graph API. Measures what's working. Feeds the feedback loop that improves future captions and hashtags.
+
+**Files:**
+- `/home/drmanzo/.local/bin/djinn-social-analyst`
+- `~/.config/systemd/user/djinn-social-analyst.service`
+- `~/.config/systemd/user/djinn-social-analyst.timer` (daily at 00:30 UTC)
+
+**Interface:** `djinn-social-analyst [--days 7]` (default: last 7 days of posts)
+
+**Config:** reads `~/.config/djinn/meta.env` (IG_USER_ID, META_PAGE_TOKEN)
+
+**Logic:**
+1. Call `GET /{IG_USER_ID}/media?fields=id,timestamp,caption&limit=20` → get list of recent post IDs
+2. For each post in the last `--days` days, call `GET /{media_id}/insights?metric=reach,plays,saved,shares,comments,ig_reels_avg_watch_time`
+3. Build a record per post: `{media_id, timestamp, caption_preview (first 60 chars), reach, plays, saved, shares, comments, avg_watch_ms}`
+4. Write full record to `~/Obsidian/djinn/social/analytics/YYYY-MM-DD.json`
+5. Sort posts by `(saved + shares)` descending
+6. Write `~/Obsidian/djinn/social/TREND-SIGNAL.md`:
+
+```markdown
+# Trend Signal — {YYYY-MM-DD}
+_Updated by djinn-social-analyst_
+
+## Top performers (last 7 days, by saves + shares)
+| Post | Reach | Saves | Shares | Watch time |
+...
+
+## Bottom performers
+...
+
+## Signal deltas
+- Avg watch time this week vs last week: X ms
+- Top hashtag pattern: [inferred from top post captions]
+- Recommended caption length: X chars (median of top 3)
+```
+
+6. `git -C ~/Obsidian add djinn/social/ && git commit -m "social: analyst {date}" && git push`
+7. Telegram: `📊 Social report ready — {date}. Top post: {caption_preview} ({saves} saves, {shares} shares)`
+
+**Output files:**
+- `~/Obsidian/djinn/social/analytics/YYYY-MM-DD.json` — raw per-post metrics
+- `~/Obsidian/djinn/social/TREND-SIGNAL.md` — human + agent readable summary
+
+**Error handling:** If API returns no data (no posts yet) → write empty analytics file + log "no posts in window" to Telegram. Do not crash.
+
+**Success criteria:**
+```bash
+python3 -m py_compile ~/.local/bin/djinn-social-analyst && echo OK
+systemctl --user list-timers | grep social-analyst
+# Create the output dirs:
+mkdir -p ~/Obsidian/djinn/social/analytics
+```
+
+**Report back:** COMMS.md — confirm timer active, dirs created, dry-run or syntax check passes.
