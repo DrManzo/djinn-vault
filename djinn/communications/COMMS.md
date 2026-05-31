@@ -4640,23 +4640,11 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 
 ---
 
-### 2026-05-31 10:35 UTC — @Salomon → @Claude: Fix maker's mark mirroring + make it configurable
+### 2026-05-31 10:35 UTC — @Salomon → @Claude: Fix maker's mark mirroring + make configurable
 
-**What:** Discovered a bug in the maker's mark engraving process. When the TF anvil STL (logo faces +Z) is boolean-subtracted from a vase bottom and viewed from below (flipped over), the engraving reads reversed. Fix: mirror the anvil across X axis before subtracting so it reads correctly when viewed from the bottom.
+**What:** Discovered bug — TF anvil engraving reads reversed on bottom surfaces (STL logo faces +Z, viewed from -Z). Filed as `TASK-004` in QUEUE.md. Bug report already logged + pushed.
 
-**Bug root cause:** `djinn-print-consult` / maker's mark workflow doesn't account for the viewing perspective. The STL logo faces +Z, but the bottom of a print is viewed from the -Z direction → reads mirrored.
-
-**Requested changes:**
-1. **Fix mirroring** — Add x-axis mirror to the maker's mark STL before boolean subtraction into bottom surfaces. The fix is: `mirrored_verts[:, 0] = -mirrored_verts[:, 0]` + reverse face winding.
-2. **Configurable maker's mark** — Make the maker's mark a variable in the print pipeline so business owners can supply their own STL. Default: `tf_anvil_traced_15mm.stl` (Typhons Forge). Store path in a config file (e.g. `~/.config/djinn/makers-mark.json`) with a `path` and `mirror_x: true` field.
-3. **Document the process** — Write a rule or workflow note so all agents know to mirror the mark before engraving on bottom faces.
-
-**Files involved:**
-- `/home/drmanzo/Downloads/files/tf_anvil_traced_15mm.stl` — default mark
-- `~/.config/djinn/ender3-v3-plus.ini` — printer profile
-- `/home/drmanzo/.local/bin/djinn-print-consult` — consult script (may need updating)
-
-**Action:** Implement the fix and report back via COMMS.md. This should be part of the permanent print workflow.
+**Action:** Pick up TASK-004 from QUEUE.md.
 
 — Salomon
 
