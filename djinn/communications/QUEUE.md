@@ -263,3 +263,79 @@ Add `kit` command to both gateway scripts so Javier can trigger from phone:
 - Response: "Kit ready — {drive_link}"
 
 **Files:** `djinn-discord-gateway`, `djinn-telegram-gateway`
+
+---
+
+## TASK-012
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Deep research brief — Djinn Media social media integration opportunities
+
+**How to run:** Javier pastes the brief below directly into Perplexity. Marcus produces a research artifact. Javier relays output back to vault.
+
+---
+
+### Marcus Research Brief — Djinn Media
+
+**Who you are answering for:**
+Javier runs a one-person 3D print shop (Typhon's Forge) with a fully automated AI backend — multi-agent system (Claude, local Ollama, Perplexity) handling quoting, slicing, printing, shipping, and accounting. He is now building a social media production layer called **Djinn Media** on top of this system.
+
+The existing media pipeline already handles: video ingest → color grading → caption generation → hashtag selection → Google Drive upload → Discord notification. All local, all automated, CLI-driven on a Linux machine with ffmpeg, faster-whisper, Ollama (phi4:14b, llama3.2-vision), rclone.
+
+**Target platforms:** Instagram Reels, Instagram Feed, Facebook Reels, Facebook Feed. Possibly TikTok later.
+
+**Content type:** Short-form video (15–90s) of 3D printing process, product reveals, AI shop automation demos. Dark maker aesthetic. Cannabis accessories in the mix.
+
+---
+
+**Research questions — go deep on each:**
+
+1. **Auto-posting APIs**
+   What are the current (2026) options for programmatically publishing to Instagram and Facebook without manual intervention? Specifically:
+   - Instagram Graph API — current capabilities, what requires Meta Business Suite, what can be fully automated vs what still requires human action
+   - Facebook Graph API for video/Reels posting
+   - Third-party scheduling APIs (Buffer, Later, Publer, etc.) that expose REST APIs — which ones allow full automation without a human approval step?
+   - Any new Meta features in 2025–2026 that opened up or closed off auto-posting?
+
+2. **What's actually performing on Reels for maker/3D printing content in 2026**
+   - What content formats are the algorithm rewarding right now (POV, voiceover, text-on-screen, timelapse, reveal format)?
+   - Optimal clip length for reach vs engagement tradeoff
+   - What hook styles (first 3 seconds) are working in the maker/DIY/craft niche
+   - Any data on posting frequency, timing, consistency patterns that matter
+   - How do successful small maker accounts (under 10k followers) grow vs larger ones
+
+3. **AI-assisted social media tools for creators — competitive landscape**
+   - What tools exist in 2026 for AI-assisted caption writing, hashtag research, content scheduling for small creators?
+   - Any tools that do what Djinn Media is building (auto-generate content from raw footage + metadata)?
+   - What's the gap — what are these tools missing that a custom pipeline could do better?
+
+4. **Cross-platform content repurposing**
+   - Best practices for repurposing one piece of content across IG, FB, and TikTok without getting penalized for duplicate content
+   - Watermark detection — does Instagram or FB actually suppress content with TikTok watermarks in 2026?
+   - How to format one video file to perform optimally on all three without separate exports
+
+5. **Analytics and feedback loops**
+   - What analytics are available via the Instagram/Facebook Graph API (not just the app — the actual API)?
+   - Can you pull reach, saves, shares, watch time, retention data programmatically?
+   - Are there open-source or lightweight tools for aggregating this data locally?
+
+6. **Cannabis content and platform policies in 2026**
+   - What is Instagram's current enforcement stance on cannabis accessory content (not drug use — 3D printed accessories, pipes, etc.)?
+   - What hashtag categories are getting shadowbanned vs tolerated?
+   - Any workarounds successful cannabis-adjacent accounts are using?
+   - Facebook's policy vs Instagram's policy — are they different?
+
+7. **Djinn Media as a product**
+   - If this pipeline were packaged as a tool for other small shop owners / makers — what would be the most valuable features to emphasize?
+   - Who is the target user (maker, Etsy seller, print shop, cannabis brand)?
+   - What's the competitive positioning vs existing tools?
+
+---
+
+**Output format requested:**
+Structured report with one section per question. For each section: current state, key findings, specific recommendations or integrations to pursue, and any warnings/gotchas. Cite sources. Flag anything time-sensitive (API changes, policy updates).
+
+**Deliver as:** Markdown artifact Javier can paste into the vault at `~/Obsidian/djinn/projects/RESEARCH-djinn-media-marcus.md`
