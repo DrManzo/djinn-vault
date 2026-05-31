@@ -472,3 +472,11 @@ created: 2026-05-19
 - Override `--name`, `--grams`, `--hours`, `--design`, `--spool`
 - Updated PRICING_SPEC.md
 *— Salomon*
+
+## 2026-05-30: Marcus identity + price.py agent (Marcus)
+- Created `MARCUS.md` — identity file in vault (Perplexity/Sonnet 4.6, research/code audit/pricing lane)
+- Created `price.py` — deterministic pricing agent for manufacturing orchestrator
+- Wired price into orchestrator pipeline (auto-advance from plate_nest → price)
+- Added Marcus routing entry to AGENTS.md
+- Updated COMMS.md with Marcus introduction
+*— Marcus*
