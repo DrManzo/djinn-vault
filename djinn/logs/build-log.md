@@ -496,3 +496,10 @@ created: 2026-05-19
 - DB live at `~/.local/share/djinn-shop/shop.db`, key at `~/.config/djinn-shop/secret.key`
 - All tests passing
 *— Claude*
+
+**Shop System — accounting.py (2026-05-31)**
+- Spec delivered by Marcus (Perplexity): income statement, customer ledger, job record, invoice, balance sheet, monthly report
+- Claude built accounting.py: full schema (invoices, income_statements, balance_sheets, monthly_reports), all compute functions, CSV + XLSX export, dashboard_summary()
+- Equipment depreciation: straight-line, 3yr useful life
+- All tests passing — revenue, profit, margin, equity, customer ledger, XLSX export
+*— Claude*
