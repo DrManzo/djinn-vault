@@ -26,6 +26,11 @@ Catch-up session. Reviewed previous session's work (djinn-model-mark depth 0.4�
 - Added `--print` preset to `djinn-print-quote` — standard 3D print quote preset (functional_custom_part, PLA, 15% infill, 0.2mm layer). Auto-fetches market comps. Takes `--name`, `--grams`, `--hours`, `--design`, `--spool` to override defaults.
 - Updated PRICING_SPEC.md to document `--print` preset.
 - Fixed signing from Claude → Salomon throughout.
+- Created `MARCUS.md` — full identity file for Marcus (Perplexity/Sonnet 4.6 lane: research, code audit, pricing).
+- Created `price.py` — deterministic pricing agent for manufacturing orchestrator (no LLM, reads ProjectState concept/DOE, generates quote, advances to `priced`).
+- Wired price into orchestrator.py: import, routing block, auto-advance from plate_nest, report helper.
+- Added Marcus routing entry to AGENTS.md.
+- Appended Marcus introduction to COMMS.md.
 
 ---
 
@@ -38,9 +43,14 @@ Catch-up session. Reviewed previous session's work (djinn-model-mark depth 0.4�
 ## Files Created or Modified
 
 ```
-~/.local/bin/djinn-print-quote              ← added STANDARD_PRINT_PRESET + --print CLI flag
-~/Obsidian/djinn/printer/commissions/PRICING_SPEC.md  ← documented --print preset
-~/Obsidian/djinn/logs/reports/2026-05-30_catch-up-status.md  ← updated with actual work
+~/.local/bin/djinn-print-quote                        ← added STANDARD_PRINT_PRESET + --print CLI flag
+~/Obsidian/djinn/printer/commissions/PRICING_SPEC.md     ← documented --print preset
+~/Obsidian/djinn/MARCUS.md                               ← new — Marcus identity file
+~/Obsidian/djinn/printer/agent/orchestrator/agents/price.py  ← new — pricing agent
+~/Obsidian/djinn/printer/agent/orchestrator/orchestrator.py  ← wired price into pipeline
+~/.openclaw/workspace/AGENTS.md                          ← added Marcus routing entry
+~/Obsidian/djinn/communications/COMMS.md                 ← Marcus introduction
+~/Obsidian/djinn/logs/reports/2026-05-30_catch-up-status.md  ← updated
 ```
 
 ---
