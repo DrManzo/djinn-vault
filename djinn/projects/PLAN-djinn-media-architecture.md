@@ -90,6 +90,32 @@ Read from `media-context.json` written by Layer 1. No manual input required.
 
 ---
 
+## Personal Footage Intake — Fire Test Path (TASK-013/014)
+
+Before Discord capture is built, Javier can test the full pipeline with his own footage:
+
+```
+iPhone → Google Drive (gdrive:Typhons-Forge/inbox/)
+  ↓ rclone sync every 5 min (djinn-media-gdrive-sync.timer)
+~/djinn-media-inbox/
+  ↓ djinn-media-drop watcher (inotifywait daemon)
+djinn-media-ingest --job-name {derived from filename}
+  ↓
+Telegram: "📥 Ingested: {project_id} — send reel/full to process"
+  ↓
+Javier sends: full {project_id}
+  ↓
+Layer 1 + Layer 2 pipeline → stitch-kit/ → Drive → #post-ready
+```
+
+**Drop folder:** `~/djinn-media-inbox/`
+**GDrive inbox:** `gdrive:Typhons-Forge/inbox/`
+**Processed files moved to:** `~/djinn-media-inbox/processed/`
+
+This path is intentionally separate from Discord capture. It's the manual "I shot this, run it" path that will exist permanently even after full automation.
+
+---
+
 ## Current Scope — Discord Only
 
 **Right now Djinn Media runs on Discord channel content only.**

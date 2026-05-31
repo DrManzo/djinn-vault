@@ -266,6 +266,84 @@ Add `kit` command to both gateway scripts so Javier can trigger from phone:
 
 ---
 
+## TASK-013
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Javier
+- context: Build djinn-media-drop — personal footage intake watcher for fire testing the pipeline
+
+**What to build:**
+
+### 1. Drop folder
+`~/djinn-media-inbox/` — local watched folder on Salomon
+
+### 2. GDrive sync path (iPhone → Salomon)
+`gdrive:Typhons-Forge/inbox/` → `~/djinn-media-inbox/`
+Javier drops files from iPhone to Google Drive inbox folder. rclone syncs down every 5 min via systemd timer.
+
+### 3. `djinn-media-drop` watcher daemon
+- Watches `~/djinn-media-inbox/` with inotifywait (or poll fallback if inotify unavailable)
+- When a new file lands and is fully written (not still copying):
+  1. Derives job_slug from filename (strip extension, slugify)
+  2. Runs `djinn-media-ingest <file> --job-name <job_slug>`
+  3. Moves processed file to `~/djinn-media-inbox/processed/`
+  4. Sends Telegram notification:
+     ```
+     📥 Djinn Media — intake received
+     Job: {job_slug}
+     Project: {project_id}
+     Type: {video|photo}
+     
+     Send to start processing:
+       reel {project_id}          ← export full reel
+       reel {project_id} combine  ← combine multiple clips
+       full {project_id}          ← run entire pipeline
+     ```
+
+### 4. systemd units (two)
+- `djinn-media-drop.service` — the watcher daemon
+- `djinn-media-gdrive-sync.timer` — rclone sync every 5 min
+  `rclone copy gdrive:Typhons-Forge/inbox ~/djinn-media-inbox --ignore-existing`
+
+**Files to create:**
+- `/home/drmanzo/.local/bin/djinn-media-drop` — watcher script
+- `~/.config/systemd/user/djinn-media-drop.service`
+- `~/.config/systemd/user/djinn-media-gdrive-sync.timer`
+- `~/.config/systemd/user/djinn-media-gdrive-sync.service`
+
+**Note:** This is the fire-test intake path — Javier's own footage only. Completely separate from Discord capture (future). Lets him test the full pipeline with real footage immediately.
+
+---
+
+## TASK-014
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude (per Javier)
+- context: Deploy djinn-media-drop watcher + gdrive sync timer after Claude builds TASK-013
+
+**After Claude completes TASK-013:**
+```bash
+git -C ~/Obsidian pull
+mkdir -p ~/djinn-media-inbox/processed
+systemctl --user enable --now djinn-media-drop.service
+systemctl --user enable --now djinn-media-gdrive-sync.timer
+```
+
+**Verify:**
+```bash
+systemctl --user status djinn-media-drop.service
+systemctl --user status djinn-media-gdrive-sync.timer
+# Drop a test file into ~/djinn-media-inbox/ and confirm Telegram notification fires
+```
+
+**Report back:** COMMS.md + build-log.md. Confirm Telegram intake notification works end to end.
+
+---
+
 ## TASK-012
 - assigned_to: marcus
 - status: pending
