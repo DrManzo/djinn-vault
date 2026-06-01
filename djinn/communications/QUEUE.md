@@ -1162,11 +1162,13 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-029
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Javier
-- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Build djinn-marcus-sync — Selenium/Firefox scraper polls Perplexity Pro library, diffs against vault state, drops new/updated threads into RAW/, clerk routes them. Backlog 2 months on first run. Hourly systemd timer. Telegram notification on new threads. Phone threads included automatically (cloud-synced).
+- context: PHASE-4: Build — djinn-marcus-sync — Perplexity Pro library scraper
+- output: ~/.local/bin/djinn-marcus-sync — Xvfb+Firefox bypasses Cloudflare, extracts cookies from snap profile, diffs against state file + RAW/, saves new threads with frontmatter to RAW/, Telegram notification, git auto-commit. Hourly systemd timer installed (active). 20 threads detected on first dry-run. Run djinn-marcus-sync to do first full sync, --full to resync all.
 
 ## TASK-030
 - assigned_to: claude
@@ -1363,3 +1365,13 @@ echo "Structure:"; ls /mnt/archive/
 - created: 2026-06-01 by Claude
 - completed: 2026-06-01 by Claude
 - context: PHASE-1: Run after TASK-044 completes — gates all builds — Full Typhon system audit — snap bloat, log sizes, home directory, duplicate data (library-rescue vs Library-Backup), ollama-system (53GB of models — which are still needed?), running services health check, disk cleanup. Report what can be safely removed.
+
+## TASK-052
+- assigned_to: claude
+- status: done
+- completed: 2026-06-01 by Claude
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: PHASE-4: Build — Wire djinn-gemini into Telegram gateway
+- output: djinn-telegram-gateway updated — /gemini <cmd> <args> routes to djinn-gemini CLI (ask, youtube, url, doc, research). ANSI codes stripped, header/path lines filtered, 3800-char truncation for Telegram limit, 180s timeout for long analyses. /help updated.
