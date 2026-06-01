@@ -1264,7 +1264,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-040
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1290,7 +1291,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-043
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
