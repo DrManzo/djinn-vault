@@ -1155,3 +1155,43 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - trigger: manual
 - created: 2026-05-31 by Claude
 - context: Perplexity decision — downgrade to $9/month annual (keep research lane) or cancel (Gemini handles Marcus)
+
+## TASK-029
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Javier
+- context: Build djinn-marcus-sync — Selenium/Firefox scraper polls Perplexity Pro library, diffs against vault state, drops new/updated threads into RAW/, clerk routes them. Backlog 2 months on first run. Hourly systemd timer. Telegram notification on new threads. Phone threads included automatically (cloud-synced).
+
+## TASK-030
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: COMMS.md rotation — archive entries older than 30 days to djinn/communications/archive/COMMS-YYYY-MM.md, keep COMMS.md lean and fast to scan
+
+## TASK-031
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Djinn conversation log — both gateways (Telegram + Discord) write daily exchange summary to djinn/logs/conversations/YYYY-MM-DD.md so key decisions made between Javier and Djinn are vault-persistent
+
+## TASK-032
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Claude queue alert — Djinn checks QUEUE.md for assigned_to:claude + status:pending at gateway startup and pings Javier via Telegram so pending Claude tasks don't silently pile up
+
+## TASK-033
+- assigned_to: claude
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Typhon heartbeat staleness alert — if HEARTBEAT-typhon.md last beat is >24h old, Djinn alerts Javier on next Telegram message
