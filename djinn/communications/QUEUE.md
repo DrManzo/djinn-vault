@@ -1167,10 +1167,11 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-030
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
+- completed: 2026-06-01 by Claude
 - context: PHASE-3: Infrastructure — run anytime, no dependency — COMMS.md rotation — archive entries older than 30 days to djinn/communications/archive/COMMS-YYYY-MM.md, keep COMMS.md lean and fast to scan
 
 ## TASK-031
@@ -1199,10 +1200,11 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-034
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
+- completed: 2026-06-01 by Claude
 - context: PHASE-3: Quick fix — run anytime, no dependency — Fix djinn-printer-files-backup exit code — rsync transfers successfully but set -euo pipefail causes exit 1. Add || true to rsync pipe.
 
 ## TASK-035
@@ -1340,8 +1342,9 @@ echo "Structure:"; ls /mnt/archive/
 
 ## TASK-045
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: critical
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-01 by Claude
 - context: PHASE-1: Run after TASK-044 completes — gates all builds — Full Typhon system audit — snap bloat, log sizes, home directory, duplicate data (library-rescue vs Library-Backup), ollama-system (53GB of models — which are still needed?), running services health check, disk cleanup. Report what can be safely removed.
