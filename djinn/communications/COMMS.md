@@ -932,3 +932,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:11 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-need-your-help-i-want-to-take-you-to-open-claw-i-need-all-of-the-fil.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:11
+**RE:** Session end — slipbox-2026-06-01-i-need-your-help-i-want-to-take-you-to-open-claw-i-need-all-of-the-fil-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-need-your-help-i-want-to-take-you-to-open-claw-i-need-all-of-the-fil.md
+
+**Action:** None — FYI.
+
+— Salomon
