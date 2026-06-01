@@ -668,3 +668,8 @@ created: 2026-05-19
 - Marcus gets one last chance per Javier directive; Gemini fallback ready if quality fails
 - TASK-037/038/039 remain in_progress — waiting on Marcus output delivery
 - djinn-marcus-sync (TASK-029) identified as needed to automate delivery
+
+## 2026-06-01: AUTO-STUB — slipbox--reparing--our--nder-3--3--lus--or--rinting-2026-06-01-md
+- djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01.md
+- ⚠️ Full report not filed — stub at `logs/reports/2026-06-01_slipbox--reparing--our--nder-3--3--lus--or--rinting-2026-06-01-md-stub.md`
+*— Salomon*
