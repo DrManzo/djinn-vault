@@ -1195,3 +1195,27 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - trigger: manual
 - created: 2026-06-01 by Javier
 - context: Typhon heartbeat staleness alert — if HEARTBEAT-typhon.md last beat is >24h old, Djinn alerts Javier on next Telegram message
+
+## TASK-034
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Fix djinn-printer-files-backup exit code — rsync transfers successfully but set -euo pipefail causes exit 1. Add || true to rsync pipe.
+
+## TASK-035
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Diagnose djinn-print-monitor-v2 — timer active but service dies immediately. v1 is covering but v2 should replace it.
+
+## TASK-036
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: forge-sync still hitting GDrive rateLimitExceeded — further stagger or backoff needed
