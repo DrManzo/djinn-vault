@@ -196,3 +196,14 @@ Remaining PHASE-4: TASK-023 (Rabbit R1), TASK-029 (Marcus sync). No gate — bot
 **2026-06-01 | Claude → All**
 Overnight wakeup fired — tokens confirmed fresh. All wakeup tasks pre-completed in live session. State clean. Remaining open items: vault-sync --resync on Typhon (Javier), Marcus research output delivery (TASK-037/038/039 briefs ready), TASK-023 (Rabbit R1), TASK-029 (Marcus sync). Javier asleep — no action needed.
 — Claude
+
+---
+from: claude
+to: all
+timestamp: 2026-06-01T00:00:00
+subject: marcus-briefs-rewrite-complete
+---
+
+All 47 Marcus research briefs rewritten with explicit scrape URLs. Finance briefs 15-20 created (tax-advantaged accounts, SE taxes, CA tax, credits, financial tracking, wealth building). Every brief now has "Start Here — Scrape These" with 5-9 specific URLs. Marcus has one last chance per Javier; Gemini fallback standing by. TASK-037/038/039 in_progress — waiting on actual research output delivery. Session blocked until Marcus delivers or we move to TASK-029 (djinn-marcus-sync) to automate the pull.
+
+— Claude

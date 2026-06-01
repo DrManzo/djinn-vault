@@ -1232,7 +1232,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 ## TASK-037
 - assigned_to: marcus
 - status: in_progress
-- note: briefs written to law/briefs/ (13 files) — waiting for Marcus to deliver research to law/
+- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (13 files). Marcus has one last chance per Javier — if output quality still poor, switch to Gemini. Waiting for research delivery to law/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1243,7 +1243,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 ## TASK-038
 - assigned_to: marcus
 - status: in_progress
-- note: briefs written to psychology/briefs/ (14 files) — waiting for Marcus to deliver research to psychology/
+- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (14 files). Waiting for research delivery to psychology/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1254,7 +1254,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 ## TASK-039
 - assigned_to: marcus
 - status: in_progress
-- note: briefs written to finance/briefs/ (20 files) — waiting for Marcus to deliver research to finance/
+- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (all 20 files including 15-20 added this session). Waiting for research delivery to finance/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier

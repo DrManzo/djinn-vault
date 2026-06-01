@@ -1,27 +1,33 @@
 ---
 assigned_to: marcus
 suite: Djinn Cash
-github: search for relevant repos, tools, calculators, datasets — include best under ## GitHub Resources
-compliance: every output must note applicable SEC/IRS/FINRA/CA-FTB legal constraints
-output_to: djinn/research/marcus/finance/
+output_to: djinn/research/marcus/finance/20_building-wealth-from-zero.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
-⚠️ Note legal compliance constraints in every file. Educational only — not financial/tax/legal advice.
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 20 — Building Wealth From Zero
+# Session 20 — Building Wealth from Zero
 
-**Cover:**
-- The math of starting from nothing: compound interest table starting at $0, $100/mo, $500/mo, $1000/mo at 7% over 10/20/30 years
-- Priority sequence: emergency fund first → high-interest debt → employer match (free money) → Roth IRA → more 401k → taxable investing — why this order
-- The income problem: wealth building is impossible below a threshold, honest talk about increasing income vs cutting expenses
-- Time as the asset: why starting at 22 vs 32 is worth more than doubling your investment amount
-- Common wealth-destruction mistakes: lifestyle inflation, no emergency fund (debt spiral), cashing out 401k, market timing, high-fee advisors
-- Milestones that actually matter: $1k emergency fund, 3-month fund, first $10k invested, first $100k (hardest psychological milestone)
-- Wealth building for self-employed/variable income: percentage-based savings, business vs personal separation
-- The 4% rule: retirement math, safe withdrawal rate, what it means for FIRE (Financial Independence)
-- Real talk: median vs mean wealth in America, what the numbers actually look like, class mobility data
-- GitHub: FIRE calculators, compound interest tools, retirement readiness assessments, wealth building roadmaps
+## Start Here — Scrape These
+- https://www.mrmoneymustache.com/2013/02/22/getting-rich-from-zero-to-hero-in-one-blog-post/ — MrMoneyMustache core wealth-building post
+- https://www.reddit.com/r/personalfinance/wiki/commontopics — r/personalfinance prime directive (the flowchart)
+- https://www.bogleheads.org/wiki/Getting_started — Bogleheads getting started
+- https://www.nerdwallet.com/article/investing/how-to-grow-wealth — NerdWallet wealth building guide
+- https://earlyretirementnow.com/2016/12/07/the-shockingly-simple-math-behind-early-retirement/ — savings rate → years to retirement math
+- https://www.choosefi.com/the-fi-equation/ — ChooseFI financial independence equation
+- https://www.investopedia.com/articles/personal-finance/100516/setting-financial-goals/ — goal-setting framework
+- https://affordanything.com/is-frugality-worth-it/ — Paula Pant on frugality vs income
+
+## Cover
+- The sequence matters: emergency fund first (3-6 months expenses in HYSA), then high-interest debt, then retirement contributions to get employer match, then additional investing
+- r/personalfinance flowchart: scrape the actual steps and summarize them (it's the gold standard for this exact question)
+- Savings rate is the lever: at 10% savings rate → ~40 years to retire; at 50% → ~17 years; at 65% → ~10 years. Show the table
+- FIRE (Financial Independence / Retire Early): FI number = annual expenses × 25 (4% safe withdrawal rate). How to calculate yours
+- Income growth vs frugality: frugality has a floor (you can only cut so much), income has no ceiling. Both matter but income is higher leverage above a certain point
+- Index fund investing: total market index fund (VTI or VTSAX), set and forget, time in market beats timing the market, compound interest math
+- Debt elimination strategies: avalanche (highest interest first, mathematically optimal) vs snowball (smallest balance first, psychologically motivating)
+- Starting from nothing concretely: open HYSA (high-yield savings account, 4-5% APY currently), open Roth IRA and contribute $583/month to max $7k/year, automate contributions so it's not a decision
+- Common mistakes: lifestyle inflation, not negotiating salary, paying for whole life insurance, holding cash too long, waiting for the "right time" to invest
 
 **Output file:** `djinn/research/marcus/finance/20_building-wealth-from-zero.md`

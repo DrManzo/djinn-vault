@@ -1,26 +1,39 @@
 ---
 assigned_to: marcus
 suite: Djinn Cash
-github: search for relevant repos, tools, calculators, datasets — include best under ## GitHub Resources
-compliance: every output must note applicable SEC/IRS/FINRA/CA-FTB legal constraints
-output_to: djinn/research/marcus/finance/
+output_to: djinn/research/marcus/finance/10_sector-analysis.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
-⚠️ Note legal compliance constraints in every file. Educational only — not financial/tax/legal advice.
+**One session. Full depth. Scrape the links, synthesize the content.**
 
 # Session 10 — Sector Analysis
 
-**Cover:**
-- All 11 S&P sectors: technology, healthcare, financials, energy, consumer staples, consumer discretionary, utilities, materials, industrials, real estate, communication services — current state and key players
-- Cyclical vs defensive: which sectors perform in expansion vs recession, leading indicators for each
-- Sector ETFs: the main ones (XLK, XLV, XLF, etc.), expense ratios, top holdings
-- Macro conditions and sector rotation: rising rates → financials, falling rates → utilities/real estate, inflation → energy/materials, recession fear → staples/healthcare
-- How to read sector performance charts: relative strength, sector vs SPY comparison
-- Current opportunities and risks (research live as of session date)
-- Sector concentration risk: when your portfolio is too heavy in one sector
-- International sectors: how they differ from US, EM vs developed market sector weighting
-- GitHub: sector rotation models, sector ETF comparison tools, macro indicator dashboards
+## Start Here — Scrape These
+- https://www.sectorspdr.com/sectorspdr/ — SPDR sector ETFs (official, best data)
+- https://finviz.com/map.ashx — FINVIZ sector performance map
+- https://etfdb.com/etfdb-category/equity-u-s-sector/ — ETF sector comparison
+- https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard — GICS sectors
+- https://www.investopedia.com/ask/answers/05/sectorvsindusrty.asp — sector vs industry
+- https://fred.stlouisfed.org — FRED economic data (correlate sectors with macro)
+- https://stockanalysis.com/sectors/ — sector performance data
+
+## Cover
+All 11 S&P 500 sectors — for each: what's in it, current trends, cyclical or defensive, best ETF ticker, macro conditions that favor it:
+1. Technology (XLK) — semiconductors, software, hardware. Cyclical. Rate-sensitive.
+2. Healthcare (XLV) — pharma, biotech, insurance. Defensive. Aging demographics tailwind.
+3. Financials (XLF) — banks, insurance, asset managers. Cyclical. Benefits from rising rates.
+4. Energy (XLE) — oil, gas, renewables. Cyclical. Geopolitical + supply/demand driven.
+5. Consumer Staples (XLP) — food, beverage, household. Defensive. Outperform in recessions.
+6. Consumer Discretionary (XLY) — retail, autos, luxury. Cyclical. Consumer confidence driven.
+7. Utilities (XLU) — electric, water, gas. Defensive/interest-rate sensitive. Bond proxy.
+8. Materials (XLB) — mining, chemicals, paper. Cyclical. Infrastructure spend driven.
+9. Industrials (XLI) — aerospace, defense, transportation. Cyclical. Manufacturing PMI driven.
+10. Real Estate (XLRE) — REITs. Rate-sensitive. Inflation hedge.
+11. Communication Services (XLC) — media, telecom, social. Mixed cyclical/defensive.
+
+Sector rotation cycle: which sectors lead at each phase of the economic cycle
+
+⚠️ Educational only. Not investment advice.
 
 **Output file:** `djinn/research/marcus/finance/10_sector-analysis.md`

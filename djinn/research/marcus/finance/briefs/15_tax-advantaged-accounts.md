@@ -1,28 +1,36 @@
 ---
 assigned_to: marcus
 suite: Djinn Cash
-github: search for relevant repos, tools, calculators, datasets — include best under ## GitHub Resources
-compliance: every output must note applicable SEC/IRS/FINRA/CA-FTB legal constraints
-output_to: djinn/research/marcus/finance/
+output_to: djinn/research/marcus/finance/15_tax-advantaged-accounts.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
-⚠️ Note legal compliance constraints in every file. Educational only — not financial/tax/legal advice.
+**One session. Full depth. Scrape the links, synthesize the content.**
 
 # Session 15 — Tax-Advantaged Accounts
 
-**Cover:**
-- Traditional 401k: contribution limits 2025/2026, employer match (free money), pre-tax benefit, RMDs at 73
-- Roth 401k: same limits, after-tax contributions, no RMDs, income limit (none for 401k)
-- Traditional IRA: contribution limits, deductibility rules (income limits when covered by workplace plan)
-- Roth IRA: contribution limits, income limits for direct contribution, tax-free growth, no RMDs
-- Backdoor Roth IRA: step-by-step process, pro-rata rule trap, when it makes sense
-- Mega backdoor Roth: after-tax 401k contributions + in-service withdrawal, not available at all employers
-- SEP-IRA: contribution limits (25% of compensation or $69k), who it's for, deadlines
-- SIMPLE IRA: small employer option, contribution limits, 2-year rule
-- HSA triple tax advantage: contribution limits 2025, eligible expenses, investment strategy, Medicare at 65
-- 529 plans: contribution limits, state deductions, qualified expenses, superfunding
-- GitHub: retirement calculator tools, Roth vs traditional comparison tools, HSA optimizer
+## Start Here — Scrape These
+- https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-contributions — IRS contribution limits
+- https://www.irs.gov/retirement-plans/roth-iras — Roth IRA IRS page
+- https://www.irs.gov/health-plans/health-savings-account-hsa — HSA IRS page
+- https://www.fidelity.com/retirement-ira/ira-comparison — Fidelity account comparison
+- https://www.investopedia.com/terms/b/backdoor-roth-ira.asp — backdoor Roth
+- https://www.bogleheads.org/wiki/Backdoor_Roth_IRA — Bogleheads backdoor Roth guide
+- https://www.kitces.com/blog/mega-backdoor-roth/ — mega backdoor Roth (Kitces)
+
+## Cover
+Full comparison table and details — get 2025/2026 limits from IRS:
+
+- **Traditional 401k**: pre-tax contributions (reduce taxable income now), employer match (free money — always contribute to get full match), RMDs at 73, $23,500 limit 2025
+- **Roth 401k**: after-tax contributions, tax-free growth and withdrawals, no income limit, same contribution limit as traditional
+- **Traditional IRA**: pre-tax if no workplace plan or below income limit, $7,000 limit 2025, deductibility phases out with income if covered by workplace plan
+- **Roth IRA**: after-tax, tax-free growth/withdrawals, income limit phases out ~$150k-$165k single, $236k-$246k MFJ for 2025
+- **Backdoor Roth IRA**: contribute non-deductible traditional IRA → convert to Roth, avoids income limit. Beware pro-rata rule if you have other IRA money
+- **Mega backdoor Roth**: after-tax 401k contributions ($46k+ total) → in-plan Roth conversion. Plan must allow it
+- **SEP-IRA**: for self-employed, up to 25% of net self-employment income or $69,000 (2025), pre-tax
+- **HSA**: triple tax advantage (pre-tax in, tax-free growth, tax-free medical withdrawals), $4,150 single/$8,300 family 2025, must have HDHP, invest the balance after $1k+ cash cushion
+- Early withdrawal penalties: 10% + taxes before 59½, exceptions (Roth contributions, 72t distributions, first home, disability)
+
+⚠️ Educational only. Not tax advice. IRS limits change annually — verify current figures.
 
 **Output file:** `djinn/research/marcus/finance/15_tax-advantaged-accounts.md`
