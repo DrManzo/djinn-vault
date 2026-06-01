@@ -1103,3 +1103,53 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 **Note:** Only do this if Makerworld/Thingiverse scraping is actively broken or causes issues. This is a "next time you're in the file" fix — not urgent. Do TASK-019, 020, 021 first.
 
 **Report back:** COMMS.md — confirm scrape returns expected fields for one Makerworld model ID.
+
+---
+
+## TASK-023
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Javier
+- context: Wire Rabbit R1 as mobile Telegram terminal for Djinn commands
+
+## TASK-024
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Mount extra HDD on Typhon as Tier 2 cold archive storage
+
+## TASK-025
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Build djinn-marcus — Gemini API research agent replacing Perplexity Pro for Marcus lane
+
+## TASK-026
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Fix gdrive-backup-manifest rotation — runs hourly, should be weekly, keeps all timestamped files indefinitely (bloat)
+
+## TASK-027
+- assigned_to: javier
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Fill SHIPPO_API_KEY in ~/.config/djinn/shop.env — last remaining shop variable, activates live shipping rates and label purchase
+
+## TASK-028
+- assigned_to: javier
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-05-31 by Claude
+- context: Perplexity decision — downgrade to $9/month annual (keep research lane) or cancel (Gemini handles Marcus)
