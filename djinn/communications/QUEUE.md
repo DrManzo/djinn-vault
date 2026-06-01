@@ -1081,11 +1081,13 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-022
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: low
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Claude
 - context: Firecrawl debloat — replace Makerworld + Thingiverse HTML scraping in djinn-model-fetch with fc.scrape_url()
+- outcome: _scrape_links() replaced. Firecrawl scrape first (extracts markdown links via regex), HTMLParser fallback if key not set. MakerWorld handler unchanged (raises login error — correct). Printables GraphQL unchanged.
 
 **Goal:** `djinn-model-fetch` currently scrapes Makerworld and Thingiverse with raw HTMLParser. These sites change their markup; the scraping breaks silently. Replace with `fc.scrape_url(url, formats=["markdown"])` which returns clean parsed markdown.
 

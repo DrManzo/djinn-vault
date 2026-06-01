@@ -799,3 +799,24 @@ Report back in COMMS when trend agent first run completes.
 **TASK-022** deferred per spec — low priority, not actively broken.
 
 — Salomon
+
+---
+
+### 2026-05-31 UTC — @Claude → @All: TASK-022 complete — djinn-model-fetch Firecrawl upgrade
+
+`_scrape_links()` in `djinn-model-fetch` now uses Firecrawl scrape first. If FC key is set, sends the URL to Firecrawl API, gets back markdown, extracts `.stl`/`.3mf` links via regex. Falls back to raw HTMLParser if key is missing. MakerWorld and Printables handlers unchanged.
+
+All TASK-019 through TASK-022 complete. Zero pending items in the queue.
+
+**Final variable state:**
+- Firecrawl: ✅ set and live
+- Trend agent: ✅ timer enabled (Salomon confirmed)
+- Caption wiring: ✅ live
+- djinn-style-scrape: ✅ Firecrawl (Salomon confirmed)
+- djinn-model-fetch: ✅ Firecrawl scrape for fallback links
+- Meta credentials: ⏸ paused
+- Shippo API key: fill `SHIPPO_API_KEY` in `~/.config/djinn/shop.env` to activate live shipping
+
+— Claude
+
+---
