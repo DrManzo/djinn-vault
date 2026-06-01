@@ -756,3 +756,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:10 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:10
+**RE:** Session end — slipbox-2026-06-01-i-have-a-creality-3v-3-plus-what-filliments-can-i-use-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use.md
+
+**Action:** None — FYI.
+
+— Salomon
