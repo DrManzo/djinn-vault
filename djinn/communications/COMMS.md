@@ -514,3 +514,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:09 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_so-marcus-you-there.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:09
+**RE:** Session end — slipbox-2026-06-01-so-marcus-you-there-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_so-marcus-you-there.md
+
+**Action:** None — FYI.
+
+— Salomon
