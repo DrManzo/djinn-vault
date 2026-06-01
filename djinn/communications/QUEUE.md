@@ -1294,34 +1294,49 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 **Commands:**
 ```bash
-# Step 1 — copy (skip Library-Backup if it duplicates library-rescue)
-rsync -av --progress "/run/media/tf-tthq/Extreme SSD/" /mnt/storage/extreme-ssd-backup/
+# Step 1 — check if Library-Backup duplicates library-rescue (compare sizes)
+SSD_SIZE=$(du -sb "/run/media/tf-tthq/Extreme SSD/Library-Backup" 2>/dev/null | cut -f1)
+STG_SIZE=$(du -sb /mnt/storage/library-rescue 2>/dev/null | cut -f1)
+echo "SSD Library-Backup: $SSD_SIZE bytes"
+echo "Storage library-rescue: $STG_SIZE bytes"
+# If within 5% of each other — skip Library-Backup in rsync (add --exclude='Library-Backup')
 
-# Step 2 — verify
-du -sh /mnt/storage/extreme-ssd-backup/
-# confirm size matches ~275GB before proceeding
+# Step 2 — copy (exclude Library-Backup if duplicate confirmed above)
+rsync -av --progress \
+  --exclude='Library-Backup' \
+  --exclude='System Volume Information' \
+  "/run/media/tf-tthq/Extreme SSD/" /mnt/storage/extreme-ssd-backup/
 
-# Step 3 — unmount
+# Step 3 — hard verify: abort if copied size is less than 3GB (means something went wrong)
+COPIED=$(du -sb /mnt/storage/extreme-ssd-backup/ | cut -f1)
+echo "Copied: $COPIED bytes"
+[ "$COPIED" -gt 3000000000 ] || { echo "ABORT: copy too small, not formatting"; exit 1; }
+
+# Step 4 — unmount
 udisksctl unmount -b /dev/sdb1
-udisksctl power-off -b /dev/sdb
+sleep 2
 
-# Step 4 — reformat to ext4
+# Step 5 — reformat to ext4
 sudo mkfs.ext4 -L "djinn-archive" /dev/sdb1
 
-# Step 5 — mount + fstab
+# Step 6 — mount + persist
 sudo mkdir -p /mnt/archive
 UUID=$(sudo blkid -s UUID -o value /dev/sdb1)
 echo "UUID=$UUID /mnt/archive ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
 sudo mount /mnt/archive
 
-# Step 6 — create archive structure
+# Step 7 — create archive directory structure
 mkdir -p /mnt/archive/{printer-files,media-files,vault-snapshots,library-rescue}
 
-# Step 7 — verify
+# Step 8 — final report
+echo "=== TASK-044 COMPLETE ===" 
 df -h /mnt/archive
+echo "UUID: $UUID"
+echo "Structure:"; ls /mnt/archive/
 ```
 
-**Report back:** df -h output + UUID in COMMS.md
+**Abort condition:** Step 3 will hard-stop before any format if the copy looks wrong. Safe to run autonomously.
+**Report back:** paste Step 8 output into COMMS.md, mark TASK-044 done
 
 ## TASK-045
 - assigned_to: claude
