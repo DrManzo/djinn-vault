@@ -93,3 +93,9 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 
 **Decision:** djinn-marcus uses Perplexity API (sonar-pro), not Gemini.
 **Why:** Javier is keeping Perplexity Pro. The value prop is live web search + citation threading — exactly what Sonar does. Gemini handles Drive/docs/vision via Google One AI Premium (separate lane). Marcus = research + web. Gemini = docs + vision.
+
+## 2026-06-01 — Build gate: infrastructure + research before any new suite
+
+**Decision:** Nothing gets built until (1) Typhon audit + cleanup complete, (2) Marcus research reports for all three suites delivered.
+**Why:** Typhon cleanup gives us clean storage infrastructure to build on. Marcus research defines what each suite (Law, Psyc, Cash) actually needs — features, depth, structure. Building without that means guessing and reworking. Research-first is always cheaper than rebuild-after.
+**Order:** Typhon TASK-044/045 → Marcus TASK-037/038/039 → Claude architects → Salomon builds.
