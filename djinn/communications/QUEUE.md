@@ -1124,11 +1124,13 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-025
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude
-- context: Build djinn-marcus — Gemini API research agent replacing Perplexity Pro for Marcus lane
+- completed: 2026-05-31 by Claude
+- context: Build djinn-marcus — Perplexity CLI research agent (vault-integrated, topic threads, QUEUE.md-aware)
+- output: ~/.local/bin/djinn-marcus — stdlib Python, sonar-pro default, 7 commands, git auto-commit on writes
 
 ## TASK-026
 - assigned_to: claude

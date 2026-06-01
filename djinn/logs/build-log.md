@@ -618,3 +618,13 @@ created: 2026-05-19
 - **Freed:** 7.9 GB pip cache, 1.5 GB faster-whisper model, 2 .bak files
 - **Disabled:** `djinn-media-gdrive-sync.timer` (constant failures), `djinn-meta-token-refresh.timer` (Meta paused), Xvfb from discord-watcher
 - **vault-sync throttled:** 2 min → 15 min; added `--ignore-errors` for mid-write log files
+
+## 2026-05-31 — djinn-marcus Perplexity CLI
+
+- **`~/.local/bin/djinn-marcus`** built — Perplexity API CLI, stdlib Python (no deps)
+- **Commands:** `ask` (one-off), `research` (threaded → vault), `repl` (interactive), `deep` (sonar-deep-research), `topics`, `read`, `tasks`
+- **Vault integration:** topic threads as `djinn/research/marcus/<slug>/`, CONTEXT.md rolling window (last 8 exchanges), dated query files
+- **Identity:** injects MARCUS-SESSION-BRIEF.md as system prompt at startup
+- **Auto-commit:** git push after every research write (`--author=Marcus <marcus@djinn>`)
+- **Key:** `~/.config/djinn/perplexity.env` (chmod 600) — needs fill
+- **TASK-025 done**

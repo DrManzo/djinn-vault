@@ -88,3 +88,8 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 
 **Decision:** Formalize three tiers: Vault (text, syncs everywhere), Local Assets (binary, Salomon-local, Typhon weekly rsync), Cold Archive (Typhon, pull on demand).
 **Why:** Preparing for multi-device access. As Djinn grows, no device should need to sync binary files to know system state. The vault is the index — it describes everything. Binary assets stay on the machine that uses them.
+
+## 2026-05-31 — Marcus = Perplexity CLI, not Gemini
+
+**Decision:** djinn-marcus uses Perplexity API (sonar-pro), not Gemini.
+**Why:** Javier is keeping Perplexity Pro. The value prop is live web search + citation threading — exactly what Sonar does. Gemini handles Drive/docs/vision via Google One AI Premium (separate lane). Marcus = research + web. Gemini = docs + vision.
