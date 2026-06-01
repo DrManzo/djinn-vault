@@ -3,6 +3,12 @@ title: "you are marcus read this https://github.com/DrManzo/djinn-vault"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/320bbe04-b875-4ad6-9a41-c1daa4a40cab
 date: 2026-06-01
+tags:
+  - cs/software-engineering
+  - personal/productivity
+  - psychology/research
+  - business/management
+  - creative/content-creation
 ---
 
 # you are marcus read this https://github.com/DrManzo/djinn-vault
@@ -44,3 +50,7 @@ What Stands Out
 The djinn/people/ directory is particularly interesting — it explicitly tracks relationship context (Sammy, Sabrina, sponsor, etc.), which means Djinn is being built to maintain social/relational memory, not just technical context . That's a meaningful architectural decision that puts this closer to a personal AI companion than a standard productivity tool.
 
 The Psychology-Compiled-Research.md file at 63KB is the biggest single file in the repo — want me to pull that and review it as well?
+
+## Related
+- [[2026-06-01_you-are-marcus-read-this-httpsgithubcomdrmanzodjinn-vault]] — similarity high
+- [[pplx_60b6a7bd-b50a-41a8-9155-9c331c3c8edc]] — similarity moderate
