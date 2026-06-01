@@ -1674,9 +1674,10 @@ Restore: when mention is detected for an archived person → `run_shell(f"djinn-
 
 ## TASK-059
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
+- completed: 2026-06-01 by Marcus
 - created: 2026-06-01 by Claude (per Javier)
 - context: Research — what does djinn-bughunter need to run robustly as a local error reporter on Salomon? What monitoring infrastructure belongs in a self-hosted systemd/Python environment?
 
@@ -1724,4 +1725,148 @@ One-person shop. Linux (Ubuntu/Debian). Python scripts, systemd services and tim
 **Output format:** Structured report, one section per question. Be specific — name actual tools, patterns, systemd directives. Flag anything with high maintenance cost (we want durable, low-touch monitoring).
 
 **Deliver to:** `djinn/research/marcus/TASK-059_bughunter-monitoring.md` — commit to vault. Claude reads on demand.
+
+---
+
+## TASK-060
+- assigned_to: marcus
+- status: pending
+- priority: critical
+- trigger: manual
+- created: 2026-06-01 by Claude (per Javier)
+- context: Full-stack research — automated social media content studio pipeline for two brands (Typhon's Forge + Terp Tribe Clouds). Season/episode/weekly cadence. Apple ecosystem priority. Near-studio-staff automation level.
+
+**Brief:**
+
+Javier is building an automated social media content studio on top of the existing Djinn media pipeline. Two separate brands, two separate Telegram bots, one shared backend. The system takes raw footage (photos + video) from iCloud or Google Drive, processes it into platform-ready content, and outputs a `DONE/` folder per content day — fully labeled, transcribed, captioned, and tagged, ready to copy-paste or schedule.
+
+**What Djinn already has (do not re-research, build on it):**
+- `djinn-media-ingest` — intake, manifest creation
+- `djinn-media-reel` — ffmpeg reel assembly, 30fps H.264
+- `djinn-media-repurpose` — clip segmentation
+- `djinn-media-kit` — stitch-kit folder + STITCH-ORDER.txt
+- `djinn-media-publish-prep` — Ollama caption gen, hashtag selection (reads TREND-SIGNAL.md)
+- `djinn-media-publish` — Meta Graph API publish (IG + FB)
+- `djinn-trend-agent` — 6-hour trend polling (Firecrawl + Printables RSS → Ollama phi4:14b)
+- `djinn-social-analyst` — daily Meta analytics pull
+- `ffmpeg`, `faster-whisper`, Ollama (`phi4:14b`, `llama3.2-vision`), `rclone` (GDrive configured)
+- Two social Telegram bots registered: `@djinn_bughunter_bot` (Typhon's Forge), `@djinn_terptribeclouds_bot` (Terp Tribe Clouds)
+
+**Brand 1 — Terp Tribe Clouds**
+Co-founder project. Currently in **Season 6**. Fixed weekly content schedule:
+| Day | Content Theme |
+|-----|---------------|
+| Monday | Network Monday |
+| Tuesday | Eve Life Tuesday |
+| Wednesday | Wax Wednesday |
+| Thursday | Terpy Disposables |
+| Friday | Flower Friday |
+| Saturday | Sesh Out Saturday |
+| Sunday | Slow-Mo Sundays |
+
+**Brand 2 — Typhon's Forge**
+Javier's own shop. Weekly day names TBD — same pipeline, different brand identity. 3D printing, functional art, maker content.
+
+**Target platforms for both brands:**
+Instagram Reels + Feed, Facebook Reels + Feed, YouTube Shorts, X (Twitter) video.
+
+**Output folder structure (per brand):**
+```
+Terp Tribe/
+└── Monday/
+    └── S6_E1_W1_Network-Monday/
+        ├── videos/          ← raw clips
+        ├── pics/            ← raw photos
+        └── done/
+            ├── reel.mp4             ← final assembled reel
+            ├── cover.jpg            ← thumbnail
+            ├── caption_ig.txt       ← IG caption + hashtags, copy-paste ready
+            ├── caption_fb.txt       ← FB version (shorter, 2–3 hashtags)
+            ├── caption_yt.txt       ← YouTube title + description + tags
+            ├── caption_x.txt        ← X/Twitter version (280 chars)
+            └── transcription.txt    ← full audio transcription
+```
+
+File naming convention: `S{season}_E{episode}_W{week}_{content-day-slug}`
+
+**Research questions — go deep on each:**
+
+1. **iCloud access from Linux in 2026**
+   - What are the current options for syncing iCloud Photo Library or iCloud Drive to a Linux machine (Salomon, Ubuntu)?
+   - `icloudpd` (iCloud Photos Downloader) — current state, auth method, reliability, Apple ID 2FA handling
+   - Any alternatives: `pyicloud`, direct iCloud Drive API, Shortcuts automation on iPhone to push to GDrive first?
+   - Apple's stance on third-party iCloud access in 2026 — has it gotten more or less open?
+   - **Recommended path:** given Djinn already has rclone + GDrive, is the best flow iPhone → iCloud → GDrive (via iOS Shortcuts) → rclone pull? Or is direct iCloudpd more reliable?
+   - Realistic failure modes and maintenance burden for each approach
+
+2. **Apple ecosystem media formats — handling HEIC, HEVC, ProRes**
+   - iPhone shoots HEIC photos and HEVC (H.265) or ProRes video. What does ffmpeg need to handle these on Linux?
+   - `heif-gdk-pixbuf`, `libheif`, ffmpeg HEVC decoding — what packages are required?
+   - ProRes RAW / ProRes 422 from iPhone 15 Pro — can ffmpeg transcode these without Apple hardware? What are the limitations?
+   - Live Photos — `.HEIC` + `.MOV` pair — should we extract the still, the video, or both? Best practice for social media?
+   - Optimal transcode settings: HEIC → JPEG (for thumbnails/IG feed), HEVC → H.264 (for all platforms), ProRes → H.264 (same pipeline)
+   - Any quality/compression tradeoffs to be aware of for cannabis accessory + maker content (macro shots, smoke effects, detail shots)
+
+3. **Platform format specs — current 2026 requirements**
+   For each platform (Instagram Reels, IG Feed, Facebook Reels, FB Feed, YouTube Shorts, X video):
+   - Optimal resolution and aspect ratio (9:16, 1:1, 16:9?)
+   - Max file size and duration limits
+   - Recommended codec and bitrate for best quality vs upload speed
+   - Caption length limits and hashtag best practices per platform
+   - Thumbnail requirements
+   - Any 2025–2026 changes to specs that the existing djinn-media-reel pipeline needs to account for
+   - Can one master export serve all platforms, or do we need per-platform encodes?
+
+4. **YouTube Shorts + X publishing APIs**
+   The existing pipeline only publishes to Meta (IG + FB). What's needed to add YouTube Shorts and X:
+   - YouTube Data API v3 — uploading Shorts (9:16 under 60s), required scopes, OAuth flow for headless/server use, quota limits
+   - X (Twitter) API v2 video upload — current status (has Elon's API pricing affected automated video posting?), free vs paid tiers, what you get at each tier
+   - Best library for each: `google-api-python-client` for YouTube, `tweepy` or direct requests for X?
+   - Any gotchas specific to cannabis-adjacent content on YouTube vs X (policy enforcement differences)
+   - Realistic automation level: can both be fully headless, or does one require manual steps?
+
+5. **Per-day content templates and seasonal naming automation**
+   - How to build a content calendar engine that knows: today is Wednesday Season 6, therefore this is "Wax Wednesday" S6_E{N}_W{week_of_season}
+   - Episode numbering across 7 days/week: does E1 = first piece of content ever, or first of the season, or first of the week?
+   - Recommended episode/week counter storage (SQLite? JSON file per brand?)
+   - How to generate the folder structure automatically on ingest — script creates `S6_E1_W1_Wax-Wednesday/` before any content lands
+   - Content day templates: per-theme prompt injection for the caption agent. "Wax Wednesday" content should prompt differently than "Slow-Mo Sundays." How to store and inject these per brand, per day.
+   - How the `done/` folder gets populated — what runs in sequence, what can run in parallel?
+
+6. **Caption and description generation — per platform, per brand, per content theme**
+   - The existing caption agent (Ollama phi4:14b, reads TREND-SIGNAL.md) generates one IG caption. Now we need 4 platform variants + brand voice differentiation.
+   - What prompt engineering patterns work for generating platform-appropriate caption variants from one piece of content?
+   - How to encode brand voice: Terp Tribe (cannabis community, lifestyle, stoner culture) vs Typhon's Forge (maker, precision craft, dark aesthetic). Both need cannabis-safe language.
+   - Per-content-theme tone injection: "Slow-Mo Sundays" should read differently than "Wax Wednesday." How to structure this as a reusable config per brand?
+   - X/Twitter 280-char constraint — best approach for auto-generating punchy short-form from a longer caption?
+   - YouTube description structure: title (SEO), description (first 125 chars show before "more"), chapters if applicable, end-screen CTA, tags list
+
+7. **Transcription pipeline for video content**
+   - `faster-whisper` is already installed. What's the current recommended model size for short-form social content (under 60s) on Salomon hardware?
+   - How to integrate transcription output into the done/ folder: `.srt` subtitles for burn-in, `.txt` for copy-paste, both?
+   - Should the transcription feed into caption generation (give the model the transcript as context)?
+   - Auto-subtitle burn-in with ffmpeg — current best practice for vertical (9:16) Reels-style content
+
+8. **Multi-brand architecture — keeping Typhon and Terp Tribe completely separate**
+   - Single backend (Djinn on Salomon), two brand configs, two Telegram bots, two folder trees, two sets of captions/hashtags/brand voices, two social platform credentials
+   - How to structure brand config files so adding a third brand later is just adding a new config file
+   - Credential isolation: each brand has its own Meta Page token, IG user ID, YT channel, X account. How to store and load per-brand without risk of cross-posting
+   - Should each brand have its own media pipeline instance, or one pipeline with brand-aware routing?
+
+9. **Scheduling and publishing automation**
+   - Best practices for scheduling social posts for optimal reach in 2026 (time-of-day, day-of-week for cannabis/maker niches)
+   - Does any platform still penalize third-party scheduled posts vs native posting?
+   - Buffer, Later, Publer API tiers — if we want scheduled publishing without building it ourselves, what's the most cost-effective option for 2 brands, 4 platforms, 7 posts/week each?
+   - Alternatively: can we build a lightweight cron-based scheduler in Djinn that posts at a configured time per brand per day without a third-party service?
+
+10. **Storage and archival for season-based content**
+    - A full season of content (7 content days/week × ~10 weeks) is potentially 70+ reel files + raw footage. What's the recommended storage architecture?
+    - Salomon local SSD → Typhon cold archive (already set up at `/mnt/archive`) → GDrive as offsite backup. How should the done/ folders be tiered?
+    - Naming and search: how to find "all Wax Wednesday content from Season 6" in a folder tree efficiently
+    - Any metadata tagging approach (XMP sidecar files, SQLite index) that makes the archive queryable without a full media server
+
+**Output format:** Structured report, one section per research question. For each: current state, specific tools/libraries to use, integration path with existing Djinn stack, warnings/gotchas, estimated build complexity. Flag anything that requires Javier's Apple ID credentials or platform account setup — those are blockers.
+
+**Deliver to:** `djinn/research/marcus/TASK-060_social-studio-pipeline.md` — commit to vault. Claude reads and builds from it.
+
 
