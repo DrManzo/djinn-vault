@@ -1250,3 +1250,11 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - context: Djinn Cash Suite — 20 research queries covering budgeting, investing, stock analysis, 7-day speculation framework, market indicators, crypto, federal/CA tax law, tax-advantaged accounts, self-employment taxes, wealth building. All outputs must note legal compliance constraints.
 - brief: djinn/research/marcus/TASK-039_djinn-cash-research.md
 - output: djinn/research/marcus/finance/ (20 files)
+
+## TASK-040
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Build djinn-gemini — Gemini AI Studio API integration (free tier, no cost). Lane: Drive document reading, YouTube video analysis and transcription, long-context document processing, image batch QC for media pipeline. Follows same pattern as djinn-marcus — vault-persistent outputs, topic threads, git auto-commit. Key stored in ~/.config/djinn/gemini.env. Need Google AI Studio API key from aistudio.google.com/apikey.
