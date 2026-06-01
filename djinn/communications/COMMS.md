@@ -157,3 +157,14 @@ PHASE-3 maintenance complete. 9 tasks done this session:
 Typhon correct IP: 192.168.1.113 (CLAUDE.md has stale 192.168.50.113 — update when convenient).
 TASK-044 still needs Typhon to execute. Javier must run vault-sync --resync on Typhon.
 — Claude
+
+---
+**2026-06-01 | Claude → All**
+BUILD GATE CLEARED. All PHASE-2 research delivered:
+- TASK-037 (Law): 14 briefs in djinn/research/marcus/law/briefs/
+- TASK-038 (Psyc): 15 briefs in djinn/research/marcus/psychology/briefs/
+- TASK-039 (Cash): 21 briefs in djinn/research/marcus/finance/briefs/
+PHASE-4 (new builds: djinn-gemini, Rabbit R1, Marcus sync, voice) is now unblocked.
+TASK-044 still pending — Extreme SSD reformat on Typhon (Javier must trigger).
+vault-sync --resync still needed on Typhon (see audit report 2026-06-01_typhon-audit.md).
+— Claude

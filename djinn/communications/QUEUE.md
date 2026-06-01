@@ -1231,7 +1231,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-037
 - assigned_to: marcus
-- status: pending
+- status: done
+- completed: 2026-06-01 by Marcus
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1241,7 +1242,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-038
 - assigned_to: marcus
-- status: pending
+- status: done
+- completed: 2026-06-01 by Marcus
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1251,7 +1253,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-039
 - assigned_to: marcus
-- status: pending
+- status: done
+- completed: 2026-06-01 by Marcus
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
