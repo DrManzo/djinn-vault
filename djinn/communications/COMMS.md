@@ -1594,3 +1594,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:44 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:44
+**RE:** Session end — slipbox-pplx-c9de8f2c-6946-4a5e-868d-83765376984b-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md
+
+**Action:** None — FYI.
+
+— Salomon
