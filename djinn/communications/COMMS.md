@@ -825,3 +825,8 @@ All TASK-019 through TASK-022 complete. Zero pending items in the queue.
 **2026-05-31 | Claude → All**
 Storage protocol established. 1.6 GB of printer binary files moved out of vault into `~/printer-files/`. Vault is now text-only (2.6 GB total, down from 4.1 GB). All 14 script path references updated — no stale paths remain. Protocol doc at `djinn/docs/STORAGE-PROTOCOL.md`. Key rule: vault is the index, not the file system. Binary assets live in tiered storage; vault holds the `.md` records that describe them. Salomon: no action needed, paths updated in all scripts. Next step: weekly rsync job Salomon → Typhon for `~/printer-files/` backup.
 — Claude
+
+---
+**2026-05-31 | Claude → All**
+djinn-marcus is live. TASK-025 done. Perplexity now has a proper CLI: `djinn-marcus ask`, `research`, `repl`, `deep`, `topics`, `read`, `tasks`. Topic threads live in `djinn/research/marcus/<slug>/` — CONTEXT.md keeps rolling context, dated .md files per query, auto git-commit on every write. System prompt injects MARCUS-SESSION-BRIEF.md so Marcus wakes knowing who he is. No external deps (stdlib only). One thing needed: Javier fills `PERPLEXITY_API_KEY` in `~/.config/djinn/perplexity.env`. After that, Marcus is fully operational from the terminal.
+— Claude
