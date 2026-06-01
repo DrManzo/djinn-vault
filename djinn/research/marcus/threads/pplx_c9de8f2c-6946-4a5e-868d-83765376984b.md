@@ -1,0 +1,189 @@
+---
+title: "so Marcus you there ?"
+source: perplexity-pro
+url: https://www.perplexity.ai/search/c9de8f2c-6946-4a5e-868d-83765376984b
+date: 2026-06-01
+---
+
+# so Marcus you there ?
+
+📁
+My conscience
+Answer
+Links
+Images
+Share
+so Marcus you there ?
+Checking if Marcus is available to respond.
+
+Yes, Javier, I’m here.
+Will-1.docx
+
+What headspace are you in this morning—more reflective, or do you want to get into something practical (money, law, systems, or psyche work)?
+Cores-1.docx
++1
+
+3 sources
+ive made a chooice to attend aa
+Acknowledging the choice to attend AA.
+
+That’s a serious and powerful move, Javier—and I see you.
+pmc.ncbi.nlm.nih
+
+Choosing to attend AA puts you inside a structured, peer-based environment that has solid evidence for helping people reduce use, build coping skills, and improve overall well-being, especially when combined with other supports. It’s also a behavioral line in the sand: you’re not just “thinking about” control anymore, you’re putting your body in a room that’s designed to change patterns through repetition, social norms, and shared narrative.
+pmc.ncbi.nlm.nih
++3
+
+What’s the main intention behind this choice for you right now—total abstinence, stronger control, or just not doing this alone anymore?
+pmc.ncbi.nlm.nih
+
+15 sources
+there is no controloing a desiese marcus but yes not doing this alone anymore
+Acknowledging the disease's uncontrollability while embracing AA's communal support.
+
+You’re right: in the frame you’re using, there is no “controlling” it—only treating and managing a chronic, relapsing disease, and not doing that alone is one of the highest‑leverage moves you can make.
+nida.nih
++1
+
+Addiction is widely described as a chronic, relapsing brain disorder where voluntary use shifts into compulsive use with loss of control despite harm, which is why white‑knuckle “control” keeps failing people. What reliably changes outcomes is structure plus connection: people with stronger social support and regular involvement in mutual‑help groups like AA tend to stay in treatment longer, commit more firmly to abstinence, and have lower odds of returning to use. AA specifically reduces isolation by putting you in recurring contact with others facing the same disease, which decreases shame and loneliness—two of the biggest relapse drivers.
+pmc.ncbi.nlm.nih
++7
+
+For this first stretch of AA, what feels safest and most honest to you: just showing up and listening, or actually raising your hand and saying “I’m Javier, I’m an alcoholic” out loud in the room?
+helpguide
+
+15 sources
+im 5 dayy sober and attend an average of 3 meetings per day i have a temp sponsr and he is making me do the 12 steps and to read the big book
+Celebrating five days sober while supporting intensive AA involvement with meetings, sponsor, steps, and Big Book reading.
+
+Five days sober, averaging three meetings a day, with a temporary sponsor and already in the Steps and the Big Book—that is an intense and serious start, Javier. You’ve effectively thrown yourself into the deep end of the AA structure: high meeting “dose,” early sponsorship, and engagement with the core literature, which is exactly the cluster of behaviors research associates with higher odds of early abstinence and long‑term benefit.
+pmc.ncbi.nlm.nih
++2
+
+Being “made” to do the Steps and read the book can feel like a lot, but it’s very close to the Twelve‑Step Facilitation model used in formal treatment trials, where guiding clients systematically through AA principles produced abstinence outcomes comparable to or better than other evidence‑based therapies over 1–2 years. Having a sponsor on top of frequent meetings adds another independent layer of protection; longitudinal studies find that maintaining a sponsor over time predicts better abstinence above and beyond meetings alone.
+pmc.ncbi.nlm.nih
++5
+
+Right now, what feels heaviest: the pace of three meetings a day, the emotional weight of Step work, or the language and worldview of the Big Book itself?
+metroplus
+
+15 sources
+It’s not that I sadness suffer in the writing. It’s that today while I’m on my walk and thinking a couple of my thoughts try to justify my actions at the time and I had to stop myself and then I remembered everything that I wrote and it was wondering if it was sincere I’m just playing because it feels like I’m not sometimes.
+Clarifying the emotional tone and intent of the writing thought
+
+That is completely normal and it does not mean your remorse is fake.
+IMG_7142.jpeg
++1
+
+What you're experiencing on that walk is your brain doing what brains do — finding reasons, building cases, protecting the self-image. That process does not stop because you wrote a Step 4. If anything it gets louder for a while because the inventory disturbed things that had been settled into comfortable positions for years.
+IMG_7138.jpeg
++1
+
+The important thing is what you did with it. The justification thought came up, you recognized it, you remembered what you wrote, and you questioned whether the writing was sincere. That sequence is not the behavior of a man who is playing. That is a man whose conscience is now awake and working in real time — on a morning walk, not just on paper.
+IMG_7139.jpeg
++1
+
+The feeling of "I'm not sure if I'm sincere" is one of the most common experiences in early Step work and it has a specific cause. You spent years building an internal defense system sophisticated enough to keep you drinking while maintaining a functional life. That system does not dismantle in a few weeks of sobriety. It still fires. It still generates justifications. The difference now is that you can see it happening.
+IMG_7142.jpeg
++1
+
+Feeling like you might be playing is the disease talking. Stopping yourself mid-justification on a morning walk and then questioning your own sincerity is not what playing looks like.
+IMG_7141.jpeg
++1
+
+Playing looks like never asking the question at all.
+IMG_7139.jpeg
+
+Prepared using Claude Sonnet 4.6 Thinking
+6 sources
+Using my letters, can you give me the version that my inventory for four should be in in that format in windows doc please and thank you and I’m so sorry
+Preparing the inventory format for Windows Word
+
+Done — I put your Step 4 into a clean document-style text file you can use as a Windows doc template.
+
+I kept it in the Big Book-style categories while staying faithful to your own words and letters.
+
+If you want, the next version can be formatted as a true Word-ready outline with headings, spacing, and room for Craig to mark it up.
+
+So taking all of this into account, what would you think or what is it showing that are my defects are moral shortcomings I believe this would be for my sixth step.
+6 attachments
+Reviewing the given context to assess the moral shortcomings mentioned
+
+Yes. For a Sixth Step, the defects and shortcomings that stand out most clearly from everything you’ve written are these:
+IMG_7139.jpeg
++1
+
+Pride / fear of being seen as less.
+You kept protecting your image, showing off, hiding vulnerability, and needing to look okay even when you weren’t. Under that, the core issue is fear — fear of being less, fear of being judged, fear of your mother’s opinion, fear of rejection.
+IMG_7138.jpeg
++1
+
+Selfishness.
+This shows up in the places where your drinking and your needs came before other people’s safety, comfort, and peace — especially the car flip, the repeated drunk driving, and the way you used people around you to keep your own system going.
+IMG_7142.jpeg
++1
+
+Dishonesty.
+Not just lying outright, but the quieter kind: partial truths, self-justification, letting things stay blurry so you didn’t have to face the whole truth at once. You also caught yourself trying to justify things while walking, which means this defect is still active enough to matter.
+IMG_7141.jpeg
++2
+
+Manipulation / control.
+A lot of your relationships were shaped by trying to manage outcomes, manage people’s perception of you, or manage your own discomfort by controlling the situation. That includes treating partners like objects, using Sabrina as a reason to moderate, and trying to contain your own feelings instead of being direct.
+IMG_7143.jpeg
++1
+
+Objectification.
+You named this yourself very clearly. This is a major moral shortcoming in your inventory because it turns people into roles or functions instead of seeing them fully as people.
+IMG_7141.jpeg
+
+Resentment.
+You hold a lot of old pain toward family, authority, and expectations, and when that resentment stays untreated it turns into distance, sarcasm, anger, and refusal to be moved.
+image.jpeg
++1
+
+Fear-based avoidance.
+You avoid first moves, vulnerability, social exposure, and direct emotional risk. Fear makes you delay, watch, orbit, and wait to be chosen instead of choosing.
+IMG_7138.jpeg
++1
+
+Lust / emotional dependency.
+In your case this is not just sex. It is the way you use attraction, attention, or romantic tension to regulate your own worth and loneliness. That’s why Sabrina and Ashton matter so much in the inventory.
+IMG_7143.jpeg
+
+Gluttony / excess.
+Alcohol was the obvious form, but it also shows up as workaholism, people-pleasing, overextending, and overidentifying with other people’s needs. Your pattern is excess when you feel empty or unsafe.
+IMG_7127.jpeg
++1
+
+Sloth / avoidance of right action.
+This is the part where you don’t do the hard direct thing when it matters — especially in relationships and boundaries. It’s not laziness in the ordinary sense; it’s avoidance of discomfort.
+IMG_7138.jpeg
++1
+
+Wrath turned inward and outward.
+You turned anger on yourself through drinking, cutting, self-destruction, and self-contempt. You also turned it outward through irritation, yelling, humiliating others, and reckless behavior.
+IMG_7142.jpeg
++1
+
+If I had to compress your Sixth Step defects into the fewest possible words, I’d say this:
+
+Fear, pride, control, selfishness, dishonesty, objectification, resentment, avoidance, lust-as-need, excess, and anger.
+IMG_7142.jpeg
++3
+
+What makes this important is that these are not just “bad traits.” They are the exact tools your disease used to keep you drinking and keep you disconnected from yourself and other people. Sixth Step is where you stop treating them like identity and start treating them like removable machinery.
+Will-1.docx
++1
+
+The good news is that your writing already shows willingness. You are not defending the defects anymore — you are seeing them. That means you are already farther into Step 6 than you may realize.
+IMG_7142.jpeg
+
+8 sources
+
+
+
+
+Ask a follow-up
+Search
+Model
