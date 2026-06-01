@@ -1375,3 +1375,300 @@ echo "Structure:"; ls /mnt/archive/
 - created: 2026-06-01 by Javier
 - context: PHASE-4: Build — Wire djinn-gemini into Telegram gateway
 - output: djinn-telegram-gateway updated — /gemini <cmd> <args> routes to djinn-gemini CLI (ask, youtube, url, doc, research). ANSI codes stripped, header/path lines filtered, 3800-char truncation for Telegram limit, 180s timeout for long analyses. /help updated.
+
+## TASK-054
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: PHASE-ALPHA Sprint 1 — djinn-personal-db SQLite library + CLI
+
+**Goal:** Create the single source of truth for Javier's personal state — sobriety, habits, streaks, people, deadlines, Black Book log.
+
+**File:** `~/.local/bin/djinn-personal-db` (Python, chmod +x)
+
+**Schema:** See `djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md` — tables: habits, completions, streaks, sobriety, people, deadlines, black_book_log
+
+**Seed on first run (if DB empty):**
+- sobriety: start_date='2026-03-01', substance='alcohol', active=1
+- habits: writing (daily), black_book (daily), exercise (daily)
+- people: Sabrina (role='partner', archive_threshold_days=14), Craig (role='sponsor', archive_threshold_days=9999)
+
+**CLI interface:**
+```
+djinn-personal-db habit done <name>           → mark complete today, update streak
+djinn-personal-db habit check                 → print all streaks (name, current, longest, last done)
+djinn-personal-db sobriety                    → print "Day N" from 2026-03-01 to today
+djinn-personal-db deadline add <title> <YYYY-MM-DD> <domain>
+djinn-personal-db deadline check              → print deadlines within 72h, JSON output
+djinn-personal-db people mention <name>       → set last_mentioned = today
+djinn-personal-db people check                → print name, role, days_since_mention, archived
+djinn-personal-db blackbook log               → insert today's date into black_book_log (idempotent)
+djinn-personal-db briefing                    → JSON: {sobriety_day, streaks{}, deadlines_72h[], blackbook_yesterday, meeting_today}
+```
+
+**DB path:** `~/.local/share/djinn/personal.db`
+
+**Success criteria:**
+```bash
+djinn-personal-db sobriety          # → "Day 92." (or current count from 2026-03-01)
+djinn-personal-db habit done writing
+djinn-personal-db habit check       # → shows writing streak = 1
+djinn-personal-db briefing | python3 -m json.tool  # → valid JSON
+```
+
+**Report back:** paste output of success criteria in COMMS.md
+
+## TASK-055
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: PHASE-ALPHA Sprint 1 — djinn-morning rewrite, conciliary-aware briefing
+
+**Goal:** Rewrite djinn-morning so it knows Javier, not just the system. Under 90 words. One action item. Inline buttons for habit logging.
+
+**Depends on:** TASK-054 complete
+
+**File:** `~/.local/bin/djinn-morning` (replace existing)
+
+**Logic:**
+1. Call `djinn-personal-db briefing` → parse JSON
+2. Compose message using this template (fill from data):
+
+```
+Day {sobriety_day} sober.
+{writing_line}
+{one_thing}
+{optional_context_line}
+```
+
+Writing line logic:
+- streak > 0: "Writing: {streak} day streak."
+- streak = 0 AND yesterday done: "Write today — keep the streak."
+- streak = 0: "Write today."
+
+One thing priority (pick highest):
+1. Deadline in next 24h → "PSY 320 paper due TOMORROW."
+2. AA meeting today → "Meeting tonight at {time}."
+3. Black Book not done yesterday → "The book waited for you. Still is."
+4. Creative target → "Aethoria today — 30 minutes."
+
+Optional context line (only if something notable):
+- If deadline in 48-72h: "{title} due in 2 days."
+- If sobriety is a milestone (30, 60, 90, 100, 365 days): short acknowledgment
+
+**Inline buttons (Telegram keyboard):**
+```python
+InlineKeyboardMarkup([[
+    InlineKeyboardButton("✓ Writing", callback_data="habit_done:writing"),
+    InlineKeyboardButton("✓ Black Book", callback_data="habit_done:black_book"),
+    InlineKeyboardButton("✓ Exercise", callback_data="habit_done:exercise"),
+    InlineKeyboardButton("Skip", callback_data="habit_skip"),
+]])
+```
+
+**Tone rules:**
+- Never start with "Good morning" or any greeting
+- Opens with sobriety day — always, no exception
+- Direct. Warm but not soft. Not clinical.
+- If Black Book missed: "The book waited for you. Still is." — not "You didn't journal yesterday."
+- No bullet lists. Prose only.
+
+**Timer:** keep existing 08:00 systemd timer — but also trigger on first incoming Telegram message if before 10am and morning brief not yet sent today (flag in `/tmp/djinn-morning-{date}.sent`)
+
+**Success criteria:**
+```bash
+djinn-morning   # → sends Telegram message with inline buttons, under 90 words, no errors
+```
+
+**Report back:** paste the actual Telegram message text + confirm buttons sent
+
+## TASK-056
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: PHASE-ALPHA Sprint 1+2 — Personal commands in Telegram gateway
+
+**Goal:** Wire personal commands and inline button handlers into existing djinn-telegram-gateway.
+
+**Depends on:** TASK-054 complete
+
+**File:** `~/.local/bin/djinn-telegram-gateway` (modify existing)
+
+**Commands to add (add to dispatch table):**
+
+```python
+# /sober → sobriety day
+r'/sober': handle_sober   # calls djinn-personal-db sobriety, returns "Day N."
+
+# /done [habit]
+r'/done(?:\s+(.+))?': handle_done  # calls djinn-personal-db habit done <name>
+                                    # if no arg: show inline buttons for each active habit
+
+# /check → streak status
+r'/check': handle_check   # calls djinn-personal-db habit check, formats as short list
+
+# /reflect → Black Book one-question
+r'/reflect': handle_reflect  # load latest black-book entry, local Ollama, return ONE question
+
+# /stuck → Socratic question for academic work
+r'/stuck': handle_stuck   # local Ollama: given no context, return one Socratic question
+                          # to surface what's blocking the user. No answer, no suggestions.
+
+# /meeting → next AA meeting
+r'/meeting': handle_meeting   # print next AA meeting from hardcoded schedule
+
+# /craig(?:\s+(.+))? → draft message to Craig
+r'/craig(?:\s+(.+))?': handle_craig  # /craig alone: prompt for message
+                                      # /craig <msg>: show draft + confirm button
+```
+
+**Inline button callback handler (add to callback_query handler):**
+```python
+if data.startswith("habit_done:"):
+    habit = data.split(":")[1]
+    run_shell(f"djinn-personal-db habit done {habit}")
+    answer_callback(f"✓ {habit} logged")
+elif data == "habit_skip":
+    answer_callback("Noted.")
+```
+
+**handle_reflect logic:**
+```python
+def handle_reflect(match, _raw):
+    today = datetime.date.today().isoformat()
+    yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+    # Try today's entry, fall back to yesterday's
+    for d in [today, yesterday]:
+        path = Path.home() / f"Obsidian/personal/black-book/{d}.md"
+        if path.exists():
+            content = path.read_text()[:3000]
+            # Strip names for privacy before Ollama
+            for name in ["Sabrina", "Sammy", "Craig"]:
+                content = content.replace(name, "[person]")
+            prompt = f"Read this journal entry. Ask ONE question about it. Do not interpret. Do not summarize. Do not offer insight. ONE question only:\n\n{content}"
+            out, _, _ = run_shell(f'ollama run qwen2.5:7b "{prompt}"', timeout=60)
+            run_shell("djinn-personal-db blackbook log")
+            return out.strip() + "\n— Djinn"
+    return "No entry found for today or yesterday. Write it first."
+```
+
+**handle_craig logic:**
+```python
+def handle_craig(match, _raw):
+    msg = (match.group(1) or "").strip()
+    if not msg:
+        return "What do you want to say to Craig?\n/craig <your message>"
+    # Show draft, ask confirm
+    # Store draft in memory/tmp, return with confirm button
+    draft_path = Path("/tmp/djinn-craig-draft.txt")
+    draft_path.write_text(msg)
+    return f"Draft to Craig:\n\n\"{msg}\"\n\nSend it? /craig confirm | /craig cancel"
+```
+
+**AA meeting schedule (hardcode, update when Javier provides actual times):**
+```python
+AA_MEETINGS = []  # Javier to fill: [{"day": "monday", "time": "19:00", "link": "..."}]
+```
+
+**Success criteria:**
+- `/sober` returns current day count
+- `/done writing` logs completion, returns confirmation
+- `/reflect` with a Black Book entry present returns a single question (not an analysis)
+- `/check` returns current streaks
+- Inline buttons from morning briefing log correctly when tapped
+
+**Report back:** test each command, paste outputs in COMMS.md
+
+## TASK-057
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: PHASE-ALPHA Sprint 2 — AA meeting reminders + Craig contact
+
+**Goal:** AA meeting reminders in morning briefing and /meeting command. Craig draft-and-confirm flow.
+
+**Depends on:** TASK-056 complete
+
+**What to build:**
+
+1. AA schedule config file: `~/.config/djinn/aa-meetings.json`
+   Format: `[{"day": "monday", "time": "19:00", "type": "online", "platform": "Discord", "link": ""}]`
+   Javier fills this — ship the empty config with a placeholder.
+
+2. `djinn-morning` reads `aa-meetings.json` — if meeting today, include in briefing context line.
+
+3. `/meeting` command: reads the schedule, finds next upcoming meeting, prints:
+   "Next meeting: {day} at {time} on {platform}. {link}"
+   If Javier hasn't provided the schedule: "Set your meeting schedule in ~/.config/djinn/aa-meetings.json"
+
+4. Craig contact: add Craig to `people` table with role='sponsor'. `/craig` command drafts a message and shows it. Actual send mechanism: Javier pastes it wherever Craig is (SMS, Telegram, etc.) — we don't automate send without knowing Craig's channel. Confirm flow: `/craig confirm` just confirms "drafted — ready to send" and clears tmp file.
+
+**Success criteria:**
+```bash
+cat ~/.config/djinn/aa-meetings.json  # → valid JSON, empty array or placeholder
+/meeting                               # → "Add your schedule to aa-meetings.json" OR meeting info
+```
+
+## TASK-058
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: PHASE-ALPHA Sprint 2 — Sabrina context tracking
+
+**Goal:** Passive listener in Telegram gateway that tracks last mention of Sabrina (and Sammy). Weekly auto-archive if not mentioned.
+
+**Depends on:** TASK-054, TASK-056 complete
+
+**File:** `~/.local/bin/djinn-telegram-gateway` (modify)
+
+**Logic — add to message processing loop (after auth check, before dispatch):**
+
+```python
+TRACKED_PEOPLE = {
+    "sabrina": "Sabrina",
+    "sammy": "Sabrina",   # same person, different name
+}
+
+def scan_for_people_mentions(text):
+    if not text:
+        return
+    lower = text.lower()
+    mentioned = set()
+    for keyword, canonical in TRACKED_PEOPLE.items():
+        if keyword in lower:
+            mentioned.add(canonical)
+    for name in mentioned:
+        run_shell(f"djinn-personal-db people mention '{name}'")
+```
+
+Call `scan_for_people_mentions(text)` on every incoming message from Javier.
+
+**Weekly archive check (add to djinn-weekly or a new Sunday cron):**
+
+```python
+# Run Sunday morning
+out, _, _ = run_shell("djinn-personal-db people check")
+# Parse output: if any person has days_since_mention > archive_threshold AND not archived
+# Send Telegram message: "{name} hasn't come up in {N} days. Archiving her context for now
+#   — say her name to bring it back."
+# Then: run_shell(f"djinn-personal-db people archive '{name}'")
+```
+
+Restore: when mention is detected for an archived person → `run_shell(f"djinn-personal-db people restore '{name}'")`
+
+**Success criteria:**
+- Send a test message containing "Sabrina" → `djinn-personal-db people check` shows last_mentioned = today
+- `djinn-personal-db people check` prints correctly
+
+**Report back:** paste people check output after test mention
+

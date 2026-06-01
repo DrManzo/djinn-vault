@@ -49,3 +49,5 @@ djinn/printer/queue/*.gco
 # Large STL files in coin library (>50MB — too large for GitHub)
 djinn/printer/library/typhons-forge-coin/*.stl
 __pycache__/
+personal/black-book/
+personal/
