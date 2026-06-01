@@ -1,24 +1,31 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/13_personality-frameworks.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 13 — Personality Frameworks
+# Session 13 — Personality Frameworks Comparison
 
-**Cover:**
-- Big Five (OCEAN): the gold standard — what it measures, how stable it is, what it predicts
-- MBTI: history, 16 types, why it's popular, why psychologists criticize it, what it's actually useful for
-- Enneagram: 9 types, wings, instinctual variants, centers of intelligence — origins and evidence base
-- DISC: four profiles, workplace use, limitations
-- Comparison matrix: validity, reliability, test-retest stability, predictive power of each
-- How to use them without over-identifying: frameworks as maps not cages
-- Dark Triad: narcissism, Machiavellianism, psychopathy — measurement, overlap, real-world impact
-- Personality change: can it happen, what moves the needle, age-related changes (conscientiousness increases with age)
-- GitHub: Big Five open-source assessments, IPIP scales, personality prediction implementations, MBTI critics resources
+## Start Here — Scrape These
+- https://openpsychometrics.org/tests/IPIP-BFFM/ — free validated Big Five test (take it)
+- https://bigfive-test.com — Big Five test and detailed trait breakdowns
+- https://www.16personalities.com — MBTI/Big Five hybrid (take the test)
+- https://en.wikipedia.org/wiki/Big_Five_personality_traits — Wikipedia Big Five
+- https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator — MBTI Wikipedia
+- https://en.wikipedia.org/wiki/Enneagram_of_Personality — Enneagram Wikipedia
+- https://www.enneagraminstitute.com — Enneagram Institute
+- https://www.psychologytoday.com/us/tests/personality — Psych Today personality tests
+
+## Cover
+- Big Five (OCEAN): the only scientifically validated model — Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. Each trait is a spectrum, not a type. Predicts real outcomes (job performance, health, relationship success)
+- MBTI: 16 types, massive corporate adoption, no predictive validity in academic research. Why people love it despite the science, when it's useful (team building, self-reflection), when it misleads
+- Enneagram: 9 types with wings, centers of intelligence (head/heart/body), integration/disintegration arrows. No academic validation but deep psychological insight for self-reflection
+- Comparison table: validity, reliability, use cases, limitations
+- Why personality measurement is hard: self-report bias, context dependence, stability vs change over time
+- Practical use: don't use any of these for hiring decisions. Use Big Five for research/self-understanding, MBTI for team communication exercises, Enneagram for shadow work and motivation patterns
+- The limits of labels: over-identifying with a type can become an excuse for not changing
 
 **Output file:** `djinn/research/marcus/psychology/13_personality-frameworks.md`

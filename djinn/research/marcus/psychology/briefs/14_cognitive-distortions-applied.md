@@ -1,32 +1,41 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/14_cognitive-distortions-applied.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 14 — Cognitive Distortions Applied Guide
+# Session 14 — Cognitive Distortions — Applied Guide
 
-**Cover:**
-All 15 cognitive distortions — this is a practical guide, not academic. For each distortion:
-1. Clear definition
-2. What it sounds like in your head (internal monologue example)
-3. Real-world situation where it shows up
-4. How to identify it in yourself
-5. How to identify it in others
-6. Reframing technique specific to that distortion
+## Start Here — Scrape These
+- https://www.therapistaid.com/therapy-worksheets/cbt/none — Therapist Aid CBT worksheets
+- https://positivepsychology.com/cognitive-distortions/ — Positive Psychology full list
+- https://www.psychologytools.com/resource/unhelpful-thinking-styles/ — Psychology Tools
+- https://en.wikipedia.org/wiki/Cognitive_distortion — Wikipedia list
+- https://www.verywellmind.com/cognitive-distortions-and-mental-health-5094664 — Verywell Mind
+- https://www.mindtools.com/pages/article/newCDV_81.htm — MindTools reframing guide
+- https://cogbtherapy.com/cbt-blog/list-of-cognitive-distortions — CBT blog comprehensive
 
-**The 15:**
-All-or-nothing thinking, overgeneralization, mental filter, disqualifying the positive, mind reading, fortune telling, magnification/minimization (catastrophizing/minimizing), emotional reasoning, should statements (musterbation), labeling and mislabeling, personalization, jumping to conclusions, magnification, comparison, blame
+## Cover
+All 15 distortions with: (1) definition, (2) real-world example in self-talk, (3) how to identify it in the moment, (4) reframing technique:
+1. All-or-nothing thinking — "If I'm not perfect, I'm a failure"
+2. Overgeneralization — "This always happens to me"
+3. Mental filter — focusing only on negatives
+4. Disqualifying the positive — "That doesn't count"
+5. Mind reading — assuming others think negatively of you
+6. Fortune telling — predicting negative outcomes
+7. Magnification/Minimization — catastrophizing or shrinking
+8. Emotional reasoning — "I feel stupid so I must be stupid"
+9. Should statements — rigid rules ("I should be further along by now")
+10. Labeling — "I'm a loser" vs "I made a mistake"
+11. Personalization — taking blame for things outside your control
+12. Jumping to conclusions — forming judgments without evidence
+13. Comparison — measuring yourself against others' highlight reel
+14. Blame — externalizing all responsibility
+15. Fallacy of fairness — "Life should be fair"
 
-**Also cover:**
-- How distortions cluster: which ones tend to appear together
-- Distortions in relationships: how they create conflict cycles
-- Distortions and specific disorders: which distortions are most common in depression vs anxiety vs narcissism
-- The meta-skill: catching distortions in real time, not just on paper
-- GitHub: thought record apps, cognitive distortion quizzes, CBT worksheet tools
+Practical section: how to use a thought record to catch distortions in real time, daily practice
 
 **Output file:** `djinn/research/marcus/psychology/14_cognitive-distortions-applied.md`

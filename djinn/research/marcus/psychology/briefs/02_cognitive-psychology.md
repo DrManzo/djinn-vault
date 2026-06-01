@@ -1,24 +1,32 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/02_cognitive-psychology.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
 # Session 02 — Cognitive Psychology
 
-**Cover:**
-- Information processing model: sensory memory, working memory, long-term memory — capacity and duration of each
-- Memory systems: episodic, semantic, procedural, implicit vs explicit
-- Cognitive biases — full taxonomy with real examples:
-  Confirmation bias, availability heuristic, anchoring, sunk cost fallacy, Dunning-Kruger, Baader-Meinhof, survivorship bias, fundamental attribution error, in-group bias, framing effect, and at least 10 more
-- Attention: selective, divided, sustained — bottleneck theories
-- Problem-solving: algorithms vs heuristics, mental sets, functional fixedness
-- Mental models: what they are, how they form, how to build better ones
-- Decision-making: dual process theory (System 1 vs System 2 — Kahneman)
-- GitHub: bias detection tools, cognitive training apps, decision-making frameworks
+## Start Here — Scrape These
+- https://www.simplypsychology.org/cognitive.html — Simply Psychology cognitive overview
+- https://www.verywellmind.com/what-is-cognitive-psychology-2794747 — Verywell Mind
+- https://en.wikipedia.org/wiki/Cognitive_bias — Wikipedia list of cognitive biases
+- https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect — Dunning-Kruger
+- https://en.wikipedia.org/wiki/Availability_heuristic — availability heuristic
+- https://en.wikipedia.org/wiki/Confirmation_bias — confirmation bias
+- https://thinkinganddeciding.com — Thinking and Deciding (Jonathan Baron) reference
+- https://fs.blog/mental-models/ — Farnam Street mental models library
+- https://www.rationalwiki.org/wiki/List_of_cognitive_biases — full bias taxonomy
+
+## Cover
+- Memory systems: sensory, short-term (7±2 items), long-term (declarative/procedural), working memory
+- Attention: selective, divided, sustained — why multitasking is a myth
+- Full cognitive bias taxonomy: confirmation bias, availability heuristic, anchoring, sunk cost fallacy, framing effect, Dunning-Kruger, fundamental attribution error, in-group bias — each explained with real examples
+- Mental models: first principles thinking, inversion, second-order thinking, Occam's Razor
+- Problem-solving: algorithms vs heuristics, means-ends analysis, insight vs analytical problem solving
+- Decision-making under uncertainty: prospect theory, loss aversion (losses hurt 2x more than equivalent gains feel good)
+- Cognitive load theory: why complex information overwhelms working memory, chunking as solution
 
 **Output file:** `djinn/research/marcus/psychology/02_cognitive-psychology.md`

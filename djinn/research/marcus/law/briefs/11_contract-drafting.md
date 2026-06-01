@@ -1,26 +1,35 @@
 ---
 assigned_to: marcus
 suite: Djinn Law
-github: search for relevant repos, templates, tools — include best under ## GitHub Resources
-output_to: djinn/research/marcus/law/
+output_to: djinn/research/marcus/law/11_contract-drafting.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 11 — Contract Drafting for Service Businesses
+# Session 11 — Contract Drafting
 
-Research contract drafting — practical, not academic.
+## Start Here — Scrape These
+- https://www.law.cornell.edu/wex/contract_drafting — LII contract drafting
+- https://www.docracy.com — free contract templates (scrape categories)
+- https://www.lawdepot.com — free contract generator templates
+- https://www.contractstandards.com/public-contracts — standard contract clauses explained
+- https://www.nolo.com/legal-encyclopedia/drafting-contracts — Nolo drafting guide
+- https://en.wikipedia.org/wiki/Force_majeure — force majeure clause
+- https://en.wikipedia.org/wiki/Indemnification — indemnification explained
+- https://www.cooleygo.com/documents/form-consulting-agreement/ — Cooley startup consulting agreement
 
-**Cover:**
-- Essential clauses for any service contract: scope of work, deliverables, timeline, payment terms
-- IP ownership clause: work for hire doctrine, who owns what was created
-- Limitation of liability clause: why it matters, how courts treat it, caps
-- Indemnification: one-way vs mutual, what to include, what to refuse
-- Dispute resolution: arbitration vs litigation, governing law, venue selection
-- Termination clauses: for cause, for convenience, notice requirements, what happens to work product
-- Force majeure: what qualifies, how to draft it post-COVID
-- Confidentiality/NDA: what to protect, duration, carve-outs
-- GitHub: search for open-source contract templates, plain-language legal templates, lawyer-reviewed free contracts
+## Cover
+- Essential clauses every contract needs: parties, recitals, definitions, representations, obligations, payment, term/termination, dispute resolution, governing law
+- Definitions section: why precise defined terms prevent disputes
+- Payment terms: net 30/60/90, late payment penalties, invoicing requirements
+- Intellectual property: work-for-hire clause, IP assignment, license vs ownership distinction
+- Confidentiality/NDA clauses: mutual vs one-way, scope of confidential information, duration
+- Indemnification: who protects who from third-party claims, carve-outs for gross negligence
+- Limitation of liability: caps (usually contract value), consequential damages waiver
+- Force majeure: COVID-era lessons, what qualifies, notice requirements
+- Termination clauses: for cause vs for convenience, cure periods, survival clauses
+- Dispute resolution: arbitration vs litigation, choice of law, choice of forum (why Delaware courts)
+- Plain language drafting: how to write clauses a non-lawyer can understand and enforce
 
 **Output file:** `djinn/research/marcus/law/11_contract-drafting.md`

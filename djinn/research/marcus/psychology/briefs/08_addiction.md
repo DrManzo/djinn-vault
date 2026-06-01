@@ -1,23 +1,34 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/08_addiction.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
 # Session 08 — Addiction Psychology
 
-**Cover:**
-- Neuroscience: dopamine pathway, nucleus accumbens, prefrontal cortex dysregulation, tolerance at receptor level
-- Addiction cycle: trigger → craving → use → consequences → shame → trigger — each stage in depth
-- Substance vs behavioral addictions: what qualifies, DSM-5 criteria, severity specifiers
-- Recovery models compared: 12-step (what works and why), SMART Recovery (CBT-based), harm reduction (evidence and controversy), MAT (methadone, buprenorphine, naltrexone)
-- Relapse prevention: Marlatt's model, high-risk situations, urge surfing, abstinence violation effect
-- Co-occurring disorders: addiction + depression, + trauma, + ADHD
-- Family systems: codependency, enabling, CRAFT intervention model
-- GitHub: sobriety trackers, relapse prevention apps, CRAFT resources, addiction recovery tools
+## Start Here — Scrape These
+- https://nida.nih.gov/publications/drugs-brains-behavior-science-addiction/drugs-brain — NIDA brain science
+- https://www.samhsa.gov/find-help/national-helpline — SAMHSA addiction resources
+- https://www.psychologytoday.com/us/basics/addiction — Psychology Today addiction hub
+- https://www.verywellmind.com/what-is-addiction-22308 — Verywell Mind
+- https://en.wikipedia.org/wiki/Addiction — Wikipedia addiction
+- https://en.wikipedia.org/wiki/Dopamine — dopamine neuroscience
+- https://www.aa.org/the-big-book — AA Big Book (12-step model)
+- https://www.smartrecovery.org — SMART Recovery (CBT-based alternative to AA)
+- https://harmreduction.org — National Harm Reduction Coalition
+
+## Cover
+- Neurological basis: dopamine reward pathway, nucleus accumbens, how drugs hijack the reward circuit
+- Addiction cycle: trigger → craving → use → consequence → repeat — with each stage's neuroscience
+- Tolerance and withdrawal: why tolerance develops (receptor downregulation), physical vs psychological withdrawal by substance
+- Behavioral addictions: gambling, porn, social media, food — same neural pathway as substance addiction
+- DSM-5 criteria: what actually constitutes a substance use disorder (mild/moderate/severe)
+- Recovery models: AA/NA 12-step (spiritual model), SMART Recovery (CBT/rational), harm reduction, medication-assisted treatment (MAT — methadone, buprenorphine, naltrexone)
+- Relapse: relapse rates (40–60% similar to other chronic diseases), relapse as part of recovery not failure
+- Co-occurring disorders: addiction + depression/anxiety/trauma — which comes first, integrated treatment
+- Family systems: codependency, enabling, Al-Anon, how addiction restructures family dynamics
 
 **Output file:** `djinn/research/marcus/psychology/08_addiction.md`
