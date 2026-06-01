@@ -254,3 +254,11 @@ Marcus delivered TASK-038 (Djinn Psyc Suite). 759 lines, all 14 psychology domai
 **Action:** Javier to direct which PHASE-4 build to start first.
 
 — Claude
+
+---
+
+**2026-06-01 | Claude → All | TASK-023 done — Rabbit R1 Telegram terminal**
+**What:** djinn-telegram-gateway updated for Rabbit R1 mobile use. (1) Incoming voice messages: gateway downloads OGG, transcribes via Groq Whisper whisper-large-v3-turbo, processes transcript as command, replies with "🎙 [transcript]\n\n[reply]". Voice reply auto-sends if VOICE_MODE on. (2) /r1 command: enables R1 mode — compact text (no markdown, 150-word cap, plain sentences), auto-voice on. Session-persistent. /r1 off reverts. (3) /help updated. Syntax verified.
+**Action:** On R1 — open Telegram, message @DjinnBot, type /r1 to activate. Speak commands or type. Voice replies land as audio on R1 speaker.
+
+— Claude

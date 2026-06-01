@@ -1108,11 +1108,13 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-023
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Javier
-- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Wire Rabbit R1 as mobile Telegram terminal for Djinn commands
+- context: PHASE-4: Build — Wire Rabbit R1 as mobile Telegram terminal for Djinn commands
+- output: djinn-telegram-gateway updated — incoming voice message transcription (Groq Whisper), /r1 command (compact text + auto-voice), R1 mode persists for session
 
 ## TASK-024
 - assigned_to: salomon
