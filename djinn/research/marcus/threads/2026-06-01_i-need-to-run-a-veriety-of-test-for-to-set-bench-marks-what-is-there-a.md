@@ -3,6 +3,12 @@ title: "i need to run a veriety of test for to set bench marks what is there a l
 source: perplexity-pro
 url: https://www.perplexity.ai/search/b5b3d086-ccdf-456d-9289-b3641c4b34d0
 date: 2026-06-01
+tags:
+  - 3d-printing/models/benchmark
+  - 3d-printing/calibration/cube
+  - 3d-printing/printer-maintenance/tuning
+  - 3d-printing/test-models/benchy
+  - 3d-printing/test-models/vibration-tower
 ---
 
 # i need to run a veriety of test for to set bench marks what is there a list of models i can do this
@@ -80,3 +86,7 @@ creality
 +1
 
 If you tell me what you most care about benchmarking first (pure speed vs dimensional accuracy vs functional parts), I can turn this into a step‑by‑step test plan with specific models and slicer settings for your Ender 3 V3 Plus.
+
+## Related
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing]] — similarity tuning and preparation
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01]] — similarity tuning and preparation
