@@ -1231,8 +1231,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-037
 - assigned_to: marcus
-- status: done
-- completed: 2026-06-01 by Marcus
+- status: in_progress
+- note: briefs written to law/briefs/ (13 files) — waiting for Marcus to deliver research to law/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1242,8 +1242,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-038
 - assigned_to: marcus
-- status: done
-- completed: 2026-06-01 by Marcus
+- status: in_progress
+- note: briefs written to psychology/briefs/ (14 files) — waiting for Marcus to deliver research to psychology/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1253,8 +1253,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-039
 - assigned_to: marcus
-- status: done
-- completed: 2026-06-01 by Marcus
+- status: in_progress
+- note: briefs written to finance/briefs/ (20 files) — waiting for Marcus to deliver research to finance/
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
