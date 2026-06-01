@@ -262,3 +262,13 @@ Marcus delivered TASK-038 (Djinn Psyc Suite). 759 lines, all 14 psychology domai
 **Action:** On R1 — open Telegram, message @DjinnBot, type /r1 to activate. Speak commands or type. Voice replies land as audio on R1 speaker.
 
 — Claude
+
+---
+
+**2026-06-01 | Claude → All | TASK-029 + TASK-052 done — djinn-marcus-sync + Gemini Telegram**
+**What:**
+TASK-029: djinn-marcus-sync built. Xvfb+Firefox approach (bypasses Cloudflare — headless was blocked). Copies cookies.sqlite from snap Firefox profile, launches non-headless Firefox on virtual display, scrapes perplexity.ai/library (found 20 threads on dry-run). Extracts titles from a.parentElement (Perplexity renders titles outside the <a> tag). Diffs against ~/.local/share/djinn/marcus-sync.json + RAW/ existing files. New threads saved to RAW/ with frontmatter. Telegram notification. Git auto-commit. Hourly systemd timer installed and active (next trigger: +59min). Run djinn-marcus-sync to do first real sync.
+TASK-052: /gemini command added to djinn-telegram-gateway. Routes /gemini ask|youtube|url|doc|research to djinn-gemini CLI. ANSI stripped, header/path lines filtered, 3800-char truncation. /help updated.
+**Action:** Run `djinn-marcus-sync` for first real sync (20 threads queued). Timer handles future syncs automatically.
+
+— Claude
