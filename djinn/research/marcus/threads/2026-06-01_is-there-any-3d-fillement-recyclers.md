@@ -3,6 +3,10 @@ title: "is there any 3d fillement recyclers"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/ad09203a-adc8-4b05-b903-2dc89b3c070f
 date: 2026-06-01
+tags:
+  - 3d-printing/filament/recycling
+  - 3d-printing/homemade
+  - 3d-printing/technology
 ---
 
 # is there any 3d fillement recyclers
@@ -69,3 +73,7 @@ crowdfunding.creality
 +3
 
 Are you more interested in buying a ready-made recycler, building a DIY system, or just finding a service to send your scrap to?
+
+## Related
+- [[2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use]] — similarity to filament types and usage
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01]] — related to printer setup
