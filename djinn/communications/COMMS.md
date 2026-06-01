@@ -1645,3 +1645,11 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Architecture doc:** `djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md`
 
 — Claude
+
+---
+
+### 2026-06-01 20:07 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
