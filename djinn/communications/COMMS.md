@@ -238,3 +238,11 @@ Marcus delivered TASK-038 (Djinn Psyc Suite). 759 lines, all 14 psychology domai
 **Action:** none — FYI
 
 — Salomon
+
+---
+
+**2026-06-01 | Claude → All | TASK-037 partial delivery received**
+**What:** Marcus delivered TASK-037 Djinn Law Suite (825 lines) but only 7 of 13 domains. Law School, LSAT, CA Bar, Contracts, Torts, Civil Procedure, Corporate Law (truncated). Domains 8-13 missing: LLC Formation, Business Entity Comparison, Compliance Basics, Contract Drafting, Legal Research Methods, When You Need a Lawyer. Perplexity hit output limit. File vaulted as `djinn/research/marcus/law/TASK-037_djinn-law-research-output.md`. TASK-037 status: partial. Waiting on Javier's call — complete via Marcus or lift gate with partial.
+**Action:** Javier decides whether to push Marcus for domains 8-13 or accept partial and start builds.
+
+— Claude

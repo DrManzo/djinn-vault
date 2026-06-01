@@ -1231,14 +1231,14 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-037
 - assigned_to: marcus
-- status: in_progress
-- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (13 files). Marcus has one last chance per Javier — if output quality still poor, switch to Gemini. Waiting for research delivery to law/
+- status: partial
+- note: research delivered 2026-06-01 as TASK-037_djinn-law-research-output.md (825 lines). PARTIAL — 7 of 13 domains covered (Law School, LSAT, CA Bar, Contracts, Torts, Civil Procedure, Corporate Law truncated mid-table). MISSING domains 8-13: LLC Formation, Business Entity Comparison, Compliance Basics, Contract Drafting, Legal Research Methods, When You Need a Lawyer. Perplexity likely hit output limit. Javier to decide: ask Marcus to complete or accept partial and lift gate.
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
 - context: PHASE-2: Research gate — run after TASK-045. No suite builds until all three Marcus tasks complete — Djinn Law Suite — 13 research queries covering law school paths, LSAT, bar prep, contracts, torts, civil procedure, corporate law, LLC formation, compliance, contract drafting, legal research methods
 - brief: djinn/research/marcus/TASK-037_djinn-law-research.md
-- output: djinn/research/marcus/law/ (13 files)
+- output: djinn/research/marcus/law/TASK-037_djinn-law-research-output.md (partial)
 
 ## TASK-038
 - assigned_to: marcus
