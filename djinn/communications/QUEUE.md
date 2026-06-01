@@ -1242,8 +1242,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-038
 - assigned_to: marcus
-- status: in_progress
-- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (14 files). Waiting for research delivery to psychology/
+- status: done
+- note: research delivered 2026-06-01 as single combined file (759 lines, all 14 domains covered with citations). Saved to djinn/research/marcus/psychology/TASK-038_djinn-psyc-research-output.md
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
