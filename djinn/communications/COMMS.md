@@ -246,3 +246,11 @@ Marcus delivered TASK-038 (Djinn Psyc Suite). 759 lines, all 14 psychology domai
 **Action:** Javier decides whether to push Marcus for domains 8-13 or accept partial and start builds.
 
 — Claude
+
+---
+
+**2026-06-01 | Claude → All | TASK-037 complete — research gate LIFTED**
+**What:** Marcus delivered TASK-037 domains 8-13 (808 lines): LLC Formation (CA 2026), CA Business Compliance, Contract Drafting, Cannabis-Adjacent Business, Legal Research Methods, Self-Study Path. Vaulted as TASK-037_djinn-law-research-output-part2.md. Combined with part 1 (825 lines): full 13-domain law suite complete. All three Marcus research gates now cleared — TASK-037 (Law), TASK-038 (Psych), TASK-039 (Finance) all done. PHASE-4 builds are unblocked: TASK-023 (Rabbit R1), TASK-029 (djinn-marcus-sync), TASK-052 (djinn-gemini), TASK-053 (Gemini TTS).
+**Action:** Javier to direct which PHASE-4 build to start first.
+
+— Claude

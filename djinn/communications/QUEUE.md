@@ -1231,8 +1231,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-037
 - assigned_to: marcus
-- status: partial
-- note: research delivered 2026-06-01 as TASK-037_djinn-law-research-output.md (825 lines). PARTIAL — 7 of 13 domains covered (Law School, LSAT, CA Bar, Contracts, Torts, Civil Procedure, Corporate Law truncated mid-table). MISSING domains 8-13: LLC Formation, Business Entity Comparison, Compliance Basics, Contract Drafting, Legal Research Methods, When You Need a Lawyer. Perplexity likely hit output limit. Javier to decide: ask Marcus to complete or accept partial and lift gate.
+- status: done
+- note: research delivered in two passes. Part 1 (825 lines): domains 1-7 (Law School, LSAT, CA Bar, Contracts, Torts, Civil Procedure, Corporate Law). Part 2 (808 lines): domains 8-13 (LLC Formation, CA Business Compliance, Contract Drafting, Cannabis-Adjacent Business, Legal Research Methods, Self-Study Path). Both vaulted in djinn/research/marcus/law/. RESEARCH GATE LIFTED — all three suites (Law, Psych, Finance) now complete. PHASE-4 builds can begin.
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
