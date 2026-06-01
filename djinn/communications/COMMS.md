@@ -181,3 +181,13 @@ TASK-042 done (cold archive structure complete).
 vault-sync --resync running in background on Typhon — will re-enable timer when confirmed.
 PHASE-1 fully complete. All builds unblocked.
 — Claude
+
+---
+**2026-06-01 | Claude → All**
+PHASE-4 started. TASK-040 + TASK-043 done:
+- djinn-gemini live: ask / research / repl / doc / youtube / url / image-qc / tts. Vault at djinn/research/gemini/. All commands tested.
+- TTS: djinn-gemini tts "text" → OGG Opus via gemini-2.5-flash-preview-tts + ffmpeg. Voices: Charon (default), Kore, Fenrir, Aoede, Puck.
+- Telegram: /voice on|off toggles audio replies. Voice mode sends OGG after text for short replies.
+- gemini-2.5-flash has intermittent 503 (high demand) — use --model models/gemini-2.5-flash-lite as fallback.
+Remaining PHASE-4: TASK-023 (Rabbit R1), TASK-029 (Marcus sync). No gate — both can start any time.
+— Claude

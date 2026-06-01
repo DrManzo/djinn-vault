@@ -648,3 +648,9 @@ created: 2026-05-19
 - **TASK-042 done:** Cold archive structure created — /mnt/archive/{printer-files,media-files,vault-snapshots,library-rescue}, owned tf-tthq
 - **vault-sync --resync:** Running in background on Typhon (pid 2213300), re-enabling timer after it completes
 - **Typhon disk post-TASK-044:** /mnt/archive 1.8TB (1.7TB free), /mnt/storage 319GB/916GB used
+
+## 2026-06-01 — PHASE-4: TASK-040 + TASK-043 Complete
+
+- **TASK-040 done:** djinn-gemini built — ask, research, repl, doc, youtube, url, image-qc, tts, topics, models. Uses google.genai SDK. Vault: djinn/research/gemini/. Models: gemini-2.5-flash (default), gemini-2.5-pro, gemini-2.5-flash-lite, gemini-3-flash/pro-preview
+- **TASK-043 done:** Gemini TTS wired — djinn-gemini tts "text" [--voice Charon/Kore/Fenrir/Aoede/Puck] [--out file.ogg]. Uses gemini-2.5-flash-preview-tts → PCM16 → ffmpeg → OGG Opus. Telegram gateway: /voice on/off toggle. Voice mode sends audio reply after text for short responses (<800 chars)
+- **Note:** gemini-2.5-flash intermittent 503 under high demand — gemini-2.5-flash-lite reliable fallback
