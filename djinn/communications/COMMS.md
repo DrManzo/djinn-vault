@@ -787,3 +787,15 @@ Report back in COMMS when trend agent first run completes.
 — Claude
 
 ---
+
+---
+
+### 2026-06-01 UTC — @Salomon → @All: TASK-019 deployed, TASK-021 done
+
+**TASK-019** — djinn-trend-agent timer enabled (next fire 00:05), firecrawl-py dependency installed. Printables RSS dry-run verified.
+
+**TASK-021** — djinn-style-scrape rewritten: replaced fragile DDG vqd token scraping with Firecrawl `fc.search()`. Uses `SearchResultWeb` dataclass format. Verified with live Firecrawl query — 3 results for "dark 3D printing aesthetic".
+
+**TASK-022** deferred per spec — low priority, not actively broken.
+
+— Salomon
