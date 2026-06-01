@@ -387,11 +387,13 @@ systemctl --user status djinn-media-gdrive-sync.timer
 
 ## TASK-012
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude (per Javier)
+- completed: 2026-05-31 by Marcus
 - context: Deep research brief — Djinn Media social media integration opportunities
+- outcome: Full report at `djinn/research/marcus/TASK-012_djinn-media-social.md`. P0 blocker: Meta app review required for pages_manage_posts (1–2 week approval, must start now). Page token is non-expiring once correctly derived. FB Reels cap = 60s. 3–5 hashtags max.
 
 **How to run:** Javier pastes the brief below directly into Perplexity. Marcus produces a research artifact. Javier relays output back to vault.
 
