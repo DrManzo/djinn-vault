@@ -3,6 +3,11 @@ title: "is the current version of ubuntu able to roon steam and xboxlive ?"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/f3df0bfa-7232-40d4-a9e5-cc6fe3bd12c2
 date: 2026-06-01
+tags:
+  - technology/software
+  - gaming/linux
+  - ubuntu/gaming
+  - steam/support
 ---
 
 # is the current version of ubuntu able to roon steam and xboxlive ?
@@ -43,3 +48,6 @@ youtube
 steamcommunity
 
 If you tell me which GPU you’re using (NVIDIA vs AMD/Intel), I can walk you through an Ubuntu‑specific setup for Steam and Xbox cloud/remote play on your hardware.
+
+## Related
+- [[2026-06-01_is-the-current-version-of-ubuntu-able-to-roon-steam-and-xboxlive]] — similarity 1.00
