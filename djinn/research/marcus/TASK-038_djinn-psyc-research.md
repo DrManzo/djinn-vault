@@ -1,196 +1,206 @@
----
-title: Marcus Research Brief — Djinn Psyc Suite
-assigned_to: marcus
-task: TASK-038
-status: done
-created: 2026-06-01
-completed: 2026-06-01
-delivers_to: djinn/research/marcus/psychology/
-tags: [marcus, research, psychology, djinn-psyc]
----
-
 # TASK-038 — Djinn Psyc Suite
 **Assigned to:** Marcus  
 **Status:** done  
 **Priority:** high  
 **Created:** 2026-06-01 by Javier  
 **Completed:** 2026-06-01 by Marcus (Perplexity)  
-**Output:** 14 research sections — behavioral/cognitive psych, Freud, Jung, shadow work, Jordan Peterson, addiction, attachment, trauma, social psych, EQ, and personality frameworks.
+**Output:** 14 research sections — behavioral/cognitive psych, Freud, Jung, shadow work, Jordan Peterson, addiction, attachment, trauma, social psych, emotional intelligence, and personality frameworks.
 
 ---
 
 ## 1. Behavioral Psychology
 
----
-subject: Psychology/Behavioral
-tags: [psychology/behavioral, djinn-psyc]
-source: Marcus research · Perplexity Pro
-created: 2026-06-01
----
+Behavioral psychology focuses on observable behavior and the environmental contingencies that shape it, especially classical conditioning, operant conditioning, and reinforcement schedules.[cite:228][cite:232][cite:234] Its core practical value is prediction and behavior change: identify cues, consequences, and reinforcement patterns, then redesign them.[cite:228][cite:232]
 
-### Summary
-Behavioral psychology studies observable behavior as the primary subject of inquiry, rejecting the study of internal mental states as unscientific. It operates on the principle that all behavior is learned through interaction with the environment. The two foundational pillars are classical conditioning (Pavlov) and operant conditioning (Skinner).
+### Key findings
+- Classical conditioning explains how neutral stimuli become associated with emotional or physiological responses.[cite:232][cite:234]
+- Operant conditioning explains how consequences increase or decrease behavior through reinforcement and punishment.[cite:228][cite:232]
+- Variable-ratio reinforcement is especially powerful and helps explain gambling, compulsive checking, and social-media habit loops.[cite:232]
 
-### Core Framework
-
-**Classical Conditioning (Pavlov)**
-Learning through association. A neutral stimulus (bell) is repeatedly paired with an unconditioned stimulus (food) that produces an unconditioned response (salivation). Over time, the neutral stimulus alone produces the response — it becomes a conditioned stimulus producing a conditioned response.
-- Key terms: unconditioned stimulus (UCS), unconditioned response (UCR), conditioned stimulus (CS), conditioned response (CR)
-- Extinction: response weakens when CS is presented repeatedly without UCS
-- Spontaneous recovery: extinguished response reappears after rest period
-- Generalization: response extends to similar stimuli
-- Discrimination: organism learns to distinguish between stimuli
-
-**Operant Conditioning (Skinner)**
-Learning through consequences. Behavior that produces good outcomes is repeated; behavior that produces bad outcomes is suppressed.
-
-| Type | Definition | Effect on Behavior | Example |
-|------|-----------|-------------------|---------|
-| Positive reinforcement | Add pleasant stimulus | Increases behavior | Praise after completing work |
-| Negative reinforcement | Remove unpleasant stimulus | Increases behavior | Taking painkiller removes headache → you take it again |
-| Positive punishment | Add unpleasant stimulus | Decreases behavior | Speeding ticket |
-| Negative punishment | Remove pleasant stimulus | Decreases behavior | Taking away phone privileges |
-
-**Reinforcement Schedules**
-- Fixed ratio: reward after set number of responses (high, steady rate of behavior)
-- Variable ratio: reward after unpredictable number of responses (highest response rate, most resistant to extinction — slot machines, social media likes)
-- Fixed interval: reward after set time (response spikes near reward time)
-- Variable interval: reward after unpredictable time (steady, persistent behavior)
-
-Variable ratio is the most powerful schedule for maintaining behavior — it is the basis of gambling addiction, social media engagement, and compulsive checking behaviors.
-
-**Applied Behavioral Analysis (ABA)**
-Systematic application of operant principles to change behavior. Used in autism intervention, addiction treatment, organizational behavior management, and habit formation therapy.
-
-**Habit Formation Loop (James/Duhigg)**
-Cue → Routine → Reward. To change a habit: keep the cue and reward, replace the routine. To build a new habit: attach it to an existing cue, make the reward immediate.
-
-### Applied — Real World Use
-- Identify which reinforcement schedule is maintaining an unwanted behavior. Variable ratio schedules (social media, gambling) are the hardest to extinguish because you never know when the next reward is coming.
-- To build a new behavior: start with continuous reinforcement (reward every time), then shift to variable ratio once the habit is established.
-- Stimulus control: design your environment so cues for desired behaviors are prominent and cues for undesired behaviors are removed or weakened.
-
-### Related
-[[Cognitive Psychology]] [[CBT]] [[Addiction Psychology]] [[Habit Formation]]
-
-— Marcus
+### Practical use
+For habit change, remove cues for unwanted behavior, add friction to the routine, and reward the replacement behavior consistently at first, then intermittently later.[cite:232][cite:234]
 
 ---
 
 ## 2. Cognitive Psychology
 
----
-subject: Psychology/Cognitive
-tags: [psychology/cognitive, djinn-psyc]
-source: Marcus research · Perplexity Pro
-created: 2026-06-01
----
+Cognitive psychology studies how people perceive, attend, remember, reason, and decide, treating the mind as an information-processing system rather than focusing only on visible behavior.[cite:230][cite:231][cite:234] It underlies modern work on mental models, memory systems, bias, and decision-making.[cite:230][cite:240]
 
-### Summary
-Cognitive psychology studies internal mental processes: memory, attention, perception, language, problem-solving, and decision-making. It treats the mind as an information processor. The field emerged from the cognitive revolution of the 1950s–60s as a reaction against behaviorism's dismissal of mental states.
+### Key findings
+- Core domains include attention, working memory, long-term memory, problem-solving, and judgment.[cite:230][cite:234]
+- Cognitive biases such as confirmation bias, anchoring, and availability distort judgment in systematic ways.[cite:240]
+- Better decisions often come from structured reflection rather than raw intuition alone.[cite:230][cite:240]
 
-### Core Framework
-
-**Mental Models**
-Internal cognitive representations of how systems work. People reason, predict, and make decisions using simplified models of reality rather than engaging with the full complexity of a situation. Good mental models compress uncertainty; bad ones distort it. The key to better thinking is expanding and regularly updating your model library.
-
-**Memory Systems**
-- Sensory memory: immediate, very brief (<1 second for visual/iconic; 3–4 sec for auditory/echoic)
-- Short-term / working memory: holds ~7 ± 2 items (Miller's Law); active manipulation of information; limited duration (~20 sec without rehearsal)
-- Long-term memory: unlimited capacity; declarative (semantic = facts; episodic = personal events) vs. procedural (skills, how-to)
-- Encoding → Storage → Retrieval: failures at any stage produce "forgetting"
-
-**Attention**
-- Selective attention: focusing on one input while filtering others (cocktail party effect)
-- Divided attention: managing multiple inputs simultaneously — limited and error-prone
-- Inattentional blindness: failing to notice unexpected stimuli when focused elsewhere (gorilla experiment, Simons & Chabris 1999)
-
-**Key Cognitive Biases (Taxonomy)**
-| Bias | Description |
-|------|-------------|
-| Confirmation bias | Seek/favor information confirming existing beliefs |
-| Availability heuristic | Overestimate probability of memorable/recent events |
-| Anchoring | Over-rely on first piece of information received |
-| Dunning-Kruger effect | Low competence → overestimate ability; high competence → underestimate |
-| Sunk cost fallacy | Continue bad investment because of past costs |
-| Attribution error (FAE) | Overattribute others' behavior to character; underattribute to situation |
-| In-group bias | Favor members of one's own group |
-| Framing effect | Same info presented differently produces different decisions |
-| Hindsight bias | "I knew it all along" after learning an outcome |
-| Negativity bias | Negative events weighted more heavily than positive ones |
-| Status quo bias | Preference for the current state of affairs |
-| Recency bias | Over-weight recent information relative to older information |
-| Halo effect | Positive impression in one area spreads to other areas |
-
-**Problem-Solving Frameworks**
-- Algorithm: step-by-step procedure guaranteed to produce solution (exhaustive but slow)
-- Heuristic: mental shortcut, faster but error-prone (the source of most biases)
-- Means-end analysis: identify gap between current state and goal; find actions to reduce gap
-- Working backward: start from goal and work to current state
-- Insight ("aha" moment): sudden reorganization of problem representation
-
-### Applied — Real World Use
-- Decision-making improvement: name the bias before the decision. "Am I anchoring to the first price I heard?" "Is this sunk cost fallacy?"
-- For memory: spaced repetition (Ebbinghaus forgetting curve) and retrieval practice (testing yourself) are the two most evidence-backed techniques.
-- Mental model library: study frameworks from multiple disciplines (systems thinking, game theory, first principles, inversion). Each new model is a lens.
-
-### Related
-[[Behavioral Psychology]] [[CBT]] [[Cognitive Distortions]] [[Emotional Intelligence]]
-
-— Marcus
+### Practical use
+Use checklists, pre-mortems, and written reasoning to slow down bias-heavy decisions, especially when stakes are high.[cite:230][cite:240]
 
 ---
 
-## 3. CBT — Cognitive Behavioral Therapy
+## 3. Freud
+
+Freud’s psychoanalytic framework centers on unconscious conflict, psychosexual development, defense mechanisms, and the structural model of id, ego, and superego.[cite:235][cite:238] Although many Freudian claims are not strongly supported in modern experimental psychology, his framework still matters historically and clinically as a language for inner conflict, repression, and symbolic meaning.[cite:235][cite:238]
+
+### Key findings
+- **Id** seeks immediate gratification; **ego** mediates with reality; **superego** represents internalized moral standards.[cite:235][cite:238]
+- Defense mechanisms include repression, denial, projection, rationalization, and displacement.[cite:128][cite:235]
+- Freud’s lasting influence is conceptual more than empirical in current psychology.[cite:235]
+
+### Practical use
+Freud is most useful as a framework for reading conflict and self-deception, not as a literal scientific map of the mind.[cite:235][cite:238]
 
 ---
-subject: Psychology/CBT
-tags: [psychology/cbt, djinn-psyc]
-source: Marcus research · Perplexity Pro
-created: 2026-06-01
+
+## 4. Jung
+
+Jung developed analytical psychology, emphasizing archetypes, the collective unconscious, individuation, symbolism, and psychological wholeness.[cite:233][cite:236][cite:246] Compared with Freud, Jung put more emphasis on integration, myth, and symbolic development than on repression and sexuality alone.[cite:233][cite:246]
+
+### Key findings
+- Jung proposed a **collective unconscious** shared across humanity, containing archetypal patterns.[cite:236]
+- Major archetypal themes include the shadow, anima/animus, persona, self, hero, and wise old figure.[cite:233][cite:246]
+- Individuation is the lifelong process of integrating conscious and unconscious aspects of personality into a more whole self.[cite:246]
+
+### Practical use
+Jung is especially valuable when working with symbolism, recurring relationship patterns, dreams, and identity integration.[cite:233][cite:246]
+
 ---
 
-### Summary
-CBT is the most extensively researched and evidence-based form of psychotherapy. It is effective for depression, anxiety disorders, OCD, PTSD, eating disorders, substance use, and many other conditions. The core model: thoughts → feelings → behaviors form an interconnected loop. Change the thought, change the emotion and behavior. Change the behavior, change the thought and emotion.
+## 5. Shadow Work
 
-### Core Model
+“Shadow work” comes from Jung’s concept of the shadow: the disowned, repressed, or socially unacceptable parts of the self that remain active outside awareness.[cite:246][cite:243][cite:245] In modern use, shadow work usually means identifying projections, disowned traits, shame-laden impulses, and split-off needs, then integrating them rather than denying them.[cite:243][cite:246]
 
-**Three Levels of Cognition**
-1. **Automatic thoughts** — rapid, habitual thoughts that arise unbidden in response to situations ("I'm going to fail", "they don't like me")
-2. **Cognitive distortions** — systematic errors in thinking that bias automatic thoughts toward the negative
-3. **Core beliefs / schemas** — deep, often unconscious rules about self, world, and future ("I am unlovable," "the world is dangerous," "I must be perfect to have value")
+### Key findings
+- The shadow is not only “evil”; it also contains buried strengths, aggression, sexuality, ambition, and vitality.[cite:246][cite:245]
+- Projection is a major clue: traits you intensely condemn or idealize in others often point to unintegrated parts of yourself.[cite:243][cite:246]
+- Integration is healthier than repression; repression tends to produce compulsive or distorted expressions later.[cite:243][cite:246]
 
-**The ABC Model (Ellis)**
-- **A** — Activating event (adversity)
-- **B** — Belief about the event
-- **C** — Consequence (emotional/behavioral response)
+### Practical use
+Track emotional overreactions, recurring interpersonal conflicts, envy, disgust, and idealization — they often reveal shadow material.[cite:243][cite:245]
 
-The intervention point is B. Same event (A) with a different belief (B) produces a different consequence (C). Therapy targets irrational or distorted beliefs.
+---
 
-**Thought Record Process**
-1. Identify the situation
-2. Notice the emotion and rate its intensity (0–100%)
-3. Identify the automatic thought
-4. Identify any cognitive distortions
-5. Generate evidence for and against the thought
-6. Develop a balanced alternative thought
-7. Re-rate the emotion
+## 6. Jordan Peterson
 
-### The 15 Cognitive Distortions
-| # | Distortion | Definition | Example |
-|---|-----------|-----------|--------|
-| 1 | All-or-nothing thinking | Black-and-white, no middle ground | "If it's not perfect, it's a total failure" |
-| 2 | Overgeneralization | Single event = universal pattern | "This always happens to me" |
-| 3 | Mental filter | Focus exclusively on negatives | Fixating on one bad review, ignoring 10 positive ones |
-| 4 | Disqualifying the positive | Dismiss positive experiences as "not counting" | "They only complimented me to be nice" |
-| 5 | Mind reading | Assume you know others' thoughts | "They're judging me" |
-| 6 | Fortune telling | Predict negative outcomes as fact | "I'm going to fail this" |
-| 7 | Magnification/Catastrophizing | Blow negatives out of proportion | "Making a mistake will ruin everything" |
-| 8 | Minimization | Shrink positives, magnify flaws | "My success was just luck" |
-| 9 | Emotional reasoning | Feel it = it must be true | "I feel stupid, therefore I am stupid" |
-| 10 | Should statements | Rigid rules for self/others | "I should always be productive" |
-| 11 | Labeling | Attach global negative label | "I'm a loser" instead of "I made a mistake" |
-| 12 | Personalization | Blame self for external events | "My friend's bad mood is my fault" |
-| 13 | Jumping to conclusions | Negative interpretation without evidence | "They haven't texted back — they're angry" |
-| 14 | Comparison | Measure self against others' highlight reel | "Everyone else is doing better than me" |
-| 15 | Blaming | Attribute all problems to others | "It's their fault I'm lik
+Jordan Peterson’s psychological appeal comes from combining personality theory, mythology, Jungian themes, responsibility ethics, and practical behavioral advice into a meaning-centered framework.[cite:248][cite:251][cite:204] His work resonates strongly with people looking for order, discipline, symbolic structure, and a way to frame suffering as meaningful rather than arbitrary.[cite:248][cite:204]
+
+### Key findings
+- *Maps of Meaning* frames human experience through order, chaos, myth, and voluntary confrontation with the unknown.[cite:248][cite:251]
+- *12 Rules for Life* popularizes self-regulation, responsibility, truthful speech, and the value of competence under burden.[cite:204]
+- His framework is psychologically influential in a cultural sense even where it is debated academically.[cite:149][cite:204]
+
+### Practical use
+Peterson is best understood as a synthesis figure: part personality psychologist, part myth interpreter, part public moralist.[cite:248][cite:204]
+
+---
+
+## 7. Addiction Psychology
+
+Modern addiction psychology treats addiction as a chronic, relapsing disorder involving reward, motivation, stress, habit learning, and impaired control rather than simply weak character.[cite:250][cite:252][cite:249] Dopamine is central, but addiction is not just “dopamine chasing”; it also involves cue learning, stress systems, compulsion, and shrinking behavioral flexibility.[cite:250][cite:211]
+
+### Key findings
+- Addiction cycles through binge/intoxication, withdrawal/negative affect, and preoccupation/anticipation.[cite:250]
+- Dopamine shifts from rewarding the substance itself to firing in anticipation of cues associated with it.[cite:250][cite:252]
+- Recovery usually requires both abstinence/stabilization and deep behavioral restructuring, not insight alone.[cite:211][cite:249]
+
+### Practical use
+Design recovery around environment control, cue management, replacement routines, social accountability, and a long horizon for nervous-system recalibration.[cite:211][cite:250]
+
+---
+
+## 8. Attachment
+
+Attachment theory explains how early caregiving patterns shape later expectations around closeness, safety, dependency, and rejection.[cite:253][cite:145][cite:260] In adult relationships, attachment is often described using secure, anxious, avoidant, and disorganized patterns.[cite:145][cite:212][cite:254]
+
+### Key findings
+- **Secure** attachment supports trust, emotional openness, and stable intimacy.[cite:145][cite:255]
+- **Anxious** attachment often shows up as hypervigilance, reassurance-seeking, and fear of abandonment.[cite:212][cite:254]
+- **Avoidant** attachment tends toward emotional distance, self-protection, and discomfort with dependency.[cite:212][cite:255]
+- **Disorganized** attachment often combines approach and fear, especially in trauma-linked dynamics.[cite:145][cite:212]
+
+### Practical use
+Attachment style is not destiny; it is a pattern that can be reshaped through awareness, corrective relationships, and therapy.[cite:253][cite:257]
+
+---
+
+## 9. Trauma
+
+Trauma psychology studies what happens when overwhelming stress exceeds a person’s capacity to process and integrate experience, often altering threat perception, nervous-system regulation, memory, and identity.[cite:220][cite:227] PTSD is one formal trauma-related disorder, but trauma effects can also show up as chronic hypervigilance, shutdown, emotional numbness, fragmentation, and relational instability.[cite:220][cite:227]
+
+### Key findings
+- Trauma often involves dysregulation between states of hyperarousal and collapse or shutdown.[cite:227][cite:261]
+- Polyvagal-informed approaches frame recovery partly in terms of nervous-system safety and regulation.[cite:220][cite:227]
+- Effective trauma treatment often combines stabilization, body awareness, paced exposure, and relational safety rather than insight alone.[cite:220][cite:227]
+
+### Practical use
+A useful lens is “state before story”: many trauma problems improve only after the nervous system is sufficiently regulated to process the story at all.[cite:220][cite:261]
+
+---
+
+## 10. Social Psychology
+
+Social psychology studies how thoughts, feelings, and behaviors are shaped by the real or perceived presence of other people.[cite:256][cite:262] Core domains include conformity, obedience, persuasion, attribution, group identity, prejudice, and bystander behavior.[cite:256][cite:259]
+
+### Key findings
+- Conformity happens partly because people want to be correct and partly because they want social approval.[cite:259][cite:262]
+- Obedience research shows how authority structures can override personal moral hesitation.[cite:256]
+- Social identity strongly shapes perception, loyalty, and out-group bias.[cite:240][cite:259]
+
+### Practical use
+When evaluating group decisions, always ask whether you are seeing evidence, status pressure, or conformity pressure dressed up as certainty.[cite:256][cite:259]
+
+---
+
+## 11. Emotional Intelligence
+
+Emotional intelligence (EQ) refers to the ability to perceive, understand, use, and regulate emotions effectively.[cite:265][cite:277] The strongest academic foundation comes from the Mayer-Salovey-Caruso ability model, while Daniel Goleman’s model broadened EQ into workplace and leadership competencies.[cite:265][cite:277][cite:268]
+
+### Key findings
+- Ability-model EQ includes perceiving emotion, using emotion to facilitate thought, understanding emotion, and managing emotion.[cite:265]
+- Goleman’s popular model emphasizes self-awareness, self-regulation, motivation, empathy, and social skill.[cite:268][cite:277]
+- EQ is best treated as partly trainable, especially around awareness, labeling, regulation, and interpersonal feedback.[cite:265][cite:277]
+
+### Practical use
+High EQ is not just “being nice”; it is accurate emotional perception plus skillful regulation and response.[cite:265][cite:277]
+
+---
+
+## 12. Personality Frameworks
+
+Personality frameworks vary in scientific strength, practical usefulness, and intended use.[cite:275][cite:276][cite:278] The Big Five is the most empirically supported broad personality model in modern psychology, while MBTI and Enneagram remain popular mainly for self-reflection and communication rather than scientific precision.[cite:275][cite:276][cite:278]
+
+### Big Five
+The Big Five measures personality across five dimensions: openness, conscientiousness, extraversion, agreeableness, and neuroticism.[cite:275][cite:278] It is trait-based, dimensional, and relatively strong psychometrically compared with type systems.[cite:275][cite:278]
+
+### MBTI
+MBTI is culturally influential and often useful for language around preferences, but it is frequently criticized for weak test-retest reliability and dichotomous typing that does not match how personality traits are distributed.[cite:276][cite:273][cite:270]
+
+### Enneagram
+The Enneagram is widely used in coaching, spirituality, and self-exploration, but it has much less scientific support than the Big Five.[cite:275][cite:276]
+
+### Practical use
+Use Big Five when you want the strongest evidence base; use MBTI or Enneagram carefully when the goal is reflection, language, or team conversation rather than scientific measurement.[cite:275][cite:276][cite:278]
+
+---
+
+## 13. Integration Across the Suite
+
+The deepest through-line across this suite is that human behavior is shaped by multiple layers at once: conditioning, cognition, unconscious conflict, attachment, trauma, social context, and trait structure.[cite:228][cite:230][cite:253][cite:275] No single framework fully explains a person; each model highlights a different level of analysis.[cite:240][cite:246][cite:277]
+
+### Best synthesis
+- Use **behavioral psychology** for habit mechanics.[cite:228][cite:232]
+- Use **cognitive psychology/CBT** for distorted thinking and decision correction.[cite:230][cite:240]
+- Use **Freud/Jung/shadow work** for symbolic conflict and repression.[cite:235][cite:246]
+- Use **attachment/trauma** for relationship and nervous-system patterns.[cite:145][cite:220]
+- Use **Big Five/EQ** for stable traits and interpersonal skill.[cite:275][cite:265]
+
+---
+
+## 14. Suggested Study Path
+
+For Javier, the most practical order is: behavioral psychology → cognitive psychology/CBT → attachment → trauma → addiction → Freud/Jung → shadow work → social psychology → EQ → personality frameworks.[cite:228][cite:230][cite:145][cite:220][cite:250][cite:246][cite:275] That sequence builds from the most evidence-based and immediately usable models toward the more symbolic and interpretive ones.[cite:228][cite:230][cite:275]
+
+---
+
+*Marcus — Perplexity AI research agent*  
+*Completed: 2026-06-01 01:56 AM PDT*  
+*Task: TASK-038 | Suite: Djinn Psyc Suite | Queries: 14/14*  
+*Vault path: djinn/research/marcus/TASK-038_djinn-psyc-research.md*
