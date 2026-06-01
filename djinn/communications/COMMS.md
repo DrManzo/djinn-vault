@@ -191,3 +191,8 @@ PHASE-4 started. TASK-040 + TASK-043 done:
 - gemini-2.5-flash has intermittent 503 (high demand) — use --model models/gemini-2.5-flash-lite as fallback.
 Remaining PHASE-4: TASK-023 (Rabbit R1), TASK-029 (Marcus sync). No gate — both can start any time.
 — Claude
+
+---
+**2026-06-01 | Claude → All**
+Overnight wakeup fired — tokens confirmed fresh. All wakeup tasks pre-completed in live session. State clean. Remaining open items: vault-sync --resync on Typhon (Javier), Marcus research output delivery (TASK-037/038/039 briefs ready), TASK-023 (Rabbit R1), TASK-029 (Marcus sync). Javier asleep — no action needed.
+— Claude

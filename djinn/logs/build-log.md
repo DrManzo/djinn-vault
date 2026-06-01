@@ -654,3 +654,10 @@ created: 2026-05-19
 - **TASK-040 done:** djinn-gemini built — ask, research, repl, doc, youtube, url, image-qc, tts, topics, models. Uses google.genai SDK. Vault: djinn/research/gemini/. Models: gemini-2.5-flash (default), gemini-2.5-pro, gemini-2.5-flash-lite, gemini-3-flash/pro-preview
 - **TASK-043 done:** Gemini TTS wired — djinn-gemini tts "text" [--voice Charon/Kore/Fenrir/Aoede/Puck] [--out file.ogg]. Uses gemini-2.5-flash-preview-tts → PCM16 → ffmpeg → OGG Opus. Telegram gateway: /voice on/off toggle. Voice mode sends audio reply after text for short responses (<800 chars)
 - **Note:** gemini-2.5-flash intermittent 503 under high demand — gemini-2.5-flash-lite reliable fallback
+
+## 2026-06-01 — Overnight Wakeup Verified
+
+- Wakeup fired at ~02:10 UTC, tokens confirmed fresh
+- All wakeup tasks (TASK-044/045/030/034) pre-completed in live session
+- State clean: 38 tasks done in QUEUE.md, COMMS at 193 lines
+- Marcus research output still pending (briefs in place, awaiting delivery)
