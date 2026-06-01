@@ -910,3 +910,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:10 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-think-you-made-a-very-important-discovery-when-it-comes-to-the-educa.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:10
+**RE:** Session end — slipbox-2026-06-01-i-think-you-made-a-very-important-discovery-when-it-comes-to-the-educa-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-think-you-made-a-very-important-discovery-when-it-comes-to-the-educa.md
+
+**Action:** None — FYI.
+
+— Salomon
