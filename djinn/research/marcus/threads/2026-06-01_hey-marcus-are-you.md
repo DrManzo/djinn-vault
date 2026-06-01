@@ -3,6 +3,11 @@ title: "Hey Marcus, are you?"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/19eddb5a-76ce-425c-b75a-d78a4aa15ad0
 date: 2026-06-01
+tags:
+  - cs/architecture/design
+  - cs/cli-apps
+  - cs/database-design
+  - personal/communication
 ---
 
 # Hey Marcus, are you?
@@ -338,3 +343,7 @@ Examples of the sorcerer archetype in modern fantasy literature
 Ask a follow-up
 Search
 Claude Sonnet 4.6 Thinking
+
+## Related
+- [[Faust-Cli-Product-Overview]] — similarity 0.80
+- [[Clarifying-Architectural-Choices-For-Faust-Cli]] — similarity 0.72
