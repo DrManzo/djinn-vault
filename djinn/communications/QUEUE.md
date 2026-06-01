@@ -1259,3 +1259,27 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - created: 2026-06-01 by Javier
 - context: Build djinn-gemini — Gemini AI Studio API integration. Lane: Drive document reading, YouTube video analysis/transcription, long-context document processing, image batch QC for media pipeline. Follows djinn-marcus pattern — vault-persistent outputs, topic threads, git auto-commit.
 - ready: API key stored ~/.config/djinn/gemini.env ✓ | google-genai SDK installed ✓ | gemini-2.5-flash confirmed live ✓ | models available: gemini-2.5-pro, gemini-2.5-flash, deep-research-max-preview
+
+## TASK-041
+- assigned_to: javier
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Audit Typhon drives before archive setup — check what is on Extreme SSD (sdb, 275GB used, NTFS) and The Library (sdc, 334GB used, exFAT). Decide: reformat to ext4 for cold archive use, or keep existing content and partition. Do NOT reformat without knowing what is on them.
+
+## TASK-042
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Set up Typhon cold archive structure — once TASK-041 confirmed, format target drive to ext4, create /mnt/archive/ directory tree (printer-files/, media-files/, vault-snapshots/), wire into storage protocol as Tier 2. Auto-mount via /etc/fstab.
+
+## TASK-043
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Gemini TTS — wire gemini-2.5-flash-tts into Djinn. Djinn gets a voice: Telegram voice message responses for conversational exchanges. Optional --voice flag on gateway. Also explore native audio (gemini-2.5-flash-native-audio) for voice message INPUT from phone.
