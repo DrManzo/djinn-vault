@@ -1,0 +1,46 @@
+---
+title: "reference https://github.com/DrManzo/djinn-vault for what i have and ill send a link to the video"
+source: perplexity-pro
+url: https://www.perplexity.ai/search/afc417f1-555a-4b1a-a5c7-b650a289d59b
+date: 2026-06-01
+---
+
+# reference https://github.com/DrManzo/djinn-vault for what i have and ill send a link to the video
+
+Got a clear picture of your djinn-vault repo. Here's what I can see you currently have:
+
+Current Repo Structure
+
+Root-level files:
+
+.gitignore — secrets/env exclusions
+
+.python-version — Python version pinned
+
+Psychology-Compiled-Research.md — your research notes (63KB)
+
+README.md — project overview
+
+result.json — looks like a test/output artifact
+
+Directories:
+
+.obsidian/ — Obsidian vault config (this is a live Obsidian vault)
+
+djinn/ — likely the core agent/script code
+
+i notes/ — personal notes folder
+
+inbox/ — capture inbox (classic Obsidian GTD setup)
+
+references/ — reference materials
+
+scripts/ — automation scripts
+
+search/ — search-related tooling or indexes
+
+What I'm Seeing
+
+Your vault is a hybrid repo — it's simultaneously an Obsidian knowledge base and a Python project housing Djinn's code and scripts. The djinn/ and scripts/ dirs are where the agent logic lives, while .obsidian/, inbox/, i notes/, and references/ are the vault's note structure.
+
+Go ahead and drop the video link, Javier — once I see what you're building toward I can cross-reference what's already in the repo and tell you exactly what's missing or needs restructuring.
