@@ -3,6 +3,11 @@ title: "i have a creality 3v 3 plus what filliments can i use ?"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/ad024a8e-8a0e-4b46-bba8-e5ede92b559c
 date: 2026-06-01
+tags:
+  - 3d-printing/filament/types
+  - 3d-printing/printer-models/ender-3-v3-plus
+  - 3d-printing/models/ender-3-v3-plus
+  - 3d-printing/filament/recommendations
 ---
 
 # i have a creality 3v 3 plus what filliments can i use ?
@@ -44,3 +49,7 @@ Important Notes
 All filaments must be 1.75mm diameter. When printing with carbon fiber or glow-in-the-dark filaments, you'll need a hardened nozzle since these materials are abrasive. You can use any brand of filament, not just Creality products.
 simplyprint
 +3
+
+## Related
+- [[Filaments-For-Creality-Ender-3-V3-Plus]] — similarity 0.82
+- [[2026-06-01_can-i-use-this-with-the-ender-3v3-plus]] — similarity 0.80
