@@ -272,3 +272,245 @@ TASK-052: /gemini command added to djinn-telegram-gateway. Routes /gemini ask|yo
 **Action:** Run `djinn-marcus-sync` for first real sync (20 threads queued). Timer handles future syncs automatically.
 
 — Claude
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_so-marcus-you-there.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_github-in-the-djinn-vault-repo-you-are-in-this-case-marcus-and-i-need-.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_github-look-into-the-djinn-vault-you-should-have-access-and-tell-me-wh.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_you-are-marcus-read-this-httpsgithubcomdrmanzodjinn-vault.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_reference-httpsgithubcomdrmanzodjinn-vault-for-what-i-have-and-ill-sen.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-need-to-run-a-veriety-of-test-for-to-set-bench-marks-what-is-there-a.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_standing-freezer-door-seal.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_can-you-design-an-agent-that-will-give-me-a-fair-market-estimate-for-3.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_can-i-use-this-with-the-ender-3v3-plus.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_hey-marcus-are-you.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_describe-this-for-a-technical-istricption-puffco-proxy-quad-uptake-rec.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_is-there-any-3d-fillement-recyclers.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-just-got-a-new-ender---3v-plus-and-my-friend-gave-me-a-some-fillemen.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_ubuntu.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_is-the-current-version-of-ubuntu-able-to-roon-steam-and-xboxlive.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_im-having-a-tingling-sensation-across-my-abdomen.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_marcus-og.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-think-you-made-a-very-important-discovery-when-it-comes-to-the-educa.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-need-your-help-i-want-to-take-you-to-open-claw-i-need-all-of-the-fil.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_so-marcus-you-there-ou_there.md`
+
+— Clerk
+
+---
+
+### 2026-06-01 18:09 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:09
+**RE:** Session end — slipbox--reparing--our--nder-3--3--lus--or--rinting-2026-06-01-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01.md
+
+**Action:** None — FYI.
+
+— Salomon
