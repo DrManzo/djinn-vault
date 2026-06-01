@@ -673,3 +673,11 @@ created: 2026-05-19
 - djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01.md
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-01_slipbox--reparing--our--nder-3--3--lus--or--rinting-2026-06-01-md-stub.md`
 *— Salomon*
+
+## 2026-06-01 — djinn-marcus-sync full rescrape overhaul
+
+- Removed persistent `seen_urls` skip filter — all threads re-scraped every run (threads are ongoing, not one-shot)
+- Added `scroll_to_load_full_thread()` — scrolls until scrollHeight stabilizes, ensures full lazy-loaded DOM
+- Simplified `extract_thread()` to `document.body.innerText` — free, no CSS selectors, no Gemini API
+- `route_marcus_thread()` in clerk now uses stable `pplx_{thread_uuid}.md` filename — re-scrapes overwrite in place
+- Removed `scan_raw_for_urls()` — cross-run dedup no longer needed

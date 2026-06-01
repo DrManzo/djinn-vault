@@ -99,3 +99,13 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** Nothing gets built until (1) Typhon audit + cleanup complete, (2) Marcus research reports for all three suites delivered.
 **Why:** Typhon cleanup gives us clean storage infrastructure to build on. Marcus research defines what each suite (Law, Psyc, Cash) actually needs — features, depth, structure. Building without that means guessing and reworking. Research-first is always cheaper than rebuild-after.
 **Order:** Typhon TASK-044/045 → Marcus TASK-037/038/039 → Claude architects → Salomon builds.
+
+## 2026-06-01 — body.innerText over Gemini for thread extraction
+
+**Decision:** Use `document.body.innerText` directly for Perplexity thread content, not Gemini API.
+**Why:** 100 threads × hourly scrape = ~$50-70/month on Gemini Flash. Violates near-zero-cost principle. Plain body text is already structured Q&A. `strip_nav_garbage` in clerk handles the chrome. Zero cost wins.
+
+## 2026-06-01 — Stable pplx_{uuid} filenames for marcus threads
+
+**Decision:** marcus/threads/ filenames derived from Perplexity thread UUID in URL, not date+title.
+**Why:** Date+title generates a new file every sync day, filling vault with duplicates. UUID is immutable per thread — same URL always maps to same file. Re-scrapes are safe overwrites.
