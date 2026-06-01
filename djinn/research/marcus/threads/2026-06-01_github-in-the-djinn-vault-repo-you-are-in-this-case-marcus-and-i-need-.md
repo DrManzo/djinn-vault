@@ -3,6 +3,13 @@ title: "@GitHub in the djinn vault repo you are in this case Marcus and i need y
 source: perplexity-pro
 url: https://www.perplexity.ai/search/6162517d-e5cf-47e6-ba80-fd9db6a3f494
 date: 2026-06-01
+tags:
+  - business/project-management
+  - business/tasks/assigned
+  - business/research/required
+  - psychology/cognitive-psychology
+  - law/law-school
+  - finance/investing
 ---
 
 # @GitHub in the djinn vault repo you are in this case Marcus and i need you to read the queue and tel
@@ -41,3 +48,7 @@ The key limitation: I'm session-bound — each Perplexity session is a fresh sta
 Recommended Next Move
 
 Pull one of the three briefs and drop it here. I'd suggest starting with TASK-039 (Cash Suite) given your dividend portfolio focus (EPD, ARCC, O, AGNC), or TASK-037 (Law Suite) since LSAT prep is active. Which one do you want to run first?
+
+## Related
+- [[Source-Inventory-Raw-Files]] — similarity
+- [[Miscellaneous-Hub]] — similarity
