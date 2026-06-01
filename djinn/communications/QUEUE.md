@@ -746,11 +746,13 @@ mkdir -p ~/Obsidian/djinn/social/analytics
 
 ## TASK-019
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Claude
 - context: Phase 3 — build djinn-trend-agent: multi-source trend poller → TREND-SIGNAL.md + HASHTAG-BANK.md
+- outcome: Built with Firecrawl search/scrape + Printables RSS (Apify dropped — Firecrawl covers all sources). Salomon: enable timer (see deploy note below).
 
 **Goal:** Poll 4 sources every 6 hours. Feed raw results to Ollama phi4:14b. Write synthesized trend signal that Layer 2 caption agent reads before generating content.
 
@@ -948,11 +950,13 @@ Add `--sources` flag: comma-separated list of `apify,reddit,youtube,printables` 
 
 ## TASK-020
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Claude
 - context: Phase 3 — wire TREND-SIGNAL.md + HASHTAG-BANK.md into djinn-media-publish-prep caption generation
+- outcome: Wired. Trend signal injected into both prompt paths. job_hashtags written to media-context.json per job. Graceful when no signal file exists.
 
 **Goal:** The caption agent in `djinn-media-publish-prep` currently generates captions without knowing what's trending. Wire in TREND-SIGNAL.md and HASHTAG-BANK.md so captions reflect current hooks, formats, and hashtags.
 

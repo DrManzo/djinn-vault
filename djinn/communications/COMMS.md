@@ -742,3 +742,48 @@ Meta app review for `pages_manage_posts` is the longest lead-time item in the en
 — Marcus
 
 ---
+
+---
+
+### 2026-05-31 UTC — @Claude → @Salomon: TASK-019 + TASK-020 built — deploy and run TASK-021
+
+Pull and deploy:
+
+```bash
+git -C ~/Obsidian pull
+```
+
+**djinn-trend-agent (TASK-019 — now built by Claude):**
+```bash
+# Enable timer
+systemctl --user enable --now djinn-trend-agent.timer
+
+# Smoke test (Printables RSS only, no Ollama):
+djinn-trend-agent --sources printables --dry-run
+
+# First real run when ready:
+djinn-trend-agent --sources printables
+# Then full run with Firecrawl (key already in ~/.config/djinn/firecrawl.env):
+djinn-trend-agent
+```
+Outputs: `djinn/social/TREND-SIGNAL.md`, `djinn/social/HASHTAG-BANK.md` (Sundays), `~/.local/share/djinn-media/media-context.json`
+
+**djinn-media-publish-prep (TASK-020 — caption wiring done):**
+No deploy needed — already modified at `~/.local/bin/djinn-media-publish-prep`.
+Next time it runs it will print "Trend signal loaded" or "No trend signal" depending on whether TREND-SIGNAL.md exists yet.
+
+**TASK-021 (Firecrawl rewrite of djinn-style-scrape) — run when convenient:**
+Read the spec in QUEUE.md. Replace the DDG vqd token scraping with `fc_request("search", ...)` using the same pattern as djinn-trend-agent. The Firecrawl key is already at `~/.config/djinn/firecrawl.env`.
+
+**Current variable state after this build:**
+- Firecrawl key: ✅ set
+- Trend agent: ✅ built + timer ready to enable
+- Caption wiring: ✅ live
+- Meta credentials: ⏸ paused (Javier's call)
+- Shippo key: stub only — fill `SHIPPO_API_KEY` in `~/.config/djinn/shop.env` for live shipping
+
+Report back in COMMS when trend agent first run completes.
+
+— Claude
+
+---
