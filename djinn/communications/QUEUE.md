@@ -1283,3 +1283,50 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - trigger: manual
 - created: 2026-06-01 by Claude
 - context: Gemini TTS — wire gemini-2.5-flash-tts into Djinn. Djinn gets a voice: Telegram voice message responses for conversational exchanges. Optional --voice flag on gateway. Also explore native audio (gemini-2.5-flash-native-audio) for voice message INPUT from phone.
+
+## TASK-044
+- assigned_to: typhon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Copy Extreme SSD → /mnt/storage, then reformat to ext4 as djinn-archive cold storage. 552GB free on storage, 275GB to copy — fits. NOTE: Library-Backup (271GB on Extreme SSD) may duplicate library-rescue (263GB already on storage) — verify before copying, skip if identical.
+
+**Commands:**
+```bash
+# Step 1 — copy (skip Library-Backup if it duplicates library-rescue)
+rsync -av --progress "/run/media/tf-tthq/Extreme SSD/" /mnt/storage/extreme-ssd-backup/
+
+# Step 2 — verify
+du -sh /mnt/storage/extreme-ssd-backup/
+# confirm size matches ~275GB before proceeding
+
+# Step 3 — unmount
+udisksctl unmount -b /dev/sdb1
+udisksctl power-off -b /dev/sdb
+
+# Step 4 — reformat to ext4
+sudo mkfs.ext4 -L "djinn-archive" /dev/sdb1
+
+# Step 5 — mount + fstab
+sudo mkdir -p /mnt/archive
+UUID=$(sudo blkid -s UUID -o value /dev/sdb1)
+echo "UUID=$UUID /mnt/archive ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
+sudo mount /mnt/archive
+
+# Step 6 — create archive structure
+mkdir -p /mnt/archive/{printer-files,media-files,vault-snapshots,library-rescue}
+
+# Step 7 — verify
+df -h /mnt/archive
+```
+
+**Report back:** df -h output + UUID in COMMS.md
+
+## TASK-045
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Full Typhon system audit — snap bloat, log sizes, home directory, duplicate data (library-rescue vs Library-Backup), ollama-system (53GB of models — which are still needed?), running services health check, disk cleanup. Report what can be safely removed.
