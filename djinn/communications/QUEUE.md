@@ -1672,3 +1672,56 @@ Restore: when mention is detected for an archived person → `run_shell(f"djinn-
 
 **Report back:** paste people check output after test mention
 
+## TASK-059
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude (per Javier)
+- context: Research — what does djinn-bughunter need to run robustly as a local error reporter on Salomon? What monitoring infrastructure belongs in a self-hosted systemd/Python environment?
+
+**Brief:**
+
+Djinn just added `@djinn_bughunter_bot` (Telegram) + `djinn-alert` (notifier script) for failure reporting. It currently catches systemd `OnFailure` events for 7 core services and lets scripts call `djinn-alert "message"` directly. This is functional but minimal. Javier wants to know what else is needed to make this bulletproof and what patterns exist for local error monitoring at this scale.
+
+**Who this is for:**
+One-person shop. Linux (Ubuntu/Debian). Python scripts, systemd services and timers, Telegram bots. No cloud monitoring budget. Djinn is the infrastructure — needs to monitor itself.
+
+**Research questions:**
+
+1. **Systemd failure coverage gaps**
+   - `OnFailure` only fires on clean service failure (exit 1, OOM, etc.). What does it miss?
+   - What about: timer units that run but exit 0 with no output (silent no-ops), timers that never fire (misconfigured OnCalendar), services that "succeed" but produce empty/wrong output, services stuck in a restart loop?
+   - What are the standard patterns for catching these in a self-hosted systemd environment?
+   - Is `systemd-watchdog` (WatchdogSec=) worth adding to long-running services? What does it catch vs OnFailure?
+
+2. **Python script error capture — beyond systemd**
+   - Many Djinn scripts run via timers and swallow exceptions silently. What patterns (decorators, context managers, wrapper functions) let a script report its own failures to djinn-alert without changing every error path?
+   - Is there a lightweight local equivalent of Sentry for Python that works offline? (e.g. Sentry's self-hosted, Rollbar alternatives, etc.)
+   - What's the simplest pattern for "wrap any CLI script so unhandled exceptions go to Telegram"?
+
+3. **Disk and resource monitoring**
+   - What are the standard lightweight tools for monitoring disk usage, RAM, and CPU on a single Linux machine and alerting when thresholds are crossed?
+   - Specifically: Salomon has a print queue, media pipeline, and Ollama models (heavy disk/RAM). What thresholds matter and what tools can alert on them without a full Prometheus/Grafana stack?
+   - Can systemd itself trigger alerts on disk pressure? Or is a small cron check simpler?
+
+4. **Telegram bot failure self-monitoring**
+   - The bots themselves (djinn-personal-gateway, djinn-telegram-gateway) could crash or lose network. SystemD catches the crash — but what about: bot running but Telegram API unreachable, bot running but poll loop silently stuck, bot running but messages not being received?
+   - What heartbeat or watchdog patterns exist specifically for Telegram bot processes?
+   - Is there a pattern where the bot pings itself or sends a heartbeat to a secondary channel every N hours to prove it's alive?
+
+5. **Local log aggregation — what's realistic**
+   - Currently logs go to `/tmp/` and are lost on reboot. What's the minimal viable log persistence setup for a Djinn-scale system (7–10 systemd services, a dozen cron scripts)?
+   - `journald` persistent logging vs flat log files — which is easier to query and alert on?
+   - Any lightweight local log analysis tools that can catch patterns (e.g., "this error appeared 3 times in the last hour") without a full ELK stack?
+
+6. **Build recommendation**
+   - What's the 20% of monitoring that catches 80% of real failures in a system like Djinn?
+   - Concrete architecture: what to add to `djinn-alert` and what to add to individual services
+   - What should be in a `djinn-health` script that runs every 30 minutes and reports system state?
+   - Estimated build time for each piece
+
+**Output format:** Structured report, one section per question. Be specific — name actual tools, patterns, systemd directives. Flag anything with high maintenance cost (we want durable, low-touch monitoring).
+
+**Deliver to:** `djinn/research/marcus/TASK-059_bughunter-monitoring.md` — commit to vault. Claude reads on demand.
+
