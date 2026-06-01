@@ -3,6 +3,10 @@ title: "i’m having a tingling sensation across my abdomen"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/7df7ac33-3f66-4ca6-92a9-5725e31a7bcb
 date: 2026-06-01
+tags:
+  - personal/health/symptoms
+  - personal/health/neuropathy
+  - personal/health/anxiety
 ---
 
 # i’m having a tingling sensation across my abdomen
@@ -44,3 +48,6 @@ Whether movement, eating, or pressing on the area changes it.
 That pattern helps narrow whether this is most consistent with a nerve issue, muscle strain, or something that needs faster evaluation.
 pmc.ncbi.nlm.nih
 +1
+
+## Related
+- [[Grounding-Techniques-For-Stress-And-Anxiety]] — similarity to anxiety symptoms
