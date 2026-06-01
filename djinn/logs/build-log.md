@@ -661,3 +661,10 @@ created: 2026-05-19
 - All wakeup tasks (TASK-044/045/030/034) pre-completed in live session
 - State clean: 38 tasks done in QUEUE.md, COMMS at 193 lines
 - Marcus research output still pending (briefs in place, awaiting delivery)
+
+## 2026-06-01 — Marcus Briefs Rewrite
+- All 47 briefs rewritten with explicit "Start Here — Scrape These" URL sections
+- Finance briefs 15-20 created (tax-advantaged accounts, SE taxes, CA tax, credits, tracking, wealth building)
+- Marcus gets one last chance per Javier directive; Gemini fallback ready if quality fails
+- TASK-037/038/039 remain in_progress — waiting on Marcus output delivery
+- djinn-marcus-sync (TASK-029) identified as needed to automate delivery

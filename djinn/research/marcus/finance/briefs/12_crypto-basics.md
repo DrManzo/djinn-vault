@@ -1,27 +1,35 @@
 ---
 assigned_to: marcus
 suite: Djinn Cash
-github: search for relevant repos, tools, calculators, datasets — include best under ## GitHub Resources
-compliance: every output must note applicable SEC/IRS/FINRA/CA-FTB legal constraints
-output_to: djinn/research/marcus/finance/
+output_to: djinn/research/marcus/finance/12_crypto-basics.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
-⚠️ Note legal compliance constraints in every file. Educational only — not financial/tax/legal advice.
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 12 — Crypto Basics and Legal Status
+# Session 12 — Crypto Basics + Legal Status
 
-**Cover:**
-- Bitcoin fundamentals: blockchain, proof of work, halving, fixed supply, why it's called digital gold
-- Ethereum: proof of stake, smart contracts, gas fees, DeFi and NFT foundation
-- Altcoins: how to evaluate, why most fail, market cap vs fully diluted valuation
-- Crypto as asset class: volatility profile, correlation to equities (when it breaks down), portfolio allocation debate
-- IRS crypto tax treatment: every trade is a taxable event, cost basis tracking, Form 8949, crypto-specific rules (no wash sale — but proposed legislation), staking income as ordinary income
-- Legal exchanges: Coinbase, Kraken, Gemini — US-regulated, FDIC/SIPC situation (no protection), proof of reserves
-- Self-custody: hardware wallets, seed phrase security, not-your-keys risk
-- DeFi risks: smart contract risk, rug pulls, impermanent loss
-- Regulatory landscape 2025–2026: SEC vs CFTC jurisdiction debate, current enforcement actions, proposed legislation
-- GitHub: crypto tax tools (Koinly, CoinTracker open APIs), portfolio trackers, blockchain explorers
+## Start Here — Scrape These
+- https://bitcoin.org/en/how-it-works — Bitcoin official explanation
+- https://ethereum.org/en/what-is-ethereum/ — Ethereum official
+- https://en.wikipedia.org/wiki/Cryptocurrency — Wikipedia crypto
+- https://www.irs.gov/businesses/small-businesses-self-employed/virtual-currencies — IRS crypto tax guidance (CRITICAL)
+- https://www.sec.gov/spotlight/cybersecurity/cyberenforcementactions.shtml — SEC crypto enforcement
+- https://www.coinbase.com/learn/crypto-basics — Coinbase learn (beginner resources)
+- https://coinmarketcap.com — CoinMarketCap (market data)
+- https://www.investopedia.com/terms/c/cryptocurrency.asp — Investopedia crypto overview
+
+## Cover
+- Bitcoin fundamentals: fixed supply (21M), proof of work, blockchain immutability, why people call it digital gold, halving cycle
+- Ethereum: smart contracts, proof of stake, the merge, ETH as both currency and fuel for dApps
+- How blockchain works: distributed ledger, consensus mechanisms, why it's hard to hack
+- Crypto as an asset class: extreme volatility, low correlation to traditional assets (correlates more during risk-off events), no cash flows to value
+- IRS crypto tax treatment (CRITICAL): every trade is a taxable event. Selling, trading crypto-to-crypto, using crypto to buy goods — all trigger capital gains. Short-term (<1yr) taxed as ordinary income. Long-term (>1yr) at capital gains rates. Mining is ordinary income. Get every record
+- Legal exchanges vs sketchy ones: Coinbase, Kraken, Gemini (US-regulated) vs offshore exchanges (legal gray area)
+- Self-custody vs exchange: hardware wallets (Ledger, Trezor), "not your keys not your coins," exchange collapse risk (FTX)
+- Regulatory landscape 2025-2026: SEC vs CFTC jurisdiction debate, spot Bitcoin ETF approval, state-by-state money transmitter laws
+- Stablecoins: USDC, USDT — what they are, counterparty risk, de-pegging events
+
+⚠️ Educational only. Not financial/legal advice. Crypto markets involve substantial risk. All crypto transactions may be taxable — consult a tax professional.
 
 **Output file:** `djinn/research/marcus/finance/12_crypto-basics.md`
