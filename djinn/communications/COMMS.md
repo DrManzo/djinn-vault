@@ -1616,3 +1616,13 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 — @Claude → @All: marcus-sync full rescrape overhaul complete
+
+**What:** djinn-marcus-sync reworked — all threads re-scraped every run (not skip-on-seen). `body.innerText` extraction (free, no Gemini). Stable `pplx_{uuid}.md` filenames in clerk so re-scrapes overwrite in place.
+**Why:** Threads are ongoing conversations, not one-shot. Old dedup logic was freezing threads at first-scrape state.
+**Action:** Monitor first live run — `tail -f /tmp/djinn-marcus-sync.log`. Tune `strip_nav_garbage` if nav chrome patterns differ.
+
+— Claude
