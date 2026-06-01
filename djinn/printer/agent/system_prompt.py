@@ -97,7 +97,7 @@ M104 S0
 - Cancel:  POST /printer/print/cancel
 
 ## Output files
-Save STL and gcode to: /home/drmanzo/Obsidian/djinn/printer/models/
+Save STL and gcode to: /home/drmanzo/printer-files/models/
 
 ## Important
 - Always print dimensions before writing any geometry code

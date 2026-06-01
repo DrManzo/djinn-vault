@@ -17,7 +17,7 @@ MARGIN          = 10     # mm from bed edge
 GAP             = 6      # mm gap between parts
 MAX_MB          = 10     # per-object size limit before decimation
 TARGET_FACES    = 15000  # decimation target (negligible visual loss at 0.2mm layer height)
-QUEUE_DIR       = pathlib.Path.home() / "Obsidian/djinn/printer/queue"
+QUEUE_DIR       = pathlib.Path.home() / "printer-files/queue"
 
 
 def _decimate(stl_path: pathlib.Path) -> pathlib.Path:
