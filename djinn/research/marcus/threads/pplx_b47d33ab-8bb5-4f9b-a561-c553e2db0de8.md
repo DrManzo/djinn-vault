@@ -3,6 +3,10 @@ title: "i just got a new ender - 3v plus and my friend gave me a some fillement 
 source: perplexity-pro
 url: https://www.perplexity.ai/search/b47d33ab-8bb5-4f9b-a561-c553e2db0de8
 date: 2026-06-01
+tags:
+  - 3d-printing/printer-maintenance/preparation
+  - 3d-printing/filament/handling
+  - personal/printing
 ---
 
 # i just got a new ender - 3v plus and my friend gave me a some fillement and want to print a cool pri
@@ -48,3 +52,7 @@ youtube
 +1
 
 What type of filament did your friend give you (PLA, PETG, ABS, etc.)?
+
+## Related
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing-2026-06-01]] — bed-prep-steps
+- [[2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use]] — filament-dryness
