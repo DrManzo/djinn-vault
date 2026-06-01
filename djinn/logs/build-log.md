@@ -628,3 +628,16 @@ created: 2026-05-19
 - **Auto-commit:** git push after every research write (`--author=Marcus <marcus@djinn>`)
 - **Key:** `~/.config/djinn/perplexity.env` (chmod 600) — needs fill
 - **TASK-025 done**
+
+## 2026-06-01 — PHASE-3 Maintenance + Typhon Audit
+
+- **TASK-045 done:** Typhon audit complete — journal freed 3.8GB, vault-sync timer disabled (needs --resync), Ollama models already cleared, TASK-044 still pending
+- **TASK-034 done:** djinn-printer-files-backup rsync || true fix
+- **TASK-030 done:** COMMS.md rotated 842→137 lines, archive saved
+- **TASK-035 done:** djinn-print-monitor-v2 already working (oneshot, exits 0)
+- **TASK-036 done:** forge-sync rate limiting (--tpslimit 2) + timer 15→30 min
+- **TASK-026 done:** gdrive-backup-manifest rotation extended to all 13 file types
+- **TASK-032 done:** Claude queue alert added to telegram-gateway startup
+- **TASK-033 done:** Typhon heartbeat staleness alert added to telegram-gateway startup
+- **TASK-031 done:** Conversation logging added to both Telegram + Discord gateways → djinn/logs/conversations/YYYY-MM-DD.md
+- **Typhon correct IP:** 192.168.1.113 (CLAUDE.md has stale 192.168.50.113)
