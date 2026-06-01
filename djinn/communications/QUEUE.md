@@ -751,6 +751,7 @@ mkdir -p ~/Obsidian/djinn/social/analytics
 - trigger: manual
 - created: 2026-05-31 by Claude
 - completed: 2026-05-31 by Claude
+- deployed: 2026-05-31 by Salomon (timer enabled, firecrawl-py installed)
 - context: Phase 3 — build djinn-trend-agent: multi-source trend poller → TREND-SIGNAL.md + HASHTAG-BANK.md
 - outcome: Built with Firecrawl search/scrape + Printables RSS (Apify dropped — Firecrawl covers all sources). Salomon: enable timer (see deploy note below).
 
@@ -1023,10 +1024,11 @@ python3 -m py_compile ~/.local/bin/djinn-media-publish-prep && echo OK
 
 ## TASK-021
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - context: Firecrawl debloat — rewrite djinn-style-scrape: replace fragile DDG vqd token scraping with fc.search()
 
 **Goal:** Replace the 2-step DuckDuckGo image search (extract vqd token from HTML → query /i.js) with a single `fc.search()` call. The vqd pattern breaks silently whenever DDG changes their frontend.
