@@ -1109,18 +1109,18 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 ## TASK-023
 - assigned_to: claude
 - status: pending
-- priority: high
+- priority: normal
 - trigger: manual
 - created: 2026-05-31 by Javier
-- context: Wire Rabbit R1 as mobile Telegram terminal for Djinn commands
+- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Wire Rabbit R1 as mobile Telegram terminal for Djinn commands
 
 ## TASK-024
 - assigned_to: salomon
 - status: pending
-- priority: high
+- priority: low
 - trigger: manual
 - created: 2026-05-31 by Claude
-- context: Mount extra HDD on Typhon as Tier 2 cold archive storage
+- context: SUPERSEDED by TASK-044 + TASK-042 — no action needed — Mount extra HDD on Typhon as Tier 2 cold archive storage
 
 ## TASK-025
 - assigned_to: claude
@@ -1138,7 +1138,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
-- context: Fix gdrive-backup-manifest rotation — runs hourly, should be weekly, keeps all timestamped files indefinitely (bloat)
+- context: PHASE-3: Infrastructure — run anytime, no dependency — Fix gdrive-backup-manifest rotation — runs hourly, should be weekly, keeps all timestamped files indefinitely (bloat)
 
 ## TASK-027
 - assigned_to: javier
@@ -1146,7 +1146,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
-- context: Fill SHIPPO_API_KEY in ~/.config/djinn/shop.env — last remaining shop variable, activates live shipping rates and label purchase
+- context: JAVIER: Fill Shippo key when ready — no phase dependency — Fill SHIPPO_API_KEY in ~/.config/djinn/shop.env — last remaining shop variable, activates live shipping rates and label purchase
 
 ## TASK-028
 - assigned_to: javier
@@ -1160,10 +1160,10 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 ## TASK-029
 - assigned_to: claude
 - status: pending
-- priority: high
+- priority: normal
 - trigger: manual
 - created: 2026-05-31 by Javier
-- context: Build djinn-marcus-sync — Selenium/Firefox scraper polls Perplexity Pro library, diffs against vault state, drops new/updated threads into RAW/, clerk routes them. Backlog 2 months on first run. Hourly systemd timer. Telegram notification on new threads. Phone threads included automatically (cloud-synced).
+- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Build djinn-marcus-sync — Selenium/Firefox scraper polls Perplexity Pro library, diffs against vault state, drops new/updated threads into RAW/, clerk routes them. Backlog 2 months on first run. Hourly systemd timer. Telegram notification on new threads. Phone threads included automatically (cloud-synced).
 
 ## TASK-030
 - assigned_to: claude
@@ -1171,7 +1171,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: COMMS.md rotation — archive entries older than 30 days to djinn/communications/archive/COMMS-YYYY-MM.md, keep COMMS.md lean and fast to scan
+- context: PHASE-3: Infrastructure — run anytime, no dependency — COMMS.md rotation — archive entries older than 30 days to djinn/communications/archive/COMMS-YYYY-MM.md, keep COMMS.md lean and fast to scan
 
 ## TASK-031
 - assigned_to: claude
@@ -1179,23 +1179,23 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Djinn conversation log — both gateways (Telegram + Discord) write daily exchange summary to djinn/logs/conversations/YYYY-MM-DD.md so key decisions made between Javier and Djinn are vault-persistent
+- context: PHASE-3: Infrastructure — run anytime, no dependency — Djinn conversation log — both gateways (Telegram + Discord) write daily exchange summary to djinn/logs/conversations/YYYY-MM-DD.md so key decisions made between Javier and Djinn are vault-persistent
 
 ## TASK-032
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: PHASE-3: Quick fix — run anytime, no dependency — Claude queue alert — Djinn checks QUEUE.md for assigned_to:claude + status:pending at gateway startup and pings Javier via Telegram so pending Claude tasks don't silently pile up
+
+## TASK-033
 - assigned_to: claude
 - status: pending
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Claude queue alert — Djinn checks QUEUE.md for assigned_to:claude + status:pending at gateway startup and pings Javier via Telegram so pending Claude tasks don't silently pile up
-
-## TASK-033
-- assigned_to: claude
-- status: pending
-- priority: low
-- trigger: manual
-- created: 2026-06-01 by Javier
-- context: Typhon heartbeat staleness alert — if HEARTBEAT-typhon.md last beat is >24h old, Djinn alerts Javier on next Telegram message
+- context: PHASE-3: Infrastructure — run anytime, no dependency — Typhon heartbeat staleness alert — if HEARTBEAT-typhon.md last beat is >24h old, Djinn alerts Javier on next Telegram message
 
 ## TASK-034
 - assigned_to: claude
@@ -1203,7 +1203,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Fix djinn-printer-files-backup exit code — rsync transfers successfully but set -euo pipefail causes exit 1. Add || true to rsync pipe.
+- context: PHASE-3: Quick fix — run anytime, no dependency — Fix djinn-printer-files-backup exit code — rsync transfers successfully but set -euo pipefail causes exit 1. Add || true to rsync pipe.
 
 ## TASK-035
 - assigned_to: claude
@@ -1211,7 +1211,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Diagnose djinn-print-monitor-v2 — timer active but service dies immediately. v1 is covering but v2 should replace it.
+- context: PHASE-3: Infrastructure — run anytime, no dependency — Diagnose djinn-print-monitor-v2 — timer active but service dies immediately. v1 is covering but v2 should replace it.
 
 ## TASK-036
 - assigned_to: claude
@@ -1219,15 +1219,15 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: forge-sync still hitting GDrive rateLimitExceeded — further stagger or backoff needed
+- context: PHASE-3: Infrastructure — run anytime, no dependency — forge-sync still hitting GDrive rateLimitExceeded — further stagger or backoff needed
 
 ## TASK-037
 - assigned_to: marcus
 - status: pending
-- priority: low
+- priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Djinn Law Suite — 13 research queries covering law school paths, LSAT, bar prep, contracts, torts, civil procedure, corporate law, LLC formation, compliance, contract drafting, legal research methods
+- context: PHASE-2: Research gate — run after TASK-045. No suite builds until all three Marcus tasks complete — Djinn Law Suite — 13 research queries covering law school paths, LSAT, bar prep, contracts, torts, civil procedure, corporate law, LLC formation, compliance, contract drafting, legal research methods
 - brief: djinn/research/marcus/TASK-037_djinn-law-research.md
 - output: djinn/research/marcus/law/ (13 files)
 
@@ -1237,17 +1237,17 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Djinn Psyc Suite — 14 research queries covering behavioral/cognitive psych, Freud, Jung, shadow work, Jordan Peterson, addiction, attachment, trauma, social psychology, EQ, personality frameworks
+- context: PHASE-2: Research gate — run after TASK-045. No suite builds until all three Marcus tasks complete — Djinn Psyc Suite — 14 research queries covering behavioral/cognitive psych, Freud, Jung, shadow work, Jordan Peterson, addiction, attachment, trauma, social psychology, EQ, personality frameworks
 - brief: djinn/research/marcus/TASK-038_djinn-psyc-research.md
 - output: djinn/research/marcus/psychology/ (14 files)
 
 ## TASK-039
 - assigned_to: marcus
 - status: pending
-- priority: low
+- priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Djinn Cash Suite — 20 research queries covering budgeting, investing, stock analysis, 7-day speculation framework, market indicators, crypto, federal/CA tax law, tax-advantaged accounts, self-employment taxes, wealth building. All outputs must note legal compliance constraints.
+- context: PHASE-2: Research gate — run after TASK-045. No suite builds until all three Marcus tasks complete — Djinn Cash Suite — 20 research queries covering budgeting, investing, stock analysis, 7-day speculation framework, market indicators, crypto, federal/CA tax law, tax-advantaged accounts, self-employment taxes, wealth building. All outputs must note legal compliance constraints.
 - brief: djinn/research/marcus/TASK-039_djinn-cash-research.md
 - output: djinn/research/marcus/finance/ (20 files)
 
@@ -1257,24 +1257,24 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Build djinn-gemini — Gemini AI Studio API integration. Lane: Drive document reading, YouTube video analysis/transcription, long-context document processing, image batch QC for media pipeline. Follows djinn-marcus pattern — vault-persistent outputs, topic threads, git auto-commit.
+- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Build djinn-gemini — Gemini AI Studio API integration. Lane: Drive document reading, YouTube video analysis/transcription, long-context document processing, image batch QC for media pipeline. Follows djinn-marcus pattern — vault-persistent outputs, topic threads, git auto-commit.
 - ready: API key stored ~/.config/djinn/gemini.env ✓ | google-genai SDK installed ✓ | gemini-2.5-flash confirmed live ✓ | models available: gemini-2.5-pro, gemini-2.5-flash, deep-research-max-preview
 
 ## TASK-041
 - assigned_to: javier
 - status: pending
-- priority: high
+- priority: low
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: Audit Typhon drives before archive setup — check what is on Extreme SSD (sdb, 275GB used, NTFS) and The Library (sdc, 334GB used, exFAT). Decide: reformat to ext4 for cold archive use, or keep existing content and partition. Do NOT reformat without knowing what is on them.
+- context: SUPERSEDED — drive contents audited manually 2026-06-01 — Audit Typhon drives before archive setup — check what is on Extreme SSD (sdb, 275GB used, NTFS) and The Library (sdc, 334GB used, exFAT). Decide: reformat to ext4 for cold archive use, or keep existing content and partition. Do NOT reformat without knowing what is on them.
 
 ## TASK-042
 - assigned_to: claude
 - status: pending
-- priority: normal
+- priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: Set up Typhon cold archive structure — once TASK-041 confirmed, format target drive to ext4, create /mnt/archive/ directory tree (printer-files/, media-files/, vault-snapshots/), wire into storage protocol as Tier 2. Auto-mount via /etc/fstab.
+- context: PHASE-3: Run after TASK-044/045 complete — Set up Typhon cold archive structure — once TASK-041 confirmed, format target drive to ext4, create /mnt/archive/ directory tree (printer-files/, media-files/, vault-snapshots/), wire into storage protocol as Tier 2. Auto-mount via /etc/fstab.
 
 ## TASK-043
 - assigned_to: claude
@@ -1282,15 +1282,15 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: Gemini TTS — wire gemini-2.5-flash-tts into Djinn. Djinn gets a voice: Telegram voice message responses for conversational exchanges. Optional --voice flag on gateway. Also explore native audio (gemini-2.5-flash-native-audio) for voice message INPUT from phone.
+- context: PHASE-4: Build — gated on TASK-037/038/039 research complete — Gemini TTS — wire gemini-2.5-flash-tts into Djinn. Djinn gets a voice: Telegram voice message responses for conversational exchanges. Optional --voice flag on gateway. Also explore native audio (gemini-2.5-flash-native-audio) for voice message INPUT from phone.
 
 ## TASK-044
 - assigned_to: typhon
 - status: pending
-- priority: high
+- priority: critical
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: Copy Extreme SSD → /mnt/storage, then reformat to ext4 as djinn-archive cold storage. 552GB free on storage, 275GB to copy — fits. NOTE: Library-Backup (271GB on Extreme SSD) may duplicate library-rescue (263GB already on storage) — verify before copying, skip if identical.
+- context: PHASE-1: Run now — gates all builds — Copy Extreme SSD → /mnt/storage, then reformat to ext4 as djinn-archive cold storage. 552GB free on storage, 275GB to copy — fits. NOTE: Library-Backup (271GB on Extreme SSD) may duplicate library-rescue (263GB already on storage) — verify before copying, skip if identical.
 
 **Commands:**
 ```bash
@@ -1341,7 +1341,7 @@ echo "Structure:"; ls /mnt/archive/
 ## TASK-045
 - assigned_to: claude
 - status: pending
-- priority: normal
+- priority: critical
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: Full Typhon system audit — snap bloat, log sizes, home directory, duplicate data (library-rescue vs Library-Backup), ollama-system (53GB of models — which are still needed?), running services health check, disk cleanup. Report what can be safely removed.
+- context: PHASE-1: Run after TASK-044 completes — gates all builds — Full Typhon system audit — snap bloat, log sizes, home directory, duplicate data (library-rescue vs Library-Backup), ollama-system (53GB of models — which are still needed?), running services health check, disk cleanup. Report what can be safely removed.
