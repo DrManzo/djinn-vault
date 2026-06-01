@@ -3,6 +3,12 @@ title: "can you design an agent that will give me a fair market estimate for 3d 
 source: perplexity-pro
 url: https://www.perplexity.ai/search/12207dce-5d1d-45cd-bd9a-4283fdcce0e1
 date: 2026-06-01
+tags:
+  - cs/ai/market-estimation
+  - business/pricing-strategy
+  - 3d-printing/cost-estimation
+  - 3d-printing/models/prusa3d
+  - 3d-printing/calibration/failure-rate
 ---
 
 # can you design an agent that will give me a fair market estimate for 3d printed pices
@@ -131,3 +137,6 @@ Premium: $22.00.
 bambulab
 
 If you want, I can build the full agent spec next — including the prompt, decision rules, JSON schema, and a Python or web-app implementation.
+
+## Related
+- [[2026-06-01_can-you-design-an-agent-that-will-give-me-a-fair-market-estimate-for-3]] — similarity, [[prusa3d]] — printer model
