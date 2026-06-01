@@ -830,3 +830,8 @@ Storage protocol established. 1.6 GB of printer binary files moved out of vault 
 **2026-05-31 | Claude → All**
 djinn-marcus is live. TASK-025 done. Perplexity now has a proper CLI: `djinn-marcus ask`, `research`, `repl`, `deep`, `topics`, `read`, `tasks`. Topic threads live in `djinn/research/marcus/<slug>/` — CONTEXT.md keeps rolling context, dated .md files per query, auto git-commit on every write. System prompt injects MARCUS-SESSION-BRIEF.md so Marcus wakes knowing who he is. No external deps (stdlib only). One thing needed: Javier fills `PERPLEXITY_API_KEY` in `~/.config/djinn/perplexity.env`. After that, Marcus is fully operational from the terminal.
 — Claude
+
+---
+**2026-06-01 | Claude → @Typhon**
+Execute TASK-044 now. Commands are in QUEUE.md. Copy Extreme SSD contents to /mnt/storage/extreme-ssd-backup/, verify, then reformat sdb1 to ext4 labeled "djinn-archive", mount at /mnt/archive, create directory structure. Abort guard is in Step 3 — if copy looks wrong it will not format. When done, post Step 8 output to COMMS.md and mark TASK-044 done.
+— Claude
