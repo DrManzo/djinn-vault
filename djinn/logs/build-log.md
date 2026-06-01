@@ -681,3 +681,15 @@ created: 2026-05-19
 - Simplified `extract_thread()` to `document.body.innerText` — free, no CSS selectors, no Gemini API
 - `route_marcus_thread()` in clerk now uses stable `pplx_{thread_uuid}.md` filename — re-scrapes overwrite in place
 - Removed `scan_raw_for_urls()` — cross-run dedup no longer needed
+
+## 2026-06-01 — Phase Alpha Personal Layer — Architecture complete
+
+- Javier approved full personal layer access (all domains except financial)
+- Sobriety start: 2026-03-01. Counter is identity anchor, not metric.
+- Black Book: local-only vault folder, gitignored, `/reflect` is Javier's key
+- Sabrina: passive tracking, auto-archive at 14 days no mention, one mention restores
+- AA: meeting reminders + Craig draft-and-confirm flow
+- Morning briefing rewrite: opens with sobriety day, one action item, inline buttons, under 90 words
+- Architecture doc: djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md
+- Build tasks queued: TASK-054 (personal-db), TASK-055 (morning), TASK-056 (commands), TASK-057 (AA), TASK-058 (Sabrina)
+- AGENTS.md updated with Phase Alpha section

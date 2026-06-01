@@ -109,3 +109,21 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 
 **Decision:** marcus/threads/ filenames derived from Perplexity thread UUID in URL, not date+title.
 **Why:** Date+title generates a new file every sync day, filling vault with duplicates. UUID is immutable per thread — same URL always maps to same file. Re-scrapes are safe overwrites.
+
+## 2026-06-01 — Phase Alpha: Full personal access granted
+
+**Decision:** Djinn gets read access to all personal domains except financial. Black Book included — local-only processing only (Ollama, never cloud).
+**Why:** Javier is new to sobriety, ADHD, workaholic pattern — needs structure held externally. Giving Djinn context is the precondition for it actually functioning as a conciliary rather than a system status tool.
+**How to apply:** All personal layer tools use local Ollama only for sensitive content. Cloud AI (Gemini, Groq) never receives Black Book, habit, sobriety, or relationship data.
+
+## 2026-06-01 — Sabrina archive rule
+
+**Decision:** Djinn holds Sabrina context passively. If Javier doesn't mention her in 14 days (without Djinn prompting), she gets quietly archived. One mention restores.
+**Why:** Javier said it explicitly — consistent mention = active context. Silence = fade out. Djinn doesn't force the topic.
+**How to apply:** Passive scan in Telegram gateway. Weekly check Sunday morning. Archive is soft — never delete.
+
+## 2026-06-01 — Morning briefing: open with sobriety day, always
+
+**Decision:** Every morning briefing opens with "Day N sober." regardless of anything else.
+**Why:** Sobriety counter is identity, not a metric. It's the ground the day is built on. Opens before everything else — deadlines, streaks, tasks.
+**How to apply:** djinn-morning hardcodes this as line 1. Non-negotiable.

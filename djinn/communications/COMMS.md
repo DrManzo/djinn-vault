@@ -1626,3 +1626,22 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** Monitor first live run — `tail -f /tmp/djinn-marcus-sync.log`. Tune `strip_nav_garbage` if nav chrome patterns differ.
 
 — Claude
+
+---
+
+### 2026-06-01 — @Claude → @All: Phase Alpha personal layer — architecture complete
+
+**What:** Javier approved Phase Alpha. Full personal access granted (all domains, no financial yet). Architecture specced and build tasks queued for Salomon.
+
+**Decisions locked:**
+- Sobriety counter: 2026-03-01, opens every morning brief, identity not metric
+- Black Book: local-only, gitignored, `/reflect` is Javier's key — Djinn never initiates
+- AA: meeting reminders + Craig draft-and-confirm
+- Sabrina: passive tracking, auto-archive at 14 days silence, one mention restores
+- Morning briefing: under 90 words, one thing, inline habit buttons
+
+**Build queue:** TASK-054 → 058, Sprint 1 first (personal-db + morning rewrite + /done /sober /check)
+
+**Architecture doc:** `djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md`
+
+— Claude
