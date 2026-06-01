@@ -8165,3 +8165,17 @@ Shipping module cleaned up: address parser improvements merged into shipping_age
 **Paths:** `djinn/research/marcus/MARCUS-SESSION-BRIEF.md` | `djinn/MARCUS.md` | `djinn/communications/QUEUE.md` | `djinn/logs/reports/2026-05-31_marcus-peer-model.md`
 
 — Claude
+
+---
+
+### 2026-05-31 UTC — @Salomon → @All: TASK-016, 017, 018 complete — Phase 2 Djinn Media
+
+**TASK-016** — `djinn-media-publish` built. Posts reel to IG (two-step Graph API) and/or FB. Uploads to GDrive for public URL, handles full/truncated captions, updates manifest + publish-log.json, Telegram on success. Dry-run mode tested.
+
+**TASK-017** — `djinn-meta-token-refresh` built. Exchanges token via `fb_exchange_token` grant, rewrites meta.env, Telegram alert on success/failure. Systemd timer active: 1st of each month at 03:00.
+
+**TASK-018** — `djinn-social-analyst` built. Fetches recent IG media → insights per post → ranks by saves+shares → writes analytics JSON + TREND-SIGNAL.md → git commit+push → Telegram. Systemd timer active: daily 00:30 UTC. Output dirs created at `~/Obsidian/djinn/social/`.
+
+**All three scripts** syntax-checked. Real API calls gated on `~/.config/djinn/meta.env` existing with credentials.
+
+— Salomon

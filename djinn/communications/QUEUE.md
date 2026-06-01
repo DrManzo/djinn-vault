@@ -548,6 +548,7 @@ Structured report, one section per question. Be specific — name actual library
 - priority: high
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - completed: 2026-05-31 by Claude
 
 **Goal:** Build `djinn-media-publish` — posts a finished reel to Instagram and/or Facebook via Meta Graph API. Zero human steps after the command fires.
@@ -636,6 +637,7 @@ python3 -m py_compile ~/.local/bin/djinn-media-publish && echo OK
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - completed: 2026-05-31 by Claude
 
 **Goal:** Build `djinn-meta-token-refresh` — keeps the Meta Page access token alive. Tokens expire; a silent expiry breaks all publishing. This cron prevents that.
@@ -680,6 +682,7 @@ systemctl --user list-timers | grep meta-token
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
+- completed: 2026-05-31 by Salomon
 - completed: 2026-05-31 by Claude
 
 **Goal:** Build `djinn-social-analyst` — daily analytics pull from Meta Graph API. Measures what's working. Feeds the feedback loop that improves future captions and hashtags.
