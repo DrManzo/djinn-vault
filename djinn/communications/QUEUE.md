@@ -1219,3 +1219,33 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - trigger: manual
 - created: 2026-06-01 by Javier
 - context: forge-sync still hitting GDrive rateLimitExceeded — further stagger or backoff needed
+
+## TASK-037
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Djinn Law Suite — 13 research queries covering law school paths, LSAT, bar prep, contracts, torts, civil procedure, corporate law, LLC formation, compliance, contract drafting, legal research methods
+- brief: djinn/research/marcus/TASK-037_djinn-law-research.md
+- output: djinn/research/marcus/law/ (13 files)
+
+## TASK-038
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Djinn Psyc Suite — 14 research queries covering behavioral/cognitive psych, Freud, Jung, shadow work, Jordan Peterson, addiction, attachment, trauma, social psychology, EQ, personality frameworks
+- brief: djinn/research/marcus/TASK-038_djinn-psyc-research.md
+- output: djinn/research/marcus/psychology/ (14 files)
+
+## TASK-039
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Javier
+- context: Djinn Cash Suite — 20 research queries covering budgeting, investing, stock analysis, 7-day speculation framework, market indicators, crypto, federal/CA tax law, tax-advantaged accounts, self-employment taxes, wealth building. All outputs must note legal compliance constraints.
+- brief: djinn/research/marcus/TASK-039_djinn-cash-research.md
+- output: djinn/research/marcus/finance/ (20 files)
