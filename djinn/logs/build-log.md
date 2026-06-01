@@ -608,3 +608,13 @@ created: 2026-05-19
 - Updated `djinn/communications/QUEUE.md` — added `assigned_to: marcus` and `assigned_to: claude` task formats
 - Updated `~/.openclaw/workspace/AGENTS.md` — Marcus section rewritten as peer, bidirectional task assignment protocol
 - Commit: `33ec429` | Pushed to `github.com/DrManzo/djinn-vault`
+
+## 2026-05-31 — Storage Protocol + Audit
+
+- **Gateway bugs fixed:** Discord gateway `import sys` missing (crash-looped 6,994×), Telegram `handle_queue` crash on `stats=null`
+- **1.6 GB moved out of vault:** `printer/library`, `queue`, `recovery`, `calibration`, `models`, `originals` → `~/printer-files/`. Vault shrunk 4.1 GB → 2.6 GB
+- **14 script/module path references updated** to `printer-files/` prefix
+- **Storage protocol written:** `djinn/docs/STORAGE-PROTOCOL.md` — tier definitions, multi-device reading pattern, asset+record pairing, pruning schedule
+- **Freed:** 7.9 GB pip cache, 1.5 GB faster-whisper model, 2 .bak files
+- **Disabled:** `djinn-media-gdrive-sync.timer` (constant failures), `djinn-meta-token-refresh.timer` (Meta paused), Xvfb from discord-watcher
+- **vault-sync throttled:** 2 min → 15 min; added `--ignore-errors` for mid-write log files

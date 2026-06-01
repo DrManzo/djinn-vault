@@ -6,7 +6,7 @@ import json, pathlib, re, subprocess
 from ..llm import LLM
 from ..project_state import ProjectState
 
-MODELS_DIR = pathlib.Path.home() / "Obsidian/djinn/printer/models"
+MODELS_DIR = pathlib.Path.home() / "printer-files/models"
 
 SYSTEM = """You are ProtoOptAgent. You generate two geometry variants from one OpenSCAD design.
 

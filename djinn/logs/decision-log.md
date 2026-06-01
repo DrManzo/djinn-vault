@@ -77,3 +77,14 @@ Maintenance burden: 3–8h/month. Failure mode: silent (returns empty data, no e
 
 ### 2026-05-31 — djinn-style-scrape DDG vqd pattern queued for replacement (Claude)
 The 2-step vqd token extract → image search pattern is the canonical fragile-scraper antipattern. Breaks silently when DDG updates HTML. Firecrawl fc.search() is a one-call replacement. Queued as TASK-021 — not urgent but should be done before djinn-trend-agent is live, since both do similar searches.
+
+## 2026-05-31 — Binary Files Out of Vault
+
+**Decision:** Move all binary printer assets (STL, gcode, recovery) out of `~/Obsidian/` into `~/printer-files/`.
+**Why:** Vault was 4.1 GB (98% binary blobs). vault-sync was rclone-copying 1.6 GB of model files every 15 min. ChromaDB was walking binary dirs. Every agent reading "the vault" was implicitly carrying gigabytes of irrelevant data.
+**Principle established:** Vault = text only. Binary assets live in Tier 1 (`~/printer-files/`, `~/media-files/`). Vault holds records/metadata that describe where assets live, not the assets themselves.
+
+## 2026-05-31 — Storage Tier Architecture
+
+**Decision:** Formalize three tiers: Vault (text, syncs everywhere), Local Assets (binary, Salomon-local, Typhon weekly rsync), Cold Archive (Typhon, pull on demand).
+**Why:** Preparing for multi-device access. As Djinn grows, no device should need to sync binary files to know system state. The vault is the index — it describes everything. Binary assets stay on the machine that uses them.

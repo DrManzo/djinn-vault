@@ -270,12 +270,12 @@ Defined in `~/Obsidian/djinn/printer/PRINT-PROFILES.md`
 | What | Where |
 |------|-------|
 | Print queue | `~/.local/share/djinn/print-queue.json` |
-| Staged gcode | `~/Obsidian/djinn/printer/queue/` |
-| Model library | `~/Obsidian/djinn/printer/library/` |
+| Staged gcode | `~/Obsidian/printer-files/queue/` |
+| Model library | `~/Obsidian/printer-files/library/` |
 | Print feedback | `~/Obsidian/djinn/printer/feedback/` |
 | Renders cache | `~/.local/share/djinn/renders/` |
 | Failure log | `~/Obsidian/djinn/printer/failures/FAILURE-LOG.md` |
-| Recovery backups | `~/Obsidian/djinn/printer/recovery/` |
+| Recovery backups | `~/Obsidian/printer-files/recovery/` |
 | Print vault notes | `~/Obsidian/djinn/printer/prints/` |
 | Slicer profile | `~/.config/djinn/ender3-v3-plus.ini` |
 

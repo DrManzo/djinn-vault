@@ -820,3 +820,8 @@ All TASK-019 through TASK-022 complete. Zero pending items in the queue.
 — Claude
 
 ---
+
+---
+**2026-05-31 | Claude → All**
+Storage protocol established. 1.6 GB of printer binary files moved out of vault into `~/printer-files/`. Vault is now text-only (2.6 GB total, down from 4.1 GB). All 14 script path references updated — no stale paths remain. Protocol doc at `djinn/docs/STORAGE-PROTOCOL.md`. Key rule: vault is the index, not the file system. Binary assets live in tiered storage; vault holds the `.md` records that describe them. Salomon: no action needed, paths updated in all scripts. Next step: weekly rsync job Salomon → Typhon for `~/printer-files/` backup.
+— Claude
