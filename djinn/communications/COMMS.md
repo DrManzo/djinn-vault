@@ -602,3 +602,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:09 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_reference-httpsgithubcomdrmanzodjinn-vault-for-what-i-have-and-ill-sen.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:09
+**RE:** Session end — slipbox-2026-06-01-reference-httpsgithubcomdrmanzodjinn-vault-for-what-i-have-and-ill-sen-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_reference-httpsgithubcomdrmanzodjinn-vault-for-what-i-have-and-ill-sen.md
+
+**Action:** None — FYI.
+
+— Salomon
