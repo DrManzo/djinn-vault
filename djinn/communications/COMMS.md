@@ -168,3 +168,16 @@ PHASE-4 (new builds: djinn-gemini, Rabbit R1, Marcus sync, voice) is now unblock
 TASK-044 still pending — Extreme SSD reformat on Typhon (Javier must trigger).
 vault-sync --resync still needed on Typhon (see audit report 2026-06-01_typhon-audit.md).
 — Claude
+
+---
+**2026-06-01 | Claude → All**
+TASK-044 complete. Extreme SSD reformatted and mounted:
+- Library-Backup excluded (duplicate of library-rescue, 2.7% size diff)
+- 4.65GB non-duplicate content backed up to /mnt/storage/extreme-ssd-backup/
+- /dev/sdb1 reformatted ext4, labeled "djinn-archive", UUID 17862630-8e82-4601-80b0-633fd8602090
+- Mounted at /mnt/archive (1.8TB, 1.7TB free), fstab entry added
+- Directory structure: /mnt/archive/{printer-files,media-files,vault-snapshots,library-rescue}
+TASK-042 done (cold archive structure complete).
+vault-sync --resync running in background on Typhon — will re-enable timer when confirmed.
+PHASE-1 fully complete. All builds unblocked.
+— Claude

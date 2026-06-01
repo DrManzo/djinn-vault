@@ -1281,10 +1281,11 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-042
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-01 by Claude (done as part of TASK-044 execution)
 - context: PHASE-3: Run after TASK-044/045 complete — Set up Typhon cold archive structure — once TASK-041 confirmed, format target drive to ext4, create /mnt/archive/ directory tree (printer-files/, media-files/, vault-snapshots/), wire into storage protocol as Tier 2. Auto-mount via /etc/fstab.
 
 ## TASK-043
@@ -1297,10 +1298,11 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-044
 - assigned_to: typhon
-- status: pending
+- status: done
 - priority: critical
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-01 by Claude (executed via SSH)
 - context: PHASE-1: Run now — gates all builds — Copy Extreme SSD → /mnt/storage, then reformat to ext4 as djinn-archive cold storage. 552GB free on storage, 275GB to copy — fits. NOTE: Library-Backup (271GB on Extreme SSD) may duplicate library-rescue (263GB already on storage) — verify before copying, skip if identical.
 
 **Commands:**
