@@ -1257,4 +1257,5 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
-- context: Build djinn-gemini — Gemini AI Studio API integration (free tier, no cost). Lane: Drive document reading, YouTube video analysis and transcription, long-context document processing, image batch QC for media pipeline. Follows same pattern as djinn-marcus — vault-persistent outputs, topic threads, git auto-commit. Key stored in ~/.config/djinn/gemini.env. Need Google AI Studio API key from aistudio.google.com/apikey.
+- context: Build djinn-gemini — Gemini AI Studio API integration. Lane: Drive document reading, YouTube video analysis/transcription, long-context document processing, image batch QC for media pipeline. Follows djinn-marcus pattern — vault-persistent outputs, topic threads, git auto-commit.
+- ready: API key stored ~/.config/djinn/gemini.env ✓ | google-genai SDK installed ✓ | gemini-2.5-flash confirmed live ✓ | models available: gemini-2.5-pro, gemini-2.5-flash, deep-research-max-preview
