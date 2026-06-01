@@ -1134,7 +1134,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-026
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
@@ -1176,7 +1177,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-031
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1184,15 +1186,17 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-032
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
+- completed: 2026-06-01 by Claude
 - context: PHASE-3: Quick fix — run anytime, no dependency — Claude queue alert — Djinn checks QUEUE.md for assigned_to:claude + status:pending at gateway startup and pings Javier via Telegram so pending Claude tasks don't silently pile up
 
 ## TASK-033
 - assigned_to: claude
-- status: pending
+- status: done
+- completed: 2026-06-01 by Claude
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
@@ -1209,18 +1213,20 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-035
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
+- completed: 2026-06-01 by Claude
 - context: PHASE-3: Infrastructure — run anytime, no dependency — Diagnose djinn-print-monitor-v2 — timer active but service dies immediately. v1 is covering but v2 should replace it.
 
 ## TASK-036
 - assigned_to: claude
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Javier
+- completed: 2026-06-01 by Claude
 - context: PHASE-3: Infrastructure — run anytime, no dependency — forge-sync still hitting GDrive rateLimitExceeded — further stagger or backoff needed
 
 ## TASK-037
