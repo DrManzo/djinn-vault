@@ -800,3 +800,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-01 18:10 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-just-got-a-new-ender---3v-plus-and-my-friend-gave-me-a-some-fillemen.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 11:10
+**RE:** Session end — slipbox-2026-06-01-i-just-got-a-new-ender---3v-plus-and-my-friend-gave-me-a-some-fillemen-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads/2026-06-01_i-just-got-a-new-ender---3v-plus-and-my-friend-gave-me-a-some-fillemen.md
+
+**Action:** None — FYI.
+
+— Salomon
