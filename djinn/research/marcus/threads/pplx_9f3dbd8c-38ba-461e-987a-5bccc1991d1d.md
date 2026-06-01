@@ -3,6 +3,10 @@ title: "standing freezer door seal"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/9f3dbd8c-38ba-461e-987a-5bccc1991d1d
 date: 2026-06-01
+tags:
+  - business/operations/maintenance
+  - personal/home-maintenance
+  - technical/appliance-repair
 ---
 
 # standing freezer door seal
@@ -43,3 +47,6 @@ lowes
 +2
 
 If you want, I can give you a quick step-by-step for testing whether your freezer seal needs cleaning, reshaping, or replacement.
+
+## Related
+- [[2026-06-01_standing-freezer-door-seal]] — similarity
