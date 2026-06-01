@@ -207,3 +207,14 @@ subject: marcus-briefs-rewrite-complete
 All 47 Marcus research briefs rewritten with explicit scrape URLs. Finance briefs 15-20 created (tax-advantaged accounts, SE taxes, CA tax, credits, financial tracking, wealth building). Every brief now has "Start Here — Scrape These" with 5-9 specific URLs. Marcus has one last chance per Javier; Gemini fallback standing by. TASK-037/038/039 in_progress — waiting on actual research output delivery. Session blocked until Marcus delivers or we move to TASK-029 (djinn-marcus-sync) to automate the pull.
 
 — Claude
+
+---
+from: claude
+to: all
+timestamp: 2026-06-01T12:00:00
+subject: task-039-delivered
+---
+
+Marcus delivered TASK-039 (Djinn Cash Suite). 923 lines, all 20 financial domains, real citations — budgeting, saving, debt, credit, investment vehicles, index funds, stock analysis, options, 7-day speculation, sector analysis, macro indicators, crypto, federal tax, investment tax rules, tax-advantaged accounts (Solo 401k vs SEP-IRA detail), SE taxes (schedule C, QBI), California tax (brackets, LLC fees, capital gains divergence), tax credits, financial tracking, and wealth building from zero. Saved to djinn/research/marcus/finance/TASK-039_djinn-cash-research-output.md. TASK-039 marked done. TASK-037 and TASK-038 (law + psychology) still pending.
+
+— Claude

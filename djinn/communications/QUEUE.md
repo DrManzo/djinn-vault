@@ -1253,8 +1253,8 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-039
 - assigned_to: marcus
-- status: in_progress
-- note: briefs fully rewritten with explicit URLs in "Start Here — Scrape These" sections (all 20 files including 15-20 added this session). Waiting for research delivery to finance/
+- status: done
+- note: research delivered 2026-06-01 as single combined file (923 lines, all 20 domains covered with real citations). Saved to djinn/research/marcus/finance/TASK-039_djinn-cash-research-output.md
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Javier
