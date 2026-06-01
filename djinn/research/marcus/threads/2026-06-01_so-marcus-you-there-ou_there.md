@@ -3,6 +3,11 @@ title: "so Marcus you there ?"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/c9de8f2c-6946-4a5e-868d-83765376984b
 date: 2026-06-01
+tags:
+  - psychology/addiction
+  - psychology/behavioral-change
+  - personal/motivation
+  - personal/support-groups
 ---
 
 # so Marcus you there ?
@@ -187,3 +192,7 @@ IMG_7142.jpeg
 Ask a follow-up
 Search
 Model
+
+## Related
+- [[Aa-Process-And-Initial-Steps]] — similarity in AA process
+- [[2026-06-01_so-marcus-you-there]] — same conversation context
