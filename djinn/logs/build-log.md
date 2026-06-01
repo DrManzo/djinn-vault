@@ -641,3 +641,10 @@ created: 2026-05-19
 - **TASK-033 done:** Typhon heartbeat staleness alert added to telegram-gateway startup
 - **TASK-031 done:** Conversation logging added to both Telegram + Discord gateways → djinn/logs/conversations/YYYY-MM-DD.md
 - **Typhon correct IP:** 192.168.1.113 (CLAUDE.md has stale 192.168.50.113)
+
+## 2026-06-01 — TASK-044 + TASK-042 Complete
+
+- **TASK-044 done:** Extreme SSD processed on Typhon — Library-Backup excluded (2.7% size diff = duplicate), 4.65GB non-duplicate content copied to /mnt/storage/extreme-ssd-backup/. Drive reformatted ext4 labeled "djinn-archive", mounted at /mnt/archive, UUID in /etc/fstab
+- **TASK-042 done:** Cold archive structure created — /mnt/archive/{printer-files,media-files,vault-snapshots,library-rescue}, owned tf-tthq
+- **vault-sync --resync:** Running in background on Typhon (pid 2213300), re-enabling timer after it completes
+- **Typhon disk post-TASK-044:** /mnt/archive 1.8TB (1.7TB free), /mnt/storage 319GB/916GB used
