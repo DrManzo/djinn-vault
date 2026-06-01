@@ -3,6 +3,11 @@ title: "reference https://github.com/DrManzo/djinn-vault for what i have and ill
 source: perplexity-pro
 url: https://www.perplexity.ai/search/afc417f1-555a-4b1a-a5c7-b650a289d59b
 date: 2026-06-01
+tags:
+  - psychology/research
+  - personal/notes
+  - cs/software-project
+  - obsidian/knowledge-base
 ---
 
 # reference https://github.com/DrManzo/djinn-vault for what i have and ill send a link to the video
@@ -44,3 +49,7 @@ What I'm Seeing
 Your vault is a hybrid repo — it's simultaneously an Obsidian knowledge base and a Python project housing Djinn's code and scripts. The djinn/ and scripts/ dirs are where the agent logic lives, while .obsidian/, inbox/, i notes/, and references/ are the vault's note structure.
 
 Go ahead and drop the video link, Javier — once I see what you're building toward I can cross-reference what's already in the repo and tell you exactly what's missing or needs restructuring.
+
+## Related
+- [[2026-06-01_github-look-into-the-djinn-vault-you-should-have-access-and-tell-me-wh]] — similarity 0.89
+- [[2026-06-01_you-are-marcus-read-this-httpsgithubcomdrmanzodjinn-vault]] — similarity 0.87
