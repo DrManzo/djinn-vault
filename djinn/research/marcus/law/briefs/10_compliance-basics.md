@@ -1,26 +1,33 @@
 ---
 assigned_to: marcus
 suite: Djinn Law
-github: search for relevant repos, templates, tools — include best under ## GitHub Resources
-output_to: djinn/research/marcus/law/
+output_to: djinn/research/marcus/law/10_compliance-basics.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 10 — Compliance Basics for Small Business
+# Session 10 — Compliance Basics
 
-Research what compliance actually means for a small business owner.
+## Start Here — Scrape These
+- https://www.sba.gov/business-guide/launch-your-business/apply-for-licenses-permits — SBA licenses/permits
+- https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers — EIN application
+- https://www.dol.gov/general/topic/workhours — DOL labor law basics
+- https://www.ftc.gov/business-guidance/small-businesses — FTC small business compliance
+- https://osha.gov/small-business — OSHA small business guide
+- https://www.gdpr.eu/what-is-gdpr/ — GDPR explained (if handling EU customers)
+- https://oag.ca.gov/privacy/ccpa — California Consumer Privacy Act (CCPA)
+- https://www.eeoc.gov/employers — EEOC employer obligations
 
-**Cover:**
-- Federal requirements: EIN (when required, how to get one), federal tax registration, employer taxes
-- State requirements: state business license, state tax registration, state employer registration
-- Local requirements: city/county business licenses, zoning, home occupation permits
-- Annual maintenance: annual reports by state, franchise tax, registered agent updates
-- Employment compliance: W-2 vs 1099 classification (IRS 20-factor test), worker misclassification risk
-- Record-keeping: what to keep, how long, paper vs digital
-- Industry-specific: when you need additional licenses (contractor, food, healthcare, firearms, etc.)
-- California specifics: CA Secretary of State requirements, CDTFA (sales tax), EDD registration
-- GitHub: compliance checklists, business license lookup tools, record-keeping templates
+## Cover
+- Business licenses: federal (EIN), state (seller's permit, professional licenses), local (business license, zoning)
+- Employment law basics: at-will employment, minimum wage (federal vs state), overtime (FLSA), I-9 requirements
+- California-specific employment: higher minimum wage, CFRA/FMLA, mandatory sick leave, AB5 (contractor classification)
+- Privacy compliance: CCPA (California) — who it applies to, consumer rights, required notices
+- Tax compliance: sales tax nexus, payroll taxes, quarterly estimated payments
+- Contracts and agreements: NDAs, independent contractor agreements, terms of service
+- GDPR basics: if you have EU users, what you need — consent, data processing agreements, right to erasure
+- Industry-specific: food (health permits), financial services (FINRA/SEC), healthcare (HIPAA)
+- Record-keeping requirements: how long to keep tax records (7 years), employment records (3 years)
 
 **Output file:** `djinn/research/marcus/law/10_compliance-basics.md`

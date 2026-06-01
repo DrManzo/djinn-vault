@@ -1,24 +1,33 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/10_social-psychology.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 10 — Social Psychology
+# Session 10 — Social Psychology Essentials
 
-**Cover:**
-- Conformity: Asch line experiments — what they proved, conditions that increase/decrease conformity
-- Obedience: Milgram shock experiments — full findings, what predicted resistance, ethical legacy
-- Group dynamics: groupthink (Janis), social loafing, deindividuation, group polarization
-- In-group/out-group bias: minimal group paradigm, realistic conflict theory, social identity theory (Tajfel)
-- Bystander effect: Kitty Genovese (real story vs myth), diffusion of responsibility, how to counteract it
-- Persuasion: Cialdini's 6 principles (reciprocity, commitment, social proof, authority, liking, scarcity) — each with real application
-- Fundamental attribution error: actor-observer bias, self-serving bias
-- Stereotype threat: Steele's research, how it operates, interventions
-- GitHub: social psychology experiment replications, persuasion analysis tools, bias measurement instruments
+## Start Here — Scrape These
+- https://www.simplypsychology.org/social-psychology.html — Simply Psychology overview
+- https://en.wikipedia.org/wiki/Asch_conformity_experiments — Asch conformity
+- https://en.wikipedia.org/wiki/Milgram_experiment — Milgram obedience
+- https://en.wikipedia.org/wiki/Bystander_effect — bystander effect
+- https://en.wikipedia.org/wiki/Social_identity_theory — social identity theory
+- https://en.wikipedia.org/wiki/Fundamental_attribution_error — attribution error
+- https://www.influenceatwork.com/principles-of-persuasion/ — Cialdini's 6 principles
+- https://www.verywellmind.com/social-psychology-4157244 — Verywell Mind hub
+- https://www.psychologytoday.com/us/basics/social-psychology — Psych Today
+
+## Cover
+- Conformity (Asch): line experiment, 37% conformed even when answer was obviously wrong, why (normative vs informational influence)
+- Obedience to authority (Milgram): 65% delivered max shock, conditions that increase/decrease obedience, relevance to war crimes and corporate wrongdoing
+- Group dynamics: groupthink (Bay of Pigs), social loafing (less effort in groups), diffusion of responsibility
+- Bystander effect: Kitty Genovese myth and reality, how group size reduces helping, how to overcome it (single out an individual)
+- In-group/out-group bias: us vs them psychology, minimal group paradigm, how quickly it activates
+- Social identity theory (Tajfel): self-esteem from group membership, inter-group conflict
+- Fundamental attribution error: over-attributing others' behavior to character vs situation
+- Cialdini's 6 principles of persuasion: reciprocity, commitment/consistency, social proof, authority, liking, scarcity — with examples and manipulation warning
 
 **Output file:** `djinn/research/marcus/psychology/10_social-psychology.md`

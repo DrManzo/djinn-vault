@@ -1,24 +1,34 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/05_jung.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
-# Session 05 — Jung
+# Session 05 — Jung — Core Framework
 
-**Cover:**
-- Collective unconscious: differs from Freud's personal unconscious — how and why
-- Archetypes in full: Self, Shadow, Anima/Animus, Persona, Hero, Trickster, Great Mother, Wise Old Man, Child
-- Individuation: the lifelong process, what it looks like, mid-life crisis as trigger
-- Psychological types: introversion/extroversion + four functions (thinking, feeling, sensing, intuiting) — foundation of MBTI
-- Synchronicity: definition, examples, clinical use
-- Active imagination: step-by-step practice, what it produces, risks
-- Transcendent function: holding tension of opposites until third emerges
-- Jungian dream analysis vs Freudian: amplification method
-- GitHub: archetype assessment tools, Jungian text archives, personality type implementations
+## Start Here — Scrape These
+- https://www.simplypsychology.org/carl-jung.html — Simply Psychology Jung
+- https://www.jungpage.org — The Jung Page (dedicated resource)
+- https://en.wikipedia.org/wiki/Carl_Jung — Wikipedia Carl Jung
+- https://en.wikipedia.org/wiki/Collective_unconscious — collective unconscious
+- https://en.wikipedia.org/wiki/Jungian_archetypes — archetypes
+- https://en.wikipedia.org/wiki/Individuation — individuation process
+- https://en.wikipedia.org/wiki/Psychological_Types — psychological types (MBTI source)
+- https://plato.stanford.edu/entries/jung/ — Stanford Encyclopedia Jung
+- https://www.youtube.com/results?search_query=jordan+peterson+jung — Peterson lectures on Jung (YouTube, note top results)
+
+## Cover
+- Collective unconscious: personal vs collective layer, phylogenetic inheritance of psychic structure
+- Archetypes: Self (totality/wholeness), Shadow (rejected self), Anima/Animus (contra-sexual), Persona (social mask), Trickster, Hero, Great Mother, Wise Old Man — each with mythology examples
+- Individuation: lifelong process of becoming whole, integrating shadow, realizing the Self
+- Psychological types: introversion/extraversion, four functions (thinking/feeling/sensation/intuition) — basis for MBTI
+- Synchronicity: meaningful coincidence without causal connection — what Jung meant, why controversial
+- Active imagination: technique for communicating with unconscious content
+- Symbols and mythology: why Jung analyzed world mythology, universal symbolic themes
+- Differences from Freud: libido is general psychic energy (not just sexual), religion/spirituality as legitimate, unconscious is creative not just repository of repressed material
+- Modern relevance: where Jungian ideas show up in culture, therapy, literature
 
 **Output file:** `djinn/research/marcus/psychology/05_jung.md`

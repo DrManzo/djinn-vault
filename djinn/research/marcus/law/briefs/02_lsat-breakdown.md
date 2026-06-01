@@ -1,28 +1,32 @@
 ---
 assigned_to: marcus
 suite: Djinn Law
-github: search for relevant repos, templates, tools — include best under ## GitHub Resources
-output_to: djinn/research/marcus/law/
+output_to: djinn/research/marcus/law/02_lsat-breakdown.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
-
-Search the web AND GitHub. GitHub rule: find the best repos, templates, tools, or code examples related to this topic. List them with links and one-line descriptions under ## GitHub Resources.
+**One session. One topic. Full depth. Scrape the links below, read the content, synthesize it.**
 
 # Session 02 — LSAT Breakdown
 
-Research the LSAT in full — structure, scoring, prep, strategy.
+## Start Here — Scrape These
+- https://www.lsac.org/lsat/about-the-lsat — official LSAT structure and scoring
+- https://www.lsac.org/lsat/lsat-prep — free LSAC prep materials
+- https://7sage.com/how-to-study-for-the-lsat/ — 7Sage LSAT study guide (top resource)
+- https://www.khanacademy.org/prep/lsat — free Khan Academy LSAT prep
+- https://www.powerscore.com/lsat/help/lsat_percentiles.cfm — score percentile table
+- https://www.manhattanprep.com/lsat/blog/what-is-a-good-lsat-score/ — score context by school
+- https://en.wikipedia.org/wiki/Law_School_Admission_Test — full overview
 
-**Cover:**
-- Three sections: Logical Reasoning, Reading Comprehension, Analytical Reasoning (Logic Games)
-- Scoring scale (120–180), median scores by school tier, what score you need for T14 vs regional
-- Prep timeline: how long realistically, diminishing returns after X months
-- Best prep resources ranked: 7Sage, Blueprint, Khan Academy, PowerScore, LSAC official materials
-- Logic Games vs LR — which moves the needle more and why
-- Test-taking strategy: timing, flagging, guessing rules
-- LSAT Flex (digital) vs legacy — what changed
-- Retake strategy: when to retake, how many times, how schools view multiple scores
-- GitHub: any open-source LSAT prep tools, question banks, score trackers
+## Cover
+- Exam structure: Logical Reasoning (x2), Analytical Reasoning (Logic Games), Reading Comprehension
+- Scoring: 120–180 scale, raw score conversion, median vs 75th percentile by school tier
+- What T14 schools actually want: median LSAT by school with current data
+- Study timeline: cold diagnostic → target score → realistic study hours (100h minimum, 300h+ for major improvement)
+- Best free vs paid resources: Khan Academy (free), 7Sage (freemium), PowerScore bibles, Manhattan Prep
+- Logic games strategy: setup types, diagramming methods
+- LR strategy: argument structure, common flaw types, strengthen/weaken approach
+- RC strategy: passage mapping, main point, inference questions
+- Test day: digital format, flex test option, score cancellation, retake policy
 
 **Output file:** `djinn/research/marcus/law/02_lsat-breakdown.md`

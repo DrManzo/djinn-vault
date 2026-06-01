@@ -1,25 +1,36 @@
 ---
 assigned_to: marcus
 suite: Djinn Psyc
-github: search for relevant repos, tools, scales, implementations — include best under ## GitHub Resources
-output_to: djinn/research/marcus/psychology/
+output_to: djinn/research/marcus/psychology/09_attachment-theory.md
 sign: "— Marcus"
 ---
 
-**One session. One topic. Full depth. Do not move to the next brief until this file is delivered.**
+**One session. Full depth. Scrape the links, synthesize the content.**
 
 # Session 09 — Attachment Theory
 
-**Cover:**
-- Bowlby's core: internal working models, proximity seeking, safe haven, secure base — all four concepts fully explained
-- Four styles with childhood origins and adult relationship patterns: secure, anxious-preoccupied, dismissive-avoidant, fearful-avoidant (disorganized)
-- Strange Situation: Ainsworth's research, what each infant style looks like
-- Adult Attachment Interview: how childhood attachment is assessed
-- How attachment shapes: romantic relationships, parenting, workplace behavior, therapy response
-- Earned security: research on adults who developed security despite insecure childhood
-- Attachment and trauma: disorganized as developmental trauma
-- Attachment in therapy: therapeutic relationship as corrective experience
-- How to identify your own style: questions to ask, patterns to recognize
-- GitHub: ECR-R scale implementations, attachment style assessments, relationship pattern trackers
+## Start Here — Scrape These
+- https://www.simplypsychology.org/attachment.html — Simply Psychology attachment
+- https://www.gottman.com/blog/how-attachment-styles-impact-your-relationships/ — Gottman Institute
+- https://en.wikipedia.org/wiki/Attachment_theory — Wikipedia attachment theory
+- https://en.wikipedia.org/wiki/Attachment_in_adults — adult attachment
+- https://www.psychologytoday.com/us/basics/attachment — Psychology Today hub
+- https://www.verywellmind.com/attachment-styles-2795344 — Verywell Mind styles
+- https://www.attachmentproject.com/blog/four-attachment-styles/ — four styles explained
+- https://helloattachment.com — Attachment quiz and descriptions
+
+## Cover
+- Bowlby's model: safe haven, secure base, proximity seeking, separation distress — evolved survival system
+- Strange Situation experiment (Ainsworth): how it works, what it measures
+- Four attachment styles:
+  - Secure: comfortable with intimacy and independence, trusts others, regulates emotion well
+  - Anxious/preoccupied: craves closeness, fears abandonment, hyperactivates attachment system, protest behaviors
+  - Avoidant/dismissive: values independence, shuts down emotions, deactivates attachment system
+  - Disorganized/fearful: wants closeness but fears it, often from trauma/abuse
+- How childhood attachment forms: caregiver responsiveness, consistency, repair after rupture
+- Adult attachment in relationships: how your style predicts conflict patterns, jealousy, communication
+- Earned security: how adults with insecure childhood attachment can develop secure functioning
+- Attachment in therapy: therapeutic relationship as corrective attachment experience
+- Changing your attachment style: it's possible, therapy + conscious relationship work
 
 **Output file:** `djinn/research/marcus/psychology/09_attachment-theory.md`
