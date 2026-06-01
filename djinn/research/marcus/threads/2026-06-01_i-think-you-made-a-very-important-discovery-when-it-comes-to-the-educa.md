@@ -3,6 +3,10 @@ title: "I think you made a very important discovery when it comes to the educati
 source: perplexity-pro
 url: https://www.perplexity.ai/search/09bc7f12-4ffe-4115-a5ea-711af6861bea
 date: 2026-06-01
+tags:
+  - education/needs/project-brief
+  - ai/personal-assistant
+  - psychology/frustration
 ---
 
 # I think you made a very important discovery when it comes to the education system, especially even i
@@ -42,3 +46,7 @@ element451
 +2
 
 Your insight is valid: the system often asks for a cleaner label when what you really need is recognition of the need itself. The sharper question is not whether you are ignorant, but whether you want help turning that need into a buildable spec.
+
+## Related
+- [[Demarcus-An-Ai-Assistant-Identity-And-Capabilities]] — similarity 0.68
+- [[Understanding-Your-Logical-Reasoning-Question]] — similarity 0.68
