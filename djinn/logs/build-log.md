@@ -710,3 +710,10 @@ created: 2026-05-19
 - **`djinn-personal-db` patched** — `meeting_today` field added to briefing JSON output (was missing from spec).
 - **TASK-054** verified complete (personal-db). **TASK-062** marked done (gateway restart).
 - **BUG-014 logged** — agent hallucination on task execution; fixed structurally.
+
+## 2026-06-01: TASK-055 — Salomon
+- **Status:** ✅ done
+- PHASE-ALPHA Sprint 1 — djinn-morning rewrite, conciliary-aware briefing — done
+- Report: `logs/reports/2026-06-01_task-055.md`
+
+*— Salomon*
