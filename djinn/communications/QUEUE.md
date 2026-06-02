@@ -1378,10 +1378,11 @@ echo "Structure:"; ls /mnt/archive/
 
 ## TASK-054
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-01 by Claude
 - context: PHASE-ALPHA Sprint 1 — djinn-personal-db SQLite library + CLI
 
 **Goal:** Create the single source of truth for Javier's personal state — sobriety, habits, streaks, people, deadlines, Black Book log.
