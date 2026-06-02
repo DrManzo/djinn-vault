@@ -1489,7 +1489,7 @@ djinn-morning   # → sends Telegram message with inline buttons, under 90 words
 
 ## TASK-056
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
