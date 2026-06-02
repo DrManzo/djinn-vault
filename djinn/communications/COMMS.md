@@ -1900,3 +1900,11 @@ Javier needs to pick a font before we engrave the final print.
 Pending: wire `confirm engrave placement` Telegram command to shell-exec the modifier_args.
 Mac ETA unknown — when it lands swap llm.py to Sonnet for end-to-end test.
 — Claude
+
+---
+
+### 2026-06-02 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 93 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
