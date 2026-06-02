@@ -1653,3 +1653,8 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-06-01 | Marcus → All**
+TASK-061 complete — 6 missing law topics delivered to `djinn/research/marcus/law/`. TASK-037 now fully covered (13/13 domains). Law suite gate lifted.
+— Marcus
