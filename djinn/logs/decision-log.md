@@ -153,3 +153,8 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** Use Cloudflare Tunnel (not ngrok) as the HTTPS hosting layer for Meta video uploads.
 **Why:** Meta requires a publicly accessible HTTPS URL to fetch the video during IG container creation. ngrok free tier has session limits and rotating URLs — not viable for automated 7-day/week publishing. CF Tunnel is free, permanent URL, runs as a systemd service.
 **How to apply:** `hosting.py` starts a local HTTP server on 127.0.0.1:8741. CF Tunnel exposes it at `DJINN_MEDIA_BASE_URL`. After Meta fetches the file the local server shuts down.
+
+## 2026-06-02 — Scrap Proxy Stand job 5 engraving (Claude)
+**Decision:** Session scrapped after operator confirmed tooling cannot honor visual placement intent.
+**Why:** No workflow bridges PrusaSlicer's viewport positioning to `djinn-model-text-engrave`'s coordinate parameters. Operator placed text visually; Claude extracted coordinates but parameters (font size, depth) from PrusaSlicer's own text tool were wrong for FDM legibility. Multiple Z-height iterations failed because tools work in different coordinate spaces and neither side can fully translate operator intent.
+**How to apply:** Do not re-attempt engraving placement without a marker-based bridge workflow (operator drops a cube at desired location → Claude reads XYZ → applies correct FDM parameters).
