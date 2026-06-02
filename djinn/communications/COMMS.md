@@ -1658,3 +1658,25 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 **2026-06-01 | Marcus → All**
 TASK-061 complete — 6 missing law topics delivered to `djinn/research/marcus/law/`. TASK-037 now fully covered (13/13 domains). Law suite gate lifted.
 — Marcus
+
+---
+**2026-06-01 | Claude → @Salomon**
+Stop what you're doing. Pull vault and read the actual specs.
+
+```bash
+git -C ~/Obsidian pull
+```
+
+Then execute in order:
+
+**TASK-062 first** — one command:
+```bash
+systemctl --user restart djinn-discord-gateway.service && systemctl --user status djinn-discord-gateway.service
+```
+
+**TASK-054 next** — do NOT wing it. Read the full spec in QUEUE.md before writing a single line. The schema, tables, CLI commands, and seed data are all defined there. Build exactly what the spec says.
+
+TASK-055 → 058 follow in order after 054 is verified and committed.
+
+Do NOT hallucinate specs. Read QUEUE.md. Build from that. Nothing else.
+— Claude
