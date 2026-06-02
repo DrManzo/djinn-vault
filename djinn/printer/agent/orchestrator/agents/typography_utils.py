@@ -48,6 +48,19 @@ except ImportError:
     SurfaceGroup               = object
     WallProfile                = object
 
+# ── Research-backed sidewall constants ────────────────────────────────────────
+# Source: 2023 HF study on 3D-printed type (Tandfonline) + 0.4mm nozzle community
+# benchmarks (Prusa forum, MakerForums). Sidewall roughness (Ra ≈ layer_h × 0.55)
+# means text needs extra height/stroke vs a top face to remain legible.
+MIN_LETTER_H_SIDEWALL = 6.0    # hard minimum for FLAT_SIDE / CURVED_* surfaces
+REC_LETTER_H_SIDEWALL = 8.0    # recommended — comfortable legibility on rough side
+MIN_STROKE_SIDEWALL   = 0.6    # 1.5× nozzle — diagonal strokes below this get eaten by texture
+REC_STROKE_SIDEWALL   = 0.9    # target stroke for reliable sidewall readability
+MAX_ENGRAVE_DEPTH     = 1.4    # beyond this adds wall stress with no legibility gain
+FRONT_ARC_DEG         = 120.0  # max reliable viewing arc on a cylinder (±60° from front)
+# Lowercase glyphs with small counters that fail first on rough sidewalls
+_RISKY_LOWERCASE      = set('egsaopqyb')
+
 # PIL optional — used for real font metric extraction
 try:
     from PIL import Image, ImageDraw, ImageFont
@@ -187,6 +200,10 @@ class CutAdvisory:
     warnings: List[str]
     workarounds: List[str]
     brief: str
+    # Research-backed legibility gate fields
+    risky_small_sidewall: bool = False   # True → Telegram must ask Javier to confirm
+    case_style: str = 'Mixed'            # 'Mixed' | 'ALL_CAPS' | 'ALL_CAPS_RECOMMENDED'
+    legibility_score: float = 1.0        # 0.0–1.0; < 0.6 triggers advisory
 
 
 @dataclass
@@ -299,7 +316,9 @@ def curve_projection(
     spacing_mm     = char_height_mm * 0.15
     arc_per_char   = char_width_mm + spacing_mm
 
-    usable_arc_mm  = 2 * math.pi * outer_radius_mm * (270.0 / 360.0)
+    # Use FRONT_ARC_DEG (120°) as the reliable viewing window — text beyond ±60° from
+    # front foreshortens and counters collapse at arm's length viewing distance.
+    usable_arc_mm  = 2 * math.pi * outer_radius_mm * (FRONT_ARC_DEG / 360.0)
     max_chars      = int(usable_arc_mm / arc_per_char)
 
     half_w  = char_width_mm / 2
@@ -313,11 +332,12 @@ def curve_projection(
 
     parts = [
         f'Cylindrical. Outer radius: {outer_radius_mm:.1f}mm.',
-        f'Arc/char: {arc_per_char:.1f}mm. Max chars in 270°: {max_chars}.',
+        f'Arc/char: {arc_per_char:.1f}mm. Max chars in {FRONT_ARC_DEG:.0f}° front arc: {max_chars}.',
     ]
     if too_many:
         parts.append(
-            f'"{content}" has {len(content)} chars — exceeds {max_chars}. '
+            f'"{content}" has {len(content)} chars — exceeds front-arc max ({max_chars}). '
+            f'Text would extend beyond ±{FRONT_ARC_DEG/2:.0f}° and foreshorten at viewing angle. '
             'Abbreviate or reduce font size.'
         )
     parts.append(
@@ -502,7 +522,52 @@ def _apply_font_to_glyphs(
     return updated
 
 
-# ── 6. Final cut advisory ─────────────────────────────────────────────────────
+# ── 6. Legibility score ───────────────────────────────────────────────────────
+
+def _legibility_score(
+    height_mm: float,
+    stroke_mm: float,
+    depth_mm: float,
+    is_sidewall: bool,
+    n_problem_glyphs: int,
+    surface_angle_deg: float,
+) -> float:
+    """
+    0.0–1.0 estimate of likely print legibility.
+    < 0.6 → advisory warning to Javier before committing to print.
+    """
+    score = 1.0
+    min_h = MIN_LETTER_H_SIDEWALL if is_sidewall else MIN_LETTER_H
+    rec_h = REC_LETTER_H_SIDEWALL if is_sidewall else REC_LETTER_H
+    min_s = MIN_STROKE_SIDEWALL   if is_sidewall else MIN_STROKE
+
+    if height_mm < min_h:
+        score -= 0.40
+    elif height_mm < rec_h:
+        score -= 0.15
+
+    if stroke_mm < min_s:
+        score -= 0.30
+    elif stroke_mm < min_s * 1.4:
+        score -= 0.10
+
+    if depth_mm < MIN_ENGRAVE_DEPTH:
+        score -= 0.25
+    elif depth_mm < MIN_ENGRAVE_DEPTH_READABLE:
+        score -= 0.10
+
+    if is_sidewall:
+        score -= 0.08           # sidewall texture always costs something
+
+    score -= n_problem_glyphs * 0.04
+
+    if surface_angle_deg > 70:  # steep side or overhang
+        score -= 0.12
+
+    return round(max(0.0, min(1.0, score)), 2)
+
+
+# ── 7. Final cut advisory ─────────────────────────────────────────────────────
 
 def build_advisory(
     content: str,
@@ -569,6 +634,69 @@ def build_advisory(
             f"Glyph '{g.char}' needs ≥{g.min_height_mm}mm "
             f"(requested {requested_height_mm}mm): {g.notes}"
             + (' [PIL-measured]' if g.measured_by_pil else '')
+        )
+
+    # ── Sidewall hard rules (research-backed) ────────────────────────────────
+    is_sidewall          = label in ('FLAT_SIDE', 'CURVED_CONVEX', 'CURVED_CONCAVE')
+    risky_small_sidewall = False
+    case_style           = 'ALL_CAPS' if content == content.upper() and content.strip() else 'Mixed'
+    leg_score            = 1.0  # computed below
+
+    if is_sidewall:
+        # Height gate
+        if final_height < MIN_LETTER_H_SIDEWALL:
+            risky_small_sidewall = True
+            warnings.append(
+                f'HEIGHT RISK: {final_height}mm < sidewall minimum {MIN_LETTER_H_SIDEWALL}mm. '
+                f'Layer texture (~{LAYER_H_STD*0.55:.2f}mm ridge) will fragment strokes. '
+                f'Upgrade to ≥{REC_LETTER_H_SIDEWALL}mm for reliable result.'
+            )
+            final_height = max(final_height, MIN_LETTER_H_SIDEWALL)
+        elif final_height < REC_LETTER_H_SIDEWALL:
+            warnings.append(
+                f'Height {final_height}mm is marginal for sidewall. '
+                f'≥{REC_LETTER_H_SIDEWALL}mm recommended. Proceed with care.'
+            )
+
+        # Stroke gate
+        if final_stroke < MIN_STROKE_SIDEWALL:
+            risky_small_sidewall = True
+            warnings.append(
+                f'STROKE RISK: {final_stroke}mm < sidewall minimum {MIN_STROKE_SIDEWALL}mm. '
+                f'Diagonal strokes get chewed by 0.2mm layer ridges. '
+                f'Target ≥{REC_STROKE_SIDEWALL}mm.'
+            )
+            final_stroke = max(final_stroke, MIN_STROKE_SIDEWALL)
+
+        # Depth cap — beyond MAX_ENGRAVE_DEPTH adds wall stress, not readability
+        if final_depth > MAX_ENGRAVE_DEPTH:
+            warnings.append(
+                f'Depth capped {final_depth}mm → {MAX_ENGRAVE_DEPTH}mm. '
+                f'Beyond {MAX_ENGRAVE_DEPTH}mm adds wall stress without legibility gain.'
+            )
+            final_depth = MAX_ENGRAVE_DEPTH
+
+        # Case style recommendation
+        risky_chars = sorted(set(ch for ch in content if ch in _RISKY_LOWERCASE))
+        if risky_chars:
+            case_style = 'ALL_CAPS_RECOMMENDED'
+            warnings.append(
+                f'CASE RISK: lowercase {risky_chars} have small counters that fail on rough sidewalls '
+                f'(e/g/s/a/o/p/q/y/b). Strongly recommend ALL CAPS to remove these glyphs.'
+            )
+        elif content == content.upper():
+            case_style = 'ALL_CAPS'
+
+    # ── Legibility score (computed for all surfaces, used as safety gate) ───────
+    leg_score = _legibility_score(
+        final_height, final_stroke, final_depth,
+        is_sidewall, len(flagged), angle,
+    )
+    if leg_score < 0.6 and not risky_small_sidewall:
+        risky_small_sidewall = True
+        warnings.append(
+            f'LEGIBILITY SCORE {leg_score:.2f} < 0.60. Combined glyph/size/stroke risk '
+            f'is high. Confirm with Javier before printing.'
         )
 
     if slope.staircase_risk in ('MEDIUM', 'HIGH'):
@@ -642,6 +770,9 @@ def build_advisory(
         problem_glyphs=[g.char for g in flagged],
         warnings=warnings, workarounds=workarounds,
         brief=' '.join(brief_parts),
+        risky_small_sidewall=risky_small_sidewall,
+        case_style=case_style,
+        legibility_score=leg_score,
     )
 
 
@@ -756,6 +887,9 @@ def full_typography_report(
     ]
     if cut.problem_glyphs:
         lines.append(f'  Problems    : {", ".join(cut.problem_glyphs)}')
+    lines.append(f'  Legibility  : {cut.legibility_score:.2f}/1.00'
+                 + ('  ⚠ RISKY — confirm with Javier' if cut.risky_small_sidewall else '  ✓'))
+    lines.append(f'  Case style  : {cut.case_style}')
     if cut.warnings:
         lines.append('  WARNINGS:')
         for w in cut.warnings:
