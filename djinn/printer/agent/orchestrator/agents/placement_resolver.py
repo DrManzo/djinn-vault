@@ -204,11 +204,18 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
     wall_profile = getattr(geo_report, 'wall_profile', None)
     pz_min = getattr(wall_profile, 'prime_zone_z_min', None)
     pz_max = getattr(wall_profile, 'prime_zone_z_max', None)
+    # outer_r from wall profile — used as arc radius when spec value is absent
+    wp_outer_r = getattr(wall_profile, 'outer_r_max', 0.0) or 0.0
+    is_cyl     = getattr(wall_profile, 'is_cylindrical', False)
+
+    is_side_surface = surface_label in ('FLAT_SIDE', 'CURVED_CONVEX', 'CURVED_CONCAVE') or arc_wrap or is_cyl
 
     if pz_min is not None and pz_max is not None:
         pz_center  = (pz_min + pz_max) / 2
-        z_surface  = pz_center
-        if y_off != 0:
+        # Only override Z for side/cylindrical surfaces — top/bottom use their own centroid Z
+        if is_side_surface:
+            z_surface = pz_center
+        if y_off != 0 and is_side_surface:
             half_pz    = (pz_max - pz_min) / 2
             y_off_clamped = max(-half_pz + EDGE_CLEARANCE_MM,
                                 min(half_pz - EDGE_CLEARANCE_MM, y_off))
@@ -220,9 +227,11 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
     x_off = max(-max_x, min(max_x, x_off))
 
     # ── Arc wrap: convert x_offset to degrees ────────────────────────────────
+    # Use spec arc_radius if provided; fall back to wall_profile outer_r when arc_wrap requested
+    effective_arc_r = arc_radius if arc_radius > 0 else (wp_outer_r if (arc_wrap or is_cyl) and wp_outer_r > 0 else 0.0)
     arc_offset_deg = 0.0
-    if arc_wrap and arc_radius > 0:
-        arc_offset_deg = math.degrees(x_off / arc_radius)
+    if arc_wrap and effective_arc_r > 0:
+        arc_offset_deg = math.degrees(x_off / effective_arc_r)
 
     # ── modifier_args dict ────────────────────────────────────────────────────
     modifier_args = {
@@ -234,9 +243,9 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
         '--rotation':    round(rotation_deg, 1),
         '--anchor':      'CENTER',
     }
-    if arc_wrap:
+    if arc_wrap or (is_cyl and is_side_surface):
         modifier_args['--arc-offset-deg'] = round(arc_offset_deg, 2)
-        modifier_args['--arc-radius']     = round(arc_radius, 2)
+        modifier_args['--arc-radius']     = round(effective_arc_r, 2)
 
     # ── Human-readable summary ────────────────────────────────────────────────
     lines = [
@@ -251,9 +260,10 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
         f'  z_surface   : {z_surface:.2f} mm',
         f'  rotation    : {rotation_deg}°',
     ]
-    if arc_wrap:
-        lines.append(f'  Arc wrap    : r={arc_radius:.1f}mm  offset={arc_offset_deg:.2f}°')
-    if pz_min is not None:
+    if arc_wrap or (is_cyl and is_side_surface):
+        lines.append(f'  Arc wrap    : r={effective_arc_r:.1f}mm  offset={arc_offset_deg:.2f}°'
+                     + (f'  (radius from wall_profile)' if arc_radius == 0 and wp_outer_r > 0 else ''))
+    if pz_min is not None and is_side_surface:
         lines.append(f'  Prime zone  : Z {pz_min:.1f}–{pz_max:.1f} mm (center {z_surface:.1f})')
     lines += [
         '',
@@ -279,7 +289,7 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
         anchor='CENTER',
         arc_wrap=arc_wrap,
         arc_offset_deg=round(arc_offset_deg, 2),
-        arc_radius_mm=arc_radius,
+        arc_radius_mm=effective_arc_r,
         modifier_args=modifier_args,
         text_summary='\n'.join(lines),
     )
