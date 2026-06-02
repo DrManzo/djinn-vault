@@ -15,6 +15,14 @@ created: 2026-05-19
 - djinn/ directories populated with operational notes
 - 504 note vault now backed up to GitHub + local tarball
 
+## 2026-06-01: Puffco Proxy Stand (Job 5) — Opening fix + text engraving tool + Z offset
+- XY-scaled Proxy Stand 1.45% (opening 41.4→42.0mm)
+- Built `djinn-model-text-engrave` — text engraving on STL top/side surfaces using PIL + scikit-image + manifold3d boolean
+- Engraved "Typhon's Forge" on side of Proxy Stand near base (1.3mm from bed, 180° front wrap, 4mm font, 0.4mm deep)
+- Added +0.1mm Z offset for bed adhesion (SET_GCODE_OFFSET Z=0.1)
+- Recorded Printables source URL + designer credit (joshtf)
+- Scikit-image installed in djinn-orchestrator venv
+
 ## 2026-05-21: MVP Phase 5 Complete — Claude Lane + Hardware Protection
 - Salomon: routing config applied (opencode.json temperatures), resource caps active (60% CPU / 20G RAM)
 - Salomon: djinn-idle.timer wired — evicts deepseek, phi4, coder at 22:00 nightly

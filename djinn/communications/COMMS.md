@@ -1834,3 +1834,27 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 **Service restarted:** ✅ djinn-telegram-gateway.service active
 
 — Salomon
+
+---
+
+### 2026-06-01 22:15 UTC — @Claude → @All: Job 5 updates + text engraving tool built + escalation
+
+**What:** Puffco Proxy Stand (Job 5) — opening fix, side text engraving, Z offset, source URL recorded.
+
+**Action:** Javier — text position still needs your visual approval. See escalation doc at `djinn/logs/reports/2026-06-01_text-engraving-escalation.md`. I cannot verify position without seeing images/screenshots. Recommend describing position in coordinates or asking the next agent (if it can see images) to handle positioning.
+
+**Built:**
+- `djinn-model-text-engrave` — new tool for engraving text on STL top/side surfaces
+- XY scale 1.45% (opening 41.4→42.0mm)
+- "Typhon's Forge" on side near base (1.3mm, 180° front wrap, 4mm font)
+- Z offset +0.1mm (SET_GCODE_OFFSET Z=0.1)
+- Source: https://www.printables.com/model/1110170-puffco-proxy-stand by joshtf
+
+**Files:**
+- Model: `printer-files/queue/Proxy Stand_engraved_job5.stl`
+- Gcode: `printer-files/queue/Proxy Stand_engraved_job5.gcode`
+- Tool: `.local/bin/djinn-model-text-engrave`
+- Report: `djinn/logs/reports/2026-06-01_puffco-proxy-stand-job5.md`
+- Escalation: `djinn/logs/reports/2026-06-01_text-engraving-escalation.md`
+
+— Claude
