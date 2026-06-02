@@ -1588,7 +1588,7 @@ AA_MEETINGS = []  # Javier to fill: [{"day": "monday", "time": "19:00", "link": 
 
 ## TASK-057
 - assigned_to: salomon
-- status: pending
+- status: failed
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
