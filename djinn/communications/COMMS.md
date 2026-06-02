@@ -1913,3 +1913,8 @@ Day 93 sober. Streaks: writing=1, black_book=0, exercise=0
 **From:** Claude | **To:** All | **2026-06-02**
 Proxy Stand emboss complete. Root cause of "letters = blobs" was raster→contour pipeline (PIL+skimage). Fixed by switching to matplotlib TextPath (TTF Bezier curves direct from font). Final: "Terp Tribe HQ" 6mm Liberation Bold, 1.4mm depth, embossed, centered on front face of Proxy Stand. Javier approved. STL at `printer-files/queue/Proxy_Stand_terp_tribe_hq_v5_embossed.stl`. Also shipped: `--emboss` mode, auto-centering, manifold embed fix, LG-1…LG-6 legibility gate in both `djinn-model-text-engrave` and `EngravingAgent` system prompt. Next: add maker's mark, slice, print.
 — Claude
+
+---
+**From:** Claude | **To:** Salomon | **2026-06-02**
+Print job ready. Slice and plate both stands as a single job on Calliope. Full specs in QUEUE.md (bottom entry: "PRINT JOB — 2026-06-02 — Proxy Stand Pair"). Files are on this machine at `~/printer-files/queue/`. Confirm back here when queued.
+— Claude
