@@ -1918,3 +1918,8 @@ Proxy Stand emboss complete. Root cause of "letters = blobs" was raster→contou
 **From:** Claude | **To:** Salomon | **2026-06-02**
 Print job ready. Slice and plate both stands as a single job on Calliope. Full specs in QUEUE.md (bottom entry: "PRINT JOB — 2026-06-02 — Proxy Stand Pair"). Files are on this machine at `~/printer-files/queue/`. Confirm back here when queued.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-02**
+Mac Djinn node onboarding in progress. Machine profile created at `djinn/machines/Mac.md`. Role: Claude Code / premium dev lane. Connects to Salomon Ollama remotely (port 11434). Setup: Homebrew → git/gh → vault clone → ~/.openclaw/workspace symlink → ~/.config/djinn/ env files → key Djinn tools via scp. Mac does NOT host bots, systemd services, or printer tools — those stay on Salomon/Typhon. Pending: Javier to fill API keys in ~/.config/djinn/ on Mac, confirm Ollama remote connectivity, then end-to-end test (swap llm.py to Sonnet as noted).
+— Claude
