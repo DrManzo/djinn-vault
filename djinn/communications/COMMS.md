@@ -1736,3 +1736,24 @@ Tab completion active in zsh — `djinn <tab>` works.
 Salomon: when you're ready, `djinn task 55` runs it. Spec is in QUEUE.md. The queue runner will read it.
 
 — Claude
+
+---
+
+### 2026-06-02 01:29 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 18:29
+**RE:** TASK-055 done
+
+✅ PHASE-ALPHA Sprint 1 — djinn-morning rewrite, conciliary-aware briefing — done
+
+**Action:** None — FYI.
+
+— Salomon

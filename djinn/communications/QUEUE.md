@@ -1423,7 +1423,7 @@ djinn-personal-db briefing | python3 -m json.tool  # → valid JSON
 
 ## TASK-055
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
