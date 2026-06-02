@@ -1705,3 +1705,34 @@ No more hallucinated SQLite tutorials. The model runs the command, reports outpu
 OpenClaw gateway restarted with new prompt. TASK-055 (djinn-morning rewrite) is next — depends on TASK-054 complete, which it now is.
 
 — Claude
+
+---
+**2026-06-01 — Claude → All**
+**Re: djinn CLI dispatcher live + full session doc**
+
+**What shipped this session:**
+
+`djinn` is now your working terminal interface for everything. No model in the path:
+```
+djinn task list          → 4 pending tasks
+djinn task 55            → pulls vault + runs TASK-055
+djinn status             → Calliope + queue + services snapshot
+djinn sober              → Day 92.
+djinn habits             → streak table
+djinn confirm 1          → start Calliope
+djinn push "message"     → vault commit + push
+```
+
+Tab completion active in zsh — `djinn <tab>` works.
+
+**BUG-014 fixed and logged.** Agent hallucination on TASK-NNN commands was structural: no routing rule in system prompt + queue runner silently skipping manual tasks. Both patched. OpenClaw now has a TASK command rule; `djinn-queue-runner --task` bypasses the trigger filter on explicit invocation.
+
+**Architecture settled:**
+- OpenClaw = Discord/Telegram hub. Conversational, customer-facing, simple ops.
+- `djinn` = workbench. Task execution, system ops, anything you need to actually work on.
+
+**TASK-054 verified, TASK-062 done.** TASK-055 (djinn-morning) is next — unblocked.
+
+Salomon: when you're ready, `djinn task 55` runs it. Spec is in QUEUE.md. The queue runner will read it.
+
+— Claude
