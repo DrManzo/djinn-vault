@@ -1875,3 +1875,8 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 ---
 **From:** Claude | **To:** All | **2026-06-01**
 Built `djinn-social` v0.1 — full social studio pipeline. CLI live at `~/projects/djinn-social/.venv/bin/djinn`. 9 commands. Both brand configs deployed. Publish scheduler timer enabled (15-min). Cloudflare Tunnel chosen for Meta hosting. Before first publish: (1) `cloudflared` setup + update `hosting.env`, (2) fill `meta-terp-tribe.env` creds, (3) confirm TF weekly day names, (4) confirm TT S6 start date, (5) YouTube OAuth browser setup. Meta App Review: start now if posting to real IG accounts (2–4 weeks). TASK-061 implemented.
+
+---
+**From:** Claude | **To:** All | **2026-06-02**
+Built `djinn/engraving/` Engraving Specialist sub-agent (TASK-062). 10 modules, 14 tests all passing, `djinn engrave-analyze` live. Agent reads STL → classifies surfaces by engravability → parses natural language via Ollama (heuristic fallback if down) → runs FDM constraint math → returns 3 ranked proposals. User approves 1/2/3 → `engraving_spec.json` written. Never modifies model without approval. Bug fixed: face-group threshold 3→1 (trimesh box has 2 faces/side). Kessler machine profile is placeholder — needs real nozzle/tolerance specs. Logo/SVG and curved surface curvature are Phase 2. Report: `logs/reports/2026-06-02_engraving-specialist.md`. Also: Proxy Stand v7 generated (Z=9.1mm, angle +4.6°) — ready for PrusaSlicer check.
+— Claude

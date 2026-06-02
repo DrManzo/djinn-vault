@@ -775,3 +775,19 @@ created: 2026-05-19
 - Brand configs: terp-tribe (S6) + typhon-forge (S1) deployed to `~/.config/djinn/brands/`
 - SystemD units enabled: djinn-publish-scheduler.timer, djinn-token-refresh.timer
 - Blockers: CF Tunnel setup, API creds, Meta App Review, YouTube OAuth (one-time browser)
+
+## 2026-06-02: Engraving Specialist Sub-Agent (TASK-062)
+- Built `djinn/engraving/` package: 10 modules, 14 tests (all passing)
+- Mesh reader: trimesh load/repair, auto-downsample >50k faces, surface text summary for LLM
+- Surface classifier: normal grouping (cos 15°), SurfaceType enum, engravability score 0–1
+- Constraint engine: MachineProfile + FDM hard limits (min depth 0.5mm, min letter 3mm, min stroke 1 nozzle)
+- Machine profiles: fdm_04mm, fdm_02mm, fdm_06mm, sla, kessler (placeholder)
+- Intent parser: Ollama LLM extraction + heuristic fallback when Ollama is down
+- Placement scorer: composite formula (35/25/20/20 weights)
+- Proposal generator: 3 ranked proposals with full constraint checks and slicer notes
+- Workarounds: auto-adjust depth/height/font when proposals fail constraints
+- EngravingSpecialist class: `analyze()` + `approve()` API
+- CLI: `djinn engrave-analyze <stl> <request>` with --machine and --model flags
+- trimesh 4.12.2 installed, trimesh>=4.0 added to pyproject.toml
+- Bug fixed: surface classifier threshold < 3 → < 1 (primitive meshes have 2 faces/side)
+— Claude
