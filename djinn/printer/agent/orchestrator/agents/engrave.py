@@ -22,6 +22,7 @@ import json, pathlib, re
 from ..llm import LLM
 from ..project_state import ProjectState
 from . import geometry_utils as geo
+from . import typography_utils as typo
 
 # ── System prompt ─────────────────────────────────────────────────────────────
 # Note: the full geometry report is injected at runtime into the user message.
@@ -172,15 +173,65 @@ def run(state: ProjectState, llm: LLM) -> ProjectState:
         for w in report.warnings:
             print(f'    ⚠ {w}')
 
-    # Build the full prompt — geometry data embedded verbatim
+    # ── Typography analysis ───────────────────────────────────────────────────
+    # Infer text content, font, and size from the request for early legibility check.
+    # Best surface from geometry: use top engravable group's type and wall data.
+    import re as _re
+    _quoted = _re.findall(r'["\'](.+?)["\']', engrave_request)
+    engrave_text = _quoted[0] if _quoted else engrave_request[:40]
+
+    best_surface_type = 'FLAT_SIDE'
+    if report.engravable_groups:
+        best_surface_type = report.engravable_groups[0].label
+
+    wall_mm = report.wall_profile.prime_zone_wall if report.wall_profile else 5.0
+    outer_r = report.wall_profile.outer_r_max if report.wall_profile else 0.0
+
+    # Default font: Roboto-Black (best FDM font available)
+    _default_font = '/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF/Roboto-Black.ttf'
+    font_hint = state.brief.get('font_path', _default_font)
+    font_h_mm = float(state.brief.get('font_height_mm', 6.0))
+
+    try:
+        typo_report = typo.full_typography_report(
+            text=engrave_text,
+            font_path=font_hint,
+            font_height_mm=font_h_mm,
+            surface_type=best_surface_type,
+            wall_thickness_mm=wall_mm,
+            outer_radius_mm=outer_r,
+        )
+        typo_summary = typo_report.text_summary
+        # Store advisory in state for downstream use
+        state.mesh['typography'] = {
+            'text': engrave_text,
+            'font': typo_report.font_metrics.font_name,
+            'font_height_mm': font_h_mm,
+            'recommended_depth_mm': typo_report.cut_advisory.recommended_depth_mm,
+            'max_safe_depth_mm': typo_report.cut_advisory.max_safe_depth_mm,
+            'legibility_score': typo_report.legibility_score,
+            'problem_chars': typo_report.problem_chars,
+            'adjustments': typo_report.cut_advisory.adjustments,
+        }
+        print(f'    typography: legibility={typo_report.legibility_score:.2f}  '
+              f'depth={typo_report.cut_advisory.recommended_depth_mm}mm  '
+              f'{"⚠ " + str(len(typo_report.problem_chars)) + " problem chars" if typo_report.problem_chars else "✓ clean"}')
+    except Exception as e:
+        typo_summary = f'(typography analysis unavailable: {e})'
+
+    # Build the full prompt — geometry + typography embedded verbatim
     user_msg = f"""=== ENGRAVING REQUEST ===
 {engrave_request}
 
 === FULL GEOMETRY DATA (read every line before proposing anything) ===
 {report.text_summary}
 
+=== TYPOGRAPHY ANALYSIS (apply these recommendations to every proposal) ===
+{typo_summary}
+
 === TASK ===
 Propose exactly 3 ranked engraving options for this STL and this request.
+Use the typography cut advisory for depth, font height, and stroke guidance.
 Apply every constraint and every workaround from your system prompt.
 Return ONLY the JSON block. No prose before or after."""
 
