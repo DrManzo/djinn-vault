@@ -2225,3 +2225,26 @@ journalctl --user -u djinn-discord-watcher.service -n 30 --no-pager
 
 ### Notes
 Meta App Review: apply at developers.facebook.com → Business → Instagram → content_publish permissions. Start now — takes 2–4 weeks. Dev mode works for Javier's own accounts without review.
+
+---
+
+## TASK-064
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-02 by Claude
+- context: Proxy Stand v22 — PRINT THIS. Final engraving: TYPHONS FORGE, ALL CAPS, 8mm Liberation Bold, 1.4mm depth, bore expanded to 42.4mm for 42mm glass cylinder fit.
+
+**File:** `/home/drmanzo/printer-files/queue/Proxy_Stand_job5_v22_pla.stl`
+**Material:** PLA
+**Slicer settings:** 0.15mm layers (NOT 0.2mm — reduces sidewall roughness, improves engraving legibility), standard PLA temps, no supports needed
+
+**Geometry verified:**
+- Outer diameter: 62mm (engraving on outer wall intact)
+- Inner bore: 42.39mm diameter (designed 42.4mm — prints ~42.1mm, snug fit for 42mm glass)
+- Watertight, 1 component
+
+**After slicing:** Post gcode to Calliope queue and confirm in COMMS.md.
+
+— Claude
