@@ -1,6 +1,7 @@
 """
 ProjectState — shared state object for the manufacturing pipeline.
-Extends the existing print-queue.json schema with design, optimization, and plate phases.
+Extends the existing print-queue.json schema with design, optimization,
+plate phases, and native engraving support.
 """
 import json, pathlib, datetime
 from dataclasses import dataclass, field, asdict
@@ -14,7 +15,9 @@ class ProjectState:
     # Identity
     id: int = 0
     status: str = "design_gen"
-    # design_gen | design_edit | proto_opt | doe_opt | plate_nest | priced | pending | printing
+    # design_gen | design_edit | proto_opt | doe_opt | plate_nest | priced
+    # | engrave_pending_approval | engrave_approved | engrave_error
+    # | pending | printing
     added: str = ""
     note: str = ""
 
@@ -39,6 +42,17 @@ class ProjectState:
     # Pricing phase
     quote: dict = field(default_factory=dict)
 
+    # ── Engraving phase ──────────────────────────────────────────────────────
+    # engraving_request   : human natural-language string (e.g. "add Typhon's Forge near the base")
+    # engraving_proposals : full JSON blob from EngravingAgent (3 proposals + geometry notes)
+    # engraving_approved  : 1, 2, or 3 — which proposal Javier selected
+    # engraving_spec      : the approved proposal dict (subset of engraving_proposals)
+    # mesh                : geometry summary computed by EngravingAgent for downstream use
+    engraving_request: str = ""
+    engraving_proposals: dict = field(default_factory=dict)
+    engraving_approved: int = 0
+    engraving_spec: dict = field(default_factory=dict)
+
     # Compatibility with existing queue fields
     url: str = ""
     model_path: str = ""
@@ -58,7 +72,6 @@ class ProjectState:
         jobs = queue.get("jobs", [])
         for i, job in enumerate(jobs):
             if job.get("id") == self.id:
-                # Merge: keep existing queue fields, update design fields
                 merged = {**job, **d}
                 jobs[i] = merged
                 queue["jobs"] = jobs
