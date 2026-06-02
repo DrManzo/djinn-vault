@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-05-30 23:46 UTC
-Source file: 
-Readings: 1554
+Generated: 2026-06-02 03:45 UTC
+Source file: vase_plate_job.gcode
+Readings: 44
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 120°C | 60°C |
-| Mean | 213.2°C | 59.3°C |
-| Std dev | ±15.00°C | ±5.41°C |
-| Range | 28.1–222.1°C | 22.6–66.0°C |
+| Mean | 200.2°C | 60.0°C |
+| Std dev | ±30.56°C | ±0.29°C |
+| Range | 68.1–211.0°C | 59.0–61.0°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 1554
 
 ## Anomalies
 - 
-hotend temp variance high: ±15.0°C (check nozzle_mcu cable)- bed temp variance high: ±5.4°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±30.6°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)

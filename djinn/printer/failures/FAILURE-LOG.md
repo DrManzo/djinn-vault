@@ -507,3 +507,13 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-05-30 22:18:21 UTC
+=== FAILURE DETECTED ===
+  File: Proxy Stand_job5.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-02 03:39:56 UTC
+=== FAILURE DETECTED ===
+  File: vase_plate_job.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-02 03:52:00 UTC
