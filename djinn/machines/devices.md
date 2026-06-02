@@ -57,28 +57,20 @@ Devices physically connected to Salomon via USB, detected 2026-06-02.
 | **Manufacturer** | Apple |
 | **Model** | iPhone (5/5C/5S/6/SE/7/8/X/XR range) |
 | **USB ID** | 05ac:12a8 |
-| **USB mode** | AFC (Apple File Conduit) + tethering |
+| **USB mode** | AFC (charging/file access only) |
 | **GVFS mount** | `afc://00008130-00163086018A001C/` |
 | **gPhoto2 mount** | `gphoto2://Apple_Inc._iPhone_0000813000163086018A001C/` |
 | **Connected to** | Salomon (bus 3, dev 5) |
 
-### Network via tethering
+### Role
 
-When USB tethering is active on the iPhone:
+**Charging only** — not an active Djinn node. No tethering, no media sync, no agent running on it.
 
-| Field | Value |
-|-------|-------|
-| **Interface** | `enx12a2d37a331b` (Salomon) |
-| **Salomon IP** | `172.20.10.3/28` |
-| **iPhone gateway IP** | `172.20.10.1` |
-| **Subnet** | `172.20.10.0/28` |
-| **Provides** | Cellular internet to Salomon |
+Telegram and Discord are installed on this phone — this is how Javier receives Djinn notifications and sends commands to Salomon (printer bot, etc.) when away from the machines. The phone itself is a communication terminal for Javier, not a compute node.
 
-### Notes
+### Network note
 
-- iPhone is currently providing cellular data via USB tether (active as of 2026-06-02)
-- AFC mount allows direct file access (photos, etc.) if needed
-- Media backup not yet run — use `ifuse` or `gphoto2` if needed
+Linux creates a `172.20.10.x` interface (`enx12a2d37a331b`) when the iPhone is connected via USB even without intentional tethering — this is normal iOS behavior. It does not mean tethering is in use.
 
 ---
 
