@@ -517,3 +517,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-02 03:52:00 UTC
+=== FAILURE DETECTED ===
+  File: Proxy_Stand_job5_v23_final.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-02 11:35:48 UTC
