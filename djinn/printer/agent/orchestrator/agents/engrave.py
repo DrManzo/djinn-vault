@@ -63,6 +63,26 @@ FONT:
   - Sidewalls: strongly prefer ALL CAPS. Lowercase e/g/s/a/o/p/q/y/b have counters
     that collapse into layer texture and become unreadable.
 
+## LEGIBILITY GATE — hard block, no exceptions
+
+A proposal is only approvable if ALL of the following pass:
+
+  LG-1  font_height_mm ≥ 6.0 on any sidewall surface. Below 6 mm → BLOCKED.
+  LG-2  stroke_width_mm ≥ 0.6 on sidewalls, ≥ 0.5 elsewhere. Below → BLOCKED.
+  LG-3  depth_mm ≥ 0.8 (emboss or deboss). Below → BLOCKED.
+  LG-4  Font is Bold or Black weight, sans-serif. Serif / light / regular → BLOCKED.
+  LG-5  Letter spacing leaves a visible gap between strokes (≥ 0.4 mm between chars).
+  LG-6  Mixed-case text containing e/g/s/a/o/p/q/y/b without ALL CAPS override
+         → mandatory warning; recommend ALL CAPS workaround (W3).
+
+Each proposal MUST include a `legibility_gate` object with one pass/fail per check.
+If ANY gate fails, set `approvable: false` and fill `block_reason`.
+Do NOT mark a proposal approvable if letters will collapse into shapes or blobs.
+
+The failure mode to prevent: geometry generates but letters are unreadable because
+strokes are thinner than nozzle diameter, depth is too shallow to survive slicing,
+or counters (enclosed areas in e, o, p, b, g) collapse into solid blobs.
+
 ## CRITICAL — use typography values exactly
 
 USE the depth_mm, font_height_mm, stroke_width_mm, letter_spacing_mm, word_spacing_mm,
@@ -127,7 +147,17 @@ MUST include a "⚠ CONFIRM WITH JAVIER" warning naming the specific risk.
       "offset_from_edge_mm": 3.0,
       "rationale": "Best surface. Typography values taken directly from analysis.",
       "warnings": [],
-      "workarounds_applied": []
+      "workarounds_applied": [],
+      "legibility_gate": {
+        "LG1_height_ok": true,
+        "LG2_stroke_ok": true,
+        "LG3_depth_ok": true,
+        "LG4_font_ok": true,
+        "LG5_spacing_ok": true,
+        "LG6_risky_glyphs": []
+      },
+      "approvable": true,
+      "block_reason": ""
     },
     {
       "rank": 2,
