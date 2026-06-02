@@ -61,6 +61,12 @@ class SurfaceGroup:
     engravability: float    # 0.0–1.0
     engrav_reason: str
     angle_from_vertical: float  # degrees
+    # TODO: add face_bbox_w and face_bbox_h (per-surface extents, not global model bbox).
+    # placement_resolver currently estimates usable area from the global bounding box,
+    # which overestimates narrow faces (e.g. a partial side face, a top island).
+    # Compute these in classify_surfaces() by walking g['faces'] and projecting
+    # vertices onto the surface's tangent plane (normal as Z axis), then taking
+    # min/max of the projected X and Y extents.
 
 
 @dataclass

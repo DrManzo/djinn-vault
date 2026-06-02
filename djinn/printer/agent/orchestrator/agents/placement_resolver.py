@@ -163,11 +163,11 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
     # ── Parse position_description ───────────────────────────────────────────
     x_off = 0.0
     y_off = 0.0
-    placement_token = 'centered'   # default
+    placement_token = None   # None until a token fires — unmatched → resolved=False
 
     desc = position_desc
 
-    # Vertical position tokens
+    # Vertical position tokens (checked in priority order, longest match first)
     if re.search(r'lower\s+third|bottom\s+third|base\s+band|lower\s+band', desc):
         y_off = -(usable_h * 0.33)
         placement_token = 'lower_third'
@@ -180,25 +180,45 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
     elif re.search(r'upper\s+half|top\s+half', desc):
         y_off = +(usable_h * 0.25)
         placement_token = 'upper_half'
-    elif re.search(r'center(?:ed)?|middle', desc):
+    elif re.search(r'\bcenter(?:ed)?\b|\bmiddle\b|\bcentre\b', desc):
         y_off = 0.0
         placement_token = 'centered'
 
-    # Horizontal position tokens
-    if re.search(r'left\s+align|left\s+side|left\s+edge', desc):
+    # Horizontal position tokens — require explicit alignment intent, not just surface label.
+    # "right side" / "left side" describe which surface; "right aligned" / "right edge" describe position.
+    if re.search(r'left[\s-]align|left\s+edge|aligned\s+left', desc):
         x_off = -(usable_w * 0.25)
-        placement_token += '_left'
-    elif re.search(r'right\s+align|right\s+side|right\s+edge', desc):
+        placement_token = (placement_token + '_left') if placement_token else 'left'
+    elif re.search(r'right[\s-]align|right\s+edge|aligned\s+right', desc):
         x_off = +(usable_w * 0.25)
-        placement_token += '_right'
+        placement_token = (placement_token + '_right') if placement_token else 'right'
 
     # Explicit centroid extraction  "centroid at (X, Y, Z)mm"
     m = re.search(r'centroid\s+at\s+\(([\d.\-]+),\s*([\d.\-]+),\s*([\d.\-]+)\)', desc)
     if m:
-        # The LLM already gave us the absolute centroid — offsets are 0
         x_off = 0.0
         y_off = 0.0
         placement_token = 'centroid_explicit'
+
+    # "wrapped around" / "prime zone" / "arc wrap" on a cylindrical surface are valid
+    # centered placements — the full-circumference wrap has no lateral bias by default.
+    if placement_token is None and re.search(
+        r'\bwrapped?\b|\bprime\s*zone\b|\barc\s*wrap\b|\bcircumference\b', desc
+    ):
+        placement_token = 'centered'
+
+    # ── Ambiguity guard — fail if no token resolved ───────────────────────────
+    if placement_token is None:
+        return PlacementSpec(
+            resolved=False,
+            reason=(
+                f'position_description contains no recognizable spatial token: '
+                f'"{spec.get("position_description", "")[:80]}". '
+                f'Use: centered / lower third / upper third / upper|lower half / '
+                f'upper|lower band / left aligned / right aligned / '
+                f'centroid at (X,Y,Z) / wrapped around.'
+            ),
+        )
 
     # ── Wall profile Z clamping (prime zone) ─────────────────────────────────
     wall_profile = getattr(geo_report, 'wall_profile', None)
@@ -243,7 +263,9 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
         '--rotation':    round(rotation_deg, 1),
         '--anchor':      'CENTER',
     }
-    if arc_wrap or (is_cyl and is_side_surface):
+    # Only add arc flags when the proposal explicitly requested arc_wrap AND a valid radius exists.
+    # Cylindrical detection alone (is_cyl) is not enough — the LLM must have set arc_wrap=True.
+    if arc_wrap and effective_arc_r > 0:
         modifier_args['--arc-offset-deg'] = round(arc_offset_deg, 2)
         modifier_args['--arc-radius']     = round(effective_arc_r, 2)
 
@@ -260,9 +282,9 @@ def _resolve(spec: dict, geo_report) -> PlacementSpec:
         f'  z_surface   : {z_surface:.2f} mm',
         f'  rotation    : {rotation_deg}°',
     ]
-    if arc_wrap or (is_cyl and is_side_surface):
+    if arc_wrap and effective_arc_r > 0:
         lines.append(f'  Arc wrap    : r={effective_arc_r:.1f}mm  offset={arc_offset_deg:.2f}°'
-                     + (f'  (radius from wall_profile)' if arc_radius == 0 and wp_outer_r > 0 else ''))
+                     + ('  (radius from wall_profile)' if arc_radius == 0 and wp_outer_r > 0 else ''))
     if pz_min is not None and is_side_surface:
         lines.append(f'  Prime zone  : Z {pz_min:.1f}–{pz_max:.1f} mm (center {z_surface:.1f})')
     lines += [
