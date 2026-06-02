@@ -812,3 +812,11 @@ created: 2026-05-19
 - Final: "Terp Tribe HQ" 6mm Liberation Bold, 1.4mm depth, embossed, centered on front face
 - STL: `printer-files/queue/Proxy_Stand_terp_tribe_hq_v5_embossed.stl` — Javier approved
 — Claude
+
+## 2026-06-02: BUG — Calliope nozzle_mcu cable loses comms under print vibration
+- **System:** calliope
+- **Severity:** high | **Status:** fixed
+- **Root cause:** Sprite Pro extruder nozzle_mcu CAN/serial cable bundle goes intermittent under toolhead movement + thermal load. retransmit_seq skyrockets after ~500s, bytes_invalid spikes, Klipper triggers klippy_shutdown. Killed combined_jobs_2_3.gcode twice (jobs 000031, 000032) at 8-9min mark. Cable reseated at toolhead board and mainboard by Javier 2026-06-02. Monitor — if it recurs the cable assembly needs replacement.
+- **Report:** `logs/reports/2026-06-02_bug-calliope-nozzle-mcu-cable-loses-comms-under-print-vibration.md`
+
+*— Claude*
