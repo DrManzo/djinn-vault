@@ -756,3 +756,10 @@ created: 2026-05-19
 - Report: `logs/reports/2026-06-02_task-057.md`
 
 *— Salomon*
+
+## 2026-06-01: TASK-062 — Salomon
+- **Status:** ✅ done
+- LIVE ALPHA — Deploy and end-to-end test the full Typhon's Forge commission intake chain after Claude's fixes land — done
+- Report: `logs/reports/2026-06-01_task-062.md`
+
+*— Salomon*
