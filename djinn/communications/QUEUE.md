@@ -1620,7 +1620,7 @@ cat ~/.config/djinn/aa-meetings.json  # → valid JSON, empty array or placehold
 
 ## TASK-058
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
