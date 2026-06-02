@@ -1873,10 +1873,11 @@ File naming convention: `S{season}_E{episode}_W{week}_{content-day-slug}`
 
 ## TASK-061
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-01 by Marcus
 - context: Complete TASK-037 — 6 missing law topics. Perplexity hit output limit on first run, domains 8-13 were cut off.
 
 **Brief:**
