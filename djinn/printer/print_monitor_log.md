@@ -15105,3 +15105,10 @@
 | 2026-06-02 20:58 UTC | printing | 0.0% | 40.3 | 0 | 47.4 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
 | 2026-06-02 20:59 UTC | printing | 0.0% | 96.5 | 130 | 54.2 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
 | 2026-06-02 21:01 UTC | printing | 0.0% | 129.6 | 130 | 56.1 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:02 UTC | printing | 0.0% | 195.1 | 130 | 55.9 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:03 UTC | printing | 0.0% | 129.9 | 130 | 55.4 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:04 UTC | printing | 0.0% | 159.9 | 220 | 55.2 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:05 UTC | printing | 0.0% | 220.5 | 220 | 55.1 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:06 UTC | printing | 0.0% | 220.3 | 220 | 55.2 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:07 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
+| 2026-06-02 21:08 UTC | printing | 0.0% | 220.2 | 220 | 54.9 | 55 | 0% | 0 | combined_jobs_2_3.gcode |
