@@ -22,13 +22,13 @@ File: `Proxy Stand.stl`
 Integrity: 🔒 `5201baabd4a0b4b1b4ab302e2bde74c1…`
 Dims: 62.0x62.0x21.0mm | Volume: 27.1cm³
 
-*Print time:* 1h 6m 1s
-*Filament:* 7662mm / 22.9g
+*Print time:* 1h 6m 19s
+*Filament:* 7659mm / 22.8g
 *Hotend:* 210°C  *Bed:* 65°C
 *Layer height:* 0.2mm
 
 *Settings used:*
-  Maker's mark: ⚠️ skipped (see log)
+  Maker's mark: ✅ TF anvil engraved (bottom)
   Profile: *production*  Supports: no
   Infill: 25%
   Brim: YES (8mm)
@@ -57,5 +57,5 @@ Calliope will NOT start automatically.
 
 | Time | Event |
 |------|-------|
-| 2026-06-02 02:25 UTC | Sliced — waiting for confirm |
+| 2026-06-02 02:29 UTC | Sliced — waiting for confirm |
 
