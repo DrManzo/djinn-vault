@@ -763,3 +763,15 @@ created: 2026-05-19
 - Report: `logs/reports/2026-06-01_task-062.md`
 
 *— Salomon*
+
+## 2026-06-01 — djinn-social v0.1 (Claude)
+- Built `~/projects/djinn-social/` — full multi-brand social content pipeline
+- Modules: ingest, reel (ffmpeg 9:16), transcribe (faster-whisper), caption (Ollama+cannabis rules)
+- Publishers: Meta (IG+FB), YouTube Shorts, X
+- Hosting: Cloudflare Tunnel on port 8741 (replaces ngrok)
+- Scheduler: 15-min systemd timer, kit_ready → publish chain
+- Token refresh: monthly timer, 60-day IG long-lived token cycle
+- CLI: 9 commands (`djinn`, `djinn-media-*`, `djinn-content-*`, `djinn-token-refresh`)
+- Brand configs: terp-tribe (S6) + typhon-forge (S1) deployed to `~/.config/djinn/brands/`
+- SystemD units enabled: djinn-publish-scheduler.timer, djinn-token-refresh.timer
+- Blockers: CF Tunnel setup, API creds, Meta App Review, YouTube OAuth (one-time browser)

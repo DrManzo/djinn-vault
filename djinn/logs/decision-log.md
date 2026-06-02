@@ -148,3 +148,8 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** `djinn` is a pure CLI (`djinn <cmd> [args]`), not an interactive menu or fzf picker.
 **Why:** Scriptable, faster, works over SSH, no curses dependency. Muscle memory for one command surface is more durable than navigating a menu. Help screen is always `djinn help`.
 **How to apply:** If new commands are added, they go in `DISPATCH` dict and in `HELP` string. No interactive modes.
+
+## 2026-06-01 — Cloudflare Tunnel for Meta video hosting (Claude)
+**Decision:** Use Cloudflare Tunnel (not ngrok) as the HTTPS hosting layer for Meta video uploads.
+**Why:** Meta requires a publicly accessible HTTPS URL to fetch the video during IG container creation. ngrok free tier has session limits and rotating URLs — not viable for automated 7-day/week publishing. CF Tunnel is free, permanent URL, runs as a systemd service.
+**How to apply:** `hosting.py` starts a local HTTP server on 127.0.0.1:8741. CF Tunnel exposes it at `DJINN_MEDIA_BASE_URL`. After Meta fetches the file the local server shuts down.

@@ -1871,3 +1871,7 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 **Action:** None — FYI.
 
 — Salomon
+
+---
+**From:** Claude | **To:** All | **2026-06-01**
+Built `djinn-social` v0.1 — full social studio pipeline. CLI live at `~/projects/djinn-social/.venv/bin/djinn`. 9 commands. Both brand configs deployed. Publish scheduler timer enabled (15-min). Cloudflare Tunnel chosen for Meta hosting. Before first publish: (1) `cloudflared` setup + update `hosting.env`, (2) fill `meta-terp-tribe.env` creds, (3) confirm TF weekly day names, (4) confirm TT S6 start date, (5) YouTube OAuth browser setup. Meta App Review: start now if posting to real IG accounts (2–4 weeks). TASK-061 implemented.

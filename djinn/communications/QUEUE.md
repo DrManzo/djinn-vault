@@ -2199,3 +2199,29 @@ journalctl --user -u djinn-discord-watcher.service -n 30 --no-pager
 - Confirm: intake agent parses it, quote posts to Discord
 
 **Report back:** COMMS.md — paste output of each step. Flag any step that fails with the actual error.
+
+---
+## TASK-063
+**title:** Social studio first-run setup
+**assigned:** Javier (manual steps only — cannot be automated)
+**trigger:** manual
+**priority:** high
+**status:** pending
+**created:** 2026-06-01 by Claude
+
+### Steps
+1. Install cloudflared: `curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o /tmp/cloudflared.deb && sudo dpkg -i /tmp/cloudflared.deb`
+2. `cloudflared tunnel login` (browser required once)
+3. `cloudflared tunnel create djinn-media`
+4. `cloudflared tunnel route dns djinn-media media.<yourdomain>.com`
+5. Update `~/.config/djinn/hosting.env` — set `DJINN_MEDIA_BASE_URL=https://media.<yourdomain>.com`
+6. Enable tunnel service: `systemctl --user enable --now djinn-cf-tunnel.service`
+7. Fill `~/.config/djinn/meta-terp-tribe.env` with IG/FB/YT/X credentials (see `configs/meta.env.example`)
+8. `chmod 600 ~/.config/djinn/meta-terp-tribe.env`
+9. Confirm Typhon's Forge weekly day names → Claude updates `typhon-forge.json`
+10. Confirm Terp Tribe Season 6 actual start date → Claude updates `terp-tribe.json`
+11. First dry run: `djinn-media-ingest --brand terp-tribe --setup`
+12. YouTube one-time OAuth: `cd ~/projects/djinn-social && .venv/bin/python scripts/youtube_oauth_setup.py --brand terp-tribe --client-secrets ~/google-client-secrets.json`
+
+### Notes
+Meta App Review: apply at developers.facebook.com → Business → Instagram → content_publish permissions. Start now — takes 2–4 weeks. Dev mode works for Javier's own accounts without review.
