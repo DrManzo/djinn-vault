@@ -522,3 +522,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-02 11:35:48 UTC
+=== FAILURE DETECTED ===
+  File: combined_jobs_2_3.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-02 20:40:24 UTC
