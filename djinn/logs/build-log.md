@@ -737,4 +737,14 @@ created: 2026-05-19
 - PHASE-ALPHA Sprint 2 — Sabrina context tracking — done
 - Report: `logs/reports/2026-06-01_task-058.md`
 
+---
+
+### 2026-06-02 — TASK-057 finished — Salomon
+
+- AA meeting reminders (`/meeting`) — handlers wired into Telegram gateway
+- Craig contact flow (`/craig <msg> | confirm | cancel`) — draft-and-confirm pattern
+- People mention scanning — Sabrina/Craig auto-tracked from text + voice
+- Service restarted: djinn-telegram-gateway ✅
+- Report: `logs/reports/2026-06-02_task-057.md`
+
 *— Salomon*
