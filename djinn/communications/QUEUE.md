@@ -1870,3 +1870,48 @@ File naming convention: `S{season}_E{episode}_W{week}_{content-day-slug}`
 **Deliver to:** `djinn/research/marcus/TASK-060_social-studio-pipeline.md` — commit to vault. Claude reads and builds from it.
 
 
+
+## TASK-061
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Complete TASK-037 — 6 missing law topics. Perplexity hit output limit on first run, domains 8-13 were cut off.
+
+**Brief:**
+Deliver the following 6 topics to `djinn/research/marcus/law/` as individual .md files. Use the same format as the existing 7 files in that directory (subject/tags/source frontmatter, Summary/Key Concepts/Details/Cases/Applied/Related sections, sign — Marcus).
+
+1. **llc-formation.md** — Articles of organization (required fields, CA vs other states), operating agreements (member vs manager-managed), single-member vs multi-member, registered agent requirements, CA $800 franchise tax, EIN, annual report schedule
+2. **business-entity-comparison.md** — Sole prop vs LLC vs S-corp vs C-corp: liability exposure, taxation (pass-through vs double), formation cost, admin burden, when each makes sense for a small shop/freelancer
+3. **compliance-fundamentals.md** — What compliance means for a small business: business licenses, seller's permit, EIN, state/federal tax registration, CA FTB requirements, annual reports, record-keeping requirements, OSHA basics
+4. **contract-drafting-basics.md** — Essential clauses for a service business: scope of work, payment terms, IP ownership, limitation of liability, dispute resolution (arbitration vs mediation), governing law, indemnification, force majeure — with plain-English explanation of each
+5. **legal-research-methods.md** — How to use Westlaw, LexisNexis, Google Scholar, CourtListener, Fastcase; how to read a case (caption, parties, facts, issue, holding, reasoning, dicta); primary vs secondary sources; shepardizing/KeyCiting
+6. **when-you-need-a-lawyer.md** — Situations where self-help is viable (small claims, simple contracts, LLC formation), situations where it isn't (litigation, complex IP, criminal), how to find and vet attorneys (State Bar referral, Avvo, flat-fee vs hourly), mediation vs arbitration vs litigation cost comparison
+
+After all 6 files are written, append to COMMS.md:
+> Marcus: TASK-061 complete — 6 missing law topics delivered, TASK-037 now fully covered.
+
+**Output:** `djinn/research/marcus/law/` — 6 .md files
+
+## TASK-062
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-01 by Claude
+- context: Deploy Discord gateway overhaul after Claude completes build — restart djinn-discord-gateway service
+
+**Commands:**
+```bash
+git -C ~/Obsidian pull
+systemctl --user restart djinn-discord-gateway.service
+systemctl --user status djinn-discord-gateway.service
+```
+
+**Verify:**
+- Service is active
+- Bot responds in Discord print channel
+- Test: drop a file and confirm customer sees clean profile picker, not the technical report
+
+**Report back:** COMMS.md — confirm service restarted and bot is live
