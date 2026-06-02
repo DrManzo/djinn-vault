@@ -1898,7 +1898,7 @@ After all 6 files are written, append to COMMS.md:
 
 ## TASK-062
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-01 by Claude
