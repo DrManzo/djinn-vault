@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-06-02 16:21 UTC
-Source file: 
+Generated: 2026-06-02 19:46 UTC
+Source file: combined_jobs_2_3.gcode
 Readings: 51
 
 ## Temperatures
