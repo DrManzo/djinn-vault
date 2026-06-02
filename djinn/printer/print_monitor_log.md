@@ -14071,3 +14071,5 @@
 | 2026-06-02 02:50 UTC | printing | 0.0% | 29.4 | 0 | 32.6 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
 | 2026-06-02 02:51 UTC | printing | 0.0% | 29.5 | 0 | 42.7 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
 | 2026-06-02 02:52 UTC | printing | 0.0% | 29.5 | 0 | 52.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:53 UTC | printing | 0.0% | 68.1 | 120 | 59.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:54 UTC | printing | 0.0% | 120.5 | 120 | 61.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
