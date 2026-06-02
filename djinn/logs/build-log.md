@@ -799,3 +799,6 @@ created: 2026-05-19
 - Generated v16 (from operator 3MF, 0.005 cm³ removed — invisible), v17 (Z=11–18mm, 0.200 cm³ — scrapped)
 - Session scrapped: tooling cannot bridge visual placement intent to correct FDM parameters
 — Claude
+
+- **2026-06-02** Built `placement_resolver.py` — deterministic bridge converting `position_description` → exact mm coords + CLI modifier_args. Patched two bugs: prime zone Z scoped to side surfaces only; arc_radius fallback uses `wall_profile.outer_r_max` when `arc_wrap=True`. Commits: `60045a0` (Marcus), `d7ef40c` (Claude fixes). Proxy Stand v19 STLs with Liberation and DejaVu fonts generated.
+— Claude
