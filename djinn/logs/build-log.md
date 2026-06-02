@@ -700,3 +700,13 @@ created: 2026-05-19
 - **openclaw.json**: Added TASK-NNN command rule to main agent — runs `djinn-queue-runner --task TASK-N` instead of hallucinating
 - **djinn-personal-db (TASK-054)**: Verified all success criteria pass; added meeting_today to briefing JSON
 - **TASK-054** marked done in QUEUE.md
+
+## 2026-06-01 — djinn CLI dispatcher + agent fix (evening session)
+
+- **`djinn` CLI dispatcher** built at `~/.local/bin/djinn` — single command for all Djinn ops, no LLM, no context overflow. Covers: print queue, confirm/deny/slice, commission quotes, task execution, personal state (sobriety/habits/briefing), system status, vault push/pull, design, media. 270 lines Python.
+- **Tab completion** installed at `~/.local/share/bash-completion/completions/djinn`, sourced in `.zshrc`. Completes subcommands, habit names, job IDs, task IDs.
+- **`djinn-queue-runner` patched** — `--task` flag now bypasses `trigger: auto` filter; manual tasks reachable by direct invocation. `--list` now shows all pending tasks (not just auto).
+- **`openclaw.json` patched** — added TASK-NNN command rule to main agent prompt: routes to `djinn-queue-runner` directly, never interprets specs.
+- **`djinn-personal-db` patched** — `meeting_today` field added to briefing JSON output (was missing from spec).
+- **TASK-054** verified complete (personal-db). **TASK-062** marked done (gateway restart).
+- **BUG-014 logged** — agent hallucination on task execution; fixed structurally.

@@ -127,3 +127,15 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** Every morning briefing opens with "Day N sober." regardless of anything else.
 **Why:** Sobriety counter is identity, not a metric. It's the ground the day is built on. Opens before everything else — deadlines, streaks, tasks.
 **How to apply:** djinn-morning hardcodes this as line 1. Non-negotiable.
+
+## 2026-06-01 — OpenClaw as hub, `djinn` as workbench
+
+**Decision:** OpenClaw TUI stays for Discord/Telegram presence and simple conversational ops. `djinn` CLI is the interface for task execution, system ops, and anything requiring reliable output.
+**Why:** The 7B model is good at routing and chat formatting. It is not reliable for parsing structured specs and executing multi-step tasks — demonstrated by BUG-014 (hallucinated SQLite tutorial instead of reading TASK-054). Deterministic dispatch is always faster and never hallucinates.
+**How to apply:** When building new Djinn capabilities: if the operation is deterministic, add it to `djinn`. If it's conversational, add it to OpenClaw's system prompt. Never add complex spec-reading tasks to the model's system prompt — put a script in the path instead.
+
+## 2026-06-01 — No interactive TUI for djinn dispatcher
+
+**Decision:** `djinn` is a pure CLI (`djinn <cmd> [args]`), not an interactive menu or fzf picker.
+**Why:** Scriptable, faster, works over SSH, no curses dependency. Muscle memory for one command surface is more durable than navigating a menu. Help screen is always `djinn help`.
+**How to apply:** If new commands are added, they go in `DISPATCH` dict and in `HELP` string. No interactive modes.
