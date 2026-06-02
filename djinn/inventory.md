@@ -49,6 +49,18 @@
 | djinn-daily | ❌ | ✅ | 08:00 daily |
 | djinn-weekly | ❌ | ✅ | Sunday 20:00 |
 
+## Connected Devices (Salomon — USB)
+
+| Device | Type | USB ID | Mode | Notes |
+|--------|------|--------|------|-------|
+| Samsung Galaxy Tab S (S Pen) | Android tablet | 04e8:6860 | MTP | Serial R52T10BL3BV, Verizon, ~7.6GB media |
+| Apple iPhone | Smartphone | 05ac:12a8 | AFC + tether | USB tether: `enx12a2d37a331b`, Salomon IP 172.20.10.3 |
+
+**Tablet media backup:** `/home/drmanzo/device-backups/samsung-galaxy-tab/` (Salomon)
+**Full device doc:** `machines/devices.md`
+
+---
+
 ## Gaps — What Each Machine Needs
 
 ### Both complete — no critical gaps remaining
