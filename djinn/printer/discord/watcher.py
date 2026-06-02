@@ -6,6 +6,12 @@ calls djinn-model-fetch automatically. Runs as a systemd service.
 
 import os, sys, json, time, subprocess, pathlib, logging, urllib.request, re, datetime
 
+# Keywords that indicate a commission request in plain text
+COMMISSION_KEYWORDS = [
+    "i want", "i need", "can you make", "can you print", "make me", "print me",
+    "how much", "how much for", "quote", "order", "commission", "custom"
+]
+
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     level=logging.INFO,
@@ -99,23 +105,75 @@ def process_message(msg: dict, token: str, processed: list) -> bool:
         return False
 
     acted = False
+    text = (msg.get("content") or "").strip()
 
-    # File attachments (.stl / .3mf) only — URLs are handled by the OpenClaw agent
+    # File attachments (.stl / .3mf) — full intake pipeline
     for att in msg.get("attachments", []):
         fname = att.get("filename", "")
         ext = pathlib.Path(fname).suffix.lower()
         if ext in MODEL_EXTS:
             url = att["url"]
+            # Check if caption contains customer prefs (e.g. "standard black" or "quality petg")
+            fetch_args = [url]
+            caption_lower = text.lower()
+            for profile in ("production", "quality", "standard", "proto", "draft"):
+                if profile in caption_lower:
+                    mapped = {"quality": "production", "draft": "proto"}.get(profile, profile)
+                    fetch_args += ["--profile", mapped]
+                    break
+            for color in ("black", "white", "grey", "gray", "red", "blue", "green", "orange", "yellow", "natural", "clear"):
+                if color in caption_lower:
+                    fetch_args += ["--color", color]
+                    break
+            if text and text != fname:
+                fetch_args += ["--note", text[:200]]
             log.info(f"Found {ext} attachment: {fname}")
             try:
-                run_model_fetch(url, fname)
+                result = subprocess.run(
+                    ["djinn-model-fetch"] + fetch_args,
+                    capture_output=True, text=True, timeout=600,
+                )
+                if result.returncode == 0:
+                    log.info(f"Success: {result.stdout[-200:].strip()}")
+                else:
+                    log.error(f"Failed ({result.returncode}): {result.stderr[-300:].strip()}")
                 acted = True
             except subprocess.TimeoutExpired:
                 log.error(f"Timed out processing {fname}")
-                discord_send(token, f"Timed out processing `{fname}`")
+                discord_send(token, f"⏱️ Timed out analyzing `{fname}` — try again.")
             except Exception as e:
                 log.error(f"Failed to process {fname}: {e}")
-                discord_send(token, f"Failed to process `{fname}`: {e}")
+                discord_send(token, f"❌ Failed to process `{fname}`: {e}")
+
+    # Plain text commission requests — no file attached
+    if not acted and text:
+        text_lower = text.lower()
+        if any(kw in text_lower for kw in COMMISSION_KEYWORDS):
+            log.info(f"Commission request detected: {text[:80]}")
+            try:
+                result = subprocess.run(
+                    ["python3", "-c",
+                     f"import sys; sys.path.insert(0, '{pathlib.Path.home()}/Obsidian/djinn/printer'); "
+                     f"from shop.intake_agent import IntakeAgent; "
+                     f"agent = IntakeAgent(); out = agent.parse('''{text.replace(chr(39), ' ')}'''); "
+                     f"print(out)"],
+                    capture_output=True, text=True, timeout=60,
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    discord_send(token, result.stdout.strip()[:1900])
+                else:
+                    # Fallback: acknowledge and route to quote
+                    discord_send(token,
+                        f"Got it — I'll quote that for you.\n"
+                        f"Use `/quote {text[:120]}` or drop your file in this channel."
+                    )
+                acted = True
+            except Exception as e:
+                log.error(f"Intake agent error: {e}")
+                discord_send(token,
+                    "Drop your `.stl` or `.3mf` file here and I'll analyze it instantly.\n"
+                    "Or use `/quote <description>` for a quick estimate."
+                )
 
     return acted
 

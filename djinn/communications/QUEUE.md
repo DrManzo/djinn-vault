@@ -2150,3 +2150,52 @@ Research compliance, business structure, and operational requirements for sellin
 **Output format:** One section per research area. For each: current state in 2026, specific tools/libraries/products to evaluate, direct integration path with Djinn's existing stack, gotchas and warnings, and build priority (P0 = blocks revenue / P1 = high value / P2 = nice to have). Flag anything requiring physical hardware purchase.
 
 **Deliver to:** `djinn/research/marcus/TASK-061_3d-printing-full-audit.md` — commit to vault. This is the master reference for all 3D pipeline builds going forward.
+
+---
+
+## TASK-062
+- assigned_to: salomon
+- status: pending
+- priority: critical
+- trigger: manual
+- created: 2026-06-02 by Claude (per Javier)
+- context: LIVE ALPHA — Deploy and end-to-end test the full Typhon's Forge commission intake chain after Claude's fixes land
+
+**Depends on:** Claude fixes in watcher, consult chain, supports logic (built in same session as this task)
+
+**Steps:**
+```bash
+git -C ~/Obsidian pull
+# Restart the watcher so it picks up the new watcher.py
+systemctl --user restart djinn-discord-watcher.service
+systemctl --user restart djinn-discord-gateway.service
+systemctl --user restart djinn-telegram-gateway.service
+sleep 3
+# Confirm all running
+systemctl --user is-active djinn-discord-watcher.service
+systemctl --user is-active djinn-discord-gateway.service
+systemctl --user is-active djinn-telegram-gateway.service
+systemctl --user is-active djinn-print-monitor.service
+systemctl --user is-active djinn-shop-dashboard.service
+```
+
+**End-to-end test:**
+1. Drop any .stl file in #3d-printing on Discord
+2. Confirm within 60s: watcher logs show `djinn-print-consult` running, consult report posts to #3d-printing
+3. Confirm: profile picker message appears asking for standard/production/proto + supports y/n
+4. Select a profile via Discord
+5. Confirm: `queue` command on Telegram shows the job with correct settings
+6. Send `confirm 1` on Telegram
+7. Confirm: Calliope starts printing (Moonraker shows `printing` state)
+8. Send `deny 1` only if you want to cancel — otherwise let it run
+
+**If step 2 fails:** Check watcher log:
+```bash
+journalctl --user -u djinn-discord-watcher.service -n 30 --no-pager
+```
+
+**Also test:**
+- Type a commission description in #3d-printing: "I want a puffco proxy stand in black PETG, 2 of them"
+- Confirm: intake agent parses it, quote posts to Discord
+
+**Report back:** COMMS.md — paste output of each step. Flag any step that fails with the actual error.
