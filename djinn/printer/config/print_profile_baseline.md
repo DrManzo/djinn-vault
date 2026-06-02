@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-02 20:57 UTC
-Source file: combined_jobs_2_3.gcode
-Readings: 100
+Generated: 2026-06-02 21:13 UTC
+Source file: 
+Readings: 113
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 130°C | 55°C |
-| Mean | 212.6°C | 55.0°C |
-| Std dev | ±26.28°C | ±0.28°C |
-| Range | 49.0–220.9°C | 53.7–56.4°C |
+| Mean | 210.1°C | 55.0°C |
+| Std dev | ±29.64°C | ±0.40°C |
+| Range | 49.0–220.9°C | 52.5–56.4°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 100
 
 ## Anomalies
 - 
-hotend temp variance high: ±26.3°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±29.6°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
