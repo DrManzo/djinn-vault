@@ -73,6 +73,7 @@ class GeometryReport:
     volume_cm3: float
     surface_groups: List[SurfaceGroup] = field(default_factory=list)
     engravable_groups: List[SurfaceGroup] = field(default_factory=list)
+    wall_profile: 'WallProfile | None' = None
     warnings: List[str] = field(default_factory=list)
     text_summary: str = ""  # human-readable block for LLM consumption
 
@@ -235,6 +236,157 @@ def classify_surfaces(
     return result
 
 
+@dataclass
+class ZSlice:
+    z: float
+    outer_r: float
+    inner_r: float
+    wall_thick: float
+    solid: bool        # True = no hollow center, False = tubular
+
+
+@dataclass
+class WallProfile:
+    z_min: float
+    z_max: float
+    slices: List[ZSlice]
+    prime_zone_z_min: float   # Z range with thickest consistent wall
+    prime_zone_z_max: float
+    prime_zone_wall: float    # average wall thickness in prime zone
+    is_cylindrical: bool      # outer radius variance < 15% → roughly cylindrical
+    outer_r_min: float
+    outer_r_max: float
+    text_summary: str
+
+
+def _intersect_z(face: Face, z: float) -> List[Tuple[float, float]]:
+    """Return XY intersection points of a triangle's edges with the plane Z=z."""
+    verts = [face.v0, face.v1, face.v2]
+    pts = []
+    for i in range(3):
+        v1, v2 = verts[i], verts[(i + 1) % 3]
+        z1, z2 = v1[2], v2[2]
+        if z1 == z2:
+            continue
+        if min(z1, z2) <= z <= max(z1, z2):
+            t = (z - z1) / (z2 - z1)
+            x = v1[0] + t * (v2[0] - v1[0])
+            y = v1[1] + t * (v2[1] - v1[1])
+            pts.append((x, y))
+    return pts
+
+
+def compute_wall_profile(faces: List[Face], n_slices: int = 25) -> WallProfile:
+    """
+    Sample outer/inner radius and wall thickness at n_slices Z heights.
+    Works for both solid and hollow (tubular) objects.
+    Returns a WallProfile with the prime engravable zone identified.
+    """
+    all_z = [v[2] for f in faces for v in (f.v0, f.v1, f.v2)]
+    z_min, z_max = min(all_z), max(all_z)
+    height = z_max - z_min
+    step = height / (n_slices + 1)
+
+    slices = []
+    for i in range(1, n_slices + 1):
+        z = z_min + i * step
+        pts = []
+        for face in faces:
+            pts.extend(_intersect_z(face, z))
+        if len(pts) < 3:
+            continue
+
+        r_vals = sorted([math.sqrt(x * x + y * y) for x, y in pts])
+        outer_r = r_vals[-1]
+
+        # Detect hollow core: if there's a gap in the radial distribution,
+        # the inner wall is the first cluster above the gap.
+        # Simple heuristic: inner = smallest r that is > 5% of outer_r
+        inner_candidates = [r for r in r_vals if r > outer_r * 0.05]
+        inner_r = min(inner_candidates) if inner_candidates else 0.0
+        wall_thick = outer_r - inner_r
+        solid = inner_r < outer_r * 0.10
+
+        slices.append(ZSlice(
+            z=round(z, 2),
+            outer_r=round(outer_r, 2),
+            inner_r=round(inner_r, 2),
+            wall_thick=round(wall_thick, 2),
+            solid=solid,
+        ))
+
+    if not slices:
+        return WallProfile(
+            z_min=z_min, z_max=z_max, slices=[],
+            prime_zone_z_min=z_min, prime_zone_z_max=z_max,
+            prime_zone_wall=0.0, is_cylindrical=False,
+            outer_r_min=0.0, outer_r_max=0.0,
+            text_summary='(wall profile: no intersections found)',
+        )
+
+    outer_rs = [s.outer_r for s in slices]
+    outer_r_min = min(outer_rs)
+    outer_r_max = max(outer_rs)
+    outer_r_avg = sum(outer_rs) / len(outer_rs)
+    outer_r_variance_pct = (outer_r_max - outer_r_min) / max(outer_r_avg, 1) * 100
+    is_cylindrical = outer_r_variance_pct < 15.0
+
+    # Find prime engravable zone: longest run of slices with wall ≥ 2mm
+    # weighted by wall thickness
+    best_start = best_end = best_wall = 0
+    cur_start = 0
+    for i, s in enumerate(slices):
+        if s.wall_thick < 2.0:
+            cur_start = i + 1
+        else:
+            run_wall = sum(sl.wall_thick for sl in slices[cur_start:i+1]) / (i - cur_start + 1)
+            run_score = (i - cur_start + 1) * run_wall
+            best_score = (best_end - best_start + 1) * best_wall if best_wall else 0
+            if run_score > best_score:
+                best_start, best_end, best_wall = cur_start, i, run_wall
+
+    prime_z_min = slices[best_start].z
+    prime_z_max = slices[best_end].z
+
+    # Build human-readable summary
+    lines = [
+        '--- WALL PROFILE (Z cross-section scan) ---',
+        f'  Z range      : {z_min:.1f} to {z_max:.1f} mm (height {height:.1f}mm)',
+        f'  Outer radius : {outer_r_min:.1f}–{outer_r_max:.1f} mm  '
+        f'({"constant — cylindrical" if is_cylindrical else f"tapers {outer_r_variance_pct:.0f}% — not a plain cylinder"})',
+        f'  Prime engrave zone: Z {prime_z_min:.1f}–{prime_z_max:.1f} mm  '
+        f'(avg wall {best_wall:.1f}mm — thickest consistent material)',
+        '',
+        f'  {"Z (mm)":>8}  {"outer_r":>8}  {"inner_r":>8}  {"wall":>6}  {"type":>6}',
+        f'  {"--------":>8}  {"--------":>8}  {"--------":>8}  {"------":>6}  {"------":>6}',
+    ]
+    for s in slices:
+        kind = 'solid' if s.solid else 'tube'
+        lines.append(
+            f'  {s.z:8.1f}  {s.outer_r:8.2f}  {s.inner_r:8.2f}  {s.wall_thick:6.2f}  {kind:>6}'
+        )
+    lines.append('')
+    lines.append(
+        f'  ✓ BEST ZONE FOR ENGRAVING: Z {prime_z_min:.1f}–{prime_z_max:.1f} mm  '
+        f'(wall {best_wall:.1f}mm thick, outer radius {slices[best_start].outer_r:.1f}mm)'
+    )
+    lines.append(
+        f'  → At 1.9mm depth this uses {1.9/best_wall*100:.0f}% of wall — '
+        + ('safe.' if best_wall >= 3.8 else 'TIGHT — reduce depth to 0.8mm.')
+    )
+
+    return WallProfile(
+        z_min=z_min, z_max=z_max, slices=slices,
+        prime_zone_z_min=prime_z_min,
+        prime_zone_z_max=prime_z_max,
+        prime_zone_wall=round(best_wall, 2),
+        is_cylindrical=is_cylindrical,
+        outer_r_min=outer_r_min,
+        outer_r_max=outer_r_max,
+        text_summary='\n'.join(lines),
+    )
+
+
 def _bounding_box(faces: List[Face]):
     xs, ys, zs = [], [], []
     for f in faces:
@@ -267,6 +419,7 @@ def full_geometry_report(stl_path: str) -> GeometryReport:
     vol = _approx_volume(faces)
     groups = classify_surfaces(faces)
     engravable = [g for g in groups if g.engravability >= 0.5]
+    wall_profile = compute_wall_profile(faces)
     warnings = []
 
     if bbox_x > BED_X or bbox_y > BED_Y or bbox_z > BED_Z:
@@ -314,6 +467,8 @@ def full_geometry_report(stl_path: str) -> GeometryReport:
             lines.append(f'  ⚠ {w}')
 
     lines.append('')
+    lines.append(wall_profile.text_summary)
+    lines.append('')
     lines.append('--- FDM ENGRAVING RULES (apply to every proposal) ---')
     lines.append('  1. Depth must be ≥ 0.5mm to be visible (≥ 0.8mm recommended).')
     lines.append('  2. Text height must be ≥ 3mm absolute (≥ 5mm recommended).')
@@ -333,6 +488,7 @@ def full_geometry_report(stl_path: str) -> GeometryReport:
         volume_cm3=vol,
         surface_groups=groups,
         engravable_groups=engravable,
+        wall_profile=wall_profile,
         warnings=warnings,
         text_summary='\n'.join(lines),
     )
