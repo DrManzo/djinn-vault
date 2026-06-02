@@ -14503,3 +14503,22 @@
 | 2026-06-02 10:38 UTC | standby | 0.0% | 24.9 | 0 | 23.3 | 0 | 0% | 0 |  |
 | 2026-06-02 10:39 UTC | standby | 0.0% | 25.0 | 0 | 23.3 | 0 | 0% | 0 |  |
 | 2026-06-02 10:40 UTC | printing | 0.0% | 25.0 | 0 | 26.1 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:41 UTC | printing | 0.0% | 24.9 | 0 | 36.4 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:42 UTC | printing | 0.0% | 25.0 | 0 | 46.2 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:43 UTC | printing | 0.0% | 49.0 | 130 | 53.7 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:44 UTC | printing | 0.0% | 129.6 | 130 | 56.1 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:45 UTC | printing | 0.0% | 202.0 | 130 | 56.1 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:46 UTC | printing | 0.0% | 130.4 | 130 | 55.4 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:47 UTC | printing | 0.0% | 148.1 | 220 | 55.2 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:48 UTC | printing | 0.0% | 220.0 | 220 | 55.2 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:49 UTC | printing | 0.0% | 220.2 | 220 | 55.1 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:50 UTC | printing | 0.0% | 219.7 | 220 | 54.6 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:51 UTC | printing | 0.0% | 220.4 | 220 | 54.6 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:52 UTC | printing | 0.0% | 220.4 | 220 | 54.9 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:53 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:54 UTC | printing | 0.0% | 219.4 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:55 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:56 UTC | printing | 0.0% | 220.2 | 220 | 55.1 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:57 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:58 UTC | printing | 0.0% | 219.4 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
+| 2026-06-02 10:59 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_job5_v23_final.gcode |
