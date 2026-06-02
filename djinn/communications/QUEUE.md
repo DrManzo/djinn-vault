@@ -1732,7 +1732,8 @@ One-person shop. Linux (Ubuntu/Debian). Python scripts, systemd services and tim
 
 ## TASK-060
 - assigned_to: marcus
-- status: pending
+- status: done
+- completed: 2026-06-01 by Marcus
 - priority: critical
 - trigger: manual
 - created: 2026-06-01 by Claude (per Javier)
