@@ -1,731 +1,779 @@
 """
-typography_utils.py — FDM-aware typography analysis for the Djinn engraving pipeline.
+typography_utils.py — Adaptive letter geometry engine for FDM engraving.
 
-Companion to geometry_utils.py. Answers the question geometry_utils can't:
-"Will the letters actually be readable once printed?"
+Merged from typography_utils_marcus.py (physics foundation) and
+typography_utils.py (PIL font measurement layer).
 
-Uses PIL to read real font metrics from TTF files. Analyzes:
-  - Stroke widths per character (from actual glyph bitmaps)
-  - Counter detection (holes in o, b, d, e, etc.) and whether they're printable
-  - Surface texture interaction (layer lines vs letter form orientation)
-  - Adaptive depth recommendation based on wall thickness + surface type + font
-  - Per-character warnings and font substitution advice
+Pipeline:
+  1. analyse_text()       — glyph difficulty table, min heights, stroke multipliers
+  2. slope_projection()   — height/depth/spacing scale via 1/cos(θ), staircase risk
+  3. curve_projection()   — arc length, sagitta, max chars, depth inner vs outer
+  4. texture_correction() — layer line ridges, infill ghosting, wall flex buffers
+  5. _measure_font_pil()  — OPTIONAL: real stroke widths from TTF via PIL (overrides table)
+  6. build_advisory()     — assembles final CutAdvisory with mm values + brief
+  7. full_typography_report() — master entry point, returns TypographyReport
 
-No external deps beyond PIL (Pillow), which is already in the djinn venv.
+All output in mm. No required external deps.
+PIL (Pillow) used when available for real font measurements — falls back
+to glyph table heuristics if PIL is unavailable or no font path given.
 
 Machine: Calliope — Ender-3 V3 Plus
 Nozzle: 0.4mm   Layer: 0.20mm std / 0.12mm acc
 """
 from __future__ import annotations
-
 import math
 import pathlib
 from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
-# PIL is available — used for real font metric extraction
+# ── Machine constants — import from geometry_utils, fall back inline ──────────
+try:
+    from .geometry_utils import (
+        NOZZLE_DIA, LAYER_H_STD, LAYER_H_ACC,
+        MIN_ENGRAVE_DEPTH, MIN_ENGRAVE_DEPTH_READABLE,
+        MIN_LETTER_H, REC_LETTER_H, MIN_STROKE,
+        OVERHANG_ANGLE_LIMIT,
+        SurfaceGroup, WallProfile,
+    )
+except ImportError:
+    NOZZLE_DIA                 = 0.4
+    LAYER_H_STD                = 0.20
+    LAYER_H_ACC                = 0.12
+    MIN_ENGRAVE_DEPTH          = 0.5
+    MIN_ENGRAVE_DEPTH_READABLE = 0.8
+    MIN_LETTER_H               = 3.0
+    REC_LETTER_H               = 5.0
+    MIN_STROKE                 = 0.4
+    OVERHANG_ANGLE_LIMIT       = 45.0
+    SurfaceGroup               = object
+    WallProfile                = object
+
+# PIL optional — used for real font metric extraction
 try:
     from PIL import Image, ImageDraw, ImageFont
     _PIL_OK = True
 except ImportError:
     _PIL_OK = False
 
-# ── Machine constants (mirror geometry_utils for self-contained use) ──────────
-NOZZLE_DIA       = 0.4    # mm
-LAYER_H_STD      = 0.20   # mm
-LAYER_H_ACC      = 0.12   # mm
-MIN_COUNTER_MM   = 0.8    # mm — smallest printable counter (hole inside letter)
-MIN_STROKE_MM    = 0.4    # mm — 1× nozzle
-MIN_LETTER_H_MM  = 3.0    # mm — absolute minimum
-REC_LETTER_H_MM  = 5.0    # mm — recommended
-SURFACE_ROUGHNESS_FACTOR = 0.5   # roughness = layer_h × this factor
 
-# Characters with FULLY ENCLOSED counters (voids the nozzle must navigate around)
-# Open counters (c, e, r, s) are excluded — they're open loops, not enclosed voids
-COUNTER_CHARS = set('aAbBdDgGopOPqQ068&@#')
-# Characters with very thin strokes even in bold fonts
-THIN_STROKE_CHARS = set('iIlL1!|:;.,\'"`')
-# Characters that are especially wide (may need span adjustment)
-WIDE_CHARS = set('mMwW%')
-
-# Font weight → estimated stroke-width-to-height ratio
-_WEIGHT_STROKE_RATIO = {
-    'black':      0.18,
-    'extrabold':  0.16,
-    'heavy':      0.17,
-    'bold':       0.13,
-    'semibold':   0.11,
-    'medium':     0.09,
-    'regular':    0.08,
-    'light':      0.05,
-    'thin':       0.03,
-    'ultralight': 0.02,
+# ── Glyph difficulty table ────────────────────────────────────────────────────
+# (min_height_mm, stroke_multiplier, notes)
+_GLYPH_DIFFICULTY: dict[str, tuple[float, float, str]] = {
+    'i': (3.5, 1.2, 'Thin vertical + dot — increase stroke, watch dot fill'),
+    'j': (3.5, 1.2, 'Same as i + descender'),
+    'l': (3.5, 1.1, 'Single stroke — clean but needs height'),
+    '1': (3.5, 1.1, 'Single stroke numeral'),
+    'I': (3.5, 1.0, 'Capital I — simplest glyph'),
+    'o': (4.0, 1.3, 'Full loop — nozzle must complete closed path'),
+    'O': (4.5, 1.3, 'Large loop — ensure wall clearance inside counter'),
+    'e': (4.0, 1.4, 'Loop + crossbar — most failure-prone lowercase'),
+    'E': (4.0, 1.2, 'Three crossbars — safe at 4mm+'),
+    'a': (4.0, 1.3, 'Enclosed bowl + arm'),
+    'g': (4.5, 1.4, 'Double-story g — avoid below 5mm'),
+    'B': (4.5, 1.3, 'Double bowl — check counter fill at small sizes'),
+    'R': (4.0, 1.2, 'Bowl + leg — good at 4mm+'),
+    'S': (4.0, 1.3, 'S-curve — staircase risk on slopes'),
+    's': (4.0, 1.4, 'Small s — most staircase-prone lowercase'),
+    'W': (5.0, 1.2, 'Wide diagonal — needs full 5mm on side surfaces'),
+    'w': (4.5, 1.2, 'Same — avoid on textured sides'),
+    'M': (5.0, 1.2, 'Wide with diagonals'),
+    'm': (4.5, 1.2, 'Three strokes — needs clean inter-stroke gap'),
+    'X': (4.0, 1.3, 'Crossed diagonals — staircase on sides'),
+    'x': (4.0, 1.3, 'Same'),
+    'K': (4.0, 1.2, 'Diagonal arms'),
+    'k': (4.0, 1.2, 'Diagonal arms'),
+    'Z': (4.0, 1.2, 'Diagonal midbar'),
+    'z': (4.0, 1.2, 'Same'),
+    'N': (4.5, 1.2, 'Diagonal stroke'),
+    'V': (4.0, 1.2, 'V-shape — needs full height'),
+    'v': (4.0, 1.2, 'Same'),
+    'A': (4.5, 1.2, 'Apex + crossbar'),
+    "'": (5.0, 1.5, "Apostrophe — single dot at small sizes, often unreadable below 6mm"),
+    '"': (5.0, 1.5, 'Quote marks — unreadable below 6mm'),
+    '.': (5.0, 2.0, 'Period — prints as blob below 5mm'),
+    ',': (5.0, 2.0, 'Comma — same as period'),
+    '!': (4.5, 1.5, 'Exclamation — bar + dot, dot unreliable below 5mm'),
+    '?': (5.0, 1.4, 'Question mark — bowl + dot'),
+    '@': (7.0, 1.5, 'At sign — never below 7mm on FDM'),
+    '#': (6.0, 1.3, 'Hash — four strokes, needs 6mm+'),
+    '%': (6.0, 1.4, 'Percent — two loops + diagonal'),
+    '&': (6.0, 1.4, 'Ampersand — complex shape'),
 }
+_DEFAULT_GLYPH = (MIN_LETTER_H, 1.0, 'Standard glyph')
 
-# Known good FDM fonts (verified clean at small sizes)
-FDM_RECOMMENDED_FONTS = [
-    'Roboto-Black',
-    'Roboto-Bold',
-    'RobotoCondensed-Bold',
-    'LiberationSans-Bold',
-    'DejaVuSans-Bold',
-    'FreeSans-Bold',
-    'Impact',
-    'Arial-Bold',
-]
+# Font weight → stroke ratio (stroke_width / cap_height) — used when PIL unavailable
+_WEIGHT_STROKE_RATIO = {
+    'black': 0.18, 'extrabold': 0.16, 'heavy': 0.17, 'bold': 0.13,
+    'semibold': 0.11, 'medium': 0.09, 'regular': 0.08,
+    'light': 0.05, 'thin': 0.03, 'ultralight': 0.02,
+}
 
 
 # ── Dataclasses ───────────────────────────────────────────────────────────────
 
 @dataclass
-class CharAnalysis:
+class GlyphAdvisory:
     char: str
+    min_height_mm: float
+    recommended_height_mm: float
     stroke_width_mm: float
-    has_counter: bool
-    counter_size_mm: float      # 0 if no counter
-    counter_printable: bool     # True if counter_size >= MIN_COUNTER_MM
-    printable: bool             # False if stroke too thin
-    warnings: List[str] = field(default_factory=list)
+    notes: str
+    flag: bool
+    measured_by_pil: bool = False   # True = stroke from real font measurement
 
 
 @dataclass
-class FontMetrics:
+class SlopeCompensation:
+    surface_angle_deg: float
+    height_scale: float
+    depth_scale: float
+    spacing_scale: float
+    staircase_risk: str     # NONE / LOW / MEDIUM / HIGH
+    advisory: str
+
+
+@dataclass
+class CurveCompensation:
+    is_cylindrical: bool
+    outer_radius_mm: float
+    arc_length_per_char_mm: float
+    recommended_char_count: int
+    wrap_direction: str             # HORIZONTAL / VERTICAL
+    depth_inner_mm: float
+    depth_outer_mm: float
+    advisory: str
+
+
+@dataclass
+class TextureCorrection:
+    surface_type: str
+    layer_line_depth_mm: float
+    depth_buffer_mm: float
+    recommended_depth_mm: float
+    stroke_buffer_mm: float
+    advisory: str
+
+
+@dataclass
+class FontProfile:
+    """Real font metrics — populated by PIL measurement layer."""
     font_name: str
     font_path: str
-    weight_class: str           # black / bold / regular / light / thin
-    stroke_ratio: float         # stroke_width / cap_height
+    weight_class: str
+    measured_stroke_ratio: float    # from real TTF, or heuristic
     is_serif: bool
     is_condensed: bool
-    is_monospace: bool
-    fdm_suitable: bool          # True if verified usable on FDM
-    fdm_suitability_reason: str
-
-
-@dataclass
-class SurfaceTextureProfile:
-    surface_type: str           # FLAT_TOP / FLAT_SIDE / CURVED
-    layer_height_mm: float
-    roughness_mm: float         # peak-to-valley surface texture
-    layer_orientation: str      # parallel / perpendicular / diagonal to text
-    texture_interference: str   # none / low / medium / high
-    min_depth_to_clear_texture: float   # depth needed to stand above texture noise
-    texture_notes: str
+    fdm_suitable: bool
+    fdm_note: str
+    pil_available: bool
 
 
 @dataclass
 class CutAdvisory:
-    recommended_depth_mm: float
-    min_depth_mm: float
-    max_safe_depth_mm: float
-    recommended_font_height_mm: float
-    min_font_height_mm: float
-    recommended_style: str      # deboss / emboss
-    stroke_compensation_mm: float   # add to stroke width for FDM spread
-    wall_depth_ratio: float     # recommended_depth / wall_thickness
-    legibility_score: float     # 0.0–1.0
-    rationale: str
-    warnings: List[str] = field(default_factory=list)
-    adjustments: List[str] = field(default_factory=list)
+    content: str
+    style: str
+    final_depth_mm: float
+    final_height_mm: float
+    final_stroke_mm: float
+    letter_spacing_mm: float
+    word_spacing_mm: float
+    orientation_deg: float
+    arc_wrap: bool
+    arc_radius_mm: float
+    layer_profile: str              # 'standard_0.20' | 'accuracy_0.12'
+    pass_count: int
+    feed_rate_advisory: str         # 'normal' | 'slow_20pct' | 'slow_40pct'
+    problem_glyphs: List[str]
+    warnings: List[str]
+    workarounds: List[str]
+    brief: str
 
 
 @dataclass
 class TypographyReport:
-    text: str
-    font_path: str
-    font_metrics: FontMetrics
-    font_height_mm: float
-    total_width_mm: float
-    char_analyses: List[CharAnalysis]
-    surface_texture: SurfaceTextureProfile
+    content: str
+    char_count: int
+    font_profile: Optional[FontProfile]
+    glyph_advisories: List[GlyphAdvisory]
+    slope_comp: SlopeCompensation
+    curve_comp: Optional[CurveCompensation]
+    texture_corr: TextureCorrection
     cut_advisory: CutAdvisory
-    problem_chars: List[str]
-    legibility_score: float     # 0.0–1.0 composite
-    text_summary: str           # for LLM injection
+    text_summary: str
 
 
-# ── Font metrics extraction ───────────────────────────────────────────────────
+# ── 1. Glyph analysis ─────────────────────────────────────────────────────────
 
-def _weight_from_name(font_path: str) -> Tuple[str, float]:
-    """Infer font weight class and stroke ratio from filename."""
-    name = pathlib.Path(font_path).stem.lower().replace('-', '').replace('_', '')
-    for weight, ratio in _WEIGHT_STROKE_RATIO.items():
-        if weight in name:
-            return weight, ratio
-    return 'regular', _WEIGHT_STROKE_RATIO['regular']
-
-
-def _measure_stroke_width_px(font, char='H', render_height=200) -> float:
-    """
-    Render a capital H at render_height px and measure the stroke width
-    by scanning the middle row for on/off transitions.
-    Returns stroke width as fraction of render height.
-    """
-    if not _PIL_OK:
-        return 0.10
-
-    try:
-        img = Image.new('L', (render_height * 2, render_height + 20), 0)
-        draw = ImageDraw.Draw(img)
-        draw.text((5, 5), char, fill=255, font=font)
-        arr = list(img.getdata())
-        W = img.width
-
-        mid_row = render_height // 2 + 5
-        row = arr[mid_row * W: (mid_row + 1) * W]
-
-        threshold = 64
-        in_stroke = False
-        strokes = []
-        start = 0
-        for i, px in enumerate(row):
-            if px > threshold and not in_stroke:
-                in_stroke = True
-                start = i
-            elif px <= threshold and in_stroke:
-                in_stroke = False
-                strokes.append(i - start)
-        if in_stroke:
-            strokes.append(len(row) - start)
-
-        if strokes:
-            # Use the thinnest stroke found (for H it's the crossbar or vertical)
-            return min(strokes) / render_height
-        return 0.10
-    except Exception:
-        return 0.10
-
-
-def _measure_counter_size_px(font, char='o', render_height=200) -> float:
-    """
-    Render a lowercase 'o' and estimate the counter size as a fraction of height.
-    Looks for the largest enclosed dark region.
-    """
-    if not _PIL_OK:
-        return 0.35
-
-    try:
-        img = Image.new('L', (render_height * 2, render_height + 20), 0)
-        draw = ImageDraw.Draw(img)
-        draw.text((5, 5), char, fill=255, font=font)
-        arr = list(img.getdata())
-        W = img.width
-
-        # Find the bounding box of white pixels
-        white_rows = [r for r in range(img.height)
-                      if any(arr[r * W + c] > 64 for c in range(W))]
-        if not white_rows:
-            return 0.0
-        char_top = white_rows[0]
-        char_bot = white_rows[-1]
-        char_h = char_bot - char_top
-
-        # In the middle of the character, scan for a dark gap (the counter)
-        mid = (char_top + char_bot) // 2
-        row = arr[mid * W: (mid + 1) * W]
-        threshold = 64
-
-        # Find dark runs that are surrounded by white (= counter)
-        in_dark = False
-        dark_runs = []
-        start = 0
-        prev_had_white = False
-        for i, px in enumerate(row):
-            if px > threshold:
-                prev_had_white = True
-                if in_dark:
-                    dark_runs.append((start, i))
-                    in_dark = False
-            else:
-                if prev_had_white and not in_dark:
-                    in_dark = True
-                    start = i
-
-        enclosed = [e - s for s, e in dark_runs if e - s > 2]
-        if enclosed:
-            return max(enclosed) / render_height
-        return 0.0
-    except Exception:
-        return 0.35
-
-
-def analyze_font(font_path: str, font_height_mm: float) -> FontMetrics:
-    """Extract real metrics from a TTF font file using PIL."""
-    name = pathlib.Path(font_path).stem
-    name_lower = name.lower()
-    weight, stroke_ratio = _weight_from_name(font_path)
-
-    is_serif = any(w in name_lower for w in ('serif', 'times', 'georgia', 'free'))
-    is_condensed = any(w in name_lower for w in ('condensed', 'narrow', 'cond'))
-    is_monospace = any(w in name_lower for w in ('mono', 'courier', 'code', 'fixed'))
-    fdm_suitable = any(r in name for r in FDM_RECOMMENDED_FONTS)
-
-    # Try to measure actual stroke ratio from the font
-    if _PIL_OK and pathlib.Path(font_path).exists():
-        try:
-            render_h = 200
-            pil_font = ImageFont.truetype(font_path, render_h)
-            measured = _measure_stroke_width_px(pil_font, 'H', render_h)
-            if 0.03 < measured < 0.40:
-                stroke_ratio = measured
-        except Exception:
-            pass
-
-    suitability_reasons = []
-    if 'black' in name_lower or 'heavy' in name_lower:
-        suitability_reasons.append('thick strokes — excellent FDM readability')
-        fdm_suitable = True
-    elif 'bold' in name_lower:
-        suitability_reasons.append('bold weight — good FDM readability')
-        fdm_suitable = True
-    elif 'light' in name_lower or 'thin' in name_lower:
-        suitability_reasons.append('thin strokes — will lose definition at <8mm on FDM')
-        fdm_suitable = False
-    elif is_serif:
-        suitability_reasons.append('serif font — serifs need ≥7mm to survive FDM')
-        fdm_suitable = fdm_suitable and font_height_mm >= 7.0
-    else:
-        suitability_reasons.append('standard weight — acceptable at ≥5mm')
-
-    return FontMetrics(
-        font_name=name,
-        font_path=font_path,
-        weight_class=weight,
-        stroke_ratio=stroke_ratio,
-        is_serif=is_serif,
-        is_condensed=is_condensed,
-        is_monospace=is_monospace,
-        fdm_suitable=fdm_suitable,
-        fdm_suitability_reason='; '.join(suitability_reasons) or 'unknown',
-    )
-
-
-# ── Per-character analysis ────────────────────────────────────────────────────
-
-def analyze_characters(
-    text: str,
-    font_path: str,
-    font_height_mm: float,
-) -> List[CharAnalysis]:
-    """Analyze each character for printability at the given font height."""
-    results = []
-    name_lower = pathlib.Path(font_path).stem.lower()
-    weight, stroke_ratio = _weight_from_name(font_path)
-
-    # Try to get real metrics via PIL
-    pil_font = None
-    if _PIL_OK and pathlib.Path(font_path).exists():
-        try:
-            pil_font = ImageFont.truetype(font_path, 200)
-        except Exception:
-            pass
-
-    for ch in text:
-        if ch in ' \t\n':
+def analyse_text(content: str, requested_height_mm: float = REC_LETTER_H) -> List[GlyphAdvisory]:
+    advisories = []
+    seen = set()
+    for ch in content:
+        if ch in seen or ch == ' ':
             continue
-
-        stroke_mm = font_height_mm * stroke_ratio
-        has_counter = ch in COUNTER_CHARS
-        counter_mm = 0.0
-
-        # Thin stroke characters use a reduced ratio
-        if ch in THIN_STROKE_CHARS:
-            stroke_mm = font_height_mm * min(stroke_ratio, 0.06)
-
-        # Measure actual counter size for counter chars
-        if has_counter and pil_font:
-            frac = _measure_counter_size_px(pil_font, ch, 200)
-            counter_mm = font_height_mm * frac
-        elif has_counter:
-            # Heuristic: counter is ~35% of height for round letters
-            counter_mm = font_height_mm * 0.35
-
-        counter_printable = (not has_counter) or (counter_mm >= MIN_COUNTER_MM)
-        printable = stroke_mm >= MIN_STROKE_MM
-
-        warnings = []
-        if stroke_mm < MIN_STROKE_MM:
-            warnings.append(
-                f"'{ch}': stroke {stroke_mm:.2f}mm < nozzle {MIN_STROKE_MM}mm — "
-                f"will be lost. Increase font size to ≥{MIN_STROKE_MM/stroke_ratio:.1f}mm."
-            )
-        elif stroke_mm < MIN_STROKE_MM * 1.5:
-            warnings.append(
-                f"'{ch}': stroke {stroke_mm:.2f}mm is borderline — "
-                f"bold font or ≥{MIN_STROKE_MM*1.5/stroke_ratio:.1f}mm recommended."
-            )
-        if has_counter and not counter_printable and counter_mm > 0:
-            needed = MIN_COUNTER_MM / max(counter_mm / font_height_mm, 0.001)
-            if needed < 200:   # only warn if the number is sensible
-                warnings.append(
-                    f"'{ch}': counter {counter_mm:.2f}mm < minimum {MIN_COUNTER_MM}mm — "
-                    f"interior void may collapse. Try font height ≥{needed:.1f}mm or bold font."
-                )
-
-        results.append(CharAnalysis(
+        seen.add(ch)
+        min_h, stroke_mult, notes = _GLYPH_DIFFICULTY.get(ch, _DEFAULT_GLYPH)
+        rec_h = max(min_h, requested_height_mm)
+        stroke = round(NOZZLE_DIA * stroke_mult, 2)
+        flag = requested_height_mm < min_h
+        advisories.append(GlyphAdvisory(
             char=ch,
-            stroke_width_mm=round(stroke_mm, 3),
-            has_counter=has_counter,
-            counter_size_mm=round(counter_mm, 3),
-            counter_printable=counter_printable,
-            printable=printable,
-            warnings=warnings,
+            min_height_mm=min_h,
+            recommended_height_mm=rec_h,
+            stroke_width_mm=stroke,
+            notes=notes,
+            flag=flag,
         ))
+    return advisories
 
-    return results
 
+# ── 2. Slope compensation ─────────────────────────────────────────────────────
 
-# ── Surface texture analysis ──────────────────────────────────────────────────
+def slope_projection(surface_angle_deg: float) -> SlopeCompensation:
+    rad = math.radians(surface_angle_deg)
+    height_scale  = round(1.0 / max(math.cos(rad), 0.1), 3) if surface_angle_deg >= 1 else 1.0
+    depth_scale   = round(1.0 / max(math.cos(rad), 0.1), 3)
+    spacing_scale = round(1.0 / max(math.cos(rad), 0.1), 3)
 
-def analyze_surface_texture(
-    surface_type: str,
-    layer_height_mm: float = LAYER_H_STD,
-) -> SurfaceTextureProfile:
-    """
-    Determine how FDM layer lines will interact with engraved letters.
-
-    surface_type: 'FLAT_TOP' | 'FLAT_BOTTOM' | 'FLAT_SIDE' | 'CURVED_CONVEX' | other
-    """
-    roughness = layer_height_mm * SURFACE_ROUGHNESS_FACTOR
-
-    if surface_type in ('FLAT_TOP', 'FLAT_BOTTOM'):
-        # Layer lines run horizontally — mostly perpendicular to vertical letter strokes
-        orientation = 'perpendicular'
-        interference = 'low'
-        texture_notes = (
-            'Layer lines run horizontal — perpendicular to vertical letter strokes. '
-            'Minimal interference. Horizontal strokes (crossbar of H, T) may show '
-            'slight staircase at small sizes.'
+    if surface_angle_deg < 10:
+        staircase = 'NONE'
+        advisory = 'Surface nearly horizontal. No staircase. Standard parameters apply.'
+    elif surface_angle_deg < 20:
+        staircase = 'LOW'
+        advisory = (
+            f'Slope {surface_angle_deg:.0f}°. Minor staircase on diagonal strokes. '
+            f'Scale height ×{height_scale:.2f}, depth ×{depth_scale:.2f}. '
+            'Recommend sans-serif bold.'
         )
-    elif 'SIDE' in surface_type:
-        # Side surface — layer lines stack vertically during print
-        # Text on a side surface: letters are cut across horizontal layer boundaries
-        orientation = 'parallel'
-        interference = 'medium'
-        texture_notes = (
-            'Side surface: layer lines run horizontally across the face. '
-            'They cross through letter strokes creating visible ridges inside cuts. '
-            'Depth must exceed layer height by 2× to read clearly. '
-            'Bold/black fonts and ≥1.5mm depth strongly recommended.'
+    elif surface_angle_deg < 35:
+        staircase = 'MEDIUM'
+        advisory = (
+            f'Slope {surface_angle_deg:.0f}°. Visible staircase on curves/diagonals. '
+            f'Scale height ×{height_scale:.2f}, depth ×{depth_scale:.2f}, '
+            f'spacing ×{spacing_scale:.2f}. '
+            'Avoid S, s, O, o, e, g. Use block capitals. Slow feed 20%.'
         )
-    elif 'CURVED' in surface_type:
-        orientation = 'diagonal'
-        interference = 'medium'
-        texture_notes = (
-            'Curved surface: layer lines are concentric arcs. '
-            'Letters near the apex are cleanest; text near edges may show '
-            'increasing staircase. Wrap text along the curve axis for best results.'
+    elif surface_angle_deg < OVERHANG_ANGLE_LIMIT:
+        staircase = 'HIGH'
+        advisory = (
+            f'Slope {surface_angle_deg:.0f}°. Severe staircase. '
+            f'Height ×{height_scale:.2f}, depth ×{depth_scale:.2f}. '
+            'Only straight-stroke letters (I, H, T, L, E, F) will read cleanly. '
+            'Slow feed 40%. Consider W1 reorient.'
         )
     else:
-        orientation = 'unknown'
-        interference = 'medium'
-        texture_notes = 'Surface type unknown — assume medium texture interference.'
+        staircase = 'HIGH'
+        advisory = (
+            f'Slope {surface_angle_deg:.0f}° exceeds FDM limit ({OVERHANG_ANGLE_LIMIT}°). '
+            'Engraving will fail. Apply W1 (reorient) or W8 (SLA).'
+        )
 
-    # Minimum depth to stand clearly above texture noise
-    if interference == 'low':
-        min_depth = roughness * 3.0    # 3× roughness
-    elif interference == 'medium':
-        min_depth = roughness * 5.0    # 5× roughness
-    else:
-        min_depth = roughness * 8.0    # high interference
-
-    return SurfaceTextureProfile(
-        surface_type=surface_type,
-        layer_height_mm=layer_height_mm,
-        roughness_mm=round(roughness, 3),
-        layer_orientation=orientation,
-        texture_interference=interference,
-        min_depth_to_clear_texture=round(min_depth, 2),
-        texture_notes=texture_notes,
+    return SlopeCompensation(
+        surface_angle_deg=surface_angle_deg,
+        height_scale=height_scale,
+        depth_scale=depth_scale,
+        spacing_scale=spacing_scale,
+        staircase_risk=staircase,
+        advisory=advisory,
     )
 
 
-# ── Adaptive cut advisor ──────────────────────────────────────────────────────
+# ── 3. Curve compensation ─────────────────────────────────────────────────────
 
-def compute_cut_advisory(
-    text: str,
-    font_metrics: FontMetrics,
-    font_height_mm: float,
-    char_analyses: List[CharAnalysis],
-    surface_texture: SurfaceTextureProfile,
-    wall_thickness_mm: float,
-    outer_radius_mm: float = 0.0,   # 0 = flat surface
-) -> CutAdvisory:
-    """
-    Given everything we know about the font, the letters, and the surface,
-    recommend the optimal cut parameters.
-    """
-    warnings = []
-    adjustments = []
-
-    # ── Depth calculation ────────────────────────────────────────────────────
-    # Floor: must clear surface texture
-    depth_floor = surface_texture.min_depth_to_clear_texture
-    depth_floor = max(depth_floor, 0.5)     # hard minimum
-
-    # Ceiling: don't exceed 30% of wall thickness
-    depth_ceiling = wall_thickness_mm * 0.30
-    depth_ceiling = min(depth_ceiling, 2.5)  # cap at 2.5mm — diminishing returns
-
-    # Curved surface penalty: reduce by 10% (curvature spreads the cut)
-    if outer_radius_mm > 0 and outer_radius_mm < 50:
-        depth_ceiling *= 0.90
-        warnings.append(
-            f'Curved surface (r={outer_radius_mm:.1f}mm): depth ceiling reduced by 10%. '
-            f'Curvature spreads cut geometry — shallower reads cleaner.'
+def curve_projection(
+    outer_radius_mm: float,
+    content: str,
+    char_height_mm: float,
+    is_cylindrical: bool = True,
+) -> CurveCompensation:
+    if not is_cylindrical or outer_radius_mm <= 0:
+        return CurveCompensation(
+            is_cylindrical=False, outer_radius_mm=outer_radius_mm,
+            arc_length_per_char_mm=0, recommended_char_count=len(content),
+            wrap_direction='HORIZONTAL',
+            depth_inner_mm=MIN_ENGRAVE_DEPTH_READABLE,
+            depth_outer_mm=MIN_ENGRAVE_DEPTH_READABLE,
+            advisory='Surface is not cylindrical. Standard flat projection applies.'
         )
 
-    # Target depth: start at 1.9mm (known good from Camood reference), clamp to range
-    depth_target = 1.9
-    depth_target = max(depth_floor, min(depth_target, depth_ceiling))
+    char_width_mm  = char_height_mm * 0.6
+    spacing_mm     = char_height_mm * 0.15
+    arc_per_char   = char_width_mm + spacing_mm
 
-    if depth_target < 0.8:
-        warnings.append(
-            f'Wall only {wall_thickness_mm:.1f}mm thick — max safe depth '
-            f'{depth_ceiling:.2f}mm. Text may be faint. Consider reorienting print.'
+    usable_arc_mm  = 2 * math.pi * outer_radius_mm * (270.0 / 360.0)
+    max_chars      = int(usable_arc_mm / arc_per_char)
+
+    half_w  = char_width_mm / 2
+    sagitta = outer_radius_mm - math.sqrt(max(0, outer_radius_mm**2 - half_w**2))
+
+    depth_outer = round(MIN_ENGRAVE_DEPTH_READABLE + sagitta, 2)
+    depth_inner = round(MIN_ENGRAVE_DEPTH_READABLE, 2)
+
+    wrap = 'HORIZONTAL' if outer_radius_mm >= 20 and len(content) <= max_chars else 'VERTICAL'
+    too_many = len(content) > max_chars
+
+    parts = [
+        f'Cylindrical. Outer radius: {outer_radius_mm:.1f}mm.',
+        f'Arc/char: {arc_per_char:.1f}mm. Max chars in 270°: {max_chars}.',
+    ]
+    if too_many:
+        parts.append(
+            f'"{content}" has {len(content)} chars — exceeds {max_chars}. '
+            'Abbreviate or reduce font size.'
         )
-    if depth_floor > depth_target:
-        warnings.append(
-            f'Surface texture ({surface_texture.texture_interference} interference) '
-            f'requires ≥{depth_floor:.2f}mm depth to read. '
-            f'Wall limits depth to {depth_ceiling:.2f}mm — may be marginal.'
-        )
-
-    # ── Font height check ────────────────────────────────────────────────────
-    min_font_h = MIN_LETTER_H_MM
-    rec_font_h = font_height_mm
-
-    # Serif fonts need more height to preserve details
-    if font_metrics.is_serif:
-        min_font_h = max(min_font_h, 7.0)
-        if font_height_mm < 7.0:
-            warnings.append(
-                f'Serif font at {font_height_mm}mm — serifs will collapse below 7mm on FDM. '
-                f'Switch to bold sans-serif (Roboto Black, DejaVuSans-Bold) or increase to 7mm.'
-            )
-            adjustments.append(f'Increase font height to 7mm OR switch to bold sans-serif')
-
-    if not font_metrics.fdm_suitable:
-        adjustments.append(
-            f'Replace {font_metrics.font_name} with Roboto-Black or DejaVuSans-Bold '
-            f'({font_metrics.fdm_suitability_reason})'
-        )
-
-    # ── Stroke compensation ──────────────────────────────────────────────────
-    # FDM nozzle slightly overextrudes on first layer and into recesses.
-    # Compensate by not shrinking strokes — 0mm compensation unless strokes are borderline.
-    min_stroke = min((c.stroke_width_mm for c in char_analyses), default=0.4)
-    stroke_comp = 0.0
-    if min_stroke < NOZZLE_DIA * 1.5:
-        stroke_comp = NOZZLE_DIA * 0.5
-        adjustments.append(
-            f'Stroke compensation +{stroke_comp:.2f}mm — thinnest stroke '
-            f'({min_stroke:.2f}mm) is close to nozzle dia. Use bold font or increase size.'
-        )
-
-    # ── Problem characters ───────────────────────────────────────────────────
-    problem_chars = [c for c in char_analyses if c.warnings]
-    if problem_chars:
-        for pc in problem_chars:
-            for w in pc.warnings:
-                warnings.append(w)
-
-    # ── Style recommendation ─────────────────────────────────────────────────
-    # Deboss (inward carve) is almost always better on FDM side walls
-    style = 'deboss'
-    if surface_texture.surface_type in ('FLAT_TOP',):
-        style = 'deboss'  # still deboss — emboss on flat top needs supports
-
-    # ── Legibility score ─────────────────────────────────────────────────────
-    score = 1.0
-
-    # Penalize for font not being FDM-suited
-    if not font_metrics.fdm_suitable:
-        score -= 0.25
-    # Penalize for depth being too shallow relative to floor
-    if depth_target < depth_floor * 1.2:
-        score -= 0.20
-    # Penalize for problem characters
-    n_prob = len(problem_chars)
-    score -= min(n_prob * 0.05, 0.25)
-    # Penalize for texture interference
-    if surface_texture.texture_interference == 'high':
-        score -= 0.15
-    elif surface_texture.texture_interference == 'medium':
-        score -= 0.05
-    # Penalize for thin wall
-    if wall_thickness_mm < 3.0:
-        score -= 0.20
-
-    score = round(max(0.0, min(1.0, score)), 2)
-
-    rationale = (
-        f'Wall {wall_thickness_mm:.1f}mm → max safe depth {depth_ceiling:.2f}mm (30% rule). '
-        f'Surface texture ({surface_texture.texture_interference}) needs ≥{depth_floor:.2f}mm to clear layer lines. '
-        f'Recommended: {depth_target:.2f}mm depth ({depth_target/wall_thickness_mm*100:.0f}% of wall). '
-        f'Font {font_metrics.font_name} ({font_metrics.weight_class}) — '
-        f'stroke ratio {font_metrics.stroke_ratio:.2f} → '
-        f'{font_height_mm * font_metrics.stroke_ratio:.2f}mm strokes at {font_height_mm}mm height.'
+    parts.append(
+        f'Sagitta: {sagitta:.3f}mm. Depth center: {depth_outer:.2f}mm / edge: {depth_inner:.2f}mm. '
+        f'Wrap: {wrap}.'
     )
 
-    return CutAdvisory(
-        recommended_depth_mm=round(depth_target, 2),
-        min_depth_mm=round(depth_floor, 2),
-        max_safe_depth_mm=round(depth_ceiling, 2),
-        recommended_font_height_mm=round(rec_font_h, 1),
-        min_font_height_mm=round(min_font_h, 1),
-        recommended_style=style,
-        stroke_compensation_mm=round(stroke_comp, 2),
-        wall_depth_ratio=round(depth_target / max(wall_thickness_mm, 0.1), 3),
-        legibility_score=score,
-        rationale=rationale,
-        warnings=warnings,
-        adjustments=adjustments,
+    return CurveCompensation(
+        is_cylindrical=True, outer_radius_mm=outer_radius_mm,
+        arc_length_per_char_mm=round(arc_per_char, 2),
+        recommended_char_count=max_chars, wrap_direction=wrap,
+        depth_inner_mm=depth_inner, depth_outer_mm=depth_outer,
+        advisory=' '.join(parts),
     )
 
 
-# ── Full report ───────────────────────────────────────────────────────────────
+# ── 4. Texture correction ─────────────────────────────────────────────────────
 
-def full_typography_report(
-    text: str,
-    font_path: str,
-    font_height_mm: float,
-    surface_type: str,
-    wall_thickness_mm: float,
-    outer_radius_mm: float = 0.0,
+def texture_correction(
+    surface_angle_deg: float,
     layer_height_mm: float = LAYER_H_STD,
-) -> TypographyReport:
-    """
-    Full typography analysis for a given text + font + surface combination.
-    Returns a TypographyReport with LLM-ready text_summary.
-    """
-    # Resolve font path
-    font_path = _resolve_font(font_path)
+    surface_label: str = 'FLAT_TOP',
+    infill_pct: int = 20,
+    wall_count: int = 3,
+) -> TextureCorrection:
+    if surface_label == 'FLAT_TOP':
+        ridge_h = layer_height_mm * 0.20
+        stype = 'LAYER_LINES_LIGHT'
+    elif surface_label == 'FLAT_SIDE':
+        ridge_h = layer_height_mm * 0.55
+        stype = 'LAYER_LINES'
+    elif surface_label == 'FLAT_BOTTOM':
+        ridge_h = layer_height_mm * 0.30
+        stype = 'LAYER_LINES_LIGHT'
+    else:
+        ridge_h = layer_height_mm * 0.60
+        stype = 'ROUGH'
 
-    font_metrics   = analyze_font(font_path, font_height_mm)
-    char_analyses  = analyze_characters(text, font_path, font_height_mm)
-    surface_texture = analyze_surface_texture(surface_type, layer_height_mm)
-    cut_advisory   = compute_cut_advisory(
-        text, font_metrics, font_height_mm, char_analyses,
-        surface_texture, wall_thickness_mm, outer_radius_mm,
+    infill_buffer = max(0.0, (infill_pct - 40) / 100 * 0.1)
+    wall_buffer   = 0.20 if wall_count < 2 else (0.10 if wall_count < 4 else 0.0)
+    depth_buffer  = round(ridge_h + infill_buffer + wall_buffer, 3)
+    rec_depth     = round(MIN_ENGRAVE_DEPTH_READABLE + depth_buffer, 2)
+    stroke_buffer = NOZZLE_DIA * 0.5 if surface_label == 'FLAT_SIDE' else 0.0
+
+    parts = [
+        f'Surface: {stype}. Layer ridge: {ridge_h:.3f}mm at {layer_height_mm}mm layer height.',
+        f'Depth buffer (ridge+infill+wall): {depth_buffer:.3f}mm. Min depth: {rec_depth:.2f}mm.',
+    ]
+    if stroke_buffer > 0:
+        parts.append(f'Stroke buffer: +{stroke_buffer:.2f}mm. Min stroke: {MIN_STROKE+stroke_buffer:.2f}mm.')
+    if infill_buffer > 0:
+        parts.append(f'Infill ghosting ({infill_pct}%): +{infill_buffer:.3f}mm.')
+    if wall_buffer > 0:
+        parts.append(f'Low wall count ({wall_count}): +{wall_buffer:.2f}mm flex compensation.')
+
+    return TextureCorrection(
+        surface_type=stype, layer_line_depth_mm=round(ridge_h, 3),
+        depth_buffer_mm=depth_buffer, recommended_depth_mm=rec_depth,
+        stroke_buffer_mm=round(stroke_buffer, 2), advisory=' '.join(parts),
     )
 
-    # Estimate total text width
-    total_width_mm = _estimate_text_width(text, font_path, font_height_mm)
-    problem_chars  = [c.char for c in char_analyses if c.warnings]
-    legibility_score = cut_advisory.legibility_score
 
-    text_summary = _build_summary(
-        text, font_metrics, font_height_mm, total_width_mm,
-        char_analyses, surface_texture, cut_advisory, problem_chars,
-    )
-
-    return TypographyReport(
-        text=text,
-        font_path=font_path,
-        font_metrics=font_metrics,
-        font_height_mm=font_height_mm,
-        total_width_mm=total_width_mm,
-        char_analyses=char_analyses,
-        surface_texture=surface_texture,
-        cut_advisory=cut_advisory,
-        problem_chars=problem_chars,
-        legibility_score=legibility_score,
-        text_summary=text_summary,
-    )
-
+# ── 5. PIL font measurement layer ─────────────────────────────────────────────
 
 def _resolve_font(font_path: str) -> str:
-    """Return font_path as-is if it exists, otherwise search common locations."""
     if pathlib.Path(font_path).exists():
         return font_path
-    search_dirs = [
+    for d in [
         pathlib.Path('/usr/share/fonts/truetype/roboto/unhinted/RobotoTTF'),
         pathlib.Path('/usr/share/fonts/truetype/dejavu'),
         pathlib.Path('/usr/share/fonts/truetype/liberation'),
         pathlib.Path('/usr/share/fonts/truetype/freefont'),
-        pathlib.Path('/usr/share/fonts/truetype'),
-    ]
-    name = pathlib.Path(font_path).name
-    for d in search_dirs:
-        candidate = d / name
-        if candidate.exists():
-            return str(candidate)
-    # Return original path and let PIL fail gracefully
+    ]:
+        c = d / pathlib.Path(font_path).name
+        if c.exists():
+            return str(c)
     return font_path
 
 
-def _estimate_text_width(text: str, font_path: str, font_height_mm: float) -> float:
-    """Estimate rendered text width in mm using PIL."""
-    if not _PIL_OK or not pathlib.Path(font_path).exists():
-        return len(text) * font_height_mm * 0.6   # rough heuristic
-
+def _measure_stroke_ratio_pil(font_path: str, render_h: int = 200) -> float:
+    """Render 'H' at render_h px and measure thinnest stroke as fraction of height."""
     try:
-        render_h = 200
         pil_font = ImageFont.truetype(font_path, render_h)
-        bbox = pil_font.getbbox(text)
-        if bbox:
-            pixel_width = bbox[2] - bbox[0]
-            return round(pixel_width / render_h * font_height_mm, 1)
+        img = Image.new('L', (render_h * 2, render_h + 20), 0)
+        ImageDraw.Draw(img).text((5, 5), 'H', fill=255, font=pil_font)
+        W = img.width
+        arr = list(img.getdata())
+        mid = render_h // 2 + 5
+        row = arr[mid * W: (mid + 1) * W]
+        in_s, start, strokes = False, 0, []
+        for i, px in enumerate(row):
+            if px > 64 and not in_s:
+                in_s, start = True, i
+            elif px <= 64 and in_s:
+                in_s = False
+                strokes.append(i - start)
+        if in_s:
+            strokes.append(len(row) - start)
+        if strokes:
+            ratio = min(strokes) / render_h
+            if 0.03 < ratio < 0.40:
+                return ratio
     except Exception:
         pass
-    return len(text) * font_height_mm * 0.6
+    return 0.0
 
 
-def _build_summary(
-    text, font_metrics, font_height_mm, total_width_mm,
-    char_analyses, surface_texture, cut_advisory, problem_chars,
-) -> str:
-    adv = cut_advisory
-    fm  = font_metrics
-    st  = surface_texture
+def _build_font_profile(font_path: str, font_height_mm: float) -> Optional[FontProfile]:
+    """Build FontProfile using PIL if available, else return None."""
+    if not font_path:
+        return None
+
+    font_path = _resolve_font(font_path)
+    name      = pathlib.Path(font_path).stem
+    nl        = name.lower().replace('-', '').replace('_', '')
+
+    weight = 'regular'
+    for w in _WEIGHT_STROKE_RATIO:
+        if w in nl:
+            weight = w
+            break
+
+    is_serif     = any(w in nl for w in ('serif', 'times', 'georgia', 'free'))
+    is_condensed = any(w in nl for w in ('condensed', 'narrow', 'cond'))
+    fdm_suitable = any(w in nl for w in ('black', 'heavy', 'extrabold', 'bold'))
+
+    if is_serif:
+        fdm_note = f'Serif font — needs ≥7mm to preserve serifs on FDM'
+        fdm_suitable = fdm_suitable and font_height_mm >= 7.0
+    elif any(w in nl for w in ('light', 'thin', 'ultralight')):
+        fdm_note = f'Light/thin weight — strokes will be lost at <8mm'
+        fdm_suitable = False
+    else:
+        fdm_note = f'Sans-serif {"bold/black" if fdm_suitable else "regular"} — '
+        fdm_note += 'FDM suitable' if fdm_suitable else 'acceptable at ≥5mm'
+
+    # Measure real stroke ratio if PIL available
+    measured = 0.0
+    pil_ok = False
+    if _PIL_OK and pathlib.Path(font_path).exists():
+        measured = _measure_stroke_ratio_pil(font_path)
+        pil_ok = measured > 0
+
+    stroke_ratio = measured if pil_ok else _WEIGHT_STROKE_RATIO.get(weight, 0.09)
+
+    return FontProfile(
+        font_name=name, font_path=font_path, weight_class=weight,
+        measured_stroke_ratio=stroke_ratio,
+        is_serif=is_serif, is_condensed=is_condensed,
+        fdm_suitable=fdm_suitable, fdm_note=fdm_note,
+        pil_available=pil_ok,
+    )
+
+
+def _apply_font_to_glyphs(
+    glyphs: List[GlyphAdvisory],
+    font_profile: FontProfile,
+    font_height_mm: float,
+) -> List[GlyphAdvisory]:
+    """
+    Override glyph stroke_width_mm with real measured values from PIL.
+    This supersedes the table multipliers for accurate per-font advice.
+    """
+    if not font_profile or not font_profile.pil_available:
+        return glyphs
+
+    ratio = font_profile.measured_stroke_ratio
+    updated = []
+    for g in glyphs:
+        _, table_mult, _ = _GLYPH_DIFFICULTY.get(g.char, _DEFAULT_GLYPH)
+        # Use measured ratio × table multiplier (thin chars still get their penalty)
+        real_stroke = round(font_height_mm * ratio * table_mult, 3)
+        updated.append(GlyphAdvisory(
+            char=g.char,
+            min_height_mm=g.min_height_mm,
+            recommended_height_mm=g.recommended_height_mm,
+            stroke_width_mm=real_stroke,
+            notes=g.notes,
+            flag=g.flag or (real_stroke < MIN_STROKE),
+            measured_by_pil=True,
+        ))
+    return updated
+
+
+# ── 6. Final cut advisory ─────────────────────────────────────────────────────
+
+def build_advisory(
+    content: str,
+    surface_group,
+    wall_profile,
+    requested_height_mm: float = REC_LETTER_H,
+    requested_depth_mm: float  = MIN_ENGRAVE_DEPTH_READABLE,
+    requested_stroke_mm: float = MIN_STROKE,
+    style: str = 'deboss',
+    layer_height_mm: float = LAYER_H_STD,
+    infill_pct: int = 20,
+    wall_count: int = 3,
+    font_profile: Optional[FontProfile] = None,
+) -> CutAdvisory:
+    glyphs = analyse_text(content, requested_height_mm)
+    if font_profile:
+        glyphs = _apply_font_to_glyphs(glyphs, font_profile, requested_height_mm)
+
+    flagged          = [g for g in glyphs if g.flag]
+    max_stroke_needed = max((g.stroke_width_mm for g in glyphs), default=MIN_STROKE)
+    max_min_height   = max((g.min_height_mm for g in glyphs), default=MIN_LETTER_H)
+
+    angle   = getattr(surface_group, 'angle_from_vertical', 0.0)
+    label   = getattr(surface_group, 'label', 'FLAT_TOP')
+    slope   = slope_projection(angle)
+
+    is_cyl  = getattr(wall_profile, 'is_cylindrical', False) if wall_profile else False
+    outer_r = getattr(wall_profile, 'outer_r_max', 0.0) if wall_profile else 0.0
+    curve   = curve_projection(outer_r, content, requested_height_mm, is_cyl)
+
+    texture = texture_correction(angle, layer_height_mm, label, infill_pct, wall_count)
+
+    # Height
+    base_height  = max(requested_height_mm, max_min_height)
+    final_height = round(base_height * slope.height_scale, 2)
+    final_height = max(final_height, MIN_LETTER_H)
+
+    # Depth
+    base_depth  = max(requested_depth_mm, texture.recommended_depth_mm)
+    final_depth = round(base_depth * slope.depth_scale, 2)
+    if wall_profile and hasattr(wall_profile, 'prime_zone_wall'):
+        max_safe = wall_profile.prime_zone_wall * 0.50
+        if final_depth > max_safe:
+            final_depth = round(max_safe, 2)
+
+    # Stroke — use PIL-measured value if available, else table
+    final_stroke = round(
+        max(requested_stroke_mm, max_stroke_needed, MIN_STROKE) + texture.stroke_buffer_mm,
+        2,
+    )
+
+    # If font profile says font is unsuitable, add warning
+    warnings   = []
+    workarounds = []
+
+    if font_profile and not font_profile.fdm_suitable:
+        warnings.append(
+            f'Font {font_profile.font_name} not ideal for FDM: {font_profile.fdm_note}. '
+            f'Recommend Roboto-Black or DejaVuSans-Bold.'
+        )
+
+    for g in flagged:
+        warnings.append(
+            f"Glyph '{g.char}' needs ≥{g.min_height_mm}mm "
+            f"(requested {requested_height_mm}mm): {g.notes}"
+            + (' [PIL-measured]' if g.measured_by_pil else '')
+        )
+
+    if slope.staircase_risk in ('MEDIUM', 'HIGH'):
+        warnings.append(f'Staircase {slope.staircase_risk} at {angle:.0f}°. {slope.advisory}')
+        if slope.staircase_risk == 'HIGH':
+            workarounds.append('W1 — Reorient model so target surface faces up')
+
+    if is_cyl and len(content) > curve.recommended_char_count:
+        warnings.append(
+            f'Text too long for arc: {len(content)} chars, max {curve.recommended_char_count}. '
+            'Abbreviate or reduce font size.'
+        )
+        workarounds.append('W5 — Line-wrap text along arc')
+
+    if wall_profile and hasattr(wall_profile, 'prime_zone_wall'):
+        max_safe = wall_profile.prime_zone_wall * 0.50
+        if requested_depth_mm > max_safe:
+            warnings.append(
+                f'Requested depth {requested_depth_mm}mm exceeds 50% of wall '
+                f'({wall_profile.prime_zone_wall}mm). Capped at {max_safe:.2f}mm.'
+            )
+
+    letter_spacing = round(final_height * 0.12 * slope.spacing_scale, 2)
+    word_spacing   = round(final_height * 0.60 * slope.spacing_scale, 2)
+    arc_wrap       = is_cyl and outer_r > 0
+    layer_profile  = 'accuracy_0.12' if final_depth <= 0.6 else 'standard_0.20'
+    pass_count     = 2 if final_stroke >= NOZZLE_DIA * 1.5 else 1
+    feed           = ('slow_40pct' if slope.staircase_risk == 'HIGH'
+                      else 'slow_20pct' if slope.staircase_risk == 'MEDIUM' or arc_wrap
+                      else 'normal')
+
+    brief_parts = [
+        f'Content: "{content}" ({len(content)} chars).',
+        f'Surface: {label} at {angle:.0f}° from horizontal.',
+        f'Final spec: {style} / depth {final_depth}mm / height {final_height}mm / stroke {final_stroke}mm.',
+        f'Spacing: letter {letter_spacing}mm / word {word_spacing}mm.',
+    ]
+    if arc_wrap:
+        brief_parts.append(
+            f'Arc wrap: r={curve.outer_radius_mm:.1f}mm, {curve.wrap_direction}, '
+            f'depth {curve.depth_outer_mm}mm center / {curve.depth_inner_mm}mm edge.'
+        )
+    if slope.height_scale != 1.0 or slope.depth_scale != 1.0:
+        brief_parts.append(
+            f'Slope compensation: height ×{slope.height_scale:.2f}, depth ×{slope.depth_scale:.2f}.'
+        )
+    brief_parts.append(
+        f'Texture buffer: +{texture.depth_buffer_mm:.2f}mm. '
+        f'Layer: {layer_profile}. Passes: {pass_count}. Feed: {feed}.'
+    )
+    if font_profile:
+        src = 'PIL-measured' if font_profile.pil_available else 'table-estimated'
+        brief_parts.append(
+            f'Font {font_profile.font_name} ({font_profile.weight_class}): '
+            f'stroke ratio {font_profile.measured_stroke_ratio:.2f} [{src}].'
+        )
+    if warnings:
+        brief_parts.append('WARNINGS: ' + ' | '.join(warnings))
+    if workarounds:
+        brief_parts.append('WORKAROUNDS: ' + ', '.join(workarounds))
+
+    return CutAdvisory(
+        content=content, style=style,
+        final_depth_mm=final_depth, final_height_mm=final_height,
+        final_stroke_mm=final_stroke,
+        letter_spacing_mm=letter_spacing, word_spacing_mm=word_spacing,
+        orientation_deg=0.0, arc_wrap=arc_wrap,
+        arc_radius_mm=outer_r if arc_wrap else 0.0,
+        layer_profile=layer_profile, pass_count=pass_count,
+        feed_rate_advisory=feed,
+        problem_glyphs=[g.char for g in flagged],
+        warnings=warnings, workarounds=workarounds,
+        brief=' '.join(brief_parts),
+    )
+
+
+# ── 7. Master entry point ─────────────────────────────────────────────────────
+
+def full_typography_report(
+    content: str,
+    surface_group,
+    wall_profile=None,
+    requested_height_mm: float = REC_LETTER_H,
+    requested_depth_mm: float  = MIN_ENGRAVE_DEPTH_READABLE,
+    requested_stroke_mm: float = MIN_STROKE,
+    style: str = 'deboss',
+    layer_height_mm: float = LAYER_H_STD,
+    infill_pct: int = 20,
+    wall_count: int = 3,
+    font_path: str = None,
+) -> TypographyReport:
+    """
+    Master entry point. Accepts surface_group and wall_profile from geometry_utils.
+    Optional font_path enables real PIL font measurement.
+    """
+    font_profile = _build_font_profile(font_path, requested_height_mm) if font_path else None
+
+    glyphs  = analyse_text(content, requested_height_mm)
+    if font_profile:
+        glyphs = _apply_font_to_glyphs(glyphs, font_profile, requested_height_mm)
+
+    angle   = getattr(surface_group, 'angle_from_vertical', 0.0)
+    label   = getattr(surface_group, 'label', 'FLAT_TOP')
+    is_cyl  = getattr(wall_profile, 'is_cylindrical', False) if wall_profile else False
+    outer_r = getattr(wall_profile, 'outer_r_max', 0.0) if wall_profile else 0.0
+
+    slope   = slope_projection(angle)
+    curve   = curve_projection(outer_r, content, requested_height_mm, is_cyl)
+    texture = texture_correction(angle, layer_height_mm, label, infill_pct, wall_count)
+    cut     = build_advisory(
+        content, surface_group, wall_profile,
+        requested_height_mm, requested_depth_mm, requested_stroke_mm,
+        style, layer_height_mm, infill_pct, wall_count, font_profile,
+    )
 
     lines = [
-        '--- TYPOGRAPHY ANALYSIS ---',
-        f'  Text       : "{text}"',
-        f'  Font       : {fm.font_name} ({fm.weight_class})',
-        f'  FDM suited : {"YES" if fm.fdm_suitable else "NO — " + fm.fdm_suitability_reason}',
-        f'  Stroke ratio: {fm.stroke_ratio:.2f} → '
-        f'{font_height_mm * fm.stroke_ratio:.2f}mm strokes at {font_height_mm}mm height',
-        f'  Size       : {font_height_mm}mm tall × {total_width_mm}mm wide',
-        '',
-        f'  Surface    : {st.surface_type}  texture={st.texture_interference}  '
-        f'roughness={st.roughness_mm}mm',
-        f'  Layer lines: {st.layer_orientation} to text strokes',
-        f'  {st.texture_notes}',
-        '',
-        '  --- CUT ADVISORY ---',
-        f'  Recommended depth  : {adv.recommended_depth_mm}mm',
-        f'  Depth range        : {adv.min_depth_mm}mm (min) → {adv.max_safe_depth_mm}mm (max safe)',
-        f'  Wall usage         : {adv.wall_depth_ratio*100:.0f}% of wall at recommended depth',
-        f'  Style              : {adv.recommended_style}',
-        f'  Stroke compensation: +{adv.stroke_compensation_mm}mm',
-        f'  Legibility score   : {adv.legibility_score:.2f} / 1.00',
-        '',
-        f'  Rationale: {adv.rationale}',
+        '=== TYPOGRAPHY ANALYSIS ===',
+        f'Content        : "{content}"',
+        f'Char count     : {len(content)} (non-space: {len(content.replace(" ",""))})',
+        f'Requested spec : height={requested_height_mm}mm  depth={requested_depth_mm}mm  '
+        f'stroke={requested_stroke_mm}mm  style={style}',
     ]
 
-    if problem_chars:
-        lines.append(f'\n  ⚠ PROBLEM CHARACTERS: {", ".join(repr(c) for c in problem_chars)}')
-        for ca in char_analyses:
-            for w in ca.warnings:
-                lines.append(f'    • {w}')
+    if font_profile:
+        src = 'PIL-measured' if font_profile.pil_available else 'table-estimated'
+        lines += [
+            '',
+            '--- FONT PROFILE ---',
+            f'  Font       : {font_profile.font_name} ({font_profile.weight_class})',
+            f'  FDM suited : {"YES" if font_profile.fdm_suitable else "NO — " + font_profile.fdm_note}',
+            f'  Stroke ratio: {font_profile.measured_stroke_ratio:.3f} [{src}]'
+            f' → {requested_height_mm * font_profile.measured_stroke_ratio:.2f}mm strokes at {requested_height_mm}mm',
+        ]
 
-    if adv.warnings:
-        lines.append('\n  ⚠ WARNINGS:')
-        for w in adv.warnings:
-            if w not in [cw for ca in char_analyses for cw in ca.warnings]:
-                lines.append(f'    • {w}')
-
-    if adv.adjustments:
-        lines.append('\n  → RECOMMENDED ADJUSTMENTS:')
-        for a in adv.adjustments:
-            lines.append(f'    • {a}')
-
-    if adv.legibility_score >= 0.85:
-        lines.append('\n  ✓ VERDICT: Will print cleanly. Proceed.')
-    elif adv.legibility_score >= 0.65:
-        lines.append('\n  ~ VERDICT: Acceptable. Apply adjustments above for best results.')
+    flagged = [g for g in glyphs if g.flag]
+    lines += ['', '--- GLYPH ANALYSIS ---']
+    if flagged:
+        for g in flagged:
+            src = ' [PIL]' if g.measured_by_pil else ''
+            lines.append(
+                f"  ⚠ '{g.char}' FLAG: min={g.min_height_mm}mm  "
+                f"stroke={g.stroke_width_mm}mm{src}  {g.notes}"
+            )
     else:
-        lines.append('\n  ✗ VERDICT: Legibility at risk. Apply all adjustments before cutting.')
+        lines.append('  ✓ All glyphs viable at requested height.')
 
-    return '\n'.join(lines)
+    lines += [
+        '', '--- SLOPE COMPENSATION ---',
+        f'  Angle       : {angle:.1f}° from horizontal',
+        f'  Staircase   : {slope.staircase_risk}',
+        f'  Scales      : height ×{slope.height_scale:.3f}  depth ×{slope.depth_scale:.3f}  '
+        f'spacing ×{slope.spacing_scale:.3f}',
+        f'  Advisory    : {slope.advisory}',
+        '', '--- CURVE COMPENSATION ---',
+        f'  Cylindrical : {curve.is_cylindrical}',
+    ]
+    if curve.is_cylindrical:
+        lines += [
+            f'  Outer radius: {curve.outer_radius_mm:.1f}mm',
+            f'  Arc/char    : {curve.arc_length_per_char_mm:.2f}mm',
+            f'  Max chars   : {curve.recommended_char_count}',
+            f'  Depth center: {curve.depth_outer_mm:.2f}mm / edge: {curve.depth_inner_mm:.2f}mm',
+            f'  Wrap        : {curve.wrap_direction}',
+        ]
+    lines.append(f'  Advisory    : {curve.advisory}')
+
+    lines += [
+        '', '--- TEXTURE CORRECTION ---',
+        f'  Type        : {texture.surface_type}',
+        f'  Ridge height: {texture.layer_line_depth_mm:.3f}mm',
+        f'  Depth buffer: +{texture.depth_buffer_mm:.3f}mm',
+        f'  Stroke buf  : +{texture.stroke_buffer_mm:.2f}mm',
+        f'  Advisory    : {texture.advisory}',
+        '',
+        '--- FINAL CUT ADVISORY (use these values — do not substitute) ---',
+        f'  Style       : {cut.style}',
+        f'  Depth       : {cut.final_depth_mm}mm',
+        f'  Height      : {cut.final_height_mm}mm',
+        f'  Stroke      : {cut.final_stroke_mm}mm',
+        f'  Spacing     : letter {cut.letter_spacing_mm}mm / word {cut.word_spacing_mm}mm',
+        f'  Arc wrap    : {cut.arc_wrap}  r={cut.arc_radius_mm:.1f}mm',
+        f'  Layer       : {cut.layer_profile}',
+        f'  Passes      : {cut.pass_count}',
+        f'  Feed        : {cut.feed_rate_advisory}',
+    ]
+    if cut.problem_glyphs:
+        lines.append(f'  Problems    : {", ".join(cut.problem_glyphs)}')
+    if cut.warnings:
+        lines.append('  WARNINGS:')
+        for w in cut.warnings:
+            lines.append(f'    ⚠ {w}')
+    if cut.workarounds:
+        lines.append('  WORKAROUNDS:')
+        for wa in cut.workarounds:
+            lines.append(f'    🔧 {wa}')
+    lines += ['', f'  BRIEF: {cut.brief}']
+
+    return TypographyReport(
+        content=content,
+        char_count=len(content),
+        font_profile=font_profile,
+        glyph_advisories=glyphs,
+        slope_comp=slope,
+        curve_comp=curve if curve.is_cylindrical else None,
+        texture_corr=texture,
+        cut_advisory=cut,
+        text_summary='\n'.join(lines),
+    )

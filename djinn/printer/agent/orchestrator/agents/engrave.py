@@ -20,7 +20,7 @@ import json, pathlib, re
 from ..llm import LLM
 from ..project_state import ProjectState
 from . import geometry_utils as geo
-from . import typography_utils_marcus as typo
+from . import typography_utils as typo
 
 # ── System prompt ─────────────────────────────────────────────────────────────
 
@@ -226,6 +226,7 @@ def run(state: ProjectState, llm: LLM) -> ProjectState:
                 layer_height_mm=layer_h,
                 infill_pct=infill,
                 wall_count=walls,
+                font_path=state.brief.get('font_path'),
             )
             typo_block = typo_report.text_summary
             cut = typo_report.cut_advisory
