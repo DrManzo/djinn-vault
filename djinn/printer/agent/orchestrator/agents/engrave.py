@@ -5,12 +5,14 @@ for the Djinn manufacturing orchestrator.
 Pipeline:
   1. Load STL from state.source_stl (or accept path from brief)
   2. Run full geometry analysis via geometry_utils.full_geometry_report()
-  3. Run full typography analysis via typography_utils_marcus.full_typography_report()
+  3. Run full typography analysis via typography_utils.full_typography_report()
      — adapts letter height, depth, stroke, spacing, arc wrap, and texture
        buffer to the actual surface the text will land on
   4. Build a rich LLM prompt with ALL geometry AND typography data embedded
   5. LLM generates 3 ranked proposals using the pre-computed mm values
   6. Return proposals for Javier approval — nothing touches the model
+  7. approve(state, N) — records choice, resolves exact placement coords
+     via placement_resolver and stores in state.engraving_placement
 
 Machine: Calliope — Ender-3 V3 Plus
 Nozzle: 0.4mm  Layer: 0.20mm std / 0.12mm acc  Bed: 300×300×340mm
@@ -21,6 +23,7 @@ from ..llm import LLM
 from ..project_state import ProjectState
 from . import geometry_utils as geo
 from . import typography_utils as typo
+from . import placement_resolver as placer
 
 # ── System prompt ─────────────────────────────────────────────────────────────
 
@@ -183,6 +186,9 @@ def run(state: ProjectState, llm: LLM) -> ProjectState:
         state.note = f'EngravingAgent: geometry analysis failed — {e}'
         return state
 
+    # Cache geo_report on state so approve() can use it without re-parsing
+    state._geo_report = geo_report
+
     print(f'    bbox: {geo_report.bbox_x:.1f}×{geo_report.bbox_y:.1f}×{geo_report.bbox_z:.1f}mm  '
           f'faces: {geo_report.face_count}  groups: {len(geo_report.surface_groups)}')
     print(f'    engravable (score≥0.5): {len(geo_report.engravable_groups)}')
@@ -201,7 +207,6 @@ def run(state: ProjectState, llm: LLM) -> ProjectState:
     typo_block = '(Typography analysis: no engravable surface found — see geometry warnings.)'
 
     if best_surface:
-        # Extract quoted content from request if present
         quoted = re.findall(r'["\u2018\u2019\u201c\u201d]([^"\u2018\u2019\u201c\u201d]+)["\u2018\u2019\u201c\u201d]', engrave_request)
         content_to_analyse = quoted[0] if quoted else engrave_request
 
@@ -260,7 +265,7 @@ Return ONLY the JSON block. No prose before or after."""
     print(f'  [EngravingAgent] Sending to {llm.name} ...')
     reply = llm.chat(SYSTEM, [{'role': 'user', 'content': user_msg}], max_tokens=4000)
 
-    # ── 4. Parse JSON ───────────────────────────────────────────────────────────
+    # ── 4. Parse JSON ─────────────────────────────────────────────────────────
     proposals = {}
     m = re.search(r'```json\s*(.*?)\s*```', reply, re.DOTALL)
     if m:
@@ -286,7 +291,7 @@ Return ONLY the JSON block. No prose before or after."""
     state.engraving_request = engrave_request
     state.status = 'engrave_pending_approval'
 
-    # ── 5. Store full context in state.mesh ──────────────────────────────────
+    # ── 5. Store full context in state.mesh ───────────────────────────────────
     wp = geo_report.wall_profile
     state.mesh = {
         'bbox_x': geo_report.bbox_x,
@@ -333,18 +338,62 @@ Return ONLY the JSON block. No prose before or after."""
 def approve(state: ProjectState, choice: int) -> ProjectState:
     """
     Record Javier's approval of proposal 1, 2, or 3.
-    Writes engraving_spec to state for the downstream modifier.
+
+    1. Writes engraving_spec to state.
+    2. Runs placement_resolver.resolve() to convert position_description
+       into exact x/y/z offsets + modifier_args.
+    3. Stores PlacementSpec in state.engraving_placement.
+    4. Prints resolved coordinates for Telegram confirmation.
     """
     proposals = state.engraving_proposals.get('proposals', [])
     if not proposals or choice < 1 or choice > len(proposals):
         state.note = f'EngravingAgent approve: choice {choice} out of range (have {len(proposals)})'
         return state
+
     chosen = proposals[choice - 1]
     state.engraving_approved = choice
-    state.engraving_spec = chosen
-    state.status = 'engrave_approved'
+    state.engraving_spec     = chosen
+    state.status             = 'engrave_approved'
     state.note = f'Engraving approved: {chosen.get("label", "")} — {chosen.get("content", "")}'
     print(f'  [EngravingAgent] Approved proposal {choice}: {state.note}')
+
+    # ── Resolve placement coordinates ─────────────────────────────────────────
+    geo_report = getattr(state, '_geo_report', None)
+    if geo_report is None:
+        print('  [EngravingAgent] ⚠ No cached geo_report — re-running geometry analysis.')
+        stl_path = state.source_stl or state.model_path
+        if stl_path and pathlib.Path(stl_path).exists():
+            try:
+                geo_report = geo.full_geometry_report(stl_path)
+                state._geo_report = geo_report
+            except Exception as e:
+                print(f'  [EngravingAgent] ⚠ geometry re-run failed: {e}')
+
+    placement = placer.resolve(chosen, geo_report) if geo_report else placer.PlacementSpec(
+        resolved=False,
+        reason='geo_report unavailable — re-run engrave analysis before approving.',
+    )
+
+    state.engraving_placement = {
+        'resolved':         placement.resolved,
+        'reason':           placement.reason,
+        'x_offset_mm':      placement.x_offset_mm,
+        'y_offset_mm':      placement.y_offset_mm,
+        'z_surface_mm':     placement.z_surface_mm,
+        'width_mm':         placement.width_mm,
+        'height_mm':        placement.height_mm,
+        'rotation_deg':     placement.rotation_deg,
+        'anchor':           placement.anchor,
+        'arc_wrap':         placement.arc_wrap,
+        'arc_offset_deg':   placement.arc_offset_deg,
+        'arc_radius_mm':    placement.arc_radius_mm,
+        'modifier_args':    placement.modifier_args,
+    }
+
+    # Print for Telegram / console confirmation
+    print()
+    print(placement.text_summary)
+
     return state
 
 
