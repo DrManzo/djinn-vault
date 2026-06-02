@@ -1,23 +1,32 @@
 """
 Djinn Manufacturing Orchestrator — intent parser and agent router.
 Entry point for the full DesignGen → Edit → ProtoOpt → DOE → PlateNest → Price pipeline.
+Includes native EngravingAgent routing — do NOT use djinn-model-text-engrave for placement.
 """
 import json, re
 from .project_state import ProjectState, _load_queue
 from .llm import LLM
-from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, price
+from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, price, engrave
 
 INTENT_SYSTEM = """You are a manufacturing pipeline router for a 3D printing system.
 
 Classify the user input into ONE intent:
   new_design   — create a new part from scratch
-  edit_design  — modify an existing design
+  edit_design  — modify an existing design (geometry, dimensions, structure)
+  engrave      — add text, logo, symbol, marking, or engraving to an existing STL
   optimize     — generate prototype/production geometry variants
   doe          — optimize slicer/process parameters
   plate        — arrange parts on a print plate
   price        — get a cost quote
   status       — show job queue status
   unknown      — none of the above
+
+## Engrave classification rules:
+Classify as 'engrave' when the user says ANY of:
+  "engrave", "add text", "put text", "write on", "mark", "stamp", "label",
+  "inscribe", "brand", "logo", "signature", "put my name", "add my name",
+  "carve", "deboss", "emboss", "put [anything] on the surface",
+  or any phrase implying placing visual content ON an existing 3D surface.
 
 Reply with ONLY valid JSON: {"intent": "...", "job_id": null}
 """
@@ -38,6 +47,7 @@ def run(
     user_input: str,
     job_id: int = None,
     edit_request: str = None,
+    engrave_request: str = None,
     doe_goal: str = "prototype_fast",
     plate_items: list = None,
     printer: dict = None,
@@ -46,6 +56,7 @@ def run(
     """
     Main entry point.
 
+    engrave_request: if provided, forces engrave routing and sets the engraving intent.
     auto_advance: if True, automatically runs the full pipeline from current state forward.
     Otherwise stops after each agent and returns state for inspection.
     """
@@ -56,6 +67,12 @@ def run(
     if printer is None:
         printer = {
             "model": "Ender-3 V3 Plus",
+            "nozzle_dia_mm": 0.4,
+            "layer_h_std_mm": 0.20,
+            "layer_h_acc_mm": 0.12,
+            "bed_x_mm": 300,
+            "bed_y_mm": 300,
+            "bed_z_mm": 340,
             "has_enclosure": False,
             "hotend_sock": True,
             "bed_insulated": False,
@@ -64,22 +81,38 @@ def run(
     # Load or create state
     if job_id:
         state = ProjectState.load(job_id)
-        intent = _status_to_intent(state.status)
-        if edit_request:
+        intent_raw = classify(user_input, llm)["intent"]
+        # Explicit overrides
+        if engrave_request:
+            intent = "engrave"
+            state.engraving_request = engrave_request
+        elif edit_request:
             intent = "edit_design"
+        else:
+            intent = intent_raw if intent_raw != "unknown" else _status_to_intent(state.status)
     else:
         try:
             brief = json.loads(user_input)
         except json.JSONDecodeError:
             brief = {"request": user_input, "piece_name": user_input[:50]}
+
+        # Detect engrave from natural language even without job_id
+        if engrave_request:
+            intent = "engrave"
+            brief["engraving_request"] = engrave_request
+        else:
+            intent = classify(user_input, llm)["intent"]
+
         state = ProjectState.new(brief)
+        if engrave_request:
+            state.engraving_request = engrave_request
         state.save()
         print(f"  Job #{state.id} created — {state.note}")
-        intent = "new_design"
 
     print(f"  Status: {state.status} | Intent: {intent}")
 
-    # Route to agent
+    # ── Route to agent ────────────────────────────────────────────────────────
+
     if intent == "new_design":
         state = design_gen.run(state, llm)
         state.save()
@@ -93,6 +126,14 @@ def run(
         state.save()
         if not auto_advance:
             return state
+
+    if intent == "engrave" or engrave_request:
+        if engrave_request and not state.engraving_request:
+            state.engraving_request = engrave_request
+        state = engrave.run(state, llm)
+        state.save()
+        # Pause for approval — never auto-advance past engraving
+        return state
 
     if intent == "optimize" or (auto_advance and state.status == "design_edit"):
         state = proto_opt.run(state, llm)
@@ -127,16 +168,27 @@ def run(
     return state
 
 
+def approve_engrave(job_id: int, choice: int) -> ProjectState:
+    """Approve engraving proposal 1, 2, or 3 for an existing job."""
+    state = ProjectState.load(job_id)
+    state = engrave.approve(state, choice)
+    state.save()
+    return state
+
+
 # ── Status helpers ────────────────────────────────────────────────────────────
 
 def _status_to_intent(status: str) -> str:
     return {
-        "design_gen":  "new_design",
-        "design_edit": "edit_design",
-        "proto_opt":   "optimize",
-        "doe_opt":     "doe",
-        "plate_nest":  "plate",
-        "priced":      "price",
+        "design_gen":              "new_design",
+        "design_edit":             "edit_design",
+        "engrave_pending_approval": "engrave",
+        "engrave_approved":         "engrave",
+        "engrave_error":            "engrave",
+        "proto_opt":               "optimize",
+        "doe_opt":                 "doe",
+        "plate_nest":              "plate",
+        "priced":                  "price",
     }.get(status, "status")
 
 
@@ -146,10 +198,10 @@ def _show_queue():
     if not jobs:
         print("  Queue empty.")
         return
-    print(f"\n  {'ID':>3}  {'Status':<16}  Note")
-    print("  " + "─" * 55)
+    print(f"\n  {'ID':>3}  {'Status':<28}  Note")
+    print("  " + "─" * 62)
     for j in jobs:
-        print(f"  {j.get('id', 0):>3}  {j.get('status', '?'):<16}  {str(j.get('note', ''))[:40]}")
+        print(f"  {j.get('id', 0):>3}  {j.get('status', '?'):<28}  {str(j.get('note', ''))[:40]}")
 
 
 def _report_concept(state: ProjectState):
