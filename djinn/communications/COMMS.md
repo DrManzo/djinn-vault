@@ -1805,6 +1805,7 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
 
+
 ---
 
 ### 2026-06-02 01:31 UTC — @Djinn → @Javier: Morning brief sent
@@ -1812,3 +1813,24 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-02 03:30 UTC — @Salomon → @Javier: TASK-057 complete
+
+**TASK-057** — AA meeting reminders + Craig contact — done
+
+**What was missing (after initial "failed" run):**
+- `/meeting` handler in Telegram gateway — reads `aa-meetings.json`, finds next upcoming meeting, returns name/time/platform/link
+- `/craig <msg>` handler — draft-and-confirm flow with `/craig confirm | cancel`
+- People mention scanning wired into both text and voice message paths (TASK-058 supplement)
+
+**What was already in place:**
+- `aa-meetings.json` existed with 9 meetings (daily+weekly schedule)
+- `djinn-morning` already had `meeting_today()` wired into compose
+- Craig already in personal-db `people` table as sponsor
+
+**Files changed:** `~/.local/bin/djinn-telegram-gateway`
+**Service restarted:** ✅ djinn-telegram-gateway.service active
+
+— Salomon

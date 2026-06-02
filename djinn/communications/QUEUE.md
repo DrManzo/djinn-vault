@@ -1592,6 +1592,7 @@ AA_MEETINGS = []  # Javier to fill: [{"day": "monday", "time": "19:00", "link": 
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
+- completed: 2026-06-02 by Salomon
 - context: PHASE-ALPHA Sprint 2 — AA meeting reminders + Craig contact
 
 **Goal:** AA meeting reminders in morning briefing and /meeting command. Craig draft-and-confirm flow.

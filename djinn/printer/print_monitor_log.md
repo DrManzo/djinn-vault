@@ -14073,3 +14073,62 @@
 | 2026-06-02 02:52 UTC | printing | 0.0% | 29.5 | 0 | 52.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
 | 2026-06-02 02:53 UTC | printing | 0.0% | 68.1 | 120 | 59.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
 | 2026-06-02 02:54 UTC | printing | 0.0% | 120.5 | 120 | 61.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:55 UTC | printing | 0.0% | 190.1 | 120 | 61.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:56 UTC | printing | 0.0% | 120.1 | 120 | 60.3 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:57 UTC | printing | 0.0% | 122.0 | 210 | 60.2 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:58 UTC | printing | 0.0% | 209.5 | 210 | 60.2 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 02:59 UTC | printing | 0.0% | 209.7 | 210 | 60.2 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:00 UTC | printing | 0.0% | 210.1 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:01 UTC | printing | 0.0% | 210.5 | 210 | 59.9 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:02 UTC | printing | 0.0% | 209.9 | 210 | 59.9 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:03 UTC | printing | 0.0% | 209.4 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:04 UTC | printing | 0.0% | 211.0 | 210 | 59.8 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:05 UTC | printing | 0.0% | 209.5 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:06 UTC | printing | 0.0% | 210.4 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:07 UTC | printing | 0.0% | 210.5 | 210 | 59.9 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:09 UTC | printing | 0.0% | 210.4 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:10 UTC | printing | 0.0% | 210.3 | 210 | 59.8 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:11 UTC | printing | 0.0% | 210.4 | 210 | 59.7 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:12 UTC | printing | 0.0% | 209.6 | 210 | 59.9 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:13 UTC | printing | 0.0% | 210.3 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:14 UTC | printing | 0.0% | 210.4 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:15 UTC | printing | 0.0% | 210.2 | 210 | 60.1 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:16 UTC | printing | 0.0% | 209.5 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:17 UTC | printing | 0.0% | 209.9 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:18 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:19 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:20 UTC | printing | 0.0% | 210.4 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:21 UTC | printing | 0.0% | 209.6 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:22 UTC | printing | 0.0% | 210.3 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:23 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:24 UTC | printing | 0.0% | 209.6 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:25 UTC | printing | 0.0% | 209.8 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:26 UTC | printing | 0.0% | 210.0 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:27 UTC | printing | 0.0% | 209.3 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:28 UTC | printing | 0.0% | 210.7 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:29 UTC | printing | 0.0% | 209.7 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:30 UTC | printing | 0.0% | 209.2 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:31 UTC | printing | 0.0% | 209.7 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:32 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:33 UTC | printing | 0.0% | 209.5 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:34 UTC | printing | 0.0% | 209.7 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:35 UTC | printing | 0.0% | 209.9 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:36 UTC | printing | 0.0% | 210.0 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:37 UTC | printing | 0.0% | 209.6 | 210 | 60.0 | 60 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:38 UTC | printing | 0.0% | 209.7 | 0 | 60.0 | 0 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:39 UTC | complete | 0.0% | 151.9 | 0 | 58.8 | 0 | 0% | 0 | Proxy Stand_job5.gcode |
+| 2026-06-02 03:40 UTC | standby | 0.0% | 112.9 | 0 | 55.7 | 0 | 0% | 0 |  |
+| 2026-06-02 03:41 UTC | standby | 0.0% | 86.7 | 0 | 53.8 | 0 | 0% | 0 |  |
+| 2026-06-02 03:43 UTC | standby | 0.0% | 68.6 | 0 | 52.2 | 0 | 0% | 0 |  |
+| 2026-06-02 03:44 UTC | standby | 0.0% | 56.4 | 0 | 50.6 | 0 | 0% | 0 |  |
+| 2026-06-02 03:45 UTC | printing | 0.0% | 48.1 | 0 | 49.1 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:46 UTC | printing | 0.0% | 80.7 | 130 | 53.9 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:47 UTC | printing | 0.0% | 129.9 | 130 | 56.1 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:48 UTC | printing | 0.0% | 202.1 | 200 | 56.0 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:49 UTC | printing | 0.0% | 131.7 | 130 | 55.4 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:50 UTC | printing | 0.0% | 129.6 | 130 | 55.2 | 55 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:51 UTC | cancelled | 0.0% | 205.4 | 0 | 54.9 | 0 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:52 UTC | cancelled | 0.0% | 146.8 | 0 | 53.3 | 0 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:53 UTC | cancelled | 0.0% | 108.9 | 0 | 51.6 | 0 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:54 UTC | cancelled | 0.0% | 83.4 | 0 | 50.1 | 0 | 0% | 0 | vase_plate_job.gcode |
+| 2026-06-02 03:55 UTC | cancelled | 0.0% | 66.1 | 0 | 48.7 | 0 | 0% | 0 | vase_plate_job.gcode |
