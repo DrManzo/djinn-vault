@@ -215,6 +215,7 @@ Return ONLY the JSON block. No prose before or after."""
     state.status = 'engrave_pending_approval'
 
     # Store geometry summary in state for downstream use
+    wp = report.wall_profile
     state.mesh = {
         'bbox_x': report.bbox_x,
         'bbox_y': report.bbox_y,
@@ -232,6 +233,19 @@ Return ONLY the JSON block. No prose before or after."""
             }
             for g in report.surface_groups
         ],
+        'wall_profile': {
+            'is_cylindrical': wp.is_cylindrical,
+            'outer_r_min': wp.outer_r_min,
+            'outer_r_max': wp.outer_r_max,
+            'prime_zone_z_min': wp.prime_zone_z_min,
+            'prime_zone_z_max': wp.prime_zone_z_max,
+            'prime_zone_wall_mm': wp.prime_zone_wall,
+            'slices': [
+                {'z': s.z, 'outer_r': s.outer_r, 'inner_r': s.inner_r,
+                 'wall_thick': s.wall_thick, 'solid': s.solid}
+                for s in wp.slices
+            ],
+        } if wp else {},
     }
 
     _report_proposals(state)
