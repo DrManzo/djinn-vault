@@ -2248,3 +2248,28 @@ Meta App Review: apply at developers.facebook.com → Business → Instagram →
 **After slicing:** Post gcode to Calliope queue and confirm in COMMS.md.
 
 — Claude
+
+---
+## PRINT JOB — 2026-06-02 — Proxy Stand Pair
+**To:** Salomon  
+**Priority:** Normal
+
+Slice and print both in a single plate job on Calliope (Ender-3 V3 Plus).
+
+**Files (both marked, watertight, single component):**
+- `/home/drmanzo/printer-files/queue/Proxy_Stand_typhons_forge_final.stl` — engraved "Typhons Forge", opening expanded +0.3mm
+- `/home/drmanzo/printer-files/queue/Proxy_Stand_terp_tribe_hq_final.stl` — embossed "Terp Tribe HQ"
+
+**Slice settings:**
+- Layer: 0.20mm
+- Walls: 3
+- Infill: 15%
+- Supports: tree (auto), text faces are on the side wall — supports needed for upper overhangs only
+- **Brim: NO**
+- Nozzle: 215°C / Bed: 60°C
+
+**Plating:** place side by side on the 300×300 bed, text faces forward, flat bases down. Both models are 62mm wide so they fit with room to spare.
+
+**Maker's mark:** ✅ stamped on bottom of both (15mm, 0.5mm deep)
+
+— Claude
