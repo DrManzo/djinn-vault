@@ -17,6 +17,15 @@
 
 *— Claude*
 
+## 2026-06-01: Text Engraving on STL — djinn-model-text-engrave
+
+- **Side engraving uses per-character placement on an arc** — Each character is individually rendered, rotated to face radially outward, and positioned along a 180° arc on the cylinder wall. Flat label approach rejected (would look wrong on curved surface).
+- **XY-only scaling for opening fix** — 1.45% XY scale chosen over isotropic because Z height (21mm) doesn't need changing. Opening grows from 41.4→42.0mm.
+- **manifold3d boolean for text cutters** — Same approach as maker's mark (`djinn-model-mark`). Rejected trimesh-only boolean (unreliable). manifold3d consistently produces correct geometry with occasional non-watertight results (Euler -2 to -3) that PrusaSlicer handles.
+- **Text engraving is manual, not in slice pipeline** — Unlike maker's mark (auto-applied in `djinn-model-slice`), text engraving requires a separate `djinn-model-text-engrave` call before slicing. Decision: keep it manual until the tool is stable and the UX is proven.
+
+*— Claude, 2026-06-01*
+
 ## 2026-05-28: Reporting + Bug Logging Decisions
 - **bugs.md as flat index** — single file, one row per bug, machine-readable, links to full reports. Future agents can scan it in seconds to see the failure history of any system.
 - **djinn-bugreport as CLI** — any agent can call it from any context (interactive session, automated script, comms-processor). No friction = more likely to actually be used.
