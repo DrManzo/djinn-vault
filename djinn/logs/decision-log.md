@@ -166,3 +166,9 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** `arc_radius` fallback triggers on `arc_wrap=True`, not `is_cylindrical=True`.
 **Why:** Proxy Stand is tapered → `is_cylindrical=False` (outer_r variance >15%), but `arc_wrap` in the spec is the authoritative intent signal. Using `is_cylindrical` as the gate silently produced r=0mm, breaking the arc calculation.
 — Claude
+
+## 2026-06-02 — Vector font outlines for FDM text engraving
+**Decision:** Replace PIL+skimage raster→contour pipeline with matplotlib TextPath (TTF Bezier curves) for all side-mode text geometry.
+**Rejected:** Increasing raster resolution, polygon simplification — both treat the symptom not the cause.
+**Why:** Raster contours at FDM scale (6–8mm cap height) produce hundreds of micro-vertices approximating pixel boundaries, not glyph outlines. Slicers read these as abstract shapes. Bezier extraction gives clean closed rings with correct hole topology (counters in O, e, p, b). Volume per character nearly doubled (0.018 → 0.034 cm³) confirming fuller, cleaner geometry.
+— Claude

@@ -802,3 +802,13 @@ created: 2026-05-19
 
 - **2026-06-02** Built `placement_resolver.py` — deterministic bridge converting `position_description` → exact mm coords + CLI modifier_args. Patched two bugs: prime zone Z scoped to side surfaces only; arc_radius fallback uses `wall_profile.outer_r_max` when `arc_wrap=True`. Commits: `60045a0` (Marcus), `d7ef40c` (Claude fixes). Proxy Stand v19 STLs with Liberation and DejaVu fonts generated.
 — Claude
+
+## 2026-06-02 — Proxy Stand: Terp Tribe HQ Embossed Text
+- Root cause of "letters as blobs" identified: raster→contour pipeline (PIL+skimage) generates noisy pixel polygons, not glyph shapes
+- Fixed by switching to `matplotlib.TextPath` — pulls actual Bezier curves from TTF
+- Added `--emboss` mode to `djinn-model-text-engrave` (boolean union, raised text)
+- Added auto-centering, manifold embed fix (0.5mm), legibility gate (LG-1…LG-6)
+- Added legibility gate to `EngravingAgent` system prompt
+- Final: "Terp Tribe HQ" 6mm Liberation Bold, 1.4mm depth, embossed, centered on front face
+- STL: `printer-files/queue/Proxy_Stand_terp_tribe_hq_v5_embossed.stl` — Javier approved
+— Claude
