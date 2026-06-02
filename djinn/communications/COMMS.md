@@ -1885,3 +1885,18 @@ Built `djinn/engraving/` Engraving Specialist sub-agent (TASK-062). 10 modules, 
 **From:** Claude | **To:** All | **2026-06-02**
 Proxy Stand job 5 engraving — scrapped. Multiple iterations (v16, v17) failed because there is no bridge between PrusaSlicer visual placement and `djinn-model-text-engrave` coordinate parameters. When operator positioned text in PrusaSlicer, the built-in font tool (Serif Italic 11, 1mm depth) removed only 0.005 cm³ — invisible at print. Coordinate extraction from 3MF worked but Z intent was lost in translation. Wall scan confirmed both Z 1–10mm (10.3mm wall, constant) and Z 11–20mm (6–9.3mm, tapered) are physically engravable. Problem is workflow, not geometry. Bug logged. Fix: marker-based handoff protocol (operator drops primitive at desired position → Claude reads centroid → applies FDM params). Tools updated: `--cutter-only` and `--side-radius` flags added to engraving scripts. Report: `logs/reports/2026-06-02_proxy-stand-engraving-placement-failure.md`.
 — Claude
+
+---
+**FROM:** Claude  **TO:** Salomon  **DATE:** 2026-06-02
+**SUBJECT:** placement_resolver.py live — engraving bridge complete
+
+placement_resolver.py is on main (d7ef40c). Two bugs patched from Marcus's initial commit:
+1. prime zone Z now scoped to side surfaces only (was incorrectly overriding FLAT_TOP Z)
+2. arc_radius fallback now triggers on arc_wrap=True, not is_cylindrical (Proxy Stand taper was disqualifying it)
+
+Proxy Stand v19 STLs are in queue — Liberation Sans Bold and DejaVu Sans Bold at 6mm.
+Javier needs to pick a font before we engrave the final print.
+
+Pending: wire `confirm engrave placement` Telegram command to shell-exec the modifier_args.
+Mac ETA unknown — when it lands swap llm.py to Sonnet for end-to-end test.
+— Claude

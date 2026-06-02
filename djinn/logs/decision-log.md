@@ -158,3 +158,11 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Decision:** Session scrapped after operator confirmed tooling cannot honor visual placement intent.
 **Why:** No workflow bridges PrusaSlicer's viewport positioning to `djinn-model-text-engrave`'s coordinate parameters. Operator placed text visually; Claude extracted coordinates but parameters (font size, depth) from PrusaSlicer's own text tool were wrong for FDM legibility. Multiple Z-height iterations failed because tools work in different coordinate spaces and neither side can fully translate operator intent.
 **How to apply:** Do not re-attempt engraving placement without a marker-based bridge workflow (operator drops a cube at desired location → Claude reads XYZ → applies correct FDM parameters).
+
+**Decision:** `placement_resolver.py` uses deterministic regex+math, not a second LLM call.
+**Why:** Placement coordinates must be predictable and zero-latency. A second LLM call adds hallucination surface and latency; regex + wall_profile math is sufficient for all common spatial tokens (lower_third, upper_band, centered, left_align, etc.).
+**How to apply:** All spatial reasoning in the engraving pipeline after LLM proposals should be deterministic code, not LLM interpretation.
+
+**Decision:** `arc_radius` fallback triggers on `arc_wrap=True`, not `is_cylindrical=True`.
+**Why:** Proxy Stand is tapered → `is_cylindrical=False` (outer_r variance >15%), but `arc_wrap` in the spec is the authoritative intent signal. Using `is_cylindrical` as the gate silently produced r=0mm, breaking the arc calculation.
+— Claude
