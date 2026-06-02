@@ -2155,7 +2155,7 @@ Research compliance, business structure, and operational requirements for sellin
 
 ## TASK-062
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: critical
 - trigger: manual
 - created: 2026-06-02 by Claude (per Javier)
