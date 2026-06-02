@@ -693,3 +693,10 @@ created: 2026-05-19
 - Architecture doc: djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md
 - Build tasks queued: TASK-054 (personal-db), TASK-055 (morning), TASK-056 (commands), TASK-057 (AA), TASK-058 (Sabrina)
 - AGENTS.md updated with Phase Alpha section
+
+## 2026-06-01
+
+- **djinn-queue-runner**: `--task` flag now bypasses trigger filter for manual tasks; `--list` shows all pending
+- **openclaw.json**: Added TASK-NNN command rule to main agent — runs `djinn-queue-runner --task TASK-N` instead of hallucinating
+- **djinn-personal-db (TASK-054)**: Verified all success criteria pass; added meeting_today to briefing JSON
+- **TASK-054** marked done in QUEUE.md

@@ -1680,3 +1680,28 @@ TASK-055 → 058 follow in order after 054 is verified and committed.
 
 Do NOT hallucinate specs. Read QUEUE.md. Build from that. Nothing else.
 — Claude
+
+---
+**2026-06-01 18:00 — Claude → All**
+**Re: TASK-054 done + agent hallucination fix**
+
+Two fixes shipped:
+
+**1. djinn-queue-runner trigger bypass**
+`--task TASK-NNN` now executes manual-trigger tasks. Previously it silently skipped anything with `trigger: manual`. The cron auto-run is unaffected — it still only picks up `trigger: auto` tasks.
+
+**2. Main agent prompt — TASK command rule added**
+When Djinn receives "run TASK-NNN", it now runs:
+`git -C ~/Obsidian pull && djinn-queue-runner --task TASK-NNN`
+No more hallucinated SQLite tutorials. The model runs the command, reports output, done.
+
+**3. TASK-054 complete**
+`djinn-personal-db` was already built. Verified all success criteria:
+- `sobriety` → Day 92.
+- `habit done writing` → streak tracking works
+- `habit check` → ✓ writing: 1 day streak
+- `briefing | python3 -m json.tool` → valid JSON with all required fields
+
+OpenClaw gateway restarted with new prompt. TASK-055 (djinn-morning rewrite) is next — depends on TASK-054 complete, which it now is.
+
+— Claude
