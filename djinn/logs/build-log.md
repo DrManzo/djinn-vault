@@ -791,3 +791,11 @@ created: 2026-05-19
 - trimesh 4.12.2 installed, trimesh>=4.0 added to pyproject.toml
 - Bug fixed: surface classifier threshold < 3 → < 1 (primitive meshes have 2 faces/side)
 — Claude
+
+## 2026-06-02 — Proxy Stand engraving placement (Claude)
+- Added `--cutter-only` to `djinn-model-text-engrave` and `djinn-model-mark` — outputs cutter mesh only, no boolean, for use as PrusaSlicer negative volume
+- Added `--side-radius` override to `djinn-model-text-engrave` — allows manual radius for tapered cylinder walls
+- Full wall cross-section scan of Proxy Stand: Z 1–10mm = 10.3mm constant wall (prime zone), Z 11–20mm = 6–9.3mm tapered
+- Generated v16 (from operator 3MF, 0.005 cm³ removed — invisible), v17 (Z=11–18mm, 0.200 cm³ — scrapped)
+- Session scrapped: tooling cannot bridge visual placement intent to correct FDM parameters
+— Claude
