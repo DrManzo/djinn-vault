@@ -1757,3 +1757,16 @@ Day 92 sober. Streaks: writing=1, black_book=0, exercise=0
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-01 18:30
+**RE:** TASK-056 done
+
+✅ PHASE-ALPHA Sprint 1+2 — Personal commands in Telegram gateway — done
+
+**Action:** None — FYI.
+
+— Salomon
