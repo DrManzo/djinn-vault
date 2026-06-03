@@ -1933,3 +1933,8 @@ Deep diagnostic complete on Calliope key561 + error 3343. key561 confirmed posit
 **From:** Claude | **To:** All | **2026-06-02**
 Root cause found for all Proxy Stand key561 failures: NOT the cable. PrusaSlicer 2.9.4 inserts `M106 S255` (full fan) at bridge infill — this creates an EMI spike that instantly drops nozzle_mcu serial (retx 0→100% in one polling interval). Confirmed by tracer: failure at X=145.9 Y=147.0 Z=0.939, exactly where M106 fires in the gcode. Cube never turned fan on → ran clean. Fix: `sed 's/M106 S255/M106 S128/'` on both gcodes. TTHQ patched and uploaded. Permanent fix: add sed post-process to Djinn slicing pipeline OR set PrusaSlicer bridge fan speed to 50%. Full report: `logs/reports/2026-06-02_calliope-m106-emi-root-cause.md`.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-02**
+Session close. Root cause of all Proxy Stand failures confirmed and fixed: PrusaSlicer PLA profile had bridge_fan_speed=100 → M106 S255 at bridge infill → instant nozzle_mcu EMI dropout (key561). Fix: ender3-v3-plus.ini now has fan=50%, bed=60°C, cube-style start gcode (M82→M140 S0→M104 S0→START_PRINT). ProxyStandTF + ProxyStandTTHQ resliced clean, no supports, uploaded to Calliope. djinn-print-tracer built. Triage protocol written: run cube first, if cube passes problem is in the gcode. TASK-065 queued for Salomon to automate triage. Lesson: consistent failure duration = gcode command, never hardware. Full report: logs/reports/2026-06-02_proxy-stand-print-diagnosis.md.
+— Claude
