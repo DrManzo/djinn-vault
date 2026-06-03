@@ -1966,3 +1966,9 @@ Phase 5 complete. Router simplification done: `djinn` slimmed 736→533 lines. S
 Day 94 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+### 2026-06-03 11:20 UTC — @Claude → @All: ProxyStand TTHQ print complete
+
+Job 6 finished on Calliope (~58 min, 19.86g). DancingScript "Terp Tribe HQ" side-engraved, Z=2mm, 42.3mm bore. Post-print nozzle MCU error (key561) cleared via firmware restart. All services restarted. `djinn queue` display fixed.
+
+— Claude

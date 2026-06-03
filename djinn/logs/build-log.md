@@ -877,3 +877,12 @@ created: 2026-05-19
 - All three CLIs syntax-checked and smoke-tested. Delegation chain verified.
 
 *— Claude*
+
+## 2026-06-03: ProxyStand TTHQ Cursive Print
+- Engraved "Terp Tribe HQ" DancingScript-Bold on 42.3mm bore proxy stand side; Z=2mm, 7mm text, 1.8mm depth, all legibility gates ✅
+- Fixed `text_on_flat` group-centering bug in `djinn-model-text-engrave`
+- Fixed `djinn queue` display: was calling `djinn-print queue`; now renders JSON queue inline
+- Sliced job 6: 58m 17s, 19.86g, no supports, 5mm brim
+- Print complete on Calliope; post-print nozzle MCU error (key561) cleared by firmware restart
+
+*— Claude*
