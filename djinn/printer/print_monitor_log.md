@@ -15548,3 +15548,10 @@
 | 2026-06-03 06:21 UTC | cancelled | 0.0% | 29.0 | 0 | 29.0 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
 | 2026-06-03 06:22 UTC | cancelled | 0.0% | 29.0 | 0 | 28.8 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
 | 2026-06-03 06:23 UTC | cancelled | 0.0% | 28.9 | 0 | 28.7 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:24 UTC | cancelled | 0.0% | 28.8 | 0 | 28.6 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:25 UTC | cancelled | 0.0% | 28.7 | 0 | 28.4 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:26 UTC | cancelled | 0.0% | 28.6 | 0 | 28.3 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:27 UTC | cancelled | 0.0% | 28.6 | 0 | 28.2 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:28 UTC | cancelled | 0.0% | 28.5 | 0 | 28.1 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:29 UTC | cancelled | 0.0% | 28.4 | 0 | 28.0 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:30 UTC | cancelled | 0.0% | 28.3 | 0 | 27.9 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
