@@ -868,3 +868,12 @@ created: 2026-05-19
 - Hardware: 4 strain gauge connectors re-seated (error 3343 — done by Javier). nozzle_mcu connector inspected (done by Javier).
 
 *— Claude*
+
+## 2026-06-03: Phase 5 — Router Simplification
+
+- Created `/home/drmanzo/.local/bin/forge` — standalone Forge CLI (~175 lines), all `djinn forge *` subcommands
+- Created `/home/drmanzo/.local/bin/terp` — standalone Terp Tribe CLI (~60 lines), all `djinn terp *` subcommands
+- Slimmed `djinn` router: 736 → 533 lines. `forge|tf)` → `exec forge "$@"`. `terp|tthq)` → `exec terp "$@"`
+- All three CLIs syntax-checked and smoke-tested. Delegation chain verified.
+
+*— Claude*
