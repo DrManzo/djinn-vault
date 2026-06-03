@@ -15381,3 +15381,40 @@
 | 2026-06-03 03:29 UTC | standby | 0.0% | 129.6 | 130 | 60.8 | 60 | 0% | 0 |  |
 | 2026-06-03 03:30 UTC | standby | 0.0% | 129.7 | 130 | 60.4 | 60 | 0% | 0 |  |
 | 2026-06-03 03:31 UTC | printing | 0.0% | 221.6 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:32 UTC | printing | 0.0% | 217.9 | 220 | 60.2 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:33 UTC | printing | 0.0% | 220.5 | 220 | 59.4 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:34 UTC | printing | 0.0% | 220.0 | 220 | 59.5 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:35 UTC | printing | 0.0% | 220.6 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:36 UTC | printing | 0.0% | 219.9 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:37 UTC | printing | 0.0% | 220.2 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:38 UTC | printing | 0.0% | 219.7 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:39 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:40 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:41 UTC | printing | 0.0% | 219.7 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:42 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:43 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:44 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:45 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:46 UTC | printing | 0.0% | 219.5 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:47 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:48 UTC | printing | 0.0% | 219.7 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:49 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:50 UTC | printing | 0.0% | 219.3 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:51 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:52 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:53 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:54 UTC | printing | 0.0% | 218.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:55 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:56 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:57 UTC | complete | 0.0% | 179.0 | 0 | 59.5 | 0 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-03 03:59 UTC | standby | 0.0% | 130.6 | 0 | 54.9 | 0 | 0% | 0 |  |
+| 2026-06-03 04:00 UTC | standby | 0.0% | 98.9 | 0 | 53.5 | 0 | 0% | 0 |  |
+| 2026-06-03 04:01 UTC | standby | 0.0% | 76.7 | 0 | 52.0 | 0 | 0% | 0 |  |
+| 2026-06-03 04:02 UTC | standby | 0.0% | 62.1 | 0 | 50.1 | 0 | 0% | 0 |  |
+| 2026-06-03 04:03 UTC | standby | 0.0% | 52.2 | 0 | 48.3 | 0 | 0% | 0 |  |
+| 2026-06-03 04:04 UTC | printing | 0.0% | 46.1 | 0 | 52.9 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |
+| 2026-06-03 04:05 UTC | printing | 0.0% | 168.7 | 170 | 56.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |
+| 2026-06-03 04:06 UTC | printing | 0.0% | 161.0 | 130 | 56.1 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |
+| 2026-06-03 04:07 UTC | printing | 0.0% | 130.3 | 130 | 55.6 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |
+| 2026-06-03 04:08 UTC | printing | 0.0% | 220.8 | 220 | 55.3 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |
+| 2026-06-03 04:09 UTC | printing | 0.0% | 219.8 | 220 | 55.3 | 55 | 0% | 0 | Proxy_Stand_TF_solo.gcode |

@@ -527,3 +527,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-02 20:40:24 UTC
+=== FAILURE DETECTED ===
+  File: CRtestcube_Ender-3 V3 Plus_26m.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-03 03:57:56 UTC
