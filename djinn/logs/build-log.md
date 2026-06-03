@@ -834,3 +834,15 @@ created: 2026-05-19
 - Built djinn-print-tracer — real-time nozzle_mcu + XY position logger
 - ProxyStandTF.gcode + ProxyStandTTHQ.gcode resliced clean (no supports, M106 S127.5)
 - Report: logs/reports/2026-06-02_proxy-stand-print-diagnosis.md
+
+## 2026-06-03
+- SSH enabled on Calliope (root / creality_ender3v3, via Settings → Root Account Information)
+- Moonraker upgraded v0.7.1 → v0.10.0 via Creality Helper Script (Guilouz)
+- Fluidd installed on Calliope at http://192.168.1.114:4408
+- Gcode Shell Command installed on Calliope
+- OrcaSlicer 2.3.2 installed on Salomon via Flatpak
+- Calliope printer profile written to OrcaSlicer
+- Switching from PrusaSlicer to OrcaSlicer for all Calliope slicing
+- All proxy stand STLs/gcodes scrubbed to blocked; fresh STL incoming
+- Config backups on Calliope cleaned from 52 → 5
+- nozzle_mcu key561 failure still unresolved — latest trace shows instant silence (bytes_invalid=0), NOT EMI pattern — likely physical connector or power issue on nozzle board

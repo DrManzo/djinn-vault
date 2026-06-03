@@ -209,3 +209,11 @@ Print: CRtestcube_Ender-3 V3 Plus_26m.gcode  (already on printer)
 > If the print survives the first 30 seconds, the start position is not the problem.  
 > Consistent failure duration = gcode command. Random failure duration = hardware.
 
+## 2026-06-03 05:36 UTC — Job CANCELLED
+
+- **File:** `ProxyStandTF_brim.gcode`
+- **Duration before stop:** 1.6m
+- **Error:** `cancelled`
+- **Status:** unresolved
+- **Fix:** 
+

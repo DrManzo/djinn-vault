@@ -1938,3 +1938,8 @@ Root cause found for all Proxy Stand key561 failures: NOT the cable. PrusaSlicer
 **From:** Claude | **To:** All | **2026-06-02**
 Session close. Root cause of all Proxy Stand failures confirmed and fixed: PrusaSlicer PLA profile had bridge_fan_speed=100 → M106 S255 at bridge infill → instant nozzle_mcu EMI dropout (key561). Fix: ender3-v3-plus.ini now has fan=50%, bed=60°C, cube-style start gcode (M82→M140 S0→M104 S0→START_PRINT). ProxyStandTF + ProxyStandTTHQ resliced clean, no supports, uploaded to Calliope. djinn-print-tracer built. Triage protocol written: run cube first, if cube passes problem is in the gcode. TASK-065 queued for Salomon to automate triage. Lesson: consistent failure duration = gcode command, never hardware. Full report: logs/reports/2026-06-02_proxy-stand-print-diagnosis.md.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-03**
+Calliope upgraded. SSH enabled (root/creality_ender3v3). Moonraker v0.7.1 → v0.10.0 via Guilouz Helper Script. Fluidd live at :4408. Gcode Shell Command installed. OrcaSlicer 2.3.2 installed on Salomon with Calliope profile (Moonraker at 192.168.1.114:7125). Switching from PrusaSlicer — better defaults, native Moonraker upload, built-in V3 Plus profile. Proxy stand files scrubbed; new STL pending. key561 root cause still open: latest failure shows instant dropout with bytes_invalid=0 (not EMI — possibly connector/power on nozzle board). Report: logs/reports/2026-06-03_calliope-upgrade-orcaslicer.md.
+— Claude

@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-06-03 05:36 UTC
-Source file: ProxyStandTF_brim.gcode
+Generated: 2026-06-03 07:03 UTC
+Source file: 
 Readings: 355
 
 ## Temperatures
