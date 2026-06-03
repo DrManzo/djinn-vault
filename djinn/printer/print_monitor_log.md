@@ -15523,3 +15523,9 @@
 | 2026-06-03 05:55 UTC | cancelled | 0.0% | 32.2 | 0 | 35.6 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
 | 2026-06-03 05:56 UTC | cancelled | 0.0% | 31.9 | 0 | 35.2 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
 | 2026-06-03 05:57 UTC | cancelled | 0.0% | 31.7 | 0 | 34.7 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:58 UTC | cancelled | 0.0% | 31.6 | 0 | 34.2 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:59 UTC | cancelled | 0.0% | 31.4 | 0 | 33.8 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:00 UTC | cancelled | 0.0% | 31.2 | 0 | 33.5 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:01 UTC | cancelled | 0.0% | 31.0 | 0 | 33.1 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:02 UTC | cancelled | 0.0% | 30.9 | 0 | 32.8 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 06:03 UTC | cancelled | 0.0% | 30.7 | 0 | 32.5 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
