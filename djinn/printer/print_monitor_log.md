@@ -15699,3 +15699,14 @@
 | 2026-06-03 08:58 UTC | cancelled | 0.0% | 29.7 | 0 | 32.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
 | 2026-06-03 08:59 UTC | cancelled | 0.0% | 29.6 | 0 | 31.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
 | 2026-06-03 09:00 UTC | cancelled | 0.0% | 29.4 | 0 | 31.3 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:01 UTC | cancelled | 0.0% | 29.3 | 0 | 31.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:02 UTC | cancelled | 0.0% | 29.2 | 0 | 30.7 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:03 UTC | cancelled | 0.0% | 29.1 | 0 | 30.4 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:04 UTC | cancelled | 0.0% | 29.0 | 0 | 30.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:05 UTC | cancelled | 0.0% | 28.9 | 0 | 29.9 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:06 UTC | cancelled | 0.0% | 28.8 | 0 | 29.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:07 UTC | cancelled | 0.0% | 28.7 | 0 | 29.4 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:08 UTC | cancelled | 0.0% | 28.7 | 0 | 29.2 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:09 UTC | cancelled | 0.0% | 28.6 | 0 | 29.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:10 UTC | cancelled | 0.0% | 28.5 | 0 | 28.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:11 UTC | cancelled | 0.0% | 28.4 | 0 | 28.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
