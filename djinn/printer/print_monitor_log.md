@@ -15646,3 +15646,56 @@
 | 2026-06-03 08:03 UTC | standby | 0.0% | 25.4 | 0 | 24.6 | 0 | 0% | 0 |  |
 | 2026-06-03 08:04 UTC | standby | 0.0% | 25.4 | 0 | 24.6 | 0 | 0% | 0 |  |
 | 2026-06-03 08:05 UTC | standby | 0.0% | 25.4 | 0 | 24.6 | 0 | 0% | 0 |  |
+| 2026-06-03 08:06 UTC | standby | 0.0% | 25.3 | 0 | 24.6 | 0 | 0% | 0 |  |
+| 2026-06-03 08:07 UTC | standby | 0.0% | 25.4 | 0 | 24.6 | 0 | 0% | 0 |  |
+| 2026-06-03 08:08 UTC | standby | 0.0% | 25.4 | 0 | 24.5 | 0 | 0% | 0 |  |
+| 2026-06-03 08:10 UTC | printing | 0.0% | 133.0 | 130 | 27.7 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:11 UTC | printing | 0.0% | 201.4 | 200 | 37.8 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:12 UTC | printing | 0.0% | 130.4 | 130 | 47.2 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:13 UTC | printing | 0.0% | 130.4 | 130 | 55.6 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:14 UTC | printing | 0.0% | 173.4 | 220 | 60.0 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:15 UTC | printing | 0.0% | 219.8 | 220 | 61.1 | 60 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:16 UTC | cancelled | 0.0% | 191.4 | 0 | 60.2 | 0 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:17 UTC | cancelled | 0.0% | 138.8 | 0 | 57.7 | 0 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:18 UTC | cancelled | 0.0% | 102.7 | 0 | 55.3 | 0 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:19 UTC | cancelled | 0.0% | 78.2 | 0 | 53.2 | 0 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:20 UTC | cancelled | 0.0% | 61.6 | 0 | 51.3 | 0 | 0% | 0 | gcodes/Proxy_Tornado_Recycler_job1.gcode |
+| 2026-06-03 08:21 UTC | printing | 0.0% | 101.8 | 130 | 50.4 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:22 UTC | printing | 0.0% | 203.4 | 200 | 57.3 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:23 UTC | printing | 0.0% | 130.6 | 130 | 60.8 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:24 UTC | printing | 0.0% | 130.5 | 220 | 61.3 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:25 UTC | printing | 0.0% | 219.9 | 220 | 60.9 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:26 UTC | printing | 0.0% | 219.6 | 220 | 60.6 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:27 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:28 UTC | printing | 0.0% | 220.6 | 220 | 59.9 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:29 UTC | printing | 0.0% | 219.7 | 220 | 60.1 | 60 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:30 UTC | printing | 0.0% | 212.9 | 0 | 59.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:31 UTC | cancelled | 0.0% | 153.6 | 0 | 57.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:32 UTC | cancelled | 0.0% | 113.5 | 0 | 54.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:33 UTC | cancelled | 0.0% | 86.0 | 0 | 52.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:34 UTC | cancelled | 0.0% | 67.5 | 0 | 51.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:35 UTC | cancelled | 0.0% | 54.8 | 0 | 49.4 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:36 UTC | cancelled | 0.0% | 46.2 | 0 | 47.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:37 UTC | cancelled | 0.0% | 40.9 | 0 | 46.4 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:38 UTC | cancelled | 0.0% | 37.9 | 0 | 45.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:39 UTC | cancelled | 0.0% | 36.3 | 0 | 44.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:40 UTC | cancelled | 0.0% | 35.2 | 0 | 42.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:41 UTC | cancelled | 0.0% | 34.4 | 0 | 41.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:42 UTC | cancelled | 0.0% | 33.7 | 0 | 40.8 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:43 UTC | cancelled | 0.0% | 33.1 | 0 | 40.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:44 UTC | cancelled | 0.0% | 32.8 | 0 | 39.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:45 UTC | cancelled | 0.0% | 32.3 | 0 | 38.3 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:47 UTC | cancelled | 0.0% | 32.0 | 0 | 37.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:48 UTC | cancelled | 0.0% | 31.6 | 0 | 36.9 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:49 UTC | cancelled | 0.0% | 31.4 | 0 | 36.3 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:50 UTC | cancelled | 0.0% | 31.1 | 0 | 35.7 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:51 UTC | cancelled | 0.0% | 30.9 | 0 | 35.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:52 UTC | cancelled | 0.0% | 30.7 | 0 | 34.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:53 UTC | cancelled | 0.0% | 30.5 | 0 | 34.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:54 UTC | cancelled | 0.0% | 30.3 | 0 | 33.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:55 UTC | cancelled | 0.0% | 30.1 | 0 | 33.1 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:56 UTC | cancelled | 0.0% | 30.0 | 0 | 32.7 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:57 UTC | cancelled | 0.0% | 29.9 | 0 | 32.4 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:58 UTC | cancelled | 0.0% | 29.7 | 0 | 32.0 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 08:59 UTC | cancelled | 0.0% | 29.6 | 0 | 31.6 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
+| 2026-06-03 09:00 UTC | cancelled | 0.0% | 29.4 | 0 | 31.3 | 0 | 0% | 0 | gcodes/ProxyStand_TCF.gcode |
