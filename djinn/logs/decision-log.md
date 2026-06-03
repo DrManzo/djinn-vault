@@ -172,3 +172,11 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Rejected:** Increasing raster resolution, polygon simplification — both treat the symptom not the cause.
 **Why:** Raster contours at FDM scale (6–8mm cap height) produce hundreds of micro-vertices approximating pixel boundaries, not glyph outlines. Slicers read these as abstract shapes. Bezier extraction gives clean closed rings with correct hole topology (counters in O, e, p, b). Volume per character nearly doubled (0.018 → 0.034 cm³) confirming fuller, cleaner geometry.
 — Claude
+
+## 2026-06-03: Phase 5 — Standalone forge/terp CLIs
+
+- **Bash over Python Click** — Forge/Terp CLIs are thin delegates to existing `djinn-*` binaries. No reasoning needed, bash consistent with existing pattern.
+- **`exec` delegation** — `exec forge "$@"` replaces djinn's shell process; cleaner than subprocess, no extra PID.
+- **Separate `terp` binary** — distinct brand identity, independent future command surface. Not merged into `forge`.
+
+*— Claude*

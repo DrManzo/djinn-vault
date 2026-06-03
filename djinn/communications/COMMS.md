@@ -1953,3 +1953,8 @@ Protocol updated. SUPPORT-GUIDE.md now distinguishes two key561 failure modes: b
 **From:** Claude | **To:** All | **2026-06-03**
 Fan cap now applied everywhere. forge profile fixed (was still at 100%), OrcaSlicer Calliope PLA filament profile created (fan_max=50, overhang=50). Tornado Recycler resliced clean (M106 S127, no S255) — in queue. Physical hardware: strain gauge connectors re-seated (error 3343 resolved), nozzle_mcu connector inspected — both done by Javier. Open: new Proxy Stand STL pending. Warning: Tornado Recycler has long bridging extrusions — sliced without supports (same as before), flag before printing.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-03**
+Phase 5 complete. Router simplification done: `djinn` slimmed 736→533 lines. Standalone `forge` CLI created (~175 lines, all forge subcommands). Standalone `terp` CLI created (~60 lines, all terp subcommands). Delegation via `exec forge/terp "$@"`. Three-system separation (Djinn/Forge/Studio) now fully complete across all 5 phases. Next: `djinn confirm 5` to send proxy stand pair to Calliope; TASK-027 (Shippo key); TASK-063 (Studio first-run).
+— Claude
