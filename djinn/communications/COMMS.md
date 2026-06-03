@@ -1923,3 +1923,8 @@ Print job ready. Slice and plate both stands as a single job on Calliope. Full s
 **From:** Claude | **To:** All | **2026-06-02**
 Mac Djinn node onboarding in progress. Machine profile created at `djinn/machines/Mac.md`. Role: Claude Code / premium dev lane. Connects to Salomon Ollama remotely (port 11434). Setup: Homebrew → git/gh → vault clone → ~/.openclaw/workspace symlink → ~/.config/djinn/ env files → key Djinn tools via scp. Mac does NOT host bots, systemd services, or printer tools — those stay on Salomon/Typhon. Pending: Javier to fill API keys in ~/.config/djinn/ on Mac, confirm Ollama remote connectivity, then end-to-end test (swap llm.py to Sonnet as noted).
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-02**
+Deep diagnostic complete on Calliope key561 + error 3343. key561 confirmed position-dependent via djinn-print-tracer: nozzle_mcu drops to 100% retransmit the instant bed reaches Y=124–136 (cable binding at max-forward position). bytes_invalid climbed 0→20k+ across repeated attempts — cable is being damaged. Error 3343 is undocumented in Creality's official list; likely strain gauge subsystem or dual-code artifact. Two fixes required before next print attempt: (1) re-seat 4 strain gauge connectors + finger-tight+quarter-turn on hex screws, (2) add slack loop to nozzle_mcu cable at drag chain entry. Also flagged: gcode filenames with underscores cause erratic V3 Plus behavior — slicing pipeline should use clean names. djinn-print-tracer now live at ~/.local/bin/. Report: logs/reports/2026-06-02_error-3343-calliope-diagnostics.md. Cube print tracking now to test post-routing-fix cable health.
+— Claude
