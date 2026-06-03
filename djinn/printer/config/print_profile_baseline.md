@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-03 00:24 UTC
-Source file: Proxy_Stand_TF_solo.gcode
-Readings: 202
+Generated: 2026-06-03 03:14 UTC
+Source file: 
+Readings: 267
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 130°C | 55°C |
-| Mean | 209.1°C | 52.8°C |
-| Std dev | ±30.55°C | ±5.41°C |
-| Range | 49.0–221.9°C | 34.9–56.4°C |
+| Mean | 210.9°C | 49.5°C |
+| Std dev | ±27.91°C | ±8.43°C |
+| Range | 49.0–221.9°C | 31.3–56.4°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 202
 
 ## Anomalies
 - 
-hotend temp variance high: ±30.6°C (check nozzle_mcu cable)- bed temp variance high: ±5.4°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±27.9°C (check nozzle_mcu cable)- bed temp variance high: ±8.4°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
