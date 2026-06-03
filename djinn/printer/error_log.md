@@ -141,11 +141,26 @@ hysteresis: 20          # was default (~5)
 
 ---
 
+## 2026-06-02 — key561 "Lost communication with MCU 'nozzle_mcu'" — Proxy Stand pair
+
+- **Error code:** key561 (distinct from key564 — this is outright comms loss, not heater fault)
+- **Jobs affected:** 000031 (6.1min), 000032 (8.7min), 000033 (20.6min) — all `combined_jobs_2_3.gcode`
+- **Pattern:** NOT deterministic — different filament_used each failure. Duration increases with each cable reseat. Retransmit rate 85% during prints.
+- **Previous fix on this machine (2-week-old Ender-3 V3 Plus):** Javier repositioned/reseated cable. Error cleared temporarily.
+- **Gcode ruled out:** No M106 S155.55 ramp in proxy stand gcode (uses M106 S255 only). verify_heater still relaxed (check_gain_time:120, max_error:999, hysteresis:20).
+- **Working theory:** Cable routing through drag chain causes intermittent connection under toolhead movement. Improves with reseat, degrades under sustained vibration. Position-dependent (specific XY coordinates may stress the cable more).
+- **Diagnostic tool deployed:** `djinn-print-tracer` — polls Moonraker every 5s, logs nozzle_mcu stats + XY position to `djinn/printer/active/TRACE-*.md`. Sends Telegram alert when retx% > 50 or bytes_invalid > 20.
+- **Next steps:** Read the trace after next failure. If retransmit rate spikes at consistent XY position → cable routing fix. If random → cable assembly replacement needed.
+- **Trace file:** `~/Obsidian/djinn/printer/active/TRACE-2026-06-02_*.md`
+
+---
+
 ## Troubleshooting Quick Reference
 
 | Symptom | Check first | Likely cause |
 |---------|-------------|--------------|
 | `key564` mid-print | `nozzle_mcu retransmit_seq` in klippy log | EMI from motors on serial line → relax verify_heater |
+| `key561` mid-print | `nozzle_mcu retransmit_seq` + XY position in TRACE log | Outright comms loss — cable routing stress OR EMI at specific position. Run djinn-print-tracer. |
 | `klippy_disconnect` at same point every print | Print history — identical filament_used? | Specific gcode command (fan, speed change) causing EMI spike |
 | `klippy_disconnect` random timing | `leveling_mcu` or `nozzle_mcu` retransmit_seq climbing | Physical cable issue — reseat or replace |
 | `bytes_invalid` in stats | Signal integrity | EMI / damaged cable shielding — not a connector issue |
