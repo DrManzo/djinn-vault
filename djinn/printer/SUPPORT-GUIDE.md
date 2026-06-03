@@ -1,6 +1,6 @@
 # Support Settings — Calliope Print Guide
 
-*Ender-3 V3 Plus | PLA | Last updated 2026-05-27 — Claude*
+*Ender-3 V3 Plus | PLA | Last updated 2026-06-03 — Claude*
 
 ---
 
@@ -112,17 +112,40 @@ To change the default mark: update `path` in the config. The `mirror_x: true` st
 
 ---
 
-## Print Failure Triage — Quick Reference (added 2026-06-02)
+## Print Failure Triage — Quick Reference (updated 2026-06-03)
 
 **Order matters. Do not touch hardware until the cube test passes.**
 
 1. **Run tracer on next attempt** → `djinn-print-tracer --interval 5 &`
-2. **Instant retransmit spike?** → `grep M106` in gcode at failure Z. Cap `S255 → S128`. Retry.
+2. **Instant retransmit spike — read bytes_invalid at moment of dropout:**
+   - `bytes_invalid > 0` at dropout → **EMI** → cap fan in slicer (bridge_fan_speed=0, max 50%). Retry.
+   - `bytes_invalid = 0` at dropout → **physical disconnect or power reset** of nozzle_mcu board → check connector + power trace physically. Fan cap will NOT fix this.
 3. **Gradual retransmit climb?** → Print the cube first:
    - Cube passes → gcode problem, not hardware
    - Cube fails → hardware problem, then check cables/connectors
 4. **Consistent failure duration across attempts** → gcode command. Never hardware.
 5. **Random failure duration** → hardware or EMI accumulation.
+6. **Wait ≥ 2 min between klippy_shutdown and next attempt** — rapid restart cycles stress the nozzle_mcu connector and compound whatever underlying issue exists.
 
 **Cube file:** `CRtestcube_Ender-3 V3 Plus_26m.gcode` — always on printer, no upload needed.
+
+---
+
+## Slicer Setup — Active Configuration (updated 2026-06-03)
+
+Two slicers are installed. Each has a specific role:
+
+| Slicer | Role | How invoked |
+|--------|------|-------------|
+| **OrcaSlicer 2.3.2** | Interactive slicing — manual jobs, commission parts | GUI (`flatpak run com.orcaslicer.OrcaSlicer`) — uploads directly to Calliope via Moonraker |
+| **PrusaSlicer** | CLI pipeline — `djinn-model-slice`, `djinn-model-combine`, `djinn-print-consult` | `/usr/bin/prusa-slicer` — profile at `~/.config/forge/ender3-v3-plus.ini` |
+
+**Calliope OrcaSlicer profile:** `~/.var/app/com.orcaslicer.OrcaSlicer/data/OrcaSlicer/user/default/machine/Calliope.json`
+
+**Fan rule — applies to BOTH slicers (hardware constraint, not slicer-specific):**
+The nozzle_mcu board on the Sprite Pro extruder is EMI-sensitive. 100% fan (`M106 S255`) causes nozzle_mcu dropout.
+- OrcaSlicer: set `bridge_fan_speed = 0` in the Calliope filament profile
+- PrusaSlicer: profile already has `bridge_fan_speed = 50`, `max_fan_speed = 50` — do not remove
+
+**Bridge geometry warning:** Engraved OR embossed text on a model creates bridge sections in the slicer. Each letter groove or raised letter top is a span. More text = more bridges = more fan-intensive spans = higher EMI risk. Check bridge count before printing text-heavy models.
 

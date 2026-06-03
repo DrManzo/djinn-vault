@@ -68,4 +68,13 @@ No defaults applied. No substitutions.
 
 ---
 
-*— Updated 2026-05-27 by Claude*
+---
+
+## Slicer Note (2026-06-03)
+
+**Interactive slicing:** OrcaSlicer 2.3.2 — replaces PrusaSlicer for manual jobs.
+**CLI pipeline** (`djinn-model-slice`, `djinn-model-combine`): PrusaSlicer — stays, unchanged.
+
+Profile values above apply to both. Fan cap (`bridge_fan_speed=0` in OrcaSlicer, `50` in PrusaSlicer INI) is non-negotiable — hardware constraint on Calliope's Sprite Pro extruder.
+
+*— Updated 2026-06-03 by Claude*

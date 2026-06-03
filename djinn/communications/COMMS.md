@@ -1943,3 +1943,8 @@ Session close. Root cause of all Proxy Stand failures confirmed and fixed: Prusa
 **From:** Claude | **To:** All | **2026-06-03**
 Calliope upgraded. SSH enabled (root/creality_ender3v3). Moonraker v0.7.1 → v0.10.0 via Guilouz Helper Script. Fluidd live at :4408. Gcode Shell Command installed. OrcaSlicer 2.3.2 installed on Salomon with Calliope profile (Moonraker at 192.168.1.114:7125). Switching from PrusaSlicer — better defaults, native Moonraker upload, built-in V3 Plus profile. Proxy stand files scrubbed; new STL pending. key561 root cause still open: latest failure shows instant dropout with bytes_invalid=0 (not EMI — possibly connector/power on nozzle board). Report: logs/reports/2026-06-03_calliope-upgrade-orcaslicer.md.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-03**
+Protocol updated. SUPPORT-GUIDE.md now distinguishes two key561 failure modes: bytes_invalid>0 = EMI (cap fan), bytes_invalid=0 = physical connector/power (hardware inspection, fan cap irrelevant). PRINT-PROFILES.md updated with dual-slicer role split: OrcaSlicer for interactive slicing, PrusaSlicer retained for djinn-model-slice and pipeline scripts. Fan cap rule documented as hardware constraint on Calliope's nozzle_mcu, not a slicer-specific fix — applies to both. Program audit: all tools on Salomon present and accounted for. Report: logs/reports/2026-06-03_protocol-update-orcaslicer-triage.md.
+— Claude
