@@ -846,3 +846,15 @@ created: 2026-05-19
 - All proxy stand STLs/gcodes scrubbed to blocked; fresh STL incoming
 - Config backups on Calliope cleaned from 52 → 5
 - nozzle_mcu key561 failure still unresolved — latest trace shows instant silence (bytes_invalid=0), NOT EMI pattern — likely physical connector or power issue on nozzle board
+
+## 2026-06-03: Protocol Update + Slicer Role Split
+
+- SUPPORT-GUIDE.md updated:
+  - Triage: `bytes_invalid=0` at dropout = physical connector/power (NOT EMI) — fan cap is irrelevant for this pattern
+  - Added 2-min cool-down rule between klippy_shutdown restarts
+  - Added Slicer Setup section: OrcaSlicer for interactive, PrusaSlicer for CLI scripts, fan rule is hardware-wide
+- PRINT-PROFILES.md updated: slicer role split + fan cap rule noted for both slicers
+- Session report: `logs/reports/2026-06-03_protocol-update-orcaslicer-triage.md`
+- Program audit: OrcaSlicer ✅ Flatpak, PrusaSlicer ✅ system, all djinn-* scripts intact
+
+*— Claude*
