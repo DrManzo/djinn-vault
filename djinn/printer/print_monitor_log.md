@@ -15933,3 +15933,17 @@
 | 2026-06-03 13:01 UTC | printing | 0.0% | 209.9 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
 | 2026-06-03 13:02 UTC | printing | 0.0% | 210.4 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
 | 2026-06-03 13:03 UTC | printing | 0.0% | 210.8 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:04 UTC | printing | 0.0% | 210.3 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:05 UTC | printing | 0.0% | 210.5 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:06 UTC | printing | 0.0% | 210.4 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:07 UTC | printing | 0.0% | 209.5 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:08 UTC | printing | 0.0% | 209.9 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:09 UTC | printing | 0.0% | 210.1 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:10 UTC | printing | 0.0% | 210.4 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:11 UTC | printing | 0.0% | 210.3 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:12 UTC | printing | 0.0% | 209.6 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:13 UTC | printing | 0.0% | 209.6 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:14 UTC | printing | 0.0% | 209.6 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:15 UTC | printing | 0.0% | 209.6 | 210 | 55.0 | 55 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:16 UTC | complete | 0.0% | 201.3 | 0 | 54.3 | 0 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |
+| 2026-06-03 13:17 UTC | complete | 0.0% | 201.3 | 0 | 52.8 | 0 | 0% | 0 | ProxyStand_TTHQ_cursive_centered_job6.gcode |

@@ -66,3 +66,6 @@ Calliope will NOT start automatically.
 | 2026-06-03 12:55 UTC | 50.3% complete |
 | 2026-06-03 12:59 UTC | 60.4% complete |
 | 2026-06-03 13:03 UTC | 70.1% complete |
+| 2026-06-03 13:07 UTC | 80.4% complete |
+| 2026-06-03 13:10 UTC | 90.0% complete |
+| 2026-06-03 13:16 UTC | Completed in 46m 24s |
