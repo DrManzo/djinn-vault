@@ -109,3 +109,20 @@ The mark STL logo faces +Z. When boolean-subtracted into a bottom face and viewe
 To change the default mark: update `path` in the config. The `mirror_x: true` stays unless your new mark is already designed mirror-flipped.
 
 **Never** subtract a mark STL directly into a bottom face without mirroring first. The config enforces this — if you bypass the tool, you own the result.
+
+---
+
+## Print Failure Triage — Quick Reference (added 2026-06-02)
+
+**Order matters. Do not touch hardware until the cube test passes.**
+
+1. **Run tracer on next attempt** → `djinn-print-tracer --interval 5 &`
+2. **Instant retransmit spike?** → `grep M106` in gcode at failure Z. Cap `S255 → S128`. Retry.
+3. **Gradual retransmit climb?** → Print the cube first:
+   - Cube passes → gcode problem, not hardware
+   - Cube fails → hardware problem, then check cables/connectors
+4. **Consistent failure duration across attempts** → gcode command. Never hardware.
+5. **Random failure duration** → hardware or EMI accumulation.
+
+**Cube file:** `CRtestcube_Ender-3 V3 Plus_26m.gcode` — always on printer, no upload needed.
+

@@ -168,3 +168,44 @@ hysteresis: 20          # was default (~5)
 | `bytes_retransmit` climbing, `rto` → 5.000 | Full MCU serial breakdown | Cable or interference — print will eventually die regardless of settings |
 | Print starts but stalls in START_PRINT | `print_duration=0` for >5 min | Heating or leveling stall — check temps and leveling_mcu |
 
+
+---
+
+## Diagnostic Protocol — Print Failure Triage (added 2026-06-02)
+
+**When any print fails mid-run, follow this order. Do not skip steps.**
+
+### Step 1 — Run djinn-print-tracer on the next attempt
+```bash
+djinn-print-tracer --interval 5 &
+```
+Watch for:
+- **Instant 0→100% retransmit** → EMI event from a gcode command → go to Step 2A
+- **Gradual retransmit climb** → possible hardware → go to Step 2B
+
+### Step 2A — Gcode first (instant failure pattern)
+```bash
+grep -n "M106" /path/to/failing.gcode
+# Find the line near the failure Z height
+# Cap any M106 S255 → M106 S128
+sed -i 's/^M106 S255$/M106 S128/' failing.gcode
+```
+Re-upload and retry. If it passes → done. Never touched hardware.
+
+### Step 2B — Run the calibration cube before touching any hardware
+```
+Print: CRtestcube_Ender-3 V3 Plus_26m.gcode  (already on printer)
+```
+- **Cube passes** → hardware is fine. Problem is in the failing gcode. Grep M106, check START_PRINT sequence, check object placement on bed.
+- **Cube fails** → hardware issue confirmed. Then check cables, connectors, strain gauges.
+
+### Why the cube
+- Creality slicer: no `M106 S255` during print, no bridge fan spikes
+- Centered at Y=135–165: doesn't stress cable at extreme bed positions
+- 26 min: long enough to catch thermal/EMI drift
+- Already on the printer — no upload needed
+
+### Rule
+> If the print survives the first 30 seconds, the start position is not the problem.  
+> Consistent failure duration = gcode command. Random failure duration = hardware.
+
