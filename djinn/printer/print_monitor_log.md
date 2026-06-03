@@ -15443,3 +15443,7 @@
 | 2026-06-03 04:33 UTC | printing | 0.0% | 220.4 | 220 | 54.8 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
 | 2026-06-03 04:34 UTC | printing | 0.0% | 220.3 | 220 | 55.1 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
 | 2026-06-03 04:35 UTC | printing | 0.0% | 220.3 | 220 | 54.9 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:36 UTC | paused | 0.0% | 220.0 | 220 | 54.6 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:37 UTC | paused | 0.0% | 220.0 | 220 | 52.6 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:38 UTC | paused | 0.0% | 220.0 | 220 | 51.1 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:39 UTC | standby | 0.0% | 118.0 | 0 | 49.5 | 0 | 0% | 0 |  |
