@@ -160,7 +160,8 @@ hysteresis: 20          # was default (~5)
 | Symptom | Check first | Likely cause |
 |---------|-------------|--------------|
 | `key564` mid-print | `nozzle_mcu retransmit_seq` in klippy log | EMI from motors on serial line → relax verify_heater |
-| `key561` mid-print | `nozzle_mcu retransmit_seq` + XY position in TRACE log | Outright comms loss — cable routing stress OR EMI at specific position. Run djinn-print-tracer. |
+| `key561` instant 0→100% retransmit | grep M106 in gcode at failure Z height | Fan EMI spike (M106 S255 at bridge infill) — cap fan at S128 in gcode or PrusaSlicer settings |
+| `key561` gradual retransmit climb | nozzle_mcu retransmit_seq + XY in TRACE log | Physical cable issue — reseat or reroute |
 | `klippy_disconnect` at same point every print | Print history — identical filament_used? | Specific gcode command (fan, speed change) causing EMI spike |
 | `klippy_disconnect` random timing | `leveling_mcu` or `nozzle_mcu` retransmit_seq climbing | Physical cable issue — reseat or replace |
 | `bytes_invalid` in stats | Signal integrity | EMI / damaged cable shielding — not a connector issue |
