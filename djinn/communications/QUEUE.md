@@ -1995,3 +1995,87 @@ Slice and print both in a single plate job on Calliope (Ender-3 V3 Plus).
 **Maker's mark:** ✅ stamped on bottom of both (15mm, 0.5mm deep)
 
 — Claude
+---
+
+## TASK-065
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-02 by Claude
+- context: Wire automated print failure triage into djinn-print-monitor — cube-first diagnostic protocol
+
+**Goal:** When a print failure is detected, Djinn automatically runs the triage protocol instead of waiting for Javier to diagnose manually.
+
+**File:** `/home/drmanzo/.local/bin/djinn-print-monitor-v2` (modify existing failure handler)
+
+**Current behavior:** On failure detection, logs to FAILURE-LOG.md and sends Telegram alert.
+
+**New behavior — add after failure is logged:**
+
+### 1. Check if tracer data exists for the failed job
+```python
+TRACE_DIR = Path.home() / "Obsidian/djinn/printer/active"
+traces = list(TRACE_DIR.glob("TRACE-*.md"))
+latest_trace = max(traces, key=lambda p: p.stat().st_mtime) if traces else None
+```
+
+### 2. Analyze tracer data if available
+```python
+# Read trace, find rows with 100% retransmit
+# Check if the spike was instant (0→100% in one interval) or gradual (climbing over many rows)
+# INSTANT: two consecutive rows where retx% jumps from <5% to >90%
+# GRADUAL: retx% climbs across 5+ rows
+
+if instant_spike:
+    # Grep M106 in the failed gcode at the failure Z height
+    failed_gcode = Path.home() / f"printer-files/queue/{failed_filename}"
+    # if file exists locally, grep for M106 near failure layer
+    # Send Telegram: "⚡ EMI spike detected at Z={z}. Check M106 in gcode near that layer. Suggest: cap M106 S255→S128"
+    msg = f"⚡ Instant nozzle_mcu spike at Z={failure_z} X={failure_x} Y={failure_y}\nLikely cause: M106 fan command\nRun: grep M106 {failed_filename}\nFix: cap S255→S128"
+elif gradual_climb:
+    msg = f"📈 Gradual nozzle_mcu degradation — possible hardware\nQueuing calibration cube..."
+    # Queue the cube (step 3)
+else:
+    msg = "⚠️ Print failed — no tracer data. Start djinn-print-tracer before next attempt."
+```
+
+### 3. Auto-queue calibration cube on gradual failure (or no tracer data)
+```python
+CUBE_FILE = "CRtestcube_Ender-3 V3 Plus_26m.gcode"
+# POST to Moonraker job queue
+requests.post(f"{MOONRAKER}/server/job_queue/job", json={"filename": CUBE_FILE})
+# Send Telegram: "🧊 Calibration cube queued as next job — hardware baseline test. If it passes, problem is in the failed gcode."
+```
+
+### 4. Telegram alert format on failure
+```
+🔴 Print failed: {filename}
+Duration: {duration}s ({duration/60:.1f}min)
+State: {state}
+
+🔬 Tracer analysis: {instant_spike | gradual_climb | no_data}
+{diagnostic_message}
+
+Next: {cube_queued | check_gcode_M106 | start_tracer}
+```
+
+**Config needed:**
+```python
+CUBE_GCODE = "CRtestcube_Ender-3 V3 Plus_26m.gcode"  # hardcode, always on printer
+MOONRAKER = "http://192.168.1.114:7125"
+TRACE_DIR = Path.home() / "Obsidian/djinn/printer/active"
+```
+
+**Dependencies:** `requests` (already installed), `pathlib` (stdlib)
+
+**Success criteria:**
+```bash
+# Simulate a failure: temporarily rename state file to force failure detection
+# Confirm Telegram message arrives with correct triage analysis
+# Confirm cube is queued in Moonraker job queue on gradual/no-data path
+python3 -m py_compile ~/.local/bin/djinn-print-monitor-v2 && echo OK
+systemctl --user status djinn-print-monitor.timer
+```
+
+**Report back:** COMMS.md — paste sample Telegram message output and confirm cube queues correctly on test failure.
