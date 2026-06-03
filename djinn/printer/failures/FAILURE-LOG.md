@@ -552,3 +552,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-03 08:31:22 UTC
+=== FAILURE DETECTED ===
+  File: ProxyStand_TTHQ_cursive_centered_job6.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-03 13:16:33 UTC
