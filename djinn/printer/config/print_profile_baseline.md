@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-03 03:31 UTC
-Source file: CRtestcube_Ender-3 V3 Plus_26m.gcode
-Readings: 268
+Generated: 2026-06-03 04:04 UTC
+Source file: Proxy_Stand_TF_solo.gcode
+Readings: 293
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 130°C | 55°C |
-| Mean | 210.9°C | 49.5°C |
-| Std dev | ±27.87°C | ±8.44°C |
-| Range | 49.0–221.9°C | 31.3–60.1°C |
+| Mean | 211.7°C | 50.4°C |
+| Std dev | ±26.77°C | ±8.59°C |
+| Range | 49.0–221.9°C | 31.3–60.2°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 268
 
 ## Anomalies
 - 
-hotend temp variance high: ±27.9°C (check nozzle_mcu cable)- bed temp variance high: ±8.4°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±26.8°C (check nozzle_mcu cable)- bed temp variance high: ±8.6°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
