@@ -15449,3 +15449,14 @@
 | 2026-06-03 04:39 UTC | standby | 0.0% | 118.0 | 0 | 49.5 | 0 | 0% | 0 |  |
 | 2026-06-03 04:40 UTC | standby | 0.0% | 97.7 | 0 | 47.8 | 0 | 0% | 0 |  |
 | 2026-06-03 04:41 UTC | standby | 0.0% | 81.5 | 0 | 45.5 | 0 | 0% | 0 |  |
+| 2026-06-03 04:42 UTC | printing | 0.0% | 221.0 | 220 | 49.2 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:43 UTC | printing | 0.0% | 220.0 | 220 | 54.4 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:44 UTC | printing | 0.0% | 220.0 | 220 | 55.9 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:45 UTC | printing | 0.0% | 220.0 | 220 | 55.9 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:46 UTC | printing | 0.0% | 220.0 | 220 | 55.5 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:47 UTC | printing | 0.0% | 219.7 | 220 | 55.1 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:48 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:49 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:50 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:51 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:52 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
