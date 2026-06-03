@@ -542,3 +542,13 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-03 05:38:29 UTC
+=== FAILURE DETECTED ===
+  File: gcodes/Proxy_Tornado_Recycler_job1.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-03 08:16:18 UTC
+=== FAILURE DETECTED ===
+  File: gcodes/ProxyStand_TCF.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-03 08:31:22 UTC
