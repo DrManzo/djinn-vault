@@ -537,3 +537,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-03 04:57:15 UTC
+=== FAILURE DETECTED ===
+  File: ProxyStandTF_brim.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-03 05:38:29 UTC

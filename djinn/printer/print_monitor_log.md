@@ -15465,3 +15465,61 @@
 | 2026-06-03 04:55 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
 | 2026-06-03 04:56 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
 | 2026-06-03 04:57 UTC | cancelled | 0.0% | 149.0 | 0 | 53.6 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:58 UTC | cancelled | 0.0% | 102.8 | 0 | 51.4 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 04:59 UTC | cancelled | 0.0% | 74.5 | 0 | 49.1 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:00 UTC | cancelled | 0.0% | 57.1 | 0 | 47.1 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:01 UTC | cancelled | 0.0% | 46.3 | 0 | 45.5 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:02 UTC | cancelled | 0.0% | 40.0 | 0 | 44.0 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:03 UTC | cancelled | 0.0% | 37.6 | 0 | 43.0 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:04 UTC | cancelled | 0.0% | 36.5 | 0 | 42.2 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:05 UTC | cancelled | 0.0% | 35.6 | 0 | 41.3 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:06 UTC | cancelled | 0.0% | 34.9 | 0 | 40.5 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:08 UTC | cancelled | 0.0% | 34.4 | 0 | 39.8 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:09 UTC | cancelled | 0.0% | 34.0 | 0 | 39.1 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:10 UTC | cancelled | 0.0% | 33.6 | 0 | 38.4 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:11 UTC | cancelled | 0.0% | 33.3 | 0 | 37.7 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:12 UTC | cancelled | 0.0% | 33.1 | 0 | 37.1 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:13 UTC | cancelled | 0.0% | 32.9 | 0 | 36.6 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:14 UTC | cancelled | 0.0% | 32.7 | 0 | 36.1 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:15 UTC | cancelled | 0.0% | 32.5 | 0 | 35.7 | 0 | 0% | 0 | Proxy_Stand_TF_solo_patched.gcode |
+| 2026-06-03 05:16 UTC | printing | 0.0% | 121.2 | 130 | 37.2 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:17 UTC | printing | 0.0% | 202.0 | 130 | 46.5 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:18 UTC | printing | 0.0% | 130.5 | 130 | 54.9 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:19 UTC | printing | 0.0% | 146.3 | 220 | 60.0 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:20 UTC | printing | 0.0% | 220.5 | 220 | 61.2 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:21 UTC | printing | 0.0% | 219.5 | 220 | 61.1 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:22 UTC | printing | 0.0% | 220.2 | 220 | 60.5 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:23 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:24 UTC | printing | 0.0% | 219.8 | 220 | 59.9 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:25 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:26 UTC | printing | 0.0% | 219.8 | 220 | 59.8 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:27 UTC | printing | 0.0% | 220.4 | 220 | 60.0 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:28 UTC | printing | 0.0% | 219.9 | 220 | 60.1 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:29 UTC | printing | 0.0% | 220.5 | 220 | 59.9 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:30 UTC | paused | 0.0% | 219.6 | 220 | 59.7 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:31 UTC | standby | 0.0% | 163.6 | 0 | 57.2 | 0 | 0% | 0 |  |
+| 2026-06-03 05:32 UTC | standby | 0.0% | 130.5 | 0 | 55.0 | 0 | 0% | 0 |  |
+| 2026-06-03 05:33 UTC | standby | 0.0% | 105.5 | 0 | 53.1 | 0 | 0% | 0 |  |
+| 2026-06-03 05:34 UTC | standby | 0.0% | 87.1 | 0 | 51.3 | 0 | 0% | 0 |  |
+| 2026-06-03 05:35 UTC | standby | 0.0% | 73.7 | 0 | 49.8 | 0 | 0% | 0 |  |
+| 2026-06-03 05:36 UTC | printing | 0.0% | 144.6 | 220 | 49.9 | 60 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:37 UTC | printing | 0.0% | 219.9 | 0 | 57.0 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:38 UTC | cancelled | 0.0% | 147.6 | 0 | 56.4 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:39 UTC | cancelled | 0.0% | 102.0 | 0 | 53.7 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:40 UTC | cancelled | 0.0% | 73.9 | 0 | 51.3 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:41 UTC | cancelled | 0.0% | 56.8 | 0 | 49.3 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:43 UTC | cancelled | 0.0% | 46.0 | 0 | 47.4 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:44 UTC | cancelled | 0.0% | 39.8 | 0 | 45.8 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:45 UTC | cancelled | 0.0% | 37.4 | 0 | 44.6 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:46 UTC | cancelled | 0.0% | 36.2 | 0 | 43.5 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:47 UTC | cancelled | 0.0% | 35.3 | 0 | 42.5 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:48 UTC | cancelled | 0.0% | 34.6 | 0 | 41.3 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:49 UTC | cancelled | 0.0% | 34.0 | 0 | 39.3 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:50 UTC | cancelled | 0.0% | 33.5 | 0 | 38.5 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:51 UTC | cancelled | 0.0% | 33.1 | 0 | 37.9 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:52 UTC | cancelled | 0.0% | 33.0 | 0 | 37.2 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:53 UTC | cancelled | 0.0% | 32.7 | 0 | 36.7 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:54 UTC | cancelled | 0.0% | 32.4 | 0 | 36.1 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:55 UTC | cancelled | 0.0% | 32.2 | 0 | 35.6 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:56 UTC | cancelled | 0.0% | 31.9 | 0 | 35.2 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
+| 2026-06-03 05:57 UTC | cancelled | 0.0% | 31.7 | 0 | 34.7 | 0 | 0% | 0 | ProxyStandTF_brim.gcode |
