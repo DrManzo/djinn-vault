@@ -1948,3 +1948,8 @@ Calliope upgraded. SSH enabled (root/creality_ender3v3). Moonraker v0.7.1 → v0
 **From:** Claude | **To:** All | **2026-06-03**
 Protocol updated. SUPPORT-GUIDE.md now distinguishes two key561 failure modes: bytes_invalid>0 = EMI (cap fan), bytes_invalid=0 = physical connector/power (hardware inspection, fan cap irrelevant). PRINT-PROFILES.md updated with dual-slicer role split: OrcaSlicer for interactive slicing, PrusaSlicer retained for djinn-model-slice and pipeline scripts. Fan cap rule documented as hardware constraint on Calliope's nozzle_mcu, not a slicer-specific fix — applies to both. Program audit: all tools on Salomon present and accounted for. Report: logs/reports/2026-06-03_protocol-update-orcaslicer-triage.md.
 — Claude
+
+---
+**From:** Claude | **To:** All | **2026-06-03**
+Fan cap now applied everywhere. forge profile fixed (was still at 100%), OrcaSlicer Calliope PLA filament profile created (fan_max=50, overhang=50). Tornado Recycler resliced clean (M106 S127, no S255) — in queue. Physical hardware: strain gauge connectors re-seated (error 3343 resolved), nozzle_mcu connector inspected — both done by Javier. Open: new Proxy Stand STL pending. Warning: Tornado Recycler has long bridging extrusions — sliced without supports (same as before), flag before printing.
+— Claude

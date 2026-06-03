@@ -858,3 +858,13 @@ created: 2026-05-19
 - Program audit: OrcaSlicer ✅ Flatpak, PrusaSlicer ✅ system, all djinn-* scripts intact
 
 *— Claude*
+
+## 2026-06-03: Fan Cap Applied System-Wide + Tornado Recycler Resliced
+
+- `~/.config/forge/ender3-v3-plus.ini` — fixed: bridge_fan=100→50, max_fan=100→50, min_fan=100→50 (was the unfixed CLI pipeline profile)
+- `~/.config/djinn/ender3-v3-plus.ini` — already fixed, no change needed
+- OrcaSlicer `Calliope PLA` filament profile created: fan_max=50, fan_min=50, overhang_fan=50, bed_temp=60°C
+- `Proxy_Tornado_Recycler_job1.gcode` resliced with fixed profile: M106 S127 only, no S255. In queue.
+- Hardware: 4 strain gauge connectors re-seated (error 3343 — done by Javier). nozzle_mcu connector inspected (done by Javier).
+
+*— Claude*
