@@ -59,3 +59,10 @@ Calliope will NOT start automatically.
 | 2026-06-03 12:18 UTC | Sliced — waiting for confirm |
 
 | 2026-06-03 12:21 UTC | Print started |
+| 2026-06-03 12:43 UTC | 10.3% complete |
+| 2026-06-03 12:46 UTC | 20.2% complete |
+| 2026-06-03 12:49 UTC | 30.2% complete |
+| 2026-06-03 12:52 UTC | 40.8% complete |
+| 2026-06-03 12:55 UTC | 50.3% complete |
+| 2026-06-03 12:59 UTC | 60.4% complete |
+| 2026-06-03 13:03 UTC | 70.1% complete |
