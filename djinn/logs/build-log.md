@@ -820,3 +820,10 @@ created: 2026-05-19
 - **Report:** `logs/reports/2026-06-02_bug-calliope-nozzle-mcu-cable-loses-comms-under-print-vibration.md`
 
 *— Claude*
+
+## 2026-06-02: RESEARCH — Calliope Error 3343 + nozzle_mcu Key561 Full Diagnostic
+- Built `djinn-print-tracer` — 5s polling tracer capturing nozzle_mcu stats + XY position during prints
+- Confirmed key561 is position-dependent: kills at Y=124–136 across all attempts (cable binding at max bed-forward position)
+- Error 3343 (undocumented): likely strain gauge subsystem or dual-code artifact. Repair: re-seat 4 strain gauge connectors + hex screws, firmware audit (rollback 1.2.3.23 → 1.2.3.21 if needed)
+- Djinn risk: gcode filenames with underscores trigger erratic V3 Plus behavior — enforce clean names in slicing pipeline
+- Report: `logs/reports/2026-06-02_error-3343-calliope-diagnostics.md`
