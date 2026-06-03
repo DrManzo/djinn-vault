@@ -827,3 +827,10 @@ created: 2026-05-19
 - Error 3343 (undocumented): likely strain gauge subsystem or dual-code artifact. Repair: re-seat 4 strain gauge connectors + hex screws, firmware audit (rollback 1.2.3.23 → 1.2.3.21 if needed)
 - Djinn risk: gcode filenames with underscores trigger erratic V3 Plus behavior — enforce clean names in slicing pipeline
 - Report: `logs/reports/2026-06-02_error-3343-calliope-diagnostics.md`
+
+## 2026-06-02: FIX — PLA profile fan 100%→50%, cube-style start gcode
+- Root cause of all Proxy Stand key561 failures: `bridge_fan_speed=100` in ender3-v3-plus.ini → M106 S255 at bridge infill → EMI kills nozzle_mcu
+- Fix: capped all fan settings to 50%, start gcode now matches Creality cube style, bed 60°C
+- Built djinn-print-tracer — real-time nozzle_mcu + XY position logger
+- ProxyStandTF.gcode + ProxyStandTTHQ.gcode resliced clean (no supports, M106 S127.5)
+- Report: logs/reports/2026-06-02_proxy-stand-print-diagnosis.md
