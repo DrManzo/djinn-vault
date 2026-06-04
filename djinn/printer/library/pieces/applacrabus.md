@@ -1,15 +1,17 @@
 ---
 id: applacrabus
-name: Appla Crabus (Apple with Crab Claws)
+name: Applacrabus (Apple with Crab Claws)
 category: external
 platform: cults3d
-compliance_status: pending-review
+creator: Midnight3DPrinting
+license: CC BY-SA 4.0
+compliance_status: verified-commercial
 date_acquired: 2026-06-04
 date_processed: 2026-06-04
-tags: [proxy-accessory, art, external, puffco, terp-tribe]
+tags: [proxy-accessory, art, external, puffco, terp-tribe, cc-by-sa]
 ---
 
-# Appla Crabus — Apple with Crab Claws
+# Applacrabus — Apple with Crab Claws
 
 ## Attribution
 
@@ -17,17 +19,23 @@ tags: [proxy-accessory, art, external, puffco, terp-tribe]
 |-------|-------|
 | **Platform** | Cults3D |
 | **Source URL** | https://cults3d.com/en/3d-model/art/applacrabus |
-| **Designer** | ⚠ PENDING — verify on Cults3D page |
-| **License** | ⚠ PENDING — verify on Cults3D page |
-| **Commercial use** | ⚠ UNKNOWN — must confirm before listing |
+| **Designer** | Midnight3DPrinting |
+| **License** | CC BY-SA 4.0 |
+| **Commercial use** | ✅ YES — with attribution + ShareAlike on derivatives |
+| **Price** | Free |
 
-> **Action required:** Go to the Cults3D page, record the designer handle and license type here. If license is personal-only or NC, this piece cannot be sold — use only for display/personal pieces. Update `compliance_status` in `index.json` to `verified-commercial` or `verified-personal-only`.
+### What CC BY-SA means for the shop
+
+- ✅ Can sell prints
+- ✅ Can modify (bore, scale, engrave)
+- ⚠ Must credit Midnight3DPrinting in every listing
+- ⚠ Modified versions must carry the same CC BY-SA 4.0 license
 
 ---
 
 ## Description
 
-Art piece — apple body elevated on four crab claw legs. Used as the first Proxy Core accessory body in the Typhon's Forge pipeline. Decorative / conversation piece category.
+Art piece — a forest spirit that became a monster: apple body elevated on four crab-claw legs. Originally published to Thingiverse in September 2024 by Midnight3DPrinting, mirrored to Cults3D. First Proxy Core accessory body processed through the Typhon's Forge pipeline. Novelty / conversation piece category.
 
 ---
 
@@ -42,40 +50,39 @@ Art piece — apple body elevated on four crab claw legs. Used as the first Prox
 
 ## Processing Log
 
-**Tool:** djinn-bore-core v3  
-**Date:** 2026-06-04
+**Tool:** djinn-bore-core v3 | **Date:** 2026-06-04
 
 | Step | Detail |
 |------|--------|
-| Input mesh | 55,211 faces, NOT watertight (5 disconnected bodies, 73 open edges) |
-| Auto-scale | ×46.678 — detected meters-as-mm, scaled to 76mm target height |
-| Proportional scale | Fell back to uniform (proportional footprint too narrow for 38mm bore) |
-| Mesh repair | Poisson surface reconstruction (pymeshlab depth=8) → 127,168 faces, watertight |
+| Input mesh | 55,211 faces — NOT watertight (5 disconnected bodies, 73 open edges) |
+| Auto-scale | ×46.678 — meters-as-mm → 76mm target height |
+| Proportional scale | Fell back to uniform (extreme aspect ratio — proportional footprint too narrow for 38mm bore) |
+| Mesh repair | Poisson surface reconstruction → 127,168 faces, is_volume=True |
 | Bore | 38.3mm ⌀ × 51.0mm depth — Puffco Proxy Core seat |
 | Wall thickness | 5.1mm ✓ |
-| Support columns | OK (crab claws below bore floor — passed threshold check) |
-| Maker's mark | TF anvil, 15mm, 0.5mm depth, bore floor, no mirror |
+| Columns | OK (claw legs below bore floor, passed threshold) |
+| Maker's mark | TF anvil 15mm, 0.5mm depth, bore floor, no mirror |
 | Output | 120,118 faces |
-| Material (test) | PLA (prototype only) |
+| Material (test) | PLA (prototype) — PETG/ABS/ASA for production |
 
 ---
 
 ## Print Notes
 
-- Crab claw legs are thin — print slowly, 2–3 perimeters minimum
-- No supports needed (claws are self-supporting at this scale)
-- Bore is tight-fit for Proxy Core — test fit before final material
-- Recommend PETG minimum for any piece that will be used; ABS/ASA for regular use near heat
+- Claw legs are thin — slow perimeter speed, 3+ walls
+- No supports needed
+- Bore is snug — test fit before committing to final material
+- PETG minimum for any piece used near heat; ABS/ASA for regular sessions
 
 ---
 
 ## Attribution Block (for product listings)
 
-> "Appla Crabus" by **[DESIGNER — fill in]** on Cults3D  
-> Original: https://cults3d.com/en/3d-model/art/applacrabus  
-> Modified by Typhon's Forge: scaled, Puffco Proxy Core seat bored (38mm × 51mm), TF maker's mark added.  
-> License: **[LICENSE — fill in]**
+> "Applacrabus" by **Midnight3DPrinting** on Cults3D  
+> https://cults3d.com/en/3d-model/art/applacrabus  
+> Modified by Typhon's Forge: scaled to fit, Puffco Proxy Core seat bored (38.3mm × 51mm), TF maker's mark added to bore floor.  
+> License: CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/
 
 ---
 
-*— djinn-bore-core v3, 2026-06-04*
+*— djinn-bore-core v3 / Claude, 2026-06-04*

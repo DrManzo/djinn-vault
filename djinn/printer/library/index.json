@@ -2,26 +2,33 @@
   "_meta": {
     "description": "Typhon's Forge model library — provenance and attribution index",
     "categories": {
-      "external": "Downloaded from Cults3D, Thingiverse, MakerWorld, etc. — license must be verified before commercial use",
+      "external": "Downloaded from Cults3D, Thingiverse, MakerWorld, Printables etc. — license must be verified before commercial use",
       "terp-tribe": "Terp Tribe community designs — use governed by Terp Tribe agreement",
       "forge": "Typhon's Forge originals — owned by Javier, commercial use unrestricted"
     },
-    "license_statuses": ["verified-commercial", "verified-personal-only", "pending-review", "unknown"],
+    "license_statuses": {
+      "verified-commercial": "License confirmed — commercial use permitted (with any required attribution)",
+      "verified-personal-only": "License confirmed — personal/non-commercial use only. DO NOT LIST IN SHOP.",
+      "pending-review": "License not yet confirmed — treat as personal-only until verified",
+      "unknown": "Source/license unknown"
+    },
     "last_updated": "2026-06-04"
   },
   "pieces": {
+
     "applacrabus": {
       "id": "applacrabus",
-      "name": "Appla Crabus (Apple with Crab Claws)",
+      "name": "Applacrabus (Apple with Crab Claws)",
       "category": "external",
       "source": {
         "platform": "cults3d",
         "url": "https://cults3d.com/en/3d-model/art/applacrabus",
-        "creator": "PENDING — check Cults3D page",
-        "license": "PENDING — check Cults3D page",
-        "license_url": "PENDING",
-        "commercial_ok": null,
-        "notes": "Verify license before using in any shop listing. Cults3D models may be CC, personal-only, or commercial."
+        "creator": "Midnight3DPrinting",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercial_ok": true,
+        "price": "free",
+        "notes": "CC BY-SA = commercial use allowed. Derivatives must carry same license. Must credit Midnight3DPrinting in any listing."
       },
       "files": {
         "original": "printer-files/library/originals/external/applacrabus_original.stl",
@@ -32,17 +39,126 @@
         "date_processed": "2026-06-04",
         "tool": "djinn-bore-core v3",
         "modifications": [
-          "auto-scaled ×46.678 (meters→mm, then height-fit to 76mm)",
-          "Poisson surface reconstruction (original mesh non-watertight, 5 bodies)",
+          "auto-scaled ×46.678 (meters→mm + height-fit to 76mm)",
+          "Poisson surface reconstruction (original non-watertight, 5 bodies)",
           "bore: 38.3mm ⌀ × 51.0mm depth (Puffco Proxy Core seat)",
           "maker's mark engraved on bore floor (15mm TF anvil, 0.5mm depth)"
         ],
         "wall_thickness_mm": 5.1,
-        "material": "pla",
+        "material_tested": "pla",
         "print_ready": true
       },
-      "attribution_block": "\"Appla Crabus\" by [CREATOR — fill in] on Cults3D (https://cults3d.com/en/3d-model/art/applacrabus). Modified: scaled, bore added for Puffco Proxy Core. License: [LICENSE — fill in].",
+      "attribution_block": "\"Applacrabus\" by Midnight3DPrinting on Cults3D (https://cults3d.com/en/3d-model/art/applacrabus). Modified by Typhon's Forge: scaled, Puffco Proxy Core seat bored (38.3mm × 51mm), TF maker's mark added. License: CC BY-SA 4.0.",
+      "compliance_status": "verified-commercial"
+    },
+
+    "puffco-proxy-tornadocycler": {
+      "id": "puffco-proxy-tornadocycler",
+      "name": "Puffco Proxy Tornadocycler",
+      "category": "external",
+      "source": {
+        "platform": "cults3d",
+        "url": "https://cults3d.com/en/3d-model/art/puffco-proxy-tornadocycler",
+        "creator": "FabrizioCreations",
+        "license": "Cults PU (Personal Use, No AI)",
+        "license_url": "https://cults3d.com/en/license",
+        "commercial_ok": false,
+        "price": "$17.43 USD",
+        "notes": "PAID model. Personal use only. No AI. Cannot be sold or used in commercial listings. For personal/display prints only."
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/tornadocycler_original.stl",
+        "cored": null
+      },
+      "processing": {
+        "date_acquired": "prior to 2026-06-04",
+        "date_processed": null,
+        "tool": null,
+        "modifications": [],
+        "print_ready": false,
+        "notes": "File exists in library as nado_recycler_Proxy_Tornado_Recycler_stl — needs to be copied to originals/external/"
+      },
+      "compliance_status": "verified-personal-only"
+    },
+
+    "puffco-proxy-stand-joshtf": {
+      "id": "puffco-proxy-stand-joshtf",
+      "name": "Puffco Proxy Stand",
+      "category": "external",
+      "source": {
+        "platform": "printables",
+        "url": "https://www.printables.com/model/1110170-puffco-proxy-stand",
+        "creator": "joshtf (@joshtf_2304545)",
+        "license": "Printables Standard (All Rights Reserved)",
+        "license_url": "https://www.printables.com/social/terms-of-service",
+        "commercial_ok": false,
+        "price": "free",
+        "notes": "Printables standard license = all rights reserved = personal use only. No commercial listing."
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/proxy_stand_joshtf_original.stl",
+        "cored": null
+      },
+      "processing": {
+        "date_acquired": "prior to 2026-06-04",
+        "date_processed": null,
+        "print_ready": false,
+        "notes": "Proxy Stand files exist in staging/ — need to move originals here"
+      },
+      "compliance_status": "verified-personal-only"
+    },
+
+    "puffco-proxy-toilet-cup": {
+      "id": "puffco-proxy-toilet-cup",
+      "name": "Puffco Proxy Core Toilet Cup",
+      "category": "external",
+      "source": {
+        "platform": "makerworld",
+        "url": "https://makerworld.com/en/models/2801075-puffco-proxy-core-toilet-cup",
+        "creator": "PENDING — MakerWorld blocked scraping, check manually",
+        "license": "PENDING — check MakerWorld page",
+        "license_url": null,
+        "commercial_ok": null,
+        "price": "PENDING",
+        "notes": "MakerWorld (Bambu Lab) blocked automated fetch. Must verify manually. Common MakerWorld licenses: CC BY, CC BY-NC, or Bambu-specific. Toilet cup form factor — novelty proxy accessory."
+      },
+      "files": {
+        "original": null,
+        "cored": null
+      },
+      "processing": {
+        "date_acquired": null,
+        "date_processed": null,
+        "print_ready": false
+      },
+      "compliance_status": "pending-review"
+    },
+
+    "puffco-proxy-travel-pack": {
+      "id": "puffco-proxy-travel-pack",
+      "name": "Puffco Proxy All-in-One Travel Pack",
+      "category": "external",
+      "source": {
+        "platform": "makerworld",
+        "url": "https://makerworld.com/en/models/2280231-puffco-proxy-all-in-one-travel-pack",
+        "creator": "PENDING — MakerWorld blocked scraping, check manually",
+        "license": "PENDING — check MakerWorld page",
+        "license_url": null,
+        "commercial_ok": null,
+        "price": "PENDING",
+        "notes": "MakerWorld blocked automated fetch. Multi-component travel pack — multiple STL files likely. Verify license and component list manually."
+      },
+      "files": {
+        "original": null,
+        "cored": null
+      },
+      "processing": {
+        "date_acquired": null,
+        "date_processed": null,
+        "print_ready": false
+      },
       "compliance_status": "pending-review"
     }
+
   }
 }
