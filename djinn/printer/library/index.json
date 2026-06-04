@@ -163,6 +163,35 @@
       "compliance_status": "pending-review"
     },
 
+    "tardis": {
+      "id": "tardis",
+      "name": "Doctor Who TARDIS",
+      "category": "external",
+      "source": {
+        "platform": "cults3d",
+        "url": "https://cults3d.com/en/3d-model/art/tardis-de-doctor-who",
+        "creator": "LuliasMartch",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "commercial_ok": true,
+        "price": "free"
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/tardis_original.stl",
+        "cored": "printer-files/library/cored/external/tardis_cored.stl"
+      },
+      "processing": {
+        "date_acquired": "2026-06-04",
+        "date_processed": "2026-06-04",
+        "tool": "manifold3d direct (379-body mesh, trimesh volume check bypassed)",
+        "modifications": ["bore: 38.3mm ⌀ × 51.0mm at top center"],
+        "print_ready": true
+      },
+      "modification_level": "significant",
+      "attribution_block": "\"Tardis de Doctor Who\" by LuliasMartch on Cults3D (https://cults3d.com/en/3d-model/art/tardis-de-doctor-who). Modified by Typhon's Forge: Proxy Core seat bored. License: CC BY 4.0.",
+      "compliance_status": "verified-commercial"
+    },
+
     "duff-beer-pen-holder": {
       "id": "duff-beer-pen-holder",
       "name": "Duff Beer Pen Holder (Colored)",
