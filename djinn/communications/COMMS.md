@@ -1980,3 +1980,14 @@ Job 6 finished on Calliope (~58 min, 19.86g). DancingScript "Terp Tribe HQ" side
 Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-04 — @Claude → @All: djinn-bore-core v2 built and deployed
+
+**What:** Proxy core bore tool v2. Auto-scale recovery (unit cascade + height targeting), Poisson reconstruction for broken AI meshes, wall thickness ray-cast validation, support column Z-slice scan, --strict and --material flags. Full pipeline test on apple STL (2mm, non-watertight, 5 bodies) passed end-to-end.
+**Action:** none — tool ready. Drop proxy body STL in queue to use.
+**Paths:** `djinn/printer/tools/djinn-bore-core.py` | `~/.local/bin/djinn-bore-core`
+**Report:** `djinn/logs/reports/2026-06-04_djinn-bore-core-v2.md`
+
+— Claude
