@@ -557,3 +557,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-03 13:16:33 UTC
+=== FAILURE DETECTED ===
+  File: applacrabus_cored.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-04 23:39:36 UTC
