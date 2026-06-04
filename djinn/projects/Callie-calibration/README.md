@@ -5,7 +5,7 @@
 **Filament:** PLA
 **Firmware:** Klipper (Nebula)
 **Slicer:** OrcaSlicer 2.3.2 (GUI) + PrusaSlicer (headless pipeline)
-**Moonraker:** http://192.168.1.114:7125
+**Moonraker:** http://192.168.1.113:7125
 
 ## Benchmark Plan
 

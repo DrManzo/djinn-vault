@@ -35,7 +35,7 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Calliope (Printer — Ender-3 V3 Plus)
 | Attribute | Value |
 |-----------|-------|
-| IP | 192.168.1.114:7125 |
+| IP | 192.168.1.113:7125 |
 | Firmware | Klipper + Moonraker (Nebula pad) |
 | Slicer | OrcaSlicer (via Salomon) |
 | Status | READY |
@@ -65,7 +65,7 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
          │
          │ HTTP (Moonraker API)      ┌─────────────────┐
          ├─────────────────────────►│    Calliope      │
-         │                          │ 192.168.1.114    │
+         │                          │ 192.168.1.113    │
          │                          │ Ender-3 V3 Plus  │
          │                          │ Klipper/Moonraker│
          │                          └─────────────────┘

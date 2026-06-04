@@ -79,7 +79,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Field | Value |
 |-------|-------|
 | Machine | Ender-3 V3 Plus (Calliope) |
-| IP | 192.168.1.114:7125 (Moonraker) |
+| IP | 192.168.1.113:7125 (Moonraker) |
 | Control | Klipper + Moonraker |
 | Bot | Telegram bot on Typhon — `/print_status`, `/print`, `/print_cancel` |
 | Config backup | [[djinn/printer/backup/]] |

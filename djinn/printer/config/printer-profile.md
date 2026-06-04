@@ -11,7 +11,7 @@
 | Nozzle | 0.4mm hardened steel |
 | Connectivity | WiFi — Creality Nebula pad (bypasses Creality Cloud) |
 | Print server | Klipper + Moonraker on Nebula pad |
-| API endpoint | `http://192.168.1.114:7125` |
+| API endpoint | `http://192.168.1.113:7125` |
 
 ## Default Print Settings — PLA
 
@@ -49,7 +49,7 @@ From Rose_Decor_fixed.gcode run (2026-05-22):
 ## Hardware Notes
 
 - **nozzle_mcu**: GD32F303CBT6 on `/dev/ttyS1` @ 230400 baud — cable reseated 2026-05-22, retransmit_seq dropped from 4289 → 2
-- **Printer IP**: DHCP at 192.168.1.114 — recommend static lease via router to prevent future address changes
+- **Printer IP**: DHCP at 192.168.1.113 — recommend static lease via router to prevent future address changes
 - **Cat safety**: Printer must be enclosed or placed out of reach — bed reaches 55-60°C, hotend 220°C+
 
 ## Software Stack (Salomon)

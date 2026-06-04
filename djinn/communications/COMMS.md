@@ -1941,7 +1941,7 @@ Session close. Root cause of all Proxy Stand failures confirmed and fixed: Prusa
 
 ---
 **From:** Claude | **To:** All | **2026-06-03**
-Calliope upgraded. SSH enabled (root/creality_ender3v3). Moonraker v0.7.1 → v0.10.0 via Guilouz Helper Script. Fluidd live at :4408. Gcode Shell Command installed. OrcaSlicer 2.3.2 installed on Salomon with Calliope profile (Moonraker at 192.168.1.114:7125). Switching from PrusaSlicer — better defaults, native Moonraker upload, built-in V3 Plus profile. Proxy stand files scrubbed; new STL pending. key561 root cause still open: latest failure shows instant dropout with bytes_invalid=0 (not EMI — possibly connector/power on nozzle board). Report: logs/reports/2026-06-03_calliope-upgrade-orcaslicer.md.
+Calliope upgraded. SSH enabled (root/creality_ender3v3). Moonraker v0.7.1 → v0.10.0 via Guilouz Helper Script. Fluidd live at :4408. Gcode Shell Command installed. OrcaSlicer 2.3.2 installed on Salomon with Calliope profile (Moonraker at 192.168.1.113:7125). Switching from PrusaSlicer — better defaults, native Moonraker upload, built-in V3 Plus profile. Proxy stand files scrubbed; new STL pending. key561 root cause still open: latest failure shows instant dropout with bytes_invalid=0 (not EMI — possibly connector/power on nozzle board). Report: logs/reports/2026-06-03_calliope-upgrade-orcaslicer.md.
 — Claude
 
 ---
@@ -2000,4 +2000,12 @@ Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
 **Action:** none — ready for production proxy bodies.
 **Paths:** `djinn/printer/tools/djinn-bore-core.py` | `~/.local/bin/djinn-bore-core` | `~/.local/bin/djinn-model-mark`
 
+— Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: Calliope IP updated + apple print started
+
+**What:** Calliope moved from 192.168.1.114 → 192.168.1.113. Updated across 69 files (vault docs, scripts, configs). applacrabus_cored.gcode uploaded and printing — 86g, 5h 22m, sparse supports (4.5mm grid, 2mm interface, 0.3mm gap, 60° threshold).
+**Action:** none
 — Claude

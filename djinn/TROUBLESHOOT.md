@@ -330,7 +330,7 @@ scp -i ~/.ssh/id_ed25519 /path/to/file tf-tthq@192.168.1.113:~/destination/
 
 ```bash
 # Check Moonraker is reachable
-curl -s http://192.168.1.114:7125/printer/info | python3 -m json.tool | grep state
+curl -s http://192.168.1.113:7125/printer/info | python3 -m json.tool | grep state
 
 # Telegram commands (via @DjinnOCBot on Typhon)
 /print_status
