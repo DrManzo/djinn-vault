@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-djinn-bore-core v2 — Proxy core bore tool
+djinn-bore-core v3 — Proxy core bore tool
 
 Bores a core seat cavity into the top of any STL body for the Puffco Proxy.
-v2: auto-scale recovery, wall thickness check, support column scan.
+v2: auto-scale recovery, wall thickness check, support column scan, Poisson repair.
+v3: proportion-preserving scale, maker's mark on bore floor.
 
 Defaults (caliper-verified):
   diameter: 38.0mm + tolerance
@@ -23,12 +24,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 COMMS_PATH            = Path.home() / "Obsidian/djinn/communications/COMMS.md"
+MARK_CONFIG_PATH      = Path.home() / ".config/djinn/makers-mark.json"
+MARK_CONFIG_FALLBACK  = Path.home() / ".config/forge/makers-mark.json"
+
 BORE_DIAMETER_DEFAULT = 38.0
 BORE_DEPTH_DEFAULT    = 51.0
 TOLERANCE_DEFAULT     = 0.3
 
-WALL_HARD_FAIL   = 1.5   # mm — always a hard stop
-WALL_WARN        = 3.0   # mm — warning; hard stop under --strict
+WALL_HARD_FAIL    = 1.5   # mm — always a hard stop
+WALL_WARN         = 3.0   # mm — warning; hard stop under --strict
 COLUMN_FAIL_RATIO = 0.10  # < 10% bore area — hard stop under --strict
 COLUMN_WARN_RATIO = 0.15  # 10–15% — warning
 
@@ -38,20 +42,102 @@ def log(msg, quiet=False):
         print(msg, flush=True)
 
 
+# ── Feature map + proportion-preserving scale ─────────────────────────────────
+
+def capture_feature_map(mesh):
+    """
+    Capture normalized vertex positions (0–1 in all axes) before any scaling.
+    Returns dict with bbox_min, bbox_dims, norm_verts.
+    """
+    import numpy as np
+    bbox_min  = mesh.bounds[0].copy()
+    bbox_dims = (mesh.bounds[1] - mesh.bounds[0])
+    safe_dims = np.where(bbox_dims > 0, bbox_dims, 1.0)
+    return {
+        "bbox_min":   bbox_min,
+        "bbox_dims":  bbox_dims,
+        "norm_verts": (mesh.vertices - bbox_min) / safe_dims,
+    }
+
+
+def proportional_scale(mesh, bore_depth, target_height):
+    """
+    Scale the body below the bore floor proportionally.
+    Bore zone (top bore_depth mm) stays fixed in Z.
+    XY scales uniformly with the below-bore Z scale to preserve proportions.
+    Returns (new_mesh, scale_used, report_dict).
+    """
+    import numpy as np
+
+    top_z       = float(mesh.vertices[:, 2].max())
+    bore_floor  = top_z - bore_depth
+    base_z      = float(mesh.vertices[:, 2].min())
+    below_h     = bore_floor - base_z
+
+    if below_h <= 0:
+        return mesh, 1.0, {"note": "bore fills body — no below-bore zone to scale"}
+
+    target_below = target_height - bore_depth
+    if target_below <= 0:
+        return mesh, 1.0, {"note": "target_height <= bore_depth — cannot scale"}
+
+    z_scale  = target_below / below_h
+    xy_scale = z_scale  # keep proportions: XY matches Z scale
+
+    cx = float((mesh.bounds[0][0] + mesh.bounds[1][0]) / 2.0)
+    cy = float((mesh.bounds[0][1] + mesh.bounds[1][1]) / 2.0)
+
+    verts = mesh.vertices.copy()
+
+    # XY: scale all vertices around center
+    verts[:, 0] = cx + (verts[:, 0] - cx) * xy_scale
+    verts[:, 1] = cy + (verts[:, 1] - cy) * xy_scale
+
+    # Z: scale only below bore floor
+    below = verts[:, 2] < bore_floor
+    verts[below, 2] = base_z + (verts[below, 2] - base_z) * z_scale
+
+    new_mesh          = mesh.copy()
+    new_mesh.vertices = verts
+    new_dims          = new_mesh.bounds[1] - new_mesh.bounds[0]
+
+    report = {
+        "bore_zone_mm":      round(bore_depth, 1),
+        "body_below_before": round(below_h, 1),
+        "body_below_after":  round(target_below, 1),
+        "scale":             round(z_scale, 4),
+        "width_before":      round(float(mesh.bounds[1][0] - mesh.bounds[0][0]), 1),
+        "width_after":       round(float(new_dims[0]), 1),
+        "total_height":      round(float(new_dims[2]), 1),
+    }
+    return new_mesh, z_scale, report
+
+
+def print_proportion_report(report, quiet=False):
+    if quiet or not report or "note" in report:
+        return
+    log("  Proportion map:", quiet)
+    log(f"    Bore zone:    {report['bore_zone_mm']:.1f}mm → {report['bore_zone_mm']:.1f}mm  ✓ fixed (hardware spec)", quiet)
+    log(f"    Body below:   {report['body_below_before']:.1f}mm → {report['body_below_after']:.1f}mm  ×{report['scale']:.4f}", quiet)
+    log(f"    Object width: {report['width_before']:.1f}mm → {report['width_after']:.1f}mm  (XY matches body scale)", quiet)
+    log(f"    Total height: {report['total_height']:.1f}mm", quiet)
+
+
 # ── Auto-scale recovery ───────────────────────────────────────────────────────
 
-def auto_scale(mesh, depth, target_height=None, strict=False):
+def auto_scale(mesh, depth, target_height=None, strict=False, preserve_proportions=True):
     """
-    Detect wrong-unit scale and correct. Returns (mesh, scale_factor, rescaled, desc).
-    Trigger: height < depth+10mm OR any dimension < 5mm.
+    Detect wrong-unit scale and correct.
+    Returns (mesh, scale_factor, rescaled, desc, prop_report).
     """
+    import numpy as np
     bounds  = mesh.bounds
     dims    = bounds[1] - bounds[0]
     max_dim = float(dims.max())
     height  = float(dims[2])
 
     if height >= depth + 10.0 and max_dim >= 5.0:
-        return mesh, 1.0, False, "no rescale needed"
+        return mesh, 1.0, False, "no rescale needed", {}
 
     if strict:
         raise ValueError(
@@ -61,16 +147,16 @@ def auto_scale(mesh, depth, target_height=None, strict=False):
 
     # Unit detection cascade
     if max_dim < 5.0:
-        unit_scale = 1000.0
+        unit_scale  = 1000.0
         unit_reason = "sub-5mm → assuming meters exported as mm (×1000)"
     elif max_dim < 50.0:
-        unit_scale = 10.0
+        unit_scale  = 10.0
         unit_reason = "5–50mm → assuming cm exported as mm (×10)"
     elif max_dim > 500.0:
-        unit_scale = 0.0394
+        unit_scale  = 0.0394
         unit_reason = ">500mm → assuming inches as mm (×0.0394)"
     else:
-        unit_scale = 1.0
+        unit_scale  = 1.0
         unit_reason = "dimensions within range, height too short"
 
     if unit_scale != 1.0:
@@ -79,22 +165,33 @@ def auto_scale(mesh, depth, target_height=None, strict=False):
 
     new_height = float(mesh.bounds[1][2] - mesh.bounds[0][2])
     min_h      = target_height if target_height else (depth + 25.0)
-    h_scale    = 1.0
+    prop_report = {}
+    h_scale     = 1.0
 
-    # After a unit correction, always scale to target — the original scale was wrong
-    # so we have no reason to trust the resulting size. Scale up OR down to target.
-    # Without a unit correction, only scale up (model is legitimately large if > min_h).
-    needs_scale = (unit_scale != 1.0) or (new_height < min_h)
-    if needs_scale and abs(new_height - min_h) / max(new_height, 0.001) > 0.05:
-        h_scale = min_h / new_height
-        mesh.apply_scale(h_scale)
+    needs_height_fix = (unit_scale != 1.0) or (new_height < min_h)
+    if needs_height_fix and abs(new_height - min_h) / max(new_height, 0.001) > 0.05:
+        if preserve_proportions:
+            prop_mesh, z_scale, prop_report = proportional_scale(mesh, depth, min_h)
+            # Verify bore will still fit after proportional XY shrink
+            prop_dims = prop_mesh.bounds[1] - prop_mesh.bounds[0]
+            min_footprint = min(float(prop_dims[0]), float(prop_dims[1]))
+            if min_footprint >= depth + 10.0:  # bore_diameter is not known here; use depth as proxy check
+                mesh    = prop_mesh
+                h_scale = z_scale
+                unit_reason += f"; proportional scale ×{z_scale:.4f} (body below bore)"
+            else:
+                # Proportional scale would make object too narrow — fall back to uniform
+                prop_report = {"note": f"proportional would yield {min_footprint:.1f}mm footprint — fell back to uniform"}
+                h_scale = min_h / new_height
+                mesh.apply_scale(h_scale)
+                unit_reason += f"; uniform scale ×{h_scale:.4f} (proportional footprint too narrow)"
+        else:
+            h_scale = min_h / new_height
+            mesh.apply_scale(h_scale)
+            unit_reason += f"; uniform scale ×{h_scale:.4f}"
 
     total = unit_scale * h_scale
-    desc  = unit_reason
-    if h_scale != 1.0:
-        desc += f"; height-scaled ×{h_scale:.2f} to {min_h:.1f}mm"
-
-    return mesh, total, True, desc
+    return mesh, total, True, unit_reason, prop_report
 
 
 # ── Top detection ─────────────────────────────────────────────────────────────
@@ -132,7 +229,6 @@ def make_cylinder_mesh(diameter, depth, cx, cy, top_z, segments=64):
 
 
 def repair_mesh(mesh):
-    """Fast repair — fixes winding/normals/holes in-place. Returns (mesh, method)."""
     import trimesh
     trimesh.repair.fix_winding(mesh)
     trimesh.repair.fix_normals(mesh)
@@ -141,18 +237,17 @@ def repair_mesh(mesh):
 
 
 def repair_mesh_heavy(mesh):
-    """Poisson surface reconstruction via pymeshlab. Returns a new watertight mesh."""
     import trimesh, tempfile, os
     try:
         import pymeshlab
     except ImportError:
         return None, "pymeshlab not installed"
-
-    with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as f:
-        tmp_in = f.name
-    with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as f:
-        tmp_out = f.name
+    tmp_in = tmp_out = None
     try:
+        with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as f:
+            tmp_in = f.name
+        with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as f:
+            tmp_out = f.name
         mesh.export(tmp_in)
         ms = pymeshlab.MeshSet()
         ms.load_new_mesh(tmp_in)
@@ -167,10 +262,11 @@ def repair_mesh_heavy(mesh):
         return None, str(e)
     finally:
         for p in (tmp_in, tmp_out):
-            try:
-                os.unlink(p)
-            except Exception:
-                pass
+            if p:
+                try:
+                    os.unlink(p)
+                except Exception:
+                    pass
 
 
 def boolean_subtract(body, cutter):
@@ -210,14 +306,82 @@ def boolean_subtract(body, cutter):
     )
 
 
+# ── Maker's mark on bore floor ────────────────────────────────────────────────
+
+def load_mark_config():
+    for p in (MARK_CONFIG_PATH, MARK_CONFIG_FALLBACK):
+        if p.exists():
+            try:
+                return json.loads(p.read_text())
+            except Exception:
+                pass
+    return {}
+
+
+def engrave_mark_on_bore_floor(bored_mesh, cx, cy, top_z, bore_depth, effective_diam, quiet=False):
+    """
+    Engrave maker's mark on bore floor centered at (cx, cy).
+    Bore floor is at top_z - bore_depth. Mark recesses into body below the floor.
+    Mirror is NOT applied (bore floor is viewed from above, natural orientation).
+    Returns (result_mesh, mark_size_used, error_str_or_None).
+    """
+    import trimesh
+
+    cfg = load_mark_config()
+    mark_stl_path = cfg.get("path")
+    if not mark_stl_path or not Path(mark_stl_path).exists():
+        return bored_mesh, 0.0, f"mark STL not found: {mark_stl_path}"
+
+    depth_mm     = float(cfg.get("depth_mm", 0.5))
+    config_size  = float(cfg.get("size_mm", 15.0))
+
+    # Max mark diameter: bore_diam - 6mm (3mm margin each side)
+    max_size = effective_diam - 6.0
+    mark_size = min(config_size, max_size)
+    if mark_size < 3.0:
+        return bored_mesh, 0.0, f"bore too small for mark (max={max_size:.1f}mm < 3mm)"
+
+    log(f"  Engraving mark on bore floor ({mark_size:.1f}mm, {depth_mm}mm deep)...", quiet)
+
+    mark = trimesh.load(str(mark_stl_path), process=True)
+
+    # Scale to mark_size based on X extent
+    x_ext = mark.bounds[1][0] - mark.bounds[0][0]
+    if x_ext > 0:
+        mark.apply_scale(mark_size / x_ext)
+
+    # NO mirror — bore floor is viewed from above (+Z), natural orientation reads correctly
+    # (contrast with bottom face mark which IS mirrored for below-Z viewing)
+
+    # Flatten Z to depth_mm
+    z_ext = mark.bounds[1][2] - mark.bounds[0][2]
+    if z_ext > 0:
+        mark.vertices[:, 2] = (
+            (mark.vertices[:, 2] - mark.bounds[0][2]) / z_ext * depth_mm
+        )
+
+    trimesh.repair.fix_normals(mark, multibody=True)
+
+    # Position: center at (cx, cy), cutter top overlaps bore floor by 0.01mm
+    bore_floor_z = top_z - bore_depth
+    mb = mark.bounds
+    mark.apply_translation([
+        cx - (mb[0][0] + mb[1][0]) / 2.0,
+        cy - (mb[0][1] + mb[1][1]) / 2.0,
+        bore_floor_z - depth_mm + 0.01,
+    ])
+
+    try:
+        result, _ = boolean_subtract(bored_mesh, mark)
+        return result, mark_size, None
+    except Exception as e:
+        return bored_mesh, 0.0, f"mark boolean failed: {e}"
+
+
 # ── Structural checks ─────────────────────────────────────────────────────────
 
 def check_wall_thickness(bored_mesh, cx, cy, top_z, bore_radius, depth,
                           n_z=6, n_angles=12):
-    """
-    Cast inward rays at multiple Z levels within the bore.
-    Returns minimum wall thickness in mm, or None if measurement failed.
-    """
     import numpy as np
     FAR   = 400.0
     min_w = float("inf")
@@ -262,17 +426,13 @@ def _polygon_area(pts):
 
 
 def check_support_columns(mesh, top_z, bore_depth, bore_radius):
-    """
-    Scan Z slices below the bore floor for thin support columns.
-    Returns (issues_list, worst_issue_or_None).
-    """
     import numpy as np
-    bore_area  = math.pi * bore_radius ** 2
-    base_z     = float(mesh.bounds[0][2])
-    floor_z    = top_z - bore_depth
+    bore_area = math.pi * bore_radius ** 2
+    base_z    = float(mesh.bounds[0][2])
+    floor_z   = top_z - bore_depth
 
     if floor_z <= base_z + 2.0:
-        return [], None  # bore goes to base — nothing to check below
+        return [], None
 
     issues = []
     for z in np.arange(floor_z - 3.0, base_z + 2.0, -3.0):
@@ -321,7 +481,7 @@ def validate_bore_geometry(mesh, diameter, depth, cx, cy, top_z):
     if diameter > min(w, d):
         raise ValueError(
             f"Bore diameter {diameter}mm exceeds object footprint "
-            f"({w:.1f} × {d:.1f}mm)."
+            f"({w:.1f} × {d:.1f}mm). Use --no-proportional or increase --target-height."
         )
 
 
@@ -342,7 +502,8 @@ def wall_status_str(wall):
 def append_comms(input_path, output_path, diameter, depth,
                  cx, cy, top_z, top_mode, engine,
                  scale_factor, scale_desc,
-                 wall_mm, col_worst, material):
+                 wall_mm, col_worst, material,
+                 prop_report=None, mark_size=0.0):
     if not COMMS_PATH.exists():
         return
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -364,6 +525,20 @@ def append_comms(input_path, output_path, diameter, depth,
         "asa":  "✓ ASA — optimal for heat exposure",
     }.get(material.lower(), "")
 
+    prop_line = ""
+    if prop_report and "note" not in prop_report:
+        prop_line = (
+            f"**Proportion:** body-below ×{prop_report['scale']:.4f} "
+            f"({prop_report['body_below_before']:.1f}mm → {prop_report['body_below_after']:.1f}mm) | "
+            f"bore zone {prop_report['bore_zone_mm']:.1f}mm fixed\n"
+        )
+
+    mark_line = (
+        f"**Mark:** ✓ bore floor engraved — {mark_size:.1f}mm @ {load_mark_config().get('depth_mm', 0.5)}mm depth, mirror=off (viewed from above)\n"
+        if mark_size > 0 else
+        "**Mark:** none\n"
+    )
+
     msg = (
         f"\n---\n\n"
         f"### {ts} — @djinn-bore-core → @All: Bore complete\n\n"
@@ -373,8 +548,10 @@ def append_comms(input_path, output_path, diameter, depth,
         f"top Z={top_z:.1f}mm, center ({cx:.1f}, {cy:.1f})\n"
         f"**Top mode:** {top_mode} | **Engine:** {engine}\n"
         f"**Scale:** {scale_line}\n"
+        + prop_line +
         f"**Wall:** {wall_status_str(wall_mm)}\n"
         f"**Columns:** {col_line}\n"
+        + mark_line
     )
     if mat_warn:
         msg += f"**Material:** {mat_warn}\n"
@@ -393,31 +570,27 @@ def main():
     )
     parser.add_argument("input",
                         help="Path to input STL")
-    parser.add_argument("--diameter",      type=float, default=BORE_DIAMETER_DEFAULT,
-                        help=f"Bore diameter mm (default {BORE_DIAMETER_DEFAULT})")
-    parser.add_argument("--depth",         type=float, default=BORE_DEPTH_DEFAULT,
-                        help=f"Bore depth mm (default {BORE_DEPTH_DEFAULT})")
-    parser.add_argument("--tolerance",     type=float, default=TOLERANCE_DEFAULT,
-                        help="Added to diameter for fit clearance, clamped 0.2–0.4 (default 0.3)")
-    parser.add_argument("--top-mode",      choices=["z-max", "flat", "manual"], default="z-max")
-    parser.add_argument("--top-z",         type=float, default=None,
-                        help="Manual Z override (requires --top-mode manual)")
-    parser.add_argument("--output",        type=str, default=None,
-                        help="Output path (default: <input>_bored.stl)")
-    parser.add_argument("--target-height", type=float, default=None,
+    parser.add_argument("--diameter",          type=float, default=BORE_DIAMETER_DEFAULT)
+    parser.add_argument("--depth",             type=float, default=BORE_DEPTH_DEFAULT)
+    parser.add_argument("--tolerance",         type=float, default=TOLERANCE_DEFAULT,
+                        help="Added to diameter, clamped 0.2–0.4 (default 0.3)")
+    parser.add_argument("--top-mode",          choices=["z-max", "flat", "manual"], default="z-max")
+    parser.add_argument("--top-z",             type=float, default=None)
+    parser.add_argument("--output",            type=str,   default=None)
+    parser.add_argument("--target-height",     type=float, default=None,
                         help="Target height mm after auto-scale (default: depth+25mm)")
-    parser.add_argument("--material",      default="pla",
-                        choices=["pla", "petg", "abs", "asa"],
-                        help="Material for COMMS warning (default: pla)")
-    parser.add_argument("--strict",        action="store_true",
+    parser.add_argument("--material",          default="pla",
+                        choices=["pla", "petg", "abs", "asa"])
+    parser.add_argument("--strict",            action="store_true",
                         help="Escalate all warnings to hard stops")
-    parser.add_argument("--no-comms",      action="store_true",
-                        help="Skip COMMS.md append")
-    parser.add_argument("--dry-run",       action="store_true",
-                        help="Print plan, write nothing")
-    parser.add_argument("--quiet",         action="store_true")
-    parser.add_argument("--json",          action="store_true",
-                        help="Output result as JSON for pipeline use")
+    parser.add_argument("--no-proportional",   action="store_true",
+                        help="Use uniform scale instead of proportion-preserving scale")
+    parser.add_argument("--no-mark",           action="store_true",
+                        help="Skip maker's mark on bore floor")
+    parser.add_argument("--no-comms",          action="store_true")
+    parser.add_argument("--dry-run",           action="store_true")
+    parser.add_argument("--quiet",             action="store_true")
+    parser.add_argument("--json",              action="store_true")
     args = parser.parse_args()
 
     input_path = Path(args.input).expanduser().resolve()
@@ -435,14 +608,18 @@ def main():
     effective_diam = args.diameter + tol
     bore_radius    = effective_diam / 2.0
 
-    log(f"  djinn-bore-core v2", args.quiet)
+    log(f"  djinn-bore-core v3", args.quiet)
     log(f"  Input:    {input_path}", args.quiet)
     log(f"  Diameter: {effective_diam:.1f}mm ({args.diameter} + {tol} tol)", args.quiet)
     log(f"  Depth:    {args.depth}mm", args.quiet)
     log(f"  Top mode: {args.top_mode}", args.quiet)
     log(f"  Material: {args.material.upper()} {'(prototype)' if args.material == 'pla' else ''}", args.quiet)
-    if args.strict:
-        log(f"  Mode:     STRICT — all warnings are hard stops", args.quiet)
+    flags = []
+    if args.strict:           flags.append("STRICT")
+    if args.no_proportional:  flags.append("no-proportional")
+    if args.no_mark:          flags.append("no-mark")
+    if flags:
+        log(f"  Flags:    {', '.join(flags)}", args.quiet)
 
     try:
         import trimesh
@@ -458,15 +635,20 @@ def main():
         sys.exit(1)
     log(f"  Mesh: {len(mesh.faces)} faces, watertight={mesh.is_watertight}", args.quiet)
 
+    # Capture feature map before any scaling
+    feature_map = capture_feature_map(mesh)
+
     # ── auto-scale ────────────────────────────────────────────────────────────
     scale_factor = 1.0
     scale_desc   = "no rescale needed"
     rescaled     = False
+    prop_report  = {}
     try:
-        mesh, scale_factor, rescaled, scale_desc = auto_scale(
+        mesh, scale_factor, rescaled, scale_desc, prop_report = auto_scale(
             mesh, args.depth,
             target_height=args.target_height,
             strict=args.strict,
+            preserve_proportions=not args.no_proportional,
         )
     except ValueError as e:
         print(f"✗ {e}", file=sys.stderr)
@@ -476,6 +658,7 @@ def main():
         dims = mesh.bounds[1] - mesh.bounds[0]
         log(f"  ⚠  Auto-scaled ×{scale_factor:.3f}: {scale_desc}", args.quiet)
         log(f"     New size: {dims[0]:.1f} × {dims[1]:.1f} × {dims[2]:.1f}mm", args.quiet)
+        print_proportion_report(prop_report, args.quiet)
 
     # ── repair ───────────────────────────────────────────────────────────────
     repair_method = "none"
@@ -486,14 +669,14 @@ def main():
             log("  ⚠  Fast repair insufficient — running Poisson reconstruction...", args.quiet)
             heavy, method = repair_mesh_heavy(mesh)
             if heavy is not None and heavy.is_volume:
-                mesh = heavy
+                mesh          = heavy
                 repair_method = method
                 log(f"  ✓ Poisson reconstruction succeeded ({len(mesh.faces)} faces)", args.quiet)
             else:
                 log(f"  ⚠  Poisson failed ({method}) — boolean may produce artifacts", args.quiet)
                 repair_method = f"failed ({method})"
 
-    # ── support column check (on original geometry, pre-bore) ─────────────────
+    # ── support column check ──────────────────────────────────────────────────
     col_issues, col_worst = [], None
     if mesh.bounds[1][2] - args.depth > mesh.bounds[0][2] + 2.0:
         log("  Checking support columns below bore floor...", args.quiet)
@@ -503,8 +686,7 @@ def main():
         if col_worst:
             label = "CRITICAL" if col_worst["critical"] else "WARNING"
             log(f"  ⚠  Column {label}: {col_worst['area']:.1f}mm² "
-                f"({col_worst['ratio']*100:.1f}% of bore area) at Z={col_worst['z']}mm",
-                args.quiet)
+                f"({col_worst['ratio']*100:.1f}%) at Z={col_worst['z']}mm", args.quiet)
             if args.strict and col_worst["critical"]:
                 print("✗ Support column below minimum under --strict", file=sys.stderr)
                 sys.exit(1)
@@ -536,24 +718,16 @@ def main():
     if args.dry_run:
         log("\n  [DRY RUN] No files written.", args.quiet)
         log(f"  Would write: {output_path}", args.quiet)
-        if col_worst:
-            log(f"  ⚠  Column warning would appear in COMMS", args.quiet)
         if args.json:
             print(json.dumps({
-                "status":       "dry_run",
-                "output":       str(output_path),
-                "diameter":     effective_diam,
-                "depth":        args.depth,
-                "top_z":        top_z,
-                "cx":           cx,
-                "cy":           cy,
-                "scale_factor": scale_factor,
-                "top_mode":     args.top_mode,
-                "col_worst":    col_worst,
+                "status": "dry_run", "output": str(output_path),
+                "diameter": effective_diam, "depth": args.depth,
+                "top_z": top_z, "cx": cx, "cy": cy,
+                "scale_factor": scale_factor, "top_mode": args.top_mode,
             }))
         sys.exit(0)
 
-    # ── boolean subtract ──────────────────────────────────────────────────────
+    # ── boolean subtract (bore) ───────────────────────────────────────────────
     log("  Building cutter cylinder...", args.quiet)
     cutter = make_cylinder_mesh(effective_diam, args.depth, cx, cy, top_z)
 
@@ -565,7 +739,7 @@ def main():
         sys.exit(1)
     log(f"  Engine: {engine} | {len(result.faces)} faces out", args.quiet)
 
-    # ── wall thickness check (on bored result) ────────────────────────────────
+    # ── wall thickness check ──────────────────────────────────────────────────
     log("  Checking wall thickness...", args.quiet)
     wall_mm = check_wall_thickness(result, cx, cy, top_z, bore_radius, args.depth)
     log(f"  Wall: {wall_status_str(wall_mm)}", args.quiet)
@@ -577,6 +751,17 @@ def main():
     if wall_mm is not None and wall_mm < WALL_WARN and args.strict:
         print(f"✗ Wall {wall_mm:.1f}mm < {WALL_WARN}mm under --strict", file=sys.stderr)
         sys.exit(1)
+
+    # ── maker's mark on bore floor ────────────────────────────────────────────
+    mark_size = 0.0
+    if not args.no_mark:
+        result, mark_size, mark_err = engrave_mark_on_bore_floor(
+            result, cx, cy, top_z, args.depth, effective_diam, args.quiet
+        )
+        if mark_err:
+            log(f"  ⚠  Mark skipped: {mark_err}", args.quiet)
+        else:
+            log(f"  ✓ Mark engraved ({mark_size:.1f}mm, bore floor)", args.quiet)
 
     # ── export ────────────────────────────────────────────────────────────────
     result.export(str(output_path))
@@ -595,6 +780,7 @@ def main():
                 cx, cy, top_z, args.top_mode, engine,
                 scale_factor, scale_desc,
                 wall_mm, col_worst, args.material,
+                prop_report=prop_report, mark_size=mark_size,
             )
             log("  ✓ COMMS.md appended", args.quiet)
         except Exception as e:
@@ -602,18 +788,12 @@ def main():
 
     if args.json:
         print(json.dumps({
-            "status":       "ok",
-            "output":       str(output_path),
-            "diameter":     effective_diam,
-            "depth":        args.depth,
-            "top_z":        top_z,
-            "cx":           cx,
-            "cy":           cy,
-            "scale_factor": scale_factor,
-            "top_mode":     args.top_mode,
-            "engine":       engine,
-            "wall_mm":      wall_mm,
-            "col_worst":    col_worst,
+            "status": "ok", "output": str(output_path),
+            "diameter": effective_diam, "depth": args.depth,
+            "top_z": top_z, "cx": cx, "cy": cy,
+            "scale_factor": scale_factor, "top_mode": args.top_mode,
+            "engine": engine, "wall_mm": wall_mm,
+            "col_worst": col_worst, "mark_size": mark_size,
         }))
 
     sys.exit(0)
