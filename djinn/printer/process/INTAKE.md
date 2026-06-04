@@ -76,7 +76,7 @@ sed -i 's/M106 S15[0-9]\.[0-9]*/M106 S0/g' yourfile.gcode
 
 ## Step 4 — Pre-Print Checklist
 
-- [ ] File uploaded to printer (Moonraker: http://192.168.1.114:7125 or via Telegram `/print <filename>`)
+- [ ] File uploaded to printer (Moonraker: http://192.168.1.113:7125 or via Telegram `/print <filename>`)
 - [ ] Correct filament loaded and colour/material noted for log
 - [ ] Bed clean — IPA wipe if last print had adhesion issues
 - [ ] printer.cfg verify_heater settings: `check_gain_time:120`, `max_error:999`, `hysteresis:20`

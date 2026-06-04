@@ -6,7 +6,7 @@
 VAULT="/home/tf-tthq/Obsidian"
 MODEL_DIR="$VAULT/djinn/printer/prints/YYYY-MM-DD_ModelName"
 LOGFILE="$MODEL_DIR/monitor.log"
-PRINTER="192.168.1.114:7125"
+PRINTER="192.168.1.113:7125"
 PIDFILE="/tmp/print-monitor.pid"
 
 mkdir -p "$MODEL_DIR"

@@ -1,6 +1,6 @@
 # Djinn 3D Print Pipeline — Instruction Manual
 
-**Printer:** Calliope (Ender-3 V3 Plus) at `192.168.1.114`
+**Printer:** Calliope (Ender-3 V3 Plus) at `192.168.1.113`
 **Interface:** Discord `#3d-printing` or Telegram
 **Agent:** Djinn (OgDjinn#9859) — powered by Salomon / deepseek-r1:7b
 **Last updated:** 2026-05-30
@@ -312,7 +312,7 @@ systemctl --user restart djinn-discord-gateway.service
 - Command format: `slice N <profile> ...` — no extra punctuation
 
 **confirm did nothing:**
-- Check Moonraker is reachable: `curl http://192.168.1.114:7125/printer/info`
+- Check Moonraker is reachable: `curl http://192.168.1.113:7125/printer/info`
 - Check Calliope isn't already printing: `print status`
 
 **Renders missing from report:**

@@ -133,19 +133,19 @@ cp plate_1.gcode modelname.gcode
 
 # Option A — via Moonraker API
 curl -F "file=@modelname.gcode" \
-  "http://192.168.1.114:7125/server/files/upload"
+  "http://192.168.1.113:7125/server/files/upload"
 
 # Option B — via SCP (if Moonraker unreachable)
 curl -X POST \
   -F "file=@modelname.gcode" \
   -F "print=true" \
-  "http://192.168.1.114:7125/server/files/upload"
+  "http://192.168.1.113:7125/server/files/upload"
 ```
 
 ### Step 7 — Start Print
 ```bash
 curl -X POST \
-  "http://192.168.1.114:7125/printer/print/start" \
+  "http://192.168.1.113:7125/printer/print/start" \
   -H "Content-Type: application/json" \
   -d '{"filename":"modelname.gcode"}'
 ```
@@ -171,7 +171,7 @@ The monitor script polls Moonraker every 60s, writes to `prints/YYYY-MM-DD_Model
 tail -50 plate_1.gcode > error_capture.gcode
 
 # Get klippy log excerpt
-curl -s "http://192.168.1.114:7125/server/files/klippy.log" | tail -100 >> error_capture.gcode
+curl -s "http://192.168.1.113:7125/server/files/klippy.log" | tail -100 >> error_capture.gcode
 
 # Write postmortem
 cat > postmortem.md << 'EOF'

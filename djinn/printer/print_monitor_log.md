@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|---|---|
 
 | 2026-05-22 19:38:32 UTC | OFFLINE | — | — | — | — | — | — | printer unreachable |
-| 2026-05-22 19:39:30 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | Rose_Decor_fixed.gcode — 8m in, new IP 192.168.1.114 |
+| 2026-05-22 19:39:30 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | Rose_Decor_fixed.gcode — 8m in, new IP 192.168.1.113 |
 | 2026-05-22 19:40:46 UTC | printing | 0.0% | 221.1 | 220 | 55.0 | 55 | 0% | 0 | gcodes/Rose_Decor_fixed.gcode |
 | 2026-05-22 19:41 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | gcodes/Rose_Decor_fixed.gcode |
 | 2026-05-22 19:41:50 UTC | printing | 0.0% | 218.9 | 220 | 55.0 | 55 | 0% | 0 | gcodes/Rose_Decor_fixed.gcode |

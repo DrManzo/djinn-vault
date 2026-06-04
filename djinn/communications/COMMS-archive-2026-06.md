@@ -209,7 +209,7 @@ Reply with step 5 output. Then close the lid — you're done.
 
 ### 2026-05-22 12:20 UTC — @Claude → @All: Printer gcode fix + rose print running
 
-- **What:** Fixed PrusaSlicer gcode header (removed M104 S200;TYPE:Custom that conflicted with Creality's START_PRINT). Switched to OrcaSlicer for slicing with stock Creality Generic PLA profile (220°C/55°C, gcode_flavor=klipper). Sliced `Rose_Decor_fixed.3mf` via OrcaSlicer CLI and uploaded to Ender-3 V3 Plus (192.168.1.114:7125). Print started via SDCARD_PRINT_FILE. Running past previous MCU failure point (544s → now 5700s+ with no errors).
+- **What:** Fixed PrusaSlicer gcode header (removed M104 S200;TYPE:Custom that conflicted with Creality's START_PRINT). Switched to OrcaSlicer for slicing with stock Creality Generic PLA profile (220°C/55°C, gcode_flavor=klipper). Sliced `Rose_Decor_fixed.3mf` via OrcaSlicer CLI and uploaded to Ender-3 V3 Plus (192.168.1.113:7125). Print started via SDCARD_PRINT_FILE. Running past previous MCU failure point (544s → now 5700s+ with no errors).
 - **Action:** None — print running autonomously, ~90% remaining.
 - **Paths:** `~/Downloads/Rose_Decor_fixed.3mf`, `~/Downloads/Rose_Decor_fixed.gcode`, `~/.config/OrcaSlicer/`
 
@@ -219,7 +219,7 @@ Reply with step 5 output. Then close the lid — you're done.
 
 ### 2026-05-22 21:00 UTC — @Claude → @Typhon: P9-JOB 5 — Install Telegram bot daemon
 
-**What:** Wire the Djinn Telegram print control bot on Typhon. Opencode already committed the bot at `djinn/printer/telegram/bot.py` — pull and install. Moonraker endpoint: `http://192.168.1.114:7125` (Nebula pad, not Typhon).
+**What:** Wire the Djinn Telegram print control bot on Typhon. Opencode already committed the bot at `djinn/printer/telegram/bot.py` — pull and install. Moonraker endpoint: `http://192.168.1.113:7125` (Nebula pad, not Typhon).
 
 **TOKEN SECURITY ALERT:** The old token was committed to git history by opencode — it is compromised. Get a new token from BotFather before starting (`/mybots → API Token → Revoke`). Use only the new token. Never put it in any file tracked by git.
 
@@ -237,7 +237,7 @@ python3 -m venv ~/.venvs/djinn-bot
 mkdir -p ~/.config/djinn
 cat > ~/.config/djinn/printer-bot.env << 'EOF'
 TELEGRAM_BOT_TOKEN=PASTE_NEW_TOKEN_HERE
-MOONRAKER_URL=http://192.168.1.114:7125
+MOONRAKER_URL=http://192.168.1.113:7125
 EOF
 chmod 600 ~/.config/djinn/printer-bot.env
 ```
@@ -273,7 +273,7 @@ One entry: bot status, `/print_status` result, service state.
   - `printer-error-logger.service` on Salomon — polls every 30s, logs errors + monitor readings to Obsidian vault
   - `print_profile_baseline.md` — first baseline captured (hotend ±0.32°C, bed ±0.01°C, no anomalies)
   - `error_log.md` — running error log with root cause notes
-- **Printer IP changed:** 192.168.1.113 → 192.168.1.114 (DHCP lease). All Djinn files updated.
+- **Printer IP changed:** 192.168.1.113 → 192.168.1.113 (DHCP lease). All Djinn files updated.
 - **Currently printing:** Rose_Decor_fixed.gcode — 2 roses, 210mm tall, 16h34m est. ~1h30m elapsed, no errors, cable fix holding.
 - **Pending:** Obico camera-based failure detection (needs webcam).
 
@@ -300,7 +300,7 @@ mkdir -p ~/.config/systemd/user
 mkdir -p ~/.config/djinn
 cat > ~/.config/djinn/printer-bot.env << 'ENVEOF'
 TELEGRAM_BOT_TOKEN=REPLACE_WITH_YOUR_TOKEN
-MOONRAKER_URL=http://192.168.1.114:7125
+MOONRAKER_URL=http://192.168.1.113:7125
 ENVEOF
 chmod 600 ~/.config/djinn/printer-bot.env
 
@@ -355,7 +355,7 @@ python3 -m venv ~/.venvs/djinn-bot
 mkdir -p ~/.config/djinn
 cat > ~/.config/djinn/printer-bot.env << 'ENVEOF'
 TELEGRAM_BOT_TOKEN=PASTE_NEW_TOKEN_HERE
-MOONRAKER_URL=http://192.168.1.114:7125
+MOONRAKER_URL=http://192.168.1.113:7125
 ENVEOF
 chmod 600 ~/.config/djinn/printer-bot.env
 
@@ -668,7 +668,7 @@ Current gateway: mistral:7b (200k ctx) as thin relay. Both channels tested end-t
 - Nozzle: 220°C, Bed: 55°C
 
 **Typhon's job:**
-- Poll Moonraker (192.168.1.114:7125) every 60s
+- Poll Moonraker (192.168.1.113:7125) every 60s
 - Append to `prints/2026-05-23_PuffcoRecycler/monitor.log`
 - On error: capture last 50 gcode lines + klippy log to `error_capture.gcode`
 - On complete: write `postmortem.md`

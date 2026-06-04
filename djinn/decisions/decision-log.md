@@ -42,14 +42,14 @@ created: 2026-05-19
 
 ## 2026-05-22: Phase 9 — Printer Node architecture locked
 
-- **Print server**: Creality Nebula pad running Klipper + Moonraker at `192.168.1.114:7125`
+- **Print server**: Creality Nebula pad running Klipper + Moonraker at `192.168.1.113:7125`
 - **Decision**: Typhon KIAUH/Klipper install SKIPPED — Nebula pad is already a fully functional Moonraker node, reflashing MCU adds risk with zero benefit
 - **Salomon** handles: modeling tools (FreeCAD, Blender, OpenSCAD), AI generation (Hunyuan3D-2), OrcaSlicer slicing, Claude lane work
 - **Typhon** handles: Telegram bot daemon (always-on, lightweight, hits Moonraker over LAN)
 - **PLR + thermal watchdog**: `plr.cfg` uploaded to Nebula pad — saves Z/layer at each layer change, polls every 5s for temp drops
 - **Error logging**: `printer-error-logger.service` running on Salomon — polls Moonraker every 30s, logs to vault
 - **idle_timeout**: Changed from 99999999 → 600s on Nebula pad — cat safety, turns off heaters + motors after 10 min idle
-- **Printer IP**: Static-lease recommended at 192.168.1.114 — currently DHCP, changed once during this session (.113 → .114)
+- **Printer IP**: Static-lease recommended at 192.168.1.113 — currently DHCP, changed once during this session (.113 → .114)
 - **Vault schema**: `djinn/printer/{queue,active,completed,models,config}` active
 
 ---

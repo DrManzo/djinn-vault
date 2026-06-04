@@ -27,10 +27,10 @@ OrcaSlicer 2.3.2 installed via Flatpak on Salomon. Calliope physical printer pro
 
 ## What Was Built or Changed
 
-### Calliope (192.168.1.114)
+### Calliope (192.168.1.113)
 - **SSH enabled** — Settings → Root Account Information → root / `creality_ender3v3`
 - **Moonraker** — `v0.7.1-780-gdde9bcc-dirty` → `v0.10.0-20-g9008485` (upstream, via Creality Helper Script)
-- **Fluidd** — installed at `http://192.168.1.114:4408` (replaces old Creality web UI)
+- **Fluidd** — installed at `http://192.168.1.113:4408` (replaces old Creality web UI)
 - **Gcode Shell Command** — installed (enables shell execution from Klipper macros)
 - **Config backups** — cleaned from 52 → 5 (kept most recent)
 - **Safe point** — `/usr/data/SAFE-POINT-2026-06-02/` on printer, `~/printer-files/calliope-safe-point-2026-06-02/` locally
@@ -39,7 +39,7 @@ OrcaSlicer 2.3.2 installed via Flatpak on Salomon. Calliope physical printer pro
 ### Salomon (this machine)
 - **OrcaSlicer 2.3.2** — installed via `flatpak install flathub com.orcaslicer.OrcaSlicer`
 - **Calliope printer profile** — `~/.var/app/com.orcaslicer.OrcaSlicer/data/OrcaSlicer/user/default/machine/Calliope.json`
-  - Host: `http://192.168.1.114`, Port 7125, Moonraker, Fluidd UI at `:4408`
+  - Host: `http://192.168.1.113`, Port 7125, Moonraker, Fluidd UI at `:4408`
 - **Connection doc** — `~/.config/djinn/calliope-orcaslicer.md`
 
 ### Vault

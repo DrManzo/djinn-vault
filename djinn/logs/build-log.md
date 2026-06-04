@@ -36,7 +36,7 @@ created: 2026-05-19
 
 ## 2026-05-22: Phase 9 — Printer Node (Ender-3 V3 Plus) — In Progress
 
-- Klipper + Moonraker: already live on Nebula pad (`192.168.1.114:7125`) — no Typhon install needed
+- Klipper + Moonraker: already live on Nebula pad (`192.168.1.113:7125`) — no Typhon install needed
 - `plr.cfg` uploaded to printer: Power Loss Recovery + thermal watchdog (5s poll, saves Z+layer, pauses on temp drop)
 - `printer-error-logger.service` active on Salomon: polls Moonraker every 30s, logs errors + monitor rows to vault
 - Printer vault structure live: `djinn/printer/{queue,active,completed,models,config}`
@@ -838,7 +838,7 @@ created: 2026-05-19
 ## 2026-06-03
 - SSH enabled on Calliope (root / creality_ender3v3, via Settings → Root Account Information)
 - Moonraker upgraded v0.7.1 → v0.10.0 via Creality Helper Script (Guilouz)
-- Fluidd installed on Calliope at http://192.168.1.114:4408
+- Fluidd installed on Calliope at http://192.168.1.113:4408
 - Gcode Shell Command installed on Calliope
 - OrcaSlicer 2.3.2 installed on Salomon via Flatpak
 - Calliope printer profile written to OrcaSlicer

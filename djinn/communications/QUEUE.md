@@ -2063,7 +2063,7 @@ Next: {cube_queued | check_gcode_M106 | start_tracer}
 **Config needed:**
 ```python
 CUBE_GCODE = "CRtestcube_Ender-3 V3 Plus_26m.gcode"  # hardcode, always on printer
-MOONRAKER = "http://192.168.1.114:7125"
+MOONRAKER = "http://192.168.1.113:7125"
 TRACE_DIR = Path.home() / "Obsidian/djinn/printer/active"
 ```
 

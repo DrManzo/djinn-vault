@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-MOONRAKER_URL = os.environ.get("MOONRAKER_URL", "http://192.168.1.114:7125")
+MOONRAKER_URL = os.environ.get("MOONRAKER_URL", "http://192.168.1.113:7125")
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 if not BOT_TOKEN:
     log.error("TELEGRAM_BOT_TOKEN not set")

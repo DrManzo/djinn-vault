@@ -1,7 +1,7 @@
 # Klipper Macros — Djinn Print Safety
 
-Paste these into `printer.cfg` on Calliope (192.168.1.114).
-Access via Fluidd at http://192.168.1.114 → Configuration → printer.cfg
+Paste these into `printer.cfg` on Calliope (192.168.1.113).
+Access via Fluidd at http://192.168.1.113 → Configuration → printer.cfg
 
 **Replace any previous DJINN_FAILURE_PARK macro with this full set.**
 

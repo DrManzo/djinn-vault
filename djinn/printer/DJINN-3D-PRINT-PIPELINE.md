@@ -4,7 +4,7 @@
 **Version:** 1.0  
 **Date:** 2026-05-31  
 **Author:** Javier (DrManzo) — Architecture by Claude, Salomon, Marcus  
-**Hardware:** Calliope (Ender-3 V3 Plus) at 192.168.1.114  
+**Hardware:** Calliope (Ender-3 V3 Plus) at 192.168.1.113  
 **Platform:** Fedora Linux / Salomon (HP Omen, RTX 5060, 29GB RAM)
 
 ---
@@ -54,7 +54,7 @@ A fully automated, AI-mediated 3D print shop operating system. A customer drops 
 ┌──────────────────▼──────────────────────────────────────────────┐
 │                    HARDWARE LAYER                               │
 │   Calliope (Ender-3 V3 Plus)                                    │
-│   Klipper + Moonraker at 192.168.1.114:7125                     │
+│   Klipper + Moonraker at 192.168.1.113:7125                     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
