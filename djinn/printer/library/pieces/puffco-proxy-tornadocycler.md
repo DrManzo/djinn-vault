@@ -15,8 +15,11 @@ tags: [proxy-accessory, recycler, external, puffco, personal-use-only]
 ## ⚠ COMPLIANCE FLAG — PERSONAL USE ONLY
 
 **This model CANNOT be sold or listed in the shop.**  
-License: Cults Personal Use — no commercial use, no AI use.  
-Use only for personal/display prints.
+License: Cults Personal Use — no commercial use, no AI use.
+
+**Bore does not apply** — the Tornadocycler is a water pipe attachment, not a Proxy Core seat body. TF modifications are surface-level only: engravings, embossing, maker's mark. Primary form factor remains intact — transformation argument is weak. `No AI` clause also covers djinn pipeline use.
+
+**Resolution:** Build `forge/tornado-recycler` as original geometry — design engraving zones in from the start, full commercial freedom, no attribution needed.
 
 ---
 

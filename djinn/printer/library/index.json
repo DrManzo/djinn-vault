@@ -92,14 +92,16 @@
         "print_ready": false,
         "notes": "File exists in library as nado_recycler_Proxy_Tornado_Recycler_stl — needs to be copied to originals/external/"
       },
-      "modification_level": "substantial-transformation",
+      "modification_level": "significant",
       "tf_modifications": [
-        "bore: 38.3mm ⌀ × 51.0mm depth (planned)",
-        "engravings: planned",
-        "maker's mark: planned"
+        "NOTE: bore does NOT apply — Tornadocycler is an attachment, not a Proxy Core seat",
+        "surface engravings: planned",
+        "embossing: planned",
+        "maker's mark on base or body: planned"
       ],
-      "forge_replacement": "pending — build forge/tornado-recycler as original geometry to replace this",
-      "compliance_status": "tf-transformed-pending-counsel"
+      "transformation_assessment": "Surface modifications only (engrave/emboss/mark). Primary form factor intact. Transformation argument is weak without structural modification. Cults PU + No AI clause cover the pipeline. Do not list commercially.",
+      "forge_replacement": "PRIORITY — build forge/tornado-recycler as original geometry. Design engraving zones in from the start.",
+      "compliance_status": "verified-personal-only"
     },
 
     "puffco-proxy-stand-joshtf": {
