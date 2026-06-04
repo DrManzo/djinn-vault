@@ -67,6 +67,8 @@ djinn-bore-core ~/printer-files/library/originals/external/<id>_original.stl \
 | puffco-proxy-stand-joshtf | Puffco Proxy Stand | Printables | joshtf | All Rights Reserved | ❌ personal only |
 | puffco-proxy-toilet-cup | Proxy Core Toilet Cup | MakerWorld | PENDING | PENDING | ⚠ unknown |
 | puffco-proxy-travel-pack | Proxy All-in-One Travel Pack | MakerWorld | PENDING | PENDING | ⚠ unknown |
+| duff-beer-pen-holder | Duff Beer Pen Holder | MakerWorld | PENDING | PENDING | ⚠ unknown |
+| doctor-pen-holder | Doctor Pen Holder / Lab Coat | MakerWorld | PENDING | PENDING | ⚠ unknown |
 
 **MakerWorld note:** Bambu Lab blocks all automated fetching — requires a logged-in browser session. Open both URLs manually to complete the pending entries.
 

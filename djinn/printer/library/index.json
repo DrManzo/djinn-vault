@@ -163,6 +163,60 @@
       "compliance_status": "pending-review"
     },
 
+    "duff-beer-pen-holder": {
+      "id": "duff-beer-pen-holder",
+      "name": "Duff Beer Pen Holder (Colored)",
+      "category": "external",
+      "source": {
+        "platform": "makerworld",
+        "url": "https://makerworld.com/en/models/18603-duff-beer-pen-cup",
+        "profile_id": "909171",
+        "creator": "PENDING",
+        "license": "PENDING",
+        "commercial_ok": null,
+        "notes": "MakerWorld blocked. Check manually."
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/duff-beer-pen-holder_original.3mf",
+        "modified": null
+      },
+      "processing": {
+        "date_acquired": "2026-06-04",
+        "date_processed": null,
+        "modifications": "pending — not yet defined",
+        "print_ready": false
+      },
+      "modification_level": "none",
+      "compliance_status": "pending-review"
+    },
+
+    "doctor-pen-holder": {
+      "id": "doctor-pen-holder",
+      "name": "Doctor Pen Holder / Desk Organizer — Lab Coat",
+      "category": "external",
+      "source": {
+        "platform": "makerworld",
+        "url": "https://makerworld.com/en/models/2171986-doctor-pen-holder-desk-organizer-lab-coat",
+        "profile_id": "2355921",
+        "creator": "PENDING",
+        "license": "PENDING",
+        "commercial_ok": null,
+        "notes": "MakerWorld blocked. Check manually."
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/doctor-pen-holder_original.zip",
+        "modified": null
+      },
+      "processing": {
+        "date_acquired": "2026-06-04",
+        "date_processed": null,
+        "modifications": "pending — not yet defined",
+        "print_ready": false
+      },
+      "modification_level": "none",
+      "compliance_status": "pending-review"
+    },
+
     "puffco-proxy-travel-pack": {
       "id": "puffco-proxy-travel-pack",
       "name": "Puffco Proxy All-in-One Travel Pack",
