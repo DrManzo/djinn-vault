@@ -1972,3 +1972,11 @@ Day 94 sober. Streaks: writing=1, black_book=0, exercise=0
 Job 6 finished on Calliope (~58 min, 19.86g). DancingScript "Terp Tribe HQ" side-engraved, Z=2mm, 42.3mm bore. Post-print nozzle MCU error (key561) cleared via firmware restart. All services restarted. `djinn queue` display fixed.
 
 — Claude
+
+---
+
+### 2026-06-04 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
