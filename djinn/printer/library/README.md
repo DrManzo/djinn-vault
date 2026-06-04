@@ -60,8 +60,14 @@ djinn-bore-core ~/printer-files/library/originals/external/<id>_original.stl \
 
 ## Registered Pieces
 
-| ID | Name | Category | Status |
-|----|------|----------|--------|
-| applacrabus | Apple with Crab Claws | external | ⚠ pending-review |
+| ID | Name | Platform | Creator | License | Shop OK? |
+|----|------|----------|---------|---------|----------|
+| applacrabus | Applacrabus (Apple w/ Crab Claws) | Cults3D | Midnight3DPrinting | CC BY-SA 4.0 | ✅ with credit |
+| puffco-proxy-tornadocycler | Puffco Proxy Tornadocycler | Cults3D | FabrizioCreations | Cults PU / No AI | ❌ personal only |
+| puffco-proxy-stand-joshtf | Puffco Proxy Stand | Printables | joshtf | All Rights Reserved | ❌ personal only |
+| puffco-proxy-toilet-cup | Proxy Core Toilet Cup | MakerWorld | PENDING | PENDING | ⚠ unknown |
+| puffco-proxy-travel-pack | Proxy All-in-One Travel Pack | MakerWorld | PENDING | PENDING | ⚠ unknown |
+
+**MakerWorld note:** Bambu Lab blocks all automated fetching — requires a logged-in browser session. Open both URLs manually to complete the pending entries.
 
 *Update this table when adding pieces.*
