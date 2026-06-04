@@ -886,3 +886,9 @@ created: 2026-05-19
 - Print complete on Calliope; post-print nozzle MCU error (key561) cleared by firmware restart
 
 *— Claude*
+
+## 2026-06-04 — djinn-bore-core v2 — Claude
+- Extended Marcus's v1 spec: auto-scale recovery, wall thickness check, Poisson reconstruction, support column scan
+- Handles broken AI meshes (non-watertight, wrong-unit scale, multi-body)
+- Full test: apple STL (2mm, 5 bodies, non-watertight) → ×46 scale → Poisson repair → bore → 5.1mm wall OK
+- Installed: ~/.local/bin/djinn-bore-core | Source: djinn/printer/tools/djinn-bore-core.py
