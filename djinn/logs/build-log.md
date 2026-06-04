@@ -892,3 +892,9 @@ created: 2026-05-19
 - Handles broken AI meshes (non-watertight, wrong-unit scale, multi-body)
 - Full test: apple STL (2mm, 5 bodies, non-watertight) → ×46 scale → Poisson repair → bore → 5.1mm wall OK
 - Installed: ~/.local/bin/djinn-bore-core | Source: djinn/printer/tools/djinn-bore-core.py
+
+## 2026-06-04 — djinn-bore-core v3 + djinn-model-mark guard — Claude
+- Proportion-preserving scale: two-zone (Z body-below, XY matched), auto-fallback to uniform if proportional footprint too narrow
+- Maker's mark engraved on bore floor: 15mm, no mirror (viewed from above), 0.5mm depth
+- djinn-model-mark: guard added — exits cleanly with message when input ends in _bored.stl
+- Tested: apple STL end-to-end, mark engraved, guard fires correctly
