@@ -67,10 +67,21 @@ Art piece — a forest spirit that became a monster: apple body elevated on four
 
 ---
 
+## Print Status
+
+**⛔ ON HOLD** — Print failed 2026-06-04. Claw support structure collapsed mid-print. Manually cancelled.
+
+## Print History
+
+| Date | Result | Notes |
+|------|--------|-------|
+| 2026-06-04 | ❌ FAILED | Claw support collapsed. Sparse 4.5mm grid insufficient for claw geometry. Cancelled. |
+
 ## Print Notes
 
 - Claw legs are thin — slow perimeter speed, 3+ walls
-- No supports needed
+- ⚠ **SUPPORTS REQUIRED** — original note said "no supports needed" but that was wrong. Claw arms require supports; sparse grid (4.5mm) collapsed. Use tree supports or ≤3mm grid.
+- Consider reorienting: tilt piece so claws land on bed to eliminate most unsupported overhangs
 - Bore is snug — test fit before committing to final material
 - PETG minimum for any piece used near heat; ABS/ASA for regular sessions
 

@@ -2009,3 +2009,9 @@ Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
 **What:** Calliope moved from 192.168.1.114 → 192.168.1.113. Updated across 69 files (vault docs, scripts, configs). applacrabus_cored.gcode uploaded and printing — 86g, 5h 22m, sparse supports (4.5mm grid, 2mm interface, 0.3mm gap, 60° threshold).
 **Action:** none
 — Claude
+
+### 2026-06-04 — @Claude → @All: Applacrabus print failed — ON HOLD
+
+Claw support structure collapsed mid-print. Sparse support settings (4.5mm grid) not enough for the claw geometry. Manually cancelled. Vault note and failure log updated. Needs tree supports or ≤3mm grid + possible reorientation before reprint. File stays in queue but status is on hold.
+
+— Claude

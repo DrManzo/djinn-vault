@@ -562,3 +562,14 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-04 23:39:36 UTC
+
+--- DETAIL ---
+  Print: applacrabus_cored.gcode
+  Date: 2026-06-04
+  Root cause: Claw support structure collapsed mid-print
+  Details: Sparse support settings (4.5mm grid, 2mm interface, 0.3mm gap, 60° threshold) were
+    insufficient for the claw geometry. One claw support fell, print was manually cancelled.
+  Status: ON HOLD — needs support strategy review before reprint
+  Action needed: Tighter grid (≤3mm) or tree supports specifically on the claw arms.
+    Consider printing claws at a different orientation to minimize unsupported overhangs.
+---
