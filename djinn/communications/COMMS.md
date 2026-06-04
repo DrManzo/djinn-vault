@@ -1991,3 +1991,13 @@ Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
 **Report:** `djinn/logs/reports/2026-06-04_djinn-bore-core-v2.md`
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: djinn-bore-core v3 + djinn-model-mark guard
+
+**What:** Two patches. (1) Proportion-preserving scale — two-zone scaling (Z body-below + matched XY) with auto-fallback to uniform when proportional footprint too narrow for bore; proportion report in stdout. (2) Maker's mark engraved on bore floor — 15mm, no X-mirror (viewed from above), boolean subtracted into bored result before export. djinn-model-mark guards against double-marking: exits cleanly if input ends in _bored.stl.
+**Action:** none — ready for production proxy bodies.
+**Paths:** `djinn/printer/tools/djinn-bore-core.py` | `~/.local/bin/djinn-bore-core` | `~/.local/bin/djinn-model-mark`
+
+— Claude
