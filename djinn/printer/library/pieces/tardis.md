@@ -42,8 +42,10 @@ Doctor Who TARDIS police box. Multi-part CAD model (379 watertight bodies). Full
 
 | Type | Path |
 |------|------|
-| Original | `~/printer-files/library/originals/external/tardis_original.stl` |
-| Cored | `~/printer-files/library/cored/external/tardis_cored.stl` |
+| Cored (market) | `~/printer-files/library/cored/external/tardis_cored.stl` |
+
+> Original STL and wayne-peters source files purged 2026-06-04 — only the cored TF version is kept.
+> `tardis_body_cored.stl` (intermediate) also discarded.
 
 ---
 

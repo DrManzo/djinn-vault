@@ -177,7 +177,6 @@
         "price": "free"
       },
       "files": {
-        "original": "printer-files/library/originals/external/tardis_original.stl",
         "cored": "printer-files/library/cored/external/tardis_cored.stl"
       },
       "processing": {
