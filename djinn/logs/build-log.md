@@ -898,3 +898,10 @@ created: 2026-05-19
 - Maker's mark engraved on bore floor: 15mm, no mirror (viewed from above), 0.5mm depth
 - djinn-model-mark: guard added — exits cleanly with message when input ends in _bored.stl
 - Tested: apple STL end-to-end, mark engraved, guard fires correctly
+
+## 2026-06-04: Applacrabus Print Failure
+- Print cancelled mid-run: claw support collapsed (sparse 4.5mm grid insufficient)
+- Vault note updated: status ON HOLD, print history added, corrected "no supports" → SUPPORTS REQUIRED
+- Failure logged in FAILURE-LOG.md with root cause and reslice recommendations
+
+*— Claude*
