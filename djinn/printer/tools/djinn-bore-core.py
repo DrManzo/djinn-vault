@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-djinn-bore-core v3 — Proxy core bore tool
+djinn-bore-core v4 — Proxy core bore tool
 
 Bores a core seat cavity into the top of any STL body for the Puffco Proxy.
 v2: auto-scale recovery, wall thickness check, support column scan, Poisson repair.
 v3: proportion-preserving scale, maker's mark on bore floor.
+v4: 4-quadrant true-center detection, Z-level scan for best fit, wall auto-scale.
 
 Defaults (caliper-verified):
   diameter: 38.0mm + tolerance
@@ -194,7 +195,123 @@ def auto_scale(mesh, depth, target_height=None, strict=False, preserve_proportio
     return mesh, total, True, unit_reason, prop_report
 
 
-# ── Top detection ─────────────────────────────────────────────────────────────
+# ── True center — 4-quadrant top face analysis ───────────────────────────────
+
+def find_true_center_top(mesh, bore_radius, wall_min=3.0, wall_tol=0.4):
+    """
+    Find the true center of the top face using 4-quadrant area-weighted analysis.
+    Also checks if the object needs to be scaled up to meet minimum wall requirements.
+
+    Steps:
+    1. Extract all upward-facing faces within 2mm of max Z
+    2. Compute initial centroid from those faces
+    3. Divide into 4 quadrants around that centroid
+    4. Area-weighted centroid per quadrant → average = refined true center
+    5. Check min wall; if < wall_min + wall_tol, compute scale needed
+
+    Returns (cx, cy, top_z, scale_needed, wall_mm, report_dict)
+    """
+    import numpy as np
+
+    up_mask = mesh.face_normals[:, 2] > 0.9
+    if not up_mask.any():
+        # fall back to z-max
+        fc = mesh.vertices[mesh.faces].mean(axis=1)
+        i  = fc[:, 2].argmax()
+        cx, cy = float(fc[i, 0]), float(fc[i, 1])
+        top_z  = float(mesh.vertices[:, 2].max())
+        return cx, cy, top_z, 1.0, None, {"method": "z-max fallback"}
+
+    fc       = mesh.vertices[mesh.faces].mean(axis=1)
+    up_fc    = fc[up_mask]
+    up_area  = mesh.area_faces[up_mask]
+    z_max    = float(up_fc[:, 2].max())
+    top_band = up_fc[:, 2] >= (z_max - 2.0)
+
+    if not top_band.any():
+        top_band = np.ones(len(up_fc), dtype=bool)
+
+    # Scan from top downward: find the HIGHEST Z level where a ±2mm window
+    # of upward faces spans at least (bore_diameter + 2×wall_target) in both X and Y
+    target_wall = wall_min + wall_tol
+    # Scan threshold: bore must physically fit (diameter + 1mm clearance each side)
+    # Wall adequacy is checked AFTER finding the level and handled by auto-scale
+    min_span    = (bore_radius * 2) + 2.0  # bore diameter + 1mm each side minimum
+
+    z_levels = sorted(set(float(round(z, 1)) for z in up_fc[:, 2]), reverse=True)
+    best_z    = None
+    best_band = None
+
+    for z_candidate in z_levels:
+        band = np.abs(up_fc[:, 2] - z_candidate) <= 2.0
+        if band.sum() < 3:
+            continue
+        pts   = up_fc[band]
+        span_x = pts[:, 0].max() - pts[:, 0].min()
+        span_y = pts[:, 1].max() - pts[:, 1].min()
+        if span_x >= min_span and span_y >= min_span:
+            best_z    = z_candidate
+            best_band = band
+            break
+
+    if best_z is None:
+        # No level fits — use the widest upward face level
+        best_z    = float(up_fc[up_area.argmax(), 2])
+        best_band = np.abs(up_fc[:, 2] - best_z) <= 2.0
+
+    top_band = best_band
+    z_max    = best_z
+
+    # Step 1: initial centroid
+    init_cx = float(np.average(up_fc[top_band, 0], weights=up_area[top_band]))
+    init_cy = float(np.average(up_fc[top_band, 1], weights=up_area[top_band]))
+
+    # Step 2: 4-quadrant refinement
+    pts  = up_fc[top_band]
+    area = up_area[top_band]
+    q_centroids = []
+    for sx, sy in [(1,1),(-1,1),(1,-1),(-1,-1)]:
+        qmask = ((pts[:,0] - init_cx) * sx >= 0) & ((pts[:,1] - init_cy) * sy >= 0)
+        if qmask.sum() > 0:
+            qcx = float(np.average(pts[qmask, 0], weights=area[qmask]))
+            qcy = float(np.average(pts[qmask, 1], weights=area[qmask]))
+            q_centroids.append((qcx, qcy))
+
+    if q_centroids:
+        cx = float(np.mean([q[0] for q in q_centroids]))
+        cy = float(np.mean([q[1] for q in q_centroids]))
+    else:
+        cx, cy = init_cx, init_cy
+
+    # Step 3: wall check — min distance from true center to top face boundary
+    top_verts = mesh.vertices[mesh.faces[up_mask][top_band].flatten()]
+    dist_x = min(abs(top_verts[:,0].max() - cx), abs(cx - top_verts[:,0].min()))
+    dist_y = min(abs(top_verts[:,1].max() - cy), abs(cy - top_verts[:,1].min()))
+    min_clearance = min(dist_x, dist_y)
+    wall_mm       = min_clearance - bore_radius
+    target_wall   = wall_min + wall_tol  # 3.0 + 0.4 = 3.4mm
+
+    # Step 4: compute scale if wall is too thin
+    scale_needed = 1.0
+    if wall_mm < target_wall:
+        # Scale object so min_clearance becomes bore_radius + target_wall
+        scale_needed = (bore_radius + target_wall) / max(min_clearance, 0.001)
+
+    report = {
+        "method":        "4-quadrant face centroid",
+        "init_center":   (round(init_cx, 2), round(init_cy, 2)),
+        "true_center":   (round(cx, 2), round(cy, 2)),
+        "quadrants":     len(q_centroids),
+        "top_z":         round(z_max, 2),
+        "wall_mm":       round(wall_mm, 2),
+        "scale_needed":  round(scale_needed, 4),
+        "top_span_mm":   (round(float(top_verts[:,0].max()-top_verts[:,0].min()),1),
+                          round(float(top_verts[:,1].max()-top_verts[:,1].min()),1)),
+    }
+    return cx, cy, z_max, scale_needed, wall_mm, report
+
+
+# ── Top detection (legacy modes) ─────────────────────────────────────────────
 
 def find_top_z_max(mesh):
     import numpy as np
@@ -574,7 +691,8 @@ def main():
     parser.add_argument("--depth",             type=float, default=BORE_DEPTH_DEFAULT)
     parser.add_argument("--tolerance",         type=float, default=TOLERANCE_DEFAULT,
                         help="Added to diameter, clamped 0.2–0.4 (default 0.3)")
-    parser.add_argument("--top-mode",          choices=["z-max", "flat", "manual"], default="z-max")
+    parser.add_argument("--top-mode",          choices=["auto", "z-max", "flat", "manual"], default="auto",
+                        help="Top detection: auto=4-quadrant true center (default), z-max, flat, manual")
     parser.add_argument("--top-z",             type=float, default=None)
     parser.add_argument("--output",            type=str,   default=None)
     parser.add_argument("--target-height",     type=float, default=None,
@@ -608,7 +726,7 @@ def main():
     effective_diam = args.diameter + tol
     bore_radius    = effective_diam / 2.0
 
-    log(f"  djinn-bore-core v3", args.quiet)
+    log(f"  djinn-bore-core v4", args.quiet)
     log(f"  Input:    {input_path}", args.quiet)
     log(f"  Diameter: {effective_diam:.1f}mm ({args.diameter} + {tol} tol)", args.quiet)
     log(f"  Depth:    {args.depth}mm", args.quiet)
@@ -693,19 +811,38 @@ def main():
         else:
             log("  ✓ Support columns OK", args.quiet)
 
-    # ── find top ─────────────────────────────────────────────────────────────
-    if args.top_mode == "z-max":
-        cx, cy, top_z = find_top_z_max(mesh)
-    elif args.top_mode == "flat":
-        cx, cy, top_z = find_top_flat(mesh)
-    else:
+    # ── find top — 4-quadrant true center by default ─────────────────────────
+    if args.top_mode == "manual":
         if args.top_z is None:
             print("✗ --top-mode manual requires --top-z <value>", file=sys.stderr)
             sys.exit(1)
         cx, cy, _ = find_top_z_max(mesh)
         top_z = args.top_z
+        log(f"  Top: Z={top_z:.2f}mm  center ({cx:.2f}, {cy:.2f}) [manual]", args.quiet)
+    elif args.top_mode in ("z-max", "flat"):
+        if args.top_mode == "z-max":
+            cx, cy, top_z = find_top_z_max(mesh)
+        else:
+            cx, cy, top_z = find_top_flat(mesh)
+        log(f"  Top: Z={top_z:.2f}mm  center ({cx:.2f}, {cy:.2f}) [{args.top_mode}]", args.quiet)
+    else:  # "auto" — 4-quadrant true center (default)
+        cx, cy, top_z, scale_for_wall, wall_pre, center_report = find_true_center_top(
+            mesh, bore_radius, wall_min=WALL_WARN, wall_tol=0.4
+        )
+        log(f"  Top: Z={top_z:.2f}mm  true center ({cx:.2f}, {cy:.2f})  "
+            f"[4-quadrant, {center_report['quadrants']} quads]", args.quiet)
+        log(f"  Top span: {center_report['top_span_mm'][0]}×{center_report['top_span_mm'][1]}mm  "
+            f"wall={center_report['wall_mm']:.1f}mm", args.quiet)
 
-    log(f"  Top: Z={top_z:.2f}mm  center ({cx:.2f}, {cy:.2f})", args.quiet)
+        # Auto-scale to meet wall requirement if needed
+        if scale_for_wall > 1.01:
+            log(f"  ⚠  Wall {center_report['wall_mm']:.1f}mm < {WALL_WARN+0.4:.1f}mm — "
+                f"scaling ×{scale_for_wall:.3f} to meet minimum", args.quiet)
+            mesh.apply_scale(scale_for_wall)
+            scale_factor *= scale_for_wall
+            # Re-run center after scale
+            cx, cy, top_z, _, _, _ = find_true_center_top(mesh, bore_radius)
+            log(f"  Rescaled top: Z={top_z:.2f}mm  center ({cx:.2f}, {cy:.2f})", args.quiet)
 
     # ── validate bore geometry ────────────────────────────────────────────────
     try:
