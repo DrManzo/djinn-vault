@@ -9,8 +9,15 @@
     "license_statuses": {
       "verified-commercial": "License confirmed — commercial use permitted (with any required attribution)",
       "verified-personal-only": "License confirmed — personal/non-commercial use only. DO NOT LIST IN SHOP.",
+      "tf-transformed-pending-counsel": "TF modifications are substantial (bore + engrave + mark) — transformation argument may apply, but license is restrictive. Do not list until resolved.",
       "pending-review": "License not yet confirmed — treat as personal-only until verified",
       "unknown": "Source/license unknown"
+    },
+    "modification_levels": {
+      "none": "Original file, unmodified",
+      "minor": "Scale or tolerance adjustment only",
+      "significant": "Bore added, proportions changed, or surface features added",
+      "substantial-transformation": "Bore + engravings + embossing + maker's mark + rescale — resulting mesh shares base silhouette only; topology, surface geometry, and function substantially changed"
     },
     "last_updated": "2026-06-04"
   },
@@ -48,6 +55,13 @@
         "material_tested": "pla",
         "print_ready": true
       },
+      "modification_level": "substantial-transformation",
+      "tf_modifications": [
+        "auto-scaled ×46.678 (meters→mm + height-fit)",
+        "Poisson surface reconstruction (original non-watertight)",
+        "bore: 38.3mm ⌀ × 51.0mm depth",
+        "maker's mark: TF anvil 15mm engraved on bore floor"
+      ],
       "attribution_block": "\"Applacrabus\" by Midnight3DPrinting on Cults3D (https://cults3d.com/en/3d-model/art/applacrabus). Modified by Typhon's Forge: scaled, Puffco Proxy Core seat bored (38.3mm × 51mm), TF maker's mark added. License: CC BY-SA 4.0.",
       "compliance_status": "verified-commercial"
     },
@@ -64,7 +78,7 @@
         "license_url": "https://cults3d.com/en/license",
         "commercial_ok": false,
         "price": "$17.43 USD",
-        "notes": "PAID model. Personal use only. No AI. Cannot be sold or used in commercial listings. For personal/display prints only."
+        "notes": "PAID model. Personal use only. No AI clause. TF's substantial modifications (bore + engravings + mark) may constitute transformation, but Cults PU is explicit and 'No AI' covers djinn-bore-core. Do not list commercially until creator contact or forge/ replacement exists."
       },
       "files": {
         "original": "printer-files/library/originals/external/tornadocycler_original.stl",
@@ -78,7 +92,14 @@
         "print_ready": false,
         "notes": "File exists in library as nado_recycler_Proxy_Tornado_Recycler_stl — needs to be copied to originals/external/"
       },
-      "compliance_status": "verified-personal-only"
+      "modification_level": "substantial-transformation",
+      "tf_modifications": [
+        "bore: 38.3mm ⌀ × 51.0mm depth (planned)",
+        "engravings: planned",
+        "maker's mark: planned"
+      ],
+      "forge_replacement": "pending — build forge/tornado-recycler as original geometry to replace this",
+      "compliance_status": "tf-transformed-pending-counsel"
     },
 
     "puffco-proxy-stand-joshtf": {
@@ -105,6 +126,12 @@
         "print_ready": false,
         "notes": "Proxy Stand files exist in staging/ — need to move originals here"
       },
+      "modification_level": "minor",
+      "tf_modifications": [
+        "no bore (stand — not a proxy body)",
+        "custom TTHQ-engraved variant exists as forge/ piece — separate from this"
+      ],
+      "forge_replacement": "exists — ProxyStand_TTHQ_* in staging/ is original geometry, not derived from this",
       "compliance_status": "verified-personal-only"
     },
 
