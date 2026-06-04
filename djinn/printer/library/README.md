@@ -63,6 +63,7 @@ djinn-bore-core ~/printer-files/library/originals/external/<id>_original.stl \
 | ID | Name | Platform | Creator | License | Shop OK? |
 |----|------|----------|---------|---------|----------|
 | applacrabus | Applacrabus (Apple w/ Crab Claws) | Cults3D | Midnight3DPrinting | CC BY-SA 4.0 | ✅ with credit |
+| tardis | Doctor Who TARDIS | Cults3D | LuliasMartch | CC BY 4.0 | ✅ with credit |
 | puffco-proxy-tornadocycler | Puffco Proxy Tornadocycler | Cults3D | FabrizioCreations | Cults PU / No AI | ❌ personal only |
 | puffco-proxy-stand-joshtf | Puffco Proxy Stand | Printables | joshtf | All Rights Reserved | ❌ personal only |
 | puffco-proxy-toilet-cup | Proxy Core Toilet Cup | MakerWorld | PENDING | PENDING | ⚠ unknown |
