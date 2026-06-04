@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "description": "Typhon's Forge model library — provenance and attribution index",
+    "categories": {
+      "external": "Downloaded from Cults3D, Thingiverse, MakerWorld, etc. — license must be verified before commercial use",
+      "terp-tribe": "Terp Tribe community designs — use governed by Terp Tribe agreement",
+      "forge": "Typhon's Forge originals — owned by Javier, commercial use unrestricted"
+    },
+    "license_statuses": ["verified-commercial", "verified-personal-only", "pending-review", "unknown"],
+    "last_updated": "2026-06-04"
+  },
+  "pieces": {
+    "applacrabus": {
+      "id": "applacrabus",
+      "name": "Appla Crabus (Apple with Crab Claws)",
+      "category": "external",
+      "source": {
+        "platform": "cults3d",
+        "url": "https://cults3d.com/en/3d-model/art/applacrabus",
+        "creator": "PENDING — check Cults3D page",
+        "license": "PENDING — check Cults3D page",
+        "license_url": "PENDING",
+        "commercial_ok": null,
+        "notes": "Verify license before using in any shop listing. Cults3D models may be CC, personal-only, or commercial."
+      },
+      "files": {
+        "original": "printer-files/library/originals/external/applacrabus_original.stl",
+        "cored": "printer-files/library/cored/external/applacrabus_cored.stl"
+      },
+      "processing": {
+        "date_acquired": "2026-06-04",
+        "date_processed": "2026-06-04",
+        "tool": "djinn-bore-core v3",
+        "modifications": [
+          "auto-scaled ×46.678 (meters→mm, then height-fit to 76mm)",
+          "Poisson surface reconstruction (original mesh non-watertight, 5 bodies)",
+          "bore: 38.3mm ⌀ × 51.0mm depth (Puffco Proxy Core seat)",
+          "maker's mark engraved on bore floor (15mm TF anvil, 0.5mm depth)"
+        ],
+        "wall_thickness_mm": 5.1,
+        "material": "pla",
+        "print_ready": true
+      },
+      "attribution_block": "\"Appla Crabus\" by [CREATOR — fill in] on Cults3D (https://cults3d.com/en/3d-model/art/applacrabus). Modified: scaled, bore added for Puffco Proxy Core. License: [LICENSE — fill in].",
+      "compliance_status": "pending-review"
+    }
+  }
+}
