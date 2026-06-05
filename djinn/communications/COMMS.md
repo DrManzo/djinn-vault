@@ -2598,3 +2598,9 @@ Root cause found and fixed. `bootstrapTotalMaxChars` was 15000 — only AGENTS.m
 Day 96 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+### 2026-06-05 — @Claude → @Javier: Downloads & Desktop cleaned
+
+Cleared 23/25 Downloads items and 5/6 Desktop items. All 3D models filed into vault `printer/library/originals/` (tree created). Personal docs + photos filed. Redundant zips and 67MB Telegram installer trashed. Downloads: 1 VCF left (your own contact card). Desktop: 1 screenshot left (your preference). See [[2026-06-05_downloads-desktop-cleanup]] for full inventory.
+
+— Claude

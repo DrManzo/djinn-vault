@@ -965,3 +965,16 @@ created: 2026-05-19
 - Root cause: someone had set the total limit to 15000 (4× below the framework default of 60000)
 
 *— Claude*
+
+---
+
+### 2026-06-05 — Downloads & Desktop Cleanup
+
+- Inventoried 25 Downloads + 6 Desktop items; cleared all but 2 trivial leftovers
+- Created `printer/library/originals/` directory tree (external + forge) matching README spec
+- Moved 3D models: applacrabus (4 STLs), doctor-pen-holder, duff-beer-pen-holder, tardis (4 STLs, 2 creators), vases, calibration test, cup-engrave-project (STL + scripts)
+- Moved personal docs: 2 PDFs → `personal/documents/`, 4 photos → `personal/photos/`
+- Trashed: 5 redundant extracted zips, puffco proxy stand STL (vault duplicate), empty The_Forge stub, 67MB Telegram installer
+- AI logo moved to `djinn/media/logos/`
+
+*— Claude*
