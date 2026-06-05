@@ -1,10 +1,11 @@
 ---
 subject: psychology/writing/personal-growth
 tags:
-  - psychology/archetypes/wounded-healer
+  - psychology/identity/development
+  - psychology/empathy/self-healing
+  - psychology/personal-growth
   - psychology/strategic-personas
-  - psychology/shadow-work
-  - psychology/power-dynamics
+  - creative/writing-inspiration
 created: 2026-06-04
 source: Perplexity export
 ---
@@ -32,5 +33,5 @@ In his personal growth journey, allowing elements to "vent" and engaging in beha
 - [Marcus-core-Files.docx](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_92e78eae-dbdf-412d-b0d9-3b13598502fa/6101dfb2-afbe-479a-a699-dc4938a07de9/Marcus-core-Files.docx)
 
 ## Related
-- [[Psychological-Archetypes]] — Overview of various psychological archetypes and their applications.
-- [[Strategic-Personas-Development]] — Techniques for developing and integrating strategic personas in personal growth.
+- [[The-Wounded-Healer-And-The-Fool-Strategic-Integration]] — similarity
+- [[Empathy-And-Self-Awareness-In-Transformation]] — similarity
