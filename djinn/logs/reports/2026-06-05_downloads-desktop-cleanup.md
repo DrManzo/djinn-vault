@@ -17,7 +17,7 @@ related: [[build-log]] | [[decision-log]]
 
 ## Summary
 
-Inventoried 25 items in Downloads and 6 items on Desktop. All 3D model files moved into the vault's `printer/library/originals/` structure (which existed as a spec in README but had no actual subdirectories). Personal documents moved to `personal/documents/`. Duplicate and extracted-zip files trashed. Downloads and Desktop now essentially empty.
+Inventoried 25 items in Downloads and 6 items on Desktop. All 3D model files moved into the vault's `printer/library/originals/` structure (which existed as a spec in README but had no actual subdirectories). Personal documents moved to `personal/documents/`. Duplicate and extracted-zip files trashed. Downloads now has 1 item (VCF contact card); Desktop is fully empty.
 
 ---
 
@@ -31,13 +31,13 @@ Inventoried 25 items in Downloads and 6 items on Desktop. All 3D model files mov
 - 67MB Telegram installer trashed (can re-download; not installed)
 - `Javier Manzo-Ramos.vcf` left in Downloads (low priority)
 
-**Desktop — cleared 5 of 6 items:**
+**Desktop — cleared all 6 items:**
 - `files(1).zip` extracted → cup engraving project scripts + STL moved to vault
 - `puffco-proxy-stand-model_files./Proxy Stand.stl` trashed (exact duplicate in vault, same 672,884 bytes)
 - `puffco-proxy-stand-model_files./` PDF moved to vault printer library
 - `The_Forge/hello.java` + folder trashed (empty stub)
 - AI logo image moved to `djinn/media/logos/`
-- May-30 screenshot left on Desktop (Javier's preference)
+- May-30 screenshot trashed (Javier confirmed)
 
 **Vault — new directories created:**
 ```
