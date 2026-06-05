@@ -224,3 +224,11 @@ E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260605-161308 | 2026-06-05 16:13 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
