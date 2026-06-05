@@ -2100,7 +2100,7 @@ systemctl --user status djinn-print-monitor.timer
 - Material: PLA · 215°C nozzle · 60°C bed
 - Layer: 0.2mm · 3 walls · 15% infill
 - Supports: **buildplate-only** — tank underside junction ONLY, top edge NO support, round body NO support
-- Brim: 5mm
-- Print time: 30h 4m · 499.2g PLA
+- Brim: none
+- Print time: 29h 59m · 497.6g PLA
 
 *— Claude, 2026-06-04*
