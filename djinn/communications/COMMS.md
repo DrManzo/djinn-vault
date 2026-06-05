@@ -2253,3 +2253,35 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Filament-Recomm
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:08 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Analyzing-The-Wounded-Healer-And-The-Fool-Strategic.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:08 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Cash-Suite-Research-Task-039.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:08
+**RE:** Session end — slipbox--jinn--ash--uite--esearch--ask-039-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Cash-Suite-Research-Task-039.md
+
+**Action:** None — FYI.
+
+— Salomon
