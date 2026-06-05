@@ -1,12 +1,13 @@
 ---
 subject: AI/development/cli
 tags:
-  - ai/development/cli
-  - ai/models/performance-analysis
-  - personal/ai/conciliary
+  - personal/ai-conciliary
+  - psychology/adhd
+  - creativity/journaling
+  - technology/telegram-bot
+  - business/design
 created: 2026-06-04
 source: Perplexity export
-
 ---
 
 # TASK-053 Personal Layer Research Summary
@@ -31,22 +32,8 @@ The research emphasizes the importance of context-aware signals and minimalistic
 - [Mirai wearable nudging research](https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2025.1738751/full)
 
 ## Related
-- [[AI-Development-CLI]] — CLI development for AI systems.
-- [[Personal-AI-Conciliary]] — Design patterns for personal AI conciliaries.
-
----
-
-subject: AI/development/cli
-tags:
-  - ai/development/cli
-  - ai/models/performance-analysis
-  - personal/ai/conciliary
-created: 2026-06-04
-source: Perplexity export
-
----
-
-# TASK-059 BugHunter Monitoring
+- [[Faust-Cli-Product-Overview]] — similarity
+- [[Demarcus-An-Ai-Assistant-Identity-And-Capabilities]] — personal AI adoption
 
 ## Summary
 This note outlines the research and design for a bug monitoring system, focusing on `systemd OnFailure` gaps.
@@ -60,7 +47,5 @@ The task involves analyzing potential issues with `systemd OnFailure` mechanisms
 ## References
 
 ## Related
-- [[AI-Development-CLI]] — CLI development for AI systems.
-- [[BugHunter-Monitoring]] — Future tasks related to bug monitoring.
-
----
+- [[Faust-Cli-Product-Overview]] — similarity
+- [[Demarcus-An-Ai-Assistant-Identity-And-Capabilities]] — personal AI adoption
