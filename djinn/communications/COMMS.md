@@ -2357,3 +2357,35 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Target-Corporat
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:09 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Designing-A-Script-For-Puffco-Proxy-Bore.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:10 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personal-Bio.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:10
+**RE:** Session end — slipbox--ersonal--io-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Personal-Bio.md
+
+**Action:** None — FYI.
+
+— Salomon
