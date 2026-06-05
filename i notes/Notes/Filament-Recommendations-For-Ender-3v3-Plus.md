@@ -1,8 +1,9 @@
 ---
 subject: business/3d-printing/filament/types
 tags:
-  - business/3d-printing/filament/recommendations
-  - business/3d-printing/filament/preparation
+  - 3d-printing/filament/recommendations
+  - 3d-printing/models/ender-3-v3-plus
+  - 3d-printing/filament/types
 created: 2026-06-04
 source: Perplexity export
 ---
@@ -47,13 +48,5 @@ The Ender 3v3 Plus, a popular 3D printer model, benefits from using different ty
 - [DrManzo/djinn-vault](https://github.com/DrManzo/djinn-vault)
 
 ## Related
-- [[3d-printing/filament/types]] — Overview of different filament types.
-- [[3d-printing/filament/recommendations]] — Filament recommendations for various 3D printers.
-- [[3d-printing/filament/preparation]] — Preparation and handling guidelines for filaments.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: 3d-printing/benchmark/models/end3v3plus, 3d-printing/filament/compatible, 3d-printing/filament/handling, 3d-printing/filament/preparation, 3d-printing/filament/recommendations, 3d-printing/filament/types, 3d-printing/glassware/attachment, 3d-printing/printer-maintenance, 3d-printing/printer-models/ender-3-v3-plus, 3d-printing/printer-setup/beginner-guide, 3d-printing/printer-setup/preparation
+- [[3d-Printing-Filament-Recommendations-For-Ender-3-V3]] — similarity
+- [[Filaments-For-Creality-Ender-3-V3-Plus]] — similarity
