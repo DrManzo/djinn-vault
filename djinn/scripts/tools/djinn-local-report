@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""
+djinn-local-report — generate session reports via phi4:14b (no Claude required)
+
+Usage:
+  djinn-local-report --topic "gateway-phase1"
+  djinn-local-report --topic "gateway-phase1" --since "2026-06-05T18:00:00"
+  djinn-local-report --topic "gateway-phase1" --no-commit
+  djinn-local-report --topic "gateway-phase1" --upgrade   # use Claude API
+"""
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+
+VAULT      = Path.home() / "Obsidian"
+REPORTS    = VAULT / "djinn/logs/reports"
+COMMS      = VAULT / "djinn/communications/COMMS.md"
+QUEUE      = VAULT / "djinn/communications/QUEUE.md"
+_OLLAMA_HOST = __import__("os").environ.get("OLLAMA_HOST", "http://192.168.1.225:11434")
+OLLAMA_URL = f"{_OLLAMA_HOST}/api/generate"
+CLAUDE_ENV = Path.home() / ".config/djinn/claude.env"
+
+REQUIRED_SECTIONS = [
+    "## Summary",
+    "## Work Completed",
+    "## Files Changed",
+    "## Decisions Made",
+    "## Open Issues",
+    "## Next Steps",
+]
+
+def run(cmd, cwd=None):
+    r = subprocess.run(cmd, shell=True, capture_output=True, text=True, cwd=cwd or str(VAULT))
+    return r.stdout.strip()
+
+def assemble_context(topic: str, since: str | None) -> str:
+    parts = []
+
+    # Git commits this session
+    since_flag = f"--since='{since}'" if since else "--since='8 hours ago'"
+    commits = run(f"git log --oneline {since_flag}")
+    parts.append(f"## Git commits this session\n{commits or '(none)'}")
+
+    # Files changed
+    n_commits = len(commits.splitlines()) if commits else 1
+    diff = run(f"git diff --stat HEAD~{max(n_commits,1)} HEAD")
+    parts.append(f"## Files changed\n{diff or '(none)'}")
+
+    # Recent COMMS entries
+    if COMMS.exists():
+        lines = COMMS.read_text().splitlines()
+        entries, current = [], []
+        for line in lines:
+            if line.startswith("### ") and current:
+                entries.append("\n".join(current))
+                current = [line]
+            elif line.startswith("### "):
+                current = [line]
+            elif current:
+                current.append(line)
+        if current:
+            entries.append("\n".join(current))
+        recent = [e for e in entries if not any(x in e for x in
+                  ["heartbeat","HEARTBEAT","vault-sync","CHECKPOINT"])][-5:]
+        parts.append("## Recent COMMS entries\n" + "\n---\n".join(recent))
+
+    # Active queue tasks
+    if QUEUE.exists():
+        q = QUEUE.read_text()
+        today = datetime.now().strftime("%Y-%m-%d")
+        tasks = re.findall(
+            r'(## TASK-\d+.*?(?=## TASK-|\Z))',
+            q, re.DOTALL
+        )
+        relevant = [t for t in tasks if
+                    re.search(r'status:\s*(done|in.progress)', t, re.I) and today in t]
+        if relevant:
+            parts.append("## Tasks completed/in-progress today\n" + "\n".join(relevant[:5]))
+
+    parts.insert(0, f"Topic: {topic}\nDate: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    return "\n\n".join(parts)
+
+def call_ollama(context: str, model: str = "phi4:14b") -> str:
+    prompt = f"""Write a Djinn AI OS session report. Be factual and specific. Use ONLY information from the context below — do not invent details.
+
+Required format (include ALL six sections with these exact headings):
+
+# Session Report — {datetime.now().strftime('%Y-%m-%d')} — {{topic}}
+
+## Summary
+2-3 sentences describing what was accomplished.
+
+## Work Completed
+Bullet list of concrete work done.
+
+## Files Changed
+List the files from the git diff context.
+
+## Decisions Made
+Any architectural or operational decisions. "None" if not applicable.
+
+## Open Issues
+Unresolved issues or blockers. "None" if not applicable.
+
+## Next Steps
+What should happen next.
+
+---
+
+Context:
+{context}
+"""
+    payload = json.dumps({
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {"temperature": 0.3, "num_predict": 1200}
+    }).encode()
+
+    req = urllib.request.Request(
+        OLLAMA_URL, data=payload,
+        headers={"Content-Type": "application/json"}, method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            return json.loads(resp.read())["response"]
+    except Exception as e:
+        return None
+
+def call_claude_api(context: str) -> str:
+    key = ""
+    if CLAUDE_ENV.exists():
+        for line in CLAUDE_ENV.read_text().splitlines():
+            if line.startswith("ANTHROPIC_API_KEY="):
+                key = line.split("=", 1)[1].strip()
+    key = key or __import__("os").environ.get("ANTHROPIC_API_KEY", "")
+    if not key:
+        print("No ANTHROPIC_API_KEY found — falling back to phi4:14b", file=sys.stderr)
+        return None
+
+    payload = json.dumps({
+        "model": "claude-haiku-4-5-20251001",
+        "max_tokens": 1500,
+        "messages": [{"role": "user", "content":
+            f"Write a Djinn AI OS session report using ONLY the context below. "
+            f"Include all 6 sections: Summary, Work Completed, Files Changed, "
+            f"Decisions Made, Open Issues, Next Steps.\n\nContext:\n{context}"
+        }]
+    }).encode()
+
+    req = urllib.request.Request(
+        "https://api.anthropic.com/v1/messages",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "x-api-key": key,
+            "anthropic-version": "2023-06-01"
+        }, method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read())["content"][0]["text"]
+    except Exception as e:
+        print(f"Claude API call failed: {e}", file=sys.stderr)
+        return None
+
+def validate(text: str) -> list[str]:
+    return [s for s in REQUIRED_SECTIONS if s not in text]
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--topic", required=True)
+    p.add_argument("--since", default=None)
+    p.add_argument("--no-commit", action="store_true")
+    p.add_argument("--upgrade", action="store_true")
+    args = p.parse_args()
+
+    print(f"[djinn-local-report] Topic: {args.topic}")
+    print("[djinn-local-report] Assembling context...")
+    context = assemble_context(args.topic, args.since)
+
+    model_used = "unknown"
+    report = None
+
+    if args.upgrade:
+        print("[djinn-local-report] --upgrade: trying Claude API...")
+        report = call_claude_api(context)
+        model_used = "claude-haiku"
+
+    if not report:
+        print("[djinn-local-report] Calling phi4:14b via Ollama...")
+        t0 = datetime.now()
+        report = call_ollama(context, "phi4:14b")
+        elapsed = (datetime.now() - t0).seconds
+        model_used = f"phi4:14b ({elapsed}s)"
+
+    if not report:
+        print("[djinn-local-report] phi4 unavailable, falling back to qwen2.5:7b...")
+        report = call_ollama(context, "qwen2.5:7b")
+        model_used = "qwen2.5:7b (fallback)"
+
+    if not report:
+        print("ERROR: All models failed. Is Ollama running?", file=sys.stderr)
+        sys.exit(1)
+
+    # Validate sections
+    missing = validate(report)
+    if missing:
+        print(f"[djinn-local-report] Missing sections: {missing} — retrying...")
+        retry_prompt = report + f"\n\nThe report is missing these sections: {missing}. Add them now."
+        report2 = call_ollama(retry_prompt, "phi4:14b")
+        if report2:
+            report = report2
+            missing = validate(report)
+        if missing:
+            print(f"[djinn-local-report] WARNING: Still missing {missing} after retry")
+
+    # Save
+    today = datetime.now().strftime("%Y-%m-%d")
+    slug = re.sub(r"[^a-z0-9-]", "-", args.topic.lower()).strip("-")
+    out_path = REPORTS / f"{today}_{slug}.md"
+    out_path.write_text(report)
+    print(f"[djinn-local-report] Saved: {out_path}")
+    print(f"[djinn-local-report] Model: {model_used}")
+
+    # COMMS entry
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M")
+    with open(COMMS, "a") as f:
+        f.write(f"\n### {ts} UTC — @Djinn → @All: session report auto-generated — {args.topic}\n\n"
+                f"Model: `{model_used}` | File: `{out_path.name}`\n\n— Djinn\n")
+
+    if not args.no_commit:
+        subprocess.run(
+            f'cd {VAULT} && git add {out_path} {COMMS} && '
+            f'git commit -m "report: {args.topic} — auto-generated by {model_used}"',
+            shell=True
+        )
+        print("[djinn-local-report] Committed.")
+
+    print("[djinn-local-report] Done.")
+
+if __name__ == "__main__":
+    main()
