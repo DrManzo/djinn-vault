@@ -987,3 +987,15 @@ created: 2026-05-19
 - Final Camood_TTHQ_engraved.stl = original + TF anvil bottom mark only (correct — no added text needed)
 
 *— Claude*
+
+## 2026-06-05: Camood TTHQ Engraving Fixed
+- Identified clean Camood base from MakerWorld cup_stls.zip (14,726 faces, no mfg text) → saved to library
+- Fixed `camood_tthq_engrave.py`:
+  - `qCurveTo`: was linear interpolation → fixed to proper TrueType quadratic bezier
+  - `glyph_polygons`: unary_union was filling holes → fixed via signed area (CW=outer, CCW=hole, subtract)
+  - Added XY centering for non-origin exports
+  - SOURCE_STL → Camood_clean.stl; DEPTH_MM 1.8 → 2.5mm
+- Output: `Camood_TTHQ_engraved.stl` — watertight, 43,232 faces, legibility PASS
+- Installed `rtree` (missing trimesh dep for ray_triangle spatial index)
+
+*— Claude*
