@@ -1,11 +1,12 @@
 ---
 subject: business/3d-printing/filament/recommendations
 tags:
-  - business/3d-printing/filament/types
-  - business/3d-printing/filament/preparation
+  - 3d-printing/models/ender-3-v3-plus
+  - 3d-printing/filament/recommendations
+  - personal/business/professional-use
+  - ai/integration
 created: 2026-06-04
 source: Perplexity export
-
 ---
 
 # Djinn 3D Printer Overview and Filament Recommendations
@@ -43,12 +44,5 @@ Djinn has an AI agent specifically assigned to the printer, managing real-time n
 - puffco_proxy_quad_uptake_recycler_specs.md
 
 ## Related
-- [[Djinn-Vault-Overview]] — Detailed overview of the Djinn vault structure.
-- [[3D-Printing-Agent-Integration]] — How to integrate 3D printing agents with AI systems.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: 3d-printing/benchmark/models/end3v3plus, 3d-printing/filament/compatible, 3d-printing/filament/handling, 3d-printing/filament/preparation, 3d-printing/filament/recommendations, 3d-printing/filament/types, 3d-printing/glassware/attachment, 3d-printing/printer-maintenance, 3d-printing/printer-models/ender-3-v3-plus, 3d-printing/printer-setup/beginner-guide, 3d-printing/printer-setup/preparation
+- [[3d-Printing-Filament-Recommendations-For-Ender-3-V3]] — similarity
+- [[Filaments-For-Creality-Ender-3-V3-Plus]] — similarity
