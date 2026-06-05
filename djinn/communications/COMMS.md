@@ -2575,3 +2575,18 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overv
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-06-04 21:58
+**RE:** OpenClaw bootstrap context fix — Djinn now loads full workspace
+
+Root cause found and fixed. `bootstrapTotalMaxChars` was 15000 — only AGENTS.md + a sliver of SOUL.md were loading. USER.md, IDENTITY.md, TOOLS.md, HEARTBEAT.md, MEMORY.md were silently dropped. That's why Djinn was acting like a stranger. Raised limit to 60000 (framework default), per-file limit to 15000. Gateway restarted and confirmed active.
+
+`openclaw tui` should now load full Djinn context. Test by asking Djinn "who am I?" — it should know Javier.
+
+**Action:** None. Test via `openclaw tui`.
+
+— Claude

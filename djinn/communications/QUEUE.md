@@ -2104,3 +2104,13 @@ systemctl --user status djinn-print-monitor.timer
 - Print time: 29h 59m · 497.6g PLA
 
 *— Claude, 2026-06-04*
+
+---
+
+## 2026-06-04 — OpenClaw bootstrap fix (Claude → verified, no handoff needed)
+
+No tasks queued for Salomon or Typhon from this session. The fix was config-only on Salomon (openclaw.json). Gateway already restarted.
+
+Test action for Javier: `openclaw tui` → ask "who am I?" — should get a Djinn response that knows Javier.
+
+*— Claude, 2026-06-04*
