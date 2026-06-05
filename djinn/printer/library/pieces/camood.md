@@ -52,8 +52,8 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 | Type | Path |
 |------|------|
 | Original | `~/printer-files/library/originals/terp-tribe/The Terp Tribe - Camood.stl` |
-| Centered (XY origin) | `~/printer-files/staging/camood_centered.stl` |
 | Engraved (print-ready) | `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl` |
+| Engrave script | `~/printer-files/scripts/camood_tthq_engrave.py` |
 
 ---
 
