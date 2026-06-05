@@ -978,3 +978,12 @@ created: 2026-05-19
 - AI logo moved to `djinn/media/logos/`
 
 *— Claude*
+
+## 2026-06-05: djinn-detect-surfaces
+- Built `~/.local/bin/djinn-detect-surfaces` — pre-flight surface scanner for engraving pipeline
+- Uses histogram-peak ray-cast (6 directions × 400 rays), extracts flat panels from curved geometry
+- Debugged: ray origin direction inversion bug (0 hits → fixed), vertex_defects property vs method
+- Ran on Camood STL: back panel Y=51.305mm (2.79mm inset from bbox), confirmed manufacturer text on back
+- Final Camood_TTHQ_engraved.stl = original + TF anvil bottom mark only (correct — no added text needed)
+
+*— Claude*
