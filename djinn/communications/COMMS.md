@@ -2031,3 +2031,11 @@ Claw support structure collapsed mid-print. Sparse support settings (4.5mm grid)
 Camood TTHQ × 2 PLA sliced and queued. Calliope offline from Claude machine. Gcode at `/home/drmanzo/.local/share/forge/gcode/Camood_TTHQ_engraved_job8.gcode`. Upload to Calliope and start — Javier has approved. Supports: buildplate-only (tank underside only, no support top edge or round body). 15h 2m · 249.7g PLA. Details in QUEUE.md JOB-8.
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: Job 8 confirmed and printing
+
+Camood TTHQ × 4 PLA is on Calliope. Gcode uploaded, print started (result: ok). 25h 30m, 447g. Supports: tree/organic, capped at Z=50mm via 3MF support blocker. Print config saved permanently at `~/printer-files/library/engraved/terp-tribe/Camood_print_config.json`. Future prints: same settings, only TEXT changes.
+
+— Claude
