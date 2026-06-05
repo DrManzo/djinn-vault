@@ -1,0 +1,366 @@
+#!/usr/bin/env python3
+"""
+djinn-comms-auto — Structured COMMS Entry Generator
+SPEC-3 from TASK-066 (Claude Dependency Audit + Migration Spec)
+
+Routes COMMS entries to the right model (or no model) based on event type,
+writes them to COMMS.md with a file lock, and maintains idempotency.
+
+Usage:
+    djinn-comms-auto --event task-complete --task TASK-066
+    djinn-comms-auto --event build --file djinn-session-end --summary "v2: auto commit msg"
+    djinn-comms-auto --event bug --exit-code 1 --script djinn-bore-core --context "..."
+    djinn-comms-auto --session-end --topic "gateway-phase1"
+
+— Marcus, TASK-069
+"""
+
+import argparse
+import fcntl
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from pathlib import Path
+
+# ── Constants ─────────────────────────────────────────────────────────────────────────────
+
+VERSION = "1.0.0"
+
+VAULT_ROOT = Path.home() / "Obsidian" / "djinn"
+COMMS_PATH = VAULT_ROOT / "communications" / "COMMS.md"
+
+# Env-overridable defaults — same pattern as djinn-local-report
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://192.168.1.225:11434")
+
+# Event type → model routing table (from SPEC-3)
+EVENT_ROUTING = {
+    "heartbeat":      None,           # scripted, no LLM
+    "git":            None,           # scripted, no LLM
+    "task-complete":  "qwen2.5:7b",
+    "build":          "phi4:14b",
+    "bug":            "deepseek-r1:7b",
+    "session-end":    "phi4:14b",
+}
+
+FALLBACK_MODEL = "qwen2.5:7b"
+
+# ── Argument Parsing ──────────────────────────────────────────────────────────────────────────
+
+def parse_args():
+    p = argparse.ArgumentParser(
+        description="djinn-comms-auto — write COMMS entries from Salomon without Claude",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    p.add_argument("--event", choices=list(EVENT_ROUTING.keys()),
+                   help="Type of event (determines model routing)")
+    p.add_argument("--task",    help="TASK ID (for task-complete events)")
+    p.add_argument("--file",    help="File/tool name (for build events)")
+    p.add_argument("--summary", help="One-line human summary of the event")
+    p.add_argument("--script",  help="Script name that errored (for bug events)")
+    p.add_argument("--exit-code", dest="exit_code", type=int, help="Exit code (bug events)")
+    p.add_argument("--context", help="Additional context string passed to the model")
+    p.add_argument("--session-end", dest="session_end", action="store_true",
+                   help="Shorthand: --event session-end")
+    p.add_argument("--topic",   help="Session topic (for session-end)")
+    p.add_argument("--model",   help="Override the default routed model")
+    p.add_argument("--dry-run", action="store_true",
+                   help="Print what would be written; do not modify COMMS.md")
+    p.add_argument("--no-comms", action="store_true",
+                   help="Skip writing to COMMS.md (for piping output elsewhere)")
+    p.add_argument("--version", action="version", version=f"djinn-comms-auto {VERSION}")
+    return p.parse_args()
+
+# ── Gateway Check ────────────────────────────────────────────────────────────────────────────
+
+def gateway_check():
+    """
+    Ask djinn-gateway classify whether writing a COMMS entry is permitted.
+    Abort if tier > 2 (Permanent Write or above).
+    Returns True if approved, False if should abort.
+    """
+    try:
+        result = subprocess.run(
+            ["djinn-gateway", "classify", "write COMMS entry"],
+            capture_output=True, text=True, timeout=10
+        )
+        output = result.stdout.strip().lower()
+        # Parse tier from output — djinn-gateway classify returns e.g. "tier 1" or "tier: 1"
+        for token in output.split():
+            if token.isdigit():
+                tier = int(token)
+                if tier > 2:
+                    print(
+                        f"✗ Gateway blocked: tier {tier} > 2 for COMMS write. Aborting.",
+                        file=sys.stderr
+                    )
+                    return False
+                return True
+        # If we can't parse tier, allow (gateway may not be installed)
+        return True
+    except FileNotFoundError:
+        # djinn-gateway not installed — allow, log warning
+        print("⚠  djinn-gateway not found — skipping gateway check", file=sys.stderr)
+        return True
+    except subprocess.TimeoutExpired:
+        print("⚠  djinn-gateway timed out — skipping gateway check", file=sys.stderr)
+        return True
+
+# ── Idempotency ──────────────────────────────────────────────────────────────────────────────
+
+def make_event_id(event: str, key: str) -> str:
+    """
+    Hash --event + --task/--file/--script + current UTC minute.
+    Truncate to 12 hex chars. This is the dedup key.
+    """
+    minute = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
+    raw = f"{event}:{key}:{minute}"
+    return hashlib.sha256(raw.encode()).hexdigest()[:12]
+
+def is_duplicate(event_id: str, comms_path: Path, window: int = 20) -> bool:
+    """
+    Check if event_id appears in the last `window` lines of COMMS.md.
+    """
+    if not comms_path.exists():
+        return False
+    lines = comms_path.read_text(encoding="utf-8").splitlines()
+    tail = lines[-window:] if len(lines) >= window else lines
+    return any(event_id in line for line in tail)
+
+# ── Ollama API ─────────────────────────────────────────────────────────────────────────────
+
+def ollama_generate(model: str, prompt: str, system: str = "") -> str:
+    """
+    Call Ollama /api/generate on OLLAMA_HOST.
+    Returns the generated text, or raises RuntimeError on failure.
+    """
+    payload = {
+        "model": model,
+        "prompt": prompt,
+        "system": system,
+        "stream": False,
+        "options": {"temperature": 0.3, "num_predict": 512},
+    }
+    data = json.dumps(payload).encode("utf-8")
+    url = f"{OLLAMA_HOST.rstrip('/')}/api/generate"
+
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            body = json.loads(resp.read().decode("utf-8"))
+            return body.get("response", "").strip()
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"Ollama unreachable at {OLLAMA_HOST}: {exc}") from exc
+
+# ── Prompt Templates ───────────────────────────────────────────────────────────────────────────
+
+SYSTEM_PROMPT = (
+    "You are a technical writer for Djinn AI OS. "
+    "Write COMMS log entries. Be brief, specific, and factual. "
+    "Do not invent details not present in the context provided. "
+    "Use only the exact format given."
+)
+
+def build_prompt(event: str, context_data: dict) -> str:
+    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    base = f"Write a COMMS entry for the Djinn AI OS log.\n\nUse EXACTLY this format:\n\n"
+
+    if event in ("task-complete",):
+        base += (
+            f"### {now_utc} UTC — @Salomon → @All: {{subject}}\n\n"
+            "**Task:** {task_id}\n"
+            "**Action:** {one sentence}\n"
+            "**Result:** {one sentence}\n\n"
+            "— Salomon\n"
+        )
+    elif event == "build":
+        base += (
+            f"### {now_utc} UTC — @Salomon → @All: {{subject}}\n\n"
+            "**Action:** {one line}\n"
+            "**Files:** {list}\n"
+            "**Result:** {one line}\n\n"
+            "— Salomon\n"
+        )
+    elif event == "bug":
+        base += (
+            f"### {now_utc} UTC — @Salomon → @All: BUG — {{subject}}\n\n"
+            "**Script:** {script_name}\n"
+            "**Exit Code:** {exit_code}\n"
+            "**Observed:** {one line}\n"
+            "**Root Cause:** {one line if known, else 'under investigation'}\n\n"
+            "— Salomon\n"
+        )
+    elif event == "session-end":
+        base += (
+            f"### {now_utc} UTC — @Salomon → @All: session-end — {{topic}}\n\n"
+            "**Summary:** {2-3 sentences covering what was accomplished}\n"
+            "**Files Changed:** {brief list}\n"
+            "**Open Issues:** {any known blockers or follow-ups}\n\n"
+            "— Salomon\n"
+        )
+    else:
+        base += (
+            f"### {now_utc} UTC — @Salomon → @All: {{subject}}\n\n"
+            "**Event:** {event_type}\n"
+            "**Detail:** {one line}\n\n"
+            "— Salomon\n"
+        )
+
+    ctx_lines = "\n".join(f"  {k}: {v}" for k, v in context_data.items() if v)
+    base += f"\nContext:\n{ctx_lines}\n"
+    return base
+
+# ── Scripted Entry (no LLM) ────────────────────────────────────────────────────────────────────
+
+def scripted_entry(event: str, context_data: dict) -> str:
+    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    detail = context_data.get("summary") or context_data.get("context") or "(no detail)"
+    subject = f"{event} event"
+    if event == "heartbeat":
+        subject = "heartbeat"
+    elif event == "git":
+        subject = f"git event — {context_data.get('file', 'unknown')}"
+    return (
+        f"\n\n### {now_utc} UTC — @Salomon → @All: {subject}\n\n"
+        f"**Event:** {event}\n"
+        f"**Detail:** {detail}\n\n"
+        "— Salomon\n"
+    )
+
+# ── Validation ──────────────────────────────────────────────────────────────────────────────
+
+def validate_entry(entry: str, event: str) -> bool:
+    """
+    Minimal regex-style check: entry must have the ### header and at least one **Key:** line.
+    """
+    has_header = entry.strip().startswith("###")
+    has_bold_field = "**" in entry
+    return has_header and has_bold_field
+
+# ── COMMS Writer ────────────────────────────────────────────────────────────────────────────
+
+def append_to_comms(entry: str, comms_path: Path, dry_run: bool = False) -> bool:
+    """
+    Append entry to COMMS.md using fcntl.flock for file locking.
+    Returns True on success.
+    """
+    if dry_run:
+        print("─── DRY RUN — would append to COMMS.md ───")
+        print(entry)
+        print("───────────────────────────────────────────")
+        return True
+
+    comms_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(comms_path, "a", encoding="utf-8") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            fh.write(entry if entry.startswith("\n") else "\n" + entry)
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+    return True
+
+# ── Main ─────────────────────────────────────────────────────────────────────────────────
+
+def main():
+    args = parse_args()
+
+    # --session-end shorthand
+    if args.session_end and not args.event:
+        args.event = "session-end"
+
+    if not args.event:
+        print("✗ --event is required (or use --session-end)", file=sys.stderr)
+        sys.exit(1)
+
+    # Determine the dedup key
+    dedup_key = (
+        args.task or args.file or args.script or args.topic or args.event
+    )
+    event_id = make_event_id(args.event, dedup_key or "generic")
+
+    # Idempotency check
+    if not args.dry_run and not args.no_comms:
+        if is_duplicate(event_id, COMMS_PATH):
+            print(f"⚠  Duplicate event {event_id} found in last 20 lines of COMMS.md — skipping.",
+                  file=sys.stderr)
+            sys.exit(0)
+
+    # Gateway check
+    if not args.dry_run and not gateway_check():
+        sys.exit(1)
+
+    # Build context dict
+    context_data = {
+        "event":     args.event,
+        "task":      args.task,
+        "file":      args.file,
+        "summary":   args.summary,
+        "script":    args.script,
+        "exit_code": str(args.exit_code) if args.exit_code is not None else None,
+        "context":   args.context,
+        "topic":     args.topic,
+        "event_id":  event_id,
+    }
+
+    # Route to model
+    model = args.model or EVENT_ROUTING.get(args.event)
+    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+
+    if model is None:
+        # Scripted entry — no LLM
+        entry = scripted_entry(args.event, context_data)
+        entry += f"\n<!-- event_id:{event_id} -->\n"
+    else:
+        # LLM entry
+        prompt = build_prompt(args.event, context_data)
+        print(f"→ Calling {model} via Ollama at {OLLAMA_HOST} ...", file=sys.stderr)
+        try:
+            raw = ollama_generate(model, prompt, system=SYSTEM_PROMPT)
+        except RuntimeError as exc:
+            print(f"⚠  Ollama error: {exc}", file=sys.stderr)
+            print(f"⚠  Falling back to {FALLBACK_MODEL}", file=sys.stderr)
+            try:
+                raw = ollama_generate(FALLBACK_MODEL, prompt, system=SYSTEM_PROMPT)
+            except RuntimeError as exc2:
+                print(f"✗ Fallback also failed: {exc2}", file=sys.stderr)
+                print("✗ No COMMS entry written.", file=sys.stderr)
+                sys.exit(1)
+
+        if not validate_entry(raw, args.event):
+            # Re-prompt once with stricter instruction
+            print("⚠  Entry failed validation — retrying with stricter prompt", file=sys.stderr)
+            strict = (
+                "The previous output was missing the required ### header or **Field:** lines.\n"
+                f"REQUIRED: Start the entry with '### {now_utc} UTC — @Salomon → @All:'\n\n"
+            ) + prompt
+            try:
+                raw = ollama_generate(model, strict, system=SYSTEM_PROMPT)
+            except RuntimeError:
+                pass  # Use whatever we got
+
+        entry = "\n\n" + raw.strip()
+        entry += f"\n<!-- event_id:{event_id} -->\n"
+
+    # Print to stdout always
+    print(entry)
+
+    # Write to COMMS.md unless --no-comms
+    if not args.no_comms:
+        success = append_to_comms(entry, COMMS_PATH, dry_run=args.dry_run)
+        if success and not args.dry_run:
+            print(f"✓ COMMS entry written ({event_id})", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
