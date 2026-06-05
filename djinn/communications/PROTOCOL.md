@@ -1,13 +1,13 @@
 ---
 title: Djinn Communications Protocol
 tags: [djinn, protocol, communications, agents]
-updated: 2026-05-30
+updated: 2026-06-05
 ---
 
 # Djinn Communications Protocol
 
 Rules every agent follows. No exceptions. No shortcuts.
-**Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[COMMS]] | [[AGENTS]]
+**Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[COMMS]] | [[AGENTS]] | [[GATEWAY]]
 
 ---
 
@@ -49,14 +49,17 @@ Both machines on **192.168.1.x** subnet as of 2026-05-23.
 
 Every agent, every session, in this order:
 
-1. **READ** → `HEARTBEAT.md` + `HEARTBEAT-typhon.md` — machine status
-2. **READ** → `tail -n 50 COMMS.md` — recent context
-3. **WORK** → execute the task
-4. **REPORT** → write a session report (see Report Standard below)
-5. **APPEND** → one entry to `COMMS.md` (see format below)
-6. **PUSH** → `git add -A && git commit && git push`
+1. **READ** → `djinn/GATEWAY.md` — action tier rules and Dev mode status (**added 2026-06-05**)
+2. **READ** → `HEARTBEAT.md` + `HEARTBEAT-typhon.md` — machine status
+3. **READ** → `tail -n 50 COMMS.md` — recent context
+4. **WORK** → execute the task
+5. **REPORT** → write a session report (see Report Standard below)
+6. **APPEND** → one entry to `COMMS.md` (see format below)
+7. **PUSH** → `git add -A && git commit && git push`
 
-No session ends without steps 4, 5, and 6. **A session that produces no report is incomplete.**
+No session ends without steps 5, 6, and 7. **A session that produces no report is incomplete.**
+
+> **Gateway note:** Step 7 (push) is a Tier 3 action under GATEWAY.md. In Standard mode, write a COMMS CHECKPOINT entry and wait for Javier's approval before pushing. In Dev mode, push autonomously but still log the COMMS entry.
 
 ---
 
@@ -74,6 +77,7 @@ No session ends without steps 4, 5, and 6. **A session that produces no report i
 
 **Recipient tags:** `@Salomon`, `@Typhon`, `@Claude`, `@Marcus`, `@All`
 **Processed tag:** After acting on a message, append `**Processed:** YYYY-MM-DD — AgentName` below it.
+**Checkpoint tag:** For Tier 3 approvals, prefix subject with `CHECKPOINT:` — see GATEWAY.md.
 
 ---
 
@@ -208,4 +212,4 @@ All bugs are indexed in `djinn/logs/bugs.md`. Template: `djinn/logs/BUG-REPORT-T
 | medium | Bug report + session report |
 | low | Bug report (can be brief) |
 
-*— Claude, 2026-05-28 | Updated by Marcus, 2026-05-30*
+*— Claude, 2026-05-28 | Updated by Marcus, 2026-05-30 | Gateway wired in by Marcus, 2026-06-05*
