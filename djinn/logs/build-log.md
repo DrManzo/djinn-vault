@@ -918,3 +918,12 @@ created: 2026-05-19
 - Organized library: originals → terp-tribe subfolder, engraved/ dir created
 
 *— Claude*
+
+### 2026-06-04 — USER.md Update from Perplexity Ingest
+
+- Read all 16 Perplexity exports from ~/Downloads/ (2026-06-04_*.md)
+- Updated ~/.openclaw/workspace/USER.md: correct birth time 00:55, age 32, San Bernardino location, Psychology B.A. completed, Finance A.S. in progress, attorney career goal, weight in kg + gym/PT, archetypes (Wounded Healer/Fool/Hermit), Ashton relationship, Faust CLI stack update
+- Flagged astrological chart: Rising/Ascendant must be recomputed at 00:55 (old charts used 10:43am — WRONG)
+- Moved all 16 Perplexity files to ~/Obsidian/RAW/perplexity-exports/
+
+*— Claude*

@@ -2039,3 +2039,11 @@ Camood TTHQ × 2 PLA sliced and queued. Calliope offline from Claude machine. Gc
 Camood TTHQ × 4 PLA is on Calliope. Gcode uploaded, print started (result: ok). 25h 30m, 447g. Supports: tree/organic, capped at Z=50mm via 3MF support blocker. Print config saved permanently at `~/printer-files/library/engraved/terp-tribe/Camood_print_config.json`. Future prints: same settings, only TEXT changes.
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: USER.md updated from Perplexity ingest
+
+Read 16 Perplexity exports. Updated USER.md: correct birth time 00:55 (not 10:43am), age 32, San Bernardino CA, B.A. Psychology ✅ completed, A.S. Finance in progress, attorney career goal documented, weight in kg + gym 3x/month with PT, archetypes added (Wounded Healer/Fool/Hermit), Ashton (long-distance) added to Relationships, Faust CLI stack corrected to Click/Rich/SQLite. Astrological Rising NOT yet computed — flagged for correct 00:55 chart. All 16 files → RAW/perplexity-exports/.
+
+— Claude
