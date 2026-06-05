@@ -573,3 +573,8 @@ Each entry: one incident. Append only.
   Action needed: Tighter grid (≤3mm) or tree supports specifically on the claw arms.
     Consider printing claws at a different orientation to minimize unsupported overhangs.
 ---
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_engraved_job8.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-05 01:39:14 UTC
