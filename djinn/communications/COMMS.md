@@ -2805,3 +2805,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Designing-A-Scr
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-05 12:44
+**RE:** Session end — slipbox--aust--li--verview-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview.md
+
+**Action:** None — FYI.
+
+— Typhon
