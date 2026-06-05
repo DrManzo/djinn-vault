@@ -583,3 +583,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-05 05:25:50 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_engraved_job10_pause530.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-05 17:36:02 UTC

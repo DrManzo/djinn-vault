@@ -2114,3 +2114,26 @@ No tasks queued for Salomon or Typhon from this session. The fix was config-only
 Test action for Javier: `openclaw tui` → ask "who am I?" — should get a Djinn response that knows Javier.
 
 *— Claude, 2026-06-04*
+
+---
+
+## 2026-06-05 — Print Queue Reset
+
+**Closed by Claude — per Javier request 2026-06-05**
+
+The following print items are now closed. No prints are pending, queued, or on hold.
+
+| Item | Status | Reason |
+|------|--------|--------|
+| JOB-8 — Camood TTHQ × 4 | **cancelled** | Superseded by Job 9 → Job 10. All Camood jobs concluded. |
+| PRINT JOB — 2026-06-02 — Proxy Stand Pair | **cancelled** | Superseded by Job 6 (ProxyStand_TTHQ). Closed. |
+| TASK-065 — djinn-print-monitor triage | **superseded** | Replaced by `djinn-print-safety` daemon (built 2026-06-05). Triage logic lives there now. |
+| TASK-063 — Social studio first-run setup | **pending — non-print** | Retained. No print dependency. Javier's own setup steps. |
+
+**Printer state as of 2026-06-05:**
+- Moonraker queue: empty, idle
+- Print history: cleared (71 entries)
+- Active traces: archived to `djinn/printer/traces-archive/`
+- No prints approved, running, or waiting
+
+*— Claude, 2026-06-05*
