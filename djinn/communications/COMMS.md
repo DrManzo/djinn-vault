@@ -2649,3 +2649,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printe
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-05 12:44
+**RE:** Session end — slipbox--ilament--ecommendations--or--nder-3v3--lus-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Filament-Recommendations-For-Ender-3v3-Plus.md
+
+**Action:** None — FYI.
+
+— Typhon
