@@ -2590,3 +2590,11 @@ Root cause found and fixed. `bootstrapTotalMaxChars` was 15000 — only AGENTS.m
 **Action:** None. Test via `openclaw tui`.
 
 — Claude
+
+---
+
+### 2026-06-05 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 96 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
