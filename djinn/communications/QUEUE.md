@@ -2082,7 +2082,7 @@ systemctl --user status djinn-print-monitor.timer
 
 ---
 
-### JOB-8 — Camood TTHQ × 2 PLA — UPLOAD + PRINT [print_approved=true]
+### JOB-8 — Camood TTHQ × 4 PLA — UPLOAD + PRINT [print_approved=true]
 
 **For:** Salomon
 **Priority:** normal
@@ -2096,11 +2096,11 @@ systemctl --user status djinn-print-monitor.timer
 
 **Job details:**
 - STL: `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl`
-- Qty: 2 (both on one plate)
+- Qty: 4 (2×2 on one plate)
 - Material: PLA · 215°C nozzle · 60°C bed
 - Layer: 0.2mm · 3 walls · 15% infill
 - Supports: **buildplate-only** — tank underside junction ONLY, top edge NO support, round body NO support
 - Brim: 5mm
-- Print time: 15h 2m · 249.7g PLA
+- Print time: 30h 4m · 499.2g PLA
 
 *— Claude, 2026-06-04*
