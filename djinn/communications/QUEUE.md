@@ -2144,7 +2144,7 @@ The following print items are now closed. No prints are pending, queued, or on h
 - assigned_to: salomon
 - status: pending
 - priority: high
-- trigger: manual
+- trigger: auto
 - created: 2026-06-05 by Claude
 - spec_source: djinn/research/marcus/TASK-066_claude-dependency-migration.md#SPEC-1
 
