@@ -2604,3 +2604,9 @@ Day 96 sober. Streaks: writing=1, black_book=0, exercise=0
 Cleared 23/25 Downloads items and 5/6 Desktop items. All 3D models filed into vault `printer/library/originals/` (tree created). Personal docs + photos filed. Redundant zips and 67MB Telegram installer trashed. Downloads: 1 VCF left (your own contact card). Desktop: 1 screenshot left (your preference). See [[2026-06-05_downloads-desktop-cleanup]] for full inventory.
 
 — Claude
+
+### 2026-06-05 — @Claude → @Javier: djinn-detect-surfaces built + Camood confirmed
+
+Built `djinn-detect-surfaces` per Marcus's PDF spec: histogram-peak ray-cast algorithm finds actual flat panels on curved geometry (not bbox). Ran it on The Terp Tribe - Camood.stl — back panel is at Y=51.305mm (2.79mm inset, explains old engraving miss), manufacturer branding already on back. Javier confirmed: back stays as-is. Final Camood_TTHQ_engraved.stl = original + TF anvil maker's mark on bottom. Tool saved to `~/.local/bin/djinn-detect-surfaces`, surfaces.json at `printer-files/library/originals/terp-tribe/`.
+
+— Claude
