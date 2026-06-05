@@ -2079,3 +2079,28 @@ systemctl --user status djinn-print-monitor.timer
 ```
 
 **Report back:** COMMS.md — paste sample Telegram message output and confirm cube queues correctly on test failure.
+
+---
+
+### JOB-8 — Camood TTHQ × 2 PLA — UPLOAD + PRINT [print_approved=true]
+
+**For:** Salomon
+**Priority:** normal
+**Status:** gcode ready, Calliope unreachable from Claude machine
+
+**Action needed:**
+1. Upload gcode to Calliope Moonraker: `http://192.168.1.114:7125`
+   - File: `/home/drmanzo/.local/share/forge/gcode/Camood_TTHQ_engraved_job8.gcode`
+   - If path not shared: scp from Salomon or re-slice with `djinn slice 8`
+2. Start print — **Javier has given explicit approval**
+
+**Job details:**
+- STL: `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl`
+- Qty: 2 (both on one plate)
+- Material: PLA · 215°C nozzle · 60°C bed
+- Layer: 0.2mm · 3 walls · 15% infill
+- Supports: **buildplate-only** — tank underside junction ONLY, top edge NO support, round body NO support
+- Brim: 5mm
+- Print time: 15h 2m · 249.7g PLA
+
+*— Claude, 2026-06-04*
