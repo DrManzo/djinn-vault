@@ -1,9 +1,9 @@
 ---
 subject: ai/development/faust/cli
 tags:
-  - ai/development/cli
-  - ai/models/performance-analysis
-  - ai/integration
+  - cs/cli
+  - cs/architecture
+  - cs/features
 created: 2026-06-04
 
 # Faust CLI Architecture and Features
@@ -44,7 +44,10 @@ The Faust CLI application is designed as a local-first personal operating system
 ## Related
 - [[AI-Development-Faust-Core]] — Core concepts and features of the Faust CLI.
 - [[Task-Management-Systems]] — Overview of task management tools and their integration.
-
 ---
 
 This note captures the essential details about the Faust CLI application, its architecture, and key features. It is structured to be easily referenced for further development or analysis.
+
+## Related
+- [[Faust-Cli-Product-Overview]] — product-overview
+- [[Faust-Cli-Core-Adapters]] — core-adapters
