@@ -1,11 +1,11 @@
 ---
 subject: business/3d-printing/filament/types
 tags:
-  - business/3d-printing/filament/recommendations
-  - business/3d-printing/filament/preparation
+  - 3d-printing/filament/recommendations
+  - 3d-printing/models/ender-3-v3-plus
+  - 3d-printing/filament/types
 created: 2026-06-04
 source: Perplexity export
-
 ---
 
 # 3D Printing Filament Recommendations for Ender 3 V3 Plus
@@ -260,3 +260,8 @@ The trial balance is a crucial component in ensuring the accuracy of financial s
 - [MakerWorld](https://makerworld.com/)
 
 ---
+
+## Related
+- [[Filaments-For-Creality-Ender-3-V3-Plus]] — similarity
+- [[Preparing-Your-Ender-3-V3-Plus-For-Printing]] — preparation
+- [[2026-06-01_i-have-a-creality-3v-3-plus-what-filliments-can-i-use]] — specific
