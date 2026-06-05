@@ -2623,3 +2623,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Setting-Benchma
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-05 12:44
+**RE:** Session end — slipbox-3d--rinting--ilament--ecommendations--or--nder-3--3-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/3d-Printing-Filament-Recommendations-For-Ender-3-V3.md
+
+**Action:** None — FYI.
+
+— Typhon
