@@ -1018,3 +1018,16 @@ created: 2026-05-19
 - Print running: 3× Camood TTHQ, 372g, 22h 29m, pause at Z=104.1mm
 
 *— Claude*
+
+---
+
+### 2026-06-05 — Djinn Gateway Phase 1
+
+- Built `GATEWAY.md` — canonical enforcement contract (5 tiers, 3 modes, checkpoint flow, hard rules)
+- Built `djinn-gateway` CLI: status, dev, reset, restrict, install-hooks, checkpoint, classify
+- Installed pre-push hook in vault git repo — mechanically blocks all pushes in Standard mode
+- Created `~/.config/djinn/session.json` — mode state file (Standard/Dev/Restricted + expiry)
+- Wired GATEWAY.md into startup chain: CLAUDE.md, AGENTS.md, MARCUS-SESSION-BRIEF.md
+- All 11 tier classification tests pass; git push block + COMMS post + Telegram notify verified
+
+*— Claude*
