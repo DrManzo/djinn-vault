@@ -37,3 +37,22 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 | 2026-06-02 | Claude | calliope / PrusaSlicer | high | fixed | M106 S255 at bridge infill creates EMI spike → instant key561 nozzle_mcu comms loss. Fix: cap fan at S128. Misdiagnosed as cable for most of session. | [[2026-06-02_calliope-m106-emi-root-cause]] |
 
 | 2026-06-04 | Claude | OpenClaw / openclaw.json | high | fixed | `agents.defaults.bootstrapTotalMaxChars` was 15000 — OpenClaw silently loaded only AGENTS.md + partial SOUL.md, dropping USER.md, IDENTITY.md, TOOLS.md, HEARTBEAT.md, MEMORY.md. Djinn had no identity, didn't know Javier. Fix: raised limit to 60000, added bootstrapMaxChars 15000. | [[2026-06-04_openclaw-bootstrap-fix]] |
+
+---
+
+### BUG-013 — PrusaSlicer ignores SupportBlocker for multi-instance 3MF
+
+**Date:** 2026-06-05
+**System:** 3D printing / PrusaSlicer 2.9.4
+**Severity:** medium
+**Status:** workaround (gcode post-processor)
+
+**Symptom:** 3MF with `volume_type="SupportBlocker"` in `Slic3r_PE_model.config` produces correct gcode when there is one `<item>` in the build section. With 3 `<item>` elements referencing the same object ID, PS treats the blocker mesh as printable geometry → gcode has 583g/31h instead of 372g/22h.
+
+**Root cause:** PrusaSlicer multi-instance handling does not correctly propagate volume type config to all instances when build items share an object ID. The `SupportBlocker` designation is ignored and the modifier mesh is printed as solid.
+
+**Workaround:** Use `djinn-gcode-support-cap INPUT OUTPUT Z_MM` to strip support extrusion above Z_MM after slicing.
+
+**Lesson:** Test multi-instance 3MF blocker separately from single-instance. Single-instance works; multi-instance requires gcode post-processing.
+
+*— Claude*
