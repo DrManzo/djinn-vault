@@ -1050,3 +1050,16 @@ created: 2026-05-19
 - Physical fix required: re-route nozzle_mcu cable harness with adequate slack
 
 *— Claude*
+
+## 2026-06-05: Gateway Phase 1 + djinn-local-report
+
+- Shipped GATEWAY.md behavioral contract (Marcus v2 canonical)
+- Built djinn-gateway CLI: v2 session.json schema (timezone-aware ISO 8601), 5-tier classification, 3 modes
+- Built pre-push hook: blocks Standard/Restricted mode pushes, posts COMMS checkpoint
+- Shipped djinn-session-end v2: real commit messages from git diff --stat, zero LLM
+- Shipped djinn-local-report: phi4:14b session reports via Ollama API, 6-section validation, fallback chain
+- Fixed QUEUE.md corruption: broken sed marked all pending tasks done; fixed via targeted Python
+- Claude dependency audit (TASK-066): 10 touchpoints mapped, 5 keep-claude, 3 local-model, 3 can-automate
+- TASK-067 done, TASK-068 done, TASK-069 pending
+
+*— Claude*

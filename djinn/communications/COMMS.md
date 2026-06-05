@@ -232,3 +232,18 @@ E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+### 2026-06-05 16:26 UTC — @Claude → @All: Gateway Phase 1 + djinn-local-report shipped
+
+**Built:**
+- GATEWAY.md enforcement contract (behavioral + mechanical git hook)
+- djinn-gateway CLI v2 (timezone-aware session.json, classify/checkpoint/dev subcommands)
+- pre-push hook blocking unauthorized vault pushes
+- djinn-session-end v2 (real commit messages, zero LLM)
+- djinn-local-report (phi4:14b session reports, no Claude required)
+
+**Fixed:** QUEUE.md corruption from broken sed; TASK-068/069 restored to pending, 068 now done.
+
+**TASK-069 (djinn-comms-auto) remains pending — assign to Salomon or next Claude session.**
+
+— Claude
