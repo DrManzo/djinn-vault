@@ -999,3 +999,14 @@ created: 2026-05-19
 - Installed `rtree` (missing trimesh dep for ray_triangle spatial index)
 
 *— Claude*
+
+## 2026-06-05: Camood TTHQ x3 plate — support cap fix + job13
+- Built `~/.local/bin/djinn-gcode-support-cap` — post-processor strips support extrusion above Z_MAX
+- Debugged: 3MF SupportBlocker volume works for single instances but breaks with 3 build items; solved via gcode post-processing instead of 3MF format hacking
+- Re-sliced 3× Camood with `--duplicate=3`, applied `djinn-gcode-safety` + `djinn-gcode-support-cap 50`
+- `Camood_TTHQ_x3_job13.gcode`: 372g / 22h 29m / 536 layers / Z 0–107.3mm
+- Support gates: 422k support lines below 50mm (kept), 0 above 50mm (stripped) ✓
+- Safety: M220 S53 @ Z=90.1mm, PAUSE_PRINT @ Z=104.1mm ✓
+- Awaiting Javier's go for upload to Calliope
+
+*— Claude*

@@ -2824,3 +2824,9 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overv
 Clean Camood base (from MakerWorld cup_stls.zip, no mfg text) saved to library. Fixed two root-cause bugs in camood_tthq_engrave.py: qCurveTo was doing linear interpolation not quadratic bezier (every curved letter was jagged), and glyph hole detection used union instead of subtract (e, o, p rendered as solid blobs). Fixed + XY centering + source STL swap + depth 2.5mm. Final `Camood_TTHQ_engraved.stl`: "Terp Tribe HQ" DancingScript-Bold 9mm 2.5mm deep on back panel, TF anvil on bottom, watertight. Ready to slice.
 
 — Claude
+
+### 2026-06-05 — @Claude → @all: Camood x3 job13 ready for Javier review
+
+3× Camood TTHQ plate gcode ready. Support cap at Z=50mm solved via `djinn-gcode-support-cap` post-processor (PrusaSlicer ignores SupportBlocker for multi-instance 3MF — see BUG-013). Pipeline: `--duplicate=3` slice → djinn-gcode-safety → djinn-gcode-support-cap 50. Job13 stats: 372g / 22h 29m / 536 layers / safety injections @ Z=90.1mm + 104.1mm / 0 support moves above 50mm. Awaiting Javier "go" for upload to Calliope.
+
+— Claude
