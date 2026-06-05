@@ -54,6 +54,13 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 | Original | `~/printer-files/library/originals/terp-tribe/The Terp Tribe - Camood.stl` |
 | Engraved (print-ready) | `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl` |
 | Engrave script | `~/printer-files/scripts/camood_tthq_engrave.py` |
+| **Print config (reusable)** | `~/printer-files/library/engraved/terp-tribe/Camood_print_config.json` |
+
+## To Re-Print (Future Runs)
+
+1. **Same text** — gcode already sliced. Queue it: `djinn-confirm-print <new_id>` after adding to queue
+2. **Different text** — edit `TEXT` in `camood_tthq_engrave.py`, re-run script, re-slice with `Camood_print_config.json` settings
+3. **Slicer settings are frozen** in `Camood_print_config.json` — material, temps, supports, layer height, everything
 
 ---
 
@@ -77,10 +84,16 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 ## Print Notes
 
 - Tall piece (107mm) — check bed leveling
-- Print with back panel facing front of bed for best surface quality
-- No supports needed
-- Text is on back tank face — visible when piece is oriented naturally
+- No brim
+- **Supports:** organic tree, buildplate-only, Z cap at 50mm (via 3MF support blocker). Catches bottom curves/corners only
+- Text on back tank face — visible when oriented naturally
 - No bore modification (used as-is)
+
+## Print History
+
+| Date | Qty | Material | Time | Status |
+|------|-----|----------|------|--------|
+| 2026-06-04 | 4 | PLA | 25h 30m | 🔄 Printing |
 
 ---
 
