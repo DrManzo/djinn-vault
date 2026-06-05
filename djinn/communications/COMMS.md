@@ -2047,3 +2047,11 @@ Camood TTHQ × 4 PLA is on Calliope. Gcode uploaded, print started (result: ok).
 Read 16 Perplexity exports. Updated USER.md: correct birth time 00:55 (not 10:43am), age 32, San Bernardino CA, B.A. Psychology ✅ completed, A.S. Finance in progress, attorney career goal documented, weight in kg + gym 3x/month with PT, archetypes added (Wounded Healer/Fool/Hermit), Ashton (long-distance) added to Relationships, Faust CLI stack corrected to Click/Rich/SQLite. Astrological Rising NOT yet computed — flagged for correct 00:55 chart. All 16 files → RAW/perplexity-exports/.
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: Salomon printer-files cleaned
+
+Full cleanup of ~/printer-files/. 25+ files trashed (staging intermediates, recovery gcodes, duplicate ID-named folders). New: library/bore-tools/ (caliper/collar/gauge), library/unknown/ (19 untagged items + README), originals/external/proxy-travel-pack/ (Puffco travel pack components). Cup consolidated in library/cup/. ProxyStand_TTHQ_cursive_centered.stl → canonical terp-tribe/. 7 generator scripts moved to scripts/. models/ and staging/ now empty. Job 8 on Calliope — not touched.
+
+— Claude

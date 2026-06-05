@@ -927,3 +927,17 @@ created: 2026-05-19
 - Moved all 16 Perplexity files to ~/Obsidian/RAW/perplexity-exports/
 
 *— Claude*
+
+## 2026-06-04: Salomon Printer-Files Cleanup
+- Full audit and reorganization of ~/printer-files/
+- Trashed 25+ junk/duplicate files (staging intermediates, recovery gcodes, duplicate ID-named folders for cup/proxy stand/vases, empty folders)
+- Created library/bore-tools/ — bore measurement caliper/collar/gauge assets from models/
+- Created library/unknown/ — 19 unidentified items with README
+- Created library/originals/external/proxy-travel-pack/ — Puffco Proxy Travel Pack components
+- Moved 7 Python generator scripts from models/ → scripts/
+- Consolidated cup to library/cup/ (cup.3mf, cup_engraved_final.stl, cup_engraved_final_bored.stl, cup_geometry.stl/.gcode)
+- ProxyStand_TTHQ_cursive_centered.stl → library/engraved/terp-tribe/ (canonical)
+- tf_anvil_traced_*.stl → library/logos/
+- models/ and staging/ are now empty
+
+*— Claude*
