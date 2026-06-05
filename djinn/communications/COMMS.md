@@ -2675,3 +2675,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Cash-Suit
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-05 12:44
+**RE:** Session end — slipbox--eport--n--egibility--ssues--ith--mbossed--ext-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Report-On-Legibility-Issues-With-Embossed-Text.md
+
+**Action:** None — FYI.
+
+— Typhon
