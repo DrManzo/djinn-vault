@@ -216,3 +216,11 @@ Single Camood TTHQ job14 printing. Two incidents: (1) auto-pause at 10min/0.4% �
 E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.log). Hardware bug, not software. Happened 3× today. Triggered by wide XY travel during bed leveling mesh at print start. Fix: physical re-route of nozzle_mcu cable harness. Until fixed: multi-object plates and full bed leveling will keep hitting this. See BUG-014 in bugs.md.
 
 — Claude
+
+
+### CHECKPOINT-20260605-155641 | 2026-06-05 15:56 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
