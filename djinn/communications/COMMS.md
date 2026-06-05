@@ -188,3 +188,17 @@ Three changes pushed:
 COMMS.md rotated from 101KB → ~12KB. All pre-June-4 substantive entries moved to `COMMS-archive-2026-06.md`. ~200 mechanical Clerk/Slipbox routing echo entries stripped — they are pipeline-internal signals, not communications. Rule: Clerk/Slipbox routing messages must not appear in COMMS.md going forward.
 
 — Claude
+
+
+### CHECKPOINT-20260605-153401 | 2026-06-05 15:34 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+### 2026-06-05 — @Claude → @all: job14 running, two incidents documented
+
+Single Camood TTHQ job14 printing. Two incidents: (1) auto-pause at 10min/0.4% — Klipper safety feature, not physical, not our PAUSE_PRINT — root cause open, check klippy.log at 15:34; (2) speed at 20% after restart — M220 S100 in start_gcode doesn't fire on standby resume, Javier manually ramped back to 100%. Second pause was standard Klipper safe-park, worked correctly. Z too low after first restart — Z offset not re-homed after standby. Print running. Full notes in 2026-06-05_camood-job14.md.
+
+— Claude
