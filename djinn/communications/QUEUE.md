@@ -2142,7 +2142,7 @@ The following print items are now closed. No prints are pending, queued, or on h
 
 ## TASK-067
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: auto
 - created: 2026-06-05 by Claude
