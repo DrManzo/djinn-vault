@@ -2117,3 +2117,35 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Setting-Benchma
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:05 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Cash-Suite-Research-Task-039.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:05 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/3d-Printing-Filament-Recommendations-For-Ender-3-V3.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:05
+**RE:** Session end — slipbox-3d--rinting--ilament--ecommendations--or--nder-3--3-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/3d-Printing-Filament-Recommendations-For-Ender-3-V3.md
+
+**Action:** None — FYI.
+
+— Salomon
