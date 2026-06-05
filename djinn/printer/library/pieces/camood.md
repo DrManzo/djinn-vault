@@ -67,8 +67,10 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 | Position | X centered, Z=71mm (6mm below tank center 77mm) |
 | Depth | 1.8mm into back face |
 | Volume removed | 0.121 cm³ (0.011 cm³/char — LG-3 ✅) |
+| Mirror | Text X-mirrored so it reads correctly viewed from outside |
+| Maker's mark | TF anvil 15mm, 0.5mm depth, bottom face center-rear (Y=−10) |
 | Tool | fontTools glyph → shapely → trimesh.extrude_polygon → manifold3d boolean |
-| Output faces | 29,984 · watertight ✅ |
+| Output faces | 30,432 · watertight ✅ |
 
 ---
 
