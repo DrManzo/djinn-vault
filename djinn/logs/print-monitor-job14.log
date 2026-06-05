@@ -1,1 +1,13 @@
 [2026-06-05 15:24:12] djinn-print-monitor starting
+[2026-06-05 15:34:09] State: printing → paused (Camood_TTHQ_job14.gcode)
+[2026-06-05 15:34:21] State: paused → standby ()
+[2026-06-05 15:36:03] State: standby → printing (Camood_TTHQ_job14.gcode)
+[2026-06-05 15:36:45] ZONE: speed cap at Z=330.8mm
+[2026-06-05 15:36:45] ZONE: pause zone at Z=330.8mm
+[2026-06-05 15:36:46] ZONE: danger zone at Z=330.8mm
+[2026-06-05 15:37:06] SPEED CHANGE: 100% → 20% at Z=0.8mm XY=(152.3,182.3)
+[2026-06-05 15:39:10] SPEED CHANGE: 20% → 50% at Z=0.7mm XY=(130.9,133.8)
+[2026-06-05 15:39:20] SPEED CHANGE: 50% → 75% at Z=0.7mm XY=(138.6,128.3)
+[2026-06-05 15:39:31] SPEED CHANGE: 75% → 100% at Z=0.7mm XY=(143.5,147.0)
+[2026-06-05 15:42:45] State: printing → paused (Camood_TTHQ_job14.gcode)
+[2026-06-05 15:44:07] State: paused → printing (Camood_TTHQ_job14.gcode)

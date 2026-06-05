@@ -1031,3 +1031,14 @@ created: 2026-05-19
 - All 11 tier classification tests pass; git push block + COMMS post + Telegram notify verified
 
 *— Claude*
+
+## 2026-06-05: job14 single Camood + monitor upgrade
+- Patched start_gcode: M220 S100 + M204 P2000 T2000 added to reset speed on fresh print starts
+- djinn-print-monitor upgraded: Z zone alerts, speed factor tracking with XY, 5% step, 10s poll, first_layer_seen guard
+- job14 uploaded and started (124g, 7h 25m, single Camood TTHQ)
+- Two pauses observed: first stop at 10min (likely Klipper safety — not physical, not our PAUSE_PRINT), second was standard safe-park
+- Speed came up at 20% after restart — M220 S100 doesn't re-run on resume from standby; Javier manually ramped to 100%
+- Z too low after first restart — Z offset not re-applied on standby resume
+- Print resumed and running as of session close
+
+*— Claude*
