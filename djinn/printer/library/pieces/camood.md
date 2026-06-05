@@ -34,13 +34,16 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 | Property | Value |
 |----------|-------|
 | Dims | 66.04 × 108.19 × 107.28 mm |
-| Z range | -53.64 → +53.64 mm (centered) |
+| Z range | 0 → 107.28 mm (bed-aligned) |
 | Faces | 18,436 |
 | Watertight | ✅ Yes |
-| Volume | 248.85 cm³ |
-| Back panel | Bed Z 55–65mm, Y face at ~51.55mm, flat |
+| Volume | 249.83 cm³ |
+| Back panel (tank) | Z=56–98mm (42mm tall), actual surface at Y=+51.55mm from center |
+| Back panel width | ~61mm (X=−30.5 to +30.5mm) |
 | Lower bore | ~9.2mm (joint/base) |
 | Chamber bore | ~26–38mm (varies by Z) |
+
+**Note:** Bounding box Y=54.09mm is a different part of the model — the flat tank back face is at Y=51.553mm (confirmed by ray-cast).
 
 ---
 
@@ -48,23 +51,34 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 
 | Type | Path |
 |------|------|
-| Original | `~/printer-files/library/originals/The Terp Tribe - Camood.stl` |
-| Engraved | pending |
+| Original | `~/printer-files/library/originals/terp-tribe/The Terp Tribe - Camood.stl` |
+| Centered (XY origin) | `~/printer-files/staging/camood_centered.stl` |
+| Engraved (print-ready) | `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl` |
 
 ---
 
 ## Processing Log
 
-**Status:** Engraving in progress — "Terp Tribe HQ" DancingScript-Bold on back panel (tank).
+**Status:** ✅ Engraved — "Terp Tribe HQ" DancingScript-Bold on back tank panel.
+
+| Step | Detail |
+|------|--------|
+| Text | "Terp Tribe HQ" · DancingScript-Bold · 9mm cap height |
+| Position | X centered, Z=71mm (6mm below tank center 77mm) |
+| Depth | 1.8mm into back face |
+| Volume removed | 0.121 cm³ (0.011 cm³/char — LG-3 ✅) |
+| Tool | fontTools glyph → shapely → trimesh.extrude_polygon → manifold3d boolean |
+| Output faces | 29,984 · watertight ✅ |
 
 ---
 
 ## Print Notes
 
 - Tall piece (107mm) — check bed leveling
-- Back panel ("tank") is the primary branding surface
-- No bore modification needed (used as-is)
-- Text placement: back panel, bed Z ~55–65mm
+- Print with back panel facing front of bed for best surface quality
+- No supports needed
+- Text is on back tank face — visible when piece is oriented naturally
+- No bore modification (used as-is)
 
 ---
 

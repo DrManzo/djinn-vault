@@ -2015,3 +2015,11 @@ Day 95 sober. Streaks: writing=1, black_book=0, exercise=0
 Claw support structure collapsed mid-print. Sparse support settings (4.5mm grid) not enough for the claw geometry. Manually cancelled. Vault note and failure log updated. Needs tree supports or ≤3mm grid + possible reorientation before reprint. File stays in queue but status is on hold.
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @All: Camood TTHQ engraving complete
+
+"Terp Tribe HQ" DancingScript-Bold now engraved on flat back tank face. Key lesson: bounding box Y=54.09mm is NOT the tank surface — actual face at Y=51.553mm (verified by ray-cast). Result is watertight, 0.011 cm³/char. Print-ready at `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl`. Awaiting Javier's print approval.
+
+— Claude
