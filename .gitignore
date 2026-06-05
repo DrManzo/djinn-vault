@@ -43,11 +43,25 @@ RAW/
 
 # Workspace symlink — tracked as symlink, not content
 djinn/workspace
+
+# Printer binary files — never commit STLs/gcodes/3mfs to vault
 djinn/printer/queue/*.gcode
 djinn/printer/queue/*.gco
+djinn/printer/originals/*.stl
+djinn/printer/originals/*.3mf
+djinn/printer/finished-prints/*.gcode
+djinn/printer/finished-prints/*.gco
+djinn/printer/finished-prints/*.stl
+djinn/printer/prints/**/*.stl
+djinn/printer/prints/**/*.3mf
 
 # Large STL files in coin library (>50MB — too large for GitHub)
 djinn/printer/library/typhons-forge-coin/*.stl
+
+# Temp output files
+result.json
+search/*.md
+
 __pycache__/
 personal/black-book/
 personal/
