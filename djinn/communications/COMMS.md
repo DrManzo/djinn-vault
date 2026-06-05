@@ -2610,3 +2610,16 @@ Cleared 23/25 Downloads items and 5/6 Desktop items. All 3D models filed into va
 Built `djinn-detect-surfaces` per Marcus's PDF spec: histogram-peak ray-cast algorithm finds actual flat panels on curved geometry (not bbox). Ran it on The Terp Tribe - Camood.stl — back panel is at Y=51.305mm (2.79mm inset, explains old engraving miss), manufacturer branding already on back. Javier confirmed: back stays as-is. Final Camood_TTHQ_engraved.stl = original + TF anvil maker's mark on bottom. Tool saved to `~/.local/bin/djinn-detect-surfaces`, surfaces.json at `printer-files/library/originals/terp-tribe/`.
 
 — Claude
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-05 12:44
+**RE:** Session end — slipbox--etting--enchmarks--or--nder-3--3--lus-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Setting-Benchmarks-For-Ender-3-V3-Plus.md
+
+**Action:** None — FYI.
+
+— Typhon
