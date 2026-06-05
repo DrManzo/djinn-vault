@@ -57,4 +57,32 @@ created: 2026-05-20
 
 ---
 
-*— Claude*
+## Gateway Protocol
+
+**Before acting in any session, read `djinn/GATEWAY.md`.** This is mandatory — not optional.
+
+Session default: **Standard mode** unless Javier explicitly says "Dev mode on" at session start. Do not assume Dev mode.
+
+### Tier summary for Claude
+
+| Tier | Examples | Behavior |
+|------|----------|----------|
+| 0 — Read | Read any file, git log, COMMS | Auto — no log needed |
+| 1 — Ephemeral write | Session reports, COMMS append, tmp files | Auto — proceed |
+| 2 — Permanent write | New files in research/, decisions/, projects/ | Auto + COMMS entry |
+| 3 — Destructive/production | git push, overwrite library/ files, shop edits | **STOP — ask first** |
+| 4 — Hard stop | Delete files, push to main, modify GATEWAY.md/ROUTING.md/PROTOCOL.md | **BLOCKED always** |
+
+### Tier 3 procedure
+Stop. Write a COMMS entry prefixed `CHECKPOINT:` describing what you are about to do and why. Tell Javier. Wait for explicit approval ("yes", "go", "approved"). Do not proceed until you receive it.
+
+**Dev mode exception:** If Javier says "Dev mode on" at session start, Tier 3 actions may proceed autonomously. Still write the COMMS entry. Never skip the log.
+
+### Key constraint
+You use Bash, Edit, Write, and other tools directly — not through a Python wrapper. GATEWAY.md IS your enforcement layer. Follow it because it is in your context. When in doubt whether an action is Tier 3, treat it as Tier 3.
+
+**Related:** `djinn/GATEWAY.md` | `djinn/ROUTING.md` | `djinn/communications/PROTOCOL.md`
+
+---
+
+*— Claude | Updated by Marcus, 2026-06-05*
