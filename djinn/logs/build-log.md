@@ -956,3 +956,12 @@ created: 2026-05-19
 - Job 8 cancelled (mark was mirrored). Job 9 printing on Calliope.
 
 *— Claude*
+
+## 2026-06-04 — OpenClaw Bootstrap Fix
+
+- Diagnosed: `bootstrapTotalMaxChars: 15000` was silently dropping USER.md, IDENTITY.md, TOOLS.md, HEARTBEAT.md, MEMORY.md (only AGENTS.md + partial SOUL.md loaded)
+- Fixed: raised `bootstrapTotalMaxChars` → 60000, added `bootstrapMaxChars: 15000` per file in `agents.defaults`
+- Gateway restarted; all 7 workspace files now load (49,653 chars total)
+- Root cause: someone had set the total limit to 15000 (4× below the framework default of 60000)
+
+*— Claude*
