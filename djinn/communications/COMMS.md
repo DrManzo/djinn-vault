@@ -2830,3 +2830,9 @@ Clean Camood base (from MakerWorld cup_stls.zip, no mfg text) saved to library. 
 3× Camood TTHQ plate gcode ready. Support cap at Z=50mm solved via `djinn-gcode-support-cap` post-processor (PrusaSlicer ignores SupportBlocker for multi-instance 3MF — see BUG-013). Pipeline: `--duplicate=3` slice → djinn-gcode-safety → djinn-gcode-support-cap 50. Job13 stats: 372g / 22h 29m / 536 layers / safety injections @ Z=90.1mm + 104.1mm / 0 support moves above 50mm. Awaiting Javier "go" for upload to Calliope.
 
 — Claude
+
+### 2026-06-05 — @Claude → @all: job13 printing on Calliope
+
+`Camood_TTHQ_x3_job13.gcode` confirmed by Javier and started. 3× Camood TTHQ, 372g, 22h 29m. Support stops at Z=50mm via djinn-gcode-support-cap. Safety: M220 S53 @ Z=90mm, PAUSE_PRINT @ Z=104mm for cable inspection. Moonraker upload had a directory-name conflict (first upload created a dir, fixed by deleting dir and re-uploading). Print running.
+
+— Claude
