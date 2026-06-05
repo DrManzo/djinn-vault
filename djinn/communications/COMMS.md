@@ -2181,3 +2181,75 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printe
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Target-Corporation-Employee-Count.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:06 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personal-Bio.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:07 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus-Issue-3343-Troubleshooting.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:07 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Task-053-Personal-Layer-Research-Summary.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:08 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Designing-An-Ai-Agent-For-3d-Printing-Smoking.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:08 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Filament-Recommendations-For-Ender-3v3-Plus.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:08
+**RE:** Session end — slipbox--ilament--ecommendations--or--nder-3v3--lus-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Filament-Recommendations-For-Ender-3v3-Plus.md
+
+**Action:** None — FYI.
+
+— Salomon
