@@ -2487,3 +2487,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Analyzing-The-W
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:11 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Architecture-And-Features.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:11
+**RE:** Session end — slipbox--aust--li--rchitecture--nd--eatures-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Architecture-And-Features.md
+
+**Action:** None — FYI.
+
+— Salomon
