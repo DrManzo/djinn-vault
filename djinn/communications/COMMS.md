@@ -2285,3 +2285,35 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Cash-Suit
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:08 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Architecture-And-Features.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:08 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Report-On-Legibility-Issues-With-Embossed-Text.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:08
+**RE:** Session end — slipbox--eport--n--egibility--ssues--ith--mbossed--ext-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Report-On-Legibility-Issues-With-Embossed-Text.md
+
+**Action:** None — FYI.
+
+— Salomon
