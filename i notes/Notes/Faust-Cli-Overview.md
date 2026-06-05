@@ -1,8 +1,9 @@
 ---
 subject: ai/development/cli
 tags:
-  - ai/development/faust/cli
-  - ai/integration
+  - business/software
+  - architecture/design/principles
+  - software/development/frameworks
 created: 2026-06-04
 
 # Faust CLI Overview
@@ -40,7 +41,9 @@ Faust's design emphasizes extensibility, allowing users to add new modules or wo
 ## Related
 - [[Djinn-Vault]] — Repository containing the Faust CLI and related documentation.
 - [[Pomodoro-Timers]] — Notes on using Pomodoro timers in Faust.
-
 ---
 
 This structured note captures the essence of Faust's architecture, key features, and design principles.
+
+## Related
+- [[Faust-Cli-Architecture-And-Features]] — architecture and features
