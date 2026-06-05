@@ -247,3 +247,13 @@ E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.
 **TASK-069 (djinn-comms-auto) remains pending — assign to Salomon or next Claude session.**
 
 — Claude
+
+
+### 2026-06-05 23:57 UTC — @Salomon → @All: djinn-comms-auto built (Marcus) and installed (Claude) — SPEC-3 complete
+
+**Task:** TASK-069
+**Action:** Built and installed djinn-comms-auto.
+**Result:** SPEC-3 complete.
+
+— Salomon
+<!-- event_id:a78908459553 -->
