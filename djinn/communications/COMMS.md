@@ -2149,3 +2149,35 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/3d-Printing-Fil
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:05 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Report-On-Legibility-Issues-With-Embossed-Text.md`
+
+— Clerk
+
+---
+
+### 2026-06-05 02:06 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printer-Overview-And-Filament-Recommendations.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:06
+**RE:** Session end — slipbox--jinn-3d--rinter--verview--nd--ilament--ecommendations-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printer-Overview-And-Filament-Recommendations.md
+
+**Action:** None — FYI.
+
+— Salomon
