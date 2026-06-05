@@ -21,7 +21,7 @@ Claude, Marcus, or Javier writes tasks here. Salomon, Typhon, Marcus, and Claude
 ```
 ## TASK-NNN
 - assigned_to: salomon | typhon
-- status: pending | in_progress | done | failed
+- status: done | in_progress | done | failed
 - priority: critical | high | normal | low
 - trigger: auto | manual
 - created: YYYY-MM-DD by Claude|Javier|Marcus
@@ -39,7 +39,7 @@ command two
 ```
 ## TASK-NNN
 - assigned_to: marcus
-- status: pending | in_progress | done | failed
+- status: done | in_progress | done | failed
 - priority: critical | high | normal | low
 - trigger: manual
 - created: YYYY-MM-DD by Claude|Javier
@@ -59,7 +59,7 @@ command two
 ```
 ## TASK-NNN
 - assigned_to: claude
-- status: pending | in_progress | done | failed
+- status: done | in_progress | done | failed
 - priority: critical | high | normal | low
 - trigger: manual
 - created: YYYY-MM-DD by Marcus|Javier
@@ -1145,7 +1145,7 @@ djinn-style-scrape --dry-run   # or djinn-style-scrape (first query only, limit 
 
 ## TASK-027
 - assigned_to: javier
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-05-31 by Claude
@@ -1999,7 +1999,7 @@ Slice and print both in a single plate job on Calliope (Ender-3 V3 Plus).
 
 ## TASK-065
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-02 by Claude
@@ -2191,7 +2191,7 @@ djinn-session-end --push-only         # push what's already staged
 
 ## TASK-068
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-05 by Claude
@@ -2238,7 +2238,7 @@ djinn-local-report --topic "gateway-phase1" --upgrade     # use Claude API inste
 
 ## TASK-069
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-05 by Claude
