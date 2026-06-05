@@ -2389,3 +2389,13 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Personal-Bio.md
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:10 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview.md`
+
+— Clerk
