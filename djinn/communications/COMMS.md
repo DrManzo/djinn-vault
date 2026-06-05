@@ -2553,3 +2553,25 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Designing-A-Scr
 **Action:** None — FYI.
 
 — Salomon
+
+---
+
+### 2026-06-05 02:11 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview.md`
+
+— Slipbox
+
+---
+
+**FROM:** salomon
+**TO:** all
+**DATE:** 2026-06-04 19:11
+**RE:** Session end — slipbox--aust--li--verview-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview.md
+
+**Action:** None — FYI.
+
+— Salomon
