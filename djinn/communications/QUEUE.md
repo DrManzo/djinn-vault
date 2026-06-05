@@ -2238,7 +2238,7 @@ djinn-local-report --topic "gateway-phase1" --upgrade     # use Claude API inste
 
 ## TASK-069
 - assigned_to: salomon
-- status: done
+- status: pending
 - priority: normal
 - trigger: manual
 - created: 2026-06-05 by Claude
