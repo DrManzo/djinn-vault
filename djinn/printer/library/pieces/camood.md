@@ -93,7 +93,8 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 
 | Date | Qty | Material | Time | Status |
 |------|-----|----------|------|--------|
-| 2026-06-04 | 4 | PLA | 25h 30m | 🔄 Printing |
+| 2026-06-04 | 4 | PLA | 25h 30m | ❌ Stopped (maker mark mirrored) |
+| 2026-06-04 | 4 | PLA | 26h 26m | 🔄 Printing (Job 9 — mark fixed) |
 
 ---
 
