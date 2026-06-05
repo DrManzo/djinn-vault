@@ -1,9 +1,9 @@
 ---
 subject: business/accounting-systems/legal-entities/subsidiaries
 tags:
-  - business/budgeting/systems/50-30-20
-  - business/budgeting/systems/zero-based-budgeting
-  - business/research/cash-suite
+  - business/budgeting/methods
+  - personal-finance/techniques
+  - finance/planning
 created: 2026-06-04
 source: Perplexity export
 ---
@@ -45,13 +45,5 @@ The research highlights that while both budgeting methods have their merits, the
 - [Forbes](https://www.forbes.com/sites/kerrygarcia/2026/04/why-zero-based-budgeting-is-the-best-budgeting-method-for-your-personal-finance/?sh=7a9e8b1f9c5d)
 
 ## Related
-- [[Djinn-Law-Suite]] — Legal research for the Djinn Law Suite.
-- [[Djinn-Psyc-Suite]] — Psychological research for the Djinn Psyc Suite.
-- [[Djinn-Cash-Suite-Budgeting-Systems]] — Detailed budgeting systems analysis.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: 3d-printing/benchmark/models/end3v3plus, 3d-printing/filament/compatible, 3d-printing/filament/handling, 3d-printing/filament/preparation, 3d-printing/filament/recommendations, 3d-printing/filament/types, 3d-printing/glassware/attachment, 3d-printing/printer-maintenance, 3d-printing/printer-models/ender-3-v3-plus, 3d-printing/printer-setup/beginner-guide, 3d-printing/printer-setup/preparation, academic-writing/apa-style, academic-writing/study-strategies, accounting/cycle/close, accounting/principles/governance, accounting/ratios/performance-analysis, accounting/systems/adjusting-entries/supplies, accounting/systems/trial-balance/order-structure, ai/development/cli, ai/development/faust/cli, ai/development/fedora/workstation, ai/models/integration, ai/models/performance-analysis, banking/evaluation/factors, betrayal/trust, bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_, bio/neuroscience/executive-functions, bio/neuroscience/memories, biology/cell-biology/mitosis, biology/conception, biology/neuroscience/brain-pathways, biology/neuroscience/cerebellum, biology/neuroscience/memories, biology/neuroscience/motor-control, biology/neuroscience/symptoms, business/3d-printing/filament/preparation, business/3d-printing/filament/recommendations, business/3d-printing/filament/types, business/accounting-systems
+- [[Personal-Finance-Budget-And-Planning]] — similarity 0.81
+- [[Financial-Management-With-Free-Software-On-Macos]] — similarity 0.75
