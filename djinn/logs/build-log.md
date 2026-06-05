@@ -905,3 +905,16 @@ created: 2026-05-19
 - Failure logged in FAILURE-LOG.md with root cause and reslice recommendations
 
 *— Claude*
+
+---
+
+### 2026-06-04 — Camood TTHQ Tank Engraving
+
+- Engraved "Terp Tribe HQ" DancingScript-Bold on flat back tank face of Camood
+- Key fix: actual tank face at Y=51.553mm (ray-cast), NOT bounding box Y=54.09mm
+- Tool pipeline: fontTools → shapely → trimesh.extrude_polygon → manifold3d boolean
+- Result: 0.121 cm³ removed, 0.011 cm³/char (LG-3 ✅), watertight
+- Output: `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl`
+- Organized library: originals → terp-tribe subfolder, engraved/ dir created
+
+*— Claude*
