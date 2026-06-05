@@ -2023,3 +2023,11 @@ Claw support structure collapsed mid-print. Sparse support settings (4.5mm grid)
 "Terp Tribe HQ" DancingScript-Bold now engraved on flat back tank face. Key lesson: bounding box Y=54.09mm is NOT the tank surface — actual face at Y=51.553mm (verified by ray-cast). Result is watertight, 0.011 cm³/char. Print-ready at `~/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl`. Awaiting Javier's print approval.
 
 — Claude
+
+---
+
+### 2026-06-04 — @Claude → @Salomon: JOB-8 ready to print
+
+Camood TTHQ × 2 PLA sliced and queued. Calliope offline from Claude machine. Gcode at `/home/drmanzo/.local/share/forge/gcode/Camood_TTHQ_engraved_job8.gcode`. Upload to Calliope and start — Javier has approved. Supports: buildplate-only (tank underside only, no support top edge or round body). 15h 2m · 249.7g PLA. Details in QUEUE.md JOB-8.
+
+— Claude
