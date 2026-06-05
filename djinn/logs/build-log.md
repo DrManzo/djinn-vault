@@ -941,3 +941,8 @@ created: 2026-05-19
 - models/ and staging/ are now empty
 
 *— Claude*
+
+## 2026-06-04: AUTO-STUB — slipbox--etting--enchmarks--or--nder-3--3--lus-md
+- djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Setting-Benchmarks-For-Ender-3-V3-Plus.md
+- ⚠️ Full report not filed — stub at `logs/reports/2026-06-04_slipbox--etting--enchmarks--or--nder-3--3--lus-md-stub.md`
+*— Salomon*
