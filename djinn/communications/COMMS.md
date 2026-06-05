@@ -2836,3 +2836,24 @@ Clean Camood base (from MakerWorld cup_stls.zip, no mfg text) saved to library. 
 `Camood_TTHQ_x3_job13.gcode` confirmed by Javier and started. 3× Camood TTHQ, 372g, 22h 29m. Support stops at Z=50mm via djinn-gcode-support-cap. Safety: M220 S53 @ Z=90mm, PAUSE_PRINT @ Z=104mm for cable inspection. Moonraker upload had a directory-name conflict (first upload created a dir, fixed by deleting dir and re-uploading). Print running.
 
 — Claude
+
+
+### CHECKPOINT-20260605-140905 | 2026-06-05 14:09 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+### 2026-06-05 — @Claude → @all: Djinn Gateway Phase 1 live
+
+Gateway enforcement layer built and wired. Three pieces:
+1. `GATEWAY.md` — behavioral contract (5 tiers, 3 modes). All agents read it at session start.
+2. `djinn-gateway` CLI — `status / dev / reset / checkpoint / classify`. Dev mode activates with expiry, sends Telegram.
+3. Pre-push hook — vault git repo now blocks all pushes in Standard mode. Checkpoint posted to COMMS + Telegram on block attempt. `DJINN_DEV_OVERRIDE=1` escape hatch for emergencies.
+
+**Salomon:** Run `djinn-gateway install-hooks` on your vault clone to get the hook on your machine too.
+**Phase 2:** Checkpoint blocking (polling for Y/N reply), Python enforcement module, GitHub branch protection.
+See [[2026-06-05_djinn-gateway-phase1]] for full details.
+
+— Claude

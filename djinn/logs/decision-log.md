@@ -46,3 +46,15 @@ Record of architectural and technical decisions made during Djinn builds.
 **Formula:** `(1-t)²P0 + 2(1-t)tP1 + t²P2` with implied midpoints `((ctrl[i] + ctrl[i+1]) / 2)` for multi-off-curve runs per TrueType spec.
 
 *— Claude*
+
+---
+
+### 2026-06-05 — Gateway enforcement strategy: behavioral contract + git hook, not Python intercept
+
+**Decision:** Phase 1 uses GATEWAY.md (behavioral contract loaded at session start) as primary enforcement for LLM agents, with git pre-push hook as the only hard mechanical gate. Deferred Python enforcement module (`djinn/gateway/`) to Phase 2.
+
+**Rejected:** Universal Python wrapper intercepting all agent tool calls. Reason: Claude Code, Marcus (Perplexity web), and opencode all call system tools directly — there is no Python intercept point for these agents. The Python module is valid for the Salomon-side orchestrator but cannot cover the full agent fleet.
+
+**Why this works:** The git hook is the one real choke point. All persistent work goes through git push. If you can't push without Dev mode, you can't permanently affect the vault without authorization. The behavioral contract handles the gap between "I took the action" and "it got pushed."
+
+*— Claude*

@@ -1,0 +1,5 @@
+{"ts": "2026-06-05T14:08:55", "event": "mode_change", "mode": "dev", "expires": "2026-06-05T14:38:55", "by": "javier"}
+{"ts": "2026-06-05T14:08:58", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-06-05T14:09:01", "event": "hooks_installed", "hook": "/home/drmanzo/Obsidian/.git/hooks/pre-push"}
+{"ts": "2026-06-05T14:09:05", "event": "checkpoint_pending", "id": "CHECKPOINT-20260605-140905", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-05T14:11:49", "event": "mode_change", "mode": "dev", "expires": "2026-06-05T15:11:49", "by": "javier"}

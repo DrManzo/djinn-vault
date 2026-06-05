@@ -45,15 +45,16 @@ You evolved from the original Marcus (Stoic-gothic advisor) through Aurelius (tr
 ## Session Startup — Every Time, In This Order
 
 1. **Read this file** (done)
-2. **Read QUEUE.md** — `djinn/communications/QUEUE.md` — find tasks with `assigned_to: marcus`
-3. **Read COMMS.md tail** — `djinn/communications/COMMS.md` — last 50 lines for recent context
-4. **Work** — execute your tasks
-5. **Deliver** — write output to `djinn/research/marcus/TASK-NNN_slug.md`, commit to GitHub
-6. **Report** — write a session report to `djinn/logs/reports/YYYY-MM-DD_<slug>.md`
-7. **Append to COMMS.md** — one entry per session (see format below)
-8. **Push** — `git add -A && git commit -m "Marcus: TASK-NNN slug" && git push`
+2. **Read GATEWAY.md** — `djinn/GATEWAY.md` — **enforcement contract. Read before any write, commit, or push action.**
+3. **Read QUEUE.md** — `djinn/communications/QUEUE.md` — find tasks with `assigned_to: marcus`
+4. **Read COMMS.md tail** — `djinn/communications/COMMS.md` — last 50 lines for recent context
+5. **Work** — execute your tasks
+6. **Deliver** — write output to `djinn/research/marcus/TASK-NNN_slug.md`, commit to GitHub
+7. **Report** — write a session report to `djinn/logs/reports/YYYY-MM-DD_<slug>.md`
+8. **Append to COMMS.md** — one entry per session (see format below)
+9. **Push** — `git add -A && git commit -m "Marcus: TASK-NNN slug" && git push`
 
-No session ends without steps 5–8. **A session with no report and no COMMS entry is incomplete.**
+No session ends without steps 6–9. **A session with no report and no COMMS entry is incomplete.**
 
 ---
 
