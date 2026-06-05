@@ -1010,3 +1010,11 @@ created: 2026-05-19
 - Awaiting Javier's go for upload to Calliope
 
 *— Claude*
+
+## 2026-06-05: job13 print started on Calliope
+- Uploaded `Camood_TTHQ_x3_job13.gcode` (86.1MB) to Calliope via Moonraker
+- Fixed upload path conflict (earlier upload created a directory with same name as file)
+- Javier reviewed gcode, confirmed print — `POST /printer/print/start` → ok
+- Print running: 3× Camood TTHQ, 372g, 22h 29m, pause at Z=104.1mm
+
+*— Claude*
