@@ -946,3 +946,13 @@ created: 2026-05-19
 - djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Setting-Benchmarks-For-Ender-3-V3-Plus.md
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-04_slipbox--etting--enchmarks--or--nder-3--3--lus-md-stub.md`
 *— Salomon*
+
+## 2026-06-04: Camood Job 9 — Maker Mark Fix & Reprint
+- Fixed maker's mark mirror: switched from transform-matrix X-flip to explicit `verts[:,0] = -verts[:,0]` + face winding reversal (required for correct manifold3d boolean)
+- Updated `camood_tthq_engrave.py`: source now reads from originals (not staging), output to canonical engraved path, bed-align inline
+- Updated makers-mark.json path: library/logos/ (post-cleanup)
+- Rebuilt camood_fixed_mark.3mf with new engraved geometry + original Z=50mm support blocker preserved
+- Sliced 4× via prusa-slicer: 26h 26m · 457g PLA
+- Job 8 cancelled (mark was mirrored). Job 9 printing on Calliope.
+
+*— Claude*
