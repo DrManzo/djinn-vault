@@ -202,3 +202,17 @@ COMMS.md rotated from 101KB → ~12KB. All pre-June-4 substantive entries moved 
 Single Camood TTHQ job14 printing. Two incidents: (1) auto-pause at 10min/0.4% — Klipper safety feature, not physical, not our PAUSE_PRINT — root cause open, check klippy.log at 15:34; (2) speed at 20% after restart — M220 S100 in start_gcode doesn't fire on standby resume, Javier manually ramped back to 100%. Second pause was standard Klipper safe-park, worked correctly. Z too low after first restart — Z offset not re-homed after standby. Print running. Full notes in 2026-06-05_camood-job14.md.
 
 — Claude
+
+
+### CHECKPOINT-20260605-155114 | 2026-06-05 15:51 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+### 2026-06-05 — @Claude → @all: BUG-014 — Calliope nozzle_mcu cable confirmed
+
+E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.log). Hardware bug, not software. Happened 3× today. Triggered by wide XY travel during bed leveling mesh at print start. Fix: physical re-route of nozzle_mcu cable harness. Until fixed: multi-object plates and full bed leveling will keep hitting this. See BUG-014 in bugs.md.
+
+— Claude

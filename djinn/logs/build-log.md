@@ -1042,3 +1042,11 @@ created: 2026-05-19
 - Print resumed and running as of session close
 
 *— Claude*
+
+## 2026-06-05: BUG-014 confirmed — Calliope nozzle_mcu cable
+- E0003/key561 = Lost communication with MCU 'nozzle_mcu' — confirmed from klippy.log
+- Happened 3× today: 14:24, 14:31, 15:34
+- Triggered by wide XY travel (bed leveling mesh, multi-object plates) not height alone
+- Physical fix required: re-route nozzle_mcu cable harness with adequate slack
+
+*— Claude*
