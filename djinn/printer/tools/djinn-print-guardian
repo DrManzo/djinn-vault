@@ -1,0 +1,278 @@
+#!/usr/bin/env python3
+"""
+djinn-print-guardian
+────────────────────
+Moonraker watchdog that keeps prints alive on Calliope (Ender 3 V3 Plus).
+Polls printer state every N seconds, detects known failure modes, and
+injects targeted recovery gcode via Moonraker API to reach completion.
+
+Known failure modes handled:
+  BUG-014  — nozzle_mcu UART dropout (key561) at Z<10mm
+  RESUME   — M220 S20 speed-lock after power loss recovery
+  DRIFT    — motion settings reverted after any FIRMWARE_RESTART
+  PAUSE    — unattended pause (filament sensor, thermal, etc.)
+
+Usage:
+  djinn-print-guardian [--host 192.168.1.X] [--port 7125] [--interval 15]
+                       [--auto-resume] [--log /path/to/guardian.log]
+
+Author: Djinn system / Marcus spec
+"""
+
+import argparse
+import json
+import logging
+import sys
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+# ── Calliope Creality defaults ─────────────────────────────────────────────
+CREALITY_MOTION = "SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=500 SQUARE_CORNER_VELOCITY=5"
+CREALITY_PA     = "SET_PRESSURE_ADVANCE ADVANCE=0.042"
+SPEED_RESTORE   = "M220 S100"
+
+# ── BUG-014: dropout window ─────────────────────────────────────────────────
+BUG014_Z_THRESHOLD = 12.0   # mm — all 11 dropouts were Z<10mm, 12mm gives margin
+
+# ── Failure signatures ──────────────────────────────────────────────────────
+DROPOUT_MSGS   = ["key561", "nozzle_mcu", "Lost communication with MCU"]
+SPEED_LOCK_MSG = "M220 S20"
+
+
+def ts():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def moonraker_get(host, port, path):
+    url = f"http://{host}:{port}{path}"
+    try:
+        with urllib.request.urlopen(url, timeout=5) as r:
+            return json.loads(r.read())
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def moonraker_post(host, port, path, data=None):
+    url = f"http://{host}:{port}{path}"
+    body = json.dumps(data or {}).encode()
+    req = urllib.request.Request(url, data=body,
+                                  headers={"Content-Type": "application/json"},
+                                  method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=5) as r:
+            return json.loads(r.read())
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def run_gcode(host, port, gcode, log):
+    """Send a gcode command via Moonraker script endpoint."""
+    import urllib.parse
+    encoded = urllib.parse.quote(gcode)
+    url = f"http://{host}:{port}/printer/gcode/script?script={encoded}"
+    req = urllib.request.Request(url, data=b"", method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=5) as r:
+            result = json.loads(r.read())
+            log.info(f"GCODE sent: {gcode!r} → {result}")
+            return True
+    except Exception as e:
+        log.error(f"GCODE send failed: {gcode!r} → {e}")
+        return False
+
+
+def get_printer_state(host, port):
+    """Returns dict with keys: state, z_pos, speed_factor, print_file, message"""
+    info = moonraker_get(host, port, "/printer/objects/query?print_stats&toolhead&gcode_move&display_status")
+    if "error" in info:
+        return None
+    r = info.get("result", {}).get("status", {})
+    return {
+        "state":        r.get("print_stats", {}).get("state", "unknown"),
+        "z_pos":        r.get("toolhead", {}).get("position", [0, 0, 0, 0])[2],
+        "speed_factor": r.get("gcode_move", {}).get("speed_factor", 1.0),
+        "print_file":   r.get("print_stats", {}).get("filename", ""),
+        "message":      r.get("display_status", {}).get("message", ""),
+    }
+
+
+def get_klippy_log_tail(host, port, lines=50):
+    """Pull last N lines of klippy.log via Moonraker server_files API."""
+    data = moonraker_get(host, port, f"/server/files/klippy.log?tail={lines}")
+    if "error" in data:
+        return ""
+    return data.get("result", "")
+
+
+def inject_motion_defaults(host, port, log, reason=""):
+    log.info(f"Injecting Creality motion defaults. Reason: {reason}")
+    run_gcode(host, port, CREALITY_MOTION, log)
+    run_gcode(host, port, CREALITY_PA, log)
+
+
+def inject_speed_restore(host, port, log):
+    log.info("Injecting M220 S100 speed restore (power-loss recovery lock detected)")
+    run_gcode(host, port, SPEED_RESTORE, log)
+
+
+def check_dropout_risk(z_pos, log):
+    """Returns True if we are in the BUG-014 danger zone."""
+    if z_pos < BUG014_Z_THRESHOLD:
+        log.debug(f"BUG-014 zone: Z={z_pos:.2f}mm (threshold={BUG014_Z_THRESHOLD}mm)")
+        return True
+    return False
+
+
+def check_klippy_log_for_dropout(host, port, log):
+    """Scan recent klippy.log lines for key561 / nozzle_mcu dropout signatures."""
+    tail = get_klippy_log_tail(host, port, lines=80)
+    for sig in DROPOUT_MSGS:
+        if sig in tail:
+            log.warning(f"BUG-014 dropout signature found in log: {sig!r}")
+            return True
+    return False
+
+
+def attempt_firmware_restart_and_recover(host, port, log, state):
+    """
+    Full BUG-014 recovery sequence:
+    1. Send FIRMWARE_RESTART
+    2. Wait for Klipper reconnect
+    3. Re-inject motion defaults (FIRMWARE_RESTART wipes velocity limits)
+    4. RESUME via power-loss recovery state
+
+    Only triggered when auto-resume is ON and print was in-progress.
+    """
+    log.warning("BUG-014 recovery sequence starting — FIRMWARE_RESTART")
+    run_gcode(host, port, "FIRMWARE_RESTART", log)
+
+    for attempt in range(20):
+        time.sleep(3)
+        s = get_printer_state(host, port)
+        if s and s["state"] != "error":
+            log.info(f"Klipper reconnected after {attempt * 3}s")
+            break
+    else:
+        log.error("Klipper did not reconnect after 60s — guardian cannot recover")
+        return False
+
+    inject_motion_defaults(host, port, log, reason="post-FIRMWARE_RESTART recovery")
+
+    time.sleep(2)
+    log.info("Sending RESUME to restart from PLR state")
+    run_gcode(host, port, "RESUME", log)
+    return True
+
+
+def guardian_loop(host, port, interval, auto_resume, log):
+    log.info(f"djinn-print-guardian started — polling {host}:{port} every {interval}s")
+    log.info(f"Auto-resume: {'ON' if auto_resume else 'OFF'}")
+
+    last_state     = None
+    in_bug014_zone = False
+    motion_injected_this_print = False
+    resume_count   = 0
+
+    while True:
+        try:
+            s = get_printer_state(host, port)
+
+            if s is None:
+                log.warning("Moonraker unreachable — retrying")
+                time.sleep(interval)
+                continue
+
+            state  = s["state"]
+            z_pos  = float(s["z_pos"])
+            spdfac = float(s["speed_factor"])
+            msg    = s["message"]
+
+            # ── New print started ────────────────────────────────────────
+            if state == "printing" and last_state != "printing":
+                log.info(f"Print started: {s['print_file']}")
+                motion_injected_this_print = False
+                resume_count = 0
+
+            # ── Motion defaults: inject once per print ───────────────────
+            if state == "printing" and not motion_injected_this_print:
+                inject_motion_defaults(host, port, log, reason="print start injection")
+                motion_injected_this_print = True
+
+            # ── Speed-lock detection (PLR artifact) ──────────────────────
+            if state in ("printing", "paused") and spdfac < 0.25:
+                inject_speed_restore(host, port, log)
+
+            # ── BUG-014 zone monitor ─────────────────────────────────────
+            if state == "printing":
+                in_zone = check_dropout_risk(z_pos, log)
+                if in_zone and not in_bug014_zone:
+                    log.info(f"Entered BUG-014 danger zone at Z={z_pos:.2f}mm")
+                    in_bug014_zone = True
+                elif not in_zone and in_bug014_zone:
+                    log.info(f"Exited BUG-014 danger zone at Z={z_pos:.2f}mm")
+                    in_bug014_zone = False
+
+            # ── Error state recovery ─────────────────────────────────────
+            if state == "error":
+                log.error(f"Printer in ERROR state at Z={z_pos:.2f}mm")
+                dropout = check_klippy_log_for_dropout(host, port, log)
+
+                if dropout and in_bug014_zone and auto_resume and resume_count < 3:
+                    resume_count += 1
+                    log.warning(f"BUG-014 auto-recovery attempt {resume_count}/3")
+                    success = attempt_firmware_restart_and_recover(host, port, log, s)
+                    if success:
+                        log.info("Recovery sequence complete — print resuming")
+                        motion_injected_this_print = False
+                    else:
+                        log.error("Recovery failed — human intervention required")
+                elif resume_count >= 3:
+                    log.error("Max recovery attempts (3) reached — pausing print")
+                    run_gcode(host, port, "PAUSE", log)
+                    log.error("Print PAUSED — check nozzle_mcu connector (BUG-014)")
+                else:
+                    log.error("Error state — no BUG-014 signature or auto-resume off")
+
+            # ── Unexpected pause ─────────────────────────────────────────
+            if state == "paused" and last_state == "printing":
+                log.warning(f"Print paused at Z={z_pos:.2f}mm — msg: {msg!r}")
+
+            last_state = state
+
+        except KeyboardInterrupt:
+            log.info("djinn-print-guardian stopped by user")
+            sys.exit(0)
+        except Exception as e:
+            log.error(f"Guardian loop error: {e}")
+
+        time.sleep(interval)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="djinn-print-guardian — Calliope print watchdog")
+    parser.add_argument("--host",        default="192.168.1.100", help="Moonraker host IP")
+    parser.add_argument("--port",        type=int, default=7125,  help="Moonraker port")
+    parser.add_argument("--interval",    type=int, default=15,    help="Poll interval seconds")
+    parser.add_argument("--auto-resume", action="store_true",     help="Auto-recover from BUG-014")
+    parser.add_argument("--log",         default=None,            help="Log file path (stdout default)")
+    args = parser.parse_args()
+
+    handlers = [logging.StreamHandler(sys.stdout)]
+    if args.log:
+        handlers.append(logging.FileHandler(args.log))
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s  %(levelname)-8s  %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%SZ",
+        handlers=handlers,
+    )
+    log = logging.getLogger("guardian")
+    guardian_loop(args.host, args.port, args.interval, args.auto_resume, log)
+
+
+if __name__ == "__main__":
+    main()
