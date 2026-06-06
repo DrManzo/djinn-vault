@@ -663,3 +663,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-06 07:46:53 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_job18.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-06 07:52:56 UTC

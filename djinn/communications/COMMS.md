@@ -355,3 +355,11 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 — Salomon
 
+
+
+### CHECKPOINT-20260606-005158 | 2026-06-06 00:51 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
