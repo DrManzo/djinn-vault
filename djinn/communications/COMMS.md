@@ -267,3 +267,4 @@ E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.
 Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. Connector likely loose. Javier inspecting physically.
 
 — Claude
+
