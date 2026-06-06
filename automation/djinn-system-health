@@ -1,0 +1,323 @@
+#!/usr/bin/env bash
+# =============================================================================
+# djinn-system-health
+# Comprehensive system health check for the Djinn stack.
+# Run manually or via cron/systemd timer.
+#
+# Exit codes:
+#   0 = all checks passed
+#   1 = one or more checks failed
+#   2 = critical failure (script error)
+#
+# Usage:
+#   ./djinn-system-health              # full check, human-readable output
+#   ./djinn-system-health --json       # JSON output for machine consumption
+#   ./djinn-system-health --telegram   # send results to Telegram on failure
+#   ./djinn-system-health --quiet      # suppress output, exit code only
+# =============================================================================
+
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# Config — override via environment or edit here
+# ---------------------------------------------------------------------------
+OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
+VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"
+LOG_DIR="${LOG_DIR:-$HOME/.local/share/djinn/logs}"
+DISK_THRESHOLD_PCT="${DISK_THRESHOLD_PCT:-85}"       # alert when disk > 85%
+VRAM_THRESHOLD_MB="${VRAM_THRESHOLD_MB:-1000}"        # alert when free VRAM < 1000MB
+TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-}"
+TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID:-}"
+
+# Services to check (systemd unit names)
+SERVICES=(
+    "ollama"
+    "djinn-heartbeat.timer"
+    "djinn-vault-sync.timer"
+)
+
+# Ollama models that must be available (pulled, not necessarily loaded)
+REQUIRED_MODELS=(
+    "qwen2.5:7b"
+    "qwen2.5-coder:7b"
+)
+
+# External endpoints to test reachability
+EXTERNAL_ENDPOINTS=(
+    "https://api.openai.com"
+    "https://api.anthropic.com"
+)
+
+# ---------------------------------------------------------------------------
+# Flags
+# ---------------------------------------------------------------------------
+OUTPUT_JSON=false
+SEND_TELEGRAM=false
+QUIET=false
+
+for arg in "$@"; do
+    case $arg in
+        --json)      OUTPUT_JSON=true ;;
+        --telegram)  SEND_TELEGRAM=true ;;
+        --quiet)     QUIET=true ;;
+    esac
+done
+
+# ---------------------------------------------------------------------------
+# State tracking
+# ---------------------------------------------------------------------------
+declare -a FAILURES=()
+declare -a WARNINGS=()
+declare -a PASSES=()
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+log() { [[ $QUIET == false ]] && echo "$@" || true; }
+pass()  { PASSES+=("$1");   [[ $QUIET == false ]] && echo "  ✓ $1" || true; }
+warn()  { WARNINGS+=("$1"); [[ $QUIET == false ]] && echo "  ⚠ $1" || true; }
+fail()  { FAILURES+=("$1"); [[ $QUIET == false ]] && echo "  ✗ $1" || true; }
+
+# ---------------------------------------------------------------------------
+# CHECK: Systemd services & timers
+# ---------------------------------------------------------------------------
+check_services() {
+    log ""
+    log "── Services & Timers ──────────────────────────────────────"
+    for svc in "${SERVICES[@]}"; do
+        if systemctl is-active --quiet "$svc" 2>/dev/null; then
+            pass "$svc is active"
+        else
+            status=$(systemctl is-active "$svc" 2>/dev/null || echo "not-found")
+            fail "$svc is $status"
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Disk space
+# ---------------------------------------------------------------------------
+check_disk() {
+    log ""
+    log "── Disk Space ─────────────────────────────────────────────"
+
+    # Check vault path
+    if [[ -d "$VAULT_PATH" ]]; then
+        pct=$(df "$VAULT_PATH" | awk 'NR==2 {gsub(/%/,""); print $5}')
+        if (( pct >= DISK_THRESHOLD_PCT )); then
+            fail "Vault disk at ${pct}% (threshold: ${DISK_THRESHOLD_PCT}%)"
+        else
+            pass "Vault disk at ${pct}%"
+        fi
+    else
+        warn "Vault path not found: $VAULT_PATH"
+    fi
+
+    # Check Ollama models directory
+    OLLAMA_MODELS_DIR="${OLLAMA_MODELS:-$HOME/.ollama/models}"
+    if [[ -d "$OLLAMA_MODELS_DIR" ]]; then
+        pct=$(df "$OLLAMA_MODELS_DIR" | awk 'NR==2 {gsub(/%/,""); print $5}')
+        size_gb=$(du -sh "$OLLAMA_MODELS_DIR" 2>/dev/null | cut -f1)
+        if (( pct >= DISK_THRESHOLD_PCT )); then
+            fail "Models disk at ${pct}% (models: ${size_gb})"
+        else
+            pass "Models disk at ${pct}% (models: ${size_gb})"
+        fi
+    fi
+
+    # Check log dir
+    if [[ -d "$LOG_DIR" ]]; then
+        log_size=$(du -sh "$LOG_DIR" 2>/dev/null | cut -f1)
+        pass "Log dir size: ${log_size}"
+    else
+        warn "Log dir not found: $LOG_DIR"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Ollama API responsiveness
+# ---------------------------------------------------------------------------
+check_ollama() {
+    log ""
+    log "── Ollama ─────────────────────────────────────────────────"
+
+    if ! curl -sf --max-time 5 "${OLLAMA_HOST}/api/tags" >/dev/null 2>&1; then
+        fail "Ollama API unreachable at ${OLLAMA_HOST}"
+        return
+    fi
+    pass "Ollama API responding"
+
+    # Check required models are pulled
+    available_models=$(curl -sf --max-time 5 "${OLLAMA_HOST}/api/tags" 2>/dev/null \
+        | python3 -c "import sys,json; d=json.load(sys.stdin); print('\n'.join(m['name'] for m in d.get('models',[])))" \
+        2>/dev/null || echo "")
+
+    for model in "${REQUIRED_MODELS[@]}"; do
+        if echo "$available_models" | grep -q "^${model}"; then
+            pass "Model available: $model"
+        else
+            fail "Model missing: $model (run: ollama pull $model)"
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: VRAM availability (nvidia-smi)
+# ---------------------------------------------------------------------------
+check_vram() {
+    log ""
+    log "── GPU / VRAM ─────────────────────────────────────────────"
+
+    if ! command -v nvidia-smi &>/dev/null; then
+        warn "nvidia-smi not found — skipping VRAM check"
+        return
+    fi
+
+    # Parse free memory for each GPU
+    while IFS= read -r line; do
+        gpu_idx=$(echo "$line" | awk '{print $1}')
+        free_mb=$(echo "$line" | awk '{print $2}')
+        total_mb=$(echo "$line" | awk '{print $3}')
+        used_mb=$(echo "$line" | awk '{print $4}')
+
+        if (( free_mb < VRAM_THRESHOLD_MB )); then
+            warn "GPU ${gpu_idx}: VRAM pressure — ${free_mb}MB free / ${total_mb}MB total (used: ${used_mb}MB)"
+        else
+            pass "GPU ${gpu_idx}: ${free_mb}MB free / ${total_mb}MB total"
+        fi
+    done < <(nvidia-smi --query-gpu=index,memory.free,memory.total,memory.used \
+        --format=csv,noheader,nounits 2>/dev/null)
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Systemd timers — last trigger time
+# ---------------------------------------------------------------------------
+check_timers() {
+    log ""
+    log "── Timer Last-Run Validation ──────────────────────────────"
+
+    declare -A TIMER_MAX_AGE_HOURS=(
+        ["djinn-heartbeat.timer"]=1
+        ["djinn-vault-sync.timer"]=25
+        ["djinn-daily.timer"]=25
+        ["djinn-weekly.timer"]=170
+    )
+
+    for timer in "${!TIMER_MAX_AGE_HOURS[@]}"; do
+        max_age=${TIMER_MAX_AGE_HOURS[$timer]}
+        last_trigger=$(systemctl show "$timer" --property=LastTriggerUSec 2>/dev/null \
+            | cut -d= -f2)
+
+        if [[ -z "$last_trigger" || "$last_trigger" == "0" ]]; then
+            warn "$timer: no recorded trigger (never run or unit not found)"
+            continue
+        fi
+
+        # Convert to epoch seconds
+        last_epoch=$(date -d "$last_trigger" +%s 2>/dev/null || echo 0)
+        now_epoch=$(date +%s)
+        age_hours=$(( (now_epoch - last_epoch) / 3600 ))
+
+        if (( age_hours > max_age )); then
+            fail "$timer: last ran ${age_hours}h ago (max: ${max_age}h)"
+        else
+            pass "$timer: last ran ${age_hours}h ago"
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Network — SSH reachability and external API endpoints
+# ---------------------------------------------------------------------------
+check_network() {
+    log ""
+    log "── Network ────────────────────────────────────────────────"
+
+    for endpoint in "${EXTERNAL_ENDPOINTS[@]}"; do
+        if curl -sf --max-time 5 --head "$endpoint" >/dev/null 2>&1; then
+            pass "Reachable: $endpoint"
+        else
+            warn "Unreachable: $endpoint (network issue or outage)"
+        fi
+    done
+}
+
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+print_summary() {
+    log ""
+    log "── Summary ────────────────────────────────────────────────"
+    log "  Passed:   ${#PASSES[@]}"
+    log "  Warnings: ${#WARNINGS[@]}"
+    log "  Failures: ${#FAILURES[@]}"
+
+    if (( ${#FAILURES[@]} > 0 )); then
+        log ""
+        log "FAILURES:"
+        for f in "${FAILURES[@]}"; do
+            log "  ✗ $f"
+        done
+    fi
+    log ""
+}
+
+json_output() {
+    python3 - <<PYEOF
+import json, sys
+data = {
+    "timestamp": "$TIMESTAMP",
+    "status": "$(( ${#FAILURES[@]} > 0 )) && echo 'FAILED' || echo 'OK'",
+    "counts": {
+        "passed": ${#PASSES[@]},
+        "warnings": ${#WARNINGS[@]},
+        "failures": ${#FAILURES[@]}
+    },
+    "failures": $(printf '%s\n' "${FAILURES[@]+"${FAILURES[@]}"}" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))"),
+    "warnings": $(printf '%s\n' "${WARNINGS[@]+"${WARNINGS[@]}"}" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
+}
+print(json.dumps(data, indent=2))
+PYEOF
+}
+
+send_telegram() {
+    [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]] && return
+    (( ${#FAILURES[@]} == 0 )) && return  # only alert on failure
+
+    msg="🔴 *Djinn Health Check FAILED*%0A$(date)%0A%0A"
+    for f in "${FAILURES[@]}"; do
+        msg+="✗ ${f}%0A"
+    done
+
+    curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+        -d "chat_id=${TELEGRAM_CHAT_ID}" \
+        -d "parse_mode=Markdown" \
+        -d "text=${msg}" \
+        >/dev/null 2>&1 || true
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+main() {
+    log "╔══════════════════════════════════════════════════════════╗"
+    log "║  djinn-system-health  •  $TIMESTAMP  ║"
+    log "╚══════════════════════════════════════════════════════════╝"
+
+    check_services
+    check_disk
+    check_ollama
+    check_vram
+    check_timers
+    check_network
+
+    [[ $OUTPUT_JSON == true ]] && json_output
+    [[ $OUTPUT_JSON == false ]] && print_summary
+    [[ $SEND_TELEGRAM == true ]] && send_telegram
+
+    # Exit 1 if any failures
+    (( ${#FAILURES[@]} > 0 )) && exit 1 || exit 0
+}
+
+main
