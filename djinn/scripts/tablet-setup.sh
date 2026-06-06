@@ -2,7 +2,7 @@
 # =============================================================================
 # tablet-setup.sh — Djinn Tablet Bootstrap
 # Run from: Salomon (drmanzo@192.168.1.225)
-# Target:   Samsung Galaxy Tab S (R52T10BL3BV)
+# Target:   Samsung Galaxy Tab S (SM-T738U / 192.168.1.45)
 # Purpose:  Configure the Tablet as a full Djinn development node
 #           — vault sync, SSH keys, dev tooling, Termux bootstrap
 # =============================================================================
@@ -12,8 +12,7 @@
 #
 # Requirements on Salomon:
 #   - adb (Android Debug Bridge)   → sudo apt install adb
-#   - Android USB Debugging ON     → Settings > Developer Options > USB Debugging
-#   - Tablet connected via USB
+#   - Tablet reachable via WiFi ADB or USB
 #
 # Requirements on Tablet (install manually before running):
 #   - Termux (from F-Droid — NOT Play Store)
@@ -40,12 +39,15 @@ err()  { echo -e "${RED}[✗]${NC} $1"; exit 1; }
 # ── Config ────────────────────────────────────────────────────────────────────
 VAULT="$HOME/Obsidian"
 DJINN="$VAULT/djinn"
-TABLET_SERIAL="R52T10BL3BV"
+TABLET_SERIAL="192.168.1.45:5555"       # WiFi ADB — SM-T738U on LAN
 SALOMON_IP="192.168.1.225"
 OLLAMA_PORT="11434"
 OPENCLAW_PORT="18789"
-SSH_KEY="$HOME/.ssh/tablet_ed25519"  # Key we generate FOR the tablet
+SSH_KEY="$HOME/.ssh/tablet_ed25519"      # Key we generate FOR the tablet
 REPO_URL="https://github.com/DrManzo/djinn-vault.git"
+
+# Vault location on the tablet (confirmed path)
+TABLET_VAULT_PATH="/storage/emulated/0/Obsidian"
 
 # Termux home on the tablet (ADB shell context)
 TERMUX_HOME="/data/data/com.termux/files/home"
@@ -75,11 +77,11 @@ if echo "$DEVICES" | grep -q "$TABLET_SERIAL"; then
 elif echo "$DEVICES" | grep -q 'device$'; then
     warn "Tablet connected but serial not matched — proceeding anyway"
 else
-    err "No tablet detected. Enable USB Debugging and reconnect."
+    err "No tablet detected. Check: adb connect 192.168.1.45:5555"
 fi
 
 # Check Termux is installed
-if ! adb shell pm list packages 2>/dev/null | grep -q 'com.termux'; then
+if ! adb -s "$TABLET_SERIAL" shell pm list packages 2>/dev/null | grep -q 'com.termux'; then
     err "Termux not found on tablet. Install from F-Droid first: https://f-droid.org/packages/com.termux/"
 fi
 log "Termux detected on tablet"
@@ -125,25 +127,13 @@ else
 fi
 
 # =============================================================================
-# STEP 3 — Push SSH Keys into Termux
+# STEP 3 — Push SSH Keys to Tablet
 # =============================================================================
-info "Step 3: Pushing SSH keys into Termux..."
+info "Step 3: Pushing SSH keys to tablet /sdcard/..."
 
-# Create .ssh dir in Termux
-adb shell run-as com.termux mkdir -p "$TERMUX_SSH" 2>/dev/null || \
-adb shell "su -c 'mkdir -p $TERMUX_SSH'" 2>/dev/null || \
-adb shell am startservice --user 0 -n com.termux/.app.TermuxService 2>/dev/null || true
-
-# Push private key
-adb push "$SSH_KEY" "/sdcard/tablet_ed25519"
-adb shell run-as com.termux cp /sdcard/tablet_ed25519 "$TERMUX_SSH/id_ed25519" 2>/dev/null || \
-    warn "Could not copy key into Termux automatically — do it manually in Termux:"
-    warn "  cp /sdcard/tablet_ed25519 ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519"
-
-# Push public key
-adb push "${SSH_KEY}.pub" "/sdcard/tablet_ed25519.pub"
-
-log "SSH keys pushed to /sdcard/ — complete setup in Termux (Step 9)"
+adb -s "$TABLET_SERIAL" push "$SSH_KEY" "/sdcard/tablet_ed25519"
+adb -s "$TABLET_SERIAL" push "${SSH_KEY}.pub" "/sdcard/tablet_ed25519.pub"
+log "SSH keys pushed to /sdcard/"
 
 # =============================================================================
 # STEP 4 — Build Termux Bootstrap Script
@@ -173,14 +163,26 @@ TYPHON_IP="192.168.1.113"
 ORION_IP="192.168.1.176"
 VAULT_REPO="https://github.com/DrManzo/djinn-vault.git"
 
+# ── Confirmed vault location on this tablet
+OBSIDIAN_VAULT="/storage/emulated/0/Obsidian"
+
 echo ""
 echo "╔══════════════════════════════════════════════════╗"
 echo "║     DJINN TERMUX BOOTSTRAP — Tablet Node         ║"
 echo "╚══════════════════════════════════════════════════╝"
 echo ""
 
+# ── Storage access first (needed before anything else) ───
+info "Requesting storage access..."
+termux-setup-storage
+echo ""
+warn ">>> APPROVE the storage permission popup NOW, then press ENTER to continue"
+read -r _
+log "Storage access granted — continuing"
+
 # ── Package setup ────────────────────────────────────────
 info "Updating Termux packages..."
+termux-change-repo
 pkg update -y && pkg upgrade -y
 
 info "Installing core packages..."
@@ -190,7 +192,7 @@ pkg install -y \
     curl \
     wget \
     python \
-    nodejs \
+    nodejs-lts \
     jq \
     vim \
     nano \
@@ -199,16 +201,16 @@ pkg install -y \
     tree \
     zip \
     unzip \
+    tar \
     rsync \
     nmap \
     netcat-openbsd \
+    iproute2 \
+    dnsutils \
+    clang \
+    make \
     termux-api
 log "Core packages installed"
-
-# ── Storage access ───────────────────────────────────────
-info "Requesting storage access..."
-termux-setup-storage
-log "Storage setup initiated — approve the permission popup"
 
 # ── SSH key setup ─────────────────────────────────────────
 info "Setting up SSH keys..."
@@ -259,175 +261,196 @@ git config --global user.email "djinnstudio@gmail.com"
 git config --global core.editor "nano"
 git config --global pull.rebase false
 git config --global init.defaultBranch main
+git config --global credential.helper store
 log "Git configured"
 
-# ── Clone djinn-vault ─────────────────────────────────────
-info "Cloning djinn-vault..."
-VAULT_DIR="$HOME/djinn-vault"
-if [[ -d "$VAULT_DIR" ]]; then
-    warn "djinn-vault already exists — pulling latest"
-    git -C "$VAULT_DIR" pull
+# ── Sync vault into Obsidian folder ──────────────────────
+# Vault lives at /storage/emulated/0/Obsidian (confirmed path)
+# Git-manage it directly there so Obsidian picks it up immediately
+info "Syncing djinn-vault into $OBSIDIAN_VAULT ..."
+
+if [[ -d "$OBSIDIAN_VAULT/.git" ]]; then
+    warn "Vault already a git repo — pulling latest"
+    git -C "$OBSIDIAN_VAULT" pull
+elif [[ -d "$OBSIDIAN_VAULT" ]] && [[ "$(ls -A $OBSIDIAN_VAULT)" ]]; then
+    warn "$OBSIDIAN_VAULT exists with files but is not a git repo"
+    warn "Initializing git in existing vault and setting remote..."
+    git -C "$OBSIDIAN_VAULT" init
+    git -C "$OBSIDIAN_VAULT" remote add origin "$VAULT_REPO"
+    git -C "$OBSIDIAN_VAULT" fetch origin
+    git -C "$OBSIDIAN_VAULT" checkout -b main --track origin/main 2>/dev/null || \
+    git -C "$OBSIDIAN_VAULT" branch --set-upstream-to=origin/main main
+    git -C "$OBSIDIAN_VAULT" pull origin main
+    log "Vault initialized and synced at $OBSIDIAN_VAULT"
 else
-    git clone "$VAULT_REPO" "$VAULT_DIR"
-    log "djinn-vault cloned to $VAULT_DIR"
+    # Empty or missing — clone directly into it
+    mkdir -p "$(dirname $OBSIDIAN_VAULT)"
+    git clone "$VAULT_REPO" "$OBSIDIAN_VAULT"
+    log "Vault cloned to $OBSIDIAN_VAULT"
 fi
 
-# ── Symlink vault for Obsidian ────────────────────────────
-info "Linking vault to shared storage for Obsidian..."
-mkdir -p ~/storage/shared
-if [[ ! -L ~/storage/shared/djinn-vault ]]; then
-    ln -s "$VAULT_DIR" ~/storage/shared/djinn-vault
-    log "Symlink: ~/storage/shared/djinn-vault → $VAULT_DIR"
-else
-    warn "Symlink already exists"
+# Also keep a Termux-home reference symlink
+if [[ ! -L "$HOME/vault" ]]; then
+    ln -s "$OBSIDIAN_VAULT" "$HOME/vault"
+    log "Symlink: ~/vault → $OBSIDIAN_VAULT"
 fi
 
 # ── Djinn CLI aliases ─────────────────────────────────────
 info "Writing djinn shell aliases..."
 cat >> ~/.bashrc << 'ALIASES'
 
-# ── Djinn Fleet ─────────────────────────────────────────
+# ── Djinn Fleet ──────────────────────────────────────────
 export SALOMON="192.168.1.225"
 export TYPHON="192.168.1.113"
 export ORION="192.168.1.176"
-export VAULT="$HOME/djinn-vault"
+export VAULT="/storage/emulated/0/Obsidian"
 
 alias djinn-ssh-salomon='ssh salomon'
 alias djinn-ssh-typhon='ssh typhon'
 alias djinn-ssh-orion='ssh orion'
-alias vault-pull='git -C $VAULT pull'
-alias vault-log='git -C $VAULT log --oneline -20'
+alias vault-pull='git -C "$VAULT" pull'
+alias vault-push='git -C "$VAULT" add -A && git -C "$VAULT" commit -m "tablet: $(date +%Y-%m-%d %H:%M)" && git -C "$VAULT" push'
+alias vault-log='git -C "$VAULT" log --oneline -20'
+alias vault-status='git -C "$VAULT" status'
 
-# Ollama API shortcuts (route to fleet)
+# Query Ollama on Salomon
 djinn-ask() {
+    local prompt="$1"
     local model="${2:-qwen2.5:7b}"
     local host="${3:-$SALOMON}"
     curl -s "http://$host:11434/api/generate" \
-        -d "{\"model\":\"$model\",\"prompt\":\"$1\",\"stream\":false}" \
+        -d "{\"model\":\"$model\",\"prompt\":\"$prompt\",\"stream\":false}" \
         | python -c "import sys,json; print(json.load(sys.stdin)['response'])"
 }
 
+# Query heavy model on Orion
 djinn-ask-orion() {
     djinn-ask "$1" "llama3.3:70b" "$ORION"
 }
 
-# Push a note to vault inbox via SSH
+# Push a note into vault inbox
 djinn-note() {
     local note="$1"
-    local date=$(date +%Y-%m-%d)
-    echo "$note" | ssh salomon "cat >> ~/Obsidian/djinn/inbox/${date}-tablet.md"
-    echo "Note sent to vault inbox"
+    local ts=$(date +%Y-%m-%d)
+    local inbox="$VAULT/djinn/inbox/${ts}-tablet.md"
+    echo -e "\n## $(date +%H:%M)\n$note" >> "$inbox"
+    echo "Note saved to $inbox"
 }
 
-# Quick fleet status
+# Fleet ping status
 djinn-status() {
     echo "--- Fleet Ping ---"
-    for host in salomon typhon orion; do
-        if ping -c1 -W1 $host &>/dev/null 2>&1; then
-            echo "  ✓ $host online"
+    for ip in "salomon:192.168.1.225" "typhon:192.168.1.113" "orion:192.168.1.176"; do
+        name=$(echo $ip | cut -d: -f1)
+        addr=$(echo $ip | cut -d: -f2)
+        if ping -c1 -W1 "$addr" &>/dev/null 2>&1; then
+            echo "  ✓ $name ($addr) online"
         else
-            echo "  ✗ $host offline"
+            echo "  ✗ $name ($addr) offline"
         fi
     done
+}
+
+# List Ollama models available on Salomon
+djinn-models() {
+    curl -s "http://$SALOMON:11434/api/tags" \
+        | python -c "import sys,json; [print(' ',m['name']) for m in json.load(sys.stdin)['models']]"
 }
 ALIASES
 log "Shell aliases written to ~/.bashrc"
 
 # ── Python dev setup ─────────────────────────────────────
 info "Installing Python dev tools..."
-pip install --upgrade pip
+pip install --upgrade pip setuptools wheel
 pip install \
     requests \
     httpx \
-    ollama \
-    openai \
     rich \
     typer \
     pydantic \
-    python-dotenv
+    python-dotenv \
+    ollama \
+    openai
 log "Python packages installed"
 
 # ── Node/npm tools ────────────────────────────────────────
 info "Installing Node tools..."
-npm install -g \
-    prettier \
-    typescript \
-    ts-node
+npm install -g prettier typescript ts-node
 log "Node tools installed"
 
-# ── Vault sync cron (optional) ───────────────────────────
-info "Setting up vault sync..."
-# Termux doesn't have cron by default — use Termux:Boot for auto-start
+# ── Vault auto-sync boot script ───────────────────────────
+info "Setting up vault auto-sync on boot..."
 pkg install -y termux-services 2>/dev/null || true
 mkdir -p ~/.termux/boot
 cat > ~/.termux/boot/vault-sync.sh << 'BOOT'
 #!/data/data/com.termux/files/usr/bin/bash
-# Auto-pull vault on Termux boot
+# Auto-pull vault every 5 min after Termux boots
 while true; do
-    git -C "$HOME/djinn-vault" pull --ff-only 2>/dev/null
-    sleep 300  # every 5 minutes
+    git -C "/storage/emulated/0/Obsidian" pull --ff-only 2>/dev/null
+    sleep 300
 done &
 BOOT
 chmod +x ~/.termux/boot/vault-sync.sh
-log "Vault sync boot script written"
+log "Boot sync script written (~/.termux/boot/vault-sync.sh)"
 
 # ── SSH connection tests ──────────────────────────────────
 info "Testing SSH connections to fleet..."
 for entry in "salomon $SALOMON_IP" "typhon $TYPHON_IP" "orion $ORION_IP"; do
     name=$(echo $entry | cut -d' ' -f1)
     ip=$(echo $entry | cut -d' ' -f2)
-    if ssh -o ConnectTimeout=5 -o BatchMode=yes $name 'echo ok' &>/dev/null; then
+    if ssh -o ConnectTimeout=5 -o BatchMode=yes "$name" 'echo ok' &>/dev/null; then
         log "SSH → $name ($ip): OK"
     else
-        warn "SSH → $name ($ip): FAILED (may need to add key to authorized_keys)"
+        warn "SSH → $name ($ip): FAILED (key may need to be added to authorized_keys)"
     fi
 done
 
 # ── Ollama API test ───────────────────────────────────────
 info "Testing Ollama API on Salomon..."
-if curl -s --connect-timeout 5 "http://$SALOMON_IP:11434/api/tags" | python -c "import sys,json; models=json.load(sys.stdin)['models']; [print(' ',m['name']) for m in models]" 2>/dev/null; then
-    log "Ollama API on Salomon: reachable"
+if curl -s --connect-timeout 5 "http://$SALOMON_IP:11434/api/tags" \
+    | python -c "import sys,json; models=json.load(sys.stdin)['models']; [print(' ',m['name']) for m in models]" 2>/dev/null; then
+    log "Ollama API: reachable — models listed above"
 else
-    warn "Ollama API on Salomon: not reachable (check WiFi / Salomon status)"
+    warn "Ollama API: not reachable (check WiFi / Salomon status)"
 fi
 
 echo ""
 echo "╔══════════════════════════════════════════════════╗"
-echo "║         TABLET BOOTSTRAP COMPLETE                ║"
+echo "║         TABLET BOOTSTRAP COMPLETE ✓              ║"
 echo "╚══════════════════════════════════════════════════╝"
 echo ""
-echo "Next steps:"
-echo "  1. source ~/.bashrc"
-echo "  2. Open Obsidian → point vault to /sdcard/djinn-vault/"
-echo "  3. Test: ssh salomon"
-echo "  4. Test: djinn-status"
-echo "  5. Test: djinn-ask 'Hello from tablet'"
+echo "  Vault:       /storage/emulated/0/Obsidian"
+echo "  Vault link:  ~/vault"
 echo ""
-echo "  Vault:      ~/djinn-vault/"
-echo "  Key files:  ~/djinn-vault/djinn/AGENTS.md"
-echo "              ~/djinn-vault/djinn/TABLET.md"
-echo "              ~/djinn-vault/djinn/INFRASTRUCTURE.md"
+echo "  Run now:"
+echo "    source ~/.bashrc"
+echo "    ssh salomon          ← SSH into Salomon"
+echo "    djinn-status         ← ping fleet"
+echo "    djinn-models         ← list Ollama models"
+echo "    djinn-ask 'hello'    ← test AI query"
+echo "    vault-pull           ← sync vault"
+echo ""
+echo "  Obsidian:"
+echo "    Vault is already at /storage/emulated/0/Obsidian"
+echo "    Open Obsidian → it should auto-detect the existing vault"
 echo ""
 TERMUX_EOF
 
 log "Termux bootstrap script built"
 
 # =============================================================================
-# STEP 5 — Push Bootstrap Script to Tablet via ADB
+# STEP 5 — Push Bootstrap Script to Tablet
 # =============================================================================
 info "Step 5: Pushing bootstrap script to tablet..."
-
-adb push "$TERMUX_BOOTSTRAP" "/sdcard/djinn-termux-bootstrap.sh"
-log "Bootstrap script pushed to /sdcard/djinn-termux-bootstrap.sh"
+adb -s "$TABLET_SERIAL" push "$TERMUX_BOOTSTRAP" "/sdcard/djinn-termux-bootstrap.sh"
+log "Bootstrap pushed to /sdcard/djinn-termux-bootstrap.sh"
 
 # =============================================================================
-# STEP 6 — Push Critical Vault Files to Tablet SD Card
+# STEP 6 — Push Critical Vault Docs
 # =============================================================================
 info "Step 6: Pushing critical vault docs to /sdcard/djinn-docs/..."
+adb -s "$TABLET_SERIAL" shell mkdir -p /sdcard/djinn-docs/
 
-adb shell mkdir -p /sdcard/djinn-docs/
-
-# Core Djinn docs the tablet needs to read immediately
 CRITICAL_FILES=(
     "$DJINN/AGENTS.md"
     "$DJINN/INFRASTRUCTURE.md"
@@ -441,7 +464,7 @@ CRITICAL_FILES=(
 
 for f in "${CRITICAL_FILES[@]}"; do
     if [[ -f "$f" ]]; then
-        adb push "$f" "/sdcard/djinn-docs/"
+        adb -s "$TABLET_SERIAL" push "$f" "/sdcard/djinn-docs/"
         log "Pushed: $(basename $f)"
     else
         warn "Missing: $f — skipping"
@@ -449,80 +472,29 @@ for f in "${CRITICAL_FILES[@]}"; do
 done
 
 # =============================================================================
-# STEP 7 — Write Obsidian Vault Config Hint
-# =============================================================================
-info "Step 7: Writing Obsidian setup hint..."
-
-OBSIDIAN_HINT="/tmp/OBSIDIAN-SETUP.md"
-cat > "$OBSIDIAN_HINT" << 'OBS_EOF'
-# Obsidian Mobile Setup — Djinn Vault
-
-## Vault Location
-After running the Termux bootstrap:
-- Vault cloned to: `~/djinn-vault/` (Termux home)
-- Symlinked to:    `/sdcard/djinn-vault/` (visible to Obsidian)
-
-## Steps
-1. Open Obsidian Mobile
-2. Tap "Open folder as vault"
-3. Navigate to: Internal Storage > djinn-vault
-4. Select the `djinn/` subfolder as the vault root
-5. Obsidian will index all notes automatically
-
-## Sync
-- Vault syncs via `vault-pull` alias in Termux (runs git pull)
-- Auto-sync every 5 min via boot script (requires Termux:Boot)
-- To push a change: `git -C ~/djinn-vault add -A && git commit -m "..." && git push`
-  (GitHub auth required — run `git config credential.helper store` first)
-
-## Key Files to Bookmark in Obsidian
-- djinn/AGENTS.md         — Fleet rules + lane assignments
-- djinn/TABLET.md         — This device's full spec and role
-- djinn/INFRASTRUCTURE.md — Full fleet topology
-- djinn/SYSTEM-STATE.md   — Live services and machine status
-- djinn/ROUTING.md        — Model routing rules
-OBS_EOF
-
-adb push "$OBSIDIAN_HINT" "/sdcard/djinn-docs/OBSIDIAN-SETUP.md"
-log "Obsidian setup guide pushed"
-
-# =============================================================================
-# STEP 8 — Final Instructions
+# STEP 7 — Final Instructions
 # =============================================================================
 echo ""
 echo -e "${BOLD}╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BOLD}║           SALOMON-SIDE SETUP COMPLETE                     ║${NC}"
+echo -e "${BOLD}║           SALOMON-SIDE SETUP COMPLETE ✓                   ║${NC}"
 echo -e "${BOLD}╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${GREEN}Files pushed to tablet /sdcard/:${NC}"
-echo "  /sdcard/djinn-termux-bootstrap.sh  ← run this in Termux"
+echo -e "${GREEN}Pushed to tablet:${NC}"
+echo "  /sdcard/djinn-termux-bootstrap.sh  ← run this inside Termux"
 echo "  /sdcard/tablet_ed25519             ← private SSH key"
 echo "  /sdcard/tablet_ed25519.pub         ← public SSH key"
 echo "  /sdcard/djinn-docs/*.md            ← critical vault docs"
 echo ""
-echo -e "${YELLOW}NOW DO THIS ON THE TABLET:${NC}"
+echo -e "${YELLOW}NOW on the Tablet — open Termux and run:${NC}"
 echo ""
-echo "  1. Open Termux"
-echo "  2. Run:"
+echo "    bash /sdcard/djinn-termux-bootstrap.sh"
 echo ""
-echo "       bash /sdcard/djinn-termux-bootstrap.sh"
-echo ""
-echo "  3. When prompted — approve storage permission"
-echo "  4. After bootstrap finishes:"
-echo "       source ~/.bashrc"
-echo "       ssh salomon          ← should connect to Salomon"
-echo "       djinn-status         ← should ping all fleet nodes"
-echo "       djinn-ask 'test'     ← should get Ollama response from Salomon"
-echo ""
-echo -e "${YELLOW}OBSIDIAN:${NC}"
-echo "  Open Obsidian → vault → /sdcard/djinn-vault/"
-echo "  Read /sdcard/djinn-docs/OBSIDIAN-SETUP.md for full steps"
-echo ""
-echo -e "${GREEN}Tablet SSH public key (add anywhere needed):${NC}"
+echo -e "${BLUE}Vault path on tablet:${NC} /storage/emulated/0/Obsidian"
+echo -e "${BLUE}Tablet SSH pubkey:${NC}"
 cat "${SSH_KEY}.pub"
 echo ""
 
-# Log to vault
+# Write + commit vault report
 REPORT="$DJINN/logs/reports/$(date +%Y-%m-%d)_tablet-setup.md"
 mkdir -p "$(dirname $REPORT)"
 cat > "$REPORT" << REPORT_EOF
@@ -534,38 +506,34 @@ tags: [djinn, tablet, setup, bootstrap]
 
 # Tablet Setup Report — $(date +%Y-%m-%d)
 
+## Device
+- Model: SM-T738U (Galaxy Tab S7 FE)
+- ADB: 192.168.1.45:5555
+- Vault path: /storage/emulated/0/Obsidian
+
 ## Status
 Salomon-side setup complete. Bootstrap script pushed to tablet.
 
-## Keys Generated
-- Private key: $SSH_KEY
-- Public key: ${SSH_KEY}.pub
-- Added to: Salomon authorized_keys
-
-## Files Pushed
-- /sdcard/djinn-termux-bootstrap.sh
-- /sdcard/tablet_ed25519 (private key)
-- /sdcard/tablet_ed25519.pub
-- /sdcard/djinn-docs/ ($(ls $DJINN/*.md $DJINN/machines/TABLET.md 2>/dev/null | wc -l) files)
+## Keys
+- Private: $SSH_KEY
+- Public:  ${SSH_KEY}.pub
+- Added to: Salomon, Typhon (if reachable), Orion (if reachable)
 
 ## Next Steps
-- [ ] Run bootstrap in Termux
-- [ ] Verify SSH to Salomon/Typhon/Orion
-- [ ] Configure Obsidian Mobile vault
-- [ ] Add tablet IP to INFRASTRUCTURE.md
-- [ ] Set up Tasker webhooks (optional)
+- [ ] Run bootstrap in Termux: bash /sdcard/djinn-termux-bootstrap.sh
+- [ ] Verify SSH: ssh salomon
+- [ ] Test AI: djinn-ask 'hello'
+- [ ] Open Obsidian → confirm vault at /storage/emulated/0/Obsidian
+- [ ] Add tablet static IP to INFRASTRUCTURE.md
 
-*— Marcus, $(date +%Y-%m-%d)*
+*— drmanzo, $(date +%Y-%m-%d)*
 REPORT_EOF
 
-log "Report written: $REPORT"
-
-# Commit report
 if git -C "$VAULT" status --porcelain 2>/dev/null | grep -q .; then
     git -C "$VAULT" add -A
     git -C "$VAULT" commit -m "chore: tablet setup report $(date +%Y-%m-%d)"
     git -C "$VAULT" push
-    log "Vault committed and pushed"
+    log "Vault report committed and pushed"
 fi
 
-echo -e "${GREEN}${BOLD}Done. Tablet setup initiated from Salomon.${NC}"
+echo -e "${GREEN}${BOLD}Done. Run the bootstrap script on the tablet to finish.${NC}"
