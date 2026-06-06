@@ -1103,5 +1103,6 @@ created: 2026-05-19
 - nozzle_mcu disconnect at 22:34:33 PDT — BUG-014 recurrence (12th dropout)
 - Power-loss recovery attempted but stuck (empty filename in recovery state) — print cancelled
 - Second restart cancelled by user
+- User started `ksr_fdmtest_v4` — print running past previous failure point (32+ min, stable at 220°C/60°C). nozzle_mcu dropout was intermittent, not guaranteed.
 
 *— Claude*

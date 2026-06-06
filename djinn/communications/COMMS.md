@@ -351,5 +351,7 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 **Paths:** `djinn/logs/reports/2026-06-05_camood-job17-eco-nozzle-mcu.md` | BUG-014 updated
 
+**UPDATE:** User started `ksr_fdmtest_v4` — 32+ min in, past the previous failure zone (Z=4.2mm, ~20 min). 220°C/60°C stable, 4.2m filament used. nozzle_mcu dropout was intermittent, not guaranteed on every print.
+
 — Claude
 
