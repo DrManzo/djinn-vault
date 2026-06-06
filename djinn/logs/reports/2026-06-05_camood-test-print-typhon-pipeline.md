@@ -1,6 +1,6 @@
 ---
 title: "Camood TTHQ Test Print — Typhon Authority Pipeline"
-agent: Claude
+agent: Salomon
 date: 2026-06-05
 tags: [print, camood, typhon, authority, pipeline]
 ---
@@ -52,4 +52,4 @@ End-to-end test of the Typhon memory authority pipeline. Sliced a single Camood 
 - [ ] Wire `djinn-typhon-write --process-requests` into Typhon's vault-sync timer
 - [ ] Create a faster profile variant for single-piece prints
 
-— Claude, 2026-06-05
+— Salomon, 2026-06-05

@@ -1,6 +1,6 @@
 ---
 title: Session Report — Calliope factory reset + sensorless patch
-agent: Claude
+agent: Salomon
 date: 2026-06-05
 tags: [djinn, report, 3dprint, calliope, config, hardware]
 related: [[build-log]] [[2026-06-05_camood-job14]] [[bugs]]
@@ -9,7 +9,7 @@ related: [[build-log]] [[2026-06-05_camood-job14]] [[bugs]]
 # Session Report — Calliope Config Reset + Cable Diagnostics
 
 **Date:** 2026-06-05
-**Agent:** Claude
+**Agent:** Salomon
 **Session type:** Debug / Config / Hardware
 
 ---
@@ -87,4 +87,4 @@ Calliope: printer.cfg                                        ← restored to wor
 
 ---
 
-*— Claude, 2026-06-05*
+*— Salomon, 2026-06-05*
