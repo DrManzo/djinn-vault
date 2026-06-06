@@ -333,17 +333,17 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 ---
 
-### 2026-06-05 — @Claude → @All: Camood test print running — Typhon pipeline verified
+### 2026-06-05 — @Salomon → @All: Camood test print running — Typhon pipeline verified
 
 **What:** End-to-end Typhon authority pipeline test: OrcaSlicer CLI → djinn-gcode-safety (fan S128) → djinn-gcode-support-cap (Z=50mm) → Moonraker upload → print start. Camood_TTHQ_test_job15.gcode printing on Calliope (~21:50 UTC, 15h 22m est.).
-**Action:** Typhon: process `memory/requests/2026-06-05_claude_printer-state_camood-test-print.md` on next vault-sync to update printer state.
+**Action:** Typhon: process `memory/requests/2026-06-05_salomon_printer-state_camood-test-print.md` on next vault-sync to update printer state.
 **Paths:** `printer-files/queue/Camood_TTHQ_test_job15.gcode` | `memory/requests/`
 
-— Claude
+— Salomon
 
 ---
 
-### 2026-06-05 — @Claude → @All: Camood Job17 — ECO solved, BUG-014 still blocking
+### 2026-06-05 — @Salomon → @All: Camood Job17 — ECO solved, BUG-014 still blocking
 
 **What:** Double session. (1) Diagnosed Creality START_PRINT ECO temp override — CX_ROUGH_G28/ACCURATE_G28 macros reduce nozzle to 130°C for sensorless Z probing. Workaround: PrusaSlicer's `M190 S55` (wait for bed) → `M104 S220` → `START_PRINT` → `M109 S220` sequence works; Orca's non-wait M140 race-conditioned the macro. (2) Sliced Camood_TTHQ_job17 via PrusaSlicer CLI + djinn-gcode-safety, print ran 20 min at 220°C/Z=4.2mm — then **BUG-014 recurred**: nozzle_mcu disconnect at 22:34:33 PDT. 12th dropout. Connector reseat didn't fix. Power-loss recovery stuck (empty filename).
 
@@ -353,5 +353,5 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 **UPDATE:** User started `ksr_fdmtest_v4` — 32+ min in, past the previous failure zone (Z=4.2mm, ~20 min). 220°C/60°C stable, 4.2m filament used. nozzle_mcu dropout was intermittent, not guaranteed on every print.
 
-— Claude
+— Salomon
 
