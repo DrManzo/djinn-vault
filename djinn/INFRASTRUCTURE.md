@@ -32,6 +32,21 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 | Disk | 552G free (37% used) |
 | Role | Storage, lightweight tasks, Typhon's Studio streaming/post-production |
 
+### Orin (Large-Model Host — iMac)
+| Attribute | Value |
+|-----------|-------|
+| Hostname | Jacobs-iMac-213.lan |
+| IP | 192.168.1.176 |
+| SSH | `ssh orin` (javiermanzo@, key auth) |
+| CPU | Intel Core i7-7700K @ 4.20GHz |
+| RAM | 40GB |
+| Disk | 1.7Ti free / 1.8Ti total |
+| OS | macOS (Darwin 24.6.0 / macOS Sequoia) |
+| Ollama Models | llama3.3:70b, qwen2.5-coder:32b, phi4:14b, nomic-embed-text |
+| Ollama Endpoint | http://192.168.1.176:11434 |
+| Role | Large-model CPU inference, always-on storage, long-running jobs |
+| Status | ONLINE — connected 2026-06-06 |
+
 ### Calliope (Printer — Ender-3 V3 Plus)
 | Attribute | Value |
 |-----------|-------|
@@ -62,7 +77,14 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
 │  192.168.1.225  │  vault sync  │  192.168.1.113   │
 │  (Omen, Fedora) │  (15-min)    │  (MSI, Fedora)   │
 └────────┬────────┘              └─────────────────┘
-         │
+         │     SSH
+         │◄───────────────────────►┌─────────────────┐
+         │                         │      Orin        │
+         │                         │  192.168.1.176   │
+         │                         │ (iMac, macOS)    │
+         │                         │ llama3.3:70b     │
+         │                         │ qwen2.5-coder:32b│
+         │                         └─────────────────┘
          │ HTTP (Moonraker API)      ┌─────────────────┐
          ├─────────────────────────►│    Calliope      │
          │                          │ 192.168.1.113    │
