@@ -1063,3 +1063,10 @@ created: 2026-05-19
 - TASK-067 done, TASK-068 done, TASK-069 pending
 
 *— Claude*
+
+## 2026-06-05 — Calliope reset + Creality motion defaults
+- Adopted Creality Print motion settings in ender3-v3-plus.ini: SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=500 SQUARE_CORNER_VELOCITY=5, SET_PRESSURE_ADVANCE ADVANCE=0.042
+- Patched Calliope sensorless.cfg: suppressed key404 Y homing error on power loss recovery
+- Full config backup saved: ~/Obsidian/djinn/printer/calliope-config-backup-2026-06-05/
+- Factory reset attempted but blocked by Z probe mismatch; reverted to working printer.cfg
+- KEY FINDING: all 11 key561 dropouts occurred at Z < 10mm — cable connector issue, not routing
