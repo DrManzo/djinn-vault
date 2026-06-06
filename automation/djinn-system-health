@@ -22,7 +22,7 @@ set -euo pipefail
 # Config — override via environment or edit here
 # ---------------------------------------------------------------------------
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
-VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"
+VAULT_PATH="${VAULT_PATH:-$HOME/Obsidian}"
 LOG_DIR="${LOG_DIR:-$HOME/.local/share/djinn/logs}"
 DISK_THRESHOLD_PCT="${DISK_THRESHOLD_PCT:-85}"       # alert when disk > 85%
 VRAM_THRESHOLD_MB="${VRAM_THRESHOLD_MB:-1000}"        # alert when free VRAM < 1000MB
