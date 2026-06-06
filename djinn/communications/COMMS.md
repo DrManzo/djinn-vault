@@ -363,3 +363,11 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260606-011745 | 2026-06-06 01:17 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
