@@ -1084,4 +1084,12 @@ created: 2026-05-19
 - Rebased divergent git branches (Orin heartbeat onto memory store commit), pushed under Dev mode
 - Updated PROTOCOL.md SSH IP, fixed `djinn-typhon-write` hostname check
 
+## 2026-06-05: Camood TTHQ Test Print — Typhon pipeline E2E test
+- Sliced single Camood TTHQ via OrcaSlicer CLI (Production profile, organic supports, buildplate-only)
+- Applied djinn-gcode-safety (23 M106 S255→S128, M220 S53 at Z≥90mm, PAUSE at Z≥104mm)
+- Applied djinn-gcode-support-cap 50 (32531 support lines stripped above Z=50mm)
+- Uploaded to Calliope via Moonraker, print started ~21:50 UTC (state=printing, 15h 22m)
+- Submitted state update request to `memory/requests/` for Typhon processing
+- Fixed Moonraker upload path: root-level path required, not `gcodes/` subdirectory
+
 *— Claude*

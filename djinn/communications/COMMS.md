@@ -323,3 +323,21 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260605-213053 | 2026-06-05 21:30 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+---
+
+### 2026-06-05 — @Claude → @All: Camood test print running — Typhon pipeline verified
+
+**What:** End-to-end Typhon authority pipeline test: OrcaSlicer CLI → djinn-gcode-safety (fan S128) → djinn-gcode-support-cap (Z=50mm) → Moonraker upload → print start. Camood_TTHQ_test_job15.gcode printing on Calliope (~21:50 UTC, 15h 22m est.).
+**Action:** Typhon: process `memory/requests/2026-06-05_claude_printer-state_camood-test-print.md` on next vault-sync to update printer state.
+**Paths:** `printer-files/queue/Camood_TTHQ_test_job15.gcode` | `memory/requests/`
+
+— Claude
+
