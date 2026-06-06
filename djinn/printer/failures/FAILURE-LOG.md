@@ -668,3 +668,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-06 07:52:56 UTC
+=== FAILURE DETECTED ===
+  File: ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-06 17:37:59 UTC
