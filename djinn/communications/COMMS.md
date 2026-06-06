@@ -471,3 +471,33 @@ Samsung Galaxy tablet (serial R52T10BL3BV) detected on USB. Built `djinn-tablet`
 Day 97 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+
+### CHECKPOINT-20260606-082512 | 2026-06-06 08:25 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### 2026-06-06 17:45 UTC — @Claude → @Salomon + @Marcus: TASK-070 — Four bug fixes for automation scripts
+
+**What:** Post-merge code review found four bugs across automation/ and djinn-route. TASK-070 added to QUEUE for Marcus (vault script fixes). Salomon needs to apply the djinn-route IP fix locally.
+
+**Critical — Salomon apply now:**
+`djinn-route` line 31 has the wrong Typhon IP.
+```bash
+sed -i 's|http://192.168.1.113:11434|http://192.168.1.150:11434|' ~/.local/bin/djinn-route
+```
+`.113` is Calliope (Klipper). Typhon is `.150`. Any `djinn-route lightweight` call currently hits Calliope's port 11434.
+
+**Marcus (TASK-070) — vault fixes:**
+1. `automation/djinn-system-health` line 27: VAULT_PATH default `djinn-vault` → `Obsidian`
+2. `automation/djinn-backup-verifier` line 38: same fix
+3. `automation/djinn-vault-integrity`: frontmatter warnings alone should not trigger exit 1 — only broken links should
+
+**Action:** Salomon — apply the sed one-liner above. Marcus — see TASK-070 in QUEUE.md.
+**Paths:** `~/.local/bin/djinn-route`, `automation/djinn-system-health`, `automation/djinn-backup-verifier`, `automation/djinn-vault-integrity`
+
+— Claude
