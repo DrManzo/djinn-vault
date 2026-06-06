@@ -379,3 +379,18 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260606-030215 | 2026-06-06 03:02 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+### CLAUDE-20260606-1 | 2026-06-06 | Claude | INFO
+**Action:** Session complete — Hermes onboarded, LLM client built, AGENTS.md fixed
+**Summary:** Built djinn/core/llm.py (global Ollama/Groq client). Hermes Agent self-onboarded as Assistant lane. Fixed AGENTS.md single-line corruption (Hermes write_file bug). Fixed Hermes default model (nemotron-3-super:cloud → qwen3.6:latest). Created assistant profile config. Added HERMES_HOME to .zshrc. Marcus TASK-067 gap analysis in vault.
+**Tier:** 1 — Info only
+
+*— Claude*
