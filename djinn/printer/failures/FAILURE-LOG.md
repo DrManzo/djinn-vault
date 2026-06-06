@@ -633,3 +633,18 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → standby
   Time: 2026-06-05 23:55:10 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_test_job15.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-06 04:58:56 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_test_job15_final.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-06 05:07:59 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_job16.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-06 05:13:00 UTC
