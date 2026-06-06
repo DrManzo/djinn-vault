@@ -1,6 +1,6 @@
 ---
 title: Session Report — Djinn Gateway Phase 1
-agent: Salomon
+agent: Claude
 date: 2026-06-05
 tags: [djinn, report, gateway, enforcement, architecture]
 related: [[build-log]] | [[decision-log]] | [[GATEWAY]] | [[ROUTING]]
@@ -9,7 +9,7 @@ related: [[build-log]] | [[decision-log]] | [[GATEWAY]] | [[ROUTING]]
 # Session Report — Djinn Gateway Phase 1
 
 **Date:** 2026-06-05
-**Agent:** Salomon
+**Agent:** Claude
 **Session type:** Architecture / Build
 **Trigger:** Javier pointed to Perplexity spec `we also need a heavy handed routing system for all.md` — full gateway design for enforcing agent behavioral contracts across the Djinn system.
 
@@ -106,12 +106,12 @@ Tier classification (10 actions):
 
 ## What's Next (Phase 2)
 
-- [ ] **Checkpoint blocking** — `djinn-gateway checkpoint` polls `~/.local/share/djinn/checkpoints/{id}.json` for Y/N reply. Marcus or a Telegram bot handler writes the decision file. — @Salomon (build) + @Salomon (spec)
-- [ ] **Python enforcement module** — `djinn/gateway/` package wrapping orchestrator tool calls. Salomon-side orchestrator calls `gateway.execute()` instead of tools directly. — @Salomon (spec) → @Salomon (build)
+- [ ] **Checkpoint blocking** — `djinn-gateway checkpoint` polls `~/.local/share/djinn/checkpoints/{id}.json` for Y/N reply. Marcus or a Telegram bot handler writes the decision file. — @Salomon (build) + @Claude (spec)
+- [ ] **Python enforcement module** — `djinn/gateway/` package wrapping orchestrator tool calls. Salomon-side orchestrator calls `gateway.execute()` instead of tools directly. — @Claude (spec) → @Salomon (build)
 - [ ] **Audit log viewer** — `djinn-gateway log [--date YYYY-MM-DD]` reads `djinn/logs/gateway/*.jsonl` — @Salomon
-- [ ] **GitHub branch protection** — protect `main`, require PR. Set via GitHub API with Javier's token. — @Javier (activate) or @Salomon (write the API call)
+- [ ] **GitHub branch protection** — protect `main`, require PR. Set via GitHub API with Javier's token. — @Javier (activate) or @Claude (write the API call)
 - [ ] **Salomon pre-push hook** — `djinn-gateway install-hooks` should run on Salomon's vault clone too. — @Salomon
 
 ---
 
-*— Salomon, 2026-06-05*
+*— Claude, 2026-06-05*

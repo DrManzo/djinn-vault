@@ -1,6 +1,6 @@
 ---
 title: Session Report — djinn-detect-surfaces build + Camood surface scan
-agent: Salomon
+agent: Claude
 date: 2026-06-05
 tags: [djinn, report, 3dprint, engraving, tool-build, camood]
 related: [[build-log]] [[decision-log]]
@@ -9,7 +9,7 @@ related: [[build-log]] [[decision-log]]
 # Session Report — djinn-detect-surfaces + Camood Surface Scan
 
 **Date:** 2026-06-05
-**Agent:** Salomon
+**Agent:** Claude
 **Session type:** Build / Debug
 **Trigger:** Original Camood engraving script was using bbox depth instead of actual face position, causing boolean subtract to miss or undershoot. Original STL already has manufacturer branding on the back — needed a pre-flight scanner before touching geometry.
 
@@ -91,4 +91,4 @@ Key geometry confirmed:
 
 ---
 
-*— Salomon, 2026-06-05*
+*— Claude, 2026-06-05*

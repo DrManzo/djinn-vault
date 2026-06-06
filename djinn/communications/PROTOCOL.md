@@ -129,8 +129,9 @@ Full standard: `djinn/communications/TYPHON-AUTHORITY.md`
 
 | Agent | Signature | Git Author | Git Email |
 |-------|-----------|------------|-----------|
-| Salomon opencode | `— Salomon` | `DrManzo` | `salomon@djinn` |
+| Claude | `— Claude` | `Claude` | `claude@djinn` |
 | Marcus | `— Marcus` | `Marcus` | `marcus@djinn` |
+| Salomon opencode | `— Salomon` | `DrManzo` | `salomon@djinn` |
 | Typhon opencode | `— Typhons Forge` | `Typhons Forge` | `typhon@djinn` |
 
 ---
