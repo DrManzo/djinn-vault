@@ -1,0 +1,377 @@
+#!/usr/bin/env bash
+# =============================================================================
+# djinn-backup-verifier
+# Verify backup integrity WITHOUT performing a full restore.
+# Tests that backups exist, are recent, are non-empty, and are readable.
+#
+# What this checks:
+#   1. Backup recency   — last backup is within expected window
+#   2. Backup size      — archive is non-trivially sized (not empty/stub)
+#   3. Archive integrity — tar/gzip can read the archive without error
+#   4. File count       — archive contains expected minimum number of files
+#   5. Sentinel file    — a known file exists inside the archive
+#   6. rclone remote    — remote backup destination is reachable (if configured)
+#   7. Remote recency   — newest remote file matches local backup age
+#
+# Exit codes:
+#   0 = all checks passed
+#   1 = one or more checks failed
+#
+# Usage:
+#   ./djinn-backup-verifier                   # full check, human output
+#   ./djinn-backup-verifier --json            # machine-readable output
+#   ./djinn-backup-verifier --telegram        # Telegram alert on failure
+#   ./djinn-backup-verifier --quiet           # exit code only
+#   ./djinn-backup-verifier --fix-permissions # also chmod backups to 600
+# =============================================================================
+
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# Config — override via environment or edit directly
+# ---------------------------------------------------------------------------
+
+# Local backup directory (where tar.gz archives land)
+BACKUP_DIR="${BACKUP_DIR:-$HOME/backups/djinn}"
+
+# Vault path — used for sentinel file detection and size baseline
+VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"
+
+# Max acceptable backup age in hours before we call it a failure
+# 25h = daily backup with 1h grace window
+BACKUP_MAX_AGE_HOURS="${BACKUP_MAX_AGE_HOURS:-25}"
+
+# Minimum backup archive size in bytes (default 100KB — protects against empty stub files)
+BACKUP_MIN_SIZE_BYTES="${BACKUP_MIN_SIZE_BYTES:-102400}"
+
+# Minimum number of files expected inside the archive
+BACKUP_MIN_FILE_COUNT="${BACKUP_MIN_FILE_COUNT:-10}"
+
+# A file that MUST exist inside the archive (relative path from archive root)
+# Set to empty string to skip sentinel check
+BACKUP_SENTINEL_FILE="${BACKUP_SENTINEL_FILE:-README.md}"
+
+# rclone remote name (leave empty to skip remote checks)
+# Example: "backblaze:djinn-backups" or "gdrive:djinn"
+RCLONE_REMOTE="${RCLONE_REMOTE:-}"
+
+# Max age for remote backup (hours) — should match or be slightly > local
+REMOTE_MAX_AGE_HOURS="${REMOTE_MAX_AGE_HOURS:-49}"
+
+TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-}"
+TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID:-}"
+
+# ---------------------------------------------------------------------------
+# Flags
+# ---------------------------------------------------------------------------
+OUTPUT_JSON=false
+SEND_TELEGRAM=false
+QUIET=false
+FIX_PERMISSIONS=false
+
+for arg in "$@"; do
+    case $arg in
+        --json)             OUTPUT_JSON=true ;;
+        --telegram)         SEND_TELEGRAM=true ;;
+        --quiet)            QUIET=true ;;
+        --fix-permissions)  FIX_PERMISSIONS=true ;;
+    esac
+done
+
+# ---------------------------------------------------------------------------
+# State tracking
+# ---------------------------------------------------------------------------
+declare -a FAILURES=()
+declare -a WARNINGS=()
+declare -a PASSES=()
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+LATEST_BACKUP=""
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+log()  { [[ $QUIET == false ]] && echo "$@" || true; }
+pass() { PASSES+=("$1");   [[ $QUIET == false ]] && echo "  ✓ $1" || true; }
+warn() { WARNINGS+=("$1"); [[ $QUIET == false ]] && echo "  ⚠ $1" || true; }
+fail() { FAILURES+=("$1"); [[ $QUIET == false ]] && echo "  ✗ $1" || true; }
+
+human_bytes() {
+    local bytes=$1
+    if   (( bytes >= 1073741824 )); then printf "%.1fGB" "$(echo "scale=1; $bytes/1073741824" | bc)"
+    elif (( bytes >= 1048576 ));    then printf "%.1fMB" "$(echo "scale=1; $bytes/1048576" | bc)"
+    elif (( bytes >= 1024 ));       then printf "%.1fKB" "$(echo "scale=1; $bytes/1024" | bc)"
+    else echo "${bytes}B"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Backup directory exists and contains archives
+# ---------------------------------------------------------------------------
+check_backup_dir() {
+    log ""
+    log "── Backup Directory ───────────────────────────────────────"
+
+    if [[ ! -d "$BACKUP_DIR" ]]; then
+        fail "Backup dir not found: $BACKUP_DIR"
+        return 1
+    fi
+    pass "Backup dir exists: $BACKUP_DIR"
+
+    # Find the most recent archive (.tar.gz or .tgz)
+    LATEST_BACKUP=$(find "$BACKUP_DIR" -maxdepth 2 \
+        \( -name "*.tar.gz" -o -name "*.tgz" \) \
+        -printf '%T@ %p\n' 2>/dev/null \
+        | sort -rn | head -1 | awk '{print $2}')
+
+    if [[ -z "$LATEST_BACKUP" ]]; then
+        fail "No .tar.gz archives found in $BACKUP_DIR"
+        return 1
+    fi
+    pass "Latest backup: $(basename "$LATEST_BACKUP")"
+    return 0
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Backup recency
+# ---------------------------------------------------------------------------
+check_recency() {
+    log ""
+    log "── Backup Recency ─────────────────────────────────────────"
+
+    [[ -z "$LATEST_BACKUP" ]] && { warn "Skipping recency check — no backup found"; return; }
+
+    backup_mtime=$(stat -c %Y "$LATEST_BACKUP" 2>/dev/null || echo 0)
+    now_epoch=$(date +%s)
+    age_hours=$(( (now_epoch - backup_mtime) / 3600 ))
+    age_mins=$(( ((now_epoch - backup_mtime) % 3600) / 60 ))
+
+    if (( age_hours >= BACKUP_MAX_AGE_HOURS )); then
+        fail "Backup is ${age_hours}h ${age_mins}m old (max: ${BACKUP_MAX_AGE_HOURS}h) — backup job may have failed"
+    else
+        pass "Backup age: ${age_hours}h ${age_mins}m (within ${BACKUP_MAX_AGE_HOURS}h window)"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Archive size sanity
+# ---------------------------------------------------------------------------
+check_size() {
+    log ""
+    log "── Archive Size ───────────────────────────────────────────"
+
+    [[ -z "$LATEST_BACKUP" ]] && { warn "Skipping size check — no backup found"; return; }
+
+    size_bytes=$(stat -c %s "$LATEST_BACKUP" 2>/dev/null || echo 0)
+    size_human=$(human_bytes "$size_bytes")
+
+    if (( size_bytes < BACKUP_MIN_SIZE_BYTES )); then
+        fail "Archive suspiciously small: ${size_human} (min: $(human_bytes $BACKUP_MIN_SIZE_BYTES)) — may be corrupt or empty"
+    else
+        pass "Archive size: ${size_human}"
+    fi
+
+    # Optional: permissions check
+    if [[ $FIX_PERMISSIONS == true ]]; then
+        chmod 600 "$LATEST_BACKUP"
+        pass "Permissions set to 600"
+    else
+        perms=$(stat -c %a "$LATEST_BACKUP" 2>/dev/null || echo "???")
+        if [[ "$perms" != "600" && "$perms" != "640" ]]; then
+            warn "Archive permissions are ${perms} (consider 600 — run with --fix-permissions)"
+        else
+            pass "Archive permissions: ${perms}"
+        fi
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Archive integrity (can gzip decompress it?)
+# ---------------------------------------------------------------------------
+check_integrity() {
+    log ""
+    log "── Archive Integrity ──────────────────────────────────────"
+
+    [[ -z "$LATEST_BACKUP" ]] && { warn "Skipping integrity check — no backup found"; return; }
+
+    # gzip integrity test — reads the entire archive without extracting
+    if gzip -t "$LATEST_BACKUP" 2>/dev/null; then
+        pass "gzip integrity check passed"
+    else
+        fail "gzip integrity check FAILED — archive is corrupt: $(basename $LATEST_BACKUP)"
+        return
+    fi
+
+    # tar listing — confirms tar header is valid and readable
+    file_count=$(tar -tzf "$LATEST_BACKUP" 2>/dev/null | wc -l)
+    if [[ $? -ne 0 ]]; then
+        fail "tar listing failed — archive header corrupt"
+        return
+    fi
+    pass "tar listing succeeded: ${file_count} entries"
+
+    # File count floor
+    if (( file_count < BACKUP_MIN_FILE_COUNT )); then
+        fail "Archive contains only ${file_count} files (expected >= ${BACKUP_MIN_FILE_COUNT})"
+    else
+        pass "File count: ${file_count} (>= ${BACKUP_MIN_FILE_COUNT} minimum)"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: Sentinel file presence inside archive
+# ---------------------------------------------------------------------------
+check_sentinel() {
+    log ""
+    log "── Sentinel File ──────────────────────────────────────────"
+
+    [[ -z "$LATEST_BACKUP" ]] && { warn "Skipping sentinel check — no backup found"; return; }
+    [[ -z "$BACKUP_SENTINEL_FILE" ]] && { warn "BACKUP_SENTINEL_FILE not set — skipping"; return; }
+
+    if tar -tzf "$LATEST_BACKUP" 2>/dev/null | grep -q "${BACKUP_SENTINEL_FILE}$"; then
+        pass "Sentinel found in archive: ${BACKUP_SENTINEL_FILE}"
+    else
+        fail "Sentinel NOT found in archive: ${BACKUP_SENTINEL_FILE} — wrong backup or truncated archive"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# CHECK: rclone remote reachability and recency
+# ---------------------------------------------------------------------------
+check_remote() {
+    log ""
+    log "── Remote Backup (rclone) ─────────────────────────────────"
+
+    if [[ -z "$RCLONE_REMOTE" ]]; then
+        warn "RCLONE_REMOTE not set — skipping remote checks"
+        return
+    fi
+
+    if ! command -v rclone &>/dev/null; then
+        warn "rclone not installed — skipping remote checks"
+        return
+    fi
+
+    # Test remote connectivity (list with short timeout)
+    if ! rclone ls "$RCLONE_REMOTE" --max-depth 1 --contimeout 10s --timeout 15s \
+        >/dev/null 2>&1; then
+        fail "rclone remote unreachable: $RCLONE_REMOTE"
+        return
+    fi
+    pass "rclone remote reachable: $RCLONE_REMOTE"
+
+    # Find newest file on remote
+    newest_remote=$(rclone ls "$RCLONE_REMOTE" --max-depth 1 2>/dev/null \
+        | awk '{print $2}' | sort | tail -1)
+
+    if [[ -z "$newest_remote" ]]; then
+        fail "rclone remote appears empty: $RCLONE_REMOTE"
+        return
+    fi
+
+    # Get modification time of newest remote file
+    remote_mtime=$(rclone lsl "${RCLONE_REMOTE}/${newest_remote}" 2>/dev/null \
+        | awk '{print $2, $3}' | head -1)
+
+    if [[ -n "$remote_mtime" ]]; then
+        remote_epoch=$(date -d "$remote_mtime" +%s 2>/dev/null || echo 0)
+        now_epoch=$(date +%s)
+        remote_age_hours=$(( (now_epoch - remote_epoch) / 3600 ))
+
+        if (( remote_age_hours > REMOTE_MAX_AGE_HOURS )); then
+            fail "Newest remote backup is ${remote_age_hours}h old (max: ${REMOTE_MAX_AGE_HOURS}h) — rclone sync may have failed"
+        else
+            pass "Newest remote backup: ${remote_age_hours}h old (${newest_remote})"
+        fi
+    else
+        warn "Could not determine remote backup age for: $newest_remote"
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+print_summary() {
+    log ""
+    log "── Summary ────────────────────────────────────────────────"
+    log "  Passed:   ${#PASSES[@]}"
+    log "  Warnings: ${#WARNINGS[@]}"
+    log "  Failures: ${#FAILURES[@]}"
+
+    if (( ${#FAILURES[@]} > 0 )); then
+        log ""
+        log "FAILURES:"
+        for f in "${FAILURES[@]}"; do
+            log "  ✗ $f"
+        done
+        log ""
+        log "Recovery guidance:"
+        log "  1. Check your backup job: systemctl status djinn-vault-sync"
+        log "  2. Manually inspect: ls -lah $BACKUP_DIR"
+        log "  3. Test extraction:  tar -tzf <archive> | head -20"
+        log "  4. If corrupt: restore from remote — rclone copy $RCLONE_REMOTE $BACKUP_DIR"
+    fi
+    log ""
+}
+
+json_output() {
+    python3 - <<PYEOF
+import json
+data = {
+    "timestamp": "$TIMESTAMP",
+    "backup_checked": "$(basename ${LATEST_BACKUP:-none})",
+    "status": "FAILED" if ${#FAILURES[@]} > 0 else "OK",
+    "counts": {
+        "passed": ${#PASSES[@]},
+        "warnings": ${#WARNINGS[@]},
+        "failures": ${#FAILURES[@]}
+    },
+    "failures": $(printf '%s\n' "${FAILURES[@]+"${FAILURES[@]}"}" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))"),
+    "warnings": $(printf '%s\n' "${WARNINGS[@]+"${WARNINGS[@]}"}" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
+}
+print(json.dumps(data, indent=2))
+PYEOF
+}
+
+send_telegram() {
+    [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]] && return
+    (( ${#FAILURES[@]} == 0 )) && return
+
+    msg="🔴 *Djinn Backup Verification FAILED*%0A$(date)%0A%0A"
+    msg+="Archive: $(basename ${LATEST_BACKUP:-none})%0A%0A"
+    for f in "${FAILURES[@]}"; do
+        msg+="✗ ${f}%0A"
+    done
+    msg+="%0ACheck: systemctl status djinn-vault-sync"
+
+    curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+        -d "chat_id=${TELEGRAM_CHAT_ID}" \
+        -d "parse_mode=Markdown" \
+        -d "text=${msg}" \
+        >/dev/null 2>&1 || true
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+main() {
+    log "╔══════════════════════════════════════════════════════════╗"
+    log "║  djinn-backup-verifier  •  $TIMESTAMP  ║"
+    log "╚══════════════════════════════════════════════════════════╝"
+
+    # check_backup_dir sets LATEST_BACKUP; if it fails, subsequent checks
+    # are skipped gracefully via the empty-string guards inside each function.
+    check_backup_dir || true
+    check_recency
+    check_size
+    check_integrity
+    check_sentinel
+    check_remote
+
+    [[ $OUTPUT_JSON == true ]] && json_output
+    [[ $OUTPUT_JSON == false ]] && print_summary
+    [[ $SEND_TELEGRAM == true ]] && send_telegram
+
+    (( ${#FAILURES[@]} > 0 )) && exit 1 || exit 0
+}
+
+main
