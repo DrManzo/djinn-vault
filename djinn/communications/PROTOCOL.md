@@ -94,6 +94,25 @@ This means any agent can leave a task for Salomon or Typhon and it will be picke
 
 ---
 
+## Typhon Memory Authority
+
+**Typhon is the sole write authority for `djinn/memory/current/` and `djinn/memory/history/`.**
+All other agents are read-only consumers of those paths.
+
+| Action | Who may do it |
+|--------|---------------|
+| Write to `djinn/memory/current/` | Typhon only — via `djinn-typhon-write` |
+| Write to `djinn/memory/history/` | Typhon only — via `djinn-typhon-write` |
+| Write to `djinn/memory/requests/` | Any agent (new file only, never overwrite) |
+| Write to `djinn/memory/reports/` | Any agent (new file only, never overwrite) |
+| Read from any `djinn/memory/` path | Any agent |
+
+When Typhon is unavailable, all agents switch to **pull-only mode** for `djinn/memory/`.
+Conflicts: Typhon's current record wins until Javier reviews.
+Full standard: `djinn/communications/TYPHON-AUTHORITY.md`
+
+---
+
 ## Ownership
 
 | Agent | Owns | Never touches |
@@ -101,8 +120,8 @@ This means any agent can leave a task for Salomon or Typhon and it will be picke
 | Claude | COMMS.md, PROTOCOL.md, SYSTEM-STATE.md, djinn/projects/, djinn/logs/ | systemd timers, ~/.local/bin/, heartbeat files |
 | Marcus | COMMS.md (append only), djinn/logs/reports/ (session reports) | systemd timers, ~/.local/bin/, heartbeat files, PROTOCOL.md structure |
 | Salomon | HEARTBEAT.md, systemd timers, ~/.local/bin/ scripts, vault-sync | vault structure, routing docs |
-| Typhon | HEARTBEAT-typhon.md, printer bot service, Typhon timers | vault structure, routing docs |
-| Anyone | Append to COMMS.md, CHANGELOG.md | — |
+| Typhon | HEARTBEAT-typhon.md, djinn/memory/current/, djinn/memory/history/, printer bot service, Typhon timers | vault structure, routing docs |
+| Anyone | Append to COMMS.md, CHANGELOG.md, write to djinn/memory/requests/, djinn/memory/reports/ | — |
 
 ---
 
@@ -212,4 +231,4 @@ All bugs are indexed in `djinn/logs/bugs.md`. Template: `djinn/logs/BUG-REPORT-T
 | medium | Bug report + session report |
 | low | Bug report (can be brief) |
 
-*— Claude, 2026-05-28 | Updated by Marcus, 2026-05-30 | Gateway wired in by Marcus, 2026-06-05*
+*— Claude, 2026-05-28 | Updated by Marcus, 2026-05-30 | Gateway wired in by Marcus, 2026-06-05 | Typhon memory authority wired in by Marcus, 2026-06-05*
