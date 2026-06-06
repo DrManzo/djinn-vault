@@ -8,7 +8,7 @@ related: [[inventory]] | [[devices]] | [[AGENTS]] | [[INFRASTRUCTURE]] | [[SYSTE
 
 # TABLET.md — Samsung Galaxy Tab S (Development Node)
 
-This document defines the Samsung Galaxy Tab S as a **first-class Djinn development node** — not just a peripheral. It covers hardware stats sourced directly from the vault, its role in the fleet, development tooling, lane assignments, connectivity, and integration touchpoints with Salomon, Typhon, and Orin.
+This document defines the Samsung Galaxy Tab S as a **first-class Djinn development node** — not just a peripheral. It covers hardware stats sourced directly from the vault, its role in the fleet, development tooling, lane assignments, connectivity, and integration touchpoints with Salomon, Typhon, and Orion.
 
 ---
 
@@ -59,14 +59,14 @@ The S Pen is a precision input device — treat this tablet as a **sketch, annot
          │  WiFi / SSH
          │◄──────────────────────────────────────────────────────►
          │                           ┌─────────────────────────┐
-         └──────────────────────────►│         Orin             │
+         └──────────────────────────►│         Orion            │
                                      │  192.168.1.176           │
                                      │  (iMac, 40GB RAM)        │
                                      │  llama3.3:70b inference  │
                                      └─────────────────────────┘
 ```
 
-The Tablet operates on the **same 192.168.1.x subnet** as all fleet nodes. It can reach Salomon, Typhon, and Orin over WiFi directly — no VPN required on LAN.
+The Tablet operates on the **same 192.168.1.x subnet** as all fleet nodes. It can reach Salomon, Typhon, and Orion over WiFi directly — no VPN required on LAN.
 
 ---
 
@@ -76,7 +76,7 @@ The Tablet operates on the **same 192.168.1.x subnet** as all fleet nodes. It ca
 |-----------|-----------|
 | **Primary Lane** | Input / Command Terminal + Field Development |
 | **Secondary Lane** | Observation / Monitoring (read-only vault, print status) |
-| **Not Assigned To** | Print confirm/deny (Salomon lane), Architecture (Claude lane), Long-inference (Orin lane) |
+| **Not Assigned To** | Print confirm/deny (Salomon lane), Architecture (Claude lane), Long-inference (Orion lane) |
 | **Signs as** | `— Tablet` (if agent runs) |
 
 ### What Tablet Does in the Fleet
@@ -88,7 +88,7 @@ The Tablet operates on the **same 192.168.1.x subnet** as all fleet nodes. It ca
 - **Media consumption:** Reference photos, renders, print previews from Djinn
 
 ### What Tablet Does NOT Do
-- Does not run Ollama (no local inference — routes to Salomon or Orin via API)
+- Does not run Ollama (no local inference — routes to Salomon or Orion via API)
 - Does not own print jobs (Salomon lane, non-negotiable)
 - Does not push to vault autonomously (all pushes go through Salomon's git pipeline)
 
@@ -130,7 +130,7 @@ ssh drmanzo@192.168.1.225
 # Typhon
 ssh tf-tthq@192.168.1.113
 
-# Orin
+# Orion
 ssh orin  # (javiermanzo@192.168.1.176)
 ```
 
@@ -140,7 +140,7 @@ ssh orin  # (javiermanzo@192.168.1.176)
 curl http://192.168.1.225:11434/api/generate \
   -d '{"model":"qwen2.5:7b","prompt":"<task>","stream":false}'
 
-# Route to Orin (large models, latency OK)
+# Route to Orion (large models, latency OK)
 curl http://192.168.1.176:11434/api/generate \
   -d '{"model":"llama3.3:70b","prompt":"<task>","stream":false}'
 ```
@@ -230,8 +230,8 @@ Tablet has no local Ollama — all inference routes to fleet over WiFi.
 | Deep reasoning / LSAT | Salomon | deepseek-r1:7b |
 | Code review | Salomon | qwen2.5-coder:7b |
 | Vision / image analysis | Salomon | llama3.2-vision:11b |
-| Long-form / complex analysis | Orin | llama3.3:70b |
-| Caption / notes generation | Salomon or Orin | phi4:14b |
+| Long-form / complex analysis | Orion | llama3.3:70b |
+| Caption / notes generation | Salomon or Orion | phi4:14b |
 | External research | Perplexity (Marcus lane) | Cloud (Sonnet 4.6) |
 
 ---
@@ -258,7 +258,7 @@ Tablet has no local Ollama — all inference routes to fleet over WiFi.
 ### Creative / D&D / Writing
 - S Pen → campaign maps, sketches
 - Obsidian Mobile → read/write creative vault notes
-- Route complex writing assistance to Orin (llama3.3:70b) for quality
+- Route complex writing assistance to Orion (llama3.3:70b) for quality
 
 ---
 
@@ -266,7 +266,7 @@ Tablet has no local Ollama — all inference routes to fleet over WiFi.
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| Termux SSH key setup (Tablet → fleet) | High | Generate ed25519 on Tablet, add to Salomon/Typhon/Orin authorized_keys |
+| Termux SSH key setup (Tablet → fleet) | High | Generate ed25519 on Tablet, add to Salomon/Typhon/Orion authorized_keys |
 | Obsidian Mobile + GitHub sync | High | Plug into djinn-vault repo — Tablet as read/write vault node |
 | Tasker webhook → Telegram relay | Medium | One-tap Tasker buttons for `/status`, `/queue`, `/confirm` |
 | S Pen sketch intake script | Medium | Auto-detect new sketches in DCIM/Sketches → trigger media ingest |
