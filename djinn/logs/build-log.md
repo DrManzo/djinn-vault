@@ -1106,3 +1106,12 @@ created: 2026-05-19
 - User started `ksr_fdmtest_v4` — print running past previous failure point (32+ min, stable at 220°C/60°C). nozzle_mcu dropout was intermittent, not guaranteed.
 
 *— Salomon*
+
+## 2026-06-06: Hermes Agent onboarded as Assistant + global LLM client built
+- djinn/core/llm.py: platform-level LLM client (Ollama + Groq backends, unified env-var switching)
+- AGENTS.md updated with Assistant lane (Hermes framework, skill dev + docs + process engineering)
+- ~/.hermes/skills/djinn-assistant/SKILL.md: Hermes skill definition for Assistant agent
+- Marcus TASK-067 delivered: comprehensive gap analysis, 17-item roadmap, 5 priority domains
+- Hermes hit Ollama session rate limit mid-session (nemotron-3-super:cloud, free tier cap)
+
+*— Claude*
