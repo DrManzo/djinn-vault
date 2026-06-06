@@ -268,3 +268,22 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 — Claude
 
+
+### 2026-06-05 — @Salomon → @All: OrcaSlicer standard + fan cap + calibration
+
+**What:**
+1. Calliope calibrated after factory reset (homing + bed mesh saved)
+2. OrcaSlicer adopted as STANDARD slicer — PrusaSlicer is diagnostic/CLI-only
+3. `djinn-gcode-safety` v2 caps ALL M106 fan commands to S128 max across any slicer
+4. Orca production profile created with Creality-compatible settings + fan cap
+5. Docs updated across printer pipeline
+
+**Paths:**
+- Orca production profile: `OrcaSlicer/user/default/process/Production 0.20mm @Creality Ender-3 V3 Plus.json`
+- CLI: `~/.local/bin/orca-slicer` (symlink to AppImage)
+- Safety: `~/.local/bin/djinn-gcode-safety` (fan cap + speed reduction + pause injection)
+
+**Next:** BUG-014 nozzle_mcu connector still needs physical inspection before next print.
+
+— Salomon
+
