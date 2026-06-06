@@ -295,3 +295,23 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+### CHECKPOINT-20260605-185543 | 2026-06-05 19:01 | RESOLVED
+**Action:** Dev mode activated — push allowed
+**Resolution:** Javier confirmed Dev mode
+
+---
+
+### 2026-06-05 — @Claude → @All: Typhon gateway deployed + SSH fixed
+
+**What:**
+1. SSH fixed: Typhon IP 192.168.1.113 → 192.168.1.150, `~/.ssh/config` created, known_hosts cleaned
+2. `djinn-typhon-write` deployed to Typhon `~/.local/bin/` — hostname check relaxed for `tftthq`
+3. Verified: `--status` shows store reachable, `--write` test confirmed (current state + history log)
+4. Rebased divergent git history + pushed under Dev mode
+5. Updated PROTOCOL.md IP reference
+
+**Action:** Next — wire `--process-requests` into Typhon's vault-sync timer when ready
+**Paths:** `~/.ssh/config` | `djinn/printer/tools/djinn-typhon-write` | `djinn/communications/PROTOCOL.md`
+
+— Claude
+

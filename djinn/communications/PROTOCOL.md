@@ -25,7 +25,7 @@ Rules every agent follows. No exceptions. No shortcuts.
 ## Network — Current State
 
 Both machines on **192.168.1.x** subnet as of 2026-05-23.
-- Salomon → Typhon: ✅ SSH works (`ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113`)
+- Salomon → Typhon: ✅ SSH works (`ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.150`)
 - Typhon → Salomon: ✅ SSH works
 - Cross-machine file delivery: Salomon can SCP directly to Typhon — no longer relay-only
 
