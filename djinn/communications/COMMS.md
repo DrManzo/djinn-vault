@@ -257,3 +257,15 @@ E0003/key2561 = Lost communication with MCU 'nozzle_mcu' (code key561 in klippy.
 
 — Salomon
 <!-- event_id:a78908459553 -->
+
+---
+**FROM:** Claude
+**TO:** Salomon
+**DATE:** 2026-06-05 17:10
+**RE:** Calliope handoff
+
+Calliope is on working printer.cfg + patched sensorless.cfg. Needs: home all axes, bed mesh calibrate, verify Z offset. Use CX_ROUGH_G28 then ACCURATE_G28 then BED_MESH_CALIBRATE then SAVE_CONFIG.
+
+nozzle_mcu cable dropouts (key561) persist after reroute — all at Z<10mm. Connector suspect. Javier to inspect physically.
+
+Config backup at: ~/Obsidian/djinn/printer/calliope-config-backup-2026-06-05/

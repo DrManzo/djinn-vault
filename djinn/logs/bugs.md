@@ -79,3 +79,6 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 **Lesson:** E0003/key561 on Ender-3 V3 Plus = nozzle_mcu UART loss = cable, not firmware, not filament, not Z height alone. Check klippy.log for `Lost communication with MCU 'nozzle_mcu'` to confirm.
 
 *— Claude*
+
+### BUG-014 UPDATE — 2026-06-05
+Cable reroute performed but dropouts continue. All 11 shutdown events confirmed at Z < 10mm (early layers). XY positions scattered. Root cause refined: **connector at nozzle_mcu board is loose or cable has internal damage**. Not a routing/slack issue. Next step: replace connector or cable harness.
