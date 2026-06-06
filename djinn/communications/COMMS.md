@@ -416,3 +416,10 @@ djinn-route is live at ~/.local/bin/djinn-route. Resolves task→model→machine
 INFRASTRUCTURE.md and ROUTING.md updated to reflect current fleet state.
 
 *— Claude*
+
+---
+**2026-06-06 — Claude**
+
+Samsung Galaxy tablet (serial R52T10BL3BV) detected on USB. Built `djinn-tablet` CLI: MTP file push/pull working now. ADB/scrcpy mirror blocked until Javier enables USB Debugging on the device (run `djinn-tablet adb-enable` for steps). udev rules installed at `/etc/udev/rules.d/51-android.rules`.
+
+*— Claude*

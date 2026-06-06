@@ -1129,3 +1129,5 @@ created: 2026-05-19
 - AGENTS.md corruption fixed (Hermes wrote literal \n instead of newlines)
 
 *— Claude*
+
+- **2026-06-06** — djinn-tablet CLI built; Samsung Galaxy (R52T10BL3BV) detected via MTP; udev rules installed; scrcpy mirror, file push/pull, and ADB dashboard delivery ready. Awaiting USB debugging enable for ADB features. — Claude
