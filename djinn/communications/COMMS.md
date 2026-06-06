@@ -423,3 +423,11 @@ INFRASTRUCTURE.md and ROUTING.md updated to reflect current fleet state.
 Samsung Galaxy tablet (serial R52T10BL3BV) detected on USB. Built `djinn-tablet` CLI: MTP file push/pull working now. ADB/scrcpy mirror blocked until Javier enables USB Debugging on the device (run `djinn-tablet adb-enable` for steps). udev rules installed at `/etc/udev/rules.d/51-android.rules`.
 
 *— Claude*
+
+
+### CHECKPOINT-20260606-062754 | 2026-06-06 06:27 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
