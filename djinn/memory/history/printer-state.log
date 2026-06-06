@@ -1,0 +1,5 @@
+[2026-06-05T18:43:00Z] INIT | source=Marcus | domain=memory.current | field=printer-state
+BEFORE: null
+AFTER:  Created djinn/memory/current/printer-state.md — initial canonical printer state
+NOTE:   Typhon memory store bootstrapped. Calliope idle. OrcaSlicer production profile active. BUG-014 resolved. BUG-013 mitigated.
+---
