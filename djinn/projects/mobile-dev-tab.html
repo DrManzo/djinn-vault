@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Dev — Media Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   ART DIRECTION: Terminal-meets-media-ops
+   Palette: deep slate + amber accent (forge theme)
+   Typography: Inter body + JetBrains Mono for code/data
+   Density: dense — this is a reference/ops tab
+═══════════════════════════════════════════════ */
+:root, [data-theme="light"] {
+  --color-bg:             #f5f4f0;
+  --color-surface:        #f8f7f4;
+  --color-surface-2:      #fafaf8;
+  --color-surface-offset: #eeebe5;
+  --color-surface-dynamic:#e5e2db;
+  --color-divider:        #d8d4cc;
+  --color-border:         #ccc8bf;
+  --color-text:           #1e1c17;
+  --color-text-muted:     #6b6860;
+  --color-text-faint:     #aaa89f;
+  --color-text-inverse:   #f8f7f3;
+  --color-primary:        #c27a00;
+  --color-primary-hover:  #a86600;
+  --color-primary-active: #8a5200;
+  --color-primary-highlight: #f0e2c4;
+  --color-success:        #3d7320;
+  --color-success-hover:  #2b5616;
+  --color-success-highlight: #d2e2c8;
+  --color-error:          #b02020;
+  --color-error-highlight:#f0d0d0;
+  --color-blue:           #1a5f8a;
+  --color-blue-highlight: #c8dff0;
+  --color-purple:         #6b3ab0;
+  --color-purple-highlight:#ddd0f2;
+  --color-code-bg:        #1a1916;
+  --color-code-text:      #e8e4da;
+  --color-code-amber:     #f0b429;
+  --color-code-green:     #6dba4a;
+  --color-code-blue:      #5fa8d8;
+  --color-code-muted:     #8a8070;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --shadow-sm: 0 1px 2px oklch(0.15 0.02 60 / 0.07);
+  --shadow-md: 0 3px 10px oklch(0.15 0.02 60 / 0.10);
+  --shadow-lg: 0 8px 24px oklch(0.15 0.02 60 / 0.14);
+  --transition: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --text-xs:   clamp(0.7rem, 0.68rem + 0.1vw, 0.75rem);
+  --text-sm:   clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.9rem, 0.87rem + 0.15vw, 1rem);
+  --text-lg:   clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-xl:   clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+}
+[data-theme="dark"] {
+  --color-bg:             #111009;
+  --color-surface:        #171510;
+  --color-surface-2:      #1c1a14;
+  --color-surface-offset: #141210;
+  --color-surface-dynamic:#252218;
+  --color-divider:        #201e16;
+  --color-border:         #2e2b20;
+  --color-text:           #d8d4c8;
+  --color-text-muted:     #7a7464;
+  --color-text-faint:     #4a4638;
+  --color-text-inverse:   #1a1810;
+  --color-primary:        #e8a020;
+  --color-primary-hover:  #f0b030;
+  --color-primary-active: #f8c040;
+  --color-primary-highlight:#3a2e10;
+  --color-success:        #6db840;
+  --color-success-hover:  #82cc52;
+  --color-success-highlight:#1e3012;
+  --color-error:          #e05050;
+  --color-error-highlight:#3a1414;
+  --color-blue:           #5098d0;
+  --color-blue-highlight: #162030;
+  --color-purple:         #9a68e0;
+  --color-purple-highlight:#241640;
+  --color-code-bg:        #0c0b08;
+  --color-code-text:      #e0dac8;
+  --color-code-amber:     #f0b429;
+  --color-code-green:     #6dba4a;
+  --color-code-blue:      #5fa8d8;
+  --color-code-muted:     #665e4a;
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.4);
+  --shadow-md: 0 3px 12px oklch(0 0 0 / 0.5);
+  --shadow-lg: 0 8px 28px oklch(0 0 0 / 0.6);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100dvh;
+  line-height: 1.55;
+}
+button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code, .mono { font-family: var(--font-mono); }
+
+/* ── LAYOUT ─────────────────────────── */
+.page-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-12);
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0 var(--space-4);
+  border-bottom: 1px solid var(--color-divider);
+  margin-bottom: var(--space-6);
+  gap: var(--space-3);
+}
+.page-header-left { display: flex; align-items: center; gap: var(--space-3); }
+.logo-mark { width: 32px; height: 32px; flex-shrink: 0; }
+.page-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+.page-subtitle {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.header-actions { display: flex; align-items: center; gap: var(--space-2); }
+
+/* ── THEME TOGGLE ─────────────────────── */
+.theme-btn {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted);
+  transition: color var(--transition), background var(--transition);
+}
+.theme-btn:hover { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* ── SECTION HEADERS ──────────────────── */
+.section { margin-bottom: var(--space-8); }
+.section-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-divider);
+}
+
+/* ── PLATFORM SPEC TABLE ──────────────── */
+.spec-table-wrap {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+}
+.spec-table thead tr {
+  background: var(--color-surface-offset);
+  border-bottom: 1px solid var(--color-border);
+}
+.spec-table th {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.spec-table tbody tr {
+  border-bottom: 1px solid var(--color-divider);
+  transition: background var(--transition);
+}
+.spec-table tbody tr:last-child { border-bottom: none; }
+.spec-table tbody tr:hover { background: var(--color-surface-offset); }
+.spec-table td {
+  padding: var(--space-2) var(--space-3);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.spec-table td:first-child { font-weight: 500; color: var(--color-text); }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-family: var(--font-mono);
+}
+.badge-amber  { background: var(--color-primary-highlight); color: var(--color-primary); }
+.badge-green  { background: var(--color-success-highlight); color: var(--color-success); }
+.badge-blue   { background: var(--color-blue-highlight);   color: var(--color-blue); }
+.badge-purple { background: var(--color-purple-highlight); color: var(--color-purple); }
+.badge-muted  { background: var(--color-surface-dynamic);  color: var(--color-text-muted); }
+
+.callout {
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+}
+.callout-amber {
+  background: var(--color-primary-highlight);
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.25);
+  color: var(--color-text);
+}
+.callout-green {
+  background: var(--color-success-highlight);
+  border: 1px solid oklch(from var(--color-success) l c h / 0.25);
+  color: var(--color-text);
+}
+.callout-icon { flex-shrink: 0; margin-top: 1px; }
+.callout-text strong { font-weight: 600; }
+
+/* ── NAMING GRID ─────────────────────── */
+.naming-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+@media (max-width: 640px) { .naming-grid { grid-template-columns: 1fr; } }
+.naming-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.naming-card-head {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface-offset);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.naming-card-body { padding: var(--space-3); background: var(--color-surface); }
+
+/* ── CODE BLOCKS ─────────────────────── */
+.code-block {
+  background: var(--color-code-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid oklch(from var(--color-code-text) l c h / 0.08);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-top: var(--space-2);
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid oklch(from var(--color-code-text) l c h / 0.08);
+  background: oklch(from var(--color-code-bg) calc(l + 0.03) c h);
+}
+.code-lang {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-code-amber);
+}
+.copy-btn {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--color-code-muted);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid oklch(from var(--color-code-text) l c h / 0.10);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.copy-btn:hover {
+  color: var(--color-code-text);
+  border-color: oklch(from var(--color-code-text) l c h / 0.25);
+  background: oklch(from var(--color-code-text) l c h / 0.05);
+}
+.copy-btn.copied { color: var(--color-code-green); border-color: var(--color-code-green); }
+pre {
+  padding: var(--space-4);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--color-code-text);
+}
+pre .c-amber { color: var(--color-code-amber); }
+pre .c-green { color: var(--color-code-green); }
+pre .c-blue  { color: var(--color-code-blue); }
+pre .c-muted { color: var(--color-code-muted); }
+pre .c-bold  { font-weight: 600; }
+
+/* ── PIPELINE ─────────────────────────── */
+.pipeline { display: flex; flex-direction: column; gap: 0; }
+.pipeline-connector {
+  height: 12px;
+  margin-left: calc(140px + 0.375rem);
+  border-left: 2px solid var(--color-divider);
+}
+
+/* ── TASK TABLE ──────────────────────── */
+.task-table-wrap {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.task-table { width: 100%; border-collapse: collapse; font-size: var(--text-xs); }
+.task-table thead tr {
+  background: var(--color-surface-offset);
+  border-bottom: 1px solid var(--color-border);
+}
+.task-table th {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+.task-table tbody tr { border-bottom: 1px solid var(--color-divider); transition: background var(--transition); }
+.task-table tbody tr:last-child { border-bottom: none; }
+.task-table tbody tr:hover { background: var(--color-surface-offset); }
+.task-table td { padding: var(--space-2) var(--space-3); vertical-align: middle; }
+.task-id { font-family: var(--font-mono); font-weight: 600; color: var(--color-primary); font-size: 0.68rem; }
+.assignee-claude  { color: var(--color-blue);   font-weight: 600; }
+.assignee-salomon { color: var(--color-purple); font-weight: 600; }
+.task-desc code {
+  background: var(--color-surface-dynamic);
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+}
+.build-order {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-offset);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  border: 1px solid var(--color-border);
+  line-height: 2;
+}
+.bo-claude  { color: var(--color-blue); }
+.bo-salomon { color: var(--color-purple); }
+.bo-arrow   { color: var(--color-text-faint); }
+
+/* ── CHANGE CARDS ─────────────────────── */
+.change-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: var(--space-3);
+}
+.change-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.change-card:hover { box-shadow: var(--shadow-md); }
+.change-card-head {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-offset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.change-script { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--color-text); }
+.change-count  { font-size: 0.65rem; font-family: var(--font-mono); color: var(--color-text-faint); }
+.change-card-body { padding: var(--space-3) var(--space-4); background: var(--color-surface); }
+.change-item {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: var(--text-xs);
+  align-items: flex-start;
+}
+.change-item:last-child { border-bottom: none; }
+.change-bullet {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem; font-weight: 700;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+}
+.bullet-fix  { background: var(--color-primary-highlight); color: var(--color-primary); }
+.bullet-new  { background: var(--color-success-highlight); color: var(--color-success); }
+.change-text { color: var(--color-text-muted); line-height: 1.45; }
+.change-text code {
+  background: var(--color-surface-dynamic);
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+  color: var(--color-text);
+}
+
+/* ── STITCH ORDER PREVIEW ─────────────── */
+.stitch-preview {
+  background: var(--color-code-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid oklch(from var(--color-code-text) l c h / 0.08);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.stitch-preview-head {
+  background: oklch(from var(--color-code-bg) calc(l + 0.03) c h);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid oklch(from var(--color-code-text) l c h / 0.08);
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.stitch-preview-dots { display: flex; gap: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red    { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green  { background: #28c840; }
+.stitch-preview-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-code-muted);
+  letter-spacing: 0.03em;
+}
+.stitch-preview-body {
+  padding: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--color-code-text);
+}
+
+/* ── ACCESS GRID ─────────────────────── */
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+@media (max-width: 580px) { .access-grid { grid-template-columns: 1fr; } }
+.access-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+.access-card-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.access-path {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-primary);
+  background: var(--color-primary-highlight);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  line-height: 1.6;
+  word-break: break-all;
+  margin-bottom: var(--space-2);
+}
+.access-path.blue { color: var(--color-blue); background: var(--color-blue-highlight); }
+.access-note { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5; }
+.access-note code {
+  background: var(--color-surface-dynamic);
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+}
+
+/* ── STATUS BAR ──────────────────────── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+.status-item { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted); }
+.status-dot  { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.planned { background: var(--color-primary); }
+.status-sep  { color: var(--color-text-faint); }
+.gap-filler  { flex: 1; }
+
+/* ── TWO-COL GRID ────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+@media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-header-left">
+      <svg class="logo-mark" aria-label="Djinn Media Kit" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="7" fill="var(--color-primary)" opacity="0.12"/>
+        <path d="M8 24 L8 12 C8 9.8 9.8 8 12 8 L17 8 C21.4 8 25 11.6 25 16 C25 20.4 21.4 24 17 24 Z" stroke="var(--color-primary)" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <circle cx="16" cy="16" r="3" fill="var(--color-primary)"/>
+      </svg>
+      <div>
+        <div class="page-title">Mobile Dev — Media Kit</div>
+        <div class="page-subtitle">PLAN-media-kit-mobile · djinn-vault · created 2026-05-31</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="theme-btn" data-theme-toggle aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <div class="status-item"><div class="status-dot planned"></div> Status: Planned</div>
+    <div class="status-sep">·</div>
+    <div class="status-item">Goal: phone-ready stitch kit per print job</div>
+    <div class="status-sep">·</div>
+    <div class="status-item">Tags: instagram · facebook · mobile · media</div>
+    <div class="gap-filler"></div>
+    <div class="status-item">Verified: 2026-05-31</div>
+  </div>
+
+  <!-- ─── 1. PLATFORM SPECS ─── -->
+  <section class="section">
+    <h2 class="section-title">Platform Specs</h2>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Platform</th><th>Format</th><th>Resolution</th>
+            <th>Codec</th><th>Audio</th><th>FPS</th>
+            <th>Max Duration</th><th>Max Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-purple">Instagram Reels</span></td>
+            <td>MP4</td><td>1080×1920 (9:16)</td>
+            <td><span class="badge badge-blue">H.264</span></td>
+            <td>AAC</td><td><span class="badge badge-amber">30fps ⚠</span></td>
+            <td>3 min</td><td>1 GB</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">Instagram Feed</span></td>
+            <td>MP4</td><td>1080×1350 (4:5)</td>
+            <td><span class="badge badge-blue">H.264</span></td>
+            <td>AAC</td><td><span class="badge badge-amber">30fps ⚠</span></td>
+            <td>60s</td><td>—</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">Facebook Reels</span></td>
+            <td>MP4</td><td>1080×1920 (9:16)</td>
+            <td><span class="badge badge-blue">H.264</span></td>
+            <td>AAC</td><td><span class="badge badge-amber">30fps ⚠</span></td>
+            <td>No limit</td><td>4 GB</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">Facebook Feed</span></td>
+            <td>MP4</td><td>1080×1920 (9:16)</td>
+            <td><span class="badge badge-blue">H.264</span></td>
+            <td>AAC</td><td><span class="badge badge-amber">30fps ⚠</span></td>
+            <td>No limit</td><td>4 GB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-green">
+      <span class="callout-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      </span>
+      <div class="callout-text"><strong>Key finding:</strong> Facebook and Instagram Reels are now the same spec (as of June 2025). All Facebook videos post as Reels. <strong>One export covers both platforms.</strong></div>
+    </div>
+    <div class="callout callout-amber">
+      <span class="callout-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      <div class="callout-text"><strong>Current pipeline gap:</strong> FPS is not forced — clips inherit source FPS. Everything else (H.264, AAC, 1080×1920, +faststart) is already correct. Fix: add <code>-r 30</code> to all ffmpeg export commands.</div>
+    </div>
+  </section>
+
+  <!-- ─── 2. NAMING CONVENTION ─── -->
+  <section class="section">
+    <h2 class="section-title">Naming Convention</h2>
+    <div class="naming-grid">
+      <div class="naming-card">
+        <div class="naming-card-head">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Rule
+        </div>
+        <div class="naming-card-body">
+          <div class="code-block" style="margin-top:0">
+            <pre style="padding:var(--space-3)"><span class="c-amber">{job_slug}</span><span class="c-muted">_</span><span class="c-blue">{nn}</span><span class="c-muted">.mp4</span></pre>
+          </div>
+          <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-3);line-height:1.6">
+            <code>job_slug</code> from manifest <code>notes</code> field set at ingest with <code>--notes "job_name"</code>.<br>
+            Fallback: project_id slug if not provided.
+          </div>
+        </div>
+      </div>
+      <div class="naming-card">
+        <div class="naming-card-head">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Examples
+        </div>
+        <div class="naming-card-body">
+          <div class="code-block" style="margin-top:0">
+            <pre style="padding:var(--space-3)"><span class="c-green">mini-vases-job4</span><span class="c-muted">_01.mp4
+</span><span class="c-green">mini-vases-job4</span><span class="c-muted">_02.mp4
+</span><span class="c-green">mini-vases-job4</span><span class="c-amber">_reel.mp4</span>   <span class="c-muted">← combined
+</span><span class="c-green">puffco-proxy-v2</span><span class="c-muted">_01.mp4
+</span><span class="c-green">puffco-proxy-v2</span><span class="c-amber">_reel.mp4</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 3. STITCH-KIT STRUCTURE ─── -->
+  <section class="section">
+    <h2 class="section-title">stitch-kit/ Folder Structure</h2>
+    <div class="two-col">
+      <div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2)">Local project folder — flat, numbered, nothing buried</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">folder tree</span></div>
+          <pre><span class="c-amber c-bold">stitch-kit/</span>
+<span class="c-muted">├── </span><span class="c-green">{job_slug}_01.mp4</span>         <span class="c-muted">← hook (0–30s)</span>
+<span class="c-muted">├── </span><span class="c-green">{job_slug}_02.mp4</span>         <span class="c-muted">← middle</span>
+<span class="c-muted">├── </span><span class="c-green">{job_slug}_03.mp4</span>         <span class="c-muted">← closer</span>
+<span class="c-muted">├── </span><span class="c-amber">{job_slug}_reel.mp4</span>       <span class="c-muted">← combined reel</span>
+<span class="c-muted">└── </span><span class="c-blue">STITCH-ORDER.txt</span>          <span class="c-muted">← clips + notes</span></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2)">Google Drive — stitch-kit/ is the primary download target</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">gdrive structure</span></div>
+          <pre><span class="c-muted">gdrive:Typhons-Forge/posts/</span><span class="c-green">{project_id}</span><span class="c-muted">/</span>
+<span class="c-amber c-bold">├── stitch-kit/</span>         <span class="c-muted">← PRIMARY ★</span>
+<span class="c-muted">│   ├── </span><span class="c-green">{job_slug}_01.mp4</span>
+<span class="c-muted">│   ├── </span><span class="c-amber">{job_slug}_reel.mp4</span>
+<span class="c-muted">│   └── </span><span class="c-blue">STITCH-ORDER.txt</span>
+<span class="c-muted">├── publish/</span>            <span class="c-muted">← captions, POST.txt</span>
+<span class="c-muted">├── video/</span>              <span class="c-muted">← pipeline master</span>
+<span class="c-muted">└── feed/</span>               <span class="c-muted">← 1080×1350 photos</span></pre>
+        </div>
+        <div class="callout callout-amber" style="margin-top:var(--space-2);font-size:0.65rem;padding:var(--space-2) var(--space-3)">
+          <span class="callout-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5 2 2 0 0 1 3.58 2.87h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg></span>
+          <span>Discord <code>#post-ready</code> message leads with <strong>stitch-kit/ Drive link</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4. STITCH-ORDER.txt PREVIEW ─── -->
+  <section class="section">
+    <h2 class="section-title">STITCH-ORDER.txt Format</h2>
+    <div class="stitch-preview">
+      <div class="stitch-preview-head">
+        <div class="stitch-preview-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="stitch-preview-title">STITCH-ORDER.txt — example: mini-vases-job4</div>
+      </div>
+      <div class="stitch-preview-body">
+        <span class="c-amber">Project:</span> mini-vases-job4<br>
+        <span class="c-amber">Generated:</span> 2026-05-31<br>
+        <br>
+        <span class="c-green">Clip 1</span> <span class="c-muted">—</span> mini-vases-job4_01.mp4  <span class="c-muted">[0:00–0:30, 30s]</span><br>
+        <span class="c-muted">  Hook: printer reveal, vases starting to form</span><br>
+        <br>
+        <span class="c-green">Clip 2</span> <span class="c-muted">—</span> mini-vases-job4_02.mp4  <span class="c-muted">[0:30–1:00, 30s]</span><br>
+        <span class="c-muted">  Mid: layer detail, engraving close-up</span><br>
+        <br>
+        <span class="c-green">Clip 3</span> <span class="c-muted">—</span> mini-vases-job4_03.mp4  <span class="c-muted">[1:00–1:30, 30s]</span><br>
+        <span class="c-muted">  Closer: finished vases off the bed</span><br>
+        <br>
+        <span class="c-amber">Full Reel</span> <span class="c-muted">—</span> mini-vases-job4_reel.mp4  <span class="c-muted">[90s combined]</span><br>
+        <br>
+        <span class="c-blue">Platform:</span> Instagram Reels + Facebook Reels (same spec)<br>
+        <span class="c-blue">Specs:</span> 1080×1920, H.264, 30fps, AAC<br>
+        <span class="c-blue">Captions:</span> see publish/POST.txt
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. CODE CHANGES ─── -->
+  <section class="section">
+    <h2 class="section-title">Code Changes Required</h2>
+    <div class="change-grid">
+
+      <div class="change-card">
+        <div class="change-card-head">
+          <span class="change-script">djinn-media-reel</span>
+          <span class="change-count">2 fixes</span>
+        </div>
+        <div class="change-card-body">
+          <div class="change-item">
+            <div class="change-bullet bullet-fix">FIX</div>
+            <div class="change-text">Add <code>-r 30</code> to all ffmpeg export commands (force 30fps)</div>
+          </div>
+          <div class="change-item">
+            <div class="change-bullet bullet-fix">FIX</div>
+            <div class="change-text">Read <code>job_slug</code> from manifest notes; rename output <code>{project_id}_reel.mp4</code> → <code>{job_slug}_reel.mp4</code></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="change-card">
+        <div class="change-card-head">
+          <span class="change-script">djinn-media-repurpose</span>
+          <span class="change-count">2 fixes</span>
+        </div>
+        <div class="change-card-body">
+          <div class="change-item">
+            <div class="change-bullet bullet-fix">FIX</div>
+            <div class="change-text">Rename output <code>clip_{n:02d}.mp4</code> → <code>{job_slug}_{n:02d}.mp4</code></div>
+          </div>
+          <div class="change-item">
+            <div class="change-bullet bullet-fix">FIX</div>
+            <div class="change-text">Read <code>job_slug</code> from manifest</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="change-card">
+        <div class="change-card-head">
+          <span class="change-script" style="color:var(--color-success)">djinn-media-kit</span>
+          <span class="badge badge-green" style="font-size:0.62rem">NEW ~80 lines</span>
+        </div>
+        <div class="change-card-body">
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Reads all clips from <code>exports/reel/</code></div></div>
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Creates <code>stitch-kit/</code> folder in project root</div></div>
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Copies clips with job-name convention</div></div>
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Writes <code>STITCH-ORDER.txt</code> with durations + manifest notes</div></div>
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Sets manifest <code>status = "kit_ready"</code></div></div>
+          <div class="change-item"><div class="change-bullet bullet-new">NEW</div><div class="change-text">Trigger: <code>djinn-media-kit {id}</code> · Discord/TG: <code>kit {id}</code></div></div>
+        </div>
+      </div>
+
+      <div class="change-card">
+        <div class="change-card-head">
+          <span class="change-script">djinn-media-publish-prep</span>
+          <span class="change-count">2 changes</span>
+        </div>
+        <div class="change-card-body">
+          <div class="change-item"><div class="change-bullet bullet-fix">FIX</div><div class="change-text">Upload <code>stitch-kit/</code> to Drive first, before <code>publish/</code> and <code>video/</code></div></div>
+          <div class="change-item"><div class="change-bullet bullet-fix">FIX</div><div class="change-text">Discord <code>#post-ready</code> message leads with stitch-kit Drive link</div></div>
+        </div>
+      </div>
+
+      <div class="change-card">
+        <div class="change-card-head">
+          <span class="change-script">djinn-media-ingest</span>
+          <span class="change-count">1 addition</span>
+        </div>
+        <div class="change-card-body">
+          <div class="change-item"><div class="change-bullet bullet-new">ADD</div><div class="change-text">Add <code>--job-name "slug"</code> flag that writes <code>job_slug</code> to manifest</div></div>
+          <div class="change-item"><div class="change-bullet bullet-fix">NOTE</div><div class="change-text">Fallback: uses project_id slug if <code>--job-name</code> not provided</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 6. FULL PIPELINE ─── -->
+  <section class="section">
+    <h2 class="section-title">Updated Full Pipeline</h2>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">bash — pipeline with kit step</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><span class="c-amber c-bold">djinn-media-ingest</span> &lt;path&gt; --job-name <span class="c-green">"mini-vases-job4"</span>
+  <span class="c-muted">→ creates project, stores job_slug in manifest</span>
+
+<span class="c-amber c-bold">djinn-media-reel</span> &lt;id&gt; [--combine]
+  <span class="c-muted">→ exports {job_slug}_reel.mp4 at <span class="c-amber">30fps</span></span>
+
+<span class="c-amber c-bold">djinn-media-repurpose</span> &lt;id&gt; [--clips N]
+  <span class="c-muted">→ exports {job_slug}_01.mp4, _02.mp4...</span>
+
+<span class="c-amber c-bold">djinn-media-thumbnail</span> &lt;id&gt;
+<span class="c-amber c-bold">djinn-media-qa</span> &lt;id&gt;
+
+<span class="c-green c-bold">djinn-media-kit</span> &lt;id&gt;          <span class="c-green">← NEW STEP</span>
+  <span class="c-muted">→ creates stitch-kit/, writes STITCH-ORDER.txt</span>
+
+<span class="c-amber c-bold">djinn-media-publish-prep</span> &lt;id&gt;
+  <span class="c-muted">→ uploads stitch-kit/ to Drive <span class="c-amber">(primary link)</span></span>
+  <span class="c-muted">→ posts to Discord #post-ready with kit link</span></pre>
+    </div>
+  </section>
+
+  <!-- ─── 7. OBSIDIAN MOBILE ACCESS ─── -->
+  <section class="section">
+    <h2 class="section-title">Obsidian Mobile Access</h2>
+    <div class="access-grid">
+      <div class="access-card">
+        <div class="access-card-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          Vault path (text files)
+        </div>
+        <div class="access-path">~/Obsidian/djinn/media/posts/<br>{project_id}/stitch-kit/</div>
+        <div class="access-note">Vault syncs via git. STITCH-ORDER.txt and POST.txt are always here. Large video files may be excluded from git to avoid repo bloat.</div>
+      </div>
+      <div class="access-card">
+        <div class="access-card-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-blue)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5 2 2 0 0 1 3.58 2.87h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>
+          Primary access (videos)
+        </div>
+        <div class="access-path blue">Google Drive:<br>Typhons-Forge/posts/{project_id}/stitch-kit/</div>
+        <div class="access-note">Drive is the primary mobile access point for video files. Discord <code>#post-ready</code> always includes the direct stitch-kit Drive link.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 8. DELEGATION ─── -->
+  <section class="section">
+    <h2 class="section-title">Delegation &amp; Build Order</h2>
+    <div class="task-table-wrap">
+      <table class="task-table">
+        <thead>
+          <tr><th>Task</th><th>Who</th><th>What</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="task-id">TASK-005</span></td><td><span class="assignee-claude">Claude</span></td><td class="task-desc">Update <code>djinn-media-reel</code>: force 30fps, job-name output</td></tr>
+          <tr><td><span class="task-id">TASK-006</span></td><td><span class="assignee-claude">Claude</span></td><td class="task-desc">Update <code>djinn-media-repurpose</code>: job-name clip naming</td></tr>
+          <tr><td><span class="task-id">TASK-007</span></td><td><span class="assignee-claude">Claude</span></td><td class="task-desc">Build <code>djinn-media-kit</code>: stitch-kit folder + STITCH-ORDER.txt</td></tr>
+          <tr><td><span class="task-id">TASK-008</span></td><td><span class="assignee-claude">Claude</span></td><td class="task-desc">Update <code>djinn-media-publish-prep</code>: upload stitch-kit/ first, new Discord format</td></tr>
+          <tr><td><span class="task-id">TASK-009</span></td><td><span class="assignee-claude">Claude</span></td><td class="task-desc">Update <code>djinn-media-ingest</code>: add <code>--job-name</code> flag</td></tr>
+          <tr><td><span class="task-id">TASK-010</span></td><td><span class="assignee-salomon">Salomon</span></td><td class="task-desc">Deploy + test full pipeline with <code>mini-vases-job4</code> project</td></tr>
+          <tr><td><span class="task-id">TASK-011</span></td><td><span class="assignee-salomon">Salomon</span></td><td class="task-desc">Add <code>kit {project_id}</code> trigger to Discord + Telegram gateways</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="build-order">
+      <strong style="color:var(--color-text-muted);font-size:0.65rem;letter-spacing:0.06em;text-transform:uppercase">Build order:</strong><br>
+      <span class="bo-claude">005</span> <span class="bo-arrow">→</span>
+      <span class="bo-claude">006</span> <span class="bo-arrow">→</span>
+      <span class="bo-claude">007</span> <span class="bo-arrow">→</span>
+      <span class="bo-claude">008</span> <span class="bo-arrow">→</span>
+      <span class="bo-claude">009</span>
+      <span style="color:var(--color-text-faint)"> (all Claude, one session) </span>
+      <span class="bo-arrow">→</span>
+      <span class="bo-salomon">010</span> <span class="bo-arrow">→</span>
+      <span class="bo-salomon">011</span>
+      <span style="color:var(--color-text-faint)"> (Salomon after Claude done)</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+  r.setAttribute('data-theme', d);
+  if (t) t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    t.innerHTML = d === 'dark'
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText || pre.textContent).then(() => {
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>
