@@ -2,7 +2,7 @@
 title: Djinn Agent Routing Rules
 tags: [djinn, routing, agents, multi-machine]
 created: 2026-05-20
-updated: 2026-05-30
+updated: 2026-06-06
 ---
 
 # ROUTING.md — Djinn Agent Routing Rules
@@ -12,107 +12,133 @@ Which agent handles what. Read this before routing any task.
 
 ---
 
-## Agent Roster
+## Automated Routing — `djinn-route`
 
-| Agent | Machine | Interface | Provider | Cost |
-|-------|---------|-----------|----------|------|
-| opencode | Salomon | CLI / comms-processor | Ollama local (qwen2.5:7b default) | Free |
-| opencode | Typhon | CLI / comms-processor | Ollama local + remote Salomon | Free |
-| Claude | Salomon | Claude Code CLI | Anthropic API (Pro) | Premium |
-| djinn-design (orchestrator) | Salomon | CLI + Discord/Telegram | phi4:14b local → Claude if API key set | Free/Premium |
-| djinn-print-quote | Salomon | CLI + Discord/Telegram | Local (no LLM needed) | Free |
-| **Marcus** | **External** | **Perplexity web interface / API** | **Perplexity AI (Sonnet 4.6)** | **Premium** |
+All model selection is automated. Do not hardcode model names or URLs in scripts.
+
+```bash
+# Get env vars for a task type
+eval "$(djinn-route <task>)"
+# Then use $OLLAMA_BASE_URL and $DJINN_MODEL
+
+# Or query directly
+djinn-route code-heavy --json    # {"machine":"orin","model":"qwen2.5-coder:32b","url":"..."}
+djinn-route vision --model       # llama3.2-vision:11b-instruct-q4_K_M
+djinn-route best --url           # http://192.168.1.176:11434
+djinn-route --list               # show all task types
+```
+
+**Fallback:** If Orin is unreachable, `djinn-route` automatically falls back to the best Salomon equivalent. Scripts don't need to handle this.
 
 ---
 
-## Routing Rules
+## Task → Model → Machine Map
+
+| Task | Model | Machine | Notes |
+|------|-------|---------|-------|
+| `default` | qwen2.5:7b | Salomon | **Required** for OpenClaw tool calling |
+| `reasoning` | deepseek-r1:7b | Salomon | Analysis, planning, law/psychology |
+| `code` | qwen2.5-coder:7b | Salomon | Fast code, debug, demos |
+| `code-heavy` | qwen2.5-coder:32b | Orin | Full codebase audits, architecture |
+| `notes` | phi4:14b | Salomon | Summaries, captions, APA formatting |
+| `vision` | llama3.2-vision:11b | Salomon | Image scoring, thumbnails, QC |
+| `embed` | nomic-embed-text | Salomon | Vector embeddings, semantic search |
+| `best` | llama3.3:70b | Orin | Highest quality, latency-tolerant tasks |
+| `hermes` | qwen3.6:latest | Orin | Hermes Agent / Assistant lane |
+| `creative` | mistral:7b | Salomon | Creative writing |
+| `lightweight` | qwen2.5:7b | Typhon | Typhon-local ops |
+
+---
+
+## Fleet Model Inventory (audited 2026-06-06)
+
+### Salomon — 192.168.1.225 (HP Omen, RTX 5060, 29GB RAM)
+| Model | Size | Task |
+|-------|------|------|
+| qwen2.5:7b | 4.7GB | default, ops, OpenClaw |
+| deepseek-r1:7b | 4.7GB | reasoning |
+| qwen2.5-coder:7b | 4.7GB | code |
+| phi4:14b | 9.1GB | notes, captions |
+| llama3.2-vision:11b | 7.8GB | vision (only on Salomon) |
+| nomic-embed-text | 274MB | embeddings |
+| mistral:7b | 4.4GB | creative writing |
+
+### Typhon — 192.168.1.113 (MSI, 14GB RAM)
+| Model | Size | Task |
+|-------|------|------|
+| qwen2.5:7b | 4.7GB | default, OpenClaw |
+| deepseek-r1:8b | 5.2GB | reasoning |
+| nomic-embed-text | 274MB | embeddings |
+
+### Orin — 192.168.1.176 (iMac i7-7700K, 40GB RAM, CPU inference)
+| Model | Size | Task |
+|-------|------|------|
+| llama3.3:70b | 42GB | best quality (2-4 tok/s CPU) |
+| qwen2.5-coder:32b | 19GB | code-heavy |
+| qwen3.6:latest | 23GB | hermes / assistant |
+| phi4:14b | 9.1GB | notes (overflow from Salomon) |
+| nomic-embed-text | 274MB | embeddings |
+
+---
+
+## Agent Roster
+
+| Agent | Machine | Interface | Model | Cost |
+|-------|---------|-----------|-------|------|
+| opencode (Salomon) | Salomon | CLI / comms-processor | qwen2.5:7b default | Free |
+| opencode (Typhon) | Typhon | CLI / comms-processor | qwen2.5:7b | Free |
+| Hermes (Assistant) | Salomon | CLI | qwen3.6 via Orin | Free |
+| Claude | Salomon | Claude Code CLI | Anthropic API | Premium |
+| djinn-design | Salomon | CLI + Discord/Telegram | phi4:14b → Claude | Free/Premium |
+| djinn-print-quote | Salomon | CLI + Discord/Telegram | Python (no LLM) | Free |
+| Marcus | External | Perplexity web | Perplexity AI | Premium |
+
+---
+
+## Lane Routing Rules
 
 ### Route to opencode (Salomon) when:
-- Daily operations, automation scripts, systemd timers
-- File sync, git operations, vault management
+- Daily ops, automation, systemd timers, vault management
 - Quick queries, tool use, shell execution
 - Voice pipeline (voxtype, Piper)
-- Heavy inference (phi4:14b, llama3.2-vision, mistral:7b)
-- Anything fast and local
+- Heavy inference that needs GPU (vision, phi4)
 
 ### Route to opencode (Typhon) when:
-- Tasks local to Typhon's filesystem or storage (/mnt/storage)
+- Tasks local to Typhon filesystem
 - Printer bot management
-- Lightweight inference (<8B models)
-- Storage/backup queries
+- Lightweight inference
 
-### Route to djinn-design when:
-- Creating a new 3D part from a description
-- Editing an existing parametric design
-- Generating prototype-light or production variants
-- Optimizing slicer settings for a prototype (DOE)
-- Arranging a print plate
-
-### Route to djinn-print-quote when:
-- Estimating commission pricing for a print job
-- From Discord/Telegram: `quote <json>`, `quote coin`, `quick quote <name> <g>g <h>h`
+### Route to Orin when:
+- 70B inference needed (`djinn-route best`)
+- Large code review (`djinn-route code-heavy`)
+- Hermes/Assistant sessions (`djinn-route hermes`)
+- Anything that can tolerate 2-4 tok/s latency
 
 ### Route to Claude when:
-- Architecture decisions — system design, multi-agent orchestration
-- Cross-domain synthesis — psychology + law + CS
-- Vault-persistent structured work — decision records, reference notes, audits
-- Complex multi-step reasoning or strategic planning
-- Anything requiring long context window or premium reasoning
+- Architecture decisions, multi-agent design, system changes
+- Cross-domain synthesis (psych + law + CS)
+- Session reports, git push, vault-persistent work
 
 ### Route to Marcus when:
-- Deep research requiring live web sources with citations
-- Cross-domain synthesis combining current external knowledge with vault context
-- Full system audits — reading the entire repo and producing a structured report
-- Code review and architectural critique with sourced recommendations
-- Anything where Javier wants both GitHub repo access AND web search in the same session
-- Research outputs destined for vault notes (Marcus output feeds Clerk → Slipbox pipeline)
+- Deep research requiring live web + citations
+- Full system audits with GitHub + web in same session
+- Research destined for vault notes
 
 ### Escalation path:
 ```
-opencode (Typhon) → opencode (Salomon) → Claude / Marcus
+opencode (Typhon) → opencode (Salomon) → Orin → Claude / Marcus
 ```
-
-Claude and Marcus are peers at the top of the escalation chain. Claude owns architecture decisions and vault-persistent structured work. Marcus owns research synthesis and system-wide reads with external sourcing.
 
 ---
 
-## Communication Channels — Current
+## Communication Channels
 
 | Channel | Use |
 |---------|-----|
-| [[COMMS]] | **Primary.** All inter-agent tasks, decisions, handoffs — append only |
-| Telegram | Real-time alerts and interrupts to Javier |
-| SSH (direct) | Salomon↔Typhon file delivery and service management |
-
-**Old files (archived — do not use):**
-- `communications/archive/Salomon-to-Typhon.md`
-- `communications/archive/Typhon-to-Salomon.md`
-- `communications/archive/Claude-inbox.md`
-- `communications/archive/Claude-outbox.md`
-
-All traffic now flows through COMMS.md. Agents are addressed by `@Salomon`, `@Typhon`, `@Claude`, `@Marcus`.
+| [[COMMS]] | Primary — all inter-agent tasks, handoffs |
+| Telegram | Real-time alerts to Javier |
+| SSH | Salomon ↔ Typhon ↔ Orin file delivery |
 
 ---
 
-## Model Selection Quick Reference
-
-| Task | Model | Agent |
-|------|-------|-------|
-| Quick admin / automation | qwen2.5:7b | Salomon or Typhon |
-| Deep reasoning | deepseek-r1:7b | Salomon or Typhon |
-| Code / dev | qwen2.5-coder:7b | Salomon or Typhon |
-| Structured notes, APA | phi4:14b | Salomon (remote from Typhon) |
-| Vision / image | llama3.2-vision:11b | Salomon (remote from Typhon) |
-| Creative writing | mistral:7b | Salomon |
-| Lightweight admin | llama3.2:3b | Typhon |
-| Architecture, synthesis, audit | Claude Sonnet | Claude lane |
-| Research + web sources + vault read | Perplexity Sonnet 4.6 | Marcus lane |
-| Embeddings | nomic-embed-text | Either |
-| 3D design generation | phi4:14b → Claude | djinn-design |
-| 3D design editing | phi4:14b → Claude | djinn-design |
-| Slicer DOE optimization | Python (no LLM) | djinn-design --doe |
-| Commission pricing | Python (no LLM) | djinn-print-quote |
-
----
-
-*— Claude, 2026-05-23 | Updated by Marcus, 2026-05-30*
+*— Claude, 2026-06-06 (audited + Orin integrated)*
