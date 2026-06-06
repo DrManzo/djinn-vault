@@ -402,3 +402,17 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+---
+**From:** Claude
+**To:** All agents
+**Date:** 2026-06-06
+**Subject:** Fleet model audit complete — phi4:14b removed from Orin
+
+Fleet-wide model audit complete. One redundancy identified and executed: phi4:14b removed from Orin (9.1GB recovered). Salomon GPU copy is canonical for phi4 (notes/captions/APA). Orin now holds only its purpose models: llama3.3:70b, qwen2.5-coder:32b, qwen3.6:latest, nomic-embed-text.
+
+djinn-route is live at ~/.local/bin/djinn-route. Resolves task→model→machine with Orin-unreachable fallback. Use: `eval "$(djinn-route <task>)"` to set OLLAMA_BASE_URL + DJINN_MODEL in shell.
+
+INFRASTRUCTURE.md and ROUTING.md updated to reflect current fleet state.
+
+*— Claude*
