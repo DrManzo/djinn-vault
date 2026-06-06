@@ -42,10 +42,15 @@ REQUIRED_MODELS=(
     "qwen2.5-coder:7b"
 )
 
-# External endpoints to test reachability
+# External endpoints — Djinn's actual reachability surface:
+#   Anthropic  : Claude API (primary LLM backend)
+#   GitHub     : git push/pull for vault sync (fails silently if down)
+#   Telegram   : bot notification delivery
+# Override via EXTERNAL_ENDPOINTS env var as space-separated list.
 EXTERNAL_ENDPOINTS=(
-    "https://api.openai.com"
     "https://api.anthropic.com"
+    "https://api.github.com"
+    "https://api.telegram.org"
 )
 
 # ---------------------------------------------------------------------------
@@ -102,7 +107,6 @@ check_disk() {
     log ""
     log "── Disk Space ─────────────────────────────────────────────"
 
-    # Check vault path
     if [[ -d "$VAULT_PATH" ]]; then
         pct=$(df "$VAULT_PATH" | awk 'NR==2 {gsub(/%/,""); print $5}')
         if (( pct >= DISK_THRESHOLD_PCT )); then
@@ -114,7 +118,6 @@ check_disk() {
         warn "Vault path not found: $VAULT_PATH"
     fi
 
-    # Check Ollama models directory
     OLLAMA_MODELS_DIR="${OLLAMA_MODELS:-$HOME/.ollama/models}"
     if [[ -d "$OLLAMA_MODELS_DIR" ]]; then
         pct=$(df "$OLLAMA_MODELS_DIR" | awk 'NR==2 {gsub(/%/,""); print $5}')
@@ -126,7 +129,6 @@ check_disk() {
         fi
     fi
 
-    # Check log dir
     if [[ -d "$LOG_DIR" ]]; then
         log_size=$(du -sh "$LOG_DIR" 2>/dev/null | cut -f1)
         pass "Log dir size: ${log_size}"
@@ -148,7 +150,6 @@ check_ollama() {
     fi
     pass "Ollama API responding"
 
-    # Check required models are pulled
     available_models=$(curl -sf --max-time 5 "${OLLAMA_HOST}/api/tags" 2>/dev/null \
         | python3 -c "import sys,json; d=json.load(sys.stdin); print('\n'.join(m['name'] for m in d.get('models',[])))" \
         2>/dev/null || echo "")
@@ -174,7 +175,6 @@ check_vram() {
         return
     fi
 
-    # Parse free memory for each GPU
     while IFS= read -r line; do
         gpu_idx=$(echo "$line" | awk '{print $1}')
         free_mb=$(echo "$line" | awk '{print $2}')
@@ -214,7 +214,6 @@ check_timers() {
             continue
         fi
 
-        # Convert to epoch seconds
         last_epoch=$(date -d "$last_trigger" +%s 2>/dev/null || echo 0)
         now_epoch=$(date +%s)
         age_hours=$(( (now_epoch - last_epoch) / 3600 ))
@@ -228,17 +227,18 @@ check_timers() {
 }
 
 # ---------------------------------------------------------------------------
-# CHECK: Network — SSH reachability and external API endpoints
+# CHECK: Network — Djinn's actual reachability surface
 # ---------------------------------------------------------------------------
 check_network() {
     log ""
-    log "── Network ────────────────────────────────────────────────"
+    log "── Network Reachability ───────────────────────────────────"
+    log "   (Anthropic API | GitHub | Telegram)"
 
     for endpoint in "${EXTERNAL_ENDPOINTS[@]}"; do
         if curl -sf --max-time 5 --head "$endpoint" >/dev/null 2>&1; then
             pass "Reachable: $endpoint"
         else
-            warn "Unreachable: $endpoint (network issue or outage)"
+            warn "Unreachable: $endpoint"
         fi
     done
 }
@@ -283,7 +283,7 @@ PYEOF
 
 send_telegram() {
     [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]] && return
-    (( ${#FAILURES[@]} == 0 )) && return  # only alert on failure
+    (( ${#FAILURES[@]} == 0 )) && return
 
     msg="🔴 *Djinn Health Check FAILED*%0A$(date)%0A%0A"
     for f in "${FAILURES[@]}"; do
@@ -316,7 +316,6 @@ main() {
     [[ $OUTPUT_JSON == false ]] && print_summary
     [[ $SEND_TELEGRAM == true ]] && send_telegram
 
-    # Exit 1 if any failures
     (( ${#FAILURES[@]} > 0 )) && exit 1 || exit 0
 }
 
