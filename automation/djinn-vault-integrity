@@ -9,8 +9,8 @@ Checks (in order):
   3. Frontmatter validation (title, tags) in djinn/ and references/ — WARN only
 
 Exit codes:
-  0 — Clean (orphans alone = clean)
-  1 — Issues found (broken links or frontmatter errors)
+  0 — Clean (orphans alone = clean; frontmatter warnings alone = clean)
+  1 — Broken links found
   2 — Script error (vault not found, etc.)
 
 Run modes:
@@ -36,7 +36,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
-# ── Try PyYAML, fall back to regex ──────────────────────────────────────────
+# — Try PyYAML, fall back to regex ————————————————————————————————————————
 try:
     import yaml
     HAVE_YAML = True
@@ -44,7 +44,7 @@ except ImportError:
     HAVE_YAML = False
 
 
-# ── Constants ────────────────────────────────────────────────────────────────
+# — Constants ——————————————————————————————————————————————————————————————
 
 EXCLUDED_DIRS = {".obsidian", ".git", "RAW", "djinn/.obsidian"}
 EXCLUDED_EXTENSIONS = {".canvas"}
@@ -70,7 +70,7 @@ WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 MD_LINK_RE  = re.compile(r"\[(?:[^\]]*)\]\(([^)]+)\)")
 
 
-# ── Vault discovery ──────────────────────────────────────────────────────────
+# — Vault discovery ————————————————————————————————————————————————————————
 
 def get_vault_path() -> Path:
     raw = os.environ.get("VAULT_PATH", "~/Obsidian")
@@ -101,7 +101,7 @@ def collect_md_files(vault: Path) -> list[Path]:
     return sorted(files)
 
 
-# ── Frontmatter parsing ──────────────────────────────────────────────────────
+# — Frontmatter parsing ————————————————————————————————————————————————————
 
 def extract_frontmatter(text: str) -> dict | None:
     """Return parsed frontmatter dict or None if absent/unparseable."""
@@ -140,28 +140,24 @@ def needs_frontmatter_check(rel: Path) -> bool:
     return True
 
 
-# ── Link parsing ─────────────────────────────────────────────────────────────
+# — Link parsing ———————————————————————————————————————————————————————————
 
 def parse_wikilink_target(raw: str) -> str:
     """[[target#section|alias]] → target (stem only, no .md suffix)."""
-    # Strip alias
     if "|" in raw:
         raw = raw.split("|")[0]
-    # Strip heading
     if "#" in raw:
         raw = raw.split("#")[0]
-    # Strip .md suffix
     raw = raw.strip()
     if raw.lower().endswith(".md"):
         raw = raw[:-3]
     return raw
 
 
-def parse_links_from_file(path: Path, vault: Path) -> list[tuple[int, str, str]]:
+def parse_links_from_file(path: Path, vault: Path) -> list[tuple[int, str, str, str]]:
     """
-    Returns list of (line_number, link_type, resolved_target_str).
+    Returns list of (line_number, link_type, resolved_target_str, raw_text).
     link_type: 'wiki' or 'md'
-    resolved_target_str: for wiki = stem to search; for md = absolute path str
     """
     links = []
     try:
@@ -170,29 +166,25 @@ def parse_links_from_file(path: Path, vault: Path) -> list[tuple[int, str, str]]
         return links
 
     for i, line in enumerate(text.splitlines(), start=1):
-        # WikiLinks
         for m in WIKILINK_RE.finditer(line):
             raw = m.group(1)
             target = parse_wikilink_target(raw)
             if target:
                 links.append((i, "wiki", target, m.group(0)))
 
-        # Markdown links — only local .md files
         for m in MD_LINK_RE.finditer(line):
             href = m.group(1).strip()
-            # Skip anchors, external URLs, non-md
             if href.startswith(("#", "http://", "https://", "mailto:")):
                 continue
             if not href.lower().endswith(".md"):
                 continue
-            # Resolve relative to file's directory
             resolved = (path.parent / href).resolve()
             links.append((i, "md", str(resolved), m.group(0)))
 
     return links
 
 
-# ── Build stem index ─────────────────────────────────────────────────────────
+# — Build stem index ———————————————————————————————————————————————————————
 
 def build_stem_index(files: list[Path]) -> dict[str, list[Path]]:
     """Map lowercase stem → list of matching paths (usually 1)."""
@@ -202,7 +194,7 @@ def build_stem_index(files: list[Path]) -> dict[str, list[Path]]:
     return idx
 
 
-# ── Check 1: Broken links ────────────────────────────────────────────────────
+# — Check 1: Broken links ——————————————————————————————————————————————————
 
 def check_broken_links(
     files: list[Path],
@@ -236,10 +228,9 @@ def check_broken_links(
     return broken
 
 
-# ── Check 2: Orphaned files ──────────────────────────────────────────────────
+# — Check 2: Orphaned files ————————————————————————————————————————————————
 
 def check_orphans(files: list[Path], vault: Path) -> list[dict]:
-    # Build incoming link count for every file
     incoming: dict[str, int] = defaultdict(int)
     stem_index = build_stem_index(files)
     all_paths = {str(f) for f in files}
@@ -251,7 +242,7 @@ def check_orphans(files: list[Path], vault: Path) -> list[dict]:
             if link_type == "wiki":
                 key = target.lower()
                 for matched in stem_index.get(key, []):
-                    if str(matched) != str(path):  # don't count self-links
+                    if str(matched) != str(path):
                         incoming[str(matched)] += 1
             elif link_type == "md":
                 if target != str(path):
@@ -262,11 +253,9 @@ def check_orphans(files: list[Path], vault: Path) -> list[dict]:
         rel = path.relative_to(vault)
         parts = rel.parts
 
-        # Skip daily notes
         if DAILY_NOTE_PATTERN.match(path.name):
             continue
 
-        # Skip orphan-excluded dirs
         skip = False
         for excl in ORPHAN_EXCLUDE_DIRS:
             excl_parts = Path(excl).parts
@@ -282,7 +271,7 @@ def check_orphans(files: list[Path], vault: Path) -> list[dict]:
     return orphans
 
 
-# ── Check 3: Frontmatter ─────────────────────────────────────────────────────
+# — Check 3: Frontmatter ———————————————————————————————————————————————————
 
 def check_frontmatter(files: list[Path], vault: Path) -> list[dict]:
     warnings = []
@@ -304,7 +293,7 @@ def check_frontmatter(files: list[Path], vault: Path) -> list[dict]:
     return warnings
 
 
-# ── Log writing ───────────────────────────────────────────────────────────────
+# — Log writing ————————————————————————————————————————————————————————————
 
 def write_log(vault: Path, date_str: str, status: str, stats: dict, broken: list, orphans: list, fm_warnings: list):
     log_dir = vault / "djinn" / "logs"
@@ -345,7 +334,7 @@ def write_log(vault: Path, date_str: str, status: str, stats: dict, broken: list
     return log_path
 
 
-# ── Telegram ──────────────────────────────────────────────────────────────────
+# — Telegram ———————————————————————————————————————————————————————————————
 
 def send_telegram(token: str, chat_id: str, message: str):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -365,16 +354,16 @@ def build_telegram_message(date_str: str, stats: dict, broken: list) -> str:
         "",
         "*Broken Links:*",
     ]
-    for b in broken[:20]:  # cap at 20 to avoid message length limits
+    for b in broken[:20]:
         lines.append(f"• `{b['file']}:{b['line']}` → {b['link']}")
     if len(broken) > 20:
         lines.append(f"…and {len(broken) - 20} more. See djinn/logs/vault-integrity-{date_str}.md")
     return "\n".join(lines)
 
 
-# ── Human output ──────────────────────────────────────────────────────────────
+# — Human output ———————————————————————————————————————————————————————————
 
-def print_human(status: str, stats: dict, broken: list, orphans: list, fm_warnings: list, log_path: Path | None):
+def print_human(status: str, stats: dict, broken: list, orphans: list, fm_warnings: list, log_path):
     width = 60
     print("=" * width)
     print("  djinn-vault-integrity")
@@ -407,7 +396,7 @@ def print_human(status: str, stats: dict, broken: list, orphans: list, fm_warnin
     print()
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# — Main ———————————————————————————————————————————————————————————————————
 
 def main():
     parser = argparse.ArgumentParser(description="djinn-vault-integrity")
@@ -419,12 +408,10 @@ def main():
     vault = get_vault_path()
     date_str = datetime.now().strftime("%Y-%m-%d")
 
-    # ── Collect files ──
     files = collect_md_files(vault)
     stem_index = build_stem_index(files)
     all_paths = {str(f) for f in files}
 
-    # ── Run checks ──
     broken      = check_broken_links(files, vault, stem_index, all_paths)
     orphans     = check_orphans(files, vault)
     fm_warnings = check_frontmatter(files, vault)
@@ -436,12 +423,11 @@ def main():
         "fm_warnings": len(fm_warnings),
     }
 
-    # Status: only broken links or FM errors elevate to ISSUES FOUND
-    has_issues = bool(broken or fm_warnings)
+    # Exit 1 only on broken links — frontmatter warnings and orphans are informational
+    has_issues = bool(broken)
     status = "ISSUES FOUND" if has_issues else "CLEAN"
     exit_code = 1 if has_issues else 0
 
-    # ── Output ──
     if args.quiet:
         sys.exit(exit_code)
 
@@ -456,11 +442,9 @@ def main():
             if not token or not chat_id:
                 print("ERROR: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID required for --telegram", file=sys.stderr)
                 sys.exit(2)
-            # Still write log so the Telegram message can reference it
             log_path = write_log(vault, date_str, status, stats, broken, orphans, fm_warnings)
             msg = build_telegram_message(date_str, stats, broken)
             send_telegram(token, chat_id, msg)
-        # Telegram mode: no stdout on clean run
         sys.exit(exit_code)
 
     if args.json:

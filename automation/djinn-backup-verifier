@@ -35,7 +35,7 @@ set -euo pipefail
 BACKUP_DIR="${BACKUP_DIR:-$HOME/backups/djinn}"
 
 # Vault path — used for sentinel file detection and size baseline
-VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"
+VAULT_PATH="${VAULT_PATH:-$HOME/Obsidian}"
 
 # Max acceptable backup age in hours before we call it a failure
 # 25h = daily backup with 1h grace window
