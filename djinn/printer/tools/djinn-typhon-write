@@ -38,7 +38,7 @@ HISTORY_DIR = MEMORY_ROOT / "history"
 REQUESTS_DIR = MEMORY_ROOT / "requests"
 REPORTS_DIR = MEMORY_ROOT / "reports"
 
-AUTHORITY_HOST = "typhon"    # Hostname that may run this script
+AUTHORITY_HOSTS = {"typhon", "tftthq"}    # Hostnames that may run this script
 
 
 # ---------------------------------------------------------------------------
@@ -48,10 +48,10 @@ AUTHORITY_HOST = "typhon"    # Hostname that may run this script
 def enforce_typhon_only():
     """Refuse to run on any machine that isn't Typhon."""
     hostname = socket.gethostname().lower()
-    if AUTHORITY_HOST not in hostname:
+    if hostname not in AUTHORITY_HOSTS:
         print(f"FATAL: djinn-typhon-write may only run on Typhon.")
         print(f"       Current host: {hostname}")
-        print(f"       Expected:     *{AUTHORITY_HOST}*")
+        print(f"       Expected one of: {', '.join(sorted(AUTHORITY_HOSTS))}")
         print()
         print("       Submit your update as a request instead:")
         print(f"       {REQUESTS_DIR}/YYYY-MM-DD_<agent>_<domain>_<slug>.md")

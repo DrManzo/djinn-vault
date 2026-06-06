@@ -1075,3 +1075,13 @@ created: 2026-05-19
 - djinn-gcode-safety v2: M106 fan capping added (caps ALL M106 to S128 max across any slicer)
 - Orca production profile created: fan cap 50%, Creality-compatible settings
 - Docs updated: PRINT-PROFILES.md, SUPPORT-GUIDE.md, DJINN-3D-PRINT-PIPELINE.md, PRINTER-MANUAL.md
+
+## 2026-06-05: Typhon Gateway Deploy + SSH Fix
+- Created `djinn/memory/` store with Typhon authority write gateway
+- Fixed SSH to Typhon: IP changed 192.168.1.113 → 192.168.1.150, created `~/.ssh/config`
+- Deployed `djinn-typhon-write` to Typhon `~/.local/bin/` — hostname enforcement fixed for `tftthq`
+- Verified end-to-end: `--status` + `--write` test on Typhon confirmed (current + history store)
+- Rebased divergent git branches (Orin heartbeat onto memory store commit), pushed under Dev mode
+- Updated PROTOCOL.md SSH IP, fixed `djinn-typhon-write` hostname check
+
+*— Claude*
