@@ -1,6 +1,6 @@
 ---
 title: Session Report — Downloads & Desktop Cleanup
-agent: Claude
+agent: Salomon
 date: 2026-06-05
 tags: [djinn, report, housekeeping, vault, 3d-models]
 related: [[build-log]] | [[decision-log]]
@@ -9,7 +9,7 @@ related: [[build-log]] | [[decision-log]]
 # Session Report — Downloads & Desktop Cleanup
 
 **Date:** 2026-06-05
-**Agent:** Claude
+**Agent:** Salomon
 **Session type:** Ops
 **Trigger:** Javier requested inventory and cleanup of ~/Downloads and ~/Desktop
 
@@ -111,11 +111,11 @@ None.
 
 ## What's Next
 
-- [ ] Update `index.json` to add Wayne Peters Tardis entry — @Claude
-- [ ] Add `wayne_peters` creator credit to `pieces/tardis.md` — @Claude
+- [ ] Update `index.json` to add Wayne Peters Tardis entry — @Salomon
+- [ ] Add `wayne_peters` creator credit to `pieces/tardis.md` — @Salomon
 - [ ] Identify `il_570xN_reference.jpg` — which model/commission is it for? — @Javier
 - [ ] Decide if `Javier Manzo-Ramos.vcf` in Downloads should be trashed — @Javier
 
 ---
 
-*— Claude, 2026-06-05*
+*— Salomon, 2026-06-05*

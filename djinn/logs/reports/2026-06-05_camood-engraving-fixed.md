@@ -1,6 +1,6 @@
 ---
 title: Session Report — Camood TTHQ Engraving Fixed
-agent: Claude
+agent: Salomon
 date: 2026-06-05
 tags: [djinn, report, 3dprint, engraving, camood, bugfix]
 related: [[build-log]] [[2026-06-05_djinn-detect-surfaces]]
@@ -9,7 +9,7 @@ related: [[build-log]] [[2026-06-05_djinn-detect-surfaces]]
 # Session Report — Camood TTHQ Engraving Fixed
 
 **Date:** 2026-06-05
-**Agent:** Claude
+**Agent:** Salomon
 **Session type:** Build / Debug
 **Trigger:** Javier provided clean Camood base (no manufacturer text) from MakerWorld cup_stls.zip and asked to fix rendering issues with T and e glyphs in DancingScript-Bold.
 
@@ -90,4 +90,4 @@ Legibility gate: ✅ PASS all gates (height 9mm ≥ 3mm flat, depth 2.5mm ≥ 0.
 
 ---
 
-*— Claude, 2026-06-05*
+*— Salomon, 2026-06-05*
