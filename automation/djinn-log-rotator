@@ -1,0 +1,340 @@
+#!/usr/bin/env python3
+"""
+djinn-log-rotator — Weekly log rotation for djinn/logs/
+Path: ~/djinn-vault/automation/djinn-log-rotator
+
+Rotates dated log files into djinn/logs/archive/YYYY-MM/ by date.
+Never deletes. Never compresses. Never touches permanent ledgers.
+
+Rotation rules:
+  vault-integrity-YYYY-MM-DD.md   keep newest INTEGRITY_KEEP_N (default 14), archive rest
+  djinn/logs/reports/*.md         keep last REPORTS_KEEP_DAYS days, archive older
+  *-YYYY-MM-DD*.md in djinn/logs/ keep last REPORTS_KEEP_DAYS days, archive older
+
+Permanent ledgers (NEVER touched):
+  djinn/logs/build-log.md
+  djinn/logs/decision-log.md
+  djinn/logs/bugs.md
+
+Exit codes:
+  0  Clean run (even if nothing rotated)
+  1  Partial failure (some files couldn't be moved)
+  2  Script error (vault path missing, etc.)
+
+Run modes:
+  (default)   Print what was moved to stdout
+  --dry-run   Print what would move, touch nothing
+  --json      JSON summary to stdout
+  --quiet     Exit code only
+
+Env vars:
+  VAULT_PATH          default: ~/Obsidian
+  REPORTS_KEEP_DAYS   default: 60
+  INTEGRITY_KEEP_N    default: 14
+"""
+
+import os
+import re
+import sys
+import json
+import shutil
+import argparse
+from pathlib import Path
+from datetime import datetime, timedelta
+
+
+# ── Permanent ledgers ──────────────────────────────────────────────────────────
+# Explicit allowlist of files that must never be rotated.
+# Add here if new permanent ledgers are created in djinn/logs/.
+PERMANENT_LEDGERS = {
+    "build-log.md",
+    "decision-log.md",
+    "bugs.md",
+}
+
+# Regex for any dated filename: matches YYYY-MM-DD anywhere in the stem
+DATED_FILE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
+
+# Specifically vault-integrity files
+INTEGRITY_RE = re.compile(r"^vault-integrity-(\d{4}-\d{2}-\d{2})\.md$")
+
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+def get_config() -> dict:
+    def _int(key, default):
+        try:
+            return int(os.environ.get(key, default))
+        except ValueError:
+            return default
+
+    raw = os.environ.get("VAULT_PATH", "~/Obsidian")
+    vault = Path(raw).expanduser().resolve()
+    if not vault.exists():
+        print(f"ERROR: Vault path not found: {vault}", file=sys.stderr)
+        sys.exit(2)
+
+    return {
+        "vault":             vault,
+        "logs_dir":          vault / "djinn" / "logs",
+        "archive_base":      vault / "djinn" / "logs" / "archive",
+        "reports_keep_days": _int("REPORTS_KEEP_DAYS", 60),
+        "integrity_keep_n":  _int("INTEGRITY_KEEP_N", 14),
+    }
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def is_permanent(path: Path) -> bool:
+    return path.name in PERMANENT_LEDGERS
+
+
+def extract_date(filename: str) -> datetime | None:
+    m = DATED_FILE_RE.search(filename)
+    if not m:
+        return None
+    try:
+        return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+    except ValueError:
+        return None
+
+
+def archive_dest(archive_base: Path, file_date: datetime) -> Path:
+    """Returns the monthly archive directory for a given date."""
+    return archive_base / file_date.strftime("%Y-%m")
+
+
+def move_file(src: Path, dest_dir: Path, dry_run: bool) -> tuple[bool, str]:
+    """
+    Move src into dest_dir. Creates dest_dir if needed.
+    Returns (success, message).
+    """
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest = dest_dir / src.name
+
+    # Handle name collision: append _2, _3, etc.
+    if dest.exists():
+        stem, suffix = src.stem, src.suffix
+        counter = 2
+        while dest.exists():
+            dest = dest_dir / f"{stem}_{counter}{suffix}"
+            counter += 1
+
+    if dry_run:
+        return True, f"[dry-run] would move: {src.name} → {dest_dir.relative_to(dest_dir.parent.parent.parent)}/"
+
+    try:
+        shutil.move(str(src), str(dest))
+        return True, f"moved: {src.name} → {dest_dir.name}/"
+    except OSError as e:
+        return False, f"FAILED: {src.name} — {e}"
+
+
+# ── Rotation targets ───────────────────────────────────────────────────────────
+
+def collect_integrity_files(logs_dir: Path, keep_n: int) -> list[Path]:
+    """
+    Find all vault-integrity-YYYY-MM-DD.md files.
+    Return those that exceed the keep_n newest (i.e., candidates for archiving).
+    """
+    candidates = []
+    for f in logs_dir.glob("vault-integrity-*.md"):
+        if is_permanent(f):
+            continue
+        if INTEGRITY_RE.match(f.name):
+            d = extract_date(f.name)
+            if d:
+                candidates.append((d, f))
+
+    # Sort newest first
+    candidates.sort(key=lambda x: x[0], reverse=True)
+
+    # Keep newest keep_n, return the rest for archiving
+    to_archive = [f for _, f in candidates[keep_n:]]
+    return to_archive
+
+
+def collect_reports_files(logs_dir: Path, keep_days: int) -> list[Path]:
+    """
+    Find all .md files in djinn/logs/reports/ older than keep_days.
+    """
+    reports_dir = logs_dir / "reports"
+    if not reports_dir.exists():
+        return []
+
+    cutoff = datetime.now() - timedelta(days=keep_days)
+    to_archive = []
+    for f in reports_dir.glob("*.md"):
+        if is_permanent(f):
+            continue
+        d = extract_date(f.name)
+        if d and d < cutoff:
+            to_archive.append(f)
+        elif d is None:
+            # No date in name — fall back to file mtime
+            mtime = datetime.fromtimestamp(f.stat().st_mtime)
+            if mtime < cutoff:
+                to_archive.append(f)
+    return to_archive
+
+
+def collect_other_dated_files(logs_dir: Path, keep_days: int) -> list[Path]:
+    """
+    Any *-YYYY-MM-DD*.md files directly in djinn/logs/ that aren't
+    vault-integrity files and aren't permanent ledgers.
+    Archive those older than keep_days.
+    """
+    cutoff = datetime.now() - timedelta(days=keep_days)
+    to_archive = []
+
+    for f in logs_dir.glob("*.md"):
+        if is_permanent(f):
+            continue
+        if INTEGRITY_RE.match(f.name):
+            continue  # handled by collect_integrity_files
+        d = extract_date(f.name)
+        if d and d < cutoff:
+            to_archive.append(f)
+    return to_archive
+
+
+# ── Main rotation logic ───────────────────────────────────────────────────────
+
+def run_rotation(cfg: dict, dry_run: bool) -> dict:
+    """
+    Execute rotation. Returns summary dict:
+    {
+        moved: [ {src, dest, status, message}, ... ],
+        skipped_ledgers: [ filename, ... ],
+        errors: [ message, ... ],
+        total_moved: int,
+        total_errors: int,
+    }
+    """
+    logs_dir     = cfg["logs_dir"]
+    archive_base = cfg["archive_base"]
+
+    if not logs_dir.exists():
+        print(f"ERROR: logs dir not found: {logs_dir}", file=sys.stderr)
+        sys.exit(2)
+
+    # Gather all candidates
+    targets: list[tuple[Path, datetime | None]] = []
+
+    for f in collect_integrity_files(logs_dir, cfg["integrity_keep_n"]):
+        targets.append((f, extract_date(f.name)))
+
+    for f in collect_reports_files(logs_dir, cfg["reports_keep_days"]):
+        targets.append((f, extract_date(f.name)))
+
+    for f in collect_other_dated_files(logs_dir, cfg["reports_keep_days"]):
+        targets.append((f, extract_date(f.name)))
+
+    # Deduplicate (a file could theoretically match multiple collectors)
+    seen = set()
+    unique_targets = []
+    for f, d in targets:
+        if f not in seen:
+            seen.add(f)
+            unique_targets.append((f, d))
+
+    moved   = []
+    errors  = []
+    skipped = []
+
+    for src, file_date in unique_targets:
+        # Final permanent ledger guard
+        if is_permanent(src):
+            skipped.append(src.name)
+            continue
+
+        # Determine archive month
+        if file_date:
+            dest_dir = archive_dest(archive_base, file_date)
+        else:
+            # Fall back to mtime for undated files
+            mtime = datetime.fromtimestamp(src.stat().st_mtime)
+            dest_dir = archive_dest(archive_base, mtime)
+
+        success, msg = move_file(src, dest_dir, dry_run)
+        entry = {
+            "src":     str(src.relative_to(cfg["vault"])),
+            "dest":    str(dest_dir.relative_to(cfg["vault"])),
+            "status":  "ok" if success else "error",
+            "message": msg,
+        }
+        if success:
+            moved.append(entry)
+        else:
+            errors.append(entry)
+
+    return {
+        "moved":            moved,
+        "skipped_ledgers":  skipped,
+        "errors":           errors,
+        "total_moved":      len(moved),
+        "total_errors":     len(errors),
+    }
+
+
+# ── Output ─────────────────────────────────────────────────────────────────────
+
+def print_human(summary: dict, dry_run: bool):
+    width = 60
+    prefix = "[DRY RUN] " if dry_run else ""
+    print("=" * width)
+    print(f"  {prefix}djinn-log-rotator")
+    print("=" * width)
+    print(f"  Files rotated: {summary['total_moved']}")
+    print(f"  Errors:        {summary['total_errors']}")
+    if summary["skipped_ledgers"]:
+        print(f"  Ledgers protected: {', '.join(summary['skipped_ledgers'])}")
+    print("-" * width)
+
+    if summary["moved"]:
+        label = "Would move" if dry_run else "Moved"
+        print(f"\n{label}:")
+        for e in summary["moved"]:
+            print(f"  {e['message']}")
+
+    if summary["errors"]:
+        print("\nErrors:")
+        for e in summary["errors"]:
+            print(f"  {e['message']}")
+
+    if summary["total_moved"] == 0 and summary["total_errors"] == 0:
+        print("  Nothing to rotate.")
+
+    print()
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description="djinn-log-rotator")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate rotation without moving files")
+    parser.add_argument("--json",    action="store_true", help="JSON summary to stdout")
+    parser.add_argument("--quiet",   action="store_true", help="Exit code only, no output")
+    args = parser.parse_args()
+
+    cfg     = get_config()
+    summary = run_rotation(cfg, dry_run=args.dry_run)
+
+    exit_code = 0
+    if summary["total_errors"] > 0:
+        exit_code = 1
+
+    if args.quiet:
+        sys.exit(exit_code)
+
+    if args.json:
+        summary["dry_run"] = args.dry_run
+        print(json.dumps(summary, indent=2))
+    else:
+        print_human(summary, dry_run=args.dry_run)
+
+    sys.exit(exit_code)
+
+
+if __name__ == "__main__":
+    main()
