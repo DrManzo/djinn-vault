@@ -17,6 +17,7 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 
 VAULT      = Path.home() / "Obsidian"
 REPORTS    = VAULT / "djinn/logs/reports"
@@ -39,7 +40,7 @@ def run(cmd, cwd=None):
     r = subprocess.run(cmd, shell=True, capture_output=True, text=True, cwd=cwd or str(VAULT))
     return r.stdout.strip()
 
-def assemble_context(topic: str, since: str | None) -> str:
+def assemble_context(topic: str, since: Optional[str]) -> str:
     parts = []
 
     # Git commits this session
