@@ -42,7 +42,7 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 | RAM | 40GB |
 | Disk | 1.7Ti free / 1.8Ti total |
 | OS | macOS (Darwin 24.6.0 / macOS Sequoia) |
-| Ollama Models | llama3.3:70b, qwen2.5-coder:32b, phi4:14b, nomic-embed-text |
+| Ollama Models | llama3.3:70b, qwen2.5-coder:32b, qwen3.6:latest, nomic-embed-text |
 | Ollama Endpoint | http://192.168.1.176:11434 |
 | Role | Large-model CPU inference, always-on storage, long-running jobs |
 | Status | ONLINE — connected 2026-06-06 |

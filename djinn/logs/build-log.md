@@ -1115,3 +1115,17 @@ created: 2026-05-19
 - Hermes hit Ollama session rate limit mid-session (nemotron-3-super:cloud, free tier cap)
 
 *— Claude*
+
+## 2026-06-06 — Fleet Model Audit + Orin Integration
+
+- SSH connected Orin (192.168.1.176 / javiermanzo) to Djinn fleet
+- Built djinn-route: automated task→model→machine routing (11 task types, Orin fallback)
+- djinn/ROUTING.md: full rewrite with fleet table, djinn-route docs
+- djinn/INFRASTRUCTURE.md: Orin added (i7-7700K, 40GB, macOS Sequoia)
+- Salomon RAM crisis fixed: removed qwen3.6:latest (26GB → 14GB free, 0 swap)
+- Model audit complete — 1 redundancy found and removed: phi4:14b on Orin (GPU version on Salomon is canonical)
+- Typhon qwen2.5:7b restored (was missing, caused OpenClaw breakage)
+- Hermes config fixed on both Salomon and Orin (default model, profile config)
+- AGENTS.md corruption fixed (Hermes wrote literal \n instead of newlines)
+
+*— Claude*
