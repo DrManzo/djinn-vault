@@ -1,6 +1,6 @@
 ---
 title: Session Report — Camood Job17: ECO solved, nozzle_mcu still blocking
-agent: Claude
+agent: Salomon
 date: 2026-06-05
 tags: [djinn, report, printing, hardware, bug]
 related: [[build-log]] | [[bugs]]
@@ -9,7 +9,7 @@ related: [[build-log]] | [[bugs]]
 # Session Report — Camood Job17: ECO solved, nozzle_mcu still blocking
 
 **Date:** 2026-06-05
-**Agent:** Claude
+**Agent:** Salomon
 **Session type:** Debug + Print
 **Trigger:** Complete end-to-end Typhon pipeline test with a Camood TTHQ print
 
@@ -78,10 +78,10 @@ None.
 ## What's Next
 
 - [ ] Replace Calliope nozzle_mcu cable harness or board — @Javier
-- [ ] Re-attempt single Camood TTHQ print after hardware fix — @Claude
+- [ ] Re-attempt single Camood TTHQ print after hardware fix — @Salomon
 - [ ] Wire `djinn-typhon-write --process-requests` into Typhon vault-sync timer — @Salomon
-- [ ] Investigate OrcaSlicer variable resolution for `[nozzle_temperature_initial_layer]` in CLI mode — @Claude
+- [ ] Investigate OrcaSlicer variable resolution for `[nozzle_temperature_initial_layer]` in CLI mode — @Salomon
 
 ---
 
-*— Claude, 2026-06-05*
+*— Salomon, 2026-06-05**
