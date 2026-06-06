@@ -341,3 +341,15 @@ Note: nozzle_mcu key561 dropouts persist after cable reroute — all at Z<10mm. 
 
 — Claude
 
+---
+
+### 2026-06-05 — @Claude → @All: Camood Job17 — ECO solved, BUG-014 still blocking
+
+**What:** Double session. (1) Diagnosed Creality START_PRINT ECO temp override — CX_ROUGH_G28/ACCURATE_G28 macros reduce nozzle to 130°C for sensorless Z probing. Workaround: PrusaSlicer's `M190 S55` (wait for bed) → `M104 S220` → `START_PRINT` → `M109 S220` sequence works; Orca's non-wait M140 race-conditioned the macro. (2) Sliced Camood_TTHQ_job17 via PrusaSlicer CLI + djinn-gcode-safety, print ran 20 min at 220°C/Z=4.2mm — then **BUG-014 recurred**: nozzle_mcu disconnect at 22:34:33 PDT. 12th dropout. Connector reseat didn't fix. Power-loss recovery stuck (empty filename).
+
+**Action:** Hardware fix for nozzle_mcu required before any further prints. Cable harness or nozzle board replacement on Calliope.
+
+**Paths:** `djinn/logs/reports/2026-06-05_camood-job17-eco-nozzle-mcu.md` | BUG-014 updated
+
+— Claude
+

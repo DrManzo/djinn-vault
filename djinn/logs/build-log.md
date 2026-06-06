@@ -1091,5 +1091,17 @@ created: 2026-05-19
 - Uploaded to Calliope via Moonraker, print started ~21:50 UTC (state=printing, 15h 22m)
 - Submitted state update request to `memory/requests/` for Typhon processing
 - Fixed Moonraker upload path: root-level path required, not `gcodes/` subdirectory
+- ECO temp override diagnosed: Creality CX_ROUGH_G28/ACCURATE_G28 reduce nozzle to 130°C for probing; M109 S220 after START_PRINT re-heats. Orca's non-wait bed temp (M140) races with macro; PrusaSlicer's wait (M190) works.
+- BUG-014 recurred: 12th nozzle_mcu dropout at Z=4.2mm, 20 min into job17. Connector reseat didn't permanently fix. Blocks all prints.
+- PrusaSlicer CLI profile confirmed working for ECO bypass — slicing, gcode-safety, upload, print start all succeeded. Temp stable at 220°C throughout active print.
+- SSH access to Calliope confirmed (root/creality_ender3v3). Read printer.cfg, gcode_macro.cfg, printer_params.cfg for debugging.
+
+## 2026-06-05: Camood TTHQ Job17 — ECO solved, nozzle_mcu still blocking
+- Creality ECO temp override diagnosed and worked around via PrusaSlicer start gcode structure
+- PrusaSlicer CLI sliced Camood_TTHQ_job17 with djinn-gcode-safety post-processor (fan S128, speed M220 S53, PAUSE)
+- Print started, ran ~20 min at 220°C, reached Z=4.2mm
+- nozzle_mcu disconnect at 22:34:33 PDT — BUG-014 recurrence (12th dropout)
+- Power-loss recovery attempted but stuck (empty filename in recovery state) — print cancelled
+- Second restart cancelled by user
 
 *— Claude*

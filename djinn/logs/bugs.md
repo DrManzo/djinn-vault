@@ -82,3 +82,10 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 
 ### BUG-014 UPDATE — 2026-06-05
 Cable reroute performed but dropouts continue. All 11 shutdown events confirmed at Z < 10mm (early layers). XY positions scattered. Root cause refined: **connector at nozzle_mcu board is loose or cable has internal damage**. Not a routing/slack issue. Next step: replace connector or cable harness.
+
+### BUG-014 UPDATE — 2026-06-05 (2nd occurrence)
+**12th dropout** at Z=4.2mm, 20 min into Camood_TTHQ_job17 (PrusaSlicer, 220°C/55°C, fan S128). Dropout occurred at 22:34:33 PDT. Klipper auto-restarted but power-loss recovery got stuck (empty filename in recovery state). Print cancelled.
+
+Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout recurred after 3 days. Board or cable needs replacement, not reseat.
+
+**Impact:** Blocks all prints until fixed. Both Orca (ECO temp issue, worked around by PrusaSlicer gcode structure) and PrusaSlicer (temperature correct, but nozzle_mcu drops out) approaches fail at Z<10mm due to this hardware issue.
