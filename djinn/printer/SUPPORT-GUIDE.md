@@ -138,14 +138,17 @@ Two slicers are installed. Each has a specific role:
 | Slicer | Role | How invoked |
 |--------|------|-------------|
 | **OrcaSlicer 2.3.2** | Interactive slicing — manual jobs, commission parts | GUI (`flatpak run com.orcaslicer.OrcaSlicer`) — uploads directly to Calliope via Moonraker |
-| **PrusaSlicer** | CLI pipeline — `djinn-model-slice`, `djinn-model-combine`, `djinn-print-consult` | `/usr/bin/prusa-slicer` — profile at `~/.config/forge/ender3-v3-plus.ini` |
+| **OrcaSlicer** | **STANDARD** — interactive manual slicing, Creality-native profiles | `~/Applications/OrcaSlicer_V2.3.2.AppImage` — config at `~/.config/OrcaSlicer/` |
+| **PrusaSlicer** | CLI pipeline + diagnostic only — `djinn-model-slice`, `djinn-model-combine`, `djinn-print-consult` | `/usr/bin/prusa-slicer` — profile at `~/.config/forge/ender3-v3-plus.ini` |
 
 **Calliope OrcaSlicer profile:** `~/.var/app/com.orcaslicer.OrcaSlicer/data/OrcaSlicer/user/default/machine/Calliope.json`
 
 **Fan rule — applies to BOTH slicers (hardware constraint, not slicer-specific):**
 The nozzle_mcu board on the Sprite Pro extruder is EMI-sensitive. 100% fan (`M106 S255`) causes nozzle_mcu dropout.
 - OrcaSlicer: set `bridge_fan_speed = 0` in the Calliope filament profile
-- PrusaSlicer: profile already has `bridge_fan_speed = 50`, `max_fan_speed = 50` — do not remove
+- OrcaSlicer: production profile caps fan at 50% — do not override
+- PrusaSlicer: profile has `bridge_fan_speed = 50`, `max_fan_speed = 50` — do not remove
+- `djinn-gcode-safety` post-processes ALL gcode to cap M106 at S128 max regardless of slicer
 
 **Bridge geometry warning:** Engraved OR embossed text on a model creates bridge sections in the slicer. Each letter groove or raised letter top is a span. More text = more bridges = more fan-intensive spans = higher EMI risk. Check bridge count before printing text-heavy models.
 

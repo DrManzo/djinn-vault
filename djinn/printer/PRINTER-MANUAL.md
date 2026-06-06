@@ -27,7 +27,7 @@ Djinn picks it up within 20 seconds and:
 - Downloads and analyzes the mesh (dimensions, volume, overhangs, bed fit)
 - Generates 3 renders: front view, side view, overhang map (red = needs support)
 - Sends all three images to Discord and Telegram
-- Runs a PrusaSlicer dry-run to get real time and filament estimates
+- Runs a dry-run slice to get real time and filament estimates (PrusaSlicer CLI)
 - Posts the full consult report
 
 **Supported sources:** Discord attachment, direct `.stl`/`.3mf` URL, Printables, Thingiverse URL
@@ -107,7 +107,7 @@ slice 1 supports=yes infill=20 brim=yes layer=0.20 material=pla priority=balance
 
 No `/` prefix needed. Reply exactly like the examples in the report.
 
-**What happens:** Djinn slices the model with PrusaSlicer using your exact settings. Takes 10–120 seconds depending on model size.
+**What happens:** Djinn slices the model using your exact settings (PrusaSlicer CLI pipeline). Takes 10–120 seconds depending on model size.
 
 ---
 

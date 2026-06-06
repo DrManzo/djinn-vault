@@ -71,10 +71,12 @@ No defaults applied. No substitutions.
 ---
 
 ## Slicer Note (2026-06-03)
+**Interactive slicing (STANDARD):** OrcaSlicer 2.3.2 — AppImage at `~/Applications/OrcaSlicer_V2.3.2.AppImage`. Built-in Ender-3 V3 Plus profile. Production config at `OrcaSlicer/user/default/process/Production 0.20mm @Creality Ender-3 V3 Plus.json`.
 
-**Interactive slicing:** OrcaSlicer 2.3.2 — replaces PrusaSlicer for manual jobs.
-**CLI pipeline** (`djinn-model-slice`, `djinn-model-combine`): PrusaSlicer — stays, unchanged.
+**CLI pipeline** (`djinn-model-slice`, `djinn-model-combine`): PrusaSlicer — diagnostic/legacy use only. Profile at `~/.config/forge/ender3-v3-plus.ini`.
 
-Profile values above apply to both. Fan cap (`bridge_fan_speed=0` in OrcaSlicer, `50` in PrusaSlicer INI) is non-negotiable — hardware constraint on Calliope's Sprite Pro extruder.
+**Diagnostic use (PrusaSlicer only):** Opening gcode files for inspection, reviewing extrusion paths, comparing layer views. NOT for production slicing.
+
+ALL gcode (from any slicer) passes through `djinn-gcode-safety` which caps M106 fan speed to S128 max — hardware constraint on Calliope's nozzle_mcu UART.
 
 *— Updated 2026-06-03 by Claude*

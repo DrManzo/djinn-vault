@@ -268,7 +268,7 @@ DOEPrintOptAgent eliminates test prints — runs Taguchi factorial design to fin
 |---|---|
 | OS | Fedora Linux |
 | Printer firmware | Klipper + Moonraker |
-| Slicer | PrusaSlicer (CLI + headless Xvfb) |
+| Slicer | **Standard:** OrcaSlicer 2.3.2 — **CLI:** PrusaSlicer (legacy/diagnostic) |
 | Local LLMs | Ollama (qwen2.5:7b, deepseek-r1:7b, phi4:14b, llama3.2-vision:11b) |
 | Premium AI | Claude (Anthropic API), Perplexity (Marcus) |
 | Database | SQLite + Fernet encryption |

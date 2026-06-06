@@ -1070,3 +1070,8 @@ created: 2026-05-19
 - Full config backup saved: ~/Obsidian/djinn/printer/calliope-config-backup-2026-06-05/
 - Factory reset attempted but blocked by Z probe mismatch; reverted to working printer.cfg
 - KEY FINDING: all 11 key561 dropouts occurred at Z < 10mm — cable connector issue, not routing
+- Calliope calibration run: CX_ROUGH_G28 → ACCURATE_G28 → BED_MESH_CALIBRATE → SAVE_CONFIG
+- OrcaSlicer adopted as STANDARD slicer — PrusaSlicer relegated to diagnostic/CLI
+- djinn-gcode-safety v2: M106 fan capping added (caps ALL M106 to S128 max across any slicer)
+- Orca production profile created: fan cap 50%, Creality-compatible settings
+- Docs updated: PRINT-PROFILES.md, SUPPORT-GUIDE.md, DJINN-3D-PRINT-PIPELINE.md, PRINTER-MANUAL.md
