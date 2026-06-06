@@ -1,6 +1,6 @@
 ---
 title: "Deploy Typhon Write Gateway + Fix SSH + Rebase Divergent Branches"
-agent: Salomon
+agent: Claude
 date: 2026-06-05
 tags: [typhon, gateway, memory, deploy, ssh]
 ---
@@ -68,4 +68,4 @@ Deployed `djinn-typhon-write` to Typhon, fixed SSH connectivity (IP change 192.1
 - [ ] Seed `current/queue-state.md` from existing QUEUE.md content
 - [ ] Update HEARTBEAT-typhon.md to reflect new IP
 
-— Salomon, 2026-06-05
+— Claude, 2026-06-05

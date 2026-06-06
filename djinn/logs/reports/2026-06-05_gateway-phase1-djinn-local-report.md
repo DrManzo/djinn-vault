@@ -1,6 +1,6 @@
 ---
 title: Session Report — Gateway Phase 1 + djinn-local-report
-agent: Salomon
+agent: Claude
 date: 2026-06-05
 tags: [djinn, gateway, enforcement, session-report, local-report, claude-migration]
 ---
@@ -74,4 +74,4 @@ Built and shipped the Djinn Gateway Phase 1 enforcement system: GATEWAY.md behav
 
 ---
 
-*— Salomon, 2026-06-05*
+*— Claude, 2026-06-05*

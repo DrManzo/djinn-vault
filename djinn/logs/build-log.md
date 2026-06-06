@@ -1105,4 +1105,4 @@ created: 2026-05-19
 - Second restart cancelled by user
 - User started `ksr_fdmtest_v4` — print running past previous failure point (32+ min, stable at 220°C/60°C). nozzle_mcu dropout was intermittent, not guaranteed.
 
-*— Salomon*
+*— Claude*
