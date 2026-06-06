@@ -2279,3 +2279,55 @@ djinn-comms-auto --session-end --topic "gateway-phase1"
 
 **Report back:** COMMS entry with test output for all 4 event types, confirmation of idempotency check.
 
+---
+
+## TASK-070
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-06 by Claude
+- context: Four bug fixes across automation/ scripts and djinn-route — caught during post-merge code review
+
+**Fixes required:**
+
+### Fix 1 — djinn-route: wrong Typhon IP (critical)
+**File:** `~/.local/bin/djinn-route` on Salomon (NOT in vault — local file only)
+**Line 31:** `TYPHON_URL="http://192.168.1.113:11434"` → `"http://192.168.1.150:11434"`
+
+`.113` is Calliope (Klipper/Moonraker). Typhon is `.150` (confirmed in `~/.ssh/config`). Any script using `djinn-route lightweight` currently hits Calliope's port 11434 which doesn't run Ollama. Since djinn-route is not vault-tracked, note this fix in your COMMS entry so Salomon applies it locally — or propose adding djinn-route to the vault so it's version-controlled.
+
+### Fix 2 — djinn-system-health: wrong VAULT_PATH default
+**File:** `automation/djinn-system-health`
+**Line 27:** `VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"` → `"${VAULT_PATH:-$HOME/Obsidian}"`
+
+The vault lives at `~/Obsidian`, not `~/djinn-vault`. If run without VAULT_PATH set, the disk check silently looks at a path that doesn't exist.
+
+### Fix 3 — djinn-backup-verifier: same VAULT_PATH default bug
+**File:** `automation/djinn-backup-verifier`
+**Line 38:** `VAULT_PATH="${VAULT_PATH:-$HOME/djinn-vault}"` → `"${VAULT_PATH:-$HOME/Obsidian}"`
+
+Same root cause as Fix 2.
+
+### Fix 4 — djinn-vault-integrity: frontmatter warnings should not raise exit 1
+**File:** `automation/djinn-vault-integrity`
+**Current behavior:** `has_issues = bool(broken or fm_warnings)` — exits 1 on frontmatter warnings alone.
+**Correct behavior:** Only exit 1 on broken links. Frontmatter warnings stay in the report but don't change the exit code (they're noise-level, not actionable failures).
+
+Change:
+```python
+# Before:
+has_issues = bool(broken or fm_warnings)
+
+# After:
+has_issues = bool(broken)
+```
+
+The status line in the report and log can still show "ISSUES FOUND" if there are frontmatter warnings — just don't let that alone trigger exit 1 (and by extension, Telegram alerts).
+
+---
+
+**Deliver:** Push fixes 2, 3, 4 to vault via commit. For fix 1 (djinn-route), write a COMMS entry addressed to @Salomon with the exact sed command or note so Salomon applies it locally.
+
+**Report back:** COMMS entry confirming all four fixes committed/noted.
+
