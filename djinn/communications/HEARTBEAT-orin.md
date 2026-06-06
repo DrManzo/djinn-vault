@@ -1,20 +1,22 @@
 Heartbeat — Orin
-Last beat: PENDING — not yet bootstrapped
+Last beat: 2026-06-06 00:00 UTC — manually updated
 Machine: Orin (192.168.1.176)
-Status: Offline — awaiting setup
+Status: Online — ethernet, Ollama live
 
 Hardware:
   CPU: Intel 8-core
   RAM: 40GB
   Storage: 2TB
   GPU: Intel integrated (CPU inference only)
-  OS: macOS (fresh)
+  OS: macOS
 
-Ollama models (planned):
-  qwen2.5:32b — primary large-model inference
-  phi4:14b — session reports, summaries
-  deepseek-r1:14b — reasoning tasks
-  nomic-embed-text — embeddings
+Ollama models (live):
+  llama3.3:70b     — 42.5GB — primary, best local model in fleet
+  phi4:14b         — 9.1GB  — reports, summaries
+  nomic-embed-text — 0.3GB  — embeddings
 
-Notes: iMac, always-on. No Metal acceleration — all Ollama inference is CPU.
+Pulling (background):
+  deepseek-r1:14b, qwen2.5:32b, qwen2.5-coder:7b
+
+Notes: Always-on, ethernet, static IP 192.168.1.176. CPU inference only (no Metal on Intel).
 Bootstrap doc: djinn/onboarding/orin-bootstrap.md
