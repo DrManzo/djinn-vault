@@ -128,6 +128,32 @@ These apply in every mode, no exceptions:
 - **Never commit credentials, tokens, or API keys** to git.
 - **Every action that touches production** (shop data, live print, git push) gets a COMMS entry.
 
+### Lane Discipline — Enforced Rule
+
+**Claude is invoked only for architecture, design standards, and spec writing.**
+
+All other work must route through `djinn-gate` before agent assignment. If `djinn-gate` returns `accepted` for a lane that does not require Claude, the task routes there — not to Claude.
+
+Specifically barred from Claude invocation without djinn-gate rejection first:
+
+| Task category | Required route |
+|--------------|----------------|
+| Ops (file edits, git, systemd, shell) | ops lane → Salomon/local scripts |
+| Status checks, log rotation, COMMS appends | clerk lane → Salomon |
+| Print pipeline (slice, confirm, deny, queue) | production lane → Salomon |
+| Commission quotes, shop pricing | shop lane → djinn-print-quote |
+| Research, citations | marcus lane → Marcus |
+| Code / scripts (unless cross-domain) | coding lane → Salomon |
+
+Any task `djinn-gate` can route without a Claude invocation **must** be routed that way. Claude is the lane of last resort for multi-domain synthesis, not a general-purpose fallback.
+
+Every LLM call dispatched by any Djinn tool must declare a `profile` parameter:
+- `"deterministic"` — deterministic retrieval, classification, yes/no (temperature=0.1)
+- `"structured_output"` — JSON extraction, structured formatting (temperature=0.2)
+- `"synthesis"` — open-ended reasoning, multi-domain analysis (temperature=0.7)
+
+Calls without a declared profile are rejected at the `djinn.core.llm.chat()` level — no silent fallback.
+
 ---
 
 ## Autonomous Operation Boundaries
