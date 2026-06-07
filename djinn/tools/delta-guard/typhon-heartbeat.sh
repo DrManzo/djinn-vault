@@ -56,6 +56,7 @@ PYEOF
 
 if [[ $? -eq 0 ]]; then
     cd "$VAULT" || exit 1
+    git pull --rebase --quiet 2>/dev/null || true
     git add -A \
     && git commit -m "heartbeat: $(date -u '+%Y-%m-%dT%H:%MZ') — Typhon" --quiet \
     && git push --quiet
