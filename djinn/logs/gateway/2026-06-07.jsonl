@@ -4,3 +4,6 @@
 {"ts": "2026-06-07T00:54:05", "event": "checkpoint_pending", "id": "CHECKPOINT-20260607-005404", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-06-07T01:04:55", "event": "checkpoint_pending", "id": "CHECKPOINT-20260607-010455", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-06-07T01:58:55", "event": "checkpoint_pending", "id": "CHECKPOINT-20260607-015854", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-07T10:47:58", "event": "checkpoint_pending", "id": "CHECKPOINT-20260607-104757", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-07T10:55:02", "event": "checkpoint_pending", "id": "CHECKPOINT-20260607-105502", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-07T10:55:12", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-07T19:55:12+00:00", "by": "javier"}

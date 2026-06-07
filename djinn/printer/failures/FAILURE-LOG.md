@@ -697,3 +697,31 @@ Each entry: one incident. Append only.
   Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
 ", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
 "]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
