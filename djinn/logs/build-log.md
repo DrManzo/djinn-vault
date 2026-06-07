@@ -1133,3 +1133,11 @@ created: 2026-05-19
 - **2026-06-06** — djinn-tablet CLI built; Samsung Galaxy (R52T10BL3BV) detected via MTP; udev rules installed; scrcpy mirror, file push/pull, and ADB dashboard delivery ready. Awaiting USB debugging enable for ADB features. — Claude
 
 - **2026-06-07** | Tab S7 FE bootstrap — Ubuntu proot, SSH :8022, vault cloned, Gateway Standard mode | Claude
+
+## 2026-06-07 — Privacy Sweep
+- Bulk replaced Sabrina/Sammy → Mira, Ashton → Cade across 26 vault files + 10 RAW exports + memory files
+- Renamed 2 love letter files, renamed 1 RAW file
+- Fixed duplicate dict key and list entry in QUEUE.md after replacement
+- Final scan: zero remaining hits for any target name
+- Pushed: commit 8d9bce1
+— Claude
