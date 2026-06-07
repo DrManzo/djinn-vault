@@ -1,65 +1,104 @@
 """
-LLM backend abstraction.
+djinn/printer/agent/orchestrator/llm.py
+────────────────────────────────────────────────────────────────
+LLM backend for the printer orchestrator.
 
-Priority:
-  1. Anthropic (Claude) — if ANTHROPIC_API_KEY is set in ~/.config/djinn/claude.env
-  2. Ollama phi4:14b  — always available locally (best reasoning model on Salomon)
+PHASE 4 MIGRATION (2026-06-07, Marcus)
+  Previous implementation had a silent Anthropic escalation path:
+  if ANTHROPIC_API_KEY was present in ~/.config/djinn/claude.env,
+  all printer orchestrator calls routed to claude-sonnet-4-6 without
+  any gate, profile, or cost check.
 
-To activate Claude routing:
-  echo "ANTHROPIC_API_KEY=sk-ant-..." >> ~/.config/djinn/claude.env
-  chmod 600 ~/.config/djinn/claude.env
+  This is replaced. All calls now route through djinn.core.llm.chat()
+  with declared profiles. Anthropic path is removed from this module.
+  Printer tasks are ops/production lane — they do not require Claude.
+
+PROFILE ASSIGNMENTS
+  design tasks    → "synthesis"        (temp=0.7, max=2048)
+  code tasks      → "structured_output" (temp=0.2, max=1024)
+  classification  → "deterministic"    (temp=0.1, max=512)
+
+BACKEND
+  djinn.core.llm respects DJINN_USE_GROQ and DJINN_MODEL env vars.
+  Default: Ollama qwen2.5:7b. Model overrides via DJINN_MODEL.
+  For code tasks: set DJINN_MODEL=qwen2.5-coder:7b before calling.
 """
-import os, pathlib
 
-CLAUDE_ENV  = pathlib.Path.home() / ".config/djinn/claude.env"
-CLAUDE_MODEL = "claude-sonnet-4-6"
-OLLAMA_DESIGN_MODEL = "phi4:14b"      # best reasoning on Salomon
-OLLAMA_CODE_MODEL   = "qwen2.5-coder:7b"  # code generation
+import os
+import sys
 
+# Ensure djinn root is importable when running from this subdirectory
+_vault_root = None
+_search = __file__
+for _ in range(6):
+    _search = os.path.dirname(_search)
+    if os.path.isfile(os.path.join(_search, "djinn", "core", "llm.py")):
+        _vault_root = _search
+        break
+if _vault_root and _vault_root not in sys.path:
+    sys.path.insert(0, _vault_root)
 
-def _load_env():
-    if CLAUDE_ENV.exists():
-        for line in CLAUDE_ENV.read_text().splitlines():
-            line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
-                k, v = line.split("=", 1)
-                os.environ.setdefault(k.strip(), v.strip())
-
-_load_env()
+from djinn.core.llm import chat as _core_chat, get_backend
 
 
 class LLM:
-    def __init__(self, prefer_code: bool = False):
-        key = os.environ.get("ANTHROPIC_API_KEY", "")
-        if key:
-            import anthropic as _ant
-            self.backend = "anthropic"
-            self._client = _ant.Anthropic(api_key=key)
-            self.model = CLAUDE_MODEL
-        else:
-            import ollama as _oll
-            self.backend = "ollama"
-            self._client = _oll
-            self.model = OLLAMA_CODE_MODEL if prefer_code else OLLAMA_DESIGN_MODEL
+    """
+    Drop-in replacement for the old printer LLM abstraction.
 
-    def chat(self, system: str, messages: list, max_tokens: int = 4096) -> str:
-        if self.backend == "anthropic":
-            resp = self._client.messages.create(
-                model=self.model,
-                system=system,
-                messages=messages,
-                max_tokens=max_tokens,
-            )
-            return resp.content[0].text
-        else:
-            full = [{"role": "system", "content": system}] + messages
-            resp = self._client.chat(
-                model=self.model,
-                messages=full,
-                options={"temperature": 0.2, "num_ctx": 8192},
-            )
-            return resp["message"]["content"]
+    API is intentionally compatible with the previous LLM class so that
+    orchestrator.py and agents/*.py require no changes. The key difference:
+    - No Anthropic path. All calls are local via djinn.core.llm.
+    - profile is declared per call type, not buried in defaults.
+    """
+
+    def __init__(self, prefer_code: bool = False):
+        self._prefer_code = prefer_code
+        # Override model for code-specific instantiation
+        if prefer_code:
+            os.environ.setdefault("DJINN_MODEL", "qwen2.5-coder:7b")
+
+    def chat(
+        self,
+        system: str,
+        messages: list,
+        max_tokens: int = None,   # ignored — profile controls this
+        profile: str = None,
+    ) -> str:
+        """
+        Route a chat request through djinn.core.llm with an explicit profile.
+
+        Args:
+            system:    System prompt string.
+            messages:  List of {role, content} dicts.
+            max_tokens: Ignored. Profile controls max_tokens. Kept for
+                        backward-compat so callers don't break.
+            profile:   Required. One of: deterministic, structured_output,
+                       synthesis. Inferred from self._prefer_code if not given.
+
+        Returns:
+            str: Assistant reply.
+        """
+        if profile is None:
+            profile = "structured_output" if self._prefer_code else "synthesis"
+
+        # Build flat prompt from messages list for djinn.core.llm.chat()
+        # (core chat handles system separately)
+        user_content = ""
+        for msg in messages:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            if role == "user":
+                user_content = content   # last user message wins for simple calls
+            elif role == "assistant":
+                pass  # multi-turn not needed for printer ops
+
+        return _core_chat(
+            prompt=user_content,
+            profile=profile,
+            system=system,
+            messages=None,  # let core build from prompt+system
+        )
 
     @property
     def name(self) -> str:
-        return f"{self.backend}/{self.model}"
+        return f"djinn.core.llm/{get_backend()}"
