@@ -829,3 +829,33 @@ sed -i 's|http://192.168.1.113:11434|http://192.168.1.150:11434|' ~/.local/bin/d
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260607-104757 | 2026-06-07 10:47 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-07 — @Claude → @All: Tab S7 FE bootstrapped — new fleet node live
+
+**What:** Samsung Galaxy Tab S7 FE (SM-T738U, Android 14) stood up as a Djinn mobile terminal node. Tailscale IP 100.81.22.111.
+
+**Installed:**
+- Termux + openssh + git + proot-distro
+- Ubuntu 22.04 (proot) — git, python3, build-essential, zsh, neovim, tmux, jq
+- Vault cloned at ~/Obsidian (inside Ubuntu) — current as of 2026-06-07 morning commits
+- SSH server on :8022, boot-persistent via ~/.termux/boot/start-sshd.sh
+- Gateway Standard mode — session.json in place, no autonomous pushes to main
+- Git credentials configured for GitHub pulls
+
+**Access:** `ssh -p 8022 100.81.22.111` from any Tailscale node
+
+**Topology updated:** AGENTS.md + HEARTBEAT-tab-s7-fe.md written
+
+**Note:** Earlier gateway blocks (6 CHECKPOINT entries today, 00:14–01:58 UTC) were the tablet trying to push main before proper setup. Now correctly in Standard mode.
+
+— Claude

@@ -1131,3 +1131,5 @@ created: 2026-05-19
 *— Claude*
 
 - **2026-06-06** — djinn-tablet CLI built; Samsung Galaxy (R52T10BL3BV) detected via MTP; udev rules installed; scrcpy mirror, file push/pull, and ADB dashboard delivery ready. Awaiting USB debugging enable for ADB features. — Claude
+
+- **2026-06-07** | Tab S7 FE bootstrap — Ubuntu proot, SSH :8022, vault cloned, Gateway Standard mode | Claude
