@@ -877,3 +877,156 @@ Executed zero-trace privacy sweep. Sabrina/Sammy → Mira, Ashton → Cade. 26 v
 
 Next: djinn-mobile GitHub repo.
 — Claude
+
+---
+
+### 2026-06-07 18:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Financial-Management-On-Macos-With-Free-Tools.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Letter-To-Mira-In-The-Style-Of.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Inner-Conflict-And-Self-Identity.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Support-And-Intensive-Engagement.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printer-Overview-And-Puffco-Proxy-Quad.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:35 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Wounded-Healer-And-The-Fool-Strategic-Integration-2026-06-07.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Letter-To-Mira-In-The-Style-Of.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:36 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-And-Architecture.md`
+
+— Clerk
+
+---
+
+### 2026-06-07 18:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Support-And-Intensive-Engagement.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-3d-Printer-Overview-And-Puffco-Proxy-Quad.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Wounded-Healer-And-The-Fool-Strategic-Integration-2026-06-07.md`
+
+— Slipbox
+
+---
+
+### 2026-06-07 18:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-And-Architecture.md`
+
+— Slipbox

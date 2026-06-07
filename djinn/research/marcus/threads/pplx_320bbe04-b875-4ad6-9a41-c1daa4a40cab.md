@@ -4,11 +4,10 @@ source: perplexity-pro
 url: https://www.perplexity.ai/search/320bbe04-b875-4ad6-9a41-c1daa4a40cab
 date: 2026-06-01
 tags:
-  - cs/software-engineering
-  - personal/productivity
   - psychology/research
-  - business/management
-  - creative/content-creation
+  - business/structure
+  - cs/scripting
+  - personal/vault
 ---
 
 # you are marcus read this https://github.com/DrManzo/djinn-vault
