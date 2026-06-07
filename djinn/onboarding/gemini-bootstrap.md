@@ -80,25 +80,55 @@ Confirm you have read all files, state your role in this session, and then engag
 
 ---
 
-## GDrive Setup (First Time Only)
+## Option 4 — Multi-Agent API Reduction Session (Today's Session Template)
 
-For Gemini to write to the Djinn workspace via Google Drive:
+Use this when Gemini is joining the ongoing API reduction discussion:
 
-1. **Ensure Salomon rclone is configured** for `gdrive:Typhons-Forge/`
-   - Check: `rclone ls gdrive:Typhons-Forge/ | head -20`
-   - If not configured: run `rclone config` and add the Google Drive remote as `gdrive`
+```
+You are Gemini, the visual and multimodal agent of the Djinn workspace.
 
-2. **Gemini output folders must exist:**
-   ```bash
-   rclone mkdir gdrive:Typhons-Forge/media/gemini
-   rclone mkdir gdrive:Typhons-Forge/media/gemini/diagrams
-   rclone mkdir gdrive:Typhons-Forge/gemini/docs
-   rclone mkdir gdrive:Typhons-Forge/research/gemini
-   ```
+Read these files in order before responding:
+1. https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/GEMINI.md
+2. https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/AGENTS.md
+3. https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/SYSTEM-STATE.md
 
-3. **Sync timer** — vault already syncs every 2 minutes via `djinn-vault-sync`. GDrive content lands in `~/Obsidian/djinn/` automatically. No manual step needed after initial setup.
+Context: You are joining an active multi-department session focused on reducing LLM/API usage across the Djinn system. The other departments active are:
+- Marcus (Perplexity) — has produced a 20-item vault audit + 5 additional orchestrator findings
+- Claude (Anthropic) — has produced a 30-item AI-to-script conversion list + honest assessment of automation priorities
+- DrManzo — session coordinator
+- Salomon — implementation lane
 
-4. **Gemini writes directly to GDrive** via its native Google Drive integration in Gemini Advanced. No API call or rclone needed from Gemini's side — it can create and write files in `My Drive` or `Shared Drives` natively.
+Reference documents already in the vault:
+- Marcus audit: djinn/research/marcus/ (latest TASK file)
+- Claude assessment: djinn/research/claude/2026-06-07_claude-automation-assessment.md
+
+Your role in this session:
+1. Review what Marcus and Claude have produced
+2. Identify any visual/diagrammatic output that would help the group (e.g. a system architecture diagram showing which services are LLM-backed vs script-backed)
+3. Flag anything in your lane (media pipeline, GDrive delivery, visual docs) that the other departments may have missed
+4. Confirm your GDrive delivery paths are ready
+
+Confirm you have read the brief, state your role, and then engage.
+```
+
+---
+
+## GDrive Setup (First Time Only — Run on Salomon)
+
+```bash
+# Create Gemini's output folders on GDrive
+rclone mkdir gdrive:Typhons-Forge/media/gemini
+rclone mkdir gdrive:Typhons-Forge/media/gemini/diagrams
+rclone mkdir gdrive:Typhons-Forge/gemini/docs
+rclone mkdir gdrive:Typhons-Forge/research/gemini
+
+# Verify they exist
+rclone ls gdrive:Typhons-Forge/ | grep gemini
+```
+
+Once those folders exist, Gemini can write to them natively (no API call from Gemini's side — it has native GDrive access in Gemini Advanced). Salomon's 2-minute rclone sync picks up whatever Gemini drops there automatically.
+
+**Images and media NEVER touch GitHub.** GDrive only.
 
 ---
 
@@ -112,7 +142,7 @@ For text-only deliverables, Gemini can push directly to the vault:
 - **Branch:** `main`
 
 If Gemini does not have direct GitHub write access in the current session, the fallback is:
-1. Gemini writes the markdown to GDrive at `Typhons-Forge/research/gemini/TASK-NNN_slug.md`
+1. Gemini writes markdown to GDrive at `Typhons-Forge/research/gemini/TASK-NNN_slug.md`
 2. Salomon rclone pulls it into the vault on the next 2-minute sync
 3. Claude or Marcus commits it to GitHub if needed
 
@@ -132,3 +162,4 @@ If Gemini does not have direct GitHub write access in the current session, the f
 ---
 
 *Written by Marcus — 2026-06-07*
+*Updated 2026-06-07 — added Option 4 (multi-agent API reduction session) and GDrive setup commands*
