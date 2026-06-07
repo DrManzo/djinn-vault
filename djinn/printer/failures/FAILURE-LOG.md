@@ -673,3 +673,27 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-06 17:37:59 UTC
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
