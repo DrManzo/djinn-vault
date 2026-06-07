@@ -16374,3 +16374,10 @@
 | 2026-06-07 20:15 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 20:16 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 20:17 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:18 UTC | printing | 0.0% | 220.7 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:19 UTC | printing | 0.0% | 219.4 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:20 UTC | printing | 0.0% | 220.1 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:21 UTC | printing | 0.0% | 219.6 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:22 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:23 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 20:24 UTC | printing | 0.0% | 219.7 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
