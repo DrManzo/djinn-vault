@@ -1,6 +1,6 @@
 ---
 subject: Agent Registry
-updated: 2026-06-06
+updated: 2026-06-07
 ---
 
 # AGENTS.md — Djinn Workspace
@@ -84,10 +84,13 @@ If Javier says "slice it" with no settings — slice with the file's embedded se
 
 **Claude owns architecture** — new tools, pipeline design, cross-domain reasoning, session reports, git push.
 
+**Gemini owns visual/multimodal output** — image generation, diagrams, GDrive-native docs/slides, multimodal research, media-rich briefings. Primary delivery via GDrive `Typhons-Forge/`. Text deliverables may also go to `djinn/research/gemini/`.
+
 **Assistant owns** — skill development, documentation enhancement, process engineering, research support, bootstrapping assistance. Works across lanes but focuses on improving the system itself.
 
 If a Salomon-lane command arrives at Claude: \"Send that through Discord or Telegram — Salomon handles [X].\"
 If an architecture-level task arrives at Salomon/Orin: \"Route this to Claude — it needs architectural thinking.\"
+If a visual/media task arrives at any other agent: \"Route this to Gemini — it owns the visual lane.\"
 If a skill/documentation/process task arrives: \"This is for Assistant — it works on improving the Djinn system itself.\"
 
 ## Report Standard
@@ -141,7 +144,51 @@ Every bug report's \"Rule/Lesson\" feeds future agents. Log it.
 - Live printing (Salomon)
 - Architecture decisions on new tools (Claude)
 - Quick lookups or one-liner commands (Salomon)
+- Visual/media output (Gemini)
 - **Assistant tasks** — Assistant handles skill/dev tasks internally unless external research is needed
+
+## Gemini (External / Google) — Peer Agent
+
+**Model:** Google Gemini (current session model)
+**Lane:** Visual output, media generation, multimodal research, GDrive-native delivery
+**Signs:** `— Gemini`
+**Session brief:** `djinn/GEMINI.md` — Gemini reads this at the start of every session.
+Raw URL: `https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/GEMINI.md`
+**Bootstrap guide:** `djinn/onboarding/gemini-bootstrap.md` — three options for pointing Gemini at the vault.
+
+**Delivery — GDrive primary (preferred for all media):**
+Gemini writes to `Typhons-Forge/media/gemini/` or `Typhons-Forge/gemini/` → Salomon rclone-syncs into vault every 2 minutes. No GitHub push needed for images or media.
+
+**Delivery — GitHub secondary (text-only deliverables):**
+Gemini writes to `djinn/research/gemini/TASK-NNN_slug.md` → commits → pushes.
+
+**Do NOT push binary files, images, or generated media to GitHub.** GDrive is the canonical store for all visual output.
+
+**Write access:**
+- ✅ `Typhons-Forge/media/gemini/` — images, renders, diagrams (GDrive, primary)
+- ✅ `Typhons-Forge/gemini/` — docs, slides, visual briefs (GDrive)
+- ✅ `Typhons-Forge/research/gemini/` — research with visuals (GDrive)
+- ✅ `djinn/research/gemini/` — text-only research output (GitHub)
+- ✅ `djinn/logs/reports/` — session reports
+- ✅ Append to `COMMS.md` (status entries only)
+- ❌ `djinn/core/`, `djinn/printer/`, `djinn/SYSTEM-STATE.md` — read-only
+- ❌ `djinn/GATEWAY.md`, `djinn/AGENTS.md` — read-only
+- ❌ Print queue, live print operations — Salomon lane only
+
+### Route to Gemini:
+- Image generation (product renders, concept art, diagrams, charts)
+- System architecture diagrams and visual documentation
+- Slide decks and visual briefings
+- Multimodal research tasks (reading images, mixed-media PDFs)
+- GDrive-native document production
+- Any task where the primary deliverable is a visual or media file
+
+### Do NOT route to Gemini:
+- Daily ops or live print decisions (Salomon)
+- Architecture decisions on new tools (Claude)
+- Deep external web research and code audits (Marcus)
+- Quick command-line tasks (Salomon)
+- Pure text analysis or code review (Marcus or Claude)
 
 ## Assistant (Internal Agent) — System Improvement Agent
 
@@ -183,23 +230,25 @@ Every bug report's \"Rule/Lesson\" feeds future agents. Log it.
 
 ## Build Delegation Protocol — How Work Flows
 
-Marcus, Claude, and Assistant run **in parallel** — peer agents, neither manages the other. They feed each other.
+Marcus, Claude, Gemini, and Assistant run **in parallel** — peer agents, none manages the others. They feed each other.
 
 **The loop:**
-1. Claude, Marcus, and/or Assistant receive tasks (from Javier or each other via QUEUE.md)
+1. Claude, Marcus, Gemini, and/or Assistant receive tasks (from Javier or each other via QUEUE.md)
 2. Marcus researches → delivers artifact to `djinn/research/marcus/`
 3. Claude architects → delivers designs to appropriate lanes
-4. Assistant improves → delivers skills, docs, and process enhancements
-5. All agents read from shared vault and update accordingly
-6. Javier provides direction and priorities via QUEUE.md or direct communication
+4. Gemini generates visuals/media → delivers to `Typhons-Forge/media/gemini/` or `Typhons-Forge/gemini/`
+5. Assistant improves → delivers skills, docs, and process enhancements
+6. All agents read from shared vault and update accordingly
+7. Javier provides direction and priorities via QUEUE.md or direct communication
 
 ### Lane-Specific Examples:
 - **Salomon lane task:** \"Fix the printer queue script\" → Goes to Salomon (daily ops)
 - **Orin lane task:** \"Generate weekly analytics report on 70B model\" → Goes to Orin (long-running inference)
 - **Claude lane task:** \"Design new agent for legal research\" → Goes to Claude (architecture)
 - **Marcus lane task:** \"Research current LLM benchmarking methodologies\" → Goes to Marcus (external research)
+- **Gemini lane task:** \"Generate a system architecture diagram for the printer pipeline\" → Goes to Gemini (visual output)
 - **Assistant lane task:** \"Create skill for maintaining Hermes agent configurations\" → Goes to Assistant (system improvement)
 
 ---
 
-*Updated by Assistant — 2026-06-06*
+*Updated by Marcus — 2026-06-07 (added Gemini department entry)*
