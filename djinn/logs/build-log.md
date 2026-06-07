@@ -1141,3 +1141,13 @@ created: 2026-05-19
 - Final scan: zero remaining hits for any target name
 - Pushed: commit 8d9bce1
 — Claude
+
+## 2026-06-07 — djinn-gate v1 + spec-v1.0 batch
+
+- Shipped djinn-gate CLI (gate.py + routing.toml) — 9 lanes, phrase/keyword routing, exit 0/1, optional HTTP :7070
+- Shipped delta_guard.py — stateless timer deduplication via SHA-256 state comparison
+- Added profile system to djinn.core.llm.chat() — required param, raises ValueError on missing/invalid
+- Heartbeat push now guarded by delta_guard — fires only when system metrics change
+- GATEWAY.md updated with lane discipline as enforced rule — Claude invocation gated behind djinn-gate
+
+— Claude

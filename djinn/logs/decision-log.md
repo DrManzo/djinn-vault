@@ -58,3 +58,17 @@ Record of architectural and technical decisions made during Djinn builds.
 **Why this works:** The git hook is the one real choke point. All persistent work goes through git push. If you can't push without Dev mode, you can't permanently affect the vault without authorization. The behavioral contract handles the gap between "I took the action" and "it got pushed."
 
 *— Claude*
+
+## 2026-06-07 — Profile system placement
+
+**Decision:** resolve_profile() lives in djinn.core.llm, not gate.py.
+**Reason:** LLM concerns belong in the LLM module. gate.py exports validate_profile()
+as a thin convenience but the authoritative implementation is llm.py.
+
+## 2026-06-07 — Heartbeat delta_guard state key
+
+**Decision:** State tracks GPU/RAM/disk/Ollama metrics, not timestamp or full file content.
+**Reason:** Timestamp always changes — using it as state would fire every run, defeating
+the guard. Metrics represent meaningful system state change.
+
+— Claude

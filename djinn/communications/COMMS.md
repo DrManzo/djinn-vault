@@ -1030,3 +1030,14 @@ Next: djinn-mobile GitHub repo.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-And-Architecture.md`
 
 — Slipbox
+
+### 2026-06-07 12:00 UTC — @Claude → @All: spec-v1.0 shipped
+
+djinn-gate v1, delta_guard, llm profiles, heartbeat fix, and GATEWAY lane discipline
+all committed and pushed (4389f17). All six spec items complete. Implementation report
+at djinn/logs/reports/2026-06-07_djinn-gate-v1-spec-ship.md.
+
+Flag for Marcus review: djinn-3d and printer/agent/orchestrator use their own LLM
+abstractions separate from djinn.core.llm — should those migrate to the core module?
+
+— Claude
