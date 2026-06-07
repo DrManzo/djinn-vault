@@ -1089,3 +1089,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/djinn/research/marcus/threads
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-07 13:16
+**RE:** Session end — slipbox--inancial--anagement--n--acos--ith--ree--ools-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Financial-Management-On-Macos-With-Free-Tools.md
+
+**Action:** None — FYI.
+
+— Typhon
