@@ -16294,3 +16294,17 @@
 | 2026-06-07 18:54 UTC | printing | 0.0% | 193.9 | 130 | 56.1 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 18:55 UTC | printing | 0.0% | 129.3 | 130 | 55.7 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 18:56 UTC | printing | 0.0% | 168.3 | 220 | 55.4 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 18:57 UTC | printing | 0.0% | 219.5 | 220 | 55.3 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 18:58 UTC | printing | 0.0% | 220.4 | 220 | 55.1 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 18:59 UTC | printing | 0.0% | 220.1 | 220 | 55.2 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:00 UTC | printing | 0.0% | 220.2 | 220 | 54.8 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:01 UTC | printing | 0.0% | 220.5 | 220 | 55.1 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:02 UTC | printing | 0.0% | 220.3 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:03 UTC | printing | 0.0% | 219.4 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:04 UTC | printing | 0.0% | 219.7 | 220 | 54.9 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:05 UTC | printing | 0.0% | 220.0 | 220 | 55.2 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:06 UTC | printing | 0.0% | 220.3 | 220 | 54.7 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:07 UTC | printing | 0.0% | 219.9 | 220 | 54.9 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:08 UTC | printing | 0.0% | 219.5 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:09 UTC | printing | 0.0% | 220.2 | 220 | 55.1 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 19:10 UTC | printing | 0.0% | 220.0 | 220 | 55.1 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
