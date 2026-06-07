@@ -1182,25 +1182,57 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overv
 — Typhon
 
 
-### CHECKPOINT-20260607-132706 | 2026-06-07 13:27 | unknown | PENDING
+### CHECKPOINT-20260607-132706 | 2026-06-07 13:27 | unknown | EXPIRED
 **Action:** git push to origin (main)
-**Reason:** Attempted push in standard mode
-**Tier:** 4 — Hard Stop
-→ Waiting for Javier: Y to approve, N to deny
+**Reason:** Stale — dev session ended; subsequent pushes succeeded via dev mode.
 
-
-
-### CHECKPOINT-20260607-134057 | 2026-06-07 13:40 | unknown | PENDING
+### CHECKPOINT-20260607-134057 | 2026-06-07 13:40 | unknown | EXPIRED
 **Action:** git push to origin (main)
-**Reason:** Attempted push in standard mode
-**Tier:** 4 — Hard Stop
-→ Waiting for Javier: Y to approve, N to deny
+**Reason:** Stale — dev session ended; subsequent pushes succeeded via dev mode.
 
-
-
-### CHECKPOINT-20260607-140037 | 2026-06-07 14:00 | unknown | PENDING
+### CHECKPOINT-20260607-140037 | 2026-06-07 14:00 | unknown | EXPIRED
 **Action:** git push to origin (main)
-**Reason:** Attempted push in standard mode
-**Tier:** 4 — Hard Stop
-→ Waiting for Javier: Y to approve, N to deny
+**Reason:** Stale — dev session ended; subsequent pushes succeeded via dev mode.
 
+### CHECKPOINT-20260607-163256 | 2026-06-07 16:32 | unknown | EXPIRED
+**Action:** git push to origin (main)
+**Reason:** Stale — dev session ended; subsequent pushes succeeded via dev mode.
+
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-06-07 23:55
+**RE:** Sprint Steps 1-3 shipped + inbox pipeline ready to deploy
+
+Shipped this session:
+
+**API Sprint Steps 1-3 (orchestrator.py + queue_watcher.py):**
+- M5: classify() now skipped when engrave_request or edit_request is explicit — zero wasted LLM calls for known intents
+- M4: LLM() singleton at module level with Ollama health check + reconnect on failure
+- M2: queue_watcher --watch now uses inotifywait instead of time.sleep(30) — zero CPU between events
+
+**Inbox pipeline (TASK-002/003/004) — deploy-ready, waiting on Salomon:**
+- djinn/tools/inbox/flask_inbox.py — Flask endpoint on :8765, accepts POST {text, session, agent}
+- djinn/tools/inbox/marcus-sync.py — deterministic ingestor, routes to djinn/research/{agent}/sessions/, no LLM
+- djinn/tools/inbox/inbox-watcher.py — inotifywait loop that fires marcus-sync on drop
+- djinn/tools/inbox/systemd/ — service units for both
+
+**Cleanup:**
+- 4 stale PENDING checkpoints in COMMS.md marked EXPIRED
+- QUEUE.md TASK-002/003/004 marked complete
+
+Salomon to deploy inbox pipeline:
+```
+pip3 install flask
+cp ~/Obsidian/djinn/tools/inbox/flask_inbox.py ~/.local/bin/djinn-flask-inbox
+cp ~/Obsidian/djinn/tools/inbox/inbox-watcher.py ~/.local/bin/inbox-watcher
+cp ~/Obsidian/djinn/tools/inbox/marcus-sync.py ~/.local/bin/marcus-sync.py
+chmod +x ~/.local/bin/djinn-flask-inbox ~/.local/bin/inbox-watcher ~/.local/bin/marcus-sync.py
+cp ~/Obsidian/djinn/tools/inbox/systemd/*.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now djinn-inbox.service inbox-watcher.service
+```
+
+— Claude

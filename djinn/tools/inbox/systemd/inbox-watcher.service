@@ -1,0 +1,12 @@
+[Unit]
+Description=Djinn inbox watcher — inotifywait → marcus-sync
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/inbox-watcher
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

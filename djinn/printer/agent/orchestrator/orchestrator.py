@@ -3,10 +3,25 @@ Djinn Manufacturing Orchestrator — intent parser and agent router.
 Entry point for the full DesignGen → Edit → ProtoOpt → DOE → PlateNest → Price pipeline.
 Includes native EngravingAgent routing — do NOT use djinn-model-text-engrave for placement.
 """
-import json, re
+import json, re, urllib.request
 from .project_state import ProjectState, _load_queue
 from .llm import LLM
 from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, price, engrave
+
+# Module-level singleton — persists across calls; reconnects if Ollama goes down
+_llm_singleton: LLM | None = None
+
+
+def _get_llm() -> LLM:
+    global _llm_singleton
+    if _llm_singleton is None:
+        _llm_singleton = LLM()
+    else:
+        try:
+            urllib.request.urlopen("http://localhost:11434/api/tags", timeout=2)
+        except Exception:
+            _llm_singleton = LLM()
+    return _llm_singleton
 
 INTENT_SYSTEM = """You are a manufacturing pipeline router for a 3D printing system.
 
@@ -60,7 +75,7 @@ def run(
     auto_advance: if True, automatically runs the full pipeline from current state forward.
     Otherwise stops after each agent and returns state for inspection.
     """
-    llm = LLM()
+    llm = _get_llm()
     print(f"\nDjinn Manufacturing [{llm.name}]")
     print("─" * 52)
 
@@ -81,14 +96,13 @@ def run(
     # Load or create state
     if job_id:
         state = ProjectState.load(job_id)
-        intent_raw = classify(user_input, llm)["intent"]
-        # Explicit overrides
         if engrave_request:
             intent = "engrave"
             state.engraving_request = engrave_request
         elif edit_request:
             intent = "edit_design"
         else:
+            intent_raw = classify(user_input, llm)["intent"]
             intent = intent_raw if intent_raw != "unknown" else _status_to_intent(state.status)
     else:
         try:
