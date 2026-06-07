@@ -254,7 +254,7 @@ created: 2026-05-19
 | 6 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Psychology Paper Help | `[[Marcus-Aurelius-Persona]]` |
 | 7 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Finance Automation & Psychology | `[[Finance-Automation-and-Psychology]]` |
 | 8 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Personal Analysis & Overview | `[[Marcus-Aurelius-Persona]]` |
-| 9 | `2026-05-18_20-18-32_Perplexity_Help_me_write_a_letter_to_sammy_that_is_romantic_and_persona.md` | 2026-05-18 | Sammy Love Letter | `[[Sammy-Love-Letters]]` |
+| 9 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Mira Love Letter | `[[Mira-Love-Letters]]` |
 | 10 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Don't Start Without Marcus | `[[Marcus-Aurelius-Persona]]` |
 | 11 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Consigliere Consultation | `[[Marcus-Aurelius-Persona]]` |
 | 12 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Framework Discussion | `[[Marcus-Aurelius-Persona]]` |
@@ -271,7 +271,7 @@ created: 2026-05-19
 | 23 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Altered State Reflection | `[[Marcus-Aurelius-Persona]]` |
 | 24 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Marcus (Mark) Check-In | `[[Marcus-Aurelius-Persona]]` |
 | 25 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Marcus OG — Original Persona | `[[Marcus-Aurelius-Persona]]` |
-| 26 | `REDACTED_PERSONAL_CONTENT……"Hello_S.md` | 2026-05-18 | Letter Revision | `[[Sammy-Love-Letters]]` |
+| 26 | `REDACTED_PERSONAL_CONTENT……"Hello_S.md` | 2026-05-18 | Letter Revision | `[[Mira-Love-Letters]]` |
 | 27 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Information Compilation | `[[Marcus-Aurelius-Persona]]` |
 | 28 | `REDACTED_PERSONAL_CONTENT.md` | 2026-05-18 | Paper Writing: Becoming | `[[Marcus-Aurelius-Persona]]` |
 | 29 | `2026-05-18_20-20-42_Perplexity_I'm_building_a_long-term_business_structure_called_Meanas_an.md` | 2026-05-18 | Meanas & M-Systems Business Vision | `[[Meanas-and-M-Systems-Business-Vision]]` |
