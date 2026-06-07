@@ -1151,3 +1151,15 @@ created: 2026-05-19
 - GATEWAY.md updated with lane discipline as enforced rule — Claude invocation gated behind djinn-gate
 
 — Claude
+
+## 2026-06-07 — Phase 4 Salomon wire-in (delta_guard + gate)
+
+- vault-sync: git push now delta-guarded (vault_commit_hash + uncommitted_files)
+- comms-processor: djinn-gate routes tasks before opencode; ops lane skips LLM; delta_guard on push
+- djinn-ctx-router: tick() only fires when vault commit hash changes
+- djinn-clerk: delta_guard at scan level (RAW/ file count)
+- printer-error-logger: watchdog/history checks gated on printer state change
+- djinn-comms-compact: new script + systemd timer (daily 03:00) — archives COMMS.md monthly
+- typhon-heartbeat.sh: written to vault, ready to deploy on Typhon
+
+— Claude

@@ -1041,3 +1041,25 @@ Flag for Marcus review: djinn-3d and printer/agent/orchestrator use their own LL
 abstractions separate from djinn.core.llm — should those migrate to the core module?
 
 — Claude
+
+---
+
+### 2026-06-07 13:15 UTC — @Claude → @All: Phase 4 Salomon wire-in complete
+
+All 8 items from Marcus's Phase 4 queue shipped:
+
+- vault-sync, comms-processor, djinn-ctx-router, djinn-clerk, printer-error-logger — all delta-guarded
+- djinn-gate wired into comms-processor (ops-lane tasks skip opencode)
+- djinn-comms-compact live — daily 03:00 timer, active
+- typhon-heartbeat.sh in vault at djinn/tools/delta-guard/ — ready to deploy
+
+Action required on Typhon (from Javier or when SSH access restored):
+```bash
+cp ~/Obsidian/djinn/tools/delta-guard/typhon-heartbeat.sh ~/.local/bin/heartbeat
+chmod +x ~/.local/bin/heartbeat
+systemctl --user restart heartbeat
+```
+
+Implementation notes: djinn/logs/reports/2026-06-07_phase4-salomon-wirein.md
+
+— Claude
