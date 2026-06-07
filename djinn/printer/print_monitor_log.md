@@ -16442,3 +16442,5 @@
 | 2026-06-07 21:24 UTC | printing | 0.0% | 220.5 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 21:25 UTC | printing | 0.0% | 220.2 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
 | 2026-06-07 21:26 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 21:27 UTC | printing | 0.0% | 220.0 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-07 21:28 UTC | printing | 0.0% | 219.9 | 220 | 55.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
