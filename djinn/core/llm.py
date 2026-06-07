@@ -53,7 +53,7 @@ Written by Marcus (Claude), 2026-06-06
 import os
 import sys
 from openai import OpenAI
-from typing import Optional
+from typing import Literal, Optional
 
 
 # ─── Constants ────────────────────────────────────────────────────────────────
@@ -67,6 +67,31 @@ _GROQ_DEFAULT_MODEL   = "llama-3.3-70b-versatile"
 _DEFAULT_TIMEOUT      = 120
 _DEFAULT_TEMPERATURE  = 0.7
 _DEFAULT_MAX_TOKENS   = 2048
+
+# ─── Profile system ───────────────────────────────────────────────────────────
+
+_PROFILES: dict[str, dict] = {
+    "deterministic":     {"temperature": 0.1, "max_tokens": 512},
+    "structured_output": {"temperature": 0.2, "max_tokens": 1024},
+    "synthesis":         {"temperature": 0.7, "max_tokens": 2048},
+}
+
+ProfileType = Literal["deterministic", "synthesis", "structured_output"]
+
+
+def resolve_profile(profile: str) -> tuple[float, int]:
+    """
+    Return (temperature, max_tokens) for the given profile.
+
+    Raises ValueError on missing or invalid input — no silent fallback.
+    """
+    if not profile or profile not in _PROFILES:
+        raise ValueError(
+            f"[djinn.core.llm] profile is required and must be one of "
+            f"{sorted(_PROFILES)}. Got: {profile!r}"
+        )
+    p = _PROFILES[profile]
+    return p["temperature"], p["max_tokens"]
 
 
 # ─── Backend detection ────────────────────────────────────────────────────────
@@ -156,38 +181,34 @@ def get_backend() -> str:
 
 def chat(
     prompt: str,
+    profile: ProfileType,
     system: Optional[str] = None,
     model: Optional[str] = None,
-    temperature: Optional[float] = None,
-    max_tokens: Optional[int] = None,
     messages: Optional[list] = None,
 ) -> str:
     """
     One-shot chat completion. Returns the assistant's reply as a string.
 
     Args:
-        prompt:      User message (required unless you pass `messages` directly).
-        system:      Optional system prompt prepended to the conversation.
-        model:       Override the active model for this call only.
-        temperature: Sampling temperature (default: DJINN_TEMPERATURE or 0.7).
-        max_tokens:  Max output tokens (default: DJINN_MAX_TOKENS or 2048).
-        messages:    Full message list override — ignores `prompt` and `system`
-                     if provided. Useful for multi-turn context passing.
+        prompt:   User message (required unless you pass `messages` directly).
+        profile:  Required. One of "deterministic", "structured_output",
+                  "synthesis". Sets temperature and max_tokens. Raises
+                  ValueError on missing or invalid value — no silent fallback.
+        system:   Optional system prompt prepended to the conversation.
+        model:    Override the active model for this call only.
+        messages: Full message list override — ignores `prompt` and `system`
+                  if provided. Useful for multi-turn context passing.
 
     Returns:
         str: The assistant reply content.
 
     Raises:
-        RuntimeError: If the API call fails after retries.
+        ValueError:  If profile is missing or not a recognized value.
+        RuntimeError: If the API call fails.
     """
+    _temp, _max = resolve_profile(profile)
     client = get_client()
     _model = model or get_model()
-    _temp  = temperature if temperature is not None else float(
-        os.environ.get("DJINN_TEMPERATURE", _DEFAULT_TEMPERATURE)
-    )
-    _max   = max_tokens or int(
-        os.environ.get("DJINN_MAX_TOKENS", _DEFAULT_MAX_TOKENS)
-    )
 
     if messages is None:
         messages = []
@@ -222,7 +243,7 @@ if __name__ == "__main__":
     print(f"[djinn.core.llm] Backend : {get_backend()}")
     print(f"[djinn.core.llm] Sending test prompt...")
     try:
-        reply = chat("Reply with exactly: DJINN ONLINE")
+        reply = chat("Reply with exactly: DJINN ONLINE", profile="deterministic")
         print(f"[djinn.core.llm] Response: {reply}")
     except RuntimeError as e:
         print(f"[djinn.core.llm] ERROR: {e}", file=sys.stderr)

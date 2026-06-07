@@ -1,0 +1,175 @@
+# djinn-gate routing table — v1.0
+# Nine lanes. Do not add new lanes without explicit Javier approval.
+# djinn-gate is the only module that reads this file directly.
+
+[[lanes]]
+name                = "marcus"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["research", "web", "citations", "sources"]
+keywords            = [
+  "research", "citation", "cite", "source", "academic", "paper",
+  "study", "fact-check", "verify", "look up", "current events",
+  "news", "search web", "literature", "journal", "reference",
+  "bibliography", "evidence"
+]
+phrases             = [
+  "find sources for", "look this up", "fact check", "current research on",
+  "academic papers on", "search the web for", "what does the literature say",
+  "cite a source", "find a citation", "look up online"
+]
+
+[[lanes]]
+name                = "archivist"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["vault", "notes", "obsidian", "organization"]
+keywords            = [
+  "vault", "note", "obsidian", "organize", "archive", "retrieve",
+  "find file", "document", "index", "catalog", "folder", "tag",
+  "link", "backlink", "wikilink"
+]
+phrases             = [
+  "find the note", "search the vault", "where is the file",
+  "retrieve document", "organize notes", "look in vault",
+  "find reference", "search obsidian", "check the vault"
+]
+
+[[lanes]]
+name                = "clerk"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["tasks", "logging", "comms", "scheduling", "tracking"]
+keywords            = [
+  "task", "schedule", "reminder", "comms", "log", "status", "update",
+  "append", "heartbeat", "track", "checklist", "queue", "report",
+  "summary", "session", "handoff", "checkpoint", "notify"
+]
+phrases             = [
+  "add to comms", "log this", "append entry", "update status",
+  "write to comms", "create task", "add task", "schedule reminder",
+  "write session report", "add to queue", "write a report",
+  "append to build log", "update decision log"
+]
+
+[[lanes]]
+name                = "ops"
+llm_allowed         = false
+isolated            = false
+escalation_allowed  = true
+tags                = ["system", "shell", "git", "files", "admin", "services"]
+keywords            = [
+  "git", "systemd", "service", "timer", "backup", "disk", "ssh",
+  "chmod", "mkdir", "rm", "move", "copy", "sync", "cron", "bash",
+  "shell", "install", "reboot", "restart", "enable", "disable",
+  "daemon", "mount", "unmount", "symlink", "chown", "sudo", "apt",
+  "pip", "npm", "port", "firewall", "network", "process", "kill",
+  "ps aux", "top", "htop", "journalctl", "systemctl"
+]
+phrases             = [
+  "git push", "git commit", "git pull", "restart service", "enable timer",
+  "run backup", "check disk", "ssh into", "copy file", "move file",
+  "delete file", "install package", "check service", "start daemon",
+  "stop service", "reload config", "check logs", "rotate logs"
+]
+
+[[lanes]]
+name                = "production"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["3d-printing", "slicing", "gcode", "calliope", "print-queue"]
+keywords            = [
+  "print", "slice", "gcode", "calliope", "filament", "ender",
+  "klipper", "moonraker", "stl", "obj", "3mf", "bed", "nozzle",
+  "infill", "layer", "prusaslicer", "orcaslicer", "confirm", "deny",
+  "print queue", "maker mark", "makers mark", "supports", "adhesion",
+  "retraction", "temperature", "slicer", "plate", "arrange"
+]
+phrases             = [
+  "confirm print", "deny print", "slice model", "send to printer",
+  "add to print queue", "check print status", "cancel print",
+  "print this", "make a print of", "whats printing",
+  "apply makers mark", "plate the models", "upload gcode"
+]
+
+[[lanes]]
+name                = "shop"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["quotes", "pricing", "orders", "customers", "commissions"]
+keywords            = [
+  "quote", "price", "order", "customer", "commission", "invoice",
+  "cost", "charge", "payment", "shop", "sell", "sold", "inventory",
+  "stock", "margin", "material cost", "labor", "profit", "discount",
+  "refund", "shipping"
+]
+phrases             = [
+  "how much for", "get a quote", "price this", "customer order",
+  "write an invoice", "calculate cost", "what does it cost",
+  "commission price", "give me a quote", "how much should i charge",
+  "price out", "quote this job"
+]
+
+[[lanes]]
+name                = "coding"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["code", "scripts", "debugging", "apis", "automation"]
+keywords            = [
+  "code", "script", "function", "debug", "error", "bug", "fix",
+  "python", "bash", "api", "endpoint", "import", "class", "module",
+  "refactor", "test", "deploy", "variable", "loop", "exception",
+  "parse", "regex", "json", "yaml", "toml", "subprocess", "async",
+  "thread", "socket", "http", "websocket", "database", "sql",
+  "migration", "config", "env", "cli", "argparse"
+]
+phrases             = [
+  "write a script", "fix this code", "debug this", "add a function",
+  "how do i code", "write a function", "refactor this", "create an api",
+  "build a script", "implement this", "write a class", "add a method",
+  "fix the bug", "why is this failing", "help me debug"
+]
+
+[[lanes]]
+name                = "creative"
+llm_allowed         = true
+isolated            = false
+escalation_allowed  = true
+tags                = ["writing", "content", "social-media", "captions", "copy"]
+keywords            = [
+  "write", "caption", "post", "story", "creative", "fiction",
+  "poem", "content", "social", "instagram", "hashtag", "blog",
+  "draft", "copy", "reel", "describe", "narrative", "tone",
+  "voice", "brand", "tagline", "slogan"
+]
+phrases             = [
+  "write a caption", "create content", "draft a post", "write a story",
+  "write copy for", "create a reel", "write something creative",
+  "generate hashtags", "make a post about", "write me a",
+  "describe this", "give me copy for"
+]
+
+[[lanes]]
+name                = "student"
+llm_allowed         = true
+isolated            = true
+escalation_allowed  = false
+tags                = ["learning", "education", "study", "explanations"]
+keywords            = [
+  "explain", "teach", "learn", "study", "understand", "what is",
+  "how does", "tutorial", "lesson", "course", "concept", "definition",
+  "example", "simplify", "eli5", "in simple terms", "basics",
+  "beginner", "introduction"
+]
+phrases             = [
+  "explain this to me", "how does this work", "teach me about",
+  "what is the meaning of", "can you explain", "help me understand",
+  "give me an example", "simplify this", "break this down",
+  "explain like im five", "explain it simply", "what does this mean"
+]
