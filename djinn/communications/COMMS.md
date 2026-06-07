@@ -1167,3 +1167,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/The-Wounded-Hea
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-07 13:17
+**RE:** Session end — slipbox--aust--li--verview--nd--rchitecture-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-And-Architecture.md
+
+**Action:** None — FYI.
+
+— Typhon
