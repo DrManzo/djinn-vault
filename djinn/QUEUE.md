@@ -32,4 +32,6 @@ Agents append to this file. Javier sets priorities.
 
 ## Completed
 
-<!-- Move completed tasks here with [x] and date -->
+- [x] TASK-002 | infra | Claude | 2026-06-07 | Flask inbox endpoint written: djinn/tools/inbox/flask_inbox.py — deploy to Salomon per README in that dir
+- [x] TASK-003 | infra | Claude | 2026-06-07 | inbox-watcher.py + inbox-watcher.service written: djinn/tools/inbox/ — deploy to Salomon
+- [x] TASK-004 | infra | Claude | 2026-06-07 | marcus-sync.py written: djinn/tools/inbox/marcus-sync.py — deploy to ~/.local/bin/ on Salomon

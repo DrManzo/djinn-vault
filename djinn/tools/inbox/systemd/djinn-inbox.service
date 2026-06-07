@@ -1,0 +1,13 @@
+[Unit]
+Description=Djinn Flask inbox endpoint (port 8765)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/djinn-flask-inbox
+Restart=on-failure
+RestartSec=5
+Environment=DJINN_INBOX_PORT=8765
+
+[Install]
+WantedBy=default.target

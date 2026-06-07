@@ -221,11 +221,14 @@ def main():
     results = scan_queue(name_filter=args.name, force=args.all)
 
     if args.watch:
-        import time
-        print(f"  Watching {QUEUE_DIR} every 30s...")
-        processed = set(f.name for f in QUEUE_DIR.iterdir() if f.is_file()) if not args.all else set()
+        import subprocess
+        QUEUE_DIR.mkdir(parents=True, exist_ok=True)
+        print(f"  Watching {QUEUE_DIR} (inotifywait)...")
         while True:
-            time.sleep(30)
+            subprocess.run(
+                ["inotifywait", "-e", "close_write", "-q", str(QUEUE_DIR)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
             new_results = scan_queue(name_filter=args.name, force=False)
             if new_results:
                 run_pipeline(new_results, output=args.output)
