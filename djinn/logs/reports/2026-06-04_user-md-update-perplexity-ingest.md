@@ -17,7 +17,7 @@ related: [[build-log]] [[decision-log]]
 
 ## Summary
 
-Read all 16 Perplexity export files from `~/Downloads/`. Extracted personal profile data and updated `~/.openclaw/workspace/USER.md` with 8 targeted updates: corrected birth time (00:55, not 10:43am), correct age (32), location specificity (San Bernardino), education status (Psychology B.A. completed, Finance A.S. in progress), attorney career goal detail, weight/gym update in kg, primary archetypes (Wounded Healer/Fool/Hermit), Ashton relationship added, Faust CLI update. All 16 Perplexity files moved to vault RAW.
+Read all 16 Perplexity export files from `~/Downloads/`. Extracted personal profile data and updated `~/.openclaw/workspace/USER.md` with 8 targeted updates: corrected birth time (00:55, not 10:43am), correct age (32), location specificity (San Bernardino), education status (Psychology B.A. completed, Finance A.S. in progress), attorney career goal detail, weight/gym update in kg, primary archetypes (Wounded Healer/Fool/Hermit), Cade relationship added, Faust CLI update. All 16 Perplexity files moved to vault RAW.
 
 ---
 
@@ -33,7 +33,7 @@ Read all 16 Perplexity export files from `~/Downloads/`. Extracted personal prof
 **Read all files before writing vs. write incrementally — Why:** Most files were navigation sidebars with no personal content. Only 4 files had actionable personal info. Reading all first prevented conflicting partial updates.
 
 **Which files had useful personal content:**
-1. `Marcus_og.md` — archetypes (Wounded Healer/Fool/Hermit), weight in kg, gym/PT, Ashton relationship, sobriety/ADHD tracking architecture
+1. `Marcus_og.md` — archetypes (Wounded Healer/Fool/Hermit), weight in kg, gym/PT, Cade relationship, sobriety/ADHD tracking architecture
 2. `Tell_us_more_about_yourself.md` — formal bio: San Bernardino location, age 32, Psychology B.A. completed, Finance A.S. in progress, attorney goal (BigLaw → disability nonprofit → own practice), 12-step program
 3. `TASK-053_personal-layer-research.md` — ADHD daily briefing architecture, Black Book design, Telegram habit tracking spec, academic support patterns
 4. `Hey_Marcus_15-44.md` — Faust CLI current state: Click/Rich/SQLite, 5 modules, verb-first grammar

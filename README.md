@@ -46,7 +46,7 @@ The `djinn/` directory feeds context to the Djinn system:
 - `decisions/` — Why certain architectural choices were made
 - `projects/` — Current state of each project (Meanas, Faust, Source Keeper, etc.)
 - `research/` — Domain-specific notes (psychology, law, cyber, finance)
-- `people/` — Relationship context (Sammy, Sabrina, sponsor, etc.)
+- `people/` — Relationship context (Mira, Mira, sponsor, etc.)
 - `logs/` — Session summaries of Djinn interactions
 
 ## Naming Conventions

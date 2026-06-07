@@ -155,7 +155,7 @@ Sprint 1 unblocked:
 
 Sprint 2 follows:
 - **TASK-057** — AA meeting schedule + Craig draft-and-confirm
-- **TASK-058** — Sabrina passive context tracking
+- **TASK-058** — Mira passive context tracking
 
 All can now be triggered cleanly via `djinn task 55`, `djinn task 56`, etc.
 

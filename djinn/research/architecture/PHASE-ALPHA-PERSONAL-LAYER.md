@@ -96,7 +96,7 @@ CREATE TABLE black_book_log (
 Seed data on install:
 - sobriety: start_date = '2026-03-01', substance = 'alcohol'
 - habits: writing (daily), black_book (daily), exercise (daily)
-- people: Sabrina (partner, archive_threshold=14), Craig (sponsor, no archiving)
+- people: Mira (partner, archive_threshold=14), Craig (sponsor, no archiving)
 
 ---
 
@@ -212,13 +212,13 @@ Djinn never opens this door. Javier always holds the key.
 
 ---
 
-## Component 6: Sabrina Context Tracking
+## Component 6: Mira Context Tracking
 
 Passive listener in Telegram gateway:
-- Scan each incoming message for: "Sabrina", "Sammy", "she", "her" (context-aware)
-- On match: `djinn-personal-db people mention Sabrina`
+- Scan each incoming message for: "Mira", "Mira", "she", "her" (context-aware)
+- On match: `djinn-personal-db people mention Mira`
 - Weekly check (Sunday morning): if `last_mentioned > 14 days` → flag in briefing with:
-  "Sabrina hasn't come up in two weeks. Archiving her context for now — say her name to bring it back."
+  "Mira hasn't come up in two weeks. Archiving her context for now — say her name to bring it back."
 - Archive doesn't delete — moves to `people.archived = 1`. One mention restores her.
 
 ---
@@ -236,7 +236,7 @@ Passive listener in Telegram gateway:
 - TASK-058: Black Book vault setup confirmed + gitignore verified
 
 ### Sprint 3
-- TASK-059: Sabrina context tracking
+- TASK-059: Mira context tracking
 - TASK-060: Pattern notice — weekly theme surfacing from Black Book (local only)
 
 ---

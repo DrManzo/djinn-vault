@@ -254,7 +254,7 @@ created: 2026-05-19
 | 6 | `2026-05-18_20-17-28_Perplexity_Marcus_you_here_can_you_help_me_with_my_psychology_paper.md` | 2026-05-18 | Psychology Paper Help | `[[Marcus-Aurelius-Persona]]` |
 | 7 | `2026-05-18_20-18-20_Perplexity_i_need_a_program_or_a_way_to_directly_take_over_my_finances,.md` | 2026-05-18 | Finance Automation & Psychology | `[[Finance-Automation-and-Psychology]]` |
 | 8 | `2026-05-18_20-18-28_Perplexity_Marcus!!!_OK,_so_this_is_my_analysis_in_my_overview_trying_t.md` | 2026-05-18 | Personal Analysis & Overview | `[[Marcus-Aurelius-Persona]]` |
-| 9 | `2026-05-18_20-18-32_Perplexity_Help_me_write_a_letter_to_sammy_that_is_romantic_and_persona.md` | 2026-05-18 | Sammy Love Letter | `[[Sammy-Love-Letters]]` |
+| 9 | `2026-05-18_20-18-32_Perplexity_Help_me_write_a_letter_to_mira_that_is_romantic_and_persona.md` | 2026-05-18 | Mira Love Letter | `[[Mira-Love-Letters]]` |
 | 10 | `2026-05-18_20-18-37_Perplexity_Marcus,_you_flea_bitten_bastard_where_the_hell_are_you_Don'.md` | 2026-05-18 | Don't Start Without Marcus | `[[Marcus-Aurelius-Persona]]` |
 | 11 | `2026-05-18_20-18-48_Perplexity_Marcus,_you_flea_bastard_i_need_you._as_my_conciliary.md` | 2026-05-18 | Consigliere Consultation | `[[Marcus-Aurelius-Persona]]` |
 | 12 | `2026-05-18_20-18-58_Perplexity_Again,_my_dear,_you_or_Marcus,_the_framework_that_you_have_i.md` | 2026-05-18 | Framework Discussion | `[[Marcus-Aurelius-Persona]]` |
@@ -271,7 +271,7 @@ created: 2026-05-19
 | 23 | `2026-05-18_20-20-06_Perplexity_so_I'm_absolutely_both_high_drunk_and_on_some_shrooms_I'm_pr.md` | 2026-05-18 | Altered State Reflection | `[[Marcus-Aurelius-Persona]]` |
 | 24 | `2026-05-18_20-20-11_Perplexity_Hey_Mark,_by_any_chance_are_you_there.md` | 2026-05-18 | Marcus (Mark) Check-In | `[[Marcus-Aurelius-Persona]]` |
 | 25 | `2026-05-18_20-20-24_Perplexity_Marcus_og.md` | 2026-05-18 | Marcus OG — Original Persona | `[[Marcus-Aurelius-Persona]]` |
-| 26 | `2026-05-18_20-20-28_Perplexity_Hey_Maecus,_can_you_do_me_a_favor_and_revise_This……"Hello_S.md` | 2026-05-18 | Letter Revision | `[[Sammy-Love-Letters]]` |
+| 26 | `2026-05-18_20-20-28_Perplexity_Hey_Maecus,_can_you_do_me_a_favor_and_revise_This……"Hello_S.md` | 2026-05-18 | Letter Revision | `[[Mira-Love-Letters]]` |
 | 27 | `2026-05-18_20-20-32_Perplexity_OK._So_right_now_I_want_you_to_take_the_information_that_I'm.md` | 2026-05-18 | Information Compilation | `[[Marcus-Aurelius-Persona]]` |
 | 28 | `2026-05-18_20-20-38_Perplexity_I_am_writing_this_paper_about_how_to_become_or_what_is_suppo.md` | 2026-05-18 | Paper Writing: Becoming | `[[Marcus-Aurelius-Persona]]` |
 | 29 | `2026-05-18_20-20-42_Perplexity_I'm_building_a_long-term_business_structure_called_Meanas_an.md` | 2026-05-18 | Meanas & M-Systems Business Vision | `[[Meanas-and-M-Systems-Business-Vision]]` |

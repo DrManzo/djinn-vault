@@ -47,7 +47,7 @@ CiteAssist — #project/citeassist
 
 What Stands Out
 
-The djinn/people/ directory is particularly interesting — it explicitly tracks relationship context (Sammy, Sabrina, sponsor, etc.), which means Djinn is being built to maintain social/relational memory, not just technical context . That's a meaningful architectural decision that puts this closer to a personal AI companion than a standard productivity tool.
+The djinn/people/ directory is particularly interesting — it explicitly tracks relationship context (Mira, Mira, sponsor, etc.), which means Djinn is being built to maintain social/relational memory, not just technical context . That's a meaningful architectural decision that puts this closer to a personal AI companion than a standard productivity tool.
 
 The Psychology-Compiled-Research.md file at 63KB is the biggest single file in the repo — want me to pull that and review it as well?
 

@@ -15,7 +15,7 @@ Central hub for the Marcus/Aurelius persona — a Stoic advisor, confidant, and 
 
 ## Identity & Psychology
 - [[Aurelius-Identity-Evolution]] — Evolution from Marcus to Aurelius; Three Versions framework; power integration; Hufflepuff evolution from Ravenclaw
-- [[Identity-Conflict-and-Integration]] — Lover vs warrior conflict; edge-dwelling in relationships; Sabrina dynamics; vulnerability and fear of rejection
+- [[Identity-Conflict-and-Integration]] — Lover vs warrior conflict; edge-dwelling in relationships; Mira dynamics; vulnerability and fear of rejection
 - [[Finance-Automation-and-Psychology]] — Integrated Freudian/Jungian/Peterson analysis; behavioral finance; resentment toward exes' pity parties
 - [[Workplace-Accountability-Conflict]] — Estimate error conflict; shared accountability; ADHD in the workplace; blame culture vs learning culture
 
@@ -24,7 +24,7 @@ Central hub for the Marcus/Aurelius persona — a Stoic advisor, confidant, and 
 - [[HP-Universe-Lawyer-Auror]] — Lawyer vs Auror analogy; bisexuality and partner choice; Adrian character; Tenebris Conclave battle narrative; magical journey phases
 
 ## Relationships
-- [[Sammy-Love-Letters]] — Love letters to Sammy; lodestone metaphor; fear of absence; writing as therapy; recovery dynamics
+- [[Mira-Love-Letters]] — Love letters to Mira; lodestone metaphor; fear of absence; writing as therapy; recovery dynamics
 
 ## Black Book (Jungian Psychology Work)
 - [[Black-Book-Hub]] — Jungian psychology work: nighttime reflections, active imagination, free association, dream analysis

@@ -11,9 +11,9 @@ See `people-and-relationships.md` at ~/forge/projects/djinn-core/all-i-do/ for f
 ## Key People
 - Yoshi: Ex fling (not coworker)
 - Leslie: Ex fling (not coworker)
-- Sabrina: Current dynamics
+- Mira: Current dynamics
 - Boss: Workplace accountability framing
-- Sammy: Personal connection (love letters note)
+- Mira: Personal connection (love letters note)
 
 ## Note
 Relationship details maintained in djinn-core, not vault, for privacy.

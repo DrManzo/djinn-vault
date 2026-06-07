@@ -1394,7 +1394,7 @@ echo "Structure:"; ls /mnt/archive/
 **Seed on first run (if DB empty):**
 - sobriety: start_date='2026-03-01', substance='alcohol', active=1
 - habits: writing (daily), black_book (daily), exercise (daily)
-- people: Sabrina (role='partner', archive_threshold_days=14), Craig (role='sponsor', archive_threshold_days=9999)
+- people: Mira (role='partner', archive_threshold_days=14), Craig (role='sponsor', archive_threshold_days=9999)
 
 **CLI interface:**
 ```
@@ -1550,7 +1550,7 @@ def handle_reflect(match, _raw):
         if path.exists():
             content = path.read_text()[:3000]
             # Strip names for privacy before Ollama
-            for name in ["Sabrina", "Sammy", "Craig"]:
+            for name in ["Mira", "Craig"]:
                 content = content.replace(name, "[person]")
             prompt = f"Read this journal entry. Ask ONE question about it. Do not interpret. Do not summarize. Do not offer insight. ONE question only:\n\n{content}"
             out, _, _ = run_shell(f'ollama run qwen2.5:7b "{prompt}"', timeout=60)
@@ -1625,9 +1625,9 @@ cat ~/.config/djinn/aa-meetings.json  # → valid JSON, empty array or placehold
 - priority: normal
 - trigger: manual
 - created: 2026-06-01 by Claude
-- context: PHASE-ALPHA Sprint 2 — Sabrina context tracking
+- context: PHASE-ALPHA Sprint 2 — Mira context tracking
 
-**Goal:** Passive listener in Telegram gateway that tracks last mention of Sabrina (and Sammy). Weekly auto-archive if not mentioned.
+**Goal:** Passive listener in Telegram gateway that tracks last mention of Mira (and Mira). Weekly auto-archive if not mentioned.
 
 **Depends on:** TASK-054, TASK-056 complete
 
@@ -1637,8 +1637,7 @@ cat ~/.config/djinn/aa-meetings.json  # → valid JSON, empty array or placehold
 
 ```python
 TRACKED_PEOPLE = {
-    "sabrina": "Sabrina",
-    "sammy": "Sabrina",   # same person, different name
+    "mira": "Mira",
 }
 
 def scan_for_people_mentions(text):
@@ -1669,7 +1668,7 @@ out, _, _ = run_shell("djinn-personal-db people check")
 Restore: when mention is detected for an archived person → `run_shell(f"djinn-personal-db people restore '{name}'")`
 
 **Success criteria:**
-- Send a test message containing "Sabrina" → `djinn-personal-db people check` shows last_mentioned = today
+- Send a test message containing "Mira" → `djinn-personal-db people check` shows last_mentioned = today
 - `djinn-personal-db people check` prints correctly
 
 **Report back:** paste people check output after test mention

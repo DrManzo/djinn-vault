@@ -64,5 +64,5 @@ Our separate journeys, wherever they lead,
 Are richer for the love we've helped to seed.
 
 ## Related
-- [[A-Romantic-Letter-To-Sammy]] — emotional resonance
-- [[Sammy-Love-Letters]] — thematic overlap
+- [[A-Romantic-Letter-To-Mira]] — emotional resonance
+- [[Mira-Love-Letters]] — thematic overlap

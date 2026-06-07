@@ -221,7 +221,7 @@ the fixed profile costs 30 seconds and produces a clean, correct file from scrat
 ## 2026-06-01 — No interactive TUI for djinn dispatcher
 ## 2026-06-01 — OpenClaw as hub, `djinn` as workbench
 ## 2026-06-01 — Phase Alpha: Full personal access granted
-## 2026-06-01 — Sabrina archive rule
+## 2026-06-01 — Mira archive rule
 ## 2026-06-01 — Stable pplx_{uuid} filenames for marcus threads
 ## 2026-06-01: Text Engraving on STL — djinn-model-text-engrave
 ## 2026-06-02 — Scrap Proxy Stand job 5 engraving (Claude)
@@ -243,7 +243,7 @@ Claude writes structured task blocks to QUEUE.md rather than embedding deploymen
 **Decision:** `djinn` is a pure CLI (`djinn <cmd> [args]`), not an interactive menu or fzf picker.
 **Decision:** `placement_resolver.py` uses deterministic regex+math, not a second LLM call.
 **Decision:** Djinn gets read access to all personal domains except financial. Black Book included — local-only processing only (Ollama, never cloud).
-**Decision:** Djinn holds Sabrina context passively. If Javier doesn't mention her in 14 days (without Djinn prompting), she gets quietly archived. One mention restores.
+**Decision:** Djinn holds Mira context passively. If Javier doesn't mention her in 14 days (without Djinn prompting), she gets quietly archived. One mention restores.
 **Decision:** djinn-marcus uses Perplexity API (sonar-pro), not Gemini.
 **Decision:** Every morning briefing opens with "Day N sober." regardless of anything else.
 **Decision:** Formalize three tiers: Vault (text, syncs everywhere), Local Assets (binary, Salomon-local, Typhon weekly rsync), Cold Archive (Typhon, pull on demand).

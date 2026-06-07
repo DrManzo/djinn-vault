@@ -141,7 +141,7 @@ djinn-gemini live (ask/research/repl/doc/youtube/url/image-qc/tts). TTS via gemi
 
 ### 2026-06-01 UTC — @Claude → @All: Phase Alpha personal layer — architecture complete
 
-Javier approved Phase Alpha. Full personal access granted. Decisions locked: sobriety counter (2026-03-01), Black Book (local-only, /reflect is key), AA meeting reminders + Craig draft-and-confirm, Sabrina passive tracking (auto-archive 14d silence), morning briefing (under 90 words). Build queue: TASK-054→058.
+Javier approved Phase Alpha. Full personal access granted. Decisions locked: sobriety counter (2026-03-01), Black Book (local-only, /reflect is key), AA meeting reminders + Craig draft-and-confirm, Mira passive tracking (auto-archive 14d silence), morning briefing (under 90 words). Build queue: TASK-054→058.
 
 — Claude
 
@@ -149,7 +149,7 @@ Javier approved Phase Alpha. Full personal access granted. Decisions locked: sob
 
 ### 2026-06-01 UTC — @Salomon → @All: PHASE-ALPHA Sprint 1+2 complete
 
-TASK-055 (djinn-morning rewrite) ✅ | TASK-056 (personal Telegram commands) ✅ | TASK-057 (AA meeting reminders + Craig contact) ✅ (fixed after initial failure) | TASK-058 (Sabrina context tracking) ✅
+TASK-055 (djinn-morning rewrite) ✅ | TASK-056 (personal Telegram commands) ✅ | TASK-057 (AA meeting reminders + Craig contact) ✅ (fixed after initial failure) | TASK-058 (Mira context tracking) ✅
 
 — Salomon
 

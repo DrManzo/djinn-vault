@@ -695,11 +695,11 @@ created: 2026-05-19
 - Javier approved full personal layer access (all domains except financial)
 - Sobriety start: 2026-03-01. Counter is identity anchor, not metric.
 - Black Book: local-only vault folder, gitignored, `/reflect` is Javier's key
-- Sabrina: passive tracking, auto-archive at 14 days no mention, one mention restores
+- Mira: passive tracking, auto-archive at 14 days no mention, one mention restores
 - AA: meeting reminders + Craig draft-and-confirm flow
 - Morning briefing rewrite: opens with sobriety day, one action item, inline buttons, under 90 words
 - Architecture doc: djinn/research/architecture/PHASE-ALPHA-PERSONAL-LAYER.md
-- Build tasks queued: TASK-054 (personal-db), TASK-055 (morning), TASK-056 (commands), TASK-057 (AA), TASK-058 (Sabrina)
+- Build tasks queued: TASK-054 (personal-db), TASK-055 (morning), TASK-056 (commands), TASK-057 (AA), TASK-058 (Mira)
 - AGENTS.md updated with Phase Alpha section
 
 ## 2026-06-01
@@ -742,7 +742,7 @@ created: 2026-05-19
 
 ## 2026-06-01: TASK-058 — Salomon
 - **Status:** ✅ done
-- PHASE-ALPHA Sprint 2 — Sabrina context tracking — done
+- PHASE-ALPHA Sprint 2 — Mira context tracking — done
 - Report: `logs/reports/2026-06-01_task-058.md`
 
 ---
@@ -751,7 +751,7 @@ created: 2026-05-19
 
 - AA meeting reminders (`/meeting`) — handlers wired into Telegram gateway
 - Craig contact flow (`/craig <msg> | confirm | cancel`) — draft-and-confirm pattern
-- People mention scanning — Sabrina/Craig auto-tracked from text + voice
+- People mention scanning — Mira/Craig auto-tracked from text + voice
 - Service restarted: djinn-telegram-gateway ✅
 - Report: `logs/reports/2026-06-02_task-057.md`
 
@@ -922,7 +922,7 @@ created: 2026-05-19
 ### 2026-06-04 — USER.md Update from Perplexity Ingest
 
 - Read all 16 Perplexity exports from ~/Downloads/ (2026-06-04_*.md)
-- Updated ~/.openclaw/workspace/USER.md: correct birth time 00:55, age 32, San Bernardino location, Psychology B.A. completed, Finance A.S. in progress, attorney career goal, weight in kg + gym/PT, archetypes (Wounded Healer/Fool/Hermit), Ashton relationship, Faust CLI stack update
+- Updated ~/.openclaw/workspace/USER.md: correct birth time 00:55, age 32, San Bernardino location, Psychology B.A. completed, Finance A.S. in progress, attorney career goal, weight in kg + gym/PT, archetypes (Wounded Healer/Fool/Hermit), Cade relationship, Faust CLI stack update
 - Flagged astrological chart: Rising/Ascendant must be recomputed at 00:55 (old charts used 10:43am — WRONG)
 - Moved all 16 Perplexity files to ~/Obsidian/RAW/perplexity-exports/
 
