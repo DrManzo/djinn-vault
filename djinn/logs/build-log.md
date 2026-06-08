@@ -1194,3 +1194,12 @@ created: 2026-05-19
 - **Report:** `logs/reports/2026-06-07_bug-clerk-watch-wrong-raw-path.md`
 
 *— Claude*
+
+## 2026-06-08 — TASK-070 Audit (Claude)
+
+- Audited all four TASK-070 fixes
+- Fixes 2/3/4 already applied in vault (VAULT_PATH defaults + vault-integrity exit code)
+- Fix 1 (djinn-route Typhon IP .113→.150) noted in COMMS for Salomon — script not vault-tracked
+- TASK-070 marked done
+
+— Claude

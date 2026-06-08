@@ -2282,7 +2282,8 @@ djinn-comms-auto --session-end --topic "gateway-phase1"
 
 ## TASK-070
 - assigned_to: marcus
-- status: pending
+- status: done
+- completed: 2026-06-08 by Claude (audit — fixes 2/3/4 already applied; fix 1 noted in COMMS for Salomon)
 - priority: high
 - trigger: manual
 - created: 2026-06-06 by Claude
