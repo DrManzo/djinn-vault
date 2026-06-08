@@ -1212,3 +1212,13 @@ created: 2026-05-19
 - Logged to COMMS.md
 
 — Salomon
+
+## 2026-06-08 — Virtual Ender-3 V3 Plus (Claude)
+- Built virtual printer on Salomon: Docker + SimulAVR + real Klipper + Moonraker
+- Config: CoreXZ, 300×300×330, bed mesh 6×6, PA=0.04, input shaper EI
+- Wired into `forge printer [start|stop|status|...]`
+- Systemd auto-start: `djinn-virtual-printer.service` enabled
+- API live at localhost:7125 — full Moonraker interface
+- Doc: `djinn/printer/VIRTUAL-PRINTER.md`
+
+— Claude

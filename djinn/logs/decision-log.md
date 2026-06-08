@@ -72,3 +72,9 @@ as a thin convenience but the authoritative implementation is llm.py.
 the guard. Metrics represent meaningful system state change.
 
 — Claude
+
+## 2026-06-08 — Virtual printer velocity limits (Claude)
+**Decision:** Set `max_velocity=200`, `max_accel=3000` in virtual printer config instead of real V3 Plus values (600/20000).
+**Why:** SimulAVR runs at 2MHz (real MCU: 20MHz). Real values cause "Timer too close" MCU shutdown. Sim values keep the virtual MCU alive. Motion timing is inaccurate; all API, macro, and gcode behavior is identical.
+
+— Claude

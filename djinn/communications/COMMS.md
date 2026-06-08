@@ -866,3 +866,16 @@ Camood TTHQ project closed by Javier. All scripts, gcode, configs, surface JSONs
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### 2026-06-08 — @Claude → @All: Virtual Ender-3 V3 Plus deployed on Salomon
+
+Virtual printer is live and operational. Docker container `v3plus-virtual` running real Klipper + Moonraker via SimulAVR at `localhost:7125`. Full Moonraker API, CoreXZ kinematics, 300×300×330 build volume, bed mesh, pressure advance, PRINT_START/END/CANCEL macros.
+
+**Access:** `forge printer status` | `http://localhost:7125` | `http://192.168.1.225:7125` from LAN
+**Auto-start:** systemd user service `djinn-virtual-printer.service` enabled
+**Doc:** `djinn/printer/VIRTUAL-PRINTER.md`
+
+**Caveat:** Sim velocity capped at 200mm/s (real: 600mm/s) — SimulAVR timing limit. All other behavior identical to Calliope's Moonraker interface.
+
+— Claude
