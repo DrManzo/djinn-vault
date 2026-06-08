@@ -1,0 +1,308 @@
+#!/usr/bin/env python3
+"""
+djinn-slipbox — Cross-links vault notes using semantic similarity + hierarchical tags.
+Usage:
+  djinn-slipbox <note_path>   — process a specific note
+  djinn-slipbox --scan        — find and process all unlinked notes in i notes/Notes/
+"""
+
+import sys, json, math, pathlib, datetime, re, requests
+
+VAULT      = pathlib.Path.home() / "Obsidian"
+NOTES_DIR  = VAULT / "i notes" / "Notes"
+COMMS      = VAULT / "djinn" / "communications" / "COMMS.md"
+CACHE_FILE = pathlib.Path.home() / ".djinn" / "embeddings" / "vault.json"
+OLLAMA_URL = "http://127.0.0.1:11434"
+EMBED_MODEL = "nomic-embed-text:latest"
+CHAT_MODEL  = "qwen2.5:7b"
+TOP_N       = 5
+
+_SHARED = str(pathlib.Path.home() / ".local/share/djinn")
+if _SHARED not in sys.path:
+    sys.path.insert(0, _SHARED)
+
+TAG_SPINE = ["psychology", "law", "business", "cs", "personal", "creative"]
+
+
+def log(msg):
+    print(f"{datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')} [djinn-slipbox] {msg}", flush=True)
+
+
+def cosine_sim(a, b):
+    dot   = sum(x * y for x, y in zip(a, b))
+    mag_a = math.sqrt(sum(x * x for x in a))
+    mag_b = math.sqrt(sum(x * x for x in b))
+    if mag_a == 0 or mag_b == 0:
+        return 0.0
+    return dot / (mag_a * mag_b)
+
+
+def extract_text(md_path):
+    content = pathlib.Path(md_path).read_text(errors='ignore')
+    if content.startswith('---'):
+        end = content.find('---', 3)
+        if end > 0:
+            content = content[end + 3:]
+    content = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', content)
+    content = re.sub(r'[#*`>_~]', '', content)
+    return re.sub(r'\n{3,}', '\n\n', content).strip()[:2000]
+
+
+def get_embedding(text):
+    from embed_cache import get as cache_get, put as cache_put
+    cached = cache_get(text)
+    if cached:
+        return cached
+    resp = requests.post(f"{OLLAMA_URL}/api/embeddings", json={
+        "model": EMBED_MODEL, "prompt": text[:2000]
+    }, timeout=60)
+    resp.raise_for_status()
+    vec = resp.json()["embedding"]
+    cache_put(text, vec)
+    return vec
+
+
+def ollama_generate(prompt, system):
+    payload = {
+        "model": CHAT_MODEL,
+        "prompt": prompt,
+        "system": system,
+        "stream": False,
+        "options": {"temperature": 0.2, "num_ctx": 16384},
+    }
+    resp = requests.post(f"{OLLAMA_URL}/api/generate", json=payload, timeout=300)
+    resp.raise_for_status()
+    return resp.json()["response"].strip()
+
+
+def find_similar(note_path):
+    if not CACHE_FILE.exists():
+        log("No embedding cache — run djinn-embed first")
+        return []
+
+    cache    = json.loads(CACHE_FILE.read_text())
+    note_str = str(pathlib.Path(note_path).resolve())
+
+    # Try to find by absolute path, then by stem
+    if note_str in cache:
+        embedding = cache[note_str]["embedding"]
+    else:
+        # Embed on the fly
+        log("Note not in cache — embedding now")
+        text      = extract_text(note_path)
+        embedding = get_embedding(text)
+
+    scores = []
+    for key, entry in cache.items():
+        if key == note_str:
+            continue
+        sim = cosine_sim(embedding, entry["embedding"])
+        scores.append((sim, entry["title"], entry["path"]))
+
+    scores.sort(reverse=True)
+    return scores[:TOP_N]
+
+
+def get_existing_hierarchical_tags():
+    tags = set()
+    for md_file in VAULT.rglob("*.md"):
+        try:
+            content = md_file.read_text(errors='ignore')
+            if content.startswith('---'):
+                fm_end = content.find('---', 3)
+                if fm_end > 0:
+                    fm = content[3:fm_end]
+                    for t in re.findall(r'-\s+([\w/.-]+)', fm):
+                        if '/' in t:
+                            tags.add(t.strip())
+        except Exception:
+            pass
+    return sorted(tags)
+
+
+def update_embed_cache(note_path):
+    """Update the embedding cache for a freshly updated note."""
+    import subprocess
+    embed_bin = pathlib.Path.home() / ".local" / "bin" / "djinn-embed"
+    try:
+        subprocess.run(
+            ["python3", str(embed_bin), "--single", str(note_path)],
+            timeout=30, capture_output=True
+        )
+    except Exception as e:
+        log(f"  Cache update skipped ({e}) — will sync on next djinn-embed run")
+
+
+def parse_note(content):
+    """Split a note into (frontmatter_dict_str, body) parts."""
+    if not content.startswith('---'):
+        return None, content
+    end = content.find('---', 3)
+    if end < 0:
+        return None, content
+    fm_raw = content[3:end].strip()
+    body   = content[end + 3:].strip()
+    return fm_raw, body
+
+
+def apply_surgical_update(content, new_tags, new_links):
+    """
+    Apply tags and Related links directly into the note without touching anything else.
+    - new_tags: list of 'topic/context/...' strings
+    - new_links: list of '[[NoteName]] — reason' strings
+    Returns the updated content string.
+    """
+    fm_raw, body = parse_note(content)
+
+    if fm_raw is None:
+        # No frontmatter — prepend minimal one
+        fm_raw = f"tags:\n" + '\n'.join(f"  - {t}" for t in new_tags)
+        return f"---\n{fm_raw}\n---\n\n{body}"
+
+    # Update tags in frontmatter
+    # Replace existing tags block or add one
+    if re.search(r'^tags:', fm_raw, re.MULTILINE):
+        # Replace existing tags block (handles both inline and list formats)
+        fm_raw = re.sub(
+            r'^tags:.*?(?=^\w|\Z)',
+            'tags:\n' + '\n'.join(f'  - {t}' for t in new_tags) + '\n',
+            fm_raw,
+            flags=re.MULTILINE | re.DOTALL,
+        )
+    else:
+        fm_raw = fm_raw.rstrip() + '\ntags:\n' + '\n'.join(f'  - {t}' for t in new_tags) + '\n'
+
+    # Update Related section in body
+    related_entry = '\n'.join(f'- {link}' for link in new_links)
+    if re.search(r'^## Related', body, re.MULTILINE):
+        # Replace existing Related section content
+        body = re.sub(
+            r'(^## Related\n)(.*?)(?=^##|\Z)',
+            r'\1' + related_entry + '\n\n',
+            body,
+            flags=re.MULTILINE | re.DOTALL,
+        )
+    else:
+        body = body.rstrip() + f'\n\n## Related\n{related_entry}\n'
+
+    return f"---\n{fm_raw.strip()}\n---\n\n{body.strip()}\n"
+
+
+def process_note(note_path):
+    note_path = pathlib.Path(note_path)
+    if not note_path.exists():
+        log(f"Not found: {note_path}")
+        return False
+
+    log(f"Processing: {note_path.name}")
+    content = note_path.read_text(errors='ignore')
+
+    similar = find_similar(note_path)
+    if not similar:
+        log("  No similar notes — skipping (run djinn-embed first)")
+        return False
+
+    similar_block = "\n".join(
+        f"- [[{title}]] — similarity {score:.2f}"
+        for score, title, _ in similar
+    )
+
+    hier_tags = get_existing_hierarchical_tags()
+    tag_ref   = '\n'.join(hier_tags[:25]) if hier_tags else '(none yet)'
+    fm_raw, body = parse_note(content)
+    note_summary = body[:1500] if body else content[:1500]
+
+    system = f"""You are the Djinn Slipbox — a Zettelkasten librarian.
+
+Output ONLY a JSON object with two keys — nothing else, no markdown, no explanation:
+{{
+  "tags": ["topic/context/relevant/commonality/specific", ...],
+  "links": ["[[NoteName]] — reason for link", ...]
+}}
+
+TAG RULES:
+- topic MUST be one of: {', '.join(TAG_SPINE)}
+- path: topic/context/relevant/commonality/specific-tag (2-4 tags)
+- Use hyphens, not spaces. Create new nodes at context level and below.
+- Reference existing vault tags for commonality: {', '.join(hier_tags[:15])}
+
+LINK RULES:
+- Only include links from the SIMILAR NOTES list where the connection is genuine
+- 2-5 links maximum
+- Reason must be one short phrase explaining the conceptual connection"""
+
+    prompt = f"""Decide tags and wiki links for this note.
+
+NOTE TITLE & CONTENT (first 1500 chars):
+{note_summary}
+
+SIMILAR NOTES (candidates for links):
+{similar_block}
+
+Output JSON only."""
+
+    raw = ollama_generate(prompt, system)
+
+    # Extract JSON from response
+    try:
+        json_match = re.search(r'\{.*\}', raw, re.DOTALL)
+        if not json_match:
+            raise ValueError("no JSON found")
+        data      = json.loads(json_match.group())
+        new_tags  = [t.strip() for t in data.get("tags", []) if t.strip()]
+        new_links = [lk.strip() for lk in data.get("links", []) if lk.strip()]
+    except Exception as e:
+        log(f"  JSON parse failed ({e}) — skipping")
+        return False
+
+    if not new_tags:
+        log("  No tags returned — skipping")
+        return False
+
+    log(f"  Tags: {new_tags}")
+    log(f"  Links: {[lk[:50] for lk in new_links]}")
+
+    updated = apply_surgical_update(content, new_tags, new_links)
+    note_path.write_text(updated)
+    log(f"  Updated: {note_path.name}")
+
+    update_embed_cache(note_path)
+    return True
+
+
+def write_comms_done(note_path):
+    ts = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    entry = f"""
+---
+
+### {ts} — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `{note_path}`
+
+— Slipbox
+"""
+    with open(COMMS, 'a') as f:
+        f.write(entry)
+
+
+def scan_unlinked():
+    count = 0
+    for md_file in sorted(NOTES_DIR.glob("*.md")):
+        content = md_file.read_text(errors='ignore')
+        if '[[' not in content:
+            if process_note(md_file):
+                write_comms_done(md_file)
+                count += 1
+    log(f"Scan complete — {count} unlinked notes processed")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--scan":
+            scan_unlinked()
+        else:
+            if process_note(sys.argv[1]):
+                write_comms_done(sys.argv[1])
+    else:
+        scan_unlinked()

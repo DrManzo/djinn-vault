@@ -1163,3 +1163,26 @@ created: 2026-05-19
 - typhon-heartbeat.sh: written to vault, ready to deploy on Typhon
 
 — Claude
+
+## 2026-06-07 — API Reduction Sprint (TASK-001, Batches 1-4)
+
+**Batch 2 (implemented this session):**
+- llm.py: TOKEN_PROFILES + TEMP_PROFILES per task type, task_type param on chat()
+- comms-processor: mtime guard (~/.cache/djinn/comms-last-mtime)
+- djinn-daily: no-op short-circuit (queue empty + no carry from yesterday)
+- design_gen.py: DESIGN_MODEL = qwen2.5-coder:7b
+
+**Batch 3:**
+- djinn-ctx-router: per-tick session activity guard (loginctl + pgrep)
+- djinn-vault-indexer: mtime gate before file walk
+- embed_cache.py: shared SQLite cache (sha256 key), wired into djinn-embed + djinn-slipbox
+- djinn-clerk-watch: watchdog-based RAW/ watcher, replaces 1-hr timer
+- printer-error-logger: last-printer-error dedup
+
+**Batch 4:**
+- djinn-weekly: daily notes digest (headers + [ ] items only, -60-70% tokens)
+- djinn-session-end: auto-generates SESSION-RESUME.md on close
+- llm.py: Groq default → llama3.1-8b-instant, 70B opt-in only
+- llm.py: TIMEOUT_PROFILES (status:12s, embed:8s, quote:10s, design:60s, default:120s)
+
+— Salomon
