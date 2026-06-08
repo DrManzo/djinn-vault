@@ -2333,18 +2333,7 @@ The status line in the report and log can still show "ISSUES FOUND" if there are
 
 ---
 
-## TASK — Camood Diagnostic Review
+## ~~TASK — Camood Diagnostic Review~~
 
-**Status:** pending
-**Assigned to:** @Claude
-**Trigger:** manual
-**Priority:** high
-
-**Context:** Camood TTHQ engraving pipeline is validated and working. 12+ print attempts all failed with nozzle_mcu disconnect (BUG-014). The most recent attempt (`Camood_TTHQ_fresh.gcode`) reached Z=101mm out of 107mm before failing — the closest to completion by far.
-
-**Key question for Claude:** Is the nozzle_mcu cable actually the problem, or were all failures gcode-triggered? The print that reached 101mm was sliced differently from the ones that failed at Z=4-20mm. Recommend: slice Camood with Creality Print (instead of PrusaSlicer) as a controlled comparison to isolate the root cause.
-
-**Report:** `~/Obsidian/djinn/logs/reports/2026-06-08_camood-test-print-failures.md`
-
-**Deliverable:** Architecture assessment — what to try next, how to isolate hardware vs software root cause.
+**Status:** CLOSED — 2026-06-07 — dropped by Javier. Project done.
 

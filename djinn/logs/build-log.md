@@ -1203,3 +1203,12 @@ created: 2026-05-19
 - TASK-070 marked done
 
 — Claude
+
+## 2026-06-08 — KSR FDM test print on Calliope (Salomon)
+
+- Uploaded and started `ksr_fdmtest_v4_by_Autodesk_1h58m.gcode` (10MB) from USB drive
+- Moonraker was down initially (printer had just rebooted) — recovered
+- Added job 10 to `print-queue.json`, started `djinn-print-monitor` background poller (PID 666681)
+- Logged to COMMS.md
+
+— Salomon
