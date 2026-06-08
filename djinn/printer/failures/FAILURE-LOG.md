@@ -814,3 +814,8 @@ Each entry: one incident. Append only.
   Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
 ", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
 "]}
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_fresh.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-08 04:29:38 UTC
