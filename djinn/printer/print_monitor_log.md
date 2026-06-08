@@ -210,3 +210,5 @@
 | 2026-06-08 06:25 UTC | printing | 0.0% | 206.0 | 205 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
 | 2026-06-08 06:26 UTC | printing | 0.0% | 220.9 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
 | 2026-06-08 06:27 UTC | printing | 0.0% | 220.3 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 06:28 UTC | printing | 0.0% | 216.6 | 216 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 06:29 UTC | printing | 0.0% | 220.1 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
