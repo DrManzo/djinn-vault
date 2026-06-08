@@ -1,0 +1,235 @@
+#!/home/drmanzo/.pyenv/versions/3.11.11/bin/python3
+"""
+djinn-vault-indexer — indexes the Obsidian vault into ChromaDB using nomic-embed-text.
+
+Usage:
+  djinn-vault-indexer              # full index (or incremental if index exists)
+  djinn-vault-indexer --full       # force full reindex
+  djinn-vault-indexer --status     # show index stats
+"""
+
+import os
+import sys
+import json
+import hashlib
+import time
+import argparse
+import requests
+import chromadb
+from pathlib import Path
+from datetime import datetime
+
+VAULT_DIR   = Path.home() / "Obsidian"
+INDEX_DIR   = Path.home() / ".local/share/djinn/vault-index"
+STATE_FILE  = INDEX_DIR / "index-state.json"
+OLLAMA_URL  = "http://localhost:11434/api/embed"
+EMBED_MODEL = "nomic-embed-text"
+COLLECTION  = "vault_notes"
+CHUNK_SIZE  = 800
+CHUNK_OVERLAP = 100
+CACHE_DIR   = Path.home() / ".cache/djinn"
+LAST_RUN_FILE = CACHE_DIR / "vault-indexer-last-run"
+
+SKIP_DIRS = {".git", ".obsidian", "RAW", ".trash"}
+SKIP_FILES = {"COMMS.md"}  # append-only log, too large and low signal density
+
+
+def embed(texts: list[str]) -> list[list[float]]:
+    r = requests.post(OLLAMA_URL, json={"model": EMBED_MODEL, "input": texts}, timeout=60)
+    r.raise_for_status()
+    return r.json()["embeddings"]
+
+
+def chunk_text(text: str, path: str) -> list[dict]:
+    """Split markdown into overlapping chunks, preserving header context."""
+    lines = text.splitlines()
+    chunks = []
+    current = []
+    current_len = 0
+    current_header = ""
+
+    for line in lines:
+        if line.startswith("#"):
+            current_header = line.strip("# ").strip()
+        current.append(line)
+        current_len += len(line) + 1
+
+        if current_len >= CHUNK_SIZE:
+            chunk_text = "\n".join(current).strip()
+            if chunk_text:
+                chunks.append({
+                    "text": chunk_text,
+                    "header": current_header,
+                    "path": path,
+                })
+            # Keep overlap
+            overlap_start = max(0, len(current) - CHUNK_OVERLAP // 20)
+            current = current[overlap_start:]
+            current_len = sum(len(l) + 1 for l in current)
+
+    if current:
+        chunk_text = "\n".join(current).strip()
+        if chunk_text:
+            chunks.append({"text": chunk_text, "header": current_header, "path": path})
+
+    return chunks
+
+
+def file_hash(path: Path) -> str:
+    return hashlib.md5(path.read_bytes()).hexdigest()
+
+
+def load_state() -> dict:
+    if STATE_FILE.exists():
+        return json.loads(STATE_FILE.read_text())
+    return {}
+
+
+def save_state(state: dict):
+    STATE_FILE.write_text(json.dumps(state, indent=2))
+
+
+def collect_files() -> list[Path]:
+    files = []
+    for root, dirs, filenames in os.walk(VAULT_DIR):
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for fn in filenames:
+            if fn.endswith(".md") and fn not in SKIP_FILES:
+                files.append(Path(root) / fn)
+    return files
+
+
+def index(full=False):
+    INDEX_DIR.mkdir(parents=True, exist_ok=True)
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Mtime gate — skip if no vault files changed since last index
+    if not full:
+        last_run = 0.0
+        if LAST_RUN_FILE.exists():
+            try:
+                last_run = float(LAST_RUN_FILE.read_text().strip())
+            except (ValueError, OSError):
+                pass
+        if last_run > 0:
+            newest = 0.0
+            for root, dirs, _ in os.walk(VAULT_DIR):
+                dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+                try:
+                    mtime = os.path.getmtime(root)
+                    if mtime > newest:
+                        newest = mtime
+                except OSError:
+                    pass
+            if newest <= last_run:
+                print("Vault unchanged since last index — skipping")
+                return
+
+    client = chromadb.PersistentClient(path=str(INDEX_DIR))
+
+    if full:
+        try:
+            client.delete_collection(COLLECTION)
+        except Exception:
+            pass
+
+    col = client.get_or_create_collection(
+        name=COLLECTION,
+        metadata={"hnsw:space": "cosine"}
+    )
+
+    state = {} if full else load_state()
+    files = collect_files()
+    added = updated = skipped = 0
+
+    for fpath in files:
+        rel = str(fpath.relative_to(VAULT_DIR))
+        h = file_hash(fpath)
+
+        if not full and state.get(rel) == h:
+            skipped += 1
+            continue
+
+        try:
+            text = fpath.read_text(errors="replace")
+        except Exception as e:
+            print(f"  skip {rel}: {e}", file=sys.stderr)
+            continue
+
+        if len(text.strip()) < 50:
+            state[rel] = h
+            continue
+
+        chunks = chunk_text(text, rel)
+        if not chunks:
+            state[rel] = h
+            continue
+
+        # Remove old chunks for this file
+        try:
+            existing = col.get(where={"path": rel})
+            if existing["ids"]:
+                col.delete(ids=existing["ids"])
+        except Exception:
+            pass
+
+        # Embed in batches of 16
+        batch_size = 16
+        for i in range(0, len(chunks), batch_size):
+            batch = chunks[i:i+batch_size]
+            texts = [c["text"] for c in batch]
+            try:
+                embeddings = embed(texts)
+            except Exception as e:
+                print(f"  embed error {rel}: {e}", file=sys.stderr)
+                continue
+
+            ids = [f"{rel}::{i+j}" for j, _ in enumerate(batch)]
+            metadatas = [{"path": c["path"], "header": c["header"], "rel": rel} for c in batch]
+            col.add(ids=ids, embeddings=embeddings, documents=texts, metadatas=metadatas)
+
+        action = "updated" if state.get(rel) else "added"
+        if action == "updated":
+            updated += 1
+        else:
+            added += 1
+        state[rel] = h
+
+    save_state(state)
+    total = col.count()
+    print(f"Index: {total} chunks — +{added} added, ~{updated} updated, {skipped} unchanged")
+    LAST_RUN_FILE.write_text(str(time.time()))
+    return total
+
+
+def status():
+    if not INDEX_DIR.exists():
+        print("No index found. Run djinn-vault-indexer to build.")
+        return
+    client = chromadb.PersistentClient(path=str(INDEX_DIR))
+    try:
+        col = client.get_collection(COLLECTION)
+        count = col.count()
+        state = load_state()
+        print(f"Vault index: {count} chunks across {len(state)} files")
+        if STATE_FILE.exists():
+            mtime = datetime.fromtimestamp(STATE_FILE.stat().st_mtime)
+            print(f"Last indexed: {mtime.strftime('%Y-%m-%d %H:%M')}")
+    except Exception:
+        print("Index exists but is empty or corrupt. Run djinn-vault-indexer --full")
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--full", action="store_true", help="Force full reindex")
+    p.add_argument("--status", action="store_true", help="Show index stats")
+    args = p.parse_args()
+
+    if args.status:
+        status()
+    else:
+        index(full=args.full)
+
+
+if __name__ == "__main__":
+    main()

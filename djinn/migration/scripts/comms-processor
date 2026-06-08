@@ -1,0 +1,267 @@
+#!/bin/bash
+# comms-processor — Djinn COMMS.md agent trigger
+# Scans COMMS.md for unprocessed tasks addressed to this agent.
+# Routes tasks through djinn-gate before invoking opencode.
+# Ops-lane tasks skip opencode entirely and run as direct scripts.
+# Runs on a 3-min timer via systemd.
+
+set -euo pipefail
+
+AGENT="${DJINN_AGENT:-Salomon}"
+AGENT_TAG="@${AGENT}"
+VAULT="$HOME/Obsidian"
+COMMS="$VAULT/djinn/communications/COMMS.md"
+STATE_DIR="$HOME/.local/share/djinn"
+STATE_FILE="$STATE_DIR/comms-processor-${AGENT,,}.state"
+OPENCODE="$HOME/.opencode/bin/opencode"
+# No hardcoded model — opencode uses whatever is set in ~/.opencode/opencode.json
+# Override with DJINN_MODEL env var only if you need to force a specific model
+SOUL="$HOME/.openclaw/workspace/SOUL.md"
+AGENTS_CONF="$HOME/.openclaw/workspace/AGENTS.md"
+LOCK="/tmp/djinn-comms-${AGENT,,}.lock"
+TIMEOUT=180
+DJINN_GATE="python3 $HOME/Obsidian/djinn/tools/djinn-gate/gate.py"
+DELTA_GUARD_PY="$HOME/Obsidian/djinn/tools/delta-guard"
+
+log() { echo "$(date -u '+%Y-%m-%d %H:%M:%S UTC') [comms-processor/$AGENT] $*"; }
+
+# One instance at a time
+if [ -f "$LOCK" ]; then
+    log "already running — skipping"
+    exit 0
+fi
+touch "$LOCK"
+trap "rm -f $LOCK" EXIT
+
+CACHE_DIR="$HOME/.cache/djinn"
+mkdir -p "$STATE_DIR" "$CACHE_DIR"
+
+# Mtime guard — skip entirely if COMMS.md hasn't changed since last run
+LAST_RUN_FILE="$CACHE_DIR/comms-last-mtime"
+CURRENT_MTIME=$(stat -c %Y "$COMMS" 2>/dev/null || echo 0)
+LAST_MTIME=$(cat "$LAST_RUN_FILE" 2>/dev/null || echo 0)
+if [ "$CURRENT_MTIME" != "0" ] && [ "$CURRENT_MTIME" = "$LAST_MTIME" ]; then
+    log "COMMS.md unchanged (mtime check) — skipping"
+    exit 0
+fi
+echo "$CURRENT_MTIME" > "$LAST_RUN_FILE"
+
+# Pull latest vault
+cd "$VAULT"
+git pull --quiet 2>/dev/null || true
+
+# Get last processed line count
+LAST_LINE=0
+[ -f "$STATE_FILE" ] && LAST_LINE=$(cat "$STATE_FILE" 2>/dev/null || echo 0)
+
+# Get current line count
+CURRENT_LINE=$(wc -l < "$COMMS")
+
+# Update state immediately — even if no tasks, advance the cursor
+echo "$CURRENT_LINE" > "$STATE_FILE"
+
+# Nothing new
+if [ "$CURRENT_LINE" -le "$LAST_LINE" ]; then
+    log "no new entries (${CURRENT_LINE} lines)"
+    exit 0
+fi
+
+# Extract new content since last check
+NEW_CONTENT=$(tail -n +"$((LAST_LINE + 1))" "$COMMS")
+
+# Check if any new content targets this agent or its sub-agents
+if ! echo "$NEW_CONTENT" | grep -qE "→ (@${AGENT}|@Clerk|@Slipbox)"; then
+    log "no new tasks for $AGENT or sub-agents"
+    exit 0
+fi
+
+# --- Direct dispatch: @Clerk → djinn-clerk ---
+CLERK_PATHS=$(echo "$NEW_CONTENT" | python3 -c "
+import sys, re
+content = sys.stdin.read()
+sections = re.split(r'(?=^### )', content, flags=re.MULTILINE)
+paths = []
+for s in sections:
+    if '→ @Clerk' in s:
+        m = re.search(r'\*\*Paths:\*\*\s+\`([^\`]+)\`', s)
+        if m:
+            paths.append(m.group(1).strip())
+print('\n'.join(paths))
+" 2>/dev/null)
+
+if [ -n "$CLERK_PATHS" ]; then
+    while IFS= read -r path; do
+        [ -z "$path" ] && continue
+        log "Dispatching @Clerk: $path"
+        "$HOME/.local/bin/djinn-clerk" "$path" 2>&1 | while IFS= read -r line; do log "  [clerk] $line"; done || true
+        CLERK_SLUG="clerk-$(basename "$path" | sed 's/[^a-z0-9]/-/g' | tr '[:upper:]' '[:lower:]')"
+        "$HOME/.local/bin/djinn-session-end" "$CLERK_SLUG" "djinn-clerk processed: $path" \
+            2>&1 | while IFS= read -r line; do log "  [session-end] $line"; done || true
+    done <<< "$CLERK_PATHS"
+fi
+
+# --- Direct dispatch: @Slipbox → djinn-slipbox ---
+SLIPBOX_PATHS=$(echo "$NEW_CONTENT" | python3 -c "
+import sys, re
+content = sys.stdin.read()
+sections = re.split(r'(?=^### )', content, flags=re.MULTILINE)
+paths = []
+for s in sections:
+    if '→ @Slipbox' in s:
+        m = re.search(r'\*\*Paths:\*\*\s+\`([^\`]+)\`', s)
+        if m:
+            paths.append(m.group(1).strip())
+print('\n'.join(paths))
+" 2>/dev/null)
+
+if [ -n "$SLIPBOX_PATHS" ]; then
+    while IFS= read -r path; do
+        [ -z "$path" ] && continue
+        log "Dispatching @Slipbox: $path"
+        "$HOME/.local/bin/djinn-slipbox" "$path" 2>&1 | while IFS= read -r line; do log "  [slipbox] $line"; done || true
+        SLIPBOX_SLUG="slipbox-$(basename "$path" | sed 's/[^a-z0-9]/-/g' | tr '[:upper:]' '[:lower:]')"
+        "$HOME/.local/bin/djinn-session-end" "$SLIPBOX_SLUG" "djinn-slipbox cross-linked: $path" \
+            2>&1 | while IFS= read -r line; do log "  [session-end] $line"; done || true
+    done <<< "$SLIPBOX_PATHS"
+fi
+
+# --- opencode dispatch: @Salomon tasks ---
+TASKS=$(echo "$NEW_CONTENT" | python3 -c "
+import sys, re
+content = sys.stdin.read()
+# Split on section headers
+sections = re.split(r'(?=^### )', content, flags=re.MULTILINE)
+found = []
+for s in sections:
+    if '→ @${AGENT}' in s and '→ @Clerk' not in s and '→ @Slipbox' not in s and s.strip():
+        found.append(s.strip())
+print('\n\n'.join(found))
+" 2>/dev/null)
+
+if [ -z "$TASKS" ]; then
+    log "no @${AGENT} tasks for opencode — sub-agent dispatch complete"
+    exit 0
+fi
+
+# ── djinn-gate routing ───────────────────────────────────────────────────────
+# Extract first meaningful line from task block as task description for gate.
+TASK_DESC=$(echo "$TASKS" | grep -m1 -v '^###\|^---\|^$\|^\*\*' | head -c200 | tr '\n' ' ')
+GATE_RESULT=$($DJINN_GATE route --task "$TASK_DESC" 2>/dev/null || echo '{"status":"rejected","lane":null}')
+GATE_LANE=$(echo "$GATE_RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('lane',''))" 2>/dev/null || echo "")
+GATE_LLM=$(echo "$GATE_RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('llm_allowed','true'))" 2>/dev/null || echo "true")
+
+log "djinn-gate: lane=${GATE_LANE:-rejected} llm_allowed=${GATE_LLM} task=${TASK_DESC:0:60}..."
+
+# Ops lane: no LLM — log and skip opencode
+if [ "$GATE_LANE" = "ops" ] && [ "$GATE_LLM" = "False" ]; then
+    log "ops-lane task — skipping opencode (ops tasks run as scripts, not LLM)"
+    TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+    cat >> "$COMMS" << EOF
+
+---
+
+### ${TIMESTAMP} — @${AGENT} → @All: Ops task deferred to script
+
+**Original task:** ${TASK_DESC:0:120}
+**Reason:** djinn-gate routed to ops lane (llm_allowed=false). Run the appropriate script directly.
+
+— ${AGENT}
+EOF
+    cd "$VAULT"
+    git add djinn/communications/COMMS.md
+    git -c user.name="${AGENT}" -c user.email="${AGENT,,}@djinn" \
+        commit -m "comms-processor: ops-lane skip ${TIMESTAMP}" --quiet 2>/dev/null || true
+    git push --quiet 2>/dev/null || true
+    exit 0
+fi
+
+log "found @Salomon task(s) — invoking opencode (lane: ${GATE_LANE:-unknown})"
+
+# Build prompt
+PROMPT="You are the Djinn AI agent running on ${AGENT}. Your identity and operating rules are in the attached files.
+
+djinn-gate routing context: lane=${GATE_LANE:-unknown}, llm_allowed=${GATE_LLM}
+
+Key paths on this machine:
+- Vault: ${VAULT}
+- COMMS.md: ${COMMS}
+- Workspace: $(dirname "$SOUL")
+
+Read the following task(s) and execute them using your tools. Use absolute paths for any file operations. Be concise.
+
+MANDATORY SESSION PROTOCOL — do these in order after completing the task:
+1. Write a session report to: ${VAULT}/djinn/logs/reports/$(date +%Y-%m-%d)_<slug>.md
+   Use the template at ${VAULT}/djinn/logs/REPORT-TEMPLATE.md
+   Required sections: Summary, What Was Built/Changed, Technical Decisions, Files Created/Modified, Tests & Validation, Known Issues, What's Next
+2. If any bug was found or fixed: run djinn-bugreport "title" "root cause" system severity status
+3. Append a summary line to: ${VAULT}/djinn/logs/build-log.md
+4. git -C ${VAULT} add -A && git -C ${VAULT} commit -m "session: <slug>" && git -C ${VAULT} push
+If you skip the report, djinn-session-end will auto-stub it and notify Javier via Telegram.
+
+TASKS:
+${TASKS}"
+
+# Invoke opencode — uses model from ~/.opencode/opencode.json (respects OpenClaw config)
+# Pass DJINN_MODEL env var to override if needed for this specific invocation
+MODEL_FLAG=""
+[ -n "${DJINN_MODEL:-}" ] && MODEL_FLAG="-m $DJINN_MODEL"
+RESPONSE=$(timeout "$TIMEOUT" "$OPENCODE" run \
+    --dangerously-skip-permissions \
+    $MODEL_FLAG \
+    -f "$SOUL" \
+    -f "$AGENTS_CONF" \
+    -- "$PROMPT" 2>/dev/null) || RESPONSE="[ERROR] opencode timed out or failed after ${TIMEOUT}s — task not completed. Check journal: journalctl --user -u comms-processor"
+
+# Append response to COMMS.md
+TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+cat >> "$COMMS" << EOF
+
+---
+
+### ${TIMESTAMP} — @${AGENT} → @All: Task complete
+
+**Responding to tasks received:** lines ${LAST_LINE}–${CURRENT_LINE} of COMMS.md
+**Result:**
+${RESPONSE}
+
+— ${AGENT}
+EOF
+
+log "response written to COMMS.md"
+
+# Commit and push — guarded by delta_guard on COMMS.md line count
+cd "$VAULT"
+git add djinn/communications/COMMS.md
+
+python3 - <<PYEOF
+import sys, pathlib
+sys.path.insert(0, "$DELTA_GUARD_PY")
+from delta_guard import should_fire
+from timer_states import normalize_state
+
+comms = pathlib.Path("$COMMS")
+line_count = comms.read_text().count('\n') if comms.exists() else 0
+raw_state = {"comms_line_count": line_count}
+state = normalize_state(raw_state, "comms-processor")
+sys.exit(0 if should_fire(state, "comms-processor") else 1)
+PYEOF
+
+if [[ $? -eq 0 ]]; then
+    git -c user.name="${AGENT}" -c user.email="${AGENT,,}@djinn" \
+        commit -m "comms-processor: ${AGENT} processed tasks ${TIMESTAMP}" --quiet 2>/dev/null || true
+    git push --quiet 2>/dev/null || true
+    log "done — vault pushed"
+else
+    log "done — COMMS.md unchanged, skipping push"
+fi
+
+# ── Session reporting enforcement ────────────────────────────────────────────
+# After every opencode invocation, enforce that a session report was written.
+# If opencode skipped the report, djinn-session-end auto-stubs it and fires
+# a Telegram warning to Javier so nothing silently falls through the cracks.
+SESSION_DATE=$(date +%Y-%m-%d)
+SESSION_SLUG="comms-${AGENT,,}-${SESSION_DATE}"
+TASK_FIRST_LINE=$(echo "$TASKS" | head -1 | sed 's/[^a-zA-Z0-9 ]//g' | cut -c1-60)
+SESSION_SUMMARY="${AGENT} processed COMMS.md tasks (lines ${LAST_LINE}–${CURRENT_LINE}): ${TASK_FIRST_LINE}"
+"$HOME/.local/bin/djinn-session-end" "$SESSION_SLUG" "$SESSION_SUMMARY" \
+    2>&1 | while IFS= read -r line; do log "[session-end] $line"; done || true

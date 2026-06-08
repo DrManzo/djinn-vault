@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""
+djinn-embed — Builds/updates the vault embedding index for semantic search.
+Usage:
+  djinn-embed           — incremental update (only new/changed files)
+  djinn-embed --full    — full rebuild of the entire index
+"""
+
+import sys, json, pathlib, datetime, hashlib, requests, re
+
+VAULT      = pathlib.Path.home() / "Obsidian"
+CACHE_DIR  = pathlib.Path.home() / ".djinn" / "embeddings"
+CACHE_FILE = CACHE_DIR / "vault.json"
+OLLAMA_URL = "http://127.0.0.1:11434"
+MODEL      = "nomic-embed-text:latest"
+
+_SHARED = str(pathlib.Path.home() / ".local/share/djinn")
+if _SHARED not in sys.path:
+    sys.path.insert(0, _SHARED)
+
+INDEX_DIRS = [
+    VAULT / "i notes" / "Notes",
+    VAULT / "references",
+]
+
+
+def log(msg):
+    print(f"{datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')} [djinn-embed] {msg}", flush=True)
+
+
+def file_hash(path):
+    return hashlib.md5(pathlib.Path(path).read_bytes()).hexdigest()
+
+
+def extract_text(md_path):
+    """Extract clean indexable text from a markdown file."""
+    content = pathlib.Path(md_path).read_text(errors='ignore')
+    # Strip YAML frontmatter
+    if content.startswith('---'):
+        end = content.find('---', 3)
+        if end > 0:
+            content = content[end + 3:]
+    # Resolve wiki links to plain text
+    content = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', content)
+    # Strip markdown syntax characters
+    content = re.sub(r'[#*`>_~]', '', content)
+    # Collapse whitespace
+    content = re.sub(r'\n{3,}', '\n\n', content).strip()
+    return content[:2000]
+
+
+def get_embedding(text):
+    from embed_cache import get as cache_get, put as cache_put
+    cached = cache_get(text)
+    if cached:
+        return cached
+    resp = requests.post(f"{OLLAMA_URL}/api/embeddings", json={
+        "model": MODEL,
+        "prompt": text,
+    }, timeout=60)
+    resp.raise_for_status()
+    vec = resp.json()["embedding"]
+    cache_put(text, vec)
+    return vec
+
+
+def load_cache():
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    if CACHE_FILE.exists():
+        return json.loads(CACHE_FILE.read_text())
+    return {}
+
+
+def save_cache(cache):
+    CACHE_FILE.write_text(json.dumps(cache))
+
+
+def build_index(full=False):
+    cache   = {} if full else load_cache()
+    updated = 0
+    skipped = 0
+    errors  = 0
+
+    for index_dir in INDEX_DIRS:
+        if not index_dir.exists():
+            continue
+        for md_file in sorted(index_dir.rglob("*.md")):
+            key   = str(md_file)
+            fhash = file_hash(md_file)
+
+            if not full and cache.get(key, {}).get("hash") == fhash:
+                skipped += 1
+                continue
+
+            text = extract_text(md_file)
+            if len(text) < 50:
+                skipped += 1
+                continue
+
+            try:
+                embedding = get_embedding(text)
+                cache[key] = {
+                    "hash":      fhash,
+                    "embedding": embedding,
+                    "title":     md_file.stem,
+                    "path":      str(md_file),
+                    "updated":   datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                }
+                updated += 1
+                if updated % 20 == 0:
+                    save_cache(cache)
+                    log(f"  Progress: {updated} embedded...")
+            except Exception as e:
+                log(f"  Error embedding {md_file.name}: {e}")
+                errors += 1
+
+    save_cache(cache)
+    log(f"Done — {updated} updated, {skipped} unchanged, {errors} errors, {len(cache)} total in index")
+    log(f"Cache: {CACHE_FILE}")
+
+
+def update_single(note_path):
+    """Update embedding for a single note — called by other djinn scripts."""
+    note_path = pathlib.Path(note_path)
+    cache = load_cache()
+    key   = str(note_path)
+    text  = extract_text(note_path)
+    if len(text) < 50:
+        return
+    embedding = get_embedding(text)
+    cache[key] = {
+        "hash":      file_hash(note_path),
+        "embedding": embedding,
+        "title":     note_path.stem,
+        "path":      str(note_path),
+        "updated":   datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    }
+    save_cache(cache)
+
+
+if __name__ == "__main__":
+    if "--single" in sys.argv:
+        idx = sys.argv.index("--single")
+        if idx + 1 < len(sys.argv):
+            update_single(sys.argv[idx + 1])
+    else:
+        full = "--full" in sys.argv
+        log("Full rebuild" if full else "Incremental update")
+        build_index(full)
