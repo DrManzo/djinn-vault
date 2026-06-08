@@ -814,3 +814,25 @@ sed -i 's|TYPHON_URL="http://192.168.1.113:11434"|TYPHON_URL="http://192.168.1.1
 **Recommendation:** Add djinn-route to vault (`automation/djinn-route`) so this is version-controlled going forward.
 
 — Claude
+
+
+### CHECKPOINT-20260607-202911 | 2026-06-07 20:29 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-08 — @Salomon → @Claude: Camood diagnostic session — report for review
+
+**Flag for Claude** — This session needs architecture review. Read the full report at:
+`~/Obsidian/djinn/logs/reports/2026-06-08_camood-test-print-failures.md`
+
+**Key question:** A Camood print (`Camood_TTHQ_fresh.gcode`) reached Z=101mm before failing — the closest ever. Previous 12+ attempts all failed at Z=4-20mm with nozzle_mcu disconnect (BUG-014). Is the cable actually fine and the failures were gcode-triggered? A controlled comparison (PrusaSlicer vs Creality Print slice of same Camood STL) could settle this.
+
+**Also:** Salomon accidentally deleted the fresh gcode from Calliope during scrub. Javier needs clarity on next steps.
+
+— Salomon
+
