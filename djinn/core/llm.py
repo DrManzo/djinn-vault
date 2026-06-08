@@ -78,6 +78,37 @@ _PROFILES: dict[str, dict] = {
 
 ProfileType = Literal["deterministic", "synthesis", "structured_output"]
 
+# ─── Task-type profiles ────────────────────────────────────────────────────────
+# Override temp and max_tokens per task when callers pass task_type to chat().
+# Task type "default" falls through to profile-based settings.
+
+TOKEN_PROFILES: dict[str, int] = {
+    "status":    128,
+    "comms":     256,
+    "quote":     128,
+    "design":   1024,
+    "synthesis": 2048,
+    "default":  2048,
+}
+
+TEMP_PROFILES: dict[str, float] = {
+    "status":   0.1,
+    "comms":    0.1,
+    "quote":    0.0,
+    "design":   0.7,
+    "synthesis":0.7,
+    "default":  0.7,
+}
+
+_TASK_TYPE_TO_PROFILE: dict[str, str] = {
+    "status":   "deterministic",
+    "comms":    "deterministic",
+    "quote":    "deterministic",
+    "design":   "synthesis",
+    "synthesis": "synthesis",
+    "default":  "synthesis",
+}
+
 
 def resolve_profile(profile: str) -> tuple[float, int]:
     """
@@ -92,6 +123,16 @@ def resolve_profile(profile: str) -> tuple[float, int]:
         )
     p = _PROFILES[profile]
     return p["temperature"], p["max_tokens"]
+
+
+def resolve_task_type(task_type: str) -> tuple[float, int, str]:
+    """
+    Return (temperature, max_tokens, profile) for the given task type.
+
+    Falls back to "default" if task_type is not recognized.
+    """
+    t = task_type if task_type in TEMP_PROFILES else "default"
+    return TEMP_PROFILES[t], TOKEN_PROFILES[t], _TASK_TYPE_TO_PROFILE[t]
 
 
 # ─── Backend detection ────────────────────────────────────────────────────────
@@ -185,6 +226,7 @@ def chat(
     system: Optional[str] = None,
     model: Optional[str] = None,
     messages: Optional[list] = None,
+    task_type: str = "default",
 ) -> str:
     """
     One-shot chat completion. Returns the assistant's reply as a string.
@@ -198,6 +240,10 @@ def chat(
         model:    Override the active model for this call only.
         messages: Full message list override — ignores `prompt` and `system`
                   if provided. Useful for multi-turn context passing.
+        task_type: Optional task classification for refined ceilings. One of
+                  "status", "comms", "quote", "design", "synthesis", "default".
+                  When set (not "default"), overrides temperature and max_tokens
+                  from the per-task profiles. "default" uses profile-based settings.
 
     Returns:
         str: The assistant reply content.
@@ -207,6 +253,13 @@ def chat(
         RuntimeError: If the API call fails.
     """
     _temp, _max = resolve_profile(profile)
+
+    # Task-type override: per-task ceilings take priority over profile defaults
+    if task_type and task_type != "default":
+        _task_temp, _task_max, _ = resolve_task_type(task_type)
+        _temp = _task_temp
+        _max = _task_max
+
     client = get_client()
     _model = model or get_model()
 
