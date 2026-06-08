@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-08 03:24 UTC
+Generated: 2026-06-08 03:47 UTC
 Source file: ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode
-Readings: 227
+Readings: 228
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 55°C |
 | Mean | 219.8°C | 55.0°C |
-| Std dev | ±2.68°C | ±0.20°C |
-| Range | 180.1–221.5°C | 52.1–55.2°C |
+| Std dev | ±2.68°C | ±0.44°C |
+| Range | 180.1–222.1°C | 52.1–60.9°C |
 
 ## Fan
 - Ramp pattern: off

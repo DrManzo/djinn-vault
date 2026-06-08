@@ -40,3 +40,27 @@
 | 2026-06-08 03:29 UTC | error | 0.0% | 31.6 | 0 | 50.3 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
 | 2026-06-08 03:30 UTC | error | 0.0% | 31.2 | 0 | 48.7 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
 | 2026-06-08 03:31 UTC | error | 0.0% | 30.9 | 0 | 47.1 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:32 UTC | error | 0.0% | 30.5 | 0 | 45.8 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:33 UTC | error | 0.0% | 30.2 | 0 | 44.5 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:34 UTC | error | 0.0% | 29.9 | 0 | 43.3 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:35 UTC | error | 0.0% | 29.6 | 0 | 42.2 | 0 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:36 UTC | standby | 0.0% | 29.3 | 0 | 41.2 | 0 | 0% | 0 |  |
+| 2026-06-08 03:37 UTC | standby | 0.0% | 29.2 | 0 | 40.3 | 0 | 0% | 0 |  |
+| 2026-06-08 03:38 UTC | standby | 0.0% | 29.0 | 0 | 39.4 | 0 | 0% | 0 |  |
+| 2026-06-08 03:39 UTC | standby | 0.0% | 28.7 | 0 | 38.5 | 0 | 0% | 0 |  |
+| 2026-06-08 03:40 UTC | standby | 0.0% | 28.6 | 0 | 37.7 | 0 | 0% | 0 |  |
+| 2026-06-08 03:41 UTC | standby | 0.0% | 28.4 | 0 | 37.0 | 0 | 0% | 0 |  |
+| 2026-06-08 03:42 UTC | standby | 0.0% | 28.2 | 0 | 36.3 | 0 | 0% | 0 |  |
+| 2026-06-08 03:43 UTC | standby | 0.0% | 132.7 | 130 | 38.6 | 60 | 0% | 0 |  |
+| 2026-06-08 03:44 UTC | standby | 0.0% | 197.2 | 130 | 47.5 | 60 | 0% | 0 |  |
+| 2026-06-08 03:45 UTC | standby | 0.0% | 129.7 | 130 | 55.5 | 60 | 0% | 0 |  |
+| 2026-06-08 03:46 UTC | standby | 0.0% | 130.1 | 130 | 59.8 | 60 | 0% | 0 |  |
+| 2026-06-08 03:47 UTC | printing | 0.0% | 222.1 | 220 | 60.9 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:48 UTC | printing | 0.0% | 220.3 | 220 | 60.9 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:49 UTC | printing | 0.0% | 215.2 | 216 | 60.3 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:50 UTC | printing | 0.0% | 215.8 | 216 | 59.8 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:51 UTC | printing | 0.0% | 221.0 | 220 | 59.8 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:52 UTC | printing | 0.0% | 219.2 | 220 | 59.7 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:53 UTC | printing | 0.0% | 220.6 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:54 UTC | printing | 0.0% | 220.8 | 220 | 60.1 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 03:55 UTC | printing | 0.0% | 220.2 | 220 | 60.1 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
