@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-06-08 00:04 UTC
-Source file: Camood_TTHQ_fresh.gcode
+Generated: 2026-06-08 03:24 UTC
+Source file: ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode
 Readings: 227
 
 ## Temperatures

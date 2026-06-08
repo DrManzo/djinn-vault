@@ -740,3 +740,49 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-08 00:06:01 UTC
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== FAILURE DETECTED ===
+  File: ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode
+  Progress: %
+  Transition: printing → error
+  Time: 2026-06-08 03:21:17 UTC
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== FAILURE DETECTED ===
+  File: ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode
+  Progress: %
+  Transition: printing → error
+  Time: 2026-06-08 03:24:18 UTC
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}
+=== ERROR STATE ===
+  Message: {"code":"key165", "msg": "Error evaluating 'gcode_macro START_PRINT:gcode': gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+", "values": ["gcode_macro START_PRINT:gcode", "gcode.CommandError: Bed not cleared. Run BED_CLEARED after checking the build plate.
+"]}

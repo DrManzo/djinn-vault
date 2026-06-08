@@ -98,4 +98,11 @@ The Camood is a Terp Tribe branded proxy accessory. Irregular organic shape — 
 
 ---
 
-*— Claude, 2026-06-04*
+## Status
+
+**🟦 ARCHIVED — 2026-06-08**
+All gcode, 3MF, STL, scripts, and configs moved to `~/printer-files/archive/2026-06-08_scrub/`. Print monitor log cleared. Printer firmware restarted for clean-slate testing.
+
+---
+
+*— Claude, 2026-06-04 | Archived 2026-06-08*
