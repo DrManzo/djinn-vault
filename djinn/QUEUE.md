@@ -14,7 +14,7 @@ Agents append to this file. Javier sets priorities.
 
 ## Active Queue
 
-- [ ] TASK-001 | all-lanes | all | HIGH | API reduction sprint — in progress. Batch 1 (5 items) DONE. Batch 2 pending Salomon.
+- [ ] TASK-001 | all-lanes | all | HIGH | API reduction sprint — in progress. Batch 2 DONE. Batch 3 active.
 
 - [ ] TASK-005 | mobile | Javier | MEDIUM | Create iPhone Shortcut "Send to Djinn" — Share Sheet trigger, asks session name + agent, POSTs to Salomon Flask endpoint (port 8765) via Tailscale/local network.
 
@@ -28,33 +28,34 @@ Agents append to this file. Javier sets priorities.
 
 ## TASK-001 Batch Tracker
 
-### Batch 1 — DONE (shipped 2026-06-07, commit 5e79ab4)
+### Batch 1 — DONE (commit 5e79ab4)
 - [x] Delta guard on git heartbeat — eliminates 576 empty pushes/day
 - [x] Vault sync delta guard — eliminates 720 empty GitHub API calls/day
-- [x] queue_watcher.py busy-loop → inotifywait — event-driven, zero CPU poll overhead
+- [x] queue_watcher.py busy-loop → inotifywait — event-driven zero CPU poll
 - [x] LLM() hoisted to module-level singleton in orchestrator.py
-- [x] Early-return before classify() when intent is explicit (engrave/edit)
+- [x] Early-return before classify() when intent is explicit
 
-### Batch 2 — PENDING (send to Salomon)
-- [ ] Add per-task max_tokens profiles in llm.py — replace global 2048 default with task-size map (status=128, design=1024, synthesis=2048)
-- [ ] Set temperature=0.1 for deterministic tasks (status, COMMS entries, structured output) — currently 0.7 everywhere
-- [ ] Add change-detection guard to comms-processor — only invoke opencode if COMMS.md mtime has changed since last run
-- [ ] Add no-op short-circuit to djinn-daily — if PLAN.md has no carry-forward items and no new queue entries, skip model invocation entirely
-- [ ] Swap djinn-design fallback from phi4:14b → qwen2.5-coder:7b for simple 2D parts — 4.7GB GPU-native vs 9.1GB CPU offload
+### Batch 2 — DONE (commit e53bb65)
+- [x] TOKEN_PROFILES map in llm.py — per-task token ceilings (status=128, design=1024, synthesis=2048)
+- [x] TEMP_PROFILES map in llm.py — 0.1 for deterministic tasks, 0.7 for generative
+- [x] task_type param on chat() — callers pass task type, get right ceiling automatically
+- [x] Mtime guard on comms-processor — skips opencode if COMMS.md unchanged
+- [x] No-op short-circuit on djinn-daily — skips model if queue empty + no carry-forward
+- [x] DESIGN_MODEL = qwen2.5-coder:7b in design_gen.py — replaces phi4:14b for 2D/parametric tasks
 
-### Batch 3 — QUEUED (after Batch 2)
+### Batch 3 — ACTIVE (send to Salomon now)
 - [ ] djinn-ctx-router: skip context assembly if no active user session
-- [ ] ChromaDB re-index: enforce incremental mode as default, full only on --full flag
+- [ ] ChromaDB re-index: enforce incremental mode as default, --full flag required for full re-index
 - [ ] Shared nomic-embed-text cache across Slipbox, Clerk, and vault indexer
-- [ ] djinn-clerk: swap 1-hr timer for watchdog filesystem trigger
+- [ ] djinn-clerk: swap 1-hr cron timer for watchdog filesystem trigger
 - [ ] printer-error-logger: gate LLM summary call on NEW error state only
 
-### Batch 4 — QUEUED (structural)
+### Batch 4 — QUEUED (after Batch 3)
 - [ ] Weekly review: pre-summarize daily notes before LLM synthesis (cuts input ~60-70%)
-- [ ] Claude session startup: build compressed session-resume variant (replaces 6-file sequential read)
-- [ ] Groq fallback default: change from llama-3.3-70b-versatile to llama-3.1-8b-instant
-- [ ] Timeout fast-fail: set 10-15s timeout for lightweight tasks vs global 120s
-- [ ] COMMS.md compaction cron: archive entries older than N days to JSONL, truncate live file
+- [ ] Claude session startup: compressed session-resume variant (replaces 6-file sequential read)
+- [ ] Groq fallback default: llama-3.3-70b-versatile → llama-3.1-8b-instant
+- [ ] Timeout fast-fail: 10-15s for lightweight tasks vs global 120s
+- [ ] COMMS.md compaction cron: archive entries older than N days to JSONL
 
 ## Completed
 
