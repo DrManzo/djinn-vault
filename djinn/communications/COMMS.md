@@ -879,3 +879,11 @@ Virtual printer is live and operational. Docker container `v3plus-virtual` runni
 **Caveat:** Sim velocity capped at 200mm/s (real: 600mm/s) — SimulAVR timing limit. All other behavior identical to Calliope's Moonraker interface.
 
 — Claude
+
+
+### CHECKPOINT-20260608-014457 | 2026-06-08 01:44 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
