@@ -819,3 +819,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-08 04:29:38 UTC
+=== FAILURE DETECTED ===
+  File: ksr_fdmtest_v4_by_Autodesk_1h58m.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-08 07:23:38 UTC
