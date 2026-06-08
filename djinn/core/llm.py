@@ -61,12 +61,26 @@ from typing import Literal, Optional
 _OLLAMA_DEFAULT_URL   = "http://localhost:11434/v1"
 _OLLAMA_DEFAULT_MODEL = "qwen2.5:7b"
 
-_GROQ_BASE_URL        = "https://api.groq.com/openai/v1"
-_GROQ_DEFAULT_MODEL   = "llama-3.3-70b-versatile"
+_GROQ_BASE_URL         = "https://api.groq.com/openai/v1"
+_GROQ_DEFAULT_MODEL    = "llama-3.1-8b-instant"
+_GROQ_LARGE_MODEL      = "llama-3.3-70b-versatile"
 
-_DEFAULT_TIMEOUT      = 120
-_DEFAULT_TEMPERATURE  = 0.7
-_DEFAULT_MAX_TOKENS   = 2048
+_DEFAULT_TIMEOUT       = 120
+_DEFAULT_TEMPERATURE   = 0.7
+_DEFAULT_MAX_TOKENS    = 2048
+
+# ─── Timeout profiles ───────────────────────────────────────────────────────────
+# Lightweight tasks fail fast instead of hanging 120s on a dead endpoint.
+
+TIMEOUT_PROFILES: dict[str, int] = {
+    "status":    12,
+    "comms":     15,
+    "quote":     10,
+    "embed":      8,
+    "design":    60,
+    "synthesis": 120,
+    "default":   120,
+}
 
 # ─── Profile system ───────────────────────────────────────────────────────────
 
@@ -145,11 +159,22 @@ def _use_groq() -> bool:
     )
 
 
-def _default_model() -> str:
+def _default_model(task_type: str = "default") -> str:
     """Return the default model for the active backend."""
     if _use_groq():
+        if task_type in ("synthesis", "architecture"):
+            return _GROQ_LARGE_MODEL
         return _GROQ_DEFAULT_MODEL
     return _OLLAMA_DEFAULT_MODEL
+
+
+def get_groq_model(task_type: str = "default") -> str:
+    """Return Groq model for the given task type.
+    Heavy tasks (synthesis, architecture) use 70B; everything else uses 8B.
+    """
+    if task_type in ("synthesis", "architecture"):
+        return _GROQ_LARGE_MODEL
+    return _GROQ_DEFAULT_MODEL
 
 
 # ─── Client factory ───────────────────────────────────────────────────────────
@@ -260,6 +285,9 @@ def chat(
         _temp = _task_temp
         _max = _task_max
 
+    # Timeout: per-task fast-fail profiles
+    _timeout = TIMEOUT_PROFILES.get(task_type, TIMEOUT_PROFILES["default"])
+
     client = get_client()
     _model = model or get_model()
 
@@ -275,6 +303,7 @@ def chat(
             messages=messages,
             temperature=_temp,
             max_tokens=_max,
+            timeout=_timeout,
         )
         return response.choices[0].message.content.strip()
     except Exception as exc:

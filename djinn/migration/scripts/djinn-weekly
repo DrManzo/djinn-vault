@@ -39,13 +39,20 @@ CHANGELOG_ENTRIES=$(grep "$WEEK_START\|$(date '+%Y-%m-%d')\|$(date -d '1 day ago
 # 3. Decision log entries — last section only
 DECISIONS=$(awk '/^## 20/{found=1} found{print}' "$DJINN/decisions/decision-log.md" 2>/dev/null | tail -30 || echo "No decisions found")
 
-# 4. Daily notes from this week
+# 4. Build daily notes digest (headers + action items only, no prose)
+WEEK_DIGEST="$HOME/.cache/djinn/week-digest.md"
+mkdir -p "$HOME/.cache/djinn"
 DAILY_NOTES=""
 for f in "$DJINN/daily/"*.md; do
     [ -f "$f" ] || continue
     NOTE_DATE=$(basename "$f" .md)
-    DAILY_NOTES="${DAILY_NOTES}\n### $NOTE_DATE\n$(cat "$f")\n"
+    # Extract headers, unchecked items, and carry references
+    DIGEST=$(grep -E "^#|^- \[ \]|carry|blocked|pending" "$f" 2>/dev/null || true)
+    if [ -n "$DIGEST" ]; then
+        DAILY_NOTES="${DAILY_NOTES}\n### $NOTE_DATE\n$DIGEST\n"
+    fi
 done
+echo -e "$DAILY_NOTES" > "$WEEK_DIGEST"
 
 # 5. Current pending items from PLAN.md
 PENDING=$(grep -E "^\- \[ \]|⏳|PENDING|pending" "$HOME/.openclaw/workspace/PLAN.md" 2>/dev/null | head -10 || echo "None")
@@ -153,6 +160,22 @@ Full note: \`djinn/weekly/${WEEK}.md\`"
         -d parse_mode="Markdown" \
         --data-urlencode "text=$DIGEST" > /dev/null
     echo "Telegram digest sent"
+fi
+
+# 11. Sabrina archive check — passive, runs every Sunday
+PEOPLE_STATUS=$(djinn-personal-db people check 2>/dev/null || echo "")
+if echo "$PEOPLE_STATUS" | grep -q "Sabrina"; then
+    DAYS_SINCE=$(echo "$PEOPLE_STATUS" | grep "Sabrina" | grep -oP '\d+(?=d ago)' || echo "0")
+    if [ "${DAYS_SINCE:-0}" -ge 14 ] 2>/dev/null; then
+        djinn-personal-db people archive "Sabrina"
+        PERSONAL_TOKEN=$(grep DJINN_PERSONAL_TG_TOKEN ~/.config/djinn/personal-tg.env 2>/dev/null | cut -d= -f2)
+        if [ -n "$PERSONAL_TOKEN" ]; then
+            curl -s "https://api.telegram.org/bot${PERSONAL_TOKEN}/sendMessage" \
+                -d chat_id="$CHAT_ID" \
+                --data-urlencode "text=Sabrina hasn't come up in ${DAYS_SINCE} days. Archiving her context for now — say her name to bring it back." \
+                > /dev/null
+        fi
+    fi
 fi
 
 echo "=== Weekly review complete ==="
