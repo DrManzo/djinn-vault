@@ -143,3 +143,9 @@
 | 2026-06-08 05:17 UTC | printing | 0.0% | 28.9 | 0 | 32.3 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
 | 2026-06-08 05:18 UTC | printing | 0.0% | 29.0 | 0 | 42.2 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
 | 2026-06-08 05:19 UTC | printing | 0.0% | 29.1 | 0 | 51.5 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:20 UTC | printing | 0.0% | 33.6 | 130 | 58.4 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:21 UTC | printing | 0.0% | 176.0 | 200 | 60.8 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:22 UTC | printing | 0.0% | 146.8 | 130 | 60.8 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:23 UTC | printing | 0.0% | 129.6 | 130 | 60.4 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:24 UTC | printing | 0.0% | 221.3 | 220 | 60.3 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
+| 2026-06-08 05:25 UTC | printing | 0.0% | 220.6 | 220 | 60.2 | 60 | 0% | 0 | ksr_fdmtest_v4_by_Autodesk_1h58m.gcode |
