@@ -14,7 +14,7 @@ Agents append to this file. Javier sets priorities.
 
 ## Active Queue
 
-- [ ] TASK-001 | all-lanes | all | HIGH | API reduction: implement top 20 script replacements (session 2026-06-07)
+- [ ] TASK-001 | all-lanes | all | HIGH | API reduction sprint — in progress. Batch 1 (5 items) DONE. Batch 2 pending Salomon.
 
 - [ ] TASK-005 | mobile | Javier | MEDIUM | Create iPhone Shortcut "Send to Djinn" — Share Sheet trigger, asks session name + agent, POSTs to Salomon Flask endpoint (port 8765) via Tailscale/local network.
 
@@ -24,10 +24,40 @@ Agents append to this file. Javier sets priorities.
 
 - [ ] TASK-008 | infra | Salomon | LOW | Wire Firefox AI Chat Exporter output folder to ~/djinn-inbox/ drop target via SSH/SFTP mount or Tailscale file drop. Laptop-only, lowest priority since Flask endpoint covers all devices.
 
-- [ ] TASK-009 | architecture | Claude | HIGH | Design bug hunter agent for Djinn — spec a proactive, automated vulnerability detection pipeline to sit alongside the existing djinn-bugreport CLI. Must include: (1) Python static analysis via bandit on every commit, (2) dependency audit via pip-audit on cron, (3) secrets scanning on staged files pre-push, (4) known-error regex triage replacing LLM error log reads (feeds into API reduction TASK-001), (5) structured output to djinn/logs/bugs.md and Telegram alert. Claude owns architecture. Salomon deploys. No LLM in the detection path — pure deterministic scanning. Marcus note: vault currently has zero automated scanning. djinn-bugreport is manual-only. This is a real gap.
+- [ ] TASK-009 | architecture | Claude | HIGH | Design bug hunter agent for Djinn — spec a proactive, automated vulnerability detection pipeline. Must include: (1) bandit static analysis on every commit, (2) pip-audit on cron, (3) secrets scanning pre-push, (4) regex error triage replacing LLM error log reads, (5) output to djinn/logs/bugs.md + Telegram alert. No LLM in detection path.
+
+## TASK-001 Batch Tracker
+
+### Batch 1 — DONE (shipped 2026-06-07, commit 5e79ab4)
+- [x] Delta guard on git heartbeat — eliminates 576 empty pushes/day
+- [x] Vault sync delta guard — eliminates 720 empty GitHub API calls/day
+- [x] queue_watcher.py busy-loop → inotifywait — event-driven, zero CPU poll overhead
+- [x] LLM() hoisted to module-level singleton in orchestrator.py
+- [x] Early-return before classify() when intent is explicit (engrave/edit)
+
+### Batch 2 — PENDING (send to Salomon)
+- [ ] Add per-task max_tokens profiles in llm.py — replace global 2048 default with task-size map (status=128, design=1024, synthesis=2048)
+- [ ] Set temperature=0.1 for deterministic tasks (status, COMMS entries, structured output) — currently 0.7 everywhere
+- [ ] Add change-detection guard to comms-processor — only invoke opencode if COMMS.md mtime has changed since last run
+- [ ] Add no-op short-circuit to djinn-daily — if PLAN.md has no carry-forward items and no new queue entries, skip model invocation entirely
+- [ ] Swap djinn-design fallback from phi4:14b → qwen2.5-coder:7b for simple 2D parts — 4.7GB GPU-native vs 9.1GB CPU offload
+
+### Batch 3 — QUEUED (after Batch 2)
+- [ ] djinn-ctx-router: skip context assembly if no active user session
+- [ ] ChromaDB re-index: enforce incremental mode as default, full only on --full flag
+- [ ] Shared nomic-embed-text cache across Slipbox, Clerk, and vault indexer
+- [ ] djinn-clerk: swap 1-hr timer for watchdog filesystem trigger
+- [ ] printer-error-logger: gate LLM summary call on NEW error state only
+
+### Batch 4 — QUEUED (structural)
+- [ ] Weekly review: pre-summarize daily notes before LLM synthesis (cuts input ~60-70%)
+- [ ] Claude session startup: build compressed session-resume variant (replaces 6-file sequential read)
+- [ ] Groq fallback default: change from llama-3.3-70b-versatile to llama-3.1-8b-instant
+- [ ] Timeout fast-fail: set 10-15s timeout for lightweight tasks vs global 120s
+- [ ] COMMS.md compaction cron: archive entries older than N days to JSONL, truncate live file
 
 ## Completed
 
-- [x] TASK-002 | infra | Salomon | 2026-06-07 | Flask inbox endpoint DEPLOYED — djinn-flask-inbox running on 0.0.0.0:8765, confirmed active by Salomon.
-- [x] TASK-003 | infra | Salomon | 2026-06-07 | inbox-watcher.service DEPLOYED — inotifywait loop active, fires marcus-sync.py on file drops, confirmed active by Salomon.
-- [x] TASK-004 | infra | Salomon | 2026-06-07 | marcus-sync.py DEPLOYED — script at ~/.local/bin/marcus-sync.py, confirmed active by Salomon.
+- [x] TASK-002 | infra | Salomon | 2026-06-07 | Flask inbox endpoint DEPLOYED — djinn-flask-inbox on 0.0.0.0:8765
+- [x] TASK-003 | infra | Salomon | 2026-06-07 | inbox-watcher.service DEPLOYED
+- [x] TASK-004 | infra | Salomon | 2026-06-07 | marcus-sync.py DEPLOYED at ~/.local/bin/
