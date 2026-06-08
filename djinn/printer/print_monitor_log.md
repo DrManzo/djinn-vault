@@ -87,3 +87,11 @@
 | 2026-06-08 04:16 UTC | printing | 0.0% | 221.0 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
 | 2026-06-08 04:17 UTC | printing | 0.0% | 221.4 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
 | 2026-06-08 04:18 UTC | printing | 0.0% | 220.5 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 04:19 UTC | printing | 0.0% | 220.9 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 04:20 UTC | printing | 0.0% | 220.8 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 04:21 UTC | printing | 0.0% | 220.9 | 220 | 60.0 | 60 | 0% | 0 | ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode |
+| 2026-06-08 04:22 UTC | printing | 0.0% | 156.8 | 0 | 59.0 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-08 04:23 UTC | cancelled | 0.0% | 105.7 | 0 | 56.8 | 0 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-08 04:24 UTC | printing | 0.0% | 118.5 | 130 | 54.8 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-08 04:25 UTC | printing | 0.0% | 186.9 | 200 | 54.5 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
+| 2026-06-08 04:26 UTC | printing | 0.0% | 143.8 | 130 | 54.6 | 55 | 0% | 0 | Camood_TTHQ_fresh.gcode |
