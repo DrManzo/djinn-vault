@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""
+djinn-clerk-watch — watchdog-based file watcher for RAW/ directory.
+Replaces the 1-hr systemd timer with event-driven triggering.
+"""
+import os
+import subprocess
+import sys
+import time
+
+RAW_DIR = os.path.expanduser("~/Obsidian/RAW")
+
+try:
+    from watchdog.observers import Observer
+    from watchdog.events import FileSystemEventHandler
+except ImportError:
+    print("watchdog not installed — run: pip3 install watchdog", file=sys.stderr)
+    sys.exit(1)
+
+
+class ClerkHandler(FileSystemEventHandler):
+    def on_created(self, event):
+        if not event.is_directory:
+            print(f"New file detected: {event.src_path} — triggering clerk", flush=True)
+            subprocess.run(
+                [os.path.expanduser("~/.local/bin/djinn-clerk"), "--file", event.src_path],
+                capture_output=True, text=True, timeout=120,
+            )
+
+
+def main():
+    if not os.path.isdir(RAW_DIR):
+        print(f"RAW dir not found: {RAW_DIR}", flush=True)
+        return
+
+    observer = Observer()
+    observer.schedule(ClerkHandler(), RAW_DIR, recursive=True)
+    observer.start()
+    print(f"djinn-clerk-watch: watching {RAW_DIR}", flush=True)
+    try:
+        while True:
+            time.sleep(60)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
+
+
+if __name__ == "__main__":
+    main()

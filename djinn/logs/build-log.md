@@ -1186,3 +1186,11 @@ created: 2026-05-19
 - llm.py: TIMEOUT_PROFILES (status:12s, embed:8s, quote:10s, design:60s, default:120s)
 
 — Salomon
+
+## 2026-06-07: BUG — clerk-watch wrong RAW_PATH
+- **System:** clerk
+- **Severity:** low | **Status:** fixed
+- **Root cause:** djinn-clerk-watch pointed at ~/Obsidian/djinn/RAW (doesn't exist) instead of ~/Obsidian/RAW (actual location). All file moves to perplexity-exports subdir also missed since recursive=False.
+- **Report:** `logs/reports/2026-06-07_bug-clerk-watch-wrong-raw-path.md`
+
+*— Claude*

@@ -89,3 +89,4 @@ Cable reroute performed but dropouts continue. All 11 shutdown events confirmed 
 Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout recurred after 3 days. Board or cable needs replacement, not reseat.
 
 **Impact:** Blocks all prints until fixed. Both Orca (ECO temp issue, worked around by PrusaSlicer gcode structure) and PrusaSlicer (temperature correct, but nozzle_mcu drops out) approaches fail at Z<10mm due to this hardware issue.
+| 2026-06-07 | Claude | clerk | low | fixed | clerk-watch wrong RAW_PATH | [[2026-06-07_bug-clerk-watch-wrong-raw-path]] |

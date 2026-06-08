@@ -682,3 +682,51 @@ sed -i 's|http://192.168.1.113:11434|http://192.168.1.150:11434|' ~/.local/bin/d
 **Next:** Salomon to run smoke test on all modified scripts. Verify `clerk.timer` disabled on Salomon. Confirm `queue_watcher --watch` inotifywait on Typhon.
 
 — Marcus
+
+---
+
+### 2026-06-08 02:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Introduction-To-Calculus.md`
+
+— Clerk
+
+---
+
+### 2026-06-08 02:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Phase-1-Deliverables-Djinn-Gateway-Rules-Implementation.md`
+
+— Clerk
+
+---
+
+### 2026-06-08 02:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-System-Agent-Interaction-Security-Workflow.md`
+
+— Clerk
+
+---
+
+### 2026-06-08 02:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Introduction-To-Calculus.md`
+
+— Slipbox
+
+---
+
+### 2026-06-08 02:21 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-System-Agent-Interaction-Security-Workflow.md`
+
+— Slipbox
