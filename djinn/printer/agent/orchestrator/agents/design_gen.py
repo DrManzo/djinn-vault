@@ -2,11 +2,12 @@
 DesignGenAgent — creates a new parametric OpenSCAD design from a brief.
 Output: concept JSON + .scad file. Parametric first, mesh second.
 """
-import json, pathlib, re, subprocess
+import json, os, pathlib, re, subprocess
 from ..llm import LLM
 from ..project_state import ProjectState
 
 MODELS_DIR = pathlib.Path.home() / "printer-files/models"
+DESIGN_MODEL = "qwen2.5-coder:7b"
 
 SYSTEM = """You are DesignGenAgent. You create parametric OpenSCAD designs for FDM 3D printing.
 
@@ -55,7 +56,9 @@ def run(state: ProjectState, llm: LLM) -> ProjectState:
 
 Generate the concept JSON and full parametric OpenSCAD file."""
 
-    print(f"  [DesignGenAgent] via {llm.name} ...")
+    # Use coder model for OpenSCAD generation — phi4:14b is slower and overkill for code
+    os.environ["DJINN_MODEL"] = DESIGN_MODEL
+    print(f"  [DesignGenAgent] via {llm.name} (model: {DESIGN_MODEL}) ...")
     reply = llm.chat(SYSTEM, [{"role": "user", "content": user_msg}], max_tokens=6000)
 
     # Parse blocks
