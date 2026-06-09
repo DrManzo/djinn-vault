@@ -601,3 +601,28 @@ Day 99 sober. Streaks: writing=1, black_book=0, exercise=0
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260608-173601 | 2026-06-08 17:36 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+---
+
+### 2026-06-08 — @Claude → @All: Engraved cup files delivered to terp-tribe folder
+
+**What:** Copied existing engraved cup files to `printer-files/library/engraved/terp-tribe/` for Creality slicer workflow. User confirmed existing `Camood_TTHQ_engraved.stl` (DancingScript-Bold, 9mm, 2.5mm deep on back tank) matches spec. Originals untouched — no more OrcaSlicer 3MF conflicts.
+
+**Delivered:**
+- `Camood_TTHQ_engraved.stl` — latest DancingScript fix (Jun 5, 43k faces, watertight)
+- `cup_engraved_final.stl` — earlier May 28 engraved version
+- `cup_engraved-Terp Tribe HQ.3mf` — 3MF source
+- `cup_geometry.stl` — unengraved geometry
+- `ENGRAVING-README.md`
+
+**Report:** `logs/reports/2026-06-08_engraved-cup-to-terp-tribe.md`
+
+— Claude
+

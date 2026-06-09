@@ -1222,3 +1222,11 @@ created: 2026-05-19
 - Doc: `djinn/printer/VIRTUAL-PRINTER.md`
 
 — Claude
+
+## 2026-06-08 — Engraved Cup → Terp Tribe Folder (Claude)
+- Copied existing engraved cup files to `printer-files/library/engraved/terp-tribe/`
+- Files delivered: `Camood_TTHQ_engraved.stl` (latest, DancingScript-Bold 9mm/2.5mm back tank), `cup_engraved_final.stl`, `cup_engraved-Terp Tribe HQ.3mf`, `cup_geometry.stl`, `ENGRAVING-README.md`
+- Originals untouched — user switched to Creality slicer, avoiding OrcaSlicer 3MF conflicts
+- Report: `logs/reports/2026-06-08_engraved-cup-to-terp-tribe.md`
+
+— Claude
