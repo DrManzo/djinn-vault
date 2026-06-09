@@ -824,3 +824,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-08 07:23:38 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-09 03:37:25 UTC
