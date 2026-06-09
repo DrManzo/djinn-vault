@@ -53,3 +53,4 @@
 {"ts": "2026-06-08T23:20:11", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:23:11+00:00", "by": "javier"}
 {"ts": "2026-06-08T23:35:32", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:38:32+00:00", "by": "javier"}
 {"ts": "2026-06-08T23:46:36", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-06-08T23:47:11", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:49:11+00:00", "by": "javier"}
