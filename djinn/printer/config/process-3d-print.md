@@ -22,7 +22,7 @@ Repeatable workflow for any custom part going from idea → printed object. Writ
 |------|------|-------|
 | CAD (prototype) | Tinkercad (browser) | tinkercad.com — free, no install |
 | CAD (final) | Fusion 360 | Free personal license, download required |
-| Slicer | OrcaSlicer | AppImage — install once on Salomon |
+| Slicer | Creality Print | Flatpak — installed on Salomon |
 | Printer control | Moonraker API | http://192.168.1.113:7125 |
 | File transfer | Moonraker upload or SD card | API preferred |
 
@@ -56,14 +56,9 @@ If no calipers: use the **fit-test collar method**:
 
 ---
 
-## Step 3 — Slice in OrcaSlicer
+## Step 3 — Slice in Creality Print
 
-**Install OrcaSlicer (first time only):**
-```bash
-# Download AppImage from github.com/SoftFever/OrcaSlicer/releases
-chmod +x OrcaSlicer*.AppImage
-./OrcaSlicer*.AppImage
-```
+**Creality Print** is installed as a Flatpak. Use the GUI to slice and send to Calliope.
 
 **Slicer settings for prototypes (PLA):**
 | Setting | Value |

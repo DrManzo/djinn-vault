@@ -71,8 +71,8 @@ Customer drops `.stl` or `.3mf` in `#3d-printing` or describes what they want in
 ### 2. Print Consult
 `djinn-print-consult` runs automatically:
 - Downloads and analyzes mesh (dimensions, volume, overhangs via trimesh)
-- Generates 3 renders: front, side, overhang map (red = needs support) via PrusaSlicer + Xvfb
-- Dry-runs PrusaSlicer to get real time and filament estimates
+- Generates 3 renders: front, side, overhang map (red = needs support) via Creality Print + Xvfb
+- Dry-runs Creality Print to get real time and filament estimates
 - Pulls prior print history for this model (keyed by file hash)
 - Posts full consult report to Discord + Telegram
 
@@ -268,7 +268,7 @@ DOEPrintOptAgent eliminates test prints — runs Taguchi factorial design to fin
 |---|---|
 | OS | Fedora Linux |
 | Printer firmware | Klipper + Moonraker |
-| Slicer | **Standard:** OrcaSlicer 2.3.2 — **CLI:** PrusaSlicer (legacy/diagnostic) |
+| Slicer | **Creality Print** (GUI) — OrcaSlicer and PrusaSlicer are archived |
 | Local LLMs | Ollama (qwen2.5:7b, deepseek-r1:7b, phi4:14b, llama3.2-vision:11b) |
 | Premium AI | Claude (Anthropic API), Perplexity (Marcus) |
 | Database | SQLite + Fernet encryption |
@@ -312,7 +312,7 @@ DOEPrintOptAgent eliminates test prints — runs Taguchi factorial design to fin
 
 ~/.local/bin/
 ├── djinn-print-consult   — Mesh analysis + renders + dry-run slice
-├── djinn-model-slice     — PrusaSlicer with exact user settings
+├── djinn-model-slice     — Creality Print with exact user settings
 ├── djinn-confirm-print   — Park calc + Moonraker upload + start
 ├── djinn-print-monitor   — Progress polling + notifications
 ├── djinn-print-quote     — Commission pricing CLI

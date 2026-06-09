@@ -65,7 +65,7 @@ Run before sending any external gcode to the printer. Flag and fix any ❌ befor
 | Fan — layer 2 ramp | Value ≤ S128 (50%) at first fan-on | ✅ / ❌ |
 | Pressure advance | `M900 K0.042000` present after START_PRINT | ✅ / ❌ |
 
-**Known bad pattern:** PrusaSlicer ramps fan to `M106 S155.55` at the brim→layer 1 boundary. This causes a deterministic EMI spike on nozzle_mcu, triggering `key564`. Always patch to `M106 S0` for layer 1. See [[error_log]] for full root cause.
+**Known bad pattern:** Aggressive fan ramps at the brim→layer 1 boundary (present in some slicer-generated gcode). This causes a deterministic EMI spike on nozzle_mcu, triggering `key564`. Always patch to `M106 S0` for layer 1. See [[error_log]] for full root cause.
 
 **Quick patch (replace aggressive layer-1 fan ramp):**
 ```bash
