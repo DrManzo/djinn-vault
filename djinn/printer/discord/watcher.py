@@ -24,6 +24,13 @@ CHANNEL_ID    = "1507882513891065876"
 POLL_INTERVAL = 20  # seconds
 MODEL_EXTS    = {".stl", ".3mf"}
 ALLOWED_USER  = "341840772582211587"  # Javier only
+QUEUE_PATH    = pathlib.Path.home() / ".local/share/djinn/print-track/print-queue.json"
+
+PROFILE_MAP = {
+    "a": "standard", "standard": "standard",
+    "b": "production", "quality": "production",
+    "c": "proto", "draft": "proto",
+}
 
 
 def load_token() -> str:
@@ -93,6 +100,20 @@ def discord_send(token: str, text: str):
         log.error(f"discord_send failed: {e}")
 
 
+def load_queue() -> dict:
+    if QUEUE_PATH.exists():
+        try:
+            return json.loads(QUEUE_PATH.read_text())
+        except Exception:
+            pass
+    return {"next_id": 1, "jobs": []}
+
+def save_queue(q: dict):
+    QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    QUEUE_PATH.write_text(json.dumps(q, indent=2))
+
+PROFILE_RE = re.compile(r"^\s*([aAbBcC]|[a-zA-Z]+)\s+([a-zA-Z]+)\s*$")
+
 def process_message(msg: dict, token: str, processed: list) -> bool:
     msg_id = msg["id"]
     if msg_id in processed:
@@ -144,6 +165,31 @@ def process_message(msg: dict, token: str, processed: list) -> bool:
             except Exception as e:
                 log.error(f"Failed to process {fname}: {e}")
                 discord_send(token, f"❌ Failed to process `{fname}`: {e}")
+
+    # Profile + color reply (e.g. "A black", "standard white") — no file attached
+    if not acted and text:
+        m = PROFILE_RE.match(text)
+        if m:
+            pname, cname = m.group(1).lower(), m.group(2).lower()
+            profile = PROFILE_MAP.get(pname)
+            colors = ("black", "white", "grey", "gray", "red", "blue", "green", "orange", "natural", "clear")
+            color = cname if cname in colors else ""
+            if profile or color:
+                q = load_queue()
+                for job in reversed(q["jobs"]):
+                    if job.get("status") == "needs_settings":
+                        if profile: job["customer_profile"] = profile
+                        if color:   job["customer_color"]   = color
+                        save_queue(q)
+                        log(f"Job #{job['id']}: set profile={profile or '?'}, color={color or '?'}")
+                        discord_send(token,
+                            f"Got it — Job #{job['id']} set to **{profile or '(no change)'}**, **{color or '(no change)'}**.\n"
+                            f"Reply `slice {job['id']} supports=... infill=... brim=...` to confirm settings.")
+                        acted = True
+                        break
+                if not acted:
+                    discord_send(token, "No pending jobs found to apply profile/color to.")
+                    acted = True
 
     # Plain text commission requests — no file attached
     if not acted and text:
