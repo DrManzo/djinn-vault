@@ -1,1 +1,2 @@
 {"ts": "2026-06-09T00:21:09", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-06-09T00:46:37", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-004636", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
