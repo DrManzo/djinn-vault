@@ -24,7 +24,7 @@ CHANNEL_ID    = "1507882513891065876"
 POLL_INTERVAL = 20  # seconds
 MODEL_EXTS    = {".stl", ".3mf"}
 ALLOWED_USER  = "341840772582211587"  # Javier only
-QUEUE_PATH    = pathlib.Path.home() / ".local/share/djinn/print-track/print-queue.json"
+QUEUE_PATH    = pathlib.Path.home() / ".local/share/djinn/print-queue.json"
 
 PROFILE_MAP = {
     "a": "standard", "standard": "standard",
@@ -181,7 +181,7 @@ def process_message(msg: dict, token: str, processed: list) -> bool:
                         if profile: job["customer_profile"] = profile
                         if color:   job["customer_color"]   = color
                         save_queue(q)
-                        log(f"Job #{job['id']}: set profile={profile or '?'}, color={color or '?'}")
+                        log.info(f"Job #{job['id']}: set profile={profile or '?'}, color={color or '?'}")
                         discord_send(token,
                             f"Got it — Job #{job['id']} set to **{profile or '(no change)'}**, **{color or '(no change)'}**.\n"
                             f"Reply `slice {job['id']} supports=... infill=... brim=...` to confirm settings.")
