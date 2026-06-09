@@ -2019,3 +2019,40 @@
 | 2026-06-09 12:52 UTC | complete | 0.0% | 24.1 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
 | 2026-06-09 12:53 UTC | complete | 0.0% | 24.1 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
 | 2026-06-09 12:54 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 12:55 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 12:56 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 12:57 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 12:58 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 12:59 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:00 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:01 UTC | complete | 0.0% | 24.1 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:02 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:03 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:04 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:05 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:06 UTC | complete | 0.0% | 24.0 | 0 | 22.3 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:07 UTC | complete | 0.0% | 23.9 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:08 UTC | complete | 0.0% | 23.9 | 0 | 22.3 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:09 UTC | complete | 0.0% | 23.9 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:10 UTC | complete | 0.0% | 23.9 | 0 | 22.3 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:11 UTC | complete | 0.0% | 24.0 | 0 | 22.3 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:12 UTC | complete | 0.0% | 23.9 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:13 UTC | complete | 0.0% | 23.9 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:14 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:15 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:16 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:17 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:18 UTC | complete | 0.0% | 24.0 | 0 | 22.4 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:19 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:20 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:21 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:22 UTC | complete | 0.0% | 24.0 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:23 UTC | complete | 0.0% | 24.1 | 0 | 22.5 | 0 | 0% | 0 | Fuss_PETG_2h55m34s.gcode |
+| 2026-06-09 13:24 UTC | standby | 0.0% | 24.1 | 0 | 22.5 | 0 | 0% | 0 |  |
+| 2026-06-09 13:25 UTC | standby | 0.0% | 24.1 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:26 UTC | standby | 0.0% | 24.0 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:27 UTC | standby | 0.0% | 24.1 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:28 UTC | standby | 0.0% | 24.1 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:29 UTC | standby | 0.0% | 24.1 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:30 UTC | standby | 0.0% | 24.2 | 0 | 22.6 | 0 | 0% | 0 |  |
+| 2026-06-09 13:31 UTC | standby | 0.0% | 24.2 | 0 | 22.6 | 0 | 0% | 0 |  |

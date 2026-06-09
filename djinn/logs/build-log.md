@@ -1264,3 +1264,11 @@ created: 2026-05-19
 - Report: `logs/reports/2026-06-08_djinn-print-track-v2-rewrite.md`
 
 — Claude
+
+## 2026-06-09 — Discord Print Flow Fix (Claude)
+- Fixed watcher.py: customer no longer sees "slice N..." prompt; auto-slices after A/B/C + color reply
+- Added sha256 dedup to djinn-model-fetch (prevents duplicate jobs from same file)
+- Created djinn-model-slice: PrusaSlicer-based headless slicer with profile settings
+- Created ender3-v3-plus.ini flat config for PrusaSlicer
+- Cleaned print queue: archived 9 stale jobs, kept job 9 (currently printing)
+- Note: OrcaSlicer/CrealityPrint CLI headless still broken; PrusaSlicer is the fallback
