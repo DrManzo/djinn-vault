@@ -100,6 +100,57 @@ def discord_send(token: str, text: str):
         log.error(f"discord_send failed: {e}")
 
 
+def _trigger_slice(job: dict):
+    """Trigger slicing for a confirmed job. Falls back to Telegram alert if script missing."""
+    job_id = job.get("id", "?")
+    model_path = job.get("model_path", "")
+    profile = job.get("customer_profile", "standard")
+    color = job.get("customer_color", "")
+    try:
+        result = subprocess.run(
+            ["djinn-model-slice", str(job_id)],
+            capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode == 0:
+            log.info(f"djinn-model-slice job #{job_id} started")
+        else:
+            log.warning(f"djinn-model-slice failed ({result.returncode}): {result.stderr[:200]}")
+            _tg_alert(job_id, model_path, profile, color)
+    except FileNotFoundError:
+        log.warning("djinn-model-slice not found — sending Telegram alert")
+        _tg_alert(job_id, model_path, profile, color)
+    except Exception as e:
+        log.error(f"_trigger_slice error: {e}")
+        _tg_alert(job_id, model_path, profile, color)
+
+
+def _tg_alert(job_id, model_path: str, profile: str, color: str):
+    """Notify Javier on Telegram that a job is confirmed and needs slicing."""
+    try:
+        oc_cfg = json.loads(OC_CONFIG.read_text())
+        tg_token = oc_cfg.get("channels", {}).get("telegram", {}).get("token", "")
+        tg_chat = (oc_cfg.get("channels", {}).get("telegram", {}).get("allowFrom", [""])[0]).replace("telegram:", "")
+        if not tg_token or not tg_chat:
+            return
+        piece = pathlib.Path(model_path).stem if model_path else "unknown"
+        msg = (
+            f"Job #{job_id} confirmed — ready to slice\n"
+            f"Piece: {piece}\n"
+            f"Profile: {profile}  Color: {color or 'not specified'}\n"
+            f"Run: djinn-model-slice {job_id}"
+        )
+        data = json.dumps({"chat_id": tg_chat, "text": msg}).encode()
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{tg_token}/sendMessage",
+            data=data,
+            headers={"Content-Type": "application/json"},
+        )
+        urllib.request.urlopen(req, timeout=10).read()
+        log.info(f"Telegram alert sent for job #{job_id}")
+    except Exception as e:
+        log.error(f"_tg_alert failed: {e}")
+
+
 def load_queue() -> dict:
     if QUEUE_PATH.exists():
         try:
@@ -180,11 +231,15 @@ def process_message(msg: dict, token: str, processed: list) -> bool:
                     if job.get("status") == "needs_settings":
                         if profile: job["customer_profile"] = profile
                         if color:   job["customer_color"]   = color
+                        job["status"] = "confirmed"
                         save_queue(q)
-                        log.info(f"Job #{job['id']}: set profile={profile or '?'}, color={color or '?'}")
+                        log.info(f"Job #{job['id']}: confirmed profile={profile or '?'}, color={color or '?'}")
+                        profile_label = {"standard": "Standard", "production": "Quality", "proto": "Draft"}.get(profile or "", profile or "Standard")
+                        color_label = (color or "your chosen color").capitalize()
                         discord_send(token,
-                            f"Got it — Job #{job['id']} set to **{profile or '(no change)'}**, **{color or '(no change)'}**.\n"
-                            f"Reply `slice {job['id']} supports=... infill=... brim=...` to confirm settings.")
+                            f"Got it! We'll get started on your **{profile_label}** print in **{color_label}**. "
+                            f"We'll send you an update when it's ready.")
+                        _trigger_slice(job)
                         acted = True
                         break
                 if not acted:
