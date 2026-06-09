@@ -1549,3 +1549,47 @@
 | 2026-06-09 04:59 UTC | complete | 0.0% | 27.8 | 0 | 26.6 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
 | 2026-06-09 05:00 UTC | complete | 0.0% | 27.8 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
 | 2026-06-09 05:01 UTC | complete | 0.0% | 27.7 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:02 UTC | complete | 0.0% | 27.7 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:03 UTC | complete | 0.0% | 27.8 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:04 UTC | complete | 0.0% | 27.7 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:05 UTC | complete | 0.0% | 27.7 | 0 | 26.5 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:06 UTC | complete | 0.0% | 27.6 | 0 | 26.4 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:07 UTC | complete | 0.0% | 27.6 | 0 | 26.4 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:08 UTC | complete | 0.0% | 27.6 | 0 | 26.4 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:09 UTC | complete | 0.0% | 27.6 | 0 | 26.4 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:10 UTC | complete | 0.0% | 27.6 | 0 | 26.3 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:11 UTC | complete | 0.0% | 27.5 | 0 | 26.3 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:12 UTC | complete | 0.0% | 27.6 | 0 | 26.3 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:13 UTC | complete | 0.0% | 27.5 | 0 | 26.3 | 0 | 0% | 0 | Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode |
+| 2026-06-09 05:14 UTC | standby | 0.0% | 27.4 | 0 | 26.3 | 0 | 0% | 0 |  |
+| 2026-06-09 05:15 UTC | standby | 0.0% | 27.5 | 0 | 26.3 | 0 | 0% | 0 |  |
+| 2026-06-09 05:16 UTC | standby | 0.0% | 27.5 | 0 | 26.3 | 0 | 0% | 0 |  |
+| 2026-06-09 05:17 UTC | standby | 0.0% | 27.5 | 0 | 26.3 | 0 | 0% | 0 |  |
+| 2026-06-09 05:18 UTC | standby | 0.0% | 27.4 | 0 | 26.2 | 0 | 0% | 0 |  |
+| 2026-06-09 05:19 UTC | standby | 0.0% | 27.5 | 0 | 26.2 | 0 | 0% | 0 |  |
+| 2026-06-09 05:20 UTC | standby | 0.0% | 27.5 | 0 | 26.2 | 0 | 0% | 0 |  |
+| 2026-06-09 05:21 UTC | standby | 0.0% | 27.4 | 0 | 26.2 | 0 | 0% | 0 |  |
+| 2026-06-09 05:22 UTC | standby | 0.0% | 27.5 | 0 | 26.2 | 0 | 0% | 0 |  |
+| 2026-06-09 05:23 UTC | standby | 0.0% | 27.4 | 0 | 26.1 | 0 | 0% | 0 |  |
+| 2026-06-09 05:24 UTC | standby | 0.0% | 27.4 | 0 | 26.1 | 0 | 0% | 0 |  |
+| 2026-06-09 05:25 UTC | standby | 0.0% | 27.4 | 0 | 26.0 | 0 | 0% | 0 |  |
+| 2026-06-09 05:26 UTC | standby | 0.0% | 27.4 | 0 | 26.0 | 0 | 0% | 0 |  |
+| 2026-06-09 05:27 UTC | standby | 0.0% | 27.3 | 0 | 26.0 | 0 | 0% | 0 |  |
+| 2026-06-09 05:28 UTC | standby | 0.0% | 53.7 | 130 | 26.3 | 60 | 0% | 0 |  |
+| 2026-06-09 05:29 UTC | standby | 0.0% | 174.0 | 200 | 35.6 | 60 | 0% | 0 |  |
+| 2026-06-09 05:30 UTC | standby | 0.0% | 147.9 | 130 | 45.1 | 60 | 0% | 0 |  |
+| 2026-06-09 05:31 UTC | standby | 0.0% | 130.0 | 130 | 53.8 | 60 | 0% | 0 |  |
+| 2026-06-09 05:32 UTC | standby | 0.0% | 130.3 | 130 | 59.6 | 60 | 0% | 0 |  |
+| 2026-06-09 05:33 UTC | printing | 0.0% | 192.4 | 220 | 61.2 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:34 UTC | printing | 0.0% | 219.7 | 220 | 61.3 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:35 UTC | printing | 0.0% | 220.2 | 220 | 59.9 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:36 UTC | printing | 0.0% | 219.6 | 220 | 59.6 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:37 UTC | printing | 0.0% | 220.2 | 220 | 59.9 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:38 UTC | printing | 0.0% | 220.0 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:39 UTC | printing | 0.0% | 220.1 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:40 UTC | printing | 0.0% | 220.0 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:41 UTC | printing | 0.0% | 219.7 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:42 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:43 UTC | printing | 0.0% | 219.7 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:44 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:45 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
