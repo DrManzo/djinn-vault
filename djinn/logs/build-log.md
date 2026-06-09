@@ -1241,3 +1241,11 @@ created: 2026-05-19
 - Report: `logs/reports/2026-06-08_slicer-migration-creality-print.md`
 
 — Claude
+
+## 2026-06-08 — Official Terp Tribe cup (Claude)
+- Camood_TTHQ_engraved.stl print completed: 160min, 89g PLA, 165mm Z
+- Tagged as official Terp Tribe cup production piece in `print-track/prints.json`
+- Data captured: progress 0-100%, filament 29,813mm, bed temps, Z profile
+- Next prints tracked automatically by `djinn-print-track` systemd service
+
+— Claude
