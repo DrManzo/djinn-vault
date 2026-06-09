@@ -1,0 +1,12 @@
+=== Batch 3 Apply — Tue Jun  9 06:56:07 AM PDT 2026 ===
+[FIX 1] ctx-router session guard injected.
+[FIX 2] ChromaDB indexer incremental guard applied.
+[FIX 3] Clerk watchdog already present or timer not found — skipping.
+[FIX 4] Error state guard function injected — wrap your LLM call with: if _is_new_error(error_text):
+
+Restarting affected services...
+  ✅ djinn-ctx-router restarted
+  ✅ printer-error-logger restarted
+
+=== Batch 3 complete. Check log: /home/drmanzo/Obsidian/djinn/logs/batch3-apply.log ===
+Next: mark Batch 3 done in QUEUE.md and start Batch 4.
