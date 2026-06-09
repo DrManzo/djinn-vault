@@ -567,3 +567,21 @@ Day 99 sober. Streaks: writing=1, black_book=0, exercise=0
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260608-165551 | 2026-06-08 16:55 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+### 2026-06-08 — @Claude: Virtual Ender-3 V3 Plus printer built and running
+
+**What:** Built a virtual V3 Plus using `mainsail-crew/virtual-klipper-printer` Docker container. Custom CoreXZ printer.cfg with real V3 Plus specs (300x300x330, bed mesh 6×6, PA 0.04, input shaper EI). Wired into Typhon's Forge as `forge printer [start|stop|status|logs|shell|update]`. Dashboard (`forge status`) now shows both real and virtual printers.
+
+**State:** Operational at localhost:7125. G28 homing verified. Full Moonraker API.
+
+**Path:** `~/virtual-printer/` (Docker compose + scripts + configs)
+
+— Claude
+
