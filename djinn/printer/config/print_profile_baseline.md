@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-09 05:33 UTC
-Source file: CRtestcube_Ender-3 V3 Plus_26m.gcode
-Readings: 160
+Generated: 2026-06-09 06:04 UTC
+Source file: 
+Readings: 186
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 65°C |
-| Mean | 219.8°C | 65.0°C |
-| Std dev | ±2.26°C | ±0.33°C |
-| Range | 192.4–221.7°C | 61.2–66.1°C |
+| Mean | 219.8°C | 64.3°C |
+| Std dev | ±2.10°C | ±1.75°C |
+| Range | 192.4–221.7°C | 59.6–66.1°C |
 
 ## Fan
 - Ramp pattern: off

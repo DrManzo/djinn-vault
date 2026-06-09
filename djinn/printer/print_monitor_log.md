@@ -1593,3 +1593,21 @@
 | 2026-06-09 05:43 UTC | printing | 0.0% | 219.7 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
 | 2026-06-09 05:44 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
 | 2026-06-09 05:45 UTC | printing | 0.0% | 219.6 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:46 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:47 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:48 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:49 UTC | printing | 0.0% | 220.4 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:50 UTC | printing | 0.0% | 219.8 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:51 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:52 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:53 UTC | printing | 0.0% | 219.3 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:54 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:55 UTC | printing | 0.0% | 220.0 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:56 UTC | printing | 0.0% | 220.2 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:57 UTC | printing | 0.0% | 218.9 | 220 | 60.1 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:58 UTC | printing | 0.0% | 219.9 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 05:59 UTC | printing | 0.0% | 219.4 | 220 | 60.0 | 60 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 06:01 UTC | complete | 0.0% | 167.4 | 0 | 59.3 | 0 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 06:02 UTC | complete | 0.0% | 123.7 | 0 | 57.6 | 0 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 06:03 UTC | complete | 0.0% | 94.0 | 0 | 55.7 | 0 | 0% | 0 | CRtestcube_Ender-3 V3 Plus_26m.gcode |
+| 2026-06-09 06:04 UTC | standby | 0.0% | 73.6 | 0 | 53.8 | 0 | 0% | 0 |  |

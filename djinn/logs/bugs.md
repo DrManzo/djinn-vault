@@ -20,6 +20,7 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 | 2026-05-28 | Claude | djinn-discord-watcher | medium | fixed | trimesh headless render fails — no DISPLAY in systemd service | [[2026-05-28_bug-trimesh-headless-render-fails-no-display-in-systemd-service]] |
 | 2026-05-30 | Print | cup_engraved_FINAL / Job #2 | low | open | Engraving shallow at letter edges (T crossbar, e curve) due to cup surface curvature; tank underside rough — supports needed | [[print-2026-05-30-job2-model]] |
 | 2026-05-31 | Claude | djinn-print-consult | medium | open | Maker's mark engraving reads reversed on bottom surfaces | [[2026-05-31_bug-maker-s-mark-engraving-reads-reversed-on-bottom-surfaces]] |
+| 2026-06-08 | Claude | djinn-print-track v2 | low | fixed | WebSocket message with str instead of dict status crashes `_handle_ws_message` — daemon self-recovered via reconnect backoff | [[2026-06-08_bug-ws-message-str-status]] |
 
 ---
 ## BUG-013 — Djinn voice too terse on conversational messages
