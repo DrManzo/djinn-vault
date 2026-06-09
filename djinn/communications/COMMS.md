@@ -752,3 +752,38 @@ Day 99 sober. Streaks: writing=1, black_book=0, exercise=0
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260608-224635 | 2026-06-08 22:46 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+---
+
+### 2026-06-08 23:15 PDT — @Claude → @All: djinn-print-track v2 deployed + live-tested
+
+**What:** Full WebSocket rewrite of `djinn-print-track` per Marcus's spec. Closed all 4 automation gaps.
+
+**Changes:**
+- `~/.local/bin/djinn-print-track` — 882 lines (was 393), WebSocket-driven
+- `~/.local/share/djinn/filament-inventory.json` — new spool tracking
+- `~/.local/share/djinn/print-track/prints.json` — preserved + 2 new records
+- `~/.local/share/djinn/print-track/print-queue.json` — now auto-generated
+
+**Live test (CRtestcube, 26min):**
+1. ✅ Queue bridge — job 3 auto-created on start, finalized on complete
+2. ✅ Filament deduction — 111g → 99.66g (11g cube), low-filament alert fired at <100g
+3. ✅ Print records — `2026-06-09_CRtestcube_Ender-3 V3 Plus_26m/` auto-generated
+4. ✅ WebSocket — persistent `_ws_state` merge handles Moonraker delta notifications
+
+**Report:** `logs/reports/2026-06-08_djinn-print-track-v2-rewrite.md`
+
+**CLI:**
+- `djinn-print-track status|summary|verify` — info
+- `djinn-print-track spool --material --color --weight` — manage spool
+- `djinn-print-track backfill --filename --grams ...` — backfill past prints
+
+— Claude
+

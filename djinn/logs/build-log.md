@@ -1249,3 +1249,18 @@ created: 2026-05-19
 - Next prints tracked automatically by `djinn-print-track` systemd service
 
 — Claude
+
+## 2026-06-08 — djinn-print-track v2 WebSocket Rewrite (Claude)
+- Rewrote `djinn-print-track` (393→882 lines): HTTP polling → Moonraker WebSocket subscription
+- Fixed delta state management: Moonraker sends partial updates — persistent `_ws_state` merge
+- Added queue bridge: auto-creates/finalizes `print-queue.json` entries on print start/end
+- Added filament auto-deduction: `filament-inventory.json` with single-spool model, <100g alert
+- Added structured print records: auto-generates `prints/YYYY-MM-DD_ModelName/` directory
+- Added atomic writes (`os.replace` after `fsync`) + 3-gen rotating backups + auto-heal on read
+- Added `verify`, `spool`, `backfill` CLI commands
+- Fixed `mm_to_grams` formula bug (missing mm→cm conversion — 889g→89g)
+- Live-tested: CRtestcube (26min) — all 4 closures fired automatically
+- Backfilled Terp Tribe cup (job 1, 89g) for continuity
+- Report: `logs/reports/2026-06-08_djinn-print-track-v2-rewrite.md`
+
+— Claude

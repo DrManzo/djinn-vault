@@ -78,3 +78,10 @@ the guard. Metrics represent meaningful system state change.
 **Why:** SimulAVR runs at 2MHz (real MCU: 20MHz). Real values cause "Timer too close" MCU shutdown. Sim values keep the virtual MCU alive. Motion timing is inaccurate; all API, macro, and gcode behavior is identical.
 
 — Claude
+
+## 2026-06-08 — Persistent WS state merge over full-state replacement (Claude)
+**Decision:** `_handle_ws_message` uses a module-level `_ws_state` dict that accumulates delta fields rather than overwriting with each partial notification.
+**Why:** Moonraker's `notify_status_update` sends only changed fields. A `total_duration` delta with no `state`/`filename` would overwrite them with empty strings. Pattern: `status[key].update(fields)`.
+**Alternative rejected:** Re-querying full state on every notification (wasteful, duplicates HTTP polling behavior).
+
+— Claude
