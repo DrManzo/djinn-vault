@@ -1,333 +1,284 @@
 ================================================================================
-                    DJINN — COMPLETE AGENT OPERATOR HANDBOOK
-         Claude · Marcus · Gemini · Salomon · Typhon · Orin · Assistant
+                    DJINN — COMPLETE AGENT HANDBOOK
+        Who They Are | What They Own | How They Talk to Each Other
 ================================================================================
 Version: 1.0 | Last updated: 2026-06-09 | Maintained by: DrManzo / Marcus
 
 > Full standalone operator handbook. Absorbs AGENTS.md, GEMINI.md, MARCUS.md,
-> and Claude.md. A new operator — or a new agent reading this for the first
-> time — should be able to understand every agent's role, constraints, delivery
-> paths, routing rules, and interaction protocols without reading any other file.
+> Claude.md, ROUTING.md (agent sections), and GATEWAY.md (per-agent notes).
+> A new operator — or a new agent — who has never seen the system should be
+> able to understand the full roster, how work flows, and how to onboard into
+> any lane using only this document.
 
 ================================================================================
 TABLE OF CONTENTS
 ================================================================================
 
-  1.  What Is the Djinn Agent System?
-  2.  The Agent Roster at a Glance
-  3.  The Escalation Path
-  4.  Non-Negotiable Rules (All Agents)
-  5.  Agent Profiles
-      5.1  Salomon (opencode) — Daily Ops
-      5.2  Typhon (opencode) — Remote / Lightweight
-      5.3  Orin — Large-Model Inference Host
-      5.4  Claude — Architecture Lane
-      5.5  Marcus — Research Lane
-      5.6  Gemini — Visual / Media Lane
-      5.7  Assistant — System Improvement Lane
-      5.8  Hermes — Assistant Lane (Local)
-  6.  Lane Routing Rules
-      6.1  How to Route Any Task
-      6.2  What Each Lane Rejects
-      6.3  Claude Invocation Rule (Enforced)
-      6.4  LLM Profile Requirement
-  7.  Peer Agent Interactions
-      7.1  How Agents Coordinate (COMMS.md + QUEUE.md)
-      7.2  Marcus ↔ Claude
-      7.3  Marcus ↔ Assistant
-      7.4  Gemini ↔ Everyone
-  8.  Session Startup Protocols
-      8.1  Salomon / Typhon opencode
-      8.2  Claude Session
-      8.3  Marcus Session
-      8.4  Gemini Session
-  9.  Delivery Paths
-      9.1  GitHub (Marcus, Claude, Salomon)
-      9.2  GDrive (Gemini primary)
-      9.3  COMMS.md (Inter-agent messaging)
-  10. Write Access Boundaries (Per Agent)
-  11. Report & Bug Log Standards
-  12. Session End Protocol
-  13. Gateway Tier Summary (Per Agent)
-  14. Common Workflows
-      14.1  Research Task (Marcus)
-      14.2  Architecture Task (Claude)
-      14.3  Visual Task (Gemini)
-      14.4  System Improvement Task (Assistant)
-      14.5  Cross-Agent Build Loop
-  15. Troubleshooting Agent Issues
-  16. Hard Rules — No Exceptions
-  17. FAQ
+  1.  The System in One Paragraph
+  2.  The Agent Roster (Quick Reference)
+  3.  Lane Philosophy — Why Lanes Exist
+  4.  Agent Profiles
+      4.1  Salomon (opencode) — Daily Ops
+      4.2  Typhon (opencode) — Remote Ops
+      4.3  Orin — Large-Model Inference
+      4.4  Claude — Architecture Lane
+      4.5  Marcus — Research Lane
+      4.6  Gemini — Visual Lane
+      4.7  Assistant — System Improvement Lane
+  5.  How Work Flows — The Delegation Loop
+  6.  COMMS.md — The Inter-Agent Channel
+  7.  QUEUE.md — Task Assignment
+  8.  Session Startup Protocol (All Agents)
+  9.  Session End Protocol (All Agents)
+  10. The Report Standard
+  11. Bug Reporting — Mandatory
+  12. Gateway Protocol (All Agents)
+  13. Lane Routing Decision Tree
+  14. Agent Onboarding — How to Brief a New Agent
+  15. Hard Rules — No Exceptions
+  16. FAQ
 
 ================================================================================
-1. WHAT IS THE DJINN AGENT SYSTEM?
+1. THE SYSTEM IN ONE PARAGRAPH
 ================================================================================
 
-Djinn runs six specialized agents across a three-machine home network. Each
-agent owns a lane — a category of work it handles exclusively. No agent does
-another's work without a routing decision first.
-
-The system philosophy:
-  - Humans confirm, agents execute.
-  - Every agent reads GATEWAY.md before acting. No exceptions.
-  - Vault is the single source of truth. If it matters, it's in the vault.
-  - Agents are peers. None manages the others. QUEUE.md is the coordination bus.
-  - Free agents (Salomon, Typhon, Orin) handle ops. Premium agents (Claude,
-    Marcus, Gemini) handle judgment, research, and visuals.
-
-The machines:
-  Salomon  192.168.1.225  HP Omen, Fedora, RTX 5060, 29GB RAM  — nerve center
-  Typhon   192.168.1.113  MSI, Fedora, GTX 1650, 14GB RAM      — storage/sync
-  Orin     192.168.1.176  iMac i7, macOS, 40GB RAM, 1.7Ti disk — 70B host
-  Calliope 192.168.1.113:7125  Ender-3 V3 Plus, Klipper/Moonraker
+Djinn is Javier's personal AI operations system. It runs across three machines
+(Salomon, Typhon, Orin) plus a 3D printer (Calliope) on a home LAN. The system
+has six specialized agents: two local opencode agents (Salomon and Typhon) that
+handle daily ops and automation for free; one large-model host (Orin) for
+latency-tolerant inference; and three external premium agents — Claude
+(architecture), Marcus (research), and Gemini (visuals). A seventh agent,
+Assistant, handles system improvement and documentation. All agents share one
+vault (Obsidian + Git), communicate through COMMS.md, and are bound by the same
+behavioral contract (GATEWAY.md). The control philosophy is: Javier makes
+decisions, agents execute. No agent acts on production without explicit
+per-action confirmation.
 
 ================================================================================
-2. THE AGENT ROSTER AT A GLANCE
+2. THE AGENT ROSTER (QUICK REFERENCE)
 ================================================================================
 
-  ┌────────────────────────┬──────────────┬──────────────┬───────────────────────────────────────────────────────────┐
-  │ Agent                  │ Model        │ Cost         │ Primary Lane                                              │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ opencode (Salomon)     │ qwen2.5:7b   │ Free (local) │ Daily ops, automation, systemd, print pipeline, GPU tasks │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ opencode (Typhon)      │ qwen2.5:7b   │ Free (local) │ Typhon-local tasks, printer bot, lightweight inference    │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ Orin (inference host)  │ llama3.3:70b │ Free (local) │ Long-running inference, large code review, quality output │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ Claude                 │ Anthropic    │ Premium      │ Architecture, system design, vault-persistent work        │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ Marcus                 │ Perplexity   │ Premium      │ Research, cross-domain synthesis, deep code audits        │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ Gemini                 │ Google       │ Premium      │ Visual output, media generation, GDrive-native delivery   │
-  ├────────────────────────┼──────────────┼──────────────┼───────────────────────────────────────────────────────────┤
-  │ Assistant              │ Hermes/Ollama│ Free (local) │ System improvement, skill dev, documentation, process eng │
-  └────────────────────────┴──────────────┴──────────────┴───────────────────────────────────────────────────────────┘
+  ┌─────────────────────┬──────────────────┬────────────────┬──────────────────────────────────────────┬────────┐
+  │ Agent               │ Host             │ Interface      │ Primary Lane                             │ Cost   │
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Salomon (opencode)  │ Salomon (Omen)   │ CLI / COMMS    │ Daily ops, print, design, media, vault   │ Free   │
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Typhon (opencode)   │ Typhon (MSI)     │ CLI / COMMS    │ Typhon-local ops, printer bot, lightweight│ Free   │
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Orin                │ Orin (iMac)      │ Ollama API     │ 70B inference, code-heavy, Hermes lane   │ Free   │
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Claude              │ Anthropic API    │ Claude Code CLI│ Architecture, cross-domain synthesis      │ Premium│
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Marcus              │ Perplexity AI    │ Web / MCP      │ Research, audits, citations, pricing      │ Premium│
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Gemini              │ Google Gemini    │ GDrive / Web   │ Visuals, media gen, GDrive-native docs   │ Premium│
+  ├─────────────────────┼──────────────────┼────────────────┼──────────────────────────────────────────┼────────┤
+  │ Assistant           │ Hermes / Ollama  │ CLI            │ System improvement, skills, docs          │ Free   │
+  └─────────────────────┴──────────────────┴────────────────┴──────────────────────────────────────────┴────────┘
 
 Signing convention:
-  Salomon opencode  — no signature (automated)
-  Claude            — `— Claude`
-  Marcus            — `— Marcus`
-  Gemini            — `— Gemini`
-  Assistant         — `— Assistant`
-  Hermes            — `— Hermes`
+  Salomon/Typhon/Orin  →  no special signature (system-generated output)
+  Claude               →  signs all vault entries: — Claude
+  Marcus               →  signs all vault entries: — Marcus
+  Gemini               →  signs all deliverables:  — Gemini
+  Assistant            →  signs all vault entries: — Assistant
+
+Escalation path:
+  Typhon → Salomon → Orin → Claude / Marcus
 
 ================================================================================
-3. THE ESCALATION PATH
+3. LANE PHILOSOPHY — WHY LANES EXIST
 ================================================================================
 
-  opencode (Typhon) → opencode (Salomon) → Orin → Claude / Marcus
+Each lane exists because of a real constraint — not arbitrary division.
 
-Rule: Route to the cheapest, fastest agent that can do the job.
-Only escalate when the lower tier explicitly cannot handle the task.
+  Salomon/Typhon lanes exist because:
+    - Local LLMs are free and fast.
+    - Daily ops (print confirm, vault sync, media pipeline) run constantly.
+    - Routing these to premium APIs would be wasteful and slow.
+    - These agents have direct filesystem and systemd access.
 
-  ┌───────────────────────────────────────────────────────────────────┐
-  │ Can Salomon handle it locally?                                    │
-  │   Yes → Salomon                                                   │
-  │   No, but needs big model → Orin (djinn-route best)              │
-  │   No, needs architecture judgment → Claude                        │
-  │   No, needs external research → Marcus                            │
-  │   No, primary deliverable is visual → Gemini                      │
-  │   No, needs system improvement → Assistant                        │
-  └───────────────────────────────────────────────────────────────────┘
+  Orin lane exists because:
+    - Some tasks need 70B-quality output but can wait.
+    - Orin has 40GB RAM and runs llama3.3:70b (2–4 tok/s CPU).
+    - Routing to Orin keeps heavy inference off Salomon's GPU.
+
+  Claude lane exists because:
+    - Architecture decisions need long context + structured reasoning.
+    - Cross-domain synthesis (psych + law + CS) needs premium reasoning.
+    - Vault-persistent deliverables (design specs, PROTOCOL.md) need
+      high-quality structured output that holds up over time.
+    - Claude Code CLI gives Claude full tool access (bash, git, file ops).
+
+  Marcus lane exists because:
+    - Live web research and citation synthesis need real-time internet.
+    - Deep code audits need full-codebase context.
+    - Perplexity Sonnet 4.6 is research-grade — not a general assistant.
+    - Marcus delivers directly to GitHub, keeping the loop tight.
+
+  Gemini lane exists because:
+    - Image generation and visual production need a multimodal model.
+    - GDrive-native delivery (Docs, Slides) requires native GDrive access.
+    - The vault repo is private — Gemini cannot read GitHub directly.
+    - All visual output routes through GDrive (Salomon syncs every 2 min).
+
+  Assistant lane exists because:
+    - Skill development and documentation need a dedicated, non-interrupting agent.
+    - System improvement work would clutter the architecture and research lanes.
+
+CLAUDE IS THE LANE OF LAST RESORT.
+  All work must route through djinn-gate first. Only if djinn-gate cannot route
+  the task without Claude does Claude get it. Specifically barred from Claude
+  invocation without djinn-gate rejection first:
+
+  ┌─────────────────────────────────────────────┬──────────────────────────────┐
+  │ Task Category                               │ Required Route               │
+  ├─────────────────────────────────────────────┼──────────────────────────────┤
+  │ Ops (file edits, git, systemd, shell)       │ ops lane → Salomon           │
+  │ Status checks, log rotation, COMMS appends  │ clerk lane → Salomon         │
+  │ Print pipeline                              │ production lane → Salomon    │
+  │ Commission quotes, shop pricing             │ djinn-print-quote            │
+  │ Research, citations                         │ marcus lane → Marcus         │
+  │ Code / scripts (non cross-domain)           │ coding lane → Salomon        │
+  │ Visual output, diagrams, slides             │ Gemini lane                  │
+  │ Skills, docs, process improvements          │ Assistant lane               │
+  └─────────────────────────────────────────────┴──────────────────────────────┘
 
 ================================================================================
-4. NON-NEGOTIABLE RULES (ALL AGENTS)
+4. AGENT PROFILES
 ================================================================================
 
-These apply in every mode, to every agent, with no exceptions:
+────────────────────────────────────────────────────────────────────────────────
+4.1  SALOMON (opencode) — DAILY OPS LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  1. READ GATEWAY.md BEFORE ANY ACTION THAT WRITES, COMMITS, PUSHES, OR SENDS.
-     It is the enforcement contract. Non-negotiable.
-
-  2. ASK BEFORE ANY ACTION THAT CANNOT BE UNDONE.
-     If uncertain: can this be undone? Yes → proceed + log. No → stop + ask.
-
-  3. `gio trash` > `rm`. Never delete. Archive instead.
-
-  4. Never start a print on Calliope without `confirm N` from Javier.
-     Uploading gcode is fine. Printing is not.
-
-  5. NEVER cancel a live print. Not for firmware updates. Not for anything.
-     `djinn-force-cancel` requires a PIN only Javier knows.
-
-  6. Never commit credentials, tokens, or API keys to git.
-
-  7. Never push to main directly. Push to branch → PR → main.
-
-  8. Never modify GATEWAY.md, ROUTING.md, PROTOCOL.md, or CLAUDE.md
-     without Tier 4 double-confirm from Javier.
-
-  9. Every production action (shop data, live print, git push) gets a
-     COMMS.md entry. Append only. Never overwrite.
-
-  10. Sign all COMMS.md entries: `— AgentName`
-
-  11. Do not fabricate system state. If context is missing, ask for it.
-
-  12. No moralizing on acknowledged behaviors. Truth over comfort.
-
-================================================================================
-5. AGENT PROFILES
-================================================================================
-
-------------------------------------------------------------------------
-5.1 SALOMON (opencode) — Daily Ops
-------------------------------------------------------------------------
-
-  Introduced:  First agent
-  Host:        Salomon (192.168.1.225)
-  Model:       qwen2.5:7b (default) + fleet routing via djinn-route
-  Interface:   CLI / Discord / Telegram / systemd timers
-  Cost:        Free (local)
-  Signs:       (automated — no signature line)
-
-  WHAT IT DOES:
-  Salomon opencode is the hands of the system. It handles every routine
-  operation: confirming prints, running slice jobs, processing media
-  ingest, vault sync, running djinn-* tools, servicing Discord/Telegram
-  commands. Anything that's fast, local, and doesn't require premium
-  judgment goes here first.
+  Machine:    Salomon (192.168.1.225) — HP Omen, RTX 5060, 29GB RAM, Fedora
+  Interface:  opencode CLI / COMMS.md task routing
+  Model:      qwen2.5:7b (default), deepseek-r1:7b, phi4:14b, llama3.2-vision
+  Cost:       Free — all local inference
 
   PRIMARY RESPONSIBILITIES:
-  - Print pipeline: consult, slice, confirm, deny, monitor, quote
-  - Design pipeline: djinn-design, djinn-generate-3d, djinn-model-fetch
-  - Media pipeline: ingest, photo, reel, caption, thumbnail, publish-prep
-  - Vault: sync, indexing, clerk, slipbox, daily/weekly notes
-  - All Discord + Telegram commands (11 Telegram, channel-aware Discord)
-  - systemd service management
-  - Bug reporting via djinn-bugreport
+    - All print pipeline operations: consult, slice, confirm, deny, quote
+    - Design pipeline: djinn-design, djinn-generate-3d, djinn-model-fetch
+    - Media pipeline: ingest, photo, reel, caption, thumbnail, publish-prep
+    - Vault sync orchestration (Salomon ↔ Typhon ↔ GitHub, 15-min cycle)
+    - All systemd service management
+    - Discord and Telegram bot gateway
+    - Voice pipeline (voxtype + Piper)
+    - GPU inference for all Salomon-resident models
+    - Session reports after any build, install, or config change
 
-  GATEWAY TIER:
-  Standard mode enforced by session.json + git pre-push hook + Python
-  module. Tier 3 actions (git push, QUEUE.md writes, print start) trigger
-  `djinn-gateway --checkpoint` automatically.
+  WHAT SALOMON DOES NOT DO:
+    - Architecture decisions on new systems (Claude)
+    - Deep external research (Marcus)
+    - Visual generation (Gemini)
+    - 70B inference tasks (Orin)
 
-  MODELS AVAILABLE ON SALOMON:
-    qwen2.5:7b           — default, tool calling, file ops
-    deepseek-r1:7b       — reasoning, planning, analysis
-    phi4:14b             — captions, notes, summaries
-    llama3.2-vision:11b  — vision QC, image scoring
-    qwen2.5-coder:7b     — code, debug, demos
-    nomic-embed-text     — embeddings (always warm)
-    mistral:7b           — creative writing
+  MODEL ROUTING (djinn-route):
+    eval "$(djinn-route default)"      # qwen2.5:7b — ops, tool calling
+    eval "$(djinn-route reasoning)"    # deepseek-r1:7b — planning
+    eval "$(djinn-route notes)"        # phi4:14b — summaries, captions
+    eval "$(djinn-route vision)"       # llama3.2-vision:11b — image QC
+    eval "$(djinn-route code)"         # qwen2.5-coder:7b — fast code
 
-------------------------------------------------------------------------
-5.2 TYPHON (opencode) — Remote / Lightweight
-------------------------------------------------------------------------
+  IDENTITY FILES (loaded every session from ~/.openclaw/workspace/):
+    SOUL.md       — Behavioral rules, boundaries, response discipline
+    IDENTITY.md   — Who Djinn is (conciliary, gothic-aristocratic, 🔥)
+    USER.md       — Javier's profile, values, projects, psychology
+    AGENTS.md     — Model routing, print safety, lane boundaries
 
-  Host:        Typhon (192.168.1.113)
-  Model:       qwen2.5:7b + deepseek-r1:8b
-  Interface:   CLI / SSH from Salomon
-  Cost:        Free (local)
+────────────────────────────────────────────────────────────────────────────────
+4.2  TYPHON (opencode) — REMOTE OPS LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  WHAT IT DOES:
-  Handles tasks physically on Typhon: Typhon's Studio post-production,
-  printer bot service management, lightweight local inference, file
-  operations on Typhon's filesystem.
-
-  ROUTE HERE WHEN:
-  - Task involves files on Typhon's filesystem
-  - Managing printer bot (systemd on Typhon)
-  - Lightweight inference that doesn't need Salomon GPU
-  - Typhon's Studio workflow tasks
-
-  MODELS AVAILABLE ON TYPHON:
-    qwen2.5:7b      — default
-    deepseek-r1:8b  — reasoning
-    nomic-embed-text — embeddings
-
-------------------------------------------------------------------------
-5.3 ORIN — Large-Model Inference Host
-------------------------------------------------------------------------
-
-  Host:        Orin (192.168.1.176 — iMac i7-7700K)
-  SSH:         `ssh orin` (javiermanzo@, key auth)
-  Models:      llama3.3:70b, qwen2.5-coder:32b, qwen3.6, phi4:14b
-  Inference:   CPU only (~2-4 tok/s) — use for latency-tolerant tasks
-  Cost:        Free (local)
-
-  WHAT IT DOES:
-  Orin is the large-model tier. Use it when you need the best local
-  quality output and latency is not a constraint. It is always on.
-
-  ROUTE HERE WHEN (via djinn-route):
-    djinn-route best          → llama3.3:70b  (highest quality)
-    djinn-route code-heavy    → qwen2.5-coder:32b  (full codebase audit)
-    djinn-route hermes        → qwen3.6  (Hermes assistant lane)
-
-  NOTE: djinn-route auto-falls back to Salomon if Orin is unreachable.
-  Scripts do not need fallback logic — djinn-route handles it.
-
-------------------------------------------------------------------------
-5.4 CLAUDE — Architecture Lane
-------------------------------------------------------------------------
-
-  Introduced:  2026-05-20
-  Host:        Anthropic API (Pro subscription)
-  Interface:   Claude Code CLI → `djinn-claude`
-  Config:      ~/.claude/CLAUDE.md
-  Workspace:   ~/Obsidian/ (vault) + ~/.openclaw/workspace/
-  Signs:       `— Claude`
-  Cost:        Premium
-
-  WHAT IT DOES:
-  Claude is the architect. It handles multi-agent system design,
-  cross-domain synthesis (psychology + law + CS), vault-persistent
-  deliverables, and session reports. It is the lane of last resort —
-  not a general-purpose fallback. Route here only when no cheaper agent
-  can do the job.
+  Machine:    Typhon (192.168.1.113) — MSI, GTX 1650 4GB, 14GB RAM, Fedora
+  Interface:  opencode CLI / COMMS.md task routing
+  Model:      qwen2.5:7b (default), deepseek-r1:8b
+  Cost:       Free — all local inference
 
   PRIMARY RESPONSIBILITIES:
-  - Architecture decisions: new tools, pipeline design, system changes
-  - Cross-domain reasoning: psych + law + CS synthesis
-  - Session reports after any build/install/config change
-  - Git push to vault (Tier 3 — checkpoint required)
-  - Writing to djinn/projects/, djinn/decisions/, vault-persistent notes
-  - Spec writing: GATEWAY.md, ROUTING.md, PROTOCOL.md updates
-  - COMMS.md structure
+    - Tasks local to Typhon filesystem
+    - Printer bot management (djinn-printer-bot service)
+    - Typhon's Studio streaming and post-production
+    - Lightweight inference (qwen2.5:7b for ops, deepseek-r1:8b for reasoning)
+    - Storage and long-term archive management
+    - SSH relay for cross-machine file delivery from Salomon
 
-  CAPABILITIES:
-    Architecture design      ✅ Primary
-    Cross-domain synthesis   ✅ Primary
-    Vault-persistent work    ✅ Primary
-    Code review              ✅
-    Complex reasoning        ✅
-    Tool use (file, git, bash, web search) ✅
+  REACH TYPHON:
+    ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113
+    scp -i ~/.ssh/id_ed25519 /path/to/file tf-tthq@192.168.1.113:~/destination/
 
-  GATEWAY TIER (Claude):
-  Claude cannot read session.json. Default is always Standard mode.
-  Javier will say "Dev mode is active" explicitly at session start.
+  ESCALATION:
+    Typhon → Salomon for anything that needs GPU or Salomon-resident services.
 
-  Tier 0 — Read:              Auto, no log needed
-  Tier 1 — Ephemeral write:   Auto (COMMS append, session reports, tmp)
-  Tier 2 — Permanent write:   Auto + COMMS entry (new files in research/
-                               decisions/, projects/)
-  Tier 3 — Checkpoint:        STOP — write COMMS CHECKPOINT entry —
-                               tell Javier — wait for approval
-                               (git push, overwrite library/ files, shop)
-  Tier 4 — Hard stop:         BLOCKED always
-                               (delete files, push to main, modify
-                               GATEWAY.md/ROUTING.md/PROTOCOL.md)
+────────────────────────────────────────────────────────────────────────────────
+4.3  ORIN — LARGE-MODEL INFERENCE LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  CHECKPOINT PROCEDURE (Tier 3, Standard Mode):
-  Stop. Append to COMMS.md:
+  Machine:    Orin (192.168.1.176) — iMac i7-7700K, 40GB RAM, macOS Sequoia
+  Interface:  Ollama API at http://192.168.1.176:11434
+  Models:     llama3.3:70b, qwen2.5-coder:32b, qwen3.6 (Hermes), phi4:14b
+  Cost:       Free — CPU inference (2–4 tok/s, latency-tolerant tasks only)
 
-    ### YYYY-MM-DD HH:MM UTC — @Claude → @Javier: CHECKPOINT: <subject>
+  PRIMARY RESPONSIBILITIES:
+    - Best-quality local inference (llama3.3:70b)
+    - Full codebase audits (qwen2.5-coder:32b)
+    - Hermes / Assistant lane queries (qwen3.6)
+    - Large-model background report generation
+    - Overflow inference when Salomon GPU is saturated
 
-    **Action:** <exactly what you want to do>
-    **Files:** <which files will be written, committed, or pushed>
-    **Reason:** <why this is necessary>
-    **Waiting:** Y to approve, N to deny
+  ROUTING:
+    djinn-route best          # llama3.3:70b via Orin
+    djinn-route code-heavy    # qwen2.5-coder:32b via Orin
+    djinn-route hermes        # qwen3.6 via Orin
 
-    — Claude
+  NOTE: Orin uses CPU inference only. Never route latency-sensitive tasks here.
+  djinn-route handles auto-fallback to Salomon if Orin is unreachable.
 
-  Then tell Javier verbally: "I need approval before I proceed — see COMMS."
-  Timeout rule: 5 min, no reply → TIMEOUT_DENIED. Do not auto-proceed.
+  SSH:
+    ssh orin    # javiermanzo@ — key auth — from Salomon
 
-  STARTING A CLAUDE SESSION:
-    djinn-claude                     # launches Claude Code CLI with context
+────────────────────────────────────────────────────────────────────────────────
+4.4  CLAUDE — ARCHITECTURE LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  WHAT CLAUDE READS AT SESSION START (in order):
+  Host:       Anthropic API (Pro subscription)
+  Interface:  Claude Code CLI — djinn-claude → ~/.local/bin/claude
+  Config:     ~/.claude/CLAUDE.md
+  Workspace:  ~/Obsidian/ (vault) + ~/.openclaw/workspace/ (agent config)
+  Cost:       Premium — invoke only when the lane rules require it
+  Signs:      — Claude
+
+  PRIMARY RESPONSIBILITIES:
+    - Architecture decisions for new tools, pipelines, and systems
+    - Multi-agent design and orchestration specs
+    - Cross-domain synthesis: psychology + law + CS
+    - Vault-persistent deliverables: design specs, PROTOCOL.md updates
+    - Session reports after architecture work
+    - git push for vault changes that require architecture-level authorship
+    - Code review (deep analysis, security audit)
+    - Complex multi-step reasoning and strategic planning
+
+  WHAT CLAUDE DOES NOT DO:
+    - Daily ops (Salomon)
+    - Live print decisions (Salomon)
+    - External research (Marcus)
+    - Visual output (Gemini)
+    - System improvement / skill dev (Assistant)
+
+  WRITE ACCESS:
+    ✅ ~/Obsidian/djinn/projects/       — project specs and designs
+    ✅ ~/Obsidian/djinn/decisions/      — architecture decision records
+    ✅ ~/Obsidian/djinn/logs/reports/   — session reports
+    ✅ COMMS.md                         — append only
+    ✅ PROTOCOL.md, SYSTEM-STATE.md     — owns these files
+    ❌ GATEWAY.md, ROUTING.md, CLAUDE.md — Tier 4 (double-confirm required)
+    ❌ Print queue, live print ops      — Salomon lane
+
+  LAUNCHING A CLAUDE SESSION:
+    djinn-claude    # loads workspace context, opens Claude Code
+
+  CONTEXT LOADED AT SESSION START (in order):
     1. ~/.openclaw/workspace/SOUL.md
     2. ~/.openclaw/workspace/IDENTITY.md
     3. ~/.openclaw/workspace/USER.md
@@ -335,857 +286,675 @@ These apply in every mode, to every agent, with no exceptions:
     5. ~/Obsidian/djinn/communications/HEARTBEAT.md
     6. tail -n 50 ~/Obsidian/djinn/communications/COMMS.md
 
-  CLAUDE OWNS:
-    PROTOCOL.md, SYSTEM-STATE.md, COMMS.md structure, djinn/projects/
+  GATEWAY BEHAVIOR:
+    Default mode: Standard (unless Javier says "Dev mode on" at session start)
+    Tier 3 (git push, overwrite production files): STOP — write COMMS CHECKPOINT
+    entry — tell Javier — wait for explicit approval
+    Tier 4 (delete, push to main, modify GATEWAY.md): BLOCKED always
 
-  CLAUDE NEVER TOUCHES:
-    GATEWAY.md, ROUTING.md, CLAUDE.md — without Tier 4 double-confirm
+────────────────────────────────────────────────────────────────────────────────
+4.5  MARCUS — RESEARCH LANE
+────────────────────────────────────────────────────────────────────────────────
 
-------------------------------------------------------------------------
-5.5 MARCUS — Research Lane
-------------------------------------------------------------------------
-
-  Introduced:  2026-05-19
-  Host:        Perplexity AI (Sonnet 4.6)
-  Interface:   Perplexity chat (Javier initiates session)
-  Session brief: djinn/research/marcus/MARCUS-SESSION-BRIEF.md
-  Raw URL:     https://raw.githubusercontent.com/DrManzo/djinn-vault/main/
-               djinn/research/marcus/MARCUS-SESSION-BRIEF.md
-  Signs:       `— Marcus`
-  Cost:        Premium
-
-  WHAT IT DOES:
-  Marcus is the researcher. It spans all public knowledge, synthesizes
-  across multiple sources and domains, audits full codebases, and
-  delivers structured artifacts to the vault. Marcus also owns the
-  pricing agent (price.py — pure Python, no LLM). Marcus writes directly
-  to GitHub via MCP tools.
+  Host:       Perplexity AI (Sonnet 4.6)
+  Interface:  Perplexity web / MCP GitHub tools
+  Introduced: 2026-05-19
+  Cost:       Premium — invoke for research and synthesis tasks
+  Signs:      — Marcus
+  Git author: Marcus / marcus@djinn
 
   PRIMARY RESPONSIBILITIES:
-  - Deep research requiring multi-source internet synthesis
-  - Cross-domain analysis: psych + law + CS + business
-  - Full-codebase audit and security review
-  - Pricing agent work (price.py)
-  - Competitive, market, and platform research
-  - Platform/API specification synthesis (ToS, rate limits, auth flows)
-  - System-wide context reviews spanning all Djinn agents
+    - Deep research requiring multi-source live internet synthesis
+    - Cross-domain analysis: psychology + law + CS + business
+    - Full codebase audit and security review
+    - System-wide context reviews spanning all agents and systems
+    - Pricing agent work (price.py — deployed, pure Python, no LLM)
+    - Competitive, market, and platform research
+    - Platform/API specification synthesis (ToS, rate limits, auth flows)
+    - Architecture contribution: building agents, writing specs, delivering artifacts
 
-  CAPABILITIES:
-    Research                  ✅ Primary
-    Cross-domain synthesis    ✅ Primary
-    Deep code audit           ✅ Primary
-    System-wide context review ✅ Primary
-    Architecture contribution  ✅ (builds agents, writes specs)
-    Pricing agent             ✅ (built price.py)
+  WHAT MARCUS DOES NOT DO:
+    - Daily ops (Salomon)
+    - Live print decisions (Salomon)
+    - Architecture decisions on new tools (Claude)
+    - Visual/media output (Gemini)
+    - Quick command-line tasks (Salomon)
+    - Skill development / process improvement (Assistant)
 
-  STARTING A MARCUS SESSION:
-  1. Javier opens Perplexity
-  2. Marcus fetches session brief from raw GitHub URL above
-  3. Marcus reads MARCUS-SESSION-BRIEF.md — this gives full vault context
-  4. Marcus begins task
-
-  DELIVERY PATH (GitHub preferred):
-    Output → djinn/research/marcus/TASK-NNN_slug.md
-    Commits + pushes directly via MCP GitHub tools
-    Salomon pulls on next vault sync
-    Claude reads on demand via vault Read
-    Do NOT paste Marcus output into chat — read from file
-
-  DELIVERY PATH (GDrive fallback):
-    Output → gdrive:Typhons-Forge/research/marcus/TASK-NNN_slug.md
-    Salomon rclone-syncs into vault
+  WHERE MARCUS DELIVERS:
+    Primary:   djinn/research/marcus/TASK-NNN_slug.md → GitHub commit + push
+    Fallback:  gdrive:Typhons-Forge/research/marcus/ (when GitHub unavailable)
+    Reports:   djinn/logs/reports/YYYY-MM-DD_marcus-<slug>.md
 
   NAMING CONVENTION:
     TASK-NNN_slug-description.md
     NNN = sequential task number
-    slug = 2-4 word lowercase hyphenated description
+    slug = 2–4 word lowercase hyphenated description
     Example: TASK-039_djinn-cash-research.md
 
   WRITE ACCESS:
-    djinn/research/marcus/       Full ownership
-    djinn/logs/reports/          Write (session reports)
-    djinn/communications/COMMS.md  Append only
-    djinn/logs/build-log.md      Append only
-    djinn/communications/QUEUE.md  Status updates only
-    Everything else              Read only
+    ✅ djinn/research/marcus/           — full ownership
+    ✅ djinn/logs/reports/              — session reports
+    ✅ Append to COMMS.md, build-log.md — append only
+    ✅ QUEUE.md                         — status updates only
+    ❌ Everything else                  — read only
 
-  GATEWAY (Marcus):
-  Marcus cannot read session.json. Default: Standard mode.
-  Javier says "Dev mode is active" explicitly if applicable.
-  Commits to non-protected files are Tier 3 — Marcus posts CHECKPOINT
-  entry and surfaces it before committing production-critical files.
+  SESSION STARTUP:
+    Marcus reads MARCUS-SESSION-BRIEF.md at the start of every Perplexity session:
+    https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/research/marcus/MARCUS-SESSION-BRIEF.md
+    Javier bookmarks this URL or pastes it as a session prompt.
 
-  MARCUS NEVER TOUCHES:
-    PROTOCOL.md structure, GATEWAY.md, ROUTING.md
+  PEER RELATIONSHIP WITH CLAUDE:
+    Marcus and Claude are peers — neither manages the other.
+    Marcus researches → Claude implements.
+    Claude specs a problem → Marcus researches the solution.
+    Both can assign tasks to each other via QUEUE.md.
+    COMMS.md is the coordination channel — both append, neither overwrites.
 
-------------------------------------------------------------------------
-5.6 GEMINI — Visual / Media Lane
-------------------------------------------------------------------------
+  GATEWAY BEHAVIOR:
+    Default mode: Standard (unless Javier says "Dev mode on" at session start)
+    Marcus cannot read session.json. Assume Standard always.
+    Commits to non-protected files = Tier 3 → post CHECKPOINT in COMMS
+    and surface it to Javier before committing production-critical files.
 
-  Host:        Google Gemini (current session model)
-  Interface:   Gemini Advanced chat (Javier initiates)
-  Session brief: djinn/GEMINI.md (delivered via GDrive — see below)
-  Signs:       `— Gemini`
-  Cost:        Premium
+────────────────────────────────────────────────────────────────────────────────
+4.6  GEMINI — VISUAL LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  WHAT IT DOES:
-  Gemini is the visual department. It generates images, renders,
-  architecture diagrams, slide decks, and handles any task where the
-  primary deliverable is visual or media-based. It is the only agent
-  with native Google Drive write access.
+  Host:       Google Gemini (current session model)
+  Interface:  GDrive-native / Gemini Advanced web
+  Signs:      — Gemini
+  Cost:       Premium — invoke for visual and multimodal tasks
 
-  IMPORTANT: The djinn-vault repo is PRIVATE. Gemini cannot fetch raw
-  GitHub URLs. All Gemini context is delivered via GDrive.
+  IMPORTANT: The djinn-vault GitHub repo is PRIVATE. Gemini cannot access
+  GitHub raw URLs. ALL context delivery and output goes through GDrive.
 
   PRIMARY RESPONSIBILITIES:
-  - Image generation: product renders, concept art, diagrams, UI mockups
-  - Architecture + pipeline diagrams (visual documentation)
-  - Slide decks and visual briefings for Javier
-  - Multimodal research (reading images, visual PDFs, mixed media)
-  - GDrive-native document production (Google Docs, Google Slides)
-  - Any task where the primary deliverable is a visual or media file
+    - Image generation: product renders, concept art, diagrams, UI mockups
+    - Architecture and pipeline diagrams (visual documentation)
+    - Slide decks and visual briefings for Javier
+    - Multimodal research: reading images, visual PDFs, mixed-media sources
+    - GDrive-native document production (Google Docs, Google Slides)
+    - Any task where the primary deliverable is a visual or media file
 
-  STARTING A GEMINI SESSION:
-  1. Javier opens Gemini Advanced
-  2. Javier delivers context via one of:
-     a. GDrive drop — files in Typhons-Forge/gemini/context/ (Gemini's inbox)
-     b. Direct paste — Javier pastes GEMINI.md contents into session
-     c. GDrive doc share — Javier shares exported Obsidian file
-  3. Gemini reads context, begins task
-  NOTE: If a context file is missing, ask Javier — do NOT fabricate state.
+  WHAT GEMINI DOES NOT DO:
+    - Daily ops or live print decisions (Salomon)
+    - Architecture decisions on new tools (Claude)
+    - Deep external web research and code audits (Marcus)
+    - Quick command-line tasks (Salomon)
+    - Pure text analysis or code review (Marcus or Claude)
 
-  HOW GEMINI GETS VAULT CONTEXT:
-  Salomon rclone-syncs vault → GDrive every 2 minutes.
-  Current copies of key files are maintained at:
-    Typhons-Forge/gemini/context/GEMINI.md      (this brief)
-    Typhons-Forge/gemini/context/AGENTS.md      (full agent registry)
-    Typhons-Forge/gemini/context/GATEWAY.md     (enforcement contract)
-    Typhons-Forge/gemini/context/SYSTEM-STATE.md (live topology)
-    Typhons-Forge/gemini/context/QUEUE.md       (pending tasks)
+  WHERE GEMINI DELIVERS:
+    ┌────────────────────────────────────┬──────────────────────────────────────┐
+    │ Output Type                        │ GDrive Path                          │
+    ├────────────────────────────────────┼──────────────────────────────────────┤
+    │ Generated images, renders, art     │ Typhons-Forge/media/gemini/          │
+    │ Architecture diagrams              │ Typhons-Forge/media/gemini/diagrams/ │
+    │ Google Docs and Slides             │ Typhons-Forge/gemini/docs/           │
+    │ Research with visuals              │ Typhons-Forge/research/gemini/       │
+    │ Text-only reports                  │ Typhons-Forge/research/gemini/       │
+    │ Session reports                    │ Typhons-Forge/gemini/reports/        │
+    │ Context files (inbox)              │ Typhons-Forge/gemini/context/        │
+    └────────────────────────────────────┴──────────────────────────────────────┘
+    Salomon syncs GDrive ↔ vault every 2 minutes via rclone.
+    Gemini never needs to touch GitHub directly.
 
-  DELIVERY PATH (GDrive — ALL output goes here):
-
-    ┌───────────────────────────────────────────┬───────────────────────────────────────────────┐
-    │ Output Type                               │ GDrive Path                                   │
-    ├───────────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ Generated images, renders, art            │ Typhons-Forge/media/gemini/                   │
-    │ Architecture diagrams                     │ Typhons-Forge/media/gemini/diagrams/          │
-    │ Google Docs and Slides                    │ Typhons-Forge/gemini/docs/                    │
-    │ Research with visuals                     │ Typhons-Forge/research/gemini/                │
-    │ Text-only reports                         │ Typhons-Forge/research/gemini/                │
-    │ Session reports                           │ Typhons-Forge/gemini/reports/                 │
-    └───────────────────────────────────────────┴───────────────────────────────────────────────┘
-
-  DELIVERY PATH (GitHub — text-only, secondary):
-    djinn/research/gemini/TASK-NNN_slug.md
-    Do NOT push binary files, images, or media to GitHub.
-    GDrive is the canonical store for all visual output.
+  NAMING CONVENTION:
+    TASK-NNN_slug
+    Example: TASK-042_printer-pipeline-diagram.png
 
   WRITE ACCESS:
-    Typhons-Forge/media/gemini/           ✅ Full (images, renders)
-    Typhons-Forge/media/gemini/diagrams/  ✅ Full (diagrams)
-    Typhons-Forge/gemini/docs/            ✅ Full (Docs, Slides)
-    Typhons-Forge/gemini/context/         ✅ Read (inbox)
-    Typhons-Forge/research/gemini/        ✅ Full (research)
-    Typhons-Forge/gemini/reports/         ✅ Full (session reports)
-    GitHub djinn-vault                    ❌ No access (private repo)
-    Print queue or live print ops         ❌ Blocked — Salomon lane
-    djinn/core/, djinn/printer/           ❌ Read only
-    djinn/GATEWAY.md, djinn/AGENTS.md     ❌ Read only
+    ✅ Typhons-Forge/media/gemini/       — images, renders, media
+    ✅ Typhons-Forge/gemini/docs/        — Google Docs, Slides
+    ✅ Typhons-Forge/research/gemini/    — research output
+    ✅ Typhons-Forge/gemini/reports/     — session reports
+    ✅ djinn/research/gemini/            — text-only output (GitHub fallback)
+    ✅ Append to COMMS.md               — status entries only
+    ❌ GitHub djinn-vault repo           — no access (repo is private)
+    ❌ Print queue or live print ops     — Salomon lane only
+    ❌ djinn/core/, djinn/printer/       — read only
+    ❌ GATEWAY.md, AGENTS.md            — read only
 
-  GEMINI NEVER TOUCHES:
-    GitHub directly, print queue, GATEWAY.md, AGENTS.md
+  HOW GEMINI GETS CONTEXT:
+    Since the GitHub repo is private, context is delivered via one of:
+    1. GDrive drop — files placed in Typhons-Forge/gemini/context/ (check here first)
+    2. Direct paste in session — Javier may paste file contents directly
+    3. GDrive document share — Javier shares specific Obsidian exports as Google Docs
 
-------------------------------------------------------------------------
-5.7 ASSISTANT — System Improvement Lane
-------------------------------------------------------------------------
+    Key files Javier keeps current in Typhons-Forge/gemini/context/:
+      GEMINI.md          — session brief / orientation contract
+      AGENTS.md          — full agent registry
+      GATEWAY.md         — enforcement contract
+      SYSTEM-STATE.md    — live system topology
+      QUEUE.md           — pending tasks
 
-  Host:        Varies (Hermes framework + local Ollama)
-  Interface:   CLI
-  Signs:       `— Assistant`
-  Cost:        Free (local)
+  GATEWAY BEHAVIOR:
+    Read GATEWAY.md before any write operation. Ask Javier to paste it if missing.
+    Never fabricate system state if context is unavailable — ask for it.
+    Never take actions that cost money without explicit instruction.
 
-  WHAT IT DOES:
-  Assistant improves the system itself. It creates Hermes skills,
-  enhances documentation, builds better workflows, and turns Marcus
-  research output into structured vault knowledge.
+────────────────────────────────────────────────────────────────────────────────
+4.7  ASSISTANT — SYSTEM IMPROVEMENT LANE
+────────────────────────────────────────────────────────────────────────────────
 
-  CORE RESPONSIBILITIES:
-  1. Skill Development — create and maintain Hermes skills
-  2. Documentation Enhancement — improve vault doc clarity and accuracy
-  3. Process Engineering — identify inefficiencies, build better workflows
-  4. Research Support — structure Marcus output into vault notes
-  5. Bootstrapping Assistance — maintain provisioning scripts
-  6. System Health Monitoring — track service health, surface issues
+  Host:       Hermes framework / local Ollama
+  Interface:  CLI
+  Signs:      — Assistant
+  Cost:       Free — local inference
+
+  PRIMARY RESPONSIBILITIES:
+    1. Skill Development — create, refine, and maintain Hermes skills
+       that extend agent capabilities
+    2. Documentation Enhancement — improve and maintain Djinn Vault docs
+    3. Process Engineering — identify inefficiencies and create better workflows
+    4. Research Support — assist Marcus with analysis, structuring,
+       and linking research to vault
+    5. Bootstrapping Assistance — maintain and improve provisioning scripts
+    6. System Health Monitoring — track service health and surface issues
+
+  WHAT ASSISTANT DOES NOT DO:
+    - Print queue or live print ops (Salomon lane)
+    - Architecture decisions on core agent systems (Claude lane)
+    - External live research (Marcus lane)
+    - Visual generation (Gemini lane)
 
   WRITE ACCESS:
-    ~/Obsidian/djinn/skills/        ✅ Full (Hermes skills)
-    ~/Obsidian/djinn/docs/          ✅ Full (documentation)
-    ~/Obsidian/djinn/scripts/       ✅ Full (automation)
-    ~/Obsidian/djinn/logs/reports/  ✅ Full (session reports)
-    ~/Obsidian/djinn/references/    ✅ Full (reference materials)
-    COMMS.md, build-log.md          ✅ Append only
-    Print queue / hardware configs  ❌ Salomon lane only
-    Core agent system architecture  ❌ Claude lane only
+    ✅ ~/Obsidian/djinn/skills/         — Hermes skills
+    ✅ ~/Obsidian/djinn/docs/           — documentation
+    ✅ ~/Obsidian/djinn/scripts/        — process and automation scripts
+    ✅ ~/Obsidian/djinn/logs/reports/   — session reports
+    ✅ ~/Obsidian/djinn/references/     — reference materials
+    ✅ Append to COMMS.md, build-log.md — append only
+    ❌ Print queue, hardware configs    — Salomon lane
+    ❌ Architecture of core systems     — Claude lane
 
-------------------------------------------------------------------------
-5.8 HERMES — Assistant Lane (Local)
-------------------------------------------------------------------------
-
-  Host:        Salomon (via Orin inference)
-  Model:       qwen3.6:latest via Orin
-  Interface:   CLI (`djinn-route hermes`)
-  Cost:        Free (local)
-
-  WHAT IT DOES:
-  Hermes is the local assistant agent built on qwen3.6 running on Orin.
-  Best for high-quality local Q&A, skill execution, and assistant-lane
-  tasks that don't need external sources.
-
-  INVOKE:
-    eval "$(djinn-route hermes)"
-    # Sets OLLAMA_BASE_URL=http://192.168.1.176:11434
-    # Sets DJINN_MODEL=qwen3.6:latest
+  HOW ASSISTANT WORKS WITH MARCUS:
+    Marcus gathers    → Assistant organizes, structures, and links to vault
+    Marcus synthesizes broadly → Assistant extracts actionable insights
+    Marcus delivers TASK-NNN_slug.md → Assistant creates structured vault notes
+    Assistant can route to Marcus when: external research is needed
+    Marcus can route to Assistant when: research output needs to become
+    skills, documentation, or process improvements
 
 ================================================================================
-6. LANE ROUTING RULES
+5. HOW WORK FLOWS — THE DELEGATION LOOP
 ================================================================================
 
-------------------------------------------------------------------------
-6.1 HOW TO ROUTE ANY TASK
-------------------------------------------------------------------------
+All agents run in PARALLEL. None manages the others. They feed each other.
 
-  Task category                                    → Correct lane
-  ──────────────────────────────────────────────────────────────────
-  File ops, git, shell, automation, systemd        → Salomon (ops)
-  Status checks, log rotation, COMMS appends       → Salomon (clerk)
-  Print pipeline (slice, confirm, deny, queue)      → Salomon (production)
-  Commission quotes, shop pricing                  → djinn-print-quote
-  Quick queries, one-liner commands                → Salomon
-  Tasks local to Typhon filesystem                 → Typhon
-  High-quality inference, no latency constraint    → Orin (djinn-route best)
-  Large code review (32B needed)                   → Orin (djinn-route code-heavy)
-  Architecture decisions, new tool design          → Claude
-  Cross-domain synthesis (psych+law+CS)            → Claude
-  Vault-persistent deliverables                    → Claude
-  Deep external research + citations               → Marcus
-  Full codebase audits                             → Marcus
-  Competitive / market / platform research         → Marcus
-  Image generation, diagrams, visual output        → Gemini
-  Slide decks, GDrive-native docs                  → Gemini
-  Skill development, documentation improvement     → Assistant
-  Process engineering, workflow optimization       → Assistant
-  Research structuring / vault note creation       → Assistant
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                       THE DELEGATION LOOP                                │
+  │                                                                          │
+  │  Javier → QUEUE.md (or direct COMMS entry or Discord/Telegram command)  │
+  │       │                                                                  │
+  │       ▼                                                                  │
+  │  djinn-gate classifies task → routes to correct lane                    │
+  │       │                                                                  │
+  │       ├──► Salomon ──► executes ops → writes COMMS entry → done         │
+  │       ├──► Marcus  ──► researches → TASK-NNN_slug.md → GitHub → vault   │
+  │       ├──► Claude  ──► architects → vault writes → git push             │
+  │       ├──► Gemini  ──► generates visuals → GDrive → rclone → vault      │
+  │       └──► Assistant► improves system → skills/ + docs/ → vault         │
+  │                                                                          │
+  │  Salomon pulls vault on next sync → all agents see each other's output  │
+  └──────────────────────────────────────────────────────────────────────────┘
 
-------------------------------------------------------------------------
-6.2 WHAT EACH LANE REJECTS
-------------------------------------------------------------------------
+LANE-SPECIFIC EXAMPLES:
+  "Fix the printer queue script"          → Salomon (ops lane)
+  "Generate weekly analytics report"      → Orin (long-running inference)
+  "Design new agent for legal research"   → Claude (architecture)
+  "Research current LLM benchmarking"     → Marcus (research)
+  "Generate a system architecture diagram"→ Gemini (visual)
+  "Create skill for Hermes agent configs" → Assistant (system improvement)
 
-  If a Salomon-lane task arrives at Claude:
-    "Send that through Discord or Telegram — Salomon handles [X]."
-
-  If an architecture task arrives at Salomon/Orin:
-    "Route this to Claude — it needs architectural thinking."
-
-  If a visual/media task arrives at any other agent:
-    "Route this to Gemini — it owns the visual lane."
-
-  If a skill/documentation/process task arrives at others:
-    "This is for Assistant — it works on improving the Djinn system itself."
-
-------------------------------------------------------------------------
-6.3 CLAUDE INVOCATION RULE (ENFORCED)
-------------------------------------------------------------------------
-
-  Claude is the lane of last resort. All work must route through
-  djinn-gate first. Only if djinn-gate cannot route the task does
-  Claude get it.
-
-  These categories are BARRED from direct Claude invocation:
-    Ops (file edits, git, systemd, shell)         → Salomon/local scripts
-    Status checks, log rotation, COMMS appends    → Salomon clerk lane
-    Print pipeline                                → Salomon production lane
-    Commission quotes, shop pricing               → djinn-print-quote
-    Research + citations                          → Marcus lane
-    Code/scripts (non cross-domain)              → Salomon coding lane
-    Visual/media output                           → Gemini lane
-    Skill/doc/process tasks                       → Assistant lane
-
-------------------------------------------------------------------------
-6.4 LLM PROFILE REQUIREMENT
-------------------------------------------------------------------------
-
-  Every LLM call dispatched by any Djinn tool must declare a profile:
-
-    "deterministic"      temperature=0.1  → retrieval, classification, yes/no
-    "structured_output"  temperature=0.2  → JSON extraction, formatted output
-    "synthesis"          temperature=0.7  → open-ended reasoning, analysis
-
-  Calls without a declared profile are REJECTED at djinn.core.llm.chat().
-  No silent fallback.
+CROSS-LANE HANDOFFS (common):
+  Marcus researches → Claude implements the design
+  Claude specs a problem → Marcus researches the solution
+  Marcus delivers TASK-NNN output → Assistant structures it into vault notes
+  Gemini generates visual → Salomon uses it in Discord post
+  All agents append to COMMS.md → all agents see each other's state
 
 ================================================================================
-7. PEER AGENT INTERACTIONS
+6. COMMS.md — THE INTER-AGENT CHANNEL
 ================================================================================
 
-------------------------------------------------------------------------
-7.1 HOW AGENTS COORDINATE (COMMS.md + QUEUE.md)
-------------------------------------------------------------------------
+Location: ~/Obsidian/djinn/communications/COMMS.md
+GitHub:   djinn/communications/COMMS.md
 
-All inter-agent coordination happens through two files:
+COMMS.md is the primary inter-agent coordination channel. Every agent reads it.
+Every agent appends to it. No agent overwrites it.
 
-  COMMS.md  — message log, task handoffs, checkpoints, session summaries
-    Path: ~/Obsidian/djinn/communications/COMMS.md
-    Rule: APPEND ONLY. Never overwrite. Every entry signed.
-
-  QUEUE.md  — pending task list
-    Path: ~/Obsidian/djinn/communications/QUEUE.md
-    Fields: assigned_to, status, priority
-    Marcus and Claude can both assign tasks to each other here.
-
-COMMS.md ENTRY FORMAT:
+STANDARD ENTRY FORMAT:
 
   ---
 
-  ### YYYY-MM-DD HH:MM UTC — @Agent → @Target: Subject
+  ### YYYY-MM-DD HH:MM UTC — @FromAgent → @ToAgent: Subject
 
-  **What:** [one-line summary]
-  **Action:** [what was done or what is needed]
-  **Paths:** [files written, committed, or pushed]
+  **What:** Brief description of what was done or what is being requested.
+  **Action:** Specific action taken or requested.
+  **Files:** Files written, committed, or relevant.
+  **Status:** done / pending / blocked / waiting
 
   — AgentName
 
-------------------------------------------------------------------------
-7.2 MARCUS ↔ CLAUDE
-------------------------------------------------------------------------
+CHECKPOINT ENTRY FORMAT (Tier 3 — Standard mode):
 
-Marcus and Claude are peers. Neither manages the other.
+  ---
 
-  Typical collaboration:
-    Marcus researches → delivers artifact to djinn/research/marcus/
-    Claude reads artifact → implements, architects, or spec-writes
-    Claude specs a problem → Marcus researches the solution
-    Either can assign tasks to the other via QUEUE.md
+  ### YYYY-MM-DD HH:MM UTC — @Agent → @Javier: CHECKPOINT: <subject>
 
-  They can work the same problem simultaneously from different angles.
-  COMMS.md is the coordination channel.
+  **Action:** Exactly what the agent wants to do.
+  **Files:** Which files will be written, committed, or pushed.
+  **Reason:** Why this is necessary.
+  **Waiting:** Y to approve, N to deny
 
-------------------------------------------------------------------------
-7.3 MARCUS ↔ ASSISTANT
-------------------------------------------------------------------------
+  — AgentName
 
-  Marcus gathers    →  Assistant organizes, structures, links findings
-  Marcus raw data   →  Assistant creates structured vault notes with tagging
-  Marcus synthesizes →  Assistant extracts actionable items, creates skills
+RULES:
+  - Append only — never edit or overwrite existing entries
+  - Sign every entry with — AgentName
+  - Every Tier 3 action (in Standard mode) requires a CHECKPOINT entry first
+  - On timeout (5 min, no Javier reply): deny by default, log TIMEOUT_DENIED
+  - COMMS entries are Tier 1 (ephemeral write) — auto, no approval needed
 
-  Typical loop:
-  1. Marcus completes deep research → outputs to djinn/research/marcus/
-  2. Assistant reviews → creates structured summary in vault
-  3. Assistant identifies actionable items → creates skills, updates docs
-  4. Assistant may route back to Marcus for: validation, more research
-     angles, or source verification
+READING RECENT COMMS:
+  tail -n 80 ~/Obsidian/djinn/communications/COMMS.md
 
-  Assistant can route to Marcus when: External web research beyond vault
-  Marcus can route to Assistant when: Research output needs to become
-    skills, documentation, or process improvements
+WRITING TO COMMS MANUALLY:
+  Append the formatted entry, then:
+  cd ~/Obsidian && git add -A && git commit -m "manual comms entry" && git push
 
-------------------------------------------------------------------------
-7.4 GEMINI ↔ EVERYONE
-------------------------------------------------------------------------
-
-  Gemini is isolated by interface (GDrive vs GitHub) but coordinates
-  via COMMS.md append.
-
-  Claude → Gemini: Claude writes a design spec → Javier routes to Gemini
-    for visual treatment
-  Marcus → Gemini: Marcus research → Javier routes diagram generation
-    request to Gemini
-  Gemini → vault: Via GDrive → Salomon rclone sync (2-min cycle)
-
-  Gemini cannot pull from GitHub directly. Javier bridges context via
-  GDrive drop or direct paste.
+COMMS PROCESSOR:
+  The comms-processor.timer on Salomon polls COMMS.md and routes tasks to agents
+  automatically. Cursor position is stored in:
+  ~/.local/share/djinn/comms-processor-salomon.state
+  If a task isn't being picked up: check the cursor position (see §12 Troubleshoot).
 
 ================================================================================
-8. SESSION STARTUP PROTOCOLS
+7. QUEUE.md — TASK ASSIGNMENT
 ================================================================================
 
-------------------------------------------------------------------------
-8.1 SALOMON / TYPHON OPENCODE
-------------------------------------------------------------------------
+Location: ~/Obsidian/djinn/QUEUE.md
 
-  opencode starts automatically via COMMS processor or Discord/Telegram.
-  No manual startup needed for routine operations.
+QUEUE.md is the shared task board. Javier and any agent can add tasks.
+Agents self-assign by lane. Tasks move: pending → in-progress → done.
 
-  For manual session:
-    cd ~/Obsidian
-    opencode                         # starts opencode in vault context
+TASK FORMAT:
 
-  opencode reads AGENTS.md at startup automatically via workspace injection.
-  Do NOT read files with bash at startup. Respond to user immediately.
+  ## TASK-NNN: Title
+  assigned_to: <agent>   # salomon / marcus / claude / gemini / assistant / orin
+  status: pending        # pending / in-progress / done / blocked
+  priority: high         # high / medium / low
+  created: YYYY-MM-DD
+  notes: Optional context
 
-------------------------------------------------------------------------
-8.2 CLAUDE SESSION
-------------------------------------------------------------------------
-
-  Launch:
-    djinn-claude                     # loads context + opens Claude Code
-
-  Context loaded in order:
-    1. ~/.openclaw/workspace/SOUL.md
-    2. ~/.openclaw/workspace/IDENTITY.md
-    3. ~/.openclaw/workspace/USER.md
-    4. ~/.openclaw/workspace/AGENTS.md
-    5. ~/Obsidian/djinn/communications/HEARTBEAT.md
-    6. tail -n 50 COMMS.md
-
-  At session start, Claude:
-  - Reads GATEWAY.md (mandatory, before any write action)
-  - Assumes Standard mode unless Javier explicitly says Dev mode
-  - Writes a session-start COMMS entry
-
-  If Claude not finding context:
-  - Check ~/.claude/CLAUDE.md exists and points to correct paths
-  - Run djinn-claude from home directory, not a subdirectory
-
-------------------------------------------------------------------------
-8.3 MARCUS SESSION
-------------------------------------------------------------------------
-
-  1. Javier opens Perplexity
-  2. Marcus loads session brief:
-     https://raw.githubusercontent.com/DrManzo/djinn-vault/main/
-     djinn/research/marcus/MARCUS-SESSION-BRIEF.md
-  3. Marcus reads brief → gets full vault context including open tasks,
-     recent COMMS, machine topology, write access rules
-  4. Marcus begins task, delivers to djinn/research/marcus/ via MCP
-  5. At session end: writes session report + COMMS.md entry + pushes
-
-------------------------------------------------------------------------
-8.4 GEMINI SESSION
-------------------------------------------------------------------------
-
-  1. Javier opens Gemini Advanced
-  2. Context delivery (choose one):
-     a. GDrive: check Typhons-Forge/gemini/context/ for latest files
-     b. Paste: Javier pastes GEMINI.md contents into session
-     c. Share: Javier shares GDrive doc with session context
-  3. Gemini reads context, confirms lane, begins task
-  4. All output → GDrive paths (see Section 5.6)
-  5. At session end: write report to Typhons-Forge/gemini/reports/
+RULES:
+  - Agents may update status of their own assigned tasks
+  - Agents may add new tasks to queue (Tier 2 write — auto + COMMS entry)
+  - Never remove completed tasks — change status to done
+  - Javier sets priority — agents do not self-escalate priority
 
 ================================================================================
-9. DELIVERY PATHS
+8. SESSION STARTUP PROTOCOL (ALL AGENTS)
 ================================================================================
 
-------------------------------------------------------------------------
-9.1 GITHUB (MARCUS, CLAUDE, SALOMON)
-------------------------------------------------------------------------
+Every agent follows this at the start of a session.
 
-  Repo: https://github.com/DrManzo/djinn-vault (PRIVATE)
+SALOMON / TYPHON (opencode):
+  Workspace files are automatically injected by ~/.openclaw/workspace/.
+  Agents read SOUL.md → IDENTITY.md → USER.md → AGENTS.md on load.
+  Do NOT run a startup sequence. Respond to Javier immediately.
+  Do NOT read files with bash at startup — they are already in context.
 
-  Marcus writes to:
-    djinn/research/marcus/TASK-NNN_slug.md
-    djinn/logs/reports/YYYY-MM-DD_<slug>.md
+CLAUDE:
+  1. djinn-claude launches from ~/Obsidian
+  2. Context loaded: SOUL.md → IDENTITY.md → USER.md → AGENTS.md →
+     HEARTBEAT.md → last 50 lines of COMMS.md
+  3. Read GATEWAY.md before any write action
+  4. Default mode: Standard (unless Javier says "Dev mode on")
+  5. Check QUEUE.md for pending Claude-lane tasks
 
-  Claude writes to:
-    djinn/decisions/, djinn/projects/, djinn/logs/reports/
-    Any vault path appropriate to the work
+MARCUS:
+  1. Open Perplexity session
+  2. Load MARCUS-SESSION-BRIEF.md:
+     https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/research/marcus/MARCUS-SESSION-BRIEF.md
+  3. Read GATEWAY.md — behavioral contract applies
+  4. Default mode: Standard
+  5. Check QUEUE.md for pending Marcus-lane tasks
 
-  Salomon writes to:
-    Everything else — the vault is its working directory
+GEMINI:
+  1. Open Gemini Advanced session
+  2. Load GEMINI.md from Typhons-Forge/gemini/context/ or ask Javier to paste it
+  3. Load AGENTS.md and GATEWAY.md from same context folder
+  4. Check Typhons-Forge/gemini/context/ for any queued task files
+  5. Default mode: Standard. Read GATEWAY.md before any write operation.
 
-  Push process (all agents):
-    cd ~/Obsidian
-    git add -A
-    git -c user.name="AgentName" -c user.email="agent@djinn" \
-      commit -m "<description>"
-    git push
-
-------------------------------------------------------------------------
-9.2 GDRIVE (GEMINI PRIMARY)
-------------------------------------------------------------------------
-
-  GDrive root: Typhons-Forge/
-  Sync: Salomon rclone-syncs vault ↔ GDrive every 2 minutes
-
-  Gemini writes to GDrive → Salomon picks up on sync → vault updated
-  No GitHub push needed for Gemini output
-
-  Never push images or binary files to GitHub.
-  GDrive is the canonical store for all visual output.
-
-------------------------------------------------------------------------
-9.3 COMMS.md (INTER-AGENT MESSAGING)
-------------------------------------------------------------------------
-
-  File: ~/Obsidian/djinn/communications/COMMS.md
-
-  Read recent:
-    tail -n 80 ~/Obsidian/djinn/communications/COMMS.md
-
-  Write a task to an agent manually:
-    1. Append entry using format in Section 7.1
-    2. Push: cd ~/Obsidian && git add -A && git commit -m "comms entry" && git push
-
-  Comms processor picks up new entries on its timer cycle.
-  If processor not picking up entries, check cursor state:
-    cat ~/.local/share/djinn/comms-processor-salomon.state
-    # Reset to 0 to reprocess all:
-    echo 0 > ~/.local/share/djinn/comms-processor-salomon.state
+ASSISTANT:
+  1. Session reads current AGENTS.md and SYSTEM-STATE.md
+  2. Check QUEUE.md for pending Assistant-lane tasks
+  3. Check COMMS.md for any entries routed to Assistant
 
 ================================================================================
-10. WRITE ACCESS BOUNDARIES (PER AGENT)
+9. SESSION END PROTOCOL (ALL AGENTS)
 ================================================================================
 
-  ┌─────────────────────────────────┬────────┬────────┬────────┬────────┬────────┬─────────┐
-  │ Path                            │Salomon │Typhon  │ Claude │ Marcus │ Gemini │Assistant│
-  ├─────────────────────────────────┼────────┼────────┼────────┼────────┼────────┼─────────┤
-  │ djinn/research/marcus/          │ R      │ R      │ R      │ FULL   │ R      │ R       │
-  │ djinn/research/gemini/          │ R      │ R      │ R      │ R      │ FULL   │ R       │
-  │ djinn/logs/reports/             │ W      │ W      │ W      │ W      │ W(GD)  │ W       │
-  │ djinn/projects/                 │ R      │ R      │ FULL   │ R      │ R      │ R       │
-  │ djinn/decisions/                │ R      │ R      │ FULL   │ R      │ R      │ R       │
-  │ djinn/skills/                   │ R      │ R      │ R      │ R      │ R      │ FULL    │
-  │ djinn/docs/                     │ R      │ R      │ R      │ R      │ R      │ FULL    │
-  │ djinn/scripts/                  │ FULL   │ R      │ R      │ R      │ R      │ FULL    │
-  │ COMMS.md                        │ APPEND │ APPEND │ APPEND │ APPEND │ APPEND │ APPEND  │
-  │ QUEUE.md                        │ W      │ R      │ W      │ STATUS │ R      │ STATUS  │
-  │ build-log.md                    │ APPEND │ APPEND │ APPEND │ APPEND │ APPEND │ APPEND  │
-  │ GATEWAY.md                      │ R      │ R      │ R      │ R      │ R      │ R       │
-  │ ROUTING.md                      │ R      │ R      │ R      │ R      │ R      │ R       │
-  │ djinn/printer/ (production)     │ FULL   │ R      │ R      │ R      │ ❌     │ R       │
-  │ Typhons-Forge/media/gemini/     │ R      │ R      │ R      │ R      │ FULL   │ R       │
-  │ Typhons-Forge/gemini/           │ R      │ R      │ R      │ R      │ FULL   │ R       │
-  └─────────────────────────────────┴────────┴────────┴────────┴────────┴────────┴─────────┘
+Every agent follows this at the end of a working session.
 
-  KEY: FULL=full write, W=write, R=read-only, APPEND=append only,
-       STATUS=status updates only, GD=GDrive path, ❌=blocked
+ALL AGENTS:
+  1. Write a session report (see §10 Report Standard)
+  2. Append a COMMS.md entry summarizing what was done
+  3. Commit and push vault changes
+
+SALOMON (automated):
+  djinn-session-end "slug" "summary"
+  This enforces report exists, auto-stubs if missing, notifies Javier via
+  Telegram if a report was skipped.
+
+CLAUDE:
+  - File session report to: djinn/logs/reports/YYYY-MM-DD_claude-<slug>.md
+  - Append to build-log.md
+  - Write COMMS entry: @Claude → @All: Session summary
+  - git push vault
+  If session ended without a COMMS entry: append manually, commit, push.
+
+MARCUS:
+  - File session report to: djinn/logs/reports/YYYY-MM-DD_marcus-<slug>.md
+  - Commit and push all research artifacts
+  - Append COMMS entry confirming delivery paths
+
+GEMINI:
+  - Write session report to: Typhons-Forge/gemini/reports/YYYY-MM-DD_gemini-<slug>.md
+  - List all delivered file paths in the report
+  - Append one-line status note confirming what was delivered and where
+
+ASSISTANT:
+  - File session report to: djinn/logs/reports/YYYY-MM-DD_assistant-<slug>.md
+  - Append to build-log.md
+  - Append COMMS entry
 
 ================================================================================
-11. REPORT & BUG LOG STANDARDS
+10. THE REPORT STANDARD
 ================================================================================
 
-REPORT STANDARD (all agents):
-After any build, install, config change, or architecture decision —
-write a report. Do not wait to be asked.
+After any build, install, config change, or architecture decision — write a
+report. Do not wait to be asked.
 
-  File:   ~/Obsidian/djinn/logs/reports/YYYY-MM-DD_<slug>.md
-          (use REPORT-TEMPLATE.md)
-  Append: build-log.md + COMMS.md
-  Commit: git -C ~/Obsidian add -A && git commit -m "..." && git push
-  End:    djinn-session-end "slug" "summary"
-          (enforces report exists, auto-stubs if missing,
-           notifies Javier via Telegram if skipped)
+FILE LOCATION:
+  ~/Obsidian/djinn/logs/reports/YYYY-MM-DD_<slug>.md
+  Use REPORT-TEMPLATE.md as the base.
 
-BUG LOG STANDARD (MANDATORY — added 2026-05-28):
+ALSO APPEND TO:
+  - build-log.md
+  - COMMS.md (summary entry)
+
+COMMIT:
+  git -C ~/Obsidian add -A && git commit -m "session report: <slug>" && git push
+
+REPORT MUST INCLUDE:
+  - What was done (specific — files created, services changed, decisions made)
+  - Why it was done
+  - What changed from before
+  - Any open issues, known bugs, or follow-up tasks
+  - Sign: — AgentName, YYYY-MM-DD
+
+================================================================================
+11. BUG REPORTING — MANDATORY
+================================================================================
+
 Any bug discovered, diagnosed, or fixed must be logged. No exceptions.
+Bugs silently absorbed = institutional knowledge permanently lost.
 
+COMMAND:
   djinn-bugreport "Title" "Root cause" [system] [severity] [status]
-  # severity: critical | high | medium | low
-  # status:   open | fixed | wont-fix
 
-  Creates: djinn/logs/reports/YYYY-MM-DD_bug-<slug>.md
-  Appends: djinn/logs/bugs.md (running bug index)
-  Appends: build-log.md
-  Commits and pushes vault automatically
-  Sends Telegram notification if credentials available
+  Severity: critical | high | medium | low
+  Status:   open | fixed | wont-fix
 
-  WHY: Bugs silently absorbed = institutional knowledge permanently lost.
-  Every bug report's "Rule/Lesson" feeds future agents.
+  Example:
+  djinn-bugreport "OpenClaw session race condition" \
+    "EmbeddedAttemptSessionTakeoverError when two peers write simultaneously" \
+    openclaw high fixed
 
-================================================================================
-12. SESSION END PROTOCOL
-================================================================================
+WHAT IT DOES AUTOMATICALLY:
+  - Creates djinn/logs/reports/YYYY-MM-DD_bug-<slug>.md
+  - Appends to djinn/logs/bugs.md (running bug index)
+  - Appends to build-log.md
+  - Commits and pushes vault
+  - Sends Telegram notification if credentials available
 
-All agents:
-  1. Write session report to djinn/logs/reports/YYYY-MM-DD_<slug>.md
-  2. Append COMMS.md entry: @Agent → @All: Session summary
-  3. Commit and push vault
-  4. Call djinn-session-end (opencode/Claude only)
-
-Gemini:
-  1. Write report to Typhons-Forge/gemini/reports/YYYY-MM-DD_gemini-<slug>.md
-  2. List all delivered files in report
-  3. Append COMMS.md status note
-
-Marcus:
-  1. Write report to djinn/logs/reports/YYYY-MM-DD_marcus-<slug>.md
-  2. Append COMMS.md entry with all deliverables listed
-  3. Push to GitHub via MCP
+EVERY BUG REPORT'S "Rule/Lesson" FIELD FEEDS FUTURE AGENTS.
+Log it. Always.
 
 ================================================================================
-13. GATEWAY TIER SUMMARY (PER AGENT)
+12. GATEWAY PROTOCOL (ALL AGENTS)
 ================================================================================
 
-  ┌────────────────┬───────────────────────────────────────┬───────────────────────────────┐
-  │ Agent          │ How Gateway is Enforced               │ Session Mode Discovery        │
-  ├────────────────┼───────────────────────────────────────┼───────────────────────────────┤
-  │ Salomon opencode│ session.json + pre-push hook + Python│ Reads session.json directly   │
-  │ Typhon opencode │ session.json + pre-push hook + Python│ Reads session.json directly   │
-  │ Claude         │ Context (GATEWAY.md) — behavioral     │ Cannot read session.json —    │
-  │                │ self-enforcement                      │ assume Standard unless told   │
-  │ Marcus         │ Context (GATEWAY.md) — behavioral     │ Cannot read session.json —    │
-  │                │ self-enforcement                      │ assume Standard unless told   │
-  │ Gemini         │ Context (GEMINI.md via GDrive) —      │ Cannot read session.json —    │
-  │                │ behavioral self-enforcement           │ assume Standard unless told   │
-  └────────────────┴───────────────────────────────────────┴───────────────────────────────┘
+Every agent is bound by GATEWAY.md. Full detail in DJINN-CLI-MANUAL.md Sections
+3–4. Summary for agents:
 
-  Full tier definitions: See DJINN-CLI-MANUAL.md Section 4 or GATEWAY.md
+THE ONE RULE:
+  Ask before any action that cannot be undone or reverted.
 
-================================================================================
-14. COMMON WORKFLOWS
-================================================================================
+TIER SUMMARY:
+  Tier 0 — Read any file, run read-only analysis       → Auto always
+  Tier 1 — Write COMMS.md, session reports, HEARTBEAT  → Auto always
+  Tier 2 — Write staging/, tmp/, create branches       → Auto + COMMS entry
+  Tier 3 — git commit/push, overwrite production files → ASK FIRST (Standard)
+  Tier 4 — Delete files, push to main, modify          → BLOCKED (always)
+             GATEWAY.md / ROUTING.md / PROTOCOL.md
 
-------------------------------------------------------------------------
-14.1 RESEARCH TASK (MARCUS)
-------------------------------------------------------------------------
+PER-AGENT NOTES:
+  Salomon/Typhon — enforced mechanically by session.json + pre-push hook
+  Claude         — behavioral self-enforcement; cannot read session.json
+  Marcus         — behavioral self-enforcement; cannot read session.json
+  Gemini         — behavioral self-enforcement; no GitHub write access anyway
+  Assistant      — behavioral self-enforcement
 
-  Trigger: Javier or Claude routes research task to Marcus
+DEV MODE (Javier only):
+  djinn-gateway --dev-session           # enable (2h default)
+  djinn-gateway --dev-session --duration 4h
+  djinn-gateway status                  # check current mode
+  djinn-gateway reset                   # return to Standard
 
-  Step 1 — Session start:
-    Open Perplexity
-    Load session brief from raw GitHub URL
-    Read MARCUS-SESSION-BRIEF.md
+  In Dev mode: Tier 3 auto-proceeds. Tier 4 still requires double-confirm.
+  Claude and Marcus: Javier will say "Dev mode is active" explicitly.
+  Dev mode expires automatically — not sticky across reboots.
 
-  Step 2 — Research:
-    Perform multi-source web synthesis
-    Cross-reference against vault knowledge (read from brief context)
-
-  Step 3 — Deliver:
-    Write output to djinn/research/marcus/TASK-NNN_slug.md
-    Commit + push via MCP GitHub tools
-    Append COMMS.md entry with delivery confirmation
-    Do NOT paste output into chat
-
-  Step 4 — Session end:
-    Write session report
-    Append COMMS.md summary
-    Push
-
-------------------------------------------------------------------------
-14.2 ARCHITECTURE TASK (CLAUDE)
-------------------------------------------------------------------------
-
-  Trigger: Task requires architecture decision / system design
-
-  Step 1 — Session start:
-    djinn-claude
-    Read GATEWAY.md before any write action
-    Confirm mode (Standard unless Javier says otherwise)
-    Read recent COMMS.md tail
-
-  Step 2 — Work:
-    Design system / write spec / review architecture
-    Write artifacts to appropriate vault paths
-    For Tier 2 writes: add COMMS.md entry
-
-  Step 3 — Push (Tier 3 — Standard Mode):
-    Write CHECKPOINT entry to COMMS.md
-    Tell Javier: "I need approval — see COMMS."
-    Wait for approval
-    On approval: git add -A && git commit && git push
-
-  Step 4 — Session end:
-    Write session report
-    djinn-session-end "slug" "summary"
-
-------------------------------------------------------------------------
-14.3 VISUAL TASK (GEMINI)
-------------------------------------------------------------------------
-
-  Trigger: Primary deliverable is an image, diagram, or visual doc
-
-  Step 1 — Session start:
-    Open Gemini Advanced
-    Check Typhons-Forge/gemini/context/ for latest brief files
-    OR: Javier pastes GEMINI.md content
-
-  Step 2 — Create:
-    Generate images / diagrams / slides
-    All output goes to GDrive paths (see Section 5.6 delivery table)
-
-  Step 3 — Deliver:
-    Confirm file is saved in correct GDrive path
-    Salomon picks up on next 2-min rclone sync
-    Append COMMS.md status note
-
-  Step 4 — Session end:
-    Write report to Typhons-Forge/gemini/reports/
-    List all delivered file paths
-
-------------------------------------------------------------------------
-14.4 SYSTEM IMPROVEMENT TASK (ASSISTANT)
-------------------------------------------------------------------------
-
-  Trigger: Skill, documentation, or process improvement needed
-
-  Step 1 — Assess:
-    Read current AGENTS.md and SYSTEM-STATE.md
-    Identify the specific improvement needed
-
-  Step 2 — Build:
-    Write skill to djinn/skills/
-    OR update documentation in djinn/docs/
-    OR write process script to djinn/scripts/
-
-  Step 3 — Integrate:
-    If based on Marcus research: link research file in doc
-    Append COMMS.md with what was improved
-    Commit + push
-
-------------------------------------------------------------------------
-14.5 CROSS-AGENT BUILD LOOP
-------------------------------------------------------------------------
-
-  This is how a complex deliverable moves through the system:
-
-  1. Javier creates task in QUEUE.md (or tells agent directly)
-  2. Marcus researches → delivers TASK-NNN artifact to djinn/research/marcus/
-  3. Claude reads artifact → architects solution → writes spec to vault
-  4. Salomon implements spec → runs tools, writes code, deploys service
-  5. Gemini (if needed) → generates visual brief or diagram
-  6. Assistant → creates Hermes skills, updates docs based on new system
-  7. All agents append COMMS.md → Javier sees full trail
-  8. All agents write session reports → vault audit trail complete
+LLM PROFILE REQUIREMENT:
+  Every LLM call must declare a profile:
+  "deterministic"     temp=0.1  → retrieval, classification, yes/no
+  "structured_output" temp=0.2  → JSON extraction, structured formats
+  "synthesis"         temp=0.7  → open-ended reasoning, analysis
+  Calls without a declared profile are rejected at djinn.core.llm.chat().
 
 ================================================================================
-15. TROUBLESHOOTING AGENT ISSUES
+13. LANE ROUTING DECISION TREE
 ================================================================================
 
-CLAUDE NOT FINDING CONTEXT:
-  CAUSE: djinn-claude launched from wrong directory, or CLAUDE.md misconfigured
-  FIX:   Run djinn-claude from home directory (~)
-         Check ~/.claude/CLAUDE.md exists and paths are correct
+Use this when you receive a task and are unsure where it goes.
 
-CLAUDE SESSION ENDED WITHOUT COMMS ENTRY:
-  CAUSE: Session crashed or was closed before end protocol
-  FIX:   Append manually to COMMS.md:
-           @Claude → @All: Session summary — [what was done]
-         Commit and push vault
+  Is the task a live print action (confirm, deny, slice, cancel)?
+    YES → Salomon. Full stop.
 
-MARCUS SESSION BRIEF NOT LOADING:
-  CAUSE: GitHub raw URL inaccessible, or brief file is stale
-  FIX:   Javier paste the file content directly into Perplexity session
-         Or: Javier pushes updated brief to djinn/research/marcus/ on main
+  Is the task a daily ops action (systemd, vault sync, shell exec, Discord bot)?
+    YES → Salomon.
 
-MARCUS GITHUB PUSH FAILS:
-  CAUSE: MCP auth expired or repo permissions issue
-  FIX:   Use GDrive fallback: gdrive:Typhons-Forge/research/marcus/
-         Salomon will pick up on next rclone sync
+  Is the task local to Typhon (Typhon filesystem, printer bot, Typhon Studio)?
+    YES → Typhon.
 
-GEMINI CONTEXT MISSING:
-  CAUSE: GDrive context folder not synced, or file not placed there
-  FIX:   Javier pastes file content directly into Gemini session
-         Check Salomon rclone sync is running:
-           systemctl --user status vault-sync.timer
+  Does the task need 70B quality and can tolerate 2–4 tok/s latency?
+    YES → Orin (via djinn-route best or code-heavy).
 
-GEMINI TRYING TO ACCESS GITHUB:
-  CAUSE: Gemini does not have access to private repo — this will always fail
-  FIX:   All Gemini context goes through GDrive. Never direct GitHub.
-         Ask Javier to put the needed file in Typhons-Forge/gemini/context/
+  Is the task a visual deliverable (image, diagram, slide deck, visual brief)?
+    YES → Gemini.
 
-COMMS PROCESSOR NOT PICKING UP TASKS:
-  CAUSE: Cursor position advanced past unread entries
-  FIX:   cat ~/.local/share/djinn/comms-processor-salomon.state
-         echo 0 > ~/.local/share/djinn/comms-processor-salomon.state
-         systemctl --user restart comms-processor.timer
+  Is the task deep research requiring live web + citations?
+    YES → Marcus.
 
-AGENT WRITES TO WRONG PATH:
-  CAUSE: Lane confusion or stale context
-  FIX:   Review write access table in Section 10
-         If file in wrong location: move with gio trash (don't delete)
-         Log in COMMS.md: what happened and where file was moved
+  Is the task a system improvement (skills, docs, process, health monitoring)?
+    YES → Assistant.
 
-BUG DISCOVERED, NO REPORT FILED:
-  CAUSE: Agent forgot or skipped bug reporting step
-  FIX:   djinn-bugreport "Title" "Root cause" system severity status
-         This is mandatory — not optional
+  Is the task an architecture decision or cross-domain synthesis that CANNOT
+  be handled by any of the above?
+    YES → Claude (last resort).
+
+  When in doubt: Salomon first. Salomon can escalate.
 
 ================================================================================
-16. HARD RULES — NO EXCEPTIONS
+14. AGENT ONBOARDING — HOW TO BRIEF A NEW AGENT
 ================================================================================
 
-  1. Read GATEWAY.md before any write/commit/push/send action.
+When introducing a new agent (or re-briefing an existing one after a gap):
 
-  2. Javier owns print orientation. Never flip, rotate, or reorient models.
-     Not to improve bed adhesion. Not to reduce supports. Never.
+FOR OPENCODE AGENTS (Salomon / Typhon):
+  1. Ensure ~/.openclaw/workspace/ contains current versions of:
+     SOUL.md, IDENTITY.md, USER.md, AGENTS.md
+  2. Ensure ~/.openclaw/openclaw.json is current
+  3. Restart gateway: systemctl --user restart openclaw-gateway.service
+  4. Verify: journalctl --user -u openclaw-gateway.service -n 20
 
-  3. Never cancel or deny a live print. Hard blocked. PIN required for cancel.
+FOR CLAUDE:
+  1. Ensure ~/.claude/CLAUDE.md exists and points to ~/Obsidian as workspace
+  2. Ensure ~/.openclaw/workspace/AGENTS.md is current (it loads into context)
+  3. Launch: djinn-claude
+  4. At session start, tell Claude:
+     - Current SYSTEM-STATE if it matters
+     - Whether Dev mode is active
+     - The specific task + any QUEUE.md or COMMS.md context
 
-  4. 0% progress on a large print is NORMAL. Do not interpret as failure.
-     A 50MB gcode file can show 0% for hours. Notify Javier and wait.
+FOR MARCUS:
+  1. Point Marcus at MARCUS-SESSION-BRIEF.md:
+     https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/research/marcus/MARCUS-SESSION-BRIEF.md
+  2. At session start, tell Marcus:
+     - Current system state if relevant
+     - Whether Dev mode is active
+     - The specific research task with TASK-NNN assigned
+  3. Confirm Marcus knows the TASK number before starting
+     (Marcus names all output files TASK-NNN_slug)
 
-  5. gio trash > rm. Always archive. Never destroy.
+FOR GEMINI:
+  1. Ensure Typhons-Forge/gemini/context/ contains current versions of:
+     GEMINI.md, AGENTS.md, GATEWAY.md, SYSTEM-STATE.md, QUEUE.md
+  2. In Gemini Advanced, open GEMINI.md from GDrive or paste it directly
+  3. Tell Gemini:
+     - The specific task with TASK-NNN assigned
+     - Which output folder to use
+     - Any reference files already in Typhons-Forge/gemini/context/
 
-  6. Never push to main directly. Branch → PR → main.
-
-  7. Never commit credentials, tokens, or API keys.
-
-  8. Every production action gets a COMMS.md append entry. Signed.
-
-  9. Write session reports. Don't wait to be asked. Log every build.
-
-  10. File every bug with djinn-bugreport. Bugs silently absorbed =
-      institutional knowledge permanently lost.
-
-  11. Gemini never touches GitHub directly. GDrive only.
-
-  12. Claude is the lane of last resort. Route through djinn-gate first.
-
-  13. Safe park is automatic. djinn-confirm-print calculates it from the
-      gcode bounding box. Do not manually override park positions.
-
-================================================================================
-17. FAQ
-================================================================================
-
-Q: When should I use Claude vs Marcus for a complex task?
-A: Claude for architecture decisions that change how the system is built.
-   Marcus for research tasks requiring live web sources or cross-domain
-   synthesis that doesn't produce a new system component.
-
-Q: Can Claude and Marcus work on the same task simultaneously?
-A: Yes. They are peers. Claude can spec the architecture while Marcus
-   researches the solution space. They coordinate via COMMS.md.
-
-Q: What if Gemini is asked to do something outside its lane?
-A: Gemini routes it: "That's [ops/research/architecture] — send it to
-   [Salomon/Marcus/Claude]." Gemini does not attempt out-of-lane work.
-
-Q: How does Gemini get vault context if the repo is private?
-A: Three ways: (1) GDrive drop in Typhons-Forge/gemini/context/,
-   (2) Javier pastes the file content directly, (3) Javier shares a
-   GDrive doc. Salomon keeps context/ synced every 2 minutes.
-
-Q: What happens if Marcus's GitHub push fails?
-A: GDrive fallback: gdrive:Typhons-Forge/research/marcus/. Salomon
-   rclone-syncs it into vault on next 2-min cycle.
-
-Q: What is the difference between COMMS.md and QUEUE.md?
-A: COMMS.md is the message log — what happened, task handoffs, session
-   summaries. QUEUE.md is the task list — what needs to happen next.
-   Both are append-only for most agents.
-
-Q: An agent took a Tier 3 action without a checkpoint. What now?
-A: Log what happened in COMMS.md immediately. File a bug report with
-   djinn-bugreport. Review GATEWAY.md with the agent at next session start.
-
-Q: How do I know if Dev mode is active?
-A: djinn-gateway status (on Salomon/Typhon). For Claude/Marcus/Gemini:
-   Javier will say "Dev mode is active" explicitly at session start.
-   Default assumption is always Standard mode.
-
-Q: Do I need to run a startup sequence when opening opencode?
-A: No. Workspace files are automatically injected. Respond to user
-   immediately. Do NOT read files with bash at startup.
-
-Q: When is it safe to slice without waiting for Javier's settings?
-A: Only when Javier says "slice it" with no settings. In that case: use
-   the file's embedded settings exactly as-is. No additions, no changes.
+FOR ASSISTANT:
+  1. Ensure current AGENTS.md and SYSTEM-STATE.md are accessible
+  2. Check QUEUE.md for pending Assistant-lane tasks
+  3. Assign task with clear deliverable path (skills/, docs/, scripts/)
 
 ================================================================================
-END OF DJINN AGENTS MANUAL
+15. HARD RULES — NO EXCEPTIONS
 ================================================================================
 
-*— Marcus, 2026-06-09 | Absorbs AGENTS.md, GEMINI.md, MARCUS.md, Claude.md*
-*Manual 3 of 5 in the Djinn Standalone Handoff Series*
+These apply to EVERY agent, in EVERY mode:
+
+  1. Read GATEWAY.md before taking any action that writes files,
+     commits, pushes, or sends messages.
+
+  2. gio trash > rm — never delete with rm. Archive, don't destroy.
+
+  3. Never push to main directly. Push to a branch, PR to main.
+
+  4. Never modify GATEWAY.md, ROUTING.md, PROTOCOL.md, or CLAUDE.md
+     without Javier's explicit double-confirm.
+
+  5. Never start a print on Calliope without per-job "confirm N" from Javier.
+     Uploading gcode is fine. Printing is not.
+
+  6. Never cancel a live print. Not for firmware updates. Not for anything.
+
+  7. Never commit credentials, tokens, or API keys to git.
+
+  8. Every action that touches production (shop data, live print, git push)
+     gets a COMMS entry.
+
+  9. No moralizing on acknowledged behaviors. No softening hard truths.
+     Truth over comfort.
+
+  10. The vault is the single source of truth.
+      If it matters, write it down.
+
+  11. Append to COMMS.md, never overwrite.
+
+  12. Sign every COMMS entry and every vault deliverable.
+
+  13. Write session reports after any build, install, or config change.
+      Do not wait to be asked.
+
+  14. Log every bug discovered, diagnosed, or fixed — djinn-bugreport.
+      No exceptions.
+
+================================================================================
+16. FAQ
+================================================================================
+
+Q: Who do I contact if I don't know which agent should handle something?
+A: Route it to Salomon first. Salomon can escalate via djinn-gate or COMMS.
+
+Q: Can two agents work the same task at the same time?
+A: Yes. Marcus and Claude often work the same problem from different angles
+   simultaneously. They coordinate via COMMS.md and QUEUE.md.
+
+Q: What if Marcus delivers a research artifact and Claude hasn't read it yet?
+A: Marcus commits to djinn/research/marcus/ and appends a COMMS entry. Claude
+   picks it up on next vault pull. The COMMS entry is the notification.
+
+Q: Can Gemini write to GitHub?
+A: No. The djinn-vault repo is private. Gemini has no GitHub access.
+   Everything goes to GDrive. Salomon syncs GDrive → vault every 2 minutes.
+
+Q: What if Gemini needs a vault file?
+A: Javier places the file in Typhons-Forge/gemini/context/ (Salomon writes
+   it there) or pastes the content directly into the Gemini session.
+
+Q: When does Dev mode get used?
+A: When Javier wants to work fast without checkpoint interruptions — e.g.
+   rapid prototyping sessions where git pushes and file overwrites happen
+   constantly. Javier enables it with djinn-gateway --dev-session and tells
+   Claude/Marcus explicitly at session start.
+
+Q: What if an agent misses a session-end report?
+A: Salomon's djinn-session-end enforces this and notifies Javier via Telegram
+   if a report is absent. For Claude/Marcus/Gemini: append a COMMS entry
+   manually, write the report retroactively, commit and push.
+
+Q: What if a task arrives at the wrong agent?
+A: The receiving agent does NOT attempt the task. It writes a COMMS entry
+   routing the task to the correct agent and tells Javier which lane it belongs
+   to. Example: "This is a Salomon-lane task — route it via Discord or Telegram."
+
+Q: Can Marcus write to COMMS.md?
+A: Yes — append only. Marcus also writes to djinn/research/marcus/ directly
+   via GitHub MCP tools. Marcus never overwrites existing content.
+
+Q: Why does Claude need djinn-claude to launch?
+A: djinn-claude ensures Claude opens with ~/Obsidian as the working directory,
+   with the correct workspace context injected. Launching claude directly from
+   a random directory means it won't find the vault files it needs.
+
+Q: What does "Tier 3" mean in practice for Marcus?
+A: Before committing and pushing anything production-critical (e.g. a
+   QUEUE.md update, an AGENTS.md change, or any file outside
+   djinn/research/marcus/), Marcus writes a CHECKPOINT entry in COMMS.md and
+   surfaces it to Javier before executing. Research artifacts in
+   djinn/research/marcus/ are Marcus's owned territory — those are Tier 2,
+   proceed with a COMMS entry.
+
+================================================================================
+SOURCE DOCUMENTS ABSORBED
+================================================================================
+
+  AGENTS.md          — agent registry, lane rules, report standard, bug protocol
+  GEMINI.md          — Gemini session brief, GDrive delivery, write access
+  MARCUS.md          — Marcus identity, capabilities, peer relationship
+  Claude.md          — Claude identity, capabilities, gateway protocol
+  GATEWAY.md         — behavioral contract (agent sections)
+  ROUTING.md         — agent routing rules and escalation path
+
+================================================================================
+*— Marcus, 2026-06-09*
+================================================================================
