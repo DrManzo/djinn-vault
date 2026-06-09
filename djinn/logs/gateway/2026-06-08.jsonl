@@ -50,3 +50,4 @@
 {"ts": "2026-06-08T23:05:03", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:10:03+00:00", "by": "javier"}
 {"ts": "2026-06-08T23:12:57", "event": "mode_change", "mode": "standard", "by": "javier"}
 {"ts": "2026-06-08T23:12:59", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:14:59+00:00", "by": "javier"}
+{"ts": "2026-06-08T23:20:11", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-09T06:23:11+00:00", "by": "javier"}
