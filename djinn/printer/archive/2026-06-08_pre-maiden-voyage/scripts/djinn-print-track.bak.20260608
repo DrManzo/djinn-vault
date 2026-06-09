@@ -1,0 +1,393 @@
+#!/usr/bin/env python3
+"""
+djinn-print-track — Permanent silent print logger for Calliope.
+
+Runs as a systemd user service. Watches Moonraker for any print event.
+Logs every print: filename, progress, temps, duration, errors, outcome.
+No Discord, no Telegram — pure data to ~/.local/share/djinn/print-track/
+
+Usage:
+  djinn-print-track              # foreground (test)
+  djinn-print-track status       # show latest + recent prints
+  djinn-print-track summary      # show all prints with outcomes
+
+Systemd:
+  systemctl --user start djinn-print-track
+  systemctl --user enable djinn-print-track
+  systemctl --user status djinn-print-track
+"""
+import os, sys, time, json, datetime, pathlib, signal
+
+MOONRAKER = "http://192.168.1.113:7125"
+DATA_DIR  = pathlib.Path.home() / ".local/share/djinn/print-track"
+POLL_S    = 10
+
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def log(*a, **kw):
+    ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{ts}]", *a, **kw, flush=True)
+
+
+def fetch(endpoint):
+    import urllib.request, urllib.error
+    try:
+        with urllib.request.urlopen(f"{MOONRAKER}/{endpoint}", timeout=5) as r:
+            data = json.loads(r.read().decode())
+            return data.get("result", data)
+    except Exception as e:
+        return {"_error": str(e)}
+
+
+PRINT_LOG = DATA_DIR / "prints.json"
+RUNNING   = DATA_DIR / "current.json"
+
+
+def _load_log():
+    if PRINT_LOG.exists():
+        return json.loads(PRINT_LOG.read_text())
+    return {"prints": []}
+
+
+def _save_log(pl):
+    PRINT_LOG.write_text(json.dumps(pl, indent=2))
+
+
+def poll():
+    """Snap full printer state."""
+    objs = "print_stats&display_status&tool0&heater_bed&gcode_move&virtual_sdcard"
+    data = fetch(f"printer/objects/query?{objs}")
+    if "_error" in data:
+        return data
+
+    s = data.get("status", {})
+    ps = s.get("print_stats", {})
+    ds = s.get("display_status", {})
+    t0 = s.get("tool0", {})
+    hb = s.get("heater_bed", {})
+    gm = s.get("gcode_move", {})
+    vs = s.get("virtual_sdcard", {})
+
+    gpos = gm.get("gcode_position", [None, None, 0])
+    z_pos = gpos[2] if len(gpos) > 2 else gm.get("position", [0, 0, 0])[2]
+
+    return {
+        "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "state": ps.get("state", "?"),
+        "file": ps.get("filename", "") or "",
+        "progress": round(ds.get("progress", 0.0) * 100, 1),
+        "duration_s": round(ps.get("print_duration", 0.0), 1),
+        "z_mm": round(float(z_pos), 2) if z_pos else 0.0,
+        "speed": round(gm.get("speed_factor", 1.0), 2),
+        "t_nozzle": t0.get("temperature"),
+        "t_bed": hb.get("temperature"),
+        "t_bed_target": hb.get("target"),
+        "filament_mm": round(ps.get("filament_used", 0.0), 1),
+        "message": ps.get("message", ""),
+        "vs_progress": round(vs.get("progress", 0.0) * 100, 1) if vs.get("progress") else None,
+    }
+
+
+def main_loop():
+    print_log = _load_log()
+    active = None  # { "file", "start_ts", ... }
+    prev = None    # previous poll for delta detection
+
+    while True:
+        point = poll()
+        if "_error" in point:
+            dly = POLL_S * 3
+            log(f"Moonraker error: {point['_error']} — retry in {dly}s")
+            time.sleep(dly)
+            continue
+
+        state = point["state"]
+        fname = point["file"]
+        RUNNING.write_text(json.dumps(point, indent=2))
+
+        # ── Detection modes ─────────────────────────────────────────────────
+        # Mode 1: Standard Moonraker print_stats (works for Orca/Prusa/fluidd)
+        std_start = state == "printing" and fname
+
+        # Mode 2: Heuristic — detect prints started outside virtual_sdcard
+        # (Creality Print, touch screen, USB direct)
+        bed_heating = (point.get("t_bed_target") or 0) > 0 and (point.get("t_bed") or 0) < 80
+        at_first_layer = 0.1 < point["z_mm"] < 0.5
+        z_dropped = prev and prev["z_mm"] > 10 and point["z_mm"] < 1
+        printing_heuristic = (bed_heating and at_first_layer) or z_dropped
+
+        heur_start = printing_heuristic and (active is None or not active.get("heuristic"))
+
+        # Determine if a print started this poll
+        started = False
+        heur_mode = False
+        heur_file = None
+
+        if std_start and (active is None or active["file"] != fname):
+            started = True
+            heur_file = fname
+        elif not std_start and heur_start and not active:
+            # Heuristic: check if Klipper's gcode file list changed recently
+            heur_file = _detect_file_via_api(prev, point) or _detect_file_via_ssh() or f"print_{point['ts'][:19].replace('T','_')}"
+            started = True
+            heur_mode = True
+            log(f"  [heuristic] Print detected via temp/Z signature")
+
+        # ── Print start ─────────────────────────────────────────────────────
+        if started:
+            active = {
+                "file": heur_file or fname or "unknown",
+                "start_ts": point["ts"],
+                "_start_time": time.time(),
+                "start_progress": point["progress"],
+                "last_progress": point["progress"],
+                "stalled_since": None,
+                "heuristic": heur_mode,
+                "peaks": {"progress": 0, "z": 0, "temp": 0},
+            }
+            log(f"\n{'='*50}")
+            log(f"PRINT STARTED: {active['file']}" + (" (heuristic)" if heur_mode else ""))
+            log(f"{'='*50}")
+
+        # ── Track active print ──────────────────────────────────────────────
+        if active:
+            ap = active
+            ap["last_progress"] = point["progress"]
+            ap["peaks"]["progress"] = max(ap["peaks"]["progress"], point["progress"])
+            ap["peaks"]["z"] = max(ap["peaks"]["z"], point["z_mm"])
+            if point["t_nozzle"]:
+                ap["peaks"]["temp"] = max(ap["peaks"]["temp"], point["t_nozzle"])
+            elif ap.get("heuristic"):
+                # Use bed temp as proxy for end detection in heuristic mode
+                ap["peaks"]["temp"] = max(ap["peaks"]["temp"], point.get("t_bed", 0))
+
+            # Detect stall: progress unchanged for 60s+
+            if point["progress"] == ap.get("_last_pct"):
+                if ap.get("stalled_since") is None:
+                    ap["stalled_since"] = point["ts"]
+            else:
+                ap["stalled_since"] = None
+            ap["_last_pct"] = point["progress"]
+
+            # Log progress every 5% (standard) or every 30s (heuristic)
+            if not ap.get("heuristic"):
+                pct_floor = (point["progress"] // 5) * 5
+                if pct_floor > (ap.get("_last_reported", 0)):
+                    ap["_last_reported"] = pct_floor
+                    log(f"  {pct_floor:3.0f}%  Z={point['z_mm']:.1f}mm  "
+                        f"T={point['t_nozzle']}°C  B={point['t_bed']}°C  "
+                        f"dur={point['duration_s']/60:.0f}min")
+            else:
+                # Heuristic: log every 30s
+                now_s = time.time()
+                if now_s - ap.get("_last_heur_log", 0) >= 30:
+                    ap["_last_heur_log"] = now_s
+                    # Estimate progress from Z height (rough)
+                    z_ratio = min(point["z_mm"] / 107.0, 0.95) if point["z_mm"] < 120 else 0.95
+                    est_progress = round(z_ratio * 100, 1)
+                    log(f"  ~{est_progress:>5.1f}%  Z={point['z_mm']:.1f}mm  "
+                        f"B={point['t_bed']:.0f}°C  "
+                        f"dur={(ap.get('_start_time', time.time()) - now_s + now_s)/60:.0f}min")
+
+            # Print end detection — standard mode
+            if not ap.get("heuristic") and state in ("standby", "complete", "error", "cancelled") and ap:
+                _end_print(ap, point, print_log)
+                active = None
+
+            # Print end detection — heuristic mode
+            if ap.get("heuristic"):
+                # Detect end: bed target drops to 0, Z moves above print area, or
+                # bed cools significantly
+                bed_cooling = point.get("t_bed_target", 0) == 0 and prev and prev.get("t_bed", 0) > point.get("t_bed", 0)
+                z_moved_up = prev and prev["z_mm"] < 10 and point["z_mm"] > 50
+                no_heat = (point.get("t_bed_target") or 0) == 0 and (point.get("t_bed") or 0) < 40
+
+                if (bed_cooling or z_moved_up or no_heat) and ap:
+                    # Check if we had sustained first-layer-like Z for a while
+                    elapsed_heur = time.time() - ap.get("_start_time", time.time())
+                    if elapsed_heur > 30:  # At least 30s of presumed printing
+                        point["_heuristic_progress"] = ap["peaks"]["progress"]
+                        point["_heuristic_outcome"] = "complete" if ap["peaks"]["z"] > 1 else "interrupted"
+                        _end_print(ap, point, print_log)
+                        active = None
+
+        # ── Error detection ─────────────────────────────────────────────────
+        if state == "error" and not active:
+            log(f"ERROR: {point.get('message', 'unknown')}")
+
+        prev = point
+        time.sleep(POLL_S)
+
+
+def _end_print(ap, point, print_log):
+    outcome = point.get("_heuristic_outcome", "complete") if ap.get("heuristic") else (
+        "complete" if point["state"] in ("standby", "complete") else point["state"]
+    )
+    elapsed = point.get("duration_s", ap.get("elapsed_s", 0))
+    if not elapsed and ap.get("_start_time"):
+        elapsed = time.time() - ap["_start_time"]
+
+    ap["end_ts"] = point["ts"]
+    ap["final_progress"] = point.get("progress", ap["peaks"]["progress"])
+    ap["outcome"] = outcome
+    ap["message"] = point.get("message", "")
+
+    entry = {
+        "file": ap["file"],
+        "start": ap["start_ts"],
+        "end": ap["end_ts"],
+        "outcome": outcome,
+        "max_progress_pct": ap["peaks"]["progress"],
+        "max_z_mm": ap["peaks"]["z"],
+        "max_temp_c": ap["peaks"]["temp"],
+        "duration_min": round(elapsed / 60, 1),
+        "filament_mm": round(point.get("filament_mm", 0), 1),
+        "message": ap["message"],
+        "detection": "heuristic" if ap.get("heuristic") else "standard",
+    }
+    print_log["prints"].append(entry)
+    _save_log(print_log)
+
+    log(f"\n{'='*50}")
+    log(f"PRINT ENDED: {outcome}")
+    log(f"  File:      {ap['file']}")
+    log(f"  Duration:  {elapsed/60:.1f} min")
+    log(f"  Max Z:     {ap['peaks']['z']:.1f}mm")
+    log(f"  Max Temp:  {ap['peaks']['temp']:.0f}°C")
+    log(f"  Filament:  {entry['filament_mm']:.0f} mm")
+    log(f"  Detection: {'heuristic' if ap.get('heuristic') else 'standard'}")
+    log(f"  Outcome:   {outcome}")
+    if ap.get("message"):
+        log(f"  Message:   {ap['message']}")
+    log(f"{'='*50}\n")
+
+
+def _detect_file_via_api(prev, cur):
+    """Try to find what's being printed by checking recent file changes."""
+    import urllib.request
+    try:
+        with urllib.request.urlopen(f"{MOONRAKER}/server/files/gcodes?root=gcodes", timeout=5) as r:
+            files = json.loads(r.read().decode()).get("result", [])
+        # Find files modified in last 5 minutes
+        recent = [f for f in files if f.get("modified", 0) > time.time() - 300]
+        if recent:
+            recent.sort(key=lambda x: x["modified"], reverse=True)
+            return recent[0]["filename"]
+    except Exception:
+        pass
+    return None
+
+
+def _detect_file_via_ssh():
+    """Fallback: SSH to printer and check what Klipper thinks is printing."""
+    import subprocess
+    try:
+        r = subprocess.run(
+            ["ssh", "-o", "ConnectTimeout=3", "-o", "StrictHostKeyChecking=no",
+             "root@192.168.1.113", "cat /tmp/klipper-gcode 2>/dev/null || echo ''"],
+            capture_output=True, text=True, timeout=5
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            return r.stdout.strip().split("/")[-1]
+    except Exception:
+        pass
+    return None
+
+
+def cmd_status():
+    if RUNNING.exists():
+        data = json.loads(RUNNING.read_text())
+        print(json.dumps(data, indent=2))
+    else:
+        print("No data yet.")
+    log_file = DATA_DIR / "prints.json"
+    if log_file.exists():
+        pl = json.loads(log_file.read_text())
+        prints = pl.get("prints", [])
+        print(f"\nTotal prints tracked: {len(prints)}")
+        for p in prints[-5:]:
+            fil = _fmt_filament(p.get("filament_mm")) if p.get("filament_mm") else "?g"
+            print(f"  {p['start'][:19]}  {p['outcome']:>10}  {p['duration_min']:>6.1f}min  {p['max_z_mm']:>5.0f}mm  {fil:>5}  {p.get('file','')[:40]}")
+
+
+def _fmt_filament(mm):
+    if not mm:
+        return "?g"
+    vol = 3.14159 * (0.875 ** 2) * mm / 1000
+    return f"{vol * 1.24:.0f}g"
+
+def cmd_summary():
+    pl = _load_log()
+    prints = pl.get("prints", [])
+    if not prints:
+        print("No prints tracked yet.")
+        return
+    print(f"\n{'START':<20} {'OUTCOME':<12} {'DUR':>6} {'Z_MAX':>6} {'FIL':>5}  FILE")
+    print("-" * 80)
+    for p in prints:
+        start = p.get("start", "?")[:19]
+        out = p.get("outcome", "?")
+        dur = f"{p.get('duration_min', 0):.0f}m"
+        z = f"{p.get('max_z_mm', 0):.0f}mm"
+        fil = _fmt_filament(p.get("filament_mm"))
+        fn = p.get("file", "?")[:48]
+        print(f"{start:<20} {out:<12} {dur:>6} {z:>6} {fil:>5}  {fn}")
+    print(f"\nTotal: {len(prints)} prints")
+
+
+def daemonize():
+    pid = os.fork()
+    if pid > 0:
+        pid_file = DATA_DIR / "pid"
+        pid_file.write_text(str(pid))
+        print(f"djinn-print-track started (PID {pid})")
+        print(f"  Data: {DATA_DIR}")
+        print(f"  Status: djinn-print-track status")
+        sys.exit(0)
+    os.setsid()
+    signal.signal(signal.SIGHUP, signal.SIG_IGN)
+    with open(os.devnull, 'r') as f:
+        os.dup2(f.fileno(), 0)
+    with open(os.devnull, 'w') as f:
+        os.dup2(f.fileno(), 1)
+        os.dup2(f.fileno(), 2)
+    main_loop()
+
+
+def main():
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1]
+        if cmd == "status":
+            cmd_status()
+            return
+        elif cmd == "summary":
+            cmd_summary()
+            return
+        elif cmd == "stop":
+            pid_file = DATA_DIR / "pid"
+            if pid_file.exists():
+                pid = int(pid_file.read_text().strip())
+                try:
+                    os.kill(pid, signal.SIGTERM)
+                    pid_file.unlink()
+                    print(f"Stopped PID {pid}")
+                except ProcessLookupError:
+                    pid_file.unlink()
+                    print("Not running (stale PID)")
+            else:
+                print("Not running")
+            return
+        elif cmd in ("start", "foreground"):
+            main_loop()
+            return
+        else:
+            print(f"Usage: {sys.argv[0]} [status|summary|stop|start]")
+            sys.exit(1)
+
+    # Detach by default
+    daemonize()
+
+
+if __name__ == "__main__":
+    main()

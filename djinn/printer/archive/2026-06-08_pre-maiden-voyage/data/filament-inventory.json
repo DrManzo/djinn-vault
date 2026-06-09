@@ -1,0 +1,40 @@
+{
+  "spools": [
+    {
+      "spool_id": "SPOOL-001",
+      "material": "PLA+",
+      "color": "White",
+      "brand": "",
+      "initial_weight_g": 200,
+      "remaining_g": 200,
+      "loaded": false,
+      "low_threshold_g": 100,
+      "added_at": "2026-06-09T05:08:54.192887+00:00",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-002",
+      "material": "PLA+",
+      "color": "White",
+      "brand": "",
+      "initial_weight_g": 200,
+      "remaining_g": 99.66,
+      "loaded": false,
+      "low_threshold_g": 100,
+      "added_at": "2026-06-09T05:09:39.275197+00:00",
+      "last_used": "2026-06-09T06:00:36.174324+00:00"
+    },
+    {
+      "spool_id": "SPOOL-003",
+      "material": "PLA",
+      "color": "Black",
+      "brand": "",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded": true,
+      "low_threshold_g": 100,
+      "added_at": "2026-06-09T06:12:53.417627+00:00",
+      "last_used": null
+    }
+  ]
+}
