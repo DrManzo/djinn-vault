@@ -352,3 +352,16 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260609-063238 | 2026-06-09 06:32 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+**2026-06-09 06:35 PDT | Claude → Djinn**
+Fixed Discord print flow. Three things were broken: (1) stale jobs 8-15 cluttering queue — archived, queue reset to next_id=10; (2) same file being dropped created duplicate jobs — dedup added by sha256; (3) watcher was telling customers to "slice N supports=..." — removed, now auto-triggers djinn-model-slice (new script) after A/B/C + color confirmed. PrusaSlicer /usr/bin/prusa-slicer works for headless slicing; OrcaSlicer/CrealityPrint flatpak CLI remain broken (run 2559 compatibility error). Vault push pending GATEWAY approval.
+— Claude
