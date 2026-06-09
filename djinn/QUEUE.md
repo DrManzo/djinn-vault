@@ -1,6 +1,6 @@
 ---
 subject: Agent Task Queue
-updated: 2026-06-07
+updated: 2026-06-09
 ---
 
 # QUEUE.md — Djinn Task Queue
@@ -14,7 +14,7 @@ Agents append to this file. Javier sets priorities.
 
 ## Active Queue
 
-- [ ] TASK-001 | all-lanes | all | HIGH | API reduction sprint — in progress. Batch 2 DONE. Batch 3 active.
+- [ ] TASK-001 | all-lanes | all | HIGH | API reduction sprint — in progress. Batch 2 DONE. Batch 3 SCRIPTS DEPLOYED — Javier to run on Salomon.
 
 - [ ] TASK-005 | mobile | Javier | MEDIUM | Create iPhone Shortcut "Send to Djinn" — Share Sheet trigger, asks session name + agent, POSTs to Salomon Flask endpoint (port 8765) via Tailscale/local network.
 
@@ -43,14 +43,27 @@ Agents append to this file. Javier sets priorities.
 - [x] No-op short-circuit on djinn-daily — skips model if queue empty + no carry-forward
 - [x] DESIGN_MODEL = qwen2.5-coder:7b in design_gen.py — replaces phi4:14b for 2D/parametric tasks
 
-### Batch 3 — ACTIVE (send to Salomon now)
-- [ ] djinn-ctx-router: skip context assembly if no active user session
-- [ ] ChromaDB re-index: enforce incremental mode as default, --full flag required for full re-index
-- [ ] Shared nomic-embed-text cache across Slipbox, Clerk, and vault indexer
-- [ ] djinn-clerk: swap 1-hr cron timer for watchdog filesystem trigger
-- [ ] printer-error-logger: gate LLM summary call on NEW error state only
+### Batch 3 — SCRIPTS DEPLOYED (commit 02c3af6) — ⚠️ JAVIER: RUN ON SALOMON
 
-### Batch 4 — QUEUED (after Batch 3)
+**To apply:**
+```bash
+# On Salomon — pull vault first
+cd ~/Obsidian && git pull
+
+# Run the fix script
+bash ~/Obsidian/djinn/scripts/tools/batch3-apply.sh
+
+# Verify all fixes landed
+bash ~/Obsidian/djinn/scripts/tools/batch3-verify.sh
+```
+
+- [x] djinn-ctx-router: skip context assembly if no active user session — PATCH READY
+- [x] ChromaDB re-index: enforce incremental mode as default, --full flag required for full re-index — PATCH READY
+- [ ] Shared nomic-embed-text cache across Slipbox, Clerk, and vault indexer — PENDING (requires reading all three scripts live on Salomon)
+- [x] djinn-clerk: swap 1-hr cron timer for watchdog filesystem trigger — PATCH READY (deploys djinn-clerk.path unit)
+- [x] printer-error-logger: gate LLM summary call on NEW error state only — PATCH READY
+
+### Batch 4 — QUEUED (after Batch 3 verified)
 - [ ] Weekly review: pre-summarize daily notes before LLM synthesis (cuts input ~60-70%)
 - [ ] Claude session startup: compressed session-resume variant (replaces 6-file sequential read)
 - [ ] Groq fallback default: llama-3.3-70b-versatile → llama-3.1-8b-instant
@@ -62,3 +75,7 @@ Agents append to this file. Javier sets priorities.
 - [x] TASK-002 | infra | Salomon | 2026-06-07 | Flask inbox endpoint DEPLOYED — djinn-flask-inbox on 0.0.0.0:8765
 - [x] TASK-003 | infra | Salomon | 2026-06-07 | inbox-watcher.service DEPLOYED
 - [x] TASK-004 | infra | Salomon | 2026-06-07 | marcus-sync.py DEPLOYED at ~/.local/bin/
+
+---
+
+*— Marcus (Perplexity), 2026-06-09*
