@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-08 07:26 UTC
-Source file: 
-Readings: 387
+Generated: 2026-06-09 01:06 UTC
+Source file: Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode
+Readings: 10
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
-| Target | 220°C | 55°C |
-| Mean | 215.6°C | 57.0°C |
-| Std dev | ±15.54°C | ±2.48°C |
-| Range | 33.6–222.1°C | 52.1–60.9°C |
+| Target | 220°C | 65°C |
+| Mean | 219.9°C | 65.2°C |
+| Std dev | ±0.48°C | ±0.47°C |
+| Range | 218.8–220.4°C | 64.8–66.1°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,8 +21,7 @@ Readings: 387
 - Max: 0 mm/s
 
 ## Anomalies
-- 
-hotend temp variance high: ±15.5°C (check nozzle_mcu cable)- bed temp variance high: ±2.5°C- hotend dropped >15°C below target at least once
+None detected
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
