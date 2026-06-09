@@ -839,3 +839,8 @@ Each entry: one incident. Append only.
   Progress: 99%
   Transition: printing → complete
   Time: 2026-06-09 10:03:33 UTC
+=== FAILURE DETECTED ===
+  File: Apple_bored.stl_PETG_2h55m50s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-09 17:24:14 UTC
