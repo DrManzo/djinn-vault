@@ -1,0 +1,76 @@
+{
+  "next_id": 10,
+  "jobs": [
+    {
+      "id": 8,
+      "model_path": "/home/drmanzo/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl",
+      "piece": "Camood_TTHQ",
+      "status": "cancelled",
+      "material": "PLA",
+      "qty": 4,
+      "layer_height": 0.2,
+      "infill": 15,
+      "brim_mm": 0,
+      "supports": "tree/organic, buildplate-only",
+      "support_note": "Organic tree supports from build plate \u2014 corners and curves where body fans out",
+      "print_approved": true,
+      "added": "2026-06-04",
+      "gcode_path": "/home/drmanzo/.local/share/forge/gcode/Camood_TTHQ_engraved_job8.gcode",
+      "print_time": "29h 59m",
+      "filament_g": 497.59,
+      "confirmed_by": "Javier",
+      "park": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 132.3,
+        "bed_full": false
+      },
+      "cancelled_reason": "maker_mark_mirror_fix \u2014 reprinted as job 9"
+    },
+    {
+      "id": 9,
+      "model_path": "/home/drmanzo/printer-files/library/engraved/terp-tribe/Camood_TTHQ_engraved.stl",
+      "piece": "Camood_TTHQ",
+      "status": "printing",
+      "material": "PLA",
+      "qty": 4,
+      "layer_height": 0.2,
+      "infill": 15,
+      "brim_mm": 0,
+      "supports": "tree/organic, buildplate-only, Z-cap 50mm",
+      "support_note": "Support blocker above Z=50mm via 3MF. Organic tree, buildplate-only.",
+      "print_approved": true,
+      "confirmed_by": "Javier",
+      "added": "2026-06-04",
+      "gcode_path": "/home/drmanzo/.local/share/forge/gcode/Camood_TTHQ_engraved_job9.gcode",
+      "print_time": "26h 26m",
+      "filament_g": 457.28,
+      "file_sha256": "ad5a693553b839e7d50d7b1521d9cd0325ad73be6e486454a46ba4d97bb32063",
+      "park": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 132.3
+      }
+    },
+    {
+      "id": 10,
+      "model_path": "/run/media/drmanzo/5483-8533/ksr_fdmtest_v4 by Autodesk&kickstart-Ender-3 V3 Plus_1h58m.gcode",
+      "piece": "ksr_fdmtest_v4",
+      "status": "completed",
+      "material": "PLA",
+      "qty": 1,
+      "layer_height": 0.2,
+      "infill": null,
+      "brim_mm": null,
+      "supports": null,
+      "print_approved": true,
+      "confirmed_by": "Javier",
+      "added": "2026-06-08",
+      "gcode_path": "gcodes/ksr_fdmtest_v4_by_Autodesk_1h58m.gcode",
+      "print_time": "1h 58m",
+      "filament_g": null,
+      "file_sha256": null,
+      "park": null
+    }
+  ]
+}
