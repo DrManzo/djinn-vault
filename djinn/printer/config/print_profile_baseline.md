@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-09 01:06 UTC
-Source file: Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode
-Readings: 10
+Generated: 2026-06-09 05:33 UTC
+Source file: CRtestcube_Ender-3 V3 Plus_26m.gcode
+Readings: 160
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 65°C |
-| Mean | 219.9°C | 65.2°C |
-| Std dev | ±0.48°C | ±0.47°C |
-| Range | 218.8–220.4°C | 64.8–66.1°C |
+| Mean | 219.8°C | 65.0°C |
+| Std dev | ±2.26°C | ±0.33°C |
+| Range | 192.4–221.7°C | 61.2–66.1°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,7 +21,8 @@ Readings: 10
 - Max: 0 mm/s
 
 ## Anomalies
-None detected
+- 
+hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
