@@ -56,7 +56,7 @@ From Rose_Decor_fixed.gcode run (2026-05-22):
 
 | Tool | Role |
 |------|------|
-| OrcaSlicer | STL → G-code slicing, Moonraker upload |
+| Creality Print | STL → G-code slicing, Moonraker upload |
 | FreeCAD | Parametric modeling (functional parts) |
 | Blender | Organic modeling, mesh repair |
 | OpenSCAD | Scripted/Djinn-generated parts |
@@ -67,7 +67,7 @@ From Rose_Decor_fixed.gcode run (2026-05-22):
 ```
 Prompt → Hunyuan3D-2 (or FreeCAD/OpenSCAD)
   → STL in djinn/printer/queue/
-  → OrcaSlicer headless slice
+  → Creality Print slice
   → Moonraker upload + print start
   → printer-error-logger monitors
   → Job logged to djinn/printer/completed/

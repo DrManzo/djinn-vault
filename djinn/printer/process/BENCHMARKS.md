@@ -47,7 +47,7 @@ First check [[error_log]] quick-reference table. Then compare current settings t
 - **Print log:** [[PRINT-LOG#2026-05-23--cup-geometry-proxy-cup]]
 - **File:** `cup_geometry_creality_fixed.gcode`
 - **Material:** PLA / 215°C / 60°C bed / 15% infill / 0.2mm layers
-- **Key risk:** Fan ramp at layer 1→2 (PrusaSlicer-generated files). Keep fan OFF layer 1.
+- **Key risk:** Fan ramp at layer 1→2 in some slicer-generated files. Keep fan OFF layer 1.
 - **Result:** 🖨️ In progress — clean at 2.8h elapsed
 - **Status:** ⏳ Baseline pending (in progress 2026-05-23)
 

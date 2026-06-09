@@ -642,3 +642,33 @@ Day 99 sober. Streaks: writing=1, black_book=0, exercise=0
 **Tier:** 4 — Hard Stop
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260608-180949 | 2026-06-08 18:09 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Attempted push in standard mode
+**Tier:** 4 — Hard Stop
+→ Waiting for Javier: Y to approve, N to deny
+
+---
+
+### 2026-06-08 — @Claude → @All: Slicer migration to Creality Print complete
+
+**What:** Full migration — OrcaSlicer + PrusaSlicer archived, Creality Print is the single slicer. `djinn-print-track` deployed as permanent silent print logger (systemd service, auto-boot). Camood TTHQ print running undisturbed at 12%.
+
+**Archive:** `printer-files/archive/slicer-legacy-2026-06-08.7z` (password: `TyphonsFrogeOld`, AES-256, 255MB, 14k files)
+**Contains:** OrcaSlicer/PrusaSlicer configs, Orca AppImage + squashfs-root, ender3-v3-plus.ini, calliope-orcaslicer.md, 4 pipeline scripts (djinn-model-slice/combine/consult/gcode-safety)
+
+**New permanent tracker:** `djinn-print-track` — systemd service, Moonraker polling, dual detection (standard + heuristic for Creality flow), captures all print data locally. No Discord/Telegram.
+
+**Docs:** 11 vault files updated for Creality Print.
+
+**Tracker commands:**
+- `djinn-print-track status` — current print state
+- `djinn-print-track summary` — all tracked prints
+- Data: `~/.local/share/djinn/print-track/`
+
+**Report:** `logs/reports/2026-06-08_slicer-migration-creality-print.md`
+
+— Claude
+

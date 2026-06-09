@@ -34,7 +34,7 @@ Printables standard license = All Rights Reserved = personal use only.
 
 ## Description
 
-Functional holder for the Puffco Proxy vaporizer — holds it steady and upright when not in use. Accommodates stock Puffco Proxy glass. No supports required. Print files at 0.20mm and 0.40mm layer heights, optimized for PLA on Prusa MK3.
+Functional holder for the Puffco Proxy vaporizer — holds it steady and upright when not in use. Accommodates stock Puffco Proxy glass. No supports required. Print files at 0.20mm and 0.40mm layer heights, optimized for PLA on Ender-3 V3 Plus (Calliope).
 
 ---
 

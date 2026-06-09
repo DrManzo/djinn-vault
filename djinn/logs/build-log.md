@@ -1230,3 +1230,14 @@ created: 2026-05-19
 - Report: `logs/reports/2026-06-08_engraved-cup-to-terp-tribe.md`
 
 — Claude
+
+## 2026-06-08 — Slicer Migration to Creality Print (Claude)
+- Full migration: OrcaSlicer + PrusaSlicer archived, Creality Print standardized
+- Built `djinn-print-track` — permanent systemd service silently logging all prints via Moonraker (progress, temps, Z, speed, filament, errors, outcome)
+- Archived all old slicer artifacts to `printer-files/archive/slicer-legacy-2026-06-08.7z` (password-protected, AES-256)
+- Removed: OrcaSlicer config (100MB), PrusaSlicer config (5.4MB), Orca AppImage (119MB), squashfs-root (367MB), ender3-v3-plus.ini, calliope-orcaslicer.md, 4 pipeline scripts (djinn-model-slice/combine/consult/gcode-safety)
+- Updated 11 vault docs to reference Creality Print
+- Live Camood TTHQ print undisturbed at 12%
+- Report: `logs/reports/2026-06-08_slicer-migration-creality-print.md`
+
+— Claude

@@ -19,9 +19,9 @@ prints/YYYY-MM-DD_ModelName/
 ├── model_analysis.json   ← machine-readable geometry report
 ├── model_raw.stl         ← original extracted model
 ├── model_centered.stl    ← model centered at origin
-├── machine_profile.json  ← OrcaSlicer machine config used
-├── process_profile.json  ← OrcaSlicer process config used  
-├── filament_profile.json ← OrcaSlicer filament config used
+├── machine_profile.json  ← Creality Print machine config used
+├── process_profile.json  ← Creality Print process config used  
+├── filament_profile.json ← Creality Print filament config used
 ├── plate_1.gcode         ← final gcode (rename on upload)
 ├── preflight.log         ← repair + slice output
 ├── monitor.log           ← per-layer progress (populated during print)
@@ -38,20 +38,17 @@ mkdir -p "~/Obsidian/djinn/printer/prints/$(date +%F)_ModelName"
 
 ### Step 1 — Analyze Model
 ```bash
-# Extract info from source
-prusa-slicer --info "source.3mf" 2>&1 | tee model_analysis.txt
-
-# Export STL
-prusa-slicer --export-stl --output /tmp/model_raw.stl "source.3mf"
-
 # Analyze overhangs (Python script — see printer/workflows/analyze.py)
-python3 analyze_stl.py /tmp/model_raw.stl > model_analysis.json
+djinn-detect-surfaces source.3mf > model_analysis.json
+
+# Export STL from source
+python3 model_export.py source.3mf /tmp/model_raw.stl
 ```
 
 ### Step 2 — Center Model
 ```bash
-prusa-slicer --align-xy 0,0 \
-  --export-stl --output /tmp/model_centered.stl /tmp/model_raw.stl
+# Center model at origin for consistent slicing
+python3 model_center.py /tmp/model_raw.stl /tmp/model_centered.stl
 ```
 
 ### Step 3 — Create Profiles
@@ -110,13 +107,16 @@ Three JSON profiles are needed. Copy templates from `workflows/templates/`:
 }
 ```
 
-### Step 4 — Slice
+### Step 4 — Slice (Creality Print GUI)
+Open Creality Print → load profiles from `machine_profile.json`, `process_profile.json`, `filament_profile.json` → slice → export gcode to `plate_1.gcode`.
+
+Or via CLI:
 ```bash
-"/home/drmanzo/Applications/OrcaSlicer_V2.3.2.AppImage" \
-  --load-filaments "filament_profile.json" \
-  --load-settings "machine_profile.json;process_profile.json" \
-  --slice 1 \
-  --outputdir "prints/YYYY-MM-DD_ModelName/" \
+creality-print --slice \
+  --machine-profile "machine_profile.json" \
+  --process-profile "process_profile.json" \
+  --filament-profile "filament_profile.json" \
+  --output "prints/YYYY-MM-DD_ModelName/plate_1.gcode" \
   "/tmp/model_centered.stl" 2>&1 | tee preflight.log
 ```
 
@@ -193,7 +193,7 @@ Append to COMMS.md with summary: print name, status, duration, errors, link to p
 3. ✅ Supports enabled for >25° overhangs
 4. ✅ Brim present for tall prints
 5. ✅ Estimated time < 24h
-6. ✅ OrcaSlicer result.json shows "Success"
+6. ✅ Creality Print result shows "Success"
 
 ## Notes
 - The `M140 S0 / M104 S0` before `START_PRINT` pattern is AVOIDED — use direct preheat instead

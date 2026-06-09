@@ -247,7 +247,7 @@ Rules:
 
 Packs same or mixed models across one or more plates. Already partially implemented (used to arrange mario pipe + 4 coins for Job #1).
 
-**Key constraint:** Decimate high-poly STLs to <10MB per object before plate building. PrusaSlicer silently drops objects when combined plate exceeds ~200MB. Use pymeshlab: `ms.meshing_decimation_quadric_edge_collapse(targetfacenum=15000)`.
+**Key constraint:** Decimate high-poly STLs to <10MB per object before plate building. Some slicers silently drop objects when combined plate exceeds ~200MB. Use pymeshlab: `ms.meshing_decimation_quadric_edge_collapse(targetfacenum=15000)`.
 
 ---
 
