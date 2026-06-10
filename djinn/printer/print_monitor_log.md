@@ -3482,3 +3482,22 @@
 | 2026-06-10 13:25 UTC | standby | 0.0% | 24.9 | 0 | 23.4 | 0 | 0% | 0 |  |
 | 2026-06-10 13:26 UTC | standby | 0.0% | 24.9 | 0 | 23.5 | 0 | 0% | 0 |  |
 | 2026-06-10 13:27 UTC | standby | 0.0% | 24.9 | 0 | 23.5 | 0 | 0% | 0 |  |
+| 2026-06-10 13:28 UTC | standby | 0.0% | 131.5 | 170 | 28.2 | 65 | 0% | 0 |  |
+| 2026-06-10 13:29 UTC | standby | 0.0% | 182.2 | 130 | 38.2 | 65 | 0% | 0 |  |
+| 2026-06-10 13:30 UTC | standby | 0.0% | 130.7 | 130 | 47.5 | 65 | 0% | 0 |  |
+| 2026-06-10 13:31 UTC | standby | 0.0% | 130.0 | 130 | 56.1 | 65 | 0% | 0 |  |
+| 2026-06-10 13:32 UTC | standby | 0.0% | 129.6 | 130 | 62.8 | 65 | 0% | 0 |  |
+| 2026-06-10 13:33 UTC | printing | 0.0% | 129.5 | 0 | 65.5 | 0 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:34 UTC | printing | 0.0% | 220.2 | 220 | 65.9 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:35 UTC | printing | 0.0% | 220.0 | 220 | 65.6 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:36 UTC | printing | 0.0% | 219.6 | 220 | 65.3 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:37 UTC | printing | 0.0% | 220.6 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:38 UTC | printing | 0.0% | 219.2 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:39 UTC | printing | 0.0% | 219.4 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:40 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:41 UTC | printing | 0.0% | 220.4 | 220 | 65.2 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:42 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:43 UTC | printing | 0.0% | 220.4 | 220 | 64.8 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:44 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:45 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:46 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
