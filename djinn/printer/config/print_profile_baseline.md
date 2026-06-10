@@ -1,6 +1,6 @@
 # Print Profile Baseline
-Generated: 2026-06-10 12:41 UTC
-Source file: 
+Generated: 2026-06-10 13:33 UTC
+Source file: obj_1_Butterfly.stl_PLA_3h13m10s.gcode
 Readings: 245
 
 ## Temperatures
