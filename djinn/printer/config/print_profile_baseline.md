@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-10 07:18 UTC
-Source file: obj_18_Motor_Gear.stl_PLA_1h6m7s.gcode
-Readings: 182
+Generated: 2026-06-10 12:41 UTC
+Source file: 
+Readings: 245
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 248.9°C | 70.0°C |
-| Std dev | ±10.56°C | ±0.33°C |
-| Range | 138.9–251.3°C | 65.6–70.3°C |
+| Mean | 241.5°C | 68.7°C |
+| Std dev | ±15.58°C | ±2.19°C |
+| Range | 138.9–251.3°C | 64.8–70.3°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 182
 
 ## Anomalies
 - 
-hotend temp variance high: ±10.6°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±15.6°C (check nozzle_mcu cable)- bed temp variance high: ±2.2°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
