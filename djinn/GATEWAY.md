@@ -2,7 +2,7 @@
 title: Djinn Gateway — Agent Behavioral Contract
 tags: [djinn, gateway, enforcement, agents]
 created: 2026-06-05
-updated: 2026-06-05
+updated: 2026-06-10
 protection: tier-4  ← no agent may modify this file without Javier's double-confirm
 ---
 
@@ -43,7 +43,7 @@ Every session runs in one mode. Mode lives in `~/.config/djinn/session.json`.
 
 **For Claude and Marcus:** Javier will tell you explicitly at session start if Dev mode is active. Default assumption is **Standard**. You cannot read `session.json` — act as Standard unless Javier says otherwise.
 
-Activate Dev mode: `djinn-gateway --dev-session` (2h default) or `djinn-gateway --dev-session --duration 4h`  
+Activate Dev mode: `djinn-gateway dev` (2h default) or `djinn-gateway dev --duration 4h`  
 Check current mode: `djinn-gateway status`  
 Reset to Standard: `djinn-gateway reset`
 
@@ -60,8 +60,8 @@ Every action has a tier. The tier determines what happens before execution.
 | **0** | **Read** | Read files, read COMMS, read git log, list dirs | Auto | Auto |
 | **1** | **Ephemeral Write** | Write COMMS.md, session reports, HEARTBEAT updates | Auto | Auto |
 | **2** | **Permanent Write** | Write to staging/, tmp/, job dirs; create branches | Auto + COMMS entry | Auto |
-| **3** | **Checkpoint** | `git commit`, `git push`, write to library/ or originals/, overwrite existing STL, update QUEUE.md, send Telegram to Javier | **ASK FIRST** | Auto + logged |
-| **4** | **Hard Stop** | Delete files, push to main directly, modify shop credentials, modify GATEWAY.md / ROUTING.md / PROTOCOL.md / CLAUDE.md | **BLOCKED** — Dev + double-confirm required | Double-confirm required |
+| **3** | **Checkpoint** | `git commit`, `git push` (including vault-sync to main), write to library/ or originals/, overwrite existing STL, update QUEUE.md, send Telegram to Javier | Log + allow in Standard; Auto + logged in Dev |
+| **4** | **Hard Stop** | `rm`/delete files, `git push --force`, modify shop credentials, modify GATEWAY.md / ROUTING.md / PROTOCOL.md / CLAUDE.md | **BLOCKED** — Dev + double-confirm required | Double-confirm required |
 
 ---
 
