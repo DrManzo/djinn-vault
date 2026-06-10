@@ -849,3 +849,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-10 08:22:40 UTC
+=== FAILURE DETECTED ===
+  File: obj_1_Butterfly.stl_PLA_3h13m10s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-10 13:52:49 UTC

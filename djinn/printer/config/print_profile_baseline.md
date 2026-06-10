@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-06-10 13:33 UTC
-Source file: obj_1_Butterfly.stl_PLA_3h13m10s.gcode
-Readings: 245
+Generated: 2026-06-10 13:52 UTC
+Source file: 
+Readings: 263
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 241.5°C | 68.7°C |
-| Std dev | ±15.58°C | ±2.19°C |
+| Mean | 240.0°C | 68.5°C |
+| Std dev | ±15.98°C | ±2.30°C |
 | Range | 138.9–251.3°C | 64.8–70.3°C |
 
 ## Fan
@@ -22,7 +22,7 @@ Readings: 245
 
 ## Anomalies
 - 
-hotend temp variance high: ±15.6°C (check nozzle_mcu cable)- bed temp variance high: ±2.2°C- hotend dropped >15°C below target at least once
+hotend temp variance high: ±16.0°C (check nozzle_mcu cable)- bed temp variance high: ±2.3°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)

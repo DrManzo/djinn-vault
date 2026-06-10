@@ -3501,3 +3501,11 @@
 | 2026-06-10 13:44 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
 | 2026-06-10 13:45 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
 | 2026-06-10 13:46 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:47 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:48 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:49 UTC | printing | 0.0% | 220.7 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:50 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:51 UTC | printing | 0.0% | 219.6 | 220 | 65.1 | 65 | 0% | 0 | obj_1_Butterfly.stl_PLA_3h13m10s.gcode |
+| 2026-06-10 13:52 UTC | standby | 0.0% | 0.0 | 0 | 0.0 | 0 | 0% | 0 |  |
+| 2026-06-10 13:53 UTC | standby | 0.0% | 151.1 | 0 | 61.8 | 0 | 0% | 0 |  |
+| 2026-06-10 13:54 UTC | standby | 0.0% | 122.2 | 0 | 59.4 | 0 | 0% | 0 |  |
