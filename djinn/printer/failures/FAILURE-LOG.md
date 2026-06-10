@@ -844,3 +844,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-09 17:24:14 UTC
+=== FAILURE DETECTED ===
+  File: obj_18_Motor_Gear.stl_PLA_1h6m7s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-10 08:22:40 UTC
