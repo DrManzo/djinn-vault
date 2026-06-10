@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-06-09 14:30 UTC
-Source file: Apple_bored.stl_PETG_2h55m50s.gcode
-Readings: 10
+Generated: 2026-06-10 00:35 UTC
+Source file: 
+Readings: 181
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 240.9°C | 70.0°C |
-| Std dev | ±28.33°C | ±0.20°C |
-| Range | 160.3–250.3°C | 69.6–70.3°C |
+| Mean | 249.5°C | 70.0°C |
+| Std dev | ±6.67°C | ±0.07°C |
+| Range | 160.3–251.3°C | 69.6–70.3°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 10
 
 ## Anomalies
 - 
-hotend temp variance high: ±28.3°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±6.7°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
