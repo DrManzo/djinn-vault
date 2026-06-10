@@ -37,3 +37,13 @@
 {"ts": "2026-06-09T19:02:48", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-190247", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-06-09T19:46:45", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-194644", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-06-09T20:46:46", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-204645", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T20:53:24", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-205323", "action": "git push to origin (main)", "reason": "Attempted push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T20:53:42", "event": "mode_change", "mode": "dev", "expires_at": "2026-06-10T05:53:42+00:00", "by": "javier"}
+{"ts": "2026-06-09T20:56:04", "event": "hooks_installed", "hook": "/home/drmanzo/Obsidian/.git/hooks/pre-push"}
+{"ts": "2026-06-09T20:56:07", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-06-09T20:56:11", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-205610", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T20:57:54", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-205753", "action": "git push to origin (worktree-swift-whistling-blossom)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T20:58:14", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-205813", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T21:05:48", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-210547", "action": "git push to origin (worktree-swift-whistling-blossom)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T21:05:57", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-210556", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-09T21:06:03", "event": "checkpoint_pending", "id": "CHECKPOINT-20260609-210603", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
