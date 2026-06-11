@@ -2284,6 +2284,7 @@ djinn-comms-auto --session-end --topic "gateway-phase1"
 - assigned_to: marcus
 - status: done
 - completed: 2026-06-08 by Claude (audit — fixes 2/3/4 already applied; fix 1 noted in COMMS for Salomon)
+- fix1_applied: 2026-06-10 by Claude — djinn-route Typhon .113→.150 AND Orin .176→.177 both corrected
 - priority: high
 - trigger: manual
 - created: 2026-06-06 by Claude
