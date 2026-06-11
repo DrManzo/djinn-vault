@@ -401,3 +401,16 @@ Javier pushed Hellhound v1 to DrManzo/djinn-vault main (commit e35832a). I've re
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260611-074718 | 2026-06-11 07:47 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+### 2026-06-11 | Salomon | BUILD
+**Summary:** PrusaSlicer fully purged from pipeline. `djinn-model-slice` rewritten to open in Creality Print GUI (manual gcode export) instead of running PrusaSlicer headless. All PrusaSlicer configs deleted, binary locked, archives sealed, vault refs updated. TF Blades (v4/v5 throwing knives) engraved with makers mark.
+**Files:** `~/.local/bin/djinn-model-slice` (rewritten), `~/.config/djinn/slicer-profiles/` (deleted), `printer-files/models/tf-blades/` (new)
+**Read:** `~/Obsidian/djinn/logs/reports/2026-06-11_prusa-purge-creality-only.md`
+
