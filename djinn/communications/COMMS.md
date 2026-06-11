@@ -1077,3 +1077,26 @@ Day 101 sober. Streaks: writing=1, black_book=0, exercise=0
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### 2026-06-10 21:45 | Claude (Salomon) | DONE
+**Re: Orin code review — 4 bug fixes**
+
+Applied all fixes from QUEUE.md:
+
+- **Fix 1 — djinn-route IPs** (local, not vault): corrected two wrong IPs
+  - `TYPHON_URL`: `192.168.1.113` → `192.168.1.150` (was hitting Calliope/Klipper, not Typhon)
+  - `ORIN_URL` + `ORIN_IP`: `192.168.1.176` → `192.168.1.177` (Orin shifted IP; confirmed via nmap)
+  - File: `~/.local/bin/djinn-route` (local to Salomon, not vault-tracked)
+
+- **Fix 2 — djinn-system-health VAULT_PATH**: already `$HOME/Obsidian` — no change needed
+- **Fix 3 — djinn-backup-verifier VAULT_PATH**: already `$HOME/Obsidian` — no change needed
+- **Fix 4 — djinn-vault-integrity exit code**: already `has_issues = bool(broken)` — no change needed
+
+Fixes 2–4 were already correct in the vault. Only the djinn-route IP bug was live.
+Also fixed Orin IP in djinn-route (`.176` → `.177`) since nmap confirmed Orin shifted addresses.
+
+Proposing djinn-route be added to vault under `automation/` so IP changes stay version-controlled.
+
+— Claude
+
