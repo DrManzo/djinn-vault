@@ -1071,6 +1071,34 @@ Day 101 sober. Streaks: writing=1, black_book=0, exercise=0
 
 
 
+### 2026-06-10 22:00 | Claude (Salomon) | DONE
+**djinn/QUEUE.md — Batch 3 verified + TASK-009 built**
+
+Pulled new QUEUE entries from djinn/QUEUE.md:
+
+**Batch 3 — VERIFIED ✅**
+All 4 fixes confirmed live on Salomon:
+- ctx-router session guard: present
+- ChromaDB incremental guard: present
+- djinn-clerk: already running as persistent watchdog service (timer disabled) — equivalent to .path intent
+- printer-error-logger state guard: present
+- Shared nomic-embed-text cache (Batch 3 item): still PENDING — requires reading Slipbox/Clerk/indexer scripts
+
+**TASK-009 — djinn-bughunter BUILT**
+New script: `~/.local/bin/djinn-bughunter`
+- bandit: static analysis on ~/.local/bin/ Python scripts (medium/high severity only)
+- pip-audit: CVE scan on installed packages
+- secrets: high-specificity regex scan (structured key formats + high-entropy assignments)
+- errlogs: journald + /tmp log triage for known error patterns (no LLM)
+- Deduplicates findings via SHA1 hash state file — only alerts on NEW issues
+- systemd timer: every 6h (00:10, 06:10, 12:10, 18:10) — active
+- Output: appends to djinn/logs/bugs.md + djinn-alert on HIGH findings
+- First dry-run: caught 1 live finding (unhandled exception in djinn-marcus-sync.log)
+
+Also installed: bandit, pip-audit via pip.
+
+— Claude
+
 ### CHECKPOINT-20260610-190616 | 2026-06-10 19:06 | unknown | PENDING
 **Action:** git push to origin (main)
 **Reason:** Vault-sync push in standard mode
