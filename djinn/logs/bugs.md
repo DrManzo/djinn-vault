@@ -95,3 +95,7 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 
 ## 2026-06-11 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `/tmp/djinn-marcus-sync.log` — unhandled exception _(type: errlog)_
+
+
+## 2026-06-11 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (1 occurrence(s)) _(type: errlog)_
