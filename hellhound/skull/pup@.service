@@ -1,0 +1,22 @@
+[Unit]
+Description=Hellhound Pup: %I
+Documentation=https://github.com/DrManzo/djinn-vault
+After=hellhound.service
+BindsTo=hellhound.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/share/hellhound/pup-%I.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hellhound-pup-%I
+
+# Pup identity injected via environment
+Environment=PUP_NAME=%I
+# HH_TOKEN must be set per-pup; use a drop-in or EnvironmentFile:
+# EnvironmentFile=%h/.config/hellhound/pup-%I.env
+
+[Install]
+WantedBy=hellhound.service

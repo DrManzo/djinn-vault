@@ -1,0 +1,186 @@
+#!/usr/bin/env bash
+# hellhound CLI — install to ~/.local/bin/hellhound
+# Usage: see 'hellhound help'
+
+set -euo pipefail
+
+HH_DIR="${HOME}/.local/share/hellhound"
+SKULL_DIR="${HH_DIR}/skull"
+SOCK="${SKULL_DIR}/skull.sock"
+CUR_LOG="${SKULL_DIR}/logs/current.jsonl"
+STATE="${SKULL_DIR}/neurals/state.json"
+PYTHON="${PYTHON:-python3}"
+
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+
+  status)
+    echo "=== Hellhound Status ==="
+    if [ -S "$SOCK" ]; then
+      echo "Socket: UP  ($SOCK)"
+    else
+      echo "Socket: DOWN (hellhound not running?)"
+    fi
+    if [ -f "$STATE" ]; then
+      echo ""
+      echo "--- Registry ---"
+      $PYTHON -c "
+import json, sys, time
+state = json.load(open('$STATE'))
+pups = state.get('pups', {})
+if not pups:
+    print('  (no pups registered)')
+for name, rec in pups.items():
+    last_hb = rec.get('last_heartbeat', 0)
+    delta   = round(time.time() - last_hb, 0)
+    print(f\"  {name:<20} gate={rec.get('gate','?'):<20} status={rec.get('status','?'):<8} hb={delta:.0f}s ago  obs={rec.get('observations_sent',0)}\")
+"
+    else
+      echo "  State file not found: $STATE"
+    fi
+    ;;
+
+  send)
+    # hellhound send pup <name>
+    [ "${1:-}" = "pup" ] && shift
+    PUP_NAME="${1:?Usage: hellhound send pup <name>}"
+    systemctl --user start "pup@${PUP_NAME}"
+    echo "Started pup@${PUP_NAME}"
+    ;;
+
+  recall)
+    if [ "${1:-}" = "--all" ]; then
+      echo "Recalling all pups via socket..."
+      if [ -f "$STATE" ]; then
+        $PYTHON -c "
+import json, socket, time
+state = json.load(open('$STATE'))
+for name in state.get('pups', {}):
+    try:
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        s.connect('$SOCK')
+        # Note: direct RECALL injection is not in the wire protocol;
+        # use systemctl stop for immediate recall.
+        s.close()
+    except Exception as e:
+        print(f'Could not contact {name}: {e}')
+"
+      fi
+      systemctl --user stop 'pup@*' 2>/dev/null || true
+      echo "All pup services stopped."
+    else
+      PUP_NAME="${1:?Usage: hellhound recall <name> | --all}"
+      systemctl --user stop "pup@${PUP_NAME}"
+      echo "Stopped pup@${PUP_NAME}"
+    fi
+    ;;
+
+  log)
+    TAIL_N="50"
+    [ "${1:-}" = "--tail" ] && TAIL_N="${2:-50}" && shift 2
+    if [ -f "$CUR_LOG" ]; then
+      tail -n "$TAIL_N" "$CUR_LOG" | $PYTHON -c "
+import json, sys
+for line in sys.stdin:
+    line = line.strip()
+    if not line: continue
+    try:
+        o = json.loads(line)
+        import datetime
+        ts = datetime.datetime.fromtimestamp(o.get('ts', 0)).strftime('%H:%M:%S')
+        sev = o.get('severity', 'info').upper()[:4]
+        pup = o.get('pup', '?')
+        ev  = o.get('event', '?')
+        dom = o.get('domain', '?')
+        print(f'[{ts}] [{sev}] {pup} {dom}/{ev}')
+    except Exception:
+        print(line)
+"
+    else
+      echo "No log file found: $CUR_LOG"
+    fi
+    ;;
+
+  patrol)
+    cd "${HH_DIR}"
+    $PYTHON -c "
+import sys
+sys.path.insert(0, '.')
+from cortex.watchdog import patrol
+anomalies = patrol(report_to_vault=True)
+if anomalies:
+    print(f'Patrol found {len(anomalies)} anomalies:')
+    import json
+    for a in anomalies:
+        print(' ', json.dumps(a))
+else:
+    print('Patrol: all clear')
+"
+    ;;
+
+  pup)
+    subcmd="${1:-}"
+    shift || true
+    case "$subcmd" in
+      new)
+        PUP_NAME="${1:?Usage: hellhound pup new <name>}"
+        TEMPLATE="${HH_DIR}/pup-template.py"
+        DEST="${HH_DIR}/pup-${PUP_NAME}.py"
+        if [ ! -f "$TEMPLATE" ]; then
+          echo "Template not found: $TEMPLATE"
+          exit 1
+        fi
+        if [ -f "$DEST" ]; then
+          echo "Pup already exists: $DEST"
+          exit 1
+        fi
+        cp "$TEMPLATE" "$DEST"
+        chmod +x "$DEST"
+        # Generate a token
+        TOKEN=$(python3 -c "import secrets; print(secrets.token_hex(32))")
+        PUP_JSON="${SKULL_DIR}/pups/${PUP_NAME}.json"
+        mkdir -p "${SKULL_DIR}/pups"
+        echo "{\"name\": \"${PUP_NAME}\", \"token\": \"${TOKEN}\"}" > "$PUP_JSON"
+        echo "Created: $DEST"
+        echo "Token stored in: $PUP_JSON"
+        echo ""
+        echo "Next steps:"
+        echo "  1. Edit $DEST — set GATE and implement run_gate()"
+        echo "  2. export HH_TOKEN=${TOKEN}  (or use EnvironmentFile)"
+        echo "  3. systemctl --user start pup@${PUP_NAME}"
+        ;;
+      *)
+        echo "Unknown pup subcommand: $subcmd"
+        echo "Usage: hellhound pup new <name>"
+        exit 1
+        ;;
+    esac
+    ;;
+
+  help|--help|-h)
+    cat <<'EOF'
+hellhound — Djinn Runtime Monitor CLI
+
+Commands:
+  status                      Registry dump + health per pup
+  send pup <name>             systemctl start pup@<name>
+  recall <name>               systemctl stop pup@<name>
+  recall --all                Stop all pup services
+  log [--tail N]              Tail current.jsonl (default: 50 lines)
+  patrol                      Run watchdog checks, report anomalies to vault
+  pup new <name>              Create pup-<name>.py from template + provision token
+  help                        Show this message
+
+Runtime directory: ~/.local/share/hellhound/skull/
+Vault output:      ~/Obsidian/djinn/hellhound/
+EOF
+    ;;
+
+  *)
+    echo "Unknown command: $cmd"
+    echo "Run 'hellhound help' for usage."
+    exit 1
+    ;;
+esac
