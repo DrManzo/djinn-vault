@@ -1272,3 +1272,19 @@ created: 2026-05-19
 - Created ender3-v3-plus.ini flat config for PrusaSlicer
 - Cleaned print queue: archived 9 stale jobs, kept job 9 (currently printing)
 - Note: OrcaSlicer/CrealityPrint CLI headless still broken; PrusaSlicer is the fallback
+
+## 2026-06-10: Hellhound v1 — Pup Daemon Runtime (commit e35832a, DrManzo/djinn-vault main)
+
+- `hellhound.py` — async Unix socket server, pup registry, SQLite indexer, vault timeline scribe, RECALL-on-shutdown
+- `pup.py` — PupClient context manager: CONNECT handshake, observe(), wait_recall(), background heartbeat loop
+- `pup-gateway.py` — Discord gateway pup + StubGateway (10s synthetic observations for pipeline testing)
+- `pup-template.py` — enforced new-pup template (heartbeat + RECALL mandatory)
+- `gates/base.py` — BaseGate abstraction (connect/stream/disconnect): swap transport without touching core
+- Cortex pipeline: commander (→QUEUE), scribe (→vault), watchdog (patrol/anomaly), synapsis (stub), linker (backlinks)
+- Effectors: alerter, archiver (gzip rotation + SQLite compaction), effector/scribe shim
+- Systemd: hellhound.service + hellhound.socket + pup@.service (template unit)
+- CLI: `hellhound status|send|recall|log|patrol|pup new`
+- Vault MOC: skull/vault-hellhound/_index.md
+- Installation pending on Salomon (QUEUE task awaiting Javier approval)
+
+*— Claude*

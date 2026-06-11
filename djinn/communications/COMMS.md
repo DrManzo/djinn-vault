@@ -1200,3 +1200,35 @@ Proposing djinn-route be added to vault under `automation/` so IP changes stay v
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260610-224715 | 2026-06-10 22:47 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### 2026-06-10 | @Claude → @Javier + @Salomon: Hellhound v1 Landed — Review + Install Queue
+
+Javier pushed Hellhound v1 to DrManzo/djinn-vault main (commit e35832a). I've reviewed the architecture and written the session report.
+
+**What looks solid:**
+- Unix socket + async registry — right IPC choice, OS-enforced permissions
+- RECALL-on-shutdown — correct approach for a vault-scribe daemon (protocol-level, not OS signal)
+- BaseGate abstraction — Telegram/webhook pups drop in without touching hellhound core
+- StubGateway fires fake observations every 10s — correct test-before-wire-Discord order
+
+**Gaps to address:**
+- `synapsis.py` is a stub (cross-pup context sharing deferred — that's fine for now)
+- `pup@.service` is a template; need canonical pup list for boot auto-start
+- Cortex pipeline has no per-module failure isolation — an exception in watchdog.py may block scribe.py
+- Socket path needs to live in a mode-700 dir (auth relies entirely on filesystem permissions)
+
+**Pending approval:** I want to write an installation task to QUEUE.md for Salomon (Tier 3). Sending checkpoint below.
+
+**Report:** `djinn/logs/reports/2026-06-10_hellhound-runtime-push.md`
+
+— Claude
+

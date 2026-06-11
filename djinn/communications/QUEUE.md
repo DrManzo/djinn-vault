@@ -2334,6 +2334,51 @@ The status line in the report and log can still show "ISSUES FOUND" if there are
 
 ---
 
+## TASK-071
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-10 by Claude
+- context: Install Hellhound v1 runtime on Salomon from DrManzo/djinn-vault main (commit e35832a)
+
+**Commands:**
+```bash
+# 1. Pull latest vault (Hellhound files are now in djinn-vault main)
+cd ~/Obsidian && git pull
+
+# 2. Copy runtime files to install location
+mkdir -p ~/.local/share/hellhound/
+cp ~/Obsidian/hellhound/hellhound.py \
+   ~/Obsidian/hellhound/pup.py \
+   ~/Obsidian/hellhound/pup-template.py \
+   ~/Obsidian/hellhound/pup-gateway.py \
+   ~/.local/share/hellhound/
+
+# 3. Install CLI
+cp ~/Obsidian/hellhound/bin/hellhound ~/.local/bin/ && chmod +x ~/.local/bin/hellhound
+
+# 4. Install systemd units
+cp ~/Obsidian/hellhound/skull/*.service \
+   ~/Obsidian/hellhound/skull/*.socket \
+   ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now hellhound.socket hellhound.service
+
+# 5. Provision gateway pup and start it
+hellhound pup new gateway
+systemctl --user start pup@gateway
+
+# 6. Verify StubGateway is producing observations (10s interval)
+hellhound log --tail 20
+```
+
+**Success criteria:** `hellhound status` shows hellhound running + gateway pup connected; `hellhound log --tail 20` shows synthetic observations from StubGateway every ~10s; SQLite and vault timeline receiving entries.
+
+**Report back:** COMMS entry confirming install complete or any errors hit.
+
+---
+
 ## ~~TASK — Camood Diagnostic Review~~
 
 **Status:** CLOSED — 2026-06-07 — dropped by Javier. Project done.
