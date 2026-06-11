@@ -430,3 +430,11 @@ Javier pushed Hellhound v1 to DrManzo/djinn-vault main (commit e35832a). I've re
 Day 102 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+
+### CHECKPOINT-20260611-082953 | 2026-06-11 08:29 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
