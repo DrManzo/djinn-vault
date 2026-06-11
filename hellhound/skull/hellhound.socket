@@ -1,0 +1,12 @@
+[Unit]
+Description=Hellhound Unix Socket
+Documentation=https://github.com/DrManzo/djinn-vault
+
+[Socket]
+ListenStream=%h/.local/share/hellhound/skull/skull.sock
+SocketMode=0600
+DirectoryMode=0700
+RemoveOnStop=true
+
+[Install]
+WantedBy=sockets.target

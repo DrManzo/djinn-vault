@@ -1,0 +1,22 @@
+[Unit]
+Description=Hellhound Master Daemon
+Documentation=https://github.com/DrManzo/djinn-vault
+After=network.target
+Requires=hellhound.socket
+
+[Service]
+Type=simple
+ExecStart=%h/.local/share/hellhound/skull/../hellhound.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hellhound
+
+# Security hardening
+NoNewPrivileges=true
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/hellhound %h/Obsidian/djinn/hellhound
+
+[Install]
+WantedBy=default.target
