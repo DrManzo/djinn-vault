@@ -24,7 +24,7 @@ Agents append to this file. Javier sets priorities.
 
 - [ ] TASK-008 | infra | Salomon | LOW | Wire Firefox AI Chat Exporter output folder to ~/djinn-inbox/ drop target via SSH/SFTP mount or Tailscale file drop. Laptop-only, lowest priority since Flask endpoint covers all devices.
 
-- [ ] TASK-009 | architecture | Claude | HIGH | Design bug hunter agent for Djinn — spec a proactive, automated vulnerability detection pipeline. Must include: (1) bandit static analysis on every commit, (2) pip-audit on cron, (3) secrets scanning pre-push, (4) regex error triage replacing LLM error log reads, (5) output to djinn/logs/bugs.md + Telegram alert. No LLM in detection path.
+- [x] TASK-009 | architecture | Claude | HIGH | djinn-bughunter BUILT + DEPLOYED 2026-06-10 — bandit, pip-audit, secrets regex, journald/log triage; 6h systemd timer active; output to bugs.md + djinn-alert; zero LLM in detection path.
 
 ## TASK-001 Batch Tracker
 
@@ -43,25 +43,13 @@ Agents append to this file. Javier sets priorities.
 - [x] No-op short-circuit on djinn-daily — skips model if queue empty + no carry-forward
 - [x] DESIGN_MODEL = qwen2.5-coder:7b in design_gen.py — replaces phi4:14b for 2D/parametric tasks
 
-### Batch 3 — SCRIPTS DEPLOYED (commit 02c3af6) — ⚠️ JAVIER: RUN ON SALOMON
+### Batch 3 — VERIFIED ✅ (2026-06-10 by Claude)
 
-**To apply:**
-```bash
-# On Salomon — pull vault first
-cd ~/Obsidian && git pull
-
-# Run the fix script
-bash ~/Obsidian/djinn/scripts/tools/batch3-apply.sh
-
-# Verify all fixes landed
-bash ~/Obsidian/djinn/scripts/tools/batch3-verify.sh
-```
-
-- [x] djinn-ctx-router: skip context assembly if no active user session — PATCH READY
-- [x] ChromaDB re-index: enforce incremental mode as default, --full flag required for full re-index — PATCH READY
+- [x] djinn-ctx-router: skip context assembly if no active user session — LIVE
+- [x] ChromaDB re-index: enforce incremental mode as default — LIVE
 - [ ] Shared nomic-embed-text cache across Slipbox, Clerk, and vault indexer — PENDING (requires reading all three scripts live on Salomon)
-- [x] djinn-clerk: swap 1-hr cron timer for watchdog filesystem trigger — PATCH READY (deploys djinn-clerk.path unit)
-- [x] printer-error-logger: gate LLM summary call on NEW error state only — PATCH READY
+- [x] djinn-clerk: already running as persistent watchdog service — timer disabled — LIVE
+- [x] printer-error-logger: gate LLM summary call on NEW error state only — LIVE
 
 ### Batch 4 — QUEUED (after Batch 3 verified)
 - [ ] Weekly review: pre-summarize daily notes before LLM synthesis (cuts input ~60-70%)
@@ -75,6 +63,7 @@ bash ~/Obsidian/djinn/scripts/tools/batch3-verify.sh
 - [x] TASK-002 | infra | Salomon | 2026-06-07 | Flask inbox endpoint DEPLOYED — djinn-flask-inbox on 0.0.0.0:8765
 - [x] TASK-003 | infra | Salomon | 2026-06-07 | inbox-watcher.service DEPLOYED
 - [x] TASK-004 | infra | Salomon | 2026-06-07 | marcus-sync.py DEPLOYED at ~/.local/bin/
+- [x] TASK-009 | architecture | Claude | 2026-06-10 | djinn-bughunter built and deployed
 
 ---
 
