@@ -228,7 +228,7 @@ The most technically interesting agent. No LLM, no prints required. Uses a Taguc
 **Output:** single merged plate STL  
 **LLM:** no — pure trimesh + pymeshlab
 
-Packs STL files onto the bed. Handles the critical **>200MB PrusaSlicer bug** (silently drops objects): every input STL is decimated to <10MB before merging.
+Packs STL files onto the bed. Handles the critical **>200MB STL bug** (large meshes silently drop objects during plate merging): every input STL is decimated to <10MB before merging.
 
 **Bed dimensions:** 300×300mm (Ender-3 V3 Plus)  
 **Margins:** 10mm from edge, 6mm gap between parts  

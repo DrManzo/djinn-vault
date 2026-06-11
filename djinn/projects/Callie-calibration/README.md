@@ -4,7 +4,7 @@
 **Nozzle:** 0.4mm hardened steel
 **Filament:** PLA
 **Firmware:** Klipper (Nebula)
-**Slicer:** OrcaSlicer 2.3.2 (GUI) + PrusaSlicer (headless pipeline)
+**Slicer:** Creality Print (GUI slicing)
 **Moonraker:** http://192.168.1.113:7125
 
 ## Benchmark Plan

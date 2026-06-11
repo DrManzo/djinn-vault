@@ -27,7 +27,7 @@ Design and print a mini bubbler that slides onto the Proxy V2 body, provides wat
 | PLA filament | ✅ Loaded | Fine for prototype fit-test only |
 | PETG or ASA filament | ❌ Not on hand | Required for final piece (heat + water) |
 | Calipers | ❌ Not on hand | Need to confirm Proxy body OD before final design |
-| Slicer software | ✅ Installed | PrusaSlicer 2.9.4 via apt |
+| Slicer software | ✅ Installed | Creality Print (flatpak) |
 | CAD software | ⚠️ Unconfirmed | Use Tinkercad (browser, no install) for prototype |
 | Fusion 360 | ❌ Not installed | Needed for final bubbler design with curves |
 

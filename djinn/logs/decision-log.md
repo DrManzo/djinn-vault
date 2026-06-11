@@ -2,6 +2,11 @@
 
 Record of architectural and technical decisions made during Djinn builds.
 
+## 2026-06-11 — PrusaSlicer removed from pipeline
+**Decision:** Remove all PrusaSlicer references from vault docs. Pipelines now use Creality Print exclusively for all slicing. All PrusaSlicer configs archived.
+
+---
+
 ---
 
 ## 2026-06-05 — gcode post-processing vs 3MF SupportBlocker volume for multi-instance plates

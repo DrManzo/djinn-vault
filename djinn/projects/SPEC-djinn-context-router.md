@@ -55,7 +55,7 @@ Javier's proposal: wikilinks for subjects, tags for actions. Exact split:
 | `[[Calliope]]` | Ender-3 V3 Plus, the 3D printer |
 | `[[print-queue]]` | print-queue.json job list |
 | `[[djinn-confirm-print]]` | confirm/deny print tool |
-| `[[djinn-model-slice]]` | PrusaSlicer wrapper |
+| `[[djinn-model-slice]]` | Creality Print slicer wrapper |
 | `[[djinn-print-quote]]` | commission pricing tool |
 | `[[djinn-model-fetch]]` | model downloader |
 | `[[djinn-design]]` | CAD/design orchestrator |

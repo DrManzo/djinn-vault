@@ -6,6 +6,8 @@ created: 2026-05-19
 
 # Build Log
 
+## 2026-06-11: PrusaSlicer fully removed from pipeline. djinn-model-slice now opens models in Creality Print GUI for manual slicing. All PrusaSlicer configs purged.
+
 ## 2026-05-19: MVP Build Day 1
 - OpenCode configured with Ollama local provider
 - Vault backed up, git initialized, pushed to GitHub
