@@ -356,3 +356,11 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 Day 104 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+
+### CHECKPOINT-20260613-081756 | 2026-06-13 08:17 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
