@@ -987,3 +987,16 @@ Day 105 sober. Streaks: writing=1, black_book=0, exercise=0
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Recent-Conversations-Highlights.md`
 
 — Clerk
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 12:51
+**RE:** Session end — slipbox--aust--li--verview-2026-06-14-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-2026-06-14.md
+
+**Action:** None — FYI.
+
+— Typhon
