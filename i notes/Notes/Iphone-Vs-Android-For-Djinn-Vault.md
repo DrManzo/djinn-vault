@@ -1,7 +1,10 @@
 ---
 subject: Technology/Smartphones/iPhone-vs-Android/Djinn-Vault-Compatible
 tags:
-  - technology/smartphones/iphone/android/djinn-vault
+  - cs/software-development
+  - personal/technology
+  - mobile-devices/iOS-vs-Android
+  - obsidian/pkm-system
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -61,5 +64,4 @@ Given the Djinn Vault's requirements for direct Git sync and Termux support, an 
 - [Tech Advisor](https://www.techadvisor.com/article/2937629/google-pixel-10-pro-fold-vs-samsung-galaxy-z-fold-7-review.html)
 
 ## Related
-- [[Djinn-Vault-Setup]] — Setup and configuration of the Djinn Vault.
-- [[Obsidian-Mobile-Sync]] — Guide on syncing Obsidian with mobile devices.
+- [[Development-Tablet-Setup]] — similarity for development setup

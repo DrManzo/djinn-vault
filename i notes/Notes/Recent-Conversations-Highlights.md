@@ -1,10 +1,10 @@
 ---
 subject: 3d-printing/models/ender-3-v3-plus/upgrades
 tags:
-  - 3d-printing/models/ender-3-v3-plus
-  - 3d-printing/printer-setup/preparation
-  - 3d-printing/subsystem
-  - 3d-printing/tool-upgrades
+  - 3d-printing/fixes
+  - 3d-printing/design
+  - cs/architecture
+  - personal/progress
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -32,6 +32,5 @@ On the printer side, we integrated the Ender-3 V3 Plus into the Djinn system as 
 - [Claude Chat](https://claude.ai/chat/dd2c9106-07c5-4097-9cce-be94d85d22ab)
 
 ## Related
-- [[3D-Printing-Fixes-and-Updates]] — Detailed notes on the fixes and updates for 3D printing models.
-- [[Typhon-Studio-Architecture-Briefs]] — Notes on the architecture brief iterations for Typhon's Studio.
-- [[Djinn-Printer-Integration]] — Notes on integrating printers into the Djinn system.
+- [[Djinn-3d-Printer-Overview-And-Filament-Recommendations]] — similarity
+- [[Setting-Benchmarks-For-Ender-3-V3-Plus]] — Klipper setup and workflow
