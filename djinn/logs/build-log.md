@@ -1290,3 +1290,8 @@ created: 2026-05-19
 - Installation pending on Salomon (QUEUE task awaiting Javier approval)
 
 *— Claude*
+
+## 2026-06-14: AUTO-STUB — slipbox--aust--li--verview-2026-06-14-md
+- djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-2026-06-14.md
+- ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--aust--li--verview-2026-06-14-md-stub.md`
+*— Typhon*
