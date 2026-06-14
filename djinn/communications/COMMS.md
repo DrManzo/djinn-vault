@@ -1052,3 +1052,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/35-Upgraded-3d-
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 12:51
+**RE:** Session end — slipbox--penclaw--ocal--odel--hortlist--or-8-16--b-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Openclaw-Local-Model-Shortlist-For-8-16-Gb.md
+
+**Action:** None — FYI.
+
+— Typhon
