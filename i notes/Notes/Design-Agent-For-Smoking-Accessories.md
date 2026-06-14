@@ -1,10 +1,13 @@
 ---
 subject: 3d-printing/models/smoking-accessories
 tags:
-  - creative/aesthetic-design/geometry/fluid-dynamics
+  - design/ai
+  - smoking/accessories
+  - fluid-dynamics
+  - 3d-printing/design
+  - safety/rules
 created: 2026-06-14
 source: Perplexity export
-
 ---
 
 # Design Agent for Smoking Accessories
@@ -38,10 +41,4 @@ The agent will be built to handle the complex requirements of designing smoking 
 - [printables+1](https://www.printables.com/en/)
 
 ## Related
-- [[Djinn-Vault-Guide]] — Overview of the Djinn project and its components.
-- [[OpenClaw-Agent-Architecture]] — Detailed architecture for the Faust/OpenClaw AI agent.
-- [[3d-printing/models/benchmark-3343]] — Benchmark models for 3D printing projects.
-
----
-
-This structured note captures the essence of designing a specialized AI agent for smoking accessories, ensuring it aligns with the existing Djinn project and relevant knowledge domains.
+- [[Designing-An-Ai-Agent-For-3d-Printing-Smoking]] — similarity, [[Djinn-3d-Printer-Overview-And-Filament-Recommendations]] — filament recommendations

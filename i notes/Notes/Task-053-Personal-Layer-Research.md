@@ -1,11 +1,11 @@
 ---
 subject: djinn/research/marcus/TASK-053_personal-layer-research.md
 tags:
-  - personal/ai-support/adhd
-  - personal/journaling/shadow-work
-  - personal/habit-tracking/telegram
-  - personal/academic-support/multi-domain-sdl
-  - personal/ai-adoption/design-constraints
+  - personal/ai-adoption
+  - psychology/adhd
+  - personal/journaling
+  - personal/habit-tracking
+  - personal/academic-support
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -31,14 +31,5 @@ The research highlights the importance of context-aware daily briefings for ADHD
 - [Meta-analysis on AI in self-directed learning](https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2025.1738751/full)
 
 ## Related
-- [[ADHD-Behavioral-Interventions]] — ADHD-specific interventions and strategies.
-- [[AI-Assisted-Journaling]] — AI's role in enhancing personal journaling practices.
-- [[Telegram-Habit-Tracking]] — Implementing habit tracking using Telegram bots.
-- [[Self-Directed-Learning-Support]] — Strategies for supporting multi-domain self-directed learning.
-
-TAG RULES:
-- topic MUST be one of: psychology, law, business, cs, personal, creative
-- path: topic/context/relevant/commonality/specific-tag
-- 2-4 tags per note, use hyphens not spaces
-- You may create new nodes at context level and below
-- Existing vault tags for reference: 1800s/literature/style, 3d-printing/automation, 3d-printing/bore-design, 3d-printing/calibration/cube, 3d-printing/filament/compatible, 3d-printing/filament/handling, 3d-printing/filament/preparation, 3d-printing/filament/recommendations, 3d-printing/filament/tracking, 3d-printing/filament/types, 3d-printing/glassware/attachment, 3d-printing/inventory-management, 3d-printing/models/benchmark, 3d-printing/models/benchmark-3343, 3d-printing/models/ender-3-v3-plus, 3d-printing/models/ender-3v3-plus, 3d-printing/models/puffco-proxy, 3d-printing/models/puffco-proxy/upgrade-script, 3d-printing/models/smoking-accessories, 3d-printing/printer-maintenance, 3d-printing/printer-models/ender-3-v3-plus, 3d-printing/printer-setup/beginner-guide, 3d-printing/printer-setup/preparation, 3d-printing/printer/subsystem, 3d-printing/quality/test, 3d-printing/tool-upgrades, 3d-printing/troubleshooting/mechanical-setup, 3d-printing/tuning/model, 3d-printing/virtual-setup, Creative/Aesthetic, Timers/Run, academic-writing/apa-style, academic-writing/study-strategies, accounting/cycle/close, accounting/principles/governance, accounting/ratios/performance-analysis, accounting/systems/adjusting-entries/supplies, accounting/systems/trial-balance/order-structure, ai/development/cli, ai/development/faust/cli
+- [[Task-053-Personal-Layer-Research-Summary]] — similarity
+- [[The-Effects-Of-Metacognitive-Regulation-On-Memory-Performance]] — metacognition

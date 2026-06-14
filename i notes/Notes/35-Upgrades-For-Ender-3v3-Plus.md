@@ -1,8 +1,9 @@
 ---
 subject: 3d-printing/models/upgrades
 tags:
-  - 3d-printing/models/ender-3v3-plus/upgrades
-  - 3d-printing/subsystem
+  - 3d-printing/upgrades/performance
+  - 3d-printing/design/embossing
+  - cs/algorithms/slicer-settings
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -45,19 +46,8 @@ The Ender 3V3 Plus is a popular 3D printer model that can benefit from several u
 - [YouTube - Understanding Embossing and Engraving](https://www.youtube.com/watch?v=aEvBC0lSbEg)
 
 ## Related
-- [[Djinn-Vault]] — Documentation for the Djinn system.
-- [[3d-printing/models/ender-3v3-plus]] — Detailed information on the Ender 3V3 Plus model.
-
----
-
-subject: 3d-printing/subsystem
-tags:
-  - 3d-printing/subsystem/upgrades
-created: 2026-06-14
-source: Perplexity export
----
-
-# Embossing and Engraving Issues
+- [[3d-Print-Queue-Inventory-Automation-Structured-Findings-For]] — queue-management
+- [[3d-Printing-Filament-Recommendations-For-Ender-3-V3]] — filament-recommendations
 
 ## Summary
 This note addresses the issue of embossed text not producing readable letters on the Ender 3V3 Plus printer, providing solutions to improve print quality.
@@ -92,5 +82,5 @@ The problem of embossed text not producing readable letters on the Ender 3V3 Plu
 - [Printing for Less - Embossing Tips](https://www.printingforless.com/blog/2023/04/26/embossing-tips/)
 
 ## Related
-- [[Djinn-Vault]] — Documentation for the Djinn system.
-- [[3d-printing/subsystem/queue-management]] — Best practices for managing print queues.
+- [[3d-Print-Queue-Inventory-Automation-Structured-Findings-For]] — queue-management
+- [[3d-Printing-Filament-Recommendations-For-Ender-3-V3]] — filament-recommendations

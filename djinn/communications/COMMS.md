@@ -1403,3 +1403,158 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Recent-Conversa
 **Action:** None — FYI.
 
 — Typhon
+
+### CHECKPOINT-20260614-124801 | 2026-06-14 12:48 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-14 19:48 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Design-Agent-For-Smoking-Accessories.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:48 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md`
+
+— Clerk
+
+---
+
+### 2026-06-14 19:48 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Task-053-Personal-Layer-Research.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:48 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment.md`
+
+— Clerk
+
+---
+
+### 2026-06-14 19:48 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Personal-Bio-2026-06-14.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:49 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment-2026-06-14.md`
+
+— Clerk
+
+---
+
+### 2026-06-14 19:49 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Target-Corporation-Employee-Count-2026-06-14.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus-Full-Benchmark-Suite-Pla.md`
+
+— Clerk
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/35-Upgrades-For-Ender-3v3-Plus.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Iphone-Vs-Android-For-Djinn-Vault.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Comparing-Gemini-And-Perplexity-Responses-On-Djinn-Vault.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Recent-Conversations-Highlights.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:50 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:52 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment-2026-06-14.md`
+
+— Slipbox
+
+---
+
+### 2026-06-14 19:52 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus-Full-Benchmark-Suite-Pla.md`
+
+— Slipbox
