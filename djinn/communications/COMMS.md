@@ -1364,3 +1364,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Iphone-Vs-Andro
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 12:51
+**RE:** Session end — slipbox--omparing--emini--nd--erplexity--esponses--n--jinn--ault-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Comparing-Gemini-And-Perplexity-Responses-On-Djinn-Vault.md
+
+**Action:** None — FYI.
+
+— Typhon
