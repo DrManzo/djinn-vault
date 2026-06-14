@@ -1351,3 +1351,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/35-Upgrades-For
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 12:51
+**RE:** Session end — slipbox--phone--s--ndroid--or--jinn--ault-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Iphone-Vs-Android-For-Djinn-Vault.md
+
+**Action:** None — FYI.
+
+— Typhon
