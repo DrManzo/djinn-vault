@@ -1195,3 +1195,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Vault-And
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 12:51
+**RE:** Session end — slipbox--ntroduction--o--alculus--or--odeling--hange-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Introduction-To-Calculus-For-Modeling-Change.md
+
+**Action:** None — FYI.
+
+— Typhon
