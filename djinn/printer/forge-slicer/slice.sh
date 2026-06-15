@@ -9,6 +9,7 @@ STL="${1:-}"
 PROFILE="${2:-}"
 MATERIAL="${3:-}"
 SUPPORTS="${4:-no}"
+SUPPORT_TYPE="${5:-normal}"
 
 if [[ -z "$STL" || -z "$PROFILE" || -z "$MATERIAL" ]]; then
     echo '{"success":false,"error":"Usage: slice.sh <stl> <profile: proto|production|quality> <material: pla|petg|abs> [supports: yes|no]"}'
@@ -69,4 +70,5 @@ docker run --rm \
     --process "/profiles/process/Calliope-${PROFILE_CAP}.json" \
     --filament "$FILAMENT_CONTAINER" \
     --output /output \
-    --supports "$SUPPORTS"
+    --supports "$SUPPORTS" \
+    --support-type "$SUPPORT_TYPE"
