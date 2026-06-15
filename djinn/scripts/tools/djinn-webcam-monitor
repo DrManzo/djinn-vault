@@ -52,9 +52,14 @@ DIFF_THRESHOLD     = 0.22    # fraction of pixels that must change to flag
 CONFIRM_COUNT      = 3       # consecutive bad checks before triggering alert
 HISTORY_DEPTH      = 6       # rolling frame window (~60 s of checks)
 
+MILESTONES          = [0.01, 0.25, 0.50, 0.75, 1.00]  # progress thresholds for social clips
+MILESTONE_DURATION  = 10     # seconds per milestone clip
+
 RECORD_DIR  = Path.home() / "Videos" / "print-monitor"
 SNAP_DIR    = RECORD_DIR / "snapshots"
+JOBS_DIR    = RECORD_DIR / "jobs"
 STATE_FILE  = Path.home() / ".local/share/djinn/webcam-state.json"
+SOCIAL_INBOX = Path.home() / "djinn-media-inbox"
 
 # ── Logging ────────────────────────────────────────────────────────────────────
 _log_dir = Path.home() / ".local/share/djinn"
@@ -71,19 +76,27 @@ log = logging.getLogger("webcam")
 
 RECORD_DIR.mkdir(parents=True, exist_ok=True)
 SNAP_DIR.mkdir(parents=True, exist_ok=True)
+JOBS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ── Moonraker ──────────────────────────────────────────────────────────────────
 def get_print_state():
     try:
         r = requests.get(
-            f"{MOONRAKER}/printer/objects/query?print_stats",
+            f"{MOONRAKER}/printer/objects/query?print_stats&virtual_sdcard",
             timeout=5
         )
-        ps = r.json()["result"]["status"]["print_stats"]
-        return ps["state"], ps["print_duration"]
+        status = r.json()["result"]["status"]
+        ps = status["print_stats"]
+        vs = status.get("virtual_sdcard", {})
+        return (
+            ps["state"],
+            ps["print_duration"],
+            vs.get("progress", 0.0),
+            ps.get("filename", ""),
+        )
     except Exception:
-        return "unknown", 0.0
+        return "unknown", 0.0, 0.0, ""
 
 
 def gcode(script):
@@ -163,7 +176,7 @@ def write_state(d):
 class WebcamMonitor:
     def __init__(self):
         self.cap       = None
-        self.writer    = None       # cv2.VideoWriter or None
+        self.writer    = None       # cv2.VideoWriter or None (scheduled/failure)
         self.rec_end   = None       # epoch to stop scheduled recording
         self.in_fail   = False
         self.fail_dir  = None
@@ -173,6 +186,13 @@ class WebcamMonitor:
         self.t_sched   = 0.0
         self.t_burst   = 0.0
         self.mode      = "idle"
+        # Milestone clip tracking
+        self.milestones_hit  = set()
+        self.ms_writer       = None   # separate VideoWriter for milestone clips
+        self.ms_end          = None   # epoch to stop current milestone clip
+        self.ms_dir          = None   # per-job clip directory
+        self.job_filename    = ""
+        self.job_start_ts    = ""
 
     # ── Camera ─────────────────────────────────────────────────────────────────
     @staticmethod
@@ -241,6 +261,106 @@ class WebcamMonitor:
             self.rec_end = None
             log.info("Recording stopped")
 
+    # ── Milestone clips ────────────────────────────────────────────────────────
+    def _ms_start(self, pct_label: str):
+        if self.ms_writer:
+            return
+        out = self.ms_dir / f"milestone_{pct_label}.mp4"
+        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        self.ms_writer = cv2.VideoWriter(str(out), fourcc, float(FPS), (640, 480))
+        self.ms_end    = time.time() + MILESTONE_DURATION
+        log.info(f"Milestone clip → {out.name}")
+
+    def _ms_stop(self):
+        if self.ms_writer:
+            self.ms_writer.release()
+            self.ms_writer = None
+            self.ms_end    = None
+
+    def _ms_check(self, progress: float, now: float):
+        """Start a 10s clip when a milestone threshold is crossed."""
+        for m in MILESTONES:
+            label = f"{int(m * 100):03d}pct"
+            if label in self.milestones_hit:
+                continue
+            if progress >= m:
+                self.milestones_hit.add(label)
+                self._ms_stop()  # finish any in-progress milestone clip first
+                self._ms_start(label)
+                log.info(f"Milestone {label} reached ({progress:.1%})")
+                break
+
+    def _ms_concat(self):
+        """Concatenate milestone clips into social_reel.mp4 via ffmpeg."""
+        clips = sorted(self.ms_dir.glob("milestone_*.mp4"))
+        if not clips:
+            log.warning("No milestone clips to concatenate")
+            return None
+
+        concat_list = self.ms_dir / "concat.txt"
+        concat_list.write_text("\n".join(f"file '{c}'" for c in clips))
+
+        reel = self.ms_dir / "social_reel.mp4"
+        result = subprocess.run(
+            ["ffmpeg", "-y", "-f", "concat", "-safe", "0",
+             "-i", str(concat_list), "-c", "copy", str(reel)],
+            capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            log.error(f"ffmpeg concat failed: {result.stderr[-200:]}")
+            return None
+
+        log.info(f"Social reel → {reel}")
+
+        # Save job metadata alongside reel
+        meta = {
+            "filename":   self.job_filename,
+            "start_ts":   self.job_start_ts,
+            "milestones": sorted(self.milestones_hit),
+            "reel":       str(reel),
+        }
+        (self.ms_dir / "job_meta.json").write_text(json.dumps(meta, indent=2))
+
+        return reel
+
+    def _ms_on_complete(self, outcome: str):
+        """Called when print ends — finalize 100% clip, concat, notify."""
+        self._ms_stop()
+
+        if outcome != "complete":
+            log.info("Print did not complete cleanly — skipping reel")
+            return
+
+        reel = self._ms_concat()
+        if not reel:
+            return
+
+        msg = (
+            f"🎬 Print reel ready: {reel.name}\n"
+            f"Job: {self.job_filename}\n"
+            f"Clips: {len(sorted(self.ms_dir.glob('milestone_*.mp4')))}/5\n"
+            f"Add your cleanup shots and drop them in djinn-media-inbox when ready.\n"
+            f"— Djinn"
+        )
+        Thread(target=tg_text, args=(msg,), daemon=True).start()
+        Thread(target=discord_send, args=(
+            f"🎬 **Print reel ready** — `{reel.name}`\n"
+            f"Job: `{self.job_filename}` | "
+            f"{len(sorted(self.ms_dir.glob('milestone_*.mp4')))}/5 milestone clips\n"
+            f"Add your cleanup shots and drop them in `djinn-media-inbox` when ready.\n— Djinn",
+        ), daemon=True).start()
+
+    def _ms_reset(self, filename: str):
+        """Start fresh milestone tracking for a new job."""
+        self._ms_stop()
+        self.milestones_hit = set()
+        self.job_filename   = filename
+        self.job_start_ts   = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        slug = Path(filename).stem[:40] if filename else "unknown"
+        self.ms_dir = JOBS_DIR / f"{self.job_start_ts}_{slug}"
+        self.ms_dir.mkdir(parents=True, exist_ok=True)
+        log.info(f"Milestone tracking started → {self.ms_dir.name}")
+
     # ── Failure handling ───────────────────────────────────────────────────────
     def _trigger_failure(self, frame):
         if self.in_fail:
@@ -282,6 +402,7 @@ class WebcamMonitor:
 
     def _reset(self):
         self._rec_stop()
+        self._ms_stop()
         self.in_fail  = False
         self.fail_dir = None
         self.fail_cnt = 0
@@ -337,18 +458,29 @@ class WebcamMonitor:
             except Exception:
                 pass
 
-            state, duration = get_print_state()
+            state, duration, progress, filename = get_print_state()
 
             # Print started
             if state == "printing" and prev_state != "printing":
                 log.info("Print detected — visual monitoring active")
                 self.mode = "monitoring"
+                self._ms_reset(filename)
                 tg_text("🖨️ Print started — visual monitoring active on Calliope.\n— Djinn")
+
+            # Milestone clips — write frame to active milestone clip, check thresholds
+            if state == "printing":
+                if self.ms_writer:
+                    self.ms_writer.write(frame)
+                    if time.time() >= self.ms_end:
+                        self._ms_stop()
+                self._ms_check(progress, time.time())
 
             # Print ended
             if prev_state == "printing" and state not in ("printing", "paused"):
                 log.info(f"Print ended ({state})")
-                # Snap the finished piece before resetting
+                outcome = "complete" if state in ("complete", "standby") else state
+                self._ms_on_complete(outcome)
+                # Snap the finished piece
                 if frame is not None:
                     ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                     snap_dir = SNAP_DIR / f"complete_{ts}"
@@ -370,13 +502,17 @@ class WebcamMonitor:
             prev_state = state
 
             write_state({
-                "mode":        self.mode,
-                "print_state": state,
-                "duration":    round(duration, 1),
-                "fail_count":  self.fail_cnt,
-                "in_failure":  self.in_fail,
-                "recording":   self.writer is not None,
-                "updated":     datetime.now().isoformat(),
+                "mode":             self.mode,
+                "print_state":      state,
+                "duration":         round(duration, 1),
+                "progress":         round(progress, 3),
+                "job_filename":     filename,
+                "fail_count":       self.fail_cnt,
+                "in_failure":       self.in_fail,
+                "recording":        self.writer is not None,
+                "milestone_clip":   self.ms_writer is not None,
+                "milestones_hit":   sorted(self.milestones_hit),
+                "updated":          datetime.now().isoformat(),
             })
 
             if state != "printing":
