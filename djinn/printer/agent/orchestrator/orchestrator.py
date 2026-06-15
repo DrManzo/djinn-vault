@@ -127,7 +127,7 @@ def run(
 
     print(f"  Status: {state.status} | Intent: {intent}")
 
-    # ── Route to agent ────────────────────────────────────────────────────────
+    # ── Route to agent ────────────────────────────────────────────
 
     if intent == "new_design":
         state = design_gen.run(state, llm)
@@ -199,7 +199,7 @@ def approve_engrave(job_id: int, choice: int) -> ProjectState:
     return state
 
 
-# ── Status helpers ────────────────────────────────────────────────────────────
+# ── Status helpers ────────────────────────────────────────────
 
 def _status_to_intent(status: str) -> str:
     return {
@@ -249,6 +249,16 @@ def _report_variants(state: ProjectState):
     print(f"  Production: {qm.get('description', '—')}")
     print(f"    {qm.get('strength_notes', '')}")
     print(f"    → {files.get('production', '—')}")
+
+    # Support analysis output
+    for tag in ("prototype", "production"):
+        sa = files.get(f"{tag}_support", {})
+        if sa:
+            mode  = sa.get("support_mode", "?")
+            score = sa.get("risk_score", "?")
+            codes = ", ".join(sa.get("reason_codes", [])) or "clean"
+            print(f"  Support ({tag}): {mode} (risk {score}) — {codes}")
+            print(f"    {sa.get('user_message', '')}")
 
 
 def _report_doe(state: ProjectState):
