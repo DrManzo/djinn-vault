@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:99
@@ -6,9 +6,16 @@ ENV LIBGL_ALWAYS_SOFTWARE=1
 ENV MESA_GL_VERSION_OVERRIDE=4.5
 
 # ── System dependencies ────────────────────────────────────────────────────────
+# Notes on 22.04 → 24.04 package changes:
+#   - libfuse2 is now libfuse2t64 on 24.04 (transitional rename)
+#   - libasound2 is now libasound2t64 on 24.04 (transitional rename)
+#   - libxss1 dropped from Ubuntu 24.04 main; replaced by libxss1 in universe
+#     (still installable, just needs universe — enabled by default on 24.04)
+#   - libxcb-util1 renamed to libxcb-util1 (same, still present)
+#   - All other package names are unchanged
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb \
-    libfuse2 \
+    libfuse2t64 \
     libgl1 \
     libgl1-mesa-dri \
     libglib2.0-0 \
@@ -34,7 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxcb-render-util0 \
     libxcb-xinerama0 \
     libxcb-util1 \
-    libasound2 \
+    libasound2t64 \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libpango-1.0-0 \
@@ -43,6 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcups2 \
     libdrm2 \
     libgbm1 \
+    libstdc++6 \
     python3 \
     ca-certificates \
     curl \
