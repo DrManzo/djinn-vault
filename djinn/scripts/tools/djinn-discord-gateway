@@ -748,7 +748,139 @@ def dispatch(text: str, channel_ctx: str) -> str:
     # No command match — pass to model (conversation)
     return sign(ask_model(text, channel_ctx=channel_ctx))
 
-# ── Discord bot ───────────────────────────────────────────────────────────────
+# ── Order UI (buttons) ────────────────────────────────────────────────────────
+
+_PROFILE_LABELS = {
+    "standard":   "Standard  — balanced quality",
+    "production": "Production — high detail",
+    "proto":      "Draft  — fast / fit test",
+}
+_COLOR_EMOJI = {"white": "⬜", "blue": "🟦", "red": "🟥", "black": "⬛"}
+
+
+class OrderView(discord.ui.View):
+    """Three-step button flow: profile → color → confirm. Only submitter can interact."""
+
+    def __init__(self, submitter_id: int, file_url: str, filename: str, note: str = ""):
+        super().__init__(timeout=300)
+        self.submitter_id = submitter_id
+        self.file_url     = file_url
+        self.filename     = filename
+        self.note         = note
+        self.profile      = None
+        self.color        = None
+        self._build_profile_buttons()
+
+    # ── Guard ──────────────────────────────────────────────────────────────────
+    async def _guard(self, interaction: discord.Interaction) -> bool:
+        if interaction.user.id != self.submitter_id:
+            await interaction.response.send_message(
+                "This isn't your order.", ephemeral=True)
+            return False
+        return True
+
+    # ── Step 1: profile ────────────────────────────────────────────────────────
+    def _build_profile_buttons(self):
+        self.clear_items()
+        self.add_item(_ProfileBtn("Standard",   "standard",   discord.ButtonStyle.primary,   self))
+        self.add_item(_ProfileBtn("Production", "production", discord.ButtonStyle.primary,   self))
+        self.add_item(_ProfileBtn("Draft",      "proto",      discord.ButtonStyle.secondary, self))
+
+    async def _on_profile(self, interaction: discord.Interaction, profile: str):
+        if not await self._guard(interaction): return
+        self.profile = profile
+        self.clear_items()
+        for color in ("white", "blue", "red", "black"):
+            style = discord.ButtonStyle.secondary
+            self.add_item(_ColorBtn(color, style, self))
+        label = _PROFILE_LABELS[profile].split("—")[0].strip()
+        await interaction.response.edit_message(
+            content=f"✅ **{label}** — now pick your color:",
+            view=self,
+        )
+
+    # ── Step 2: color ──────────────────────────────────────────────────────────
+    async def _on_color(self, interaction: discord.Interaction, color: str):
+        if not await self._guard(interaction): return
+        self.color = color
+        self.clear_items()
+        self.add_item(_ConfirmBtn(self))
+        self.add_item(_CancelBtn(self))
+        plabel = _PROFILE_LABELS[self.profile].split("—")[0].strip()
+        clabel = f"{_COLOR_EMOJI[color]} {color.capitalize()}"
+        await interaction.response.edit_message(
+            content=(
+                f"📋 **Order summary**\n"
+                f"File:    `{self.filename}`\n"
+                f"Profile: **{plabel}**\n"
+                f"Color:   **{clabel}**\n\n"
+                f"Ready to submit?"
+            ),
+            view=self,
+        )
+
+    # ── Step 3: confirm / cancel ───────────────────────────────────────────────
+    async def _on_confirm(self, interaction: discord.Interaction):
+        if not await self._guard(interaction): return
+        self.stop()
+        await interaction.response.edit_message(
+            content="✅ Order submitted — we'll review it and be in touch.\n— Typhon's Forge",
+            view=None,
+        )
+        cmd = f"djinn-model-fetch {self.file_url!r} --profile {self.profile} --color {self.color}"
+        if self.note:
+            cmd += f" --note {self.note!r}"
+        import asyncio
+        asyncio.get_event_loop().run_in_executor(None, run_shell, cmd, 300)
+
+    async def _on_cancel(self, interaction: discord.Interaction):
+        if not await self._guard(interaction): return
+        self.stop()
+        await interaction.response.edit_message(
+            content="Order cancelled — drop your file again whenever you're ready.",
+            view=None,
+        )
+
+
+class _ProfileBtn(discord.ui.Button):
+    def __init__(self, label, profile, style, view_ref):
+        super().__init__(label=label, style=style)
+        self.profile  = profile
+        self.view_ref = view_ref
+
+    async def callback(self, interaction):
+        await self.view_ref._on_profile(interaction, self.profile)
+
+
+class _ColorBtn(discord.ui.Button):
+    def __init__(self, color, style, view_ref):
+        super().__init__(label=f"{_COLOR_EMOJI[color]} {color.capitalize()}", style=style)
+        self.color    = color
+        self.view_ref = view_ref
+
+    async def callback(self, interaction):
+        await self.view_ref._on_color(interaction, self.color)
+
+
+class _ConfirmBtn(discord.ui.Button):
+    def __init__(self, view_ref):
+        super().__init__(label="Place Order", style=discord.ButtonStyle.success)
+        self.view_ref = view_ref
+
+    async def callback(self, interaction):
+        await self.view_ref._on_confirm(interaction)
+
+
+class _CancelBtn(discord.ui.Button):
+    def __init__(self, view_ref):
+        super().__init__(label="Cancel", style=discord.ButtonStyle.danger)
+        self.view_ref = view_ref
+
+    async def callback(self, interaction):
+        await self.view_ref._on_cancel(interaction)
+
+
+# ── Discord bot ────────────────────────────────────────────────────────────────
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -778,44 +910,23 @@ async def on_message(message: discord.Message):
             _text, re.I))
         _is_dm = isinstance(message.channel, _dc.DMChannel)
 
-        # ── STL/3MF attachment — single-shot order ────────────────────────────
+        # ── STL/3MF attachment — button-driven order ──────────────────────────
         _stl_atts = [
             a for a in message.attachments
             if a.filename.lower().endswith((".stl", ".3mf"))
         ] if _is_print else []
         if _stl_atts:
-            att = _stl_atts[0]
-            profile, color, note = _parse_order_caption(_text)
-            if profile and color:
-                ack = "Got your file — we're reviewing it. We'll confirm shortly.\n— Typhon's Forge"
-            else:
-                ack = (
-                    "Got your file!\n\n"
-                    "To complete your order, include your choice with the file:\n"
-                    "```\nB white\nA blue - no rush\nC black\n```\n"
-                    "See the pinned guide for all options."
-                )
-            await message.channel.send(ack)
-            cmd = f"djinn-model-fetch {att.url!r}"
-            if profile: cmd += f" --profile {profile}"
-            if color:   cmd += f" --color {color}"
-            if note:    cmd += f" --note {note!r}"
-            import asyncio
-            asyncio.get_event_loop().run_in_executor(None, run_shell, cmd, 300)
-            return
-
-        _looks_like_profile = bool(re.match(r'^[ABCabc]\s+\S+$', _text, re.I))
-
-        if _is_print and _is_profile:
-            reply = handle_customer_profile_pick(_text, str(message.author), str(message.author.id))
-            if reply:
-                await message.channel.send(reply)
-            return
-
-        if _is_print and _looks_like_profile:
+            att  = _stl_atts[0]
+            _, _, note = _parse_order_caption(_text)
+            view = OrderView(
+                submitter_id=message.author.id,
+                file_url=att.url,
+                filename=att.filename,
+                note=note,
+            )
             await message.channel.send(
-                "Format: `A white` — profile letter + color name.\n"
-                "Colors: `white` · `blue` · `red` · `black`"
+                f"Got your file, {message.author.mention}! Choose your print profile:",
+                view=view,
             )
             return
 
