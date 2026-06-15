@@ -2,7 +2,7 @@
                       DJINN JOB-ADD MANUAL
               Print Job Queue Entry + Auto-Slice
 ================================================================================
-Version: 1.0 | Last updated: 2026-06-15 | Maintained by: Owner / Marcus
+Version: 1.1 | Last updated: 2026-06-15 | Maintained by: Owner / Marcus
 
 > Queues a print job and immediately triggers slicing. The old behavior
 > (queue only, manual slice) is still available via --no-slice.
@@ -30,7 +30,7 @@ Standard form:
 Examples:
   djinn-job-add bracket.stl
   djinn-job-add bracket.stl --profile production --material petg
-  djinn-job-add bracket.stl --profile proto --supports tree --qty 2
+  djinn-job-add bracket.stl --profile proto --supports yes --qty 2
   djinn-job-add bracket.stl --notes "customer wants 0.2mm tolerance on top face"
   djinn-job-add bracket.stl --no-slice
 
@@ -46,8 +46,8 @@ Examples:
   --material        pla | petg | abs          Filament material
                                              Default: pla
 
-  --supports        none | auto | tree        Support type
-                                             Default: none (if flag omitted)
+  --supports        yes | no                  Enable support generation
+                                             Default: no (if flag omitted)
 
   --qty             N (integer)               Number of copies
                                              Default: 1
@@ -55,8 +55,6 @@ Examples:
   --notes           "<string>"                Free-text notes attached to job
 
   --no-slice        (flag, no value)          Queue only — skip auto-slice
-
-  --cono            (flag, no value)          Mark job as cono (internal tag)
 
 ================================================================================
 3. POSITIONAL KEY=VALUE STYLE
@@ -77,7 +75,7 @@ Mixing styles in the same call is supported:
 
   profile:    production
   material:   pla
-  supports:   none
+  supports:   no
   qty:        1
 
 ================================================================================
@@ -129,7 +127,7 @@ Each job entry includes:
   - stl_path
   - profile
   - material
-  - supports
+  - supports (yes | no)
   - qty
   - notes
   - status (confirmed | slice_failed | sliced | printing | done)
