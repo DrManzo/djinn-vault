@@ -1,0 +1,439 @@
+#!/home/drmanzo/.pyenv/versions/3.11.11/bin/python3
+"""
+djinn-webcam-monitor — print failure detection + smart recording for Calliope
+
+Camera:  AKASO Brave 4 at /dev/video2
+Printer: Moonraker at 192.168.1.114:7125
+
+Recording logic:
+  IDLE:      printer not printing → no recording, no analysis
+  MONITOR:   printing → frame diff analysis every 10 s, no recording
+  SCHEDULED: every 45 min → record 5 min → back to MONITOR
+  FAILURE:   anomaly confirmed → continuous record + burst snapshots
+             + pause printer via DJINN_FAILURE_PARK + notify Telegram + Discord
+
+Failure detection: compare current frame to one from ~60 s ago (6 × 10 s checks).
+If >22% of pixels shifted by >30 intensity units across 3 consecutive checks → alert.
+Warmup: first 5 min of print skipped to let the bed/brim settle.
+"""
+
+import cv2
+import json
+import logging
+import os
+import re
+import shutil
+import signal
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+from threading import Thread
+
+import requests
+
+# ── Config ─────────────────────────────────────────────────────────────────────
+CAMERA_DEVICE_NAME = "Brave"          # partial match in udevadm ID_MODEL
+CAMERA_INDEX       = 2               # fallback if discovery fails
+MOONRAKER          = "http://192.168.1.114:7125"
+TG_TOKEN           = "7962428973:AAHzCibu8E0RDDaRF3eHGA7WcOEqMbypOVI"
+TG_CHAT            = 7620067588
+DISCORD_TOKEN      = "MTUwNjI0OTIzMTY4ODUzNjE1NA.GN4BcP.jtJaXkhHHH7AOdohhwRKIuLOLadP4RJUx61K2Y"
+DISCORD_CHANNEL    = 1507882513891065876  # #3d-printing
+
+FPS                = 30
+MONITOR_INTERVAL   = 10.0    # seconds between frame analysis
+SCHEDULED_INTERVAL = 2700    # 45 min between scheduled recordings
+SCHEDULED_DURATION = 300     # 5 min of scheduled recording
+BURST_INTERVAL     = 10      # seconds between burst snapshots during failure
+WARMUP_DURATION    = 300     # 5 min before enabling failure detection
+DIFF_THRESHOLD     = 0.22    # fraction of pixels that must change to flag
+CONFIRM_COUNT      = 3       # consecutive bad checks before triggering alert
+HISTORY_DEPTH      = 6       # rolling frame window (~60 s of checks)
+
+RECORD_DIR  = Path.home() / "Videos" / "print-monitor"
+SNAP_DIR    = RECORD_DIR / "snapshots"
+STATE_FILE  = Path.home() / ".local/share/djinn/webcam-state.json"
+
+# ── Logging ────────────────────────────────────────────────────────────────────
+_log_dir = Path.home() / ".local/share/djinn"
+_log_dir.mkdir(parents=True, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(_log_dir / "webcam-monitor.log"),
+        logging.StreamHandler(sys.stdout),
+    ],
+)
+log = logging.getLogger("webcam")
+
+RECORD_DIR.mkdir(parents=True, exist_ok=True)
+SNAP_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# ── Moonraker ──────────────────────────────────────────────────────────────────
+def get_print_state():
+    try:
+        r = requests.get(
+            f"{MOONRAKER}/printer/objects/query?print_stats",
+            timeout=5
+        )
+        ps = r.json()["result"]["status"]["print_stats"]
+        return ps["state"], ps["print_duration"]
+    except Exception:
+        return "unknown", 0.0
+
+
+def gcode(script):
+    try:
+        r = requests.post(
+            f"{MOONRAKER}/printer/gcode/script",
+            json={"script": script},
+            timeout=10
+        )
+        return r.ok
+    except Exception as e:
+        log.warning(f"gcode {script!r}: {e}")
+        return False
+
+
+# ── Notifications ──────────────────────────────────────────────────────────────
+def tg_text(text):
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+            json={"chat_id": TG_CHAT, "text": text},
+            timeout=10
+        )
+    except Exception as e:
+        log.warning(f"tg_text: {e}")
+
+
+def tg_photo(path, caption):
+    try:
+        with open(path, "rb") as f:
+            requests.post(
+                f"https://api.telegram.org/bot{TG_TOKEN}/sendPhoto",
+                data={"chat_id": TG_CHAT, "caption": caption},
+                files={"photo": f},
+                timeout=30
+            )
+    except Exception as e:
+        log.warning(f"tg_photo: {e}")
+
+
+def discord_send(content, photo_path=None):
+    h = {"Authorization": f"Bot {DISCORD_TOKEN}"}
+    url = f"https://discord.com/api/v10/channels/{DISCORD_CHANNEL}/messages"
+    try:
+        if photo_path:
+            with open(photo_path, "rb") as f:
+                requests.post(url, headers=h, data={"content": content},
+                              files={"file": ("snapshot.jpg", f, "image/jpeg")},
+                              timeout=30)
+        else:
+            requests.post(url, headers={**h, "Content-Type": "application/json"},
+                          json={"content": content}, timeout=10)
+    except Exception as e:
+        log.warning(f"discord_send: {e}")
+
+
+# ── Vision ─────────────────────────────────────────────────────────────────────
+def frame_diff(f1, f2):
+    """Return fraction of pixels that changed by >30 intensity units."""
+    g1 = cv2.cvtColor(f1, cv2.COLOR_BGR2GRAY)
+    g2 = cv2.cvtColor(f2, cv2.COLOR_BGR2GRAY)
+    diff = cv2.absdiff(g1, g2)
+    _, thresh = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)
+    total = thresh.shape[0] * thresh.shape[1]
+    return cv2.countNonZero(thresh) / total
+
+
+# ── State file ─────────────────────────────────────────────────────────────────
+def write_state(d):
+    try:
+        STATE_FILE.write_text(json.dumps(d, indent=2))
+    except Exception:
+        pass
+
+
+# ── Monitor ────────────────────────────────────────────────────────────────────
+class WebcamMonitor:
+    def __init__(self):
+        self.cap       = None
+        self.writer    = None       # cv2.VideoWriter or None
+        self.rec_end   = None       # epoch to stop scheduled recording
+        self.in_fail   = False
+        self.fail_dir  = None
+        self.history   = []         # rolling frame window
+        self.fail_cnt  = 0
+        self.t_check   = 0.0
+        self.t_sched   = 0.0
+        self.t_burst   = 0.0
+        self.mode      = "idle"
+
+    # ── Camera ─────────────────────────────────────────────────────────────────
+    @staticmethod
+    def _find_camera_index():
+        """Find the AKASO by scanning udevadm — returns first capture-capable node."""
+        for i in range(10):
+            dev = f"/dev/video{i}"
+            if not os.path.exists(dev):
+                continue
+            try:
+                out = subprocess.run(
+                    ["udevadm", "info", dev],
+                    capture_output=True, text=True, timeout=3
+                ).stdout
+                if CAMERA_DEVICE_NAME in out:
+                    # Use even-numbered node (capture), skip odd (metadata)
+                    return i
+            except Exception:
+                continue
+        return CAMERA_INDEX  # fallback
+
+    def _open(self):
+        idx = self._find_camera_index()
+        log.info(f"Trying /dev/video{idx}")
+        cap = cv2.VideoCapture(idx, cv2.CAP_V4L2)
+        if not cap.isOpened():
+            cap.release()
+            log.error(f"Cannot open /dev/video{idx}")
+            return False
+        self.cap = cap
+        # Give USB camera time to stabilize before first VIDIOC_REQBUFS
+        time.sleep(1.5)
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        self.cap.set(cv2.CAP_PROP_FPS, FPS)
+        self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 2)  # small buffer → faster signal response
+        # Drain stale frames from buffer
+        for _ in range(5):
+            self.cap.read()
+        log.info(f"Camera /dev/video{idx} ready")
+        return True
+
+    def _close(self):
+        if self.cap:
+            self.cap.release()
+            self.cap = None
+        if self.writer:
+            self.writer.release()
+            self.writer = None
+        log.info("Camera released")
+
+    # ── Recording ──────────────────────────────────────────────────────────────
+    def _rec_start(self, label):
+        if self.writer:
+            return
+        ts  = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        out = RECORD_DIR / f"{ts}_{label}.mp4"
+        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+        self.writer = cv2.VideoWriter(str(out), fourcc, float(FPS), (640, 480))
+        log.info(f"Recording → {out.name}")
+
+    def _rec_stop(self):
+        if self.writer:
+            self.writer.release()
+            self.writer = None
+            self.rec_end = None
+            log.info("Recording stopped")
+
+    # ── Failure handling ───────────────────────────────────────────────────────
+    def _trigger_failure(self, frame):
+        if self.in_fail:
+            return
+        self.in_fail = True
+        self.mode    = "failure"
+        log.warning("FAILURE CONFIRMED — executing response")
+
+        ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.fail_dir = RECORD_DIR / f"failure_{ts}"
+        self.fail_dir.mkdir(parents=True, exist_ok=True)
+
+        snap = self.fail_dir / "trigger.jpg"
+        cv2.imwrite(str(snap), frame)
+
+        # Start continuous recording (no end time)
+        self._rec_stop()
+        self._rec_start("failure")
+
+        # Park the printer
+        ok = gcode("DJINN_FAILURE_PARK")
+        log.info(f"DJINN_FAILURE_PARK: {'OK' if ok else 'FAILED — check printer.cfg'}")
+
+        caption = (
+            "⚠️ Print failure detected on Calliope.\n"
+            "Printer paused — head parked clear of plate.\n"
+            "Check print, then resume or cancel job.\n"
+            "— Djinn"
+        )
+        Thread(target=tg_photo, args=(snap, caption), daemon=True).start()
+        Thread(
+            target=discord_send,
+            args=("⚠️ **Print failure detected** — Calliope paused, head parked.\nCheck print and confirm recovery or cancel.\n— Djinn",),
+            kwargs={"photo_path": snap},
+            daemon=True
+        ).start()
+
+        self.t_burst = time.time()
+
+    def _reset(self):
+        self._rec_stop()
+        self.in_fail  = False
+        self.fail_dir = None
+        self.fail_cnt = 0
+        self.history.clear()
+        self.t_sched  = 0.0
+        self.mode     = "idle"
+        log.info("Monitor reset")
+
+    # ── Main loop ──────────────────────────────────────────────────────────────
+    def run(self):
+        log.info("djinn-webcam-monitor starting")
+
+        # Wait for camera — retry every 30s silently. No Telegram spam when unplugged.
+        while not self._open():
+            log.info("Camera not available — retrying in 30 s (is AKASO plugged in?)")
+            time.sleep(30)
+
+        # Only notify once camera is actually confirmed open
+        tg_text("👁️ Webcam monitor online — Calliope watching active.\n— Djinn")
+
+        prev_state = "standby"
+
+        while True:
+            ret, frame = self.cap.read()
+            if not ret:
+                log.warning("Frame read failed — reopening camera in 3 s")
+                self._close()
+                time.sleep(3)
+                self._open()
+                continue
+
+            now = time.time()
+
+            # Write every frame to recorder when active
+            if self.writer:
+                self.writer.write(frame)
+
+            # End scheduled recording on timer
+            if self.rec_end and now >= self.rec_end and not self.in_fail:
+                self._rec_stop()
+                self.t_sched = now
+                self.mode    = "monitoring"
+                log.info("Scheduled recording done — back to monitoring")
+
+            # Interval gate for analysis
+            if now - self.t_check < MONITOR_INTERVAL:
+                continue
+            self.t_check = now
+
+            # Keep a current frame on disk for on-demand snap requests
+            try:
+                cv2.imwrite(str(SNAP_DIR / "latest.jpg"), frame)
+            except Exception:
+                pass
+
+            state, duration = get_print_state()
+
+            # Print started
+            if state == "printing" and prev_state != "printing":
+                log.info("Print detected — visual monitoring active")
+                self.mode = "monitoring"
+                tg_text("🖨️ Print started — visual monitoring active on Calliope.\n— Djinn")
+
+            # Print ended
+            if prev_state == "printing" and state not in ("printing", "paused"):
+                log.info(f"Print ended ({state})")
+                # Snap the finished piece before resetting
+                if frame is not None:
+                    ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                    snap_dir = SNAP_DIR / f"complete_{ts}"
+                    snap_dir.mkdir(parents=True, exist_ok=True)
+                    snap = snap_dir / "finished.jpg"
+                    cv2.imwrite(str(snap), frame)
+                    caption = "✅ Print complete on Calliope.\n— Djinn"
+                    Thread(target=tg_photo, args=(snap, caption), daemon=True).start()
+                    Thread(
+                        target=discord_send,
+                        args=("✅ **Print complete** — Calliope is done.\n— Djinn",),
+                        kwargs={"photo_path": snap},
+                        daemon=True,
+                    ).start()
+                else:
+                    tg_text("✅ Print finished — webcam monitor idle.\n— Djinn")
+                self._reset()
+
+            prev_state = state
+
+            write_state({
+                "mode":        self.mode,
+                "print_state": state,
+                "duration":    round(duration, 1),
+                "fail_count":  self.fail_cnt,
+                "in_failure":  self.in_fail,
+                "recording":   self.writer is not None,
+                "updated":     datetime.now().isoformat(),
+            })
+
+            if state != "printing":
+                continue
+
+            # ── Active failure: burst snapshots ────────────────────────────
+            if self.in_fail and self.fail_dir:
+                if now - self.t_burst >= BURST_INTERVAL:
+                    ts = datetime.now().strftime("%H-%M-%S")
+                    cv2.imwrite(str(self.fail_dir / f"burst_{ts}.jpg"), frame)
+                    self.t_burst = now
+                continue
+
+            # ── Failure detection (post-warmup) ────────────────────────────
+            if duration > WARMUP_DURATION:
+                self.history.append(frame.copy())
+                if len(self.history) > HISTORY_DEPTH:
+                    self.history.pop(0)
+
+                if len(self.history) >= HISTORY_DEPTH:
+                    diff = frame_diff(self.history[0], frame)
+                    if diff > DIFF_THRESHOLD:
+                        self.fail_cnt += 1
+                        log.warning(f"Anomaly {diff:.1%} — count {self.fail_cnt}/{CONFIRM_COUNT}")
+                        cv2.imwrite(str(SNAP_DIR / f"anomaly_{int(now)}.jpg"), frame)
+                    else:
+                        self.fail_cnt = max(0, self.fail_cnt - 1)
+
+                    if self.fail_cnt >= CONFIRM_COUNT:
+                        self._trigger_failure(frame)
+
+            # ── Scheduled recording cycle ──────────────────────────────────
+            if not self.writer and (now - self.t_sched) >= SCHEDULED_INTERVAL:
+                log.info("Starting scheduled 5-min recording")
+                self.mode    = "recording"
+                self._rec_start("scheduled")
+                self.rec_end = now + SCHEDULED_DURATION
+
+
+def main():
+    m = WebcamMonitor()
+
+    def _shutdown(signum, _frame):
+        log.info(f"Signal {signum} — shutting down cleanly")
+        m._close()
+        sys.exit(0)
+
+    signal.signal(signal.SIGTERM, _shutdown)
+    signal.signal(signal.SIGINT, _shutdown)
+
+    try:
+        m.run()
+    except KeyboardInterrupt:
+        log.info("Stopped")
+    finally:
+        m._close()
+
+
+if __name__ == "__main__":
+    main()

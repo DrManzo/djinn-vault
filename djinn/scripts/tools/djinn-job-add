@@ -1,0 +1,85 @@
+#!/home/drmanzo/.venvs/djinn-orchestrator/bin/python3.11
+"""
+djinn-job-add <model.stl> [profile=proto|production|quality] [material=pla|petg|abs]
+              [color=blue] [supports=yes|no] [qty=1] [notes="..."]
+
+Adds a marked STL to the print queue as a confirmed job ready for slicing.
+Prints the job_id so you can immediately run: djinn-model-slice <N>
+"""
+
+import sys, json, pathlib, datetime, argparse
+
+QUEUE_FILE = pathlib.Path.home() / ".local/share/djinn/print-queue.json"
+
+VALID_PROFILES  = {"proto", "production", "quality"}
+VALID_MATERIALS = {"pla", "petg", "abs"}
+
+
+def load_queue():
+    if QUEUE_FILE.exists():
+        return json.loads(QUEUE_FILE.read_text())
+    return {"next_id": 1, "jobs": [], "archived": []}
+
+
+def save_queue(q):
+    QUEUE_FILE.write_text(json.dumps(q, indent=2))
+
+
+def main():
+    ap = argparse.ArgumentParser(
+        prog="djinn-job-add",
+        description="Add an STL to the print queue as a confirmed job",
+    )
+    ap.add_argument("stl", help="Path to the (marked) STL file")
+    ap.add_argument("--profile",  default="production", choices=sorted(VALID_PROFILES),  help="Print tier")
+    ap.add_argument("--material", default="pla",        choices=sorted(VALID_MATERIALS), help="Filament type")
+    ap.add_argument("--color",    default="unspecified", help="Filament color (label only)")
+    ap.add_argument("--supports", default="no",          choices=["yes", "no"],          help="Enable slicer supports")
+    ap.add_argument("--qty",      type=int, default=1,   help="Number of copies")
+    ap.add_argument("--notes",    default="",            help="Free-text notes")
+
+    # Also accept key=value style (Djinn convention)
+    positional_kv = [a for a in sys.argv[1:] if "=" in a and not a.startswith("--")]
+    clean_argv = [a for a in sys.argv[1:] if "=" not in a or a.startswith("--")]
+    for kv in positional_kv:
+        k, _, v = kv.partition("=")
+        clean_argv += [f"--{k.lower()}", v]
+
+    args = ap.parse_args(clean_argv)
+
+    stl = pathlib.Path(args.stl).expanduser().resolve()
+    if not stl.exists():
+        print(f"Error: STL not found: {stl}", file=sys.stderr)
+        sys.exit(1)
+
+    q      = load_queue()
+    job_id = q["next_id"]
+
+    job = {
+        "id":               job_id,
+        "model_path":       str(stl),
+        "piece":            stl.stem,
+        "status":           "confirmed",
+        "customer_profile": args.profile,
+        "filament_type":    args.material.lower(),
+        "customer_color":   args.color,
+        "supports_needed":  args.supports in ("yes", "true", "1"),
+        "qty":              args.qty,
+        "added":            datetime.date.today().isoformat(),
+        "notes":            args.notes,
+    }
+
+    q["jobs"].append(job)
+    q["next_id"] = job_id + 1
+    save_queue(q)
+
+    print(f"Job #{job_id} added — {stl.name}")
+    print(f"  Profile:  {args.profile}  |  Material: {args.material.upper()}  |  Color: {args.color}")
+    print(f"  Supports: {args.supports}  |  Qty: {args.qty}")
+    if args.notes:
+        print(f"  Notes:    {args.notes}")
+    print(f"\nNext:  djinn-model-slice {job_id}")
+
+
+if __name__ == "__main__":
+    main()

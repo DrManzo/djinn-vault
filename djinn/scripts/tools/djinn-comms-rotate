@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# djinn-comms-rotate — Rotate a COMMS/CHECKPOINTS/PIPELINE file to archive
+# Usage: djinn-comms-rotate <file> <archive-name>
+# Example: djinn-comms-rotate CHECKPOINTS.md CHECKPOINTS-archive-2026-W24.md
+
+set -euo pipefail
+
+FILE="$1"
+ARCHIVE="$2"
+ARCHIVE_DIR="$(dirname "$FILE")/archive"
+
+if [[ ! -f "$FILE" ]]; then
+    echo "File not found: $FILE"
+    exit 1
+fi
+
+mkdir -p "$ARCHIVE_DIR"
+cp "$FILE" "$ARCHIVE_DIR/$ARCHIVE"
+
+# Preserve last 3 lines as continuity header in new live file
+tail -3 "$FILE" > "${FILE}.tmp"
+{
+    echo ""
+    echo "<!-- rotated $(date -u +%Y-%m-%dT%H:%M:%SZ) — archive: archive/$ARCHIVE -->"
+} >> "${FILE}.tmp"
+mv "${FILE}.tmp" "$FILE"
+
+echo "Rotated $(basename "$FILE") → archive/$ARCHIVE"

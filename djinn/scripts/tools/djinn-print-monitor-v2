@@ -1,0 +1,111 @@
+#!/bin/bash
+# djinn-print-monitor-v2 — print failure detector + recovery checkpoint
+# Runs as a systemd timer or cron job. Checks Callie every 60s.
+# On failure: logs to FAILURE-LOG.md, creates recovery checkpoint.
+#
+# Install: systemd --user enable djinn-print-monitor
+
+set -euo pipefail
+
+MOONRAKER="http://192.168.1.114:7125"
+BACKUP_DIR="$HOME/printer-files/recovery"
+FAILURES="$HOME/Obsidian/djinn/printer/failures"
+LOG="$FAILURES/FAILURE-LOG.md"
+STATE_FILE="$BACKUP_DIR/state.json"
+ACTIVE_FILE="$BACKUP_DIR/active.json"
+
+mkdir -p "$BACKUP_DIR" "$FAILURES"
+
+# Check if printer is reachable
+PRINTER_OK=$(curl -s --max-time 5 "$MOONRAKER/printer/info" 2>/dev/null | \
+    python3 -c "import sys,json; d=json.load(sys.stdin); print(d['result']['state'])" 2>/dev/null || echo "unreachable")
+
+if [ "$PRINTER_OK" = "unreachable" ]; then
+    echo "Moonraker unreachable — no action"
+    exit 0
+fi
+
+# Get print state
+DATA=$(curl -s --max-time 5 "$MOONRAKER/printer/objects/query?print_stats&display_status" 2>/dev/null || echo '{}')
+STATE=$(echo "$DATA" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+try:
+    s=d['result']['status']['print_stats']
+    disp=d['result']['status']['display_status']
+    print(json.dumps({
+        'state': s['state'],
+        'file': s.get('filename',''),
+        'progress': disp.get('progress',0),
+        'duration': s.get('print_duration',0),
+        'message': s.get('message','')
+    }))
+except: print('{\"state\":\"error\"}')
+")
+
+CURRENT_STATE=$(echo "$DATA" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('result',{}).get('status',{}).get('print_stats',{}).get('state','error'))" 2>/dev/null)
+
+# Load previous state
+PREV_STATE="idle"
+PREV_FILE=""
+if [ -f "$STATE_FILE" ]; then
+    PREV_STATE=$(python3 -c "import json; d=json.load(open('$STATE_FILE')); print(d.get('state','idle'))" 2>/dev/null || echo "idle")
+    PREV_FILE=$(python3 -c "import json; d=json.load(open('$STATE_FILE')); print(d.get('file',''))" 2>/dev/null || echo "")
+fi
+
+# Save current state
+echo "$DATA" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+try:
+    s=d['result']['status']['print_stats']
+    disp=d['result']['status']['display_status']
+    state = {'state': s['state'], 'file': s.get('filename',''), 'progress': disp.get('progress',0)}
+except: state = {'state':'error'}
+json.dump(state, open('$STATE_FILE','w'))
+" 2>/dev/null || true
+
+# Detect state transitions
+TS=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+# Printing → Standby/Error: failure detected
+if [ "$PREV_STATE" = "printing" ] && [ "$CURRENT_STATE" != "printing" ] && [ "$CURRENT_STATE" != "paused" ]; then
+    PREV_PROGRESS=$(python3 -c "import json; d=json.load(open('$STATE_FILE')); print(d.get('progress',0))" 2>/dev/null || echo "0")
+    PCT=$(echo "$PREV_PROGRESS * 100" | bc -l 2>/dev/null || echo "0")
+    
+    echo "=== FAILURE DETECTED ===" | tee -a "$LOG"
+    echo "  File: $PREV_FILE" | tee -a "$LOG"
+    echo "  Progress: ${PCT%.*}%" | tee -a "$LOG"
+    echo "  Transition: $PREV_STATE → $CURRENT_STATE" | tee -a "$LOG"
+    echo "  Time: $TS" | tee -a "$LOG"
+    
+    # Log to failure log
+    cat >> "$LOG" << LOGEOF
+
+### $(date -u +"%Y-%m-%d") — $PREV_FILE (auto-detected)
+**Failure Type:** Print stopped prematurely
+**State Transition:** $PREV_STATE → $CURRENT_STATE
+**Progress:** ${PCT%.*}%
+**Timestamp:** $TS
+**Recovery Backup:** \`$VAULT_GCODE/\`
+**Resolution:** Run \`djinn-print-recover\` to re-queue from vault backup
+LOGEOF
+    
+    echo "  Logged to: $LOG"
+    
+    # Clear active print tracking
+    echo '{}' > "$ACTIVE_FILE"
+fi
+
+# Printing → error message detected
+if [ "$CURRENT_STATE" = "error" ]; then
+    echo "=== ERROR STATE ===" | tee -a "$LOG"
+    MSG=$(echo "$DATA" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+print(d.get('result',{}).get('status',{}).get('print_stats',{}).get('message','unknown'))
+" 2>/dev/null)
+    echo "  Message: $MSG" | tee -a "$LOG"
+fi
+
+echo "State: $CURRENT_STATE | File: $PREV_FILE"

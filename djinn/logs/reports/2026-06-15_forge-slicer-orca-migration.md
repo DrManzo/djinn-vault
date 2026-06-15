@@ -1,6 +1,6 @@
 ---
 title: Session Report — Forge-Slicer Migration to Orca Slicer
-agent: Claude
+agents: [Marcus, Salomon, Claude]
 date: 2026-06-15
 tags: [djinn, report, forge-slicer, orca-slicer]
 related: [[build-log]] | [[decision-log]] | [[TASK-forge-slicer-glbc-fix]]
@@ -9,21 +9,23 @@ related: [[build-log]] | [[decision-log]] | [[TASK-forge-slicer-glbc-fix]]
 # Session Report — Forge-Slicer Migration to Orca Slicer
 
 **Date:** 2026-06-14
-**Agent:** Claude
+**Agents:** Marcus + Salomon + Claude
 **Session type:** Debug + Build
-**Trigger:** CrealityPrint segfault on `--slice 0` in Docker container
+**Trigger:** `djinn-model-slice 3` failing — CrealityPrint exiting with code 127 inside Docker container
 
 ---
 
 ## Summary
 
-CrealityPrint's CLI slicing (`--slice 0`) is broken in ALL v6+ Linux builds (v6.1.2 through v7.1.1) with a null pointer dereference in `Slic3r::GUI::PartPlate::set_shape`. v5.1.7 has no headless CLI. After version bisection, Orca Slicer v2.3.2 was installed as the forge-slicer backend. It slices reliably via CLI with exit 0, no crashes.
+Three-agent diagnosis. Marcus identified the GLIBC mismatch (ubuntu:22.04 → GLIBC 2.35, CrealityPrint v7.1.1 requires GLIBC 2.38) and wrote the Dockerfile fix (ubuntu:24.04 + package renames). Salomon rebuilt and validated the container. The rebuild cleared the linker error but exposed a deeper application-level segfault: null pointer dereference in `Slic3r::GUI::PartPlate::set_shape` on `--slice 0` — present in all v6+ Linux builds (v6.1.2–v7.1.1), unrelated to GLIBC. Claude version-bisected all available builds, confirmed the crash is systemic, and made the call to abandon CrealityPrint. Orca Slicer v2.3.2 installed as replacement — slices reliably via CLI, exit 0, no crashes.
 
 ---
 
 ## What Was Built or Changed
 
-- **Root-caused** CrealityPrint segfault: null dereference at offset 0x9d8 in `PartPlate::set_shape`, triggered by `--slice 0` on all machines with `support_multi_bed_types: 1`. Present in every v6+ Linux build.
+- **Marcus** diagnosed GLIBC mismatch (ubuntu:22.04 → GLIBC 2.35 vs CrealityPrint's GLIBC 2.38 requirement); wrote Dockerfile fix: base bump to ubuntu:24.04, `libfuse2` → `libfuse2t64`, `libasound2` → `libasound2t64`. See `djinn/research/marcus/TASK-forge-slicer-glibc-fix.md`.
+- **Salomon** rebuilt Docker image on ubuntu:24.04 and validated linker resolution.
+- **Claude** ran version bisection post-rebuild; confirmed null dereference at offset 0x9d8 in `PartPlate::set_shape` triggered by `--slice 0` across v6.1.2–v7.1.1 — systemic, unrelated to GLIBC. Made the call to abandon CrealityPrint.
 - **Installed** Orca Slicer v2.3.2: extracted AppImage to `/opt/orca-slicer/`, symlinked to `/usr/local/bin/orca-slicer`
 - **Rewrote** `slice.sh`: removed Docker dependency, calls Orca Slicer directly on host
 - **Deprecated** Docker-based forge-slicer pipeline: `Dockerfile`, `entrypoint.py` still in vault but obsolete
@@ -84,4 +86,4 @@ CrealityPrint's CLI slicing (`--slice 0`) is broken in ALL v6+ Linux builds (v6.
 
 ---
 
-*— Claude, 2026-06-14*
+*— Marcus (GLIBC diagnosis + Dockerfile fix), Salomon (rebuild + validation), Claude (version bisection + Orca migration) — 2026-06-14*
