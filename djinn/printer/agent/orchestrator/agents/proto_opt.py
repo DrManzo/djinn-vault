@@ -5,6 +5,7 @@ Outputs two SCAD files and renders both to STL.
 import json, pathlib, re, subprocess
 from ..llm import LLM
 from ..project_state import ProjectState
+from . import support_analysis
 
 MODELS_DIR = pathlib.Path.home() / "printer-files/models"
 
@@ -96,8 +97,14 @@ Generate prototype-light and production-ready variants."""
     base = scad_path.stem
     files = {}
 
+    material = state.brief.get("material", "pla")
+    production_analysis = None
     render_errors = []
-    for tag, match in [("prototype", proto_match), ("production", prod_match)]:
+
+    for tag, match, profile_name in [
+        ("prototype",  proto_match, "proto"),
+        ("production", prod_match,  "production"),
+    ]:
         code = match.group(1) if match else current_code
         scad_out = MODELS_DIR / f"{base}_{tag}.scad"
         scad_out.write_text(code)
@@ -108,6 +115,23 @@ Generate prototype-light and production-ready variants."""
             size_kb = stl_out.stat().st_size // 1024
             print(f"    → {tag} STL: {stl_out.name} ({size_kb}KB)")
             files[tag] = str(stl_out)
+
+            # ── Support analysis ───────────────────────────────────────
+            try:
+                sa = support_analysis.analyze(
+                    stl_out,
+                    material=material,
+                    profile=profile_name,
+                )
+                files[tag + "_support"] = sa
+                mode  = sa["support_mode"]
+                score = sa["risk_score"]
+                codes = ", ".join(sa["reason_codes"]) or "clean"
+                print(f"    → {tag} support: {mode} (risk {score}) — {codes}")
+                if tag == "production":
+                    production_analysis = sa
+            except Exception as exc:
+                print(f"    ⚠ support_analysis failed for {tag}: {exc}")
         else:
             tail = stderr[-400:] if len(stderr) > 400 else stderr
             print(f"    → {tag} render failed — SCAD: {scad_out.name}")
@@ -121,6 +145,11 @@ Generate prototype-light and production-ready variants."""
             "\n\nFix the source SCAD and retry. Check: all called modules are defined in the file; "
             "no undefined helpers like fillet_all(); top-level call only uses defined modules."
         )
+
+    # Use production analysis to set state-level support fields
+    if production_analysis is not None:
+        state.supports_needed = production_analysis["supports_recommended"]
+        state.support_mode    = production_analysis["support_mode"]
 
     state.variants = {**variant_meta, "files": files}
     state.status = "doe_opt"
