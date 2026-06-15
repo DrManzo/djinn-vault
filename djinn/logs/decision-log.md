@@ -109,3 +109,6 @@ the guard. Metrics represent meaningful system state change.
 **Why:** The hook fires at push time and doesn't have access to the calling agent's identity. The calling script knows exactly which agent it is. Env var propagation through the git→hook→gateway chain works cleanly and requires no hook changes.
 
 *— Claude, 2026-06-14*
+
+## 2026-06-14 — Migrate forge-slicer to Orca Slicer
+- CrealityPrint v6+ `--slice 0` segfaults on all printers with `support_multi_bed_types: 1` — confirmed null deref in `PartPlate::set_shape` across 7 versions
