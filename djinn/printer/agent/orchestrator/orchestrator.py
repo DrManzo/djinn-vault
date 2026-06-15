@@ -101,6 +101,8 @@ def run(
             state.engraving_request = engrave_request
         elif edit_request:
             intent = "edit_design"
+        elif auto_advance:
+            intent = "auto"  # rely solely on state.status routing; skip LLM classifier
         else:
             intent_raw = classify(user_input, llm)["intent"]
             intent = intent_raw if intent_raw != "unknown" else _status_to_intent(state.status)
@@ -163,13 +165,14 @@ def run(
         if not auto_advance:
             return state
 
-    if intent == "plate" or (auto_advance and state.status == "plate_nest"):
+    _pre_plate_status = state.status
+    if intent == "plate" or (auto_advance and _pre_plate_status == "plate_nest"):
         state = plate_nest.run(state, plate_items)
         state.save()
         if not auto_advance:
             return state
 
-    if intent == "price" or (auto_advance and state.status == "plate_nest"):
+    if intent == "price" or (auto_advance and _pre_plate_status == "plate_nest"):
         state = price.run(state)
         state.save()
         _report_price(state)
