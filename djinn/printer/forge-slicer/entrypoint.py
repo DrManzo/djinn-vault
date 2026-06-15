@@ -21,6 +21,7 @@ def parse_args():
     p.add_argument("--filament", required=True, help="Path to filament profile JSON")
     p.add_argument("--output", required=True, help="Output directory for gcode")
     p.add_argument("--supports", default="no", choices=["yes", "no"], help="Enable supports")
+    p.add_argument("--support-type", default="normal", choices=["normal", "tree"], help="Support structure type")
     return p.parse_args()
 
 
@@ -150,6 +151,9 @@ def main():
         "--outputdir", args.output,
         args.stl,
     ]
+
+    if args.supports == "yes":
+        cmd += ["--enable-support", "1", "--support-type", args.support_type]
 
     try:
         proc = subprocess.run(
