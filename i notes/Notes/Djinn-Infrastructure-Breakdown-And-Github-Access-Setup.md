@@ -3,7 +3,7 @@ tags:
   - technology/djinn-infrastructure/systems
   - technology/djinn-infrastructure/services
   - technology/djinn-infrastructure/cli-tools
-  - 3d-printing/design
+  - 3d-printing/calibration/cube
 ---
 
 ---
@@ -80,5 +80,6 @@ The Djinn infrastructure is a complex setup designed to manage various aspects o
 - [https://github.com/DrManzo/typhons-cyber-forge.git](https://github.com/DrManzo/typhons-cyber-forge.git)
 
 ## Related
-- [[Djinn-System-Overview]] — Overview of the Djinn system.
-- [[3d-printing/models/ender-3-v3-plus]] — Information on Ender-3 V3 Plus printer model.
+- [[2026-06-01_github-look-into-the-djinn-vault-you-should-have-access-and-tell-me-wh]] — access-setup
+- [[Djinn-3d-Printer-Overview-And-Puffco-Proxy-Quad]] — printer-overview
+- [[35-Forge-Upgrades-For-Ender-3v3-Plus]] — printer-upgrades

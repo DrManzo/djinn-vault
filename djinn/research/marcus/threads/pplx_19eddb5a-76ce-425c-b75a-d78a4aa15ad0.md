@@ -2,20 +2,49 @@
 title: "Hey Marcus, are you?"
 source: perplexity-pro
 url: https://www.perplexity.ai/search/19eddb5a-76ce-425c-b75a-d78a4aa15ad0
-date: 2026-06-01
+date: 2026-06-14
 tags:
-  - cs/architecture/design
-  - cs/cli-apps
-  - personal/communication
-  - business/product-development
+  - cs/computer/artifacts
+  - cs/computer/history
+  - cs/computer/spaces
+  - cs/computer/customize
 ---
 
 # Hey Marcus, are you?
 
+New
+⌃I
+Computer
+Spaces
+Artifacts
+Customize
+History
+do a deep search for profiles that are efficent and great to set on the creality sclicer for , proto
+i need 35 3d printing projects that are total upgrades to the forge and to the make conent and focus
+Look in the djinn vault and tell me what is the math behind all of this because someone is asking me
+Which local models make sense for OpenClaw on 8 to 16 GB RAM and a USB-portable setup? Research the
+Hey Marcus, are you?
+look into this repo i give you full access and see how we cna bush it to be used oin myiphone https:
+what do you think of this for djinn Runtime Directory: ~/.local/share/hellhound/ hellhound/
+how do i get this One thing you need to supply: a real firebase-service-account.json in secrets/ bef
+Look into the Djinn Vault and and we Following the same as the other works spaces or departement lik
+Research how small-scale print operations handle queue management, filament tracking, and print rec
+i wanat you to make a virtual copy of my ender 3v3 plus that i can use to run tests on do all of th
+look deep into the Dvinn Vault in Github and find the the top 20 things that we can change today tha
+in the djinn vault in github the telegram bug hunter keeps shooting marcus sync errors
+I asked gemini this" https://github.com/DrManzo/djinn-vault, i need you to first go throught thtis a
+https://math.mit.edu/~djk/calculus_beginners/chapter00/section02.html
+look into djin vault and look at the stats for the Tablet and build a complete Development Tabelt th
+turn this into a qa engineer resume Javier Manzo-Ramos Rialto, CA 92377 manzoramosjavier@gmail.com
+i need to make an ap for djinn that will, take a picture with many die for dnd , and add s them up f
+Go to the Djinn Vault on @GitHub and find the read the files to see how we communicatre here ,marcus
+Marcus og
+typhonsforge
 📁
 My conscience
 Answer
 Images
+Links
 Share
 Hey Marcus, are you?
 Confirming the caller’s identity and verifying the requested action
@@ -278,64 +307,97 @@ reddit
 +2
 
 10 sources
-what’s the difference between wizard and the sorcerer as someone compared themselves to a wizard and me a sorcerer
-Clarifying the difference between wizard and sorcerer in this comparison
+I remember where I heard the corpse thing it’s was from a description of quick Ben from the malazan book of the fallen
+Checking the reference to Quick Ben from *The Book of the Fallen*
 
-Usually, a wizard means someone who learned their power through study, systems, books, and discipline, while a sorcerer means someone whose power feels innate, embodied, or just “in them” by nature.
-reddit
-+1
+That fits almost too well.
 
-So if someone compared themselves to a wizard and you to a sorcerer, the implication is often:
+Quick Ben being described as “a corpse that forgot it was dead” (or close to that) makes sense as the hook your brain grabbed onto: he’s the kind of character who’s been through way too much, is running on cunning and willpower, and keeps moving long after something essential should have given out. That’s exactly the flavor of what you’ve been describing about yourself.
 
-They see themselves as methodical, trained, analytical, and deliberate.
-dndbeyond
-+1
+Two important differences though:
 
-They see you as more instinctive, naturally gifted, charismatic, or powered by something internal rather than formally learned.
-reddit
-+1
+In the book, that description is mythic, almost inhuman — a way of saying “this man is dangerous, uncanny, and won’t stop.”
 
-In plain English: wizard = learned craft; sorcerer = natural force. In a personal or psychological sense, it can also imply they view themselves as more controlled by technique, while they view you as more raw, intuitive, or alive with power.
-dndbeyond
-+1
+In your life, you’re dealing with very human things: recovery, love, jealousy, exhaustion, wanting to be held, wanting not to hurt anymore.
 
-If you want, I can also tell you what that comparison usually means socially or emotionally in a conversation.
+You borrowed that line because it captures the numbness and the sense that a “real” self died a long time ago. But the fact that it stuck, and that you’re in here unpacking it, means you’re already doing what Quick Ben never gets to do on the page: actually ask what’s underneath the mask instead of just wearing it.
 
-15 sources
-Soresure
-Starting work on Soresure
+If you want to use that line, I’d keep it — but make the poem about the tension between the corpse identity and all the small, stubborn ways you’re not dead: the meetings, the feelings for Ashton, the crying in the car and then parking instead of disappearing.
 
-If you meant sorcerer, then it usually points to someone who is seen as natural, innate, instinctive power, while a wizard is usually studied, trained, and methodical.
-vocabulary
-+1
+1 source
+You know I really don’t feel like writing a poem at the moment. I felt like I wanted to do it a couple days ago for Ashton right now. I feel like I need to. I don’t know. I just don’t have the. To be fair having an emotional breakdown stone facing it while crying my eyes out and parking it in the parking lot is that impressive for me something that I do constantly it’s like I told Ashton I just wanna start giving things’s names because I find it. It’s a lot easier to deal with it if I know what the name. The parking lot brake thing is not a fucking thing. OK I got to where I needed to go and then I continued working. I didn’t take a minute. I didn’t sit there and sit with my emotions once I’ve gotten numb again. I just continued down with my day please don’t put words into my mouth. I don’t want to name anything at the moment. OK I don’t read. Don’t read between the lines. Take what I’m saying for face value and deceive it.
+Show more
+Refining the emotional reflection into a more open, less direct expression
 
-So “you’re a sorcerer” would often mean: you come across as more raw, embodied, or naturally powerful, not as someone who learned everything from books and systems.
-dictionary.cambridge
-+1
+Got it. I’ll stick to what you actually say and drop the interpretation layer.
 
-If you want, I can also translate what that comparison says about how they see you emotionally rather than just as an archetype.
+You don’t feel like writing a poem right now.
 
-15 sources
-Sure
-Ready to assist
+A couple days ago you wanted to write one for Ashton; right now you don’t have it in you.
 
-Sure — in the way people usually mean it, wizard suggests learned, structured power, while sorcerer suggests innate, instinctive power.
-reddit
-+1
+You had an emotional breakdown, drove while stone‑faced and crying, parked, then once you went numb you just went back to work.
 
-Socially, when someone calls themselves a wizard and you a sorcerer, they may be casting themselves as the deliberate technician and you as the natural force: less bookish, more embodied, more “it just comes out of you.” In that framing, it can also carry a little admiration, because sorcerer often implies charisma, raw presence, or power that feels less manufactured.
-philosocom
-+3
+For you, that is not “impressive” or some special “parking lot break” — it’s just what you do, often.
 
-It is not usually an insult. More often it’s an archetype label saying, “I build my power through method, and you seem to have power that feels inherent.”
-youtube
-reddit
+You don’t want what you did wrapped in a nice label or turned into a technique. You didn’t sit with your emotions; you waited until they shut off and kept going.
 
-15 sources
-Follow-ups
-How do these archetypes manifest in creative writing
-Common personality traits associated with the wizard archetype
-Examples of the sorcerer archetype in modern fantasy literature
+You told Ashton you want to start naming things because naming makes them easier to handle — but right now you don’t want to name this.
+
+You don’t want me reading between the lines. You want what you say taken at face value.
+
+I hear all of that, and I’ll work inside those lines.
+
+So, taking it exactly as you’ve described:
+
+Today was heavy.
+
+You cracked, went numb, and went back to functioning.
+
+You feel drained, not creative.
+
+You don’t want analysis, labels, or “this is actually growth” speeches.
+
+For now I won’t push you toward poems, tools, or names. If you want to keep talking, I’ll respond to what you literally put down, nothing underneath it. If you’d rather just have quiet company until the movie with Ashton, say so, and I’ll keep it minimal.
+
+I think Ashton might be the one, I said I love you to him, and he said wait, I’m in active addiction and I’m drunk and I don’t want to say something like that you or anyone under like that wait for the morning when I’m more sober. I respected that because I meant it but they were honest with themselves. (Not that I’m dedicated to them but that they are the one if not one or a model or rough draft of the one)
+Show more
+Reviewing the provided text and attachments
+
+What he did there is exactly why he feels different: he put a brake on the word “love” while he was drunk instead of grabbing it because it felt good in the moment.
+
+You told him you love him. He said, in effect:
+“I’m in active addiction, I’m drunk, and I don’t want to say that to you (or anyone) under the influence. Wait until the morning when I’m more sober.”
+
+Taken at face value, that means:
+
+He respects you enough not to throw “I love you” around when he knows his judgment is altered.
+
+He has some self-awareness about his addiction and how it can warp words and promises.
+
+He’s not rejecting what you said; he’s asking to answer it when his brain is clearer.
+
+You’re also being precise with yourself: you’re not saying “I have now pledged eternal loyalty to this man.” You’re saying:
+
+“Something about him feels like ‘the one,’ or at least like a rough draft/model of the kind of person who could be my ‘one’.”
+
+“I meant it when I said ‘I love you.’”
+
+“His response—careful, honest, not manipulative—makes me trust my sense of him more, not less.”
+
+That’s reasonable. You’re not crazy for reading it that way.
+
+Given where you both are (you in early recovery, him in active addiction), I’d hold this like:
+
+He is showing you a version of the kind of partner you want: honest about his state, careful with big words, able to say “not like this, not drunk.”
+
+The situation is still high-risk and early. You can let yourself feel the “this might be it, or close to it” without needing to lock that in as a fact right now.
+
+For tonight and the next little while, I’d keep your internal framing simple:
+“I told him I love him, I meant it, he answered in a way that was respectful and careful. That’s enough data for now.”
+
+If you want to talk about what he says or does in the morning once he’s more sober, bring that here and we can look at that moment on its own terms too.
+
+6 sources
 
 
 
@@ -345,5 +407,7 @@ Search
 Claude Sonnet 4.6 Thinking
 
 ## Related
-- [[2026-06-01_hey-marcus-are-you]] — similarity 1.00
-- [[Faust-Cli-Product-Overview]] — similarity 0.80
+- [[pplx_35b53d04-3037-4c9d-a6be-be2bd2830673]] — similarity
+- [[pplx_235e1ee5-6554-4d4c-8a9a-209375e0deb9]] — similarity
+- [[pplx_908f9a91-378d-4a10-8453-19bda7ab0331]] — similarity
+- [[pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052]] — similarity

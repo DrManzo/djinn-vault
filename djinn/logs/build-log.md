@@ -1296,7 +1296,30 @@ created: 2026-05-19
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--aust--li--verview-2026-06-14-md-stub.md`
 *— Typhon*
 
+<<<<<<< Updated upstream
 ## 2026-06-14: AUTO-STUB — slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md
 - djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md-stub.md`
 *— Typhon*
+=======
+## 2026-06-14: Print Pipeline Full Audit + Repair — Claude
+
+### Built
+- `djinn-job-add` — new script bridging marked STL → print queue (confirmed status)
+- `djinn-print-track`: fixed Calliope IP (113→114), added `tg_notify()` on completion, added `main_queue_finalize()` to sync main queue on print end, added `discord_notify()` for customer completion mention
+- `djinn-discord-gateway`: fixed status filter `needs_review`→`needs_settings`, wired `djinn-model-mark` into customer profile-pick flow, saved `customer_discord_id` to queue entry, removed URL detection (attachments-only intake)
+- `djinn-print-monitor-v2`: fixed Calliope IP (113→114)
+- `heartbeat`: added `--autostash` to `git pull --rebase` to handle dirty working tree
+- `djinn-ctx-router`: fixed `NameError: pathlib` (should have been `Path`)
+
+### Killed
+- `djinn-discord-watcher` — disabled+stopped (duplicate of gateway attachment handler, Javier-only, caused double fetch)
+- `djinn-marcus-sync` — removed service, timer, and script (Selenium scraper for Perplexity; fragile, not needed since exports are downloaded manually)
+
+### Decisions
+- OrcaSlicer fully removed; Creality Print CLI is sole slicer
+- Commission intake: attachments-only, no URL scraping — simpler for customer and Javier
+- Calliope confirmed at 192.168.1.114 (not .113 which is Typhon)
+
+*— Claude*
+>>>>>>> Stashed changes

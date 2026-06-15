@@ -1,9 +1,9 @@
 ---
 subject: 3d-printing/models/cup-engraving
 tags:
-  - design/3d-printing/engraving
-  - design/3d-printing/cup
-  - design/3d-printing/text
+  - 3d-printing/design
+  - 3d-printing/engraving
+  - 3d-printing/text
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -42,4 +42,4 @@ To ensure that the text is engraved deeply enough, follow these steps:
 - [Blender Script for Text Engraving](https://claude.ai/chat/f650de23-c25b-4eec-b053-bb97cdfda1d5)
 
 ## Related
-- [[Report-On-Legibility-Issues-With-Embossed-Text]] — similarity, [[Designing-A-Script-For-Puffco-Proxy-Bore]] — engraving technique
+- [[Text-Engraving-Depth-And-Cup-Surface-Alignment-2026-06-14]] — similarity

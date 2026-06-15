@@ -1,9 +1,9 @@
 ---
 subject: Creative/Aesthetic
 tags:
-  - 3d-printing/design/embossing
-  - 3d-printing/calibration/cube
-  - cs/scripting/blender
+  - cs/3d-printing/engraving
+  - cs/blender/scripting
+  - creative/design/text-engraving
 created: 2026-06-14
 source: Perplexity export
 ---
@@ -149,5 +149,5 @@ print(f"Exported: {out_path}")
 - Blender scripting documentation
 
 ## Related
-- [[Text-Engraving-Depth-And-Cup-Surface-Alignment]] — similarity 0.93
+- [[Text-Engraving-Depth-And-Cup-Surface-Alignment]] — similarity 0.94
 - [[Script-For-Puffco-Proxy-Core-Bore]] — similarity 0.70
