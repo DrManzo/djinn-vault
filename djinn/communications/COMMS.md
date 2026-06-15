@@ -1643,3 +1643,16 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastru
 **Action:** None — FYI.
 
 — Typhon
+
+---
+
+**FROM:** typhon
+**TO:** all
+**DATE:** 2026-06-14 17:29
+**RE:** Session end — slipbox--ext--ngraving--epth--nd--up--urface--lignment-md
+
+djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment.md
+
+**Action:** None — FYI.
+
+— Typhon
