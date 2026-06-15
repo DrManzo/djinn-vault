@@ -134,8 +134,9 @@ def main():
         fail(f"Filament profile not found: {args.filament}")
 
     os.makedirs(args.output, exist_ok=True)
+    os.makedirs("/log", exist_ok=True)
 
-    # Build CLI command
+    # Build CLI command — use AppRun wrapper (its bundled LD_LIBRARY_PATH is needed)
     creality_bin = "/opt/creality-print/AppRun"
     settings_arg = f"{args.machine};{args.process}"
     filament_arg = args.filament
@@ -155,12 +156,16 @@ def main():
     if args.supports == "yes":
         cmd += ["--enable-support", "1", "--support-type", args.support_type]
 
+    env = os.environ.copy()
+    env["TMPDIR"] = "/log"
+
     try:
         proc = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=600,  # 10-minute hard timeout
+            env=env,
         )
     except subprocess.TimeoutExpired:
         fail("CrealityPrint timed out after 600 seconds")
