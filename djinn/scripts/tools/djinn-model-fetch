@@ -517,7 +517,7 @@ def analyze_mesh(model_path: pathlib.Path) -> dict:
 # ── Renders ───────────────────────────────────────────────────────────────────
 
 def render_model(model_path: pathlib.Path, job_id: int) -> dict[str, pathlib.Path]:
-    """Generate three renders: two final-product POVs + overhang highlight map."""
+    """Generate overhang map only — red=needs support, orange=marginal, gray=clean."""
     renders = {}
     out_dir = RENDERS_DIR / f"job{job_id}"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -526,48 +526,19 @@ def render_model(model_path: pathlib.Path, job_id: int) -> dict[str, pathlib.Pat
         import trimesh, numpy as np
 
         mesh = trimesh.load(str(model_path), force="mesh")
-
-        # 1a. Final product — 45° below eye level, slight rotation (B)
-        scene_b = mesh.scene()
-        scene_b.set_camera(angles=[0.785, 0.0, 0.5], distance=mesh.scale * 2.8)
-        try:
-            img = scene_b.save_image(resolution=[800, 600])
-            p = out_dir / "render_final_b.png"
-            p.write_bytes(img)
-            renders["final_b"] = p
-            log("Render: final product view B saved")
-        except Exception as e:
-            log(f"Render B failed: {e}")
-
-        # 1b. Final product — 45° below eye level, 45° rotation (C)
-        scene_c = mesh.scene()
-        scene_c.set_camera(angles=[0.785, 0.0, 0.8], distance=mesh.scale * 2.8)
-        try:
-            img = scene_c.save_image(resolution=[800, 600])
-            p = out_dir / "render_final_c.png"
-            p.write_bytes(img)
-            renders["final_c"] = p
-            log("Render: final product view C saved")
-        except Exception as e:
-            log(f"Render C failed: {e}")
-
-        # 2. Overhang map — gray base, red overhang faces
         mesh2 = mesh.copy()
         norms = mesh2.face_normals
         down = norms[:, 2]
         colors = np.ones((len(norms), 4), dtype=np.uint8) * [160, 160, 160, 255]
-        colors[down < -0.707] = [220, 50, 50, 255]   # red = needs support
+        colors[down < -0.707] = [220, 50, 50, 255]       # red = needs support
         colors[(down >= -0.707) & (down < -0.5)] = [220, 140, 50, 255]  # orange = marginal
         mesh2.visual = trimesh.visual.ColorVisuals(mesh2, face_colors=colors)
-        scene2 = mesh2.scene()
-        try:
-            img2 = scene2.save_image(resolution=[800, 600])
-            oh_path = out_dir / "render_overhangs.png"
-            oh_path.write_bytes(img2)
-            renders["overhangs"] = oh_path
-            log("Render: overhang map saved")
-        except Exception as e:
-            log(f"Overhang render failed: {e}")
+        scene = mesh2.scene()
+        img = scene.save_image(resolution=[800, 600])
+        oh_path = out_dir / "render_overhangs.png"
+        oh_path.write_bytes(img)
+        renders["overhangs"] = oh_path
+        log("Render: overhang map saved")
 
     except Exception as e:
         log(f"Render error: {e}")
@@ -693,13 +664,10 @@ def main():
         f"Red areas in overhang map = zones that need support."
     )
 
-    # Send renders first
-    if "final_b" in renders:
-        tg_send_photo(renders["final_b"], f"Job #{job_id} — Final product (front)")
-    if "final_c" in renders:
-        tg_send_photo(renders["final_c"], f"Job #{job_id} — Final product (side)")
     if "overhangs" in renders:
-        tg_send_photo(renders["overhangs"], f"Job #{job_id} — Overhang map (red = support needed)")
+        sup_verdict = "supports: YES" if mesh.get("needs_supports") else "supports: NO"
+        tg_send_photo(renders["overhangs"],
+                      f"Job #{job_id} — {model_path.stem}\n{dims_str} · {vol_str} · {sup_verdict}\nRed = needs support · Orange = marginal")
 
     # Generate rough quote estimate from volume
     vol_cm3 = mesh.get("volume_cm3", 0) or 0
