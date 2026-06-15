@@ -109,18 +109,23 @@ def _append_bugs_log(findings: list, dry_run: bool):
 
 def run_bandit(dry_run: bool) -> list:
     findings = []
-    py_scripts = [p for p in SCRIPTS_DIR.iterdir()
-                  if p.is_file() and (p.suffix == ".py" or
-                     (p.stat().st_size < 2_000_000 and
-                      p.read_bytes()[:2] == b"#!")
-                     and b"python" in p.read_bytes()[:100])]
+    py_scripts = [
+        p for p in SCRIPTS_DIR.iterdir()
+        if p.is_file() and p.name.startswith("djinn-") and (
+            p.suffix == ".py" or (
+                p.stat().st_size < 2_000_000 and
+                p.read_bytes()[:2] == b"#!" and
+                b"python" in p.read_bytes()[:100]
+            )
+        )
+    ]
 
     if not py_scripts:
         return findings
 
     try:
         result = subprocess.run(
-            ["bandit", "-r", "-f", "json", "-ll", "-q", str(SCRIPTS_DIR)],
+            ["bandit", "-f", "json", "-ll", "-q"] + [str(p) for p in py_scripts],
             capture_output=True, text=True, timeout=60
         )
         data = json.loads(result.stdout) if result.stdout.strip() else {}
