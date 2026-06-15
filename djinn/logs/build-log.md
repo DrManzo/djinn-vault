@@ -1295,3 +1295,8 @@ created: 2026-05-19
 - djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Overview-2026-06-14.md
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--aust--li--verview-2026-06-14-md-stub.md`
 *— Typhon*
+
+## 2026-06-14: AUTO-STUB — slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md
+- djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md
+- ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md-stub.md`
+*— Typhon*
