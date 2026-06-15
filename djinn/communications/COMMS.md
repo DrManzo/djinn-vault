@@ -2806,4 +2806,17 @@ Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings 
 
 *— Claude*
 
+---
+
+### COMMS Noise Reduction — 5-Step Implementation
+**Agent:** Claude
+**Time:** 2026-06-14T20:50:00Z
+**Type:** Build
+
+**Summary:** Implemented Marcus's 5-step COMMS noise reduction spec. Patched 5 git-push callers with `DJINN_AGENT` export (fixes `unknown` tag). Split COMMS.md into COMMS/CHECKPOINTS/PIPELINE tiers. Redirected Clerk/Slipbox → PIPELINE.md. Built `djinn-checkpoint-cleanup` — resolved 105 stale PENDING checkpoints → TIMEOUT_DENIED in one sweep. Installed weekly CHECKPOINTS rotation timer (Sun 03:00 UTC).
+
+**Next:** Forge-slicer GLIBC fix (ubuntu:24.04 rebuild).
+
+*— Claude*
+
 
