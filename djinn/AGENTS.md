@@ -57,7 +57,7 @@ If Javier says "slice it" with no settings — slice with the file's embedded se
 |---------|------|----|----------|
 | Salomon | Daily ops, live lane | 192.168.1.225 | Linux, Ollama |
 | Typhon | Storage/sync, lightweight | 192.168.1.113 | Linux, Ollama |
-| Orin | Large-model host, always-on storage | 192.168.1.176 | iMac, Intel 8-core, 40GB RAM, 2TB |
+| Orion | Large-model host, always-on storage | 192.168.1.176 | iMac, Intel 8-core, 40GB RAM, 2TB |
 
 ## Model Routing
 
@@ -69,18 +69,18 @@ If Javier says "slice it" with no settings — slice with the file's embedded se
 - `ollama/qwen2.5-coder:7b` — code (on demand)
 - `ollama/nomic-embed-text` — embeddings (always warm)
 
-**Orin (192.168.1.176) — large models, CPU inference, use for non-latency-sensitive tasks:**
+**Orion (192.168.1.176) — large models, CPU inference, use for non-latency-sensitive tasks:**
 - `ollama/llama3.3:70b` — primary, best local model in the fleet (~2-4 tok/s CPU)
 - `ollama/phi4:14b` — session reports, summaries (faster)
 - `ollama/nomic-embed-text` — embeddings
-- Route to Orin when: task needs top-tier local quality and can tolerate latency
+- Route to Orion when: task needs top-tier local quality and can tolerate latency
 
 - Architecture / multi-system decisions → Claude lane only
 
 ## Lane Boundaries
 **Salomon owns daily ops** — print confirm/deny/slice, quotes, design, media pipeline, vault sync. These never go to Claude.
 
-**Orin owns long-running inference** — 32B model tasks, background report generation, anything that can queue and wait.
+**Orion owns long-running inference** — 32B model tasks, background report generation, anything that can queue and wait.
 
 **Claude owns architecture** — new tools, pipeline design, cross-domain reasoning, session reports, git push.
 
@@ -89,7 +89,7 @@ If Javier says "slice it" with no settings — slice with the file's embedded se
 **Assistant owns** — skill development, documentation enhancement, process engineering, research support, bootstrapping assistance. Works across lanes but focuses on improving the system itself.
 
 If a Salomon-lane command arrives at Claude: \"Send that through Discord or Telegram — Salomon handles [X].\"
-If an architecture-level task arrives at Salomon/Orin: \"Route this to Claude — it needs architectural thinking.\"
+If an architecture-level task arrives at Salomon/Orion: \"Route this to Claude — it needs architectural thinking.\"
 If a visual/media task arrives at any other agent: \"Route this to Gemini — it owns the visual lane.\"
 If a skill/documentation/process task arrives: \"This is for Assistant — it works on improving the Djinn system itself.\"
 
@@ -243,7 +243,7 @@ Marcus, Claude, Gemini, and Assistant run **in parallel** — peer agents, none 
 
 ### Lane-Specific Examples:
 - **Salomon lane task:** \"Fix the printer queue script\" → Goes to Salomon (daily ops)
-- **Orin lane task:** \"Generate weekly analytics report on 70B model\" → Goes to Orin (long-running inference)
+- **Orion lane task:** \"Generate weekly analytics report on 70B model\" → Goes to Orion (long-running inference)
 - **Claude lane task:** \"Design new agent for legal research\" → Goes to Claude (architecture)
 - **Marcus lane task:** \"Research current LLM benchmarking methodologies\" → Goes to Marcus (external research)
 - **Gemini lane task:** \"Generate a system architecture diagram for the printer pipeline\" → Goes to Gemini (visual output)

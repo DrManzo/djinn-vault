@@ -1,10 +1,10 @@
 #!/bin/bash
-# Heartbeat — Orin (macOS iMac, Intel, CPU inference)
+# Heartbeat — Orion (macOS iMac, Intel, CPU inference)
 # Deploy: cp orin-heartbeat.sh ~/.local/bin/heartbeat && chmod +x ~/.local/bin/heartbeat
 # Scheduled: ~/Library/LaunchAgents/com.djinn.heartbeat.plist (every 5 min)
 
 VAULT="$HOME/Obsidian"
-HEARTBEAT="$VAULT/djinn/communications/HEARTBEAT-orin.md"
+HEARTBEAT="$VAULT/djinn/communications/HEARTBEAT-orion.md"
 DELTA_GUARD_PY="$VAULT/djinn/tools/delta-guard"
 
 _OLLAMA=$(curl -s http://localhost:11434/api/tags 2>/dev/null \
@@ -29,10 +29,10 @@ print(f'{used}GB used, {avail}GB free')
 _UPTIME=$(uptime | sed 's/.*up /up /' | sed 's/,.*//')
 
 cat > "$HEARTBEAT" << EOF
-# Heartbeat — Orin
+# Heartbeat — Orion
 
 **Last beat:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')
-**Machine:** Orin (192.168.1.177)
+**Machine:** Orion (192.168.1.177)
 **Status:** Alive
 
 ## System
@@ -64,6 +64,6 @@ if [[ $? -eq 0 ]]; then
     cd "$VAULT" || exit 1
     git pull --rebase --quiet 2>/dev/null || true
     git add -A \
-    && git commit -m "heartbeat: $(date -u '+%Y-%m-%dT%H:%MZ') — Orin" --quiet \
+    && git commit -m "heartbeat: $(date -u '+%Y-%m-%dT%H:%MZ') — Orion" --quiet \
     && git push --quiet
 fi
