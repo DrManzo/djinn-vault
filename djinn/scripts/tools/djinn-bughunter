@@ -1,0 +1,296 @@
+#!/usr/bin/env python3
+"""
+djinn-bughunter — Proactive vulnerability and error detection pipeline.
+
+No LLM in the detection path. All findings are deterministic.
+
+Runs:
+  1. bandit   — static analysis on ~/.local/bin/ Python scripts
+  2. pip-audit — CVE scan on installed packages
+  3. secrets  — regex scan for hardcoded tokens/passwords in scripts
+  4. errlogs  — regex triage of journald + /tmp logs for known error patterns
+
+Output: djinn/logs/bugs.md + djinn-alert on any new findings
+Usage:
+  djinn-bughunter            — full scan
+  djinn-bughunter --bandit   — static analysis only
+  djinn-bughunter --audit    — pip-audit only
+  djinn-bughunter --secrets  — secrets scan only
+  djinn-bughunter --errlogs  — error log triage only
+  djinn-bughunter --dry-run  — print findings, don't write or alert
+"""
+
+import sys
+import os
+import re
+import json
+import subprocess
+import datetime
+import hashlib
+import argparse
+from pathlib import Path
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+SCRIPTS_DIR  = Path.home() / ".local/bin"
+VAULT        = Path.home() / "Obsidian"
+BUGS_LOG     = VAULT / "djinn/logs/bugs.md"
+STATE_FILE   = Path.home() / ".local/share/djinn/bughunter-state.json"
+LOG_DIRS     = [Path("/tmp")]
+JOURNALD_UNITS = [
+    "djinn-telegram-gateway", "djinn-discord-gateway", "djinn-morning",
+    "djinn-trend-agent", "djinn-print-monitor", "djinn-clerk",
+]
+
+# Secrets patterns — high-specificity only; avoid env-var reads and empty defaults
+SECRET_PATTERNS = [
+    # Structured key formats — low false positive rate
+    (re.compile(r'sk-[a-zA-Z0-9]{32,}'), "OpenAI-style API key"),
+    (re.compile(r'Bot\d{8,12}:[a-zA-Z0-9_-]{35}'), "Telegram bot token"),
+    (re.compile(r'AIza[0-9A-Za-z\-_]{35}'), "Google API key"),
+    (re.compile(r'ghp_[a-zA-Z0-9]{36}'), "GitHub PAT"),
+    (re.compile(r'fc-[a-zA-Z0-9]{40,}'), "Firecrawl API key"),
+    # High-entropy bare assignments (60+ char base64/hex strings not in os.environ or Path reads)
+    (re.compile(r'(?i)(?:password|secret|jwt_secret)\s*=\s*["\'][A-Za-z0-9+/=]{48,}["\']'), "hardcoded high-entropy secret"),
+]
+
+# Error log patterns — regex → severity → label
+ERROR_PATTERNS = [
+    (re.compile(r'(Traceback \(most recent call last\)|unhandled exception)', re.I), "high", "unhandled exception"),
+    (re.compile(r'(CRITICAL|FATAL)\b', re.I), "high", "critical log entry"),
+    (re.compile(r'permission denied', re.I), "medium", "permission error"),
+    (re.compile(r'(connection refused|no route to host|name or service not known)', re.I), "medium", "network error"),
+    (re.compile(r'(disk quota|no space left)', re.I), "high", "disk full"),
+    (re.compile(r'(segfault|segmentation fault)', re.I), "high", "segfault"),
+    (re.compile(r'OOM|out of memory', re.I), "high", "OOM"),
+]
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _load_state():
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if STATE_FILE.exists():
+        try:
+            return json.loads(STATE_FILE.read_text())
+        except Exception:
+            pass
+    return {"seen_hashes": []}
+
+def _save_state(state):
+    STATE_FILE.write_text(json.dumps(state, indent=2))
+
+def _finding_hash(finding: dict) -> str:
+    key = f"{finding.get('type')}:{finding.get('file')}:{finding.get('issue')}"
+    return hashlib.sha1(key.encode()).hexdigest()[:12]
+
+def _alert(msg: str, dry_run: bool):
+    if dry_run:
+        print(f"[DRY-RUN] ALERT: {msg}")
+        return
+    subprocess.run(["djinn-alert", "--source", "djinn-bughunter", msg],
+                   capture_output=True)
+
+def _append_bugs_log(findings: list, dry_run: bool):
+    if dry_run or not findings:
+        return
+    BUGS_LOG.parent.mkdir(parents=True, exist_ok=True)
+    date = datetime.date.today().isoformat()
+    lines = [f"\n\n## {date} — djinn-bughunter scan ({len(findings)} finding(s))\n"]
+    for f in findings:
+        sev = f.get("severity", "medium").upper()
+        lines.append(f"- **[{sev}]** `{f.get('file', 'unknown')}` — {f.get('issue')} _(type: {f.get('type')})_\n")
+    if BUGS_LOG.exists():
+        with open(BUGS_LOG, "a") as fh:
+            fh.writelines(lines)
+    else:
+        BUGS_LOG.write_text("# Djinn Bug Log\n" + "".join(lines))
+
+# ── Scan 1: bandit ────────────────────────────────────────────────────────────
+
+def run_bandit(dry_run: bool) -> list:
+    findings = []
+    py_scripts = [p for p in SCRIPTS_DIR.iterdir()
+                  if p.is_file() and (p.suffix == ".py" or
+                     (p.stat().st_size < 2_000_000 and
+                      p.read_bytes()[:2] == b"#!")
+                     and b"python" in p.read_bytes()[:100])]
+
+    if not py_scripts:
+        return findings
+
+    try:
+        result = subprocess.run(
+            ["bandit", "-r", "-f", "json", "-ll", "-q", str(SCRIPTS_DIR)],
+            capture_output=True, text=True, timeout=60
+        )
+        data = json.loads(result.stdout) if result.stdout.strip() else {}
+        for issue in data.get("results", []):
+            sev = issue.get("issue_severity", "LOW").lower()
+            if sev in ("medium", "high"):
+                findings.append({
+                    "type": "bandit",
+                    "file": issue.get("filename", ""),
+                    "issue": f"{issue.get('test_id')} — {issue.get('issue_text', '')[:120]}",
+                    "severity": sev,
+                    "line": issue.get("line_number"),
+                })
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError) as e:
+        print(f"[bughunter] bandit error: {e}", file=sys.stderr)
+
+    return findings
+
+# ── Scan 2: pip-audit ─────────────────────────────────────────────────────────
+
+def run_pip_audit(dry_run: bool) -> list:
+    findings = []
+    try:
+        result = subprocess.run(
+            ["pip-audit", "--format", "json", "--progress-spinner", "off"],
+            capture_output=True, text=True, timeout=120
+        )
+        data = json.loads(result.stdout) if result.stdout.strip() else {}
+        for dep in data.get("dependencies", []):
+            for vuln in dep.get("vulns", []):
+                findings.append({
+                    "type": "pip-audit",
+                    "file": f"{dep.get('name')}=={dep.get('version')}",
+                    "issue": f"{vuln.get('id')} — {vuln.get('description', '')[:120]}",
+                    "severity": "high" if "CRITICAL" in vuln.get("id", "") else "medium",
+                })
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, FileNotFoundError) as e:
+        print(f"[bughunter] pip-audit error: {e}", file=sys.stderr)
+
+    return findings
+
+# ── Scan 3: secrets ───────────────────────────────────────────────────────────
+
+def run_secrets_scan(dry_run: bool) -> list:
+    findings = []
+    skip_exts = {".pyc", ".png", ".jpg", ".gif", ".mp3", ".mp4", ".stl", ".gcode", ".zip"}
+
+    for script in SCRIPTS_DIR.iterdir():
+        if not script.is_file():
+            continue
+        if script.suffix in skip_exts:
+            continue
+        try:
+            text = script.read_text(errors="ignore")
+        except OSError:
+            continue
+        for pattern, label in SECRET_PATTERNS:
+            if pattern.search(text):
+                findings.append({
+                    "type": "secrets",
+                    "file": str(script),
+                    "issue": f"possible {label} in script",
+                    "severity": "high",
+                })
+                break  # one finding per file max
+
+    return findings
+
+# ── Scan 4: error log triage ──────────────────────────────────────────────────
+
+def run_errlog_triage(dry_run: bool) -> list:
+    findings = []
+    since = (datetime.datetime.now() - datetime.timedelta(hours=6)).strftime("%Y-%m-%d %H:%M:%S")
+
+    # journald — check known units for errors in last 6h
+    for unit in JOURNALD_UNITS:
+        try:
+            result = subprocess.run(
+                ["journalctl", "--user", f"-u{unit}", f"--since={since}",
+                 "--no-pager", "-q", "--output=cat"],
+                capture_output=True, text=True, timeout=10
+            )
+            for pattern, sev, label in ERROR_PATTERNS:
+                matches = pattern.findall(result.stdout)
+                if matches:
+                    findings.append({
+                        "type": "errlog",
+                        "file": f"journald:{unit}",
+                        "issue": f"{label} ({len(matches)} occurrence(s))",
+                        "severity": sev,
+                    })
+                    break
+        except (subprocess.TimeoutExpired, FileNotFoundError):
+            pass
+
+    # /tmp log files
+    for log_file in Path("/tmp").glob("djinn-*.log"):
+        try:
+            text = log_file.read_text(errors="ignore")
+            for pattern, sev, label in ERROR_PATTERNS:
+                if pattern.search(text):
+                    findings.append({
+                        "type": "errlog",
+                        "file": str(log_file),
+                        "issue": label,
+                        "severity": sev,
+                    })
+                    break
+        except OSError:
+            pass
+
+    return findings
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description="djinn-bughunter")
+    parser.add_argument("--bandit",   action="store_true")
+    parser.add_argument("--audit",    action="store_true")
+    parser.add_argument("--secrets",  action="store_true")
+    parser.add_argument("--errlogs",  action="store_true")
+    parser.add_argument("--dry-run",  action="store_true")
+    args = parser.parse_args()
+
+    run_all = not any([args.bandit, args.audit, args.secrets, args.errlogs])
+
+    state = _load_state()
+    seen = set(state.get("seen_hashes", []))
+    all_findings = []
+
+    if run_all or args.bandit:
+        all_findings.extend(run_bandit(args.dry_run))
+    if run_all or args.audit:
+        all_findings.extend(run_pip_audit(args.dry_run))
+    if run_all or args.secrets:
+        all_findings.extend(run_secrets_scan(args.dry_run))
+    if run_all or args.errlogs:
+        all_findings.extend(run_errlog_triage(args.dry_run))
+
+    # Deduplicate against previously seen findings
+    new_findings = []
+    for f in all_findings:
+        h = _finding_hash(f)
+        if h not in seen:
+            new_findings.append(f)
+            seen.add(h)
+
+    if new_findings:
+        print(f"[bughunter] {len(new_findings)} new finding(s):")
+        for f in new_findings:
+            print(f"  [{f['severity'].upper()}] {f['file']} — {f['issue']}")
+
+        _append_bugs_log(new_findings, args.dry_run)
+
+        high = [f for f in new_findings if f.get("severity") == "high"]
+        if high:
+            summary = f"🐛 djinn-bughunter: {len(high)} HIGH finding(s)\n" + \
+                      "\n".join(f"• `{f['file']}` — {f['issue']}" for f in high[:5])
+            _alert(summary, args.dry_run)
+        elif new_findings:
+            summary = f"🔍 djinn-bughunter: {len(new_findings)} finding(s) (medium/low)"
+            _alert(summary, args.dry_run)
+
+        if not args.dry_run:
+            state["seen_hashes"] = list(seen)[-500:]  # keep last 500
+            _save_state(state)
+    else:
+        print(f"[bughunter] No new findings.")
+
+    return 1 if any(f["severity"] == "high" for f in new_findings) else 0
+
+if __name__ == "__main__":
+    sys.exit(main())
