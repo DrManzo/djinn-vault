@@ -2383,3 +2383,43 @@ hellhound log --tail 20
 
 **Status:** CLOSED — 2026-06-07 — dropped by Javier. Project done.
 
+
+## TASK-072
+- assigned_to: typhon
+- status: pending
+- priority: normal
+- trigger: auto
+- created: 2026-06-15 by Claude
+- context: Install Orca Slicer v2.3.2 on Typhon — distributed slicing node
+
+**Commands:**
+```bash
+wget -q https://github.com/SoftFever/OrcaSlicer/releases/download/v2.3.2/OrcaSlicer_Linux_V2.3.2.AppImage -O /tmp/OrcaSlicer.AppImage
+chmod +x /tmp/OrcaSlicer.AppImage
+sudo mkdir -p /opt/orca-slicer
+cd /tmp && /tmp/OrcaSlicer.AppImage --appimage-extract
+sudo cp -r squashfs-root/* /opt/orca-slicer/
+rm -rf /tmp/squashfs-root /tmp/OrcaSlicer.AppImage
+sudo ln -sf /opt/orca-slicer/AppRun /usr/local/bin/orca-slicer
+orca-slicer --help | head -3
+```
+
+## TASK-073
+- assigned_to: orin
+- status: pending
+- priority: normal
+- trigger: auto
+- created: 2026-06-15 by Claude
+- context: Install Orca Slicer v2.3.2 on Orin — distributed slicing node (iMac, Intel 8-core)
+
+**Commands:**
+```bash
+wget -q https://github.com/SoftFever/OrcaSlicer/releases/download/v2.3.2/OrcaSlicer_Linux_V2.3.2.AppImage -O /tmp/OrcaSlicer.AppImage
+chmod +x /tmp/OrcaSlicer.AppImage
+sudo mkdir -p /opt/orca-slicer
+cd /tmp && /tmp/OrcaSlicer.AppImage --appimage-extract
+sudo cp -r squashfs-root/* /opt/orca-slicer/
+rm -rf /tmp/squashfs-root /tmp/OrcaSlicer.AppImage
+sudo ln -sf /opt/orca-slicer/AppRun /usr/local/bin/orca-slicer
+orca-slicer --help | head -3
+```

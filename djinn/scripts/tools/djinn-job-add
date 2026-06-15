@@ -37,6 +37,7 @@ def main():
     ap.add_argument("--supports", default="no",          choices=["yes", "no"],          help="Enable slicer supports")
     ap.add_argument("--qty",      type=int, default=1,   help="Number of copies")
     ap.add_argument("--notes",    default="",            help="Free-text notes")
+    ap.add_argument("--no-slice", action="store_true",  help="Skip auto-slicing (queue only)")
 
     # Also accept key=value style (Djinn convention)
     positional_kv = [a for a in sys.argv[1:] if "=" in a and not a.startswith("--")]
@@ -78,7 +79,20 @@ def main():
     print(f"  Supports: {args.supports}  |  Qty: {args.qty}")
     if args.notes:
         print(f"  Notes:    {args.notes}")
-    print(f"\nNext:  djinn-model-slice {job_id}")
+
+    if not args.no_slice:
+        import subprocess as _sp
+        print(f"\nAuto-slicing job #{job_id}...")
+        result = _sp.run(
+            ["djinn-model-slice", str(job_id),
+             f"profile={args.profile}", f"material={args.material}",
+             f"supports={args.supports}"],
+            capture_output=False
+        )
+        if result.returncode != 0:
+            print(f"  Slicing failed — run manually: djinn-model-slice {job_id}")
+    else:
+        print(f"\nNext:  djinn-model-slice {job_id}")
 
 
 if __name__ == "__main__":
