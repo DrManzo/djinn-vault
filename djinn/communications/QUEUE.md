@@ -2336,7 +2336,7 @@ The status line in the report and log can still show "ISSUES FOUND" if there are
 
 ## TASK-071
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-10 by Claude
@@ -2386,7 +2386,7 @@ hellhound log --tail 20
 
 ## TASK-072
 - assigned_to: typhon
-- status: pending
+- status: done
 - priority: normal
 - trigger: auto
 - created: 2026-06-15 by Claude
@@ -2406,7 +2406,7 @@ orca-slicer --help | head -3
 
 ## TASK-073
 - assigned_to: orin
-- status: pending
+- status: done
 - priority: normal
 - trigger: auto
 - created: 2026-06-15 by Claude
