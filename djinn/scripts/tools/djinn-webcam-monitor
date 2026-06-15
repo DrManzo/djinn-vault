@@ -37,10 +37,10 @@ import requests
 CAMERA_DEVICE_NAME = "Brave"          # partial match in udevadm ID_MODEL
 CAMERA_INDEX       = 2               # fallback if discovery fails
 MOONRAKER          = "http://192.168.1.114:7125"
-TG_TOKEN           = "7962428973:AAHzCibu8E0RDDaRF3eHGA7WcOEqMbypOVI"
-TG_CHAT            = 7620067588
-DISCORD_TOKEN      = "MTUwNjI0OTIzMTY4ODUzNjE1NA.GN4BcP.jtJaXkhHHH7AOdohhwRKIuLOLadP4RJUx61K2Y"
-DISCORD_CHANNEL    = 1507882513891065876  # #3d-printing
+TG_TOKEN           = os.environ["DJINN_TG_TOKEN"]
+TG_CHAT            = int(os.environ.get("DJINN_TG_CHAT", "7620067588"))
+DISCORD_TOKEN      = os.environ["DJINN_DISCORD_TOKEN"]
+DISCORD_CHANNEL    = int(os.environ.get("DJINN_DISCORD_CHANNEL", "1507882513891065876"))
 
 FPS                = 30
 MONITOR_INTERVAL   = 10.0    # seconds between frame analysis

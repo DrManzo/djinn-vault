@@ -26,8 +26,7 @@ from datetime import datetime
 import discord
 
 # ── Config ────────────────────────────────────────────────────────────────────
-BOT_TOKEN    = os.environ.get("DJINN_DISCORD_TOKEN",
-    "MTUwNjI0OTIzMTY4ODUzNjE1NA.GN4BcP.jtJaXkhHHH7AOdohhwRKIuLOLadP4RJUx61K2Y")
+BOT_TOKEN    = os.environ["DJINN_DISCORD_TOKEN"]
 ALLOWED_USER = int(os.environ.get("DJINN_DISCORD_USER", "341840772582211587"))
 GUILD_ID     = int(os.environ.get("DJINN_DISCORD_GUILD", "1504308482575433788"))
 GROQ_URL     = "https://api.groq.com/openai/v1/chat/completions"
@@ -354,54 +353,15 @@ def handle_monitor_status(_m, _raw, ctx):
         return f"Could not read webcam state: {e}"
 
 def handle_help(_m, _raw, ctx):
-    helps = {
-        "print": (
-            "**3D Printing commands:**\n```\n"
-            "/queue              print queue\n"
-            "/confirm N          start job N on Calliope\n"
-            "/deny N             reject job N\n"
-            "/slice N            slice job N\n"
-            "/print status       Calliope live state\n"
-            "/callie status      same as print status\n"
-            "/quote [args]       commission price quote\n"
-            "/quick quote [args] fast quote\n"
-            "/status             system health\n"
-            "/help               this list\n```"
-        ),
-        "media": (
-            "**Media pipeline commands:**\n```\n"
-            "/ingest [args]      project intake\n"
-            "/reel [args]        video edit + LUT\n"
-            "/kit [args]         build stitch-kit + upload\n"
-            "/photo [args]       photo edit + LUT + QC\n"
-            "/caption [args]     generate captions\n"
-            "/publish [args]     polish + export\n"
-            "/qa [args]          quality check\n"
-            "/thumbnail [args]   generate thumbnail\n"
-            "/media status       recent projects\n"
-            "/status             system health\n"
-            "/help               this list\n```"
-        ),
-        "all": (
-            "**All Djinn commands:**\n```\n"
-            "PRINT: /queue /confirm N /deny N /slice N\n"
-            "       /print status /quote /quick quote\n"
-            "DESIGN: /design [args] /design status\n"
-            "MEDIA: /ingest /reel /photo /caption\n"
-            "       /publish /qa /thumbnail /media status\n"
-            "SYSTEM: /status /help\n```\n"
-            "Anything without / is conversation."
-        ),
-        "general": (
-            "**Commands available here:**\n```\n"
-            "/status   system health check\n"
-            "/help     this list\n```\n"
-            "For print ops: use #3d-printing\n"
-            "For media ops: use #media-inbox\n"
-            "For everything: use #djinn-command-center"
-        ),
-    }
-    return helps.get(ctx, helps["all"])
+    return (
+        "**Typhon's Forge — how to order:**\n"
+        "• Type `order` to start a custom 3D print commission\n"
+        "• Type `express` for rush processing\n"
+        "• Drop your `.stl` or `.3mf` file here to attach it to your order\n"
+        "• Type `my order` to check your order status\n\n"
+        "Questions? Just type them here.\n"
+        "— Typhon's Forge"
+    )
 
 # ── Routing tables (per channel context) ─────────────────────────────────────
 
@@ -864,6 +824,10 @@ async def on_message(message: discord.Message):
                 str(message.author.id), str(message.author))
             if reply:
                 await message.channel.send(reply)
+            return
+
+        if _text_lower in ("help", "?", "commands"):
+            await message.channel.send(handle_help(None, None, ctx))
             return
 
         if _text_lower in ("my order", "order status", "status"):
