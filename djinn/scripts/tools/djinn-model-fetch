@@ -651,19 +651,6 @@ def main():
         oh_line = "⚠️ Could not analyze overhangs — inspect manually"
         rec_supports = "no"
 
-    question = (
-        f"*Calliope Job #{job_id} — {model_path.name}*\n"
-        f"{dims_str} | {vol_str} | {wt_str} | {bed_str}\n\n"
-        f"📁 Staged: `{model_path}`\n"
-        f"🔒 SHA256: `{file_hash[:32]}…`\n"
-        f"   (verified at slice time — any change to this file blocks the print)\n\n"
-        f"{oh_line}\n\n"
-        f"*Awaiting customer choice (A/B/C + color)*\n"
-        f"  supports recommended: {rec_supports}\n"
-        f"  Once confirmed → auto-slices with defaults (infill=15, brim=no)\n"
-        f"Red areas in overhang map = zones that need support."
-    )
-
     if "overhangs" in renders:
         sup_verdict = "supports: YES" if mesh.get("needs_supports") else "supports: NO"
         tg_send_photo(renders["overhangs"],
@@ -707,12 +694,14 @@ def main():
     log("Customer-facing message posted to Discord.")
 
     # Auto-slice when profile and color already selected (button flow)
+    _SLICE_PROFILE = {"standard": "production", "production": "production", "proto": "proto", "quality": "quality"}
     if cust_profile and cust_color:
-        log(f"Auto-slicing job #{job_id} (profile={cust_profile} color={cust_color})...")
+        slice_profile = _SLICE_PROFILE.get(cust_profile, "production")
+        log(f"Auto-slicing job #{job_id} (profile={slice_profile} color={cust_color})...")
         sr = subprocess.run(
             ["djinn-model-slice", str(job_id),
-             f"profile={cust_profile}", f"material=pla",
-             f"supports={'yes' if rec_supports == 'yes' else 'no'}"],
+             f"profile={slice_profile}", f"material=pla",
+             f"supports={rec_supports}"],
             capture_output=False, timeout=300,
         )
         if sr.returncode != 0:
