@@ -101,3 +101,7 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 - **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (1 occurrence(s)) _(type: errlog)_
 | 2026-06-14 | Claude | forge-slicer | high | wont-fix | CrealityPrint v6+ CLI --slice 0 segfault | [[2026-06-14_bug-crealityprint-v6-cli-slice-0-segfault]] |
 | 2026-06-15 | Claude | djinn-webcam-monitor | medium | fixed | Milestone clips wrote 1 frame per 10s — clips were 33ms not 10s | [[2026-06-15_bug-webcam-milestone-clip-framerate]] |
+
+
+## 2026-06-15 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (159 occurrence(s)) _(type: errlog)_
