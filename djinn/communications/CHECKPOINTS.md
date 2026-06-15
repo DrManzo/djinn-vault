@@ -1125,3 +1125,91 @@ Rotated weekly by djinn-comms-rotate.
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260615-060054 | 2026-06-15 06:00 | @Salomon | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-061135 | 2026-06-15 06:11 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-061142 | 2026-06-15 06:11 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-061442 | 2026-06-15 06:14 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-061949 | 2026-06-15 06:19 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-061956 | 2026-06-15 06:19 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-062247 | 2026-06-15 06:22 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-062435 | 2026-06-15 06:24 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-064040 | 2026-06-15 06:40 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-064049 | 2026-06-15 06:40 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260615-064518 | 2026-06-15 06:45 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
