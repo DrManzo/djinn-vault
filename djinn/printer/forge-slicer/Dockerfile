@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:25.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:99
@@ -6,13 +6,11 @@ ENV LIBGL_ALWAYS_SOFTWARE=1
 ENV MESA_GL_VERSION_OVERRIDE=4.5
 
 # ── System dependencies ────────────────────────────────────────────────────────
-# Notes on 22.04 → 24.04 package changes:
-#   - libfuse2 is now libfuse2t64 on 24.04 (transitional rename)
-#   - libasound2 is now libasound2t64 on 24.04 (transitional rename)
-#   - libxss1 dropped from Ubuntu 24.04 main; replaced by libxss1 in universe
-#     (still installable, just needs universe — enabled by default on 24.04)
-#   - libxcb-util1 renamed to libxcb-util1 (same, still present)
-#   - All other package names are unchanged
+# Notes on 24.04 → 25.04 package changes:
+#   - libfuse2t64, libasound2t64 carry forward unchanged on 25.04
+#   - t64 ABI transition packages (libfuse2t64, libasound2t64, etc.) are stable
+#   - fontconfig 2.17.1+ required to avoid font-related segfault in CrealityPrint
+#   - All other package names are unchanged from 24.04
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb \
     libfuse2t64 \
@@ -51,6 +49,30 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libdrm2 \
     libgbm1 \
     libstdc++6 \
+    libatomic1 \
+    libdeflate0 \
+    liblerc4 \
+    libmspack0t64 \
+    libegl1 \
+    libopengl0 \
+    libcairo-gobject2 \
+    libgtk-3-0t64 \
+    libgdk-pixbuf-2.0-0 \
+    libgstreamer1.0-0 \
+    libgstreamer-plugins-base1.0-0 \
+    libjavascriptcoregtk-4.1-0 \
+    libopus0 \
+    libsecret-1-0 \
+    libsoup-3.0-0 \
+    libspeexdsp1 \
+    libsrtp2-1 \
+    libusrsctp2 \
+    libwayland-client0 \
+    libwayland-cursor0 \
+    libwayland-egl1 \
+    libwayland-server0 \
+    libwebkit2gtk-4.1-0 \
+    libx264-164 \
     python3 \
     ca-certificates \
     curl \
@@ -68,6 +90,11 @@ RUN ./CrealityPrint.AppImage --appimage-extract \
     && mv squashfs-root /opt/creality-print \
     && rm CrealityPrint.AppImage
 
+# ── Replace system libfontconfig with host version ────────────────────────────
+# Ubuntu 25.04 ships fontconfig 2.15.0, but CrealityPrint crashes (SIGSEGV at
+# null ptr) with any fontconfig < 2.17.1. Copy the host's 2.17.1 lib in.
+COPY libfontconfig.so.1.16.1 /lib/x86_64-linux-gnu/libfontconfig.so.1
+
 # ── App setup ──────────────────────────────────────────────────────────────────
 WORKDIR /app
 
@@ -76,5 +103,8 @@ COPY entrypoint.py /app/entrypoint.py
 
 # Output dir
 RUN mkdir -p /output /input /profiles
+# CrealityPrint writes crash dumps to /tmp/ then renames to /log/.
+# Symlink so rename is on the same filesystem.
+RUN ln -sf /tmp /log
 
 ENTRYPOINT ["python3", "/app/entrypoint.py"]
