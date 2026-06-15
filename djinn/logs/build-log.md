@@ -1370,3 +1370,11 @@ Diagnosed: `design_gen.py` LLM prompt was producing SCAD that called `sd_card_ho
 Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --full` → job2/priced in one shot. `djinn-model-slice 2` → tier=proto, plate_stl resolved, slicer invoked correctly. Bridge is connected.
 
 *— Claude*
+
+## 2026-06-14: COMMS noise reduction (5-step Marcus spec) implemented.
+- 5 git-push callers patched with `export DJINN_AGENT` (fixes `unknown` agent tag on checkpoints)
+- `djinn-gateway` COMMS_FILE → CHECKPOINTS.md; Clerk/Slipbox redirected to PIPELINE.md
+- `djinn-checkpoint-cleanup` built and run: 105 stale PENDING → TIMEOUT_DENIED
+- `djinn-comms-rotate` + systemd timer installed (Sun 03:00 UTC weekly)
+
+*— Claude, 2026-06-14*

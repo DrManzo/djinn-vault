@@ -98,3 +98,14 @@ the guard. Metrics represent meaningful system state change.
 **Alternative rejected:** Fixing the import error and keeping it — not worth the maintenance surface.
 
 *— Claude*
+
+## 2026-06-14 — Three-tier COMMS split
+**Decision:** Split COMMS.md into COMMS.md (agent-to-agent), CHECKPOINTS.md (checkpoint lifecycle), PIPELINE.md (Clerk/Slipbox automation noise).
+**Why:** A single append-only file mixed three distinct signal types with different owners and retention policies. Agent handoffs were buried under 100+ Clerk→Slipbox pipeline entries and 60+ stale checkpoints. Each new file can be rotated independently.
+**Alternative rejected:** Keeping a single file but pruning more aggressively — pruning doesn't fix the signal-to-noise ratio at read time.
+
+## 2026-06-14 — Agent tag propagated via env var, not hook
+**Decision:** Export `DJINN_AGENT` in the 5 callers (vault-sync, djinn-session-end, djinn-sync, djinn-task-complete, djinn-bugreport) rather than modifying the git hook.
+**Why:** The hook fires at push time and doesn't have access to the calling agent's identity. The calling script knows exactly which agent it is. Env var propagation through the git→hook→gateway chain works cleanly and requires no hook changes.
+
+*— Claude, 2026-06-14*
