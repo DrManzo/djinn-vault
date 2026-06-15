@@ -60,6 +60,7 @@ class ProjectState:
     infill: int = 20
     brim: bool = False
     supports_needed: bool = False
+    support_mode: str = "none"   # "none" | "local" | "full" — set by support_analysis
     mesh: dict = field(default_factory=dict)
     stats: dict = field(default_factory=dict)
 
