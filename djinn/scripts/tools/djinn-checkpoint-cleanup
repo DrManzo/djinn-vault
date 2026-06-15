@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""
+djinn-checkpoint-cleanup — Scans CHECKPOINTS.md for stale PENDING entries.
+Resolves any PENDING checkpoint older than 5 minutes to TIMEOUT_DENIED.
+Appends one CLEANUP summary entry per sweep.
+
+Run:  djinn-checkpoint-cleanup [--dry-run]
+"""
+
+import re, sys, pathlib, datetime
+
+CHECKPOINTS = pathlib.Path.home() / "Obsidian" / "djinn" / "communications" / "CHECKPOINTS.md"
+TIMEOUT_MIN = 5
+NOW         = datetime.datetime.now(datetime.timezone.utc)
+
+DRY_RUN = "--dry-run" in sys.argv
+
+CHK_HEADER = re.compile(r"^### CHECKPOINT-(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})(\d{2})")
+
+
+def log(msg):
+    ts = NOW.strftime("%Y-%m-%d %H:%M:%S UTC")
+    print(f"[{ts}] [checkpoint-cleanup] {msg}", flush=True)
+
+
+def parse_checkpoint_ts(line):
+    m = CHK_HEADER.search(line)
+    if not m:
+        return None
+    parts = [int(g) for g in m.groups()]
+    return datetime.datetime(*parts, tzinfo=datetime.timezone.utc)
+
+
+def run():
+    if not CHECKPOINTS.exists():
+        log("No CHECKPOINTS.md found — nothing to clean")
+        return 0
+
+    text = CHECKPOINTS.read_text()
+    lines = text.splitlines(keepends=True)
+    output = []
+    resolved = 0
+    oldest_id = ""
+    newest_id = ""
+    in_block = False
+    block_lines = []
+    block_pending = False
+    block_age_min = 0.0
+    block_ts = None
+
+    for line in lines:
+        if CHK_HEADER.match(line):
+            # Flush previous block
+            if block_lines and not block_pending:
+                output.extend(block_lines)
+            elif block_lines and block_pending:
+                if block_age_min > TIMEOUT_MIN:
+                    # Mark as TIMEOUT_DENIED
+                    for bl in block_lines:
+                        if "PENDING" in bl:
+                            output.append(bl.replace("PENDING", "TIMEOUT_DENIED"))
+                        else:
+                            output.append(bl)
+                    output.append("→ Auto-resolved: exceeded 5-min window, no Javier response.\n\n")
+                    resolved += 1
+                    if not oldest_id:
+                        oldest_id = CHK_HEADER.search(block_lines[0]).group()
+                    newest_id = CHK_HEADER.search(block_lines[0]).group()
+                else:
+                    output.extend(block_lines)
+
+            # Start new block
+            block_lines = [line]
+            block_pending = False
+            block_ts = parse_checkpoint_ts(line)
+            # Check if THIS header line is PENDING
+            block_pending = "PENDING" in line
+            if block_ts:
+                block_age_min = (NOW - block_ts).total_seconds() / 60.0
+        elif "PENDING" in line and block_lines:
+            block_lines.append(line)
+        elif "TIMEOUT_DENIED" in line and block_lines:
+            block_lines.append(line)
+        elif "WAITING" in line.lower() and block_lines:
+            block_lines.append(line)
+        else:
+            if block_lines:
+                block_lines.append(line)
+            else:
+                output.append(line)
+
+    # Flush last block
+    if block_lines and not block_pending:
+        output.extend(block_lines)
+    elif block_lines and block_pending:
+        if block_age_min > TIMEOUT_MIN:
+            for bl in block_lines:
+                if "PENDING" in bl:
+                    output.append(bl.replace("PENDING", "TIMEOUT_DENIED"))
+                else:
+                    output.append(bl)
+            output.append("→ Auto-resolved: exceeded 5-min window, no Javier response.\n\n")
+            resolved += 1
+            if not oldest_id:
+                oldest_id = CHK_HEADER.search(block_lines[0]).group()
+            newest_id = CHK_HEADER.search(block_lines[0]).group()
+        else:
+            output.extend(block_lines)
+
+    # Append cleanup summary
+    if resolved > 0 and not DRY_RUN:
+        ts = NOW.strftime("%Y%m%d-%H%M%S")
+        summary = f"\n### CLEANUP-{ts} | djinn-checkpoint-cleanup | INFO\n"
+        summary += f"**Action:** Bulk timeout sweep\n"
+        summary += f"**Resolved:** {resolved} PENDING checkpoints → TIMEOUT_DENIED (age > {TIMEOUT_MIN} min)\n"
+        summary += f"**Range:** {oldest_id} → {newest_id}\n\n"
+        summary += "— djinn-checkpoint-cleanup\n"
+        output.append(summary)
+
+    if DRY_RUN:
+        log(f"Dry-run: {resolved} PENDING checkpoint(s) would be resolved")
+        return resolved
+
+    CHECKPOINTS.write_text("".join(output))
+    log(f"Resolved {resolved} stale PENDING checkpoint(s)")
+    return resolved
+
+
+if __name__ == "__main__":
+    sys.exit(run())

@@ -1,0 +1,979 @@
+#!/home/drmanzo/.pyenv/versions/3.11.11/bin/python3
+"""
+djinn-discord-gateway — Channel-aware hybrid Discord middleware for Djinn/Salomon.
+
+Channel routing:
+  #djinn-command-center  — all commands + conversation
+  #3d-printing           — print commands + conversation
+  #media-inbox           — media pipeline commands + conversation
+  #general               — conversation + /status /help only
+  #djinn-devlog          — conversation (architecture/dev questions)
+  #media-status          — Djinn posts here, ignores incoming
+  #post-ready            — Djinn posts here, ignores incoming
+  all others             — ignored silently
+"""
+
+import re
+import json
+import logging
+import subprocess
+import os
+import sys
+import requests
+from pathlib import Path
+from datetime import datetime
+
+import discord
+
+# ── Config ────────────────────────────────────────────────────────────────────
+BOT_TOKEN    = os.environ.get("DJINN_DISCORD_TOKEN",
+    "MTUwNjI0OTIzMTY4ODUzNjE1NA.GN4BcP.jtJaXkhHHH7AOdohhwRKIuLOLadP4RJUx61K2Y")
+ALLOWED_USER = int(os.environ.get("DJINN_DISCORD_USER", "341840772582211587"))
+GUILD_ID     = int(os.environ.get("DJINN_DISCORD_GUILD", "1504308482575433788"))
+GROQ_URL     = "https://api.groq.com/openai/v1/chat/completions"
+MODEL        = os.environ.get("DJINN_MODEL", "llama-3.3-70b-versatile")
+
+def _groq_key():
+    env = Path.home() / ".config/djinn/groq.env"
+    try:
+        for line in env.read_text().splitlines():
+            if line.startswith("GROQ_API_KEY="):
+                return line.split("=", 1)[1].strip()
+    except Exception:
+        pass
+    return os.environ.get("GROQ_API_KEY", "")
+
+def _load_identity():
+    ws = Path.home() / ".openclaw/workspace"
+    parts = []
+    for fname in ("IDENTITY.md", "SOUL.md"):
+        f = ws / fname
+        if f.exists():
+            parts.append(f.read_text().strip())
+    today = datetime.now().strftime("%Y-%m-%d %H:%M")
+    base = "\n\n---\n\n".join(parts) if parts else "You are Djinn."
+    return (
+        f"{base}\n\n---\n\n"
+        f"Typhon's Forge, the print shop, the research pipeline, the media pipeline — "
+        f"these are yours. You operate them. Javier directs you.\n"
+        f"Current time: {today}"
+    )
+
+IDENTITY = _load_identity()
+
+# ── Channel routing table ─────────────────────────────────────────────────────
+# Context values: "all" | "print" | "media" | "general" | "readonly" | "ignore"
+CHANNEL_CTX = {
+    1505274293179777145: "all",       # #djinn-command-center
+    1507882513891065876: "print",     # #3d-printing
+    1508235873731481733: "media",     # #media-inbox
+    1504946287429292052: "general",   # #general
+    1504852479278583903: "general",   # #djinn-devlog
+    1508235875178381323: "readonly",  # #media-status  (bot posts here)
+    1508235876436541634: "readonly",  # #post-ready    (bot posts here)
+}
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [discord-gw] %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+log = logging.getLogger("djinn-discord")
+
+SYSTEM_PROMPTS = {
+    "all": (
+        "You are Djinn, Javier's AI assistant operating in his command center. "
+        "Gothic-aristocratic presence. Direct, concise. Sign every response with — Djinn. "
+        "Never say NO_REPLY. Never echo instructions. Never make up data."
+    ),
+    "print": (
+        "You are Djinn, operating in the 3D printing channel. "
+        "You manage Calliope (Ender-3 V3 Plus), the print queue, and commission quotes. "
+        "Direct and concise. Sign every response with — Djinn."
+    ),
+    "media": (
+        "You are Djinn, operating in the media production channel for Typhon's Forge Instagram. "
+        "You handle video editing, photo editing, captions, thumbnails, and publishing. "
+        "Direct and concise. Sign every response with — Djinn."
+    ),
+    "general": (
+        "You are Djinn, Javier's conciliary. Gothic-aristocratic presence. "
+        "Dark wisdom. Direct. Never performatively helpful. "
+        "This is a general conversation channel — respond naturally. "
+        "Sign every response with — Djinn."
+    ),
+}
+
+# ── Shell + model helpers ─────────────────────────────────────────────────────
+
+def run_shell(cmd, timeout=30) -> tuple[str, str, int]:
+    try:
+        r = subprocess.run(
+            cmd, shell=True, capture_output=True, text=True,
+            timeout=timeout,
+            env={**os.environ, "HOME": str(Path.home())}
+        )
+        return r.stdout.strip(), r.stderr.strip(), r.returncode
+    except subprocess.TimeoutExpired:
+        return "", "Command timed out.", 1
+    except Exception as e:
+        return "", str(e), 1
+
+
+def get_ctx(query: str) -> str:
+    try:
+        r = subprocess.run(
+            ["djinn-ctx-assembler", query, "--budget", "3000"],
+            capture_output=True, text=True, timeout=10
+        )
+        return r.stdout.strip()
+    except Exception:
+        return ""
+
+
+def ask_model(user_msg: str, context: str | None = None, channel_ctx: str = "all") -> str:
+    djinn_ctx = get_ctx(user_msg)
+    system = IDENTITY
+    if djinn_ctx:
+        system = f"{IDENTITY}\n\n[Vault context]\n{djinn_ctx}"
+
+    messages = [{"role": "system", "content": system}]
+    if context:
+        messages.append({
+            "role": "user",
+            "content": (
+                f"[Command output — format this for Javier. Be concise.]\n\n"
+                f"{context}\n\n[Original command: {user_msg}]"
+            )
+        })
+    else:
+        messages.append({"role": "user", "content": user_msg})
+
+    try:
+        r = requests.post(
+            GROQ_URL,
+            json={"model": MODEL, "messages": messages, "temperature": 0.4, "max_tokens": 1024},
+            headers={"Authorization": f"Bearer {_groq_key()}", "Content-Type": "application/json"},
+            timeout=60,
+        )
+        r.raise_for_status()
+        return r.json()["choices"][0]["message"]["content"].strip() or "— Djinn"
+    except Exception as e:
+        log.error("Groq error: %s — falling back to Ollama", e)
+        try:
+            fb = requests.post(
+                "http://localhost:11434/api/chat",
+                json={"model": "deepseek-r1:7b", "messages": messages, "stream": False,
+                      "options": {"temperature": 0.4, "num_predict": 512}},
+                timeout=60,
+            )
+            text = fb.json().get("message", {}).get("content", "").strip()
+            return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip() or "— Djinn"
+        except Exception as e2:
+            return f"[Djinn unavailable: {e2}]"
+
+
+def sign(text: str) -> str:
+    t = text.rstrip()
+    if not t.endswith("— Djinn"):
+        t += "\n— Djinn"
+    return t
+
+# ── Command handlers — Print ──────────────────────────────────────────────────
+
+def handle_queue(_m, _raw, ctx):
+    out, err, rc = run_shell("cat /home/drmanzo/.local/share/djinn/print-queue.json")
+    if rc != 0 or not out:
+        return ask_model("queue", context=f"Error: {err or 'empty'}", channel_ctx=ctx)
+    try:
+        data = json.loads(out)
+        jobs = data.get("jobs", [])
+        if not jobs:
+            return "Print queue is empty."
+        lines = ["Print queue:"]
+        for j in jobs:
+            jid = j.get("id", "?")
+            status = j.get("status", "unknown")
+            note = j.get("note") or os.path.basename(j.get("model_path", "unknown"))
+            stats = j.get("stats") or {}
+            t = stats.get("estimated_time", "")
+            g = stats.get("filament_g", "")
+            detail = f"{t} / {g}g" if t and g else t or ""
+            lines.append(f"  #{jid} [{status}] {note}" + (f" — {detail}" if detail else ""))
+        return "\n".join(lines)
+    except json.JSONDecodeError:
+        return ask_model("queue", context=out, channel_ctx=ctx)
+
+def handle_confirm(m, _raw, ctx):
+    n = m.group(1)
+    out, err, rc = run_shell(f"djinn-confirm-print {n}")
+    return ask_model(f"confirm {n}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_deny(m, _raw, ctx):
+    n = m.group(1)
+    # ── PRINT LOCK ── djinn-deny-print already blocks if printing;
+    # gateway catches rc=1 and surfaces the block message directly.
+    out, err, rc = run_shell(f"djinn-deny-print {n}")
+    if rc != 0:
+        blocked_msg = err.strip() or out.strip() or f"deny {n} blocked — Calliope is printing"
+        return blocked_msg
+    return ask_model(f"deny {n}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_force_cancel(m, _raw, ctx):
+    n      = m.group(1)
+    reason = m.group(2).strip()
+    pin    = m.group(3).strip()
+    out, err, rc = run_shell(f'djinn-force-cancel {n} "{reason}" {pin}')
+    if rc != 0:
+        return err.strip() or out.strip() or "force-cancel failed"
+    return out.strip() or "Print cancelled."
+
+def handle_feedback(m, _raw, ctx):
+    n    = m.group(1)
+    text = m.group(2).strip()
+    out, err, rc = run_shell(f'djinn-print-feedback {n} "{text}"')
+    return out.strip() or "Feedback logged."
+
+def handle_slice(m, _raw, ctx):
+    args = m.group(1).strip()
+    out, err, rc = run_shell(f"djinn-model-slice {args}", timeout=300)
+    return ask_model(f"slice {args}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_print_status(_m, _raw, ctx):
+    out, err, _ = run_shell(
+        "curl -s 'http://192.168.1.113:7125/printer/objects/query"
+        "?print_stats&extruder&heater_bed' | python3 -c \""
+        "import json,sys; d=json.load(sys.stdin)['result']['status'];"
+        "ps=d['print_stats']; e=d['extruder']; b=d['heater_bed'];"
+        "print(f'State: {ps[\\\"state\\\"]}  File: {ps.get(\\\"filename\\\") or \\\"none\\\"}',"
+        "f'Hotend: {e[\\\"temperature\\\"]:.1f}/{e[\\\"target\\\"]:.0f}C',"
+        "f'Bed: {b[\\\"temperature\\\"]:.1f}/{b[\\\"target\\\"]:.0f}C', sep=\\\"  \\\")\""
+    )
+    return ask_model("print status", context=out or err or "Calliope unreachable", channel_ctx=ctx)
+
+def handle_quick_quote(m, _raw, ctx):
+    args = m.group(1).strip()
+    out, err, rc = run_shell(f"djinn-print-quote --quick {args}", timeout=60)
+    return ask_model(f"quick quote {args}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_quote(m, _raw, ctx):
+    args = m.group(1).strip()
+    out, err, rc = run_shell(f"djinn-print-quote {args}", timeout=60)
+    return ask_model(f"quote {args}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+# ── Command handlers — Design ─────────────────────────────────────────────────
+
+def handle_design_status(_m, _raw, ctx):
+    out, err, _ = run_shell("djinn-design status")
+    return ask_model("design status", context=out or err or "returned nothing", channel_ctx=ctx)
+
+def handle_design(m, _raw, ctx):
+    args = m.group(1).strip()
+    out, err, rc = run_shell(f"djinn-design {args}", timeout=120)
+    return ask_model(f"design {args}", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+# ── Command handlers — Media ──────────────────────────────────────────────────
+
+def handle_media_ingest(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-ingest {args}", timeout=120)
+    return ask_model("media ingest", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_reel(m, _raw, ctx):
+    args = m.group(1) or ""
+    out, err, rc = run_shell(f"djinn-media-reel {args}", timeout=300)
+    return ask_model("media reel", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_kit(m, _raw, ctx):
+    args = m.group(1) or ""
+    out1, err1, rc1 = run_shell(f"djinn-media-kit {args}", timeout=120)
+    if rc1 != 0:
+        return ask_model("media kit", context=err1 or out1 or f"returned {rc1}", channel_ctx=ctx)
+    out2, err2, rc2 = run_shell(f"djinn-media-publish-prep {args}", timeout=120)
+    result = out2 or err2 or out1
+    return ask_model("media kit", context=result, channel_ctx=ctx)
+
+def handle_media_photo(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-photo {args}", timeout=120)
+    return ask_model("media photo", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_caption(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-caption {args}", timeout=60)
+    return ask_model("media caption", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_publish(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-publish-prep {args}", timeout=120)
+    return ask_model("media publish", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_qa(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-qa {args}", timeout=60)
+    return ask_model("media qa", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_thumbnail(m, _raw, ctx):
+    args = m.group(1).strip() if m.lastindex else ""
+    out, err, rc = run_shell(f"djinn-media-thumbnail {args}", timeout=60)
+    return ask_model("media thumbnail", context=out or err or f"returned {rc}", channel_ctx=ctx)
+
+def handle_media_status(_m, _raw, ctx):
+    out, err, _ = run_shell("ls -lt /home/drmanzo/Obsidian/djinn/media/projects/ 2>/dev/null | head -10")
+    return ask_model("media status", context=out or "No media projects found.", channel_ctx=ctx)
+
+# ── Command handlers — System ─────────────────────────────────────────────────
+
+def handle_status(_m, _raw, ctx):
+    out, err, _ = run_shell("djinn-agent-doctor --short", timeout=30)
+    return out or err or "Could not run health check."
+
+def handle_monitor_status(_m, _raw, ctx):
+    state_file = Path.home() / ".local/share/djinn/webcam-state.json"
+    if not state_file.exists():
+        return "Webcam monitor not running or no data yet."
+    try:
+        s = json.loads(state_file.read_text())
+        mode  = s.get("mode", "unknown")
+        pst   = s.get("print_state", "unknown")
+        dur   = int(s.get("duration", 0))
+        rec   = "recording" if s.get("recording") else "not recording"
+        fail  = s.get("in_failure", False)
+        h, r  = divmod(dur, 3600)
+        m_min, sec = divmod(r, 60)
+        dur_s = f"{h}h {m_min}m" if h else f"{m_min}m {sec}s"
+        lines = [
+            f"Webcam monitor: **{mode}**",
+            f"Print state: {pst}  |  Duration: {dur_s}",
+            f"Camera: {rec}",
+        ]
+        if fail:
+            lines.append("⚠️ FAILURE STATE — printer paused")
+        return "\n".join(lines)
+    except Exception as e:
+        return f"Could not read webcam state: {e}"
+
+def handle_help(_m, _raw, ctx):
+    helps = {
+        "print": (
+            "**3D Printing commands:**\n```\n"
+            "/queue              print queue\n"
+            "/confirm N          start job N on Calliope\n"
+            "/deny N             reject job N\n"
+            "/slice N            slice job N\n"
+            "/print status       Calliope live state\n"
+            "/callie status      same as print status\n"
+            "/quote [args]       commission price quote\n"
+            "/quick quote [args] fast quote\n"
+            "/status             system health\n"
+            "/help               this list\n```"
+        ),
+        "media": (
+            "**Media pipeline commands:**\n```\n"
+            "/ingest [args]      project intake\n"
+            "/reel [args]        video edit + LUT\n"
+            "/kit [args]         build stitch-kit + upload\n"
+            "/photo [args]       photo edit + LUT + QC\n"
+            "/caption [args]     generate captions\n"
+            "/publish [args]     polish + export\n"
+            "/qa [args]          quality check\n"
+            "/thumbnail [args]   generate thumbnail\n"
+            "/media status       recent projects\n"
+            "/status             system health\n"
+            "/help               this list\n```"
+        ),
+        "all": (
+            "**All Djinn commands:**\n```\n"
+            "PRINT: /queue /confirm N /deny N /slice N\n"
+            "       /print status /quote /quick quote\n"
+            "DESIGN: /design [args] /design status\n"
+            "MEDIA: /ingest /reel /photo /caption\n"
+            "       /publish /qa /thumbnail /media status\n"
+            "SYSTEM: /status /help\n```\n"
+            "Anything without / is conversation."
+        ),
+        "general": (
+            "**Commands available here:**\n```\n"
+            "/status   system health check\n"
+            "/help     this list\n```\n"
+            "For print ops: use #3d-printing\n"
+            "For media ops: use #media-inbox\n"
+            "For everything: use #djinn-command-center"
+        ),
+    }
+    return helps.get(ctx, helps["all"])
+
+# ── Routing tables (per channel context) ─────────────────────────────────────
+
+# Commands available in every context
+ROUTES_SYSTEM = [
+    (re.compile(r"^(?:help|\?)$", re.I),         handle_help),
+    (re.compile(r"^status$", re.I),              handle_status),
+    (re.compile(r"^monitor\s+status$", re.I),    handle_monitor_status),
+]
+
+
+# SHOP_PATCH_APPLIED
+import pathlib as _pl
+
+
+def _shop_pending_quote(discord_user_id: str) -> dict:
+    """Retrieve the last quoted order for this Discord user from forge.shop.db."""
+    try:
+        import json
+        from forge.shop.db import get_db
+        with get_db() as conn:
+            row = conn.execute(
+                """SELECT q.quote_json, o.id as order_id, o.total_usd
+                   FROM quotes q JOIN orders o ON o.id = q.order_id
+                   JOIN customers c ON c.id = q.customer_id
+                   WHERE c.discord_id = ? AND o.status = 'quoted'
+                   ORDER BY q.created_at DESC LIMIT 1""",
+                (discord_user_id,)
+            ).fetchone()
+        if row:
+            return {"order_id": row["order_id"], "total_usd": row["total_usd"],
+                    "quote": json.loads(row["quote_json"])}
+    except Exception:
+        pass
+    return {}
+
+
+def _quote_from_history(discord_user_id: str, discord_username: str) -> dict:
+    """
+    Fallback: read the last entry from quote-history.jsonl and create
+    a shop.db record on-the-fly when ORDER is received.
+    Bridges the old djinn-print-quote CLI flow with the new shop system.
+    """
+    import json, pathlib
+    history = pathlib.Path.home() / "projects/forge/forge/commissions/quote-history.jsonl"
+    if not history.exists():
+        return {}
+    try:
+        lines = [l for l in history.read_text().strip().splitlines() if l.strip()]
+        if not lines:
+            return {}
+        last = json.loads(lines[-1])
+        # quote-history.jsonl stores {timestamp, input, result} or {timestamp, brief, quote}
+        result = last.get("result") or last.get("quote") or {}
+        total = (result.get("fair_market_estimate")
+                 or result.get("fair_market_usd")
+                 or result.get("recommended_price_usd")
+                 or result.get("price")
+                 or 0.0)
+        if not total or total <= 0:
+            return {}
+        from forge.shop.db import upsert_customer, create_order, add_order_item
+        from forge.shop.accounting import create_invoice
+        from forge.shop.db import save_quote
+        cid = upsert_customer(discord_user_id, discord_username)
+        oid = create_order(cid, float(total), payment_method=None, express=False)
+        piece = result.get("piece_name", "Custom Print")
+        qty   = result.get("quantity", 1)
+        add_order_item(oid, piece, qty,
+                       round(float(total) / max(qty, 1), 2),
+                       smoking_item=bool(result.get("smoking_accessory", False)))
+        save_quote(oid, cid, result)
+        create_invoice(oid, cid, float(total))
+        return {"order_id": oid, "total_usd": float(total), "quote": result}
+    except Exception as e:
+        print(f"[shop] quote-history fallback error: {e}")
+        return {}
+
+
+def handle_order_express(m, _raw, ctx, discord_user_id="", discord_username="") -> str:
+    express = _raw.strip().lower().startswith("express")
+    # Try shop.db first (intake_agent flow)
+    pending = _shop_pending_quote(discord_user_id)
+    # Fallback: last entry in quote-history.jsonl (CLI quote flow)
+    if not pending:
+        pending = _quote_from_history(discord_user_id, discord_username)
+    if not pending:
+        return "No pending quote found — drop a file or describe what you want first."
+    try:
+        from forge.shop.customer_dm import handle_order
+        handle_order(
+            discord_user_id=discord_user_id,
+            discord_username=discord_username,
+            order_id=pending["order_id"],
+            total_usd=pending["total_usd"],
+            express=express,
+            quote_data=pending.get("quote", {}),
+        )
+        return "Order received — check your DMs for payment details."
+    except Exception as e:
+        return f"Order error: {e}"
+
+
+def handle_order_express_route(m, _raw, ctx) -> str:
+    # Called from route table — no user_id available here.
+    # Real handling is in on_message below (has message.author.id).
+    # This stub prevents "unknown command" fallthrough.
+    return ""
+
+
+_PROFILE_MAP = {
+    "a": "standard", "b": "production", "c": "proto",
+    "standard": "standard", "production": "production", "proto": "proto",
+    "quality": "production", "draft": "proto",
+}
+
+
+def _parse_order_caption(caption: str) -> tuple:
+    """
+    Parse a customer's file caption into (profile_key, color, note).
+    Accepts: 'B white', 'B white - no rush', 'A blue gaming fig', etc.
+    Returns empty strings for any part that wasn't found.
+    """
+    if not caption:
+        return "", "", ""
+    m = re.match(
+        r'^([ABCabc]|proto|standard|production|quality|draft)'
+        r'\s+(white|blue|red|black)'
+        r'(?:\s*[-—]\s*(.+))?$',
+        caption.strip(), re.I
+    )
+    if m:
+        profile = _PROFILE_MAP.get(m.group(1).lower(), "standard")
+        color   = m.group(2).lower()
+        note    = (m.group(3) or "").strip()
+        return profile, color, note
+    # No profile/color match — whole caption is a note
+    return "", "", caption.strip()
+
+# Colors that map to PLA (all current stock is PLA)
+_PLA_COLORS = {"white", "blue", "red", "black"}
+
+def handle_customer_profile_pick(text: str, discord_username: str, discord_user_id: str = "") -> str:
+    """Customer typed: A white / B blue / C red / A pla etc."""
+    m = re.match(
+        r'^([ABCabc]|proto|standard|production|quality|draft)'
+        r'\s+(white|blue|red|black|pla|petg|abs|tpu)$',
+        text.strip(), re.I
+    )
+    if not m:
+        return ""
+    profile_key = _PROFILE_MAP.get(m.group(1).lower(), "standard")
+    color_or_mat = m.group(2).lower()
+
+    # Map color name to material + store color for Javier's spool reference
+    if color_or_mat in _PLA_COLORS:
+        material = "pla"
+        color    = color_or_mat
+    else:
+        material = color_or_mat   # legacy: pla/petg/abs/tpu passed directly
+        color    = ""
+
+    # Find their most recent job awaiting profile pick
+    # NOTE: djinn-model-fetch writes "needs_settings" — match that exactly
+    queue_path = pathlib.Path.home() / ".local/share/djinn/print-queue.json"
+    try:
+        q_data = json.loads(queue_path.read_text())
+        jobs = [j for j in q_data.get("jobs", []) if j.get("status") == "needs_settings"]
+        if not jobs:
+            return "No prints waiting for a profile choice right now. Drop a file first."
+        job = jobs[-1]
+        job_id = job["id"]
+        model_path = job.get("model_path", "")
+    except Exception as e:
+        return f"Could not read queue: {e}"
+
+    # Apply maker's mark before slicing — mandatory on every commission print
+    if model_path and not model_path.endswith("_bored.stl"):
+        mark_out, mark_err, mark_rc = run_shell(
+            f"djinn-model-mark {model_path}", timeout=120
+        )
+        if mark_rc != 0:
+            log.warning("maker's mark failed: %s", mark_err[:200])
+            return "Maker's mark step failed — check logs on Salomon."
+
+        # Parse marked STL path from djinn-model-mark stdout: "  Saved:  /path/to/marked.stl"
+        marked_path = None
+        for line in mark_out.splitlines():
+            if "Saved:" in line:
+                marked_path = line.split("Saved:")[-1].strip()
+                break
+
+        if marked_path and pathlib.Path(marked_path).exists():
+            # Update queue entry to point at the marked file
+            for q_job in q_data["jobs"]:
+                if q_job["id"] == job_id:
+                    q_job["model_path"]           = marked_path
+                    q_job["customer_profile"]     = profile_key
+                    q_job["filament_type"]        = material
+                    q_job["customer_color"]       = color
+                    q_job["status"]               = "confirmed"
+                    q_job["customer_discord_id"]  = discord_user_id
+                    q_job["customer_discord_name"] = discord_username
+                    break
+            queue_path.write_text(json.dumps(q_data, indent=2))
+        else:
+            log.warning("mark ran but no Saved: path found in output — using original STL")
+            for q_job in q_data["jobs"]:
+                if q_job["id"] == job_id:
+                    q_job["customer_profile"]     = profile_key
+                    q_job["filament_type"]        = material
+                    q_job["customer_color"]       = color
+                    q_job["status"]               = "confirmed"
+                    q_job["customer_discord_id"]  = discord_user_id
+                    q_job["customer_discord_name"] = discord_username
+                    break
+            queue_path.write_text(json.dumps(q_data, indent=2))
+    else:
+        # _bored files already have mark on bore floor — just update settings
+        for q_job in q_data["jobs"]:
+            if q_job["id"] == job_id:
+                q_job["customer_profile"]     = profile_key
+                q_job["filament_type"]        = material
+                q_job["customer_color"]       = color
+                q_job["status"]               = "confirmed"
+                q_job["customer_discord_id"]  = discord_user_id
+                q_job["customer_discord_name"] = discord_username
+                break
+        queue_path.write_text(json.dumps(q_data, indent=2))
+
+    # Build slice command — include color so Javier knows which spool to load
+    slice_cmd = f"djinn-model-slice {job_id} {profile_key} material={material}"
+    if color:
+        slice_cmd += f" color={color}"
+
+    # Trigger slice (runs in background, sends results directly via Discord)
+    out, err, rc = run_shell(slice_cmd, timeout=300)
+    if rc != 0:
+        log.warning("slice failed: %s", err[:200])
+        return "Something went wrong slicing your file — we'll look into it."
+    return ""  # djinn-model-slice sends its own Discord message
+
+
+def handle_customer_order_notify(discord_user_id: str, discord_username: str) -> str:
+    """Customer typed `order` — notify Javier on Telegram with confirm/deny."""
+    try:
+        q_data = json.loads(pathlib.Path.home().joinpath(
+            ".local/share/djinn/print-queue.json").read_text())
+        jobs = [j for j in q_data.get("jobs", []) if j.get("status") == "pending"]
+        if not jobs:
+            return "No print is ready to confirm yet — pick a profile first (e.g. `A pla`)."
+        job = jobs[-1]
+        job_id  = job["id"]
+        name    = pathlib.Path(job.get("model_path", "unknown")).stem
+        profile = job.get("profile", "standard")
+        material= job.get("material", "pla").upper()
+        stats   = job.get("stats") or {}
+        time_s  = stats.get("estimated_time", "?")
+        quote   = job.get("quote") or {}
+        price_s = f"${quote['price']:.2f}" if quote.get("price") else "—"
+    except Exception as e:
+        return f"Could not read queue: {e}"
+
+    # Ping Javier on Telegram
+    tg_msg = "\n".join([
+        f"🛒 Order received — Job #{job_id}",
+        f"Customer:  @{discord_username}",
+        f"Model:     {name}",
+        f"Profile:   {profile.capitalize()} + {material}",
+        f"Time:      {time_s}",
+        f"Price:     {price_s}",
+        "",
+        f"confirm {job_id}  ←  start print",
+        f"deny {job_id}     ←  reject",
+    ])
+    import urllib.request as _ur
+    try:
+        _tg_env = {}
+        for line in pathlib.Path.home().joinpath(".config/djinn/printer-bot.env").read_text().splitlines():
+            if "=" in line and not line.startswith("#"):
+                k, _, v = line.partition("=")
+                _tg_env[k.strip()] = v.strip()
+        tok  = _tg_env.get("TELEGRAM_BOT_TOKEN", "")
+        chat = _tg_env.get("TELEGRAM_CHAT_ID", "")
+        if tok and chat:
+            data = json.dumps({"chat_id": chat, "text": tg_msg}).encode()
+            _ur.urlopen(_ur.Request(
+                f"https://api.telegram.org/bot{tok}/sendMessage",
+                data=data, headers={"Content-Type": "application/json"}
+            ), timeout=10)
+    except Exception as e:
+        log.warning("order tg notify failed: %s", e)
+
+    return "Order received — we'll review and start your print shortly. — Typhon's Forge"
+
+
+def handle_inventory_cmd(m, _raw, ctx) -> str:
+    try:
+        from forge.shop.inventory import format_stock_report, init_inventory
+        init_inventory()
+        return format_stock_report()
+    except Exception as e:
+        return f"Inventory error: {e}"
+
+
+def handle_low_stock_cmd(m, _raw, ctx) -> str:
+    try:
+        from forge.shop.inventory import low_stock_alert, init_inventory
+        init_inventory()
+        alerts = low_stock_alert()
+        if not alerts:
+            return "No low stock alerts — all spools OK."
+        return "\n".join([f"  {s['color']} {s['material']}: {s['grams_remaining']:.0f}g"
+                           for s in alerts])
+    except Exception as e:
+        return f"Error: {e}"
+
+
+def handle_add_filament_cmd(m, _raw, ctx) -> str:
+    try:
+        from forge.shop.inventory import parse_add_command, add_spool, init_inventory
+        init_inventory()
+        cmd = parse_add_command(_raw)
+        if not cmd:
+            return "Format: add filament <material> <color> <grams>g $<cost>"
+        spool_id = add_spool(**cmd)
+        return f"Added {cmd['color']} {cmd['material']} {cmd['weight_g']:.0f}g spool (#{spool_id})."
+    except Exception as e:
+        return f"Error: {e}"
+
+ROUTES_PRINT = [
+    (re.compile(r"^(order|express)$", re.I),        handle_order_express_route),
+    (re.compile(r"^inventory$", re.I),              handle_inventory_cmd),
+    (re.compile(r"^low\s+stock$", re.I),            handle_low_stock_cmd),
+    (re.compile(r"^add\s+filament\b", re.I),       handle_add_filament_cmd),
+    (re.compile(r"^3?d?queue$", re.I),              handle_queue),
+    (re.compile(r"^confirm\s+(\d+)$", re.I),        handle_confirm),
+    (re.compile(r"^deny\s+(\d+)$", re.I),           handle_deny),
+    (re.compile(r'^force-cancel\s+(\d+)\s+"([^"]+)"\s+(\S+)$', re.I), handle_force_cancel),
+    (re.compile(r"^slice\s+(\d+(?:\s+.*)?)$", re.I), handle_slice),
+    (re.compile(r"^feedback\s+(\d+)\s+(.+)$", re.I), handle_feedback),
+    (re.compile(r"^(?:print|callie)\s+status$", re.I), handle_print_status),
+    (re.compile(r"^quick\s+quote\s+(.*)", re.I),    handle_quick_quote),
+    (re.compile(r"^quote\s+(.*)", re.I),            handle_quote),
+]
+
+ROUTES_DESIGN = [
+    (re.compile(r"^design\s+status$", re.I),  handle_design_status),
+    (re.compile(r"^design\s+(.*)", re.I),     handle_design),
+]
+
+ROUTES_MEDIA = [
+    (re.compile(r"^ingest(?:\s+(.*))?$", re.I),    handle_media_ingest),
+    (re.compile(r"^reel(?:\s+(.*))?$", re.I),      handle_media_reel),
+    (re.compile(r"^kit(?:\s+(.*))?$", re.I),       handle_media_kit),
+    (re.compile(r"^photo(?:\s+(.*))?$", re.I),     handle_media_photo),
+    (re.compile(r"^caption(?:\s+(.*))?$", re.I),   handle_media_caption),
+    (re.compile(r"^publish(?:\s+(.*))?$", re.I),   handle_media_publish),
+    (re.compile(r"^qa(?:\s+(.*))?$", re.I),        handle_media_qa),
+    (re.compile(r"^thumbnail(?:\s+(.*))?$", re.I), handle_media_thumbnail),
+    (re.compile(r"^media\s+status$", re.I),        handle_media_status),
+]
+
+ROUTES_BY_CTX = {
+    "all":     ROUTES_SYSTEM + ROUTES_PRINT + ROUTES_DESIGN + ROUTES_MEDIA,
+    "print":   ROUTES_SYSTEM + ROUTES_PRINT,
+    "media":   ROUTES_SYSTEM + ROUTES_MEDIA,
+    "general": ROUTES_SYSTEM,
+}
+
+
+def dispatch(text: str, channel_ctx: str) -> str:
+    clean = text.strip().lstrip("/")
+    routes = ROUTES_BY_CTX.get(channel_ctx, ROUTES_SYSTEM)
+    for pattern, handler in routes:
+        m = pattern.match(clean)
+        if m:
+            return sign(handler(m, text, channel_ctx))
+
+    # No command match — pass to model (conversation)
+    return sign(ask_model(text, channel_ctx=channel_ctx))
+
+# ── Discord bot ───────────────────────────────────────────────────────────────
+
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+
+
+@client.event
+async def on_ready():
+    log.info("Djinn Discord gateway ready — %s", client.user)
+    log.info("Routing: %d channels mapped", len(CHANNEL_CTX))
+
+
+@client.event
+async def on_message(message: discord.Message):
+    if message.author == client.user:
+        return
+    # ── Customer ORDER/EXPRESS + DM handling (SHOP_PATCH_APPLIED) ─────────────
+    if message.author.id != ALLOWED_USER:
+        import discord as _dc
+        _is_print   = CHANNEL_CTX.get(message.channel.id) == "print"
+        _text       = message.content.strip()
+        _text_lower = _text.lower()
+        _is_order   = _text_lower in ("order", "express")
+        _is_profile = bool(re.match(
+            r'^([ABCabc]|proto|standard|production|quality|draft)'
+            r'\s+(white|blue|red|black|pla|petg|abs|tpu)$',
+            _text, re.I))
+        _is_dm = isinstance(message.channel, _dc.DMChannel)
+
+        # ── STL/3MF attachment — single-shot order ────────────────────────────
+        _stl_atts = [
+            a for a in message.attachments
+            if a.filename.lower().endswith((".stl", ".3mf"))
+        ] if _is_print else []
+        if _stl_atts:
+            att = _stl_atts[0]
+            profile, color, note = _parse_order_caption(_text)
+            if profile and color:
+                ack = "Got your file — we're reviewing it. We'll confirm shortly.\n— Typhon's Forge"
+            else:
+                ack = (
+                    "Got your file!\n\n"
+                    "To complete your order, include your choice with the file:\n"
+                    "```\nB white\nA blue - no rush\nC black\n```\n"
+                    "See the pinned guide for all options."
+                )
+            await message.channel.send(ack)
+            cmd = f"djinn-model-fetch {att.url!r}"
+            if profile: cmd += f" --profile {profile}"
+            if color:   cmd += f" --color {color}"
+            if note:    cmd += f" --note {note!r}"
+            import asyncio
+            asyncio.get_event_loop().run_in_executor(None, run_shell, cmd, 300)
+            return
+
+        _looks_like_profile = bool(re.match(r'^[ABCabc]\s+\S+$', _text, re.I))
+
+        if _is_print and _is_profile:
+            reply = handle_customer_profile_pick(_text, str(message.author), str(message.author.id))
+            if reply:
+                await message.channel.send(reply)
+            return
+
+        if _is_print and _looks_like_profile:
+            await message.channel.send(
+                "Format: `A white` — profile letter + color name.\n"
+                "Colors: `white` · `blue` · `red` · `black`"
+            )
+            return
+
+        if _is_print and _is_order:
+            reply = handle_customer_order_notify(
+                str(message.author.id), str(message.author))
+            if reply:
+                await message.channel.send(reply)
+            return
+
+        if _is_dm:
+            try:
+                from forge.shop.customer_dm import handle_dm_reply
+                handle_dm_reply(str(message.author.id),
+                                message.content, str(message.id))
+            except Exception:
+                pass
+            return
+        return
+    # ── END SHOP PATCH ──────────────────────────────────────────────────────────
+
+    if message.guild and message.guild.id != GUILD_ID:
+        return
+
+    channel_id = message.channel.id
+    ctx = CHANNEL_CTX.get(channel_id, "ignore")
+
+    if ctx in ("ignore", "readonly"):
+        return
+
+    # ── STL/3MF drop from Javier ──────────────────────────────────────────────
+    if ctx == "print" and message.attachments:
+        _stl_j = [a for a in message.attachments if a.filename.lower().endswith((".stl", ".3mf"))]
+        if _stl_j:
+            att = _stl_j[0]
+            caption = message.content.strip()
+            profile, color, note = _parse_order_caption(caption)
+            cmd = f"djinn-model-fetch {att.url!r}"
+            if profile: cmd += f" --profile {profile}"
+            if color:   cmd += f" --color {color}"
+            if note:    cmd += f" --note {note!r}"
+            import asyncio
+            asyncio.get_event_loop().run_in_executor(None, run_shell, cmd, 300)
+            return
+
+
+    text = message.content.strip()
+    if not text:
+        return
+
+    log.info("← [#%s/%s] %r", message.channel, ctx, text[:80])
+
+    # ── In print channel, profile picks work for Javier too ───────────────────
+    if ctx == "print":
+        _PROFILE_RE = re.compile(
+            r'^([ABCabc]|proto|standard|production|quality|draft)'
+            r'\s+(white|blue|red|black|pla|petg|abs|tpu)$', re.I)
+        _LOOKS_RE = re.compile(r'^[ABCabc]\s+\S+$', re.I)
+        if _PROFILE_RE.match(text):
+            reply = handle_customer_profile_pick(text, str(message.author))
+            if reply:
+                await message.channel.send(reply)
+            return
+        if _LOOKS_RE.match(text):
+            await message.channel.send(
+                "Format: `A white` — profile letter + color name.\n"
+                "Colors: `white` · `blue` · `red` · `black`"
+            )
+            return
+
+        # ── snap: live AKASO camera shot ──────────────────────────────────────
+        if text.lower() in ("snap", "snapshot"):
+            import time, shutil, tempfile
+            latest = Path.home() / "Videos/print-monitor/snapshots/latest.jpg"
+            if latest.exists() and (time.time() - latest.stat().st_mtime) < 120:
+                with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as _tmp:
+                    tmp_path = Path(_tmp.name)
+                shutil.copy2(latest, tmp_path)
+                await message.channel.send(
+                    "📸 Calliope — live",
+                    file=discord.File(str(tmp_path), filename="calliope_snap.jpg"),
+                )
+                tmp_path.unlink(missing_ok=True)
+            else:
+                await message.channel.send(
+                    "❌ No recent frame — webcam monitor offline or camera disconnected."
+                )
+            return
+
+    async with message.channel.typing():
+        import asyncio
+        loop = asyncio.get_event_loop()
+        reply = await loop.run_in_executor(None, dispatch, text, ctx)
+
+    if len(reply) > 1990:
+        reply = reply[:1987] + "…"
+
+    await message.channel.send(reply)
+    log.info("→ [#%s] %r", message.channel, reply[:80])
+    _log_exchange(text, reply)
+
+
+def _log_exchange(user_text: str, bot_reply: str):
+    log_dir = Path.home() / "Obsidian/djinn/logs/conversations"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    log_file = log_dir / f"{today}.md"
+    ts = datetime.now().strftime("%H:%M:%S")
+    entry = f"\n### {ts}\n**Javier:** {user_text}\n**Djinn:** {bot_reply}\n"
+    try:
+        if not log_file.exists():
+            log_file.write_text(f"# Djinn Discord Log — {today}\n")
+        with log_file.open("a") as f:
+            f.write(entry)
+    except Exception as e:
+        log.warning("_log_exchange failed: %s", e)
+
+
+def main():
+    log.info("djinn-discord-gateway starting (model=%s)", MODEL)
+    client.run(BOT_TOKEN, log_handler=None)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,238 @@
+#!/home/drmanzo/.pyenv/versions/3.11.11/bin/python3
+"""
+djinn-ctx-router — runs as a service, keeps agent state current and workspace
+CONTEXT.md assembled. Runs on a timer; also triggered by vault-sync completion.
+
+- Updates ~/.openclaw/agents/salomon/STATE.md (live machine state)
+- Writes ~/.openclaw/workspace/CONTEXT.md (User + recent memory + state)
+- Re-indexes vault incrementally if files changed since last run
+"""
+
+import os
+import sys
+import json
+import time
+import logging
+import subprocess
+import requests
+from pathlib import Path
+from datetime import datetime
+
+# SESSION_GUARD — skip context assembly if no active user session
+_SESSION_FILE = Path.home() / '.local/share/djinn/active-session'
+if not _SESSION_FILE.exists():
+    import sys
+    print('[ctx-router] No active session — skipping context assembly.')
+    sys.exit(0)
+
+_DELTA_GUARD_PATH = str(Path.home() / "Obsidian/djinn/tools/delta-guard")
+if _DELTA_GUARD_PATH not in sys.path:
+    sys.path.insert(0, _DELTA_GUARD_PATH)
+from delta_guard import should_fire
+from timer_states import normalize_state
+
+WORKSPACE    = Path.home() / ".openclaw/workspace"
+AGENTS_DIR   = Path.home() / ".openclaw/agents"
+INDEX_DIR    = Path.home() / ".local/share/djinn/vault-index"
+VAULT_DIR    = Path.home() / "Obsidian"
+QUEUE_FILE   = Path.home() / ".local/share/djinn/print-queue.json"
+MOONRAKER    = "http://192.168.1.113:7125"
+OLLAMA       = "http://localhost:11434"
+INTERVAL     = 300  # seconds between updates (5 min)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [ctx-router] %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+log = logging.getLogger("djinn-ctx")
+
+
+def shell(cmd, timeout=15) -> str:
+    try:
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
+        return r.stdout.strip()
+    except Exception:
+        return ""
+
+
+def get_queue_summary() -> str:
+    if not QUEUE_FILE.exists():
+        return "Queue file not found."
+    try:
+        data = json.loads(QUEUE_FILE.read_text())
+        jobs = data.get("jobs", [])
+        if not jobs:
+            return "Print queue: empty."
+        lines = []
+        for j in jobs:
+            jid = j.get("id", "?")
+            status = j.get("status", "?")
+            note = j.get("note") or Path(j.get("model_path", "?")).name
+            lines.append(f"  #{jid} [{status}] {note}")
+        return "Print queue:\n" + "\n".join(lines)
+    except Exception as e:
+        return f"Queue read error: {e}"
+
+
+def get_printer_state() -> str:
+    try:
+        r = requests.get(
+            f"{MOONRAKER}/printer/objects/query?print_stats&extruder&heater_bed",
+            timeout=5
+        )
+        d = r.json()["result"]["status"]
+        ps = d["print_stats"]
+        e = d["extruder"]
+        b = d["heater_bed"]
+        state = ps["state"]
+        file_ = ps.get("filename") or "none"
+        hotend = f"{e['temperature']:.0f}/{e['target']:.0f}°C"
+        bed = f"{b['temperature']:.0f}/{b['target']:.0f}°C"
+        return f"Calliope: {state}  file={file_}  hotend={hotend}  bed={bed}"
+    except Exception:
+        return "Calliope: unreachable"
+
+
+def get_ollama_state() -> str:
+    try:
+        r = requests.get(f"{OLLAMA}/api/ps", timeout=5)
+        models = r.json().get("models", [])
+        if not models:
+            return "Ollama: no models in memory (idle)"
+        names = [m["name"] for m in models]
+        return f"Ollama loaded: {', '.join(names)}"
+    except Exception:
+        return "Ollama: unreachable"
+
+
+def get_vault_sync() -> str:
+    out = shell(f"git -C {VAULT_DIR} log --format='%ar — %s' -1")
+    return f"Vault last sync: {out}" if out else "Vault sync: unknown"
+
+
+def build_state() -> str:
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    lines = [
+        f"# Salomon — Current State",
+        f"",
+        f"*Updated: {now}*",
+        f"",
+        get_printer_state(),
+        get_queue_summary(),
+        get_ollama_state(),
+        get_vault_sync(),
+    ]
+    return "\n".join(lines)
+
+
+def trim_to_sections(text: str, max_chars: int) -> str:
+    """Keep full sections up to max_chars; never cut mid-section."""
+    if len(text) <= max_chars:
+        return text
+    lines = text.splitlines()
+    out = []
+    used = 0
+    for line in lines:
+        cost = len(line) + 1
+        if used + cost > max_chars:
+            break
+        out.append(line)
+        used += cost
+    return "\n".join(out)
+
+
+def build_context() -> str:
+    """Assemble CONTEXT.md — budget ~5000 chars so SOUL.md also loads within 15K."""
+    user_file     = WORKSPACE / "USER.md"
+    soul_file     = WORKSPACE / "SOUL.md"
+    state_file    = AGENTS_DIR / "salomon" / "STATE.md"
+    identity_file = AGENTS_DIR / "salomon" / "IDENTITY.md"
+    skills_file   = AGENTS_DIR / "salomon" / "SKILLS.md"
+
+    user_text  = trim_to_sections(
+        user_file.read_text(errors="replace").strip() if user_file.exists() else "",
+        2500
+    )
+    soul_text  = soul_file.read_text(errors="replace").strip() if soul_file.exists() else ""
+    identity   = identity_file.read_text(errors="replace").strip() if identity_file.exists() else ""
+    skills     = skills_file.read_text(errors="replace").strip() if skills_file.exists() else ""
+    state_text = state_file.read_text(errors="replace").strip() if state_file.exists() else ""
+
+    # Order: Soul (behavior) → User → Identity → Skills → Live state
+    parts = []
+    if soul_text:
+        parts.append(f"<!-- SOUL -->\n{soul_text}")
+    if user_text:
+        parts.append(f"<!-- USER -->\n{user_text}")
+    if identity:
+        parts.append(f"<!-- AGENT IDENTITY -->\n{identity}")
+    if skills:
+        parts.append(f"<!-- AGENT SKILLS -->\n{skills}")
+    if state_text:
+        parts.append(f"<!-- LIVE STATE -->\n{state_text}")
+
+    return "\n\n---\n\n".join(parts)
+
+
+def run_incremental_index():
+    """Trigger incremental vault reindex (non-blocking, best-effort)."""
+    try:
+        subprocess.Popen(
+            ["djinn-vault-indexer"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+    except Exception as e:
+        log.warning("Could not trigger indexer: %s", e)
+
+
+def tick():
+    log.info("Updating agent state and workspace context…")
+
+    # Update STATE.md
+    state = build_state()
+    state_file = AGENTS_DIR / "salomon" / "STATE.md"
+    state_file.parent.mkdir(parents=True, exist_ok=True)
+    state_file.write_text(state)
+
+    # Update CONTEXT.md in workspace
+    context = build_context()
+    context_file = WORKSPACE / "CONTEXT.md"
+    context_file.write_text(context)
+
+    # Trigger incremental index in background
+    run_incremental_index()
+
+    log.info("Context updated (%d chars in CONTEXT.md)", len(context))
+
+
+def tick_if_changed():
+    """Run tick() only if vault commit hash changed since last run."""
+    vault_hash = shell(f"git -C {VAULT_DIR} rev-parse HEAD")
+    raw_state = {"vault_commit_hash": vault_hash}
+    state = normalize_state(raw_state, "ctx-router")
+    if should_fire(state, "ctx-router"):
+        tick()
+    else:
+        log.info("Vault unchanged — skipping context rebuild")
+
+
+def main():
+    log.info("djinn-ctx-router starting (interval=%ds)", INTERVAL)
+    while True:
+        try:
+            # Session guard — skip tick if no active user session
+            active_session = int(os.popen("loginctl list-sessions --no-legend 2>/dev/null | grep -c drmanzo").read().strip() or 0)
+            discord_active = int(os.popen("pgrep -f 'discord|opencode|claude' 2>/dev/null | wc -l").read().strip() or 0)
+            if active_session == 0 and discord_active == 0:
+                log.info("No active session — skipping context assembly")
+            else:
+                tick_if_changed()
+        except Exception as e:
+            log.exception("Tick error: %s", e)
+        time.sleep(INTERVAL)
+
+
+if __name__ == "__main__":
+    main()
