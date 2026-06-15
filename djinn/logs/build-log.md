@@ -1386,3 +1386,12 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-06-14_bug-crealityprint-v6-cli-slice-0-segfault.md`
 
 *— Claude*
+
+## 2026-06-15: Gateway secrets cleanup + Telegram help update
+
+- Removed hardcoded Discord + Telegram tokens from `djinn-discord-gateway` and `djinn-webcam-monitor`
+- Created `~/.djinn.env` (chmod 600, not git-tracked); all three service files updated with `EnvironmentFile=`
+- `djinn-telegram-gateway` `handle_help()` rewritten: all owner commands listed, organized by category
+- All three services restarted, confirmed active
+
+*— Claude*
