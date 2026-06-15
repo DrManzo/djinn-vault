@@ -1335,3 +1335,12 @@ created: 2026-05-19
 - Zombie old process blocking camera after service restart — cleared with `kill`; added explicit release in code to prevent recurrence
 
 *— Claude*
+
+## 2026-06-14: djinn-design Boot Fix — Claude
+
+### Fixed
+- `openai` missing from `~/.venvs/djinn-orchestrator` — installed `openai==2.41.1`
+- `weighted_median` missing from `commissions/price.py` — added alias `weighted_median = _market_median` (function existed under private name)
+- `~/.local/bin/djinn-design` `--status` handler called `orchestrator.run("status")` instead of `_show_queue()` — creating a stale job on every status check; fixed to call `_show_queue()` directly
+
+*— Claude*

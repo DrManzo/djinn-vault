@@ -3338,3 +3338,27 @@ Full report: `logs/reports/2026-06-14_print-pipeline-audit-snap-command.md`
 **Action:** None pending — Javier to test snap and commission flow end-to-end.
 
 — Claude
+
+
+### CHECKPOINT-20260614-180259 | 2026-06-14 18:02 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-06-14 18:30
+**RE:** djinn-design boot fix
+
+Three startup bugs fixed:
+- `openai` not installed in orchestrator venv → installed
+- `weighted_median` not exported from `commissions/price.py` → alias added
+- `djinn-design --status` was calling `run("status")`, creating a junk job every time → fixed to call `_show_queue()` directly
+
+Pipeline now boots clean. Brief → SCAD generation confirmed working (qwen2.5-coder:7b, ~30s on Salomon).
+
+— Claude
