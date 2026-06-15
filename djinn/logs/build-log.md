@@ -1296,12 +1296,11 @@ created: 2026-05-19
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--aust--li--verview-2026-06-14-md-stub.md`
 *— Typhon*
 
-<<<<<<< Updated upstream
 ## 2026-06-14: AUTO-STUB — slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md
 - djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md
 - ⚠️ Full report not filed — stub at `logs/reports/2026-06-14_slipbox--jinn--nfrastructure--reakdown--nd--ithub--ccess--etup-md-stub.md`
 *— Typhon*
-=======
+
 ## 2026-06-14: Print Pipeline Full Audit + Repair — Claude
 
 ### Built
@@ -1322,4 +1321,17 @@ created: 2026-05-19
 - Calliope confirmed at 192.168.1.114 (not .113 which is Typhon)
 
 *— Claude*
->>>>>>> Stashed changes
+
+## 2026-06-14: snap Command + Webcam Pipeline Fix — Claude
+
+### Built
+- `djinn-discord-gateway`: `snap`/`snapshot` command in `#3d-printing` — posts live AKASO frame from `latest.jpg`
+- `djinn-webcam-monitor`: writes `~/Videos/print-monitor/snapshots/latest.jpg` every 10 s for on-demand snap
+- `djinn-webcam-monitor`: fixed `_open()` — reverted to integer index (V4L2 backend rejects string paths), added explicit `cap.release()` on failed open to prevent zombie fd hold
+
+### Bugs Fixed
+- V4L2 "can't be used to capture by name" — root cause: string path `/dev/video2` rejected by V4L2 backend; fix: `cv2.VideoCapture(idx, CAP_V4L2)` integer form
+- Device busy on service restart — root cause: failed VideoCapture held fd without releasing; fix: explicit `cap.release()` before returning False
+- Zombie old process blocking camera after service restart — cleared with `kill`; added explicit release in code to prevent recurrence
+
+*— Claude*
