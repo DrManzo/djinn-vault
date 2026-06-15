@@ -210,6 +210,9 @@ def _market_median(comparables: list) -> Optional[float]:
     return prices[-1]  # fallback (floating-point edge)
 
 
+weighted_median = _market_median
+
+
 def _value_premium(cost_floor: float, market: MarketSpec) -> float:
     premium = cost_floor * market.customization_premium_pct
     premium += cost_floor * market.rush_premium_pct
