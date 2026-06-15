@@ -1344,3 +1344,11 @@ created: 2026-05-19
 - `~/.local/bin/djinn-design` `--status` handler called `orchestrator.run("status")` instead of `_show_queue()` — creating a stale job on every status check; fixed to call `_show_queue()` directly
 
 *— Claude*
+
+## 2026-06-14: djinn-design Pipeline Routing Fixes — Claude
+
+### Fixed
+- `orchestrator.py`: `--job N --full` was calling LLM classifier on the job note → classified as "new_design" → design_gen re-ran unnecessarily. Fix: when `auto_advance=True` + `job_id` set, intent = "auto" and routing is handled entirely by `auto_advance and state.status == X` conditions.
+- `orchestrator.py`: price agent never ran in `--full` mode. Root cause: `plate_nest.run()` sets `state.status = "priced"` before the price trigger at line 172 checks `state.status == "plate_nest"` — that check was always False by the time it ran. Fix: capture `_pre_plate_status = state.status` before `plate_nest.run()` and use that captured value for both the plate and price triggers.
+
+*— Claude*

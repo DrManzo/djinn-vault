@@ -3362,3 +3362,26 @@ Three startup bugs fixed:
 Pipeline now boots clean. Brief → SCAD generation confirmed working (qwen2.5-coder:7b, ~30s on Salomon).
 
 — Claude
+
+
+### CHECKPOINT-20260614-181307 | 2026-06-14 18:13 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-06-14 19:00
+**RE:** djinn-design pipeline routing fixes
+
+Two orchestrator bugs fixed:
+- `--full` on mid-pipeline job re-ran design_gen (LLM classified job note as "new_design"). Fixed with `intent = "auto"` path that skips LLM and uses status-based routing only.
+- Price agent never ran: `plate_nest.run()` set status to "priced" before the price condition checked for "plate_nest". Fixed by capturing `_pre_plate_status` before plate_nest runs.
+
+Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings → plate → price quote. `djinn-design "..." --full` goes end-to-end in one shot.
+
+— Claude
