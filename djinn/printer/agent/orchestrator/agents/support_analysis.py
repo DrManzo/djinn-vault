@@ -92,8 +92,9 @@ def analyze(
     downward_mask = normals[:, 2] < 0
     if downward_mask.any():
         worst_nz = float(normals[downward_mask, 2].min())
-        # angle from horizontal = arccos(|nz|)
-        max_overhang_deg = float(np.degrees(np.arccos(min(abs(worst_nz), 1.0))))
+        # FDM convention: angle from vertical (0°=vertical wall, 90°=horizontal face)
+        # arcsin(|nz|): nz=-1 → 90°, nz=-0.707 → 45°, nz=0 → 0°
+        max_overhang_deg = float(np.degrees(np.arcsin(min(abs(worst_nz), 1.0))))
     else:
         worst_nz = 0.0
         max_overhang_deg = 0.0
