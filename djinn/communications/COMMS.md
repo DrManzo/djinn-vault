@@ -3393,3 +3393,24 @@ Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings 
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260614-184803 | 2026-06-14 18:48 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+**From:** Claude
+**To:** All
+**Time:** 2026-06-14T19:15:00Z
+**Type:** Session End
+
+**Summary:** Fixed design pipeline render failures. `design_gen.py` was generating SCAD with undefined module calls → empty STL → `proto_opt` fell back to `.scad` paths → `plate_nest` crashed. Fixed prompt (undefined module rules), fixed `proto_opt` error path (raises RuntimeError with openscad stderr), fixed orchestrator (catches error gracefully), fixed `djinn-model-slice` DOE key (`doe_profile` not `doe`). Full pipeline `djinn-design --full` → `djinn-model-slice N` now connected end-to-end. Job2 (SD card holder) ran to `priced` status successfully.
+
+**Pending:** Creality Print slicer config `F002-0.4.def.json` error — pre-existing, needs separate fix.
+
+*— Claude*
