@@ -1,0 +1,1013 @@
+#!/usr/bin/env python3
+"""
+djinn-telegram-gateway — Djinn presence on Telegram.
+
+Architecture: Python intercepts commands → runs shell directly → injects output
+into Groq llama-3.3-70b for formatting. Model never needs to call tools.
+Identity loaded from SOUL.md + IDENTITY.md on every session start.
+"""
+
+import re
+import json
+import time
+import logging
+import subprocess
+import sys
+import os
+import requests
+from pathlib import Path
+from datetime import datetime
+
+# ── Config ────────────────────────────────────────────────────────────────────
+def _load_ops_token():
+    env = Path.home() / ".config/djinn/ops-tg.env"
+    if env.exists():
+        for line in env.read_text().splitlines():
+            if line.startswith("DJINN_TG_TOKEN="):
+                return line.split("=", 1)[1].strip()
+    return os.environ.get("DJINN_TG_TOKEN", "")
+
+BOT_TOKEN    = _load_ops_token()
+ALLOWED_IDS  = {int(x) for x in os.environ.get("DJINN_TG_ALLOWED", "7620067588").split(",")}
+TG_API       = f"https://api.telegram.org/bot{BOT_TOKEN}"
+POLL_TIMEOUT = 30
+GROQ_URL     = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_STT_URL = "https://api.groq.com/openai/v1/audio/transcriptions"
+MODEL        = os.environ.get("DJINN_MODEL", "llama-3.3-70b-versatile")
+
+def _groq_key():
+    env = Path.home() / ".config/djinn/groq.env"
+    try:
+        for line in env.read_text().splitlines():
+            if line.startswith("GROQ_API_KEY="):
+                return line.split("=", 1)[1].strip()
+    except Exception:
+        pass
+    return os.environ.get("GROQ_API_KEY", "")
+
+def _load_identity():
+    ws = Path.home() / ".openclaw/workspace"
+    parts = []
+    for fname in ("IDENTITY.md", "SOUL.md"):
+        f = ws / fname
+        if f.exists():
+            parts.append(f.read_text().strip())
+    today = datetime.now().strftime("%Y-%m-%d %H:%M")
+    base = "\n\n---\n\n".join(parts) if parts else "You are Djinn."
+    return (
+        f"{base}\n\n"
+        f"---\n\n"
+        f"Typhon's Forge, the print shop, the research pipeline, the media pipeline — "
+        f"these are yours. You operate them. Javier directs you.\n"
+        f"Current time: {today}\n"
+        f"Sign responses: — Djinn"
+    )
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [tg-gw] %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+log = logging.getLogger("djinn-tg")
+
+# ── Telegram helpers ──────────────────────────────────────────────────────────
+
+def tg_get(method, params=None, timeout=35):
+    r = requests.get(f"{TG_API}/{method}", params=params, timeout=timeout)
+    r.raise_for_status()
+    return r.json()
+
+def tg_post(method, payload, timeout=35):
+    r = requests.post(f"{TG_API}/{method}", json=payload, timeout=timeout)
+    r.raise_for_status()
+    return r.json()
+
+def send(chat_id, text):
+    if len(text) > 4096:
+        text = text[:4090] + "\n…"
+    tg_post("sendMessage", {"chat_id": chat_id, "text": text})
+
+def send_typing(chat_id):
+    try:
+        tg_post("sendChatAction", {"chat_id": chat_id, "action": "typing"})
+    except Exception:
+        pass
+
+def send_photo(chat_id, image_path: Path, caption: str = ""):
+    try:
+        with open(image_path, "rb") as f:
+            requests.post(
+                f"{TG_API}/sendPhoto",
+                data={"chat_id": chat_id, "caption": caption},
+                files={"photo": ("snap.jpg", f, "image/jpeg")},
+                timeout=30,
+            ).raise_for_status()
+    except Exception as e:
+        log.warning("send_photo failed: %s", e)
+        send(chat_id, f"📸 snap failed: {e}")
+
+def send_voice(chat_id, ogg_path: Path):
+    """Send an OGG Opus voice message to chat_id."""
+    try:
+        with open(ogg_path, "rb") as f:
+            requests.post(
+                f"{TG_API}/sendVoice",
+                data={"chat_id": chat_id},
+                files={"voice": ("voice.ogg", f, "audio/ogg")},
+                timeout=30,
+            ).raise_for_status()
+    except Exception as e:
+        log.warning("send_voice failed: %s", e)
+
+def transcribe_voice(file_id: str) -> str:
+    """Download a Telegram voice message and transcribe via Groq Whisper."""
+    try:
+        # Get download URL
+        info = tg_get("getFile", {"file_id": file_id})
+        file_path = info["result"]["file_path"]
+        url = f"https://api.telegram.org/file/bot{BOT_TOKEN}/{file_path}"
+        audio_data = requests.get(url, timeout=30).content
+        # Transcribe via Groq Whisper
+        r = requests.post(
+            GROQ_STT_URL,
+            headers={"Authorization": f"Bearer {_groq_key()}"},
+            files={"file": ("voice.ogg", audio_data, "audio/ogg")},
+            data={"model": "whisper-large-v3-turbo", "response_format": "text"},
+            timeout=30,
+        )
+        r.raise_for_status()
+        return r.text.strip()
+    except Exception as e:
+        log.warning("transcribe_voice failed: %s", e)
+        return ""
+
+# ── Voice mode state ──────────────────────────────────────────────────────────
+VOICE_MODE    = False
+R1_MODE       = False   # compact text + auto-voice (Rabbit R1 profile)
+COMPACT_MODE  = False   # no markdown, shorter max_tokens
+
+# ── Shell runner ──────────────────────────────────────────────────────────────
+
+def run_shell(cmd, timeout=30):
+    """Run a shell command, return (stdout, stderr, returncode)."""
+    try:
+        r = subprocess.run(
+            cmd, shell=True, capture_output=True, text=True,
+            timeout=timeout,
+            env={**os.environ, "HOME": os.path.expanduser("~")}
+        )
+        return r.stdout.strip(), r.stderr.strip(), r.returncode
+    except subprocess.TimeoutExpired:
+        return "", "Command timed out.", 1
+    except Exception as e:
+        return "", str(e), 1
+
+# ── Ollama caller ─────────────────────────────────────────────────────────────
+
+IDENTITY = _load_identity()
+
+def get_ctx(query: str) -> str:
+    try:
+        r = subprocess.run(
+            ["djinn-ctx-assembler", query, "--budget", "3000"],
+            capture_output=True, text=True, timeout=10
+        )
+        return r.stdout.strip()
+    except Exception:
+        return ""
+
+def ask_model(user_msg, context=None):
+    djinn_ctx = get_ctx(user_msg)
+    system = IDENTITY
+    if djinn_ctx:
+        system = f"{IDENTITY}\n\n[Vault context]\n{djinn_ctx}"
+    if COMPACT_MODE:
+        system += "\n\nOUTPUT RULES: You are on a small mobile screen. No markdown. No bold, no bullets, no headers. Plain sentences only. Keep responses under 150 words."
+
+    messages = [{"role": "system", "content": system}]
+    if context:
+        messages.append({
+            "role": "user",
+            "content": (
+                f"[Command output — format this for Javier. Be concise.]\n\n"
+                f"{context}\n\n"
+                f"[Original command: {user_msg}]"
+            )
+        })
+    else:
+        messages.append({"role": "user", "content": user_msg})
+
+    max_tokens = 400 if COMPACT_MODE else 1024
+    try:
+        r = requests.post(
+            GROQ_URL,
+            json={"model": MODEL, "messages": messages, "temperature": 0.4, "max_tokens": max_tokens},
+            headers={"Authorization": f"Bearer {_groq_key()}", "Content-Type": "application/json"},
+            timeout=60,
+        )
+        r.raise_for_status()
+        text = r.json()["choices"][0]["message"]["content"].strip()
+        return text or "— Djinn"
+    except Exception as e:
+        log.error("Groq error: %s — falling back to Ollama", e)
+        try:
+            fb = requests.post(
+                "http://localhost:11434/api/chat",
+                json={"model": "deepseek-r1:7b", "messages": messages, "stream": False,
+                      "options": {"temperature": 0.4, "num_predict": 512}},
+                timeout=60,
+            )
+            text = fb.json().get("message", {}).get("content", "").strip()
+            text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+            return text or "— Djinn"
+        except Exception as e2:
+            return f"[Djinn unavailable: {e2}]"
+
+# ── Command dispatch ──────────────────────────────────────────────────────────
+
+def handle_queue(_match, _raw):
+    out, err, rc = run_shell("cat /home/drmanzo/.local/share/djinn/print-queue.json")
+    if rc != 0 or not out:
+        return ask_model("queue", context=f"Error reading print queue: {err or 'empty'}")
+    try:
+        data = json.loads(out)
+        jobs = data.get("jobs", [])
+        if not jobs:
+            return "Print queue is empty. — Djinn"
+        lines = ["Print queue:"]
+        for j in jobs:
+            jid = j.get("id", "?")
+            status = j.get("status", "unknown")
+            note = j.get("note") or os.path.basename(j.get("model_path", "unknown"))
+            stats = j.get("stats") or {}
+            t = stats.get("estimated_time", "")
+            g = stats.get("filament_g", "")
+            detail = f"{t} / {g}g" if t and g else t or ""
+            lines.append(f"  #{jid} [{status}] {note}" + (f" — {detail}" if detail else ""))
+        return "\n".join(lines) + "\n— Djinn"
+    except json.JSONDecodeError:
+        return ask_model("queue", context=out)
+
+def handle_confirm(match, _raw):
+    n = match.group(1)
+    out, err, rc = run_shell(f"djinn-confirm-print {n}")
+    if rc != 0:
+        return err.strip() or out.strip() or f"confirm {n} failed"
+    return f"✅ Job #{n} confirmed — print starting."
+
+def handle_deny(match, _raw):
+    n = match.group(1)
+    out, err, rc = run_shell(f"djinn-deny-print {n}")
+    if rc != 0:
+        return err.strip() or out.strip() or f"deny {n} blocked — Calliope is printing"
+    return f"❌ Job #{n} denied."
+
+def handle_force_cancel(match, _raw):
+    n      = match.group(1)
+    reason = match.group(2).strip()
+    pin    = match.group(3).strip()
+    out, err, rc = run_shell(f'djinn-force-cancel {n} "{reason}" {pin}')
+    if rc != 0:
+        return err.strip() or out.strip() or "force-cancel failed"
+    return out.strip() or "Print cancelled."
+
+def handle_slice(match, _raw):
+    n = match.group(1)
+    out, err, rc = run_shell(f"djinn-model-slice {n}", timeout=120)
+    context = out or err or f"djinn-model-slice {n} returned code {rc}"
+    return ask_model(f"slice {n}", context=context)
+
+def handle_print_status(_match, _raw):
+    # Moonraker status
+    out, err, rc = run_shell(
+        "curl -s http://192.168.1.113:7125/printer/objects/query?"
+        "print_stats&extruder&heater_bed 2>&1 | python3 -c \""
+        "import json,sys; d=json.load(sys.stdin)['result']['status'];"
+        "ps=d['print_stats']; e=d['extruder']; b=d['heater_bed'];"
+        "print(f\\\"State: {ps['state']}  File: {ps['filename'] or 'none'}\\\");"
+        "print(f\\\"Progress: {ps.get('print_duration',0):.0f}s  Layer: {ps.get('info',{}).get('current_layer','?')}/{ps.get('info',{}).get('total_layer','?')}\\\");"
+        "print(f\\\"Hotend: {e['temperature']:.1f}/{e['target']:.0f}°C  Bed: {b['temperature']:.1f}/{b['target']:.0f}°C\\\");"
+        "\""
+    )
+    context = out or err or "Could not reach Moonraker at 192.168.1.113:7125"
+    return ask_model("print status", context=context)
+
+def handle_quote(match, raw):
+    args = match.group(1).strip()
+    out, err, rc = run_shell(f"djinn-print-quote {args}", timeout=60)
+    context = out or err or f"djinn-print-quote {args} returned code {rc}"
+    return ask_model(f"quote {args}", context=context)
+
+def handle_quick_quote(match, raw):
+    args = match.group(1).strip()
+    out, err, rc = run_shell(f"djinn-print-quote --quick {args}", timeout=60)
+    context = out or err or f"djinn-print-quote --quick {args} returned code {rc}"
+    return ask_model(f"quick quote {args}", context=context)
+
+def handle_design_status(_match, _raw):
+    out, err, rc = run_shell("djinn-design status")
+    context = out or err or "djinn-design status returned nothing"
+    return ask_model("design status", context=context)
+
+def handle_design(match, raw):
+    args = match.group(1).strip()
+    out, err, rc = run_shell(f"djinn-design {args}", timeout=120)
+    context = out or err or f"djinn-design {args} returned code {rc}"
+    return ask_model(f"design {args}", context=context)
+
+def handle_status(_match, _raw):
+    out, err, rc = run_shell("djinn-agent-doctor --short", timeout=30)
+    return out or err or "Could not run health check."
+
+def handle_monitor_status(_match, _raw):
+    import pathlib
+    state_file = pathlib.Path.home() / ".local/share/djinn/webcam-state.json"
+    if not state_file.exists():
+        return "Webcam monitor not running or no data yet.\n— Djinn"
+    try:
+        s = json.loads(state_file.read_text())
+        mode  = s.get("mode", "unknown")
+        pst   = s.get("print_state", "unknown")
+        dur   = int(s.get("duration", 0))
+        rec   = "recording" if s.get("recording") else "not recording"
+        fail  = s.get("in_failure", False)
+        h, r  = divmod(dur, 3600)
+        m_min, sec = divmod(r, 60)
+        dur_s = f"{h}h {m_min}m" if h else f"{m_min}m {sec}s"
+        lines = [
+            f"Webcam monitor: {mode}",
+            f"Print state: {pst}  Duration: {dur_s}",
+            f"Camera: {rec}",
+        ]
+        if fail:
+            lines.append("⚠️ FAILURE STATE — printer paused")
+        lines.append("— Djinn")
+        return "\n".join(lines)
+    except Exception as e:
+        return f"Could not read webcam state: {e}\n— Djinn"
+
+def handle_help(_match, _raw):
+    return (
+        "Djinn commands (all require / prefix):\n"
+        "  /queue                — print queue\n"
+        "  /confirm N            — start print job N on Calliope\n"
+        "  /deny N               — reject job N\n"
+        "  /force-cancel N \"reason\" PIN — emergency cancel live print (PIN required)\n"
+        "  /slice N              — slice job N\n"
+        "  /print status         — Calliope live state\n"
+        "  /callie status        — same as print status\n"
+        "  /status               — full system health check\n"
+        "  /kit [args]           — build stitch-kit + upload to Drive\n"
+        "  /quote [args]         — commission price quote\n"
+        "  /quick quote [args]   — fast quote (no market fetch)\n"
+        "  /design status        — manufacturing orchestrator status\n"
+        "  /design [args]        — run design agent\n"
+        "  /voice on|off         — toggle voice message responses\n"
+        "  /r1 [on|off]          — R1 mode: compact text + auto-voice (Rabbit R1)\n"
+        "  /gemini <cmd> <args>  — Gemini AI (ask/youtube/url/doc/research)\n"
+        "  /help                 — this list\n"
+        "Anything without / is conversation.\n"
+        "— Djinn"
+    )
+
+
+def handle_voice(m, _raw):
+    global VOICE_MODE
+    arg = (m.group(1) or "").strip().lower()
+    if arg == "on":
+        VOICE_MODE = True
+        return "Voice mode on — I'll send audio for conversational replies.\n— Djinn"
+    elif arg == "off":
+        VOICE_MODE = False
+        return "Voice mode off.\n— Djinn"
+    status = "on" if VOICE_MODE else "off"
+    return f"Voice mode is currently {status}. Use /voice on or /voice off.\n— Djinn"
+
+def handle_r1(m, _raw):
+    """Toggle R1 mode — compact text + auto-voice for Rabbit R1 device."""
+    global R1_MODE, VOICE_MODE, COMPACT_MODE
+    arg = (m.group(1) or "").strip().lower()
+    if arg == "on" or arg == "":
+        R1_MODE = VOICE_MODE = COMPACT_MODE = True
+        return "R1 mode on. Voice on, compact text on. Speak or type commands.\n— Djinn"
+    elif arg == "off":
+        R1_MODE = VOICE_MODE = COMPACT_MODE = False
+        return "R1 mode off.\n— Djinn"
+    status = "on" if R1_MODE else "off"
+    return f"R1 mode is {status}. /r1 on or /r1 off.\n— Djinn"
+
+
+# SHOP_PATCH_APPLIED
+import pathlib as _pl
+
+
+# ── Engraving handlers ────────────────────────────────────────────────────────
+
+def handle_engrave(match, _raw):
+    """
+    engrave <job_id> <description>
+    engrave <stl_path> <description>
+    Runs EngravingAgent on the specified job/STL and returns 3 proposals.
+    """
+    try:
+        from agent.orchestrator import orchestrator
+    except ImportError as e:
+        return f"Engraving agent not available: {e}"
+
+    arg1 = match.group(1).strip()
+    request = match.group(2).strip()
+
+    # Determine if arg1 is a job ID (integer) or a file path
+    if arg1.isdigit():
+        job_id = int(arg1)
+        try:
+            state = orchestrator.run(
+                user_input=request,
+                job_id=job_id,
+                engrave_request=request,
+            )
+        except Exception as e:
+            return f"Engrave failed for job {job_id}: {e}"
+    else:
+        # Treat as STL path
+        stl_path = arg1
+        if not _pl.Path(stl_path).exists():
+            # Try under printer-files/queue
+            alt = _pl.Path.home() / "printer-files/queue" / stl_path
+            if alt.exists():
+                stl_path = str(alt)
+            else:
+                return f"STL not found: {stl_path}"
+        try:
+            state = orchestrator.run(
+                user_input=request,
+                engrave_request=request,
+            )
+            state.source_stl = stl_path
+            state.model_path = stl_path
+            state.engraving_request = request
+            from agent.orchestrator.agents import engrave as _eng
+            from agent.orchestrator.llm import LLM
+            state = _eng.run(state, LLM())
+            state.save()
+        except Exception as e:
+            return f"Engrave analysis failed: {e}"
+
+    proposals = state.engraving_proposals
+    if not proposals or state.status == 'engrave_error':
+        return f"Engrave error (job #{state.id}): {state.note}"
+
+    lines = [
+        f"🔍 Job #{state.id} — Engraving Analysis",
+        f"Request understood: {proposals.get('request_understood', request)}",
+        f"Geometry: {proposals.get('geometry_notes', '—')}",
+        "",
+    ]
+    for p in proposals.get('proposals', []):
+        lines.append(f"[{p['rank']}] {p['label']} (score {p['engravability_score']})")
+        lines.append(f"    {p['position_description']}")
+        lines.append(f"    {p['style']} · depth {p['depth_mm']}mm · font {p['font_height_mm']}mm")
+        lines.append(f"    {p['rationale']}")
+        for w in p.get('warnings', []):
+            lines.append(f"    ⚠ {w}")
+        lines.append("")
+
+    if proposals.get('hard_blocks'):
+        for b in proposals['hard_blocks']:
+            lines.append(f"✗ BLOCKED: {b}")
+
+    lines.append(f"Reply: approve engrave 1  /  approve engrave 2  /  approve engrave 3")
+    lines.append(f"(job #{state.id})")
+    return "\n".join(lines)
+
+
+def handle_approve_engrave(match, _raw):
+    """
+    approve engrave <N>
+    approve engrave <N> <job_id>
+    Approves proposal N for the most recent (or specified) engrave job.
+    """
+    try:
+        from agent.orchestrator import orchestrator
+        from agent.orchestrator.project_state import _load_queue
+    except ImportError as e:
+        return f"Orchestrator not available: {e}"
+
+    choice = int(match.group(1))
+    job_id_str = match.group(2).strip() if match.group(2) else ""
+
+    if job_id_str.isdigit():
+        job_id = int(job_id_str)
+    else:
+        # Find most recent job with status engrave_pending_approval
+        queue = _load_queue()
+        pending = [j for j in queue.get('jobs', [])
+                   if j.get('status') == 'engrave_pending_approval']
+        if not pending:
+            return "No engraving pending approval. Run engrave first."
+        job_id = pending[-1]['id']
+
+    try:
+        state = orchestrator.approve_engrave(job_id, choice)
+    except Exception as e:
+        return f"Approve failed: {e}"
+
+    spec = state.engraving_spec
+    if not spec:
+        return f"Approval recorded for job #{job_id} but no spec returned."
+
+    lines = [
+        f"✅ Engraving approved — job #{job_id}",
+        f"   {spec.get('label', '')}",
+        f"   {spec.get('style', 'deboss')} · depth {spec.get('depth_mm')}mm · "
+        f"font {spec.get('font_height_mm')}mm",
+        f"   {spec.get('position_description', '')}",
+    ]
+    if spec.get('warnings'):
+        for w in spec['warnings']:
+            lines.append(f"   ⚠ {w}")
+    lines.append("")
+    lines.append("Run  slice N  to slice, or hand off to djinn-model-text-engrave.")
+    return "\n".join(lines)
+
+
+def handle_paid(m, _raw):
+    oid = m.group(1).upper()
+    ref = m.group(2).strip() if m.group(2) else None
+    try:
+        from forge.shop.customer_dm import handle_owner_paid
+        return handle_owner_paid(oid, ref)
+    except Exception as e:
+        return f"Error: {e}"
+
+
+def handle_shipped(m, _raw):
+    oid      = m.group(1).upper()
+    tracking = m.group(2).strip() if m.group(2) else ""
+    try:
+        from forge.shop.customer_dm import handle_owner_shipped
+        return handle_owner_shipped(oid, tracking)
+    except Exception as e:
+        return f"Error: {e}"
+
+
+def handle_ship(m, _raw):
+    oid     = m.group(1).upper()
+    service = m.group(2).strip() if m.group(2) else None
+    try:
+        from forge.shop.shipping_agent import handle_ship_command
+        return handle_ship_command(oid, service)
+    except Exception as e:
+        return f"Shipping error: {e}"
+
+
+def handle_track(m, _raw):
+    try:
+        from forge.shop.shipping_agent import track_shipment
+        return track_shipment(m.group(1).upper())
+    except Exception as e:
+        return f"Tracking error: {e}"
+
+
+def handle_inventory_tg(_m, _raw):
+    try:
+        from forge.shop.inventory import format_stock_report, init_inventory
+        init_inventory()
+        return format_stock_report()
+    except Exception as e:
+        return f"Inventory error: {e}"
+
+
+def handle_low_stock_tg(_m, _raw):
+    try:
+        from forge.shop.inventory import low_stock_alert, init_inventory
+        init_inventory()
+        alerts = low_stock_alert()
+        if not alerts:
+            return "No low stock alerts."
+        return "\n".join([f"  {s['color']} {s['material']}: {s['grams_remaining']:.0f}g"
+                           for s in alerts])
+    except Exception as e:
+        return f"Error: {e}"
+
+
+def handle_add_filament_tg(m, _raw):
+    try:
+        from forge.shop.inventory import parse_add_command, add_spool, init_inventory
+        init_inventory()
+        cmd = parse_add_command(_raw)
+        if not cmd:
+            return "Format: add filament <material> <color> <grams>g $<cost>"
+        spool_id = add_spool(**cmd)
+        return f"Added {cmd['color']} {cmd['material']} {cmd['weight_g']:.0f}g spool."
+    except Exception as e:
+        return f"Error: {e}"
+
+# ── Routing table (order matters — most specific first) ───────────────────────
+
+# ── TASK-057 handlers — AA meeting + Craig ──────────────────────────────────
+
+AA_CONF = Path.home() / ".config/djinn/aa-meetings.json"
+
+def handle_meeting(_match, _raw):
+    if not AA_CONF.exists():
+        return "Set your meeting schedule in ~/.config/djinn/aa-meetings.json\n— Djinn"
+    try:
+        meetings = json.loads(AA_CONF.read_text())
+    except Exception:
+        return "Could not read meeting schedule.\n— Djinn"
+    if not meetings:
+        return "Add your meetings to ~/.config/djinn/aa-meetings.json\n— Djinn"
+    today = datetime.now().strftime("%A").lower()
+    now_time = datetime.now().strftime("%H:%M")
+    upcoming = [
+        m for m in meetings
+        if m.get("day","").lower() in ("daily", today)
+        and m.get("time","") >= now_time
+    ]
+    upcoming.sort(key=lambda m: m.get("time",""))
+    if not upcoming:
+        return "No more meetings today. Check tomorrow's schedule.\n— Djinn"
+    m = upcoming[0]
+    link = f" — {m['link']}" if m.get("link") else ""
+    return f"Next meeting: {m['name']} at {m['time']} on {m['platform']}.{link}\n— Djinn"
+
+_CRAIG_DRAFT = Path("/tmp/djinn-craig-draft.txt")
+
+def handle_craig(match, _raw):
+    msg = (match.group(1) or "").strip().lower()
+    if not msg:
+        return "What do you want to say to Craig?\n/craig <your message>\n— Djinn"
+    if msg == "confirm":
+        if _CRAIG_DRAFT.exists():
+            draft = _CRAIG_DRAFT.read_text()
+            _CRAIG_DRAFT.unlink(missing_ok=True)
+            return f"Draft confirmed — ready to send:\n\n\"{draft}\"\n\nPaste to Craig on your channel.\n— Djinn"
+        return "No draft to confirm.\n— Djinn"
+    if msg == "cancel":
+        _CRAIG_DRAFT.unlink(missing_ok=True)
+        return "Draft cancelled.\n— Djinn"
+    _CRAIG_DRAFT.write_text(match.group(1))
+    return f"Draft to Craig:\n\n\"{match.group(1)}\"\n\nSend it? /craig confirm | /craig cancel\n— Djinn"
+
+# ── Person mention scanning (TASK-058) ──────────────────────────────────────
+
+TRACKED_PEOPLE = {"sabrina": "Sabrina", "sammy": "Sabrina"}
+
+def scan_for_people_mentions(text):
+    if not text:
+        return
+    lower = text.lower()
+    for keyword, canonical in TRACKED_PEOPLE.items():
+        if keyword in lower:
+            run_shell(f"djinn-personal-db people mention '{canonical}'")
+
+def handle_media_kit(match, _raw):
+    args = match.group(1) or ""
+    out1, err1, rc1 = run_shell(f"djinn-media-kit {args}", timeout=120)
+    if rc1 != 0:
+        return ask_model("media kit", context=err1 or out1 or f"returned {rc1}")
+    out2, err2, rc2 = run_shell(f"djinn-media-publish-prep {args}", timeout=120)
+    result = out2 or err2 or out1
+    return ask_model("media kit", context=result)
+
+_ANSI_RE = re.compile(r'\x1b\[[0-9;]*m')
+
+def handle_gemini(match, _raw):
+    subcmd = (match.group(1) or "").strip()
+    if not subcmd:
+        return (
+            "Gemini commands:\n"
+            "  /gemini ask \"prompt\"\n"
+            "  /gemini youtube <url> \"prompt\"\n"
+            "  /gemini url <url> \"prompt\"\n"
+            "  /gemini doc <path> \"prompt\"\n"
+            "  /gemini research --topic <slug> \"query\"\n"
+            "— Djinn"
+        )
+    out, err, rc = run_shell(f"djinn-gemini {subcmd}", timeout=180)
+    raw = _ANSI_RE.sub("", out or err or f"No output (rc={rc})").strip()
+    # Drop header line ("Gemini  ...") and vault path lines
+    lines = [
+        l for l in raw.splitlines()
+        if not l.strip().startswith("Saved →")
+        and "Pushed to vault" not in l
+        and not re.match(r'^Gemini\s{2,}', l)
+    ]
+    clean = "\n".join(lines).strip()
+    if len(clean) > 3800:
+        clean = clean[:3800] + "\n…[truncated]"
+    if not clean.endswith("— Djinn"):
+        clean += "\n— Djinn"
+    return clean
+
+def handle_snap(_match, raw):
+    import time
+    latest = Path.home() / "Videos/print-monitor/snapshots/latest.jpg"
+    chat_id = raw.get("message", {}).get("chat", {}).get("id")
+    if not chat_id:
+        return "snap: could not determine chat_id"
+    if not latest.exists():
+        send(chat_id, "❌ No frame — webcam monitor offline or camera disconnected.\n— Djinn")
+        return None
+    age = time.time() - latest.stat().st_mtime
+    if age > 120:
+        send(chat_id, f"⚠️ Latest frame is {int(age)}s old — webcam may be offline.\n— Djinn")
+        return None
+    send_photo(chat_id, latest, caption="📸 Calliope — live\n— Djinn")
+    return None  # photo already sent directly
+
+
+def handle_add_job(match, _raw):
+    args = match.group(1).strip()
+    out, err, rc = run_shell(f"djinn-job-add {args}", timeout=120)
+    return out.strip() or err.strip() or f"djinn-job-add returned {rc}"
+
+
+def handle_feedback_tg(match, _raw):
+    n    = match.group(1)
+    text = match.group(2).strip()
+    out, err, rc = run_shell(f'djinn-print-feedback {n} "{text}"')
+    return out.strip() or err.strip() or f"feedback {n}: returned {rc}"
+
+
+ROUTES = [
+    (re.compile(r"^(?:help|\?)$", re.I),
+        handle_help),
+    (re.compile(r"^voice(?:\s+(.*))?$", re.I),
+        handle_voice),
+    (re.compile(r"^r1(?:\s+(.*))?$", re.I),
+        handle_r1),
+    (re.compile(r"^status$", re.I),
+        handle_status),
+    (re.compile(r"^monitor\s+status$", re.I),
+        handle_monitor_status),
+    (re.compile(r"^snap(?:shot)?$", re.I),
+        handle_snap),
+    (re.compile(r"^(?:/?)3?d?queue$", re.I),
+        handle_queue),
+    (re.compile(r"^confirm\s+(\d+)$", re.I),
+        handle_confirm),
+    (re.compile(r"^deny\s+(\d+)$", re.I),
+        handle_deny),
+    (re.compile(r"^force-cancel\s+(\d+)\s+\"([^\"]+)\"\s+(\S+)$", re.I),
+        handle_force_cancel),
+    (re.compile(r"^slice\s+(\d+)$", re.I),
+        handle_slice),
+    (re.compile(r"^add\s+(.+)$", re.I),
+        handle_add_job),
+    (re.compile(r"^feedback\s+(\d+)\s+(.+)$", re.I),
+        handle_feedback_tg),
+    (re.compile(r"^(?:print|callie)\s+status$", re.I),
+        handle_print_status),
+    (re.compile(r"^quick\s+quote\s+(.*)", re.I),
+        handle_quick_quote),
+    (re.compile(r"^quote\s+(.*)", re.I),
+        handle_quote),
+    (re.compile(r"^paid\s+(ORD-\d+)(?:\s+(.+))?$", re.I),          handle_paid),
+    (re.compile(r"^shipped\s+(ORD-\d+)(?:\s+(.+))?$", re.I),       handle_shipped),
+    (re.compile(r"^ship\s+(ORD-\d+)(?:\s+(\S+))?$", re.I),        handle_ship),
+    (re.compile(r"^track\s+(ORD-\d+)$", re.I),                      handle_track),
+    (re.compile(r"^inventory$", re.I),                                 handle_inventory_tg),
+    (re.compile(r"^low\s+stock$", re.I),                              handle_low_stock_tg),
+    (re.compile(r"^add\s+filament\b", re.I),                         handle_add_filament_tg),
+    (re.compile(r"^design\s+status$", re.I),
+        handle_design_status),
+    (re.compile(r"^design\s+(.*)", re.I),
+        handle_design),
+    (re.compile(r"^kit(?:\s+(.*))?$", re.I),
+        handle_media_kit),
+    (re.compile(r"^meeting$", re.I),
+        handle_meeting),
+    (re.compile(r"^craig(?:\s+(.*))?$", re.I),
+        handle_craig),
+    (re.compile(r"^gemini(?:\s+(.+))?$", re.I),
+        handle_gemini),
+    (re.compile(r"^engrave\s+(\S+)\s+(.+)$", re.I),
+        handle_engrave),
+    (re.compile(r"^approve\s+engrave\s+([123])(?:\s+(\d+))?$", re.I),
+        handle_approve_engrave),
+]
+
+def sign(text):
+    """Ensure every response ends with Djinn's signature."""
+    t = text.rstrip()
+    if not t.endswith("— Djinn"):
+        t += "\n— Djinn"
+    return t
+
+def dispatch(text):
+    """Route a message to a handler or fall through to model."""
+    # SHOP_PATCH_APPLIED — check non-slash shop commands first
+    if not text.startswith("/"):
+        _clean = text.strip()
+        for _pat, _fn in ROUTES:
+            _m = _pat.match(_clean)
+            if _m:
+                return sign(_fn(_m, text))
+        return sign(ask_model(text))
+    clean = text.strip().lstrip("/")
+    for pattern, handler in ROUTES:
+        m = pattern.match(clean)
+        if m:
+            return sign(handler(m, text))
+    # Slash but no known command → conversational
+    return sign(ask_model(text))
+
+# ── Conversation logging ──────────────────────────────────────────────────────
+
+def log_exchange(user_text: str, bot_reply: str):
+    log_dir = Path.home() / "Obsidian/djinn/logs/conversations"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    log_file = log_dir / f"{today}.md"
+    ts = datetime.now().strftime("%H:%M:%S")
+    entry = f"\n### {ts}\n**Javier:** {user_text}\n**Djinn:** {bot_reply}\n"
+    try:
+        if not log_file.exists():
+            log_file.write_text(f"# Djinn Telegram Log — {today}\n")
+        with log_file.open("a") as f:
+            f.write(entry)
+    except Exception as e:
+        log.warning("log_exchange failed: %s", e)
+
+# ── Typhon heartbeat staleness check ─────────────────────────────────────────
+
+def check_typhon_heartbeat():
+    hb_path = Path.home() / "Obsidian/djinn/communications/HEARTBEAT-typhon.md"
+    if not hb_path.exists():
+        return
+    try:
+        text = hb_path.read_text()
+        for line in text.splitlines():
+            if line.startswith("**Last beat:**"):
+                raw = line.split("**Last beat:**", 1)[1].strip()
+                from datetime import datetime, timezone, timedelta
+                try:
+                    beat_time = datetime.strptime(raw, "%Y-%m-%d %H:%M:%S UTC").replace(tzinfo=timezone.utc)
+                    age = datetime.now(timezone.utc) - beat_time
+                    if age > timedelta(hours=24):
+                        msg = f"⚠️ Typhon heartbeat stale — last beat {raw} ({int(age.total_seconds()//3600)}h ago). Machine may be offline."
+                        for uid in ALLOWED_IDS:
+                            try:
+                                send(uid, msg)
+                            except Exception:
+                                pass
+                        log.warning("Typhon heartbeat stale: %s", raw)
+                except ValueError:
+                    pass
+                break
+    except Exception as e:
+        log.warning("Typhon heartbeat check failed: %s", e)
+
+# ── Claude queue check ────────────────────────────────────────────────────────
+
+def check_claude_queue():
+    queue_path = Path.home() / "Obsidian/djinn/communications/QUEUE.md"
+    if not queue_path.exists():
+        return
+    try:
+        text = queue_path.read_text()
+        pending = []
+        current_task = None
+        assigned_claude = False
+        status_pending = False
+        in_code_block = False
+        for line in text.splitlines():
+            if line.strip().startswith("```"):
+                in_code_block = not in_code_block
+                continue
+            if in_code_block:
+                continue
+            if line.startswith("## TASK-") and not line.strip().endswith("NNN"):
+                if current_task and assigned_claude and status_pending:
+                    pending.append(current_task)
+                current_task = line[3:].strip()
+                assigned_claude = False
+                status_pending = False
+            elif "assigned_to: claude" in line:
+                assigned_claude = True
+            elif "status: pending" in line:
+                status_pending = True
+        if current_task and assigned_claude and status_pending:
+            pending.append(current_task)
+        if pending:
+            msg = f"⏳ Pending Claude tasks ({len(pending)}):\n" + "\n".join(f"• {t}" for t in pending)
+            for uid in ALLOWED_IDS:
+                try:
+                    send(uid, msg)
+                except Exception:
+                    pass
+            log.info("Sent Claude queue alert: %d pending tasks", len(pending))
+    except Exception as e:
+        log.warning("Claude queue check failed: %s", e)
+
+# ── Main polling loop ─────────────────────────────────────────────────────────
+
+def main():
+    log.info("djinn-telegram-gateway starting (model=%s)", MODEL)
+    check_typhon_heartbeat()
+    check_claude_queue()
+    offset = None
+
+    while True:
+        try:
+            params = {"timeout": POLL_TIMEOUT, "allowed_updates": ["message"]}
+            if offset is not None:
+                params["offset"] = offset
+
+            resp = tg_get("getUpdates", params, timeout=POLL_TIMEOUT + 5)
+            updates = resp.get("result", [])
+
+            for upd in updates:
+                offset = upd["update_id"] + 1
+                msg = upd.get("message")
+                if not msg:
+                    continue
+
+                chat_id = msg["chat"]["id"]
+                from_id = msg.get("from", {}).get("id")
+                text = (msg.get("text") or "").strip()
+
+                # Handle incoming voice messages — transcribe and treat as text
+                if not text and msg.get("voice"):
+                    file_id = msg["voice"]["file_id"]
+                    if from_id not in ALLOWED_IDS:
+                        continue
+                    send_typing(chat_id)
+                    transcript = transcribe_voice(file_id)
+                    if transcript:
+                        log.info("← [%s] voice→text: %r", from_id, transcript[:80])
+                        scan_for_people_mentions(transcript)
+                        try:
+                            reply = dispatch(transcript)
+                        except Exception as e:
+                            log.exception("Dispatch error (voice): %s", e)
+                            reply = f"[Error: {e}]\n— Djinn"
+                        send(chat_id, f"🎙 {transcript}\n\n{reply}")
+                        log_exchange(f"[voice] {transcript}", reply)
+                        if VOICE_MODE and len(reply) < 800:
+                            try:
+                                ogg = Path("/tmp/djinn_voice_reply.ogg")
+                                subprocess.run(
+                                    ["djinn-gemini", "tts", reply, "--out", str(ogg)],
+                                    capture_output=True, timeout=30
+                                )
+                                if ogg.exists():
+                                    send_voice(chat_id, ogg)
+                            except Exception as _ve:
+                                log.warning("voice send failed: %s", _ve)
+                    else:
+                        send(chat_id, "Could not transcribe voice message.\n— Djinn")
+                    continue
+
+                if not text:
+                    continue
+
+                if from_id not in ALLOWED_IDS:
+                    log.warning("Ignored message from unauthorized id=%s", from_id)
+                    continue
+
+                log.info("← [%s] %r", from_id, text[:80])
+                send_typing(chat_id)
+                scan_for_people_mentions(text)
+
+                try:
+                    reply = dispatch(text)
+                except Exception as e:
+                    log.exception("Dispatch error: %s", e)
+                    reply = f"[Error: {e}]\n— Djinn"
+
+                if not reply:
+                    reply = "— Djinn"
+
+                log.info("→ [%s] %r", chat_id, reply[:80])
+                send(chat_id, reply)
+                log_exchange(text, reply)
+                if VOICE_MODE and len(reply) < 800:
+                    try:
+                        import subprocess as _sp
+                        ogg = Path("/tmp/djinn_voice_reply.ogg")
+                        _sp.run(
+                            ["djinn-gemini", "tts", reply, "--out", str(ogg)],
+                            capture_output=True, timeout=30
+                        )
+                        if ogg.exists():
+                            send_voice(chat_id, ogg)
+                    except Exception as _ve:
+                        log.warning("voice send failed: %s", _ve)
+
+        except requests.exceptions.Timeout:
+            pass  # normal long-poll expiry
+        except requests.exceptions.ConnectionError as e:
+            log.error("Network error: %s — retrying in 5s", e)
+            time.sleep(5)
+        except KeyboardInterrupt:
+            log.info("Shutting down.")
+            sys.exit(0)
+        except Exception as e:
+            log.exception("Unhandled error: %s — retrying in 5s", e)
+            time.sleep(5)
+
+if __name__ == "__main__":
+    main()

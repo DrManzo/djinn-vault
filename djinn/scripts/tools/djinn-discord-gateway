@@ -741,6 +741,10 @@ ROUTES_PRINT = [
     (re.compile(r"^confirm\s+(\d+)$", re.I),        handle_confirm),
     (re.compile(r"^deny\s+(\d+)$", re.I),           handle_deny),
     (re.compile(r'^force-cancel\s+(\d+)\s+"([^"]+)"\s+(\S+)$', re.I), handle_force_cancel),
+    (re.compile(r"^add\s+(.+)$", re.I),
+        lambda m, r, c: (lambda out, err, rc: ask_model(
+            f"add job {m.group(1)}", context=out or err or f"returned {rc}", channel_ctx=c
+        ))(*run_shell(f"djinn-job-add {m.group(1)}", timeout=120))),
     (re.compile(r"^slice\s+(\d+(?:\s+.*)?)$", re.I), handle_slice),
     (re.compile(r"^feedback\s+(\d+)\s+(.+)$", re.I), handle_feedback),
     (re.compile(r"^(?:print|callie)\s+status$", re.I), handle_print_status),
@@ -860,6 +864,42 @@ async def on_message(message: discord.Message):
                 str(message.author.id), str(message.author))
             if reply:
                 await message.channel.send(reply)
+            return
+
+        if _text_lower in ("my order", "order status", "status"):
+            import json as _json
+            try:
+                q = _json.loads(
+                    (Path.home() / ".local/share/djinn/print-queue.json").read_text()
+                )
+                jobs = [
+                    j for j in q.get("jobs", [])
+                    if str(j.get("customer_discord_id", "")) == str(message.author.id)
+                ]
+                if not jobs:
+                    await message.channel.send(
+                        "No active order found for your account.\n"
+                        "To place an order, type `order` in <#printing>.\n— Typhon's Forge"
+                    )
+                else:
+                    lines = ["**Your order status:**"]
+                    for j in jobs:
+                        status = j.get("status", "unknown")
+                        piece  = j.get("piece") or j.get("note", "your piece")
+                        STATUS_LABELS = {
+                            "confirmed":  "✅ Confirmed — queued for printing",
+                            "slicing":    "⚙️ Slicing in progress",
+                            "sliced":     "✅ Sliced — awaiting print authorization",
+                            "printing":   "🖨️ Printing now",
+                            "complete":   "✅ Print complete — ready soon",
+                            "done":       "📦 Done — check your DMs",
+                        }
+                        label = STATUS_LABELS.get(status, f"Status: {status}")
+                        lines.append(f"• **{piece}** — {label}")
+                    lines.append("— Typhon's Forge")
+                    await message.channel.send("\n".join(lines))
+            except Exception as _e:
+                await message.channel.send("Could not retrieve order status. Try again shortly.\n— Typhon's Forge")
             return
 
         if _is_dm:
