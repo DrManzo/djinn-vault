@@ -208,6 +208,9 @@ def run(state: ProjectState, goal: str = "prototype_fast", printer: dict = None)
     if best.print_speed_mms >= 100:
         tradeoffs.append(f"{best.print_speed_mms}mm/s: check for ringing artifacts — reduce if needed")
 
+    # support_mode: prefer the real geometry-derived value on state; fall back to bool-derived default
+    support_mode = state.support_mode if state.support_mode != "none" or not supports else "local"
+
     profile = {
         "goal": goal,
         "recommended_profile": {
@@ -242,6 +245,9 @@ def run(state: ProjectState, goal: str = "prototype_fast", printer: dict = None)
             }
             for c in valid[1:6]
         ],
+        # Support fields for djinn-model-slice
+        "supports_needed": supports,
+        "support_mode":    support_mode,
     }
 
     state.doe_profile = profile
