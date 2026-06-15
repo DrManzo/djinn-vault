@@ -2,7 +2,7 @@
                    DJINN WEBCAM MONITOR MANUAL
          Print Failure Detection + Social Reel Pipeline
 ================================================================================
-Version: 1.0 | Last updated: 2026-06-15 | Maintained by: Owner / Marcus
+Version: 1.1 | Last updated: 2026-06-15 | Maintained by: Owner / Marcus
 
 > Continuous monitoring service for the print bed. Detects failures via
 > frame diff analysis and captures milestone clips at key progress points.
@@ -104,9 +104,12 @@ Fields in job_meta.json:
   {
     "filename":       "<original stl/jobname>",
     "start_ts":       "<ISO 8601 timestamp>",
-    "milestones_hit": [1, 25, 50, 75, 100],
+    "milestones_hit": ["001pct", "025pct", "050pct", "075pct", "100pct"],
     "reel_path":      "<abs path to social_reel.mp4>"
   }
+
+  Note: milestones_hit stores strings in XXXpct format, not integers.
+  When parsing programmatically, expect string values — not [1, 25, 50 ...].
 
 If fewer than 5 milestones were captured (e.g., job cancelled before
 100%), the reel is assembled from whatever clips exist. milestones_hit
@@ -138,8 +141,8 @@ Location:
 Tracked fields include:
   - current job name + start timestamp
   - current print progress (float, from Moonraker)
-  - milestones_hit (list of integer thresholds reached)
-  - milestone_clip (dict mapping threshold → clip path)
+  - milestones_hit (list of strings in XXXpct format, e.g. "001pct")
+  - milestone_clip (dict mapping threshold string → clip path)
   - last_frame_diff (for failure detection logic)
   - reel_path (set on completion)
 
