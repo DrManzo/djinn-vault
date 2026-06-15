@@ -436,9 +436,13 @@ class WebcamMonitor:
 
             now = time.time()
 
-            # Write every frame to recorder when active
+            # Write every frame to recorders when active
             if self.writer:
                 self.writer.write(frame)
+            if self.ms_writer:
+                self.ms_writer.write(frame)
+                if time.time() >= self.ms_end:
+                    self._ms_stop()
 
             # End scheduled recording on timer
             if self.rec_end and now >= self.rec_end and not self.in_fail:
@@ -467,12 +471,8 @@ class WebcamMonitor:
                 self._ms_reset(filename)
                 tg_text("🖨️ Print started — visual monitoring active on Calliope.\n— Djinn")
 
-            # Milestone clips — write frame to active milestone clip, check thresholds
+            # Milestone clips — check thresholds (frame writing happens above the gate)
             if state == "printing":
-                if self.ms_writer:
-                    self.ms_writer.write(frame)
-                    if time.time() >= self.ms_end:
-                        self._ms_stop()
                 self._ms_check(progress, time.time())
 
             # Print ended
