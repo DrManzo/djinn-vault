@@ -1352,3 +1352,21 @@ created: 2026-05-19
 - `orchestrator.py`: price agent never ran in `--full` mode. Root cause: `plate_nest.run()` sets `state.status = "priced"` before the price trigger at line 172 checks `state.status == "plate_nest"` — that check was always False by the time it ran. Fix: capture `_pre_plate_status = state.status` before `plate_nest.run()` and use that captured value for both the plate and price triggers.
 
 *— Claude*
+
+---
+
+## 2026-06-14 — Design Pipeline Render Fix & Design-to-Print Bridge
+
+### Root Cause: OpenSCAD Render Failures
+Diagnosed: `design_gen.py` LLM prompt was producing SCAD that called `sd_card_holder()` and `fillet_all()` — modules never defined in the file. OpenSCAD emits "Ignoring unknown module" warnings and produces empty geometry (0-byte STL). `proto_opt.py` was silently falling back to storing `.scad` paths instead of `.stl`, which then crashed `plate_nest` (`trimesh.load()` → `NotImplementedError: file_type 'scad' not supported`).
+
+### Fixed
+- `design_gen.py`: Strengthened SYSTEM prompt with explicit rules — every called module must be defined in-file, no `fillet_all()`/undefined helpers, top-level call only uses defined modules, mental trace requirement.
+- `proto_opt.py`: `_render_stl()` now returns `(ok, stderr)`. On render failure: logs actual OpenSCAD stderr, raises `RuntimeError` with diagnostic hint. Never stores `.scad` path in `files[]` anymore.
+- `orchestrator.py`: Catches `RuntimeError` from proto_opt, prints readable error + fix instructions, returns state gracefully.
+- `djinn-model-slice`: Fixed DOE key: `job.get("doe_profile") or job.get("doe")` (was `job.get("doe")` — always empty for design jobs → defaulted to `production` tier instead of `proto`).
+
+### Validated
+Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --full` → job2/priced in one shot. `djinn-model-slice 2` → tier=proto, plate_stl resolved, slicer invoked correctly. Bridge is connected.
+
+*— Claude*

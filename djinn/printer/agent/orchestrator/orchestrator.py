@@ -152,7 +152,13 @@ def run(
         return state
 
     if intent == "optimize" or (auto_advance and state.status == "design_edit"):
-        state = proto_opt.run(state, llm)
+        try:
+            state = proto_opt.run(state, llm)
+        except RuntimeError as e:
+            print(f"\n  [ProtoOptAgent] RENDER FAILED:\n{e}")
+            print(f"\n  Fix the SCAD at: {state.source_scad}")
+            print(f"  Then re-run: djinn-design --job {state.id} --optimize")
+            return state
         state.save()
         _report_variants(state)
         if not auto_advance:

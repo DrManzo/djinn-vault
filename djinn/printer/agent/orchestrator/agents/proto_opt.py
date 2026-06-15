@@ -50,12 +50,15 @@ SYSTEM = """You are ProtoOptAgent. You generate two geometry variants from one O
 """
 
 
-def _render_stl(scad_path: pathlib.Path, stl_path: pathlib.Path) -> bool:
+def _render_stl(scad_path: pathlib.Path, stl_path: pathlib.Path) -> tuple[bool, str]:
+    """Return (success, stderr_tail)."""
     result = subprocess.run(
         ["openscad", "--render", "--export-format", "stl", "-o", str(stl_path), str(scad_path)],
         capture_output=True, text=True, timeout=180,
     )
-    return result.returncode == 0 and stl_path.exists()
+    stderr = (result.stderr or "").strip()
+    ok = result.returncode == 0 and stl_path.exists() and stl_path.stat().st_size > 0
+    return ok, stderr
 
 
 def run(state: ProjectState, llm: LLM) -> ProjectState:
@@ -93,20 +96,31 @@ Generate prototype-light and production-ready variants."""
     base = scad_path.stem
     files = {}
 
+    render_errors = []
     for tag, match in [("prototype", proto_match), ("production", prod_match)]:
         code = match.group(1) if match else current_code
         scad_out = MODELS_DIR / f"{base}_{tag}.scad"
         scad_out.write_text(code)
 
         stl_out = MODELS_DIR / f"{base}_{tag}.stl"
-        ok = _render_stl(scad_out, stl_out)
+        ok, stderr = _render_stl(scad_out, stl_out)
         if ok:
             size_kb = stl_out.stat().st_size // 1024
             print(f"    → {tag} STL: {stl_out.name} ({size_kb}KB)")
             files[tag] = str(stl_out)
         else:
-            print(f"    → {tag} render failed — SCAD saved: {scad_out.name}")
-            files[tag] = str(scad_out)
+            tail = stderr[-400:] if len(stderr) > 400 else stderr
+            print(f"    → {tag} render failed — SCAD: {scad_out.name}")
+            print(f"       OpenSCAD error: {tail}")
+            render_errors.append(f"{tag}: {tail}")
+
+    if render_errors:
+        raise RuntimeError(
+            f"OpenSCAD render failed for {len(render_errors)} variant(s):\n" +
+            "\n".join(render_errors) +
+            "\n\nFix the source SCAD and retry. Check: all called modules are defined in the file; "
+            "no undefined helpers like fillet_all(); top-level call only uses defined modules."
+        )
 
     state.variants = {**variant_meta, "files": files}
     state.status = "doe_opt"
