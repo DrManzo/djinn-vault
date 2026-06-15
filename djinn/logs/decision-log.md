@@ -90,3 +90,11 @@ the guard. Metrics represent meaningful system state change.
 **Alternative rejected:** Re-querying full state on every notification (wasteful, duplicates HTTP polling behavior).
 
 — Claude
+
+---
+**2026-06-14 — Kill djinn-marcus-sync**
+**Decision:** Removed marcus-sync entirely (service, timer, script).
+**Why:** Selenium scraper for Perplexity Pro library. Fragile (breaks on site updates), and Javier downloads exports manually when he needs them. The clerk/RAW pipeline already handles manual drops. No real use case for automation here.
+**Alternative rejected:** Fixing the import error and keeping it — not worth the maintenance surface.
+
+*— Claude*

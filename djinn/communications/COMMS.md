@@ -1631,6 +1631,7 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Recent-Conversa
 → Waiting for Javier: Y to approve, N to deny
 
 
+<<<<<<< Updated upstream
 ---
 
 **FROM:** typhon
@@ -1682,3 +1683,1623 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus
 **Action:** None — FYI.
 
 — Typhon
+=======
+
+### CHECKPOINT-20260614-170457 | 2026-06-14 17:04 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260614-172839 | 2026-06-14 17:28 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:29 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f799014-405e-47d0-841a-a662affcf248.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:30 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f799014-405e-47d0-841a-a662affcf248.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_235e1ee5-6554-4d4c-8a9a-209375e0deb9.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_235e1ee5-6554-4d4c-8a9a-209375e0deb9.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Infrastructure-Breakdown-And-Github-Access-Setup.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_52d68bde-acd1-4aaa-8c52-0c2f7e1f4797.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_52d68bde-acd1-4aaa-8c52-0c2f7e1f4797.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Text-Engraving-Depth-And-Cup-Surface-Alignment-2026-06-14.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_dd6607bc-2412-4e25-a7cb-6f981cbf533f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_dd6607bc-2412-4e25-a7cb-6f981cbf533f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_6e0c74a1-36d2-453d-953e-ca82a3da3c7d.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_6e0c74a1-36d2-453d-953e-ca82a3da3c7d.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_35b53d04-3037-4c9d-a6be-be2bd2830673.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_35b53d04-3037-4c9d-a6be-be2bd2830673.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Clerk
+
+
+### CHECKPOINT-20260614-173143 | 2026-06-14 17:31 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:31 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:32 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f799014-405e-47d0-841a-a662affcf248.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f799014-405e-47d0-841a-a662affcf248.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:33 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_235e1ee5-6554-4d4c-8a9a-209375e0deb9.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_235e1ee5-6554-4d4c-8a9a-209375e0deb9.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_52d68bde-acd1-4aaa-8c52-0c2f7e1f4797.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_52d68bde-acd1-4aaa-8c52-0c2f7e1f4797.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_dd6607bc-2412-4e25-a7cb-6f981cbf533f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_dd6607bc-2412-4e25-a7cb-6f981cbf533f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_6e0c74a1-36d2-453d-953e-ca82a3da3c7d.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_6e0c74a1-36d2-453d-953e-ca82a3da3c7d.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_35b53d04-3037-4c9d-a6be-be2bd2830673.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Clerk
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_35b53d04-3037-4c9d-a6be-be2bd2830673.md`
+
+— Slipbox
+
+
+### CHECKPOINT-20260614-173450 | 2026-06-14 17:34 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:34 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:35 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_1177148c-a8b8-42e6-831d-c29b9d29f954.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_11601983-e1b7-4e14-a546-ee0f85da69a8.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_2fd1c25d-12d7-45a0-a4f6-37281c5e3e48.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_a6cb491f-25f1-4694-a065-8aa6b3eb673a.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_e1e46601-b134-4529-a697-fdfe4cba3ec4.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_773fd4c2-a9a1-4f90-8d0b-4965ef7472b0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+>>>>>>> Stashed changes
