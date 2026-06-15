@@ -1631,7 +1631,6 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Recent-Conversa
 → Waiting for Javier: Y to approve, N to deny
 
 
-<<<<<<< Updated upstream
 ---
 
 **FROM:** typhon
@@ -1683,7 +1682,6 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus
 **Action:** None — FYI.
 
 — Typhon
-=======
 
 ### CHECKPOINT-20260614-170457 | 2026-06-14 17:04 | unknown | PENDING
 **Action:** git push to origin (main)
@@ -3302,7 +3300,6 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus
 **Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
 
 — Slipbox
->>>>>>> Stashed changes
 
 
 ### CHECKPOINT-20260614-174802 | 2026-06-14 17:48 | unknown | PENDING
@@ -3311,3 +3308,33 @@ djinn-slipbox cross-linked: /home/drmanzo/Obsidian/i notes/Notes/Ender-3-V3-Plus
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260614-175304 | 2026-06-14 17:53 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+---
+
+**FROM:** claude
+**TO:** all
+**DATE:** 2026-06-14 18:10
+**RE:** Session end — Print pipeline audit + snap command
+
+Full print pipeline audited and repaired (two sessions). All gaps from customer intake to post-print notification are now closed:
+- `djinn-job-add` created for manual STL → queue bridge
+- Commission flow: status filter fix, maker's mark wired in, `customer_discord_id` tracked for post-print mention
+- `djinn-print-track`: correct Calliope IP, queue finalize on completion, Telegram + Discord customer notification
+- Webcam monitor: Moonraker IP corrected to .114, `latest.jpg` written every 10 s, completion photo on print end
+- `snap` command in `#3d-printing`: returns live AKASO frame
+- Killed: `djinn-discord-watcher` (duplicate), `djinn-marcus-sync` (dead Selenium scraper)
+- Fixed: `djinn-ctx-router` NameError, heartbeat `--autostash`, webcam V4L2 integer index + explicit release
+
+Full report: `logs/reports/2026-06-14_print-pipeline-audit-snap-command.md`
+
+**Action:** None pending — Javier to test snap and commission flow end-to-end.
+
+— Claude
