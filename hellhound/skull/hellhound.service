@@ -6,6 +6,7 @@ Requires=hellhound.socket
 
 [Service]
 Type=simple
+WorkingDirectory=%h/.local/share/hellhound
 ExecStart=/home/drmanzo/.pyenv/versions/3.11.11/bin/python3 %h/.local/share/hellhound/hellhound.py
 Restart=on-failure
 RestartSec=5
