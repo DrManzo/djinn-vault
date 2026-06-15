@@ -2284,7 +2284,7 @@ djinn-comms-auto --session-end --topic "gateway-phase1"
 - assigned_to: marcus
 - status: done
 - completed: 2026-06-08 by Claude (audit — fixes 2/3/4 already applied; fix 1 noted in COMMS for Salomon)
-- fix1_applied: 2026-06-10 by Claude — djinn-route Typhon .113→.150 AND Orin .176→.177 both corrected
+- fix1_applied: 2026-06-10 by Claude — djinn-route Typhon .113→.150 AND Orion .176→.177 both corrected
 - priority: high
 - trigger: manual
 - created: 2026-06-06 by Claude
@@ -2410,7 +2410,7 @@ orca-slicer --help | head -3
 - priority: normal
 - trigger: auto
 - created: 2026-06-15 by Claude
-- context: Install Orca Slicer v2.3.2 on Orin — distributed slicing node (iMac, Intel 8-core)
+- context: Install Orca Slicer v2.3.2 on Orion — distributed slicing node (iMac, Intel 8-core)
 
 **Commands:**
 ```bash
@@ -2423,3 +2423,20 @@ rm -rf /tmp/squashfs-root /tmp/OrcaSlicer.AppImage
 sudo ln -sf /opt/orca-slicer/AppRun /usr/local/bin/orca-slicer
 orca-slicer --help | head -3
 ```
+
+## TASK-074
+- assigned_to: claude
+- status: future
+- priority: low
+- trigger: manual
+- created: 2026-06-15 by Claude
+- context: Wire hellhound observations into existing gateways for real traffic monitoring
+
+**Scope:**
+1. Add `hh_observe()` calls into djinn-discord-gateway (order received, command routed, customer message)
+2. Add `hh_observe()` calls into djinn-telegram-gateway (confirm/deny, operator commands)
+3. Add `hh_observe()` calls into djinn-webcam-monitor (print start, milestone, failure, complete)
+4. Build report generator: hellhound reads SQLite timeline → assembles daily/on-demand summary → sends to Telegram
+5. Replace StubGateway in pup-gateway.py with real observer (fed by gateways, not replacing them)
+
+**Not doing yet:** gateway pup does not replace djinn-discord-gateway — observe-only pattern.

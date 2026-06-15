@@ -1083,7 +1083,7 @@ created: 2026-05-19
 - Fixed SSH to Typhon: IP changed 192.168.1.113 → 192.168.1.150, created `~/.ssh/config`
 - Deployed `djinn-typhon-write` to Typhon `~/.local/bin/` — hostname enforcement fixed for `tftthq`
 - Verified end-to-end: `--status` + `--write` test on Typhon confirmed (current + history store)
-- Rebased divergent git branches (Orin heartbeat onto memory store commit), pushed under Dev mode
+- Rebased divergent git branches (Orion heartbeat onto memory store commit), pushed under Dev mode
 - Updated PROTOCOL.md SSH IP, fixed `djinn-typhon-write` hostname check
 
 ## 2026-06-05: Camood TTHQ Test Print — Typhon pipeline E2E test
@@ -1118,16 +1118,16 @@ created: 2026-05-19
 
 *— Claude*
 
-## 2026-06-06 — Fleet Model Audit + Orin Integration
+## 2026-06-06 — Fleet Model Audit + Orion Integration
 
-- SSH connected Orin (192.168.1.176 / javiermanzo) to Djinn fleet
-- Built djinn-route: automated task→model→machine routing (11 task types, Orin fallback)
+- SSH connected Orion (192.168.1.176 / javiermanzo) to Djinn fleet
+- Built djinn-route: automated task→model→machine routing (11 task types, Orion fallback)
 - djinn/ROUTING.md: full rewrite with fleet table, djinn-route docs
-- djinn/INFRASTRUCTURE.md: Orin added (i7-7700K, 40GB, macOS Sequoia)
+- djinn/INFRASTRUCTURE.md: Orion added (i7-7700K, 40GB, macOS Sequoia)
 - Salomon RAM crisis fixed: removed qwen3.6:latest (26GB → 14GB free, 0 swap)
-- Model audit complete — 1 redundancy found and removed: phi4:14b on Orin (GPU version on Salomon is canonical)
+- Model audit complete — 1 redundancy found and removed: phi4:14b on Orion (GPU version on Salomon is canonical)
 - Typhon qwen2.5:7b restored (was missing, caused OpenClaw breakage)
-- Hermes config fixed on both Salomon and Orin (default model, profile config)
+- Hermes config fixed on both Salomon and Orion (default model, profile config)
 - AGENTS.md corruption fixed (Hermes wrote literal \n instead of newlines)
 
 *— Claude*

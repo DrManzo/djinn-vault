@@ -28,7 +28,7 @@ djinn-route best --url           # http://192.168.1.176:11434
 djinn-route --list               # show all task types
 ```
 
-**Fallback:** If Orin is unreachable, `djinn-route` automatically falls back to the best Salomon equivalent. Scripts don't need to handle this.
+**Fallback:** If Orion is unreachable, `djinn-route` automatically falls back to the best Salomon equivalent. Scripts don't need to handle this.
 
 ---
 
@@ -39,12 +39,12 @@ djinn-route --list               # show all task types
 | `default` | qwen2.5:7b | Salomon | **Required** for OpenClaw tool calling |
 | `reasoning` | deepseek-r1:7b | Salomon | Analysis, planning, law/psychology |
 | `code` | qwen2.5-coder:7b | Salomon | Fast code, debug, demos |
-| `code-heavy` | qwen2.5-coder:32b | Orin | Full codebase audits, architecture |
+| `code-heavy` | qwen2.5-coder:32b | Orion | Full codebase audits, architecture |
 | `notes` | phi4:14b | Salomon | Summaries, captions, APA formatting |
 | `vision` | llama3.2-vision:11b | Salomon | Image scoring, thumbnails, QC |
 | `embed` | nomic-embed-text | Salomon | Vector embeddings, semantic search |
-| `best` | llama3.3:70b | Orin | Highest quality, latency-tolerant tasks |
-| `hermes` | qwen3.6:latest | Orin | Hermes Agent / Assistant lane |
+| `best` | llama3.3:70b | Orion | Highest quality, latency-tolerant tasks |
+| `hermes` | qwen3.6:latest | Orion | Hermes Agent / Assistant lane |
 | `creative` | mistral:7b | Salomon | Creative writing |
 | `lightweight` | qwen2.5:7b | Typhon | Typhon-local ops |
 
@@ -70,7 +70,7 @@ djinn-route --list               # show all task types
 | deepseek-r1:8b | 5.2GB | reasoning |
 | nomic-embed-text | 274MB | embeddings |
 
-### Orin — 192.168.1.176 (iMac i7-7700K, 40GB RAM, CPU inference)
+### Orion — 192.168.1.176 (iMac i7-7700K, 40GB RAM, CPU inference)
 | Model | Size | Task |
 |-------|------|------|
 | llama3.3:70b | 42GB | best quality (2-4 tok/s CPU) |
@@ -87,7 +87,7 @@ djinn-route --list               # show all task types
 |-------|---------|-----------|-------|------|
 | opencode (Salomon) | Salomon | CLI / comms-processor | qwen2.5:7b default | Free |
 | opencode (Typhon) | Typhon | CLI / comms-processor | qwen2.5:7b | Free |
-| Hermes (Assistant) | Salomon | CLI | qwen3.6 via Orin | Free |
+| Hermes (Assistant) | Salomon | CLI | qwen3.6 via Orion | Free |
 | Claude | Salomon | Claude Code CLI | Anthropic API | Premium |
 | djinn-design | Salomon | CLI + Discord/Telegram | phi4:14b → Claude | Free/Premium |
 | djinn-print-quote | Salomon | CLI + Discord/Telegram | Python (no LLM) | Free |
@@ -108,7 +108,7 @@ djinn-route --list               # show all task types
 - Printer bot management
 - Lightweight inference
 
-### Route to Orin when:
+### Route to Orion when:
 - 70B inference needed (`djinn-route best`)
 - Large code review (`djinn-route code-heavy`)
 - Hermes/Assistant sessions (`djinn-route hermes`)
@@ -126,7 +126,7 @@ djinn-route --list               # show all task types
 
 ### Escalation path:
 ```
-opencode (Typhon) → opencode (Salomon) → Orin → Claude / Marcus
+opencode (Typhon) → opencode (Salomon) → Orion → Claude / Marcus
 ```
 
 ---
@@ -137,8 +137,8 @@ opencode (Typhon) → opencode (Salomon) → Orin → Claude / Marcus
 |---------|-----|
 | [[COMMS]] | Primary — all inter-agent tasks, handoffs |
 | Telegram | Real-time alerts to Javier |
-| SSH | Salomon ↔ Typhon ↔ Orin file delivery |
+| SSH | Salomon ↔ Typhon ↔ Orion file delivery |
 
 ---
 
-*— Claude, 2026-06-06 (audited + Orin integrated)*
+*— Claude, 2026-06-06 (audited + Orion integrated)*

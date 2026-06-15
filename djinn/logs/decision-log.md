@@ -117,6 +117,6 @@ the guard. Metrics represent meaningful system state change.
 
 **Decision:** `os.environ["DJINN_DISCORD_TOKEN"]` (KeyError on missing) over `.get()` with hardcoded fallback. Single `~/.djinn.env` for all three services. Did not rewrite git history.
 
-**Why:** Silent fallback → confusing 401 with no obvious cause. Single env file → token rotation touches one file. History rewrite → requires coordinated force-push across Salomon/Typhon/Orin; token rotation is cheaper if ever needed.
+**Why:** Silent fallback → confusing 401 with no obvious cause. Single env file → token rotation touches one file. History rewrite → requires coordinated force-push across Salomon/Typhon/Orion; token rotation is cheaper if ever needed.
 
 *— Claude*

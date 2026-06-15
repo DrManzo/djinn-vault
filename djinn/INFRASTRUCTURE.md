@@ -32,7 +32,7 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 | Disk | 552G free (37% used) |
 | Role | Storage, lightweight tasks, Typhon's Studio streaming/post-production |
 
-### Orin (Large-Model Host — iMac)
+### Orion (Large-Model Host — iMac)
 | Attribute | Value |
 |-----------|-------|
 | Hostname | Jacobs-iMac-213.lan |
@@ -79,7 +79,7 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
 └────────┬────────┘              └─────────────────┘
          │     SSH
          │◄───────────────────────►┌─────────────────┐
-         │                         │      Orin        │
+         │                         │      Orion        │
          │                         │  192.168.1.176   │
          │                         │ (iMac, macOS)    │
          │                         │ llama3.3:70b     │

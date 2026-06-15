@@ -34,7 +34,7 @@ Sign every deliverable at the bottom.
 |---------|------|----|
 | Salomon | Daily ops, live print control, Ollama inference | 192.168.1.225 |
 | Typhon | Storage, sync, lightweight inference | 192.168.1.113 |
-| Orin | Large-model host (llama3.3:70b), always-on storage | 192.168.1.176 |
+| Orion | Large-model host (llama3.3:70b), always-on storage | 192.168.1.176 |
 
 The **Vault** is an Obsidian markdown knowledge base synced to Google Drive at `Typhons-Forge/`. That is your primary interface with the system — not GitHub (the repo is private and you cannot access it directly).
 
@@ -147,7 +147,7 @@ If a file is missing from your context folder, ask Javier to add it.
 | **Marcus** | Perplexity (Sonnet 4.6) | Research, audits, synthesis | GitHub `djinn/research/marcus/` → synced to GDrive |
 | **Claude** | Anthropic Claude | Architecture, system design | Direct vault writes → synced to GDrive |
 | **Salomon** | Local Ollama (Salomon) | Daily ops, print control | Live system |
-| **Orin** | Local Ollama (Orin, 70B) | Long-running inference | Reports queue |
+| **Orion** | Local Ollama (Orion, 70B) | Long-running inference | Reports queue |
 | **Assistant** | Hermes/Ollama | System improvement, documentation | `djinn/skills/`, `djinn/docs/` |
 
 ---
