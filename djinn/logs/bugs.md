@@ -99,3 +99,4 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 
 ## 2026-06-11 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (1 occurrence(s)) _(type: errlog)_
+| 2026-06-14 | Claude | forge-slicer | high | wont-fix | CrealityPrint v6+ CLI --slice 0 segfault | [[2026-06-14_bug-crealityprint-v6-cli-slice-0-segfault]] |

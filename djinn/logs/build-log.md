@@ -1378,3 +1378,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - `djinn-comms-rotate` + systemd timer installed (Sun 03:00 UTC weekly)
 
 *— Claude, 2026-06-14*
+
+## 2026-06-14: BUG — CrealityPrint v6+ CLI --slice 0 segfault
+- **System:** forge-slicer
+- **Severity:** high | **Status:** wont-fix
+- **Root cause:** Null pointer dereference in Slic3r::GUI::PartPlate::set_shape (offset 0x9d8) when '--slice 0' is used with printers that have 'support_multi_bed_types: 1' set. Present in ALL v6.x Linux builds (v6.1.2 through v7.1.1 tested). v5.1.7 has no headless CLI. Migrated to Orca Slicer v2.3.2.
+- **Report:** `logs/reports/2026-06-14_bug-crealityprint-v6-cli-slice-0-segfault.md`
+
+*— Claude*
