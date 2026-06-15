@@ -6,7 +6,7 @@ Includes native EngravingAgent routing — do NOT use djinn-model-text-engrave f
 import json, re, urllib.request
 from .project_state import ProjectState, _load_queue
 from .llm import LLM
-from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, price, engrave
+from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, makers_mark, price, engrave
 
 # Module-level singleton — persists across calls; reconnects if Ollama goes down
 _llm_singleton: LLM | None = None
@@ -174,6 +174,10 @@ def run(
     _pre_plate_status = state.status
     if intent == "plate" or (auto_advance and _pre_plate_status == "plate_nest"):
         state = plate_nest.run(state, plate_items)
+        try:
+            state = makers_mark.run(state)
+        except Exception as e:
+            print(f"  [MakersMarkAgent] WARNING: stamp failed ({e}) — proceeding without mark")
         state.save()
         if not auto_advance:
             return state
