@@ -1,0 +1,758 @@
+#!/home/drmanzo/.venvs/djinn-orchestrator/bin/python3.11
+"""
+djinn-model-fetch — Download, analyze, render, and stage a 3D model for printing.
+
+Flow:
+  1. Download STL/3MF from URL
+  2. Mesh analysis (dimensions, overhangs, bed fit)
+  3. Generate renders (final product view + overhang map)
+  4. Send question message with renders — asks supports/infill/brim
+  5. Add to queue with status "needs_settings"
+
+  User then replies: slice N supports=yes infill=15 brim=no
+  → djinn-model-slice handles slicing + final report + confirm flow
+"""
+
+import sys, os, re, json, datetime, subprocess, pathlib, hashlib, shutil
+import urllib.request, urllib.parse
+from html.parser import HTMLParser
+
+QUEUE_FILE   = pathlib.Path.home() / ".local/share/djinn/print-queue.json"
+MODELS_DIR   = pathlib.Path.home() / "printer-files/library"
+GCODE_DIR    = pathlib.Path.home() / "printer-files/queue"
+RENDERS_DIR  = pathlib.Path.home() / ".local/share/djinn/renders"
+VAULT_PRINTS = pathlib.Path.home() / "Obsidian/djinn/printer/prints"
+PROFILE      = pathlib.Path.home() / ".config/forge/ender3-v3-plus.ini"
+PRINTER_NAME = "Calliope"
+PRINTER_IP   = "192.168.1.113"
+MAX_BED      = (300, 300, 330)
+
+def _load_env(path):
+    env = {}
+    try:
+        for line in pathlib.Path(path).read_text().splitlines():
+            line = line.strip()
+            if "=" in line and not line.startswith("#"):
+                k, _, v = line.partition("=")
+                env[k.strip()] = v.strip()
+    except Exception:
+        pass
+    return env
+
+_FC_KEY       = _load_env(pathlib.Path.home() / ".config/djinn/firecrawl.env").get("FIRECRAWL_API_KEY", "")
+DISCORD_CHANNEL_ID = "1507882513891065876"
+_djinn_env    = _load_env(pathlib.Path.home() / ".djinn.env")
+_oc           = json.loads(pathlib.Path.home().joinpath(".openclaw/openclaw.json").read_text())
+DISCORD_TOKEN = _djinn_env.get("DJINN_DISCORD_TOKEN") or _oc["channels"]["discord"]["token"]
+_tg_env       = _load_env(pathlib.Path.home() / ".config/forge/printer-bot.env")
+TG_TOKEN      = _djinn_env.get("DJINN_TG_TOKEN") or _tg_env.get("TELEGRAM_BOT_TOKEN", "")
+TG_CHAT       = _djinn_env.get("DJINN_TG_CHAT") or _oc["channels"]["telegram"].get("allowFrom", [""])[0].replace("telegram:", "")
+
+
+def log(msg):
+    ts = datetime.datetime.now().strftime("%H:%M:%S")
+    print(f"[{ts}] {msg}", flush=True)
+
+
+# ── Notifications ─────────────────────────────────────────────────────────────
+
+def tg_send(text):
+    """Send status to Telegram only — not Discord. Discord gets nothing until Javier slices."""
+    _tg_send(text)
+
+
+def tg_send_photo(image_path: pathlib.Path, caption: str = ""):
+    """Send renders to Telegram only — overhang analysis is for Javier, not customers."""
+    _tg_send_photo(image_path, caption)
+
+
+def _tg_send(text):
+    if not TG_TOKEN or not TG_CHAT:
+        log(f"[notify] no creds: {text[:60]}")
+        return
+    data = json.dumps({"chat_id": TG_CHAT, "text": text}).encode()
+    try:
+        r = urllib.request.urlopen(
+            urllib.request.Request(
+                f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+                data=data,
+                headers={"Content-Type": "application/json"},
+            ),
+            timeout=10,
+        )
+        r.read()
+    except Exception as e:
+        log(f"[tg] {e}")
+
+
+def _tg_send_photo(image_path: pathlib.Path, caption: str = ""):
+    if not TG_TOKEN or not TG_CHAT:
+        return
+    try:
+        img_data = pathlib.Path(image_path).read_bytes()
+        boundary = "DjinnBoundary1337"
+        body = (
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n{TG_CHAT}\r\n"
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n{caption}\r\n"
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"render.png\"\r\nContent-Type: image/png\r\n\r\n"
+        ).encode() + img_data + f"\r\n--{boundary}--\r\n".encode()
+        urllib.request.urlopen(
+            urllib.request.Request(
+                f"https://api.telegram.org/bot{TG_TOKEN}/sendPhoto",
+                data=body,
+                headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+            ),
+            timeout=30,
+        ).read()
+        log(f"[tg_photo] sent {image_path.name}")
+    except Exception as e:
+        log(f"[tg_photo] {e}")
+
+
+def _discord_send(text: str):
+    data = json.dumps({"content": text}).encode()
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/channels/{DISCORD_CHANNEL_ID}/messages",
+        data=data,
+        headers={
+            "Authorization": f"Bot {DISCORD_TOKEN}",
+            "Content-Type": "application/json",
+            "User-Agent": "DiscordBot (djinn-model-fetch, 1.0)",
+        },
+    )
+    try:
+        urllib.request.urlopen(req, timeout=15)
+    except Exception as e:
+        log(f"[discord] {e}")
+
+
+def _discord_send_photo(image_path: pathlib.Path, caption: str = ""):
+    try:
+        img_data = pathlib.Path(image_path).read_bytes()
+        boundary = "DjinnBoundary1338"
+        body = (
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n{caption}\r\n"
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"{image_path.name}\"\r\nContent-Type: image/png\r\n\r\n"
+        ).encode() + img_data + f"\r\n--{boundary}--\r\n".encode()
+        req = urllib.request.Request(
+            f"https://discord.com/api/v10/channels/{DISCORD_CHANNEL_ID}/messages",
+            data=body,
+            headers={
+                "Authorization": f"Bot {DISCORD_TOKEN}",
+                "Content-Type": f"multipart/form-data; boundary={boundary}",
+                "User-Agent": "DiscordBot (djinn-model-fetch, 1.0)",
+            },
+        )
+        urllib.request.urlopen(req, timeout=30).read()
+        log(f"[discord_photo] sent {image_path.name}")
+    except Exception as e:
+        log(f"[discord_photo] {e}")
+
+
+# ── Queue ─────────────────────────────────────────────────────────────────────
+
+def load_queue():
+    QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if QUEUE_FILE.exists():
+        return json.loads(QUEUE_FILE.read_text())
+    return {"next_id": 1, "jobs": []}
+
+
+def save_queue(q):
+    QUEUE_FILE.write_text(json.dumps(q, indent=2))
+
+
+def add_to_queue(entry: dict, status: str = "needs_settings") -> tuple[int, bool]:
+    """Add job to queue. Returns (job_id, is_duplicate). Deduplicates by sha256."""
+    q = load_queue()
+    sha = entry.get("file_sha256")
+    if sha:
+        pending_statuses = {"needs_settings", "confirmed", "pending"}
+        for existing in q["jobs"]:
+            if existing.get("file_sha256") == sha and existing.get("status") in pending_statuses:
+                return existing["id"], True
+    job_id = q["next_id"]
+    entry["id"] = job_id
+    entry["added"] = datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z"
+    entry["status"] = status
+    q["jobs"].append(entry)
+    q["next_id"] = job_id + 1
+    save_queue(q)
+    return job_id, False
+
+
+# ── URL Detection & Download ──────────────────────────────────────────────────
+
+def sha256_file(path: pathlib.Path) -> str:
+    """SHA256 of a file — computed once at stage time, verified at slice time."""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        while chunk := f.read(65536):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def detect_source(url: str) -> str:
+    u = url.lower()
+    if "printables.com" in u:  return "printables"
+    if "thingiverse.com" in u: return "thingiverse"
+    if "makerworld.com" in u:  return "makerworld"
+    if "discord.com/channels/" in u or "discordapp.com/channels/" in u: return "discord_message"
+    path = u.split("?")[0]
+    if path.endswith(".stl") or path.endswith(".3mf"): return "direct"
+    return "generic"
+
+
+def _download_file(url: str, dest: pathlib.Path):
+    """
+    Download URL to dest — ALWAYS overwrites.
+    If a file already exists at dest, it is destroyed and replaced.
+    No caching. No skipping. The file you get is the file from the URL, right now.
+    """
+    if dest.exists():
+        log(f"OVERWRITE: {dest.name} already exists — replacing with fresh download")
+    log(f"Downloading: {url}")
+    headers = {"User-Agent": "Mozilla/5.0 (djinn-model-fetch/1.0)"}
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=60) as r, open(dest, "wb") as f:
+        while chunk := r.read(65536):
+            f.write(chunk)
+    log(f"Saved: {dest} ({dest.stat().st_size // 1024}KB)")
+
+
+def _scrape_links(url: str) -> list[str]:
+    """Extract .stl/.3mf download links from a page.
+
+    Uses Firecrawl if key is available (handles JS-rendered pages).
+    Falls back to raw HTMLParser for static HTML if key not set.
+    """
+    # ── Firecrawl path ────────────────────────────────────────────────────────
+    if _FC_KEY:
+        try:
+            payload = json.dumps({"url": url, "formats": ["markdown"]}).encode()
+            req = urllib.request.Request(
+                "https://api.firecrawl.dev/v1/scrape",
+                payload,
+                {
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {_FC_KEY}",
+                },
+            )
+            resp = json.loads(urllib.request.urlopen(req, timeout=45).read())
+            md = (resp.get("data", {}).get("markdown", "")
+                  or resp.get("markdown", ""))
+            if md:
+                # Extract markdown links: [text](url) where url ends in .stl/.3mf
+                links = re.findall(
+                    r'\]\((https?://[^\)]+\.(?:stl|3mf)[^\)]*)\)',
+                    md, re.IGNORECASE
+                )
+                if links:
+                    log(f"Firecrawl scrape: found {len(links)} model link(s)")
+                    return links
+                log("Firecrawl scrape: page parsed but no .stl/.3mf links found")
+        except Exception as e:
+            log(f"Firecrawl scrape failed, falling back to HTML parse: {e}")
+
+    # ── HTMLParser fallback ───────────────────────────────────────────────────
+    class _LinkParser(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.links = []
+        def handle_starttag(self, tag, attrs):
+            href = dict(attrs).get("href", "")
+            if href and (href.lower().endswith(".stl") or href.lower().endswith(".3mf")):
+                self.links.append(href)
+
+    headers = {"User-Agent": "Mozilla/5.0 (djinn-model-fetch/1.0)"}
+    try:
+        with urllib.request.urlopen(
+            urllib.request.Request(url, headers=headers), timeout=20
+        ) as r:
+            html = r.read().decode("utf-8", errors="ignore")
+    except Exception as e:
+        log(f"Scrape failed: {e}")
+        return []
+
+    p = _LinkParser()
+    p.feed(html)
+    base = urllib.parse.urlparse(url)
+    result = []
+    for link in p.links:
+        if link.startswith("http"):
+            result.append(link)
+        else:
+            result.append(f"{base.scheme}://{base.netloc}{link}")
+    return result
+
+
+def _printables_download(url: str, dest_dir: pathlib.Path) -> list[pathlib.Path]:
+    m = re.search(r"/model/(\d+)", url)
+    if not m:
+        return []
+    model_id = m.group(1)
+    query = """
+    query ModelFiles($id: ID!) {
+      print(id: $id) { name stls { fileSize name downloadUrl } }
+    }"""
+    payload = json.dumps({"query": query, "variables": {"id": model_id}}).encode()
+    req = urllib.request.Request(
+        "https://api.printables.com/graphql/",
+        data=payload,
+        headers={"Content-Type": "application/json", "User-Agent": "djinn/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            data = json.loads(r.read())
+        stls = data["data"]["print"]["stls"]
+        if not stls:
+            return []
+        files = []
+        for stl in stls:
+            fname = re.sub(r"[^\w\-.]", "_", stl["name"])
+            out = dest_dir / fname
+            _download_file(stl["downloadUrl"], out)
+            files.append(out)
+        return files
+    except Exception as e:
+        log(f"Printables API failed: {e}, falling back to scrape")
+        return []
+
+
+def _discord_message_download(url: str, dest_dir: pathlib.Path) -> list[pathlib.Path]:
+    m = re.search(r"/channels/(\d+)/(\d+)/(\d+)", url)
+    if not m:
+        raise RuntimeError(f"Cannot parse Discord message URL: {url}")
+    channel_id, message_id = m.group(2), m.group(3)
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/channels/{channel_id}/messages/{message_id}",
+        headers={"Authorization": f"Bot {DISCORD_TOKEN}", "User-Agent": "djinn/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            msg = json.loads(r.read())
+    except Exception as e:
+        raise RuntimeError(f"Discord API error: {e}")
+
+    model_attachments = [
+        a for a in msg.get("attachments", [])
+        if a.get("filename", "").lower().endswith((".stl", ".3mf"))
+    ]
+    if model_attachments:
+        files = []
+        for att in model_attachments:
+            fname = re.sub(r"[^\w\-.]", "_", att["filename"])
+            out = dest_dir / fname
+            _download_file(att["url"], out)
+            files.append(out)
+        return files
+
+    content = msg.get("content", "")
+    MODEL_SITES = r"https?://(?:www\.)?(?:makerworld\.com|printables\.com|thingiverse\.com)\S+"
+    site_urls = re.findall(MODEL_SITES, content, re.I)
+    if site_urls:
+        return download_model(site_urls[0], dest_dir)
+
+    direct = re.findall(r"https?://\S+\.(?:stl|3mf)", content, re.I)
+    if direct:
+        files = []
+        for link in direct[:5]:
+            ext = ".3mf" if link.lower().endswith(".3mf") else ".stl"
+            out = dest_dir / f"model{ext}"
+            _download_file(link, out)
+            files.append(out)
+        return files
+
+    raise RuntimeError(
+        "Discord message has no STL/3MF attachments or recognized model URLs. "
+        f"Content: {content[:200]}"
+    )
+
+
+def _makerworld_download(url: str, dest_dir: pathlib.Path) -> list[pathlib.Path]:
+    raise RuntimeError(
+        "MakerWorld requires login to download.\n"
+        "Download the file in your browser, then drop it in #3d-printing — "
+        "I'll pick it up automatically."
+    )
+
+
+def _copy_local_file(src: pathlib.Path, dest_dir: pathlib.Path) -> list[pathlib.Path]:
+    """
+    Copy a local file to dest_dir — ALWAYS overwrites whatever is there.
+    This is the exact file Javier pointed at. Not a cached version. Not a previous
+    version. The bytes on disk right now at the path he gave.
+    """
+    if not src.exists():
+        raise RuntimeError(f"File not found: {src}")
+    if src.suffix.lower() not in (".stl", ".3mf", ".obj", ".step", ".stp", ".gcode"):
+        raise RuntimeError(f"Unrecognized file type: {src.suffix} — expected STL/3MF/OBJ/STEP/GCODE")
+
+    dest = dest_dir / src.name
+    if dest.exists():
+        log(f"OVERWRITE: {dest.name} already exists at destination — replacing with your file")
+
+    shutil.copy2(str(src), str(dest))
+    log(f"Copied: {src} → {dest} ({dest.stat().st_size // 1024}KB)")
+    return [dest]
+
+
+def download_model(url: str, dest_dir: pathlib.Path) -> list[pathlib.Path]:
+    dest_dir.mkdir(parents=True, exist_ok=True)
+
+    # ── LOCAL FILE PATH ────────────────────────────────────────────────────────
+    # If the input isn't a URL, treat it as a local file path and copy it.
+    # No caching, no skip-if-exists. The file you named is the file that goes in.
+    if not url.startswith("http://") and not url.startswith("https://"):
+        src = pathlib.Path(url).expanduser().resolve()
+        return _copy_local_file(src, dest_dir)
+
+    source = detect_source(url)
+    log(f"Source: {source}")
+
+    if source == "discord_message":
+        return _discord_message_download(url, dest_dir)
+    if source == "direct":
+        path_part = url.lower().split("?")[0]
+        ext = ".3mf" if path_part.endswith(".3mf") else ".stl"
+        out = dest_dir / f"model{ext}"
+        _download_file(url, out)
+        return [out]
+    if source == "printables":
+        files = _printables_download(url, dest_dir)
+        if files:
+            return files
+    if source == "makerworld":
+        return _makerworld_download(url, dest_dir)
+
+    log("Scraping page for download links...")
+    links = _scrape_links(url)
+    if not links:
+        raise RuntimeError(f"No STL/3MF links found on page: {url}")
+    files = []
+    for i, link in enumerate(links[:5]):
+        ext = ".3mf" if link.lower().endswith(".3mf") else ".stl"
+        out = dest_dir / f"model_{i}{ext}"
+        try:
+            _download_file(link, out)
+            files.append(out)
+        except Exception as e:
+            log(f"Failed: {link}: {e}")
+    if not files:
+        raise RuntimeError("All download attempts failed")
+    return files
+
+
+def pick_best_file(files: list[pathlib.Path]) -> pathlib.Path:
+    threemf = [f for f in files if f.suffix == ".3mf"]
+    if threemf:
+        return threemf[0]
+    stls = sorted([f for f in files if f.suffix == ".stl"], key=lambda f: f.stat().st_size, reverse=True)
+    return stls[0] if stls else files[0]
+
+
+# ── Mesh Analysis ─────────────────────────────────────────────────────────────
+
+def analyze_mesh(model_path: pathlib.Path) -> dict:
+    result = {
+        "dims_mm": None, "volume_cm3": None, "watertight": None,
+        "needs_supports": None, "support_reason": "", "overhang_pct": 0.0,
+        "fits_bed": True, "error": None,
+    }
+    try:
+        import trimesh, numpy as np
+        mesh = trimesh.load(str(model_path), force="mesh")
+        bounds = mesh.bounds
+        dims = [round(float(bounds[1][i] - bounds[0][i]), 1) for i in range(3)]
+        result["dims_mm"] = dims
+        result["volume_cm3"] = round(float(mesh.volume) / 1000, 2)
+        result["watertight"] = bool(mesh.is_watertight)
+
+        norms = mesh.face_normals
+        down = norms[:, 2]
+        overhang_faces = int(np.sum(down < -0.707))
+        total_faces = len(norms)
+        overhang_ratio = overhang_faces / total_faces if total_faces else 0
+        result["overhang_pct"] = round(overhang_ratio * 100, 1)
+
+        # Hollow part detection: if volume << bounding box, it's a thin-walled hollow (vase, cup, bowl).
+        # Supports inside hollow parts can never be removed — always force no.
+        bbox_vol = dims[0] * dims[1] * dims[2]  # mm³
+        vol_mm3  = float(mesh.volume)
+        fill_ratio = vol_mm3 / bbox_vol if bbox_vol > 0 else 1.0
+        is_hollow = fill_ratio < 0.15  # <15% fill = hollow shell
+
+        if is_hollow:
+            result["needs_supports"] = False
+            result["support_reason"] = (
+                f"Hollow part (fill ratio {fill_ratio*100:.1f}%) — supports disabled. "
+                "Internal supports cannot be removed from hollow geometry."
+            )
+        elif overhang_ratio > 0.03:
+            result["needs_supports"] = True
+            result["support_reason"] = (
+                f"{overhang_faces} faces ({overhang_ratio*100:.1f}%) exceed 45° — "
+                "unsupported sections will sag or fail mid-print."
+            )
+        else:
+            result["needs_supports"] = False
+            result["support_reason"] = "No significant overhangs (all faces within 45° of vertical)."
+
+        for i, dim in enumerate(dims):
+            if dim > MAX_BED[i]:
+                result["fits_bed"] = False
+                break
+
+    except ImportError:
+        result["needs_supports"] = None
+        result["support_reason"] = "Mesh analysis unavailable (trimesh not installed)."
+        result["error"] = "trimesh_missing"
+    except Exception as e:
+        log(f"Mesh analysis error: {e}")
+        result["error"] = str(e)
+
+    return result
+
+
+# ── Renders ───────────────────────────────────────────────────────────────────
+
+def render_model(model_path: pathlib.Path, job_id: int) -> dict[str, pathlib.Path]:
+    """Generate three renders: two final-product POVs + overhang highlight map."""
+    renders = {}
+    out_dir = RENDERS_DIR / f"job{job_id}"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        import trimesh, numpy as np
+
+        mesh = trimesh.load(str(model_path), force="mesh")
+
+        # 1a. Final product — 45° below eye level, slight rotation (B)
+        scene_b = mesh.scene()
+        scene_b.set_camera(angles=[0.785, 0.0, 0.5], distance=mesh.scale * 2.8)
+        try:
+            img = scene_b.save_image(resolution=[800, 600])
+            p = out_dir / "render_final_b.png"
+            p.write_bytes(img)
+            renders["final_b"] = p
+            log("Render: final product view B saved")
+        except Exception as e:
+            log(f"Render B failed: {e}")
+
+        # 1b. Final product — 45° below eye level, 45° rotation (C)
+        scene_c = mesh.scene()
+        scene_c.set_camera(angles=[0.785, 0.0, 0.8], distance=mesh.scale * 2.8)
+        try:
+            img = scene_c.save_image(resolution=[800, 600])
+            p = out_dir / "render_final_c.png"
+            p.write_bytes(img)
+            renders["final_c"] = p
+            log("Render: final product view C saved")
+        except Exception as e:
+            log(f"Render C failed: {e}")
+
+        # 2. Overhang map — gray base, red overhang faces
+        mesh2 = mesh.copy()
+        norms = mesh2.face_normals
+        down = norms[:, 2]
+        colors = np.ones((len(norms), 4), dtype=np.uint8) * [160, 160, 160, 255]
+        colors[down < -0.707] = [220, 50, 50, 255]   # red = needs support
+        colors[(down >= -0.707) & (down < -0.5)] = [220, 140, 50, 255]  # orange = marginal
+        mesh2.visual = trimesh.visual.ColorVisuals(mesh2, face_colors=colors)
+        scene2 = mesh2.scene()
+        try:
+            img2 = scene2.save_image(resolution=[800, 600])
+            oh_path = out_dir / "render_overhangs.png"
+            oh_path.write_bytes(img2)
+            renders["overhangs"] = oh_path
+            log("Render: overhang map saved")
+        except Exception as e:
+            log(f"Overhang render failed: {e}")
+
+    except Exception as e:
+        log(f"Render error: {e}")
+
+    return renders
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def _parse_args():
+    """Return (url, profile, color, note) from sys.argv."""
+    args = sys.argv[1:]
+    if not args:
+        return None, "", "", ""
+    url = args[0]
+    profile = color = note = ""
+    i = 1
+    while i < len(args):
+        a = args[i]
+        if a == "--profile" and i + 1 < len(args):
+            profile = args[i + 1]; i += 2
+        elif a == "--color" and i + 1 < len(args):
+            color = args[i + 1]; i += 2
+        elif a == "--note" and i + 1 < len(args):
+            note = args[i + 1]; i += 2
+        else:
+            i += 1
+    return url, profile, color, note
+
+
+def main():
+    url, cust_profile, cust_color, cust_note = _parse_args()
+    if not url:
+        print("Usage: djinn-model-fetch <url> [--profile X] [--color X] [--note '...']")
+        sys.exit(1)
+
+    name_hint = pathlib.Path(url).stem.split("?")[0] if not url.startswith("http") else ""
+    tg_send(f"Incoming file{': ' + name_hint if name_hint else ''}...")
+
+    # 1. Download
+    slug = re.sub(r"[^\w]", "_", urllib.parse.urlparse(url).path.strip("/"))[-40:]
+    work_dir = MODELS_DIR / slug
+    try:
+        files = download_model(url, work_dir)
+    except Exception as e:
+        tg_send(f"Download failed:\n{e}")
+        sys.exit(1)
+
+    model_path = pick_best_file(files)
+    log(f"Selected: {model_path.name} ({model_path.stat().st_size // 1024}KB)")
+
+    # ── FILE INTEGRITY SEAL ───────────────────────────────────────────────────
+    # Compute SHA256 of the exact file that was just staged.
+    # This hash is stored in the queue and re-verified at slice time.
+    # If the file is modified between now and slice, slicing is blocked.
+    file_hash = sha256_file(model_path)
+    log(f"File sealed: SHA256 {file_hash[:16]}…")
+
+    # 2. Mesh analysis
+    tg_send(f"Analyzing `{model_path.name}`...")
+    mesh = analyze_mesh(model_path)
+
+    if not mesh.get("fits_bed", True):
+        dims = mesh.get("dims_mm", [])
+        tg_send(
+            f"Model too large for bed (300x300x330mm).\n"
+            f"Dims: {dims[0]}x{dims[1]}x{dims[2]}mm\nScale it down or split it."
+        )
+        sys.exit(1)
+
+    # 3. Stage in queue — include customer choices if provided
+    entry = {
+        "url": url,
+        "model_path": str(model_path),
+        "file_sha256": file_hash,
+        "gcode_path": None,
+        "mesh": mesh,
+        "stats": None,
+        "supports_needed": mesh.get("needs_supports"),
+        "supports_added": False,
+    }
+    if cust_profile: entry["customer_profile"] = cust_profile
+    if cust_color:   entry["customer_color"]   = cust_color
+    if cust_note:    entry["customer_note"]    = cust_note
+    queue_status = "confirmed" if (cust_profile and cust_color) else "needs_settings"
+    job_id, is_dup = add_to_queue(entry, status=queue_status)
+    if is_dup:
+        log(f"Duplicate file — already queued as job #{job_id}, skipping")
+        return
+    log(f"Staged as job #{job_id}")
+
+    # 4. Generate renders
+    log("Rendering previews...")
+    renders = render_model(model_path, job_id)
+
+    # 5. Send renders + settings question
+    dims = mesh.get("dims_mm", [0, 0, 0])
+    dims_str = f"{dims[0]}x{dims[1]}x{dims[2]}mm" if dims else "unknown"
+    vol_str  = f"{mesh.get('volume_cm3', '?')}cm³"
+    wt_str   = "✅" if mesh.get("watertight") else "⚠️ not watertight"
+    bed_str  = "✅ fits bed" if mesh.get("fits_bed", True) else "❌ too large"
+
+    if mesh.get("needs_supports"):
+        oh_line = f"⚠️ Overhangs: {mesh['overhang_pct']}% of faces exceed 45° — supports recommended"
+        rec_supports = "yes"
+    elif mesh.get("needs_supports") is False:
+        oh_line = f"✅ No significant overhangs ({mesh['overhang_pct']}%) — supports not needed"
+        rec_supports = "no"
+    else:
+        oh_line = "⚠️ Could not analyze overhangs — inspect manually"
+        rec_supports = "no"
+
+    question = (
+        f"*Calliope Job #{job_id} — {model_path.name}*\n"
+        f"{dims_str} | {vol_str} | {wt_str} | {bed_str}\n\n"
+        f"📁 Staged: `{model_path}`\n"
+        f"🔒 SHA256: `{file_hash[:32]}…`\n"
+        f"   (verified at slice time — any change to this file blocks the print)\n\n"
+        f"{oh_line}\n\n"
+        f"*Awaiting customer choice (A/B/C + color)*\n"
+        f"  supports recommended: {rec_supports}\n"
+        f"  Once confirmed → auto-slices with defaults (infill=15, brim=no)\n"
+        f"Red areas in overhang map = zones that need support."
+    )
+
+    # Send renders first
+    if "final_b" in renders:
+        tg_send_photo(renders["final_b"], f"Job #{job_id} — Final product (front)")
+    if "final_c" in renders:
+        tg_send_photo(renders["final_c"], f"Job #{job_id} — Final product (side)")
+    if "overhangs" in renders:
+        tg_send_photo(renders["overhangs"], f"Job #{job_id} — Overhang map (red = support needed)")
+
+    # Generate rough quote estimate from volume
+    vol_cm3 = mesh.get("volume_cm3", 0) or 0
+    est_grams = round(vol_cm3 * 1.24, 1)  # PLA density
+    est_hours = max(1, round(vol_cm3 / 12, 1))  # ~12 cm³/hr for standard profile
+    quote_text = ""
+    try:
+        qr = subprocess.run(
+            ["djinn-print-quote", "--simple", "--name", model_path.stem[:30],
+             "--grams", str(int(est_grams)), "--hours", str(est_hours),
+             "--json-out"],
+            capture_output=True, text=True, timeout=30,
+        )
+        if qr.returncode == 0:
+            qdata = json.loads(qr.stdout)
+            quote_text = f"\n\n**Estimate:** ${qdata.get('price', '?')}" if isinstance(qdata, dict) else ""
+    except Exception:
+        pass
+
+    # Post customer-facing confirmation to Discord
+    sup_note = "✅ no supports needed" if rec_supports == "no" else "⚠️ supports recommended"
+    if cust_profile and cust_color:
+        profile_label = {"standard": "Standard", "production": "Production", "proto": "Draft"}.get(cust_profile, cust_profile.capitalize())
+        discord_customer_msg = (
+            f"✅ **Order confirmed — Job #{job_id}**\n"
+            f"{dims_str} · {vol_str} · {sup_note}{quote_text}\n"
+            f"Profile: **{profile_label}** · Color: **{cust_color.capitalize()}**\n\n"
+            f"We're reviewing your print and will start it shortly.\n— Typhon's Forge"
+        )
+    else:
+        discord_customer_msg = (
+            f"**Job #{job_id} received — {model_path.stem}**\n"
+            f"{dims_str} · {vol_str} · {sup_note}{quote_text}\n\n"
+            f"Choose your print profile and color using the buttons above.\n— Typhon's Forge"
+        )
+    _discord_send(discord_customer_msg)
+    log("Customer-facing message posted to Discord.")
+
+    # Auto-slice when profile and color already selected (button flow)
+    if cust_profile and cust_color:
+        log(f"Auto-slicing job #{job_id} (profile={cust_profile} color={cust_color})...")
+        sr = subprocess.run(
+            ["djinn-model-slice", str(job_id),
+             f"profile={cust_profile}", f"material=pla",
+             f"supports={'yes' if rec_supports == 'yes' else 'no'}"],
+            capture_output=False, timeout=300,
+        )
+        if sr.returncode != 0:
+            log(f"Auto-slice failed — run manually: djinn-model-slice {job_id}")
+        log(f"Done — job #{job_id} sliced and awaiting confirm N.")
+    else:
+        log(f"Done — job #{job_id} waiting for customer profile/color selection.")
+
+
+if __name__ == "__main__":
+    main()
