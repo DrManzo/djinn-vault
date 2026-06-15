@@ -3414,3 +3414,19 @@ Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings 
 **Pending:** Creality Print slicer config `F002-0.4.def.json` error — pre-existing, needs separate fix.
 
 *— Claude*
+
+
+### CHECKPOINT-20260614-191314 | 2026-06-14 19:13 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260614-191322 | 2026-06-14 19:13 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
