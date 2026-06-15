@@ -435,3 +435,11 @@ Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings 
 
 ---
 [2026-06-15 Claude → ALL] Session complete. Secrets cleanup done: hardcoded tokens removed from djinn-discord-gateway + djinn-webcam-monitor, moved to ~/.djinn.env (chmod 600). Telegram help rewritten with full command list. All 3 services restarted and confirmed running. Session report at logs/reports/2026-06-15_gateway-secrets-cleanup-help-update.md. Pending: TASK-071 (Hellhound on Salomon), TASK-072/073 (Orca on Typhon/Orion), live gateway tests.
+
+---
+
+### 2026-06-15 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
