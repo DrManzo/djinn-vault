@@ -2443,10 +2443,11 @@ orca-slicer --help | head -3
 
 ## TASK-075
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-15 by Claude
+- completed: 2026-06-15 by Claude (built directly after 3 failed Salomon attempts — see COMMS)
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-01
 
 **Goal:** Surface the single most time-sensitive academic item in the morning briefing. GCU's 8-week courses run a predictable weekly rhythm (DQ1 due Wed, DQ2 due Fri, all assignments due Sun 11:59PM AZT) — currently invisible to Djinn.
@@ -2476,12 +2477,15 @@ Telegram: `/school` — full weekly view across all active courses (not just the
 
 **Report back:** Schema diff, test output of the seeded-week scenario, confirmation `/school` works end to end in Telegram.
 
+**Done — actual implementation notes:** Built directly into the three live files (`djinn-personal-db`, `djinn-personal-gateway`, `djinn-morning`), not as a separate vault module. Interface differs from the original spec: `academic add <course> <label> <date> [type]` (label before date, no `--recurring` flag) and a separate `academic seed-gcu <course> <monday> <start> <end>` command that inserts DQ1/DQ2/Assignments for one week at a time, instead of a generic recurrence engine. `/school` shows 7-day view with tier tags. Briefing JSON now includes `academic_item` (single highest-priority CRITICAL/ELEVATED line); `djinn-morning`'s `compose()` puts it first in the "one thing" slot, ahead of the legacy `deadlines` table. Tested live against `~/.local/share/djinn/personal.db` — schema migrated cleanly, no data loss, `briefing` JSON still parses. Vault mirror at `djinn/personal/academic/status.md` synced via `djinn-personal-db sync`.
+
 ## TASK-076
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-15 by Claude
+- completed: 2026-06-15 by Claude
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-06
 
 **Goal:** Fix the Black Book cold-start problem. Zero entries exist because the 5-entry/day goal and the `/reflect`-only flow create too high an activation bar. Replace with a zero-friction capture command.
@@ -2510,12 +2514,15 @@ Telegram: `/log [text]` — if text present, immediate capture, no prompt, no Ol
 
 **Report back:** Confirm gitignore still covers `personal/`, confirm `/reflect` gate works, paste a sample `/log` exchange.
 
+**Done — actual implementation notes:** Live `black_book_log` table (one row per day, used by `/reflect`'s existing logging) was left as-is; added a separate `black_book_entries(id, entry_date, logged_at)` table for the lifetime entry count instead of adding an `entry_source` column to `black_book_log` — simpler, no migration of existing rows needed. Entry text is written only to `~/Obsidian/personal/black-book/{date}.md` (append-only), never stored in SQLite — kept the original Phase Alpha principle that raw journal text lives in the vault file, not the DB. `/log` with no args sets a pending-state flag per chat_id and captures the next plain-text message (mirrors the existing `_craig_draft` pattern). `/reflect` gates at 3 lifetime entries, redirects below that. Tested live: `/log`, `/log <text>`, and the 3-entry gate message all confirmed via direct dispatch test, then cleaned from the DB/vault.
+
 ## TASK-077
 - assigned_to: salomon
-- status: pending
+- status: partial
 - priority: normal
 - trigger: manual
 - created: 2026-06-15 by Claude
+- completed: 2026-06-15 by Claude (flare flag + quiet-mode briefing done; streak-pause NOT done — see note)
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-07
 
 **Goal:** Stop the morning brief from generating false-guilt pressure on colitis flare days. One toggle suppresses the action item and pauses streaks for the day.
@@ -2542,6 +2549,8 @@ Telegram: `/flare` (toggle on), `/flare clear` (manual clear)
 - `/flare clear` or midnight rollover restores normal briefing behavior
 
 **Report back:** Confirm streak-pause behavior with a test sequence (log streak, flare a day, skip habits, confirm streak intact next day).
+
+**Partial — actual implementation notes:** `health_flags` table, `flare on/clear/status` commands, and `/flare`/`/flare clear` Telegram routes all built and tested live. `djinn-morning` now checks `flare_active` from the briefing JSON before composing — flare days send `compose_flare()`'s quiet message instead of the normal briefing, with no habit keyboard. **Not done:** `_recalc_streak()` in `djinn-personal-db` was not modified — a flare day with zero habit completions will still break the streak under current logic, same as any other missed day. This needs a follow-up: either skip streak recalculation entirely on flagged flare dates, or treat the flare date as a no-op day in the date-walk inside `_recalc_streak`. Leaving status as `partial` rather than `done` since this is a real, not cosmetic, gap in the original spec.
 
 ## TASK-078
 - assigned_to: salomon
