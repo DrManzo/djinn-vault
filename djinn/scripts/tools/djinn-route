@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+# djinn-route — resolve the right model + endpoint for a task type
+#
+# Usage:
+#   djinn-route <task>              → prints: export OLLAMA_BASE_URL=... DJINN_MODEL=...
+#   djinn-route <task> --json       → prints JSON
+#   djinn-route <task> --model      → prints model name only
+#   djinn-route <task> --url        → prints base URL only
+#   djinn-route --list              → list all task types
+#
+# Eval pattern (sets env vars in current shell):
+#   eval "$(djinn-route code-heavy)"
+#
+# Tasks:
+#   default        qwen2.5:7b          Salomon  — OpenClaw, tool calling, ops
+#   reasoning      deepseek-r1:7b      Salomon  — analysis, planning, law/psych
+#   code           qwen2.5-coder:7b    Salomon  — fast code, debugging
+#   code-heavy     qwen2.5-coder:32b   Orion     — large codebase, deep audit
+#   notes          phi4:14b            Salomon  — summaries, captions, APA
+#   vision         llama3.2-vision:11b Salomon  — image scoring, thumbnails
+#   embed          nomic-embed-text    Salomon  — vector embeddings
+#   best           llama3.3:70b        Orion     — highest quality, non-latency tasks
+#   hermes         qwen3.6:latest      Orion     — Hermes Agent / Assistant lane
+#   creative       mistral:7b          Salomon  — creative writing
+#   lightweight    qwen2.5:7b          Typhon   — Typhon-local tasks
+
+set -euo pipefail
+
+SALOMON_URL="http://localhost:11434"
+TYPHON_URL="http://192.168.1.150:11434"
+ORIN_URL="http://192.168.1.176:11434"
+
+ORIN_IP="192.168.1.176"
+
+_reachable() {
+    curl -sf --max-time 3 "${ORIN_URL}/api/tags" &>/dev/null
+}
+
+_resolve() {
+    local task="$1"
+    case "$task" in
+        default|ops|tool|tool-call)
+            echo "salomon qwen2.5:7b $SALOMON_URL" ;;
+        reasoning|reason|analysis|law|psych|plan)
+            echo "salomon deepseek-r1:7b $SALOMON_URL" ;;
+        code|code-fast|dev|debug)
+            echo "salomon qwen2.5-coder:7b $SALOMON_URL" ;;
+        code-heavy|code-large|audit|review)
+            echo "orin qwen2.5-coder:32b $ORIN_URL" ;;
+        notes|summary|caption|apa|phi4)
+            echo "salomon phi4:14b $SALOMON_URL" ;;
+        vision|image|thumbnail|visual)
+            echo "salomon llama3.2-vision:11b-instruct-q4_K_M $SALOMON_URL" ;;
+        embed|embeddings|vectors)
+            echo "salomon nomic-embed-text:latest $SALOMON_URL" ;;
+        best|quality|70b|large|llama70)
+            echo "orin llama3.3:70b $ORIN_URL" ;;
+        hermes|assistant|qwen36)
+            echo "orin qwen3.6:latest $ORIN_URL" ;;
+        creative|write|story|mistral)
+            echo "salomon mistral:7b $SALOMON_URL" ;;
+        lightweight|light|typhon)
+            echo "typhon qwen2.5:7b $TYPHON_URL" ;;
+        *)
+            echo "ERROR: unknown task '$task'" >&2
+            echo "salomon qwen2.5:7b $SALOMON_URL"
+            ;;
+    esac
+}
+
+_list() {
+    cat <<'EOF'
+Task types:
+  default        → Salomon  qwen2.5:7b               (ops, tool calling, OpenClaw)
+  reasoning      → Salomon  deepseek-r1:7b            (analysis, planning, law/psych)
+  code           → Salomon  qwen2.5-coder:7b          (fast code, debugging)
+  code-heavy     → Orion     qwen2.5-coder:32b         (large codebase, deep audit)
+  notes          → Salomon  phi4:14b                  (summaries, captions, APA)
+  vision         → Salomon  llama3.2-vision:11b       (image scoring, thumbnails)
+  embed          → Salomon  nomic-embed-text           (vector embeddings)
+  best           → Orion     llama3.3:70b              (highest quality, slow)
+  hermes         → Orion     qwen3.6:latest            (Hermes Agent / Assistant)
+  creative       → Salomon  mistral:7b                (creative writing)
+  lightweight    → Typhon   qwen2.5:7b                (Typhon-local tasks)
+EOF
+}
+
+# --- main ---
+
+if [[ $# -eq 0 ]] || [[ "${1:-}" == "--list" ]]; then
+    _list
+    exit 0
+fi
+
+TASK="$1"
+MODE="${2:-}"
+
+read -r MACHINE MODEL URL <<< "$(_resolve "$TASK")"
+
+# Fallback: if Orion Ollama unreachable, fall back to Salomon equivalents
+if [[ "$MACHINE" == "orin" ]] && ! _reachable; then
+    case "$TASK" in
+        code-heavy|audit|review)  MODEL="qwen2.5-coder:7b"; MACHINE="salomon"; URL="$SALOMON_URL" ;;
+        best|quality|70b|large)   MODEL="deepseek-r1:7b";   MACHINE="salomon"; URL="$SALOMON_URL" ;;
+        hermes|assistant)         MODEL="phi4:14b";          MACHINE="salomon"; URL="$SALOMON_URL" ;;
+    esac
+fi
+
+case "$MODE" in
+    --json)
+        printf '{"machine":"%s","model":"%s","url":"%s"}\n' "$MACHINE" "$MODEL" "$URL" ;;
+    --model)
+        echo "$MODEL" ;;
+    --url)
+        echo "$URL" ;;
+    *)
+        printf 'export OLLAMA_BASE_URL="%s" DJINN_MODEL="%s"\n' "$URL" "$MODEL" ;;
+esac
