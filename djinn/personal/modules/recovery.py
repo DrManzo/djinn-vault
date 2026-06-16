@@ -8,6 +8,7 @@ NEVER calls cloud LLM for recovery data.
 
 Public API:
   step_status()                          -> str
+  start_step(step_number, notes)         -> str
   advance_step()                         -> str
   log_sponsor_contact(note)              -> str
   log_craving(severity, tag)             -> str
@@ -17,8 +18,10 @@ Public API:
   meeting_brief_nudge()                  -> str | None
 """
 
-from datetime import date, datetime, timezone, timedelta
+from datetime import date, datetime, timezone
 from .db import get_conn
+
+OLLAMA_MODEL = "qwen2.5:7b"  # matches running model; change here if swapped
 
 
 # ── Step Work ────────────────────────────────────────────────────────
@@ -106,7 +109,6 @@ def log_craving(severity: int, tag: str = "") -> str:
     if not 1 <= severity <= 10:
         return "❌ Severity must be 1–10."
 
-    # Get current sobriety day from existing sobriety_log
     conn = get_conn()
     sober_row = conn.execute(
         "SELECT start_date FROM sobriety_log ORDER BY id DESC LIMIT 1"
@@ -150,7 +152,7 @@ def craving_week_pattern() -> str:
     ]
     summary = "\n".join(summary_lines)
     avg = sum(r["severity"] for r in rows) / len(rows)
-    
+
     prompt = (
         f"You are a private recovery journal assistant. "
         f"Here are craving log entries from the past 7 days (severity 1-10):\n\n"
@@ -163,8 +165,10 @@ def craving_week_pattern() -> str:
     try:
         import subprocess
         result = subprocess.run(
-            ["ollama", "run", "mistral", prompt],
-            capture_output=True, text=True, timeout=30,
+            ["ollama", "run", OLLAMA_MODEL, prompt],
+            capture_output=True,
+            text=True,
+            timeout=60,
         )
         pattern = result.stdout.strip()
         if pattern:
@@ -172,10 +176,11 @@ def craving_week_pattern() -> str:
     except Exception:
         pass
 
+    # Fallback: stats-only summary
+    tags = ", ".join(set(r["tag"] for r in rows if r["tag"])) or "none"
     return (
         f"📊 Craving pattern (7d): {len(rows)} entries, "
-        f"avg severity {avg:.1f}. Tags: "
-        + ", ".join(set(r["tag"] for r in rows if r["tag"])) or "none"
+        f"avg severity {avg:.1f}. Tags: {tags}"
     )
 
 

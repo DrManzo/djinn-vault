@@ -2,16 +2,17 @@
 TASK-076 — Black Book Micro-Entry Fix
 
 Public API:
-  log_entry(text)                -> str   (/log command)
-  get_entry_count()              -> int
-  can_reflect()                  -> bool  (gated at 3+ entries)
-  get_reflect_prompt_via_ollama() -> str  (/reflect — local Ollama only)
+  log_entry(text)                 -> str   (/log command)
+  get_entry_count()               -> int
+  can_reflect()                   -> bool  (gated at 3+ entries)
+  get_reflect_prompt_via_ollama() -> str   (/reflect — local Ollama only)
 """
 
 from datetime import datetime, timezone
 from .db import get_conn
 
 REFLECT_GATE = 3  # minimum entries before /reflect activates
+OLLAMA_MODEL = "qwen2.5:7b"  # matches running model; change here if swapped
 
 
 def log_entry(text: str) -> str:
@@ -21,8 +22,6 @@ def log_entry(text: str) -> str:
     """
     conn = get_conn()
     now = datetime.now(timezone.utc).isoformat()
-
-    # Ensure table exists (v1 schema creates black_book_log)
     conn.execute(
         """
         INSERT INTO black_book_log(entry, logged_at, entry_source)
@@ -31,7 +30,6 @@ def log_entry(text: str) -> str:
         (text.strip(), now),
     )
     conn.commit()
-
     count = conn.execute("SELECT COUNT(*) FROM black_book_log").fetchone()[0]
     conn.close()
 
@@ -54,8 +52,8 @@ def can_reflect() -> bool:
 
 def get_reflect_prompt_via_ollama() -> str:
     """
-    Pulls last 5 entries, sends to local Ollama (mistral or llama3),
-    asks for one introspective question. NEVER calls cloud LLM.
+    Pulls last 5 entries, sends to local Ollama (qwen2.5:7b).
+    Asks for one introspective question. NEVER calls cloud LLM.
     Returns the question string or a fallback if Ollama is unreachable.
     """
     if not can_reflect():
@@ -83,7 +81,7 @@ def get_reflect_prompt_via_ollama() -> str:
     try:
         import subprocess
         result = subprocess.run(
-            ["ollama", "run", "mistral", prompt],
+            ["ollama", "run", OLLAMA_MODEL, prompt],
             capture_output=True,
             text=True,
             timeout=30,
