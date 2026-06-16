@@ -443,3 +443,11 @@ Full pipeline now confirmed: brief → SCAD → proto/prod STL → DOE settings 
 Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-16 02:38 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
