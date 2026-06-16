@@ -2440,3 +2440,179 @@ orca-slicer --help | head -3
 5. Replace StubGateway in pup-gateway.py with real observer (fed by gateways, not replacing them)
 
 **Not doing yet:** gateway pup does not replace djinn-discord-gateway — observe-only pattern.
+
+## TASK-075
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-15 by Claude
+- spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-01
+
+**Goal:** Surface the single most time-sensitive academic item in the morning briefing. GCU's 8-week courses run a predictable weekly rhythm (DQ1 due Wed, DQ2 due Fri, all assignments due Sun 11:59PM AZT) — currently invisible to Djinn.
+
+**File:** `~/.local/bin/djinn-personal-db` (extend schema + commands), `~/.local/bin/djinn-morning` (briefing line)
+
+**Interface:**
+```
+djinn-personal-db academic add <course> <task_type> <due_date> [due_time] [--recurring weekly --day wed]
+djinn-personal-db academic check          — JSON list of open items, soonest first
+djinn-personal-db academic done <id>
+```
+Telegram: `/school` — full weekly view across all active courses (not just the urgent one)
+
+**Key logic:**
+- New table: `academic_deadlines(id, course, task_type, due_date, due_time, due_tz, completed, recurring, recur_day_of_week)`
+- Recurring weekly deadlines (DQ1/DQ2/Sunday-due) seeded per active course — Javier provides course list + recurrence pattern once per 8-week term, not per assignment
+- Priority algorithm: CRITICAL if due ≤ 1 day, ELEVATED if due ≤ 3 days, else background (on-demand only via `/school`)
+- Morning brief shows only the single most urgent item: `📚 [Course] — [Task] due [day].`
+- This REPLACES the existing generic `deadlines` table usage in `djinn-morning`'s "one thing" logic — academic items now take priority in that slot when CRITICAL
+
+**Success criteria:**
+- `djinn-personal-db academic add "FIN-202" "DQ1" 2026-06-17 --recurring weekly --day wednesday` registers correctly
+- Morning brief shows the academic item when one is CRITICAL/ELEVATED and nothing else outranks it
+- `/school` in Telegram returns full weekly view
+- Zero missed deadlines test: seed a full week of fake GCU deadlines, verify briefing surfaces the right one each day
+
+**Report back:** Schema diff, test output of the seeded-week scenario, confirmation `/school` works end to end in Telegram.
+
+## TASK-076
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-15 by Claude
+- spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-06
+
+**Goal:** Fix the Black Book cold-start problem. Zero entries exist because the 5-entry/day goal and the `/reflect`-only flow create too high an activation bar. Replace with a zero-friction capture command.
+
+**File:** `~/.local/bin/djinn-personal-gateway` (new route), `~/.local/bin/djinn-personal-db` (extend blackbook commands)
+
+**Interface:**
+```
+djinn-personal-db blackbook log [--source manual|reflect]
+djinn-personal-db blackbook count          — total entries logged
+```
+Telegram: `/log [text]` — if text present, immediate capture, no prompt, no Ollama call. If no text, bot replies "What's on your mind?" and captures the next message as the entry.
+
+**Key logic:**
+- Entry text is appended to `~/Obsidian/personal/black-book/{today}.md` (create if missing) — this file already gitignored, confirm it stays that way
+- `black_book_log` table gets an `entry_source` column ('manual' | 'reflect')
+- `/reflect` stays exactly as built, but only activates once 3+ entries exist total — below that, `/reflect` replies "Write a couple entries first — `/log` works for that."
+- At exactly 3 entries logged (lifetime), send one-time message: "📓 You have 3 entries. /reflect is live."
+- Drop the 5-entry daily goal entirely — it does not appear anywhere, not in briefing, not in `/check`. Replace with: 1 entry/day is "done", 3+ is shown as a bonus note, never as a requirement.
+
+**Success criteria:**
+- `/log "rough day"` writes to today's Black Book file and confirms with entry count, no Ollama call in the path
+- At 3rd lifetime entry, the unlock message fires once
+- `/reflect` before 3 entries gives the redirect message instead of erroring
+- AI never reads Black Book content except inside `/reflect`'s existing local-Ollama-only flow — confirm no regression there
+
+**Report back:** Confirm gitignore still covers `personal/`, confirm `/reflect` gate works, paste a sample `/log` exchange.
+
+## TASK-077
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-15 by Claude
+- spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-07
+
+**Goal:** Stop the morning brief from generating false-guilt pressure on colitis flare days. One toggle suppresses the action item and pauses streaks for the day.
+
+**File:** `~/.local/bin/djinn-personal-db` (new table + commands), `~/.local/bin/djinn-morning` (flare check before composing)
+
+**Interface:**
+```
+djinn-personal-db flare on
+djinn-personal-db flare clear
+djinn-personal-db flare status        — prints "active" or "clear"
+```
+Telegram: `/flare` (toggle on), `/flare clear` (manual clear)
+
+**Key logic:**
+- New table: `health_flags(flag_date, flag_type, auto_cleared)` — `flag_type` always 'colitis' for now, structured for future flag types
+- Auto-clears at midnight local time (check `flag_date != today` on read, treat as inactive)
+- `djinn-morning`: if flare active today, skip normal `compose()` entirely, send instead: "Day [N] sober.\nRest day — system in quiet mode." plus the softest possible action item only if a CRITICAL academic deadline exists (depends on TASK-075 landing first — if not yet built, omit that line entirely)
+- Streak `_recalc_streak` logic: a flare day should not break any streak — treat flare days as "skip, no penalty" for habit streak calculation (don't require completion, don't reset streak to 0 either)
+
+**Success criteria:**
+- `/flare` then triggering `djinn-morning --force` produces the quiet-mode message, not the normal briefing
+- A flare day with no habit completions does not reset the writing/exercise streak the next day
+- `/flare clear` or midnight rollover restores normal briefing behavior
+
+**Report back:** Confirm streak-pause behavior with a test sequence (log streak, flare a day, skip habits, confirm streak intact next day).
+
+## TASK-078
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-06-15 by Claude
+- spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-03,04,05
+
+**Goal:** Recovery cluster — step work tracking, craving log, and meeting attendance logging. Bundled together since all three are local-only, Ollama-only, and share the same "no surveillance, no encouragement text" design constraint.
+
+**File:** `~/.local/bin/djinn-personal-db` (3 new tables + commands), `~/.local/bin/djinn-personal-gateway` (3 new routes)
+
+**Interface:**
+```
+djinn-personal-db step status
+djinn-personal-db step done
+djinn-personal-db sponsor-contact [note]
+djinn-personal-db craving <1-10> [tag]
+djinn-personal-db craving week              — Ollama-generated pattern note, local only
+djinn-personal-db meeting attended [name]
+djinn-personal-db meeting missed
+djinn-personal-db meetings week
+```
+Telegram: `/step`, `/step done`, `/sponsor-contact [note]`, `/craving [1-10] [tag]`, `/craving week`, `/meeting attended`, `/meeting missed`, `/meetings week`
+
+**Key logic:**
+- `step_work(id, step_number, status, started_date, completed_date, notes)` — `/step` prints "Step [N]: [status]. Started [X] days ago." No encouragement text, no commentary.
+- `sponsor_contacts(id, contact_date, brief_note)` — just a timestamp + optional note, no scheduling logic, no "you haven't contacted Craig" nagging
+- `craving_log(id, logged_at, severity, tag, sobriety_day)` — `/craving 7 work-stress` replies only "Logged. Day [N] sober." `/craving week` pulls the week's entries, sends to local Ollama (qwen2.5:7b) with prompt "Identify one pattern in this data, state it as fact, no advice" — output only, no cloud LLM
+- `meeting_attendance(id, meeting_date, meeting_type, meeting_name, attended, notes)` — ties into existing AA schedule from `aa-meetings.json` for `meeting_name` lookup where possible
+- Morning brief: add at most one quiet line if 5+ days since last logged meeting attendance — "5 days since last meeting logged." No nagging tone, no streak language.
+
+**Success criteria:**
+- All four commands log correctly and round-trip through `briefing` JSON where relevant
+- `/craving week` produces a single Ollama-generated line, confirmed no cloud API call in the code path
+- 5-day-since-meeting line appears in briefing only when threshold crossed, never otherwise
+
+**Report back:** Sample output of all new commands, confirm Ollama-only path for craving pattern note (grep for any non-local LLM call).
+
+## TASK-079
+- assigned_to: salomon
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-06-15 by Claude
+- spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-08,09
+
+**Goal:** Minimum-viable tracking for Aethoria writing sessions and gym sessions — lowest complexity of the Phase Beta set, single-tap logging only.
+
+**File:** `~/.local/bin/djinn-personal-db` (2 new tables + commands), `~/.local/bin/djinn-personal-gateway` (new routes)
+
+**Interface:**
+```
+djinn-personal-db write <minutes> [scene_note]
+djinn-personal-db aethoria status            — streak + weekly session count
+djinn-personal-db aethoria-goal <text>
+djinn-personal-db gym                        — logs today, prints monthly count
+```
+Telegram: `/write [minutes] [scene note]`, `/aethoria`, `/aethoria-goal [text]`, `/gym`
+
+**Key logic:**
+- `writing_sessions(id, session_date, duration_minutes, scene_note, word_count)` — word_count optional, leave null if not provided
+- `gym_sessions(id, session_date)` — that's it, no sets/reps/weight tracking, just presence
+- Morning brief Aethoria line: show only if no writing session logged today AND no CRITICAL academic deadline active (depends on TASK-075's CRITICAL flag — if not built yet, just check "no session today")
+- After 3+ consecutive missed writing days: "Aethoria dark — 3 days. Just open the doc." — stated as fact, no guilt framing
+- Gym: briefing never mentions it unless the month ends at 0/3 sessions — that line only fires once, at month-end check
+
+**Success criteria:**
+- `/write 30 "Faust chapter 4"` logs correctly, streak visible via `/aethoria`
+- `/gym` logs and shows correct monthly count, capped reporting (no daily nagging)
+- 3-consecutive-miss dark-streak line fires correctly in a test sequence
+
+**Report back:** Sample `/write`, `/aethoria`, `/gym` output. Confirm briefing suppression logic works (log a session, verify Aethoria line disappears that day).
