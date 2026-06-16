@@ -1,8 +1,13 @@
-Heartbeat — Typhon,
-Last beat: 2026-06-16 17:06:45 UTC
-Machine: Typhon (192.168.1.113)
-Status: Alive
+# Heartbeat — Typhon
 
-System,
-Uptime: up 2 weeks, 5 days, 9 hours, 45 minutes,
-GPU: NVIDIA GTX 1650 4GB — 55, 0, 3, 4096,
+**Last beat:** 2026-06-16 17:18:40 UTC
+**Machine:** Typhon (192.168.1.113)
+**Status:** Alive
+
+## System
+
+- **Uptime:** up 2 weeks, 5 days, 9 hours, 56 minutes
+- **GPU:** NVIDIA GeForce GTX 1650 with Max-Q Design, 55, 0, 3, 4096
+- **Ollama:** 3 models loaded
+- **Disk:** 20% used (177G free)
+- **RAM:** 2.7Gi/14Gi used, 1.2Gi free
