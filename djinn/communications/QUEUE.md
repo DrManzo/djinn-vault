@@ -2518,11 +2518,11 @@ Telegram: `/log [text]` — if text present, immediate capture, no prompt, no Ol
 
 ## TASK-077
 - assigned_to: salomon
-- status: partial
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-15 by Claude
-- completed: 2026-06-15 by Claude (flare flag + quiet-mode briefing done; streak-pause NOT done — see note)
+- completed: 2026-06-15 by Claude
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-07
 
 **Goal:** Stop the morning brief from generating false-guilt pressure on colitis flare days. One toggle suppresses the action item and pauses streaks for the day.
@@ -2550,14 +2550,15 @@ Telegram: `/flare` (toggle on), `/flare clear` (manual clear)
 
 **Report back:** Confirm streak-pause behavior with a test sequence (log streak, flare a day, skip habits, confirm streak intact next day).
 
-**Partial — actual implementation notes:** `health_flags` table, `flare on/clear/status` commands, and `/flare`/`/flare clear` Telegram routes all built and tested live. `djinn-morning` now checks `flare_active` from the briefing JSON before composing — flare days send `compose_flare()`'s quiet message instead of the normal briefing, with no habit keyboard. **Not done:** `_recalc_streak()` in `djinn-personal-db` was not modified — a flare day with zero habit completions will still break the streak under current logic, same as any other missed day. This needs a follow-up: either skip streak recalculation entirely on flagged flare dates, or treat the flare date as a no-op day in the date-walk inside `_recalc_streak`. Leaving status as `partial` rather than `done` since this is a real, not cosmetic, gap in the original spec.
+**Done — actual implementation notes:** `health_flags` table, `flare on/clear/status` commands, `/flare`/`/flare clear` Telegram routes, and `djinn-morning`'s flare quiet-mode branch (`compose_flare()`, no habit keyboard) all built and tested live. Streak-pause implemented by changing `_recalc_streak()`'s date-walk to skip any date present in `health_flags` (flag_type='flare') without breaking the streak. Tested live with a real sequence: completion 2 days ago → flare flagged yesterday → completed today → streak correctly came out to 2 (flare day bridged, not counted, not broken). Test data cleaned from the live DB after verification.
 
 ## TASK-078
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: normal
 - trigger: manual
 - created: 2026-06-15 by Claude
+- completed: 2026-06-15 by Claude
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-03,04,05
 
 **Goal:** Recovery cluster — step work tracking, craving log, and meeting attendance logging. Bundled together since all three are local-only, Ollama-only, and share the same "no surveillance, no encouragement text" design constraint.
@@ -2591,12 +2592,15 @@ Telegram: `/step`, `/step done`, `/sponsor-contact [note]`, `/craving [1-10] [ta
 
 **Report back:** Sample output of all new commands, confirm Ollama-only path for craving pattern note (grep for any non-local LLM call).
 
+**Done — actual implementation notes:** All commands built directly into `djinn-personal-db` (`step status/start/done`, `sponsor`, `craving`/`craving week`, `meeting`/`meeting missed`/`meeting week`/`meeting nudge`) and corresponding `/step`, `/sponsor-contact`, `/craving`, `/meeting attended|missed|week` Telegram routes. Note: bare `/meeting` was already taken by the existing AA-schedule lookup (handle_meeting) — disambiguated by matching `/meeting (attended|missed|week)` as a separate, more specific route checked before the bare `/meeting$` pattern, so both features coexist without collision. `craving log` fixed the sobriety-table bug found in the prior Salomon attempts (queried nonexistent `sobriety_log`; now reads the live `sobriety` table directly). `craving week` confirmed Ollama-only — single `subprocess.run(["ollama","run","qwen2.5:7b",...])` call, no cloud client. `meeting_nudge` wired into `briefing` JSON and into `djinn-morning`'s priority chain. Tested live via direct dispatch calls; test rows cleaned from DB after verification.
+
 ## TASK-079
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: low
 - trigger: manual
 - created: 2026-06-15 by Claude
+- completed: 2026-06-15 by Claude
 - spec_source: djinn/research/marcus/TASK-PA-REDESIGN_personal-layer.md#SPEC-PA-08,09
 
 **Goal:** Minimum-viable tracking for Aethoria writing sessions and gym sessions — lowest complexity of the Phase Beta set, single-tap logging only.
@@ -2625,3 +2629,5 @@ Telegram: `/write [minutes] [scene note]`, `/aethoria`, `/aethoria-goal [text]`,
 - 3-consecutive-miss dark-streak line fires correctly in a test sequence
 
 **Report back:** Sample `/write`, `/aethoria`, `/gym` output. Confirm briefing suppression logic works (log a session, verify Aethoria line disappears that day).
+
+**Done — actual implementation notes:** `write`, `aethoria status/goal`, `gym` commands and matching `/write`, `/aethoria [goal ...]`, `/gym` Telegram routes built directly into the live files. `aethoria_line` in briefing JSON fires at 3+ days since last writing session with the spec's exact "Aethoria dark — N days. Just open the doc." wording, and is suppressed automatically once a session is logged today (days_since resets to 0). Added `gym_month_end_line`: fires only on the 1st of the month, checking the prior month's session count, true to the "fires once, at month-end" requirement — verified via `briefing` JSON output (field present, null outside the trigger window). Priority order in `djinn-morning` is academic > legacy deadlines > meeting nudge > meeting tonight > black book > aethoria > gym month-end > generic fallback.
