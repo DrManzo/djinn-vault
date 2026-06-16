@@ -1,0 +1,138 @@
+2026-06-16 06:38:21 UTC [vault-enrich] Scanning 382 notes...
+2026-06-16 06:40:51 UTC [vault-enrich] Merging '2026-05-19-17-04-09-Perplexity-you-are-going-to-help-me-answ.md' into existing: Technology-and-Memory.md
+2026-06-16 06:50:19 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 06:50:19 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-358 Adult Development/Technology-and-Memory.md
+2026-06-16 06:51:09 UTC [vault-enrich] Creating new from '2026-05-19-17-05-15-Perplexity-Only-give-me-the-solutions-or.md': 2026-05-19-17-05-15-Perplexity-Only.md
+2026-06-16 06:58:49 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/2026-05-19-17-05-15-Perplexity-Only.md
+2026-06-16 07:01:31 UTC [vault-enrich] Merging '2026-05-19-17-05-18-Perplexity-Only-give-me-the-solutions-or.md' into existing: Only_give_me_the_solutions_or_answers_to_the_ones_in_red_anb.md
+2026-06-16 07:14:26 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 07:14:26 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-358 Adult Development/Only_give_me_the_solutions_or_answers_to_the_ones_in_red_anb.md
+2026-06-16 07:15:01 UTC [vault-enrich] Merging '3-Apprentice-Level-Portfolio-Projects-For-Freecodecamp-Cs50.md' into existing: Computer-Science-Index.md
+2026-06-16 07:20:57 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 07:20:57 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Computer-Science-Index.md
+2026-06-16 07:20:57 UTC [vault-enrich] SKIP (no reference domain): 35-Forge-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 07:20:57 UTC [vault-enrich] SKIP (no reference domain): 35-Upgraded-3d-Printing-Projects-For-Educational-And.md
+2026-06-16 07:21:06 UTC [vault-enrich] Creating new from '35-Upgrades-For-Ender-3v3-Plus.md': 35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 07:30:19 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 07:30:19 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 07:30:19 UTC [vault-enrich] SKIP (no reference domain): 3d-Print-Queue-Inventory-Automation-For-Ender-3v3.md
+2026-06-16 07:30:57 UTC [vault-enrich] Merging '3d-Print-Queue-Inventory-Automation-Structured-Findings-For.md' into existing: 35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 07:41:00 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 07:41:18 UTC [vault-enrich] Creating new from '3d-Printing-Filament-Recommendations-For-Ender-3-V3.md': 3d-Printing-Filament-Recommendations-For-Ender-3-V3.md
+2026-06-16 07:59:43 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 07:59:43 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/3d-Printing-Filament-Recommendations-For-Ender-3-V3.md
+2026-06-16 07:59:54 UTC [vault-enrich] Merging 'A-Comprehensive-Foundation-In-Algorithms-For-Computer-Science.md' into existing: Computer-Science-Index.md
+2026-06-16 08:13:45 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:13:45 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Computer-Science-Index.md
+2026-06-16 08:13:45 UTC [vault-enrich] SKIP (no reference domain): A-Letter-To-Mira-In-The-Style-Of.md
+2026-06-16 08:13:45 UTC [vault-enrich] SKIP (no reference domain): A-Romantic-Letter-To-Mira.md
+2026-06-16 08:14:09 UTC [vault-enrich] Creating new from 'Aa-Process-And-Initial-Steps.md': Aa-Process-And-Initial-Steps.md
+2026-06-16 08:17:46 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:17:46 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Aa-Process-And-Initial-Steps.md
+2026-06-16 08:20:06 UTC [vault-enrich] Creating new from 'Aa-Support-And-Intensive-Engagement.md': Aa-Support-And-Intensive-Engagement.md
+2026-06-16 08:24:51 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:24:51 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Aa-Support-And-Intensive-Engagement.md
+2026-06-16 08:27:26 UTC [vault-enrich] Creating new from 'Academic-Discussion-Post-Template.md': Academic-Discussion-Post-Template.md
+2026-06-16 08:33:27 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:33:27 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Academic-Discussion-Post-Template.md
+2026-06-16 08:33:46 UTC [vault-enrich] Creating new from 'Academic-Planning-And-Transcripts-Request.md': Academic-Planning-And-Transcripts-Request.md
+2026-06-16 08:36:24 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:36:24 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Academic-Planning-And-Transcripts-Request.md
+2026-06-16 08:36:37 UTC [vault-enrich] Merging 'Accounting-Cycle-And-Financial-Ratios.md' into existing: Business-and-Finance-Index.md
+2026-06-16 08:43:15 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:43:15 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Business-and-Finance-Index.md
+2026-06-16 08:43:24 UTC [vault-enrich] Creating new from 'Accounting-Principles-And-Governance.md': Accounting-Principles-And-Governance.md
+2026-06-16 08:47:57 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:47:57 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Law/Accounting-Principles-And-Governance.md
+2026-06-16 08:48:12 UTC [vault-enrich] Creating new from 'Accurate-Estimation-Of-Cell-Phone-Only-Households.md': Accurate-Estimation-Of-Cell-Phone-Only-Households.md
+2026-06-16 08:52:31 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:52:31 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Accurate-Estimation-Of-Cell-Phone-Only-Households.md
+2026-06-16 08:52:31 UTC [vault-enrich] SKIP (no reference domain): Active-Imagination-Template-And-Session.md
+2026-06-16 08:52:40 UTC [vault-enrich] Creating new from 'Adjusting-Entry-For-Supplies-Expense.md': Adjusting-Entry-For-Supplies-Expense.md
+2026-06-16 08:59:04 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 08:59:04 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Finance/Adjusting-Entry-For-Supplies-Expense.md
+2026-06-16 09:01:31 UTC [vault-enrich] Creating new from 'Affair-Analysis-And-Emotional-Needs.md': Affair-Analysis-And-Emotional-Needs.md
+2026-06-16 09:05:38 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:05:38 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Affair-Analysis-And-Emotional-Needs.md
+2026-06-16 09:08:07 UTC [vault-enrich] Creating new from 'Alcohol-Awareness-Understanding-Use-And-Abuse.md': Alcohol-Awareness-Understanding-Use-And-Abuse.md
+2026-06-16 09:12:56 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:12:56 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Alcohol-Awareness-Understanding-Use-And-Abuse.md
+2026-06-16 09:12:56 UTC [vault-enrich] SKIP (no reference domain): Analysis-Of-Families-With-Children-Who-Have-Disabilities.md
+2026-06-16 09:15:34 UTC [vault-enrich] Creating new from 'Analysis-Of-The-Opening-Scene-From-12-Angry.md': Analysis-Of-The-Opening-Scene-From-12-Angry.md
+2026-06-16 09:20:23 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:20:23 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Analysis-Of-The-Opening-Scene-From-12-Angry.md
+2026-06-16 09:22:39 UTC [vault-enrich] Creating new from 'Analyzing-The-Wounded-Healer-And-The-Fool-Strategic.md': Analyzing-The-Wounded-Healer-And-The-Fool-Strategic.md
+2026-06-16 09:26:26 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:26:26 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Analyzing-The-Wounded-Healer-And-The-Fool-Strategic.md
+2026-06-16 09:26:49 UTC [vault-enrich] Merging 'Apps-For-Ios-And-Windows.md' into existing: Business-and-Finance-Index.md
+2026-06-16 09:39:06 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:39:06 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Business-and-Finance-Index.md
+2026-06-16 09:39:14 UTC [vault-enrich] Creating new from 'Are-There-Apps-On-Apple-Store-That-Help.md': Are-There-Apps-On-Apple-Store-That-Help.md
+2026-06-16 09:42:22 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:42:22 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Are-There-Apps-On-Apple-Store-That-Help.md
+2026-06-16 09:42:30 UTC [vault-enrich] Creating new from 'Ascii-Art-Signature-For-Drmanzo.md': Ascii-Art-Signature-For-Drmanzo.md
+2026-06-16 09:51:53 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 09:51:53 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Ascii-Art-Signature-For-Drmanzo.md
+2026-06-16 09:52:11 UTC [vault-enrich] Merging 'Assessing-Business-Model-Complexity-For-Bank-Perception.md' into existing: Business-and-Finance-Index.md
+2026-06-16 10:06:52 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:06:52 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Business-and-Finance-Index.md
+2026-06-16 10:07:21 UTC [vault-enrich] Creating new from 'Assignment-Guide-For-Empirical-Research-And-Validity-Analysis.md': Assignment-Guide-For-Empirical-Research-And-Validity-Analysis.md
+2026-06-16 10:11:29 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:11:29 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Assignment-Guide-For-Empirical-Research-And-Validity-Analysis.md
+2026-06-16 10:11:29 UTC [vault-enrich] SKIP (no reference domain): Aurelius-Identity-Evolution.md
+2026-06-16 10:11:37 UTC [vault-enrich] Creating new from 'Automated-Essay-Generator-With-Paragraph-Interrelation-Logic.md': Automated-Essay-Generator-With-Paragraph-Interrelation-Logic.md
+2026-06-16 10:16:05 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:16:05 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Automated-Essay-Generator-With-Paragraph-Interrelation-Logic.md
+2026-06-16 10:16:05 UTC [vault-enrich] SKIP (no reference domain): Basics-Of-Summation-Notation-And-Statistical-Measures-In.md
+2026-06-16 10:18:19 UTC [vault-enrich] Merging 'Biological-Age-Assessment-And-Analysis.md' into existing: Biological-Age.md
+2026-06-16 10:26:42 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:26:42 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-358 Adult Development/Biological-Age.md
+2026-06-16 10:26:42 UTC [vault-enrich] SKIP (no reference domain): Biological-Beginnings-And-Prenatal-Development-An-Informative-Guide.md
+2026-06-16 10:26:42 UTC [vault-enrich] SKIP (no reference domain): Black-Book-Hub.md
+2026-06-16 10:27:10 UTC [vault-enrich] Creating new from 'Brain-And-Nervous-System-Functions-Infographic-Assignment-Guide.md': Brain-And-Nervous-System-Functions-Infographic-Assignment-Guide.md
+2026-06-16 10:32:11 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:32:11 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Brain-And-Nervous-System-Functions-Infographic-Assignment-Guide.md
+2026-06-16 10:32:11 UTC [vault-enrich] SKIP (no reference domain): Brain-Injury-And-Movement-Disorders.md
+2026-06-16 10:32:41 UTC [vault-enrich] Creating new from 'Build-A-6'-X-6'-L-Shaped-Desk.md': Build-A-6'-X-6'-L-Shaped-Desk.md
+2026-06-16 10:35:44 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:35:44 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Build-A-6'-X-6'-L-Shaped-Desk.md
+2026-06-16 10:36:02 UTC [vault-enrich] Merging 'Building-A-6'-X-6'-L-Shaped-Desk.md' into existing: Build-A-6'-X-6'-L-Shaped-Desk.md
+2026-06-16 10:42:30 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:42:30 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Build-A-6'-X-6'-L-Shaped-Desk.md
+2026-06-16 10:42:59 UTC [vault-enrich] Creating new from 'Building-A-Professional-Content-Creation-Studio-A-Comprehensive.md': Building-A-Professional-Content-Creation-Studio-A-Comprehensive.md
+2026-06-16 10:47:06 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 10:47:06 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Building-A-Professional-Content-Creation-Studio-A-Comprehensive.md
+2026-06-16 10:47:34 UTC [vault-enrich] Merging 'Building-A-Tetris-Game-In-Python.md' into existing: Python-Programming-Hub.md
+2026-06-16 10:51:30 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Python/Python-Programming-Hub.md
+2026-06-16 10:51:30 UTC [vault-enrich] SKIP (no reference domain): Building-An-Ai-Agent-For-3d-Printing-Smoking.md
+2026-06-16 10:51:39 UTC [vault-enrich] Merging 'Business-Assistance-For-Typhons-Forge-Llc.md' into existing: Business-and-Finance-Index.md
+2026-06-16 11:14:16 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 11:14:16 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Business-and-Finance-Index.md
+2026-06-16 11:14:26 UTC [vault-enrich] Creating new from 'Can-I-Install-An-Apk-On-Parrot-Os.md': Can-I-Install-An-Apk-On-Parrot-Os.md
+2026-06-16 11:17:54 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 11:17:54 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Can-I-Install-An-Apk-On-Parrot-Os.md
+2026-06-16 11:18:22 UTC [vault-enrich] Merging 'Can-This-Be-Considered-A-Template-For-Django.md' into existing: Django-Template-Conversion-Guide.md
+2026-06-16 11:27:01 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Python/Django-Template-Conversion-Guide.md
+2026-06-16 11:27:01 UTC [vault-enrich] SKIP (no reference domain): Can-You-Mix-The-Delicate-Figures-Of-The.md
+2026-06-16 11:27:17 UTC [vault-enrich] Merging 'Caring-For-Individuals-With-Alzheimer's-Disease-An-Educational.md' into existing: Alzheimers-Caregiving.md
+2026-06-16 11:35:15 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-358 Adult Development/Alzheimers-Caregiving.md
+2026-06-16 11:35:41 UTC [vault-enrich] Creating new from 'Central-Tendency-In-Research-And-Data-Analysis.md': Central-Tendency-In-Research-And-Data-Analysis.md
+2026-06-16 11:41:46 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 11:41:46 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Central-Tendency-In-Research-And-Data-Analysis.md
+2026-06-16 11:42:01 UTC [vault-enrich] Merging 'Challenges-In-Middle-Childhood-And-Support-Systems.md' into existing: Parenting Challenges In Middle Childhood.md
+2026-06-16 11:53:13 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 11:53:13 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-355 Child Psychology/Parenting Challenges In Middle Childhood.md
+2026-06-16 11:54:58 UTC [vault-enrich] Creating new from 'Chapter-Review-Problems-For-Independent-Measures-Studies.md': Chapter-Review-Problems-For-Independent-Measures-Studies.md
+2026-06-16 12:05:11 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 12:05:11 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/Chapter-Review-Problems-For-Independent-Measures-Studies.md
+2026-06-16 12:05:11 UTC [vault-enrich] SKIP (no reference domain): Character-Profiles-In-The-Malazan-Book-Of-The.md
+2026-06-16 12:05:39 UTC [vault-enrich] Creating new from 'Chomsky's-Theory-On-The-Evolution-Of-Language-And.md': Chomsky's-Theory-On-The-Evolution-Of-Language-And.md
+2026-06-16 12:13:12 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 12:13:12 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Chomsky's-Theory-On-The-Evolution-Of-Language-And.md
+2026-06-16 12:13:24 UTC [vault-enrich] Creating new from 'CiteAssist-and-GhostCite-Project.md': Citeassist-And-Ghostcite-Project-Plan.md
+2026-06-16 12:17:18 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 12:17:18 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Citeassist-And-Ghostcite-Project-Plan.md
+2026-06-16 12:17:32 UTC [vault-enrich] Merging 'Citeassist-Overview.md' into existing: Citeassist-And-Ghostcite-Project-Plan.md
+2026-06-16 12:23:19 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 12:23:19 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Citeassist-And-Ghostcite-Project-Plan.md
+2026-06-16 12:23:50 UTC [vault-enrich] Merging 'Clarifying-Architectural-Choices-For-Faust-Cli.md' into existing: Faust-Project-Setup-Architecture.md
