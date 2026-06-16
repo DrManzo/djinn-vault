@@ -1,0 +1,17 @@
+2026-06-16 13:09:35 UTC [vault-enrich] Scanning 382 notes...
+2026-06-16 13:11:52 UTC [vault-enrich] Merging '2026-05-19-17-04-09-Perplexity-you-are-going-to-help-me-answ.md' into existing: Technology-and-Memory.md
+2026-06-16 13:19:54 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 13:19:54 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/PSY-358 Adult Development/Technology-and-Memory.md
+2026-06-16 13:20:41 UTC [vault-enrich] Creating new from '2026-05-19-17-05-15-Perplexity-Only-give-me-the-solutions-or.md': 2026-05-19-17-05-15-Perplexity-Only.md
+2026-06-16 13:27:19 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/2026-05-19-17-05-15-Perplexity-Only.md
+2026-06-16 13:30:10 UTC [vault-enrich] Creating new from '2026-05-19-17-05-18-Perplexity-Only-give-me-the-solutions-or.md': 2026-05-19-17-05-18-Perplexity-Only.md
+2026-06-16 13:36:48 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Psychology/2026-05-19-17-05-18-Perplexity-Only.md
+2026-06-16 13:37:22 UTC [vault-enrich] Merging '3-Apprentice-Level-Portfolio-Projects-For-Freecodecamp-Cs50.md' into existing: Computer-Science-Index.md
+2026-06-16 13:43:20 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-16 13:43:20 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Computer Science/Computer-Science-Index.md
+2026-06-16 13:43:20 UTC [vault-enrich] SKIP (no reference domain): 35-Forge-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 13:43:20 UTC [vault-enrich] SKIP (no reference domain): 35-Upgraded-3d-Printing-Projects-For-Educational-And.md
+2026-06-16 13:43:20 UTC [vault-enrich] SKIP (no reference domain): 35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-16 13:43:20 UTC [vault-enrich] SKIP (no reference domain): 3d-Print-Queue-Inventory-Automation-For-Ender-3v3.md
+2026-06-16 13:43:20 UTC [vault-enrich] SKIP (no reference domain): 3d-Print-Queue-Inventory-Automation-Structured-Findings-For.md
+2026-06-16 13:43:38 UTC [vault-enrich] Creating new from '3d-Printing-Filament-Recommendations-For-Ender-3-V3.md': 3d-Printing-Filament-Recommendations-For-Ender-3-V3.md
