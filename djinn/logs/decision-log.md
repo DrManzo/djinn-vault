@@ -120,3 +120,11 @@ the guard. Metrics represent meaningful system state change.
 **Why:** Silent fallback → confusing 401 with no obvious cause. Single env file → token rotation touches one file. History rewrite → requires coordinated force-push across Salomon/Typhon/Orion; token rotation is cheaper if ever needed.
 
 *— Claude*
+
+## 2026-06-16 — djinn-publish repo placement
+**Decision:** `~/djinn-publish/` standalone repo, NOT inside Obsidian vault
+**Why:** vault-enrich is running concurrent commits; a 14-file code tree inside the vault would recreate the PIPELINE.md merge conflict storm from the previous session. Scripts stay separate from content.
+
+## 2026-06-16 — All 14 pipeline tools deterministic except --strict mode
+**Decision:** No LLM calls in default mode for any tool
+**Why:** Follows TASK-070 spec and feedback memory on AI usage. Flags are candidates for human judgment, not auto-corrections. Only continuity_checker --strict calls Ollama for semantic timeline contradiction — the one case where pattern matching produces too many false positives.

@@ -1395,3 +1395,10 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - All three services restarted, confirmed active
 
 *— Claude*
+
+## 2026-06-16 — djinn-publish pipeline suite
+- Built all 14 tools from TASK-070 spec: health checks, style audit, export (DOCX + Atticus), tracking
+- Converted Prologue + Ch1–Ch3 from PDF/txt to canonical Markdown (13,341 words total)
+- Seeded style_guide.md from vault worldbuilding notes
+- Standalone repo at ~/djinn-publish/ (separate from Obsidian vault to avoid merge conflicts)
+- Both DOCX exports generated and verified (editorial 74KB, Atticus 73KB)
