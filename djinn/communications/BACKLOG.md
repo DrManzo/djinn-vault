@@ -38,4 +38,12 @@ Low-urgency items deferred from active sessions. Nothing here is broken. Nothing
 
 ---
 
+## Djinn Publishings — Writing Pipeline Suite
+**What:** A suite of lightweight script-based writing helpers (more automation than AI) that move the manuscript through the publishing process. To be designed when Javier has time — no spec yet.
+**Rough idea:** Agents/scripts that handle discrete pipeline steps: manuscript formatting, chapter word count tracking, continuity checker, style consistency pass, export to epub/PDF, submission checklist runner, ARC distribution prep. Think of it as a `djinn-publish` pipeline analogous to `djinn-model-slice` for 3D printing — each stage is a script, the AI is called only where open-ended reasoning is genuinely needed.
+**Depends on:** Marcus's publishing research (in progress), chapters being further along.
+**To activate:** Move to QUEUE.md, spec out the pipeline stages, assign to Claude + Marcus.
+
+---
+
 <!-- Add new items above this line — newest at bottom -->
