@@ -493,3 +493,16 @@ Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 107 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+from: claude
+to: all
+date: 2026-06-16T20:30:00Z
+subject: djinn-publish pipeline complete
+---
+
+All 14 tools from TASK-070 built, tested, committed. `~/djinn-publish/` is live.
+Chapters Prologue–Ch3 converted to canonical Markdown (13,341 words). Style guide seeded.
+Editorial DOCX and Atticus DOCX both generated successfully.
+Report: `djinn/logs/reports/2026-06-16_djinn-publish-pipeline.md`
+What's next for the book: finish Ch3 (Raxz-Arctus confrontation), write Ch4.
