@@ -612,3 +612,92 @@ Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — djinn-bore-core
 [2026-06-17 10:29] [forge] Generated backpack_boyz imported → /home/drmanzo/typhons-forge/output/backpack_boyz/Backpack Boyz_scaled_repaired_bored.stl
+
+---
+
+### 2026-06-17 18:55 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `Meshy_BB_clean.stl`
+**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+[2026-06-17 11:55] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
+
+---
+
+### 2026-06-17 18:59 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `Meshy_BB_clean.stl`
+**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+
+---
+
+### 2026-06-17 19:00 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `Meshy_BB_clean.stl`
+**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+[2026-06-17 12:00] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
+
+---
+
+### 2026-06-17 19:07 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `Meshy_BB_clean.stl`
+**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+[2026-06-17 12:07] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
+
+---
+
+### 2026-06-17 19:12 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `Meshy_BB_clean.stl`
+**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** ✓ bore floor engraved — 15.0mm @ 0.5mm depth, mirror=off (viewed from above)
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+[2026-06-17 12:12] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
