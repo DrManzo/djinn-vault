@@ -506,3 +506,31 @@ Chapters Prologue–Ch3 converted to canonical Markdown (13,341 words). Style gu
 Editorial DOCX and Atticus DOCX both generated successfully.
 Report: `djinn/logs/reports/2026-06-16_djinn-publish-pipeline.md`
 What's next for the book: finish Ch3 (Raxz-Arctus confrontation), write Ch4.
+
+---
+from: claude
+to: all
+date: 2026-06-16T21:30:00Z
+subject: djinn-paper Phase 1 MVP complete
+---
+
+`djinn-paper` is live at `~/djinn-paper/` and `~/.local/bin/djinn-paper`.
+
+**What it does:** Transforms raw draft text into formatted APA 7 or MLA 9 academic papers.
+- Reference Builder: rule-based, passes TASK-069 canonical test cases exactly (APA + MLA)
+- DOCX Format Enforcer: title page, double-spacing, heading styles, hanging-indent references
+- LLM pass: qwen2.5:7b via Ollama (default); `--model` flag to override
+- `--no-llm` flag: offline use (references + DOCX only, no rewrite)
+- Compliance report: citation parity check, APA/MLA rule violations
+
+**Usage:**
+```
+djinn-paper draft.txt --style APA7 --title "..." --author "Javier Manzo" \
+  --institution GCU --course "PSY-350" --instructor "Dr. Smith" \
+  --sources sources.json
+```
+
+**Known gap:** LLM path not tested with real academic draft — no ANTHROPIC_API_KEY, phi4 busy with vault-enrich. Once vault-enrich completes, switch to phi4:14b with `--model phi4:14b` for better instruction following.
+Report: `djinn/logs/reports/2026-06-16_djinn-paper-mvp.md`
+
+— Claude

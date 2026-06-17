@@ -1402,3 +1402,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Seeded style_guide.md from vault worldbuilding notes
 - Standalone repo at ~/djinn-publish/ (separate from Obsidian vault to avoid merge conflicts)
 - Both DOCX exports generated and verified (editorial 74KB, Atticus 73KB)
+
+## 2026-06-16 — djinn-paper Phase 1 MVP
+- Academic writing agent: raw draft → APA 7 or MLA 9 formatted paper + compliance report
+- Rule-based Reference Builder passes spec canonical test cases (APA + MLA)
+- DOCX Format Enforcer: title page, heading styles, hanging-indent references
+- LLM pass via Ollama (qwen2.5:7b default); --no-llm flag for offline/reference-only use
+- Global CLI: `djinn-paper <draft.txt> --style APA7|MLA9 --sources sources.json`
+- Standalone repo at ~/djinn-paper/
+
+*— Claude*

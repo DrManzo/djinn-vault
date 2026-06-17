@@ -128,3 +128,12 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-16 — All 14 pipeline tools deterministic except --strict mode
 **Decision:** No LLM calls in default mode for any tool
 **Why:** Follows TASK-070 spec and feedback memory on AI usage. Flags are candidates for human judgment, not auto-corrections. Only continuity_checker --strict calls Ollama for semantic timeline contradiction — the one case where pattern matching produces too many false positives.
+
+## 2026-06-16 — djinn-paper: Reference Builder and Format Enforcer are rule-based
+**Decision:** Reference Builder (`references.py`) and DOCX Format Enforcer (`docx_output.py`) use deterministic Python — no LLM.
+**Why:** Spec (TASK-069 Section 13) explicitly states this. These have deterministic correct outputs; LLM introduces hallucination risk. Spec provides canonical test cases for the Reference Builder to validate against.
+**LLM role:** Structure analysis, register rewriting, citation injection, QA check — open-ended judgment tasks.
+
+## 2026-06-16 — djinn-paper default model: qwen2.5:7b
+**Decision:** Default Ollama model is qwen2.5:7b (not phi4:14b).
+**Why:** phi4:14b is CPU-bound running vault-enrich batch; competing for CPU would be slow. No ANTHROPIC_API_KEY available. qwen2.5:7b is instruction-following capable and lightweight enough to not contend. User can override with --model.
