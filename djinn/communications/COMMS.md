@@ -701,3 +701,22 @@ Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — djinn-bore-core
 [2026-06-17 12:12] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
+
+---
+
+### 2026-06-17 19:47 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `BackPack core.stl`
+**Output:** `/home/drmanzo/Downloads/backpackboyz_forge/BackPack core_bored.stl`
+**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
+**Top mode:** auto | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
+[2026-06-17 12:47] [forge] Generated backpack_core imported → /home/drmanzo/Downloads/backpackboyz_forge/BackPack core_bored.stl
+[2026-06-17 12:56] [forge] Generated med_core_drpuffco imported → /home/drmanzo/Downloads/drpuffco_forge/Med_core_drpuffco.stl
