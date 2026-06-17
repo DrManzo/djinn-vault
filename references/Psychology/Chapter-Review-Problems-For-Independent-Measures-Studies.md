@@ -12,7 +12,7 @@ source: Djinn vault-enrich (Orion)
 # Chapter Review Problems for Independent-Measures Studies
 
 ## Summary
-This note covers key concepts and problems related to independent-measures, or between-subjects, research studies in psychology. It includes definitions, calculations of pooled variance and standard error, hypothesis testing using t-tests, and practical examples.
+This note covers key concepts and problems related to independent-measures, or between-subjects, research studies in psychology. It includes definitions, calculations for pooled variance and standard error, hypothesis testing procedures using t-tests, and practical examples.
 
 ## Key Points
 - **Definition of an Independent-Measures Study**: Uses separate samples for each treatment or population.

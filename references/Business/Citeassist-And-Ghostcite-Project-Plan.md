@@ -24,33 +24,33 @@ source: 2026-05-18_20-19-33_Perplexity; Perplexity export
 GhostCite is a Word add-in (C#, VSTO-based) that serves as a personal citation tool, enabling users to load a small set of sources, insert in-text citations on command, and auto-generate formatted references/bibliography lists. CiteAssist represents the future paid version with publisher catalog integration and cloud collaboration capabilities. The core citation engine is designed as a reusable library for later integration into Notation Clark's document/report modules.
 
 ## Key Points
-- **Word Add-in Interface**: Features a task pane with a dropdown of loaded sources.
-- **Citation Insertion**: "Insert Citation" button allows users to insert (Author, Year) at the cursor and marks the source as used.
-- **Reference Generation**: "Generate References" button creates formatted APA/MLA lists for only the used sources.
-- **MVP Characteristics**: The MVP is manual-triggered with no AI or automatic detection; it operates simply and locally.
-- **Free Version**: Users supply their own PDFs, and all processing occurs on-device.
-- **Paid Version (CiteAssist)**: Includes publisher catalogs, cloud storage, cross-device sync, and team collaboration features. Runs alongside Microsoft Word, loads PDFs as a closed corpus, suggests quotes and in-text citations, and manages reference lists/bibliographies.
-- **Core Citation Logic**: Extracted as a reusable C# library for integration with Notation Clark.
-- **Build Approach**: Utilizes the Visual Studio Word Add-in template, developing one feature at a time.
-- **Tech Stack**: Employs C#, VSTO or Office.js, with hardcoded JSON for version 0 sources.
+- Word add-in task pane with dropdown of loaded sources.
+- "Insert Citation" button drops (Author, Year) at cursor, marks source as used.
+- "Generate References" button creates formatted APA/MLA list of only used sources.
+- MVP is manual-triggered, no AI, no automatic detection — simple and local.
+- Free/local version: user supplies own PDFs, all processing on-device.
+- Paid version (CiteAssist): publisher catalogs, cloud storage, cross-device sync, team collaboration.
+- Core citation logic extracted as reusable C# library for Notation Clark integration.
+- Build approach: Visual Studio Word Add-in template, one feature at a time.
+- Tech stack: C#, VSTO or Office.js, hardcoded JSON for v0 sources.
 
 ## Details
-The development philosophy is "ugly but lethal," focusing on creating a working MVP first and iterating based on community feedback before adding polish and monetization. The MVP scope is deliberately narrow: users manually load sources, insert citations on command, and generate references when prompted by typing "References" or "Bibliography." There is no PDF parsing, AI, or system-wide detection involved.
+The development philosophy is "ugly but lethal" — get a working MVP first, iterate with community feedback, then add polish and monetization. The MVP scope is deliberately narrow: load sources manually, insert citations on user command, generate references when triggered by typing "References" or "Bibliography." No PDF parsing, no AI, no system-wide detection. 
 
 CiteAssist enhances the writing process by integrating seamlessly with Microsoft Word. Students load their PDF textbooks and scholarly articles into CiteAssist, which then monitors their typing to suggest precise quotes and citations. The tool automatically formats these citations in APA or MLA style and manages the reference list at the end of the essay.
 
 ### Workflow
 1. **Loading Sources**: Users upload their PDFs.
 2. **Real-Time Suggestions**: As they type, CiteAssist suggests relevant passages.
-3. **Insertion**: Students can confirm and insert chosen text with proper citations.
+3. **Insertion**: Users can confirm and insert chosen text with proper citations.
 4. **Reference Management**: The tool updates the reference list automatically.
 
-The long-term vision positions GhostCite as a foundational component within the larger M Systems ecosystem, with the citation engine supporting HR/legal/medical case file documentation through Notation Clark.
+The long-term vision positions GhostCite as a building block within the larger M Systems ecosystem, with the citation engine serving HR/legal/medical case file documentation through Notation Clark.
 
 ## References
-- Microsoft Word VSTO add-in development
-- Office.js API for modern Word add-ins
-- APA and MLA citation formatting standards
+- Microsoft Word VSTO add-in development.
+- Office.js API for modern Word add-ins.
+- APA and MLA citation formatting standards.
 - [Perplexity](https://www.perplexity.ai/search/753313ea-7908-4600-8f47-721253322200)
 
 ## Related
@@ -62,4 +62,4 @@ The long-term vision positions GhostCite as a foundational component within the 
 - [[CiteAssist-and-GhostCite-Project]] — integration
 ```
 
-This updated reference note integrates new information from the source content, expanding on CiteAssist's features and workflow while maintaining existing details about GhostCite.
+This updated reference note integrates the new source content into the existing structure, expanding on details and key points without duplicating or removing correct information.
