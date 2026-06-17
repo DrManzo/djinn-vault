@@ -720,3 +720,5 @@ Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
 — djinn-bore-core
 [2026-06-17 12:47] [forge] Generated backpack_core imported → /home/drmanzo/Downloads/backpackboyz_forge/BackPack core_bored.stl
 [2026-06-17 12:56] [forge] Generated med_core_drpuffco imported → /home/drmanzo/Downloads/drpuffco_forge/Med_core_drpuffco.stl
+[2026-06-17 14:49] [forge] Generated squid_proxy_staged imported → /home/drmanzo/Downloads/drpuffco_forge/squid_proxy_staged_repaired.stl
+[2026-06-17 14:53] [forge] Generated squid_proxy_staged imported → /home/drmanzo/Downloads/drpuffco_forge/squid_proxy_staged_repaired.stl
