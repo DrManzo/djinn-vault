@@ -1,0 +1,20 @@
+2026-06-17 01:47:29 UTC [vault-enrich] Found 41 duplicate notes (smaller copies) — skipping those.
+2026-06-17 01:47:29 UTC [vault-enrich] Scanning 382 notes...
+2026-06-17 01:47:29 UTC [vault-enrich] SKIP (duplicate, smaller copy of 2026-05-19-17-05-15-Perplexity-Only-give-me-the-solutions-or.md): 2026-05-19-17-05-18-Perplexity-Only-give-me-the-solutions-or.md
+2026-06-17 01:47:29 UTC [vault-enrich] SKIP (no reference domain): 35-Forge-Upgrades-For-Ender-3v3-Plus.md
+2026-06-17 01:47:29 UTC [vault-enrich] Creating new from '35-Upgraded-3d-Printing-Projects-For-Educational-And.md': 35-Upgraded-3d-Printing-Projects-For-Educational-And.md
+2026-06-17 01:52:14 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-17 01:52:14 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Education/35-Upgraded-3d-Printing-Projects-For-Educational-And.md
+2026-06-17 01:52:14 UTC [vault-enrich] SKIP (duplicate, smaller copy of 35-Forge-Upgrades-For-Ender-3v3-Plus.md): 35-Upgrades-For-Ender-3v3-Plus.md
+2026-06-17 01:52:14 UTC [vault-enrich] SKIP (no reference domain): 3d-Print-Queue-Inventory-Automation-For-Ender-3v3.md
+2026-06-17 01:52:14 UTC [vault-enrich] SKIP (duplicate, smaller copy of 3d-Print-Queue-Inventory-Automation-For-Ender-3v3.md): 3d-Print-Queue-Inventory-Automation-Structured-Findings-For.md
+2026-06-17 01:52:14 UTC [vault-enrich] Creating new from 'A-Letter-To-Mira-In-The-Style-Of.md': A-Letter-To-Mira-In-The-Style-Of.md
+2026-06-17 01:54:24 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-17 01:54:24 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Creative/A-Letter-To-Mira-In-The-Style-Of.md
+2026-06-17 01:54:24 UTC [vault-enrich] Creating new from 'A-Romantic-Letter-To-Mira.md': A-Romantic-Letter-To-Mira.md
+2026-06-17 02:06:25 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-17 02:06:25 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Personal/A-Romantic-Letter-To-Mira.md
+2026-06-17 02:06:58 UTC [vault-enrich] Merging 'Academic-Planning-And-Transcripts-Request.md' into existing: Academic-Planning-And-Transcripts-Request.md
+2026-06-17 02:10:29 UTC [vault-enrich] NOTE: model omitted frontmatter, synthesized from source/existing note.
+2026-06-17 02:10:29 UTC [vault-enrich] Written: /home/drmanzo/Obsidian/references/Business/Academic-Planning-And-Transcripts-Request.md
+2026-06-17 02:10:39 UTC [vault-enrich] Merging 'Accounting-Cycle-And-Financial-Ratios.md' into existing: Business-and-Finance-Index.md
