@@ -41,7 +41,7 @@
   "attachmentFolderPath": "./attachments",
   "newFileLocation": "folder",
   "newFileFolderPath": "inbox",
-  "promptDelete": true,
+  "promptDelete": false,
   "trashOption": "local",
   "alwaysUpdateLinks": true,
   "useMarkdownLinks": false,
