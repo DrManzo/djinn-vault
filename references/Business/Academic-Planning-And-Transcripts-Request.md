@@ -9,6 +9,16 @@ created: 2026-05-23
 source: Perplexity export
 ---
 
+```markdown
+subject: Business
+tags:
+  - business/career-factors/planning
+  - education/academic-planning
+  - psychology/career-development
+  - personal/gpa-management
+created: 2026-05-23
+source: Perplexity export
+
 # Academic Planning and Transcripts Request
 
 ## Summary
@@ -23,7 +33,7 @@ The note revises an email to Suzette regarding the author's academic planning, i
 ## Details
 The author is considering retaking the Christian Worldview class and the math course to enhance their GPA, which they believe will strengthen their graduate school applications. They are currently enrolled at San Bernardino Valley College in California and anticipate having completed sufficient credits by mid-April for transcripts to be sent. The author also requests GCU to send their transcripts to San Bernardino Valley College so that they can pursue an Associate's degree in Computer Science.
 
-The author is interested in exploring the possibility of teaching with a psychology background, based on advice from trusted friends and connections. They seek guidance on whether this path is feasible within their current academic plan.
+The author is interested in exploring the possibility of teaching with a psychology background, based on advice from trusted friends and connections. They seek guidance on whether this path is feasible within their current academic plan. The new source content does not add additional details beyond what was already covered; therefore, no further expansion is necessary here.
 
 ## References
 - [Perplexity](https://www.perplexity.ai/search/d232f120-c086-4695-8195-40e2c33c994c)
@@ -31,3 +41,6 @@ The author is interested in exploring the possibility of teaching with a psychol
 ## Related
 - [[Faust-Step-Planning]] — Detailed steps for academic planning  
 - [[GPA-Management-Strategies]] — Strategies to improve GPA
+```
+
+The updated note integrates the new source content, confirming that no additional details were provided beyond those already covered in the existing reference note.
