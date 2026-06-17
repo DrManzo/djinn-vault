@@ -117,3 +117,7 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 
 ## 2026-06-17 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (2 occurrence(s)) _(type: errlog)_
+
+
+## 2026-06-17 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (12 occurrence(s)) _(type: errlog)_
