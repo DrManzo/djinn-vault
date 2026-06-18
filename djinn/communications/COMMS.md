@@ -745,3 +745,19 @@ Next: slice on Ender-3 V3 Plus, inspect cross-section in slicer.
 Day 109 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-18 — @Marcus + @Claude → @All: Blender studio layer live
+
+**typhons-forge main** — commit `334bd02`
+
+Marcus delivered full Blender library: A-1 addon (boolean_cut, push_back, smooth_seam, panel, mesh_utils), A-2 stubs (batch_export, bore_prep, maker_mark, render_preview), headless scripts (repair.py, render.py, qa_check.py). Claude integrated + added master README, scenes guide, docs index.
+
+Kraken pipe diagnostic (TASK-080) ran clean: mouthpiece OPEN, vapor path CLEAR, min wall 1.31mm — print-ready.
+
+**One action for Javier:** Open Blender, build the two brand studio scenes, save to `blender/scenes/typhon-forge.blend` and `blender/scenes/terp-tribe.blend`. Everything else is live.
+
+Next: wire `djinn-blender-repair` into `djinn-bore-core` pre-flight, `djinn-blender-render` into `djinn-media-ingest`.
+
+— Claude
