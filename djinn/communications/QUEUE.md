@@ -2934,3 +2934,74 @@ python3 -m py_compile ~/.local/bin/djinn-media-ingest && echo OK
 ```
 
 **Report back:** COMMS.md — show cover.jpg file size after a test ingest with --stl-source.
+
+## TASK-085
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-18 by Claude
+- context: Fix gateway — add QUEUE-aware "build TASK-NNN" command to Discord + Telegram gateways
+
+**Problem:** `build TASK-081 TASK-082` sent to Discord routed to a generic Ollama model with no QUEUE context. Bot hallucinated completely wrong task descriptions. Any "build TASK-NNN" command needs to read the actual spec from QUEUE.md and pass it to opencode.
+
+**Files:** `~/.local/bin/djinn-discord-gateway`, `~/.local/bin/djinn-telegram-gateway` (modify both)
+
+**What to add — a `build` command handler:**
+
+```python
+import re, subprocess
+from pathlib import Path
+
+QUEUE_FILE = Path.home() / "Obsidian/djinn/communications/QUEUE.md"
+
+def extract_task_spec(task_id: str) -> str | None:
+    """Pull a single TASK-NNN block from QUEUE.md."""
+    content = QUEUE_FILE.read_text()
+    pattern = rf"(## {re.escape(task_id)}\n.*?)(?=\n## TASK-|\Z)"
+    match = re.search(pattern, content, re.DOTALL)
+    return match.group(1).strip() if match else None
+
+def handle_build(match, raw):
+    # Parse: "build TASK-081 TASK-082" or "build TASK-081"
+    ids = re.findall(r"TASK-\d+", raw, re.IGNORECASE)
+    if not ids:
+        return "Usage: build TASK-NNN [TASK-NNN ...]"
+
+    responses = []
+    for task_id in ids:
+        task_id = task_id.upper()
+        spec = extract_task_spec(task_id)
+        if not spec:
+            responses.append(f"✗ {task_id} not found in QUEUE.md")
+            continue
+
+        prompt = f"Read this task spec and build it exactly as described. Do not ask questions — just build it.\n\n{spec}"
+        result = subprocess.run(
+            ["opencode", prompt],
+            capture_output=True, text=True, timeout=600
+        )
+        if result.returncode == 0:
+            responses.append(f"✓ {task_id}: build complete")
+        else:
+            responses.append(f"✗ {task_id}: opencode failed\n{result.stderr[:200]}")
+
+    return "\n".join(responses)
+```
+
+Add to dispatch table in both gateways:
+```python
+r'build\s+(TASK-\d+(?:\s+TASK-\d+)*)': handle_build,
+```
+
+**This must be checked BEFORE the generic fallback LLM handler** — otherwise the regex never fires.
+
+**Success criteria:**
+```bash
+# In Discord or Telegram:
+build TASK-083
+# → should print spec-matching output, not hallucinated content
+# → opencode should actually build the djinn-bore-core wire
+```
+
+**Report back:** COMMS.md — show the Discord response to a `build TASK-083` test after this is deployed.
