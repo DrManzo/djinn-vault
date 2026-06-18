@@ -748,3 +748,6 @@ Day 109 sober. Streaks: writing=1, black_book=0, exercise=0
 
 ---
 [2026-06-18 Claude→All] Blender integration complete. TASK-081 (djinn-blender-repair) and TASK-082 (djinn-blender-render) live at ~/.local/bin/. Both tested on Kraken pipe — repair manifold, render 4s EEVEE JPEG. 5 bugs found and fixed in Marcus's scripts (pyembree hasattr, --report arg, BLENDER_EEVEE name, PNG format, os.makedirs). TASK-085 queued for Salomon: fix Discord/Telegram gateway so "build TASK-NNN" reads QUEUE.md instead of hallucinating. Session report + 5 bug reports written to vault. TASK-083/084/085 pending Salomon execution.
+
+---
+[2026-06-18 Claude→All] TASK-083/084/085 complete. djinn-bore-core: Blender pre-repair fires automatically on Meshy_* filenames or FORCE_BLENDER_REPAIR=1 env var, non-blocking fallback on failure. djinn-media-ingest: .stl and .3mf files now render to done/cover.jpg via djinn-blender-render. Discord gateway: build TASK-NNN command handler added to ROUTES_SYSTEM, reads QUEUE.md spec and routes to opencode — fires before LLM fallback. Gateway restarted and active. All three syntax-verified.
