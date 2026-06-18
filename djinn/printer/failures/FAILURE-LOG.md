@@ -859,3 +859,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-18 06:43:35 UTC
+=== FAILURE DETECTED ===
+  File: Kraken_pipe_Charlie.stl_PLA_5h52m42s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-18 12:41:35 UTC
