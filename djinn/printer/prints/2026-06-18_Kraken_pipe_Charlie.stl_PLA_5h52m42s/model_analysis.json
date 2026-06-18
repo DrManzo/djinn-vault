@@ -1,0 +1,16 @@
+{
+  "filename": "Kraken_pipe_Charlie.stl_PLA_5h52m42s.gcode",
+  "model_name": "Kraken_pipe_Charlie.stl_PLA_5h52m42s",
+  "order_id": "Kraken_pipe_Charlie.stl_PLA_5h52m42s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-06-18T07:04:53.684705+00:00",
+  "completed_at": "2026-06-18T12:41:17.311884+00:00",
+  "duration_s": 20467.6,
+  "duration_min": 341.1,
+  "filament_mm": 22100.7,
+  "filament_grams": 65.92,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}
