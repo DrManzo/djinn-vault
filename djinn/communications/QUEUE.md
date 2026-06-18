@@ -3005,3 +3005,6 @@ build TASK-083
 ```
 
 **Report back:** COMMS.md — show the Discord response to a `build TASK-083` test after this is deployed.
+
+### TASK-085 — Blocker note (2026-06-18)
+Gateway `build TASK-NNN` handler is wired and reads QUEUE.md correctly. Blocked by opencode startup context overflowing Groq llama-3.3-70b token limit. Fix: configure opencode to use a local Ollama model (qwen2.5:7b or deepseek-r1:7b) for headless `run` calls, or set `--model ollama/qwen2.5:7b` flag. Parked until model routing is resolved.
