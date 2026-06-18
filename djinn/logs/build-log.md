@@ -1412,3 +1412,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Standalone repo at ~/djinn-paper/
 
 *— Claude*
+
+## 2026-06-17 — Kraken Proxy Pipe Set
+- Repaired non-manifold Meshy AI Kraken2 3MF with manifold3d
+- Scaled 0.8113× (38.7/47.7mm) to Proxy Core spec
+- `Kraken_original.stl` — clean reference
+- `Kraken_core.stl` — maker's mark on cup floor (un-mirrored cutter, interior)
+- `Kraken_pipe.stl` — three-segment vapor path: mouthpiece r=4 + vertical r=5 to Z=80mm + angled cup entry r=4 + exterior mark
+- `proxy-pipe-presculpted.md` workflow formalized
+- mesh_repair_agent: manifold3d added as step 2 primary fixer for complex organics
+
+*— Claude*

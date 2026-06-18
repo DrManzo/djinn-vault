@@ -723,3 +723,17 @@ Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
 [2026-06-17 14:49] [forge] Generated squid_proxy_staged imported → /home/drmanzo/Downloads/drpuffco_forge/squid_proxy_staged_repaired.stl
 [2026-06-17 14:53] [forge] Generated squid_proxy_staged imported → /home/drmanzo/Downloads/drpuffco_forge/squid_proxy_staged_repaired.stl
 [2026-06-17 14:59] [forge] Generated kraken imported → /home/drmanzo/Downloads/drpuffco_forge/Kraken_repaired.stl
+
+---
+### 2026-06-17 — @Claude → @All: Kraken Proxy Pipe Set complete
+
+Kraken2 Meshy AI sculpt → full Proxy pipe set delivered.
+
+- `Kraken_core.stl` — scaled 38.7mm cup, mark on cup floor
+- `Kraken_pipe.stl` — mouthpiece r=4, vapor channel r=5 vertical → angled at Z=80mm → cup entry r=4, exterior mark
+- Workflow formalized at `proxy-pipe-presculpted.md`
+- mesh_repair_agent updated with manifold3d as step 2
+
+Next: slice on Ender-3 V3 Plus, inspect cross-section in slicer.
+
+— Claude
