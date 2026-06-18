@@ -137,3 +137,11 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-16 — djinn-paper default model: qwen2.5:7b
 **Decision:** Default Ollama model is qwen2.5:7b (not phi4:14b).
 **Why:** phi4:14b is CPU-bound running vault-enrich batch; competing for CPU would be slow. No ANTHROPIC_API_KEY available. qwen2.5:7b is instruction-following capable and lightweight enough to not contend. User can override with --model.
+
+## 2026-06-17 — Kraken pipe bore profile
+**Decision:** Three-segment vapor path: vertical from tip → Z=80mm → angled into cup center. Mouthpiece r=4, vertical r=5, cup entry r=4. Junction sphere at bend.
+**Why:** Single straight bore misses the cup (mouthpiece and cup are not coaxial on organic sculpts). Taper at Z=80mm chosen by Javier after iterating on Z=60mm. r=4 cup entry matches mouthpiece for consistent restriction.
+
+## 2026-06-17 — Interior cup mark un-mirror rule
+**Decision:** When placing maker's mark on cup floor (interior, viewed from above), reverse the X-mirror baked into djinn-model-mark --cutter-only output.
+**Why:** djinn-model-mark assumes exterior bottom viewing (from below). Interior surfaces viewed from above need `verts[:,0] = 2*cx_cut - verts[:,0]` + face winding flip.
