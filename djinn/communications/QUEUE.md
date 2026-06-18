@@ -2712,3 +2712,225 @@ Action required: [none | list specific fixes]
 Write the complete script to `djinn/research/marcus/TASK-080_kraken-pipe.md` as a fenced Python code block, preceded by a short explanation of the diagnostic approach for each check. Claude runs it and reports findings back.
 
 **Deliver to:** Claude (reads via Read tool)
+
+---
+
+## TASK-071
+- assigned_to: claude
+- status: backlog
+- priority: low
+- trigger: manual
+- created: 2026-06-18 by Javier
+- context: Restart djinn-vault-enrich on Orin — stopped mid-run on 2026-06-16, last processed letter C (main run) and restarted from A (v2). 382 notes total, ~52 written so far. Check for resume/checkpoint mechanism before relaunching to avoid duplicating already-processed notes.
+
+**When picked up:**
+- SSH to 192.168.1.176
+- Check script for checkpoint/resume logic
+- If resume supported: restart from last written note
+- If not: audit already-written notes in references/ to skip duplicates
+- Monitor first 10 notes to confirm no duplication before leaving it running
+
+## TASK-081
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-18 by Claude
+- context: Phase C — Build djinn-blender-repair CLI wrapper
+
+**Goal:** Wrap `blender/scripts/repair.py` as a first-class djinn CLI tool at `~/.local/bin/djinn-blender-repair`.
+
+**File:** `~/.local/bin/djinn-blender-repair` (new, chmod +x)
+
+**Interface:**
+```
+djinn-blender-repair <input.stl> [--out output.stl] [--report] [--timeout 120]
+```
+- `--out` defaults to `{input_stem}_repaired.stl` in same directory
+- `--report` prints verbose face/issue summary to stdout
+- `--timeout` seconds before killing Blender process (default 120)
+
+**Key logic:**
+1. Resolve script path: `~/typhons-forge/blender/scripts/repair.py` (git pull first if older than 24h — check mtime, skip if recent)
+2. Call: `/snap/bin/blender --background --python {script} -- --input {input} --out {out}`
+3. Capture stdout/stderr, pass through to caller
+4. On exit code 0: print `✓ Repair complete: {out}` — done
+5. On exit code 1: print `✗ Repair failed — non-manifold edges remain. See output above.` — exit 1
+6. On timeout: kill process, print `✗ Blender repair timed out after {timeout}s` — exit 1
+7. On Blender not found (`/snap/bin/blender` missing): print `✗ Blender not installed (snap). Run: sudo snap install blender` — exit 1
+
+**Success criteria:**
+```bash
+djinn-blender-repair ~/Downloads/kraken-typhons-forge/Kraken_pipe.stl
+# → should complete in < 120s, print repair summary, exit 0
+python3 -m py_compile ~/.local/bin/djinn-blender-repair && echo OK
+```
+
+**Report back:** COMMS.md — paste repair output on Kraken_pipe.stl, confirm exit 0.
+
+---
+
+## TASK-082
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-18 by Claude
+- context: Phase C — Build djinn-blender-render CLI wrapper
+- depends_on: TASK-081 pattern (same structure, different script)
+
+**Goal:** Wrap `blender/scripts/render.py` as `~/.local/bin/djinn-blender-render`.
+
+**File:** `~/.local/bin/djinn-blender-render` (new, chmod +x)
+
+**Interface:**
+```
+djinn-blender-render <input.stl> [--out cover.jpg] [--brand typhon|terp-tribe] [--engine eevee|cycles] [--size 1080] [--timeout 300]
+```
+- `--out` defaults to `{input_stem}_render.jpg` in same directory
+- `--brand` defaults to `typhon`
+- `--engine` defaults to `eevee`
+- `--size` defaults to 1080
+- `--timeout` defaults to 300 (Cycles needs more time)
+
+**Key logic:**
+1. Resolve script path: `~/typhons-forge/blender/scripts/render.py`
+2. Resolve scenes dir: `~/typhons-forge/blender/scenes/`
+3. Call: `/snap/bin/blender --background --python {script} -- --input {input} --out {out} --brand {brand} --engine {engine} --size {size}`
+4. On exit 0: print `✓ Render complete: {out}` — done
+5. On exit non-zero or timeout: print error, exit 1
+6. If `--out` path ends in `.jpg`: ensure render.py gets the right file format (pass `--format jpg`)
+
+**Success criteria:**
+```bash
+djinn-blender-render ~/Downloads/kraken-typhons-forge/Kraken_pipe.stl --out /tmp/kraken_test.jpg
+# → /tmp/kraken_test.jpg exists, > 50KB, exit 0
+ls -lh /tmp/kraken_test.jpg
+```
+
+**Report back:** COMMS.md — confirm render output exists and open it briefly to verify it's not black/blank (check file size as proxy).
+
+---
+
+## TASK-083
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-18 by Claude
+- depends_on: TASK-081 complete and verified
+- context: Phase C — Wire djinn-blender-repair into djinn-bore-core pre-flight
+
+**Goal:** Meshy AI sculpts automatically get cleaned before boring. Zero new commands for Javier.
+
+**File:** `~/.local/bin/djinn-bore-core` (modify existing)
+
+**What to find:** The section near the top where the input STL is validated/loaded. Look for where the file path is read and where the mesh is first opened.
+
+**Changes — add a pre-flight repair block after input validation, before any bore/mark operations:**
+
+```python
+import subprocess, os, re
+
+def _should_repair(stl_path: str) -> bool:
+    """Auto-repair if filename starts with Meshy_ or FORCE_BLENDER_REPAIR env is set."""
+    basename = os.path.basename(stl_path)
+    return basename.startswith("Meshy_") or os.environ.get("FORCE_BLENDER_REPAIR") == "1"
+
+def _blender_repair(stl_path: str) -> str:
+    """Run djinn-blender-repair, return path to repaired STL. Raises on failure."""
+    repaired = stl_path.replace(".stl", "_repaired.stl")
+    result = subprocess.run(
+        ["djinn-blender-repair", stl_path, "--out", repaired],
+        capture_output=True, text=True, timeout=150
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"Blender repair failed:\n{result.stdout}\n{result.stderr}")
+    print(f"[bore-core] Repair complete: {repaired}")
+    return repaired
+```
+
+Then in the main flow, before the mesh is loaded for boring:
+```python
+if _should_repair(input_stl):
+    print(f"[bore-core] Meshy source detected — running Blender repair pass...")
+    input_stl = _blender_repair(input_stl)
+```
+
+**Behavior:**
+- Meshy files (`Meshy_*.stl`) → auto-repair → use repaired file for boring
+- All other files → no change, same as before
+- If Blender repair fails → print warning, fall back to original file (don't block the bore)
+- Set `FORCE_BLENDER_REPAIR=1` to trigger repair on any file for testing
+
+**Success criteria:**
+```bash
+# Test with Kraken (not Meshy, use env var):
+FORCE_BLENDER_REPAIR=1 djinn-bore-core Kraken_pipe.stl ...
+# → should print "[bore-core] running Blender repair pass..." before boring begins
+python3 -m py_compile ~/.local/bin/djinn-bore-core && echo OK
+```
+
+**Report back:** COMMS.md — show the `[bore-core] Repair complete` line from a test run.
+
+---
+
+## TASK-084
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-18 by Claude
+- depends_on: TASK-082 complete and verified
+- context: Phase C — Wire djinn-blender-render into djinn-media-ingest for auto cover.jpg
+
+**Goal:** Every ingested project that has an STL source automatically gets a branded product render as its cover image. Zero new commands.
+
+**File:** `~/.local/bin/djinn-media-ingest` (modify existing)
+
+**What to find:** The section where the manifest is written and where `cover.jpg` is handled (or where the post-ingest steps run).
+
+**Changes — add a render step after manifest creation:**
+
+```python
+import subprocess, os
+
+def _render_cover(stl_path: str, project_dir: str, brand: str = "typhon") -> bool:
+    """Render cover.jpg for the project. Returns True on success."""
+    cover_path = os.path.join(project_dir, "done", "cover.jpg")
+    os.makedirs(os.path.join(project_dir, "done"), exist_ok=True)
+    result = subprocess.run(
+        ["djinn-blender-render", stl_path, "--out", cover_path, "--brand", brand],
+        capture_output=True, text=True, timeout=360
+    )
+    if result.returncode == 0:
+        print(f"[ingest] Cover render: {cover_path}")
+        return True
+    else:
+        print(f"[ingest] Render failed (non-blocking): {result.stderr.strip()}")
+        return False
+```
+
+**Where to call it:**
+- After manifest is written, check manifest for `stl_source` field (the path to the original STL)
+- If `stl_source` exists and the file is accessible: call `_render_cover(stl_source, project_dir, brand)`
+- Brand: read from manifest `brand` field if present, default `"typhon"`
+- Non-blocking: render failure prints warning but does NOT fail the ingest
+- Skip if `done/cover.jpg` already exists (don't overwrite existing covers)
+
+**Add `--stl-source` flag to ingest CLI** so Javier can specify STL at ingest time:
+```
+djinn-media-ingest <footage_path> --job-name slug [--stl-source /path/to/model.stl] [--brand typhon|terp-tribe]
+```
+If `--stl-source` is passed: write it to manifest `stl_source` field + trigger render.
+If not passed: check if a `.stl` file exists alongside the footage (same directory) — use it if found.
+
+**Success criteria:**
+```bash
+# Ingest with explicit STL source:
+djinn-media-ingest /some/footage.mp4 --job-name kraken-test --stl-source ~/Downloads/kraken-typhons-forge/Kraken_pipe.stl
+# After ingest: ls {project_dir}/done/cover.jpg → file exists, > 50KB
+python3 -m py_compile ~/.local/bin/djinn-media-ingest && echo OK
+```
+
+**Report back:** COMMS.md — show cover.jpg file size after a test ingest with --stl-source.
