@@ -2631,3 +2631,84 @@ Telegram: `/write [minutes] [scene note]`, `/aethoria`, `/aethoria-goal [text]`,
 **Report back:** Sample `/write`, `/aethoria`, `/gym` output. Confirm briefing suppression logic works (log a session, verify Aethoria line disappears that day).
 
 **Done — actual implementation notes:** `write`, `aethoria status/goal`, `gym` commands and matching `/write`, `/aethoria [goal ...]`, `/gym` Telegram routes built directly into the live files. `aethoria_line` in briefing JSON fires at 3+ days since last writing session with the spec's exact "Aethoria dark — N days. Just open the doc." wording, and is suppressed automatically once a session is logged today (days_since resets to 0). Added `gym_month_end_line`: fires only on the 1st of the month, checking the prior month's session count, true to the "fires once, at month-end" requirement — verified via `briefing` JSON output (field present, null outside the trigger window). Priority order in `djinn-morning` is academic > legacy deadlines > meeting nudge > meeting tonight > black book > aethoria > gym month-end > generic fallback.
+
+---
+
+## TASK-080
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-17 by Claude
+- context: Typhon's Forge — Kraken Proxy pipe finalization script
+
+**How to run:** Paste this brief into Perplexity (Marcus). Output goes to `djinn/research/marcus/TASK-080_kraken-pipe.md` in the vault. Claude reads and implements.
+
+---
+
+### Marcus Brief — Kraken Proxy Pipe Finalization
+
+**What this is:**
+Typhon's Forge (Javier's 3D print shop) builds Puffco Proxy accessories. The Proxy is a modular concentrate vaporizer. Accessories come in two types:
+- **Core** — holds the Proxy bowl insert. Has a 38.7mm × 44.6mm deep bore.
+- **Pipe** — the body/water attachment the core sits in. The core drops into the pipe from the top. The pipe delivers vapor from the core to the mouthpiece.
+
+**The model:**
+`/home/drmanzo/Downloads/kraken-typhons-forge/Kraken_pipe.stl`
+
+A sculpted Kraken (octopus-like creature) 3D model — 78.9 × 92.7 × 97.4mm, watertight, already repaired with manifold3d, uniformly scaled so the sculpted cup in the model = 38.7mm diameter (matching Proxy Core spec).
+
+Key geometry facts confirmed by Claude:
+- The sculpted cup (the bowl the kraken holds) is the Core receiver — 38.7mm dia, already sized correctly
+- Mantle tip (top of the model) = mouthpiece
+- Proxy connection = bottom of the model
+- No new bores needed — the sculpted geometry already provides the cup
+- Model is a shell (not solid) — watertight shell mesh, not infilled solid
+
+**What a Proxy pipe needs to function:**
+1. The Core receiver cup (38.7mm dia) — ✅ already sculpted in
+2. A vapor path from the cup floor up through the model body to the mouthpiece at the top
+3. The mouthpiece opening must be open (not capped) so vapor exits
+4. The base must be stable (flat enough to sit on a surface or fit a standard joint)
+5. Wall thickness sufficient for FFF printing in ASA — minimum 1.2mm walls
+
+**The question:**
+Write a Python script (`finalize_kraken_pipe.py`) that:
+
+1. **Checks the mouthpiece (mantle tip) opening** — fire a ray from outside the model downward into the tip area. If there's no opening (the tip is solid/capped), report it. Do NOT automatically cut it — just diagnose.
+
+2. **Checks the vapor path** — fire rays from inside the cup upward through the model body toward the mouthpiece. Determine if there is a continuous open channel (void space) connecting the cup interior to the mouthpiece opening. Report: connected or blocked.
+
+3. **Checks wall thickness** at the cup area (Z=0–10mm) — sample points around the 38.7mm cup perimeter and check that wall thickness is ≥ 1.2mm. Report min wall thickness found.
+
+4. **Reports findings** as a clean summary:
+```
+Mouthpiece: OPEN | CAPPED (at Z=Xmm)
+Vapor path: CLEAR | BLOCKED (at Z=Xmm)
+Min wall thickness: X.Xmm at (x, y, z)
+Action required: [none | list specific fixes]
+```
+
+**Tools available on this machine:**
+- `trimesh` (ray casting, mesh loading, cross-sections)
+- `manifold3d` (boolean ops if needed)
+- `numpy`
+- `shapely`
+- Python 3.11 venv at `/home/drmanzo/.venvs/djinn-orchestrator/bin/python3.11`
+
+**Constraints:**
+- Do NOT apply any modifications in this script — diagnosis only
+- Do NOT re-scale the model — it is already at final scale
+- Script must run in under 60 seconds on a model with ~867K faces
+- Use ray casting, not `mesh.contains()` — contains() is unreliable on complex organic shell meshes (confirmed this session)
+
+**Reference:**
+- Proxy Core spec: `~/Obsidian/djinn/printer/puffco_proxy_quad_uptake_recycler_specs.md`
+- Pre-sculpted bowl workflow: `~/Obsidian/djinn/printer/workflows/proxy-core-presculpted-bowl.md`
+- Cup center XY (after scaling): approximately (-1.2, -8.9)
+- Cup floor Z (after scaling): approximately 1.69mm
+
+**Output:**
+Write the complete script to `djinn/research/marcus/TASK-080_kraken-pipe.md` as a fenced Python code block, preceded by a short explanation of the diagnostic approach for each check. Claude runs it and reports findings back.
+
+**Deliver to:** Claude (reads via Read tool)
