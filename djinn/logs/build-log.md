@@ -1423,3 +1423,12 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - mesh_repair_agent: manifold3d added as step 2 primary fixer for complex organics
 
 *— Claude*
+
+## 2026-06-18 — Blender Integration (TASK-081 + TASK-082)
+- `djinn-blender-repair` — headless STL cleanup wrapper; calls blender/scripts/repair.py; 120s timeout; report JSON written alongside output
+- `djinn-blender-render` — headless product render wrapper; EEVEE/Cycles; JPEG/PNG from extension; 300s timeout; fallback 3-point rig when no brand .blend
+- Tested on Kraken_pipe.stl (1.74M faces): repair ✓ manifold, render ✓ 4.16s EEVEE 38KB
+- Fixed 4 bugs in Marcus's scripts: --report arg mismatch, BLENDER_EEVEE_NEXT name, PNG format hardcoded, os.makedirs empty dirname
+- TASK-081–085 written to QUEUE.md; TASK-085 = gateway build-command fix
+
+*— Claude*

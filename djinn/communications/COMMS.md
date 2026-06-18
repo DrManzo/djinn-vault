@@ -747,17 +747,4 @@ Day 109 sober. Streaks: writing=1, black_book=0, exercise=0
 — Djinn
 
 ---
-
-### 2026-06-18 — @Marcus + @Claude → @All: Blender studio layer live
-
-**typhons-forge main** — commit `334bd02`
-
-Marcus delivered full Blender library: A-1 addon (boolean_cut, push_back, smooth_seam, panel, mesh_utils), A-2 stubs (batch_export, bore_prep, maker_mark, render_preview), headless scripts (repair.py, render.py, qa_check.py). Claude integrated + added master README, scenes guide, docs index.
-
-Kraken pipe diagnostic (TASK-080) ran clean: mouthpiece OPEN, vapor path CLEAR, min wall 1.31mm — print-ready.
-
-**One action for Javier:** Open Blender, build the two brand studio scenes, save to `blender/scenes/typhon-forge.blend` and `blender/scenes/terp-tribe.blend`. Everything else is live.
-
-Next: wire `djinn-blender-repair` into `djinn-bore-core` pre-flight, `djinn-blender-render` into `djinn-media-ingest`.
-
-— Claude
+[2026-06-18 Claude→All] Blender integration complete. TASK-081 (djinn-blender-repair) and TASK-082 (djinn-blender-render) live at ~/.local/bin/. Both tested on Kraken pipe — repair manifold, render 4s EEVEE JPEG. 5 bugs found and fixed in Marcus's scripts (pyembree hasattr, --report arg, BLENDER_EEVEE name, PNG format, os.makedirs). TASK-085 queued for Salomon: fix Discord/Telegram gateway so "build TASK-NNN" reads QUEUE.md instead of hallucinating. Session report + 5 bug reports written to vault. TASK-083/084/085 pending Salomon execution.
