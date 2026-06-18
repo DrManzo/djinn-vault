@@ -110,59 +110,13 @@ The **highest hit** is the inner cup floor surface. Use that Z as `FLOOR_Z`.
 
 ---
 
-## Step 5 — Apply Maker's Mark on Cup Floor
+## Step 5 — Apply Maker's Mark (Exterior Bottom)
 
-```python
-import trimesh, numpy as np, manifold3d, subprocess, tempfile
-from pathlib import Path
-
-SRC      = 'model_scaled.stl'
-OUT      = 'model_core.stl'
-FLOOR_Z  = <value from Step 4>
-CUP_CX   = <scaled cup center X>
-CUP_CY   = <scaled cup center Y>
-
-mesh = trimesh.load(SRC, force='mesh')
-
-with tempfile.NamedTemporaryFile(suffix='_cutter.stl', delete=False) as tf:
-    cutter_path = tf.name
-
-subprocess.run(['djinn-model-mark', SRC, '--size', '12', '--depth', '0.5',
-                '--cutter-only', '--output', cutter_path], capture_output=True)
-
-cutter = trimesh.load(cutter_path, force='mesh')
-
-# Un-mirror X: djinn-model-mark bakes X-mirror for exterior-bottom viewing.
-# Cup floor is viewed from ABOVE — reverse the mirror.
-cx_cut = (cutter.bounds[0][0] + cutter.bounds[1][0]) / 2
-verts = np.array(cutter.vertices, dtype=np.float64)
-verts[:, 0] = 2 * cx_cut - verts[:, 0]
-faces = np.array(cutter.faces[:, [0, 2, 1]], dtype=np.int64)
-cutter = trimesh.Trimesh(vertices=verts, faces=faces, process=False)
-
-# Position: cutter top sits at FLOOR_Z, centered on cup XY
-cc_x = (cutter.bounds[0][0] + cutter.bounds[1][0]) / 2
-cc_y = (cutter.bounds[0][1] + cutter.bounds[1][1]) / 2
-cutter.apply_translation([CUP_CX - cc_x, CUP_CY - cc_y, FLOOR_Z - cutter.bounds[1][2]])
-
-def to_mf(m):
-    return manifold3d.Manifold(mesh=manifold3d.Mesh(
-        vert_properties=np.ascontiguousarray(m.vertices, dtype=np.float32),
-        tri_verts=np.ascontiguousarray(m.faces, dtype=np.uint32),
-    ))
-
-result = (to_mf(mesh) - to_mf(cutter)).to_mesh()
-out = trimesh.Trimesh(
-    vertices=np.array(result.vert_properties),
-    faces=np.array(result.tri_verts),
-)
-print(f"Face delta: {len(out.faces) - len(mesh.faces):+,}  watertight: {out.is_watertight}")
-out.export(OUT)
-Path(cutter_path).unlink(missing_ok=True)
+```bash
+djinn-model-mark model_scaled.stl --size 12 --depth 0.5 --output model_core.stl
 ```
 
-Expected: face delta > 0, watertight = True.
-If face delta = 0: the cutter is not intersecting solid material — recheck FLOOR_Z and CUP_CX/CUP_CY.
+Exterior bottom placement — `djinn-model-mark` handles it directly. No cutter manipulation needed.
 
 ---
 
@@ -171,16 +125,14 @@ If face delta = 0: the cutter is not intersecting solid material — recheck FLO
 | File | Contents |
 |------|----------|
 | `<name>_repaired.stl` | Watertight, unscaled |
-| `<name>_scaled.stl` | Scaled to Proxy spec, no mark |
-| `<name>_core.stl` | Final — scaled + mark on cup floor |
+| `<name>_scaled.stl` | Scaled to Proxy spec, no mark — save as `<name>_original.stl` |
+| `<name>_core.stl` | Final — scaled + exterior bottom mark |
 
 ---
 
 ## What NOT To Do
 
 - Do NOT run `djinn-bore-core` — that drills a new hole and destroys the sculpted cup
-- Do NOT use `djinn-model-mark` directly — it always stamps the exterior bottom (Z_min)
-- Do NOT skip the un-mirror step — the TF logo will read backwards inside the cup
 - Do NOT rely on `mesh.contains()` to find solid material on these meshes — it is unreliable on complex organic sculpts; use ray-casting instead
 
 ---
@@ -189,7 +141,6 @@ If face delta = 0: the cutter is not intersecting solid material — recheck FLO
 
 - `manifold3d` — mesh repair
 - `trimesh` — loading, ray-casting, export
-- `djinn-model-mark --cutter-only` — cutter geometry only (not the full mark command)
-- `manifold3d` boolean subtract — final mark application
+- `djinn-model-mark` — exterior bottom mark
 
 — Claude
