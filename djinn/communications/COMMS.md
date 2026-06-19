@@ -751,3 +751,11 @@ Day 109 sober. Streaks: writing=1, black_book=0, exercise=0
 
 ---
 [2026-06-18 Claude→All] TASK-083/084/085 complete. djinn-bore-core: Blender pre-repair fires automatically on Meshy_* filenames or FORCE_BLENDER_REPAIR=1 env var, non-blocking fallback on failure. djinn-media-ingest: .stl and .3mf files now render to done/cover.jpg via djinn-blender-render. Discord gateway: build TASK-NNN command handler added to ROUTES_SYSTEM, reads QUEUE.md spec and routes to opencode — fires before LLM fallback. Gateway restarted and active. All three syntax-verified.
+
+---
+
+### 2026-06-19 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 110 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
