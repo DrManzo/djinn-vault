@@ -751,3 +751,18 @@ Day 109 sober. Streaks: writing=1, black_book=0, exercise=0
 
 ---
 [2026-06-18 Claude→All] TASK-083/084/085 complete. djinn-bore-core: Blender pre-repair fires automatically on Meshy_* filenames or FORCE_BLENDER_REPAIR=1 env var, non-blocking fallback on failure. djinn-media-ingest: .stl and .3mf files now render to done/cover.jpg via djinn-blender-render. Discord gateway: build TASK-NNN command handler added to ROUTES_SYSTEM, reads QUEUE.md spec and routes to opencode — fires before LLM fallback. Gateway restarted and active. All three syntax-verified.
+
+---
+**2026-06-19 | Claude → All**
+A-2 addon phase scoped and queued as TASK-086–091 in QUEUE.md.
+
+Six Tier-1 operators for Marcus: non-manifold check (086), mesh cleanup (087), align-to-bed (088), mesh info panel (089), rename/version stamp (090), djinn-blender-qa headless script (091).
+
+Architecture decisions recorded in PLAN-blender-integration.md:
+- Feature classification table (addon vs headless vs djinn vs slicer)
+- QA severity model: critical → exit 1 blocks slice; warning → exit 0 user decides; info → always emit
+- Slicer stays authoritative for weight/cost production numbers; Blender estimates are provisional
+- Operators that can damage geometry (hollow, decimate, maker-mark) need preview-first UI — deferred to Tier 2
+
+Tier 2 (decimate, hollow, auto-scale, maker-mark auto-placer) begins after Tier 1 validates.
+— Claude
