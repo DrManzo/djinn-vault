@@ -1,0 +1,16 @@
+{
+  "filename": "Backpack_Boyz_Core.stl_PLA_6h39m26s.gcode",
+  "model_name": "Backpack_Boyz_Core.stl_PLA_6h39m26s",
+  "order_id": "Backpack_Boyz_Core.stl_PLA_6h39m26s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-06-19T07:18:53.400423+00:00",
+  "completed_at": "2026-06-19T13:35:11.750297+00:00",
+  "duration_s": 22785.0,
+  "duration_min": 379.8,
+  "filament_mm": 31376.6,
+  "filament_grams": 93.58,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}

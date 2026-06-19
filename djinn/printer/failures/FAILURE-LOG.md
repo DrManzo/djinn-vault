@@ -864,3 +864,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-18 12:41:35 UTC
+=== FAILURE DETECTED ===
+  File: Backpack_Boyz_Core.stl_PLA_6h39m26s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-19 13:35:59 UTC
