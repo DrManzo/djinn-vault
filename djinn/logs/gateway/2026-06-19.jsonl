@@ -20,3 +20,6 @@
 {"ts": "2026-06-19T13:13:53", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-131352", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Salomon", "tg_sent": true}
 {"ts": "2026-06-19T13:21:44", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-132143", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-06-19T14:10:46", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-141046", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Salomon", "tg_sent": true}
+{"ts": "2026-06-19T14:21:50", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-142144", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-19T15:12:01", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-151201", "action": "git push to origin (worktree-glowing-knitting-garden)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-06-19T15:12:39", "event": "checkpoint_pending", "id": "CHECKPOINT-20260619-151238", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
