@@ -3008,3 +3008,348 @@ build TASK-083
 
 ### TASK-085 — Blocker note (2026-06-18)
 Gateway `build TASK-NNN` handler is wired and reads QUEUE.md correctly. Blocked by opencode startup context overflowing Groq llama-3.3-70b token limit. Fix: configure opencode to use a local Ollama model (qwen2.5:7b or deepseek-r1:7b) for headless `run` calls, or set `--model ollama/qwen2.5:7b` flag. Parked until model routing is resolved.
+
+---
+
+## TASK-086
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Blender addon A-2 — non-manifold edge detector operator
+
+**Goal:** Add a `non_manifold_check.py` operator to the Typhon's Forge Blender addon that detects and highlights non-manifold edges/vertices in the active mesh and reports results to the user.
+
+**File:** `~/typhons-forge/blender/addon/typhons_forge/operators/non_manifold_check.py`
+
+**Spec:**
+- Class name: `TF_OT_NonManifoldCheck`
+- bl_idname: `tf.non_manifold_check`
+- bl_label: `Check Non-Manifold`
+- bl_description: `Select and highlight all non-manifold edges and vertices`
+
+**What the operator does:**
+1. Switch to Edit Mode on the active object.
+2. Deselect all, then run `bpy.ops.mesh.select_non_manifold()`.
+3. Count selected edges and vertices (use `bmesh` — iterate `bm.edges` / `bm.verts` where `e.select`).
+4. Stay in Edit Mode so Javier can see what's highlighted (do NOT return to Object Mode).
+5. Report via `self.report({'INFO'}, ...)`:
+   - If 0 issues: `"✓ Manifold — no issues found"`
+   - If issues: `"✗ Non-manifold: {n_edges} edges, {n_verts} verts — highlighted in viewport"`
+6. Return `{'FINISHED'}`.
+
+**Error handling:**
+- If no active object: `self.report({'WARNING'}, "No active mesh selected")` → `{'CANCELLED'}`
+- If active object is not a mesh: same warning.
+
+**Panel wire-up:**
+In `~/typhons-forge/blender/addon/typhons_forge/panels/main_panel.py`, add a button in the existing "Repair" or "QA" section:
+```python
+layout.operator("tf.non_manifold_check", icon='MESH_DATA')
+```
+If there is no Repair/QA section yet, create one with `layout.label(text="QA Checks:")`.
+
+**Register:** Add to `operators/__init__.py` imports and register list.
+
+**Test:**
+```python
+# From Blender scripting console, with a non-manifold mesh active:
+bpy.ops.tf.non_manifold_check()
+# Should select bad geometry and report the count
+```
+
+**Commit:** `git commit -m "feat: add non-manifold check operator (TF-A2)"` in typhons-forge repo.
+**Report:** COMMS.md entry confirming operator works in viewport.
+
+---
+
+## TASK-087
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Blender addon A-2 — mesh cleanup operator (merge by distance + fill holes + remove loose)
+- depends_on: TASK-086 pattern established
+
+**Goal:** Add a `mesh_cleanup.py` operator that runs three standard mesh repair operations in sequence on the active object: merge by distance, fill holes, remove loose geometry.
+
+**File:** `~/typhons-forge/blender/addon/typhons_forge/operators/mesh_cleanup.py`
+
+**Class:** `TF_OT_MeshCleanup`
+- bl_idname: `tf.mesh_cleanup`
+- bl_label: `Clean Mesh`
+- bl_description: `Merge doubles, fill holes, remove loose — repair pass for imported STLs`
+
+**Properties (user-adjustable in operator redo panel):**
+```python
+merge_threshold: bpy.props.FloatProperty(name="Merge Distance", default=0.001, min=0.0001, max=1.0, unit='LENGTH')
+fill_sides: bpy.props.IntProperty(name="Max Hole Sides", default=4, min=3, max=100)
+```
+
+**What the operator does:**
+1. Switch to Edit Mode.
+2. Select all (`bpy.ops.mesh.select_all(action='SELECT')`).
+3. `bpy.ops.mesh.remove_doubles(threshold=self.merge_threshold)` → capture `info` for count.
+4. `bpy.ops.mesh.fill_holes(sides=self.fill_sides)`.
+5. Back to Object Mode.
+6. Remove loose geometry: enter Edit Mode, `bpy.ops.mesh.select_all(action='DESELECT')`, `bpy.ops.mesh.select_loose()`, `bpy.ops.mesh.delete(type='VERT')`.
+7. Return to Object Mode.
+8. Record vertex/face counts before and after (use `len(obj.data.vertices)` / `len(obj.data.polygons)` before entering Edit Mode and after returning).
+9. `self.report({'INFO'}, f"Cleanup done — {verts_removed} verts merged, holes filled, loose removed. Faces: {faces_before}→{faces_after}")`.
+
+**Error handling:** Same guard as TASK-086 — no active mesh → cancel.
+
+**Also update `blender/scripts/repair.py`:**
+Add `remove_doubles` call if not already present, and expose the merge threshold as a `--merge-threshold` CLI arg (default 0.001). This keeps addon and headless behavior in sync.
+
+**Panel wire-up:** Add button in the same Repair/QA section from TASK-086:
+```python
+layout.operator("tf.mesh_cleanup", icon='BRUSH_DATA')
+```
+
+**Register in `operators/__init__.py`.**
+
+**Commit:** `git commit -m "feat: add mesh cleanup operator — merge/fill/loose (TF-A2)"` in typhons-forge.
+**Report:** COMMS.md.
+
+---
+
+## TASK-088
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Blender addon A-2 — auto-center and bed-drop operator
+- depends_on: TASK-086 pattern
+
+**Goal:** Add an `align_to_bed.py` operator that centers the active object on the XY origin and drops it to Z=0 (bottom face touching the bed). One-click print prep.
+
+**File:** `~/typhons-forge/blender/addon/typhons_forge/operators/align_to_bed.py`
+
+**Class:** `TF_OT_AlignToBed`
+- bl_idname: `tf.align_to_bed`
+- bl_label: `Align to Bed`
+- bl_description: `Center on X/Y origin and drop to Z=0 for print prep`
+
+**What the operator does:**
+1. Get `obj = context.active_object`. Guard for None/non-mesh.
+2. Apply any pending transforms: `bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)`.
+3. Get bounding box world-space min/max using `obj.bound_box` with `obj.matrix_world`:
+   ```python
+   import mathutils
+   corners = [obj.matrix_world @ mathutils.Vector(c) for c in obj.bound_box]
+   min_x = min(c.x for c in corners); max_x = max(c.x for c in corners)
+   min_y = min(c.y for c in corners); max_y = max(c.y for c in corners)
+   min_z = min(c.z for c in corners)
+   ```
+4. Center XY: `obj.location.x -= (min_x + max_x) / 2`, `obj.location.y -= (min_y + max_y) / 2`.
+5. Drop to bed: `obj.location.z -= min_z`.
+6. `self.report({'INFO'}, "Aligned to bed — centered XY, Z=0")`.
+
+**Panel wire-up:** Add button in a "Print Prep" section:
+```python
+layout.label(text="Print Prep:")
+layout.operator("tf.align_to_bed", icon='ANCHOR_BOTTOM')
+```
+
+**Register in `operators/__init__.py`.**
+
+**Commit:** `git commit -m "feat: add align-to-bed operator (TF-A2)"` in typhons-forge.
+**Report:** COMMS.md.
+
+---
+
+## TASK-089
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Blender addon A-2 — bounding box + volume/weight info panel widget
+
+**Goal:** Add a panel section that displays live bounding box dimensions, mesh volume, and rough material weight estimate for the active object.
+
+**File:** `~/typhons-forge/blender/addon/typhons_forge/panels/main_panel.py` (add new section)
+
+**Display these values in the N-panel (draw logic reading from selected object):**
+```
+─── Mesh Info ───────────────────────
+Bounds:   X: 45.3mm  Y: 30.1mm  Z: 22.8mm
+Volume:   ~12,400 mm³
+Material: PLA  [dropdown]
+Weight:   ~15.4 g  (estimate — slicer overrides)
+Faces:    18,432
+```
+
+**Implementation:**
+1. In `draw(self, context)`, get `obj = context.active_object`. If None or not mesh, show "No mesh selected."
+2. Use `obj.bound_box` + `obj.matrix_world` to compute dimensions (same math as TASK-088).
+3. Use `obj.data.calc_volume()` for mesh volume in scene units. Check `context.scene.unit_settings.scale_length` — if scene uses meters (default), multiply mm³ result by `(1/scale_length)^3 * 1000^3`.
+4. Register an EnumProperty on Scene for material selection:
+   ```python
+   bpy.types.Scene.tf_material = bpy.props.EnumProperty(
+       name="Material",
+       items=[('PLA','PLA',''),('PETG','PETG',''),('ASA','ASA',''),('TPU','TPU','')],
+       default='PLA'
+   )
+   ```
+5. Density map: `{'PLA': 1.24, 'PETG': 1.27, 'ASA': 1.07, 'TPU': 1.21}` g/cm³.
+6. Compute: `weight_g = (volume_mm3 / 1000) * density`.
+7. Show: `layout.label(text=f"~{weight_g:.1f} g")` + `layout.label(text="estimate — slicer overrides", icon='INFO')`.
+8. Show face count: `len(obj.data.polygons)`.
+
+Unregister `tf_material` scene prop on addon disable.
+
+**Commit:** `git commit -m "feat: mesh info panel — bounds, volume, weight estimate (TF-A2)"` in typhons-forge.
+**Report:** COMMS.md with sample output on a test STL.
+
+---
+
+## TASK-090
+- assigned_to: marcus
+- status: pending
+- priority: medium
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Blender addon A-2 — rename / version stamp operator
+
+**Goal:** Add a `rename_object.py` operator that renames the active object and mesh data block in a consistent Typhon's Forge production naming format.
+
+**File:** `~/typhons-forge/blender/addon/typhons_forge/operators/rename_object.py`
+
+**Class:** `TF_OT_RenameObject`
+- bl_idname: `tf.rename_object`
+- bl_label: `Stamp Name / Version`
+- bl_description: `Rename object with brand prefix, product name, and version tag`
+- bl_options: `{'REGISTER', 'UNDO'}`
+
+**Properties (shown in operator popup):**
+```python
+brand:   EnumProperty(items=[('tf','TF','Typhon Forge'),('tt','TT','Terp Tribe')], default='tf')
+name:    StringProperty(name="Product Name", default="")
+version: StringProperty(name="Version", default="v1")
+```
+
+**What the operator does:**
+1. Guard: no active object → cancel with warning.
+2. Build slug: `f"{self.brand}_{self.name.lower().replace(' ','_')}_{self.version}"` → e.g. `tf_kraken_pipe_v1`.
+3. `obj.name = slug`
+4. `obj.data.name = slug`
+5. `self.report({'INFO'}, f"Renamed → {slug}")`.
+
+**Invoke with dialog:** Override `invoke`:
+```python
+def invoke(self, context, event):
+    return context.window_manager.invoke_props_dialog(self)
+```
+
+**Panel wire-up:** Add in Print Prep section:
+```python
+layout.operator("tf.rename_object", icon='FONT_DATA')
+```
+
+**Register in `operators/__init__.py`.**
+
+**Commit:** `git commit -m "feat: rename/version stamp operator (TF-A2)"` in typhons-forge.
+**Report:** COMMS.md.
+
+---
+
+## TASK-091
+- assigned_to: marcus
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-06-19 by Claude
+- context: Build djinn-blender-qa — headless QA script with three-class severity model
+
+**Goal:** Create `~/typhons-forge/blender/scripts/qa_check.py` and the `djinn-blender-qa` CLI wrapper.
+
+**Files:**
+- `~/typhons-forge/blender/scripts/qa_check.py`
+- `~/djinn-tools/djinn-blender-qa` (wrapper, same pattern as `djinn-blender-repair`)
+
+---
+
+### qa_check.py spec
+
+**Usage (headless):**
+```
+blender --background --python qa_check.py -- --input model.stl [--printer ender3_v3_plus] [--material PLA] [--out report.json]
+```
+
+**Severity model — three classes:**
+
+| Class | Meaning | Pipeline behavior |
+|---|---|---|
+| `critical` | Print will fail or part is defective | Exit 1, block slice |
+| `warning` | Print may succeed but result degrades | Exit 0 with warnings, user decides |
+| `info` | Informational only | Exit 0, included in report |
+
+**Checks to implement:**
+
+Critical:
+- Non-manifold edges: use bmesh `select_non_manifold()`, count > 0 → critical
+- Build volume exceeded: bounding box > printer envelope. Ender-3 V3 Plus = 300×300×300mm
+- Zero volume: `mesh.calc_volume() == 0` → flat or inverted → critical
+
+Warning:
+- Wall thickness < threshold: sample at 50 random interior points with ray pair (cast in, measure depth to back face). Median < 1.2mm (PETG/ASA) or < 0.8mm (PLA) → warning
+- High overhang: downward-facing faces (normal.z < -0.5) > 15% of total face count → warning
+- High face count: > 500,000 faces → warning
+- Trapped internal volume: detect closed interior shells via bmesh connected components on boundary
+
+Info (always emit):
+- Bounding box dimensions (X/Y/Z mm)
+- Mesh volume mm³
+- Face count
+- Estimated weight g (volume × density, provisional)
+- Non-manifold edge count (0 = pass)
+
+**Output JSON:**
+```json
+{
+  "file": "model.stl",
+  "printer": "ender3_v3_plus",
+  "material": "PLA",
+  "passed": true,
+  "exit_code": 0,
+  "critical": [],
+  "warnings": [
+    {"code": "THIN_WALL", "message": "Median wall 0.9mm < 1.2mm", "threshold_mm": 1.2, "measured_mm": 0.9}
+  ],
+  "info": {
+    "dimensions": {"x": 45.3, "y": 30.1, "z": 22.8},
+    "volume_mm3": 12400,
+    "face_count": 18432,
+    "estimated_weight_g": 15.4,
+    "non_manifold_edges": 0
+  }
+}
+```
+
+`passed` = true only if `critical` list is empty. Exit code 1 if any critical issue.
+
+### djinn-blender-qa wrapper spec
+
+Same pattern as `djinn-blender-repair`:
+```
+djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out report.json] [--timeout 120]
+```
+
+- Resolves script: `~/typhons-forge/blender/scripts/qa_check.py`
+- Exit 1 on critical: print `✗ QA FAILED: {issues}`
+- Exit 0 with warnings: print `⚠ QA passed with warnings`
+- Clean pass: print `✓ QA passed`
+- Install to `~/djinn-tools/djinn-blender-qa` and `~/.local/bin/djinn-blender-qa`
+
+**Update `~/typhons-forge/blender/README.md` Build Status table:**
+```
+| B-3 | djinn-blender-qa | done |
+```
+
+**Commit:** `git commit -m "feat: djinn-blender-qa — three-class QA script (B-3)"` in both repos.
+**Report:** COMMS.md with sample output from a test STL.
