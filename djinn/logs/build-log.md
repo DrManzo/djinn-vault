@@ -1432,3 +1432,17 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - TASK-081–085 written to QUEUE.md; TASK-085 = gateway build-command fix
 
 *— Claude*
+
+## 2026-06-19 — Blender A-2 architecture + TASK-086–091 queued
+
+- Architecture review: classified all new features across addon / headless / djinn / slicer
+- QA severity model defined: critical (exit 1) / warning (exit 0) / info
+- TASK-086: non-manifold check operator (addon)
+- TASK-087: mesh cleanup operator — merge/fill/loose (addon + repair.py update)
+- TASK-088: align-to-bed operator (addon)
+- TASK-089: mesh info panel — bounds, volume, weight estimate (addon)
+- TASK-090: rename/version stamp operator (addon)
+- TASK-091: djinn-blender-qa + qa_check.py headless script (B-3)
+- PLAN-blender-integration.md updated with tiered classification and design constraints
+
+*— Claude*

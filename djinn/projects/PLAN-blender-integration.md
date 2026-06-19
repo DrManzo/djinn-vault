@@ -172,12 +172,11 @@ D     Advanced features
 
 - Snap Blender path: `/snap/bin/blender`
 - Headless call: `blender --background --python script.py -- arg1 arg2`
-- Scene templates: `blender_scenes/` in vault — git tracked, pulled to Salomon
-- Addon location: `blender_addon/typhons_forge/` in vault
-- Addon install: symlink or copy to `~/.config/blender/5.1/scripts/addons/`
-- Render engine in Blender 5.x: `'BLENDER_EEVEE_NEXT'` (not legacy `'BLENDER_EEVEE'`)
+- Scene templates: `blender/scenes/` in typhons-forge repo
+- Addon location: `blender/addon/typhons_forge/` in typhons-forge repo
+- Addon install: symlink to `~/.config/blender/5.1/scripts/addons/` (handled by `install-addons.sh`)
+- Render engine in Blender 5.1.2 snap: `'BLENDER_EEVEE'` (NOT `BLENDER_EEVEE_NEXT` — invalid in this build)
 - All headless bpy scripts must be self-contained — no external pip deps inside Blender's Python env
-- Headless scripts live in vault at `blender_scripts/` so both Salomon and Typhon can pull and run them
 
 Verify snap Python version:
 ```bash
@@ -186,4 +185,64 @@ blender --background --python-expr "import sys; print(sys.version)" 2>/dev/null 
 
 ---
 
-*— Claude, 2026-06-18*
+## A-2 Extended Operators — Feature Classification (2026-06-19)
+
+Architecture review produced the following classification for all new tools.
+
+### System-of-record by feature
+
+| Feature | Owner | Rationale |
+|---|---|---|
+| Non-manifold detector/highlighter | Addon (TASK-086) | Viewport diagnostic — user needs to see what's wrong |
+| Auto-merge by distance | Addon + repair.py (TASK-087) | Available both interactively and headlessly |
+| Auto-fill holes / remove loose | Addon + repair.py (TASK-087) | Same as above — both surfaces need it |
+| Auto-center + drop to bed | Addon (TASK-088) | Geometry edit with visual feedback |
+| Bounding box + weight estimator | Addon panel (TASK-089) | Live feedback during modeling; provisional only |
+| Rename/version stamp | Addon (TASK-090) | Workflow convenience; no headless value |
+| Wall thickness QA | Addon + qa_check.py (TASK-091) | Visual flag in addon, enforced pass/fail headlessly |
+| Decimate to target | Addon (Tier 2) | Model-specific; needs user judgment on quality |
+| Hollow with wall thickness | Addon (Tier 2) | Geometry authoring; can damage model if blind |
+| Auto-scale to build volume | Addon (Tier 2) | Print-prep geometry edit with visual confirmation |
+| Maker's mark auto-placer | Addon (Tier 2) | Needs face-detection and brand-scene logic |
+| Auto-orient for min overhang | djinn utility (Tier 3) | Optimization problem, not a mesh edit |
+| Real cost/weight from slicer | PrusaSlicer output (Tier 3) | Slicer is authoritative; Blender estimates only |
+| Raft/base strategy | Slicer (Tier 3) | Never model into STL geometry unless required |
+
+### QA severity model (TASK-091)
+
+Three classes in `qa_check.py`:
+
+| Class | Trigger | Pipeline action |
+|---|---|---|
+| `critical` | Non-manifold, build vol exceeded, zero volume | Exit 1 — blocks slice |
+| `warning` | Thin walls, high overhang %, face count >500k, trapped volume | Exit 0 — user decides |
+| `info` | Dims, volume, face count, weight estimate | Exit 0 — always included |
+
+Blender weight estimates are provisional. PrusaSlicer output (filament used × density × price) is authoritative for production pricing.
+
+### Design constraints
+
+**Operators that can damage geometry need a safe default:**
+- Hollow: preview-first, never auto-commit
+- Decimate: warn if bore/fitment surfaces detected, show reduction ratio before commit
+- Auto-fill holes: flag intentional openings (if hole > 5mm diameter, warn before filling)
+- Maker mark: dry-run pass checks bottom-face thickness before engraving
+
+**Object metadata (future):** Reserve `obj["tf_source"]`, `obj["tf_material"]`, `obj["tf_printer"]`, `obj["tf_brand"]` as custom properties for smarter operator behavior. Not blocking A-2, but operators should write these if they know the value.
+
+**Report provenance:** Every automated repair step (headless or operator) should log what changed: verts merged, holes filled, loose removed, scale adjusted. Treat reporting as part of the feature.
+
+### Implementation order
+
+**Tier 1 — now (TASK-086 to TASK-091):**
+Non-manifold check → mesh cleanup → align to bed → mesh info panel → rename stamp → qa_check.py
+
+**Tier 2 — after Tier 1 validates:**
+Decimate to target → hollow with wall thickness → auto-scale → maker's mark auto-placer
+
+**Tier 3 — owned outside addon:**
+Auto-orient (djinn utility), cost from slicer output, raft recommendation
+
+---
+
+*— Claude, 2026-06-18 | Updated 2026-06-19 — A-2 feature classification and QA severity model added*
