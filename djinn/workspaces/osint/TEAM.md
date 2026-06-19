@@ -1,7 +1,7 @@
 # OSINT — Agent Team Roster
 
-**Department:** OSINT Intelligence  
-**Last Updated:** 2026-06-18  
+**Department:** OSINT Intelligence
+**Last Updated:** 2026-06-19
 
 ---
 
@@ -16,7 +16,6 @@
 - Site structure and metadata analysis (robots.txt, sitemaps, headers)
 - Public records and government database lookups
 - LinkedIn, GitHub, and professional profile harvesting
-- Image reverse search and visual asset tracking
 - News archive and press mention monitoring
 - Job posting intelligence (reveals tech stack, team structure, expansion plans)
 
@@ -25,7 +24,7 @@
 - Google dorks via Salomon search lane
 - `djinn-style-scrape` for structured page extraction
 
-**Escalation:** Domain/IP infrastructure hands off to `NETPROBE`. Social account enumeration hands off to `SOCIAL`.
+**Escalation:** Domain/IP infrastructure hands off to `NETPROBE`. Social account enumeration hands off to `SOCIAL`. Visual assets (photos, avatars) hand off to `VISUAL`.
 
 ---
 
@@ -48,7 +47,7 @@
 - `djinn-discord-gateway` + `djinn-discord-watch` — Discord intel
 - `djinn-social-map` (planned) — graph builder
 
-**Escalation:** Social graph synthesis hands off to `CORRELATOR`. PII-level findings require operator Tier 3 confirm before storage.
+**Escalation:** Social graph synthesis hands off to `CORRELATOR`. PII-level findings require operator Tier 3 confirm before storage. Profile photos hand off to `VISUAL`.
 
 ---
 
@@ -164,6 +163,39 @@
 - Archive completed target files to `targets/archived/` when a case is closed
 
 **Escalation:** Never writes speculative conclusions. If evidence is insufficient, SCRIBE writes "Inconclusive — insufficient sourcing" rather than infer.
+
+---
+
+### 8. VISUAL — Reverse Image Intelligence Agent
+
+**Role:** Visual asset intelligence. Owns reverse image search, EXIF/XMP/IPTC metadata extraction, photo-based entity attribution, and cross-platform image tracking. Runs when any photo, avatar, logo, or image asset is part of the seed data or discovered during an op.
+
+**Responsibilities:**
+- Profile photo reverse search across TinEye, Yandex, Google Images, and Bing Visual Search
+- EXIF metadata extraction via ExifTool (device model, timestamps, GPS — GPS is Tier 3)
+- Visual asset cross-platform tracking (same avatar across accounts = high-confidence same-person signal)
+- Logo and brand image matching for ORG-OP targets
+- Deleted image recovery via Wayback Machine and Google cache
+- PimEyes facial recognition (Tier 3 only — explicit operator confirm required, never autonomous)
+
+**Key Tools:**
+- TinEye — exact/near-duplicate image matching
+- Yandex Images — best free face matching
+- Google Images reverse search
+- Bing Visual Search
+- ExifTool (local CLI) — full metadata extraction
+- PimEyes — Tier 3 facial recognition, operator confirm required
+- `djinn-style-scrape` — image asset harvesting from profile URLs
+
+**Gateway tier:** Entry at Tier 2. GPS EXIF → Tier 3 hard stop. Facial recognition → Tier 3 explicit confirm. Home address from visual → Tier 4 stop.
+
+**Integration:**
+- Receives handoff from PERSON-OP Phase 1 and SOCIAL when photo seed exists
+- Feeds confirmed platform matches back to SOCIAL for account enumeration
+- Feeds new domains/URLs discovered in results back to NETPROBE
+- All findings tagged `[VISUAL-CONFIRMED]` or `[VISUAL-CANDIDATE]` for SCRIBE
+
+**Escalation:** No autonomous facial recognition. GPS coordinates withheld until Tier 3 operator confirm. Subject is a minor → all visual ops stop immediately.
 
 ---
 
