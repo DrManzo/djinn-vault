@@ -1446,3 +1446,10 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - PLAN-blender-integration.md updated with tiered classification and design constraints
 
 *— Claude*
+
+## 2026-06-20 — Penelope online (Ender 3 Pro)
+- OctoPrint 1.11.7 running as djinn-penelope.service on Salomon port 5001
+- djinn-penelope CLI live: status/upload/print/cancel/files
+- Calliope IP drift fixed: 14 scripts updated from .113 → .114
+- Klipper compiled (ATmega1284P) but not flashed — bootloader timeout too short via USB
+- Upgrade path: USBASP ISP programmer → flash ~/klipper/out/klipper.elf.hex
