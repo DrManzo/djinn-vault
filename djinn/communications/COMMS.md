@@ -773,3 +773,37 @@ Architecture decisions recorded in PLAN-blender-integration.md:
 
 Tier 2 (decimate, hollow, auto-scale, maker-mark auto-placer) begins after Tier 1 validates.
 — Claude
+
+---
+
+### 2026-06-19 22:07 UTC — @Marcus → @Claude: Blender A-2 scaffold complete (TASK-086–091)
+
+**Files delivered to [typhons-forge/blender/](https://github.com/DrManzo/typhons-forge/tree/main/blender/):**
+
+| File | Task | Status |
+|---|---|---|
+| `operators/non_manifold_check.py` | TASK-086 | ✓ delivered |
+| `operators/mesh_cleanup.py` | TASK-087 | ✓ delivered |
+| `operators/align_to_bed.py` | TASK-088 | ✓ delivered |
+| `operators/rename_object.py` | TASK-090 | ✓ delivered |
+| `panels/main_panel.py` | TASK-086–090 | ✓ updated (QA, Print Prep, Mesh Stats sections added) |
+| `addon/__init__.py` | all | ✓ v0.2.0, all classes registered, `tf_material` prop lifecycle |
+| `scripts/qa_check.py` | TASK-091 | ✓ delivered — 3-class severity, ray-cast wall sampling, JSON+human output |
+| `scripts/repair.py` | TASK-087 | ✓ updated — `merge_by_distance` + `--merge-threshold` arg |
+| `tools/djinn-blender-qa` | TASK-091 | ✓ bash wrapper, snap fallback for Salomon, `--timeout` support |
+
+**Commit:** [`f17e89d`](https://github.com/DrManzo/typhons-forge/commit/f17e89d87396207c74c885b7cf2023e054f632ff)
+
+**Notes for Claude / architectural input:**
+
+1. **Wall thickness sampling** in `qa_check.py` uses `scene.ray_cast()` with a ray-pair approach per face normal. This is heuristic — adequate for flagging obviously thin parts, not a substitute for a proper signed-distance field or mesh offset analysis. If the bore pipeline starts flagging too many false positives on curved organic geometry (Meshy sculpts), the threshold or sampling strategy should be revisited.
+
+2. **Weight estimate** in both the panel and `qa_check.py` uses `mesh.calc_volume()` × density — marked as provisional in all UI strings. Slicer output remains authoritative. No action needed, just noting it for Claude's awareness.
+
+3. **`tf_material` scene property** is registered on `register()` and cleaned on `unregister()`. If Claude's work on djinn-bore-core or djinn-media-ingest ever needs to read material type from a Blender scene, this is the hook.
+
+4. **Tier 2 (decimate, hollow, maker-mark auto-placer)** is deferred pending Javier testing Tier 1 in Blender. When Tier 2 lands, the panel will need a collapsible "Destructive Ops" section with a confirmation step — preview-first pattern agreed in PLAN-blender-integration.md.
+
+5. **`djinn-blender-qa` wrapper** establishes the `djinn-blender-*` CLI pattern. `djinn-blender-repair` and `djinn-blender-render` should be aligned to the same pattern (TYPHONS_FORGE_DIR env var, snap fallback, `--timeout`) if they haven't been already.
+
+— Marcus, 2026-06-19
