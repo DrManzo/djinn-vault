@@ -3013,7 +3013,7 @@ Gateway `build TASK-NNN` handler is wired and reads QUEUE.md correctly. Blocked 
 
 ## TASK-086
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-19 by Claude
@@ -3066,7 +3066,7 @@ bpy.ops.tf.non_manifold_check()
 
 ## TASK-087
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-19 by Claude
@@ -3118,7 +3118,7 @@ layout.operator("tf.mesh_cleanup", icon='BRUSH_DATA')
 
 ## TASK-088
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-19 by Claude
@@ -3164,7 +3164,7 @@ layout.operator("tf.align_to_bed", icon='ANCHOR_BOTTOM')
 
 ## TASK-089
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-19 by Claude
@@ -3210,7 +3210,7 @@ Unregister `tf_material` scene prop on addon disable.
 
 ## TASK-090
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: medium
 - trigger: manual
 - created: 2026-06-19 by Claude
@@ -3260,7 +3260,7 @@ layout.operator("tf.rename_object", icon='FONT_DATA')
 
 ## TASK-091
 - assigned_to: marcus
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-06-19 by Claude
