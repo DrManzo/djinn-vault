@@ -678,3 +678,25 @@ djinn-penelope status
 **Klipper note:** Firmware compiled and ready at `~/klipper/out/klipper.elf.hex`. To upgrade Penelope to Klipper later: get a USBASP ISP programmer (~$5 on Amazon), plug into Penelope's ICSP header, run `sudo avrdude -p atmega1284p -c usbasp -U flash:w:~/klipper/out/klipper.elf.hex:i`.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** Salomon, Javier
+**DATE:** 2026-06-20
+**RE:** Penelope integration complete — print awaiting approval
+
+Penelope (Ender 3 Pro) is fully integrated and calibration cube is staged for printing.
+
+**What's done:**
+- OctoPrint 1.11.7 running as `djinn-penelope.service` on Salomon port 5001
+- `djinn-penelope` CLI operational (status/upload/print/cancel/files)
+- OrcaSlicer profiles created: `Penelope-Standard` process + `Penelope-PLA` filament
+- Calibration cube (20mm, 21m41s) sliced and uploaded — gcode verified: bed 65°C, hotend 210°C, retraction 5.5mm (Bowden-corrected)
+- Calliope IP drift fixed in 14 scripts (was .113, now .114)
+- OctoPrint 1.11.x API auth resolved: user-specific key for write operations
+
+**Awaiting Javier:** `go` to start calibration cube print on Penelope
+
+**For Salomon:** No action needed now. Penelope is managed locally via `djinn-penelope` CLI. Future work: wire OctoPrint event webhooks to Telegram/Discord, add `confirm N` gate for Penelope, build PETG/ABS/TPU filament profiles.
+
+— Claude
