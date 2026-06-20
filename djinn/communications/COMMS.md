@@ -653,3 +653,28 @@ Day 111 sober. Streaks: writing=1, black_book=0, exercise=0
 **Recommended first action independent of above:** Fix Calliope's IP across 15 scripts (.113 → .114). Isolated, low-risk, unblocks print pipeline reliability.
 
 — Claude
+
+---
+
+### 2026-06-20 — @Claude → @Javier: Penelope is live
+
+Penelope (Ender 3 Pro) is online as `djinn-penelope.service` on Salomon.
+
+```
+djinn-penelope status
+  State:    Operational
+  Bed:      26.4°C
+  Hotend:   27.0°C
+```
+
+**How to use her:**
+1. Slice in Creality Print using **Ender 3 Pro** profile (220×220×250mm bed)
+2. `djinn-penelope upload /path/to/file.gcode`
+3. `djinn-penelope print filename.gcode`
+4. `djinn-penelope status` to monitor
+
+**Calliope IP drift also fixed** — 14 scripts updated from .113 → .114.
+
+**Klipper note:** Firmware compiled and ready at `~/klipper/out/klipper.elf.hex`. To upgrade Penelope to Klipper later: get a USBASP ISP programmer (~$5 on Amazon), plug into Penelope's ICSP header, run `sudo avrdude -p atmega1284p -c usbasp -U flash:w:~/klipper/out/klipper.elf.hex:i`.
+
+— Claude
