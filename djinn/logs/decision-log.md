@@ -145,3 +145,23 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-17 — Interior cup mark un-mirror rule
 **Decision:** When placing maker's mark on cup floor (interior, viewed from above), reverse the X-mirror baked into djinn-model-mark --cutter-only output.
 **Why:** djinn-model-mark assumes exterior bottom viewing (from below). Interior surfaces viewed from above need `verts[:,0] = 2*cx_cut - verts[:,0]` + face winding flip.
+
+## 2026-06-20 — Penelope: OctoPrint over Klipper
+**Decision:** OctoPrint 1.11.7 on stock Marlin instead of flashing Klipper
+**Why:** ATmega1284P bootloader window ~1s is too short for 48.5KB USB write via avrdude. avr109 protocol connected but timed out. All baud rates (57600, 115200) failed. ISP programmer required for Klipper. OctoPrint needs zero hardware changes and Penelope is online immediately.
+
+## 2026-06-20 — Penelope: user API key not global key
+**Decision:** OctoPrint `djinn` admin user with user-specific 40-char API key instead of global API key
+**Why:** OctoPrint 1.11.x global key is read-only for write operations (file upload, print start). Returns 403 even with `accessControl: false`. User key was written directly to `users.yaml` — stable documented behavior, bypasses browser wizard requirement.
+
+## 2026-06-20 — OrcaSlicer: `cool_plate_temp` not `bed_temperature`
+**Decision:** Use `cool_plate_temp` / `cool_plate_temp_initial_layer` for bed temperature in OrcaSlicer filament profiles
+**Why:** OrcaSlicer uses per-plate-type temperature fields. `bed_temperature` is silently ignored — gcode showed `M190 S35` (the `fdm_filament_pla` default) until corrected. All four plate type fields set to same value to prevent wrong default selection.
+
+## 2026-06-20 — OrcaSlicer: inherit `Creality Generic PLA` not `fdm_filament_pla`
+**Decision:** Penelope PLA filament profile inherits from `Creality Generic PLA`
+**Why:** `Creality Generic PLA` already lists `Creality Ender-3 Pro 0.4 nozzle` as compatible. `fdm_filament_pla` does not include this printer and uses wrong defaults for Creality machines.
+
+## 2026-06-20 — Penelope: retraction 5.5mm (Bowden)
+**Decision:** 5.5mm retraction at 45mm/s for Penelope PLA
+**Why:** Penelope is Bowden. Calliope uses 0.5mm (direct drive). Bowden tubes require 4–7mm to prevent stringing. 5.5mm chosen as conservative middle of range per Marcus report. Confirmed in gcode as `G1 E-5.5 F2700`.

@@ -1453,3 +1453,18 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Calliope IP drift fixed: 14 scripts updated from .113 → .114
 - Klipper compiled (ATmega1284P) but not flashed — bootloader timeout too short via USB
 - Upgrade path: USBASP ISP programmer → flash ~/klipper/out/klipper.elf.hex
+
+## 2026-06-20 — Penelope (Ender 3 Pro) full integration + OrcaSlicer profiles
+
+- OctoPrint 1.11.7 installed (Python 3.11 venv) as `djinn-penelope.service` on Salomon port 5001
+- `djinn-penelope` CLI: status / upload / print / cancel / files / temps
+- OctoPrint 1.11.x API auth bug fixed: global key read-only for writes → created `djinn` admin user, user-specific API key written to users.yaml
+- `accessControl: false` set in OctoPrint config (local machine, no network exposure)
+- OrcaSlicer process profile created: `Penelope-Standard.json` (inherits `fdm_process_creality_common`, Creality Ender-3 Pro 0.4 nozzle, 0.2mm, 20% grid, Bowden speeds)
+- OrcaSlicer PLA filament profile created: `Penelope-PLA.json` (inherits `Creality Generic PLA`, `cool_plate_temp` bed fields, retraction 5.5mm Bowden-corrected, vol speed capped 9mm³/s)
+- Calibration cube (20mm) sliced (21m41s), uploaded to Penelope — awaiting print approval
+- Calliope IP drift fixed: 14 scripts + 3 vault docs updated 192.168.1.113 → 192.168.1.114
+- Klipper compiled for ATmega1284P (ready at `~/klipper/out/klipper.elf.hex`); flash path requires ISP programmer
+- PRINT-PROFILES.md, SYSTEM-STATE.md, INFRASTRUCTURE.md all updated with Penelope specs
+
+*— Claude*
