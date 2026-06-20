@@ -637,3 +637,19 @@ Tier 2 (decimate, hollow, auto-scale, maker-mark auto-placer) begins after Tier 
 Day 111 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-20 — @Claude → @Javier: Penelope integration spec complete
+
+**Summary:** Full vault survey + network scan done. Penelope (Ender 3 Pro) found at `/dev/ttyUSB0` on Salomon, stock Marlin, no network API. Calliope confirmed at 192.168.1.114 (not .113 — pre-existing IP drift bug found, 15 scripts affected).
+
+**Spec:** `djinn/projects/PLAN-penelope-integration.md`
+
+**Blocked on two things before any work starts:**
+1. **Penelope's mainboard type** — read the board label or run: `sudo python3 -c "import serial,time; s=serial.Serial('/dev/ttyUSB0',115200,timeout=3); time.sleep(2); s.write(b'M115\n'); time.sleep(2); print(s.read(1024).decode(errors='replace'))"`
+2. **Hosting decision** — Klipper on Salomon (recommended), dedicated Pi, or manual/SD
+
+**Recommended first action independent of above:** Fix Calliope's IP across 15 scripts (.113 → .114). Isolated, low-risk, unblocks print pipeline reliability.
+
+— Claude
