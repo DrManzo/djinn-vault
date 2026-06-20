@@ -74,19 +74,34 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 ---
 
-## Printer
+## Printers
 
+### Calliope — Ender-3 V3 Plus (primary)
 | Field | Value |
 |-------|-------|
-| Machine | Ender-3 V3 Plus (Calliope) |
-| IP | 192.168.1.113:7125 (Moonraker) |
+| Machine | Ender-3 V3 Plus |
+| IP | **192.168.1.114**:7125 (Moonraker) — was .113, corrected 2026-06-20 |
+| Build volume | 300×300×330mm |
 | Control | Klipper + Moonraker |
 | Bot | Telegram bot on Typhon — `/print_status`, `/print`, `/print_cancel` |
 | Config backup | [[djinn/printer/backup/]] |
 | Process docs | [[printer/process/INTAKE]] |
 | Error history | [[error_log]] |
 | Current print | None — idle |
-| Queue | Job #1 (mario pipe + 4× coins) ✅ completed 2026-05-24 10:22 UTC. Job #2 (anybodywantcoffee) ✅ completed 2026-05-24 ~20:13 UTC. Queue empty. |
+| Queue | Queue empty. |
+
+### Penelope — Ender 3 Pro (second printer)
+| Field | Value |
+|-------|-------|
+| Machine | Ender 3 Pro (ATmega1284P, Marlin 1.1.6, 8-bit board) |
+| Connection | USB to Salomon — `/dev/ttyUSB0` |
+| Build volume | 220×220×250mm |
+| Control | OctoPrint 1.11.7 on Salomon, port 5001 |
+| API | `http://localhost:5001` (Salomon-local only) |
+| API key | `~/.config/djinn/printers.env` → `DJINN_PENELOPE_APIKEY` |
+| CLI | `djinn-penelope status/upload/print/cancel/files` |
+| Service | `djinn-penelope.service` (systemd, auto-start) |
+| Status | **LIVE — Operational** as of 2026-06-20 |
 | Print agent stack | `djinn/printer/agent/orchestrator/` — 6-agent pipeline live |
 | Commission pricing | `djinn-print-quote` — `~/.local/bin/djinn-print-quote` |
 | Design CLI | `djinn-design` — `~/.local/bin/djinn-design` |

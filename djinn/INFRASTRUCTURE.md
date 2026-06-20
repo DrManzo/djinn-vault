@@ -50,10 +50,23 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Calliope (Printer — Ender-3 V3 Plus)
 | Attribute | Value |
 |-----------|-------|
-| IP | 192.168.1.113:7125 |
+| IP | **192.168.1.114**:7125 (corrected 2026-06-20, was .113) |
+| Build volume | 300×300×330mm |
 | Firmware | Klipper + Moonraker (Nebula pad) |
-| Slicer | OrcaSlicer (via Salomon) |
+| Slicer | Creality Print (via Salomon) |
 | Status | READY |
+
+### Penelope (Printer — Ender 3 Pro)
+| Attribute | Value |
+|-----------|-------|
+| Connection | USB to Salomon — `/dev/ttyUSB0` (CH340, ATmega1284P) |
+| Build volume | 220×220×250mm |
+| Firmware | Marlin 1.1.6.2 (stock, 2019) |
+| Control | OctoPrint 1.11.7 on Salomon, port 5001 |
+| Service | `djinn-penelope.service` (systemd, enabled) |
+| CLI | `djinn-penelope status/upload/print/cancel/files` |
+| API key | `~/.config/djinn/printers.env` |
+| Status | **LIVE** as of 2026-06-20 |
 
 ---
 

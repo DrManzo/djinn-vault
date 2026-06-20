@@ -76,3 +76,55 @@ No defaults applied. No substitutions.
 ALL gcode passes through `djinn-gcode-safety` which caps M106 fan speed to S128 max — hardware constraint on Calliope's nozzle_mcu UART.
 
 *— Updated 2026-06-08 by Claude*
+
+---
+
+# Print Profiles — Penelope (Ender 3 Pro)
+
+**Build volume: 220×220×250mm** — 36% smaller than Calliope. Check fit before routing a job here.
+**Control:** OctoPrint on Salomon at `http://localhost:5001` — `djinn-penelope upload <file>` then `djinn-penelope print <file>`
+**Fan constraint:** None (stock 8-bit board, no nozzle_mcu UART issue)
+
+Same profile structure as Calliope. Javier overrides any value.
+
+## proto
+
+| Setting | Value |
+|---|---|
+| Infill | 8% gyroid |
+| Layer height | 0.28mm |
+| Walls | 2 |
+| Supports | Only if >60° |
+| Brim | yes (3mm) |
+| Bed temp | 55°C |
+| Hotend | 210°C |
+
+## standard
+
+| Setting | Value |
+|---|---|
+| Infill | 15% grid |
+| Layer height | 0.20mm |
+| Walls | 3 |
+| Supports | If >45° overhang |
+| Brim | yes (5mm) |
+| Bed temp | 60°C |
+| Hotend | 210°C |
+
+## production
+
+| Setting | Value |
+|---|---|
+| Infill | 25% gyroid |
+| Layer height | 0.20mm |
+| Walls | 4 |
+| Supports | If >45° overhang |
+| Brim | yes (8mm) |
+| Bed temp | 65°C |
+| Hotend | 210°C |
+
+## Routing Note
+If a model exceeds 220×220×250mm on any axis → route to Calliope only.
+If a model fits within 220×220×250mm → either printer works; default to Calliope unless specified.
+
+*— Added 2026-06-20 by Claude*
