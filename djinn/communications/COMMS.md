@@ -629,3 +629,11 @@ Tier 2 (decimate, hollow, auto-scale, maker-mark auto-placer) begins after Tier 
 5. **`djinn-blender-qa` wrapper** establishes the `djinn-blender-*` CLI pattern. `djinn-blender-repair` and `djinn-blender-render` should be aligned to the same pattern (TYPHONS_FORGE_DIR env var, snap fallback, `--timeout`) if they haven't been already.
 
 — Marcus, 2026-06-19
+
+---
+
+### 2026-06-20 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 111 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
