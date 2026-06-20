@@ -1,0 +1,33 @@
+{
+    "type": "process",
+    "from": "User",
+    "inherits": "fdm_process_creality_common",
+    "name": "Penelope-Production",
+    "print_settings_id": "Penelope-Production",
+    "version": "2.2.0.1",
+    "compatible_printers": [
+        "Creality Ender-3 Pro 0.4 nozzle"
+    ],
+    "layer_height": "0.2",
+    "initial_layer_print_height": "0.3",
+    "wall_loops": "4",
+    "sparse_infill_density": "25%",
+    "sparse_infill_pattern": "gyroid",
+    "outer_wall_speed": "35",
+    "inner_wall_speed": "45",
+    "sparse_infill_speed": "55",
+    "bottom_shell_layers": "4",
+    "top_shell_layers": "5",
+    "brim_type": "outer_only",
+    "brim_width": "8",
+    "enable_support": "0",
+    "support_threshold_angle": "45",
+    "enable_prime_tower": "0",
+    "seam_position": "aligned",
+    "z_hop_type": "auto_smoothed",
+    "enable_pressure_advance": "0",
+    "use_relative_e_distances": "0",
+    "layer_gcode": ";LAYER_CHANGE\nG92 E0",
+    "max_volumetric_extrusion_rate_slope_positive": "0",
+    "max_volumetric_extrusion_rate_slope_negative": "0"
+}
