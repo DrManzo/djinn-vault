@@ -11,7 +11,7 @@
     "layer_height": "0.2",
     "initial_layer_print_height": "0.3",
     "wall_loops": "4",
-    "sparse_infill_density": "25%",
+    "sparse_infill_density": "14%",
     "sparse_infill_pattern": "gyroid",
     "outer_wall_speed": "35",
     "inner_wall_speed": "45",

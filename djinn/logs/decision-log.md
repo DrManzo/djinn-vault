@@ -177,3 +177,7 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-21 — Penelope: Z offset -0.5mm saved to EEPROM
 **Decision:** Z offset set to -0.5mm (M851 Z-0.5, M500)
 **Why:** Stock Penelope had no Z offset configured. First layer showed ghost/shadow (nozzle too far). Live babystepped -0.3mm then -0.2mm during print until visual confirmation of proper squish. Saved permanently so it survives restarts.
+
+## 2026-06-21 — Penelope: 220°C hotend, gyroid 14%, tree(auto) supports
+**Decision:** Standardize all Penelope profiles on 220°C / gyroid / 14% / tree(auto) for support profiles
+**Why:** Test print at 220°C with stock OrcaSlicer profile showed visually superior uniformity vs 210°C. Gyroid at 14% is isotropic and efficient at low density. Tree(auto) minimizes support material and contact points.
