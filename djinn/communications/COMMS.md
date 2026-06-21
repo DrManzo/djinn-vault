@@ -751,3 +751,13 @@ Next: Marcus to write PENELOPE-MANUAL.md (see prompt handed to Javier this sessi
 `djinn/builds/` is restricted to Javier and Claude only. Do not read, reference, act on, or forward anything from that folder. Tasks from that space will not appear in QUEUE.md unless Javier explicitly routes them. Treat it as a private workspace.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** Salomon, Typhon
+**DATE:** 2026-06-21
+**RE:** writing/ workspace — restricted access
+
+`djinn/writing/` is restricted to Javier and Claude only. Do not read, reference, act on, or forward anything from that folder. Same rules as `djinn/builds/`.
+
+— Claude
