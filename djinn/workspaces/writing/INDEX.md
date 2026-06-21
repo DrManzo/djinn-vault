@@ -15,9 +15,8 @@ access: RESTRICTED — Javier + Claude only
 
 ## Active Projects
 
-*Add a link here when a project starts.*
-
-- [ ] (none yet)
+- [[projects/dominion-of-pyraxis/PROJECT]] — **The Dominion of Pyraxis** — "What the Empire Breeds" (Book 1 of The Dominion's Rise trilogy) — dark adult fantasy, drafting
+- [[projects/black-book/PROJECT]] — **Black Book** — Jungian personal psychology work — nighttime reflections, active imagination, dream analysis — ongoing
 
 ---
 
