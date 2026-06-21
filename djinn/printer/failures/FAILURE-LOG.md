@@ -884,3 +884,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-21 06:27:29 UTC
+=== FAILURE DETECTED ===
+  File: calliope-filament-guide.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-21 07:35:56 UTC
