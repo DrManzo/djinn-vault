@@ -165,21 +165,22 @@ The four lessons are delivered gradually, creating a boiling-frog effect where e
 
 ---
 
-## The Nine Noble Houses (Convocatum)
+## The Ten Noble Houses (Convocatum)
 
-| House | Domain | Notes |
-|-------|--------|-------|
-| Solentine | Political/Administrative | Brax's house |
-| Kavaren | Military | — |
-| Drakenoth | Magical | — |
-| Mercurial | Economic | Lord Emerick — brilliant, alcoholic, overactive magical core |
-| Valerion | Border Defense | — |
-| Thessar | Knowledge | — |
-| Ironwell | Industrial | — |
-| Morghaven | Shadowed | Intelligence-adjacent |
-| Kalvennor | Storm / Rebellion | Marcella's house — walked out of gala |
+| # | House | Domain | Known Members | Notes |
+|---|-------|--------|---------------|-------|
+| 1 | Solentine | Political / Administrative | Brax, Javelin (legal) | Summer season shares the name; Brax's base of power |
+| 2 | Kavaren | Military | — | |
+| 3 | Drakenoth | Magical | — | |
+| 4 | Mercurial | Economic | Lord Emerick (Minister of Treasury) | |
+| 5 | Valerion | Border Defense | — | |
+| 6 | Thessar | Knowledge | — | |
+| 7 | Ironwell | Industrial | — | |
+| 8 | Morghaven | Shadowed / Intelligence | — | |
+| 9 | Kalvennor | Storm / Rebellion | Lady Marcella | Damaged alliance — coordinated gala exit |
+| 10 | Vandris | Trade / Southern | Lord Theron | Politically vulnerable re: southern trade negotiations |
 
-Senate mechanics: simple majority (5/9) passes legislation; supermajority (7/9) can override Emperor's veto.
+Senate mechanics: simple majority (6/10) passes legislation; supermajority (8/10) can override Emperor's veto.
 
 ---
 
