@@ -75,19 +75,26 @@ Brax is **not** Prime Minister. He is the Lord High Steward — a Great Officer 
 - High-noble tradition: an heir can be Lord High Steward but may not hold a ministerial seat
 - The Stewardship is "officially apolitical, secretly where all the knives are kept"
 
-### The Cabinet
+### The Cabinet — Full Roster
 
-| Role | Notes |
-|------|-------|
-| Emperor | Head of state |
-| Prime Minister | Formal executive, day-to-day policy |
-| Minister of Internal Affairs | |
-| Minister of Defense | |
-| Minister of Magic | |
-| Minister of Treasury | Lord Emerick — brilliant, overactive magical core, self-medicates with alcohol |
-| Minister of Foreign Relations | |
-| Minister of Public Works | |
-| Minister of Public Welfare | |
+| Role | Name | House |
+|------|------|-------|
+| Emperor | Arctus Altonian | Imperial (above houses) |
+| Lord High Steward | Brax Solentine | Solentine |
+| Prime Minister | Aldric Vernath | None — appointed professional by convention |
+| Minister of Internal Affairs | Corvyn Thessar | Thessar |
+| Minister of Defense | Bastyon Kavaren | Kavaren |
+| Minister of Magic | Sorvaine Drakenoth | Drakenoth |
+| Minister of Treasury | Emerick Mercurial | Mercurial |
+| Minister of Foreign Relations | Davan Valerion | Valerion |
+| Minister of Public Works | Dravek Ironwell | Ironwell |
+| Minister of Public Welfare | Orra Thessar | Thessar |
+
+> **Prime Minister Aldric Vernath:** No house affiliation by appointment convention — a house-affiliated PM would tilt the cabinet majority immediately. Elevated from civil service (former Senate Secretariat). Has enemies in every house, which means no specific enemy. (Marcus generation)
+
+### The Empress
+
+**Empress Valdra Altonian** — deceased. Died during the series of failed pregnancies approximately 15 years ago (c. 1320 PR). Her name echoes Valdross, the autumn season (endings). Her death is when Arctus stopped smiling. The empty chair at the imperial table. The failed pregnancies that followed hollowed the succession. Her absence shapes everything about this family.
 
 ### The Convocatum — Ten Noble Houses
 
