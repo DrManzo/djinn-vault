@@ -874,3 +874,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-20 20:49:06 UTC
+=== FAILURE DETECTED ===
+  File: ender3_spoolholder_sidemount.stl_PLA_1h1m30s.gcode
+  Progress: 0%
+  Transition: printing → error
+  Time: 2026-06-21 06:05:29 UTC
