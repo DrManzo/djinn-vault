@@ -189,3 +189,8 @@ the guard. Metrics represent meaningful system state change.
 **How to apply:** Treat as two separate book projects. Aethoria has worldbuilding complete; Pyraxis has story-in-progress. Both exist under `djinn/workspaces/writing/projects/`.
 
 *— Claude*
+**Decision:** House Vandris (Lord Theron) discovered in Ch 2 and does not appear in the established Nine Houses table.
+**Why:** The Nine Houses (Solentine, Kavaren, Drakenoth, Mercurial, Valerion, Thessar, Ironwell, Morghaven, Kalvennor) were established before Ch 2 was transcribed. Lord Theron of House Vandris appears as a named character at the gala with no house placement.
+**How to apply:** Javier needs to decide — tenth house (breaks the nine-house structure) or rename one of the unnamed slots. Flagged in CHARACTERS.md and PIPELINE-NOTES.md.
+*— Claude*
+

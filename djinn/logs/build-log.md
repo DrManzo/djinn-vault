@@ -1504,3 +1504,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Vault is now exclusive writing environment
 
 *— Claude*
+## 2026-06-21 — Pyraxis Chapter Pipeline
+- Transcribed and cleaned all 4 Dominion of Pyraxis source files (Prologue, Ch 1, Ch 2, Ch 3) into vault draft format
+- Ch 2 and Ch 3 are near publication-ready; Ch 1 needs prose revision pass; Prologue needs structural rewrite
+- Created Editorial/PIPELINE-NOTES.md — full developmental + line edit pass for all chapters
+- Updated CONTINUITY.md: locations table, historical facts, Faust facts, corrected chapter numbering
+- Updated CHARACTERS.md: Faust physical/backstory details, Lord Theron (House Vandris — new, not in Nine Houses table)
+- Session report: djinn/logs/reports/2026-06-21_pyraxis-chapter-pipeline.md
+
