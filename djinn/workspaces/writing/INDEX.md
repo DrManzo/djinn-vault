@@ -15,7 +15,8 @@ access: RESTRICTED — Javier + Claude only
 
 ## Active Projects
 
-- [[projects/dominion-of-pyraxis/PROJECT]] — **The Dominion of Pyraxis** — "What the Empire Breeds" (Book 1 of The Dominion's Rise trilogy) — dark adult fantasy, drafting
+- [[projects/dominion-of-pyraxis/PROJECT]] — **The Dominion of Pyraxis** — "What the Empire Breeds" (Book 1 of The Dominion's Rise trilogy) — dark adult fantasy, Roman-inspired political epic — drafting in progress
+- [[projects/aethoria/PROJECT]] — **Aethoria** — "Shadows in the Mist" — dark Victorian fantasy, Essence magic vs. steam technology, political intrigue — worldbuilding complete, drafting not yet started
 - [[projects/black-book/PROJECT]] — **Black Book** — Jungian personal psychology work — nighttime reflections, active imagination, dream analysis — ongoing
 
 ---

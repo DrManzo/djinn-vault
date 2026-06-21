@@ -1991,3 +1991,35 @@ Rotated weekly by djinn-comms-rotate.
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260621-150049 | 2026-06-21 15:00 | @Salomon | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260621-150346 | 2026-06-21 15:03 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260621-150701 | 2026-06-21 15:07 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260621-150948 | 2026-06-21 15:09 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
