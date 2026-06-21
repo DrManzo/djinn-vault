@@ -1468,3 +1468,15 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - PRINT-PROFILES.md, SYSTEM-STATE.md, INFRASTRUCTURE.md all updated with Penelope specs
 
 *— Claude*
+
+## 2026-06-21 — Penelope Mario Pipe + Z Offset
+
+- Fixed OctoPrint checksum resend loop: `alwaysSendChecksum` disabled, `neverSendChecksum: true` — Creality Marlin handles natively
+- Discovered Creality Print V7 gcode uses Klipper macros (START_PRINT, EXCLUDE_OBJECT, SET_VELOCITY_LIMIT) — incompatible with Penelope Marlin, silently fails
+- Created `Penelope-Standard-TreeSupports.json`: tree(auto) supports, 30° threshold, 8mm brim
+- Mario pipe printed successfully: 174 support sections, brim gripped, completed
+- Z offset diagnosed via live babystepping: -0.5mm total, saved to EEPROM (M851 Z-0.5 + M500)
+- OrcaSlicer desktop launcher added: `orca-slicer.desktop` + `/usr/local/bin/OrcaSlicer` symlink
+- `~/Desktop/Review/` created as mandatory print intake gate
+
+*— Claude*
