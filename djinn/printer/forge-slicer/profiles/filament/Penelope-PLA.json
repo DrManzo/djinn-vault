@@ -9,10 +9,10 @@
         "Creality Ender-3 Pro 0.4 nozzle"
     ],
     "nozzle_temperature": [
-        "210"
+        "220"
     ],
     "nozzle_temperature_initial_layer": [
-        "210"
+        "220"
     ],
     "cool_plate_temp": [
         "60"

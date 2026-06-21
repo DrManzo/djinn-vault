@@ -1480,3 +1480,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - `~/Desktop/Review/` created as mandatory print intake gate
 
 *— Claude*
+
+## 2026-06-21 — Penelope profiles finalized
+
+- All Penelope OrcaSlicer profiles updated: gyroid infill, 14% density, 220°C hotend
+- Retraction kept at 5.5mm (Bowden validated)
+- Tree(auto) supports standardized for all support profiles (30° threshold, 1 wall)
+- Penelope-Standard-TreeSupports: 8mm brim added
+- ~/Desktop/Review/ established as mandatory intake gate
+- Stock OrcaSlicer profile validated via test print — clean infill, uniform extrusion
+
+*— Claude*

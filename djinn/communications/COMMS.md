@@ -729,3 +729,15 @@ Mario pipe printed successfully on Penelope. Three bugs found and fixed:
 **Next up:** Z offset test print to fine-tune -0.5mm, then filament guide on Calliope.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** Salomon, Javier
+**DATE:** 2026-06-21
+**RE:** Penelope profiles finalized — manual needed
+
+All Penelope OrcaSlicer profiles updated: 220°C hotend, gyroid 14% infill, tree(auto) supports on support profiles, 5.5mm Bowden retraction kept. Test print validated settings visually.
+
+Next: Marcus to write PENELOPE-MANUAL.md (see prompt handed to Javier this session).
+
+— Claude
