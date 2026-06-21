@@ -1491,3 +1491,16 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Stock OrcaSlicer profile validated via test print — clean infill, uniform extrusion
 
 *— Claude*
+
+## 2026-06-21 — Writing Workspace Build
+
+- Created `djinn/workspaces/writing/projects/aethoria/` — separate project for Victorian fantasy (Corvus, Thorne, Ironhaven, Essence magic)
+- WORLDBUILDING.md — all 10 Aethoria worldbuilding notes consolidated directly (geography, politics, society, economy, magic, religion, military, education, transportation, international relations)
+- CHARACTERS.md — Corvus Shadowblade + Master Thorne profiles
+- Dominion of Pyraxis: CHARACTERS.md (Raxz, Javelin, Brax, Arctus, Marcella + all Nine Houses) + STORY-NOTES.md (all Story-Critique content)
+- Black Book: SESSIONS.md (template + all known sessions indexed) + FAUST.md (full gnome necromancer mythology)
+- Draft staging files created for both books — clean files where prose goes
+- Downloads/Writing removed (was entirely symlinks)
+- Vault is now exclusive writing environment
+
+*— Claude*

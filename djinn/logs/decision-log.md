@@ -181,3 +181,11 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-21 — Penelope: 220°C hotend, gyroid 14%, tree(auto) supports
 **Decision:** Standardize all Penelope profiles on 220°C / gyroid / 14% / tree(auto) for support profiles
 **Why:** Test print at 220°C with stock OrcaSlicer profile showed visually superior uniformity vs 210°C. Gyroid at 14% is isotropic and efficient at low density. Tree(auto) minimizes support material and contact points.
+
+## 2026-06-21 — Aethoria = separate project from Pyraxis
+
+**Decision:** Created a dedicated project workspace for Aethoria, separate from Dominion of Pyraxis.
+**Why:** All Aethoria worldbuilding (Corvus, Thorne, Ironhaven, Essence magic, Shadow Council) is Victorian-inspired and distinct from Pyraxis (Roman-inspired, Raxz/Arctus). The Story-Critique notes are exclusively about Pyraxis. Mixing them in one project would create confusion.
+**How to apply:** Treat as two separate book projects. Aethoria has worldbuilding complete; Pyraxis has story-in-progress. Both exist under `djinn/workspaces/writing/projects/`.
+
+*— Claude*
