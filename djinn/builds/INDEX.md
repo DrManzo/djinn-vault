@@ -2,9 +2,16 @@
 title: Builds — Master Index
 tags: [djinn, builds, planning, index]
 updated: 2026-06-21
+access: RESTRICTED
 ---
 
 # Builds Workspace
+
+> **ACCESS: Javier + Claude only.**
+> Salomon, Typhon, Marcus, and all other agents are not permitted to read,
+> write, or act on anything in this folder. No tasks from this space go to
+> QUEUE.md. No briefs are forwarded to other agents without Javier's explicit
+> instruction.
 
 This is the central space for all build planning — from event calendar to model brief to print-ready prompt. Everything that becomes a print starts here.
 
