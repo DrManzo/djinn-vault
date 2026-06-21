@@ -127,3 +127,7 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 | 2026-06-18 | Claude | djinn-blender-render | high | fixed | BLENDER_EEVEE_NEXT not valid in snap Blender 5.1.2 — correct name is BLENDER_EEVEE | [[2026-06-18_bug-blender-eevee-next-engine-name]] |
 | 2026-06-18 | Claude | djinn-blender-render | medium | fixed | render.py hardcoded PNG format — output extension ignored, .jpg saved as PNG bytes | [[2026-06-18_bug-blender-render-format-hardcoded-png]] |
 | 2026-06-18 | Claude | djinn-discord-gateway | high | open | build TASK-NNN falls through to Ollama with no QUEUE context — silent hallucinated output | [[2026-06-18_bug-gateway-build-command-no-queue-context]] |
+
+| 2026-06-21 | Claude | Penelope/OctoPrint | high | fixed | OctoPrint alwaysSendChecksum causes Marlin resend loop — printer requests line 1 indefinitely, comm deadlocked | [[2026-06-21_bug-octoprint-checksum-marlin-resend-loop]] |
+| 2026-06-21 | Claude | Penelope/Creality Print | high | documented | Creality Print V7 gcode contains Klipper macros (START_PRINT, EXCLUDE_OBJECT) — silently fails on Marlin, bed never heats | [[2026-06-21_bug-creality-print-klipper-macros-on-marlin]] |
+| 2026-06-21 | Claude | Penelope/Z offset | medium | fixed | Z offset not configured on Penelope — nozzle 0.5mm too high, first layer ghosted/non-adhesive | [[2026-06-21_bug-penelope-z-offset-unconfigured]] |

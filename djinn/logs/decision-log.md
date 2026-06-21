@@ -165,3 +165,15 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-20 — Penelope: retraction 5.5mm (Bowden)
 **Decision:** 5.5mm retraction at 45mm/s for Penelope PLA
 **Why:** Penelope is Bowden. Calliope uses 0.5mm (direct drive). Bowden tubes require 4–7mm to prevent stringing. 5.5mm chosen as conservative middle of range per Marcus report. Confirmed in gcode as `G1 E-5.5 F2700`.
+
+## 2026-06-21 — Penelope: disable forced checksums
+**Decision:** `neverSendChecksum: true` in OctoPrint serial config (was `alwaysSendChecksum: true`)
+**Why:** Forced checksums caused Marlin resend loop — printer kept requesting line 1 indefinitely, communication deadlocked. Creality Marlin handles checksums natively; OctoPrint forcing them creates a protocol conflict that crashes the print within seconds.
+
+## 2026-06-21 — Penelope: OrcaSlicer only, never Creality Print gcode
+**Decision:** Penelope must only use OrcaSlicer with Penelope-specific profiles. Creality Print gcode is forbidden on Penelope.
+**Why:** Creality Print V7 slices for Calliope (Klipper). Start sequence uses Klipper macros (START_PRINT, EXCLUDE_OBJECT, SET_VELOCITY_LIMIT) that Marlin silently ignores. Result: bed never heats, no material deposits, print fails silently.
+
+## 2026-06-21 — Penelope: Z offset -0.5mm saved to EEPROM
+**Decision:** Z offset set to -0.5mm (M851 Z-0.5, M500)
+**Why:** Stock Penelope had no Z offset configured. First layer showed ghost/shadow (nozzle too far). Live babystepped -0.3mm then -0.2mm during print until visual confirmation of proper squish. Saved permanently so it survives restarts.

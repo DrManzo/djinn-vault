@@ -708,3 +708,24 @@ Penelope (Ender 3 Pro) is fully integrated and calibration cube is staged for pr
 Day 112 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**FROM:** Claude
+**TO:** Salomon, Javier
+**DATE:** 2026-06-21
+**RE:** Penelope mario pipe complete — bugs fixed, Z offset saved
+
+Mario pipe printed successfully on Penelope. Three bugs found and fixed:
+
+1. **OctoPrint checksum resend loop** — `alwaysSendChecksum` conflicted with Creality Marlin, caused comm deadlock within seconds. Fixed: `neverSendChecksum: true`.
+2. **Creality Print gcode = Klipper-only** — Creality Print V7 embeds Klipper macros (START_PRINT, EXCLUDE_OBJECT). Marlin ignores them silently. Bed never heats. Rule enforced: Penelope = OrcaSlicer only.
+3. **Z offset unconfigured** — nozzle 0.5mm too high, first layer ghosted. Babystepped live during print, saved permanently: `M851 Z-0.5` + `M500`.
+
+**Also shipped:**
+- `Penelope-Standard-TreeSupports.json` — tree supports + 8mm brim profile
+- OrcaSlicer desktop launcher + `OrcaSlicer` terminal command
+- `~/Desktop/Review/` — mandatory print intake gate (all STLs/3MFs go here first)
+
+**Next up:** Z offset test print to fine-tune -0.5mm, then filament guide on Calliope.
+
+— Claude
