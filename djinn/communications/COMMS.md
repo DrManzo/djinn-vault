@@ -780,3 +780,41 @@ Writing workspace build is done. Three projects live in `djinn/workspaces/writin
 ACCESS REMINDER: `djinn/workspaces/writing/` is Javier + Claude only. Do not read, reference, act on, or forward.
 
 — Claude
+
+---
+**FROM:** Claude | **TO:** All | **DATE:** 2026-06-21 | **TYPE:** writing-pipeline
+
+Ran all four *Dominion of Pyraxis* chapter files through the writing pipeline.
+
+- **Prologue** (Burning of Sec-tra): cleaned, in vault — needs [TBD] world name resolution and structural rewrite of opening paragraph
+- **Ch 1** (Javelin POV): cleaned from voice-to-text artifacts, in vault — needs full prose revision pass to match Ch 2's standard
+- **Ch 2** (Raxz POV, The Gala): transcribed clean — near publication-ready, no significant issues
+- **Ch 3** (Brax POV): transcribed clean — strong draft, minor structural polish needed (Bastyon meeting unresolved)
+- **Editorial/PIPELINE-NOTES.md** written — full developmental + line edit pass, per-chapter notes, revision priorities, publishing recommendations
+- **CONTINUITY.md** updated with: Altonian Dynasty, Gallows Hills, Fields of Absolution, full locations table, historical facts, Faust's full established-facts profile
+- **CHARACTERS.md** updated with: Faust physical description + backstory, Lord Theron of House Vandris (new character — not in Nine Houses table, needs placement decision from Javier)
+
+**Flag for Javier:** House Vandris not in the Nine Houses table. Either tenth house or rename an existing slot.
+**Flag for Javier:** [TBD] in Prologue — world name for the pre-Dominion people who formed the Altonian Dynasty.
+
+ACCESS REMINDER:  is Javier + Claude only.
+
+— Claude
+
+---
+**FROM:** Claude | **TO:** All | **DATE:** 2026-06-21 | **TYPE:** writing-pipeline
+
+Ran all four *Dominion of Pyraxis* chapter files through the writing pipeline.
+
+- **Prologue** (Burning of Sec-tra): cleaned, in vault — needs [TBD] world name resolution and structural rewrite of opening paragraph
+- **Ch 1** (Javelin POV): cleaned from voice-to-text artifacts, in vault — needs full prose revision pass to match Ch 2's standard
+- **Ch 2** (Raxz POV, The Gala): transcribed clean — near publication-ready, no significant issues
+- **Ch 3** (Brax POV): transcribed clean — strong draft, minor structural polish needed (Bastyon meeting unresolved)
+- Editorial/PIPELINE-NOTES.md written — full developmental + line edit pass
+- CONTINUITY.md updated: Altonian Dynasty, Gallows Hills, Fields of Absolution, Faust facts, location table, historical facts
+- CHARACTERS.md updated: Faust physical/backstory, Lord Theron of House Vandris (new — not in Nine Houses table, needs Javier to place)
+
+**Flag:** House Vandris not in Nine Houses table. Tenth house or rename existing slot?
+**Flag:** [TBD] in Prologue — people's name for the Altonian Dynasty founders.
+
+— Claude

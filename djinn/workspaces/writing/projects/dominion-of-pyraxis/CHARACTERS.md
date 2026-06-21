@@ -129,10 +129,28 @@ The four lessons are delivered gradually, creating a boiling-frog effect where e
 ## Faust (The Advisor)
 
 **Role:** Unknown — operates in the shadows, manipulates both Brax and Javelin
-- Aware of Javelin's emotional entanglement with Raxz
-- Proposed to Brax that a wife be arranged for Javelin
-- Intercepts Brax in the gardens after Chapter 3's gala fallout
+**Physical:** Diminutive — "somewhere between a dwarf and a midget"; the only person who can genuinely unsettle Javelin
+**Signature:** Appears/vanishes with shimmer of air and sulfur smell (pop)
+
+- Is family to Brax (literal or deep-bond — not yet specified which)
+- Has held Brax under his control for 21 years (since Brax was approximately 9-10 years old)
+- Trained Javelin in survival, knife work, and limited magic — under contract to Brax's father
+- Claims Brax's father sent him out of love for Javelin
+- Says Javelin "is one of us" — implying deeper allegiance or lineage
+- Proposes arranging a wife for Javelin to sever his emotional bond with Raxz
 - Connection to the fictional Faust inner figure (see Black Book) may be intentional psychological mirror
+
+---
+
+## Lord Theron — House Vandris
+
+**Role:** Noble lord; gala attendee; political sparring partner for Raxz
+**House:** Vandris (**NOTE:** Not currently in the Nine Houses table — clarify with Javier whether this is a tenth house or replaces one of the unnamed slots)
+
+- Smooth, polished court manner; thin smile; wine in hand before gala officially began
+- Mocked Raxz's Kalvennor colors at the gala: "How very... diplomatic of you"
+- Raxz countered by referencing "House Vandris's delicate position regarding the southern trade negotiations" — Theron's smile faltered
+- Represents a house with political vulnerability in trade matters (southern trade)
 
 ---
 

@@ -243,13 +243,13 @@ Every act of magic has 2–3 sensory tells. Skill level determines how obvious o
 
 ## Established Story Events (in order)
 
-1. **The Burning of Sec-tra** (Prologue, Year 1 PR) — conspirators orchestrate the destruction of the capital to manipulate the Emperor. A youth arrives through spatial magic. Wider implications hinted.
+1. **The Burning of Sec-tra** (Prologue, Year 1 PR) — conspirators orchestrate the destruction of the capital; they have instructed "the Fists" to burn Sec-tra. Three figures watch from Gallows Hills. A youth with dark hair and cat-like eyes arrives through a spatial rip — reports the Emperor is "winning despite the overwhelming numbers." The plan was apparently to make him a hero. Closing exchange: "whoever is behind this is after a seat at the table, or they want the throne itself." The Emperor does not know who is moving the pieces.
 
-2. **The Imperial Gala** (Chapter 1, 1335 PR) — Raxz transforms his and Lady Marcella's attire using magic without consent. House Kalvennor executes a coordinated silent exit. Emperor Arctus leaves his own gala immediately after.
+2. **The Training Scene** (Chapter 1, POV: Javelin, 1335 PR) — Raxz attempts to sneak-attack Javelin at the Hall of Might. Javelin detects him by heat displacement and sound; allows him to think he has the upper hand, then counters. Raxz blinks them both to a private room. Intimate tension — Raxz asks with his body what he can't ask with words; Javelin refuses ("This isn't proper"). Javelin gives the "we must dance the careful dance of politics" speech. Faust arrives (sulfur smell). Javelin sends Raxz away; Raxz kisses the signet ring formally. Faust confronts Javelin about his feelings for Raxz; proposes arranging a wife. Javelin dresses for the gala in emerald green.
 
-3. **The Fallout** (Chapter 2) — Raxz summoned to Emperor's office. Javelin spotted holding Princess Millie, showing hurt. Brax begins damage control.
+3. **The Imperial Gala** (Chapter 2, POV: Raxz, 1335 PR) — Raxz leaves Javelin's chamber detecting sulfur in the air. Goes to Arctus's office (what he said or did there is not shown — only that he "pushed too hard" and Arctus said "You may go" coldly). Dresses in Kalvennor's "massacre of a peacock" colors. At the gala, encounters Lord Theron of House Vandris (thinly veiled insult; Raxz counters politically). Marcella arrives in matching gaudy colors — solidarity. They enter Grand Hall together. Brief moment with siblings: Ellen (whispers "eighteen months, Raxz"), Lance (seven, smug), Millie (five, silver hair = Raxz sees young Javelin holding the blue jay in the Fields of Absolution). First dance with Marcella. At the violin's last note, Raxz uses magic to transform both their outfits to imperial black and gold — without her consent. Marcella's response: "Although the surprise would have been best if properly coordinated." House Kalvennor's coordinated silent exit. Arctus stands, makes a formal excuse, and leaves. Millie delivers a sealed note: "My office." Raxz blinks to the Emperor's office. Stands before the open doors in darkness: "What have I done?"
 
-4. **Brax's POV** (Chapter 3) — Brax watches from a distance, manages logistics, contacts Emerick and Bastyon secretly. Faust intercepts in the gardens, proposes forcing Javelin into marriage. Torches go out behind Brax as he leaves. Chapter 3 deliberately delays the Raxz-Arctus confrontation to build tension.
+4. **Brax's Damage Control** (Chapter 3, POV: Brax, 1335 PR) — Brax watches the Kalvennor exit with detached humor; spots Javelin holding Millie and whispers "I'm so sorry." Uses a clerk to secretly summon Lord Emerick (Treasury) and Lord Bastyon (Military Affairs) for separate meetings. Faust intercepts him in the Central Gardens — proposes arranging a wife for Javelin to sever his emotional bond with Raxz. Brax protests; Faust dismisses the risk. A third set of footsteps approaches; Faust vanishes (shimmer + sulfur pop). Brax's hands shake: "Twenty-one years of this." Meets Emerick in the Treasury office — tense, layered exchange. Chapter ends with torches going out behind Brax as he leaves the Ministry.
 
 ---
 
@@ -262,6 +262,47 @@ Every act of magic has 2–3 sensory tells. Skill level determines how obvious o
 | The maid | The powerless absorbing punishment for the powerful's education — how the system actually works |
 | Cleaning hands on family | The Emperor's philosophy — sin becomes gift through reframing |
 | Silence / coordinated exit | The Kalvennors' most powerful political weapon — the structured, dignified withdrawal |
+
+---
+
+## Established Locations
+
+| Location | Description | First Appears |
+|----------|-------------|---------------|
+| Sec-tra | Capital city of the Dominion; birthplace of the Altonian Dynasty | Prologue |
+| Gallows Hills | Elevated position overlooking Sec-tra; where conspirators watched the city burn | Prologue |
+| Fields of Absolution | Open fields; where Raxz (age 5-6) first encountered young Javelin chasing a blue jay | Ch 2 (memory) |
+| The Hall of Might | Major court building where Javelin often sits on the steps; training sessions happen here | Ch 1 |
+| Central Gardens | Midway point between Treasury and Military Affairs offices; where Faust intercepts Brax | Ch 3 |
+| Department of Treasury | Imposing cement-pillar building from the Last Emperor's reign; where Emerick's office is | Ch 3 |
+| Department of Military Affairs | Lord Bastyon's office; Brax plans to visit after Emerick | Ch 3 |
+
+---
+
+## Established Historical Facts
+
+| Fact | Detail | Source |
+|------|--------|--------|
+| Altonian Dynasty | Pre-Dominion empire that united 7 fractured kingdoms; its birthplace was Sec-tra | Prologue |
+| The Burning of Sec-tra | Year 1 PR event — the conspirators burned the capital using "the Fists"; the Emperor fought in defense and won despite overwhelming numbers | Prologue |
+| The Wars | 15 years ago (c. 1320 PR); devastating; Emperor Arctus fought; followed by a series of failed imperial pregnancies | Ch 2 (memory) |
+| Faust's hold over Brax | Began 21 years ago (c. 1314 PR) — when Brax was roughly 9-10 years old if he's now middle-aged after 30 years of service | Ch 3 |
+| Faust's hold over Javelin | Javelin is 21; his father's arrangement with Faust has controlled his whole life | Ch 1, Ch 3 |
+
+---
+
+## Faust — Established Facts
+
+| Fact | Source |
+|------|--------|
+| Physically diminutive — "somewhere between a dwarf and a midget" | Ch 1 |
+| Taught Javelin: survival within Senate/nobility, knife work, limited magic understanding | Ch 1 |
+| Has held power over Brax for 21 years | Ch 3 |
+| Is family to Brax — "the most powerful person holding your chains was not only part of your foundation, but also family" | Ch 3 |
+| Signature: vanishes with shimmer of air + sulfur smell (pop); can also appear as "the smell of sulfur" without visible entry | Ch 1, Ch 3 |
+| Proposes arranging a wife for Javelin to sever emotional bond with Raxz | Ch 3 |
+| Says Javelin "is one of us" | Ch 3 |
+| Claims Brax's father sent him — "He only did it because he loved you. He thought you would survive." | Ch 1 |
 
 ---
 
