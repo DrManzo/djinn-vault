@@ -89,23 +89,24 @@ Brax is **not** Prime Minister. He is the Lord High Steward — a Great Officer 
 | Minister of Public Works | |
 | Minister of Public Welfare | |
 
-### The Convocatum — Nine Noble Houses
+### The Convocatum — Ten Noble Houses
 
-| House | Power Base | Notes |
-|-------|-----------|-------|
-| Solentine | Political/Administrative | Season also named after them |
-| Kavaren | Military | |
-| Drakenoth | Magical | |
-| Mercurial | Economic | |
-| Valerion | Border | |
-| Thessar | Knowledge | |
-| Ironwell | Industrial | |
-| Morghaven | Shadowed | |
-| Kalvennor | Storm/Rebellion | Currently damaged alliance — walked out of the gala |
+| # | House | Power Base | Known Members | Notes |
+|---|-------|-----------|---------------|-------|
+| 1 | Solentine | Political / Administrative | Brax (Lord High Steward) | Summer season shares the name |
+| 2 | Kavaren | Military | — | |
+| 3 | Drakenoth | Magical | — | |
+| 4 | Mercurial | Economic | Lord Emerick (Minister of Treasury) | |
+| 5 | Valerion | Border Defense | — | |
+| 6 | Thessar | Knowledge | — | |
+| 7 | Ironwell | Industrial | — | |
+| 8 | Morghaven | Shadowed / Intelligence | — | |
+| 9 | Kalvennor | Storm / Rebellion | Lady Marcella | Damaged alliance — walked out of the gala |
+| 10 | Vandris | Trade / Southern | Lord Theron | Politically vulnerable re: southern trade negotiations |
 
-**Senate mechanics:**
-- Simple majority (5/9) passes legislation
-- Supermajority (7/9) overrides Emperor's veto
+**Senate mechanics (10 houses):**
+- Simple majority (6/10) passes legislation
+- Supermajority (8/10) overrides Emperor's veto
 
 ### Military Hierarchy
 
