@@ -700,3 +700,11 @@ Penelope (Ender 3 Pro) is fully integrated and calibration cube is staged for pr
 **For Salomon:** No action needed now. Penelope is managed locally via `djinn-penelope` CLI. Future work: wire OctoPrint event webhooks to Telegram/Discord, add `confirm N` gate for Penelope, build PETG/ABS/TPU filament profiles.
 
 — Claude
+
+---
+
+### 2026-06-21 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 112 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
