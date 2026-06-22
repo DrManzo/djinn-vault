@@ -17,15 +17,25 @@ access: RESTRICTED — Javier + Claude only
 |------|-------|
 | World name | Coravian |
 | Empire name | The Dominion of Pyraxis |
-| Capital city | **Sec-tra** (curse-name; common usage) / **Teraxia** (official name; Altonian usage) |
-| Current year | 1335 PR (Pyraxis Reckoning) |
-| Emperor's reign | Year 15 (Emperor Arctus) |
+| Capital city | **Sec-tra** (common usage) / **Teraxia** (official Altonian name) |
+| Current year | **700 PR** (Pyraxis Reckoning) |
+| Emperor's reign | Year 15 (Emperor Arctus; 13th of his line) |
+| Emperors to date | 13 |
+| Magic-user lifespan | 100–180 years |
+| Non-magic lifespan | 80–100 years |
+| Average imperial reign | ~53 years (13 emperors over 700 years) |
 
-**The naming dispute — locked canon:**
-- **Teraxia** — the official name. What the Altonian family called the capital and wanted to preserve. They came to consolidate a growing nation, not to erase the culture; keeping the original name was their gesture of continuity.
-- **Sec-tra** — a curse-name. Given by the Sec-tera (the native old families) out of resentment at losing their autonomy even to a family that meant them no harm. Spoken under the breath first, then openly, then everywhere. The city forgot its given name. The curse became the city.
-- **The Sec-tera** — the original native people of the land. Their identity predates the Dominion and the Altonian consolidation. Scattered now; their cultural memory is what the Reclaimers work to preserve.
-- **This debate will always be contested.** The Altonian family uses Teraxia in formal documents; everyone else says Sec-tra. The argument is not about the name. It never was.
+**The naming history — locked canon:**
+
+The original land was **Teraxia**. The original people were **Teraxians**.
+
+Their word for themselves and their homeland was ***esx-tera*** — a Teraxian word the Altonian family and their vassals, not being native speakers, could not pronounce correctly. They mangled it. The Teraxian old nobility found this funny in the bitter way of conquered people, and began mockingly using the mispronunciation — **sec-tra** — to highlight the conquerors' failure to even say the name of what they had taken. The joke spread. Common people adopted it without knowing its origin. They became known as **Sec-trans**. The land and capital became **Sec-tra**.
+
+- **Teraxia** — official name in Altonian imperial documents. The conquerors kept it because they wanted to preserve continuity; they meant no erasure. It became the name only administrators use.
+- **Sec-tra** — what everyone actually says. Began as mockery, became identity.
+- **Teraxians** — what the old noble families still call themselves. What the Reclaimers work to restore.
+- **Sec-trans** — what common people call themselves; the name that replaced Teraxian in everyday use.
+- **The argument will never be settled.** The Altonian family believes they honored the land by preserving its name. The Teraxian old families know a mispronunciation when they hear one. Both are right about different things.
 - **The Pyraxis Reckoning begins at Year 1 PR** — the year of the Burning of Sec-tra and the Altonian consolidation of the seven kingdoms.
 
 ### Calendars
@@ -49,14 +59,16 @@ Each season has three months.
 
 ### Historical Ages
 
+*(Dates before Year 1 PR are in pre-imperial reckoning — approximate; scholars dispute them)*
+
 | Age | Span | Notes |
 |-----|------|-------|
-| Age of Fracture | 0–4,200 years ago | Pre-unity chaos |
-| Age of Unification | 4,200–1,200 years ago | Empire built |
-| The Troubling | 1,200–300 years ago | Period of conflict |
-| Modern Era | 300 years ago – present | Current setting |
+| Age of Fracture | ~2,000+ years before Year 1 PR | Seven kingdoms in constant conflict; no unity |
+| Age of Teraxian Unity | ~800–200 years before Year 1 PR | The Teraxians unified the seven kingdoms; the Sec-tera era; peak of the old civilization |
+| The Troubling | ~200–1 years before Year 1 PR | Collapse of Teraxian unity; factional wars; conditions that allowed the Altonian consolidation |
+| Modern Era / Pyraxis Reckoning | Year 1 PR – present (Year 700 PR) | Altonian dynasty; Dominion of Pyraxis; current setting |
 
-The Prologue ("The Burning of Sec-tra") is set at Year 1 PR — the founding moment of the current era.
+The Prologue ("The Burning of Sec-tra") is set at Year 1 PR — the founding moment of the current era. The Altonian family's consolidation of the seven kingdoms in the aftermath of the burning established the Pyraxis Reckoning.
 
 ---
 
@@ -338,7 +350,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 
 | Location | Description | First Appears |
 |----------|-------------|---------------|
-| Sec-tra / Teraxia | Capital city of the Dominion. Official name: Teraxia (Altonian). Curse-name: Sec-tra (Sec-tera native families, out of resentment). Sec-tra is in common use everywhere except formal imperial documents. | Prologue |
+| Sec-tra / Teraxia | Capital city of the Dominion. Official name: Teraxia (Altonian, preserved from the original land name). Common name: Sec-tra (evolved from Teraxian mockery of the conquerors' mispronunciation of *esx-tera*; became the people's identity). Teraxians call themselves Teraxians (old families) or Sec-trans (common people). | Prologue |
 | Gallows Hills | Elevated position overlooking Sec-tra; where conspirators watched the city burn | Prologue |
 | Fields of Absolution | Open fields; where Raxz (age 5-6) first encountered young Javelin chasing a blue jay | Ch 2 (memory) |
 | The Hall of Might | Major court building where Javelin often sits on the steps; training sessions happen here | Ch 1 |
@@ -355,9 +367,10 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | Altonian family | Came from outside the original land; consolidated 7 fractured kingdoms; wanted to preserve the name Teraxia; the Sec-tera's resentment of the consolidation (not erasure) created the curse-name Sec-tra | Prologue |
 | The Burning of Sec-tra | Year 1 PR founding event — engineered by Zevrath Drakenoth and Faust (with young Javelin as messenger) to make the Emperor a hero; the Emperor won the battle below not knowing who arranged the conditions; someone above Faust and Zevrath was also moving the field | Prologue |
 | The Prophecy of the Blind Child | Spoken at the Gallows Hills by an 8-year-old Sec-tera girl — beaten, abused, blinded, wandering from the burning city. She was not chosen or summoned. She appeared. Zevrath killed her when she began to turn, opportunistically — not for ritual, but because the moment was available and he took it. Her wounds were old. She was already the thing the prophecy describes. Text: *"When the flames of an empire reach the heavens above, so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."* | Prologue |
-| The Wars | 15 years ago (c. 1320 PR); devastating; Emperor Arctus fought; followed by a series of failed imperial pregnancies | Ch 2 (memory) |
-| Faust's hold over Brax | Began 21 years ago (c. 1314 PR) — when Brax was roughly 9-10 years old if he's now middle-aged after 30 years of service | Ch 3 |
-| Faust's hold over Javelin | Javelin is 21; his father's arrangement with Faust has controlled his whole life | Ch 1, Ch 3 |
+| The Wars | 15 years ago (c. Year 685 PR); devastating; Emperor Arctus fought; followed by a series of failed imperial pregnancies that began Valdra's decline | Ch 2 (memory) |
+| Faust's hold over Brax | Began 21 years ago (c. Year 679 PR) — when Brax was roughly 9-10 years old | Ch 3 |
+| Faust's hold over Javelin | Javelin is 21; Faust has shaped his entire life from birth | Ch 1, Ch 3 |
+| The Generational Conspiracy | The three figures at the Burning of Sec-tra (Year 1 PR) were ancestors of Zevrath Drakenoth, Faust, and the messenger role now held by Javelin. Each family has appointed successors across 700 years to continue the plot of the Dominion's downfall and the restoration of the original order. The conspiracy has been running continuously since the founding — the Altonian dynasty was always meant to fall; the founders arranged the conditions of their own succession. No one outside these families knows the conspiracy is the same one. | Prologue + author canon |
 
 ---
 

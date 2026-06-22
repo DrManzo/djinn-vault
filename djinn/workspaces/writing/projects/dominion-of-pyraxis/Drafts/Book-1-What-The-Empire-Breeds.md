@@ -22,7 +22,7 @@ updated: 2026-06-21
 
 ## Chapter 1
 
-*(Year 1335 PR — Imperial Gala)*
+*(Year 700 PR — Imperial Gala)*
 
 *[DRAFT STARTS HERE]*
 

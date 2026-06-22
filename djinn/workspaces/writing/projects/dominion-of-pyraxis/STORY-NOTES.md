@@ -67,7 +67,7 @@ Chapter ends with torches going out behind Brax as he leaves the Ministry: symbo
 
 ## Prologue — The Burning of Sec-tra
 
-**Setting:** Year 1, Pyraxis Reckoning (current story: Year 1335 PR)
+**Setting:** Year 1, Pyraxis Reckoning (current story: Year 700 PR)
 **Title:** "The Burning of Sec-tra"
 **Structure:**
 1. Opening hook — Sec-tra burning
@@ -122,7 +122,7 @@ The real question: "Are you willing to continue being noble?" and "Are you willi
 
 ## Government Structure — Quick Reference
 
-**Current year:** 1335 PR, Emperor Arctus's 15th year of reign
+**Current year:** 700 PR, Emperor Arctus's 15th year of reign
 
 ### Cabinet
 | Position | Notes |
