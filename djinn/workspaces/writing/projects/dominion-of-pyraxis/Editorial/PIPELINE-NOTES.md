@@ -105,7 +105,7 @@ status: first editorial pass — author review required
 
 3. **The blink at the end** — "Then Raxz blinked. The air shifted as he reappeared." — this sentence lands a little abruptly given how strongly the chapter has been paced. Consider one beat of Raxz making the choice before he acts on it. He's been avoiding the blink all evening (after Javelin's correction). Now he does it deliberately. That decision matters.
 
-4. **The Empress/mother's absence** — the empty chair at the imperial table is noted but left entirely unexplained. For a first read, this is mysterious in a potentially frustrating way. You don't need to explain her absence, but consider whether one additional sentence from Raxz's internal voice would ground the mystery just enough: does he know why she's absent? Does he choose not to think about it? That choice tells us something.
+4. **The Empress/mother's absence** — the empty chair is intentional. ~~NOTE: Empress is not dead — she is alive but dying.~~ The chair is empty because she is too ill to attend court events. Raxz *knows* she is ill. His internal voice should reflect that: not confusion about the chair, but the weight of knowing she is there but can't be here. That distinction — presence-through-absence rather than loss — is the exact emotional register this family operates in. One sentence from Raxz about his mother's illness would ground the mystery and deepen the family dynamics. *This is now established canon and the editorial flag is resolved.*
 
 ### Revision priority: LOW — clean pass only, then this chapter is done
 
@@ -131,7 +131,7 @@ status: first editorial pass — author review required
 
 ### What needs work — also minor
 
-1. **Faust as "family"** — Brax thinks "the most powerful person holding your chains was not only part of your foundation, but also family." This is a significant reveal (Faust is related to Brax somehow?) that the reader encounters without setup. Is this metaphorical family (they've been bound together long enough to function like family) or literal? Either way, it should be noted in CONTINUITY.md as an established fact.
+1. **Faust as "family"** — Brax thinks "the most powerful person holding your chains was not only part of your foundation, but also family." *This is now resolved as literal.* Faust is Brax's biological father. Brax doesn't know this — the line lands as an observation about the depth of the bond, and it is accidentally more true than Brax understands. The prose is correct as written. This is the perfect kind of dramatic irony where the reader will eventually reread this line knowing the truth. Do not change the line. Just ensure the timeline is consistent: Faust as biological father is established in CONTINUITY.md and CHARACTERS.md. *Flag resolved.*
 
 2. **"Twenty-one years of this"** — Brax's hand shaking. This line establishes that Faust has held power over Brax for 21 years — which means since Brax was roughly nine or ten years old (if he's now middle-aged after 30 years of service). That's a significant backstory beat. Consider whether this is the right place to land it, or if you want to use it elsewhere as a proper reveal.
 
@@ -146,8 +146,14 @@ status: first editorial pass — author review required
 ### 1. The Prologue-Chapter 3 Faust Connection
 Faust appears in the Prologue (implied by sword-pommel reflection and his tendency to appear from shadow), Chapter 1 (appears to Javelin), and Chapter 3 (appears to Brax). He's everywhere and controls everyone. This is excellent — *if* it's intentional, it needs to stay consistent: Does Faust know what Raxz did at the gala? Does he know the Kalvennors walked out? His conversation with Brax suggests he's aware of the situation. Make sure the timeline of his movements is possible.
 
-### 2. Magic Sensory Signatures — Establish the System Early
-Raxz detects magic by taste and temperature. Javelin detects it by sound and heat. These are the same system but the sensory tells vary by practitioner. This is interesting and worth establishing more explicitly early — maybe in Chapter 1, when Javelin detects Raxz sneaking up on him. Right now the reader might miss that these variations are part of the system.
+### 2. Magic Sensory Signatures — The Individual System (now canon)
+**This is now fully established as core world mechanics.** Each practitioner perceives magic through a dominant personal sense (internal to them) AND leaves their own unique signature when they cast (external, visible to others who can sense it). See CONTINUITY.md Magic section for the full table.
+
+The implication for revision:
+- **Chapter 1 (Javelin POV):** When Javelin senses Raxz's approach, describe his perception through *sound and heat first* — not taste. Raxz perceives by taste; Javelin perceives by sound. A sentence in Chapter 1 that names Javelin's primary perception sense would seed the system without explaining it.
+- **Chapter 2 (Raxz POV):** The existing descriptions are already correct — Raxz tastes the magic, feels temperature changes. These can stay exactly as written.
+- **Chapter 3 (Brax POV):** Brax is not established as a practitioner. His perception of Faust's magic (sulfur, shadow, vanish) is described through *external tells* — which is exactly correct for a non-practitioner witnessing a practitioner.
+- **Writing rule going forward:** Never swap perception senses between characters. Raxz will *always* taste it first. Javelin will *always* hear it first. Faust will always smell like sulfur to everyone, because that's his personal tell, not anyone else's perception filter.
 
 ### 3. The Blink Sound/Signature
 Multiple places reference the sound of a blink: "a ripping noise very audible" (Ch 1), "a faint squeak in the air, telltale compression" (Ch 2), "a brief pop and the soft whoosh" (Ch 2 end). These descriptions are slightly inconsistent. Decide what a blink sounds/feels like and make the language consistent. The STORY-NOTES.md says sensory tells include "spatial rip sound" — standardize around that.
@@ -179,10 +185,17 @@ Raxz is 21. The wars were 15 years ago, making him 6 at the time — consistent 
 
 ### Immediate (before next writing session)
 - [ ] Resolve [TBD] placeholder in Prologue (world name, people name)
-- [ ] Add Lord Theron of House Vandris to CHARACTERS.md
-- [ ] Clarify Faust's family relationship to Brax in CONTINUITY.md
+- [x] Add Lord Theron of House Vandris to CHARACTERS.md — DONE
+- [x] Clarify Faust's family relationship to Brax in CONTINUITY.md — DONE: Faust is Brax's biological father; also Javelin's biological father; Brax and Javelin are biological half-brothers; only Faust knows
 - [ ] Decide: what did Raxz push too hard about in the pre-gala meeting with Arctus? Lock it in STORY-NOTES.md even if it stays off-page.
 - [ ] Standardize blink sensory description across all chapters
+- [x] Establish magic sensory signature system — DONE (CONTINUITY.md Magic section, individual perception senses + personal tells per practitioner)
+- [x] Empress Valdra — correct status from "deceased" to "alive, dying" — DONE in CHARACTERS.md, CONTINUITY.md, FAMILY-TREES.md
+
+### Confirmed Plot Beats (locked canon — write toward these)
+- **The Emperor's office (Ch 4 or 5):** Arctus will hurt someone because of Raxz's mistake at the gala (the Kalvennor walkout, the public magic breach). This is the proxy punishment mechanism — the heir's mistakes cost someone else. This scene must be written with the reader knowing Raxz caused it and knowing he wasn't the one who paid.
+- **Faust torture arc:** Faust places Javelin in a torture scenario. Brax defies Faust to save him. This is Brax's arc-breaking moment — 21 years of control, ended to save a brother he doesn't know is his brother. This is not the next chapter; this is a mid-to-late Book 1 pivot or a Book 2 anchor.
+- **Empress Valdra's decline:** She is present in the palace but not in public scenes. Her illness should surface in passing references — a canceled audience, Millie asking for her, Raxz knowing better than to ask. Her eventual death is the series-end foreshadowing; do not rush it.
 
 ### Revision Order (when ready)
 1. **Prologue** — structural rewrite of opening paragraph + resolve TBDs

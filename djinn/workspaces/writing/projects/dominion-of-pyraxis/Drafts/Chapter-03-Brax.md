@@ -248,9 +248,10 @@ The torches were blowing out behind him as he walked. As he stepped out of the M
 
 <!-- DRAFT NOTES — do not remove
 - This chapter is essentially publication-ready — Brax's voice is extremely well-developed
-- The sword-pommel habit is a perfect physical tell; it mirrors Faust's sword-rubbing in the Prologue (intentional? confirm)
-- "What we've made him into, we can unmake just as easily" — the most chilling line in the chapter; Brax's moral corruption stated plainly
-- The Faust conversation reveals that Faust is FAMILY in some sense ("family loyalty") — this is not yet in CONTINUITY.md; add
+- The sword-pommel habit is a perfect physical tell; it mirrors Faust's sword-rubbing in the Prologue — CONFIRMED INTENTIONAL: Brax unconsciously inherited this habit from his biological father. Keep in both chapters.
+- "What we've made him into, we can unmake just as easily" — the most chilling line in the chapter; Brax's moral corruption stated plainly; even more damning with the biological truth: he's saying this about his own blood brother
+- The Faust conversation reveals "the most powerful person holding your chains was not only part of your foundation, but also family" — RESOLVED: Faust IS Brax's biological father. The line is accurate in ways Brax cannot know. Do NOT change it. The dramatic irony is the point — a reader on second read will understand this is literal. Added to CONTINUITY.md and CHARACTERS.md. ✓
+- "He is one of us, after all" (Faust about Javelin) — RESOLVED: also literal. Javelin is Faust's blood. Both Brax and Javelin are Faust's biological sons. Neither knows.
 - The Emerick scene perfectly establishes his character: genius administrator, alcoholic, fully aware of the political game, chooses careful neutrality
 - "Who served them? Who could they rely on?" — this is the thematic throughline of Brax's arc stated directly; leave it
 - Torches going out = the right image to close on; don't over-explain it
