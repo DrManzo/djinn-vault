@@ -18,7 +18,7 @@ Now the city burned.
 
 ---
 
-The child was already speaking when the dark figure stepped out of the shadow of the tree line. She stood at the edge of the Gallows Hills facing the valley below — the fire, the screams, the city she could not see — her eyes sunken and devoid of life, hollowed out long before this night. Blood ran freely from the cuts on her legs and arms. She did not move to stop it. She did not seem to know it was there.
+The child was already speaking when the dark figure stepped out of the shadow of the tree line. She stood at the edge of the Gallows Hills facing the valley below — the fire, the screams, the city she could not see. Eight years old, perhaps. Her eyes sunken and devoid of life, hollowed out long before this night. Blood ran freely from the cuts on her legs and her arms — old wounds, not new ones. She did not move to stop it. She did not seem to know it was there.
 
 "When the flames of an empire reach the heavens above," she said, "so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."
 
@@ -86,7 +86,14 @@ THE PROPHECY:
 - "Forsook its children" = what empire does; what Arctus does to Raxz; the through-line of the book
 - This prophecy runs forward through the entire series
 
-OPEN QUESTION:
-- Who is the child? Is she Sec-tera? Is she specifically chosen for this — and by whom? Zevrath or whoever is behind Zevrath?
-- "The bitter tears of the conquered will reconsecrate" — does this mean the series ends with a restoration of Teraxia / the Sec-tera? Or is this the price the empire pays?
+THE CHILD — LOCKED:
+- 8 years old. Random. Not chosen, not summoned, not ritual.
+- She was already broken before this night — beaten, abused, blinded, hollowed. The wounds on her legs and arms are old wounds.
+- She wandered to the Gallows Hills alone, away from the burning city below. She had nowhere else to go, or no longer cared where she went.
+- Zevrath did not select her. He was watching the night, and she appeared, and she spoke, and he decided the moment was available to him. That is all.
+- He took advantage of the moment. That is who Zevrath is: not a man who manufactures cruelty, but a man who has no hesitation about using whatever presents itself.
+- She IS the prophecy. The land that forsook its children produced this specific child, broken and wandering and blind, and she came to the edge of a hill and spoke the words before anyone could stop her. She is the most honest thing in the scene.
+- Faust's "unnecessary" — he is right that it served no operational purpose. But he does not appear troubled by it. He is troubled by its inefficiency. The reader carries the weight he doesn't.
+
+"The bitter tears of the conquered will reconsecrate" — open question for the series arc.
 -->
