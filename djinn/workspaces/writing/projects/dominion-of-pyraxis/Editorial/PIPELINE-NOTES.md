@@ -32,15 +32,24 @@ status: first editorial pass — author review required
 ### What needs work
 1. **The opening paragraph is doing too much.** It front-loads centuries of history while we're trying to establish a scene. Consider: start IN the scene (fire, Gallows Hills, two figures) and weave the history in as *what they're watching burn* rather than a preamble. The reader needs ground before they can absorb context.
 
-2. **[TBD] placeholders need to be resolved** — "the people of (TBD)" breaks immersion immediately. Even a placeholder world name would help. Suggested: write the scene without it entirely ("the land that would become the Dominion") until you have the name locked.
+2. **[TBD] placeholders** — RESOLVED. ✓
+   - Official capital name: **Teraxia** (Altonian family's name, preserved)
+   - Curse-name: **Sec-tra** (given by the Sec-tera native old families out of resentment; became the common name)
+   - Native people: the **Sec-tera**
+   - The naming debate is ongoing and unresolved — both sides believe they are right and both are
 
-3. **The three figures are unnamed and undescribed.** One has a sword (the pommel-light reflection). One speaks first ("Were you sure to tell the Fists..."). The messenger has dark hair and cat-like eyes. You're withholding identity deliberately — fine for mystery. But give us *something* physical or vocal that creates texture without revealing who they are.
+3. **The three figures** — RESOLVED. ✓ Identities locked but not named in prose (reader discovers):
+   - The dark, robust figure who kills the child = **Archon Zevrath Drakenoth**
+   - The one with the sword pommel who speaks the closing lines = **Faust**
+   - The slim young messenger through the spatial rip = **Javelin** (young; this is who he was before the royal household)
+   - A new opening beat added: an unnamed blind Sec-tera child speaks the prophecy; Zevrath kills her before she can turn; Faust enters after and finds it unnecessary
 
-4. **"Altonian Dynasty" needs to be reconciled** with the current Pyraxis Reckoning timeline in STORY-NOTES.md. Is Sec-tra's burning the event at Year 1 PR that the whole Reckoning is dated from? If so, say so — or imply it.
+4. **"Altonian Dynasty" reconciled.** ✓ The burning of Sec-tra IS Year 1 PR. The Altonian family came from outside the original land to consolidate 7 fractured kingdoms. They wanted to preserve the name Teraxia. The Sec-tera's resentment created Sec-tra as a curse. The burning was engineered to make the Emperor a hero — he doesn't know who arranged it.
 
 5. **Tense and rhythm:** The opening is past tense narration, then the dialogue lands, then the closing is also narration. The transitions are a little abrupt. Consider giving each of the three dialogue beats a brief surrounding beat of physical action.
 
-### Revision priority: HIGH — do before showing to anyone outside
+### Revision priority: COMPLETE — pipeline pass done 2026-06-22 ✓
+*Structure resolved, [TBDs] filled, identities locked, prophecy written. Ready for author review.*
 
 ---
 
