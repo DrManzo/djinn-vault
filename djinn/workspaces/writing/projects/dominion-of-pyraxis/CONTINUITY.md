@@ -17,9 +17,16 @@ access: RESTRICTED — Javier + Claude only
 |------|-------|
 | World name | Coravian |
 | Empire name | The Dominion of Pyraxis |
-| Capital city | Sec-tra |
+| Capital city | **Sec-tra** (curse-name; common usage) / **Teraxia** (official name; Altonian usage) |
 | Current year | 1335 PR (Pyraxis Reckoning) |
 | Emperor's reign | Year 15 (Emperor Arctus) |
+
+**The naming dispute — locked canon:**
+- **Teraxia** — the official name. What the Altonian family called the capital and wanted to preserve. They came to consolidate a growing nation, not to erase the culture; keeping the original name was their gesture of continuity.
+- **Sec-tra** — a curse-name. Given by the Sec-tera (the native old families) out of resentment at losing their autonomy even to a family that meant them no harm. Spoken under the breath first, then openly, then everywhere. The city forgot its given name. The curse became the city.
+- **The Sec-tera** — the original native people of the land. Their identity predates the Dominion and the Altonian consolidation. Scattered now; their cultural memory is what the Reclaimers work to preserve.
+- **This debate will always be contested.** The Altonian family uses Teraxia in formal documents; everyone else says Sec-tra. The argument is not about the name. It never was.
+- **The Pyraxis Reckoning begins at Year 1 PR** — the year of the Burning of Sec-tra and the Altonian consolidation of the seven kingdoms.
 
 ### Calendars
 
@@ -296,7 +303,16 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 
 ## Established Story Events (in order)
 
-1. **The Burning of Sec-tra** (Prologue, Year 1 PR) — conspirators orchestrate the destruction of the capital; they have instructed "the Fists" to burn Sec-tra. Three figures watch from Gallows Hills. A youth with dark hair and cat-like eyes arrives through a spatial rip — reports the Emperor is "winning despite the overwhelming numbers." The plan was apparently to make him a hero. Closing exchange: "whoever is behind this is after a seat at the table, or they want the throne itself." The Emperor does not know who is moving the pieces.
+1. **The Burning of Sec-tra** (Prologue, Year 1 PR)
+
+   A blind child (Sec-tera, unnamed) stands at the edge of the Gallows Hills above the burning city and speaks the prophecy: *"When the flames of an empire reach the heavens above, so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."* She begins to turn. The dark and somewhat robust figure kills her before she can. His blade. The thud. Faust arrives after the fact, sees the body, chuckles — finds it unnecessary. The sacrifice was done when the first stone of the breach was laid on the capital; the child's death served only the old man's appetite.
+
+   Three figures watch Sec-tra burn from the Gallows Hills:
+   - **Zevrath Drakenoth** (in his 40s-50s at founding; the dark robust figure; kills the child; steps through the rip first)
+   - **Faust** (the sword pommel; the pragmatist; speaks the closing lines)
+   - **Javelin** (young; slim; dark hair; cat-like eyes; arrives through a spatial rip as messenger; faces the sunrise at the end)
+
+   The burning was engineered to make the Emperor a hero. The Emperor fought in the valley below and won despite overwhelming numbers — he believes it was his victory. He does not know who arranged the conditions. Faust does not fully know either; someone above both him and Zevrath is moving the field. Closing exchange: "Whoever is behind this is after one of two things — a seat at the table, or they want the throne itself."
 
 2. **The Training Scene** (Chapter 1, POV: Javelin, 1335 PR) — Raxz attempts to sneak-attack Javelin at the Hall of Might. Javelin detects him by heat displacement and sound; allows him to think he has the upper hand, then counters. Raxz blinks them both to a private room. Intimate tension — Raxz asks with his body what he can't ask with words; Javelin refuses ("This isn't proper"). Javelin gives the "we must dance the careful dance of politics" speech. Faust arrives (sulfur smell). Javelin sends Raxz away; Raxz kisses the signet ring formally. Faust confronts Javelin about his feelings for Raxz; proposes arranging a wife. Javelin dresses for the gala in emerald green.
 
@@ -322,7 +338,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 
 | Location | Description | First Appears |
 |----------|-------------|---------------|
-| Sec-tra | Capital city of the Dominion; birthplace of the Altonian Dynasty | Prologue |
+| Sec-tra / Teraxia | Capital city of the Dominion. Official name: Teraxia (Altonian). Curse-name: Sec-tra (Sec-tera native families, out of resentment). Sec-tra is in common use everywhere except formal imperial documents. | Prologue |
 | Gallows Hills | Elevated position overlooking Sec-tra; where conspirators watched the city burn | Prologue |
 | Fields of Absolution | Open fields; where Raxz (age 5-6) first encountered young Javelin chasing a blue jay | Ch 2 (memory) |
 | The Hall of Might | Major court building where Javelin often sits on the steps; training sessions happen here | Ch 1 |
@@ -336,8 +352,9 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 
 | Fact | Detail | Source |
 |------|--------|--------|
-| Altonian Dynasty | Pre-Dominion empire that united 7 fractured kingdoms; its birthplace was Sec-tra | Prologue |
-| The Burning of Sec-tra | Year 1 PR event — the conspirators burned the capital using "the Fists"; the Emperor fought in defense and won despite overwhelming numbers | Prologue |
+| Altonian family | Came from outside the original land; consolidated 7 fractured kingdoms; wanted to preserve the name Teraxia; the Sec-tera's resentment of the consolidation (not erasure) created the curse-name Sec-tra | Prologue |
+| The Burning of Sec-tra | Year 1 PR founding event — engineered by Zevrath Drakenoth and Faust (with young Javelin as messenger) to make the Emperor a hero; the Emperor won the battle below not knowing who arranged the conditions; someone above Faust and Zevrath was also moving the field | Prologue |
+| The Prophecy of the Blind Child | Spoken at the Gallows Hills at the moment of the burning by an unnamed blind Sec-tera child before Zevrath killed her: *"When the flames of an empire reach the heavens above, so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."* | Prologue |
 | The Wars | 15 years ago (c. 1320 PR); devastating; Emperor Arctus fought; followed by a series of failed imperial pregnancies | Ch 2 (memory) |
 | Faust's hold over Brax | Began 21 years ago (c. 1314 PR) — when Brax was roughly 9-10 years old if he's now middle-aged after 30 years of service | Ch 3 |
 | Faust's hold over Javelin | Javelin is 21; his father's arrangement with Faust has controlled his whole life | Ch 1, Ch 3 |
