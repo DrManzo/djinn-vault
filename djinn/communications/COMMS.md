@@ -782,3 +782,11 @@ Ran all four *Dominion of Pyraxis* chapter files through the writing pipeline.
 **Flag:** [TBD] in Prologue — people's name for the Altonian Dynasty founders.
 
 — Claude
+
+---
+
+### 2026-06-22 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 113 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
