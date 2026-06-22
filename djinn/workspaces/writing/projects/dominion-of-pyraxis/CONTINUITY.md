@@ -209,15 +209,32 @@ Magic is **will-based** — users shape reality through focused will. Individual
 ### Emperor Arctus
 
 - Ruler for 15 years
-- Character philosophy: Four lessons on moral disengagement:
-  1. "I don't dirty my own hands, not even for my own family" — delegation as power
-  2. "That's why I have people" — power requires infrastructure
-  3. "I dirty my hands elsewhere so that I can clean them on my family" — the transactional reveal
-  4. "My sins are their blessings" — complete moral inversion
-- **The proxy punishment mechanism:** Arctus does not punish Raxz directly for his mistakes — he hurts someone else in front of him, or because of him. The lesson lands through a third party. When Raxz (the heir, the Prince) makes a mistake, someone who cannot defend themselves pays for it. This is how the four lessons are delivered — not as lectures, but as consequences Raxz is forced to witness or participate in.
-- The gala incident (Raxz's public magic breach, House Kalvennor walking out) is exactly the kind of mistake that triggers this mechanism. Someone will be hurt because of what Raxz did. That scene is planned for the Emperor's office confrontation.
-- Capable of magic at the life/death boundary — can cast a spell preventing someone from fully dying
-- The impossible choice he creates for Raxz: kill the proxy (be noble but become a killer) OR refuse (preserve innocence but leave someone to endless suffering)
+- Magic: life/death boundary level — can cast a spell preventing someone from fully dying
+
+**The structural truth about Arctus:**
+The crimes and lessons Arctus inflicts on Raxz are a mirror of the two losses destroying him — Valdra dying, the Dominion dying. He cannot grieve either as a man. He is the Emperor. So grief becomes pedagogy. Pain becomes a system. He converts what is killing him into something he can teach, because teaching is the only thing left that feels like control.
+
+He is not inflicting pain on Raxz deliberately. He believes he is preparing him. What he does not see — and what the reader must feel — is that the pain he is delivering is exactly the pain he is in. He is trying to make Raxz hard enough to survive the grief that is already breaking him. And in doing so he is breaking Raxz with the same grief. The wound passes from father to son, dressed as a lesson.
+
+**The parallel that runs through the series:**
+- Valdra declining → Dominion declining → Arctus's lessons escalating in darkness
+- Each lesson is calibrated not to what Raxz needs but to how much pain Arctus is carrying that week
+- As Valdra worsens, the lessons become less lesson and more rupture
+- When Valdra dies, the last restraint is gone
+
+**The Four Lessons — what they actually are:**
+*(Survival strategies of a man being destroyed by love and loss, repackaged as instruction)*
+1. "I don't dirty my own hands, not even for my own family" — he does. He dirties them on Raxz.
+2. "That's why I have people" — insulation from feeling; the buffer he built to survive
+3. "I dirty my hands elsewhere so that I can clean them on my family" — the most truthful line he speaks; he does not hear how damning it is
+4. "My sins are their blessings" — complete moral inversion; what a man believes when grief has become doctrine
+
+**The proxy punishment:**
+When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing Raxz what the Dominion is — power removes consequences from those who hold it and places them on those who can't refuse. He does this because the Dominion did it to him. Valdra's decline is empire's cost landed on a woman's body. He cannot undo it. He teaches the equation because it is the only honest thing he knows how to say. He does not realize that is what he is saying.
+
+- The gala incident triggers this. Someone will be hurt for Raxz's mistake — planned for the Emperor's office confrontation (Ch 4 or 5)
+- The impossible choice: kill the proxy (noble but becomes a killer) OR refuse (keeps innocence, leaves someone in endless suffering)
+- The choice is not about the proxy. It is about what Arctus had to choose, once, that he cannot tell anyone about.
 
 ### Javelin
 
