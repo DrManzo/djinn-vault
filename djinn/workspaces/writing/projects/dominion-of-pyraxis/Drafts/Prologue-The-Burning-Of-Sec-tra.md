@@ -10,9 +10,9 @@ updated: 2026-06-22
 
 ---
 
-For a thousand years, Teraxia had kept what others could not — seven fractured kingdoms brought to one table, one calendar, one name. The land had known centuries of infighting before that: nobility of magical descent against those of martial prowess against those who relied on the money-lending trades, each faction rising and burning and rising again, none of them managing what the old families of the Sec-tera had managed. Not unity. Something close enough.
+For eight hundred years, Teraxia had kept what others could not — seven fractured kingdoms brought to one table, one calendar, one name. The land had known centuries of infighting before that: nobility of magical descent against those of martial prowess against those who relied on the money-lending trades, each faction rising and burning and rising again, none of them managing what the Teraxians had managed. Not unity. Something close enough.
 
-When the Altonian family came, they promised the name would remain. They meant it — they had come not to erase but to consolidate, to build from what already stood. But the Sec-tera did not see consolidation. They saw conquest dressed in courtesy. And so they gave the capital a different name — not the one the Altonians used, not Teraxia, but *Sec-tra*. A curse, spoken under the breath first, then openly, then everywhere, until even the stones seemed to answer to it. The city forgot the name it had been given. The curse became the city.
+When the Altonian family came, they promised the name would remain. They meant it — they had come not to erase but to consolidate, to build from what already stood. The word for this land in the old tongue was *esx-tera*. The Altonians could not pronounce it. They were not native, and the syllables escaped them, and the Teraxian old families noticed. So they gave the mispronunciation back — deliberately, mockingly, with the patient contempt of people who have been conquered by someone who cannot even say the name of what they have taken. They called it *Sec-tra*. The joke spread before the conquerors understood it was a joke. Common people adopted the name without knowing its origin. They became Sec-trans. The city became Sec-tra. Teraxia became what administrators wrote in documents no one read.
 
 Now the city burned.
 
@@ -88,12 +88,26 @@ THE PROPHECY:
 
 THE CHILD — LOCKED:
 - 8 years old. Random. Not chosen, not summoned, not ritual.
-- She was already broken before this night — beaten, abused, blinded, hollowed. The wounds on her legs and arms are old wounds.
-- She wandered to the Gallows Hills alone, away from the burning city below. She had nowhere else to go, or no longer cared where she went.
-- Zevrath did not select her. He was watching the night, and she appeared, and she spoke, and he decided the moment was available to him. That is all.
-- He took advantage of the moment. That is who Zevrath is: not a man who manufactures cruelty, but a man who has no hesitation about using whatever presents itself.
-- She IS the prophecy. The land that forsook its children produced this specific child, broken and wandering and blind, and she came to the edge of a hill and spoke the words before anyone could stop her. She is the most honest thing in the scene.
-- Faust's "unnecessary" — he is right that it served no operational purpose. But he does not appear troubled by it. He is troubled by its inefficiency. The reader carries the weight he doesn't.
+- She was already broken before this night — beaten, abused, blinded, hollowed. The wounds on her legs and arms are old wounds; they predate tonight.
+- She was a Sec-trans child (or Teraxian — the distinction would not have mattered to her). She wandered to the Gallows Hills from the burning city below. No destination. Nowhere left to go.
+- Zevrath did not select her. He was watching the night and she appeared and she spoke and he decided the moment was available. That is all it took.
+- He took advantage of the moment. That is who Zevrath is: not a man who manufactures cruelty, but a man with no hesitation about using whatever presents itself. The difference between planned evil and opportunistic evil, and which is worse, is left to the reader.
+- She IS the prophecy. The land that forsook its children produced this specific child — broken, wandering, blind — and she came to the edge of a hill and got the words out before anyone could stop her. She is the most honest thing in the scene.
+- Faust finds it unnecessary. He is right that it served no plan. He is not troubled by it. The reader carries the weight he doesn't.
+
+LORE — NAMING (locked):
+- Original land: Teraxia | Original people: Teraxians
+- Their word for homeland/themselves: esx-tera (the Altonians couldn't pronounce it)
+- Teraxian nobility mocked the mispronunciation → sec-tra (deliberate, contemptuous)
+- Common people adopted sec-tra without knowing the origin → became Sec-trans
+- Capital in common use: Sec-tra | In imperial documents: Teraxia
+- Old families still call themselves Teraxians | Everyone else: Sec-trans
+
+TIMELINE:
+- This scene: Year 1 PR (the founding; 700 years before the main story)
+- The three figures are DESCENDANTS of the original conspirators, appointed by their predecessors
+- The Drakenoth, Faust's line, and the messenger role have been passed down for 700 years
+- Faust placed his own biological son (Javelin) in the messenger role — the conspiracy's continuity is now also his bloodline
 
 "The bitter tears of the conquered will reconsecrate" — open question for the series arc.
 -->

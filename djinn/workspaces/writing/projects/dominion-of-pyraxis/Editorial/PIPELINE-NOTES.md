@@ -34,19 +34,19 @@ status: first editorial pass — author review required
 
 2. **[TBD] placeholders** — RESOLVED. ✓
    - Official capital name: **Teraxia** (Altonian family's name, preserved)
-   - Curse-name: **Sec-tra** (given by the Sec-tera native old families out of resentment; became the common name)
-   - Native people: the **Sec-tera**
-   - The naming debate is ongoing and unresolved — both sides believe they are right and both are
+   - Common name: **Sec-tra** (evolved from Teraxian mockery of Altonian mispronunciation of *esx-tera*; the joke became the identity)
+   - Original people: **Teraxians** (old families' self-identification) | Common people now: **Sec-trans**
+   - The naming debate is ongoing — both sides believe they are right and both are
 
-3. **The three figures** — RESOLVED. ✓ Identities locked but not named in prose (reader discovers):
-   - The dark, robust figure who kills the child = **Archon Zevrath Drakenoth**
-   - The one with the sword pommel who speaks the closing lines = **Faust**
-   - The slim young messenger through the spatial rip = **Javelin** (young; this is who he was before the royal household)
-   - A new opening beat added: an unnamed blind Sec-tera child speaks the prophecy; Zevrath kills her before she can turn; Faust enters after and finds it unnecessary
+3. **The three figures** — RESOLVED. ✓ Identities locked but not named in prose:
+   - The dark, robust figure who kills the child = **Archon Zevrath Drakenoth** (descendant of the Drakenoth who conspired at Year 1 PR)
+   - The one with the sword pommel who speaks the closing lines = **Faust** (descendant of the Faust line; continues the 700-year conspiracy)
+   - The slim young messenger through the spatial rip = **Javelin** (young; Faust's biological son; placed in this role deliberately)
+   - A new opening beat: unnamed blind 8-year-old Teraxian child speaks the prophecy; Zevrath kills her opportunistically — she was not chosen, she wandered there; Faust enters after and finds it unnecessary
 
-4. **"Altonian Dynasty" reconciled.** ✓ The burning of Sec-tra IS Year 1 PR. The Altonian family came from outside the original land to consolidate 7 fractured kingdoms. They wanted to preserve the name Teraxia. The Sec-tera's resentment created Sec-tra as a curse. The burning was engineered to make the Emperor a hero — he doesn't know who arranged it.
+4. **"Altonian Dynasty" reconciled.** ✓ The burning IS Year 1 PR. The Altonian family came from outside to consolidate 7 kingdoms; wanted to preserve the name Teraxia; the Teraxians' mockery of their mispronunciation became Sec-tra. The burning was engineered to make the Emperor a hero — he doesn't know who arranged it. Current year: **700 PR**. 13 emperors. Magic-user lifespan 100–180 years; average reign ~53 years.
 
-5. **Tense and rhythm:** The opening is past tense narration, then the dialogue lands, then the closing is also narration. The transitions are a little abrupt. Consider giving each of the three dialogue beats a brief surrounding beat of physical action.
+2. **Tense and rhythm:** The opening is past tense narration, then the dialogue lands, then the closing is also narration. The transitions are a little abrupt. Consider giving each of the three dialogue beats a brief surrounding beat of physical action.
 
 ### Revision priority: COMPLETE — pipeline pass done 2026-06-22 ✓
 *Structure resolved, [TBDs] filled, identities locked, prophecy written. Ready for author review.*
