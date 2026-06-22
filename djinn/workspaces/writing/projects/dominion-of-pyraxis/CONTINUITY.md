@@ -212,9 +212,9 @@ Magic is **will-based** — users shape reality through focused will. Individual
 - Magic: life/death boundary level — can cast a spell preventing someone from fully dying
 
 **The structural truth about Arctus:**
-The crimes and lessons Arctus inflicts on Raxz are a mirror of the two losses destroying him — Valdra dying, the Dominion dying. He cannot grieve either as a man. He is the Emperor. So grief becomes pedagogy. Pain becomes a system. He converts what is killing him into something he can teach, because teaching is the only thing left that feels like control.
+Arctus knows exactly what he is doing to Raxz. The grief is real — Valdra dying, the Dominion dying — but the lessons are not the accidental output of a broken man. They are a decision. He has calculated what the heir must become and he is making him into it on purpose. The pain is deliberate. The coldness is chosen. The grief gives the lessons their color but it does not make the choice — he does.
 
-He is not inflicting pain on Raxz deliberately. He believes he is preparing him. What he does not see — and what the reader must feel — is that the pain he is delivering is exactly the pain he is in. He is trying to make Raxz hard enough to survive the grief that is already breaking him. And in doing so he is breaking Raxz with the same grief. The wound passes from father to son, dressed as a lesson.
+Ellen knows this. She is complicit through silence and strategic distance. She will not intervene. She has decided those 18 months are her protection and she is keeping them.
 
 **The parallel that runs through the series:**
 - Valdra declining → Dominion declining → Arctus's lessons escalating in darkness
