@@ -12,9 +12,9 @@ updated: 2026-06-22
 
 For eight hundred years, Teraxia had kept what others could not — seven fractured kingdoms brought to one table, one calendar, one name. The land had known centuries of infighting before that: nobility of magical descent against those of martial prowess against those who relied on the money-lending trades, each faction rising and burning and rising again, none of them managing what the Teraxians had managed. Not unity. Something close enough.
 
-When the Altonian family came, they promised the name would remain. They meant it — they had come not to erase but to consolidate, to build from what already stood. The word for this land in the old tongue was *esx-tera*. The Altonians could not pronounce it. They were not native, and the syllables escaped them, and the Teraxian old families noticed. So they gave the mispronunciation back — deliberately, mockingly, with the patient contempt of people who have been conquered by someone who cannot even say the name of what they have taken. They called it *Sec-tra*. The joke spread before the conquerors understood it was a joke. Common people adopted the name without knowing its origin. They became Sec-trans. The city became Sec-tra. Teraxia became what administrators wrote in documents no one read.
+When the Altonian family came, they promised the name would remain. They meant it — they had come not to erase but to consolidate, to build from what already stood. The word for this land in the old tongue was *Esx-tera*. The Altonians could not pronounce it. They were not native, and the syllables escaped them, and the Teraxian old families noticed. So they gave the mispronunciation back — deliberately, mockingly, with the patient contempt of people who have been conquered by someone who cannot even say the name of what they have taken. They called it *Sec-tra*. The joke spread before the conquerors understood it was a joke. Common people adopted the name without knowing its origin. They became Sec-trans. The city became Sec-tra. Teraxia became what administrators wrote in documents no one read.
 
-Now the city burned.
+The Empire grew and knew the people prospured and fail at the whims of fortune. The years came and went with only the lowerclass ever feeling the yoke of the true of what Now the city burned.
 
 ---
 
