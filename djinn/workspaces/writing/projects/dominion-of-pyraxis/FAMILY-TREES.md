@@ -19,9 +19,11 @@ source: manuscript (✍️) + Marcus cast generation (🧠) + name registry fill
                     │         ALTONIAN DYNASTY — THE IMPERIAL HOUSE       │
                     └─────────────────────────────────────────────────────┘
 
-Emperor Arctus Altonian ✍️ (~55)   +   Empress Valdra Altonian 🧠 (†deceased)
-"First among equals, first to battle"       Died in failed pregnancies ~15 years ago
+Emperor Arctus Altonian ✍️ (~55)   +   Empress Valdra Altonian 🧠 (alive — dying)
+"First among equals, first to battle"       Declining from failed pregnancies 15 years ago
+                                            Too ill for formal events; chair empty at gala
                                             Name echoes Valdross (autumn = endings)
+                                            Her death planned as series-end foreshadowing
                     │
         ┌───────────┬───────────┬──────────┬──────────┐
         │           │           │          │          │
@@ -35,7 +37,8 @@ Emperor Arctus Altonian ✍️ (~55)   +   Empress Valdra Altonian 🧠 (†dece
 
 **Notes:**
 - Ellen and Theo were born just before / during the wars (15 years ago); Lance and Millie are post-war children
-- The Empress's chair at the imperial table was empty at the gala — her loss is the hidden wound under everything Arctus does
+- The Empress's chair was empty at the gala because she is too ill to attend — not because she is dead. She is still alive and her decline is a running structural thread through the series.
+- Millie's silver hair matches Valdra's — the visual echo of the mother in the youngest child
 - Raxz and Ellen's 18-month gap: "Everything. And nothing." — Ellen's line at the gala
 
 ---
@@ -47,34 +50,57 @@ Emperor Arctus Altonian ✍️ (~55)   +   Empress Valdra Altonian 🧠 (†dece
                     │          HOUSE SOLENTINE — "The Quiet Machine"      │
                     └─────────────────────────────────────────────────────┘
 
+  ══════════════════════════════════════════════════════════════
+  PUBLIC / LEGAL TREE (what the court knows)
+  ══════════════════════════════════════════════════════════════
+
 Lord Davan Solentine 🧠 (†)   +   Lady Corvaine Solentine 📋 (†)
 The patriarch. Sent Faust             Name: Corvaine (registry #124)
-to 9-year-old Brax "out
-of love." The original sin.
+to 9-year-old Brax "as love."
+The act that started the chain.
                     │
         ┌───────────┴───────────┐
         │                       │
   Brax Solentine ✍️           Serath Solentine 🧠
-  Lord High Steward             Brax's younger brother
+  Lord High Steward             Brax's brother
   30 years of service           Inner court advisory
   Under Faust's control         Does public work Brax
-  for 21 years                  cannot touch without
-        +                       compromising deniability
+  for 21 years                  cannot touch
+        +
   Lady Corva Solentine 🧠
-  House matriarch
-  Cold, precise
-  Keeps the family's
-  social face
+  House matriarch; cold, precise;
+  keeps the family's public face
         │
-        │
-  Javelin Solentine ✍️ (legal heir, age 21)
-  ┌─ Legal son of Brax — biological parentage NOT established ─┐
-  │  Faust's statement "Javelin is one of us" is unresolved    │
-  │  Fang-trained operative; Raxz's mentor; in love with Raxz  │
-  └─────────────────────────────────────────────────────────────┘
+  Javelin Solentine ✍️ (LEGAL heir, age 21)
+  Fang-trained; Raxz's mentor; in love with Raxz
+
+
+  ══════════════════════════════════════════════════════════════
+  HIDDEN / BIOLOGICAL TRUTH (only Faust knows)
+  ══════════════════════════════════════════════════════════════
+
+                        FAUST ✍️
+                  ┌─────────┴─────────┐
+                  │                   │
+            Brax Solentine       Javelin Solentine
+           (biological son)      (biological son)
+           raised by Davan       raised by Brax as
+           Solentine as his      Brax's LEGAL son
+           own son — Brax        — Brax does not
+           doesn't know          know Javelin is
+                                 his brother
+
+  Neither Brax nor Javelin knows they are biological half-brothers.
+  Faust placed his son (Javelin) in his other son's (Brax's) household.
+  "Javelin is one of us" — literal. Blood.
+
+  The arc: Faust puts Javelin through a torture scenario.
+           Brax defies Faust to save him.
+           A father's hold on a son, broken by that son to save his brother.
+           Neither knows what they are to each other when it happens.
 ```
 
-**Open:** Who is Javelin's biological father? Faust's claim that Javelin is "one of us" may be the answer.
+**Biological mother(s) of Brax and Javelin:** Not yet established. Open.
 
 ---
 
@@ -439,8 +465,10 @@ his father
 | Ivryn Kavaren ↔ Solen Valerion | Shared campaign; tactical dispute that cost lives; unresolved |
 | Bastyon Kavaren ← Voryn Kavaren | She told him to take the ministerial seat before Solentine filled it |
 | Kessa Ironwell → Emperor Arctus | Arctus owes her for arming the empire during the wars; debt uncalled |
-| Brax Solentine → Lord Davan Solentine (†) | Cannot hate a dead man for what looked like love; the chain Faust built |
-| Javelin Solentine → Faust | "One of us" — biological parentage open question; may resolve this |
+| Brax Solentine → Lord Davan Solentine (†) | Cannot hate a dead man for what looked like love; the chain Faust built — but the chain is Faust, not Davan |
+| Faust → Brax Solentine | Faust is Brax's biological father; Brax has been under his control for 21 years without knowing why the hold is so complete |
+| Faust → Javelin Solentine | Faust is Javelin's biological father; placed him in Brax's household deliberately; Javelin does not know |
+| Brax Solentine ↔ Javelin Solentine | Legal father/son — actually biological half-brothers; the torture arc breaks Brax's chain without either knowing what they are to each other |
 | Marcella → Sael Velthorn | Marcella's secret; House Kalvennor's hidden vulnerability |
 | Theron Vandris → Verran Vandris (uncle) | Optimistic summaries masking a worsening situation; Theron may not know how bad it is |
 | Emerick Mercurial + Brax | Near-genuine comradeship at their meeting, then both snapped back to masks |

@@ -30,10 +30,12 @@ Check here before writing any character. If it's not here, establish it and add 
 - **Magic:** Life/death boundary level — can cast a spell preventing someone from fully dying
 - **Gala:** Left his own event immediately after Raxz's incident; glanced at Ellen before standing; "You may go" — coldly to Raxz before the gala
 
-### Empress Valdra Altonian 🧠 *(deceased)*
-- **Status:** Dead — died during the series of failed pregnancies 15 years ago
-- **Name meaning:** Echoes Valdross (the autumn season = endings); intentional
-- **Significance:** Arctus stopped smiling when she died. The empty chair at the imperial table. The failed pregnancies that followed hollowed the succession. Her absence shapes everything about this family.
+### Empress Valdra Altonian 🧠 *(alive — dying)*
+- **Status:** Alive but in serious decline; too ill to attend formal court events, including the gala (hence the empty chair)
+- **Name meaning:** Echoes Valdross (the autumn season = endings); her death is planned as a late-series event that foreshadows the end of the empire itself
+- **Narrative function:** Her slow death runs as a quiet structural thread through the series. The Dominion is also dying slowly. The Empress dying = the end of what the empire was. Her decline is Book 1's first note of that through-line.
+- **Arctus:** Stopped smiling when she became critically ill — not when she died (she is still alive). His coldness and the Four Lessons are the behavior of a man building walls against a grief he has been anticipating for years.
+- **The failed pregnancies** were what began her decline; she survived them but never recovered.
 
 ### Raxz — Prince Regent ✍️
 - **Age:** 21 | **Sexuality:** Bisexual
@@ -73,20 +75,28 @@ Check here before writing any character. If it's not here, establish it and add 
 
 ### Brax Solentine — Lord High Steward ✍️
 - **Role:** Lord High Steward of the Dominion — 30 years of service
+- **Legal parentage:** Lord Davan Solentine (legal father, †); Lady Corvaine Solentine (†)
+- **Biological parentage:** **Faust** — Brax does not know this. Only Faust knows.
+- **Biological relation to Javelin:** Half-brother — both fathered by Faust. Neither knows.
 - **Character:** Cool, detached humor as mask; professional concern underneath; guilt visible when he sees Javelin; operates through clerks, whispers, and favors
 - **Key moment:** Watching Javelin hold Millie at the gala — whispered "Javelin. I'm so sorry"
-- **Relationship to Faust:** Under Faust's control for 21 years — since Brax was ~9 years old; this began because Brax's father Lord Davan sent Faust to him
+- **Relationship to Faust:** Under Faust's control for 21 years — since age ~9; his own father Lord Davan sent Faust to him. His biological father has been his handler for 21 years. He doesn't know.
+- **Planned arc:** Defies Faust to save Javelin from a torture scenario — the moment the chain breaks. He saves his brother without knowing he has one.
 - **Sword:** Silver-handled, inlaid with ancient battle scenes — "admitted vanity"; rubs the pommel when significant moments crystallize
 
 ### Javelin Solentine ✍️
-- **Age:** 21 | **Legal father:** Brax
-- **Role:** Raxz's combat and magic mentor; Brax's legal son
+- **Age:** 21
+- **Legal parentage:** Brax Solentine (legal father — not biological)
+- **Biological parentage:** **Faust** — Javelin does not know this. Only Faust knows.
+- **Biological relation to Brax:** Half-brother — both fathered by Faust. Neither knows.
+- **Role:** Raxz's combat and magic mentor; placed in Brax's household as Brax's "legal son"
 - **Sexuality:** Bisexual — returns Raxz's feelings; holds strict limits
 - **Training:** Fang-capable operative; knife work, survival within Senate/nobility, limited magic
 - **Magic detection:** Heat displacement, sound (blink sounds like a rip)
 - **Character:** Discipline even at personal cost; face shows hurt and judgment; poor at hiding emotion despite training; bagpipe metaphor = Faust forced him to tune out noise until filtering became reflex
 - **Gala:** Emerald green attire with concealed trade tools (lockpicks, poisons, darts, knives); pickpocketed guests; comforted Raxz from behind with trinkets; left holding Millie when Raxz blinked away
 - **Threat:** Faust proposes arranging a wife for Javelin to sever his emotional bond with Raxz
+- **Planned arc:** Placed in a torture scenario by Faust; rescued by Brax who defies Faust to save him
 
 ### Lady Corva Solentine 🧠
 - **Role:** Brax's wife; house matriarch
@@ -341,9 +351,12 @@ Check here before writing any character. If it's not here, establish it and add 
 | Signature | Sulfur smell; shimmer vanish; spatial displacement pop | ✍️ Ch 1, Ch 3 |
 | Hold over Brax | 21 years — began when Brax was ~9 | ✍️ Ch 3 |
 | Family claim | Sent by Lord Davan Solentine "out of love" for Brax | ✍️ Ch 1 |
-| Relation to Brax | "Family" — literal or deep-bond, not yet specified | ✍️ Ch 3 |
-| Statement | "Javelin is one of us" | ✍️ Ch 3 |
+| **Biological father** | **Faust is Brax's biological father** — Brax doesn't know; only Faust knows | Javier canon |
+| **Biological father** | **Faust is Javelin's biological father** — Javelin doesn't know; only Faust knows | Javier canon |
+| Relation to Brax | "Family" — literal. Faust IS Brax's father. | ✍️ Ch 3 + Javier canon |
+| Statement | "Javelin is one of us" — literal. Javelin is Faust's blood. | ✍️ Ch 3 + Javier canon |
 | Proposal | Arrange a wife for Javelin to sever his bond with Raxz | ✍️ Ch 3 |
+| Planned arc | Places Javelin in a torture scenario; Brax defies him to save Javelin | Javier canon |
 | House | None established — Morghaven orbit; possibly predates the Convocatum | 🧠 Marcus |
 | Three possibilities | (1) Predates the Convocatum, operates by older rules | (2) Was struck from a house's record — retrieving that record is a plot thread | (3) Morghaven is functionally his instrument |
 

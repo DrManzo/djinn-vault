@@ -94,7 +94,14 @@ Brax is **not** Prime Minister. He is the Lord High Steward — a Great Officer 
 
 ### The Empress
 
-**Empress Valdra Altonian** — deceased. Died during the series of failed pregnancies approximately 15 years ago (c. 1320 PR). Her name echoes Valdross, the autumn season (endings). Her death is when Arctus stopped smiling. The empty chair at the imperial table. The failed pregnancies that followed hollowed the succession. Her absence shapes everything about this family.
+**Empress Valdra Altonian** — alive, but dying.
+
+Her name echoes Valdross, the autumn season — endings, descent, the last light before winter. This is intentional and structural: her death will not be a sudden event but a slow foreshadowing running through the series. The death of the Empress is planned to mirror and foreshadow the death of the empire itself. As the books progress, Valdra's decline and eventual death mark the end of what the empire was.
+
+- **Current status:** Present in the palace but too ill to attend formal events — which is why her chair at the gala was empty, not because she is dead
+- **Arctus:** Stopped smiling when she became ill (not when she died — she is still alive). His coldness, his four lessons, his systematic moral disengagement — this is a man watching his wife die slowly and building walls against the grief
+- **The failed pregnancies** — these are what began her decline; she survived them but has never recovered
+- **Narrative function:** Valdra's death is planned to close the series. Her presence-in-absence in Book 1 is the first note of the thematic through-line: the empire is also dying, slowly, and everyone pretending it isn't
 
 ### The Convocatum — Ten Noble Houses
 
@@ -141,15 +148,28 @@ Magic is **will-based** — users shape reality through focused will. Individual
 
 **Foci:** Wands are used. Both verbal and non-verbal casting possible.
 
-### Sensory Signatures (use consistently in prose)
+### Sensory Signatures — The Individual System
 
-Every act of magic has 2–3 sensory tells. Skill level determines how obvious or subtle:
+**Core rule:** Every practitioner perceives magic through a dominant sense, and every practitioner's own magic has a unique personal tell. These are not interchangeable. A practitioner who perceives by taste will still feel another practitioner's heat-signature — but taste is how they process it internally. A practitioner who leaves a sulfur smell leaves it whether the witness perceives it by smell, sound, or pressure.
 
-| Sense | Tell |
-|-------|------|
-| Temperature | Change — heat or cold depending on type |
-| Sound | Spatial rip (especially for blink/teleportation) |
-| Visual | Distortion — beginner = obvious shimmer, expert = barely perceptible |
+**Two layers:**
+1. **Perception sense** — how a practitioner detects others using magic (internal; varies per person)
+2. **Personal tell** — the sensory signature a practitioner leaves in the world when they cast (external; visible to all who can sense it)
+
+#### Established Practitioner Signatures
+
+| Practitioner | Perception Sense | Personal Tell (what others notice) | Source |
+|---|---|---|---|
+| **Raxz** | Taste (metallic for unfamiliar; warmth for Javelin) + temperature | Visible warmth radiating from chest; light (spectral rose at the gala) | ✍️ Ch 1, Ch 2 |
+| **Javelin** | Heat displacement + sound (spatial rip) | Emerald warmth; quiet — skilled enough to minimize tells | ✍️ Ch 1 |
+| **Faust** | Unknown — he detects everything | Sulfur smell + shimmer of air + muffled pop on disappearance | ✍️ Ch 1, Ch 3 |
+| **Emerick** | Unknown | His overactive magical core is ambient — a constant low hum rather than discrete casts | ✍️ Ch 3 |
+| **Raxz's blink** | — | "Ripping noise, very audible" (sloppy); "brief pop + soft whoosh" (when intentional) | ✍️ Ch 1, Ch 2 |
+| **Unfamiliar blink near Raxz at gala** | Raxz perceived: faint squeak + compression + metallic taste | — | ✍️ Ch 2 |
+
+**Writing rule:** When a character perceives magic, describe it through their dominant sense first, then any secondary tells. Raxz would describe Faust's presence as "the taste of copper going acrid, and something like rot" before he smells the sulfur. Javelin would hear it as a pressure change before any other tell.
+
+**Open to establish:** Sorvaine Drakenoth, Bastyon, Theo, Ellen, Aldrix, Thessovyn — all practitioner-class characters whose signatures have not yet been defined. Define in first scene where they use magic.
 
 ### Known Techniques
 
@@ -194,9 +214,10 @@ Every act of magic has 2–3 sensory tells. Skill level determines how obvious o
   2. "That's why I have people" — power requires infrastructure
   3. "I dirty my hands elsewhere so that I can clean them on my family" — the transactional reveal
   4. "My sins are their blessings" — complete moral inversion
-- Uses a maid as Raxz's recurring "whipping figure" — brought in whenever Arctus wants to drive home a lesson; she is punished in Raxz's place, creating Pavlovian conditioning
+- **The proxy punishment mechanism:** Arctus does not punish Raxz directly for his mistakes — he hurts someone else in front of him, or because of him. The lesson lands through a third party. When Raxz (the heir, the Prince) makes a mistake, someone who cannot defend themselves pays for it. This is how the four lessons are delivered — not as lectures, but as consequences Raxz is forced to witness or participate in.
+- The gala incident (Raxz's public magic breach, House Kalvennor walking out) is exactly the kind of mistake that triggers this mechanism. Someone will be hurt because of what Raxz did. That scene is planned for the Emperor's office confrontation.
 - Capable of magic at the life/death boundary — can cast a spell preventing someone from fully dying
-- The impossible choice he creates for Raxz: kill the maid (be noble but become a killer) OR refuse (preserve innocence but leave someone to endless suffering)
+- The impossible choice he creates for Raxz: kill the proxy (be noble but become a killer) OR refuse (preserve innocence but leave someone to endless suffering)
 
 ### Javelin
 
@@ -204,28 +225,35 @@ Every act of magic has 2–3 sensory tells. Skill level determines how obvious o
 - Raxz's lover
 - Caught between love for Raxz and duty to his role
 - Under surveillance by Faust and Brax
-- Legal son of Brax (Brax is his legal father)
+- **Legal** son of Brax (Brax is his legal father, not his biological father)
+- **Biological father: Faust** — Javelin does not know this. Only Faust knows.
+- **Biological brother: Brax** — Javelin and Brax are actually half-brothers, both fathered by Faust. Neither knows.
 - After the gala incident: spotted holding Princess Millie, showing hurt and judgment on his face
-- Currently: at risk of Faust arranging a forced marriage for him
+- Planned plot arc: Faust places Javelin in a torture scenario; Brax defies Faust to save him — this is the moment Brax's 21-year chain breaks
 
 ### Brax (Lord High Steward)
 
-- Javelin's legal father
+- **Legal** father of Javelin; **biological** brother of Javelin (neither knows; only Faust does)
+- **Biological father: Faust** — Lord Davan Solentine may be his legal/social father, but Faust is the blood. This is what "the most powerful person holding your chains was not only part of your foundation, but also family" means literally.
 - Manages behind-the-scenes damage control after the gala
 - Watches fallout with detached humor and professional concern
 - Spotted Javelin holding Princess Millie — whispered "Javelin. I'm so sorry" from a distance (guilt and regret)
 - Secretly summoned Lord Emerick (Finances) and Lord Bastyon (Military Affairs) for separate meetings
-- Being manipulated by Faust
+- Being manipulated by Faust — his own biological father
 - The torches went out behind him as he left the Ministry — established visual motif: corruption, secrecy, the cost of serving the Dominion
+- **Planned arc:** Defies Faust to save Javelin from a torture scenario — the 21-year chain breaks in this moment; Brax's entire arc bends toward this
 
 ### Faust
 
 - Antagonist operating from the shadows
+- **Biological father of both Brax and Javelin** — only Faust knows this
 - Intercepts Brax in the palace gardens after the gala
 - Aware of Javelin's emotional entanglement with Raxz
 - Proposes to "arrange a wife" for Javelin — a control mechanism
-- Manipulates both Brax and Javelin
-- True goals and methods not yet fully revealed
+- Manipulates both Brax and Javelin — his own biological sons
+- "Javelin is one of us" — this line is literal; Javelin is Faust's blood
+- Places Javelin in a torture scenario in the planned plot arc; Brax defies him to save Javelin
+- True larger goals and power source not yet fully revealed
 
 ### Lord Emerick (Minister of Treasury)
 

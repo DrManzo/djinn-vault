@@ -437,8 +437,8 @@ The doors remained open. Waiting.
 <!-- DRAFT NOTES — do not remove
 - This chapter is near publication-ready — the prose is strong throughout
 - Minor fixes: "stares in disbelief" → "stares" is a typo in original ("stairs"), fixed here
-- Lord Theron of House Vandris is introduced here — not yet in CHARACTERS.md, needs adding
-- The empty chair (Empress/Regent Consort absence) needs continuity note — mother's status unclear
+- Lord Theron of House Vandris is introduced here — ADDED to CHARACTERS.md and FAMILY-TREES.md ✓
+- The empty chair (Empress/Regent Consort absence): RESOLVED — Empress Valdra is alive but seriously ill and declining; she is too ill to attend formal court events. The chair is absence-through-illness, not death. Raxz knows she is ill. His internal voice should reflect this (knowing she can't come, not wondering where she is). See CHARACTERS.md and CONTINUITY.md for full Valdra entry. The existing prose at line 233 ("he'd suspected a division between families") may need slight revision to match: the empty chair is about her illness, not about a political-family rift. However this can be a characterization note — Raxz may *interpret* it as a rift because facing her illness is harder than having an explanation to be angry about. That reading is coherent and can stay.
 - The "meeting with Arctus" before the gala is deliberately elided — we don't see what Raxz says or does; only his reaction to Arctus's response. This is the right structural choice — keep it.
 - "Eighteen months, Raxz. That's all that separates us." — Ellen's line is devastating and perfectly placed. Do not expand or explain it.
 - The peacock costume motif carries perfectly through the chapter — from private horror to public mockery to the transformation and its political consequences
