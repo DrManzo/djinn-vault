@@ -894,3 +894,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-24 07:14:13 UTC
+=== FAILURE DETECTED ===
+  File: Object_1_PLA_10h28m54s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-24 17:51:54 UTC
