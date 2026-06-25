@@ -10,33 +10,6 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 
 ---
 
-### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_4552941b-1484-417a-b2cc-f8cd79bddd9b.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:36 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_908f9a91-378d-4a10-8453-19bda7ab0331.md`
-
-— Slipbox
-
----
-
 ### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
 
 **What:** Slipbox added [[wiki links]] and hierarchical tags.
