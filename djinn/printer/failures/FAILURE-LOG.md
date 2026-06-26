@@ -904,3 +904,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-26 00:20:59 UTC
+=== FAILURE DETECTED ===
+  File: lid.stl_PLA_23m8s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-26 01:14:19 UTC
