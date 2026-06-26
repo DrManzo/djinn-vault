@@ -1,0 +1,16 @@
+{
+  "filename": "obj_1_Paracord Jig Ruler Side.stl_PLA_6h3m16s.gcode",
+  "model_name": "obj_1_Paracord Jig Ruler Side.stl_PLA_6h3m16s",
+  "order_id": "obj_1_Paracord Jig Ruler Side.stl_PLA_6h3m16s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-06-26T01:45:01.923323+00:00",
+  "completed_at": "2026-06-26T07:35:31.608538+00:00",
+  "duration_s": 21199.5,
+  "duration_min": 353.3,
+  "filament_mm": 30033.4,
+  "filament_grams": 89.58,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}

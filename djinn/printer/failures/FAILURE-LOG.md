@@ -909,3 +909,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-26 01:14:19 UTC
+=== FAILURE DETECTED ===
+  File: obj_1_Paracord Jig Ruler Side.stl_PLA_6h3m16s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-26 07:35:42 UTC
