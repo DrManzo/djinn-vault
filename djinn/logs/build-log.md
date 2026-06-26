@@ -1512,3 +1512,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Updated CHARACTERS.md: Faust physical/backstory details, Lord Theron (House Vandris — new, not in Nine Houses table)
 - Session report: djinn/logs/reports/2026-06-21_pyraxis-chapter-pipeline.md
 
+
+## 2026-06-25 — Penelope Calibration & Mario Pipe Print Run
+- OctoPrint 1.11.7 → 1.11.8, API key rotated
+- Penelope gcode pipeline fixed: OrcaSlicer + Penelope-Standard-TreeSupports profile (Marlin), not Creality Print
+- M851/M290 confirmed non-functional on stock Ender 3 Pro without probe; physical endstop calibration is correct fix
+- Mario pipe printed on both Penelope and Calliope
+- LAW: never send any command to either printer while running
+- Next: Pi Zero 2W → Klipper upgrade for Penelope
