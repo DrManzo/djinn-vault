@@ -125,14 +125,14 @@ Full system in `i notes/Topics/Creative Writing/Book-Worldbuilding/Magic_System/
 |---------|-----|------|
 | Ch 4 | Javelin | Gala — holding Millie after Raxz blinks away. Short, heavy, no audience. |
 | Ch 5 | Marcella | Her chambers post-gala. First time inside her head. Consent, the walkout, Raxz. |
-| Ch 6 | Bastyon (POV TBD) | The Brax/Bastyon meeting — closes Ch3 hanging thread. Bastyon POV under consideration. |
+| Ch 6 | **Bastyon** ✅ | Bastyon POV — the Brax meeting from the receiving end. Same methods, inverted lens. |
 | Ch 7 | Raxz + Arctus | The Emperor's office. The confrontation. The first proxy punishment. |
 
 ## Next Steps
 
 - [ ] **Write Chapter 4** — Javelin POV, at the gala holding Millie. Keep it short — one held breath before the office.
 - [ ] **Write Chapter 5** — Marcella's room, post-gala. First interiority chapter for her character.
-- [ ] **Decide Ch6 POV** — Brax or Bastyon? Lock before writing. — @Javier
+- [x] **Ch6 POV locked — Bastyon** ✅ Brax's methods shown from the receiving end.
 - [ ] **Write Chapter 6** — The Bastyon meeting.
 - [ ] **Write Chapter 7** — Emperor's office. The confrontation Raxz caused.
 - [ ] **Lock what Raxz pushed too hard about** in the pre-gala Arctus meeting — stays off-page but needs to exist in the writer's head — @Javier
