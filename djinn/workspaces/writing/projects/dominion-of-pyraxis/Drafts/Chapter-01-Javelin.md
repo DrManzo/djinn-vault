@@ -108,7 +108,7 @@ He didn't.
 
 He stood. Set a hand on Raxz's shoulder.
 
-"If you are my failure and my shame, I will bear it. Proudly and willingly." He let it settle. "Yet a Prince of the Empire must always be proper and precise. First among equals — and last among them also. First to the slaughter. Last to the riches. Your grandfather stood by — and are those not the values the Emperor holds true?"
+"If you are my failure and my shame, I will bear it. Proudly and willingly." He let it settle. "Yet a Prince of the Empire must always be proper and precise. First among equals — and last among them also. First to the slaughter. Last to the riches. Your grandfather stood by those words — and are those not the values the Emperor holds true?"
 
 Raxz said nothing.
 
