@@ -112,7 +112,7 @@ He stood. Set a hand on Raxz's shoulder.
 
 Raxz said nothing.
 
-"Trust me. A time will come when you can freely and truly be yourself. But until then — we must dance. The careful and delicate dance." A pause. "Of politics."
+"Trust me. A time will come when you can freely and truly be yourself. But until then — we must dance. This careful and delicate dance." A pause. "Of politics."
 
 He watched it land. Saw the disheartening — and underneath it, the understanding. Raxz was not a fool. He had never been a fool. He simply had not yet learned to love what the world required of him. That, at least, gave Javelin something like hope.
 
@@ -130,7 +130,7 @@ He extended his hand. Waited.
 
 The signet ring. The Prince Errant's totem. The thing Raxz only produced when the world was watching, or when he needed to remind both of them exactly what the world required.
 
-Javelin knelt. Kissed the ring. Let his lips stay one half-second longer than protocol demanded — because Raxz's hand was warm, and because some part of him was still standing in this same room saying *this isn't proper* in his own voice, and he did not trust himself to stand up quickly.
+Javelin knelt. Kissed the ring. Let his lips stay a half-second longer than protocol demanded — because Raxz's hand was warm, and because some part of him was still standing in this same room saying *this isn't proper* in his own voice, and he did not trust himself to stand up quickly.
 
 He stood.
 
