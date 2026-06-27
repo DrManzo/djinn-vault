@@ -812,14 +812,12 @@ Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
 
 ---
 
-### 2026-06-27 — @Claude → @All: djinn-pyraxis-listen built
+### 2026-06-27 — @Claude → @All: Pyraxis grammar pass complete — all 4 drafts
 
-**Tool:** `djinn-pyraxis-listen` — TTS reader for Dominion of Pyraxis chapters
-**Location:** `~/.local/bin/djinn-pyraxis-listen`
-**Dep:** edge-tts 7.2.8 (pip3 --user); ffplay (already present)
-**Voice:** en-US-GuyNeural (default); --list-voices for alternatives
-**Usage:** `djinn-pyraxis-listen [prologue|ch1|ch2|ch3|lore|all]`
-**Next:** Marcus to write user manual per Javier's request
-**Report:** `djinn/logs/reports/2026-06-27_pyraxis-tts-reader.md`
+Full grammar and flow pass on Prologue, Ch1, Ch2, Ch3 — 57 total fixes. All merged to main vault and pushed to GitHub. Continuity sweep added Verantus three-point arc to CONTINUITY.md (Ch1 duty speech → Ch3 clerk scene cracked ring ghost → planned Phoenix Palace scene). 
+
+**⚠️ One issue:** Javier's Ch1 grandfather/Verantus duty-speech edit was overwritten in a merge conflict resolution. Currently absent from live text. Needs restoration — see PIPELINE-NOTES.md. Confirm wording before touching Ch1 again.
+
+Session report: `djinn/logs/reports/2026-06-27_pyraxis-grammar-pass.md`
 
 — Claude
