@@ -1,7 +1,7 @@
 ---
 title: Prologue — The Burning of Sec-tra
 book: What the Empire Breeds
-status: revised draft — pipeline pass complete
+status: final draft — opening revised 2026-06-27
 pov: omniscient / mystery figures
 updated: 2026-06-27
 ---
@@ -10,15 +10,11 @@ updated: 2026-06-27
 
 ---
 
-For eight hundred years, Teraxia had kept what others could not — seven fractured kingdoms brought to one table, one calendar, one name. The land had known centuries of infighting before that: nobility of magical descent against those of martial prowess against those who relied on the money-lending trades, each faction rising and burning and rising again, none of them managing what the Teraxians had managed. Not unity. Something close enough.
+She was already there when the first figure stepped from the tree line.
 
-When the Altonian family came, they promised the name would remain. They meant it — they had come not to erase but to consolidate, to build from what already stood. The word for this land in the old tongue was *Esx-tera*. The Altonians could not pronounce it. They were not native, and the syllables escaped them, and the Teraxian old families noticed. So they gave the mispronunciation back — deliberately, mockingly, with the patient contempt of people who have been conquered by someone who cannot even say the name of what they have taken. They called it *Sec-tra*. The joke spread before the conquerors understood it was a joke. Common people adopted the name without knowing its origin. They became Sec-trans. The city became Sec-tra. Teraxia became what administrators wrote in documents no one read.
+A child of the city below — eight years old, perhaps. Standing at the edge of the Gallows Hills, facing the valley. Facing nothing: her eyes were sunken and devoid of life, hollowed out before this night's consecration. Blood ran freely from the cuts on her legs and arms — fresh wounds, the scars of innocence unwillingly forfeited. She did not move. Her smile was serene.
 
-The Empire grew. The years came and went with only the lower class ever feeling the true yoke of what building an empire meant — for all their work, for all their sacrifice, the beautiful mother that bore them and welcomed them back into her at the end of their toil. That mother now burned.
-
----
-
-A child of that mother spoke to her in the shadow of her own blindness, when the dark figure stepped from the tree line. She stood at the edge of the Gallows Hills facing the valley below — the fire, the screams, the city she could not see. Eight years old, perhaps. Her eyes sunken and devoid of life, hollowed out before this night's consecration. Blood ran freely from the cuts on her legs and arms — fresh wounds, the scars of innocence unwillingly forfeited. She did not move. Her smile was serene and accepting. She did not seem to know or care what was there.
+She did not seem to know or care what was there.
 
 "When the flames of an empire reach the heavens above," she said, "so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."
 
@@ -27,6 +23,8 @@ A single flash in the dark. The screams of the burning city cut out for just an 
 ---
 
 A small man stepped into the clearing a moment later. He saw the body. He saw the old man. He chuckled — not cruelly, but in the way of a man who has just watched someone do something entirely unnecessary.
+
+Below them, Sec-tra burned. Eight centuries of empire — eight centuries of the name the conquerors couldn't pronounce and the conquered never forgave them for mispronouncing — reduced to the question of how much of it to leave standing.
 
 The sacrifice had been done the moment they laid the first stone of the breach on the capitol. That death — another empty rite — had done nothing but satisfy the bloody wants of an old man. Well. If he found some joy in it, who was *he* to judge? Did the city not thrive on the complete and unique talents of its people? It had never been expressed that those talents needed to be socially beneficial.
 
