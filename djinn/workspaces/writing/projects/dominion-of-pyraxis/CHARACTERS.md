@@ -1,7 +1,7 @@
 ---
 title: Characters — Dominion of Pyraxis
 tags: [djinn, writing, pyraxis, characters]
-updated: 2026-06-21
+updated: 2026-06-27
 access: RESTRICTED — Javier + Claude only
 source: established in manuscript (chapters) + Marcus cast generation 2026-06-21
 ---
@@ -57,6 +57,40 @@ The grief is real — Valdra is dying, the Dominion is dying, and those losses a
 When Raxz (the heir) makes a mistake, someone else is hurt for it. This is not arbitrary cruelty — it is Arctus showing Raxz exactly what the Dominion does: it takes the consequences of power out of the hands of the powerful and places them onto those who cannot refuse. He does this because the Dominion does this to him. Valdra is dying partly because of the wars he fought, the pregnancies she carried for the line, the empire's demands on her body. He cannot undo that. He can only show Raxz the equation.
 
 He does not realize this is what he is showing him.
+
+### Emperor Verantus Altonian *(abdicated)* 🧠
+- **Age:** ~75–85 (magic-user lifespan 100–180 years; still sharp, moves with deliberate care)
+- **Role:** Former Emperor; Arctus's father; Raxz's grandfather; 12th of the Altonian line
+- **Residence:** The Phoenix Palace (Palace of Autumn) — his official residence; lives on the farm portion by choice
+- **Status:** Abdicated — not dead, not exiled. Chose this.
+
+#### The Cracked Ring
+When he abdicated, his ring of imperial power was cracked — not destroyed as it would be at death, but broken to mark the voluntary surrender of authority. He wears it openly on his hand. His only adornment. It still grants absolute access to every room, corridor, and chamber in the empire. He almost never uses it. The exceptions: every grandchild's birth. He came through the servants' entrance, in plain clothes, to be present when each new life arrived. He attended the Empress. He attended the newborns. He did this for Raxz. He did it every time.
+
+#### The Phoenix Palace
+The Palace of Autumn — never truly winters; endures as the flames of the empire that built it. Grand, maintained, inhabited by scholars and those of higher learning. His official residence. He lives on the farm portion. Not performance, not humility theater — genuine preference. He is more at home with soil and livestock and the rhythm of seasons than with courts. He always was.
+
+**The servants:** His holdings are tax-free by imperial convention. The savings from those exemptions fund the servants' generational education — not kept as personal wealth. The servants at the Phoenix Palace are salaried and actively encouraged toward scholarship. Verantus teaches them himself: ethics, morality, civic philosophy. In simple attire. Sitting at a table with them. The same subjects he applied to statecraft, delivered to people who will never hold office — because he believes those subjects belong to everyone. Some servants now at the Phoenix Palace were taught by their parents, who were taught by Verantus. Second generation. He has been doing this long enough to see the work continue without him.
+
+#### Palace Visits
+Frequent. Always through servants' entrances. Dressed as any other man. The servants of the main palace are ordered to treat him as any other man — he prefers it. He takes no notice of grand corridors or court proceedings. He moves through the palace like a man moving through a house that used to be his — familiar with everything, belonging to nothing.
+
+#### What He Knows
+He sees exactly what Arctus is doing to Raxz. He has probably seen it building for years. He understands the mechanism — he governed long enough to know what the empire extracts from those who maintain it. He cannot act. Not because Arctus prevents him — Arctus has no official authority over his father. He cannot act because his own principles do not allow him to override his successor. He spent his entire reign building the idea that a great man does not overstep. He cannot become the exception to his own rule. **His virtue is the cage.** Not the empire's cage — his.
+
+#### Character
+True Machiavellian in the civic sense — Cicero's open hands, education of the people, power as service not ownership. A gentleman farmer by preference and conviction. The most powerful man in any room he enters, dressed like the least important one in it. He does not perform humility. He simply stopped performing anything else.
+
+#### The Tragedy
+He is not powerless because the empire made him so. He is powerless because his own greatness does. A lesser man would have walked through a door long ago — used the ring, entered the room, said *enough*. He doesn't. Because he built his entire reign on the idea that authority is a trust, not a weapon. He cannot unknow that. And Raxz is paying for it.
+
+#### Relationship to Arctus
+Loves his son. Did not understand what Arctus was becoming until it was too late — or understood and believed it was temporary, that the empire would moderate it. He was wrong. He knows he was wrong. He farms. He teaches. He comes through the servants' entrance when new life arrives.
+
+#### First Appearance (planned)
+Mid-lesson — teaching a servant at a plain table in the Phoenix Palace's farm quarters, in simple attire, when Raxz arrives. He finishes the thought before looking up. The servants in the room do not scramble or bow — they note Raxz's presence and wait, because they have been taught that a thought worth starting is worth finishing.
+
+---
 
 ### Empress Valdra Altonian 🧠 *(alive — dying)*
 - **Status:** Alive but in serious decline; too ill to attend formal court events, including the gala (hence the empty chair)

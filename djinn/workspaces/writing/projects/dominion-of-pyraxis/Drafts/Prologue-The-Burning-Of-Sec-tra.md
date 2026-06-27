@@ -3,7 +3,7 @@ title: Prologue — The Burning of Sec-tra
 book: What the Empire Breeds
 status: revised draft — pipeline pass complete
 pov: omniscient / mystery figures
-updated: 2026-06-22
+updated: 2026-06-27
 ---
 
 # Prologue — The Burning of Sec-tra
@@ -100,11 +100,16 @@ LORE — NAMING (locked):
 - Capital in common use: Sec-tra | In imperial documents: Teraxia
 - Old families still call themselves Teraxians | Everyone else: Sec-trans
 
-TIMELINE:
-- This scene: Year 1 PR (the founding; 700 years before the main story)
-- The three figures are DESCENDANTS of the original conspirators, appointed by their predecessors
-- The Drakenoth, Faust's line, and the messenger role have been passed down for 700 years
-- Faust placed his own biological son (Javelin) in the messenger role — the conspiracy's continuity is now also his bloodline
+TIMELINE — CORRECTED 2026-06-27:
+- This scene is set in ARCTUS'S ERA — approximately 15 years before the main story, concurrent with his rise to power
+- This is NOT Year 1 PR. It is NOT 700 years in the past. The founding of the PR calendar and this event are distinct.
+- The three figures are the ACTUAL CHARACTERS — not descendants, not representatives of an ancient lineage
+  - Zevrath Drakenoth: the actual Archon, then in his 50s-60s
+  - Faust: the actual Faust, in his current role
+  - The slim young messenger = the actual Javelin, young (teenager; pre-royal household; this is who he was before Brax's house)
+- The burning was engineered to manufacture Arctus's heroism and secure his ascension — the Emperor fought in the valley below not knowing who arranged the conditions
+- Faust placing Javelin in the messenger role is a recent, deliberate act — not a generational tradition; Javelin is Faust's biological son placed into the role by his father
+- Someone above both Faust and Zevrath was also moving the field — "neither do I, really" — this is a live plot thread
 
 "The bitter tears of the conquered will reconsecrate" — open question for the series arc.
 -->

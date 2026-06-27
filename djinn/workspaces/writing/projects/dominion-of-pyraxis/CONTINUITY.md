@@ -1,7 +1,7 @@
 ---
 title: Continuity Bible — The Dominion of Pyraxis
 tags: [djinn, writing, dominion-of-pyraxis, continuity, worldbuilding]
-updated: 2026-06-21
+updated: 2026-06-27
 access: RESTRICTED — Javier + Claude only
 ---
 
@@ -68,7 +68,7 @@ Each season has three months.
 | The Troubling | ~200–1 years before Year 1 PR | Collapse of Teraxian unity; factional wars; conditions that allowed the Altonian consolidation |
 | Modern Era / Pyraxis Reckoning | Year 1 PR – present (Year 700 PR) | Altonian dynasty; Dominion of Pyraxis; current setting |
 
-The Prologue ("The Burning of Sec-tra") is set at Year 1 PR — the founding moment of the current era. The Altonian family's consolidation of the seven kingdoms in the aftermath of the burning established the Pyraxis Reckoning.
+**TIMELINE CORRECTION (2026-06-27):** The Prologue ("The Burning of Sec-tra") is NOT set at Year 1 PR and is NOT the founding event 700 years ago. It is set in Arctus's era — concurrent with his rise to power, approximately 15 years before the main story. The three figures at the Gallows Hills (Zevrath Drakenoth, Faust, and the young messenger) are the **actual characters** who appear in the main narrative — not descendants of an ancient conspiracy. The PR calendar's Year 1 refers to the original Altonian consolidation as a separate historical event; the Burning of Sec-tra shown in the Prologue is a distinct, recent event engineered to manufacture Arctus's heroism and secure his rise to power. The generational-conspiracy note in Established Historical Facts is superseded by this correction.
 
 ---
 
@@ -214,6 +214,24 @@ Magic is **will-based** — users shape reality through focused will. Individual
 
 ## Characters — Established Facts
 
+### Verantus Altonian (Former Emperor — abdicated)
+
+- Arctus's father; Raxz's grandfather; 12th of the Altonian line
+- Age: ~75–85 (magic-user lifespan; still sharp)
+- Lives at the Phoenix Palace (Palace of Autumn) — farm portion, by choice
+- Holdings are tax-free; savings fund the servants' generational education
+- Teaches ethics and morality to servants himself, in simple attire, at a plain table
+- Visits the main palace frequently through servants' entrances; dressed as any other man; treated as any other man by order
+- His only adornment: the cracked ring — broken at abdication, not death; still grants absolute access everywhere; almost never used
+- Has used the ring only to attend the birth of every grandchild, through servants' entrances
+- Arctus has no official authority over him; he does not overstep — this is his choice, not a restriction
+- Knows exactly what Arctus is doing to Raxz; cannot act without violating the principles his entire reign was built on
+- His virtue is the cage. Not the empire's cage — his own.
+- Character: Cicero's open hands, education of the people, power as service — the true Machiavellian ideal. A great man made irrelevant by his own greatness.
+- See CHARACTERS.md for full entry
+
+---
+
 ### Raxz (Prince Regent)
 
 - Age: 21
@@ -343,6 +361,9 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | The maid | The powerless absorbing punishment for the powerful's education — how the system actually works |
 | Cleaning hands on family | The Emperor's philosophy — sin becomes gift through reframing |
 | Silence / coordinated exit | The Kalvennors' most powerful political weapon — the structured, dignified withdrawal |
+| The cracked ring | Verantus wears the ring of imperial power in its broken state — cracked at abdication, not destroyed as it would be at death. Authority acknowledged, surrendered, carried. Still functional. Worn openly. The only honest adornment in the empire. |
+| Servants' entrance | Verantus always arrives this way. The most powerful man in the room, entering through the door no one watches. The empire's hierarchy inverted, quietly, every time. |
+| The Phoenix Palace farm | Power willingly set down. The great man at the plough. What civic virtue actually looks like when it stops being rhetoric. Contrast with every other location in the story. |
 
 ---
 
@@ -357,6 +378,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | Central Gardens | Midway point between Treasury and Military Affairs offices; where Faust intercepts Brax | Ch 3 |
 | Department of Treasury | Imposing cement-pillar building from the Last Emperor's reign; where Emerick's office is | Ch 3 |
 | Department of Military Affairs | Lord Bastyon's office; Brax plans to visit after Emerick | Ch 3 |
+| The Phoenix Palace | The Palace of Autumn — Verantus's official residence. Never truly winters; endures as the flames of the empire that built it. Grand, maintained, inhabited by scholars and those of higher learning. Verantus lives on the farm portion by choice. The servant community here is educated and salaried — Verantus's civic philosophy made literal. Visitors come through no grand entrance; nothing here runs on ceremony. | Planned |
 
 ---
 
@@ -365,12 +387,12 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | Fact | Detail | Source |
 |------|--------|--------|
 | Altonian family | Came from outside the original land; consolidated 7 fractured kingdoms; wanted to preserve the name Teraxia; the Sec-tera's resentment of the consolidation (not erasure) created the curse-name Sec-tra | Prologue |
-| The Burning of Sec-tra | Year 1 PR founding event — engineered by Zevrath Drakenoth and Faust (with young Javelin as messenger) to make the Emperor a hero; the Emperor won the battle below not knowing who arranged the conditions; someone above Faust and Zevrath was also moving the field | Prologue |
+| The Burning of Sec-tra | **CORRECTED (2026-06-27):** Not a Year 1 PR founding event. Occurs in Arctus's era, approximately 15 years before the main story — engineered by Zevrath Drakenoth and Faust (with young Javelin as messenger) to manufacture Arctus's heroism and secure his rise to power. The actual characters, not descendants. The Emperor fought in the valley below and won; he does not know who arranged the conditions. Someone above Faust and Zevrath was also moving the field — the deeper conspiracy remains unidentified. | Prologue |
 | The Prophecy of the Blind Child | Spoken at the Gallows Hills by an 8-year-old Sec-tera girl — beaten, abused, blinded, wandering from the burning city. She was not chosen or summoned. She appeared. Zevrath killed her when she began to turn, opportunistically — not for ritual, but because the moment was available and he took it. Her wounds were old. She was already the thing the prophecy describes. Text: *"When the flames of an empire reach the heavens above, so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."* | Prologue |
 | The Wars | 15 years ago (c. Year 685 PR); devastating; Emperor Arctus fought; followed by a series of failed imperial pregnancies that began Valdra's decline | Ch 2 (memory) |
 | Faust's hold over Brax | Began 21 years ago (c. Year 679 PR) — when Brax was roughly 9-10 years old | Ch 3 |
 | Faust's hold over Javelin | Javelin is 21; Faust has shaped his entire life from birth | Ch 1, Ch 3 |
-| The Generational Conspiracy | The three figures at the Burning of Sec-tra (Year 1 PR) were ancestors of Zevrath Drakenoth, Faust, and the messenger role now held by Javelin. Each family appointed successors across 700 years to continue the plot. The conspiracy was originally larger — multiple families, a real coalition. Over 700 years, one by one, the others accepted defeat or simply lost interest. Their heirs didn't believe, their houses fell, their will ran out. **Zevrath and Faust's lines are the last ones still active.** What was once a coalition is now two families and a 21-year-old. They are not the vanguard of a movement. They are the stubborn end of one. Faust placing his biological son (Javelin) in the messenger role was his answer to the problem of heirs losing interest — he made the role blood-bound in a way that cannot simply be declined. | Prologue + author canon |
+| The Conspiracy — Corrected | **SUPERSEDED (2026-06-27):** The generational-descendants interpretation is retired. The Prologue is set in Arctus's era. Faust, Zevrath, and Javelin are the actual figures — not representatives of a 700-year lineage. The conspiracy is a present-day operation, not an ancient one. Faust placing Javelin (his biological son) in the messenger role is a recent act, not a generational tradition. The deeper question of who is above Faust and Zevrath — "whoever is behind this can only be after one of two things" — remains open and is a live plot thread in the main story. | Prologue + 2026-06-27 correction |
 
 ---
 
