@@ -183,7 +183,7 @@ Magic is **will-based** — users shape reality through focused will. Individual
 | **Javelin** | Heat displacement + sound (spatial rip) | Emerald warmth; quiet — skilled enough to minimize tells | ✍️ Ch 1 |
 | **Faust** | Unknown — he detects everything | Sulfur smell + shimmer of air + muffled pop on disappearance | ✍️ Ch 1, Ch 3 |
 | **Emerick** | Unknown | His overactive magical core is ambient — a constant low hum rather than discrete casts | ✍️ Ch 3 |
-| **Raxz's blink** | — | "Ripping noise, very audible" (sloppy); "brief pop + soft whoosh" (when intentional) | ✍️ Ch 1, Ch 2 |
+| **Raxz's blink** | — | "Ripping noise, very audible" (Ch1 training — sloppy, amateur); "brief pop + soft whoosh" (Ch2 end — intentional, focused). **Variation is intentional characterization, not inconsistency.** He got more deliberate, or was more focused under pressure. | ✍️ Ch 1, Ch 2 |
 | **Unfamiliar blink near Raxz at gala** | Raxz perceived: faint squeak + compression + metallic taste | — | ✍️ Ch 2 |
 
 **Writing rule:** When a character perceives magic, describe it through their dominant sense first, then any secondary tells. Raxz would describe Faust's presence as "the taste of copper going acrid, and something like rot" before he smells the sulfur. Javelin would hear it as a pressure change before any other tell.
@@ -333,7 +333,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 
 ## Established Story Events (in order)
 
-1. **The Burning of Sec-tra** (Prologue, Year 1 PR)
+1. **The Burning of Sec-tra** (Prologue — Arctus's era, ~15 years before main story; NOT Year 1 PR)
 
    A blind child (Sec-tera, unnamed) stands at the edge of the Gallows Hills above the burning city and speaks the prophecy: *"When the flames of an empire reach the heavens above, so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."* She begins to turn. The dark and somewhat robust figure kills her before she can. His blade. The thud. Faust arrives after the fact, sees the body, chuckles — finds it unnecessary. The sacrifice was done when the first stone of the breach was laid on the capital; the child's death served only the old man's appetite.
 
@@ -375,6 +375,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | Gallows Hills | Elevated position overlooking Sec-tra; where conspirators watched the city burn | Prologue |
 | Fields of Absolution | Open fields; where Raxz (age 5-6) first encountered young Javelin chasing a blue jay | Ch 2 (memory) |
 | The Hall of Might | Major court building where Javelin often sits on the steps; training sessions happen here | Ch 1 |
+| Antechamber (Hall's north corridor) | Small, seldom-used waiting room off the Hall of Might's north corridor — lit by one high window; smells of old stone and candle wax. Where Raxz blinks Javelin during the training scene; where the intimate tension moment occurs. | Ch 1 |
 | Central Gardens | Midway point between Treasury and Military Affairs offices; where Faust intercepts Brax | Ch 3 |
 | Department of Treasury | Imposing cement-pillar building from the Last Emperor's reign; where Emerick's office is | Ch 3 |
 | Department of Military Affairs | Lord Bastyon's office; Brax plans to visit after Emerick | Ch 3 |
