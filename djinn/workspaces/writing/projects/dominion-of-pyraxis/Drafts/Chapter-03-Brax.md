@@ -46,11 +46,11 @@ Others spoke much louder — the ones who knew nothing about the situation yet c
 
 It wouldn't be profitable if the Emperor grew too forceful with his measures at this moment. He still needed to deal with the delegations from the other kingdoms. Brax could not let Arctus get ahead of himself. He needed the Emperor calm.
 
-As he reached the entrance, he noticed Javelin across the hall. The young man stood holding the Princess, and hurt, wonder, and judgment were clear and evident in his face. In how he held the child. Rarely had Javelin ever been truly shaken, so this was a novelty.
+As he reached the entrance, he noticed Javelin across the hall. The young man stood holding the Princess; hurt, wonder, and judgment were clear and evident in his face. In how he held the child. Rarely had Javelin ever been truly shaken, so this was a novelty.
 
 Brax felt pain reach toward his awareness. Guilt. Perhaps a bit of regret.
 
-Barely louder than breath, he whispered: *"Javelin. I'm so sorry."*
+Barely louder than a breath, he whispered: *"Javelin. I'm so sorry."*
 
 *I don't know if we were both wrong in how we've been wielding you. A useful knife. But there is one thing I do understand — sooner or later, our reckoning will happen. I hope the gods above are merciful to me, at least. That I'm dead and gone before the ax can fall.*
 
