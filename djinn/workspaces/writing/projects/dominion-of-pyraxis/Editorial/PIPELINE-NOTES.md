@@ -275,12 +275,18 @@ Raxz is 21. The wars were 15 years ago, making him 6 at the time — consistent 
 3. **Chapter 2** — ✓ done (four targeted line edits)
 4. **Chapter 3** — ✓ done (six line edits + Faust gesture; Bastyon question open)
 
-### What Chapter 4 Needs to Do
-Based on where the existing chapters end:
-- Raxz is standing before the Emperor's office in the dark. Chapter 4 should begin HERE — inside the office — and deliver the first lesson (or the first confrontation that will lead to the lessons). The reader has been waiting for this since the gala.
-- OR: Cut away from Raxz to another POV (Javelin holding Millie, left at the gala). This creates deliberate delay. If you do this, the chapter must carry enough dramatic weight to justify the wait.
-- The Chapter 3 planning in STORY-NOTES.md suggested delaying the confrontation. The existing structure has already achieved one beat of delay (Ch 3 = Brax). A second delay (Ch 4 = Javelin at gala) would be bold. Three delays would be too many.
-- Recommended: Ch 4 = Javelin remaining at gala (one beat of delay, earn the tension), Ch 5 = the Emperor's office.
+### Chapter Plan — Locked 2026-06-27
+
+**CONFIRMED BY JAVIER — write toward this structure:**
+
+| Chapter | POV | Setting | Job |
+|---------|-----|---------|-----|
+| **Ch 4** | Javelin | The gala — after Raxz blinks away | Holding Millie. The weight of the evening with no one to perform for. Knows what's coming. Cannot intervene. One earned beat of delay before the office. Keep it short — it should land like a held breath. |
+| **Ch 5** | Marcella | Her chambers — post-gala | First time inside her head. She processes: the transformation without her consent, the coordinated walkout she led, what she actually thinks about the prince. Solves the "Marcella needs interiority" open question from PIPELINE-NOTES. |
+| **Ch 6** | Bastyon (TBD — see note) | Bastyon's meeting with Brax | Closes the Ch3 hanging thread — Brax set up two meetings, only showed one. **Open question for Javier:** Is this Brax POV (the meeting from his side) or Bastyon POV (fresh angle, character we haven't been inside)? Bastyon POV would give the reader a completely new lens on the same political moment. |
+| **Ch 7** | Raxz + Arctus | The Emperor's office | The confrontation. The first proxy punishment. The lesson delivered. Everything the book has been building to. Four chapters of delay make this landing enormous. |
+
+**The delay structure:** Ch3 (Brax at gala) → Ch4 (Javelin with Millie) → Ch5 (Marcella's room) → Ch6 (Bastyon meeting) → Ch7 (Emperor's office). Each chapter must earn its place — showing genuine fallout from a new angle, not just marking time. The pressure on Ch7 increases with each delay. Use that.
 
 ---
 
