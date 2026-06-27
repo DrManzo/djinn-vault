@@ -52,7 +52,7 @@ He took Javelin's fingers from his throat. Didn't step forward. Turned — in pl
 
 "Didn't you teach me?" he said. "To always look at the excitement of life."
 
-He was twenty-one years old and close enough that Javelin could smell him — the particular warmth that was his magical signature before he'd even started casting, the exertion of training underneath it, something clean at the core. His hands were steady. His voice had dropped.
+He was  close enough that Javelin could smell him — the particular warmth that was his magical signature before he'd even started casting, the exertion of training underneath it, something clean at the core. His hands were steady. His voice had dropped.
 
 "Risk and adventure." A pause. "Isn't that always what makes passion?"
 
@@ -84,7 +84,7 @@ He let the silence land.
 
 "What will the Emperor say? How am I to hold my head up, knowing that my dear apprentice — after all the tasks I have given him, and completed magnificently, I'll grant — now chooses to disgrace me with *this*?"
 
-Javelin crumpled onto the floor in what could only be described as the theatrical collapse of a man who had tutored one too many princes and was not certain he would survive another.
+Javelin crumpled onto an empty chair in what could only be described as the theatrical collapse of a man who had tutored one too many princes and was not certain he would survive another.
 
 ---
 
@@ -108,7 +108,7 @@ He didn't.
 
 He stood. Set a hand on Raxz's shoulder.
 
-"If you are my failure and my shame, I will bear it. Proudly and willingly." He let it settle. "Yet a Prince of the Empire must always be proper and precise. First among equals — and last among them also. First to the slaughter. Last to the riches. Is that not what your father has been teaching you?"
+"If you are my failure and my shame, I will bear it. Proudly and willingly." He let it settle. "Yet a Prince of the Empire must always be proper and precise. First to the battlefield — last among equals. First to the slaughter. Last to the riches. Is that not what your grandfather stood by and are those not the values the Emperor holds true?"
 
 Raxz said nothing.
 
