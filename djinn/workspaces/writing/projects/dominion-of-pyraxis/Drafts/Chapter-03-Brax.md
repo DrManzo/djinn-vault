@@ -174,7 +174,6 @@ The man himself was currently sitting at his desk. Calm eyes. A glass of liquor 
 
 He looked up. With a heavy, throaty voice, he said: "Brax. So glad that you — nope, can't expect manners from a man that thinks he knows them all."
 
-Full book run (put on headphones, start writing):
 He gestured at the chair in front of him.
 
 Brax closed the door and said to Emerick, "Well, my lord, at least it's comforting to know that the riches of the Dominion are in good hands. Steady, maybe not, but at least when you're like this, you're halfway competent."
