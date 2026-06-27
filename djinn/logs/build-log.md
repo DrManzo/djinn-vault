@@ -6,6 +6,12 @@ created: 2026-05-19
 
 # Build Log
 
+## 2026-06-27: Pyraxis grammar and flow pass complete — all 4 drafts
+- 57 total fixes: Prologue (9), Ch1 (6), Ch2 (9), Ch3 (33)
+- Verantus three-point arc documented in CONTINUITY.md
+- ⚠️ Ch1 grandfather/Verantus duty-speech edit lost in merge — needs restoration
+- All pushed to main vault and GitHub
+
 ## 2026-06-11: PrusaSlicer fully removed from pipeline. djinn-model-slice now opens models in Creality Print GUI for manual slicing. All PrusaSlicer configs purged.
 
 ## 2026-05-19: MVP Build Day 1
