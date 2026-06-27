@@ -150,6 +150,17 @@ Mid-lesson — teaching a servant at a plain table in the Phoenix Palace's farm 
 - **Planned arc:** Defies Faust to save Javelin from a torture scenario — the moment the chain breaks. He saves his brother without knowing he has one.
 - **Sword:** Silver-handled, inlaid with ancient battle scenes — "admitted vanity"; rubs the pommel when significant moments crystallize
 
+#### The Habit of Paying People — Origin: Verantus
+Brax served as a page under Verantus (or closely observed him in his early years at court). Verantus had a genuine habit of paying pages, clerks, and servants small tokens — not as control, but as acknowledgment: your effort was seen, your honesty was worth something, the empire's resources exist to serve the people inside it.
+
+Brax watched this. And saw — whether taught by Faust to look for it, or arriving there himself — the mechanism underneath the generosity. The same gesture, used deliberately, creates obligation. Loyalty that expects reward is leverage. A man who has received your coin is a wire you can pull.
+
+He corrupted it. Not all at once, not dramatically — he simply began using Verantus's open hand with a closed fist inside it. The money is real. The thanks is real. The relationship it creates is a resource he files and draws on.
+
+**The scene in Ch 3 (clerk, money pouch):** This is the habit in operation. "A token. Something Brax could later use." The gesture is identical to what Verantus would have done. The moral architecture underneath is completely opposite.
+
+**Whether Brax knows:** He does. He is not a self-deceiver. He knows exactly where this came from and what he did to it. He has made a decision about which version works in the empire as it actually is. He has not revisited that decision in twenty years. This is available as a moment of self-knowledge — Brax seeing himself clearly — when the story requires it.
+
 ### Javelin Solentine ✍️
 - **Age:** 21
 - **Legal parentage:** Brax Solentine (legal father — not biological)

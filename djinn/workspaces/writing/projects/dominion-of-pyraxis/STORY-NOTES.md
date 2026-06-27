@@ -32,6 +32,18 @@ access: RESTRICTED — Javier + Claude only
 - **Queer Identity in Rigid Systems** — Raxz, Javelin, Marcella all navigate this
 - **What the Empire Breeds** — the system shapes and warps each character; the book asks what serving it costs
 
+### The Corruption of Good Habits — Verantus → Brax
+
+A structural example of what the empire breeds, running below the surface:
+
+Verantus had a genuine habit of paying pages, clerks, and servants small tokens — acknowledgment that effort and honesty have worth, that the empire's resources exist to serve the people inside it. Cicero's open hands at the scale of a palace corridor.
+
+Brax watched this as a young page. Saw the habit. Saw — whether Faust pointed it out or he arrived there himself — the mechanism underneath the generosity. The same gesture, used deliberately, creates obligation. A man who has received your coin is a wire you can pull.
+
+He didn't decide to be corrupt. He decided to be effective. And in the empire as it is, those decisions converge.
+
+The clerk scene in Ch 3 is this habit operating at full efficiency. The ghost behind it — the old man's same motion, the same quiet thanks — is available as a revision beat. Brax knows. He does not stop. The empire didn't need to teach him this directly. It just needed him to be paying attention when Verantus was kind.
+
 ---
 
 ## Story So Far (Through Chapter 3)
