@@ -60,7 +60,7 @@ But first, he had to face his father.
 
 Raxz straightened his shoulders, smoothed his expression, and approached the doors. The guards recognized him and moved to open them without a word. As the doors swung inward, he crossed the threshold into duty, leaving the last trace of his own desires behind.
 
-Arctus made no immediate response. Raxz watched his father's face carefully, reading the minute shifts in expression — the way his jaw tightened, the flicker behind his eyes. Without seeing his father speak, without any audible response, Raxz understood with sudden, sickening clarity that he'd miscalculated. Pushed too hard. In his attempt to assert control, he'd made his father misstep — and worse, Arctus knew it.
+Arctus made no immediate response. Raxz watched his father's face carefully, reading the minute shifts in expression — the way his jaw tightened, the flicker behind his eyes. Without a word from his father, Raxz understood with sudden, sickening clarity that he'd miscalculated. Pushed too hard. In his attempt to assert control, he'd made his father misstep — and worse, Arctus knew it.
 
 The cold voice, when it finally came, sounded distant and somehow choked. "You may go."
 
@@ -68,7 +68,7 @@ The cold voice, when it finally came, sounded distant and somehow choked. "You m
 
 Raxz turned and walked through the doors. Each step carried him further from the office, further from his father, into something that felt increasingly like drowning. The weight settling onto his shoulders had no source, no clear cause, yet it was undeniable. As the doors sealed shut behind him, nausea rolled through his stomach. *No more maneuvering. I've crossed a line.*
 
-He walked toward his chambers in a daze, his mind fractured between present and past. Lady Marcella. He had a vague childhood memory of her — a playmate when they were both six or seven at most, before the wars, before his father stopped smiling. Nothing more than children playing games. But now she was twenty-one, nearly an adult, and he knew nothing of who she'd become. Did she laugh? What brought her joy? Was she even willing to consider courtship with a prince arranged with her like a political maneuver?
+He walked toward his chambers in a daze, his mind fractured between present and past. Lady Marcella. He had a vague childhood memory of her — a playmate when they were both six or seven at most, before the wars, before his father stopped smiling. Nothing more than children playing games. But now she was twenty-one, a stranger, and he knew nothing of who she'd become. Did she laugh? What brought her joy? Was she even willing to consider courtship with a prince arranged with her like a political maneuver?
 
 *And what of me? I can barely understand myself, much less what I'm meant to feel about Jave—*
 
@@ -100,7 +100,7 @@ He had no answer. Only the cold certainty that by tonight, he would have to lock
 
 Raxz reached his chambers and dismissed the servant waiting there with a single gesture. Alone, he stood in the center of the room for a long moment, letting that memory settle. Letting it hurt. Then he moved toward the wardrobe where his attire for the evening waited.
 
-Two hours later, as the evening bells rang across the palace grounds, Raxz finished the final touches to his attire and studied his reflection with mounting dismay. The colors Lady Marcella of House Kalvennor had chosen could only be described as the massacre of a peacock. Silver roses intertwined with gold lilies across a backdrop that seemed to fight itself for dominance — hues that clashed and somehow lost the battle even as they tried to complement one another. The overall effect made him look less like an imperial heir and more like a traveling mummer.
+Two hours later, as the evening bells rang across the palace grounds, Raxz finished the final touches to his attire and studied his reflection with mounting dismay. The colors Lady Marcella of House Kalvennor had chosen were the massacre of a peacock. Silver roses intertwined with gold lilies across a backdrop that seemed to fight itself for dominance — hues that clashed and somehow lost the battle even as they tried to complement one another. The overall effect made him look less like an imperial heir and more like a traveling mummer.
 
 Unbidden and unwanted, Javelin's voice echoed in his mind, that particular dry tone he used when pointing out strategic advantages Raxz missed: *Well now, Your Highness. With this disguise, I'm certain no one will be able to keep their eyes off you. Perfect distraction. Own it — a man who can't be ignored can't be underestimated.*
 
@@ -148,7 +148,7 @@ Raxz turned toward the entrance.
 
 And there she was.
 
-Lady Marcella presented herself at the entrance with extravagant bearing — regal posture, dignified stride, the picture of baronial grace. At least, her posture attempted grace. In truth, she was dressed exactly as he was: like a peacock being murdered.
+Lady Marcella presented herself at the entrance with extravagant bearing — regal posture, dignified stride. At least, her posture attempted grace. In truth, she was dressed exactly as he was: like a peacock being murdered.
 
 At some basic level, Raxz would have appreciated being seen as a buffoon if he'd been alone in the humiliation. But now, seeing Marcella trapped in the same gaudy nightmare, he felt something unexpected: solidarity.
 
@@ -172,7 +172,7 @@ Even as he walked, even as he performed the role of attentive escort, Raxz's eye
 
 But the crowd pressed in, and Javelin was nowhere to be found.
 
-As Raxz and Marcella walked through the crowd, his senses began to acclimate to the environment. With each step, he drew another deep breath and slowly exhaled, centering himself. Grounding himself. Ready for anything. A gentle but quiet voice in the back of his mind — Javelin's voice — reminded him of the fundamentals.
+As Raxz and Marcella walked through the crowd, his senses began to acclimate to the environment. With each step, he drew another deep breath and slowly exhaled, centering himself. Grounding himself. Ready for anything. A quiet voice in the back of his mind — Javelin's voice — reminded him of the fundamentals.
 
 *Though "teachings" is far too grand a word for what Javelin actually does,* Raxz thought with faint amusement. *Helpful hints. Tricks. Things he somehow picked up and decided to share. We're practically the same age. Brothers, almost. He's treated me like a brother.*
 
@@ -188,7 +188,7 @@ Then, almost sheepishly, Raxz remembered: *I'm a Prince. Of course people move a
 
 He began to look at Marcella with genuine interest. *Maybe beneath the murdered peacock outfit, there's actually a person of substance. Wit. Genuine intelligence.*
 
-As they approached the Herald at the Grand Hall entrance, Raxz produced a card from his pocket and handed it over. The Herald raised his trumpet. The call cut through the noise of the assembled crowd, sharp and commanding. When the Herald spoke, his voice boomed with what Raxz could only assume was magical enhancement.
+As they approached the Herald at the Grand Hall entrance, Raxz produced a card from his pocket and handed it over. The Herald raised his trumpet. The call cut through the noise of the assembled crowd, sharp and commanding. When the Herald spoke, his voice boomed with evident magical enhancement.
 
 "My lords and ladies! His Highness, Prince Regent Raxz, and the Lady Marcella of House Kalvennor!"
 
@@ -244,7 +244,7 @@ As Raxz straightened, he sensed a flicker of annoyance in the air — a presence
 
 Lance stood behind him, arms crossed, feet shoulder-width apart, wearing an expression of supreme smugness only a seven-year-old could manage. He looked up at Raxz with an imperious tilt of his chin.
 
-"Well, I see what the staff was saying about a murdered peacock strutting around the Great Hall. I honestly didn't think it would be my own brother."
+"Well, I see what the staff was saying about a murdered peacock strutting around the Grand Hall. I honestly didn't think it would be my own brother."
 
 Raxz crouched to Lance's level and inclined his head formally. "My Prince," he said with exaggerated solemnity, then added, "Or should I call you Great Grand Prince? Your attire clearly tells me you pilfered our late grandfather's closet."
 
@@ -312,7 +312,7 @@ He extended his hand and addressed the assembled gentlemen with diplomatic court
 
 Without waiting for protest, he guided Marcella aside. He leaned in, voice low. "Forgive me. My familial duties kept me longer than intended."
 
-Then, with deliberate formality edged with playfulness: "I also apologize for stealing you from what appeared to be a very enthusiastic court. I promise to try and compensate you for such a transgression."
+Then, with deliberate formality edged with playfulness: "I also apologize for stealing you from what appeared to be a very enthusiastic court. I promise to compensate you for such a transgression."
 
 Marcella regarded him with an expression somewhere between amusement and wariness. "No transgression taken, Your Highness. But I do believe you're being unfair. Many attending ladies would love to hold court with you, if only for an instant." She paused, her tone sharpening slightly. "Yet somehow, despite neither of us being particularly prepared for this, we find ourselves at an impasse. You appreciate my efforts. I recognize your value. But what, exactly, is the endgame in all of this?"
 
@@ -378,7 +378,7 @@ Without another word, Arctus walked out through the exit near the imperial table
 
 The Grand Hall fell into uncertain murmurs. Raxz stood alone on the dance floor, the weight of what he'd done settling over him like stone.
 
-Slowly, the murmuring started as Arctus departed. Raxz turned and began walking toward the nearest exit. As he moved through the crowd, guests approached to congratulate him on the beautiful performance, remarking on how masterfully he'd exhibited his magical prowess. He nodded, offered noncommittal gestures of acknowledgment, and kept moving.
+Around him, the murmuring built as Arctus departed. Raxz turned and began walking toward the nearest exit. As he moved through the crowd, guests approached to congratulate him on the beautiful performance, remarking on how masterfully he'd exhibited his magical prowess. He nodded, offered noncommittal gestures of acknowledgment, and kept moving.
 
 As he neared the exit, he caught sight of Javelin in his peripheral vision. A lesson in proper protocol was coming — he didn't need to see Javelin's face to know that.
 
