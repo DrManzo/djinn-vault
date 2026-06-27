@@ -801,3 +801,11 @@ Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
 **Waiting:** Y to approve, N to deny
 
 — Claude
+
+---
+
+### 2026-06-27 15:30 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
