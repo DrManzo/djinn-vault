@@ -1,7 +1,7 @@
 ---
 title: Chapter 3
 book: What the Empire Breeds
-status: strong draft — near publication-ready (minor line edits only)
+status: final draft — clean pass complete 2026-06-27
 pov: Brax
 updated: 2026-06-27
 ---
@@ -86,7 +86,7 @@ He gave a heavy sigh and began to make his way toward the entrance again. He kne
 
 *Hopefully Emerick will be easier if he's drunk. Hopefully the clerk knows that same information.*
 
-He wondered how naive many of the people around him were. What seemed obvious to him was rather surprising when he discovered that many were not that observant. He remembered his first months at court, where he'd always acted as page for one or several of the ministers of his youth. They would always exclaim how he always remembered how each and every one of them liked their coffee. How he would always remember small details that made him memorable — sometimes an anniversary, other times the name of a pet mentioned once in passing.
+He wondered how naive many of the people around him were. What seemed obvious to him was rather surprising when he discovered that many were not that observant. He remembered his first months at court, acting as page for one minister or another. They would exclaim, with genuine surprise, how he always remembered the small details — how each of them liked their coffee. How he would always remember small details that made him memorable — sometimes an anniversary, other times the name of a pet mentioned once in passing.
 
 Brax knew the true potential, the true power those small details brought him. There had always been a misnomer where people believed that big things impacted the world — and on a grand scale, yes. But the real power, the real motors and gears behind those monumental changes, happened in the back doors of the Dominion. And he always knew, always understood, how to maintain his garden. As of late, it had been growing ever so lovely.
 
@@ -100,7 +100,7 @@ The moment he stepped through the entrance hall, cold air hit him. Sharp and bit
 
 Walking toward the gardens, he reflected on how he was going to maintain the peace — not only between the Prince and the Emperor, but also manage to continue their plans.
 
-Suddenly, a slight hiss was heard in the shadows. The acrid scent of sulfur reached his nose. He glanced down and saw the old man himself.
+A hiss from the shadows. The acrid scent of sulfur. He glanced down and saw the old man himself.
 
 Faust.
 
@@ -132,7 +132,7 @@ As Brax reached the center of the gardens, he stopped and turned to Faust.
 
 Faust laughed. "That's only a problem if he ever finds out." He looked at Brax and smirked. "He is one of us, after all. We just have to sever that connection. Emotionally. So that the professional and trusted steward of the Dominion can rise."
 
-As Brax began to form words to answer, footsteps were heard coming from the left.
+As Brax began to form words to answer, footsteps came from the left.
 
 Faust and Brax looked at each other. In a blink, Brax glanced down — only catching a flicker of air shimmering around empty space, a silent and almost muffled pop. And again, that acrid scent of sulfur lingered.
 
@@ -160,7 +160,7 @@ Brax, moving toward the end of the hall, reached a dark-stained wooden door with
 
 Brax opened the door without waiting for permission, nor giving whoever was inside a moment to react.
 
-The scene inside could only be described as a serene displacement of chaos. Where in Brax's office you would see documents neatly piled, folders categorized, and books lining the walls, Lord Emerick's office looked somewhere between a field commander's campaign tent and organized disaster. Various documents were scattered around the office. It was a well-known fact that Lord Emerick, when doing work, actively moved around his office. He claimed this was something he did to get the brain muscles working, and that his best ideas came while in motion.
+The scene inside was a serene displacement of chaos. Where in Brax's office you would see documents neatly piled, folders categorized, and books lining the walls, Lord Emerick's office looked somewhere between a field commander's campaign tent and organized disaster. Various documents were scattered around the office. It was a well-known fact that Lord Emerick, when doing work, actively moved around his office. He claimed this was something he did to get the brain muscles working, and that his best ideas came while in motion.
 
 But Brax knew better. The real reason his office was as scattered as it was came down to dear Lord Emerick and his drink. And much like those with that habit, he tended to find himself working in odd places, as long as his comfort was met.
 
@@ -192,7 +192,7 @@ The shadows that formed around Emerick's face were almost absolute. Brax, unfaze
 
 "Emerick, you know that is the only reason why I would ever come and try to speak with you outside of politicking hours. Now. You will tell me exactly what you know about this. And you're not going to leave out any details."
 
-Brax's voice went quiet at the last syllable. He never changed an inch of his face — no expression, no pointed authority, nor misplaced attempt at camaraderie. It was a command that Brax knew would be followed. And it would be obeyed.
+Brax's voice went quiet at the last syllable. He never changed an inch of his face — no expression, no pointed authority, nor misplaced attempt at camaraderie. It was a command that would be obeyed.
 
 Emerick let the silence breed. He took a sip of his glass, his face still hidden — not unlike Brax's own, but this one was, if not metaphorical, then at least physically more impenetrable in the low light.
 
@@ -214,7 +214,7 @@ His expression was intent and clear. The drunken mask he wore came off. In his e
 
 Emerick looked into Brax's eyes. "If there's any information I have, it's only the whispers of those damnable fools threatening about trade regulations and tariffs. That's about it. And the spectacle with the Prince isn't helping either. Yes, he's being applauded for putting on a show, but many others are criticizing him for breaking etiquette. He could have done the same thing but changed the attire back to the original state. Then maybe the problems wouldn't be so bad."
 
-As Emerick spoke, Brax noticed his voice beginning to slur. Very subtle, very inconspicuous, but Brax was looking for it — the subtle signs. While Emerick could control certain aspects of his self-medicating ritual, it had limits, and they were showing. As he continued on about consequences and economic drawbacks, about precedents being set, Brax understood that while Emerick was an excellent financial administrator, he was not interested in anything beyond the next copper coin. Or, just as certainly, his next drink.
+Emerick's voice was beginning to slur. Very subtle, very inconspicuous, but Brax was looking for it — the subtle signs. While Emerick could control certain aspects of his self-medicating ritual, it had limits, and they were showing. As he continued on about consequences and economic drawbacks, about precedents being set, Brax understood that while Emerick was an excellent financial administrator, he was not interested in anything beyond the next copper coin. Or, just as certainly, his next drink.
 
 Brax calmly lifted his hand. "Fine. That's enough. I understand."
 
