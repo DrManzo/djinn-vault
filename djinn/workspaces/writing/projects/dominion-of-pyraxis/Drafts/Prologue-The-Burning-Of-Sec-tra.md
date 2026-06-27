@@ -18,7 +18,7 @@ She did not seem to know or care what was there.
 
 "When the flames of an empire reach the heavens above," she said, "so will they reach below — drowning the land in the ashes of its falsehood. And the bitter tears of the conquered will reconsecrate the land that mothered the father, but forsook its children."
 
-A single flash in the dark. The screams of the burning city cut out for just an instant — as if the world itself paused at the sound. Then the thud of something heavy hitting the ground, and the screaming resumed, the dark seemed to take more form and a somewhat robust figure cleaned his blade against the corpse without looking down.
+A single flash in the dark. The screams of the burning city cut out for just an instant — as if the world itself paused at the sound. Then the thud of something heavy hitting the ground. The screaming resumed. The dark resolved into the shape of a broad, heavily built figure cleaning his blade against the corpse without looking down.
 
 ---
 
@@ -26,11 +26,11 @@ A small man stepped into the clearing a moment later. He saw the body. He saw th
 
 Below them, Sec-tra burned. Eight centuries of empire — eight centuries of the name the conquerors couldn't pronounce and the conquered never forgave them for mispronouncing — reduced to the question of how much of it to leave standing.
 
-The sacrifice had been done the moment they laid the first stone of the breach on the capitol. That death — another empty rite — had done nothing but satisfy the bloody wants of an old man. Well. If he found some joy in it, who was *he* to judge? Did the city not thrive on the complete and unique talents of its people? It had never been expressed that those talents needed to be socially beneficial.
+The sacrifice had been done the moment they laid the first stone of the breach on the capital. That death — another empty rite — had done nothing but satisfy the bloody wants of an old man. Well. If he found some joy in it, who was *he* to judge? Did the city not thrive on the complete and unique talents of its people? It had never been expressed that those talents needed to be socially beneficial.
 
 They stood together a few paces apart and watched Sec-tra burn.
 
-"Were you sure to tell the Fists not to go overboard and leave some of the citizenry alive..." said one.
+"Did you remember to tell the Fists not to go overboard and leave some of the citizenry alive..." said one.
 
 "Well, I..." The other was still cloaked in darkness, visible only as the single dancing light reflecting from the pommel of his sword. "I may have forgotten a couple of details. But I'm sure they'll find a happy middle ground. I did tell them they would have to help with the reconstruction if we were understaffed — and I didn't mean admin level."
 
@@ -40,19 +40,19 @@ A sudden chill passed through the meadow. Both figures reacted simultaneously �
 
 The newcomer stepped out of a tear in the fabric of the air itself. Slim. Young. Dark hair and eyes that caught the distant firelight in a way that was not quite right — too still, too sharp, like an animal deciding whether the thing in front of it was worth the trouble. He dropped to one knee.
 
-"My apologies for the manner of entry — your mutual friend insisted on the dramatic entrance." An impish grin. Then his tone shifted. "The Emperor is absolutely livid. He is down there leading the forces, and he is winning despite the numbers. If the plan was to make him a hero, you are doing a good job."
+"My apologies for the manner of entry — your mutual friend insisted on the dramatic entrance." An impish grin. Then his tone shifted. "The Emperor is absolutely livid. He is down there leading the forces and winning despite the numbers. If the plan was to make him a hero, you are doing a good job."
 
 ---
 
-The three stood a few minutes longer. The last sounds of the city continued below them — the noise becoming nothing more than empty noise to them. When the silence had stood between them a few moments longer, the first figure raised his wand and cut through the air. A barely audible rip, and a cold wind through the gap, chilling the meadow for a moment before the heat from the valley below pushed back through.
+The three stood a few minutes longer. The last sounds of the city continued below them — becoming background to the silence between them. When that silence had held long enough, the first figure raised his wand and cut through the air. A barely audible rip, and a cold wind through the gap, chilling the meadow for a moment before the heat from the valley below pushed back through.
 
 He looked back before stepping through. "Let's hope the Emperor doesn't find his grit too fast." He laughed once, without warmth, and was gone.
 
 "He doesn't know who is really moving the field, does he?" said the young man, turning to face the first light beginning to build at the horizon.
 
-The remaining figure rubbed the handle of his sword. Slow. Deliberate. The firelight from the valley below caught the pommel — a single bright point in the dark.
+The remaining figure rubbed the pommel of his sword. Slow. Deliberate. The firelight from the valley below caught the pommel — a single bright point in the dark.
 
-"No," he said. "And neither do I, really." A pause. "Whoever is behind this can only be after one of two things — either a seat at the table..." He stopped. He looked at the younger man. "...or they want the throne itself."
+"No," he said. "And neither do I, really." A pause. "Whoever is behind this can only be after one of two things — either a seat at the table..." He stopped. He looked at the younger man. "...or the throne itself."
 
 ---
 
