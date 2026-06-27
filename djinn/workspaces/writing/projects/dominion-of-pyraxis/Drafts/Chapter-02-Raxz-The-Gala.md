@@ -1,9 +1,9 @@
 ---
 title: Chapter 2 — The Gala
 book: What the Empire Breeds
-status: strong draft — near publication-ready (minor line edits only)
+status: final draft — clean pass complete 2026-06-27
 pov: Raxz
-updated: 2026-06-21
+updated: 2026-06-27
 ---
 
 # Chapter Two
@@ -162,7 +162,7 @@ They met halfway. Raxz extended his arm first, a formal gesture requesting Lady 
 
 "My lady, you look very beautiful. Please, allow me to escort you to the evening's event." He offered his arm.
 
-Marcella placed her hand on his arm, but carefully — almost gingerly — as if trying not to commit to the gesture fully. There was a subtle inference of misunderstanding between them, though Raxz couldn't determine if it originated from him toward her or her toward him. He felt it. Registered it. But continued with the performance nonetheless.
+Marcella placed her hand on his arm, but carefully — almost gingerly — as if trying not to commit to the gesture fully. Something was misaligned between them — a gap he couldn't locate, couldn't name. He continued with the performance regardless.
 
 Together, they moved toward the Grand Hall where the assembled crowd waited.
 
@@ -368,7 +368,7 @@ That message, Raxz realized with dawning horror, was louder and more devastating
 
 He looked toward his father. Arctus appeared unconcerned, almost aloof. He swirled wine in a crystalline goblet, studying it as though contemplating something far away. He took a sip. Tasted it. Then drained the goblet in a single motion.
 
-Arctus glanced at Ellen — a brief look, as if sharing a private message Raxz was not privy to.
+Arctus glanced at Ellen — brief, precise, a confirmation rather than a communication. She had already returned her gaze to her goblet by the time he looked away. Two people who had already arranged what would happen next, checking that everything was in position.
 
 Then the Emperor stood.
 
@@ -380,7 +380,7 @@ The Grand Hall fell into uncertain murmurs. Raxz stood alone on the dance floor,
 
 Slowly, the murmuring started as Arctus departed. Raxz turned and began walking toward the nearest exit. As he moved through the crowd, guests approached to congratulate him on the beautiful performance, remarking on how masterfully he'd exhibited his magical prowess. He nodded, offered noncommittal gestures of acknowledgment, and kept moving.
 
-As he neared the exit, he caught sight of Javelin in his peripheral vision. Mentally, he braced himself for what he knew would be a lesson in proper protocol.
+As he neared the exit, he caught sight of Javelin in his peripheral vision. A lesson in proper protocol was coming — he didn't need to see Javelin's face to know that.
 
 That thought died the moment he felt a strong tackle from behind and heard a voice squealing with pure joy.
 
@@ -412,6 +412,12 @@ Truly, this was empire business. The Emperor only ever summoned him to his offic
 
 The moment Javelin steadied himself, still holding Millie, he looked up and made eye contact with Raxz across the hall. They shared a single moment — acknowledgment, understanding, something unspoken passing between them.
 
+*Anyone sensitive enough caught it,* Javelin's voice said in memory. *Did I not teach you better?*
+
+He had been careful all evening. Had not blinked once, not even when protocol might have permitted it — that careful, that consciously deliberate. Javelin had been watching. He'd known Javelin was watching.
+
+He wasn't going to be careful anymore.
+
 Then Raxz blinked.
 
 The air shifted as he reappeared. A subtle distortion rippled outward — a brief *pop* and the soft *whoosh* of displaced air echoing through the empty corridor. Raxz stood before the Emperor's office, two guards flanking the door like sentinels. They stared straight ahead, neither meeting his eyes.
@@ -435,16 +441,21 @@ The doors remained open. Waiting.
 ---
 
 <!-- DRAFT NOTES — do not remove
-- This chapter is near publication-ready — the prose is strong throughout
-- Minor fixes: "stares in disbelief" → "stares" is a typo in original ("stairs"), fixed here
-- Lord Theron of House Vandris is introduced here — ADDED to CHARACTERS.md and FAMILY-TREES.md ✓
-- The empty chair (Empress/Regent Consort absence): RESOLVED — Empress Valdra is alive but seriously ill and declining; she is too ill to attend formal court events. The chair is absence-through-illness, not death. Raxz knows she is ill. His internal voice should reflect this (knowing she can't come, not wondering where she is). See CHARACTERS.md and CONTINUITY.md for full Valdra entry. The existing prose at line 233 ("he'd suspected a division between families") may need slight revision to match: the empty chair is about her illness, not about a political-family rift. However this can be a characterization note — Raxz may *interpret* it as a rift because facing her illness is harder than having an explanation to be angry about. That reading is coherent and can stay.
-- The "meeting with Arctus" before the gala is deliberately elided — we don't see what Raxz says or does; only his reaction to Arctus's response. This is the right structural choice — keep it.
-- "Eighteen months, Raxz. That's all that separates us." — RESOLVED: this line is not sympathy. Ellen knows what Arctus is doing to Raxz deliberately. She is grateful those 18 months mean it is him and not her. She wants the position; she has watched the cost of the position; she has chosen herself. This line is her telling him she sees it and will not save him, dressed as intimacy. DO NOT expand or explain it — it works precisely because Raxz does not understand what she is actually saying. The reader should suspect before Raxz does.
-- Arctus's glance at Ellen before standing — RESOLVED: that is a check-in between two people with an arrangement. He confirmed she was in position before he moved. This is not subtext. Write it that way on revision.
-- The peacock costume motif carries perfectly through the chapter — from private horror to public mockery to the transformation and its political consequences
-- The golden cage memory (Javelin as child, blue jay) is beautifully executed
-- Millie's silver hair landing as both the memory trigger AND grounding Raxz in the present is the best character moment in the chapter
-- "What have I done?" closing the chapter on the threshold is the correct ending
-- See PIPELINE-NOTES.md for full editorial feedback
+CLEAN PASS COMPLETE 2026-06-27. Four changes:
+1. Arctus-Ellen glance revised: now reads as deliberate pre-arranged confirmation
+   ("Two people who had already arranged what would happen next, checking that
+   everything was in position") — no longer ambiguous subtext
+2. Blink beat added: Raxz registers Javelin's correction in memory, then consciously
+   chooses to stop being careful — making the blink defiant/deliberate, not impulsive
+3. "inference of misunderstanding" → "something was misaligned" — tighter, no filter
+4. "Mentally, he braced himself" → filter word removed
+
+STANDING DECISIONS — do not revisit:
+- The empty chair (Empress Valdra): leaving the "division between families" reading
+  intact. It's Raxz psychically defending against facing her illness with anger.
+  Coherent and richer for the ambiguity. See CHARACTERS.md for full Valdra entry.
+- "Eighteen months, Raxz." — do not expand or explain. Works because Raxz doesn't
+  understand what Ellen is actually telling him.
+- The meeting with Arctus before the gala: deliberately elided. Keep.
+- "What have I done?" on the threshold: correct ending. Keep.
 -->
