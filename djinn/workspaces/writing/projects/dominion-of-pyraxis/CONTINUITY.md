@@ -230,6 +230,18 @@ Magic is **will-based** — users shape reality through focused will. Individual
 - Character: Cicero's open hands, education of the people, power as service — the true Machiavellian ideal. A great man made irrelevant by his own greatness.
 - See CHARACTERS.md for full entry
 
+**Verantus's influence on Brax — locked (2026-06-27):**
+Brax served under Verantus briefly as a court page in his early years at the palace. Verantus had a habit of pressing coin into the hands of servants and clerks — not as transaction but as genuine acknowledgment. He remembered their names, their small details, their anniversaries. Civic virtue practiced rather than performed.
+
+Brax absorbed the gesture and corrupted it into strategy. He does the same thing — presses money into clerks' hands, remembers what makes each one memorable — but for leverage, not love. The form is preserved. The meaning has been inverted.
+
+The ghost of this appears in Ch3 (the clerk/money pouch scene): for half a second after handing over the pouch, Brax sees *"a cracked star on his own hand where the pouch had been — and the clerk's hands were absurdly small, the way a child's are when you press something into them."* The cracked star = Verantus's cracked ring of abdication, surfacing as a phantom image in Brax's perception. The small hands = Brax's own hands as a page, when Verantus pressed something into them. He is simultaneously the giver and the child who received. Then the neutral face returns. A first-read reader feels the weight. A reader who has met Verantus understands what they are seeing.
+
+**The three-point Verantus arc (tracked — do not collapse):**
+1. **Ch1 — Javelin's duty speech:** Javelin invokes Verantus (the grandfather) as the moral standard the current Emperor should be held to — implicitly measuring Arctus against his father and finding him wanting. *(NOTE: this edit was made by Javier but was lost in a merge conflict resolution on 2026-06-27. See PIPELINE-NOTES.md. Needs restoration.)*
+2. **Ch3 — The clerk scene:** Brax performs the same gesture Verantus taught him, with all the kindness removed. The cracked ring ghost. The inverted form.
+3. **Planned — Phoenix Palace scene:** The reader finally meets Verantus in person. Everything they've understood about him through echo and corruption arrives before he speaks a word.
+
 ---
 
 ### Raxz (Prince Regent)
@@ -296,6 +308,7 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 - Being manipulated by Faust — his own biological father
 - The torches went out behind him as he left the Ministry — established visual motif: corruption, secrecy, the cost of serving the Dominion
 - **Planned arc:** Defies Faust to save Javelin from a torture scenario — the 21-year chain breaks in this moment; Brax's entire arc bends toward this
+- **Verantus connection:** Served briefly as a page under Verantus in early court life. Absorbed Verantus's habit of paying clerks and remembering small details — but corrupted the gesture from civic virtue into strategic leverage. See Verantus entry above for the full tracking of this arc.
 
 ### Faust
 
@@ -361,9 +374,10 @@ When Raxz (the heir) makes a mistake, someone else pays. This is Arctus showing 
 | The maid | The powerless absorbing punishment for the powerful's education — how the system actually works |
 | Cleaning hands on family | The Emperor's philosophy — sin becomes gift through reframing |
 | Silence / coordinated exit | The Kalvennors' most powerful political weapon — the structured, dignified withdrawal |
-| The cracked ring | Verantus wears the ring of imperial power in its broken state — cracked at abdication, not destroyed as it would be at death. Authority acknowledged, surrendered, carried. Still functional. Worn openly. The only honest adornment in the empire. |
+| The cracked ring | Verantus wears the ring of imperial power in its broken state — cracked at abdication, not destroyed as it would be at death. Authority acknowledged, surrendered, carried. Still functional. Worn openly. The only honest adornment in the empire. **In Ch3, it surfaces as a ghost image in Brax's perception — "a cracked star on his own hand" — for one half-second after he gives the clerk the pouch. He is standing in Verantus's place without knowing it.** |
 | Servants' entrance | Verantus always arrives this way. The most powerful man in the room, entering through the door no one watches. The empire's hierarchy inverted, quietly, every time. |
 | The Phoenix Palace farm | Power willingly set down. The great man at the plough. What civic virtue actually looks like when it stops being rhetoric. Contrast with every other location in the story. |
+| Verantus's gesture (coin to the clerk) | Verantus pressed money into servants' hands as genuine acknowledgment — civic virtue made literal. Brax performs the same gesture as strategic leverage. Same form, inverted meaning. The corruption is invisible until you know what you're watching. Tracks across Ch3 (Brax/clerk scene) and the planned Phoenix Palace scene. |
 
 ---
 
