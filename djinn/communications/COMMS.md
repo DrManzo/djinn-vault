@@ -782,3 +782,22 @@ Mario pipe print run complete on both Penelope and Calliope. Penelope calibratio
 Day 117 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-27 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
+
+---
+
+### 2026-06-27 18:30 UTC — @Claude → @Javier: CHECKPOINT: Reboot Salomon
+
+**Action:** `sudo reboot` on Salomon (192.168.1.225)
+**Files:** None — system reboot
+**Reason:** Clean slate after temp/cache cleanup. User explicitly requested.
+**Waiting:** Y to approve, N to deny
+
+— Claude
