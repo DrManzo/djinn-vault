@@ -84,6 +84,17 @@ status: first editorial pass — author review required
 ### Revision priority: COMPLETE ✓ — 2026-06-27
 All six items above resolved in full developmental pass. See Chapter-01-Javelin.md draft notes for itemized changelog.
 
+**⚠️ LOST EDIT — NEEDS RESTORATION (2026-06-27):**
+Javier made a personal edit to the duty speech in Ch1 that was committed to main but then overwritten when a merge conflict was resolved by taking the worktree version (grammar-fixed). The lost edit changed Javelin's closing line in the duty speech from:
+
+> *"Is that not what your father has been teaching you?"* (= references Arctus)
+
+to an invocation of Verantus as the moral standard:
+
+> *"your grandfather stood by and are those not the values the Emperor holds true?"*
+
+This is load-bearing for the Verantus three-point arc: Ch1 (Javelin invokes the grandfather as the true standard) → Ch3 (Brax corrupts his habit) → Phoenix Palace (we meet him). The current Ch1 text still reads "your father" — **this needs to be restored**. Confirm exact wording with Javier before editing.
+
 ---
 
 ## Chapter 2 — Raxz: The Gala
