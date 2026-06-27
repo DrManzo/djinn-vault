@@ -118,7 +118,7 @@ Brax assessed Faust. "I've had my suspicions, but I believe he still has the abi
 
 He added *"the boy"* as an afterthought.
 
-"Ah, see, that I think is one of the problems. You still think of him as a young boy. Brax, the man is twenty-one. It's about that time we find him a bride. Maybe if we give him something else, another—" Faust moved his hand in a limp-wristed way, as if shooing away flies. "Give him something other than the Prince to focus on. You know."
+"Ah, see, that I think is one of the problems. You still think of him as a young boy. Brax, the man is twenty-one. It's about that time we find him a bride. Maybe if we give him something else, another—" Faust let his wrist go languid — a slow, deliberate motion, completing the thought he hadn't spoken aloud. "Give him something other than the Prince to focus on. You know."
 
 "He does have the proper breeding and education. It's only fitting that we not only begin to find a match for him, but also that we should start him out properly. The Prince has already learned enough from him. Maybe it's time that he—" Faust stopped and contemplated his next word. "—graduates from doing a lot of the grunt work. You do know that closeness breeds familiarity, and familiarity breeds passions. If you want to avoid it, we can do that."
 
