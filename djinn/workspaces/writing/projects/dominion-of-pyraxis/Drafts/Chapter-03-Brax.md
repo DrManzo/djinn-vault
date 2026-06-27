@@ -255,5 +255,6 @@ The torches were blowing out behind him as he walked. As he stepped out of the M
 - The Emerick scene perfectly establishes his character: genius administrator, alcoholic, fully aware of the political game, chooses careful neutrality
 - "Who served them? Who could they rely on?" — this is the thematic throughline of Brax's arc stated directly; leave it
 - Torches going out = the right image to close on; don't over-explain it
+- **THE CLERK / MONEY POUCH SCENE (2026-06-27 addition):** The gesture Brax performs here — the small token, the quiet thanks, the deliberate relationship-building — originates with Verantus. Brax served under or closely observed the former Emperor as a young page. Verantus paid servants and clerks the same way: genuinely, as acknowledgment that effort and honesty have worth. Brax took that habit and saw the leverage in it. Same surface gesture, opposite moral architecture. ON REVISION: consider adding a half-beat here — a flash of memory Brax doesn't examine, the old man's same motion — that the reader can feel without Brax naming it. He knows exactly where this came from. He made his decision. He has not revisited it. The self-knowledge is available but he does not volunteer it.
 - See PIPELINE-NOTES.md for full editorial feedback
 -->
