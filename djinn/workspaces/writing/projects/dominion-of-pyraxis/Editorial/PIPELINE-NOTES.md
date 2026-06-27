@@ -2,7 +2,7 @@
 title: Editorial Pipeline Notes — What the Empire Breeds
 type: developmental + line edit pass
 agent: Claude (Djinn writing pipeline)
-date: 2026-06-21
+date: 2026-06-27
 status: first editorial pass — author review required
 ---
 
@@ -38,18 +38,23 @@ status: first editorial pass — author review required
    - Original people: **Teraxians** (old families' self-identification) | Common people now: **Sec-trans**
    - The naming debate is ongoing — both sides believe they are right and both are
 
-3. **The three figures** — RESOLVED. ✓ Identities locked but not named in prose:
-   - The dark, robust figure who kills the child = **Archon Zevrath Drakenoth** (descendant of the Drakenoth who conspired at Year 1 PR)
-   - The one with the sword pommel who speaks the closing lines = **Faust** (descendant of the Faust line; continues the 700-year conspiracy)
-   - The slim young messenger through the spatial rip = **Javelin** (young; Faust's biological son; placed in this role deliberately)
+3. **The three figures** — RESOLVED. ✓ Identities locked but not named in prose. **TIMELINE CORRECTED 2026-06-27 — these are the actual characters, not descendants of a 700-year conspiracy:**
+   - The dark, robust figure who kills the child = **Archon Zevrath Drakenoth** (the actual Archon; present at this founding event of Arctus's power)
+   - The one with the sword pommel who speaks the closing lines = **Faust** (the actual Faust; not a descendant; this conspiracy is present-day, not ancient)
+   - The slim young messenger through the spatial rip = **Javelin** (young; Faust's biological son; placed in this role deliberately by Faust; this is who he was before the royal household)
    - A new opening beat: unnamed blind 8-year-old Teraxian child speaks the prophecy; Zevrath kills her opportunistically — she was not chosen, she wandered there; Faust enters after and finds it unnecessary
 
-4. **"Altonian Dynasty" reconciled.** ✓ The burning IS Year 1 PR. The Altonian family came from outside to consolidate 7 kingdoms; wanted to preserve the name Teraxia; the Teraxians' mockery of their mispronunciation became Sec-tra. The burning was engineered to make the Emperor a hero — he doesn't know who arranged it. Current year: **700 PR**. 13 emperors. Magic-user lifespan 100–180 years; average reign ~53 years.
+4. **"Altonian Dynasty" reconciled.** ✓ **TIMELINE CORRECTED 2026-06-27 — the burning is NOT Year 1 PR and NOT 700 years ago.** The Prologue is set in Arctus's era, approximately 15 years before the main story, concurrent with his rise to power. The burning was engineered by Faust and Zevrath to manufacture Arctus's heroism and secure his ascension — he fought in the valley below, won, and does not know who arranged the conditions. The PR calendar's Year 1 is the original Altonian consolidation, a separate historical event. The Altonian family came from outside to consolidate 7 kingdoms; wanted to preserve the name Teraxia; the Teraxians' mockery of their mispronunciation became Sec-tra. Magic-user lifespan 100–180 years. Additionally: **Verantus Altonian** (former Emperor, Arctus's father) is now a locked character — see CHARACTERS.md for full entry.
 
 2. **Tense and rhythm:** The opening is past tense narration, then the dialogue lands, then the closing is also narration. The transitions are a little abrupt. Consider giving each of the three dialogue beats a brief surrounding beat of physical action.
 
-### Revision priority: COMPLETE — pipeline pass done 2026-06-22 ✓
-*Structure resolved, [TBDs] filled, identities locked, prophecy written. Ready for author review.*
+### Revision priority: OPEN — one prose task remaining
+- [x] Structure resolved ✓
+- [x] [TBDs] filled ✓
+- [x] Identities locked ✓ (corrected to actual characters, not descendants — 2026-06-27)
+- [x] Prophecy written ✓
+- [x] Timeline corrected ✓ (Arctus's era, not Year 1 PR — 2026-06-27)
+- [ ] **Opening paragraph prose revision** — still needed. Start IN the scene (fire, Gallows Hills, two figures); weave the history in as *what they're watching burn*. The lore is correct; the structure of the opening paragraph is not yet revised.
 
 ---
 
@@ -130,7 +135,7 @@ status: first editorial pass — author review required
 
 - **"What the Dominion bred in men like him."** — this is the title of the book delivered in-scene, from the character's own voice, without announcement. Don't touch this.
 
-- **The clerk scene** — the money-pouch exchange, the philosophy of small connections vs. big events — this is the clearest window into how Brax actually thinks. The voice is sharp and consistent throughout.
+- **The clerk scene** — the money-pouch exchange, the philosophy of small connections vs. big events — this is the clearest window into how Brax actually thinks. The voice is sharp and consistent throughout. **2026-06-27 addition written in:** After the pouch is given, a half-second flash — "a cracked star on his own hand where the pouch had been — and the clerk's hands were absurdly small, the way a child's are when you press something into them. The moment passed. Brax's face reclaimed its neutral, satisfied state." The cracked star = Verantus's ring of abdication; the small hands = Brax as a page receiving the coin from Verantus, collapsed into the present. He sees himself on both ends of the gesture simultaneously. First-read: felt but not understood. Re-read: devastating.
 
 - **The Faust garden scene** — Faust proposing to find Javelin a wife is chilling, and Brax's response ("magic can only force him so far") reveals that Brax understands magic is being used as a tool of control in this household. "What we've made him into, we can unmake just as easily" — the most morally damning line in the chapter. Brax thinking it about his own son.
 
@@ -174,6 +179,13 @@ A father who destroys his son by accident is a tragedy. A father who destroys hi
 - Each lesson is calibrated not to what Raxz did wrong but to what Arctus has decided Raxz must become
 - As Valdra worsens the lessons get darker — not because Arctus loses control but because he is running out of time to finish the work
 - When Valdra dies, the last human thing left in him that still touches the lessons is gone
+
+**Verantus Altonian — the fourth structural pillar (added 2026-06-27):**
+Arctus's father. Former Emperor. Abdicated — lives at the Phoenix Palace farm, teaches ethics to servants in plain clothes, visits the main palace through servants' entrances, wears only the cracked ring of abdication. A great man: Cicero's open hands, education of the people, civic virtue lived rather than performed. He knows exactly what Arctus is doing to Raxz. He cannot act — not because Arctus prevents him, but because his own principles forbid him from overriding his successor. His virtue is the cage.
+
+He is not a symbol of hope. He is proof that individual greatness is insufficient — that the empire doesn't need to destroy the good man, it just needs to make him irrelevant. His presence in the book answers the silent question underneath the title: *could it have been otherwise?* Yes. It was otherwise, once, in this man. And here we are anyway.
+
+The corruption of his habit by Brax (paying clerks as genuine investment vs. paying clerks as leverage) is the thematic engine made visible at the level of a single gesture. See STORY-NOTES.md — *The Corruption of Good Habits* section.
 
 **What the title means now:** "What the Empire Breeds" — Arctus was made by the same machine he runs. The lesson he is teaching Raxz is what the Dominion is. He knows he is teaching it. He has decided it is correct. Brax learned it from Faust. Javelin is being shaped by it. Ellen chose to benefit from it without being the recipient. Raxz is the generation who will either become it or refuse — and that refusal, if it comes, will cost everything.
 
@@ -226,7 +238,7 @@ Raxz is 21. The wars were 15 years ago, making him 6 at the time — consistent 
 ## Publishing Pipeline — What Happens Next
 
 ### Immediate (before next writing session)
-- [ ] Resolve [TBD] placeholder in Prologue (world name, people name)
+- [x] Resolve [TBD] placeholder in Prologue (world name, people name) — DONE ✓
 - [x] Add Lord Theron of House Vandris to CHARACTERS.md — DONE
 - [x] Clarify Faust's family relationship to Brax in CONTINUITY.md — DONE: Faust is Brax's biological father; also Javelin's biological father; Brax and Javelin are biological half-brothers; only Faust knows
 - [ ] Decide: what did Raxz push too hard about in the pre-gala meeting with Arctus? Lock it in STORY-NOTES.md even if it stays off-page.
