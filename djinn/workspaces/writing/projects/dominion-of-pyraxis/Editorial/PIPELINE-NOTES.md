@@ -30,7 +30,7 @@ status: first editorial pass — author review required
 - The Fists appearing here ties back to the government structure naturally.
 
 ### What needs work
-1. **The opening paragraph is doing too much.** It front-loads centuries of history while we're trying to establish a scene. Consider: start IN the scene (fire, Gallows Hills, two figures) and weave the history in as *what they're watching burn* rather than a preamble. The reader needs ground before they can absorb context.
+1. **The opening paragraph is doing too much.** ~~It front-loads centuries of history while we're trying to establish a scene.~~ — **RESOLVED 2026-06-27 ✓** Revised to Option 2: opens on the child already at the Gallows Hills edge. Three history paragraphs removed from the top. Naming history (Sec-tra / eight centuries) folded into Faust's internal beat in one line: *"Below them, Sec-tra burned. Eight centuries of empire — eight centuries of the name the conquerors couldn't pronounce and the conquered never forgave them for mispronouncing — reduced to the question of how much of it to leave standing."*
 
 2. **[TBD] placeholders** — RESOLVED. ✓
    - Official capital name: **Teraxia** (Altonian family's name, preserved)
@@ -48,13 +48,15 @@ status: first editorial pass — author review required
 
 2. **Tense and rhythm:** The opening is past tense narration, then the dialogue lands, then the closing is also narration. The transitions are a little abrupt. Consider giving each of the three dialogue beats a brief surrounding beat of physical action.
 
-### Revision priority: OPEN — one prose task remaining
+### Revision priority: COMPLETE ✓ — 2026-06-27
 - [x] Structure resolved ✓
 - [x] [TBDs] filled ✓
-- [x] Identities locked ✓ (corrected to actual characters, not descendants — 2026-06-27)
+- [x] Identities locked ✓ (actual characters, not descendants)
 - [x] Prophecy written ✓
-- [x] Timeline corrected ✓ (Arctus's era, not Year 1 PR — 2026-06-27)
-- [ ] **Opening paragraph prose revision** — still needed. Start IN the scene (fire, Gallows Hills, two figures); weave the history in as *what they're watching burn*. The lore is correct; the structure of the opening paragraph is not yet revised.
+- [x] Timeline corrected ✓ (Arctus's era, not Year 1 PR)
+- [x] Opening paragraph revised ✓ (Option 2 — child-first; history folded into Faust's beat)
+
+**Prologue is done. Move to Chapter 1.**
 
 ---
 
