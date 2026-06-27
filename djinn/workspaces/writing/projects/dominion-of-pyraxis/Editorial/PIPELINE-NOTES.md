@@ -81,7 +81,8 @@ status: first editorial pass — author review required
 
 6. **POV is slightly unstable.** The chapter is primarily Javelin's POV but occasionally slips into a more neutral narrator stance (describing "the Prince" in third person as though from outside). Decide: deep third-person Javelin throughout, or a slightly more distanced narrator? Chapter 2 is deep third-person Raxz throughout. Matching that choice for Ch 1 would create consistency.
 
-### Revision priority: HIGH — this chapter needs the most work
+### Revision priority: COMPLETE ✓ — 2026-06-27
+All six items above resolved in full developmental pass. See Chapter-01-Javelin.md draft notes for itemized changelog.
 
 ---
 
