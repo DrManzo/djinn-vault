@@ -3,7 +3,7 @@ title: Chapter 3
 book: What the Empire Breeds
 status: strong draft — near publication-ready (minor line edits only)
 pov: Brax
-updated: 2026-06-21
+updated: 2026-06-27
 ---
 
 # Chapter Three
@@ -71,6 +71,8 @@ Pure etiquette. Brax knew that regardless of whether this fellow was busy or not
 Brax smiled. "Perfect. I need you to tell Lord Emerick and Lord Bastyon that I want a meeting with them. Do so separately. Tell Lord Emerick I will meet him in the offices of the Department of Treasury. Tell Lord Bastyon I will meet him at his office in the Department of Military Affairs. Tell them both I will be on my way and to wait for me there — that there is information we need to go over. Do so secretly and quietly for me."
 
 Brax assessed the clerk and, with a small smile, gave the young man a small money pouch. "Thank you for the discretion. And your availability."
+
+For half a second, he saw a cracked star on his own hand where the pouch had been — and the clerk's hands were absurdly small, the way a child's are when you press something into them. The moment passed. Brax's face reclaimed its neutral, satisfied state.
 
 A token. Something small. Something Brax could later use. It was never a bad idea to have connections — wires, veins he could tap at a moment's notice. Far be it from him not to use his most valuable assets: his guile, his demeanor, his fame for always being fair — both politically and morally correct.
 
@@ -255,6 +257,6 @@ The torches were blowing out behind him as he walked. As he stepped out of the M
 - The Emerick scene perfectly establishes his character: genius administrator, alcoholic, fully aware of the political game, chooses careful neutrality
 - "Who served them? Who could they rely on?" — this is the thematic throughline of Brax's arc stated directly; leave it
 - Torches going out = the right image to close on; don't over-explain it
-- **THE CLERK / MONEY POUCH SCENE (2026-06-27 addition):** The gesture Brax performs here — the small token, the quiet thanks, the deliberate relationship-building — originates with Verantus. Brax served under or closely observed the former Emperor as a young page. Verantus paid servants and clerks the same way: genuinely, as acknowledgment that effort and honesty have worth. Brax took that habit and saw the leverage in it. Same surface gesture, opposite moral architecture. ON REVISION: consider adding a half-beat here — a flash of memory Brax doesn't examine, the old man's same motion — that the reader can feel without Brax naming it. He knows exactly where this came from. He made his decision. He has not revisited it. The self-knowledge is available but he does not volunteer it.
+- **THE CLERK / MONEY POUCH SCENE (2026-06-27 — WRITTEN IN):** The flash image after the pouch is given is now in the draft: "a cracked star on his own hand... the clerk's hands absurdly small, the way a child's are." The cracked star = Verantus's cracked ring of abdication, surfacing for half a second as Brax performs the same gesture Verantus performed when Brax was a page. The clerk's small hands = Brax's own hands as a child receiving the coin, collapsed into the present. He sees himself on both ends simultaneously. Then the neutral face returns. A first-read reader will feel the weight without understanding it. A reader who has met Verantus will know exactly what they're seeing.
 - See PIPELINE-NOTES.md for full editorial feedback
 -->
