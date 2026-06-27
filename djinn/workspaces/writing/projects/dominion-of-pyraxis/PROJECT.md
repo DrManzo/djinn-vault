@@ -3,7 +3,7 @@ title: Project — The Dominion of Pyraxis
 status: active — drafting Book 1
 series: The Dominion's Rise
 tags: [djinn, writing, dominion-of-pyraxis, fantasy]
-updated: 2026-06-21
+updated: 2026-06-27
 access: RESTRICTED — Javier + Claude only
 ---
 
@@ -40,6 +40,7 @@ The Dominion of Pyraxis is a post-war state held together by fragile alliances. 
 - **Emperor Arctus** — cold, methodical, master of moral disengagement. His four lessons form the philosophical core of Book 1.
 - **Brax (Lord High Steward)** — Javelin's legal father, manages behind-the-scenes damage control, manipulated by Faust. Wields informal power without formal portfolio.
 - **Faust** — antagonist operating in the background, manipulating Brax.
+- **Verantus Altonian** — former Emperor (abdicated); Arctus's father; Raxz's grandfather. Lives at the Phoenix Palace farm. Teaches ethics to servants in plain clothes. Knows what Arctus is doing to Raxz. Cannot act without violating his own principles. His virtue is the cage.
 
 ### Houses
 - Nine Noble Houses in the Convocatum — built-in political structure with competing interests
@@ -109,11 +110,14 @@ Full system in `i notes/Topics/Creative Writing/Book-Worldbuilding/Magic_System/
 
 ## Next Steps
 
-- [ ] Finish Chapter 3 — POV rotation, delay Raxz-Arctus confrontation, build tension
+- [ ] Write Chapter 4 — POV rotation (Javelin post-gala or Marcella post-gala); delay Raxz-Arctus confrontation
+- [ ] Revise Chapter 1 — Javelin POV needs developmental work; prose choppier than Ch 2/3
 - [ ] Develop Lady Marcella Kalvennor as a character
 - [ ] Lock the Emperor's four lessons as a structural anchor for Book 1
 - [ ] Develop House Kalvennor political position and demands post-gala incident
 - [ ] Clarify Faust's role and motivations in Book 1 vs later books
+- [ ] Determine when Verantus first appears — plan Phoenix Palace scene
+- [ ] Fix Prologue prose to reflect corrected timeline (currently prose is intact; draft notes now corrected)
 
 ---
 
