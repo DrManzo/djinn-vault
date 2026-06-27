@@ -40,7 +40,7 @@ That was enough.
 
 The air tore open.
 
-The blink was loud — the crack of it echoing off the hall's stone ceiling, a wave of compressed air rolling outward, the nearest servants flinching at the displacement. Amateur work. Javelin filed that away as the tear pulled them both through and sealed shut behind them. They landed in the antechamber off the Hall's north corridor — a small, seldom-used waiting room, lit by one high window, smelling of old stone and candle wax. In the half-second of transit, the positions had reversed. Raxz stood with his back to Javelin; Javelin's arm was at his waist, two fingers resting precisely at his pulse.
+The blink was loud — the crack of it echoing off the hall's stone ceiling, a wave of compressed air rolling outward, the nearest servants flinching at the displacement. Amateur work. Javelin filed that away as the tear pulled them both through and sealed shut behind them. They landed in the antechamber off the Hall's north corridor — a small, seldom-used waiting room, lit by one high window, smelling of old stone and candle wax. In the half-second of transit, the positions had reversed. Raxz stood with his back to Javelin; Javelin's arm locked at his waist, two fingers of his free hand resting precisely at his throat.
 
 Poised.
 
@@ -82,9 +82,9 @@ Then: the teacher arrived.
 
 He let the silence land.
 
-"What will the Emperor say? How am I to hold my head up, knowing that my dear apprentice — after all the tasks I have given him, and completed magnificently, I'll grant — now chooses to disgrace me with *this*?"
+"What will the Emperor say? How am I to hold my head up, knowing that my dear apprentice — after all the tasks I have given him — completed magnificently, I'll grant — now chooses to disgrace me with *this*?"
 
-Javelin crumpled onto the floor in what could only be described as the theatrical collapse of a man who had tutored one too many princes and was not certain he would survive another.
+Javelin crumpled onto an empty chair in the theatrical collapse of a man who had tutored one too many princes and was not certain he would survive another.
 
 ---
 
@@ -138,7 +138,7 @@ Raxz walked away straight-backed, regal — every inch the Prince Regent. The do
 
 A knife left Javelin's hand and buried itself in the corner where the shadows were darkest.
 
-A voice: graspy, slow, unhurried. "Is that a way to greet one's own master?"
+A voice: raspy, slow, unhurried. "Is that a way to greet one's own master?"
 
 ---
 
@@ -174,13 +174,13 @@ Javelin turned. Let Faust see his face.
 
 Faust looked at him with the stillness of a very old, very patient thing.
 
-"That is the price every good man pays," he said. "No exceptions. Even those of us who are useful blades in the dark must remember—" a pause, "—that a knife which can be pulled on one, can always be pulled on themselves."
+"That is the price every good man pays," he said. "No exceptions. Even those of us who are useful blades in the dark must remember—" a pause, "—that a knife which can be pulled on one, can always be pulled on oneself."
 
 ---
 
 Hours later, Javelin stood before his mirror.
 
-The emerald green was the right choice. High-necked, fitted, precisely tailored — the cut that said *capable noble-born* without saying *threat*, which were almost always the same distinction. He ran through the interior checklist as he adjusted the collar: picklock sets, the darts, two of the three knives, the small vials in the left inner pocket. The trinkets — focus objects for the limited magic he'd never quite disciplined into full practice — distributed across seven concealed points. Nothing rattling. Nothing visible.
+The emerald green was the right choice. High-necked, fitted, precisely tailored — the cut that said *capable noble-born* without saying *threat* — distinctions which were almost always identical. He ran through the interior checklist as he adjusted the collar: picklock sets, the darts, two of the three knives, the small vials in the left inner pocket. The trinkets — focus objects for the limited magic he'd never quite disciplined into full practice — distributed across seven concealed points. Nothing rattling. Nothing visible.
 
 He looked at himself.
 
