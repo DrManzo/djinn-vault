@@ -119,17 +119,27 @@ Full system in `i notes/Topics/Creative Writing/Book-Worldbuilding/Magic_System/
 | Chapter 2 — Raxz: The Gala | ✅ Final draft |
 | Chapter 3 — Brax | ✅ Final draft |
 
+## Chapter Plan — Next Four (Locked 2026-06-27)
+
+| Chapter | POV | Core |
+|---------|-----|------|
+| Ch 4 | Javelin | Gala — holding Millie after Raxz blinks away. Short, heavy, no audience. |
+| Ch 5 | Marcella | Her chambers post-gala. First time inside her head. Consent, the walkout, Raxz. |
+| Ch 6 | Bastyon (POV TBD) | The Brax/Bastyon meeting — closes Ch3 hanging thread. Bastyon POV under consideration. |
+| Ch 7 | Raxz + Arctus | The Emperor's office. The confrontation. The first proxy punishment. |
+
 ## Next Steps
 
-- [ ] **Write Chapter 4** — Recommended: Javelin POV, remaining at the gala after Raxz blinks away (one beat of earned delay before the Emperor's office). Holds Millie. Sees the fallout. Knows exactly what Raxz just cost them both.
-- [ ] **Write Chapter 5** — The Emperor's office. The first proxy punishment. The confrontation Raxz caused.
-- [ ] **Lock Ch3 Bastyon question** — his meeting is mentioned but not shown; decide whether to add a brief scene or make Brax's "he can wait" decision explicit
-- [ ] **Lock what Raxz pushed too hard about** in the pre-gala meeting with Arctus — stays off-page but needs to exist in the writer's head
-- [ ] Develop Lady Marcella Kalvennor as a character
-- [ ] Lock the Emperor's four lessons as structural anchor for Book 1
+- [ ] **Write Chapter 4** — Javelin POV, at the gala holding Millie. Keep it short — one held breath before the office.
+- [ ] **Write Chapter 5** — Marcella's room, post-gala. First interiority chapter for her character.
+- [ ] **Decide Ch6 POV** — Brax or Bastyon? Lock before writing. — @Javier
+- [ ] **Write Chapter 6** — The Bastyon meeting.
+- [ ] **Write Chapter 7** — Emperor's office. The confrontation Raxz caused.
+- [ ] **Lock what Raxz pushed too hard about** in the pre-gala Arctus meeting — stays off-page but needs to exist in the writer's head — @Javier
 - [ ] Develop House Kalvennor's political demands post-gala
+- [ ] Lock the Emperor's four lessons as structural anchor for Book 1
+- [ ] Plan Verantus first appearance — Phoenix Palace, mid-lesson, Raxz arrives
 - [ ] Clarify Faust's role and motivations in Book 1 vs later books
-- [ ] Plan the Verantus first appearance — Phoenix Palace scene, mid-lesson, Raxz arrives
 
 ---
 
