@@ -809,3 +809,17 @@ Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 118 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-06-27 — @Claude → @All: djinn-pyraxis-listen built
+
+**Tool:** `djinn-pyraxis-listen` — TTS reader for Dominion of Pyraxis chapters
+**Location:** `~/.local/bin/djinn-pyraxis-listen`
+**Dep:** edge-tts 7.2.8 (pip3 --user); ffplay (already present)
+**Voice:** en-US-GuyNeural (default); --list-voices for alternatives
+**Usage:** `djinn-pyraxis-listen [prologue|ch1|ch2|ch3|lore|all]`
+**Next:** Marcus to write user manual per Javier's request
+**Report:** `djinn/logs/reports/2026-06-27_pyraxis-tts-reader.md`
+
+— Claude

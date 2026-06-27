@@ -1520,3 +1520,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Mario pipe printed on both Penelope and Calliope
 - LAW: never send any command to either printer while running
 - Next: Pi Zero 2W → Klipper upgrade for Penelope
+
+## 2026-06-27 — Pyraxis TTS Reader
+
+- Built `djinn-pyraxis-listen` CLI tool — text-to-speech reader for all Dominion of Pyraxis chapters
+- Installed edge-tts 7.2.8 (pip3 --user); uses Microsoft Edge TTS servers (online)
+- Default voice: en-US-GuyNeural (Passion/Novel); configurable via --voice flag
+- Strips markdown, frontmatter, and draft notes before synthesis; audio via ffplay
+- Reads: Prologue, Ch1, Ch2, Ch3, lore files; interactive picker or direct invocation
+- Session report: djinn/logs/reports/2026-06-27_pyraxis-tts-reader.md
+
+*— Claude*
