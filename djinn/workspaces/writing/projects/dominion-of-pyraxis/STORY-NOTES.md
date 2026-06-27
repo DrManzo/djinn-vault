@@ -1,7 +1,7 @@
 ---
 title: Story Notes — Dominion of Pyraxis
 tags: [djinn, writing, pyraxis, story-notes, development]
-updated: 2026-06-21
+updated: 2026-06-27
 access: RESTRICTED — Javier + Claude only
 ---
 
@@ -65,18 +65,37 @@ Chapter ends with torches going out behind Brax as he leaves the Ministry: symbo
 
 ---
 
+## Verantus Altonian — The Former Emperor
+
+**Name:** Verantus Altonian | **Role:** Former Emperor; Arctus's father; Raxz's grandfather; 12th of the line
+
+**The short version:** Cincinnatus at the plough. A true Machiavellian in the civic sense — Cicero's open hands, education of the people, power as service. Abdicated. Now farms. Teaches ethics to servants in plain clothes. Visits the palace through servants' entrances. Knows exactly what Arctus is doing to Raxz. Cannot act without becoming the thing his entire reign argued against. His virtue is the cage.
+
+**The cracked ring:** Broken at abdication (not death). Worn openly — his only adornment. Still grants absolute access everywhere. Used almost never. Used for every grandchild's birth.
+
+**The Phoenix Palace:** Palace of Autumn. Grand, maintained, scholars in residence. Verantus lives on the farm portion. Holdings are tax-free; savings go to the servants' generational education. He teaches them himself — ethics, morality — at a plain table, in simple attire. Some of those servants were taught by parents Verantus also taught. Second generation.
+
+**Thematic function:** Proof that the empire wasn't always this. Not idealized — concrete proof, in the form of a man who lived the alternative and still lost. He doesn't make the book hopeful. He makes it worse: if a great man couldn't hold it, and the system made him irrelevant anyway, then the problem is the system. That's the book's argument.
+
+**Relationship to Arctus:** Loves his son. Was wrong about what Arctus was becoming, or believed it was temporary, or believed the empire would moderate it. It didn't. He farms. He teaches. He comes through the servants' entrance when grandchildren are born.
+
+**First appearance:** Mid-lesson, Phoenix Palace farm quarters — Raxz arrives, the servants don't scramble, Verantus finishes his sentence before looking up.
+
+---
+
 ## Prologue — The Burning of Sec-tra
 
-**Setting:** Year 1, Pyraxis Reckoning (current story: Year 700 PR)
+**TIMELINE CORRECTION (2026-06-27):** This scene is set in Arctus's era — approximately 15 years before the main story, concurrent with his rise to power. NOT Year 1 PR. NOT 700 years ago. The three figures are the actual characters (Faust, Zevrath, young Javelin), not descendants of an ancient conspiracy.
+
 **Title:** "The Burning of Sec-tra"
 **Structure:**
 1. Opening hook — Sec-tra burning
-2. Historical context
+2. Historical context (the land's history; this is framing, not the scene's setting)
 3. Character interaction revealing they caused the destruction
-4. Complication: a youth arrives through spatial magic
-5. Closing hook — implications for the Emperor's legitimacy
+4. Complication: young Javelin arrives through spatial magic as messenger
+5. Closing hook — someone above Faust and Zevrath is also moving the field
 
-The burning was orchestrated — the central mystery of Book 1: who, why, and what does it mean for the Emperor's legitimacy?
+The burning was orchestrated to manufacture Arctus's heroism and secure his ascension — the central mystery of Book 1: who arranged this, why, and does Arctus know?
 
 ---
 
