@@ -194,3 +194,11 @@ the guard. Metrics represent meaningful system state change.
 **How to apply:** Javier needs to decide — tenth house (breaks the nine-house structure) or rename one of the unnamed slots. Flagged in CHARACTERS.md and PIPELINE-NOTES.md.
 *— Claude*
 
+
+## 2026-06-27 — TTS: edge-tts over piper for Pyraxis reader
+
+**Decision:** Use edge-tts (Microsoft, online) not piper (local) for djinn-pyraxis-listen
+**Why:** Piper only has 2 EN voices installed (both female British). edge-tts gives access to 30+ EN voices including en-US-GuyNeural (Passion/Novel) — substantially better fit for dark fantasy narration. Tradeoff: requires internet.
+**How to apply:** If offline fallback is needed, piper is still installed at ~/.local/bin/piper with en_GB-alba-medium.onnx.
+
+*— Claude*
