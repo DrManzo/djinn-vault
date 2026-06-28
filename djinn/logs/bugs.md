@@ -131,3 +131,7 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 | 2026-06-21 | Claude | Penelope/OctoPrint | high | fixed | OctoPrint alwaysSendChecksum causes Marlin resend loop — printer requests line 1 indefinitely, comm deadlocked | [[2026-06-21_bug-octoprint-checksum-marlin-resend-loop]] |
 | 2026-06-21 | Claude | Penelope/Creality Print | high | documented | Creality Print V7 gcode contains Klipper macros (START_PRINT, EXCLUDE_OBJECT) — silently fails on Marlin, bed never heats | [[2026-06-21_bug-creality-print-klipper-macros-on-marlin]] |
 | 2026-06-21 | Claude | Penelope/Z offset | medium | fixed | Z offset not configured on Penelope — nozzle 0.5mm too high, first layer ghosted/non-adhesive | [[2026-06-21_bug-penelope-z-offset-unconfigured]] |
+
+
+## 2026-06-28 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-clerk` — OOM (1 occurrence(s)) _(type: errlog)_
