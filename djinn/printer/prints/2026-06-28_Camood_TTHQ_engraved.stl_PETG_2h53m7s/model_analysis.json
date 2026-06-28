@@ -1,0 +1,16 @@
+{
+  "filename": "Camood_TTHQ_engraved.stl_PETG_2h53m7s.gcode",
+  "model_name": "Camood_TTHQ_engraved.stl_PETG_2h53m7s",
+  "order_id": "Camood_TTHQ_engraved.stl_PETG_2h53m7s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-06-28T10:53:34.047163+00:00",
+  "completed_at": "2026-06-28T13:36:53.593360+00:00",
+  "duration_s": 10030.4,
+  "duration_min": 167.2,
+  "filament_mm": 25853.7,
+  "filament_grams": 77.11,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}

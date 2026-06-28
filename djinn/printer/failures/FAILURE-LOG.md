@@ -919,3 +919,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-28 10:45:17 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TTHQ_engraved.stl_PETG_2h53m7s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-28 13:37:20 UTC
