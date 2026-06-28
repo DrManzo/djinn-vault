@@ -785,3 +785,11 @@ Full grammar and flow pass on Prologue, Ch1, Ch2, Ch3 — 57 total fixes. All me
 Session report: `djinn/logs/reports/2026-06-27_pyraxis-grammar-pass.md`
 
 — Claude
+
+---
+
+### 2026-06-28 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 119 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
