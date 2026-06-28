@@ -60,6 +60,32 @@ But first, he had to face his father.
 
 Raxz straightened his shoulders, smoothed his expression, and approached the doors. The guards recognized him and moved to open them without a word. As the doors swung inward, he crossed the threshold into duty, leaving the last trace of his own desires behind.
 
+The Emperor's office received him the way it always had — with the settled silence of a room in which everything was already decided.
+
+Arctus stood at the tall window behind his desk, his back to the door, hands clasped behind him. He watched the palace grounds below with the stillness of a man who had been waiting only in the technical sense — who had not, in any meaningful way, been uncertain of this conversation's direction. He did not turn when Raxz entered. He did not need to.
+
+Raxz stopped at the appropriate distance and waited.
+
+"Tonight," Arctus said, "you will escort Lady Marcella Kalvennor. She is your special guest. You will dance with her, speak with her, ensure she is seen to be received with every courtesy the Dominion can offer. By the time the evening ends, every house in that hall will understand that Lady Marcella is held in the highest regard."
+
+A pause — punctuation, not reflection.
+
+"Her family's alliance with the crown is not yet secured. Tonight begins the work of securing it. You will see that she has an excellent evening."
+
+"I understand."
+
+Arctus turned. Not with urgency — with the deliberateness of a man completing a sequence. His expression was composed. His eyes held no warmth and no cruelty; they held the particular quality of attention that did not distinguish between the son and the situation.
+
+"If the evening proves what it should — and the seasons that follow confirm it was well-begun — there will be a formal proposal. You know what that means for House Kalvennor. You know what it means for the Dominion." A pause. "The empire does not govern by preference, Raxz. It moves by will. In matters of alliance, there is only one will that shapes the outcome."
+
+He held Raxz's gaze.
+
+"Only one."
+
+Raxz heard him. He understood the instruction, the framework, the careful absence of cruelty in it. He counted three seconds and chose wrong.
+
+"And if Lady Marcella doesn't want this either?"
+
 Arctus made no immediate response. Raxz watched his father's face carefully, reading the minute shifts in expression — the way his jaw tightened, the flicker behind his eyes. Without a word from his father, Raxz understood with sudden, sickening clarity that he'd miscalculated. Pushed too hard. In his attempt to assert control, he'd made his father misstep — and worse, Arctus knew it.
 
 The cold voice, when it finally came, sounded distant and somehow choked. "You may go."
