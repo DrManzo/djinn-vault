@@ -669,3 +669,93 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Behavioral-Therapy-Subsections-For-Addiction.md`
 
 — Clerk
+
+---
+
+### 2026-06-28 11:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Core-Subsections-Of-Cognitive-Behavioral-Therapy-For-Addiction.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:21 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Tool-Overview.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Psychology-Neuroscience-Chemical-Biology-Of-Dominant-And.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:22 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Typhon's-Forge-Agent-Reference.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Penelope-Saturday-Upgrade-Runbook.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:23 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Unified-Guardian-Shrine-Concept-For-Desk-Display.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Dominion-Of-Pyraxis-House-Structure-And-Briefs.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Vault-Ender-3-V3-Plus-Filament-Profile-2026-06-28.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:24 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-World-Of-Warcraft-On-Linux-2026-06-28.md`
+
+— Clerk
