@@ -13,42 +13,6 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 ### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
 
 **What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_0e0139f0-bffd-4699-b160-92589c9ea66f.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
 **Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
 
 — Slipbox
