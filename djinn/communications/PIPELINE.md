@@ -449,3 +449,223 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Source:** Academic-Planning-And-Transcripts-Request.md
 **Target:** references/Business/Academic-Planning-And-Transcripts-Request.md
 **Model:** phi4:14b on Orion
+
+---
+
+### 2026-06-28 11:12 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Dominion-Of-Pyraxis-Cast-And-Characteristics.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:13 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Vault-Ender-3-V3-Plus-Filament-Profile.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:13 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-World-Of-Warcraft-On-Linux.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:14 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Modifying-A-3d-Model-In-Blender.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:14 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Osint-As-A-Djinn-Workspace.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:14 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Task-080-Kraken-Proxy-Pipe-Finalization.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:15 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Academic-Writing-Agent-For-Apa-And-Mla-Formats.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:15 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Convert-Puffco-Proxy-V1-Bowl-To-38-5mm.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:15 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-To-Modify-An-Stl-File-Into-A.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:15 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Publishings-Research-Suite.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:16 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Best-Cameras-For-Macro-Close-Up-And-Face.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:16 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Core-Components-Overview.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Pa-Layer-Redesign-Research.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:17 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Research-Request-Pa-Layer-Redesign.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Summary-Of-Today's-Djinn-Vault-Activity.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:18 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Forge-Slicer-Build-Prompt.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Forge-Slicer-Project-Overview.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Task-Comms-Noise-Reduction.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:19 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Creality-Ender-3-V3-Plus-Slicer-Profiles-For.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-Cr-Touch-On-Ender-3-Pro.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chapter-Four-Javelin.md`
+
+— Clerk
+
+---
+
+### 2026-06-28 11:20 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Cognitive-Behavioral-Therapy-Subsections-For-Addiction.md`
+
+— Clerk
