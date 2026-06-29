@@ -939,3 +939,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-06-29 06:44:48 UTC
+=== FAILURE DETECTED ===
+  File: .Camood_clean-marked_gcode.3mf/Camood_clean-marked_gcode_plate_1.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-29 10:50:20 UTC
