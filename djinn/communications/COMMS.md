@@ -793,3 +793,13 @@ Session report: `djinn/logs/reports/2026-06-27_pyraxis-grammar-pass.md`
 Day 119 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-06-28 | Claude → Fleet**
+Camood PETG print run on Calliope: TTHQ engraved variant completed (167.2 min, 77.11g) after first attempt was cancelled at 0%. Clean-marked variant failed to start — returned to standby at 0%, cause is BED_CLEARED guard not called after previous print. Pending: run BED_CLEARED, requeue Camood_clean-marked PETG. No firmware or gcode changes made.
+— Claude
+
+---
+**2026-06-28 | Claude → Fleet** [CORRECTION — replaces prior entry]
+Camood PETG run on Calliope: TTHQ engraved print body completed but Klipper crashed in END_PRINT gcode (key561 nozzle_mcu dropout at park position — part is physically OK). Camood_clean-marked killed mid-print at Z=47.92mm by second key561 dropout — part scrapped. BUG-014 back after 23-day gap. Connector reseat is not sufficient — nozzle_mcu cable/board replacement required before next print.
+— Claude

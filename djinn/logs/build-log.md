@@ -1537,3 +1537,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Session report: djinn/logs/reports/2026-06-27_pyraxis-tts-reader.md
 
 *— Claude*
+
+
+## 2026-06-28 — Camood PETG Print Run
+- `Camood_TTHQ_engraved.stl` PETG — first attempt cancelled at 0% (BED_CLEARED not called), retried and completed: 167.2 min, 77.11g ✅
+- `Camood_clean-marked.stl` PETG — failed at 0% → standby (BED_CLEARED guard, same cause) ❌ — pending reprint
+- Requires `BED_CLEARED` call before requeue; no gcode or firmware changes made
+- Session report: djinn/logs/reports/2026-06-28_camood-petg-print.md
+- Bug report: djinn/logs/reports/2026-06-28_bug-camood-petg-start.md
+
+*— Claude*

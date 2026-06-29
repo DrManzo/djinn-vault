@@ -924,3 +924,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-28 13:37:20 UTC
+=== FAILURE DETECTED ===
+  File: Camood_clean-marked.stl_PETG_2h50m0s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-29 03:01:36 UTC

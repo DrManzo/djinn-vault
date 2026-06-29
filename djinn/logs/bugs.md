@@ -90,6 +90,14 @@ Cable reroute performed but dropouts continue. All 11 shutdown events confirmed 
 Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout recurred after 3 days. Board or cable needs replacement, not reseat.
 
 **Impact:** Blocks all prints until fixed. Both Orca (ECO temp issue, worked around by PrusaSlicer gcode structure) and PrusaSlicer (temperature correct, but nozzle_mcu drops out) approaches fail at Z<10mm due to this hardware issue.
+
+### BUG-014 UPDATE — 2026-06-28 (recurrence after 23-day gap)
+Two key561 dropouts today during Camood PETG prints:
+1. **06:36:59 PDT** — Camood_TTHQ_engraved: dropout during END_PRINT parking gcode (6 seconds after `Finished SD card print`). Part was complete. Position: X=10, Y=295, Z=165 (park position). Klipper crashed in end-gcode only, part is physically fine.
+2. **20:01:17 PDT** — Camood_clean-marked: dropout mid-print at Z=47.92mm (~45% of 107mm body). Part SCRAPPED.
+
+Both confirmed `Timeout with MCU 'nozzle_mcu'` → key561. Connector reseat from 2026-06-03 lasted 23 days before failure. **Cable or board replacement is now required — reseat is not sufficient.**
+
 | 2026-06-07 | Claude | clerk | low | fixed | clerk-watch wrong RAW_PATH | [[2026-06-07_bug-clerk-watch-wrong-raw-path]] |
 
 
@@ -135,3 +143,5 @@ Connector reseat (2026-06-03) did **not** permanently fix the issue — dropout 
 
 ## 2026-06-28 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-clerk` — OOM (1 occurrence(s)) _(type: errlog)_
+
+| 2026-06-28 | Claude | Calliope / nozzle_mcu UART | high | open | BUG-014 recurring — key561 nozzle_mcu dropout killed Camood_clean-marked at Z=47.92mm (part scrapped). Also hit end-gcode of TTHQ engraved print (part OK). Connector reseat June 3 lasted 23 days — cable/board replacement now required. | [[2026-06-28_bug-camood-petg-start]] |
