@@ -944,3 +944,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-29 10:50:20 UTC
+=== FAILURE DETECTED ===
+  File: holder.stl_PLA_2h3m17s.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-29 17:42:49 UTC
