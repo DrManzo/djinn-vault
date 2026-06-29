@@ -759,3 +759,43 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Can-I-Install-World-Of-Warcraft-On-Linux-2026-06-28.md`
 
 — Clerk
+
+---
+
+### 2026-06-29 18:09 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Calliope-Bug-014-Thermal-Workaround-Playbook-Key561-Nozzle.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:10 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Faust-Cli-Tool-Overview-2026-06-29.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:10 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Installing-Cr-Touch-On-Ender-3-Pro-2026-06-29.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:10 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chapter-Four-Javelin's-Pov.md`
+
+— Clerk
