@@ -3353,3 +3353,20 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 
 **Commit:** `git commit -m "feat: djinn-blender-qa — three-class QA script (B-3)"` in both repos.
 **Report:** COMMS.md with sample output from a test STL.
+
+---
+**TASK:** Save Penelope Z offset to EEPROM
+**FOR:** Javier (manual — OctoPrint terminal)
+**DATE:** 2026-06-29
+**ACTION:** Open OctoPrint terminal → run `M851 Z-0.599` then `M500`. Current babystep is RAM only and resets on power cycle.
+
+**TASK:** Approve and print Camood_TerpTribeHq_union.stl
+**FOR:** Javier
+**DATE:** 2026-06-29
+**FILE:** ~/Desktop/Review/Camood_TerpTribeHq_union.stl
+**ACTION:** Review, approve, send to Calliope via Creality on-device slicer. Single body, boolean-unioned, ready to slice.
+
+**TASK:** Replace nozzle_mcu cable harness on Calliope
+**FOR:** Javier (hardware)
+**DATE:** 2026-06-29
+**ACTION:** Reseat is not permanent. Order or source replacement cable/connector for nozzle_mcu UART on Ender-3 V3 Plus.
