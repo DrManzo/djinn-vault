@@ -799,3 +799,43 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Chapter-Four-Javelin's-Pov.md`
 
 — Clerk
+
+---
+
+### 2026-06-29 18:11 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Djinn-Pyraxis-Listen-User-Manual.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:11 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Core-Subsections-Of-Cognitive-Behavioral-Therapy-For-Addiction-2026-06-29.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:11 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Psychology-Neuroscience-Chemical-Biology-Of-Dominant-And-2026-06-29.md`
+
+— Clerk
+
+---
+
+### 2026-06-29 18:12 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Typhon's-Forge-Agent-Reference-2026-06-29.md`
+
+— Clerk
