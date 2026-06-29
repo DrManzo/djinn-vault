@@ -799,3 +799,11 @@ Camood PETG run on Calliope: TTHQ engraved print body completed but Klipper cras
 **2026-06-28 | Claude → Fleet**
 Calliope hardened against nozzle_mcu key561 dropout for PETG: M106 capped at S128 in gcode_macro.cfg, 3-min thermal soak added to START_PRINT for temps ≥240°C, bed_mesh reduced to 3×3. Klipper restarted, all changes confirmed live. TRSYNC_TIMEOUT in mcu.py (priority 3) still needs manual SSH — command: `sed -i 's/TRSYNC_TIMEOUT = [0-9.]*$/TRSYNC_TIMEOUT = 0.05/' /usr/share/klipper/klippy/mcu.py && sudo systemctl restart klipper`. PETG temp should be set to 240°C in slicer before next run.
 — Claude
+
+---
+
+### 2026-06-29 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 120 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
