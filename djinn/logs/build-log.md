@@ -1575,3 +1575,18 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Validated: Camood_TerpTribeHq failed repeatedly as 66 bodies, printed consistently as 1 body after union.
 
 *— Claude*
+
+## 2026-06-29 — Calliope Camood Clean Print — Completed Successfully
+
+- Camood (no engraving, maker's mark only) printed to completion — 106mm, no errors, no dropout
+- **Cable reseat** provided good slack — rattle disappeared mid-print, cable held through all 530+ layers
+- **Gyroid infill confirmed safe** for simple solid geometry on Calliope — rattle was toolhead vibration only, not cable stress
+- **Root cause of all previous failures confirmed:** specific XY toolpath positions from engraving/emboss geometry pulled cable to connector stress point — not infill pattern, not temp, not software config
+- **key561 errors are symptoms, not causes** — sequence is always: XY toolpath pulls cable → connector loses contact → Klipper detects MCU timeout → key561 → emergency stop. Errors are reactive, they do nothing to the hardware.
+- All software workarounds reverted to stock — none were helping, thermal soak may have been making it worse
+- **Calliope print rules validated:**
+  - Single merged body before slicing (no separate engraving shells)
+  - Gyroid fine for simple solids, rectilinear/grid for complex engraved geometry
+  - Cable slack is the real fix — reseat and route with relief
+
+*— Claude*

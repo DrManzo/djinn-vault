@@ -202,3 +202,18 @@ the guard. Metrics represent meaningful system state change.
 **How to apply:** If offline fallback is needed, piper is still installed at ~/.local/bin/piper with en_GB-alba-medium.onnx.
 
 *— Claude*
+
+## 2026-06-29 — Calliope Workarounds Reverted
+
+**Decision:** Reverted all four BUG-014 software workarounds (M106 fan cap, thermal soak, 3×3 bed mesh, TRSYNC 0.05) to stock config.
+**Why:** None addressed the real cause. Thermal soak pre-stressed the connector before motion. Cable reseat + correct geometry is the actual fix. Stock config confirmed working.
+
+## 2026-06-29 — Calliope Infill Rules Established
+
+**Decision:** Gyroid for simple solid geometry; rectilinear/grid for engraved/embossed geometry on Calliope.
+**Why:** Gyroid on simple solids generates centered toolpaths that keep cable in safe range. Engraving geometry generates wide XY sweeps that pull cable to stress point regardless of infill. Validated by successful 106mm gyroid print after cable reseat.
+
+## 2026-06-29 — Boolean Union Law for Both Printers
+
+**Decision:** All multi-body STLs must be boolean-unioned to single body in Blender before slicing. Exception: intentional separate bodies (moving parts, print-in-place).
+**Why:** Separate shells generate inter-body travel moves. Validated: Camood 66-body failed repeatedly; 1-body completed.

@@ -807,3 +807,11 @@ Calliope hardened against nozzle_mcu key561 dropout for PETG: M106 capped at S12
 Day 120 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-06-29
+**RE:** Calliope BUG-014 root cause confirmed — print completed
+
+BUG-014 root cause confirmed after extended session. key561 dropouts on Calliope are caused by engraving/emboss geometry generating wide XY toolpath sweeps that pull the nozzle_mcu cable to connector stress point. Cable reseat by Javier restored slack. Camood (simple solid, gyroid infill, maker's mark only) printed to completion at 106mm — no errors. All software workarounds reverted to stock. Rules established: single merged body before slicing, gyroid OK for simple solids, rectilinear for engraved geometry. Penelope koi PLA print also running, babystep -0.599 active. Penelope gcode normalization script on backburner.
