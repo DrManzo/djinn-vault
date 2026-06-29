@@ -1547,3 +1547,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Bug report: djinn/logs/reports/2026-06-28_bug-camood-petg-start.md
 
 *— Claude*
+
+## 2026-06-28 — Calliope PETG Hardening (nozzle_mcu dropout workarounds)
+- M106 fan cap: `{% set tmp = [tmp, 128] | min %}` added to gcode_macro.cfg M106 macro — hard 50% cap on all fan output regardless of slicer value
+- Thermal soak: 3×60s dwell blocks added to START_PRINT, conditional on EXTRUDER_TEMP >= 240 — fires for PETG/ABS, skips for PLA
+- bed_mesh probe_count: 6,6 → 3,3 in printer.cfg — reduces XY sweep distance and nozzle_mcu polling during leveling
+- TRSYNC_TIMEOUT: NOT applied — requires SSH/physical access to /usr/share/klipper/klippy/mcu.py (manual step pending)
+- Klipper restarted — all three changes confirmed live via API
+- Based on Marcus research: root fix is temp 240°C for PETG + above mitigations
+
+*— Claude*

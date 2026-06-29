@@ -803,3 +803,8 @@ Camood PETG print run on Calliope: TTHQ engraved variant completed (167.2 min, 7
 **2026-06-28 | Claude → Fleet** [CORRECTION — replaces prior entry]
 Camood PETG run on Calliope: TTHQ engraved print body completed but Klipper crashed in END_PRINT gcode (key561 nozzle_mcu dropout at park position — part is physically OK). Camood_clean-marked killed mid-print at Z=47.92mm by second key561 dropout — part scrapped. BUG-014 back after 23-day gap. Connector reseat is not sufficient — nozzle_mcu cable/board replacement required before next print.
 — Claude
+
+---
+**2026-06-28 | Claude → Fleet**
+Calliope hardened against nozzle_mcu key561 dropout for PETG: M106 capped at S128 in gcode_macro.cfg, 3-min thermal soak added to START_PRINT for temps ≥240°C, bed_mesh reduced to 3×3. Klipper restarted, all changes confirmed live. TRSYNC_TIMEOUT in mcu.py (priority 3) still needs manual SSH — command: `sed -i 's/TRSYNC_TIMEOUT = [0-9.]*$/TRSYNC_TIMEOUT = 0.05/' /usr/share/klipper/klippy/mcu.py && sudo systemctl restart klipper`. PETG temp should be set to 240°C in slicer before next run.
+— Claude
