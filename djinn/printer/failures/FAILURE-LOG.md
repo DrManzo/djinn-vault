@@ -929,3 +929,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → standby
   Time: 2026-06-29 03:01:36 UTC
+=== FAILURE DETECTED ===
+  File: Camood_clean-marked_PETG_240C.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-06-29 05:44:28 UTC
