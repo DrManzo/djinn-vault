@@ -1557,3 +1557,21 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Based on Marcus research: root fix is temp 240°C for PETG + above mitigations
 
 *— Claude*
+
+## 2026-06-29 — Penelope Profile Validated (Proxy Stand)
+
+- `Penelope-Standard-TreeSupports.json` written to OrcaSlicer user process dir (was previously missing from disk)
+- Proxy Stand print confirmed all fixes working: clean outside, clean top surface, no blobs, no strings, seam at back, brim smooth
+- Settings validated: top_shell_layers=5, top_surface_speed=30mm/s, top_solid_infill_flow_ratio=1.05, seam_position=back, retraction=6mm@45mm/s, deretraction=25mm/s, gyroid 14%, tree(auto) supports 30°, 8mm brim
+- This is now the confirmed Penelope PLA baseline profile
+
+*— Claude*
+
+## 2026-06-29 — Print Law: Single Body Required Before Slicing
+
+- **LAW (Calliope + Penelope):** Any STL/3MF with multiple separate bodies (emboss, engraving, separate shells) MUST be boolean-unioned into a single body in Blender before slicing and sending to either printer.
+- Root cause: multi-body STLs generate inter-body travel moves that stress Calliope's nozzle_mcu cable and cause inconsistent toolpaths on both printers.
+- Fix: `blender --background --python boolean_union.py` → single body STL → Desktop/Review → slice → print.
+- Validated: Camood_TerpTribeHq failed repeatedly as 66 bodies, printed consistently as 1 body after union.
+
+*— Claude*
