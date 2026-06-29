@@ -145,3 +145,7 @@ Both confirmed `Timeout with MCU 'nozzle_mcu'` → key561. Connector reseat from
 - **[HIGH]** `journald:djinn-clerk` — OOM (1 occurrence(s)) _(type: errlog)_
 
 | 2026-06-28 | Claude | Calliope / nozzle_mcu UART | high | open | BUG-014 recurring — key561 nozzle_mcu dropout killed Camood_clean-marked at Z=47.92mm (part scrapped). Also hit end-gcode of TTHQ engraved print (part OK). Connector reseat June 3 lasted 23 days — cable/board replacement now required. | [[2026-06-28_bug-camood-petg-start]] |
+
+
+## 2026-06-29 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (2 occurrence(s)) _(type: errlog)_
