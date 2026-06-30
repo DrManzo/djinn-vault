@@ -954,3 +954,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-29 19:44:29 UTC
+=== FAILURE DETECTED ===
+  File: clamp.stl_PLA_1h33m58s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-06-30 04:09:33 UTC
