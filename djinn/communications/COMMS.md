@@ -13,15 +13,6 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 ### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
 
 **What:** Slipbox added [[wiki links]] and hierarchical tags.
-**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_8f42d661-95a6-43c9-b889-3993c658ee85.md`
-
-— Slipbox
-
----
-
-### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
-
-**What:** Slipbox added [[wiki links]] and hierarchical tags.
 **Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
 
 — Slipbox
