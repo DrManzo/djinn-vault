@@ -964,3 +964,18 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-06-30 08:38:09 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TerpTribeHq.stl_PETG_6h52m8s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-30 22:17:01 UTC
+=== FAILURE DETECTED ===
+  File: Camood_TerpTribeHq.stl_PETG_6h52m8s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-30 22:21:03 UTC
+=== FAILURE DETECTED ===
+  File: Camood_clean-marked.stl_PETG_10h8m17s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-06-30 22:31:07 UTC
