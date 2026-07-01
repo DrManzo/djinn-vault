@@ -1000,3 +1000,8 @@ Each entry: one incident. Append only.
   Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
 === ERROR STATE ===
   Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== FAILURE DETECTED ===
+  File: Object_1_PETG_54m9s.gcode
+  Progress: 82%
+  Transition: printing → error
+  Time: 2026-07-01 01:32:16 UTC
