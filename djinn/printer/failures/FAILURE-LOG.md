@@ -979,3 +979,24 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → standby
   Time: 2026-06-30 22:31:07 UTC
+=== FAILURE DETECTED ===
+  File: drpuffco - med core. - manual smooth.stl_PETG_52m43s.gcode
+  Progress: 66%
+  Transition: printing → error
+  Time: 2026-06-30 23:53:40 UTC
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
