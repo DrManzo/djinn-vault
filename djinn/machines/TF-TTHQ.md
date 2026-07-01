@@ -2,20 +2,62 @@
 title: Machine — TF/TTHQ (Typhon)
 tags: [djinn, machine, typhon, hardware, models]
 created: 2026-05-22
-updated: 2026-05-23
+updated: 2026-07-01
 ---
 
 # Machine: TF/TTHQ — Typhon
 
 **Callsign:** TF/TTHQ
-**Network name:** Typhon
-**Role:** Storage node, printer bot host, secondary Djinn agent
-**SSH:** `ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113`
-**Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[HEARTBEAT-typhon]]
+**Network name:** Typhon (Windows hostname currently reports `Typhon-4`, pending rename to `typhon` — see Status below)
+**Role:** **Changed 2026-06-25** — dedicated shop machine (slicing, commissions, content, accounting). No longer storage/sync.
+**IP:** 192.168.1.113 (host is up, all tested ports `filtered` as of 2026-07-01)
+**SSH:** Broken — old key auth (`tf-tthq@192.168.1.113`) no longer applies, machine was wiped
+**Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[HEARTBEAT-typhon]] | `djinn/workspaces/typhon-windows/setup-typhon.ps1`
 
 Changes from this machine are signed: `— TF/TTHQ`
 
 ---
+
+## ⚠️ Status: Mid-Migration, Onboarding Incomplete
+
+This machine was reinstalled from Ubuntu to **Windows** around 2026-06-25 and repurposed
+as Typhon's Forge shop machine. Everything below the divider describes the **old Ubuntu
+setup** and is kept for reference only — it does not reflect current reality.
+
+**What's confirmed as of 2026-07-01:**
+- Host is up and answering ARP/port probes at 192.168.1.113, but every checked port
+  (22, 3389, 445, 139, 5985, 11434) is `filtered` — no services exposed yet.
+- Hostname still resolves as `Typhon-4.lan`, meaning `Rename-Computer -NewName "typhon"`
+  in the setup script hasn't taken effect — the script likely hasn't been run (or completed
+  + rebooted) on this box yet.
+- No heartbeat since 2026-06-23 13:40 UTC (the old Linux heartbeat timer no longer exists
+  on Windows; nothing has replaced it).
+- Not present in the Tailscale tailnet yet.
+- The setup script's post-reboot instructions call
+  `curl https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/scripts/bootstrap-node.sh | bash`
+  inside WSL2 Ubuntu — **this file does not exist anywhere in the vault or git history.**
+  This blocks the WSL2-side Djinn install (Ollama, Claude Code, comms-processor, heartbeat)
+  even once the ps1 script runs successfully.
+
+**Onboarding checklist (what's left):**
+1. Run/re-run `djinn/workspaces/typhon-windows/setup-typhon.ps1` as Administrator on the
+   physical machine (debloat, OpenSSH, WSL2, winget installs, `C:\Forge\*`, firewall, rename, reboot).
+2. Write the missing `djinn/scripts/bootstrap-node.sh` (WSL2/Windows-adapted version of
+   `djinn/migration/bootstrap.sh`) before step 3 below can work.
+3. Inside WSL2 Ubuntu, run the bootstrap script to install Ollama/Claude Code/vault clone/djinn scripts.
+4. Paste Salomon's SSH pubkey into `C:\ProgramData\ssh\administrators_authorized_keys`.
+5. Join Tailscale.
+6. Import OrcaSlicer profiles from `Z:\forge\slicer-profiles` (verify the `Z:` share target
+   IP is actually correct — the script maps to `\\192.168.1.176\storage`, which does not
+   match a currently-live host on the LAN as of 2026-07-01).
+7. Stand up a Windows/WSL2-appropriate heartbeat + comms-processor equivalent — the old
+   systemd timers don't exist on this OS.
+
+---
+
+## Old Ubuntu Setup (superseded — reference only)
+
+**SSH (dead):** `ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113`
 
 ## Hardware
 
@@ -26,11 +68,11 @@ Changes from this machine are signed: `— TF/TTHQ`
 | **GPU** | NVIDIA GeForce GTX 1650 Max-Q — 4GB VRAM |
 | **OS Drive** | 250GB NVMe SSD (KINGSTON) — `/` |
 | **Bulk Storage** | 1TB HDD (WDC WD10SPZX) — `/mnt/storage` |
-| **OS** | Ubuntu 26.04 LTS |
+| **OS** | ~~Ubuntu 26.04 LTS~~ → Windows (as of 2026-06-25) |
 
 ---
 
-## Storage Layout
+## Storage Layout (Ubuntu — no longer applies)
 
 | Mount | Device | Size | Used | Contents |
 |-------|--------|------|------|---------|
@@ -45,9 +87,9 @@ Changes from this machine are signed: `— TF/TTHQ`
 
 ---
 
-## Ollama Models
+## Ollama Models (Ubuntu — needs reinstall inside WSL2 or native Windows Ollama)
 
-Ollama runs as system service (`ollama` user). Models stored at `/mnt/storage/ollama-system/models/` (symlinked from `/usr/share/ollama/.ollama`).
+Ollama ran as system service (`ollama` user). Models stored at `/mnt/storage/ollama-system/models/` (symlinked from `/usr/share/ollama/.ollama`).
 
 | Model | Size | Can Run Locally? | Notes |
 |-------|------|-----------------|-------|
@@ -64,7 +106,7 @@ Ollama runs as system service (`ollama` user). Models stored at `/mnt/storage/ol
 
 ---
 
-## OpenCode Config
+## OpenCode Config (Ubuntu — needs reinstall)
 
 **File:** `~/.opencode/opencode.json`
 **Providers:**
@@ -76,19 +118,19 @@ Ollama runs as system service (`ollama` user). Models stored at `/mnt/storage/ol
 
 ---
 
-## Services
+## Services (Ubuntu — none of these exist on Windows yet)
 
 | Service | Status | Notes |
 |---------|--------|-------|
-| Ollama | ✅ Running | System service, models on 1TB |
-| comms-processor | ✅ Active | 3-min timer, scans COMMS.md for @Typhon tasks |
-| vault-sync | ✅ Active | 15-min timer via rclone → gdrive |
-| djinn-printer-bot | ✅ Live | Telegram bot, token in `~/.config/djinn/printer-bot.env` |
-| heartbeat | ✅ Active | 5-min → `djinn/communications/HEARTBEAT-typhon.md` |
+| Ollama | ❌ Gone with reinstall | Needs Windows/WSL2 reinstall |
+| comms-processor | ❌ Gone with reinstall | 3-min timer, scans COMMS.md for @Typhon tasks |
+| vault-sync | ❌ Gone with reinstall | 15-min timer via rclone → gdrive |
+| djinn-printer-bot | ❌ Gone with reinstall | Telegram bot, token was in `~/.config/djinn/printer-bot.env` |
+| heartbeat | ❌ Gone with reinstall | 5-min → `djinn/communications/HEARTBEAT-typhon.md` |
 
 ---
 
-## Installed Apps
+## Installed Apps (Ubuntu — no longer applies)
 
 | App | Method | Notes |
 |-----|--------|-------|
@@ -96,7 +138,7 @@ Ollama runs as system service (`ollama` user). Models stored at `/mnt/storage/ol
 | Discord | snap | v1.0.139 |
 | rclone | apt | gdrive remote configured and working |
 
-## Git Auth
+## Git Auth (Ubuntu — credentials gone with reinstall, must be reprovisioned)
 
 All repos use HTTPS with fine-grained PAT:
 - Stored: `~/.config/djinn/github.env` (chmod 600) + `~/.git-credentials`
@@ -111,8 +153,8 @@ With 14GB RAM and GTX 1650 4GB VRAM:
 - **Runs well:** anything ≤8B parameters
 - **Runs with offload:** 8–14B (slower, CPU handles overflow)
 - **Cannot run locally:** >14B — route to Salomon via `ollama-salomon`
-- **Best use:** Lightweight admin, quick queries, printer bot, storage ops
+- **Best use:** Lightweight admin, quick queries, printer bot, storage ops (pre-Windows-migration usage — role has since changed to shop machine)
 
 ---
 
-*— Claude, 2026-05-23*
+*— Claude, 2026-05-23. Updated 2026-07-01 for Windows migration/onboarding status.*

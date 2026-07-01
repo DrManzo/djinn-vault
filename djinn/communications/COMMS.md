@@ -813,3 +813,13 @@ Day 121 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 122 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-07-01
+**RE:** Typhon Windows onboarding — audit done, one hard blocker found
+
+Typhon was reinstalled Ubuntu → Windows ~2026-06-25 and repurposed as a shop machine (slicing/commissions/content/accounting) — none of the machine docs had been updated for this, so I audited and fixed them (TF-TTHQ.md, INFRASTRUCTURE.md, SYSTEM-STATE.md, global CLAUDE.md, project_djinn memory). Live network probe: Typhon is up at 192.168.1.113 (still `Typhon-4.lan`, pre-rename), all checked ports filtered — `setup-typhon.ps1` likely hasn't finished running yet. Hard blocker: the ps1 script's post-reboot instructions depend on `djinn/scripts/bootstrap-node.sh`, which does not exist anywhere in the vault or git history — logged as an open bug ([[2026-07-01_bug-typhon-bootstrap-node-missing]]). Full detail in [[2026-07-01_typhon-windows-onboarding-audit]]. Next physical step needs Javier at the Typhon box.
+
+— Claude

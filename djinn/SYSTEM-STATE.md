@@ -17,10 +17,10 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Machine | Status | IP | User | Last Verified |
 |---------|--------|----|------|--------------|
 | Salomon | ✅ Online | 192.168.1.225 | `drmanzo` | 2026-05-23 |
-| Typhon | ✅ Online | 192.168.1.113 | `tf-tthq` | 2026-05-23 |
+| Typhon | ⚠️ Onboarding incomplete (Windows reinstall) | 192.168.1.113 | — (fresh Windows box) | 2026-07-01 |
 | Claude | ✅ Online | — (API) | — | 2026-05-23 |
 
-**Network:** Both machines on same subnet (192.168.1.x) as of 2026-05-23. SSH from Salomon→Typhon: `ssh -i ~/.ssh/id_ed25519 tf-tthq@192.168.1.113`. Passwordless via ed25519 key.
+**Network:** Both machines on same subnet (192.168.1.x). SSH Salomon→Typhon is **broken** — Typhon was wiped to Windows ~2026-06-25 and repurposed as a shop machine (slicing/commissions/content/accounting); old ed25519 key auth no longer applies. Full status and onboarding checklist: [[machines/TF-TTHQ]].
 
 ---
 
@@ -30,7 +30,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 |---------|--------|-------|
 | OpenClaw gateway | ✅ Live | 127.0.0.1:18789, token auth. main=mistral:7b (gateway relay), coder=qwen2.5-coder:7b, law=deepseek-r1:7b. historyLimit=5 |
 | Telegram @DjinnOCBot | ✅ Live | Polling, DMs locked to Javier. Bot: @DjinnOCBot (new token 2026-05-23) |
-| Telegram printer bot | ✅ Live | djinn-printer-bot.service on **Typhon** |
+| Telegram printer bot | ⚠️ Down | djinn-printer-bot.service was on **Typhon** — gone with Windows reinstall, not yet reprovisioned |
 | Ollama | ✅ Running | 0.0.0.0:11434 — **7 models** (qwen3.6 removed 2026-05-23) |
 | comms-processor | ✅ Active | 3-min timer → routes @Clerk→djinn-clerk, @Slipbox→djinn-slipbox, @Salomon→opencode |
 | djinn-clerk timer | ✅ Active | 1-hr timer → scans RAW/ for unprocessed Perplexity exports → i notes/Notes/ |
@@ -47,14 +47,18 @@ Inter-machine operational state. Read before acting. Update when state changes.
 
 ## Active Services — Typhon
 
-| Service | Status | Notes |
+**⚠️ All of the below are gone as of 2026-06-25** — Typhon was wiped from Ubuntu to Windows
+and none have been reprovisioned yet. Kept for reference on what needs to be rebuilt
+(inside WSL2, or native Windows equivalents) once onboarding completes. See [[machines/TF-TTHQ]].
+
+| Service | Status (pre-reinstall) | Notes |
 |---------|--------|-------|
-| Ollama | ✅ Running | Local models + remote routing to Salomon:11434 |
-| comms-processor | ✅ Active | 3-min systemd timer → scans COMMS.md → invokes opencode |
-| Heartbeat timer | ✅ Active | 5-min → [[HEARTBEAT-typhon]] — now writes dynamic IP |
-| Vault sync | ✅ Active | git pull 2-min |
-| djinn-printer-bot | ✅ Live | python-telegram-bot, ~/.venvs/djinn-bot/, token in ~/.config/djinn/printer-bot.env |
-| opencode | ✅ Available | Invoked via comms-processor — use `--dangerously-skip-permissions` for headless |
+| Ollama | ❌ Gone | Local models + remote routing to Salomon:11434 |
+| comms-processor | ❌ Gone | 3-min systemd timer → scans COMMS.md → invokes opencode |
+| Heartbeat timer | ❌ Gone | 5-min → [[HEARTBEAT-typhon]] — last beat 2026-06-23 |
+| Vault sync | ❌ Gone | git pull 2-min |
+| djinn-printer-bot | ❌ Gone | python-telegram-bot, ~/.venvs/djinn-bot/, token in ~/.config/djinn/printer-bot.env |
+| opencode | ❌ Gone | Invoked via comms-processor — use `--dangerously-skip-permissions` for headless |
 
 ---
 
@@ -83,7 +87,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | IP | **192.168.1.114**:7125 (Moonraker) — was .113, corrected 2026-06-20 |
 | Build volume | 300×300×330mm |
 | Control | Klipper + Moonraker |
-| Bot | Telegram bot on Typhon — `/print_status`, `/print`, `/print_cancel` |
+| Bot | Telegram bot was on Typhon — `/print_status`, `/print`, `/print_cancel` — **down**, needs reprovisioning post-Windows-migration |
 | Config backup | [[djinn/printer/backup/]] |
 | Process docs | [[printer/process/INTAKE]] |
 | Error history | [[error_log]] |
@@ -113,7 +117,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Agent | Trigger | Status | Notes |
 |-------|---------|--------|-------|
 | Salomon opencode | comms-processor (3-min timer) | ✅ Active | Fires on new @Salomon tasks in COMMS.md |
-| Typhon opencode | comms-processor (3-min timer) | ✅ Active | Same script, same logic |
+| Typhon opencode | comms-processor (3-min timer) | ❌ Down | Wiped with Windows reinstall, not reprovisioned — see [[machines/TF-TTHQ]] |
 | Claude | Javier initiates session | ✅ Working | Session-bound by design |
 | djinn-daily | 8 AM timer | ✅ Active | opencode wired, deepseek-r1:7b for PLAN.md |
 | OpenClaw main agent | Discord + Telegram | ✅ Active | mistral:7b (200k ctx, thin relay). Routes: note:/law:/code:/slipbox: prefixes |

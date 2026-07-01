@@ -26,11 +26,13 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Typhon (Secondary — MSI)
 | Attribute | Value |
 |-----------|-------|
-| IP | 192.168.1.113 |
+| IP | **192.168.1.113** — host up, hostname currently reports as `Typhon-4.lan` (pre-rename; `Rename-Computer` to `typhon` in setup-typhon.ps1 hasn't taken effect, so the script likely hasn't been run/completed yet) |
 | GPU | NVIDIA GTX 1650 4GB |
-| RAM | 14Gi total (2.6Gi used) |
-| Disk | 552G free (37% used) |
-| Role | Storage, lightweight tasks, Typhon's Studio streaming/post-production |
+| RAM | 14Gi total |
+| OS | **Windows** (reinstalled from Ubuntu ~2026-06-25) |
+| Role | **Changed** — no longer storage/sync. Now dedicated shop machine: slicing (OrcaSlicer), commissions, content (OBS/MediaMTX), accounting. Djinn stack (Ollama, Claude Code, comms-processor, etc.) runs inside WSL2 Ubuntu, not natively. |
+| Setup | `djinn/workspaces/typhon-windows/setup-typhon.ps1` — debloat, OpenSSH/WSL2/Hyper-V, winget installs, `C:\Forge\*` dirs, Tailscale, firewall |
+| Status | **Onboarding incomplete** — as of 2026-07-01, ports 22/3389/445/139/5985/11434 all `filtered` (nothing exposed yet, no firewall rules from the setup script visible), no heartbeat since 2026-06-23, not yet in Tailscale tailnet. Post-reboot step references `djinn/scripts/bootstrap-node.sh`, which does not exist in the vault yet — blocks WSL2-side Djinn setup once the ps1 script does run. |
 
 ### Orion (Large-Model Host — iMac)
 | Attribute | Value |
@@ -86,10 +88,11 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
 
 ```
 ┌─────────────────┐     SSH      ┌─────────────────┐
-│    Salomon      │◄───────────►│     Typhon       │
-│  192.168.1.225  │  vault sync  │  192.168.1.113   │
-│  (Omen, Fedora) │  (15-min)    │  (MSI, Fedora)   │
-└────────┬────────┘              └─────────────────┘
+│    Salomon      │◄- - - - - ->│     Typhon       │
+│  192.168.1.225  │  (pending —  │  192.168.1.113   │
+│  (Omen, Fedora) │  setup not   │  (MSI, Windows,  │
+└────────┬────────┘  yet run)   │   ports filtered)│
+                                 └─────────────────┘
          │     SSH
          │◄───────────────────────►┌─────────────────┐
          │                         │      Orion        │
@@ -100,13 +103,13 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
          │                         └─────────────────┘
          │ HTTP (Moonraker API)      ┌─────────────────┐
          ├─────────────────────────►│    Calliope      │
-         │                          │ 192.168.1.113    │
+         │                          │ 192.168.1.114    │
          │                          │ Ender-3 V3 Plus  │
          │                          │ Klipper/Moonraker│
          │                          └─────────────────┘
          │
          │ Ollama API (port 11434)
-         ├─────────────────────────► Typhon agents
+         ├─────────────────────────► Typhon agents (paused — WSL2 bootstrap pending)
          │
     Discord API ◄─────────────────► Discord gateway
     Telegram API ◄─────────────────► Telegram gateway
@@ -130,7 +133,7 @@ All owned by [github.com/DrManzo](https://github.com/DrManzo). Permission grante
 |-------|------|-------|
 | **Claude** | Architecture | Cross-domain reasoning, vault design, session reports, git push, complex builds |
 | **Salomon (opencode)** | Daily Ops | Print confirm/deny/slice, quotes, design, media pipeline, vault sync, Telegram/Discord |
-| **Typhon (opencode)** | Remote | Storage, Typhon's Studio, lightweight tasks, COMMS processing |
+| **Typhon (opencode)** | Remote | **Paused pending re-onboarding** — shop machine (slicing, commissions, content, accounting) on Windows/WSL2; role changed from storage/sync, agents not yet reachable |
 
 ### OpenClaw Agents (14 registered)
 content-orchestrator, ingest, video-edit, photo-edit, caption, repurpose, thumbnail, publish-prep, qa, style-scraper, and platform-specific routing agents.
@@ -138,7 +141,7 @@ content-orchestrator, ingest, video-edit, photo-edit, caption, repurpose, thumbn
 ### Orchestrator Agents (Manufacturing)
 DesignGenAgent, DesignEditAgent, ProtoOptAgent, DOEPrintOptAgent, PlateNestAgent — all live in `~/.local/bin/djinn-design`.
 
-### Typhon's Studio Agents (6, on Typhon)
+### Typhon's Studio Agents (6, on Typhon — paused, pending Windows/WSL2 re-onboarding)
 Audio Agent (4-filter RNNoise chain), Lighting Agent (Cloudybay), Music Agent (Pixabay), Copilot Agent (qwen2.5:7b via Salomon), Stream Agent (Twitch/YouTube/IG/Local), Post-Production Agent (Whisper + phi4 show notes + ffmpeg clips).
 
 ---
@@ -240,7 +243,7 @@ Audio Agent (4-filter RNNoise chain), Lighting Agent (Cloudybay), Music Agent (P
 | **COMMS.md** | `~/Obsidian/djinn/communications/COMMS.md` | Inter-agent task handoffs, persistent state (primary) |
 | **Telegram** | Bot via `djinn-telegram-gateway.service` | Real-time alerts, print notifications, human commands |
 | **Discord** | Bot via `djinn-discord-gateway.service` | Channel-aware routing (command-center, 3d-printing, media-inbox, etc.) |
-| **SSH** | Direct between Salomon ↔ Typhon | File delivery, remote service management |
+| **SSH** | Direct between Salomon ↔ Typhon | File delivery, remote service management — **broken as of 2026-07-01**, Typhon is a fresh Windows box; old ed25519 key auth no longer applies until `administrators_authorized_keys` is repopulated |
 
 ### Discord Channel Map
 | Channel | Commands Allowed |

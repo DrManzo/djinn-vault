@@ -1590,3 +1590,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
   - Cable slack is the real fix — reseat and route with relief
 
 *— Claude*
+
+## 2026-07-01 — Typhon Windows Onboarding Audit
+
+- Typhon (MSI) was reinstalled Ubuntu → Windows ~2026-06-25, repurposed from storage/sync into a dedicated shop machine (slicing/commissions/content/accounting) — this was never logged through the session protocol, so every doc still described the old setup
+- Live-probed the LAN: Typhon is up at 192.168.1.113, still identifies as `Typhon-4.lan` (pre-rename), all checked ports (22/3389/445/139/5985/11434) `filtered` — `setup-typhon.ps1` likely hasn't been run to completion yet
+- Confirmed `djinn/scripts/bootstrap-node.sh`, which the ps1 script's post-reboot instructions depend on, does not exist anywhere in the vault or git history — logged as a bug, blocks WSL2-side Djinn install
+- Updated `machines/TF-TTHQ.md`, `INFRASTRUCTURE.md`, `SYSTEM-STATE.md`, global `~/.claude/CLAUDE.md`, and the `project_djinn` auto-memory to reflect current Typhon status instead of the stale Ubuntu description
+- Fixed a stray IP typo in INFRASTRUCTURE.md's network diagram (Calliope was shown at Typhon's old `.113`, corrected to `.114`)
+- Full detail: [[2026-07-01_typhon-windows-onboarding-audit]]
+
+*— Claude*
