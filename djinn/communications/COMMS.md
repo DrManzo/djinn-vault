@@ -805,3 +805,11 @@ BUG-014 root cause confirmed after extended session. key561 dropouts on Calliope
 Day 121 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-07-01 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 122 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
