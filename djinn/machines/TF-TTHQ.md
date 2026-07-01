@@ -8,36 +8,50 @@ updated: 2026-07-01
 # Machine: TF/TTHQ — Typhon
 
 **Callsign:** TF/TTHQ
-**Network name:** Typhon (Windows hostname currently reports `Typhon-4`, pending rename to `typhon` — see Status below)
+**Network name:** Typhon (Windows hostname confirmed `Typhon` as of 2026-07-01)
 **Role:** **Changed 2026-06-25** — dedicated shop machine (slicing, commissions, content, accounting). No longer storage/sync.
-**IP:** 192.168.1.113 (host is up, all tested ports `filtered` as of 2026-07-01)
-**SSH:** Broken — old key auth (`tf-tthq@192.168.1.113`) no longer applies, machine was wiped
+**OS:** Windows 11 Home
+**IP:** LAN `192.168.1.113` (still shows `filtered` on all ports — Windows Firewall blocks unsolicited LAN); reachable **over Tailscale at `100.69.41.74`**, hostname `typhon` on tailnet
+**Windows account:** `typhon` (renamed from typo'd `typho` 2026-07-01; profile folder is still physically `C:\Users\typho` — Windows doesn't rename that, harmless)
+**SSH:** ✅ **Working** as of 2026-07-01, over Tailscale only (`ssh typhon@100.69.41.74`) — key-based via `administrators_authorized_keys`, delivered by USB (LAN port 22 still filtered)
+**Claude Code:** ✅ **Live and authenticated** as of 2026-07-01 — Claude Desktop app installed, bundled CLI at
+  `C:\Users\typho\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\2.1.187\claude.exe`.
+  Not on PATH. Credentials transferred from Salomon's `~/.claude/.credentials.json` (same Pro account) since the
+  in-app login didn't carry over to non-interactive SSH sessions (DPAPI/credential-manager scoping). Verified with
+  `claude -p "..."` over SSH — responds correctly.
 **Related:** [[SYSTEM-STATE]] | [[ROUTING]] | [[HEARTBEAT-typhon]] | `djinn/workspaces/typhon-windows/setup-typhon.ps1`
 
 Changes from this machine are signed: `— TF/TTHQ`
 
 ---
 
-## ⚠️ Status: Mid-Migration, Onboarding Incomplete
+## ⚠️ Status: Mid-Migration — SSH + Claude Code Live, WSL2/Djinn Stack Still Pending
 
 This machine was reinstalled from Ubuntu to **Windows** around 2026-06-25 and repurposed
 as Typhon's Forge shop machine. Everything below the divider describes the **old Ubuntu
 setup** and is kept for reference only — it does not reflect current reality.
 
 **What's confirmed as of 2026-07-01:**
-- Host is up and answering ARP/port probes at 192.168.1.113, but every checked port
-  (22, 3389, 445, 139, 5985, 11434) is `filtered` — no services exposed yet.
-- Hostname still resolves as `Typhon-4.lan`, meaning `Rename-Computer -NewName "typhon"`
-  in the setup script hasn't taken effect — the script likely hasn't been run (or completed
-  + rebooted) on this box yet.
+- Hostname is `Typhon` (rename completed at some point — LAN port scans still show every
+  port `filtered`, so `setup-typhon.ps1`'s Windows Firewall rules likely haven't applied, or
+  it was renamed manually).
+- **Tailscale joined** — `typhon` shows in `tailscale status` at `100.69.41.74`, reachable
+  and pingable from Salomon. This is the only working network path right now (LAN is still
+  fully filtered).
+- **SSH works over Tailscale** — OpenSSH Server is running, `administrators_authorized_keys`
+  has Salomon's pubkey (delivered via a physical USB drive labeled TYPHON, since no other
+  path existed yet). Windows account was `typho` (a typo), renamed to `typhon`.
+- **Claude Code is live and authenticated** — see above. This came from the Claude Desktop
+  app (Windows Store/MSIX package), not a standalone CLI install; WSL2 is **not installed**
+  (`wsl -l -v` reports WSL isn't present), so this is running natively on Windows, not in WSL2.
 - No heartbeat since 2026-06-23 13:40 UTC (the old Linux heartbeat timer no longer exists
   on Windows; nothing has replaced it).
-- Not present in the Tailscale tailnet yet.
 - The setup script's post-reboot instructions call
   `curl https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/scripts/bootstrap-node.sh | bash`
-  inside WSL2 Ubuntu — **this file does not exist anywhere in the vault or git history.**
-  This blocks the WSL2-side Djinn install (Ollama, Claude Code, comms-processor, heartbeat)
-  even once the ps1 script runs successfully.
+  inside WSL2 Ubuntu — **this file does not exist anywhere in the vault or git history, and
+  WSL2 itself isn't installed yet either.** This blocks the rest of the Djinn stack (Ollama,
+  comms-processor, heartbeat) — Claude Code itself is unblocked and working via the native
+  Windows route instead.
 
 **Onboarding checklist (what's left):**
 1. Run/re-run `djinn/workspaces/typhon-windows/setup-typhon.ps1` as Administrator on the
