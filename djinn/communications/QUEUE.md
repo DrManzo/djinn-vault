@@ -3372,13 +3372,20 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 **ACTION:** Reseat is not permanent. Order or source replacement cable/connector for nozzle_mcu UART on Ender-3 V3 Plus.
 
 ---
-**TASK:** Typhon Windows onboarding — physical/RDP steps
-**FOR:** Javier (manual — needs hands on the machine)
+**TASK:** ~~Typhon Windows onboarding — physical/RDP steps~~ SUPERSEDED — see below
+**STATUS:** done — SSH/Tailscale access established, remote onboarding completed, see [[2026-07-01_typhon-windows-remote-onboarding]]
+
+---
+**TASK:** Typhon Windows onboarding — one interactive/RDP session needed to finish
+**FOR:** Javier (manual — needs an interactive login at the machine, not SSH)
 **DATE:** 2026-07-01
-**CONTEXT:** Typhon (192.168.1.113, currently `Typhon-4.lan`) is up but every checked port is filtered — `setup-typhon.ps1` (`djinn/workspaces/typhon-windows/setup-typhon.ps1`) likely hasn't finished running/rebooting yet.
+**CONTEXT:** Full remote setup is done (SSH over Tailscale, Claude Code authenticated, repos cloned, ~18 pipeline apps installed — see `machines/TF-TTHQ.md`). Two things are stuck because Windows blocks GUI/service init over non-interactive SSH (Session 0 isolation — see [[2026-07-01_bug-typhon-session0-noninteractive-hangs]]).
 **ACTION:**
-1. Confirm whether `setup-typhon.ps1` has been run on the box; if not, run it as Administrator and let it reboot.
-2. After reboot, hold off on the WSL2 bootstrap curl command in the script's printed instructions — `djinn/scripts/bootstrap-node.sh` doesn't exist yet (see [[2026-07-01_bug-typhon-bootstrap-node-missing]]); Claude needs a decision on WSL2 vs. native-Windows approach before that gets written.
-3. Paste Salomon's SSH pubkey into `C:\ProgramData\ssh\administrators_authorized_keys` once reachable.
-4. Confirm the real current IP of the Oroborus/Library storage share — the script maps `Z:` to `\\192.168.1.176\storage`, which wasn't a live host on the LAN during this session's scan.
+1. Log in to Typhon interactively (physically or via RDP, not SSH). Run:
+   `"C:\Users\typho\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\2.1.187\claude.exe" --dangerously-skip-permissions`
+   and click through the disclaimer/theme prompts once. This unlocks `--bg` (background agent) mode for future unattended automation.
+2. Start Ollama once from that same interactive session (Start Menu or `ollama serve` in a terminal) and confirm it stays running (check `http://localhost:11434` responds). Once it's stable, pull the model set from the old Ollama Models table in `machines/TF-TTHQ.md` (qwen2.5:7b, qwen2.5:1.5b, llama3.2:3b, nomic-embed-text at minimum).
+3. Retry the 1Password install (`winget install --id AgileBits.1Password`) — it failed twice with a SID-mapping error, possibly tied to the recent account rename; a reboot may clear it.
+4. Confirm the real current IP of the Oroborus/Library storage share — `setup-typhon.ps1` maps `Z:` to `\\192.168.1.176\storage`, which wasn't a live host on the LAN during recent scans.
+5. Decide (with Claude): stick with the native-Windows approach used for this onboarding, or still pursue WSL2 for closer parity with old Typhon's service model — see decision-log 2026-07-01 entry.
 5. Join Tailscale.

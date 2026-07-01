@@ -165,3 +165,4 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 3. Cable slack is the real fix — reseat with proper relief routing
 
 | 2026-07-01 | Claude | Typhon onboarding | medium | open | `setup-typhon.ps1` post-reboot instructions curl a `djinn/scripts/bootstrap-node.sh` that was never created — blocks WSL2-side Djinn install once the Windows setup script runs | [[2026-07-01_bug-typhon-bootstrap-node-missing]] |
+| 2026-07-01 | Claude | Typhon / Windows SSH | medium | workaround | GUI installers (OrcaSlicer) and tray-apps (Ollama, Claude Code wizard) launched over SSH hang or crash — Session 0 isolation blocks UI init. Archive-extraction bypass found for OrcaSlicer; Ollama server still needs a human interactive session to start | [[2026-07-01_bug-typhon-session0-noninteractive-hangs]] |

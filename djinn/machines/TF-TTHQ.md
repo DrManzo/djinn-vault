@@ -25,47 +25,96 @@ Changes from this machine are signed: `— TF/TTHQ`
 
 ---
 
-## ⚠️ Status: Mid-Migration — SSH + Claude Code Live, WSL2/Djinn Stack Still Pending
+## ⚠️ Status: Native-Windows Onboarding Mostly Done — WSL2/Djinn-Stack Services Still Pending
 
 This machine was reinstalled from Ubuntu to **Windows** around 2026-06-25 and repurposed
-as Typhon's Forge shop machine. Everything below the divider describes the **old Ubuntu
-setup** and is kept for reference only — it does not reflect current reality.
+as Typhon's Forge shop machine. Everything below the "Old Ubuntu Setup" divider describes
+the **old Ubuntu setup** and is kept for reference only — it does not reflect current reality.
 
-**What's confirmed as of 2026-07-01:**
-- Hostname is `Typhon` (rename completed at some point — LAN port scans still show every
-  port `filtered`, so `setup-typhon.ps1`'s Windows Firewall rules likely haven't applied, or
-  it was renamed manually).
-- **Tailscale joined** — `typhon` shows in `tailscale status` at `100.69.41.74`, reachable
-  and pingable from Salomon. This is the only working network path right now (LAN is still
-  fully filtered).
-- **SSH works over Tailscale** — OpenSSH Server is running, `administrators_authorized_keys`
-  has Salomon's pubkey (delivered via a physical USB drive labeled TYPHON, since no other
-  path existed yet). Windows account was `typho` (a typo), renamed to `typhon`.
-- **Claude Code is live and authenticated** — see above. This came from the Claude Desktop
-  app (Windows Store/MSIX package), not a standalone CLI install; WSL2 is **not installed**
-  (`wsl -l -v` reports WSL isn't present), so this is running natively on Windows, not in WSL2.
-- No heartbeat since 2026-06-23 13:40 UTC (the old Linux heartbeat timer no longer exists
-  on Windows; nothing has replaced it).
-- The setup script's post-reboot instructions call
-  `curl https://raw.githubusercontent.com/DrManzo/djinn-vault/main/djinn/scripts/bootstrap-node.sh | bash`
-  inside WSL2 Ubuntu — **this file does not exist anywhere in the vault or git history, and
-  WSL2 itself isn't installed yet either.** This blocks the rest of the Djinn stack (Ollama,
-  comms-processor, heartbeat) — Claude Code itself is unblocked and working via the native
-  Windows route instead.
+**Decision made 2026-07-01:** rather than routing everything through WSL2 (per the original
+`setup-typhon.ps1` plan), onboarding proceeded natively on Windows — Claude Code, git, and
+all pipeline tools now run directly on Windows, driven remotely over SSH/Tailscale from
+Salomon. WSL2 was never installed; this sidesteps the "needs a reboot the SSH session can't
+survive" problem entirely for everything except Ollama's background service (see below).
 
-**Onboarding checklist (what's left):**
-1. Run/re-run `djinn/workspaces/typhon-windows/setup-typhon.ps1` as Administrator on the
-   physical machine (debloat, OpenSSH, WSL2, winget installs, `C:\Forge\*`, firewall, rename, reboot).
-2. Write the missing `djinn/scripts/bootstrap-node.sh` (WSL2/Windows-adapted version of
-   `djinn/migration/bootstrap.sh`) before step 3 below can work.
-3. Inside WSL2 Ubuntu, run the bootstrap script to install Ollama/Claude Code/vault clone/djinn scripts.
-4. Paste Salomon's SSH pubkey into `C:\ProgramData\ssh\administrators_authorized_keys`.
-5. Join Tailscale.
-6. Import OrcaSlicer profiles from `Z:\forge\slicer-profiles` (verify the `Z:` share target
-   IP is actually correct — the script maps to `\\192.168.1.176\storage`, which does not
-   match a currently-live host on the LAN as of 2026-07-01).
-7. Stand up a Windows/WSL2-appropriate heartbeat + comms-processor equivalent — the old
-   systemd timers don't exist on this OS.
+**Confirmed working as of 2026-07-01:**
+- **Network:** LAN (`192.168.1.113`) still shows every port `filtered` — Windows Firewall
+  blocks unsolicited inbound despite `setup-typhon.ps1`'s firewall rules having been applied
+  manually (see below). **Tailscale is the only working path**: `typhon` at `100.69.41.74`,
+  pings and SSHes cleanly from Salomon.
+- **SSH:** working over Tailscale, key-based via `administrators_authorized_keys` (pubkey
+  delivered by physical USB drive, since no network path existed yet at the time).
+- **Windows account:** renamed `typho` (typo) → `typhon`. Profile folder is still physically
+  `C:\Users\typho` — Windows doesn't rename that, harmless.
+- **Claude Code:** live and authenticated, from the Claude Desktop app's bundled CLI at
+  `C:\Users\typho\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude-code\2.1.187\claude.exe`
+  (not on PATH). Credentials transferred from Salomon's `~/.claude/.credentials.json` (same
+  Pro account) since the in-app interactive login didn't carry over to non-interactive SSH
+  sessions (DPAPI/credential-manager scoping). The interactive first-run wizard (theme +
+  login-method picker) could not be scripted over SSH — it also triggered a fresh browser
+  OAuth flow that failed non-interactively — so the credential-file-copy approach was used
+  instead of the wizard. **`claude --bg` (background agent mode) still needs one interactive
+  disclaimer acceptance** — attempted via `settings.json` (`dangerouslySkipPermissions: true`,
+  copied from Salomon's) but that alone wasn't sufficient; needs a human at the machine once.
+- **Git:** installed (winget), configured with a GitHub PAT (same token as Salomon's `gh auth
+  token`) embedded directly in clone URLs — the default Git Credential Manager (`manager`,
+  set at system config level) fails non-interactively over SSH even after resetting the
+  global helper to `store`; embedding the token in the URL sidestepped it entirely.
+- **Vault + repos cloned:** `C:\Users\typho\Obsidian` (djinn-vault), `C:\Users\typho\forge`
+  (typhons-cyber-forge), `C:\Users\typho\Documents\Project-Resources`.
+- **`C:\Forge\*` directory structure** built (queue, models, gcode/{penelope,calliope},
+  completed, content/{photos,videos,reels}, accounting, shop, tools).
+- **Firewall rules** opened for 22/8080/4455/8554/8889/6379/11434 (still doesn't explain the
+  LAN `filtered` result on port 22 specifically — SSH only works over Tailscale, LAN access
+  is unexplained and untested further).
+- **Power settings** applied (no sleep/hibernate on AC).
+- **Software installed via winget:** Git, Ollama, Obsidian, Python 3.12, OBS Studio,
+  Notepad++, JetBrains Mono Nerd Font, 7-Zip, Rustup, Microsoft 365 Apps (Office), Blender
+  5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord. Windows Terminal was already
+  present. **1Password failed** both attempts with `0x80070534` (SID mapping error) — likely
+  related to the account rename; untried fix is a reboot to refresh SID caches.
+- **OrcaSlicer:** the pinned URL in `setup-typhon.ps1` (v2.3.0) 404'd — upstream moved orgs
+  (`SoftFever/OrcaSlicer` → `OrcaSlicer/OrcaSlicer`) and versioned up to v2.4.1. Running the
+  installer via `Start-Process -Wait` over SSH hung indefinitely (GUI installer stuck in a
+  non-interactive Session 0 — same class of problem as the Claude Code wizard). Fixed by
+  downloading the installer and extracting it directly with 7-Zip (`7z x`) instead of running
+  it — NSIS installers unpack cleanly this way. Binary now at `C:\Forge\tools\OrcaSlicer\orca-slicer.exe`.
+- **OpenCode:** not on winget/no Windows install script path (the official installer is a
+  bash script assuming WSL/Unix) — downloaded the release zip directly
+  (`anomalyco/opencode`, `opencode-windows-x64.zip`, v1.17.13) and extracted to
+  `C:\Users\typho\.opencode\bin\opencode.exe`. Config written at
+  `C:\Users\typho\.opencode\opencode.json`, mirroring Salomon's local+remote Ollama provider
+  pattern — but **no models have been pulled yet**, and see below re: Ollama itself.
+- **Ollama:** binary installed, but **the background server does not survive a non-interactive
+  launch** — `ollama.exe serve` started via SSH crashes within ~3 seconds
+  (`app.log`: "Failed to start: Unable to init instance: Unspecified error"), same Session-0
+  class of issue as the GUI installers. Needs to be started once from an interactive/RDP
+  session; after that it may register properly and survive future headless restarts.
+
+**What's still actually blocking full parity with the original plan:**
+- WSL2 was deliberately skipped — if it's wanted later for `bootstrap-node.sh`-style parity
+  with old Typhon (systemd timers, native Linux tooling), that decision needs revisiting.
+  `djinn/scripts/bootstrap-node.sh` (referenced in the original ps1 post-reboot instructions)
+  still does not exist anywhere in the vault or git history — moot unless WSL2 gets installed.
+- No heartbeat since 2026-06-23 13:40 UTC — nothing has replaced the old Linux timer; would
+  need a Windows Task Scheduler job or an OpenCode/Claude Code cron-equivalent.
+- No comms-processor equivalent — Typhon does not currently poll COMMS.md/QUEUE.md for tasks.
+- `Z:` drive mapping to `\\192.168.1.176\storage` (Oroborus/Library) not attempted — that IP
+  wasn't confirmed live on the LAN during this session's scans.
+- 1Password not installed (see above).
+- Ollama server and OpenCode's local models not yet actually running (see above) — needs one
+  interactive session to unstick.
+- `claude --bg` disclaimer not accepted — same, needs one interactive session.
+
+**Next physical/interactive session at the machine should:**
+1. Run `claude --dangerously-skip-permissions` once interactively, click through, confirm the
+   disclaimer — unlocks `claude --bg` for future headless automation.
+2. Start `ollama serve` once interactively (or check if it needs a full GUI login rather than
+   RDP — Session 0 vs Session 1 distinction may matter) — then `ollama pull` the model set
+   from the old TF-TTHQ Ollama Models table below.
+3. Retry 1Password install (possibly after a reboot to clear the SID mapping issue).
+4. Decide whether WSL2 is still wanted for this machine's role, or whether native-Windows is
+   the permanent path going forward.
 
 ---
 

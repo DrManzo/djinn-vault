@@ -216,4 +216,12 @@ the guard. Metrics represent meaningful system state change.
 ## 2026-06-29 — Boolean Union Law for Both Printers
 
 **Decision:** All multi-body STLs must be boolean-unioned to single body in Blender before slicing. Exception: intentional separate bodies (moving parts, print-in-place).
+
+---
+
+## 2026-07-01 — Typhon Onboarding: Native Windows Instead of WSL2
+
+**Decision:** Skip WSL2 entirely for Typhon's Windows onboarding. Run Claude Code, git, and the whole pipeline software stack natively on Windows, administered remotely over SSH/Tailscale from Salomon, instead of the originally planned `setup-typhon.ps1` → reboot → WSL2 Ubuntu → `bootstrap-node.sh` path.
+**Why:** That original path has two blockers — `bootstrap-node.sh` doesn't exist anywhere in the vault or git history, and installing WSL2 requires a reboot that would kill any SSH-driven remote automation mid-flight with no way to resume unattended. Native Windows avoids both. This was a decision made under time pressure to get onboarding moving, not a fully deliberated architecture call.
+**How to apply:** This is a real deviation from documented plans and Typhon's old (pre-Windows) systemd-timer-based service model. Before building a heartbeat/comms-processor equivalent or anything else that assumed WSL2/Linux tooling, confirm with Javier whether native-Windows is the permanent path or whether WSL2 should still happen later. Don't assume this decision is final just because it's what happened first.
 **Why:** Separate shells generate inter-body travel moves. Validated: Camood 66-body failed repeatedly; 1-body completed.
