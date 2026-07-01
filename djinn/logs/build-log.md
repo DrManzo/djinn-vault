@@ -1601,3 +1601,19 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Full detail: [[2026-07-01_typhon-windows-onboarding-audit]]
 
 *— Claude*
+
+## 2026-07-01 — Typhon Windows Remote Onboarding
+
+- Established full remote admin of Typhon over Tailscale/SSH from Salomon after Javier installed Claude Code + Tailscale locally on the box
+- Renamed Windows account `typho` (typo) → `typhon`; delivered Salomon's SSH pubkey via USB since no network path existed yet
+- Claude Code authenticated via credential-file transfer from Salomon (same Pro account) — `-p` mode works, `--bg` still blocked on a disclaimer that needs one interactive session
+- Cloned all three Djinn repos (djinn-vault, typhons-cyber-forge, Project-Resources) to Typhon, working around Git Credential Manager's non-interactive failure by embedding a PAT directly in clone URLs
+- Built the full `C:\Forge` directory tree, opened firewall rules, disabled sleep
+- Installed ~18 pipeline apps via winget: Git, Ollama, Obsidian, Python 3.12, OBS Studio, Notepad++, JetBrains Mono Nerd Font, 7-Zip, Rustup, Microsoft Office, Blender, Creality Print, FFmpeg, rclone, Discord — 1Password failed (SID mapping error, unresolved)
+- OrcaSlicer's pinned installer URL was stale (repo moved orgs); its installer also hung indefinitely when run over SSH (Windows Session 0 isolation blocks GUI init) — fixed by extracting the NSIS installer directly with 7-Zip instead of running it
+- OpenCode has no Windows install script (bash-only officially) — downloaded the release zip directly and extracted it, wrote a Typhon-appropriate opencode.json
+- Ollama's server crashes within seconds when launched non-interactively (same Session-0 class of bug) — needs one human interactive session to start
+- **Deliberate architecture decision:** skipped WSL2 entirely, went native-Windows for everything — the original `setup-typhon.ps1` → WSL2 → `bootstrap-node.sh` plan has two blockers (missing script, reboot-kills-SSH-automation) that native-Windows sidesteps. Needs to be a conscious ongoing decision, not just left as-is.
+- Full detail: [[2026-07-01_typhon-windows-remote-onboarding]], bug: [[2026-07-01_bug-typhon-session0-noninteractive-hangs]]
+
+*— Claude*

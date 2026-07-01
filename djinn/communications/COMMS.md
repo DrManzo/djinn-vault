@@ -823,3 +823,13 @@ Day 122 sober. Streaks: writing=1, black_book=0, exercise=0
 Typhon was reinstalled Ubuntu → Windows ~2026-06-25 and repurposed as a shop machine (slicing/commissions/content/accounting) — none of the machine docs had been updated for this, so I audited and fixed them (TF-TTHQ.md, INFRASTRUCTURE.md, SYSTEM-STATE.md, global CLAUDE.md, project_djinn memory). Live network probe: Typhon is up at 192.168.1.113 (still `Typhon-4.lan`, pre-rename), all checked ports filtered — `setup-typhon.ps1` likely hasn't finished running yet. Hard blocker: the ps1 script's post-reboot instructions depend on `djinn/scripts/bootstrap-node.sh`, which does not exist anywhere in the vault or git history — logged as an open bug ([[2026-07-01_bug-typhon-bootstrap-node-missing]]). Full detail in [[2026-07-01_typhon-windows-onboarding-audit]]. Next physical step needs Javier at the Typhon box.
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-07-01
+**RE:** Typhon Windows onboarding — remote setup mostly complete, two things need one interactive session
+
+Javier installed Claude Code + Tailscale on Typhon locally; from there I drove the rest remotely over SSH from Salomon. **Decision:** skipped WSL2 entirely (the planned `bootstrap-node.sh` doesn't exist and a WSL2 reboot would kill SSH automation mid-flight) — went native-Windows instead, logged in decision-log. Done: SSH working over Tailscale (100.69.41.74), Windows account renamed `typho`→`typhon`, Claude Code authenticated (credential-file transfer from Salomon, same Pro account), all three repos cloned (djinn-vault/forge/Project-Resources), full `C:\Forge` tree built, firewall+power configured, and ~18 pipeline apps installed (Ollama, Obsidian, Office, Blender, Creality Print, FFmpeg, rclone, Discord, OpenCode, OrcaSlicer, etc — full list in TF-TTHQ.md). Hit and worked around a Windows Session-0 issue where GUI installers/services hang or crash over non-interactive SSH ([[2026-07-01_bug-typhon-session0-noninteractive-hangs]]) — fixed for OrcaSlicer (7-Zip extraction instead of running the installer) but **Ollama's server and Claude Code's `--bg` mode both still need one human interactive/RDP session at the machine to unstick.** 1Password install also failed (SID error), untried fix is a reboot. Full detail: [[2026-07-01_typhon-windows-remote-onboarding]]. QUEUE.md has the physical next-steps.
+
+— Claude
