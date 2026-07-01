@@ -163,3 +163,5 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 1. Single merged body — no separate engraving/emboss shells (Blender union before slicing)
 2. Gyroid safe for simple solids; rectilinear/grid for engraved/embossed geometry
 3. Cable slack is the real fix — reseat with proper relief routing
+
+| 2026-07-01 | Claude | Typhon onboarding | medium | open | `setup-typhon.ps1` post-reboot instructions curl a `djinn/scripts/bootstrap-node.sh` that was never created — blocks WSL2-side Djinn install once the Windows setup script runs | [[2026-07-01_bug-typhon-bootstrap-node-missing]] |

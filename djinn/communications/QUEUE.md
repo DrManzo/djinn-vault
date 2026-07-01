@@ -3370,3 +3370,15 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 **FOR:** Javier (hardware)
 **DATE:** 2026-06-29
 **ACTION:** Reseat is not permanent. Order or source replacement cable/connector for nozzle_mcu UART on Ender-3 V3 Plus.
+
+---
+**TASK:** Typhon Windows onboarding — physical/RDP steps
+**FOR:** Javier (manual — needs hands on the machine)
+**DATE:** 2026-07-01
+**CONTEXT:** Typhon (192.168.1.113, currently `Typhon-4.lan`) is up but every checked port is filtered — `setup-typhon.ps1` (`djinn/workspaces/typhon-windows/setup-typhon.ps1`) likely hasn't finished running/rebooting yet.
+**ACTION:**
+1. Confirm whether `setup-typhon.ps1` has been run on the box; if not, run it as Administrator and let it reboot.
+2. After reboot, hold off on the WSL2 bootstrap curl command in the script's printed instructions — `djinn/scripts/bootstrap-node.sh` doesn't exist yet (see [[2026-07-01_bug-typhon-bootstrap-node-missing]]); Claude needs a decision on WSL2 vs. native-Windows approach before that gets written.
+3. Paste Salomon's SSH pubkey into `C:\ProgramData\ssh\administrators_authorized_keys` once reachable.
+4. Confirm the real current IP of the Oroborus/Library storage share — the script maps `Z:` to `\\192.168.1.176\storage`, which wasn't a live host on the LAN during this session's scan.
+5. Join Tailscale.
