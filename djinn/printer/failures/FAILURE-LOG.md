@@ -1014,3 +1014,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-07-01 02:24:34 UTC
+=== FAILURE DETECTED ===
+  File: proxy_holster_bore_fixed.stl_PETG_48m26s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-01 05:07:34 UTC
