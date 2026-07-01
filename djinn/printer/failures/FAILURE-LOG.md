@@ -1005,3 +1005,12 @@ Each entry: one incident. Append only.
   Progress: 82%
   Transition: printing → error
   Time: 2026-07-01 01:32:16 UTC
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== ERROR STATE ===
+  Message: {"code":"key561","msg":"Lost communication with MCU 'nozzle_mcu'"}
+=== FAILURE DETECTED ===
+  File: 3DBenchy-Ender-3 V3 Plus_14m28.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-07-01 02:24:34 UTC
