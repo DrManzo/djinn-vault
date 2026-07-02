@@ -161,9 +161,8 @@ On Oroborus (not vault-tracked):
 
 - [ ] Work through `UNCONFIRMED-PRINTS.md`, confirm or flag each piece — @Javier
 - [ ] Decide on `applacrabus` rework, separate from the confirmation checklist — @Javier
-- [ ] Build the actual Typhon→Salomon gcode handoff mechanism (direct Tailscale transfer,
-      per the earlier architecture decision) — not done this session, only the library
-      migration was — @Claude, next session
+- [x] Build the actual Typhon→Salomon gcode handoff mechanism — done later the same day,
+      see `2026-07-01_djinn-gcode-sync.md`
 - [ ] Confirm `printer-files/{models,queue,creality-datadir}` are still fully intact and
       referenced correctly by existing print tooling — @Claude or @Javier, sanity check
 
