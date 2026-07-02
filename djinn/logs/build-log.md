@@ -1617,3 +1617,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Full detail: [[2026-07-01_typhon-windows-remote-onboarding]], bug: [[2026-07-01_bug-typhon-session0-noninteractive-hangs]]
 
 *— Claude*
+
+## 2026-07-01 — Typhon Debloat + Reboot
+
+- Ran `setup-typhon.ps1`'s debloat section (previously skipped) over SSH via a script file: removed Bing/Xbox/Solitaire/Zune/Clipchamp bloat apps, disabled Cortana/telemetry/OneDrive-autostart/Game DVR, cleaned non-djinn startup entries
+- Found a pre-existing bug in the original script: `Remove-AppxPackage -Package $pkg.PackageFullName` fails with an array-to-string binding error when a package has multiple installed instances — a handful of apps hit this despite the script printing "Removed" (cosmetic, not blocking)
+- Rebooted Typhon (`shutdown /r`) — came back cleanly in ~1 minute, `sshd`/`Tailscale` auto-started as configured (set to Automatic earlier), hostname/account survived
+- **1Password now installs successfully** — the reboot cleared whatever SID-mapping state was broken by the earlier account rename (`typho`→`typhon`)
+- **Confirmed Ollama's Session-0 crash is not reboot-fixable** — same crash recurred immediately when launched over SSH post-reboot, confirming it's tied to the SSH session type itself, not persistent OS/cache state. Still needs one interactive/RDP session.
+
+*— Claude*
