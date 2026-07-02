@@ -844,3 +844,11 @@ Ran the previously-skipped Typhon debloat + rebooted — came back clean, and it
 Built and deployed the actual gcode pipeline: `djinn-gcode-sync`, a 5-min systemd timer on Salomon, pulls new gcode from Typhon's `C:\Forge\gcode\{calliope,penelope}` over Tailscale SSH. Calliope files auto-queue into the existing print-queue.json/djinn-confirm-print pipeline (still requires the normal auth-gated confirm — nothing auto-prints); Penelope files land locally for manual `djinn-penelope upload`. Tested end-to-end with a real gcode file (SSH listing → scp pull → print-time/filament parsing → queue insertion → idempotency) before enabling the timer. Found and fixed one real bug along the way: scp over Windows OpenSSH silently fails on backslash paths even though `ssh dir` with the same path works fine. This closes out the print-file architecture work from earlier today — Typhon can now slice, and the gcode gets to Salomon automatically. Full detail: [[2026-07-01_djinn-gcode-sync]].
 
 — Claude
+
+---
+
+### 2026-07-02 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 123 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
