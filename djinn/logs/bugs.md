@@ -167,3 +167,7 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 | 2026-07-01 | Claude | Typhon onboarding | medium | open | `setup-typhon.ps1` post-reboot instructions curl a `djinn/scripts/bootstrap-node.sh` that was never created — blocks WSL2-side Djinn install once the Windows setup script runs | [[2026-07-01_bug-typhon-bootstrap-node-missing]] |
 | 2026-07-01 | Claude | Typhon / Windows SSH | medium | workaround | GUI installers (OrcaSlicer) and tray-apps (Ollama, Claude Code wizard) launched over SSH hang or crash — Session 0 isolation blocks UI init. Archive-extraction bypass found for OrcaSlicer; Ollama server still needs a human interactive session to start | [[2026-07-01_bug-typhon-session0-noninteractive-hangs]] |
 | 2026-07-01 | Claude | Print library migration / GNU tar | low | fixed | `tar --exclude` patterns placed after the file/dir argument are silently ignored (GNU tar 1.35) — one Camood file leaked into a transfer to Typhon before the ordering bug was caught via post-transfer verification and fixed | [[2026-07-01_print-library-migration]] |
+
+
+## 2026-07-01 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (18 occurrence(s)) _(type: errlog)_
