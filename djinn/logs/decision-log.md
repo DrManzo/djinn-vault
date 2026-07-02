@@ -225,3 +225,11 @@ the guard. Metrics represent meaningful system state change.
 **Why:** That original path has two blockers — `bootstrap-node.sh` doesn't exist anywhere in the vault or git history, and installing WSL2 requires a reboot that would kill any SSH-driven remote automation mid-flight with no way to resume unattended. Native Windows avoids both. This was a decision made under time pressure to get onboarding moving, not a fully deliberated architecture call.
 **How to apply:** This is a real deviation from documented plans and Typhon's old (pre-Windows) systemd-timer-based service model. Before building a heartbeat/comms-processor equivalent or anything else that assumed WSL2/Linux tooling, confirm with Javier whether native-Windows is the permanent path or whether WSL2 should still happen later. Don't assume this decision is final just because it's what happened first.
 **Why:** Separate shells generate inter-body travel moves. Validated: Camood 66-body failed repeatedly; 1-body completed.
+
+---
+
+## 2026-07-01 — Print Library Three-Tier Architecture: Typhon / Salomon / Oroborus
+
+**Decision:** The scattered print-file library moves to a three-tier structure. Typhon (`C:\Forge\models`) holds the full active working library. Salomon keeps only piece reports plus a small confirmed-working set needed for actual print execution. Oroborus (`192.168.1.154`) holds cold/historical archive material only — explicitly *not* part of the active gcode-handoff pipeline (that stays a direct Typhon↔Salomon Tailscale transfer, decided earlier the same session).
+**Why:** Oroborus was ruled out for the live print pipeline (third-machine dependency, unconfirmed uptime, unclear share auth) but is fine for cold storage where reliability doesn't matter — 404G free, reachable over plain SSH with key auth already working. Keeping the tiers separated (live pipeline vs. archive) avoids conflating two different reliability requirements under one storage decision.
+**How to apply:** Don't route anything time-sensitive (active slicing output, in-progress commission files) through Oroborus. It's a dead-file archive, not a working directory. If Oroborus's reliability ever gets confirmed/improved, this could be revisited, but treat that as a separate decision, not an assumption.

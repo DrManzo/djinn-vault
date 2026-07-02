@@ -1,9 +1,27 @@
 # Typhon's Forge — Model Library
 
-## Directory Structure
+## ⚠️ Binary files moved 2026-07-01
+
+The actual STL/3MF/gcode library (formerly `~/printer-files/library/` on Salomon, 3.9G) has
+moved to **Typhon** at `C:\Forge\models\library` (reachable over Tailscale,
+`ssh typhon@100.69.41.74`), matching Typhon's role as the shop/slicing machine. `Desktop/Review`
+also moved to `C:\Forge\models\review`. Historical/archival material
+(`printer-files/archive/`, `printer-files/vault-printer/`, and low-value calibration/staging
+files) moved to **Oroborus** (`192.168.1.154:~/print-library-archive/`) as cold storage.
+
+Salomon keeps only: this metadata (reports, index.json), and the confirmed-working
+Penelope/Calliope files needed for actual print execution (mario pipe, Forge coins, proxy
+recycler — see `UNCONFIRMED-PRINTS.md` for everything else's status).
+
+**Camood files were entirely excluded from this migration** — left exactly where they were,
+untouched, since that piece is under active troubleshooting.
+
+Full migration detail: `logs/reports/2026-07-01_print-library-migration.md`.
+
+## Directory Structure (historical — describes the old Salomon-local layout)
 
 ```
-printer-files/library/
+printer-files/library/          [now on Typhon: C:\Forge\models\library]
 ├── originals/
 │   ├── external/       ← Cults3D, Thingiverse, MakerWorld — untouched originals
 │   ├── terp-tribe/     ← Terp Tribe community designs
@@ -16,6 +34,7 @@ printer-files/library/
 Obsidian/djinn/printer/library/
 ├── index.json          ← machine-readable attribution manifest
 ├── README.md           ← this file
+├── UNCONFIRMED-PRINTS.md ← checklist of pieces needing print-outcome confirmation
 └── pieces/             ← per-piece human-readable reports
     └── <id>.md
 ```
