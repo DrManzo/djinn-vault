@@ -70,9 +70,18 @@ survive" problem entirely for everything except Ollama's background service (see
 - **Power settings** applied (no sleep/hibernate on AC).
 - **Software installed via winget:** Git, Ollama, Obsidian, Python 3.12, OBS Studio,
   Notepad++, JetBrains Mono Nerd Font, 7-Zip, Rustup, Microsoft 365 Apps (Office), Blender
-  5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord. Windows Terminal was already
-  present. **1Password failed** both attempts with `0x80070534` (SID mapping error) — likely
-  related to the account rename; untried fix is a reboot to refresh SID caches.
+  5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord, **1Password** (installed
+  successfully after a reboot — confirmed the earlier `0x80070534` SID mapping failures were
+  caused by the account rename, cleared once the machine rebooted). Windows Terminal was
+  already present.
+- **Debloat + reboot completed 2026-07-01:** ran the `setup-typhon.ps1` debloat section
+  (Bing/Xbox/Solitaire/Zune/etc apps removed, Cortana/telemetry/OneDrive-autostart/Game DVR
+  disabled, non-djinn startup entries cleaned) via a script file over SSH — the original
+  script's own `Remove-AppxPackage -Package $pkg.PackageFullName` line has a pre-existing bug
+  where it fails on packages with multiple installed instances (array-to-string binding
+  error); a handful of packages hit this and may not have actually been removed despite the
+  script printing "Removed". Rebooted afterward (`shutdown /r`) — came back cleanly, `sshd`/
+  `Tailscale` auto-started as configured, hostname/account survived intact.
 - **OrcaSlicer:** the pinned URL in `setup-typhon.ps1` (v2.3.0) 404'd — upstream moved orgs
   (`SoftFever/OrcaSlicer` → `OrcaSlicer/OrcaSlicer`) and versioned up to v2.4.1. Running the
   installer via `Start-Process -Wait` over SSH hung indefinitely (GUI installer stuck in a
@@ -101,9 +110,11 @@ survive" problem entirely for everything except Ollama's background service (see
 - No comms-processor equivalent — Typhon does not currently poll COMMS.md/QUEUE.md for tasks.
 - `Z:` drive mapping to `\\192.168.1.176\storage` (Oroborus/Library) not attempted — that IP
   wasn't confirmed live on the LAN during this session's scans.
-- 1Password not installed (see above).
-- Ollama server and OpenCode's local models not yet actually running (see above) — needs one
-  interactive session to unstick.
+- Ollama server and OpenCode's local models not yet actually running — **confirmed post-reboot
+  that this is tied to the SSH session type itself (Session 0), not any persistent OS state**:
+  same crash (`Unable to init instance: Unspecified error`) recurred immediately after reboot
+  when launched over SSH again. A reboot alone will not fix this — needs an actual interactive
+  session.
 - `claude --bg` disclaimer not accepted — same, needs one interactive session.
 
 **Next physical/interactive session at the machine should:**
@@ -112,8 +123,7 @@ survive" problem entirely for everything except Ollama's background service (see
 2. Start `ollama serve` once interactively (or check if it needs a full GUI login rather than
    RDP — Session 0 vs Session 1 distinction may matter) — then `ollama pull` the model set
    from the old TF-TTHQ Ollama Models table below.
-3. Retry 1Password install (possibly after a reboot to clear the SID mapping issue).
-4. Decide whether WSL2 is still wanted for this machine's role, or whether native-Windows is
+3. Decide whether WSL2 is still wanted for this machine's role, or whether native-Windows is
    the permanent path going forward.
 
 ---
