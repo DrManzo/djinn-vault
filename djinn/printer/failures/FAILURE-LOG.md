@@ -1029,3 +1029,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-07-01 16:40:39 UTC
+=== FAILURE DETECTED ===
+  File: shuriken_fang_six_point.stl_PETG_15m59s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-02 03:38:25 UTC
