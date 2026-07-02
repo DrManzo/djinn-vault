@@ -1627,3 +1627,15 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Confirmed Ollama's Session-0 crash is not reboot-fixable** — same crash recurred immediately when launched over SSH post-reboot, confirming it's tied to the SSH session type itself, not persistent OS/cache state. Still needs one interactive/RDP session.
 
 *— Claude*
+
+## 2026-07-01 — Print Library Migration: Salomon → Typhon/Oroborus
+
+- Consolidated ~9G/632 files of scattered print library (printer-files/, Desktop/Review/, stray Downloads exports) into a three-tier setup: Typhon (`C:\Forge\models`) = active working library, Oroborus (`192.168.1.154`) = cold archive, Salomon = reports + small confirmed-working set only
+- Caught a bad classification before acting on it: a sub-agent claimed `printer-files/vault-printer/` (1.5G) was a stale duplicate of the vault's own copies — checksum-verified this was false (zero matches anywhere on the system), archived it to Oroborus instead of deleting
+- Found and fixed a `tar --exclude` ordering bug (GNU tar 1.35 ignores excludes placed after the file argument) — one transfer leaked a Camood file to Typhon, caught via post-transfer `findstr` check, deleted, redone correctly
+- All Camood files (14+ across every location) excluded entirely per instruction — untouched
+- Created `printer/library/UNCONFIRMED-PRINTS.md` — 17 pieces have no logged print-outcome record anywhere; confirmed genuinely under-logged not failed, except `applacrabus` which is explicitly ON HOLD (claw supports collapsed mid-print 2026-06-04)
+- Cleanup used `gio trash` (no `rm`), only after size-verifying every transfer against source
+- Full detail: [[2026-07-01_print-library-migration]]
+
+*— Claude*

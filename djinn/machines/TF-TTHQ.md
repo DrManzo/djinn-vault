@@ -64,6 +64,12 @@ survive" problem entirely for everything except Ollama's background service (see
   (typhons-cyber-forge), `C:\Users\typho\Documents\Project-Resources`.
 - **`C:\Forge\*` directory structure** built (queue, models, gcode/{penelope,calliope},
   completed, content/{photos,videos,reels}, accounting, shop, tools).
+- **Print model library migrated here 2026-07-01** — `C:\Forge\models\library` (3.87G, the
+  real Penelope/Calliope design library) and `C:\Forge\models\review` (0.64G, intake staging)
+  moved from Salomon's `~/printer-files/library` and `~/Desktop/Review`. Typhon is now the
+  library's home; Salomon keeps only piece reports + the small confirmed-working set. Camood
+  files were excluded entirely (still under active troubleshooting). Detail:
+  `logs/reports/2026-07-01_print-library-migration.md`.
 - **Firewall rules** opened for 22/8080/4455/8554/8889/6379/11434 (still doesn't explain the
   LAN `filtered` result on port 22 specifically — SSH only works over Tailscale, LAN access
   is unexplained and untested further).
