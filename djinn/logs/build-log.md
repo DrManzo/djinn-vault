@@ -1639,3 +1639,15 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Full detail: [[2026-07-01_print-library-migration]]
 
 *— Claude*
+
+## 2026-07-01 — djinn-gcode-sync: Live Typhon→Salomon Gcode Handoff
+
+- Built `djinn-gcode-sync` — pulls new gcode from Typhon's `C:\Forge\gcode\{calliope,penelope}` over Tailscale SSH every 5 min, auto-queues Calliope jobs into the existing print-queue.json/djinn-confirm-print pipeline, lands Penelope files locally for manual `djinn-penelope upload`
+- Tested end-to-end with a real gcode file before deploying: SSH listing, scp pull, print-time/filament-g parsing, queue insertion, idempotency (no re-pull on second run) all confirmed working
+- Found and fixed a real bug: `scp` over Windows OpenSSH silently fails on backslash remote paths even though the file exists and `ssh ... dir` (same backslash path) lists it fine — fixed by forward-slashing just the scp remote path
+- Named it `djinn-gcode-sync` not `djinn-forge-sync` — an existing `forge-sync` systemd unit already means GDrive sync for `~/forge`, different thing
+- Safety gate preserved: this tool never uploads or starts a print — Calliope jobs land as `pending` same as local slicing does, `djinn-confirm-print`'s auth prompt is still required
+- Wired into `djinn-gcode-sync.timer` (5-min, systemd user), enabled and confirmed running via journalctl
+- Full detail: [[2026-07-01_djinn-gcode-sync]]
+
+*— Claude*

@@ -843,3 +843,13 @@ Javier installed Claude Code + Tailscale on Typhon locally; from there I drove t
 Ran the previously-skipped Typhon debloat + rebooted — came back clean, and it fixed 1Password's earlier SID-mapping install failure as a bonus (Ollama's Session-0 crash is confirmed NOT reboot-fixable though, still needs an interactive session). Separately, settled and executed a cleanup of Salomon's scattered print library (~9G/632 files across printer-files/, Desktop/Review/, stray Downloads/): three-tier architecture now in place — Typhon (`C:\Forge\models`) holds the full active library, Oroborus (`192.168.1.154`, cold archive only, not part of the live pipeline) holds historical material, Salomon keeps just reports + the small confirmed-working set. Caught and reversed a bad duplicate-file classification before deleting anything (checksum-verified `vault-printer/` was NOT a duplicate as first claimed), and caught/fixed a `tar --exclude` ordering bug that briefly leaked one Camood file into a transfer. All Camood files excluded entirely per instruction — untouched throughout. New checklist at `printer/library/UNCONFIRMED-PRINTS.md`: 17 pieces need print-outcome confirmation (genuinely under-logged, not failed), `applacrabus` is separately ON HOLD (known claw-support failure). Full detail: [[2026-07-01_print-library-migration]].
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-07-01
+**RE:** Live Typhon→Salomon gcode handoff built and running (djinn-gcode-sync)
+
+Built and deployed the actual gcode pipeline: `djinn-gcode-sync`, a 5-min systemd timer on Salomon, pulls new gcode from Typhon's `C:\Forge\gcode\{calliope,penelope}` over Tailscale SSH. Calliope files auto-queue into the existing print-queue.json/djinn-confirm-print pipeline (still requires the normal auth-gated confirm — nothing auto-prints); Penelope files land locally for manual `djinn-penelope upload`. Tested end-to-end with a real gcode file (SSH listing → scp pull → print-time/filament parsing → queue insertion → idempotency) before enabling the timer. Found and fixed one real bug along the way: scp over Windows OpenSSH silently fails on backslash paths even though `ssh dir` with the same path works fine. This closes out the print-file architecture work from earlier today — Typhon can now slice, and the gcode gets to Salomon automatically. Full detail: [[2026-07-01_djinn-gcode-sync]].
+
+— Claude

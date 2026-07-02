@@ -41,6 +41,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | djinn-daily timer | ✅ Active | 8 AM → morning briefing via OpenClaw cron (qwen2.5:7b, 240s timeout) |
 | djinn-weekly timer | ✅ Active | Sun 20:00 → weekly review |
 | printer-error-logger | ✅ Active | Monitors Moonraker for errors |
+| djinn-gcode-sync timer | ✅ Active (new 2026-07-01) | 5-min → pulls sliced gcode from Typhon (`C:\Forge\gcode\{calliope,penelope}`) over Tailscale SSH. Calliope files auto-queue as `pending` in print-queue.json (still requires `djinn-confirm-print` auth gate — never auto-prints). Penelope files land at `~/.local/share/forge/gcode/penelope/` for manual `djinn-penelope upload`. |
 | opencode | ✅ Available | ~/.opencode/bin/opencode v1.15.10 — use `--dangerously-skip-permissions` for headless |
 
 ---
