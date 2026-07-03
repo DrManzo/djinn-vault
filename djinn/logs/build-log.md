@@ -1652,10 +1652,10 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 
 *— Claude*
 
-## 2026-07-03 — Camood mark blocked / Typhon SSH gap
+## 2026-07-03 — Shop expansion: AD5M Pro + AD5X + Space Pi X4L acquired
 
-- Confirmed Med Core TPP collab files safe (3×28MB in collabs library)
-- `tf_anvil_traced_15mm.stl` lost from Salomon (Trash purge during library reorg)
-- File confirmed on Typhon at `C:/Users/tf-tthq/printer-files/library/originals/logos/`
-- Typhon reachable via Tailscale 100.69.41.74 but SSH key not provisioned post-reinstall
-- Camood mark task PENDING — blocked on file transfer
+- Flashforge AD5M Pro: high-speed single-material, onboarding pending
+- Flashforge AD5X: multi-color (4 filament), primary commission printer, onboarding pending
+- Creality Space Pi X4L: 4-spool filament dryer, in use
+- INFRASTRUCTURE.md updated with all three units
+- Next: network both Flashforge printers, add to Djinn printer stack

@@ -70,6 +70,32 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 | API key | `~/.config/djinn/printers.env` |
 | Status | **LIVE** as of 2026-06-20 |
 
+### Flashforge AD5M Pro *(acquired 2026-07-03)*
+| Attribute | Value |
+|-----------|-------|
+| Build volume | 220×220×220mm |
+| Speed | up to 600mm/s |
+| Firmware | FlashOS (closed) |
+| Slicer | FlashPrint 5 / OrcaSlicer |
+| Status | ONBOARDING — not yet networked/configured |
+
+### Flashforge AD5X *(acquired 2026-07-03)*
+| Attribute | Value |
+|-----------|-------|
+| Build volume | 220×220×220mm |
+| Color system | Multi-material (up to 4 colors) |
+| Speed | up to 600mm/s |
+| Firmware | FlashOS (closed) |
+| Slicer | FlashPrint 5 / OrcaSlicer |
+| Status | ONBOARDING — not yet networked/configured |
+| Notes | Primary color/multi-material printer for commissions |
+
+### Creality Space Pi X4L *(acquired 2026-07-03)*
+| Attribute | Value |
+|-----------|-------|
+| Type | Filament dryer — 4-spool, large format |
+| Status | IN USE |
+
 ---
 
 ## 2. GitHub Repositories
