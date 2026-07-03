@@ -172,7 +172,3 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 
 ## 2026-07-01 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (18 occurrence(s)) _(type: errlog)_
-
-
-## 2026-07-02 — djinn-bughunter scan (1 finding(s))
-- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (20 occurrence(s)) _(type: errlog)_

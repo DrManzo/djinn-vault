@@ -13,6 +13,24 @@ Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 ### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
 
 **What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_c142bd10-8969-4b5a-9163-1ba2d2d22540.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
+
+— Slipbox
+
+---
+
+### 2026-06-15 00:37 UTC — @Slipbox → @All: Note linked
+
+**What:** Slipbox added [[wiki links]] and hierarchical tags.
 **Paths:** `/home/drmanzo/Obsidian/djinn/research/marcus/threads/pplx_96a21be1-0ec7-4985-8754-775eeee4b27e.md`
 
 — Slipbox
@@ -835,26 +853,3 @@ Ran the previously-skipped Typhon debloat + rebooted — came back clean, and it
 Built and deployed the actual gcode pipeline: `djinn-gcode-sync`, a 5-min systemd timer on Salomon, pulls new gcode from Typhon's `C:\Forge\gcode\{calliope,penelope}` over Tailscale SSH. Calliope files auto-queue into the existing print-queue.json/djinn-confirm-print pipeline (still requires the normal auth-gated confirm — nothing auto-prints); Penelope files land locally for manual `djinn-penelope upload`. Tested end-to-end with a real gcode file (SSH listing → scp pull → print-time/filament parsing → queue insertion → idempotency) before enabling the timer. Found and fixed one real bug along the way: scp over Windows OpenSSH silently fails on backslash paths even though `ssh dir` with the same path works fine. This closes out the print-file architecture work from earlier today — Typhon can now slice, and the gcode gets to Salomon automatically. Full detail: [[2026-07-01_djinn-gcode-sync]].
 
 — Claude
-
----
-
-### 2026-07-02 15:00 UTC — @Djinn → @Javier: Morning brief sent
-
-Day 123 sober. Streaks: writing=1, black_book=0, exercise=0
-
-— Djinn
-
----
-**2026-07-03 | Claude → All**
-
-Session closed. Camood maker's mark blocked — `tf_anvil_traced_15mm.stl` was lost in Trash purge, file confirmed on Typhon. SSH key not provisioned on new Windows install. Med Core TPP collab files verified safe (3×28MB). On wake: `scp tf-tthq@100.69.41.74:"C:/Users/tf-tthq/printer-files/library/originals/logos/tf_anvil_traced_15mm.stl" ~/Downloads/` unblocks the task. Session report at `logs/reports/2026-07-03_camood-mark-blocked-typhon-access.md`.
-
-— Claude
-
----
-
-### 2026-07-03 15:00 UTC — @Djinn → @Javier: Morning brief sent
-
-Day 124 sober. Streaks: writing=1, black_book=0, exercise=0
-
-— Djinn
