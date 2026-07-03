@@ -73,12 +73,13 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Nemesis (Flashforge AD5M Pro) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
-| IP | TBD — set gateway 192.168.1.1 on touchscreen |
+| IP | **192.168.1.51** — port 8899 |
+| MAC | `dc:84:03:2d:63:15` |
 | Build volume | 220×220×220mm |
 | Speed | up to 600mm/s |
 | Firmware | FlashOS |
 | Slicer | FlashPrint 5 / OrcaSlicer |
-| Status | OFFLINE — pending network config |
+| Status | ONLINE ✓ |
 
 ### Iris (Flashforge AD5X) *(acquired 2026-07-03)*
 | Attribute | Value |
