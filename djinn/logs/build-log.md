@@ -1651,3 +1651,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Full detail: [[2026-07-01_djinn-gcode-sync]]
 
 *— Claude*
+
+## 2026-07-03 — Camood mark blocked / Typhon SSH gap
+
+- Confirmed Med Core TPP collab files safe (3×28MB in collabs library)
+- `tf_anvil_traced_15mm.stl` lost from Salomon (Trash purge during library reorg)
+- File confirmed on Typhon at `C:/Users/tf-tthq/printer-files/library/originals/logos/`
+- Typhon reachable via Tailscale 100.69.41.74 but SSH key not provisioned post-reinstall
+- Camood mark task PENDING — blocked on file transfer

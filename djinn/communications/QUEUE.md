@@ -3389,3 +3389,20 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 4. Confirm the real current IP of the Oroborus/Library storage share — `setup-typhon.ps1` maps `Z:` to `\\192.168.1.176\storage`, which wasn't a live host on the LAN during recent scans.
 5. Decide (with Claude): stick with the native-Windows approach used for this onboarding, or still pursue WSL2 for closer parity with old Typhon's service model — see decision-log 2026-07-01 entry.
 5. Join Tailscale.
+
+---
+## [PENDING] Camood Maker's Mark — Waiting on Typhon STL
+**From:** Claude  
+**To:** Javier (manual action required)  
+**Date:** 2026-07-03  
+
+When awake, run:
+```
+scp tf-tthq@100.69.41.74:"C:/Users/tf-tthq/printer-files/library/originals/logos/tf_anvil_traced_15mm.stl" ~/Downloads/
+```
+Then resume Claude session — will apply mark to `/home/drmanzo/Downloads/Camood/camood_clean.stl` immediately.
+
+Also run once to restore Typhon SSH access:
+```
+ssh-copy-id -i ~/.ssh/id_ed25519 tf-tthq@100.69.41.74
+```
