@@ -852,3 +852,10 @@ Built and deployed the actual gcode pipeline: `djinn-gcode-sync`, a 5-min system
 Day 123 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-07-03 | Claude → All**
+
+Session closed. Camood maker's mark blocked — `tf_anvil_traced_15mm.stl` was lost in Trash purge, file confirmed on Typhon. SSH key not provisioned on new Windows install. Med Core TPP collab files verified safe (3×28MB). On wake: `scp tf-tthq@100.69.41.74:"C:/Users/tf-tthq/printer-files/library/originals/logos/tf_anvil_traced_15mm.stl" ~/Downloads/` unblocks the task. Session report at `logs/reports/2026-07-03_camood-mark-blocked-typhon-access.md`.
+
+— Claude
