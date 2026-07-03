@@ -1034,3 +1034,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-07-02 03:38:25 UTC
+=== FAILURE DETECTED ===
+  File: proxy_Med_Core_clean_marked.stl_PETG_46m21s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-03 08:55:52 UTC
