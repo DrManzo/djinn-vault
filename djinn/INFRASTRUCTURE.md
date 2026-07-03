@@ -70,24 +70,27 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 | API key | `~/.config/djinn/printers.env` |
 | Status | **LIVE** as of 2026-06-20 |
 
-### Flashforge AD5M Pro *(acquired 2026-07-03)*
+### Nemesis (Flashforge AD5M Pro) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
+| IP | TBD — set gateway 192.168.1.1 on touchscreen |
 | Build volume | 220×220×220mm |
 | Speed | up to 600mm/s |
-| Firmware | FlashOS (closed) |
+| Firmware | FlashOS |
 | Slicer | FlashPrint 5 / OrcaSlicer |
-| Status | ONBOARDING — not yet networked/configured |
+| Status | OFFLINE — pending network config |
 
-### Flashforge AD5X *(acquired 2026-07-03)*
+### Iris (Flashforge AD5X) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
+| IP | **192.168.1.50** — port 8899 |
+| MAC | `dc:84:03:b2:d7:c0` |
 | Build volume | 220×220×220mm |
 | Color system | Multi-material (up to 4 colors) |
 | Speed | up to 600mm/s |
-| Firmware | FlashOS (closed) |
+| Firmware | FlashOS |
 | Slicer | FlashPrint 5 / OrcaSlicer |
-| Status | ONBOARDING — not yet networked/configured |
+| Status | ONLINE ✓ |
 | Notes | Primary color/multi-material printer for commissions |
 
 ### Creality Space Pi X4L *(acquired 2026-07-03)*
