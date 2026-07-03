@@ -1039,3 +1039,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-07-03 08:55:52 UTC
+=== FAILURE DETECTED ===
+  File: camood_TerpTribeHQ.stl_PETG_2h50m43s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-03 19:25:56 UTC
