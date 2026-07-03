@@ -1,0 +1,16 @@
+{
+  "filename": "proxy_Med_Core_clean_marked.stl_PETG_46m21s.gcode",
+  "model_name": "proxy_Med_Core_clean_marked.stl_PETG_46m21s",
+  "order_id": "proxy_Med_Core_clean_marked.stl_PETG_46m21s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-07-03T08:08:01.291839+00:00",
+  "completed_at": "2026-07-03T08:54:55.586817+00:00",
+  "duration_s": 2907.8,
+  "duration_min": 48.5,
+  "filament_mm": 5627.0,
+  "filament_grams": 16.78,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}
