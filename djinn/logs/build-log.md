@@ -1673,3 +1673,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Creality Space Pi X4L: 4-spool filament dryer, in use
 - INFRASTRUCTURE.md updated with all three units
 - Next: network both Flashforge printers, add to Djinn printer stack
+
+## 2026-07-03 — Iris zmod + Slicer Setup (Claude)
+- Diagnosed Iris zmod failure: ENABLE file can't repair a mod that was never fully installed — `/usr/data/config/mod/` was empty
+- Applied full 206MB zmod package via USB — Iris now running zmod 1.7.1-49, Moonraker on :7125
+- Nemesis confirmed online: Moonraker on 192.168.1.51:7125, Klipper ready
+- Both Flashforge printers: Fluidd at :80, SSH root@<ip>
+- Downloaded OrcaSlicer v2.4.1 (132MB) + Bambu Studio v02.07.01.62 (408MB) to Salomon ~/forge/slicers/
+- Typhon USB populated: typhon-unlock.ps1, both installers, install-slicers.ps1, OPENCODE-PROMPT.md
+- Salomon script: ~/forge/slicer-setup/djinn-typhon-slicers.sh (push + install autonomously once SSH unlocked)
+- INFRASTRUCTURE.md: Iris + Nemesis entries updated with zmod details, Moonraker, SSH
+- Pending: Typhon SSH unlock, bambufy on Iris, Djinn CLI for both printers
