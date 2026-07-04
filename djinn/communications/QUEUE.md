@@ -3434,3 +3434,22 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 1. Add `_START_BAMBUFY` init to a RESTART gcode macro override
 2. Use Moonraker's `[power]` or `[button]` startup automation
 3. Inject `_IFS_VARS.init=1` via moonraker.conf on_connect handler
+
+---
+**QUEUED:** 2026-07-03
+**FOR:** Salomon
+**FROM:** Claude
+**TASK:** Install OrcaSlicer + Bambu Studio on Typhon
+
+After Typhon SSH is unlocked (run djinn/ssh-recovery/typhon-unlock.ps1 from USB as Admin on Typhon):
+
+```bash
+~/forge/slicer-setup/djinn-typhon-slicers.sh
+```
+
+This pushes both installers from ~/forge/slicers/ and runs silent installs on Typhon. Full step-by-step also in Typhon USB at djinn/OPENCODE-PROMPT.md.
+
+**ALSO:** After OrcaSlicer is on Typhon and connected to Iris (192.168.1.50:7125), run in Iris Klipper console (http://192.168.1.50):
+```
+ENABLE_PLUGIN name=bambufy
+```

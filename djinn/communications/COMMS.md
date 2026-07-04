@@ -876,3 +876,17 @@ Ran the previously-skipped Typhon debloat + rebooted — came back clean, and it
 Built and deployed the actual gcode pipeline: `djinn-gcode-sync`, a 5-min systemd timer on Salomon, pulls new gcode from Typhon's `C:\Forge\gcode\{calliope,penelope}` over Tailscale SSH. Calliope files auto-queue into the existing print-queue.json/djinn-confirm-print pipeline (still requires the normal auth-gated confirm — nothing auto-prints); Penelope files land locally for manual `djinn-penelope upload`. Tested end-to-end with a real gcode file (SSH listing → scp pull → print-time/filament parsing → queue insertion → idempotency) before enabling the timer. Found and fixed one real bug along the way: scp over Windows OpenSSH silently fails on backslash paths even though `ssh dir` with the same path works fine. This closes out the print-file architecture work from earlier today — Typhon can now slice, and the gcode gets to Salomon automatically. Full detail: [[2026-07-01_djinn-gcode-sync]].
 
 — Claude
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-07-03
+**RE:** Iris (AD5X) zmod installed — both Flashforge printers online; slicer assets staged on Typhon USB
+
+Iris zmod was stalled because the ENABLE file only re-enables an existing install — but the mod was never fully installed on Iris (mod/.shell/ was empty). Applied the full 206MB zmod package via USB. Iris now running zmod 1.7.1-49, Moonraker on 192.168.1.50:7125, Klipper ready. Nemesis confirmed on 192.168.1.51:7125. Both accessible via Fluidd at :80 and SSH root@<ip>.
+
+Slicer decision: OrcaSlicer for Nemesis (single-material), Bambu Studio + bambufy plugin for Iris (4-color commissions — keeps waste under 50%). OrcaSlicer v2.4.1 + Bambu Studio v02.07.01.62 downloaded to Salomon ~/forge/slicers/ and copied to Typhon USB at djinn/slicers/. Typhon USB also has typhon-unlock.ps1 (drops Salomon SSH key permanently, enables password auth — run once as Admin to unblock everything) and OPENCODE-PROMPT.md for Salomon/OpenCode autonomous install.
+
+Pending: Typhon USB run on Typhon to unlock SSH → Salomon runs djinn-typhon-slicers.sh → bambufy on Iris → Djinn CLI for both printers.
+
+— Claude
