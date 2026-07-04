@@ -73,25 +73,27 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Nemesis (Flashforge AD5M Pro) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
-| IP | **192.168.1.51** — port 8899 |
+| IP | **192.168.1.51** — Moonraker :7125, Fluidd :80, FlashOS :8899 |
 | MAC | `dc:84:03:2d:63:15` |
 | Build volume | 220×220×220mm |
 | Speed | up to 600mm/s |
-| Firmware | FlashOS |
-| Slicer | FlashPrint 5 / OrcaSlicer |
-| Status | ONLINE ✓ |
+| Firmware | zmod 1.7.x (Klipper + Moonraker + Fluidd) |
+| Slicer | OrcaSlicer (Octo/Klipper mode, host:7125) |
+| SSH | `root@192.168.1.51` (password: root) |
+| Status | ONLINE ✓ — Moonraker ready |
 
 ### Iris (Flashforge AD5X) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
-| IP | **192.168.1.50** — port 8899 |
+| IP | **192.168.1.50** — Moonraker :7125, Fluidd :80, FlashOS :8899 |
 | MAC | `dc:84:03:b2:d7:c0` |
 | Build volume | 220×220×220mm |
-| Color system | Multi-material (up to 4 colors) |
+| Color system | Multi-material (up to 4 colors, IFS) |
 | Speed | up to 600mm/s |
-| Firmware | FlashOS |
-| Slicer | FlashPrint 5 / OrcaSlicer |
-| Status | ONLINE ✓ |
+| Firmware | zmod 1.7.1-49 (Klipper + Moonraker + Fluidd) — installed 2026-07-03 |
+| Slicer | OrcaSlicer (Octo/Klipper mode, host:7125) |
+| SSH | `root@192.168.1.50` (password: root) |
+| Status | ONLINE ✓ — Moonraker ready, Klipper ready |
 | Notes | Primary color/multi-material printer for commissions |
 
 ### Creality Space Pi X4L *(acquired 2026-07-03)*
