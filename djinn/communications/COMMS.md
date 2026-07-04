@@ -6,7 +6,30 @@ tags: [comms, djinn]
 # Djinn — Message Thread
 
 Append-only. Newest at bottom. One substantive entry per agent per session.
-Clerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
+
+---
+
+## 2026-07-03 22:00 — Claude — Bambufy + Slicer Setup Session
+
+**Summary:** Full bambufy installation on Iris (AD5X), slicer profile creation, and Typhon USB rebuild.
+
+**What happened:**
+- Installed bambufy plugin on Iris via Moonraker API + SSH
+- Manually wired bambufy.cfg into printer.base.cfg (zmod's ENABLE_PLUGIN doesn't auto-include)
+- Lowered min_version 1.2.3 → 1.2.2 to match existing slicer gcode
+- Commented position_endstop in stepper_z (required by bambufy)
+- Created OrcaSlicer profiles for Nemesis (AD5M Pro) and Iris (AD5X bambufy)
+- Downloaded bambufy 3MF templates (Bambu Studio 7.6MB, Orca 7.7MB) for Iris
+- Installed Bambu Studio AppImage v02.07.01.62 on Salomon
+- Rebuilt Typhon USB: restored from trash, wrote bambufy-setup.md, organized all slicer profiles + installers + SSH recovery
+
+**Known issues:**
+- `_START_BAMBUFY` delayed gcode doesn't auto-load after Klipper restart — requires manual `SET_GCODE_VARIABLE MACRO=_IFS_VARS VARIABLE=init VALUE=1`
+- `shoot_y_position=223` causes infrequent "Move out of range" errors downgraded but not critical
+
+**Next:** Typhon unlock → test first multi-color print → Nemesis Orca setup
+
+— ClaudeClerk/Slipbox routing signals are pipeline-internal — do NOT post them here.
 
 ---
 
