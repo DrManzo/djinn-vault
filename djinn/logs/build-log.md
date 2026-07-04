@@ -497,6 +497,20 @@ created: 2026-05-19
 - Updated COMMS.md with Marcus introduction
 *— Marcus*
 
+## 2026-07-03 — Bambufy on Iris + Slicer Profiles on USB — Claude
+
+- **Bambufy plugin** installed and wired on Iris (AD5X @ 192.168.1.50): 27 macros active, waste-optimized multi-color printing
+- **bambufy.cfg** (2144 lines) manually deployed to Iris after ENABLE_PLUGIN failed to wire it into plugins.cfg
+- **position_endstop** in printer.base.cfg commented for stepper_z (bambufy requirement)
+- **min_version** lowered 1.2.3→1.2.2 to match existing slicer gcode
+- **shoot_y_position=223** causes "Move out of range" errors on long retractions — lowered to 218 temporarily, reverted to 223
+- **Bambu Studio AppImage** (v02.07.01.62, 217MB) installed on Salomon at `~/BambuStudio.AppImage`
+- **Typhon USB** rebuilt with full djinn/: bambufy-setup.md, two 3MF templates (Bambu Studio + Orca), OrcaSlicer profiles for Nemesis and Iris, slicer installers, SSH recovery script, Salomon prompt
+- **Iris SSH** verified (root/root), Moonraker API confirmed working
+- **Known issue:** `_START_BAMBUFY` delayed gcode doesn't load on this Klipper version — init must be triggered manually after restart
+
+*— Claude*
+
 **FairPrintAgent Integration — commissions/ as canonical engine (2026-05-31)**
 - Marcus delivered true weighted median, smoking detection, terminal table in commissions/{price,brief,report}.py
 - Claude: replaced Etsy scraper in commissions/price.py with DDG (battle-tested); added MarketSpec.size + auto-fetch

@@ -7,6 +7,34 @@ Record of architectural and technical decisions made during Djinn builds.
 
 ---
 
+## 2026-07-03 — Bambu Studio over OrcaSlicer for Iris multi-color
+
+**Decision:** Use Bambu Studio as the primary slicer for Iris bambufy prints. OrcaSlicer profiles shipped as backup.
+
+**Context:** bambufy was designed for Bambu Studio's AMS workflow. OrcaSlicer can produce bambufy-compatible gcode but waste reduction (flush volumes, purge towers) is better integrated in Bambu Studio.
+
+**Options considered:**
+1. Bambu Studio — designed for AMS workflow, better waste optimization — ✅ chosen
+2. OrcaSlicer — works but requires manual flush tuning — shipped as fallback
+3. PrusaSlicer/SuperSlicer — no AMS support at all — ❌ rejected
+
+**Outcome:** Bambu Studio AppImage installed on Salomon; 3MF template with Iris profile baked and written to USB. OrcaSlicer profiles also written to USB for Typhon users who prefer it.
+
+---
+
+## 2026-07-03 — Manual bambufy.cfg install over zmod ENABLE_PLUGIN
+
+**Decision:** Write bambufy.cfg to its plugin directory AND manually add the include to printer.base.cfg, rather than relying on zmod's ENABLE_PLUGIN API endpoint.
+
+**Context:** `ENABLE_PLUGIN` on zmod's Klipper installed bambufy files to `mod_data/plugins/bambufy/` but did NOT wire the `.cfg` include into `plugins.cfg` or `printer.base.cfg`. Macros were on disk but never loaded.
+
+**Options considered:**
+1. Fix ENABLE_PLUGIN — zmod might fix this in a future firmware update; not actionable now — ❌
+2. Manual include in printer.base.cfg — works, matches zmod's documented manual install path — ✅ chosen
+3. Symlink or include from moonraker.conf — would work but is non-standard — ❌
+
+**Outcome:** `[include mod_data/plugins/bambufy/bambufy.cfg]` added to printer.base.cfg. Macros load on Klipper restart.
+
 ---
 
 ## 2026-06-05 — gcode post-processing vs 3MF SupportBlocker volume for multi-instance plates

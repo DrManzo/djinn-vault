@@ -3389,3 +3389,48 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 4. Confirm the real current IP of the Oroborus/Library storage share — `setup-typhon.ps1` maps `Z:` to `\\192.168.1.176\storage`, which wasn't a live host on the LAN during recent scans.
 5. Decide (with Claude): stick with the native-Windows approach used for this onboarding, or still pursue WSL2 for closer parity with old Typhon's service model — see decision-log 2026-07-01 entry.
 5. Join Tailscale.
+
+---
+
+## TASK-005 — Typhon: Unlock SSH + Import slicer profiles
+- assigned_to: typhon (Javier — needs interactive session)
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-07-03 by Claude
+- context: Typhon SSH is locked behind Windows firewall/Session 0 isolation. `typhon-unlock.ps1` on USB needs to run as Admin interactively. After unlock, import `bambufy-template-bambustudio.3mf` as default Iris profile and `orca-profiles/` JSONs for Nemesis.
+
+**Actions (after SSH unlock):**
+1. Run `typhon-unlock.ps1` as Admin on Typhon to configure SSH key auth + firewall
+2. Open `bambufy-template-bambustudio.3mf` (on USB) in Bambu Studio → save as default Iris profile
+3. Import `orca-profiles/Iris-AD5X-0.4mm-Bambufy.json` and `orca-profiles/Nemesis-AD5M-Pro-0.4mm.json` into OrcaSlicer
+
+---
+
+## TASK-006 — Iris: Test first multi-color print
+- assigned_to: javier
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-07-03 by Claude
+- context: Bambufy is live on Iris but untested with an actual multi-color print. After slicer profiles are on Typhon, slice a small 2-color test and print.
+
+**Pre-flight check:**
+1. If Iris Klipper was restarted since setup: run `SET_GCODE_VARIABLE MACRO=_IFS_VARS VARIABLE=init VALUE=1` in the console first
+2. Slice a small 2-color model using Bambu Studio with the Iris profile
+3. Send to Iris and observe filament changes
+
+---
+
+## TASK-007 — Iris: Fix `_START_BAMBUFY` delayed gcode auto-init
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-03 by Claude
+- context: bambufy's `_START_BAMBUFY` delayed gcode doesn't auto-load on zmod Klipper. After every restart, user must manually trigger init. Need to find a workaround (Klipper delayed_gcode vs STARTUP vs moonraker startup script).
+
+**Approach:** Research and implement one of:
+1. Add `_START_BAMBUFY` init to a RESTART gcode macro override
+2. Use Moonraker's `[power]` or `[button]` startup automation
+3. Inject `_IFS_VARS.init=1` via moonraker.conf on_connect handler
