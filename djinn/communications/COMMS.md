@@ -881,3 +881,11 @@ Slicer decision: OrcaSlicer for Nemesis (single-material), Bambu Studio + bambuf
 Pending: Typhon USB run on Typhon to unlock SSH → Salomon runs djinn-typhon-slicers.sh → bambufy on Iris → Djinn CLI for both printers.
 
 — Claude
+
+---
+
+### 2026-07-04 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 125 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
