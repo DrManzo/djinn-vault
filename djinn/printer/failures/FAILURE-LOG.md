@@ -1064,3 +1064,8 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → cancelled
   Time: 2026-07-05 10:33:50 UTC
+=== FAILURE DETECTED ===
+  File: arm.stl_PETG_3h22m9s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-07-05 11:42:19 UTC
