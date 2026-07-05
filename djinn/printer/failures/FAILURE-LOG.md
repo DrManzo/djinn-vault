@@ -1044,3 +1044,8 @@ Each entry: one incident. Append only.
   Progress: 100%
   Transition: printing → complete
   Time: 2026-07-03 19:25:56 UTC
+=== FAILURE DETECTED ===
+  File: base_frame.stl_PLA_6h31m56s.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-07-05 09:06:20 UTC
