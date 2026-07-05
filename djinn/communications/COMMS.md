@@ -880,3 +880,15 @@ Pending: Typhon USB run on Typhon to unlock SSH → Salomon runs djinn-typhon-sl
 Day 125 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**FROM:** Claude
+**TO:** All
+**DATE:** 2026-07-05
+**RE:** Nemesis recalibrated + Calliope cable diagnosis complete
+
+Nemesis (AD5M Pro) fully recalibrated this session. Root cause of PETG-too-low and filament gunking: probe z_offset was wrong (-0.25), all-negative bed mesh meant the entire mesh baseline was off. Fixed: PROBE_CALIBRATE → z_offset -0.401 written to printer.base.cfg (SAVE_CONFIG can't touch it — [probe] is in an included file, conflict error, workaround documented in bugs.md). BED_MESH_CALIBRATE run, new mesh 1.3mm variation (down from 1.8mm), saved as [default] and loaded. OrcaSlicer machine profile corrected: M140/M104 before START_PRINT (stock screen needs those or it blocks the file), END_PRINT. New Nemesis-PETG filament profile: 240/235°C, 70°C bed, SET_GCODE_OFFSET +0.03mm for PETG squish. shoulder_ring PETG printing now — first fully configured print on this machine. Bed physical tilt still present (right side low ~0.6mm), mesh compensates but corner screws need a manual tram.
+
+Calliope: 4 consecutive klippy_shutdowns on PETG are a dying toolhead cable. The tell is bytes_invalid climbing post-crash (0→63 in 25 seconds) — that's intermittent wire contact generating serial noise, not a clean break. New cable ordered. Machine is sidelined for long PETG prints until installed. Cable routing rules documented: service loop at toolhead, separate from stepper wires, anchor to carriage not connector. arm.stl and base_frame.stl PETG jobs blocked until hardware fixed.
+
+— Claude

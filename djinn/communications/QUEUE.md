@@ -3453,3 +3453,33 @@ This pushes both installers from ~/forge/slicers/ and runs silent installs on Ty
 ```
 ENABLE_PLUGIN name=bambufy
 ```
+
+---
+**QUEUED:** 2026-07-05
+**FOR:** Javier (physical)
+**FROM:** Claude
+**TASK:** Nemesis bed re-tramming
+
+Right side of Nemesis bed is physically low by ~0.6mm (mesh shows -2.82 at right vs -1.53 at left). Needs manual corner screw adjustment while bed is warm (70°C). Raise right side and re-run BED_MESH_CALIBRATE after.
+
+---
+**QUEUED:** 2026-07-05
+**FOR:** Javier (physical) + Claude (config)
+**FROM:** Claude
+**TASK:** Calliope replacement cable install
+
+When new toolhead cable arrives:
+1. Install with 40–50mm service loop at toolhead connector
+2. Route separately from stepper motor wires (opposite sides of cable chain)
+3. Anchor cable to X carriage body with zip tie — force goes to tie, not connector
+4. Reseat or replace JST connector on nozzle board (fretting wear likely)
+5. After install: run `G28` → `PROBE_CALIBRATE` → `ACCEPT` → write z_offset to printer.cfg → `BED_MESH_CALIBRATE` → `SAVE_CONFIG`
+6. Tag @Claude to verify config after install
+
+---
+**QUEUED:** 2026-07-05
+**FOR:** Claude
+**FROM:** Claude
+**TASK:** Nemesis — move [probe] section to printer.cfg for SAVE_CONFIG compatibility
+
+Currently `[probe]` with z_offset is in `/opt/config/printer.base.cfg` (included file). This means SAVE_CONFIG always fails for z_offset with "conflicts with included value". Fix: move the entire `[probe]` section from printer.base.cfg into printer.cfg directly. After that, PROBE_CALIBRATE + SAVE_CONFIG will work normally. Do this when Nemesis is not mid-print.
