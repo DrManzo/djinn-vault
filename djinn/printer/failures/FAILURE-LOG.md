@@ -1054,3 +1054,13 @@ Each entry: one incident. Append only.
   Progress: 0%
   Transition: printing → standby
   Time: 2026-07-05 09:52:36 UTC
+=== FAILURE DETECTED ===
+  File: arm.stl_PETG_5h54m11s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-07-05 10:21:48 UTC
+=== FAILURE DETECTED ===
+  File: arm.stl_PETG_5h54m11s.gcode
+  Progress: 0%
+  Transition: printing → cancelled
+  Time: 2026-07-05 10:33:50 UTC
