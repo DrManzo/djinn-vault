@@ -178,3 +178,7 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 
 | 2026-07-05 | Claude | Nemesis / Klipper SAVE_CONFIG | medium | workaround | SAVE_CONFIG fails with "conflicts with included value" when `[probe]` z_offset is in printer.base.cfg (included file) — z_offset must be written manually to printer.base.cfg after every PROBE_CALIBRATE | [[2026-07-05_bug-nemesis-z-offset-conflict]] |
 | 2026-07-05 | Claude | Calliope / hardware | high | open (cable ordered) | nozzle_mcu serial dropout on all PETG prints — bytes_invalid climbing post-crash confirms broken wire inside toolhead cable harness (intermittent partial contact). New cable ordered. | [[2026-07-05_bug-calliope-nozzle-mcu-cable]] |
+
+
+## 2026-07-05 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (14 occurrence(s)) _(type: errlog)_
