@@ -267,3 +267,21 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** Nemesis (single-material, speed) gets OrcaSlicer only. Iris (4-color commissions) gets Bambu Studio with the bambufy zmod plugin as primary slicer, OrcaSlicer as fallback.
 **Why:** bambufy was built specifically for the AD5X multi-material workflow — it flushes purge waste into object infill/supports, keeping material-to-waste under 50% on 4-color prints. This is real cost savings on commission work. OrcaSlicer works but generates more waste on multi-color jobs. For single-material speed printing on Nemesis, OrcaSlicer is simpler and just as capable.
 **How to apply:** Configure Typhon with both slicers. Route commission multi-color jobs to Bambu Studio → Iris. Route fast single-color jobs to OrcaSlicer → Nemesis. Install bambufy on Iris via `ENABLE_PLUGIN name=bambufy` in Klipper console once Typhon is connected.
+
+## 2026-07-05 — Nemesis: OrcaSlicer Over FlashForge Slicer (Permanent)
+
+**Decision:** OrcaSlicer is the permanent slicer for Nemesis. FlashForge's own slicer is not used.
+**Why:** FlashForge slicer targets stock firmware — proprietary M-code sequences, no Moonraker API, gcode Klipper may not understand. Nemesis runs zmod/Klipper. OrcaSlicer with corrected start gcode is the correct tool.
+**How to apply:** Do not install or recommend FlashForge slicer for any zmod printer. If a print won't work in OrcaSlicer, investigate the Klipper config, not the slicer.
+
+## 2026-07-05 — Nemesis: Per-Material Z Offset via SET_GCODE_OFFSET in Filament Start Gcode
+
+**Decision:** PETG gets +0.03mm Z offset via `SET_GCODE_OFFSET Z_ADJUST=0.03 MOVE=1` in OrcaSlicer filament start gcode. Reset to 0 in filament end gcode.
+**Why:** OrcaSlicer has no per-filament z_offset field. Klipper's SET_GCODE_OFFSET is the correct mechanism. PETG needs less squish than PLA — +0.03mm is a starting point, tunable after first print validation.
+**How to apply:** Every new filament type on Nemesis gets its own OrcaSlicer profile with appropriate Z_ADJUST. PLA = 0 (baseline from PROBE_CALIBRATE). PETG = +0.03. TPU = likely +0.05 or more.
+
+## 2026-07-05 — Calliope: Sidelined Until Cable Replacement
+
+**Decision:** No long prints on Calliope until new cable installed.
+**Why:** bytes_invalid climbing post-crash = partial wire break generating serial noise. Software cannot fix hardware serial corruption. Any long print will fail.
+**How to apply:** Short PLA test prints only. No PETG. No arm.stl/base_frame.stl. After cable install: PROBE_CALIBRATE → BED_MESH_CALIBRATE → validate.

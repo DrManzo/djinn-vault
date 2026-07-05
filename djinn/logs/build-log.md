@@ -1684,3 +1684,23 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Salomon script: ~/forge/slicer-setup/djinn-typhon-slicers.sh (push + install autonomously once SSH unlocked)
 - INFRASTRUCTURE.md: Iris + Nemesis entries updated with zmod details, Moonraker, SSH
 - Pending: Typhon SSH unlock, bambufy on Iris, Djinn CLI for both printers
+
+## 2026-07-05 — Nemesis Full Recalibration + OrcaSlicer Profile Fix (Claude)
+
+- Diagnosed nozzle-too-close root cause: probe z_offset was -0.25 (wrong), bed mesh all-negative (-1.1 to -2.9mm)
+- PROBE_CALIBRATE run → new z_offset: -0.401; written manually to `/opt/config/printer.base.cfg` via SSH (SAVE_CONFIG conflicts with included file — see bug report)
+- BED_MESH_CALIBRATE run → new 5×5 mesh, 1.3mm variation (improved from 1.8mm); saved as [default], loaded
+- OrcaSlicer machine profile updated: M140+M104+START_PRINT start gcode, END_PRINT end gcode, moonraker host_type
+- Nemesis-PETG filament profile created: 240/235°C, 70°C bed, PA 0.035, SET_GCODE_OFFSET Z_ADJUST=+0.03
+- shoulder_ring_PETG_4h14m printing — first fully calibrated print on Nemesis
+- Full detail: [[2026-07-05_printer-triage-nemesis-calliope]]
+
+## 2026-07-05 — Calliope nozzle_mcu Cable Diagnosis (Claude)
+
+- Confirmed root cause of 4× klippy_shutdown: broken wire inside toolhead cable harness
+- Evidence: bytes_invalid climbing 0→63 post-crash = intermittent partial contact, not clean break
+- All MCUs on hardware UART (not USB) — USB saturation ruled out
+- Crash at 1.7% into arm.stl at X185/Y205; moving pieces did not help — failure is general, not positional
+- New cable ordered; Calliope sidelined for long PETG until replaced
+- Cable routing rules documented: service loop, stepper separation, anchor to carriage
+- Full detail: [[2026-07-05_bug-calliope-nozzle-mcu-cable]]
