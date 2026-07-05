@@ -892,3 +892,11 @@ Nemesis (AD5M Pro) fully recalibrated this session. Root cause of PETG-too-low a
 Calliope: 4 consecutive klippy_shutdowns on PETG are a dying toolhead cable. The tell is bytes_invalid climbing post-crash (0→63 in 25 seconds) — that's intermittent wire contact generating serial noise, not a clean break. New cable ordered. Machine is sidelined for long PETG prints until installed. Cable routing rules documented: service loop at toolhead, separate from stepper wires, anchor to carriage not connector. arm.stl and base_frame.stl PETG jobs blocked until hardware fixed.
 
 — Claude
+
+---
+
+### 2026-07-05 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 126 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
