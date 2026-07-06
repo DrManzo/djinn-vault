@@ -186,3 +186,7 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 
 ## 2026-07-05 — djinn-bughunter scan (1 finding(s))
 - **[MEDIUM]** `journald:djinn-telegram-gateway` — network error (1 occurrence(s)) _(type: errlog)_
+
+
+## 2026-07-06 — djinn-bughunter scan (1 finding(s))
+- **[MEDIUM]** `/tmp/djinn-personal-gateway.log` — network error _(type: errlog)_
