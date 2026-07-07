@@ -1704,3 +1704,12 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - New cable ordered; Calliope sidelined for long PETG until replaced
 - Cable routing rules documented: service loop, stepper separation, anchor to carriage
 - Full detail: [[2026-07-05_bug-calliope-nozzle-mcu-cable]]
+
+## 2026-07-06 — Iris Profile Fix + Fleet Back Online
+
+- Fixed `Iris.json` (Bambu Studio): added `gcode_flavor: klipper`, `time_lapse_gcode: ""`, full bambufy `change_filament_gcode` (G1 Y210), `layer_change_gcode`, `print_host`
+- Added Klipper no-op macros on Iris (`user.cfg`): M981, M624, M625 — swallows Bambu spaghetti/AMS codes injected by Bambu Studio regardless of flavor setting
+- Created filament profiles: `FLASHFORGE PETG Basic @Iris`, `FLASHFORGE PLA Basic @Iris` (both `compatible_printers: ["Iris"]`, clean start gcode)
+- Diagnosed M981/M624/M625/G1 X-48.2 injection via gcode diff between working and broken files
+- Fleet status: Iris printing ✓, Nemesis printing ✓, Calliope waiting on cable parts ✓
+- Bug documented: [[2026-07-06_bug-bambu-studio-m981-m624-injection]]

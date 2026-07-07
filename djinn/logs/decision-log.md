@@ -285,3 +285,15 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** No long prints on Calliope until new cable installed.
 **Why:** bytes_invalid climbing post-crash = partial wire break generating serial noise. Software cannot fix hardware serial corruption. Any long print will fail.
 **How to apply:** Short PLA test prints only. No PETG. No arm.stl/base_frame.stl. After cable install: PROBE_CALIBRATE → BED_MESH_CALIBRATE → validate.
+
+## 2026-07-06 — Iris: Klipper No-Op Macros for Bambu M-Codes
+
+**Decision:** Add `[gcode_macro M981/M624/M625]` no-ops to Klipper `user.cfg` rather than trying to suppress via Bambu Studio profile keys.
+**Why:** `gcode_flavor: klipper` does not suppress M981 (spaghetti detection) or M624/M625 (AMS markers) — these are injected by Bambu Studio's internal code generation regardless of profile settings. No JSON key was found to disable them. No-op macros are the reliable, upgrade-proof intercept layer.
+**How to apply:** Any future Klipper printer using Bambu Studio as slicer should get these three macros in user.cfg at setup time.
+
+## 2026-07-06 — Iris: time_lapse_gcode Override to Empty String
+
+**Decision:** Override `time_lapse_gcode: ""` in `Iris.json` rather than adding G1 X-48 to Klipper soft limits or adding more no-op macros.
+**Why:** The A1 parent's timelapse gcode moves to X=-48.2 (Bambu center-origin shutter position) at every layer change. This cannot be intercepted at the macro level — it's a raw G1 move. Emptying the field at the slicer profile level is the only clean fix.
+**How to apply:** Every custom Klipper machine profile in Bambu Studio that inherits from a Bambu parent must override `time_lapse_gcode: ""`.

@@ -3483,3 +3483,21 @@ When new toolhead cable arrives:
 **TASK:** Nemesis — move [probe] section to printer.cfg for SAVE_CONFIG compatibility
 
 Currently `[probe]` with z_offset is in `/opt/config/printer.base.cfg` (included file). This means SAVE_CONFIG always fails for z_offset with "conflicts with included value". Fix: move the entire `[probe]` section from printer.base.cfg into printer.cfg directly. After that, PROBE_CALIBRATE + SAVE_CONFIG will work normally. Do this when Nemesis is not mid-print.
+
+---
+
+**QUEUED:** 2026-07-06
+**FOR:** Javier
+**FROM:** Claude
+**TASK:** Iris — monitor first multi-color tool change
+
+Watch the first filament change on any Iris multi-color print. Confirm `_GOTO_TRASH` fires (toolhead moves to trash bucket at Y≈210), filament purges, `_SBROS_TRASH` fires, and print resumes. If the trash position is wrong, tune `shoot_y_position` via: `SET_GCODE_VARIABLE MACRO=_IFS_VARS VARIABLE=shoot_y_position VALUE=<new>` + `SAVE_VARIABLE`.
+
+---
+
+**QUEUED:** 2026-07-06
+**FOR:** Javier
+**FROM:** Claude
+**TASK:** Calliope cable — install when parts arrive
+
+Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately from stepper wires (EMI). Anchor to X carriage with zip tie so pulling force goes to anchor, not connector. After install: PROBE_CALIBRATE → BED_MESH_CALIBRATE → test PETG print.
