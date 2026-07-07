@@ -190,3 +190,17 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 
 ## 2026-07-06 — djinn-bughunter scan (1 finding(s))
 - **[MEDIUM]** `/tmp/djinn-personal-gateway.log` — network error _(type: errlog)_
+
+## 2026-07-06 — Iris: Bambu Studio Injects M981/M624/M625 Regardless of gcode_flavor
+
+- **[HIGH]** Iris — `M981`/`M624`/`M625` injected by Bambu Studio even with `gcode_flavor: klipper` → Klipper `Unknown command` crash on every print
+- **Root cause:** Spaghetti detection (M981) and AMS layer markers (M624/M625) come from Bambu Studio's internal code generation, not profile fields. Not suppressible via JSON.
+- **Fix:** Klipper no-op macros in `user.cfg` on Iris (192.168.1.50). Pattern documented in [[2026-07-06_bug-bambu-studio-m981-m624-injection]]
+- **Status:** Fixed
+
+## 2026-07-06 — Iris: time_lapse_gcode Inherited from A1 Parent Contains G1 X-48.2
+
+- **[HIGH]** Iris — `G1 X-48.2 F3000` from inherited A1 `time_lapse_gcode` runs at every layer change → `Move out of range` crash
+- **Root cause:** A1 profile's timelapse uses center-origin coordinates. Iris is corner-origin 0–215mm. Inherited without override.
+- **Fix:** `"time_lapse_gcode": ""` in `Iris.json`. Pattern: any Bambu Studio profile inheriting from a Bambu parent must override this field.
+- **Status:** Fixed
