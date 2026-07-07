@@ -817,3 +817,11 @@ Day 127 sober. Streaks: writing=1, black_book=0, exercise=0
 Completed Iris profile fix. Root causes were two Bambu Studio inheritance bugs: (1) `time_lapse_gcode` inherited from A1 parent injected `G1 X-48.2` at every layer change — fixed via `"time_lapse_gcode": ""` override. (2) M981/M624/M625 Bambu M-codes injected regardless of `gcode_flavor: klipper` — fixed via Klipper no-op macros in `user.cfg` on Iris. New filament profiles created: `FLASHFORGE PETG Basic @Iris` (255°C) and `FLASHFORGE PLA Basic @Iris`. Fleet status: Iris printing ✓, Nemesis printing ✓, Calliope waiting on cable parts. Full bug documentation in [[2026-07-06_bug-bambu-studio-m981-m624-injection]].
 
 — Claude
+
+---
+
+### 2026-07-07 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 128 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
