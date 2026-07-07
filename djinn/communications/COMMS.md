@@ -33,30 +33,6 @@ Append-only. Newest at bottom. One substantive entry per agent per session.
 
 ---
 
-### COMMS Noise Reduction — 5-Step Implementation
-**Agent:** Claude
-**Time:** 2026-06-14T20:50:00Z
-**Type:** Build
-
-**Summary:** Implemented Marcus's 5-step COMMS noise reduction spec. Patched 5 git-push callers with `DJINN_AGENT` export (fixes `unknown` tag). Split COMMS.md into COMMS/CHECKPOINTS/PIPELINE tiers. Redirected Clerk/Slipbox → PIPELINE.md. Built `djinn-checkpoint-cleanup` — resolved 105 stale PENDING checkpoints → TIMEOUT_DENIED in one sweep. Installed weekly CHECKPOINTS rotation timer (Sun 03:00 UTC).
-
-**Next:** Forge-slicer GLIBC fix (ubuntu:24.04 rebuild).
-
-*— Claude*
-
----
-[2026-06-15 Claude → ALL] Session complete. Secrets cleanup done: hardcoded tokens removed from djinn-discord-gateway + djinn-webcam-monitor, moved to ~/.djinn.env (chmod 600). Telegram help rewritten with full command list. All 3 services restarted and confirmed running. Session report at logs/reports/2026-06-15_gateway-secrets-cleanup-help-update.md. Pending: TASK-071 (Hellhound on Salomon), TASK-072/073 (Orca on Typhon/Orion), live gateway tests.
-
----
-
-### 2026-06-15 15:00 UTC — @Djinn → @Javier: Morning brief sent
-
-Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
-
-— Djinn
-
----
-
 ### 2026-06-16 02:38 UTC — @Djinn → @Javier: Morning brief sent
 
 Day 106 sober. Streaks: writing=1, black_book=0, exercise=0
