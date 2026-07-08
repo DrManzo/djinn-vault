@@ -201,7 +201,7 @@ T4 = Reserve / specialty (TPU, etc.)
 ```
 
 ## Iris Notes
-- bambufy not yet installed (pending Typhon SSH unlock) — OrcaSlicer is current slicer
+- bambufy is installed and operational — Bambu Studio is the slicer for multi-color jobs; OrcaSlicer for single-color
 - `shoot_y_position` bug: if "Move out of range" error during long multi-color retractions, lower `shoot_y_position` from 223 to 218 in bambufy config
 - Iris clock may show 1970 on cold boot — NTP resolves on internet connect, non-blocking
 - Enclosure is DIY passive — no HEPA/carbon filtration; ventilate room when running ABS/ASA
