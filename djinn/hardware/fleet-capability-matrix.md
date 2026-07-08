@@ -20,7 +20,7 @@ Built from vault docs and current hardware research. Covers all four active mach
 | **Build Volume** | 220×220×220 mm | 220×220×220 mm | 300×300×330 mm | 220×220×250 mm |
 | **Max Nozzle Temp** | 300°C | 280°C | 300°C | 260°C (Marlin soft cap) |
 | **Max Bed Temp** | 110°C | 110°C | ~100°C | ~100°C |
-| **Enclosure** | **Yes** | Yes (active HEPA) | No | No |
+| **Enclosure** | Yes (DIY, passive) | Yes (active HEPA) | No | No |
 | **Extruder** | Direct drive | Direct drive | Direct drive (Sprite Pro) | Bowden (stock) |
 | **Multi-material** | Yes — IFS 4-color | No | No | No |
 | **Firmware** | Klipper (zmod/bambufy) | Klipper (zmod) | Klipper (Moonraker) | Klipper/OctoPrint (Pi Zero 2W / ATmega1284P) |
@@ -39,14 +39,14 @@ Built from vault docs and current hardware research. Covers all four active mach
 ### Material Compatibility
 
 - **Reliable:** PLA, PETG, TPU 95A (notably, multi-color TPU is a standout capability vs. competitors), PLA-CF, PETG-CF
-- **Struggles:** ABS/ASA — enclosed but chamber temp is not independently controlled; warping risk on larger parts
-- **Off-limits:** Nylon, PC, high-temp engineering resins without sustained chamber heat; CF blends technically supported but accelerate nozzle wear (hardened steel stock helps)
+- **Struggles:** ABS/ASA — DIY enclosure helps over open-air but chamber temp is passive (bed/hotend heat only, no active heater); warping risk on larger parts; sealing quality depends on the build
+- **Off-limits:** Nylon, PC, high-temp engineering resins — passive chamber can't sustain the temps required; CF blends technically supported but accelerate nozzle wear (hardened steel stock helps)
 
 ### Safety Limits
 
 - Max nozzle: 300°C
 - Max bed: 110°C
-- Enclosure: **Yes**
+- Enclosure: **Yes (DIY, passive — no active filtration).** No HEPA/carbon filtering; ventilation or aftermarket filter (Nevermore, HEPA insert) recommended for ABS/ASA. Chamber temp from bed and hotend only — less stable than Nemesis's factory enclosure.
 - Thermal runaway protection: Yes (certified CE/FCC/RoHS)
 - **Bambufy/Klipper-specific:** Two open bugs in vault — `_START_BAMBUFY` delayed gcode doesn't auto-load on zmod restart (must trigger manually), and `shoot_y_position=223` can cause "Move out of range" at Y=234.7 during long multi-color retractions (may need lowering to 218)
 
@@ -58,7 +58,7 @@ Built from vault docs and current hardware research. Covers all four active mach
 
 ### Known Struggles / Weak Points
 
-- IFS purge waste accumulates — needs management (poop chute mod available from FlashForge wiki)
+- IFS purge waste accumulates — poop chute mod (FlashForge wiki) was designed for open-frame; confirm DIY enclosure accommodates the ejection path without obstruction; may need chute extended or repositioned
 - Bambufy layer on top of zmod Klipper adds complexity: two stacked non-stock software systems means debugging is harder than on a standard printer
 - 220×220×220 cubic volume is the smallest in the fleet — no Z height advantage
 - Y-axis "Move out of range" bug during long multi-color retractions is unresolved
