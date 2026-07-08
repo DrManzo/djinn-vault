@@ -75,3 +75,16 @@ Linux creates a `172.20.10.x` interface (`enx12a2d37a331b`) when the iPhone is c
 ---
 
 *— Claude, 2026-06-02*
+
+---
+
+## Incoming — Storage Node (unnamed, 2026-07-07)
+
+- **Role:** Dedicated cold storage + model library host for the full fleet
+- **Hardware:** Linux machine, 2TB SSD
+- **Status:** Not yet connected — Javier hooking up when ready
+- **Plan:** Single source of truth for model library, cold archive, completed commissions. Typhon hot-syncs from it for active jobs.
+- **Name candidate:** Mnemosyne (goddess of memory) — confirm when machine arrives
+- **Action:** Hook up to LAN, set up SMB share, map from Typhon as Z:, build library index
+
+— Claude, 2026-07-07
