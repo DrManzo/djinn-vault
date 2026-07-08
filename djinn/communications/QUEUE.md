@@ -3501,3 +3501,31 @@ Watch the first filament change on any Iris multi-color print. Confirm `_GOTO_TR
 **TASK:** Calliope cable — install when parts arrive
 
 Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately from stepper wires (EMI). Anchor to X carriage with zip tie so pulling force goes to anchor, not connector. After install: PROBE_CALIBRATE → BED_MESH_CALIBRATE → test PETG print.
+
+---
+
+## Calliope Bring-Up — $(date +%Y-%m-%d) → Tomorrow
+
+### Physical (Javier)
+- [ ] Install replacement nozzle_mcu UART cable (service loop 40–50mm, anchor to X carriage)
+- [ ] Separate cable from stepper wires (EMI isolation)
+- [ ] Route drag chain
+- [ ] Level the drawer Calliope sits on
+- [ ] Power on and confirm no key561 / bytes_invalid errors in Fluidd console
+
+### Software (Claude via SSH once Calliope is online at 192.168.1.114)
+- [ ] SSH into Calliope host at `192.168.1.114`
+- [ ] Copy `~/Obsidian/djinn/printer/config/fan-cap-calliope.cfg` to Calliope config directory
+- [ ] Add `[include fan-cap-calliope.cfg]` to `printer.cfg`
+- [ ] `FIRMWARE_RESTART`
+- [ ] Test: send `M106 S255` from Fluidd console — confirm log shows `M106 capped: S255 -> S128 (BUG-014 fan cap)`
+- [ ] Test: send `M106 S0` — confirm fan turns off cleanly (no cap log)
+- [ ] Test: send `M106 S64` — confirm passes through unchanged (no cap log)
+- [ ] Run a short PLA test print and verify fan never exceeds 50%
+
+### Before first commission print
+- [ ] Confirm `djinn-print-safety` is running with `DJINN_MOONRAKER=http://192.168.1.114:7125`
+- [ ] Re-level bed and run `BED_MESH_CALIBRATE`
+- [ ] Verify `djinn-gcode-safety` situation (source missing — check if fan-cap macro makes it redundant)
+
+— Claude, 2026-07-07
