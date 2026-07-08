@@ -77,7 +77,7 @@ survive" problem entirely for everything except Ollama's background service (see
 - **Software installed via winget:** Git, Ollama, Obsidian, Python 3.12, OBS Studio,
   Notepad++, JetBrains Mono Nerd Font, 7-Zip, Rustup, Microsoft 365 Apps (Office), Blender
   5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord, **1Password**
-- **⚠️ Bambu Studio NOT YET INSTALLED** — required for Iris, Clotho, Lachesis, Atropos slicing. Install before any sister machine jobs. (installed
+- **Bambu Studio** — ✅ installed. Primary slicer for Iris, Clotho, Lachesis, Atropos. (installed
   successfully after a reboot — confirmed the earlier `0x80070534` SID mapping failures were
   caused by the account rename, cleared once the machine rebooted). Windows Terminal was
   already present.
@@ -125,8 +125,7 @@ survive" problem entirely for everything except Ollama's background service (see
 - `claude --bg` disclaimer not accepted — same, needs one interactive session.
 
 **Next physical/interactive session at the machine should:**
-1. Install **Bambu Studio** — required for all sister machines (Iris, Clotho, Lachesis, Atropos). Download from bambulab.com, sign in with Bambu account.
-2. Run `claude --dangerously-skip-permissions` once interactively — unlocks `claude --bg` for future headless automation.
+1. Run `claude --dangerously-skip-permissions` once interactively — unlocks `claude --bg` for future headless automation.
 3. Start `ollama serve` once interactively (Session 0 vs Session 1 issue — needs GUI login or RDP, not SSH) — then `ollama pull` model set.
 4. Decide whether WSL2 is wanted or native-Windows is the permanent path.
 
