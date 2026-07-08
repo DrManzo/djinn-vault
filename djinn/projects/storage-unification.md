@@ -14,9 +14,9 @@ One clean storage hierarchy across the full fleet. Cold storage and live working
 
 ---
 
-## Trigger
+## Machine
 
-When the new Linux storage node (2TB SSD) is connected to the LAN — Javier tags Claude to begin.
+**Oroborus** — Linux, 2TB SSD, IP `192.168.1.154` (confirmed live 2026-07-07). Already on LAN.
 
 ---
 
