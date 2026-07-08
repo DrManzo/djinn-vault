@@ -24,6 +24,7 @@ Built from vault docs and current hardware research. Covers all four active mach
 | **Extruder** | Direct drive | Direct drive | Direct drive (Sprite Pro) | Bowden (stock) |
 | **Multi-material** | Yes — IFS 4-color | No | No | No |
 | **Firmware** | Klipper (zmod/bambufy) | Klipper (zmod) | Klipper (Moonraker) | Klipper/OctoPrint (Pi Zero 2W / ATmega1284P) |
+| **Slicer** | Bambu Studio (Typhon) | OrcaSlicer (Typhon) | OrcaSlicer or Creality Print (Typhon) | OrcaSlicer (Typhon) |
 | **Motion System** | CoreXY | CoreXY | CoreXZ | Cartesian (stock) |
 | **Input Shaping** | Yes | Yes | Yes | Limited (ATmega cap) |
 | **Best Role** | Multi-color display/detail | Engineering materials, enclosed single-color | Production workhorse, commissions | Detail/personal, experimental, PETG fine-tune |
@@ -232,9 +233,26 @@ Penelope's current role is detail/personal/PETG. The 8-bit board isn't the bottl
 
 ---
 
-## ⚑ Expansion Flag — Bambu Lab P1S + AMS (×2, Under Consideration)
+---
 
-*Research only — no decision required.*
+## The Sisters — Bambu Fleet (Incoming)
+
+> All sisters run Bambu Studio on Typhon (Windows). Same slicer family as Iris.
+
+| | **Clotho** | **Lachesis** | **Atropos** |
+|---|---|---|---|
+| **Model** | Bambu P1S + AMS | Bambu P1S + AMS | TBD |
+| **Role** | Fast enclosed production, multi-color at scale | Fast enclosed production, multi-color at scale | TBD — name reserved |
+| **Slicer** | Bambu Studio (Typhon) | Bambu Studio (Typhon) | Bambu Studio (Typhon) |
+| **Status** | Planned | Planned | Incoming |
+
+**Name origin:** The three Fates (Moirai) — Clotho spins the thread, Lachesis measures it, Atropos cuts it. Filament as thread. Chosen to complete the mythological fleet naming convention.
+
+---
+
+## ⚑ Expansion Reference — Bambu Lab P1S + AMS
+
+*Clotho and Lachesis confirmed as P1S + AMS. Atropos model TBD.*
 
 ### Capability Summary
 

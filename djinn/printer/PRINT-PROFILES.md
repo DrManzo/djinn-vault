@@ -9,6 +9,22 @@ related: [[SUPPORT-SETTINGS]] | [[MACHINE-ROLES]]
 
 Profiles are suggestions, not law. Javier overrides any value at slice time.
 
+---
+
+## Slicer Routing — All slicing runs on Typhon (Windows, 192.168.1.113)
+
+| Machine | Slicer | Notes |
+|---|---|---|
+| **Iris** | Bambu Studio | Multi-color via IFS/bambufy |
+| **Clotho** | Bambu Studio | P1S + AMS |
+| **Lachesis** | Bambu Studio | P1S + AMS |
+| **Atropos** | Bambu Studio | TBD machine |
+| **Nemesis** | OrcaSlicer | zmod Klipper — FlashForge slicer incompatible |
+| **Calliope** | OrcaSlicer or Creality Print | Fan cap enforced at Klipper level (fan-cap-calliope.cfg) — slicer-agnostic |
+| **Penelope** | OrcaSlicer | zmod Klipper |
+
+> Typhon is the unified slicing station for the full fleet. Bambu Studio owns the sisters (Iris + Clotho + Lachesis + Atropos). OrcaSlicer/Creality Print owns the Klipper machines.
+
 > **Support settings are in [[SUPPORT-SETTINGS]].** This file covers general print profiles only.
 
 ---
