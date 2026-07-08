@@ -9,7 +9,7 @@ updated: 2026-07-01
 
 **Callsign:** TF/TTHQ
 **Network name:** Typhon (Windows hostname confirmed `Typhon` as of 2026-07-01)
-**Role:** **Changed 2026-06-25** — dedicated shop machine (slicing, commissions, content, accounting). No longer storage/sync.
+**Role:** **Creative workstation + shop machine** — modeling (Blender), slicing (all fleet machines), commissions, content, accounting. NOT a pipeline controller — Salomon owns orchestration, automation, and fleet observation. Typhon is where Javier does hands-on work; Salomon is the brain.
 **OS:** Windows 11 Home
 **IP:** LAN `192.168.1.113` (still shows `filtered` on all ports — Windows Firewall blocks unsolicited LAN); reachable **over Tailscale at `100.69.41.74`**, hostname `typhon` on tailnet
 **Windows account:** `typhon` (renamed from typo'd `typho` 2026-07-01; profile folder is still physically `C:\Users\typho` — Windows doesn't rename that, harmless)
@@ -76,7 +76,8 @@ survive" problem entirely for everything except Ollama's background service (see
 - **Power settings** applied (no sleep/hibernate on AC).
 - **Software installed via winget:** Git, Ollama, Obsidian, Python 3.12, OBS Studio,
   Notepad++, JetBrains Mono Nerd Font, 7-Zip, Rustup, Microsoft 365 Apps (Office), Blender
-  5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord, **1Password** (installed
+  5.1.2, Creality Print 7.1.1, FFmpeg 8.1.1, rclone, Discord, **1Password**
+- **⚠️ Bambu Studio NOT YET INSTALLED** — required for Iris, Clotho, Lachesis, Atropos slicing. Install before any sister machine jobs. (installed
   successfully after a reboot — confirmed the earlier `0x80070534` SID mapping failures were
   caused by the account rename, cleared once the machine rebooted). Windows Terminal was
   already present.
@@ -124,13 +125,10 @@ survive" problem entirely for everything except Ollama's background service (see
 - `claude --bg` disclaimer not accepted — same, needs one interactive session.
 
 **Next physical/interactive session at the machine should:**
-1. Run `claude --dangerously-skip-permissions` once interactively, click through, confirm the
-   disclaimer — unlocks `claude --bg` for future headless automation.
-2. Start `ollama serve` once interactively (or check if it needs a full GUI login rather than
-   RDP — Session 0 vs Session 1 distinction may matter) — then `ollama pull` the model set
-   from the old TF-TTHQ Ollama Models table below.
-3. Decide whether WSL2 is still wanted for this machine's role, or whether native-Windows is
-   the permanent path going forward.
+1. Install **Bambu Studio** — required for all sister machines (Iris, Clotho, Lachesis, Atropos). Download from bambulab.com, sign in with Bambu account.
+2. Run `claude --dangerously-skip-permissions` once interactively — unlocks `claude --bg` for future headless automation.
+3. Start `ollama serve` once interactively (Session 0 vs Session 1 issue — needs GUI login or RDP, not SSH) — then `ollama pull` model set.
+4. Decide whether WSL2 is wanted or native-Windows is the permanent path.
 
 ---
 
