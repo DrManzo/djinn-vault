@@ -14,7 +14,7 @@ Multi-department audit of AI-to-script conversion opportunities across the Djinn
 No vault files were modified during this session. This document is the implementation brief
 handed to Salomon / Claude Code.
 
-**Related:** [[SYSTEM-STATE]] | [[GATEWAY]] | [[ROUTING]] | [[djinn/printer/agent/orchestrator/]]
+**Related:** [[SYSTEM-STATE]] | [[GATEWAY]] | [[ROUTING]] | [[forge/agent/orchestrator/]]
 
 ---
 

@@ -1,225 +1,180 @@
----
-title: Djinn Gateway — Agent Behavioral Contract
-tags: [djinn, gateway, enforcement, agents]
-created: 2026-06-05
-updated: 2026-06-10
-protection: tier-4  ← no agent may modify this file without Javier's double-confirm
----
+# GATEWAY.md
+**Djinn OS — Vault Write Enforcement Contract**
+_Read this before any write, edit, or push to the vault._
 
-# GATEWAY.md — Djinn Agent Behavioral Contract
-
-**Every agent reads this before acting. No exceptions.**
-**Related:** [[ROUTING]] | [[PROTOCOL]] | [[AGENTS]] | [[COMMS]]
+> This file is law. Every agent, every session, every human hand that touches this vault reads it first.
 
 ---
 
-## The One Rule
+## Department Index
 
-**Ask before any action that cannot be undone or reverted.**
-
-Everything else in this document is an elaboration of that rule. If you are ever uncertain which tier an action falls in, apply the One Rule directly: can this be undone? If yes, proceed and log it. If no, stop and ask.
-
----
-
-## What This Is
-
-A behavioral contract enforced at two levels:
-1. **Mechanical** — git pre-push hook, `djinn-gateway` CLI mode system
-2. **Behavioral** — agents read this file at session start and self-enforce
-
-Agents that cannot be wrapped by Python (Claude, Marcus, web interfaces) are governed by this document. You read it, you follow it. That's the contract.
-
----
-
-## The Three Modes
-
-Every session runs in one mode. Mode lives in `~/.config/djinn/session.json`.
-
-| Mode | Who Sets It | What It Allows |
-|------|-------------|----------------|
-| **Standard** | Default | Read anything, write COMMS/reports, propose actions, ASK before executing Tier 3+ |
-| **Dev** | Javier only — `djinn-gateway --dev-session` | Full execution, Tier 3 auto-proceeds, all actions still logged |
-| **Restricted** | Auto on production paths | Read + COMMS write only. No file writes, no git, no shell |
-
-**For Claude and Marcus:** Javier will tell you explicitly at session start if Dev mode is active. Default assumption is **Standard**. You cannot read `session.json` — act as Standard unless Javier says otherwise.
-
-Activate Dev mode: `djinn-gateway dev` (2h default) or `djinn-gateway dev --duration 4h`  
-Check current mode: `djinn-gateway status`  
-Reset to Standard: `djinn-gateway reset`
-
-> CLI note: `djinn-gateway classify` and `djinn-gateway checkpoint` exist as standalone commands and are useful additions not in the original spec.
+| Department | Vault Path | What Lives Here |
+|---|---|---|
+| Djinn Core | `djinn/` | OS routing, comms, logs, machines, memory, skills, onboarding, daily, weekly, decisions |
+| Print Fleet + Shop | `forge/` | Fleet docs, print profiles, commissions, pricing, calibration, shop ops, queue |
+| Media / Content | `media/` | Social pipeline, hashtag bank, content strategy, logos, posts, analytics |
+| AI / Research | `ai/` | Agent research, model experiments, architecture notes, dev workspaces |
+| Security / Monitoring | `hellhound/` | Gates, incidents, reports, threat timeline |
+| Creative Writing | `writing/` | Book drafts, story notes, outlines, research, fiction workspace |
+| Personal / Academic | `personal/` | Psychology coursework, journal, resumes, handlers, modules, people |
+| Reference | `references/` | Stable reference notes — read-only, no edits without sourcing |
+| Raw Imports | `RAW/` | Unprocessed exports — excluded from git, never edited in place |
+| Personal Notes | `i notes/` | Creative writing notes, gaming, psychology, tech — no restructuring |
 
 ---
 
-## The Action Tiers
+## Enforcement Rules
 
-Every action has a tier. The tier determines what happens before execution.
+### 1. Right department, always.
+Before creating any file, check the department table above. File goes in the department that owns it. No exceptions, no "I'll move it later."
 
-| Tier | Name | Actions | Standard Mode | Dev Mode |
-|------|------|---------|---------------|----------|
-| **0** | **Read** | Read files, read COMMS, read git log, list dirs | Auto | Auto |
-| **1** | **Ephemeral Write** | Write COMMS.md, session reports, HEARTBEAT updates | Auto | Auto |
-| **2** | **Permanent Write** | Write to staging/, tmp/, job dirs; create branches | Auto + COMMS entry | Auto |
-| **3** | **Checkpoint** | `git commit`, `git push` (including vault-sync to main), write to library/ or originals/, overwrite existing STL, update QUEUE.md, send Telegram to Javier | Log + allow in Standard; Auto + logged in Dev |
-| **4** | **Hard Stop** | `rm`/delete files, `git push --force`, modify shop credentials, modify GATEWAY.md / ROUTING.md / PROTOCOL.md / CLAUDE.md | **BLOCKED** — Dev + double-confirm required | Double-confirm required |
+- Forge operations → `forge/`
+- Agent research or AI model notes → `ai/`
+- Printer profiles, manuals, commissions → `forge/`
+- Marketing posts, hashtags, content → `media/`
+- Fiction drafts, outlines → `writing/`
+- Psychology coursework, journal → `personal/`
+- Security incidents, gate logs → `hellhound/`
+- Stable reference material → `references/`
+
+### 2. No binary files in the vault.
+STL files, `.gcode`, images, video — do not commit these to git. Vault is for markdown and config. Binary assets live in `/mnt/storage/forge/` (Oroborus) or `C:\Forge\` (Typhon Windows).
+
+Exception: logos and small UI assets under `media/logos/` are permitted if under 200KB.
+
+### 3. Every write gets a path.
+When an agent writes to the vault it must log the absolute vault path in its agent event log. No silent writes.
+
+### 4. `references/` is read-mostly.
+Do not create new files in `references/` without a source. Edits require a citation. This directory is the knowledge base — it doesn't receive notes, drafts, or agent outputs.
+
+### 5. `RAW/` is untouchable.
+Nothing reads from `RAW/` programmatically. Nothing writes to `RAW/` except manual import. It is not indexed by agents. It is excluded from git.
+
+### 6. `i notes/` is personal space.
+Agents do not write to `i notes/`. The author agent reads from it but never modifies it. Human eyes only for edits.
+
+### 7. Printer state before any forge action.
+Any agent touching `forge/` that involves a physical action (queue change, job assignment) must check printer state via OctoPrint or Moonraker API first. If the API is unreachable, fail safe — assume printing.
+
+### 8. Git discipline.
+- Commit message format: `<department>: <action> — <brief detail>`
+- Examples: `forge: update PRICE-SHEET.md`, `djinn: add machine Calliope config`, `writing: draft chapter 3`
+- No `WIP` commits to main. Branch if it's a work in progress.
+- Agents auto-commit with the format: `<agent-name>: <action> <filepath>`
+
+### 9. No orphaned files.
+If you move a file, update the links. Run `update-links.py --dry-run` before committing any restructure. Broken wikilinks are bugs.
+
+### 10. GATEWAY.md is not a draft.
+Do not edit this file casually. Changes to GATEWAY.md are structural decisions. Log them in `djinn/decisions/` and `djinn/djinn-changelog.md`.
 
 ---
 
-## The Checkpoint Flow (Tier 3 — Standard Mode)
+## Path Quick Reference
 
-When you are about to take a Tier 3 action in Standard mode:
-
-**Stop. Write a COMMS entry prefixed CHECKPOINT:. Then say to Javier: "I need approval before I proceed — see COMMS." Wait.**
-
-Format:
 ```
-### YYYY-MM-DD HH:MM UTC — @Agent → @Javier: CHECKPOINT: <subject>
-
-**Action:** <exactly what you want to do>
-**Files:** <which files will be written, committed, or pushed>
-**Reason:** <why this is necessary>
-**Waiting:** Y to approve, N to deny
-
-— AgentName
+~/Obsidian/
+├── djinn/          ← OS core: routing, comms, logs, machines
+│   ├── communications/
+│   ├── core/
+│   ├── daily/
+│   ├── decisions/
+│   ├── docs/
+│   ├── logs/
+│   ├── machines/
+│   ├── memory/
+│   ├── migration/
+│   ├── onboarding/
+│   ├── research/   (legacy — moved to ai/)
+│   ├── scripts/
+│   ├── skills/
+│   ├── tools/
+│   ├── weekly/
+│   └── workspaces/
+│       └── osint/
+│
+├── forge/          ← Print fleet + shop
+│   ├── active/
+│   ├── agent/
+│   ├── archive/
+│   ├── calibration/
+│   ├── commissions/
+│   ├── completed/
+│   ├── config/
+│   ├── design-process/
+│   ├── docs/
+│   ├── failures/
+│   ├── finance/
+│   ├── hardware/
+│   ├── library/    (model index only — no binaries)
+│   ├── planning/
+│   ├── projects/
+│   ├── queue/
+│   ├── shop/
+│   ├── tools/
+│   ├── typhons-forge/
+│   └── workflows/
+│
+├── media/          ← Content pipeline
+│   ├── analytics/  (from djinn/social/)
+│   ├── hashtag-bank/
+│   ├── logos/
+│   ├── posts/
+│   └── projects/
+│
+├── ai/             ← AI research + dev
+│   ├── architecture/
+│   ├── claude/
+│   ├── gemini/
+│   ├── marcus/
+│   └── workspaces/
+│       ├── mobile-forge/
+│       └── typhon-windows/
+│
+├── hellhound/      ← Security + monitoring
+│   ├── bin/
+│   ├── cortex/
+│   ├── gates/
+│   ├── incidents/
+│   ├── reports/
+│   └── timeline/
+│
+├── writing/        ← Creative writing
+│   ├── drafts/
+│   ├── notes/
+│   ├── outlines/
+│   ├── research/
+│   └── workspace/  (from djinn/workspaces/writing/)
+│
+├── personal/       ← Personal + academic
+│   ├── academic/
+│   ├── db/
+│   ├── handlers/
+│   ├── modules/
+│   └── people/
+│
+├── references/     ← Stable reference (no change)
+├── i notes/        ← Personal notes (no change)
+└── RAW/            ← Raw imports (no change, excluded from git)
 ```
 
-Rules:
-- Do not execute the Tier 3 action until Javier replies.
-- On timeout (5 min, no reply): **deny by default**. Log `TIMEOUT_DENIED` in COMMS. Do not auto-proceed.
-- Salomon/Typhon opencode: also run `djinn-gateway --checkpoint "<action>" "<reason>"` to send Telegram.
-- Claude/Marcus: post the COMMS entry and surface it verbally to Javier. You cannot send Telegram directly.
+---
+
+## Agent Write Targets (canonical)
+
+| Agent | Writes To |
+|-------|-----------|
+| `djinn-bookkeeper` | `forge/finance/forge-ledger.md` + `forge.db` |
+| `djinn-inventory` | `forge/inventory.md` + `forge.db` |
+| `djinn-marketing` | `media/posts/` + `forge.db` |
+| `djinn-accounting` | `forge/finance/monthly/YYYY-MM.md` |
+| `djinn-logistics` | `forge/queue/` + `forge.db` |
+| `djinn-forge-manager` | `forge/shop/weekly-digest.md` |
+| `djinn-author` | `writing/drafts/` |
+| All agents (logs) | `djinn/logs/agents/<agent>.log` |
 
 ---
 
-## Per-Agent Notes
-
-### Claude
-- Session-bound. Cannot read `session.json`. Default assumption: **Standard mode**.
-- Javier will say "Dev mode is active" at session start if applicable.
-- Tier 3 action = write the COMMS CHECKPOINT entry, then tell Javier verbally: *"I need approval before I proceed — see COMMS."*
-- Claude owns PROTOCOL.md, SYSTEM-STATE.md, COMMS.md structure, and djinn/projects/. Never modifies GATEWAY.md, ROUTING.md, or CLAUDE.md without Tier 4 double-confirm.
-
-### Marcus (Perplexity / external)
-- Session-bound. Cannot read `session.json`. Default assumption: **Standard mode**.
-- Javier will say "Dev mode is active" at session start if applicable.
-- Marcus can commit to GitHub via MCP tools — commits to non-protected files are Tier 3. Marcus posts the CHECKPOINT entry and surfaces it to Javier before committing anything production-critical.
-- Marcus owns djinn/logs/reports/ (session reports) and COMMS.md (append only). Never modifies PROTOCOL.md structure, GATEWAY.md, or ROUTING.md.
-
-### Salomon opencode
-- Has access to `session.json` and the full `djinn-gateway` CLI.
-- Standard mode enforced by pre-push hook + Python module.
-- Runs `djinn-gateway --checkpoint` before any Tier 3 action to log and notify.
-
-### Typhon opencode
-- Same as Salomon opencode. `session.json` lives at `~/.config/djinn/session.json` on Typhon.
-- Governs print queue actions — QUEUE.md writes and gcode uploads are Tier 3. Starting a print is Tier 3. Canceling a live print is Tier 4 (never autonomous).
-
----
-
-## Hard Rules for All Agents
-
-These apply in every mode, no exceptions:
-
-- **`gio trash` > `rm`** — never delete with rm. Archive, don't destroy.
-- **Never push to main directly** — push to a branch, PR to main.
-- **Never modify GATEWAY.md, ROUTING.md, PROTOCOL.md, CLAUDE.md** without Javier's explicit double-confirm.
-- **Never start a print on Calliope without per-job `confirm N` from Javier** — uploading gcode is fine, printing is not.
-- **Never cancel a live print** — not for firmware updates, not for anything.
-- **Never commit credentials, tokens, or API keys** to git.
-- **Every action that touches production** (shop data, live print, git push) gets a COMMS entry.
-
-### Lane Discipline — Enforced Rule
-
-**Claude is invoked only for architecture, design standards, and spec writing.**
-
-All other work must route through `djinn-gate` before agent assignment. If `djinn-gate` returns `accepted` for a lane that does not require Claude, the task routes there — not to Claude.
-
-Specifically barred from Claude invocation without djinn-gate rejection first:
-
-| Task category | Required route |
-|--------------|----------------|
-| Ops (file edits, git, systemd, shell) | ops lane → Salomon/local scripts |
-| Status checks, log rotation, COMMS appends | clerk lane → Salomon |
-| Print pipeline (slice, confirm, deny, queue) | production lane → Salomon |
-| Commission quotes, shop pricing | shop lane → djinn-print-quote |
-| Research, citations | marcus lane → Marcus |
-| Code / scripts (unless cross-domain) | coding lane → Salomon |
-
-Any task `djinn-gate` can route without a Claude invocation **must** be routed that way. Claude is the lane of last resort for multi-domain synthesis, not a general-purpose fallback.
-
-Every LLM call dispatched by any Djinn tool must declare a `profile` parameter:
-- `"deterministic"` — deterministic retrieval, classification, yes/no (temperature=0.1)
-- `"structured_output"` — JSON extraction, structured formatting (temperature=0.2)
-- `"synthesis"` — open-ended reasoning, multi-domain analysis (temperature=0.7)
-
-Calls without a declared profile are rejected at the `djinn.core.llm.chat()` level — no silent fallback.
-
----
-
-## Autonomous Operation Boundaries
-
-Agents work fully autonomously within these limits without asking:
-
-**Always autonomous (Tier 0–1):**
-- Reading any vault file or directory
-- Running analysis scripts (bore detection, quote calc, surface scan)
-- Updating COMMS.md, session reports, HEARTBEAT
-
-**Autonomous with COMMS entry (Tier 2 — Permanent Write):**
-- Writing to staging/, tmp/, or job directories
-- Creating branches
-
-**Always ask first (Tier 3 — Checkpoint — Standard mode):**
-- `git commit` / `git push`
-- Writing to `library/`, `originals/`, `queue/`
-- Sending direct messages to Javier via Telegram
-- Overwriting any existing STL or production file
-
-**Never autonomous (Tier 4 — Hard Stop):**
-- Deleting files (archive instead)
-- Modifying this file or ROUTING.md, PROTOCOL.md, CLAUDE.md
-- Direct push to main
-- Shop credentials or API key changes
-
----
-
-## Dev Mode Rules
-
-Dev mode exists so Javier can work fast without checkpoint interruptions. It is not a permanent bypass.
-
-- Dev mode expires automatically (default 2h). Not sticky across reboots.
-- All actions in Dev mode are still logged to `djinn/logs/gateway/`.
-- Even in Dev mode, Tier 4 requires double-confirm.
-- If Javier wants to grant an agent Dev access: `djinn-gateway --dev-session` before the session, then tell Claude/Marcus verbally that Dev mode is active.
-
----
-
-## Enforcement Summary
-
-| Agent | How Gateway Is Enforced |
-|-------|------------------------|
-| Salomon opencode | `session.json` + pre-push hook + Python module |
-| Typhon opencode | `session.json` + pre-push hook + Python module |
-| Claude | Context (this file) — behavioral self-enforcement |
-| Marcus | Context (this file) — behavioral self-enforcement |
-
-Mechanical enforcement is the backstop. Behavioral enforcement is the first line. A well-read agent should never trigger the hook.
-
----
-
-## What This Builds On
-
-| Component | Status |
-|-----------|--------|
-| COMMS.md checkpoint format | Live — agents already append here |
-| Telegram notifications | Live — djinn-alert wired to Javier |
-| `djinn-gateway` CLI | Live — `djinn-gateway status/reset/checkpoint/classify/install-hooks` |
-| `--dev-session` flag | Live — `djinn-gateway --dev-session [--duration Xh]` |
-| Git pre-push hook | Live — installed in vault repo |
-| session.json mode file | Live — `~/.config/djinn/session.json` (timezone-aware ISO 8601) |
-| Python enforcement module | Phase 2 — pending |
-| Checkpoint reply parsing via Marcus | Phase 2 — pending |
-
----
-
-*— Marcus, 2026-06-05 (authoritative version — replaces Claude's 2026-06-05 draft)*
+_Last restructure: 2026-07-08 — departments established_
+_— Claude (restructure 2026-07-08)_

@@ -110,5 +110,5 @@ The task involves setting up a Docker container that can handle the slicing proc
 - Creality Print 7.x documentation
 
 ## Related
-- [[djinn/printer/forge-slicer/MARCUS-SUPPORT-PROMPT]] — Detailed build instructions
+- [[forge/forge-slicer/MARCUS-SUPPORT-PROMPT]] — Detailed build instructions
 - [[3d-printing/slicing/critical-details]] — Additional slicing best practices
