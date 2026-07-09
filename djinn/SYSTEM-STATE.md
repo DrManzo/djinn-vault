@@ -89,7 +89,7 @@ and none have been reprovisioned yet. Kept for reference on what needs to be reb
 | Build volume | 300×300×330mm |
 | Control | Klipper + Moonraker |
 | Bot | Telegram bot was on Typhon — `/print_status`, `/print`, `/print_cancel` — **down**, needs reprovisioning post-Windows-migration |
-| Config backup | [[djinn/printer/backup/]] |
+| Config backup | [[forge/backup/]] |
 | Process docs | [[printer/process/INTAKE]] |
 | Error history | [[error_log]] |
 | Current print | None — idle |

@@ -25,8 +25,8 @@ The day's activities were focused on improving the robustness and efficiency of 
 - [comms: COMMS noise reduction session report](https://github.com/DrManzo/djinn-vault/commit/4684afcd7c0a48c80b901ef29d0b97dc01d17c09)
 
 ## Related
-- [[djinn/research/marcus-brief-comms-noise-reduction]] — Marcus delivered the COMMS noise reduction spec.
-- [[djinn/printer/slice-sh-migration]] — Detailed notes on the migration process.
+- [[ai/marcus-brief-comms-noise-reduction]] — Marcus delivered the COMMS noise reduction spec.
+- [[forge/slice-sh-migration]] — Detailed notes on the migration process.
 - [[djinn/design/pipeline-stability]] — Notes on fixing bugs in print and design pipelines.
 
 ---
