@@ -3537,11 +3537,11 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 - trigger: manual
 - created: 2026-07-08 by Claude
 - closed: 2026-07-08 by Claude
-- context: RESOLVED — djinn-archive SSD (/dev/sdb1, 1.8TB) is physically connected to Salomon, not Oroborus. Mounted at /run/media/drmanzo/djinn-archive. Marcus structure created directly on Salomon. Oroborus /mnt/archive I/O errors irrelevant — that drive is separate.
+- context: RESOLVED — djinn-archive SSD (/dev/sdb1, 1.8TB) is physically connected to Salomon, not Oroborus. Mounted at /mnt/alexandria. Marcus structure created directly on Salomon. Oroborus /mnt/archive I/O errors irrelevant — that drive is separate.
 
 **Resolution:**
 - SSD label: djinn-archive
-- Mount: /run/media/drmanzo/djinn-archive/
+- Mount: /mnt/alexandria/
 - Marcus structure created: _inbox/ _processed/ _index/
 - README written to drive
 - Vault INDEX.md updated with correct path

@@ -1,6 +1,6 @@
 # Marcus Research Index
 
-**SSD path:** `/run/media/drmanzo/djinn-archive/marcus/`
+**SSD path:** `/mnt/alexandria/marcus/`
 **Drive:** djinn-archive · /dev/sdb1 · 1.8TB · mounted on Salomon
 **Git:** index only — exports never committed
 

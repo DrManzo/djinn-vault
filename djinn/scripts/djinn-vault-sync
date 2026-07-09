@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# djinn-vault-sync — mirror ~/Obsidian to djinn-archive SSD
+# djinn-vault-sync — mirror ~/Obsidian to Alexandria SSD
 # Usage: djinn-vault-sync [--snapshot]
 #   --snapshot  also save a dated copy in vault-snapshots/YYYY-MM-DD/
 
 set -euo pipefail
 
-SSD="/run/media/drmanzo/djinn-archive"
+SSD="/mnt/alexandria"
 VAULT="$HOME/Obsidian"
 MIRROR="$SSD/vault-snapshots/current"
 SNAP_DIR="$SSD/vault-snapshots"
 
 if ! mountpoint -q "$SSD"; then
-    echo "ERROR: djinn-archive not mounted at $SSD"
+    echo "ERROR: Alexandria not mounted at $SSD"
     exit 1
 fi
 
