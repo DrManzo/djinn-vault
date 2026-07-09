@@ -1,0 +1,58 @@
+# Docker Compose for voxtype package testing
+#
+# Usage:
+#   docker compose build                    # Build all test images
+#   docker compose run debian               # Test on Debian stable
+#   docker compose run debian-sid           # Test on Debian Sid
+#   docker compose run ubuntu               # Test on Ubuntu 24.04
+#   docker compose run fedora               # Test on Fedora 41
+#   docker compose run arch                 # Test on Arch Linux
+#   docker compose up                       # Run all tests
+#
+# The releases directory is mounted at /packages in each container
+
+services:
+  debian:
+    build:
+      context: .
+      dockerfile: Dockerfile.debian
+    image: voxtype-test-debian
+    volumes:
+      - ../releases:/packages:ro
+    command: ["debian"]
+
+  debian-sid:
+    build:
+      context: .
+      dockerfile: Dockerfile.debian-sid
+    image: voxtype-test-debian-sid
+    volumes:
+      - ../releases:/packages:ro
+    command: ["debian"]
+
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    image: voxtype-test-ubuntu
+    volumes:
+      - ../releases:/packages:ro
+    command: ["debian"]
+
+  fedora:
+    build:
+      context: .
+      dockerfile: Dockerfile.fedora
+    image: voxtype-test-fedora
+    volumes:
+      - ../releases:/packages:ro
+    command: ["rpm"]
+
+  arch:
+    build:
+      context: .
+      dockerfile: Dockerfile.arch
+    image: voxtype-test-arch
+    volumes:
+      - ../releases:/packages:ro
+    command: ["arch"]

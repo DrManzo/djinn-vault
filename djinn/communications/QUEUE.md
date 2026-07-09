@@ -3529,3 +3529,69 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 - [ ] Verify `djinn-gcode-safety` situation (source missing — check if fan-cap macro makes it redundant)
 
 — Claude, 2026-07-07
+
+## TASK-008 — Oroborus: Check /mnt/archive drive + create marcus structure
+- assigned_to: salomon
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-07-08 by Claude
+- context: /mnt/archive on Oroborus throwing I/O errors (os error 5). Drive may need fsck or remount. Once healthy, create marcus folder structure.
+
+**Commands:**
+```bash
+# SSH into Oroborus with sudo-capable session
+ssh drmanzo@192.168.1.154
+
+# Check drive health
+sudo dmesg | grep -i "sda\|error\|I/O" | tail -20
+sudo smartctl -H /dev/sda1
+
+# If remount needed
+sudo umount /mnt/archive && sudo mount /dev/sda1 /mnt/archive
+
+# If fsck needed (unmount first)
+sudo umount /mnt/archive && sudo fsck -y /dev/sda1 && sudo mount /dev/sda1 /mnt/archive
+
+# Once healthy — create marcus structure
+mkdir -p /mnt/archive/marcus/_inbox
+mkdir -p /mnt/archive/marcus/_processed
+mkdir -p /mnt/archive/marcus/_index
+# Javier drops new Marcus exports into _inbox/<YYYY-MM-DD_topic>/
+# Salomon idle agent moves processed ones to _processed/
+# _index/ holds consolidated topic files (future)
+
+echo "structure ready" && ls /mnt/archive/marcus/
+```
+
+## TASK-009 — Salomon idle: Marcus research pass-through agent
+- assigned_to: salomon
+- status: pending
+- priority: low
+- trigger: manual — run only when Salomon is idle (Javier not actively using it)
+- created: 2026-07-08 by Claude
+- context: Slow background pass-through of Marcus research exports on Oroborus. For each folder in /mnt/archive/marcus/_inbox/, read the content, extract key insights, write a consolidated summary to _index/<topic>.md, move the source folder to _processed/. Do NOT delete originals — _processed/ is the permanent record. Update ai/marcus/INDEX.md in vault with each new entry and commit.
+
+**Logic (no djinn tool yet — run manually or write djinn-marcus-index):**
+```bash
+# For each unprocessed session in _inbox/
+for dir in /mnt/archive/marcus/_inbox/*/; do
+    topic=$(basename "$dir")
+    echo "Processing: $topic"
+    
+    # Use Salomon's local model (phi4:14b or qwen2.5:7b) to summarize
+    # Feed all .md files in the dir as context
+    # Write output to /mnt/archive/marcus/_index/${topic}_summary.md
+    
+    # Move to processed
+    mv "$dir" /mnt/archive/marcus/_processed/
+    
+    # Update vault index
+    # Append row to ~/Obsidian/ai/marcus/INDEX.md
+    echo "| $(date +%Y-%m-%d) | $topic | _processed/$topic | summarized |" >> ~/Obsidian/ai/marcus/INDEX.md
+done
+
+# Commit index update
+cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index updated by idle agent" && git push
+```
+**Note:** Write this as a proper djinn-marcus-index tool once TASK-008 confirms Oroborus is healthy.

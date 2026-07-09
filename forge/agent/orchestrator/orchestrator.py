@@ -1,0 +1,301 @@
+"""
+Djinn Manufacturing Orchestrator — intent parser and agent router.
+Entry point for the full DesignGen → Edit → ProtoOpt → DOE → PlateNest → Price pipeline.
+Includes native EngravingAgent routing — do NOT use djinn-model-text-engrave for placement.
+"""
+import json, re, urllib.request
+from .project_state import ProjectState, _load_queue
+from .llm import LLM
+from .agents import design_gen, design_edit, proto_opt, doe_opt, plate_nest, makers_mark, price, engrave
+
+# Module-level singleton — persists across calls; reconnects if Ollama goes down
+_llm_singleton: LLM | None = None
+
+
+def _get_llm() -> LLM:
+    global _llm_singleton
+    if _llm_singleton is None:
+        _llm_singleton = LLM()
+    else:
+        try:
+            urllib.request.urlopen("http://localhost:11434/api/tags", timeout=2)
+        except Exception:
+            _llm_singleton = LLM()
+    return _llm_singleton
+
+INTENT_SYSTEM = """You are a manufacturing pipeline router for a 3D printing system.
+
+Classify the user input into ONE intent:
+  new_design   — create a new part from scratch
+  edit_design  — modify an existing design (geometry, dimensions, structure)
+  engrave      — add text, logo, symbol, marking, or engraving to an existing STL
+  optimize     — generate prototype/production geometry variants
+  doe          — optimize slicer/process parameters
+  plate        — arrange parts on a print plate
+  price        — get a cost quote
+  status       — show job queue status
+  unknown      — none of the above
+
+## Engrave classification rules:
+Classify as 'engrave' when the user says ANY of:
+  "engrave", "add text", "put text", "write on", "mark", "stamp", "label",
+  "inscribe", "brand", "logo", "signature", "put my name", "add my name",
+  "carve", "deboss", "emboss", "put [anything] on the surface",
+  or any phrase implying placing visual content ON an existing 3D surface.
+
+Reply with ONLY valid JSON: {"intent": "...", "job_id": null}
+"""
+
+
+def classify(text: str, llm: LLM) -> dict:
+    reply = llm.chat(INTENT_SYSTEM, [{"role": "user", "content": text}], max_tokens=80)
+    m = re.search(r'\{[^}]+\}', reply)
+    if m:
+        try:
+            return json.loads(m.group())
+        except json.JSONDecodeError:
+            pass
+    return {"intent": "unknown", "job_id": None}
+
+
+def run(
+    user_input: str,
+    job_id: int = None,
+    edit_request: str = None,
+    engrave_request: str = None,
+    doe_goal: str = "prototype_fast",
+    plate_items: list = None,
+    printer: dict = None,
+    auto_advance: bool = False,
+) -> ProjectState:
+    """
+    Main entry point.
+
+    engrave_request: if provided, forces engrave routing and sets the engraving intent.
+    auto_advance: if True, automatically runs the full pipeline from current state forward.
+    Otherwise stops after each agent and returns state for inspection.
+    """
+    llm = _get_llm()
+    print(f"\nDjinn Manufacturing [{llm.name}]")
+    print("─" * 52)
+
+    if printer is None:
+        printer = {
+            "model": "Ender-3 V3 Plus",
+            "nozzle_dia_mm": 0.4,
+            "layer_h_std_mm": 0.20,
+            "layer_h_acc_mm": 0.12,
+            "bed_x_mm": 300,
+            "bed_y_mm": 300,
+            "bed_z_mm": 340,
+            "has_enclosure": False,
+            "hotend_sock": True,
+            "bed_insulated": False,
+        }
+
+    # Load or create state
+    if job_id:
+        state = ProjectState.load(job_id)
+        if engrave_request:
+            intent = "engrave"
+            state.engraving_request = engrave_request
+        elif edit_request:
+            intent = "edit_design"
+        elif auto_advance:
+            intent = "auto"  # rely solely on state.status routing; skip LLM classifier
+        else:
+            intent_raw = classify(user_input, llm)["intent"]
+            intent = intent_raw if intent_raw != "unknown" else _status_to_intent(state.status)
+    else:
+        try:
+            brief = json.loads(user_input)
+        except json.JSONDecodeError:
+            brief = {"request": user_input, "piece_name": user_input[:50]}
+
+        # Detect engrave from natural language even without job_id
+        if engrave_request:
+            intent = "engrave"
+            brief["engraving_request"] = engrave_request
+        else:
+            intent = classify(user_input, llm)["intent"]
+
+        state = ProjectState.new(brief)
+        if engrave_request:
+            state.engraving_request = engrave_request
+        state.save()
+        print(f"  Job #{state.id} created — {state.note}")
+
+    print(f"  Status: {state.status} | Intent: {intent}")
+
+    # ── Route to agent ────────────────────────────────────────────
+
+    if intent == "new_design":
+        state = design_gen.run(state, llm)
+        state.save()
+        _report_concept(state)
+        if not auto_advance:
+            return state
+
+    if intent in ("edit_design",) or edit_request:
+        req = edit_request or user_input
+        state = design_edit.run(state, req, llm)
+        state.save()
+        if not auto_advance:
+            return state
+
+    if intent == "engrave" or engrave_request:
+        if engrave_request and not state.engraving_request:
+            state.engraving_request = engrave_request
+        state = engrave.run(state, llm)
+        state.save()
+        # Pause for approval — never auto-advance past engraving
+        return state
+
+    if intent == "optimize" or (auto_advance and state.status == "design_edit"):
+        try:
+            state = proto_opt.run(state, llm)
+        except RuntimeError as e:
+            print(f"\n  [ProtoOptAgent] RENDER FAILED:\n{e}")
+            print(f"\n  Fix the SCAD at: {state.source_scad}")
+            print(f"  Then re-run: djinn-design --job {state.id} --optimize")
+            return state
+        state.save()
+        _report_variants(state)
+        if not auto_advance:
+            return state
+
+    if intent == "doe" or (auto_advance and state.status == "doe_opt"):
+        state = doe_opt.run(state, doe_goal, printer)
+        state.save()
+        _report_doe(state)
+        if not auto_advance:
+            return state
+
+    _pre_plate_status = state.status
+    if intent == "plate" or (auto_advance and _pre_plate_status == "plate_nest"):
+        state = plate_nest.run(state, plate_items)
+        try:
+            state = makers_mark.run(state)
+        except Exception as e:
+            print(f"  [MakersMarkAgent] WARNING: stamp failed ({e}) — proceeding without mark")
+        state.save()
+        if not auto_advance:
+            return state
+
+    if intent == "price" or (auto_advance and _pre_plate_status == "plate_nest"):
+        state = price.run(state)
+        state.save()
+        _report_price(state)
+        if not auto_advance:
+            return state
+
+    if intent == "status":
+        _show_queue()
+
+    return state
+
+
+def approve_engrave(job_id: int, choice: int) -> ProjectState:
+    """Approve engraving proposal 1, 2, or 3 for an existing job."""
+    state = ProjectState.load(job_id)
+    state = engrave.approve(state, choice)
+    state.save()
+    return state
+
+
+# ── Status helpers ────────────────────────────────────────────
+
+def _status_to_intent(status: str) -> str:
+    return {
+        "design_gen":              "new_design",
+        "design_edit":             "edit_design",
+        "engrave_pending_approval": "engrave",
+        "engrave_approved":         "engrave",
+        "engrave_error":            "engrave",
+        "proto_opt":               "optimize",
+        "doe_opt":                 "doe",
+        "plate_nest":              "plate",
+        "priced":                  "price",
+    }.get(status, "status")
+
+
+def _show_queue():
+    queue = _load_queue()
+    jobs = queue.get("jobs", [])
+    if not jobs:
+        print("  Queue empty.")
+        return
+    print(f"\n  {'ID':>3}  {'Status':<28}  Note")
+    print("  " + "─" * 62)
+    for j in jobs:
+        print(f"  {j.get('id', 0):>3}  {j.get('status', '?'):<28}  {str(j.get('note', ''))[:40]}")
+
+
+def _report_concept(state: ProjectState):
+    c = state.concept
+    print(f"\n  Concept: {c.get('concept_summary', '—')}")
+    for f in c.get("key_features", []):
+        print(f"    • {f}")
+    print(f"  Orientation: {c.get('print_orientation', '?')} | "
+          f"Supports: {c.get('supports_needed', '?')} | "
+          f"~{c.get('material_g_estimate', '?')}g / ~{c.get('estimated_print_time_h', '?')}hr")
+    print(f"  SCAD → {state.source_scad}")
+
+
+def _report_variants(state: ProjectState):
+    files = state.variants.get("files", {})
+    pm = state.variants.get("prototype", {})
+    qm = state.variants.get("production", {})
+    print(f"\n  Prototype: {pm.get('description', '—')}")
+    print(f"    -{pm.get('expected_mass_reduction_pct', '?')}% mass  "
+          f"-{pm.get('expected_time_reduction_pct', '?')}% time")
+    print(f"    → {files.get('prototype', '—')}")
+    print(f"  Production: {qm.get('description', '—')}")
+    print(f"    {qm.get('strength_notes', '')}")
+    print(f"    → {files.get('production', '—')}")
+
+    # Support analysis output
+    for tag in ("prototype", "production"):
+        sa = files.get(f"{tag}_support", {})
+        if sa:
+            mode  = sa.get("support_mode", "?")
+            score = sa.get("risk_score", "?")
+            codes = ", ".join(sa.get("reason_codes", [])) or "clean"
+            print(f"  Support ({tag}): {mode} (risk {score}) — {codes}")
+            print(f"    {sa.get('user_message', '')}")
+
+
+def _report_doe(state: ProjectState):
+    d = state.doe_profile
+    p = d.get("recommended_profile", {})
+    s = d.get("expected_savings_vs_standard", {})
+    print(f"\n  DOE ({d.get('goal')}) — {d.get('candidates_passing')}/{d.get('candidates_total')} candidates")
+    print(f"  Best: {p.get('layer_height_mm')}mm | {p.get('print_speed_mms')}mm/s | "
+          f"{p.get('infill_type')} {p.get('infill_density_pct')}% | {p.get('wall_count')} walls")
+    print(f"  Savings: -{s.get('time_reduction_pct', 0)}% time | "
+          f"-{s.get('material_reduction_pct', 0)}% material | "
+          f"confidence: {d.get('confidence')}")
+    for n in d.get("machine_notes", []):
+        print(f"    ⚙ {n}")
+    for t in d.get("tradeoffs", []):
+        print(f"    ⚠ {t}")
+
+
+def _report_price(state: ProjectState):
+    q = state.quote
+    if not q:
+        return
+    b = q.get("breakdown", {})
+    print(f"\n  PRICE — {q.get('piece_name', state.note)}")
+    print(f"  Confidence: {q.get('confidence', '?').upper()}")
+    print(f"  {'─'*36}")
+    print(f"  Material:     ${b.get('material', 0):>6.2f}")
+    print(f"  Labor:        ${b.get('labor', 0):>6.2f}")
+    print(f"  Depreciation: ${b.get('depreciation', 0):>6.2f}")
+    print(f"  Maintenance:  ${b.get('maintenance', 0):>6.2f}")
+    print(f"  Electricity:  ${b.get('electricity', 0):>6.2f}")
+    print(f"  Packaging:    ${b.get('packaging', 0):>6.2f}")
+    print(f"  {'─'*36}")
+    print(f"  Cost floor:   ${q.get('cost_floor', 0):>6.2f}")
+    print(f"  Fair market:  ${q.get('fair_market_estimate', 0):>6.2f}")
+    print(f"  Premium:      ${q.get('premium_ceiling', 0):>6.2f}")

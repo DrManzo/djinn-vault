@@ -1,0 +1,88 @@
+# Build environment for voxtype ONNX AVX-512 binary
+# MUST be run on a machine with AVX-512 support (Zen 4+, some Intel)
+#
+# Uses Ubuntu 24.04 for glibc 2.39+ (required by ONNX Runtime prebuilt binaries).
+# Building inside Docker caps the glibc requirement at 2.39, preventing the
+# binary from picking up symbols from newer host glibc (e.g. 2.43 on Arch).
+#
+# Usage:
+#   docker build -f Dockerfile.onnx-avx512 -t voxtype-onnx-avx512-builder .
+#   docker run --rm -v $(pwd)/releases:/output voxtype-onnx-avx512-builder
+#
+FROM ubuntu:24.04
+
+ARG VERSION=0.6.1
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV VERSION=${VERSION}
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    clang \
+    cmake \
+    pkg-config \
+    libasound2-dev \
+    libx11-dev \
+    libxi-dev \
+    libxtst-dev \
+    libgtk-3-dev \
+    libglib2.0-dev \
+    libappindicator3-dev \
+    libssl-dev \
+    protobuf-compiler \
+    libprotobuf-dev \
+    git \
+    binutils \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+WORKDIR /build
+
+# Copy source code
+COPY . .
+
+# Cross-compile to the x86-64-v4 microarch level (AVX-512F+BW+CD+DQ+VL).
+# RUSTFLAGS applied globally crashes host-side build scripts and proc macros
+# with SIGILL on a non-AVX-512 builder, so we use the per-target rustflags
+# env var plus `--target` so cargo separates host from target compilation.
+# See Dockerfile.avx512 for the full rationale.
+ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS="-C target-cpu=x86-64-v4"
+ENV CFLAGS="-march=x86-64-v4"
+ENV CXXFLAGS="-march=x86-64-v4"
+
+# ONNX Runtime will be downloaded during build by the ort crate
+ENV ORT_STRATEGY=download
+
+# Disable LTO for faster builds
+# Build with all ONNX engines
+RUN cargo build --release --target x86_64-unknown-linux-gnu --features parakeet,moonshine,sensevoice,paraformer,dolphin,omnilingual,cohere,ml-diarization \
+    --config 'profile.release.lto=false' \
+    --config 'profile.release.codegen-units=8' \
+    && cp target/x86_64-unknown-linux-gnu/release/voxtype /tmp/voxtype-onnx-avx512
+
+# Verify the binary contains AVX-512 instructions. We deliberately do NOT
+# run `--version` here: this Docker build runs on the build host's CPU,
+# which on a GH-hosted runner usually lacks AVX-512 — executing the
+# cross-compiled binary would SIGILL. objdump-based inspection is enough.
+RUN echo "=== Checking for AVX-512 instructions ===" \
+    && avx512_count=$(objdump -d /tmp/voxtype-onnx-avx512 | grep -cE 'zmm|vpternlog|vpermt2|\{1to' || echo 0) \
+    && echo "  AVX-512 instructions: $avx512_count" \
+    && if [ "$avx512_count" -eq 0 ]; then \
+         echo "ERROR: ONNX AVX-512 binary contains zero AVX-512 instructions." \
+         && echo "  Likely cause: target-cpu and/or march flags reverted to host detection." \
+         && exit 1; \
+       fi \
+    && echo "✓ Binary contains $avx512_count AVX-512 instructions" \
+    && echo "=== Binary size ===" \
+    && ls -lh /tmp/voxtype-onnx-avx512
+
+# Output stage
+CMD mkdir -p /output \
+    && cp /tmp/voxtype-onnx-avx512 /output/voxtype-${VERSION}-linux-x86_64-onnx-avx512 \
+    && echo "Binary copied to /output:" \
+    && ls -la /output/voxtype-*

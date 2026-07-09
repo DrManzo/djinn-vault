@@ -1,0 +1,131 @@
+# Build environment for voxtype with ONNX Runtime support - AVX2 compatible
+#
+# Builds voxtype with all ONNX-based engines (Parakeet, Moonshine, SenseVoice,
+# Paraformer, Dolphin, Omnilingual). Uses Ubuntu 24.04 for glibc 2.39+
+# (required by ONNX Runtime prebuilt binaries).
+#
+# NOTE: Building on i9-9900K (no AVX-512) ensures wide CPU compatibility.
+# Output binary uses AVX2 instructions for good performance on modern CPUs.
+#
+# Usage:
+#   docker build -f Dockerfile.onnx -t voxtype-onnx-avx2-builder .
+#   docker run --rm -v $(pwd)/releases:/output voxtype-onnx-avx2-builder
+#
+# For CUDA support, use Dockerfile.onnx-cuda instead.
+# For AVX-512 support, build on an AVX-512 capable host.
+#
+FROM ubuntu:24.04
+
+ARG VERSION=0.6.1
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV VERSION=${VERSION}
+
+# Install build dependencies
+# - Standard build tools
+# - ALSA for audio (cpal)
+# - OpenSSL for ureq/tokenizers
+# - Protobuf for ONNX Runtime
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    clang \
+    cmake \
+    pkg-config \
+    libasound2-dev \
+    libx11-dev \
+    libxi-dev \
+    libxtst-dev \
+    libgtk-3-dev \
+    libglib2.0-dev \
+    libappindicator3-dev \
+    libgtk-4-dev \
+    libssl-dev \
+    protobuf-compiler \
+    libprotobuf-dev \
+    git \
+    binutils \
+    meson \
+    ninja-build \
+    && rm -rf /var/lib/apt/lists/*
+
+# Ubuntu 24.04 doesn't package gtk4-layer-shell. Build the C library from
+# source so the Rust gtk4-layer-shell crate (used by voxtype-osd-gtk4) can
+# pkg-config against it. The library is small (~10s build) and the resulting
+# .so installs to /usr/local/lib. Voxtype-bin AUR users get the runtime
+# dependency via the `gtk4-layer-shell` Arch package; .deb/.rpm distros
+# need to install the library separately.
+RUN git clone --depth 1 --branch v1.3.0 https://github.com/wmww/gtk4-layer-shell.git /tmp/gtk4-layer-shell \
+    && cd /tmp/gtk4-layer-shell \
+    && meson setup \
+        -Dexamples=false \
+        -Dtests=false \
+        -Ddocs=false \
+        -Dintrospection=false \
+        -Dvapi=false \
+        build \
+    && meson compile -C build \
+    && meson install -C build \
+    && ldconfig
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+WORKDIR /build
+
+# Copy source code
+COPY . .
+
+# Build flags for Zen 3 compatibility (no AVX-512)
+ENV RUSTFLAGS="-C target-cpu=haswell -C target-feature=-avx512f,-avx512bw,-avx512cd,-avx512dq,-avx512vl,-gfni"
+ENV GGML_NATIVE=OFF
+ENV GGML_AVX512=OFF
+ENV GGML_AVX_VNNI=OFF
+ENV GGML_AVX512_VNNI=OFF
+
+# ONNX Runtime will be downloaded during build by the ort crate
+# Set ORT_STRATEGY to download (default behavior)
+ENV ORT_STRATEGY=download
+
+# Disable LTO for faster builds (can hang on TrueNAS)
+# Build with all ONNX engines
+RUN cargo build --release --features parakeet,moonshine,sensevoice,paraformer,dolphin,omnilingual,cohere,ml-diarization \
+    --config 'profile.release.lto=false' \
+    --config 'profile.release.codegen-units=8' \
+    && cp target/release/voxtype /tmp/voxtype-onnx-avx2
+
+# Build the OSD launcher and gtk4 frontend in a separate cargo invocation
+# so the daemon binary stays clean of GTK4 / layer-shell baggage. The OSD
+# binaries are engine-agnostic — voxtype-osd is just a launcher and
+# voxtype-osd-gtk4 only renders the audio waveform — so we build them once
+# in the Dockerfile.onnx pipeline and the rest of the release matrix
+# reuses the same artifacts.
+RUN cargo build --release --features osd-gtk4 \
+    --bin voxtype-osd --bin voxtype-osd-gtk4 \
+    --config 'profile.release.lto=false' \
+    --config 'profile.release.codegen-units=8' \
+    && cp target/release/voxtype-osd /tmp/voxtype-osd \
+    && cp target/release/voxtype-osd-gtk4 /tmp/voxtype-osd-gtk4
+
+# Verify binary
+RUN echo "=== Verifying ONNX AVX2 binary ===" \
+    && /tmp/voxtype-onnx-avx2 --version \
+    && echo "=== Checking for AVX-512 instructions ===" \
+    && zmm_count=$(objdump -d /tmp/voxtype-onnx-avx2 | grep -c zmm || echo 0) \
+    && echo "  zmm registers: $zmm_count" \
+    && if [ "$zmm_count" -gt 0 ]; then \
+         echo "WARNING: Binary contains AVX-512 instructions"; \
+       else \
+         echo "✓ Binary is clean (no AVX-512)"; \
+       fi \
+    && echo "=== Binary size ===" \
+    && ls -lh /tmp/voxtype-onnx-avx2
+
+# Output stage
+CMD mkdir -p /output \
+    && cp /tmp/voxtype-onnx-avx2 /output/voxtype-${VERSION}-linux-x86_64-onnx-avx2 \
+    && cp /tmp/voxtype-osd /output/voxtype-${VERSION}-linux-x86_64-osd \
+    && cp /tmp/voxtype-osd-gtk4 /output/voxtype-${VERSION}-linux-x86_64-osd-gtk4 \
+    && echo "Binaries copied to /output:" \
+    && ls -la /output/voxtype-*

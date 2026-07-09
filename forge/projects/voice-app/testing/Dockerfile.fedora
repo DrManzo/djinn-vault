@@ -1,0 +1,22 @@
+# Dockerfile for testing voxtype .rpm packages on Fedora
+#
+# Build: docker build -f Dockerfile.fedora -t voxtype-test-fedora .
+# Run:   docker run --rm -v ../releases:/packages voxtype-test-fedora
+
+FROM fedora:41
+
+# Install minimal dependencies
+RUN dnf install -y \
+    alsa-lib \
+    && dnf clean all
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser
+
+COPY test-install.sh /test-install.sh
+RUN chmod +x /test-install.sh
+
+VOLUME /packages
+
+ENTRYPOINT ["/test-install.sh"]
+CMD ["rpm"]

@@ -1,0 +1,16 @@
+{
+  "filename": "camood_TerpTribeHQ.stl_PETG_2h50m43s.gcode",
+  "model_name": "camood_TerpTribeHQ.stl_PETG_2h50m43s",
+  "order_id": "camood_TerpTribeHQ.stl_PETG_2h50m43s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-07-03T16:39:46.203616+00:00",
+  "completed_at": "2026-07-03T19:25:48.470129+00:00",
+  "duration_s": 10047.9,
+  "duration_min": 167.5,
+  "filament_mm": 25734.4,
+  "filament_grams": 76.75,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}

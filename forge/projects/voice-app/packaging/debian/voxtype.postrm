@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        # Remove the symlink created by postinst
+        rm -f /usr/bin/voxtype
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

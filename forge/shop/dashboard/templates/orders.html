@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div><h4>Orders</h4><div class="sub">All orders</div></div>
+  <div class="d-flex gap-2 align-items-center">
+    <form method="GET" class="d-flex gap-2">
+      <select name="status" class="form-ctrl-dark" onchange="this.form.submit()">
+        <option value="all"            {% if status_filter=='all' %}selected{% endif %}>All</option>
+        <option value="quoted"         {% if status_filter=='quoted' %}selected{% endif %}>Quoted</option>
+        <option value="pending_payment"{% if status_filter=='pending_payment' %}selected{% endif %}>Pending payment</option>
+        <option value="paid"           {% if status_filter=='paid' %}selected{% endif %}>Paid</option>
+        <option value="printing"       {% if status_filter=='printing' %}selected{% endif %}>Printing</option>
+        <option value="complete"       {% if status_filter=='complete' %}selected{% endif %}>Complete</option>
+        <option value="shipped"        {% if status_filter=='shipped' %}selected{% endif %}>Shipped</option>
+      </select>
+    </form>
+  </div>
+</div>
+
+<div class="card-dark p-0" style="overflow:hidden">
+<table class="table-dark-custom">
+  <thead>
+    <tr>
+      <th>Order</th><th>Customer</th><th>Items</th>
+      <th>Total</th><th>Status</th><th>Date</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for o in orders %}
+  <tr>
+    <td><strong style="color:#e8a020">{{ o.id }}</strong>
+        {% if o.express %}<span style="font-size:.7rem;color:#cc88ff"> ⚡</span>{% endif %}</td>
+    <td>
+      <div style="color:#d4e4f0">{{ o.customer.name if o.customer else '—' }}</div>
+      <div style="font-size:.75rem;color:#5a8aaa">{{ o.customer.discord_id if o.customer else '' }}</div>
+    </td>
+    <td style="max-width:200px">
+      {% for item in o.line_items[:2] %}
+      <div style="font-size:.8rem;color:#8aacbf">×{{ item.quantity }} {{ item.description[:30] }}{% if item.smoking_item %} 🔥{% endif %}</div>
+      {% endfor %}
+      {% if o.line_items|length > 2 %}<div style="font-size:.75rem;color:#5a7a9a">+{{ o.line_items|length - 2 }} more</div>{% endif %}
+    </td>
+    <td style="color:#fff;font-weight:600">${{ '%.2f'|format(o.total_usd) }}</td>
+    <td><span class="badge-status s-{{ o.status }}">{{ o.status.replace('_',' ') }}</span></td>
+    <td style="color:#7a9ab0;font-size:.8rem">{{ o.created_at[:10] }}</td>
+    <td><a href="{{ url_for('order_detail', order_id=o.id) }}"
+           style="color:#5a9abf;font-size:.8rem;text-decoration:none">View</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" style="text-align:center;color:#5a7a9a;padding:2rem">No orders</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

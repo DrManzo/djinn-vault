@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div>
+    <h4>Queue</h4>
+    <div class="sub">{{ orders|length }} order{{ 's' if orders|length != 1 }} waiting</div>
+  </div>
+</div>
+
+{% if not orders %}
+<div class="card-dark text-center py-5">
+  <i class="bi bi-inbox" style="font-size:2.5rem;color:#2a3a4a"></i>
+  <div style="color:#7a9ab0;margin-top:.75rem">Queue is empty</div>
+</div>
+{% endif %}
+
+<div class="row g-3">
+{% for o in orders %}
+<div class="col-12">
+  <div class="card-dark">
+    <div class="d-flex align-items-start justify-content-between flex-wrap gap-2">
+
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <strong style="color:#fff;font-size:1rem">{{ o.id }}</strong>
+          <span class="badge-status s-{{ o.status }}">{{ o.status.replace('_',' ') }}</span>
+          {% if o.express %}<span class="badge-status" style="background:#2a1a40;color:#cc88ff">⚡ Express</span>{% endif %}
+        </div>
+        <div style="color:#7a9ab0;font-size:.82rem">
+          <i class="bi bi-person"></i>
+          {{ o.customer.name if o.customer else '—' }}
+          <span style="color:#3a5a7a">·</span>
+          {{ o.customer.discord_id if o.customer else '' }}
+        </div>
+      </div>
+
+      <div class="text-end">
+        <div style="font-size:1.3rem;font-weight:700;color:#e8a020">${{ '%.2f'|format(o.total_usd) }}</div>
+        <div style="color:#7a9ab0;font-size:.78rem">{{ o.created_at[:10] }}</div>
+      </div>
+    </div>
+
+    {% if o.items %}
+    <div style="margin:.75rem 0 0;padding-top:.75rem;border-top:1px solid #2a3a4a">
+      {% for item in o.line_items %}
+      <div style="font-size:.85rem;color:#d4e4f0">
+        <span style="color:#7a9ab0">×{{ item.quantity }}</span>
+        {{ item.description }}
+        {% if item.material %}<span style="color:#5a8aaa;font-size:.78rem"> · {{ item.material }}</span>{% endif %}
+        {% if item.color %}<span style="color:#5a8aaa;font-size:.78rem"> · {{ item.color }}</span>{% endif %}
+        {% if item.smoking_item %}<span style="font-size:.75rem;margin-left:.3rem">🔥</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if o.notes %}
+    <div style="margin-top:.6rem;font-size:.8rem;color:#8aaac0;font-style:italic">
+      "{{ o.notes }}"
+    </div>
+    {% endif %}
+
+    <div class="d-flex gap-2 mt-3 flex-wrap">
+      <a href="{{ url_for('order_detail', order_id=o.id) }}"
+         class="btn btn-sm btn-ghost"><i class="bi bi-eye"></i> Details</a>
+
+      {% if o.status == 'pending_payment' %}
+      <form method="POST" action="{{ url_for('mark_paid', order_id=o.id) }}" style="display:inline">
+        <button class="btn btn-sm btn-accent"><i class="bi bi-check-circle"></i> Confirm Payment</button>
+      </form>
+      {% endif %}
+
+      {% if o.status == 'paid' %}
+      <button class="btn btn-sm" style="background:#1a1040;color:#8888ff;border:1px solid #3a3080">
+        <i class="bi bi-printer"></i> confirm {{ loop.index }} in Discord
+      </button>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

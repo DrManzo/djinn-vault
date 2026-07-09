@@ -1,0 +1,29 @@
+# Dockerfile for testing voxtype .deb packages on Debian Sid (unstable)
+# This matches the environment from issue #4
+#
+# Build: docker build -f Dockerfile.debian-sid -t voxtype-test-debian-sid .
+# Run:   docker run --rm -v ../releases:/packages voxtype-test-debian-sid
+
+FROM debian:sid-slim
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install minimal dependencies for testing
+# Note: Debian Sid uses libasound2t64 (64-bit time_t transition)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    libasound2t64 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser
+
+# Copy test script
+COPY test-install.sh /test-install.sh
+RUN chmod +x /test-install.sh
+
+VOLUME /packages
+
+ENTRYPOINT ["/test-install.sh"]
+CMD ["debian"]

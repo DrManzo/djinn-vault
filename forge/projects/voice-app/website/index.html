@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voxtype - Push-to-talk voice-to-text for Linux and macOS. Fully offline speech recognition powered by Whisper. No cloud, no subscriptions.">
+    <meta name="keywords" content="voice to text, speech recognition, wayland, linux, whisper, offline, open source">
+    <meta name="author" content="Peter Jackson">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Voxtype - Voice to Text for Linux and macOS">
+    <meta property="og:description" content="Push-to-talk voice-to-text for Linux and macOS. Fully offline speech recognition powered by Whisper. No cloud, no subscriptions, no Python dependencies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voxtype.io">
+    <meta property="og:image" content="https://voxtype.io/images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="627">
+
+    <title>Voxtype - Push-to-Talk Voice-to-Text for Linux and macOS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="download/">Download</a>
+                <a href="compare/">Compare</a>
+                <a href="news/">News</a>
+                <a href="https://voxtype.io/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Voice to Text for <span class="highlight">Linux</span> and <span class="highlight">macOS</span></h1>
+            <p class="hero-subtitle">
+                9-11&times; realtime on your CPU. Local by default.
+                Voxtype runs Cohere Transcribe (#1 on the Open ASR Leaderboard) faster than realtime
+                on a plain Zen 4 CPU. Parakeet, Whisper, and five more engines if you want them.
+                No cloud, no subscription, no telemetry.
+            </p>
+            <div class="hero-badges">
+                <span class="badge">Local by Default</span>
+                <span class="badge">Open Source</span>
+                <span class="badge">Wayland Optimized</span>
+            </div>
+            <div class="hero-cta">
+                <a href="download/" class="btn btn-primary">Download</a>
+                <a href="https://github.com/peteonrails/voxtype" class="btn btn-secondary">View on GitHub</a>
+            </div>
+            <div class="hero-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <pre><code><span class="prompt">$</span> voxtype
+<span class="info">[INFO]</span> Voxtype v0.7.0 starting...
+<span class="info">[INFO]</span> Engine: cohere (cohere-transcribe-q4f16)
+<span class="info">[INFO]</span> Hotkey: SCROLLLOCK
+<span class="info">[INFO]</span> Ready! Hold SCROLLLOCK to record.
+
+<span class="comment"># User holds ScrollLock and speaks for 4.75s...</span>
+<span class="info">[INFO]</span> Recording started...
+<span class="info">[INFO]</span> Recording stopped (4.75s)
+<span class="info">[INFO]</span> Cohere transcription completed in 0.45s (10.6&times; realtime)
+<span class="success">[INFO]</span> Transcribed: "<span class="output">This is a longer test of voice activity detection with multiple words and phrases.</span>"
+<span class="success">[INFO]</span> Typed 86 characters</code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>What makes Voxtype different</h2>
+            <p class="section-subtitle">Built specifically for the modern Linux desktop. Fast on every machine.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 12 15 16 10"/>
+                        </svg>
+                    </div>
+                    <h3>Local by default</h3>
+                    <p>
+                        Your audio stays on your machine. No cloud, no subscription, no telemetry.
+                        Optional remote Whisper servers when you want them &mdash; never required.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>Pauses your music</h3>
+                    <p>
+                        Auto-pauses Spotify, Plasma media players, and anything that speaks MPRIS
+                        the moment you start dictating. Resumes on release. No more accidentally
+                        dictating over a podcast.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Meeting mode</h3>
+                    <p>
+                        Continuous transcription with chunked processing, speaker attribution,
+                        and export to Markdown, JSON, SRT, or VTT. Optional LLM post-processing
+                        pipes transcripts through Ollama for cleanup or summarization.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="6" y2="12"/>
+                            <line x1="6" y1="9" x2="6" y2="15"/>
+                            <line x1="9" y1="6" x2="9" y2="18"/>
+                            <line x1="12" y1="3" x2="12" y2="21"/>
+                            <line x1="15" y1="6" x2="15" y2="18"/>
+                            <line x1="18" y1="9" x2="18" y2="15"/>
+                            <line x1="21" y1="12" x2="18" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Floating waveform OSD</h3>
+                    <p>
+                        Matches your <code>swayosd</code> band by default &mdash; same vertical
+                        position as volume and brightness panels &mdash; so the level meter sits
+                        where you already look for system feedback.
+                        <em>New in 0.7.0.</em>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </div>
+                    <h3>Seven transcription engines</h3>
+                    <p>
+                        Whisper &middot; Parakeet &middot; Moonshine &middot; SenseVoice &middot;
+                        Paraformer &middot; Dolphin &middot; Omnilingual. Switch with one config
+                        line. CJK and 1600+ languages covered by the multilingual engines.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3>Interactive TUI configure</h3>
+                    <p>
+                        <code>voxtype configure</code> edits every option in
+                        <code>~/.config/voxtype/config.toml</code> for you &mdash; no
+                        hand-editing TOML. Auto-downloads missing models, swaps GPU binaries via
+                        <code>pkexec</code>, restarts the daemon when needed. Surfaces in
+                        Walker, fuzzel, and rofi as &ldquo;Voxtype Configuration&rdquo;.
+                        <em>New in 0.7.0.</em>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Cohere Transcribe at 9-11&times; realtime &mdash; on your CPU</h3>
+                    <p>
+                        Quantized to 1.5 GB (q4f16) so it loads fast and runs faster than realtime
+                        on a plain Zen 4 CPU. Punctuation, capitalization, and inverse text
+                        normalization out of the box. Sits at #1 on the Open ASR Leaderboard.
+                        <em>New in 0.7.0.</em>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <rect x="8" y="8" width="8" height="8"/>
+                            <line x1="4" y1="12" x2="8" y2="12"/>
+                            <line x1="16" y1="12" x2="20" y2="12"/>
+                            <line x1="12" y1="4" x2="12" y2="8"/>
+                            <line x1="12" y1="16" x2="12" y2="20"/>
+                        </svg>
+                    </div>
+                    <h3>Parakeet on AMD and NVIDIA GPUs</h3>
+                    <p>
+                        MIGraphX 7.2 for Radeon RX 7000 and 9000-series cards. Separate
+                        CUDA 12 and CUDA 13 binaries so every NVIDIA driver generation works.
+                        Vulkan for Whisper across vendors.
+                        <em>MIGraphX new in 0.7.0.</em>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Hyprland, Niri, Sway, River, GNOME, KDE</h3>
+                    <p>
+                        Compositor keybindings everywhere, evdev fallback for X11, Wayland-first
+                        typing via wtype with full CJK support. Falls back through dotool
+                        &rarr; ydotool &rarr; clipboard if any layer is unavailable.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Dynamic per-engine model loading</h3>
+                    <p>
+                        Configure all seven engines, pay memory only for the one you're actually
+                        using. Models load on first use and unload when idle so you can switch
+                        engines mid-day without restarting the daemon.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 7V4h16v3"/>
+                            <path d="M9 20h6"/>
+                            <path d="M12 4v16"/>
+                        </svg>
+                    </div>
+                    <h3>Text processing built in</h3>
+                    <p>
+                        Spoken punctuation (<code>"comma"</code> &rarr; <code>,</code>),
+                        per-user replacement tables for common mistranscriptions, and an optional
+                        post-processing pipe through any LLM or shell script. Fix domain terms,
+                        drop filler words, polish grammar &mdash; all without leaving voxtype.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <h3>One package on every distro</h3>
+                    <p>
+                        AUR (<code>voxtype</code>, <code>voxtype-bin</code>),
+                        <code>.deb</code>, <code>.rpm</code>, Homebrew on macOS. Signed release
+                        binaries from a reproducible Docker pipeline so what you install is what
+                        we built. MIT licensed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section id="news-preview" class="news-preview">
+        <div class="container">
+            <h2>Latest news</h2>
+            <p class="section-subtitle">Recent releases and what they bring</p>
+
+            <div class="news-preview-grid">
+                <a href="news/#v072" class="news-preview-card">
+                    <div class="news-preview-meta">
+                        <time datetime="2026-05-17">May 17, 2026</time>
+                        <span class="news-preview-tag">Release</span>
+                    </div>
+                    <h3>v0.7.2: Streaming Dictation, Modifier-Release Guard, Notification Cleanup</h3>
+                    <p>Parakeet streaming types text at the cursor as you speak (toggle activation only). A new evdev-based modifier-release guard stops chord hotkeys from triggering on the first typed letter. Notifications now overwrite in place instead of stacking. Experimental aarch64 binaries land for Raspberry Pi, Ampere, and Snapdragon X.</p>
+                    <span class="news-preview-link">Read more &rarr;</span>
+                </a>
+
+                <a href="news/#v071" class="news-preview-card">
+                    <div class="news-preview-meta">
+                        <time datetime="2026-05-11">May 11, 2026</time>
+                        <span class="news-preview-tag">Release</span>
+                    </div>
+                    <h3>v0.7.1: NixOS source build hotfix</h3>
+                    <p>Moves <code>tray-icon</code> and <code>rdev</code> under <code>cfg(target_os = "macos")</code> so Linux builds stop pulling in the GTK3 toolchain. Two community contributions land alongside: <code>osdNative</code> and <code>osdGtk4</code> as flake outputs, and a GTK4 OSD startup-visibility fix.</p>
+                    <span class="news-preview-link">Read more &rarr;</span>
+                </a>
+
+                <a href="news/#v070" class="news-preview-card">
+                    <div class="news-preview-meta">
+                        <time datetime="2026-05-09">May 9, 2026</time>
+                        <span class="news-preview-tag">Release</span>
+                    </div>
+                    <h3>v0.7.0: Cohere, macOS, on-screen visualizer, configuration TUI</h3>
+                    <p>Cohere as the eighth engine, full macOS support via Homebrew, GTK4 visualizer that follows swayosd convention, MIGraphX replacing ROCm on AMD, CUDA 12/13 split, and a new interactive <code>voxtype configure</code> TUI.</p>
+                    <span class="news-preview-link">Read more &rarr;</span>
+                </a>
+
+                <a href="news/#v066" class="news-preview-card">
+                    <div class="news-preview-meta">
+                        <time datetime="2026-04-18">April 18, 2026</time>
+                        <span class="news-preview-tag">Release</span>
+                    </div>
+                    <h3>v0.6.6: Media Pause, Audio Feedback, KDE Support</h3>
+                    <p>Auto-pause your music while dictating. Audio cues when transcription finishes. KDE Plasma compositor keybindings documented. Seven bug fixes across output drivers, text processing, and the remote backend.</p>
+                    <span class="news-preview-link">Read more &rarr;</span>
+                </a>
+            </div>
+
+            <div class="news-preview-cta">
+                <a href="news/" class="btn btn-secondary">All releases &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2>See It In Action</h2>
+            <p class="section-subtitle">Watch Voxtype transform voice into text</p>
+
+            <!-- Video Demo -->
+            <div class="video-demo-inline">
+                <h3>Voxtype on Omarchy</h3>
+                <div class="video-wrapper">
+                    <div class="video-aspect-ratio">
+                        <video controls playsinline>
+                            <source src="https://github.com/user-attachments/assets/f3d5156f-05e5-4f0f-9f71-b2022477d110" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <p class="video-credit">Video courtesy of <a href="https://omarchy.org">Omarchy</a>, <a href="https://basecamp.com">Basecamp</a>, and <a href="https://dhh.dk">DHH</a>.</p>
+            </div>
+
+            <!-- Interactive Demos -->
+            <h3 class="interactive-demos-header">Interactive Demos</h3>
+
+            <!-- Scenario Selector -->
+            <div class="scenario-selector">
+                <button class="scenario-btn active" data-scenario="agent">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Dictate an AI Prompt
+                </button>
+                <button class="scenario-btn" data-scenario="document">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    Writing a Document
+                </button>
+                <button class="scenario-btn" data-scenario="vim">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16 18 22 12 16 6"/>
+                        <polyline points="8 6 2 12 8 18"/>
+                    </svg>
+                    Coding with opencode
+                </button>
+            </div>
+
+            <!-- Desktop Simulation -->
+            <div class="desktop-container">
+                <!-- Hyprland-style bar -->
+                <div class="desktop-bar">
+                    <div class="bar-left">
+                        <span class="workspace active">1</span>
+                        <span class="workspace">2</span>
+                        <span class="workspace">3</span>
+                    </div>
+                    <div class="bar-center">
+                        <span class="window-title" id="active-window-title">foot ~ ai-assistant</span>
+                    </div>
+                    <div class="bar-right">
+                        <span class="bar-item" id="recording-indicator">
+                            <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            </svg>
+                        </span>
+                        <span class="bar-item">vol: 75%</span>
+                        <span class="bar-item" id="clock">14:32</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Area -->
+                <div class="desktop-area">
+                    <!-- Window: AI Agent Terminal -->
+                    <div class="window window-agent active" id="window-agent">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <span class="window-title-bar">foot ~ ai-assistant</span>
+                        </div>
+                        <div class="window-content terminal">
+                            <div class="terminal-output" id="agent-output">
+                                <div class="line"><span class="prompt-user">pete@arch</span>:<span class="prompt-dir">~/projects/myapp</span>$ ai-assistant</div>
+                                <div class="line"></div>
+                                <div class="line claude-welcome">AI Coding Assistant v1.0</div>
+                                <div class="line claude-info">Enter your prompt or type /help for commands.</div>
+                                <div class="line"></div>
+                                <div class="line claude-prompt"><span class="claude-you">You:</span> <span class="cursor-line" id="agent-input"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Window: Document Editor -->
+                    <div class="window window-editor" id="window-editor">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <span class="window-title-bar">gedit - project-notes.md</span>
+                        </div>
+                        <div class="window-content editor">
+                            <div class="editor-toolbar">
+                                <span class="toolbar-item">File</span>
+                                <span class="toolbar-item">Edit</span>
+                                <span class="toolbar-item">View</span>
+                            </div>
+                            <div class="editor-content" id="editor-content">
+                                <div class="editor-line"><span class="md-h1"># Project Notes</span></div>
+                                <div class="editor-line"></div>
+                                <div class="editor-line"><span class="md-h2">## Overview</span></div>
+                                <div class="editor-line"></div>
+                                <div class="editor-line"><span class="editor-text" id="editor-input"></span><span class="editor-cursor">|</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Window: Neovim -->
+                    <div class="window window-vim" id="window-vim">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <span class="window-title-bar">opencode — main.rs</span>
+                        </div>
+                        <div class="window-content vim">
+                            <div class="vim-lines">
+                                <div class="vim-line"><span class="line-nr">1</span><span class="kw">use</span> std::io;</div>
+                                <div class="vim-line"><span class="line-nr">2</span></div>
+                                <div class="vim-line"><span class="line-nr">3</span><span class="kw">fn</span> <span class="fn">main</span>() {</div>
+                                <div class="vim-line"><span class="line-nr">4</span>    <span class="comment">// TODO: implement user input</span></div>
+                                <div class="vim-line"><span class="line-nr">5</span>    <span class="vim-input" id="vim-input"></span><span class="vim-cursor"></span></div>
+                                <div class="vim-line"><span class="line-nr">6</span>}</div>
+                            </div>
+                            <div class="vim-statusline">
+                                <span class="vim-mode" id="vim-mode">opencode</span>
+                                <span class="vim-file">main.rs</span>
+                                <span class="vim-pos">5:1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="notifications" id="notifications"></div>
+                </div>
+
+                <!-- Hotkey Indicator -->
+                <div class="hotkey-indicator" id="hotkey-indicator">
+                    <div class="key-visual">
+                        <span class="key-cap">HOME</span>
+                    </div>
+                    <div class="key-status" id="key-status">Press to record</div>
+                </div>
+            </div>
+
+            <!-- Demo Controls -->
+            <div class="demo-controls">
+                <button class="control-btn" id="play-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Play Demo
+                </button>
+                <button class="control-btn" id="reset-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                    </svg>
+                    Reset
+                </button>
+            </div>
+
+            <!-- Scenario Description -->
+            <div class="scenario-description" id="scenario-description">
+                <h3>Dictate an AI Prompt</h3>
+                <p>Watch as Voxtype captures speech and types a prompt directly into an AI coding assistant. Perfect for hands-free interaction with agentic tools.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section id="models" class="models">
+        <div class="container">
+            <h2>Choose Your Model</h2>
+            <p class="section-subtitle">Balance speed and accuracy for your needs. With GPU acceleration, even large-v3 achieves sub-second inference!</p>
+
+            <h3 class="model-category">Whisper Models (English-only)</h3>
+            <div class="model-table-wrapper">
+                <table class="model-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Size</th>
+                            <th>Speed</th>
+                            <th>Accuracy</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>tiny.en</code></td>
+                            <td>39 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 100%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 60%"></div>
+                                </div>
+                            </td>
+                            <td>Quick notes, low-end hardware</td>
+                        </tr>
+                        <tr class="recommended">
+                            <td><code>base.en</code> <span class="rec-badge">Recommended</span></td>
+                            <td>142 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 85%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 75%"></div>
+                                </div>
+                            </td>
+                            <td>Most users</td>
+                        </tr>
+                        <tr>
+                            <td><code>small.en</code></td>
+                            <td>466 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 60%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 85%"></div>
+                                </div>
+                            </td>
+                            <td>Higher accuracy needs</td>
+                        </tr>
+                        <tr>
+                            <td><code>medium.en</code></td>
+                            <td>1.5 GB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 35%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 92%"></div>
+                                </div>
+                            </td>
+                            <td>Professional transcription</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="model-category">Whisper Models (Multilingual)</h3>
+            <div class="model-table-wrapper">
+                <table class="model-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Size</th>
+                            <th>Speed</th>
+                            <th>Accuracy</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>tiny</code></td>
+                            <td>75 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 95%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 55%"></div>
+                                </div>
+                            </td>
+                            <td>Quick notes, any language</td>
+                        </tr>
+                        <tr>
+                            <td><code>base</code></td>
+                            <td>142 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 80%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 70%"></div>
+                                </div>
+                            </td>
+                            <td>General multilingual use</td>
+                        </tr>
+                        <tr>
+                            <td><code>small</code></td>
+                            <td>466 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 55%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 82%"></div>
+                                </div>
+                            </td>
+                            <td>Better multilingual accuracy</td>
+                        </tr>
+                        <tr>
+                            <td><code>medium</code></td>
+                            <td>1.5 GB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 30%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 90%"></div>
+                                </div>
+                            </td>
+                            <td>Professional multilingual</td>
+                        </tr>
+                        <tr>
+                            <td><code>large-v3</code></td>
+                            <td>3.1 GB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 20%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 100%"></div>
+                                </div>
+                            </td>
+                            <td>Maximum accuracy</td>
+                        </tr>
+                        <tr class="recommended">
+                            <td><code>large-v3-turbo</code> <span class="rec-badge">GPU Recommended</span></td>
+                            <td>1.6 GB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 75%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 95%"></div>
+                                </div>
+                            </td>
+                            <td>Fast + accurate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="model-category">ONNX Engines (require ONNX binary variant)</h3>
+            <div class="model-table-wrapper">
+                <table class="model-table">
+                    <thead>
+                        <tr>
+                            <th>Engine / Model</th>
+                            <th>Size</th>
+                            <th>Speed</th>
+                            <th>Accuracy</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="recommended">
+                            <td><code>parakeet-tdt-0.6b-v3-int8</code> <span class="rec-badge">English</span></td>
+                            <td>670 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 95%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 95%"></div>
+                                </div>
+                            </td>
+                            <td>Best English accuracy, built-in punctuation</td>
+                        </tr>
+                        <tr>
+                            <td><code>moonshine-base</code></td>
+                            <td>237 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 98%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 78%"></div>
+                                </div>
+                            </td>
+                            <td>Fastest CPU inference, English</td>
+                        </tr>
+                        <tr class="recommended">
+                            <td><code>sensevoice-small</code> <span class="rec-badge">CJK</span></td>
+                            <td>239 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 92%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 88%"></div>
+                                </div>
+                            </td>
+                            <td>Chinese, Japanese, Korean, Cantonese, English</td>
+                        </tr>
+                        <tr>
+                            <td><code>paraformer-zh</code></td>
+                            <td>487 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 88%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 85%"></div>
+                                </div>
+                            </td>
+                            <td>Chinese + English bilingual</td>
+                        </tr>
+                        <tr>
+                            <td><code>dolphin-base</code></td>
+                            <td>198 MB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 90%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 82%"></div>
+                                </div>
+                            </td>
+                            <td>40 languages + 22 Chinese dialects</td>
+                        </tr>
+                        <tr>
+                            <td><code>omnilingual-large</code></td>
+                            <td>3.9 GB</td>
+                            <td>
+                                <div class="speed-bar">
+                                    <div class="speed-fill" style="width: 40%"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="accuracy-bar">
+                                    <div class="accuracy-fill" style="width: 75%"></div>
+                                </div>
+                            </td>
+                            <td>1600+ languages, rare and low-resource</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="model-note">
+                <strong>.en models</strong> are English-only but faster and more accurate for English. All ONNX engines require the ONNX binary variant. Switch with <code>voxtype setup onnx --enable</code>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Install Section -->
+    <section id="install" class="install">
+        <div class="container">
+            <h2>Installation</h2>
+            <p class="section-subtitle">Get up and running in minutes</p>
+            <p class="install-pitch">
+                Other Linux voice typing tools require you to clone a repo, run an install script,
+                set up a Python virtual environment, and remember to activate it every time you reboot.
+                Voxtype is different: it's a single binary. Install it from your package manager,
+                download a Whisper model, and enable the systemd user service. No virtual environments,
+                no dependency conflicts, no activation scripts. It just works, every time you log in.
+            </p>
+
+            <p class="install-note" style="margin-bottom: 1.5rem;">
+                <strong>CPU requirement:</strong> Prebuilt Linux binaries target the x86-64-v3 baseline (AVX2 + FMA + BMI1/2).
+                Intel Haswell (2013+) and AMD Excavator (2015+) or any Ryzen are supported. Older CPUs need to build from source with <code>-C target-cpu=native</code>.
+            </p>
+
+            <div class="install-tabs">
+                <button class="tab-btn active" data-tab="arch">Arch Linux</button>
+                <button class="tab-btn" data-tab="debian">Debian/Ubuntu</button>
+                <button class="tab-btn" data-tab="fedora">Fedora</button>
+                <button class="tab-btn" data-tab="macos">macOS</button>
+                <button class="tab-btn" data-tab="nixos">NixOS</button>
+                <button class="tab-btn" data-tab="appimage">AppImage</button>
+                <button class="tab-btn" data-tab="source">From Source</button>
+            </div>
+
+            <div class="install-content">
+                <div id="arch" class="tab-content active">
+                    <p class="install-note">Two AUR packages: <code>voxtype-bin</code> (prebuilt binaries, install in seconds) and <code>voxtype</code> (builds from source via cargo, 20+ minutes). Most users want <code>voxtype-bin</code>.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install from AUR</span>
+                            <button class="copy-btn" data-copy="paru -S voxtype-bin">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Prebuilt binaries (recommended)</span>
+paru -S voxtype-bin       <span class="comment"># or: yay -S voxtype-bin</span>
+
+<span class="comment"># Or build from source</span>
+paru -S voxtype           <span class="comment"># or: yay -S voxtype</span>
+
+<span class="comment"># Recommended optional dependencies</span>
+sudo pacman -S wtype wl-clipboard libnotify gtk4-layer-shell</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+
+                <div id="debian" class="tab-content">
+                    <p class="install-note">Requires Ubuntu 24.04+ or Debian Trixie+ (glibc 2.39). Older versions can build from source.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install .deb package</span>
+                            <button class="copy-btn" data-copy="sudo apt install ./voxtype_0.7.2-1_amd64.deb">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Download and install</span>
+wget https://github.com/peteonrails/voxtype/releases/download/v0.7.2/voxtype_0.7.2-1_amd64.deb
+sudo apt install ./voxtype_0.7.2-1_amd64.deb
+
+<span class="comment"># Recommended optional dependencies</span>
+sudo apt install wtype wl-clipboard libnotify-bin pipewire-alsa playerctl</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+
+                <div id="fedora" class="tab-content">
+                    <p class="install-note">Requires Fedora 40+ (glibc 2.39).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install RPM package</span>
+                            <button class="copy-btn" data-copy="sudo dnf install ./voxtype-0.7.2-1.x86_64.rpm">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Download and install</span>
+wget https://github.com/peteonrails/voxtype/releases/download/v0.7.2/voxtype-0.7.2-1.x86_64.rpm
+sudo dnf install ./voxtype-0.7.2-1.x86_64.rpm
+
+<span class="comment"># Recommended optional dependencies</span>
+sudo dnf install wtype wl-clipboard libnotify pipewire-alsa playerctl</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+
+                <div id="macos" class="tab-content">
+                    <p class="install-note">Apple Silicon (arm64) only. Uses Microsoft ONNX Runtime so all engines are available, including Parakeet on the Neural Engine path.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install via Homebrew</span>
+                            <button class="copy-btn" data-copy="brew install --cask voxtype">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Install the signed app bundle</span>
+brew install --cask voxtype
+
+<span class="comment"># First launch opens a setup wizard that walks you through</span>
+<span class="comment"># Accessibility permissions, model download, and the FN-key hotkey.</span></code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;">Or download <code>voxtype-0.7.2-macOS-arm64.dmg</code> from the <a href="https://github.com/peteonrails/voxtype/releases/latest">latest release</a>.</p>
+                </div>
+
+                <div id="nixos" class="tab-content">
+                    <p class="install-note">NixOS users get a flake with packages for every binary variant. Pulls prebuilt ONNX Runtime; CPU-only variant builds entirely from source.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install via flake</span>
+                            <button class="copy-btn" data-copy="nix profile install github:peteonrails/voxtype/v0.7.2#vulkan">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Imperative install</span>
+nix profile install github:peteonrails/voxtype/v0.7.2#vulkan
+
+<span class="comment"># Available outputs: default, vulkan, cuda, rocm, osdGtk4, osdNative</span>
+nix build github:peteonrails/voxtype/v0.7.2#osdGtk4
+
+<span class="comment"># Or pin in your flake inputs</span>
+inputs.voxtype.url = "github:peteonrails/voxtype/v0.7.2";</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+
+                <div id="appimage" class="tab-content">
+                    <p class="install-note">Self-contained binary for distros that don't have a packaged voxtype. Three variants: CPU, Vulkan GPU, and ONNX engines.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Download and run</span>
+                            <button class="copy-btn" data-copy="chmod +x voxtype-0.7.2-x86_64.AppImage && ./voxtype-0.7.2-x86_64.AppImage">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Download a variant from the latest release</span>
+wget https://github.com/peteonrails/voxtype/releases/download/v0.7.2/voxtype-0.7.2-x86_64.AppImage
+chmod +x voxtype-0.7.2-x86_64.AppImage
+
+<span class="comment"># Run directly, or move to ~/.local/bin/ for permanent install</span>
+./voxtype-0.7.2-x86_64.AppImage --help
+mv voxtype-0.7.2-x86_64.AppImage ~/.local/bin/voxtype</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+
+                <div id="source" class="tab-content">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Build from source</span>
+                            <button class="copy-btn" data-copy="git clone https://github.com/peteonrails/voxtype && cd voxtype && cargo build --release">Copy</button>
+                        </div>
+                        <pre><code><span class="comment"># Install Rust (if needed)</span>
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+<span class="comment"># Install build dependencies</span>
+<span class="comment">#   Fedora:</span>
+sudo dnf install rust cargo alsa-lib-devel clang-devel cmake pkgconf
+<span class="comment">#   Arch:</span>
+sudo pacman -S rustup alsa-lib clang cmake pkgconf
+<span class="comment">#   Debian/Ubuntu:</span>
+sudo apt install cargo libasound2-dev libclang-dev cmake pkg-config
+
+<span class="comment"># Clone and build</span>
+git clone https://github.com/peteonrails/voxtype
+cd voxtype
+cargo build --release
+
+<span class="comment"># Install</span>
+sudo cp target/release/voxtype /usr/local/bin/</code></pre>
+                    </div>
+                    <p class="install-note" style="margin-top: 1rem;">For GPU support: <code>--features gpu-vulkan</code>, <code>--features gpu-cuda</code>, or <code>--features parakeet-migraphx</code>. See <a href="https://github.com/peteonrails/voxtype/blob/main/docs/INSTALL.md">docs/INSTALL.md</a> for the full feature matrix.</p>
+                    <p class="install-note"><strong>Next:</strong> <a href="#quick-start">First-run setup</a> below.</p>
+                </div>
+            </div>
+
+            <div class="install-note" style="margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 6px;">
+                <strong>GPU acceleration.</strong> Every Linux package ships a Vulkan Whisper binary plus per-vendor ONNX engine binaries (CUDA 12, CUDA 13, MIGraphX for AMD). After install, point the wrapper at the right one:
+                <div class="code-block" style="margin-top: 0.75rem;">
+                    <pre><code><span class="comment"># Auto-detect GPU and install runtime, then switch the wrapper</span>
+sudo voxtype setup gpu --enable</code></pre>
+                </div>
+                Runtime packages you may need: <code>vulkan-icd-loader</code> (Vulkan), <code>cuda</code> or <code>cuda12.6</code> (NVIDIA), <code>rocm-hip-runtime</code> 7.x (AMD). Cohere, Parakeet, Moonshine, SenseVoice, Paraformer, Dolphin, and Omnilingual all run on whichever GPU EP the wrapper resolves to.
+            </div>
+
+            <div id="quick-start" class="post-install">
+                <h3>First-run setup</h3>
+
+                <div class="setup-tabs">
+                    <button class="setup-tab-btn active" data-setup="hyprland">Hyprland / Sway / River</button>
+                    <button class="setup-tab-btn" data-setup="standard">Standard Setup</button>
+                </div>
+
+                <div id="setup-hyprland" class="setup-content active">
+                    <p class="setup-note">For Hyprland, Sway, and River users. Uses native compositor keybindings—no <code>input</code> group required!</p>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Download whisper model and configure</span>
+voxtype setup --download
+
+<span class="comment"># Disable built-in hotkey (we'll use compositor keybindings)</span>
+cat >> ~/.config/voxtype/config.toml << 'EOF'
+
+[hotkey]
+enabled = false
+EOF
+
+<span class="comment"># Enable state file (required for toggle mode)</span>
+echo 'state_file = "auto"' >> ~/.config/voxtype/config.toml
+
+<span class="comment"># Install as systemd service</span>
+voxtype setup systemd
+
+<span class="comment"># Optional: Fix modifier key interference (if using SUPER+key combos)</span>
+voxtype setup compositor hyprland  <span class="comment"># or: sway</span></code></pre>
+                    </div>
+                    <p class="setup-note" style="margin-top: 1rem;"><strong>Then add keybindings to your compositor config:</strong></p>
+                    <div class="code-block">
+                        <div class="code-header"><span>Hyprland (~/.config/hypr/hyprland.conf)</span></div>
+                        <pre><code><span class="comment"># Push-to-talk: hold Super+V to record, release to transcribe</span>
+bind = SUPER, V, exec, voxtype record start
+bindr = SUPER, V, exec, voxtype record stop
+
+<span class="comment"># Or use Scroll Lock</span>
+bind = , SCROLL_LOCK, exec, voxtype record start
+bindr = , SCROLL_LOCK, exec, voxtype record stop</code></pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header"><span>Sway (~/.config/sway/config)</span></div>
+                        <pre><code><span class="comment"># Push-to-talk: hold $mod+v to record, release to transcribe</span>
+bindsym $mod+v exec voxtype record start
+bindsym --release $mod+v exec voxtype record stop</code></pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header"><span>River (~/.config/river/init)</span></div>
+                        <pre><code><span class="comment"># Push-to-talk: hold Super+V to record, release to transcribe</span>
+riverctl map normal Super V spawn 'voxtype record start'
+riverctl map -release normal Super V spawn 'voxtype record stop'</code></pre>
+                    </div>
+                </div>
+
+                <div id="setup-standard" class="setup-content">
+                    <p class="setup-note">For GNOME, KDE, and other desktops. Uses kernel-level hotkey detection.</p>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Add user to input group (required for hotkey detection)</span>
+sudo usermod -aG input $USER
+<span class="comment"># Log out and back in for group change to take effect</span>
+
+<span class="comment"># Download whisper model and configure</span>
+voxtype setup --download
+
+<span class="comment"># Install as systemd service (starts on login)</span>
+voxtype setup systemd
+
+<span class="comment"># Check status</span>
+systemctl --user status voxtype</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compositors Section -->
+    <section id="compositors" class="compositors">
+        <div class="container">
+            <h2>Works Everywhere</h2>
+            <p class="section-subtitle">Tested on all major Linux desktops. Optimized for Wayland, works on X11 too.</p>
+
+            <div class="compositor-grid">
+                <div class="compositor-card">
+                    <img src="images/gnome.svg" alt="GNOME" class="compositor-logo">
+                    <span>GNOME</span>
+                </div>
+                <div class="compositor-card">
+                    <img src="images/kde.svg" alt="KDE Plasma" class="compositor-logo">
+                    <span>KDE Plasma</span>
+                </div>
+                <div class="compositor-card">
+                    <img src="images/sway.svg" alt="Sway" class="compositor-logo">
+                    <span>Sway</span>
+                </div>
+                <div class="compositor-card">
+                    <img src="images/hyprland.svg" alt="Hyprland" class="compositor-logo">
+                    <span>Hyprland</span>
+                </div>
+                <div class="compositor-card">
+                    <img src="images/river.svg" alt="River" class="compositor-logo">
+                    <span>River</span>
+                </div>
+                <div class="compositor-card">
+                    <img src="images/wayland.svg" alt="Any Wayland" class="compositor-logo">
+                    <span>Any Wayland</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="feedback">
+        <div class="container">
+            <h2>We Want to Hear From You</h2>
+            <p class="section-subtitle">Voxtype is a young project and your feedback helps make it better</p>
+
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <div class="feedback-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <!-- Bug icon -->
+                            <path d="M8 2l1.88 1.88"/>
+                            <path d="M14.12 3.88L16 2"/>
+                            <path d="M9 7.13v-1a3.003 3.003 0 116 0v1"/>
+                            <path d="M12 20c-3.3 0-6-2.7-6-6v-3a6 6 0 0112 0v3c0 3.3-2.7 6-6 6z"/>
+                            <path d="M12 20v-9"/>
+                            <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/>
+                            <path d="M6 13H2"/>
+                            <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/>
+                            <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/>
+                            <path d="M22 13h-4"/>
+                            <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>
+                        </svg>
+                    </div>
+                    <h3>Something Not Working?</h3>
+                    <p>
+                        If Voxtype doesn't install cleanly, doesn't work on your system, or is buggy in any way,
+                        please open an issue. I actively monitor and respond to all reports.
+                    </p>
+                    <a href="https://github.com/peteonrails/voxtype/issues" class="btn btn-secondary">Report an Issue</a>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="feedback-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3>Like Voxtype?</h3>
+                    <p>
+                        A star on GitHub helps others discover the project. A vote on the AUR package
+                        increases the likelihood of inclusion in the Arch extras repository.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="https://github.com/peteonrails/voxtype" class="btn btn-secondary">Star on GitHub</a>
+                        <a href="https://aur.archlinux.org/packages/voxtype" class="btn btn-secondary">Vote on AUR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to try Voxtype?</h2>
+            <p>Start dictating on your Linux desktop today.</p>
+            <div class="cta-buttons">
+                <a href="download/" class="btn btn-primary btn-large">Download</a>
+                <a href="https://github.com/peteonrails/voxtype" class="btn btn-secondary btn-large">View Source</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                        <span>Voxtype</span>
+                    </a>
+                    <p>Push-to-talk voice-to-text for Linux and macOS</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Documentation</h4>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/docs/INSTALL.md">Installation</a>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/docs/USER_MANUAL.md">User Manual</a>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/docs/CONFIGURATION.md">Configuration</a>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/docs/WAYBAR.md">Waybar Integration</a>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/docs/FAQ.md">FAQ</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <a href="https://github.com/peteonrails/voxtype">GitHub</a>
+                        <a href="https://github.com/peteonrails/voxtype/issues">Issues</a>
+                        <a href="https://github.com/peteonrails/voxtype/discussions">Discussions</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="https://github.com/peteonrails/voxtype/blob/main/LICENSE">MIT License</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024, 2025, 2026 Voxtype. Open source under the MIT License.</p>
+                <p>Made by <a href="https://fasteragile.com">Faster Agile</a> and <a href="https://peterjackson.dev">Peter Jackson</a> with contributions from <a href="https://github.com/krystophny">Christopher Albert</a>, <a href="https://github.com/jvantillo">jvantillo</a>, <a href="https://github.com/materemias">materemias</a>, <a href="https://github.com/danheuck">danheuck</a>, <a href="https://github.com/digunix">digunix</a>, <a href="https://github.com/reisset">reisset</a>, <a href="https://github.com/goodroot">Goodroot</a>, <a href="https://github.com/robzolkos">robzolkos</a>, <a href="https://github.com/konnsim">konnsim</a>, <a href="https://github.com/IgorWarzocha">IgorWarzocha</a>, <a href="https://github.com/mzubair481">Zubair</a>, <a href="https://github.com/radiorambo">Umesh</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/demo.js"></script>
+</body>
+</html>

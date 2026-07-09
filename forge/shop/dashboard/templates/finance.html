@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div><h4>Finance</h4><div class="sub">{{ start }} → {{ end }}</div></div>
+  <form method="GET" class="d-flex gap-2 align-items-center">
+    <input type="date" name="start" value="{{ start }}" class="form-ctrl-dark">
+    <span style="color:#5a7a9a">to</span>
+    <input type="date" name="end"   value="{{ end }}"   class="form-ctrl-dark">
+    <button class="btn btn-sm btn-accent">Go</button>
+  </form>
+</div>
+
+<!-- Stat row -->
+<div class="row g-3 mb-3">
+  <div class="col-6 col-md-3">
+    <div class="card-dark stat-card">
+      <div class="val">${{ '%.2f'|format(stmt.gross_revenue) }}</div>
+      <div class="lbl">Revenue</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card-dark stat-card">
+      <div class="val" style="color:#44c866">${{ '%.2f'|format(stmt.gross_profit) }}</div>
+      <div class="lbl">Gross Profit</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card-dark stat-card">
+      <div class="val" style="color:#8888ff">{{ stmt.gross_margin_pct }}%</div>
+      <div class="lbl">Margin</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card-dark stat-card">
+      <div class="val" style="color:#20c0a0">${{ '%.2f'|format(stmt.net_income) }}</div>
+      <div class="lbl">Net Income</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- Income Statement -->
+  <div class="col-md-6">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem">Income Statement</div>
+      {% set rows = [
+        ('Gross Revenue',    stmt.gross_revenue,    '#e8a020'),
+        ('Material COGS',    stmt.material_cogs,    '#d4e4f0'),
+        ('Machine COGS',     stmt.machine_cogs,     '#d4e4f0'),
+        ('Labor COGS',       stmt.labor_cogs,       '#d4e4f0'),
+        ('Design COGS',      stmt.design_cogs,      '#d4e4f0'),
+        ('Total COGS',       stmt.total_cogs,       '#e06060'),
+        ('Gross Profit',     stmt.gross_profit,     '#44c866'),
+        ('Platform Fees',    stmt.platform_fees,    '#d4e4f0'),
+        ('Supply Expense',   stmt.supply_expense,   '#d4e4f0'),
+        ('Net Income',       stmt.net_income,       '#20c0a0'),
+      ] %}
+      {% for label, val, color in rows %}
+      <div style="display:flex;justify-content:space-between;padding:.4rem 0;
+                  border-bottom:1px solid #1a2a3a;font-size:.88rem;
+                  {% if label in ['Total COGS','Gross Profit','Net Income'] %}font-weight:600{% endif %}">
+        <span style="color:#8aacbf">{{ label }}</span>
+        <span style="color:{{ color }}">${{ '%.2f'|format(val) }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Balance Sheet -->
+  <div class="col-md-6">
+    <div class="card-dark">
+      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">
+        Balance Sheet <span style="font-weight:400;color:#5a7a9a">— today</span>
+      </div>
+      <form method="GET" class="d-flex gap-2 mb-3 flex-wrap">
+        <input type="hidden" name="start" value="{{ start }}">
+        <input type="hidden" name="end"   value="{{ end }}">
+        <div>
+          <label style="font-size:.75rem;color:#7a9ab0">Cash on hand ($)</label><br>
+          <input type="number" name="cash" step="0.01" value="{{ bs.cash }}" class="form-ctrl-dark" style="width:120px">
+        </div>
+        <div>
+          <label style="font-size:.75rem;color:#7a9ab0">Filament inventory (g)</label><br>
+          <input type="number" name="inv_g" step="1" value="{{ (bs.inventory_value / 0.022)|int }}" class="form-ctrl-dark" style="width:120px">
+        </div>
+        <div style="align-self:flex-end">
+          <button class="btn btn-sm btn-ghost">Recalculate</button>
+        </div>
+      </form>
+
+      {% set bs_rows = [
+        ('Cash',                bs.cash,                '#d4e4f0'),
+        ('Accounts Receivable', bs.accounts_receivable, '#e8a020'),
+        ('Inventory Value',     bs.inventory_value,     '#d4e4f0'),
+        ('Equipment Value',     bs.equipment_value,     '#d4e4f0'),
+        ('Total Assets',        bs.total_assets,        '#44c866'),
+        ('Accounts Payable',    bs.accounts_payable,    '#d4e4f0'),
+        ('Total Liabilities',   bs.total_liabilities,   '#e06060'),
+        ("Owner's Equity",      bs.owners_equity,       '#8888ff'),
+      ] %}
+      {% for label, val, color in bs_rows %}
+      <div style="display:flex;justify-content:space-between;padding:.4rem 0;
+                  border-bottom:1px solid #1a2a3a;font-size:.88rem;
+                  {% if label in ['Total Assets',"Owner's Equity"] %}font-weight:600{% endif %}">
+        <span style="color:#8aacbf">{{ label }}</span>
+        <span style="color:{{ color }}">${{ '%.2f'|format(val) }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

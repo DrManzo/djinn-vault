@@ -1,0 +1,23 @@
+# Dockerfile for testing voxtype packages on Arch Linux
+#
+# Build: docker build -f Dockerfile.arch -t voxtype-test-arch .
+# Run:   docker run --rm -v ../releases:/packages voxtype-test-arch
+
+FROM archlinux:latest
+
+# Update and install minimal dependencies
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm \
+    alsa-lib \
+    && pacman -Scc --noconfirm
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser
+
+COPY test-install.sh /test-install.sh
+RUN chmod +x /test-install.sh
+
+VOLUME /packages
+
+ENTRYPOINT ["/test-install.sh"]
+CMD ["arch"]

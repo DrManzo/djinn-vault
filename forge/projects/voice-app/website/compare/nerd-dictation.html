@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare Voxtype and Nerd-dictation for Linux speech-to-text. Whisper accuracy vs VOSK hackability.">
+    <title>Voxtype vs Nerd-dictation | Linux Speech-to-Text Comparison</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/compare.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="../download/">Download</a>
+                <a href="./">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="compare-article container">
+        <a href="./" class="back-link">&larr; All Comparisons</a>
+
+        <h1>Voxtype vs Nerd-dictation</h1>
+        <p class="lead">Two approaches to offline speech-to-text on Linux. Both work on Wayland. Which fits your workflow?</p>
+
+        <h2>At a Glance</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Aspect</th>
+                <th>Voxtype</th>
+                <th>Nerd-dictation</th>
+            </tr>
+            <tr>
+                <td>Engine</td>
+                <td>Whisper, Parakeet, Moonshine</td>
+                <td>VOSK</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>Rust</td>
+                <td>Python (single file)</td>
+            </tr>
+            <tr>
+                <td>Architecture</td>
+                <td>Systemd daemon</td>
+                <td><strong>Foreground process</strong></td>
+            </tr>
+            <tr>
+                <td>Wayland</td>
+                <td>Native (evdev)</td>
+                <td>Via ydotool</td>
+            </tr>
+            <tr>
+                <td>Text Output</td>
+                <td>wtype (native Wayland)</td>
+                <td>xdotool/ydotool</td>
+            </tr>
+            <tr>
+                <td>CJK/Unicode Output</td>
+                <td><strong>Yes</strong></td>
+                <td>No (ydotool limitation)</td>
+            </tr>
+            <tr>
+                <td>Recording Feedback</td>
+                <td>Audio + Notifications</td>
+                <td><strong>None</strong></td>
+            </tr>
+            <tr>
+                <td>GPU Acceleration</td>
+                <td>Vulkan, CUDA, Metal, ROCm</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Text Processing</td>
+                <td>Word replacements, spoken punctuation</td>
+                <td>Python callbacks</td>
+            </tr>
+        </table>
+
+        <h2>Critical Differences</h2>
+
+        <h3>CJK/Multilingual Text Output</h3>
+        <p><strong>Voxtype</strong> uses <code>wtype</code> for text output, which properly handles Korean, Chinese, Japanese, and other Unicode characters. No daemon required.</p>
+        <p><strong>Nerd-dictation</strong> uses <code>ydotool</code> which <strong>cannot output CJK characters</strong>. ydotool simulates physical key presses, but CJK characters don't map to keyboard keys. You'll get garbled output like <code> 9 .</code> instead of Korean text.</p>
+
+        <h3>Daemon vs Foreground</h3>
+        <p><strong>Voxtype</strong> runs as a systemd user service. It starts automatically at login, runs invisibly, and is always ready.</p>
+        <p><strong>Nerd-dictation</strong> must run in a <strong>terminal foreground</strong>. You need to keep a terminal window open with the process running. Close the terminal, lose dictation. You can work around this with tmux or custom systemd units, but it's manual setup.</p>
+
+        <h3>Recording Feedback</h3>
+        <p><strong>Voxtype</strong> plays audio cues when recording starts and stops, plus optional desktop notifications. You know it's working without looking at the screen.</p>
+        <p><strong>Nerd-dictation</strong> provides <strong>no feedback whatsoever</strong>. No sound, no visual indicator, nothing. You press the hotkey and hope it's recording. You find out if it worked when text appears (or doesn't).</p>
+
+        <h2>Recognition Quality</h2>
+
+        <h3>Voxtype (Whisper, Parakeet, Moonshine)</h3>
+        <p>Three engines are available. Whisper provides exceptional accuracy across accents and speaking styles. Parakeet offers fast CPU inference with punctuation. Moonshine is the fastest option for short recordings. All handle technical terminology and unusual names well.</p>
+        <p>Typical accuracy: <strong>95-99%</strong> depending on audio quality and model size.</p>
+
+        <h3>Nerd-dictation (VOSK)</h3>
+        <p>VOSK is remarkably lightweight but has lower raw accuracy. Output is all lowercase with no automatic punctuation. Works better with clear, deliberate speech.</p>
+        <p>Typical accuracy: <strong>85-95%</strong> depending on clarity and vocabulary.</p>
+
+        <h2>Setup Complexity</h2>
+
+        <h3>Voxtype</h3>
+        <pre><code># Install
+curl -LO https://github.com/peteonrails/voxtype/releases/download/v0.6.0/voxtype_0.6.0-1_amd64.deb
+sudo dpkg -i voxtype_0.6.0-1_amd64.deb
+
+# Interactive model selection and systemd setup
+voxtype setup model
+voxtype setup systemd</code></pre>
+        <p>Time to first transcription: ~5 minutes</p>
+
+        <h3>Nerd-dictation</h3>
+        <pre><code># Install VOSK
+pip install vosk
+
+# Download model manually
+mkdir -p ~/.config/vosk
+cd ~/.config/vosk
+wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+unzip vosk-model-en-us-0.22.zip
+
+# Clone and run
+git clone https://github.com/ideasman42/nerd-dictation
+./nerd-dictation/nerd-dictation begin --vosk-model-dir ~/.config/vosk/vosk-model-en-us-0.22</code></pre>
+        <p>Time to first transcription: ~15-30 minutes (including troubleshooting)</p>
+
+        <h2>Resource Usage</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Metric</th>
+                <th>Voxtype</th>
+                <th>Nerd-dictation</th>
+            </tr>
+            <tr>
+                <td>Idle</td>
+                <td>~50MB, 0% CPU</td>
+                <td>Not running</td>
+            </tr>
+            <tr>
+                <td>Active</td>
+                <td>High CPU for 1-3s</td>
+                <td>~200MB, moderate CPU</td>
+            </tr>
+            <tr>
+                <td>Model size</td>
+                <td>300MB - 3GB</td>
+                <td>~50MB per language</td>
+            </tr>
+        </table>
+
+        <h2>Customization</h2>
+
+        <h3>Voxtype</h3>
+        <p>Configuration via <code>~/.config/voxtype/config.toml</code>:</p>
+        <pre><code>[hotkey]
+key = "rightctrl"
+mode = "toggle"  # or "push_to_talk"
+
+[audio.feedback]
+enabled = true
+theme = "subtle"
+
+[text]
+# Say "period" to get ".", "open paren" for "(", etc.
+spoken_punctuation = true
+
+# Custom word replacements
+[text.replacements]
+"vox type" = "voxtype"
+"oh marky" = "Omarchy"</code></pre>
+
+        <h3>Nerd-dictation</h3>
+        <p>Python callbacks let you transform text with full programming logic:</p>
+        <pre><code>def process_text(text):
+    # Arbitrary Python transformations
+    text = text.replace("period", ".")
+    text = text.replace("new line", "\n")
+    return text.capitalize()</code></pre>
+
+        <div class="verdict-box">
+            <h3>The Verdict</h3>
+            <p><strong>Choose Voxtype</strong> if you want the best accuracy, GPU acceleration, built-in text processing (spoken punctuation, word replacements), and prefer tools that just work.</p>
+            <p><strong>Choose Nerd-dictation</strong> if you need arbitrary Python transformations, prefer minimal footprint, or enjoy tinkering.</p>
+            <p>Voxtype now includes built-in text processing that covers most common use cases without needing Python code.</p>
+        </div>
+
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://voxtype.io">Voxtype</a></li>
+            <li><a href="https://github.com/ideasman42/nerd-dictation">Nerd-dictation on GitHub</a></li>
+        </ul>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024, 2025, 2026 Voxtype. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

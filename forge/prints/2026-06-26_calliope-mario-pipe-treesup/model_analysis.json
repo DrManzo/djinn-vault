@@ -1,0 +1,16 @@
+{
+  "filename": "calliope-mario-pipe-treesup.gcode",
+  "model_name": "calliope-mario-pipe-treesup",
+  "order_id": "calliope-mario-pipe-treesup",
+  "material": "",
+  "color": "",
+  "started_at": "2026-06-25T23:13:47.187587+00:00",
+  "completed_at": "2026-06-26T00:20:15.700418+00:00",
+  "duration_s": 7378.8,
+  "duration_min": 123.0,
+  "filament_mm": 9387.9,
+  "filament_grams": 28.0,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}

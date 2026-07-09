@@ -1,0 +1,16 @@
+[Unit]
+Description=Djinn Printer Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/djinn/printer-bot.env
+ExecStart=%h/.venvs/djinn-bot/bin/python %h/Obsidian/djinn/printer/telegram/bot.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

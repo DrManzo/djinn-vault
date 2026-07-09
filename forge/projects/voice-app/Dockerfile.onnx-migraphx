@@ -1,0 +1,137 @@
+# Build environment for voxtype ONNX MIGraphX binary
+# MUST be run on a machine with an AMD GPU
+#
+# pyke ort 2.0.0-rc.12 ships no ROCm/MIGraphX prebuilt — only cu12, cu13,
+# wgpu, nvrtx, and CPU-only ("none"). The migraphx feature flag wires the
+# EP into the binary but the runtime .so files (libonnxruntime_providers_*.so)
+# come from a from-source ONNX Runtime build with --use_migraphx.
+#
+# This Dockerfile compiles ONNX Runtime 1.24.2 (matching the version pyke's
+# rc.12 wraps) against AMD's ROCm SDK, then builds voxtype against that local
+# ORT via ORT_LIB_LOCATION. Total build time: 45-60 minutes.
+#
+# Usage:
+#   docker build -f Dockerfile.onnx-migraphx -t voxtype-onnx-migraphx-builder .
+#   docker run --rm -v $(pwd)/releases:/output voxtype-onnx-migraphx-builder
+#
+# The resulting binary requires the bundled libonnxruntime_providers_migraphx.so
+# and *_shared.so installed alongside the binary (handled by scripts/package.sh),
+# plus AMD's ROCm runtime (rocm-libs / rocm-hip-runtime / migraphx) on the host.
+#
+# ROCm 7.2.2 — older 7.0.x bundles a MIGraphX without `fp4x2` shape type,
+# which ORT 1.24.2's MIGraphX provider unconditionally references and
+# fails to compile against.
+FROM rocm/dev-ubuntu-24.04:7.2.2-complete
+
+ARG VERSION=0.7.0
+ARG ORT_VERSION=1.24.2
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV VERSION=${VERSION}
+ENV ROCM_PATH=/opt/rocm
+ENV PATH="/opt/rocm/bin:${PATH}"
+
+# Install build dependencies for both ORT and voxtype.
+# migraphx-dev is required so ORT's CMake find_package(migraphx) succeeds;
+# it's not pulled in by the rocm/dev-ubuntu-24.04 base image even though
+# rocm-hip-sdk and the runtime libs are.
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    clang \
+    cmake \
+    ninja-build \
+    pkg-config \
+    libasound2-dev \
+    libx11-dev \
+    libxi-dev \
+    libxtst-dev \
+    libgtk-3-dev \
+    libglib2.0-dev \
+    libappindicator3-dev \
+    libssl-dev \
+    protobuf-compiler \
+    libprotobuf-dev \
+    git \
+    binutils \
+    python3 \
+    python3-pip \
+    python3-numpy \
+    python3-sympy \
+    python3-flatbuffers \
+    python3-packaging \
+    migraphx-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+WORKDIR /build
+
+# Clone and build ONNX Runtime from source with MIGraphX EP.
+# - --build_shared_lib produces libonnxruntime.so for the EP bridge.
+# - FETCHCONTENT_TRY_FIND_PACKAGE_MODE=NEVER forces ORT to use its bundled
+#   abseil-cpp/re2/protobuf instead of the system versions, which can have
+#   ABI drift across patch releases (the original v0.6 ROCm/CUDA Dockerfiles
+#   relied on pyke prebuilts so this wasn't an issue then).
+RUN git clone --depth 1 --branch v${ORT_VERSION} --recurse-submodules --shallow-submodules \
+        https://github.com/microsoft/onnxruntime.git /build/onnxruntime \
+    && cd /build/onnxruntime \
+    && ./build.sh \
+        --config Release \
+        --use_migraphx \
+        --migraphx_home /opt/rocm \
+        --rocm_home /opt/rocm \
+        --build_shared_lib \
+        --parallel \
+        --skip_tests \
+        --skip_submodule_sync \
+        --allow_running_as_root \
+        --cmake_extra_defines \
+            onnxruntime_BUILD_UNIT_TESTS=OFF \
+            FETCHCONTENT_TRY_FIND_PACKAGE_MODE=NEVER \
+    && ls -la /build/onnxruntime/build/Linux/Release/libonnxruntime_providers_migraphx.so \
+    && ls -la /build/onnxruntime/build/Linux/Release/libonnxruntime_providers_shared.so
+
+ENV ORT_LIB_LOCATION=/build/onnxruntime/build/Linux/Release
+
+# Copy voxtype source and build against the local ORT
+COPY . /build/voxtype
+WORKDIR /build/voxtype
+
+# Disable LTO for faster builds. The single voxtype-onnx-migraphx binary
+# bundles every ONNX engine, but MIGraphX EP registration only happens
+# for Parakeet — every other ONNX engine runs on CPU because MIGraphX 7.2
+# can't compile their graphs (per-engine notes in src/transcribe/*.rs and
+# Cargo.toml). Cohere is held back until an int4/FP16 model variant ships.
+RUN cargo build --release \
+        --features parakeet-migraphx,moonshine,sensevoice,paraformer,dolphin,omnilingual,cohere,ml-diarization \
+        --config 'profile.release.lto=false' \
+        --config 'profile.release.codegen-units=8' \
+    && cp target/release/voxtype /tmp/voxtype-onnx-migraphx
+
+# Copy companion provider .so files. ORT computes the .so search path from
+# argv[0]'s dirname (NOT /proc/self/exe), so package.sh installs the binary
+# and these .so files together under /usr/lib/voxtype/migraphx/.
+RUN mkdir -p /tmp/onnx-migraphx-libs \
+    && cp -L /build/onnxruntime/build/Linux/Release/libonnxruntime_providers_migraphx.so \
+        /tmp/onnx-migraphx-libs/ \
+    && cp -L /build/onnxruntime/build/Linux/Release/libonnxruntime_providers_shared.so \
+        /tmp/onnx-migraphx-libs/
+
+# Verify binary
+RUN echo "=== Verifying ONNX MIGraphX binary ===" \
+    && /tmp/voxtype-onnx-migraphx --version \
+    && echo "=== Binary size ===" \
+    && ls -lh /tmp/voxtype-onnx-migraphx \
+    && echo "=== Companion .so files ===" \
+    && ls -lh /tmp/onnx-migraphx-libs/
+
+# Output stage: copy binary and companion .so files
+CMD mkdir -p /output \
+    && cp /tmp/voxtype-onnx-migraphx /output/voxtype-${VERSION}-linux-x86_64-onnx-migraphx \
+    && cp /tmp/onnx-migraphx-libs/libonnxruntime_providers_migraphx.so /output/voxtype-${VERSION}-linux-x86_64-onnx-migraphx.libonnxruntime_providers_migraphx.so \
+    && cp /tmp/onnx-migraphx-libs/libonnxruntime_providers_shared.so /output/voxtype-${VERSION}-linux-x86_64-onnx-migraphx.libonnxruntime_providers_shared.so \
+    && echo "Output:" \
+    && ls -la /output/voxtype-${VERSION}-linux-x86_64-onnx-migraphx*

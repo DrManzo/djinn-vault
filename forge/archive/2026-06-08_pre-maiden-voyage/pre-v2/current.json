@@ -1,0 +1,15 @@
+{
+  "ts": "2026-06-09T05:02:05.578521+00:00",
+  "state": "complete",
+  "file": "Camood_TTHQ_engraved.stl_PLA_2h50m58s.gcode",
+  "progress": 100.0,
+  "duration_s": 9569.1,
+  "z_mm": 165.06,
+  "speed": 1.0,
+  "t_nozzle": null,
+  "t_bed": 26.5,
+  "t_bed_target": 0.0,
+  "filament_mm": 29813.1,
+  "message": "",
+  "vs_progress": 100.0
+}
