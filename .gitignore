@@ -49,6 +49,10 @@ Thumbs.db
 __pycache__/
 *.pyc
 
+# ── CODEBASES — belong in their own repos, not the vault ─────────────────────
+forge/projects/voice-app/
+forge/projects/lblack/
+
 # ── TEMP / SEARCH ─────────────────────────────────────────────────────────────
 result.json
 search/*.md
