@@ -297,3 +297,21 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** Override `time_lapse_gcode: ""` in `Iris.json` rather than adding G1 X-48 to Klipper soft limits or adding more no-op macros.
 **Why:** The A1 parent's timelapse gcode moves to X=-48.2 (Bambu center-origin shutter position) at every layer change. This cannot be intercepted at the macro level — it's a raw G1 move. Emptying the field at the slicer profile level is the only clean fix.
 **How to apply:** Every custom Klipper machine profile in Bambu Studio that inherits from a Bambu parent must override `time_lapse_gcode: ""`.
+
+## 2026-07-09 — Alexandria mount at /run/media not /mnt
+
+**Decision:** fstab entry for Alexandria SSD at `/run/media/drmanzo/alexandria`, not `/mnt/alexandria`.
+**Why:** When the SSD disconnected abruptly (JBD2 journal error), the stale `/mnt/alexandria` entry left the entire `/mnt/` directory inaccessible (I/O error 5). `/run/media/drmanzo/` is the udisks2 namespace — it's designed for removable media and handles dirty disconnects gracefully.
+**How to apply:** All removable/external drives should mount under `/run/media/drmanzo/` not `/mnt/`. Reserve `/mnt/` for temporary manual mounts only.
+
+## 2026-07-09 — Code lives on Oroborus, not Salomon
+
+**Decision:** All code repos migrated from Salomon to Oroborus (`192.168.1.154:~/code/`). Salomon runs only active services (klipper, Obsidian, Ollama models, Djinn daemons).
+**Why:** Salomon is the orchestration node — it should stay lean. Oroborus has 401GB free, 8-core iMac CPU, 40GB RAM, always-on. Code is better served from there. Matches the original machine topology design.
+**How to apply:** New code projects go to Oroborus first. Clone to Salomon only if active development requires it; delete when done.
+
+## 2026-07-09 — NTFS force via udisks2 mount_options.conf
+
+**Decision:** Configure udisks2 to force-mount dirty NTFS volumes rather than requiring manual sudo mount.
+**Why:** Typhon is Windows — every USB stick ejected from it will be dirty unless explicitly safe-ejected. Requiring sudo every time is friction. udisks2 mount_options.conf is the right layer (user-session context, UID/GID injection, no raw udev rule needed).
+**How to apply:** Config is in `/etc/udisks2/mount_options.conf`. Applies to all NTFS/ntfs3 volumes system-wide.

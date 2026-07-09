@@ -822,3 +822,7 @@ Alexandria SSD renamed (was djinn-archive), stable mount at `/mnt/alexandria`. 5
 Day 130 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-07-09 — Claude**
+Full storage migration complete. djinn-archive SSD renamed Alexandria, mounted stable at /run/media/drmanzo/alexandria. Salomon cleared of ~12GB non-essential data → Alexandria. All code (djinn, forge, ai-tools, sec) migrated to Oroborus:~/code/ via rsync. 59 Marcus exports sorted to _inbox/. Downloads emptied. puffco-710_fixed.3mf scaled to 43.46mm outer (was 38.42mm — no wall around bore). udisks2 NTFS force-mount configured so dirty Windows drives automount without sudo. /mnt stale lock cleared. Iris confirmed ready (Moonraker+Fluidd both up, klippy=ready). Typhon USB mounted at /run/media/drmanzo/typhon-usb. TASK-008 closed. Games not yet moved (interrupted). Full report: [[2026-07-09_alexandria-setup-storage-migration-cleanup]]
