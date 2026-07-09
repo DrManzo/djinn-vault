@@ -825,3 +825,13 @@ Day 128 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 129 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-07-08 — Claude**
+Code migration to Oroborus complete. All repos moved from Salomon to `oroborus:~/code/`:
+- `code/djinn/` — djinn-core, djinn-social, djinn-tools, djinn-paper, djinn-publish, djinns-voice
+- `code/forge/` — voice-app, lblack, forge python pkg
+- `code/ai-tools/` — whisper.cpp, Hunyuan3D-2, djinn-scripts
+- `code/sec/` — BurpSuiteCommunity, sec-env
+
+Alexandria SSD renamed (was djinn-archive), stable mount at `/mnt/alexandria`. 59 Marcus exports in `_inbox/`. Downloads cleared. Salomon now lean: klipper, Obsidian, Applications only.
