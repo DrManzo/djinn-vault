@@ -1726,3 +1726,10 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **TASK-008 closed**: djinn-archive was local on Salomon all along, not Oroborus; marcus structure already created
 - **Iris confirmed ready**: Moonraker 7125 + Fluidd 80 both 200 OK, klippy_state=ready — GUI issue was client-side
 - Full detail: [[2026-07-09_alexandria-setup-storage-migration-cleanup]]
+
+## 2026-07-09 — Printer Fleet Status Check + QUEUE.md Corrections (Claude)
+
+- **Calliope:** unreachable (expected, sidelined pending cable) — no action possible until Javier installs it
+- **Nemesis:** verified via SSH the queued `[probe]` fix (move out of included `printer.base.cfg` into `printer.cfg`) is already in place — SAVE_CONFIG no longer conflicts. Current z_offset (0.071) and bed mesh differ from the 7/5 calibration (-0.401) because Javier physically relocated the machine and recalibrated it himself ~7/8 — confirmed with him, not data loss. QUEUE.md task marked resolved.
+- **Iris:** idle/ready, nothing outstanding except Javier's own pending task to watch the first multi-color tool change
+- **QUEUE.md correction:** the Calliope bring-up checklist (added 2026-07-07) told Javier to (re)install the `fan-cap-calliope.cfg` M106 cap after the new cable goes in. That approach was already tried and reverted as ineffective per the 2026-06-29 BUG-014 root-cause update (cable/routing is the real fix, not fan EMI). Annotated the checklist so Javier doesn't waste time on a dead-end fix. Also flagged an unexpanded `$(date +%Y-%m-%d)` literal in that section's header (checklist was actually written 2026-07-07) and noted the config file's post-7/8-restructure path moved to `forge/config/fan-cap-calliope.cfg`.
