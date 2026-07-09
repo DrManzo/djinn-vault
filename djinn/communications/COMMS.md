@@ -814,3 +814,11 @@ Code migration to Oroborus complete. All repos moved from Salomon to `oroborus:~
 - `code/sec/` — BurpSuiteCommunity, sec-env
 
 Alexandria SSD renamed (was djinn-archive), stable mount at `/mnt/alexandria`. 59 Marcus exports in `_inbox/`. Downloads cleared. Salomon now lean: klipper, Obsidian, Applications only.
+
+---
+
+### 2026-07-09 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 130 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
