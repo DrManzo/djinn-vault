@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-SSD="/mnt/alexandria"
+SSD="/run/media/drmanzo/alexandria"
 VAULT="$HOME/Obsidian"
 MIRROR="$SSD/vault-snapshots/current"
 SNAP_DIR="$SSD/vault-snapshots"
