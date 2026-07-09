@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# djinn-vault-sync — mirror ~/Obsidian to djinn-archive SSD
+# Usage: djinn-vault-sync [--snapshot]
+#   --snapshot  also save a dated copy in vault-snapshots/YYYY-MM-DD/
+
+set -euo pipefail
+
+SSD="/run/media/drmanzo/djinn-archive"
+VAULT="$HOME/Obsidian"
+MIRROR="$SSD/vault-snapshots/current"
+SNAP_DIR="$SSD/vault-snapshots"
+
+if ! mountpoint -q "$SSD"; then
+    echo "ERROR: djinn-archive not mounted at $SSD"
+    exit 1
+fi
+
+echo "Syncing vault → $MIRROR"
+rsync -a --delete "$VAULT/" "$MIRROR/"
+echo "Done. $(du -sh "$MIRROR" | cut -f1) written."
+
+if [[ "${1:-}" == "--snapshot" ]]; then
+    DATE=$(date +%Y-%m-%d)
+    DEST="$SNAP_DIR/$DATE"
+    if [[ -d "$DEST" ]]; then
+        echo "Snapshot $DATE already exists — skipping."
+    else
+        echo "Creating snapshot → $DEST"
+        cp -al "$MIRROR" "$DEST"
+        echo "Snapshot done."
+    fi
+    # Keep last 7 dated snapshots
+    ls -d "$SNAP_DIR"/20*/ 2>/dev/null | sort | head -n -7 | while read -r old; do
+        echo "Pruning old snapshot: $old"
+        rm -rf "$old"
+    done
+fi
