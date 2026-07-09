@@ -1713,3 +1713,16 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Diagnosed M981/M624/M625/G1 X-48.2 injection via gcode diff between working and broken files
 - Fleet status: Iris printing ✓, Nemesis printing ✓, Calliope waiting on cable parts ✓
 - Bug documented: [[2026-07-06_bug-bambu-studio-m981-m624-injection]]
+
+## 2026-07-09 — Alexandria SSD Setup + Full Storage Migration (Claude)
+
+- **djinn-archive SSD renamed → Alexandria** (`e2label`), stable fstab mount at `/run/media/drmanzo/alexandria` by UUID with `nofail`; moved off `/mnt/` to prevent future corruption on disconnect
+- **djinn-vault-sync** script installed to `/usr/local/bin/` — mirrors vault to `alexandria/vault-snapshots/current/`, `--snapshot` flag for dated rollbacks (keeps last 7)
+- **Salomon cleared**: device-backups (7.6GB), Videos (935MB), GoogleDrive_archive (1.1GB), old Backups (1.2GB), forge/slicers (539MB), printer-files (153MB) → Alexandria
+- **59 Marcus exports** sorted from Downloads into `alexandria/marcus/_inbox/` (2026-07-02 batch + 2026-07-08 batch)
+- **Code migrated to Oroborus** (192.168.1.154, 401GB free): djinn-core, djinn-social, djinn-tools, djinn-paper, djinn-publish, djinns-voice → `code/djinn/`; voice-app, lblack, forge → `code/forge/`; whisper.cpp, Hunyuan3D-2, djinn-scripts → `code/ai-tools/`; BurpSuiteCommunity, sec-env → `code/sec/`
+- **puffco-710.3mf fixed**: outer body 38.42mm → 43.46mm (scale 1.1312×), 2.38mm wall around 38.7mm bore; `puffco-710_fixed.3mf` in `~/Downloads/`, original untouched
+- **udisks2 NTFS automount**: `/etc/udisks2/mount_options.conf` — `ntfs3_defaults` includes `force` flag, dirty Windows drives now automount without sudo
+- **TASK-008 closed**: djinn-archive was local on Salomon all along, not Oroborus; marcus structure already created
+- **Iris confirmed ready**: Moonraker 7125 + Fluidd 80 both 200 OK, klippy_state=ready — GUI issue was client-side
+- Full detail: [[2026-07-09_alexandria-setup-storage-migration-cleanup]]
