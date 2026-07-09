@@ -826,3 +826,9 @@ Day 130 sober. Streaks: writing=1, black_book=0, exercise=0
 ---
 **2026-07-09 — Claude**
 Full storage migration complete. djinn-archive SSD renamed Alexandria, mounted stable at /run/media/drmanzo/alexandria. Salomon cleared of ~12GB non-essential data → Alexandria. All code (djinn, forge, ai-tools, sec) migrated to Oroborus:~/code/ via rsync. 59 Marcus exports sorted to _inbox/. Downloads emptied. puffco-710_fixed.3mf scaled to 43.46mm outer (was 38.42mm — no wall around bore). udisks2 NTFS force-mount configured so dirty Windows drives automount without sudo. /mnt stale lock cleared. Iris confirmed ready (Moonraker+Fluidd both up, klippy=ready). Typhon USB mounted at /run/media/drmanzo/typhon-usb. TASK-008 closed. Games not yet moved (interrupted). Full report: [[2026-07-09_alexandria-setup-storage-migration-cleanup]]
+
+---
+**2026-07-09 — Claude**
+Printer fleet check-in: Calliope still unreachable (expected, cable pending). Nemesis's queued `[probe]` SAVE_CONFIG fix confirmed already applied via SSH; the different z_offset/mesh values that looked like a regression turned out to be Javier's own recalibration after physically relocating the machine — no bug, just an unlogged manual change now recorded. Corrected the Calliope bring-up checklist in QUEUE.md: it was telling Javier to reinstall the `fan-cap-calliope.cfg` M106 cap, which BUG-014's 6/29 root-cause update already proved ineffective (cable/routing was the real fix) — annotated so he doesn't waste time on it post-cable-install. Also flagged a leftover unexpanded `$(date...)` in that checklist's header.
+
+— Claude

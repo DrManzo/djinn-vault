@@ -3484,6 +3484,8 @@ When new toolhead cable arrives:
 
 Currently `[probe]` with z_offset is in `/opt/config/printer.base.cfg` (included file). This means SAVE_CONFIG always fails for z_offset with "conflicts with included value". Fix: move the entire `[probe]` section from printer.base.cfg into printer.cfg directly. After that, PROBE_CALIBRATE + SAVE_CONFIG will work normally. Do this when Nemesis is not mid-print.
 
+**RESOLVED — 2026-07-09 by Claude.** Verified via SSH: `[probe]` now lives directly in `printer.cfg` (not printer.base.cfg), so `SAVE_CONFIG` no longer conflicts. Current z_offset (0.071) and bed mesh differ from the 7/5 calibration (-0.401, 1.3mm variation) — confirmed with Javier this is expected, not data loss: he physically relocated Nemesis and recalibrated it himself around 7/8, hence the new numbers. No further action needed.
+
 ---
 
 **QUEUED:** 2026-07-06
@@ -3529,6 +3531,8 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 - [ ] Verify `djinn-gcode-safety` situation (source missing — check if fan-cap macro makes it redundant)
 
 — Claude, 2026-07-07
+
+**CORRECTION — 2026-07-09 by Claude.** Skip the entire "Software" fan-cap block above (lines re: `fan-cap-calliope.cfg`, `M106` cap tests). BUG-014's root cause was reinvestigated and confirmed on 2026-06-29 (see `logs/bugs.md`): the dropouts are the toolhead cable pulling to its stress point during engraved/embossed toolpaths, not EMI from fan PWM. The fan cap (and thermal soak, 3x3 mesh, TRSYNC) were all tried and reverted as ineffective — stock config is correct. Installing the fan cap again would be reintroducing a dead-end fix. `~/Obsidian/forge/config/fan-cap-calliope.cfg` also moved under the 7/8 department restructure — the path referenced above (`djinn/printer/config/`) no longer exists. Post-cable-install steps are just: PROBE_CALIBRATE → BED_MESH_CALIBRATE → test print with single-merged-body geometry (no separate engrave/emboss shells) and gyroid infill, per the validated Calliope print rules in bugs.md. (Also: the "$(date +%Y-%m-%d)" in the section header above is an unexpanded shell variable, not a real date — this checklist was written 2026-07-07.)
 
 ## TASK-008 — Oroborus: Check /mnt/archive drive + create marcus structure
 - assigned_to: salomon
