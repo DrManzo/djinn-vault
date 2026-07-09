@@ -3532,37 +3532,20 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 
 ## TASK-008 — Oroborus: Check /mnt/archive drive + create marcus structure
 - assigned_to: salomon
-- status: pending
+- status: done
 - priority: high
 - trigger: manual
 - created: 2026-07-08 by Claude
-- context: /mnt/archive on Oroborus throwing I/O errors (os error 5). Drive may need fsck or remount. Once healthy, create marcus folder structure.
+- closed: 2026-07-08 by Claude
+- context: RESOLVED — djinn-archive SSD (/dev/sdb1, 1.8TB) is physically connected to Salomon, not Oroborus. Mounted at /run/media/drmanzo/djinn-archive. Marcus structure created directly on Salomon. Oroborus /mnt/archive I/O errors irrelevant — that drive is separate.
 
-**Commands:**
-```bash
-# SSH into Oroborus with sudo-capable session
-ssh drmanzo@192.168.1.154
-
-# Check drive health
-sudo dmesg | grep -i "sda\|error\|I/O" | tail -20
-sudo smartctl -H /dev/sda1
-
-# If remount needed
-sudo umount /mnt/archive && sudo mount /dev/sda1 /mnt/archive
-
-# If fsck needed (unmount first)
-sudo umount /mnt/archive && sudo fsck -y /dev/sda1 && sudo mount /dev/sda1 /mnt/archive
-
-# Once healthy — create marcus structure
-mkdir -p /mnt/archive/marcus/_inbox
-mkdir -p /mnt/archive/marcus/_processed
-mkdir -p /mnt/archive/marcus/_index
-# Javier drops new Marcus exports into _inbox/<YYYY-MM-DD_topic>/
-# Salomon idle agent moves processed ones to _processed/
-# _index/ holds consolidated topic files (future)
-
-echo "structure ready" && ls /mnt/archive/marcus/
-```
+**Resolution:**
+- SSD label: djinn-archive
+- Mount: /run/media/drmanzo/djinn-archive/
+- Marcus structure created: _inbox/ _processed/ _index/
+- README written to drive
+- Vault INDEX.md updated with correct path
+- No Oroborus action needed for marcus
 
 ## TASK-009 — Salomon idle: Marcus research pass-through agent
 - assigned_to: salomon
