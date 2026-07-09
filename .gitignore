@@ -1,67 +1,54 @@
-# Raw exports (large, preserve locally)
+# ── PRIVACY — never commit ────────────────────────────────────────────────────
+personal/
+forge/commissions/
+forge/finance/
+ai/marcus/
+
+# ── RAW IMPORTS — local only ──────────────────────────────────────────────────
 RAW/
 
-# Obsidian cache
+# ── OBSIDIAN CACHE ────────────────────────────────────────────────────────────
 .obsidian/workspace*
 .obsidian/cache/
 .obsidian/plugins/
 .obsidian/themes/
 .obsidian/.obsidian/
 
-# Large archives
+# ── BINARY PRINT FILES — Oroborus only ───────────────────────────────────────
+*.stl
+*.3mf
+*.gcode
+*.gco
+*.step
+*.f3d
+
+# ── ARCHIVES & LARGE FILES ────────────────────────────────────────────────────
+OLD/
 *.zip
 *.tar.gz
 *.tgz
+*.iso
+*.rom
+*.nds
+*.n64
 
-# OS files
+# ── SECRETS ───────────────────────────────────────────────────────────────────
+*.env
+.config/djinn/telegram.env
+.config/djinn/printer-bot.env
+
+# ── OS / EDITOR JUNK ─────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-
-# Temp files
 *.swp
 *.swo
 *~
-
-# Never commit these — large files, system junk, unrelated directories
-OLD/
-Obsidian/
-Obsidian_archive/
-backup-Djinn/
-forge/
-forge_archive/
 .Trash-*/
-*.nds
-*.n64
-*.iso
-*.rom
-RAW/
 
-# Secrets — never commit
-.config/djinn/telegram.env
-.config/djinn/printer-bot.env
-*.env
+# ── PYTHON ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
 
-# Workspace symlink — tracked as symlink, not content
-djinn/workspace
-
-# Printer binary files — never commit STLs/gcodes/3mfs to vault
-djinn/printer/queue/*.gcode
-djinn/printer/queue/*.gco
-djinn/printer/originals/*.stl
-djinn/printer/originals/*.3mf
-djinn/printer/finished-prints/*.gcode
-djinn/printer/finished-prints/*.gco
-djinn/printer/finished-prints/*.stl
-djinn/printer/prints/**/*.stl
-djinn/printer/prints/**/*.3mf
-
-# Large STL files in coin library (>50MB — too large for GitHub)
-djinn/printer/library/typhons-forge-coin/*.stl
-
-# Temp output files
+# ── TEMP / SEARCH ─────────────────────────────────────────────────────────────
 result.json
 search/*.md
-
-__pycache__/
-personal/black-book/
-personal/
