@@ -1,0 +1,15 @@
+[Unit]
+Description=Djinn Discord Watcher — auto-process 3D model attachments
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/drmanzo/Obsidian/djinn/printer/discord/watcher.py
+Restart=on-failure
+RestartSec=15
+Environment=PATH=/home/drmanzo/.local/bin:/usr/local/bin:/usr/bin:/bin
+WorkingDirectory=/home/drmanzo
+
+[Install]
+WantedBy=default.target

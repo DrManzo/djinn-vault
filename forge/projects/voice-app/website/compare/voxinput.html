@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare Voxtype and VoxInput for Linux speech-to-text. Local Whisper vs LocalAI API approach.">
+    <title>Voxtype vs VoxInput | Linux Speech-to-Text Comparison</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/compare.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="../download/">Download</a>
+                <a href="./">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="compare-article container">
+        <a href="./" class="back-link">&larr; All Comparisons</a>
+
+        <h1>Voxtype vs VoxInput</h1>
+        <p class="lead">Different philosophies: embedded Whisper vs API-based transcription. Both target Linux power users.</p>
+
+        <h2>At a Glance</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Aspect</th>
+                <th>Voxtype</th>
+                <th>VoxInput</th>
+            </tr>
+            <tr>
+                <td>Engine</td>
+                <td>Whisper, Parakeet, Moonshine</td>
+                <td>LocalAI/OpenAI API</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>Rust</td>
+                <td>Go</td>
+            </tr>
+            <tr>
+                <td>Architecture</td>
+                <td>Self-contained daemon</td>
+                <td>API client + LocalAI server</td>
+            </tr>
+            <tr>
+                <td>Typing Backend</td>
+                <td>ydotool</td>
+                <td>dotool</td>
+            </tr>
+            <tr>
+                <td>Hotkey Detection</td>
+                <td>Built-in (evdev)</td>
+                <td>External (WM keybinds + signals)</td>
+            </tr>
+            <tr>
+                <td>Voice Activity Detection</td>
+                <td>No (push-to-talk)</td>
+                <td>Yes (realtime mode)</td>
+            </tr>
+            <tr>
+                <td>Setup Complexity</td>
+                <td>Low</td>
+                <td><strong>High (Docker, LocalAI)</strong></td>
+            </tr>
+            <tr>
+                <td>GPU Acceleration</td>
+                <td><strong>Vulkan, CUDA, Metal, ROCm</strong></td>
+                <td>Via LocalAI</td>
+            </tr>
+            <tr>
+                <td>Text Processing</td>
+                <td><strong>Word replacements, spoken punctuation</strong></td>
+                <td>None</td>
+            </tr>
+        </table>
+
+        <h2>Critical Differences</h2>
+
+        <h3>Embedded vs API Architecture</h3>
+        <p><strong>Voxtype</strong> embeds whisper.cpp directly. One binary, one process, no external services needed.</p>
+        <p><strong>VoxInput</strong> is an API client that connects to an <strong>OpenAI-compatible endpoint</strong>. The recommended setup involves running LocalAI in Docker, which provides the transcription service. This is more complex but allows swapping transcription backends.</p>
+
+        <h3>Setup Complexity</h3>
+        <p><strong>Voxtype</strong> setup:</p>
+        <pre><code>paru -S voxtype
+voxtype setup model
+voxtype setup systemd
+systemctl --user enable --now voxtype</code></pre>
+
+        <p><strong>VoxInput</strong> setup:</p>
+        <pre><code># Install LocalAI via Docker
+docker run -d --name localai -p 8080:8080 localai/localai
+
+# Install whisper model via LocalAI web UI
+# Open http://localhost:8080, install whisper-1 and silero-vad-ggml
+
+# Install dotool and configure udev rules
+# Add user to input group
+
+# Build VoxInput
+git clone https://github.com/richiejp/VoxInput
+cd VoxInput && go build -o voxinput
+
+# Configure WM keybinds for record/write commands</code></pre>
+
+        <h3>Voice Activity Detection</h3>
+        <p><strong>Voxtype</strong> uses push-to-talk exclusively. You control when recording happens.</p>
+        <p><strong>VoxInput</strong> offers a <strong>realtime VAD mode</strong> using silero-vad that can automatically detect when you're speaking. This enables hands-free continuous dictation (though the feature is noted as partial/beta).</p>
+
+        <h2>Feature Comparison</h2>
+
+        <h3>What VoxInput Does Better</h3>
+        <ul>
+            <li><strong>VAD mode</strong> - Automatic speech detection for continuous dictation</li>
+            <li><strong>Flexible backend</strong> - Swap between LocalAI, OpenAI, or any compatible API</li>
+            <li><strong>Monitor capture</strong> - Can transcribe system audio output, not just microphone</li>
+            <li><strong>AI button pressing</strong> - Experimental feature to describe UI elements for AI to click</li>
+        </ul>
+
+        <h3>What Voxtype Does Better</h3>
+        <ul>
+            <li><strong>Simple setup</strong> - No Docker, no API server, no manual model installation</li>
+            <li><strong>Self-contained</strong> - Single binary with embedded transcription</li>
+            <li><strong>Lower resource usage</strong> - No separate API server running</li>
+            <li><strong>GPU acceleration</strong> - Vulkan, CUDA, Metal, ROCm for fast transcription</li>
+            <li><strong>Text processing</strong> - Word replacements and spoken punctuation</li>
+            <li><strong>Built-in hotkeys</strong> - No WM configuration required</li>
+            <li><strong>Audio feedback</strong> - Know when you're recording</li>
+            <li><strong>Waybar integration</strong> - Status indicator built-in</li>
+        </ul>
+
+        <div class="verdict-box">
+            <h3>The Verdict</h3>
+            <p><strong>Choose Voxtype</strong> if you want a simple, self-contained tool that works out of the box. No Docker, no API servers, just install and dictate.</p>
+            <p><strong>Choose VoxInput</strong> if you're already running LocalAI infrastructure, want VAD-based continuous dictation, or need the flexibility to swap transcription backends. Be prepared for a more complex setup.</p>
+        </div>
+
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://voxtype.io">Voxtype</a></li>
+            <li><a href="https://github.com/richiejp/VoxInput">VoxInput on GitHub</a></li>
+        </ul>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024, 2025, 2026 Voxtype. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

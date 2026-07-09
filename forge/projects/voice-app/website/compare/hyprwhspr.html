@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare Voxtype and hyprwhspr for Hyprland speech-to-text. Both use Whisper, but different approaches to Wayland integration.">
+    <title>Voxtype vs hyprwhspr | Hyprland Speech-to-Text Comparison</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/compare.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="../download/">Download</a>
+                <a href="./">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="compare-article container">
+        <a href="./" class="back-link">&larr; All Comparisons</a>
+
+        <h1>Voxtype vs hyprwhspr</h1>
+        <p class="lead">Two Whisper-based tools for Hyprland users. Both offer Waybar integration and push-to-talk. Which fits your setup?</p>
+
+        <h2>At a Glance</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Aspect</th>
+                <th>Voxtype</th>
+                <th>hyprwhspr</th>
+            </tr>
+            <tr>
+                <td>Engine</td>
+                <td>Whisper, Parakeet, Moonshine</td>
+                <td>Whisper (pywhispercpp)</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>Rust</td>
+                <td>Python</td>
+            </tr>
+            <tr>
+                <td>Target Distro</td>
+                <td>Any Linux</td>
+                <td><strong>Arch/Omarchy</strong></td>
+            </tr>
+            <tr>
+                <td>Compositors</td>
+                <td>Any Wayland</td>
+                <td><strong>Hyprland-focused</strong></td>
+            </tr>
+            <tr>
+                <td>GPU Acceleration</td>
+                <td>Vulkan, CUDA, Metal, ROCm</td>
+                <td>CUDA, Vulkan</td>
+            </tr>
+            <tr>
+                <td>Waybar Integration</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Systemd Service</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Audio Feedback</td>
+                <td>Yes (customizable themes)</td>
+                <td>Yes (auto matches Omarchy)</td>
+            </tr>
+            <tr>
+                <td>Desktop Notifications</td>
+                <td>Yes (notify-send)</td>
+                <td><strong>Yes, optional</td>
+            </tr>
+            <tr>
+                <td>Word Replacements</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Spoken Punctuation</td>
+                <td>Yes (opt-in)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Interactive Setup</td>
+                <td>Yes (<code>voxtype setup model</code>)</td>
+                <td>Yes (<code>hyprwhspr setup</code>)</td>
+            </tr>
+            <tr>
+                <td>Cloud Fallback</td>
+                <td>No (offline only)</td>
+                <td>Yes (OpenAI, Groq APIs)</td>
+            </tr>
+        </table>
+
+        <h2>What They Share</h2>
+        <p>Both tools have excellent feature parity:</p>
+        <ul>
+            <li><strong>Whisper-powered</strong> - Both use OpenAI's Whisper for high-accuracy transcription</li>
+            <li><strong>Waybar integration</strong> - Status indicators for tiling WM users</li>
+            <li><strong>Systemd user service</strong> - Starts at login, always ready</li>
+            <li><strong>Audio feedback</strong> - Know when recording starts/stops</li>
+            <li><strong>Push-to-talk</strong> - Hold hotkey to record</li>
+            <li><strong>ydotool integration</strong> - Text appears at cursor</li>
+            <li><strong>Word replacements</strong> - Custom text substitutions for misheard words</li>
+            <li><strong>Spoken punctuation</strong> - Say "period" to get ".", "open paren" for "(", etc.</li>
+            <li><strong>Interactive setup</strong> - Guided model selection and download</li>
+        </ul>
+
+        <h2>Critical Differences</h2>
+
+        <h3>Distro & Compositor Support</h3>
+        <p><strong>Voxtype</strong> works on any Linux distribution and any Wayland compositor. It uses evdev for hotkey detection, which is compositor-agnostic.</p>
+        <p><strong>hyprwhspr</strong> is designed specifically for <strong>Arch Linux and Omarchy</strong>. While it may work on other distros, it's optimized for the Hyprland ecosystem and may require extra setup elsewhere.</p>
+
+        <h3>Architecture</h3>
+        <p><strong>Voxtype</strong> is a single Rust binary with no runtime dependencies beyond system libraries. Install once, run forever.</p>
+        <p><strong>hyprwhspr</strong> is a Python application that relies on pywhispercpp and other Python dependencies. It offers more flexibility (cloud API fallbacks, word overrides) but has a larger dependency footprint.</p>
+
+        <h3>GPU Acceleration</h3>
+        <p><strong>Voxtype</strong> supports Vulkan (works on AMD, NVIDIA, Intel), CUDA, Metal, and ROCm via compile-time features.</p>
+        <p><strong>hyprwhspr</strong> supports CUDA and Vulkan.</p>
+
+        <h2>Feature Comparison</h2>
+
+        <h3>What hyprwhspr Does Better</h3>
+        <ul>
+            <li><strong>REST API</strong> - Can use any Cloud APIs when local transcription is too slow</li>
+            <li><strong>Parakeet support</strong> - Alternative to Whisper using NVIDIA's Parakeet-v3 model (requires NeMo)</li>
+        </ul>
+
+        <h3>What Voxtype Does Better</h3>
+        <ul>
+            <li><strong>Any compositor</strong> - Works on GNOME, KDE, Sway, Hyprland, River, and more</li>
+            <li><strong>Any distro</strong> - Packages for Arch, Debian, Fedora, or build from source</li>
+            <li><strong>Single binary</strong> - No Python environment to manage</li>
+        </ul>
+
+        <h2>Setup Comparison</h2>
+
+        <h3>Voxtype on Arch</h3>
+        <pre><code>paru -S voxtype
+voxtype setup model     # Interactive model selection
+voxtype setup systemd   # Install systemd service
+voxtype setup waybar    # Get Waybar config (optional)</code></pre>
+
+        <h3>hyprwhspr on Arch</h3>
+        <pre><code>yay -S hyprwhspr
+hyprwhspr setup
+# Follow interactive prompts</code></pre>
+
+        <div class="verdict-box">
+            <h3>The Verdict</h3>
+            <p><strong>Choose Voxtype</strong> if you want a single binary that works on any Wayland compositor and any Linux distro.</p>
+            <p><strong>Choose hyprwhspr</strong> if you're on Arch/Omarchy with Hyprland and want REST API fallbacks for cloud usage when local transcription is too slow, or if you want to use NVIDIA's Parakeet model or any local model.</p>
+            <p>Both tools now offer excellent feature parity: word replacements, spoken punctuation, interactive setup, Waybar integration, and audio feedback. The main differences are architecture (Rust vs Python) and cloud capabilities.</p>
+        </div>
+
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://voxtype.io">Voxtype</a></li>
+            <li><a href="https://github.com/goodroot/hyprwhspr">hyprwhspr on GitHub</a></li>
+        </ul>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024, 2025, 2026 Voxtype. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

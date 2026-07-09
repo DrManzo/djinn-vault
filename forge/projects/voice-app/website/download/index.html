@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download Voxtype - Push-to-talk voice-to-text for Linux and macOS. Free and open source.">
+    <meta name="keywords" content="voxtype download, voice to text, speech recognition, linux, macos, whisper">
+    <meta name="author" content="Peter Jackson">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Download Voxtype">
+    <meta property="og:description" content="Download Voxtype - Push-to-talk voice-to-text for Linux and macOS. Fully offline speech recognition.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voxtype.io/download/">
+
+    <title>Download Voxtype - Voice-to-Text for Linux and macOS</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <style>
+        .download-hero {
+            padding: 5rem 2rem 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
+        }
+
+        .download-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .version-badge {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.35rem 0.75rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .version-badge.coming-soon-badge {
+            background: #6b7280;
+            color: #fff;
+        }
+
+        .download-section {
+            padding: 2rem 2rem 4rem;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .platform-card {
+            background: #1a1f2e;
+            border: 3px solid #3d4663;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #22d3ee 0%, #a855f7 100%);
+        }
+
+        .platform-card:hover {
+            border-color: #22d3ee;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+
+        .platform-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .platform-card .platform-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+
+        .platform-card .description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .download-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .download-btn.secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .download-btn.disabled {
+            background: var(--bg-dark);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            border: 1px solid var(--border);
+        }
+
+        .download-btn.disabled:hover {
+            transform: none;
+        }
+
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .download-btn .pkg-icon {
+            width: 64px;
+            height: 64px;
+        }
+
+        /* Package manager section */
+        .pkg-manager-section {
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        .pkg-manager-section h2 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .pkg-manager-section .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .pkg-manager-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pkg-manager-card {
+            background: #1a1f2e;
+            border: 2px solid #3d4663;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .pkg-manager-card:hover {
+            border-color: #22d3ee;
+            transition: border-color 0.2s ease;
+        }
+
+        .pkg-manager-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pkg-manager-card .distro-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+
+        .pkg-manager-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .pkg-manager-card .code-block {
+            background: #0d1117;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .pkg-manager-card .code-block code {
+            color: #e6edf3;
+        }
+
+        .pkg-manager-card .code-block .comment {
+            color: #8b949e;
+        }
+
+        .coming-soon {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .requirements {
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        .requirements h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .requirement-card {
+            padding: 1.5rem;
+        }
+
+        .requirement-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .requirement-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .requirement-card li {
+            padding: 0.25rem 0;
+            color: var(--text-muted);
+        }
+
+        .alt-downloads {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .alt-downloads h2 {
+            margin-bottom: 1rem;
+        }
+
+        .alt-downloads p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .alt-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .alt-links a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .alt-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="./">Download</a>
+                <a href="../compare/">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Download Hero -->
+    <section class="download-hero">
+        <h1>Download <span class="highlight">Voxtype</span></h1>
+        <p class="subtitle">
+            Push-to-talk voice-to-text for Linux and macOS.
+            Fully offline and open source.
+        </p>
+    </section>
+
+    <!-- Download Options -->
+    <section class="download-section">
+        <div class="download-grid">
+            <!-- Linux -->
+            <div class="platform-card">
+                <h2>
+                    <!-- Tux penguin icon -->
+                    <svg class="platform-icon" viewBox="0 0 24 24">
+                        <!-- Body -->
+                        <ellipse cx="12" cy="14" rx="7" ry="8" fill="#1a1a1a"/>
+                        <!-- Belly -->
+                        <ellipse cx="12" cy="15" rx="4.5" ry="6" fill="#fff"/>
+                        <!-- Left foot -->
+                        <ellipse cx="8" cy="21.5" rx="2.5" ry="1" fill="#f5a623"/>
+                        <!-- Right foot -->
+                        <ellipse cx="16" cy="21.5" rx="2.5" ry="1" fill="#f5a623"/>
+                        <!-- Head -->
+                        <circle cx="12" cy="6" r="4.5" fill="#1a1a1a"/>
+                        <!-- Left eye white -->
+                        <ellipse cx="10.5" cy="5.5" rx="1.2" ry="1.5" fill="#fff"/>
+                        <!-- Right eye white -->
+                        <ellipse cx="13.5" cy="5.5" rx="1.2" ry="1.5" fill="#fff"/>
+                        <!-- Left pupil -->
+                        <circle cx="10.5" cy="5.5" r="0.6" fill="#1a1a1a"/>
+                        <!-- Right pupil -->
+                        <circle cx="13.5" cy="5.5" r="0.6" fill="#1a1a1a"/>
+                        <!-- Beak -->
+                        <path d="M12 7 L10.5 8.5 L13.5 8.5 Z" fill="#f5a623"/>
+                    </svg>
+                    Linux
+                </h2>
+                <p class="description">For Omarchy, Arch, NixOS, Ubuntu, Debian, Fedora, and more</p>
+                <div class="download-buttons">
+                    <a href="https://github.com/peteonrails/voxtype/releases/download/v0.7.1/voxtype_0.7.1-1_amd64.deb" class="download-btn">
+                        <!-- Package icon with Debian red -->
+                        <svg class="pkg-icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 8l8-4 8 4v8l-8 4-8-4V8z" fill="#A80030"/>
+                            <path d="M4 8l8 4 8-4M12 12v8" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 4l8 4-8 4-8-4 8-4z" fill="#d4264a"/>
+                        </svg>
+                        Download .deb
+                    </a>
+                    <a href="https://github.com/peteonrails/voxtype/releases/download/v0.7.1/voxtype-0.7.1-1.x86_64.rpm" class="download-btn secondary">
+                        <!-- Package icon with Fedora blue -->
+                        <svg class="pkg-icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 8l8-4 8 4v8l-8 4-8-4V8z" fill="#3c6eb4"/>
+                            <path d="M4 8l8 4 8-4M12 12v8" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 4l8 4-8 4-8-4 8-4z" fill="#51A2DA"/>
+                        </svg>
+                        Download .rpm
+                    </a>
+                </div>
+                <span class="version-badge">v0.7.1</span>
+            </div>
+
+            <!-- macOS -->
+            <div class="platform-card">
+                <h2>
+                    <!-- Apple logo with gradient -->
+                    <svg class="platform-icon" viewBox="0 0 24 24">
+                        <defs>
+                            <linearGradient id="appleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#b4b4b4"/>
+                                <stop offset="100%" style="stop-color:#8a8a8a"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#appleGradient)" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    macOS
+                </h2>
+                <p class="description">For macOS 13 Ventura and later (Apple Silicon &amp; Intel). Install via Homebrew tap.</p>
+                <div class="download-buttons">
+                    <a href="#macos-brew" class="download-btn">
+                        <!-- Homebrew terminal icon -->
+                        <svg class="pkg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 17 10 11 4 5"/>
+                            <line x1="12" y1="19" x2="20" y2="19"/>
+                        </svg>
+                        Install via Homebrew
+                    </a>
+                </div>
+                <span class="version-badge">v0.7.1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Package Manager Installation -->
+    <section class="pkg-manager-section">
+        <h2>Use Your Package Manager</h2>
+        <p class="section-subtitle">Install directly from your distribution's package manager</p>
+        <div class="pkg-manager-grid">
+            <!-- Omarchy -->
+            <div class="pkg-manager-card">
+                <h3>
+                    <svg class="distro-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" fill="#e84545"/>
+                        <circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="2.5"/>
+                    </svg>
+                    Omarchy
+                </h3>
+                <p>Our primary development target. One-click install, zero configuration.</p>
+                <div class="code-block">
+                    <code>Install → AI → Dictation</code>
+                </div>
+            </div>
+
+            <!-- Arch Linux -->
+            <div class="pkg-manager-card">
+                <h3>
+                    <svg class="distro-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" fill="#1793d1"/>
+                        <path d="M12 4L6 18h3l3-7 3 7h3L12 4z" fill="#fff"/>
+                    </svg>
+                    Arch Linux
+                </h3>
+                <p>Install from the AUR using paru or yay</p>
+                <div class="code-block">
+                    <code><span class="comment"># Using paru</span><br/>paru -S voxtype<br/><br/><span class="comment"># Using yay</span><br/>yay -S voxtype</code>
+                </div>
+            </div>
+
+            <!-- NixOS -->
+            <div class="pkg-manager-card">
+                <h3>
+                    <svg class="distro-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" fill="#5277c3"/>
+                        <path d="M12 6l-4 3 4 3 4-3-4-3z" fill="#7ebae4"/>
+                        <path d="M8 9v6l4 3v-6l-4-3z" fill="#5277c3" stroke="#7ebae4" stroke-width="0.5"/>
+                        <path d="M16 9v6l-4 3v-6l4-3z" fill="#7ebae4"/>
+                    </svg>
+                    NixOS
+                </h3>
+                <p>Add to your configuration or use nix-shell</p>
+                <div class="code-block">
+                    <code><span class="comment"># In configuration.nix</span><br/>environment.systemPackages = [ pkgs.voxtype ];<br/><br/><span class="comment"># Or try it</span><br/>nix-shell -p voxtype</code>
+                </div>
+            </div>
+
+            <!-- macOS -->
+            <div class="pkg-manager-card" id="macos-brew">
+                <h3>
+                    <svg class="distro-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" fill="#333"/>
+                        <path d="M15.5 8.5c-.8-1-2-1.5-3.2-1.5-1.5 0-2.2.7-3.3.7-1.1 0-2-.7-3.3-.7-.6 0-1.8.2-2.7 1.5-1.2 1.7-1 4.9.9 7.7.7 1 1.6 2.1 2.8 2.1 1.1 0 1.4-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2.1-1.2 2.8-2.2.5-.7.7-1.1 1.1-1.9-2.9-1.1-3.4-5.3-.1-6.7z" fill="#fff"/>
+                        <ellipse cx="12" cy="5" rx="2" ry="2.5" fill="#fff"/>
+                    </svg>
+                    macOS
+                </h3>
+                <p>Install via Homebrew Cask. Apple Silicon and Intel both supported. The cask runs <code>voxtype setup</code> on first launch to download the model and request microphone permissions.</p>
+                <div class="code-block">
+                    <code><span class="comment"># Add the tap</span><br/>brew tap peteonrails/voxtype<br/><br/><span class="comment"># Install</span><br/>brew install --cask voxtype<br/><br/><span class="comment"># Launch the menubar app</span><br/>open -a Voxtype</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="requirements">
+        <h2>System Requirements</h2>
+        <div class="requirements-grid">
+            <div class="requirement-card">
+                <h3>Linux</h3>
+                <ul>
+                    <li>Omarchy</li>
+                    <li>Arch Linux (via AUR)</li>
+                    <li>NixOS</li>
+                    <li>Ubuntu 24.04+ or Debian Trixie+</li>
+                    <li>Fedora 39+</li>
+                    <li>glibc 2.39 or later (Ubuntu 24.04+, Debian Trixie+, Fedora 40+)</li>
+                    <li>PipeWire or PulseAudio</li>
+                    <li>Wayland or X11</li>
+                </ul>
+            </div>
+            <div class="requirement-card">
+                <h3>macOS</h3>
+                <ul>
+                    <li>macOS 13 Ventura or later</li>
+                    <li>Apple Silicon (M1/M2/M3/M4) or Intel</li>
+                    <li>Homebrew package manager</li>
+                    <li>4GB RAM minimum</li>
+                    <li>500MB disk space</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternative Downloads -->
+    <section class="alt-downloads">
+        <h2>Other Options</h2>
+        <p>Looking for other versions or installation methods?</p>
+        <div class="alt-links">
+            <a href="https://github.com/peteonrails/voxtype/releases">All Releases on GitHub</a>
+            <a href="https://aur.archlinux.org/packages/voxtype-bin">Pre-built Binaries (AUR)</a>
+            <a href="https://github.com/peteonrails/voxtype#building-from-source">Build from Source</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="../" class="footer-logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <span>Voxtype</span>
+                </a>
+                <p>Push-to-talk voice-to-text for Linux and macOS</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <a href="https://github.com/peteonrails/voxtype/blob/main/docs/INSTALL.md">Installation</a>
+                    <a href="https://github.com/peteonrails/voxtype/blob/main/docs/USER_MANUAL.md">User Manual</a>
+                    <a href="https://github.com/peteonrails/voxtype/blob/main/docs/CONFIGURATION.md">Configuration</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <a href="https://github.com/peteonrails/voxtype">GitHub</a>
+                    <a href="https://github.com/peteonrails/voxtype/issues">Report Issues</a>
+                    <a href="https://github.com/peteonrails/voxtype/discussions">Discussions</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>MIT License. Made by <a href="https://fasteragile.com">Faster Agile</a> and <a href="https://peterjackson.dev">Peter Jackson</a>.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

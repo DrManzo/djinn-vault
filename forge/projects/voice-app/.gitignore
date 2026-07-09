@@ -1,0 +1,58 @@
+# Build artifacts
+/target
+/dist
+
+# Cached prebuilt downloads (e.g. Microsoft ONNX Runtime for macOS builds)
+/.cache/
+
+# AUR repos (nested git repos)
+/packaging/arch/
+/packaging/arch-bin/
+
+# Vendored dependencies (patched forks)
+/vendor/
+
+# Model files (downloaded at runtime, not committed)
+/models/
+
+# Editor/IDE
+*.swp
+*~
+.DS_Store
+.idea/
+.vscode/
+
+# Audio files (test recordings)
+*.wav
+*.mp3
+# Exception: test fixtures are intentionally committed
+!tests/fixtures/vad/*.wav
+!tests/fixtures/sensevoice/*.wav
+
+# Claude Code
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Packages
+*.deb
+
+# Release binaries (uploaded to GitHub Releases)
+/releases/
+
+# Nix build output symlinks
+/result
+/result-*
+docker/
+
+# Git worktrees
+.worktrees/
+
+# VitePress
+docs/.vitepress/cache
+docs/.vitepress/dist
+node_modules
+website/docs
+
+# Local agent worktrees and ephemeral plans
+.claude/worktrees/
+PLAN-*.md

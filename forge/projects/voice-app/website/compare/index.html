@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Looking for a nerd-dictation alternative for Wayland? Compare Voxtype with nerd-dictation, Speech Note, Blurt, and other Linux speech-to-text tools. Honest feature comparison.">
+    <meta name="keywords" content="nerd-dictation alternative, speech to text linux wayland, wayland voice dictation, whisper linux, offline speech recognition linux, hyprland voice typing, sway dictation">
+    <title>Nerd-Dictation Alternative for Wayland | Linux Speech-to-Text Comparison</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/compare.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="../download/">Download</a>
+                <a href="./" class="active">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="compare-hero">
+        <div class="container">
+            <h1>Linux Speech-to-Text Tools</h1>
+            <p class="hero-subtitle">
+                An honest comparison to help you find the right tool for your setup.
+                We want you to succeed with voice input, even if Voxtype isn't the right fit.
+            </p>
+        </div>
+    </header>
+
+    <!-- Quick Matrix -->
+    <section class="comparison-matrix">
+        <div class="container">
+            <h2>Quick Comparison</h2>
+            <div class="matrix-wrapper">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Engine</th>
+                            <th>Offline</th>
+                            <th>GPU</th>
+                            <th>Wayland</th>
+                            <th>CJK Output</th>
+                            <th>Any Desktop</th>
+                            <th>Setup</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td><strong>Voxtype</strong></td>
+                            <td>Multi</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="check">Vulkan/CUDA</span></td>
+                            <td><span class="check">Native</span></td>
+                            <td><span class="check">Yes (wtype)</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>Vocalinux</td>
+                            <td>Whisper</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="check">Vulkan/CUDA</span></td>
+                            <td><span class="check">Native</span></td>
+                            <td><span class="check">Yes (wtype/ydotool)</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Nerd-dictation</td>
+                            <td>VOSK</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="partial">Via ydotool</span></td>
+                            <td><span class="no">No (ydotool)</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Speech Note</td>
+                            <td>Multi</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="partial">CUDA only</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="check">Yes (clipboard)</span></td>
+                            <td><span class="partial">GUI app</span></td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>Blurt</td>
+                            <td>Whisper</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="check">Yes (clipboard)</span></td>
+                            <td><span class="no">GNOME only</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>WhisperWriter</td>
+                            <td>Whisper</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="partial">CUDA only</span></td>
+                            <td><span class="partial">Partial</span></td>
+                            <td><span class="partial">Varies</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Numen Voice</td>
+                            <td>VOSK</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="partial">Varies</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Hard</td>
+                        </tr>
+                        <tr>
+                            <td>ibus-speech-to-text</td>
+                            <td>VOSK</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="partial">Varies</span></td>
+                            <td><span class="check">Yes (IBus)</span></td>
+                            <td><span class="partial">IBus req.</span></td>
+                            <td>Hard</td>
+                        </tr>
+                        <tr>
+                            <td>hyprwhspr</td>
+                            <td>Whisper</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="check">CUDA</span></td>
+                            <td><span class="check">Native</span></td>
+                            <td><span class="check">Yes (wl-copy)</span></td>
+                            <td><span class="no">Arch/Hyprland</span></td>
+                            <td>Easy</td>
+                        </tr>
+                        <tr>
+                            <td>waystt</td>
+                            <td>Whisper</td>
+                            <td><span class="partial">Optional</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="check">Native</span></td>
+                            <td><span class="partial">Varies</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>VoxInput</td>
+                            <td>LocalAI</td>
+                            <td><span class="partial">Via LocalAI</span></td>
+                            <td><span class="partial">Via LocalAI</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="partial">Varies</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Hard</td>
+                        </tr>
+                        <tr>
+                            <td>VOXD</td>
+                            <td>Whisper</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="no">No (ydotool)</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Speed of Sound</td>
+                            <td>Multi</td>
+                            <td><span class="check">Yes</span></td>
+                            <td><span class="partial">Via local server</span></td>
+                            <td><span class="check">Yes (XDG Desktop Portal)</span></td>
+                            <td><span class="check">Yes (XDG Desktop Portal)</span></td>
+                            <td><span class="check">Yes</span></td>
+                            <td>Easy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="recommendations">
+        <div class="container">
+            <h2>Which Tool Should You Use?</h2>
+            <div class="rec-grid">
+                <div class="rec-card highlight">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Korean, Chinese, Japanese</h3>
+                    <p>Need to dictate in CJK languages?</p>
+                    <p class="rec-answer"><strong>Voxtype on Wayland</strong> - one of the only tools that correctly outputs CJK characters. Uses wtype for native text injection. Most alternatives rely on ydotool which cannot type non-ASCII characters. (Note: CJK output requires Wayland; X11 falls back to ydotool.)</p>
+                </div>
+                <div class="rec-card highlight">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="10" rx="2"/>
+                            <rect x="7" y="7" width="3" height="4"/>
+                            <rect x="14" y="7" width="3" height="4"/>
+                            <line x1="12" y1="3" x2="12" y2="7"/>
+                        </svg>
+                    </div>
+                    <h3>Hyprland / Sway Users</h3>
+                    <p>Want native compositor keybindings?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - use <code>bind</code>/<code>bindr</code> or <code>bindsym --release</code> for push-to-talk. No <code>input</code> group required. Bind any key combo like <code>Super+V</code>.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18"/>
+                        </svg>
+                    </div>
+                    <h3>Any Linux Desktop</h3>
+                    <p>Using GNOME, KDE, or other desktops?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - works on Wayland and X11 with kernel-level hotkey detection. Optimized for Wayland.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>GNOME Users</h3>
+                    <p>Running GNOME?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - works on GNOME Wayland and X11 with the same engine roster (Cohere, Parakeet, Whisper, +4 more). Native GNOME alternatives if you'd prefer Shell-integrated UX: <strong>Blurt</strong> (Shell extension, clipboard-only) or <strong>Speed of Sound</strong> (GTK4/Adwaita app on Flathub/Snapcraft).</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>KDE Plasma Users</h3>
+                    <p>KDE has no built-in STT.</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - works perfectly on KDE Wayland with full features.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                    </div>
+                    <h3>File Transcription</h3>
+                    <p>Need to transcribe recordings?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - <code>voxtype transcribe meeting.wav --engine cohere</code> works on any 16kHz mono WAV. Pick from 7 engines, batch via shell, no GUI needed. Prefer a GUI? <strong>Speech Note</strong> covers the same ground with a desktop app and broader format support.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                    </div>
+                    <h3>Accessibility</h3>
+                    <p>Need hands-free computer control?</p>
+                    <p class="rec-answer"><strong>Numen Voice</strong> - designed for full voice control, not just dictation.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Hackers & Tinkerers</h3>
+                    <p>Want to customize everything?</p>
+                    <p class="rec-answer"><strong>Nerd-dictation</strong> - single Python file with powerful hooks.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        </svg>
+                    </div>
+                    <h3>Cross-Platform</h3>
+                    <p>Use Linux + macOS, or need Windows?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - covers Linux + macOS (Apple Silicon and Intel) with one config, native binaries on each. If you need Windows in the mix, <strong>WhisperWriter</strong> is a Python app that runs on Windows + Linux.</p>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="4" rx="1"/>
+                            <rect x="4" y="9" width="4" height="4" rx="1"/>
+                            <rect x="10" y="9" width="4" height="4" rx="1"/>
+                            <rect x="16" y="9" width="4" height="4" rx="1"/>
+                        </svg>
+                    </div>
+                    <h3>Tiling WM + Waybar</h3>
+                    <p>Want status bar integration?</p>
+                    <p class="rec-answer"><strong>Voxtype</strong> - built-in Waybar module shows recording state. Runs as systemd service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engine Comparison -->
+    <section class="engine-section">
+        <div class="container">
+            <h2>Offline Speech Recognition Engines</h2>
+            <p class="section-subtitle">The main offline speech recognition engines used by Linux dictation tools</p>
+            <div class="engine-grid">
+                <div class="engine-card">
+                    <h3>Whisper (OpenAI)</h3>
+                    <p class="engine-tagline">Maximum accuracy</p>
+                    <ul class="engine-list">
+                        <li><span class="pro">+</span> Superior accuracy (95-99%)</li>
+                        <li><span class="pro">+</span> 99+ languages from one model</li>
+                        <li><span class="pro">+</span> Automatic punctuation & caps</li>
+                        <li><span class="pro">+</span> Handles accents beautifully</li>
+                        <li><span class="con">-</span> Higher CPU usage</li>
+                        <li><span class="con">-</span> Larger models (300MB-6GB)</li>
+                    </ul>
+                    <p class="engine-tools"><strong>Used by:</strong> Voxtype, Blurt, WhisperWriter, Speech Note</p>
+                </div>
+                <div class="engine-card">
+                    <h3>Parakeet (NVIDIA)</h3>
+                    <p class="engine-tagline">Fast CPU inference with punctuation</p>
+                    <ul class="engine-list">
+                        <li><span class="pro">+</span> 30x realtime on CPU (AVX-512)</li>
+                        <li><span class="pro">+</span> Proper punctuation & capitalization</li>
+                        <li><span class="pro">+</span> CUDA/TensorRT acceleration</li>
+                        <li><span class="pro">+</span> ONNX Runtime (portable)</li>
+                        <li><span class="con">-</span> English only</li>
+                        <li><span class="con">-</span> Larger models (670MB+)</li>
+                    </ul>
+                    <p class="engine-tools"><strong>Used by:</strong> Voxtype</p>
+                </div>
+                <div class="engine-card">
+                    <h3>Moonshine (Useful Sensors)</h3>
+                    <p class="engine-tagline">Ultra-fast, tiny models</p>
+                    <ul class="engine-list">
+                        <li><span class="pro">+</span> 200x faster than Whisper on CPU</li>
+                        <li><span class="pro">+</span> Small models (100-237MB)</li>
+                        <li><span class="pro">+</span> Variable-length input (no 30s padding)</li>
+                        <li><span class="pro">+</span> MIT-licensed (English models)</li>
+                        <li><span class="con">-</span> No punctuation or capitalization</li>
+                        <li><span class="con">-</span> Lower accuracy than Whisper/Parakeet</li>
+                    </ul>
+                    <p class="engine-tools"><strong>Used by:</strong> Voxtype</p>
+                </div>
+                <div class="engine-card">
+                    <h3>VOSK (Alpha Cephei)</h3>
+                    <p class="engine-tagline">Lightweight & fast</p>
+                    <ul class="engine-list">
+                        <li><span class="pro">+</span> Very lightweight (~50MB/language)</li>
+                        <li><span class="pro">+</span> Low CPU usage</li>
+                        <li><span class="pro">+</span> Real-time streaming</li>
+                        <li><span class="pro">+</span> Works on Raspberry Pi</li>
+                        <li><span class="con">-</span> Lower accuracy (85-95%)</li>
+                        <li><span class="con">-</span> All lowercase output</li>
+                    </ul>
+                    <p class="engine-tools"><strong>Used by:</strong> Nerd-dictation, Numen, ibus-speech-to-text, Speech Note</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Comparisons -->
+    <section class="detailed-compare">
+        <div class="container">
+            <h2>Detailed Comparisons</h2>
+            <p class="section-subtitle">Deep dives into how Voxtype compares with each alternative</p>
+            <div class="compare-links">
+                <a href="nerd-dictation.html" class="compare-link-card">
+                    <h3>Voxtype vs Nerd-dictation</h3>
+                    <p>Multi-engine accuracy vs VOSK hackability. Daemon vs manual activation.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="blurt.html" class="compare-link-card">
+                    <h3>Voxtype vs Blurt</h3>
+                    <p>Multi-engine vs Whisper-only. Desktop-agnostic vs GNOME-native.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="speech-note.html" class="compare-link-card">
+                    <h3>Voxtype vs Speech Note</h3>
+                    <p>Push-to-talk daemon vs GUI transcription suite.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="numen.html" class="compare-link-card">
+                    <h3>Voxtype vs Numen Voice</h3>
+                    <p>Dictation vs full hands-free computer control.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="whisperwriter.html" class="compare-link-card">
+                    <h3>Voxtype vs WhisperWriter</h3>
+                    <p>Linux-native vs cross-platform Python app.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="vocalinux.html" class="compare-link-card">
+                    <h3>Voxtype vs Vocalinux</h3>
+                    <p>Daemon vs foreground. Both have audio feedback and cursor injection.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="hyprwhspr.html" class="compare-link-card">
+                    <h3>Voxtype vs hyprwhspr</h3>
+                    <p>Multi-engine vs Whisper-only. Universal vs Arch/Hyprland-focused.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="waystt.html" class="compare-link-card">
+                    <h3>Voxtype vs waystt</h3>
+                    <p>Both Rust. Daemon vs signal-driven. Offline vs cloud default.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="voxinput.html" class="compare-link-card">
+                    <h3>Voxtype vs VoxInput</h3>
+                    <p>Multi-engine (local) vs LocalAI API. Simple vs flexible.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="voxd.html" class="compare-link-card">
+                    <h3>Voxtype vs VOXD</h3>
+                    <p>CLI daemon vs multi-UI app. Both use whisper.cpp offline.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+                <a href="speedofsound.html" class="compare-link-card">
+                    <h3>Voxtype vs Speed of Sound</h3>
+                    <p>CLI daemon vs GUI app. Both are offline and multi-engine.</p>
+                    <span class="link-arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Note -->
+    <section class="privacy-note">
+        <div class="container">
+            <div class="privacy-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="privacy-icon">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <div>
+                    <h3>All These Tools Respect Your Privacy</h3>
+                    <p>Every tool compared here supports fully offline operation. Your voice never leaves your computer. No cloud accounts, no subscriptions, no data collection. This is how speech recognition should work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="compare-cta">
+        <div class="container">
+            <h2>Ready to Try Voxtype?</h2>
+            <p>Hold a key. Speak. Release. Your words appear at the cursor.</p>
+            <div class="cta-buttons">
+                <a href="../download/" class="btn btn-primary btn-large">Download Voxtype</a>
+                <a href="https://github.com/peteonrails/voxtype" class="btn btn-secondary btn-large">View Source</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024, 2025, 2026 Voxtype. MIT License.</p>
+                <p>Made with care for the Linux community.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

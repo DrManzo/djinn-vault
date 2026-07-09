@@ -1,0 +1,16 @@
+{
+  "filename": "ORD-012__Mario_Pipe__PLA_unknown.gcode",
+  "model_name": "Mario_Pipe",
+  "order_id": "ORD-012",
+  "material": "PLA",
+  "color": "unknown",
+  "started_at": "2026-06-09T03:30:02.478337+00:00",
+  "completed_at": "2026-06-09T06:17:02.478316+00:00",
+  "duration_s": 10020.0,
+  "duration_min": 167.0,
+  "filament_mm": 20059.72,
+  "filament_grams": 60.0,
+  "outcome": "complete",
+  "max_progress_pct": 100,
+  "max_z_mm": 0
+}

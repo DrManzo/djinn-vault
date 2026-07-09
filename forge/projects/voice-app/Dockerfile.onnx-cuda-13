@@ -1,0 +1,92 @@
+# Build environment for voxtype with ONNX CUDA 13 support
+#
+# Builds voxtype with all ONNX engines + CUDA 13 for NVIDIA GPU acceleration.
+# Pairs with Dockerfile.onnx-cuda-12 for CUDA 12.x systems. At install time,
+# voxtype-onnx-cuda is symlinked to whichever variant matches the host's
+# CUDA runtime (see voxtype setup gpu --enable).
+#
+# Usage:
+#   docker build -f Dockerfile.onnx-cuda-13 -t voxtype-onnx-cuda-13-builder .
+#   docker run --rm -v $(pwd)/releases:/output voxtype-onnx-cuda-13-builder
+#
+# The resulting binary requires:
+#   - NVIDIA GPU with CUDA 13.x runtime
+#   - NVIDIA driver 580 or newer (CUDA 13 minimum)
+#   - libcudart.so.13 and cuDNN 9 at runtime (or via LD_LIBRARY_PATH)
+#   - The bundled libonnxruntime_providers_cuda.so and *_shared.so
+#     installed alongside the binary (handled by scripts/package.sh)
+#
+FROM nvidia/cuda:13.0.3-cudnn-devel-ubuntu24.04
+
+ARG VERSION=0.7.0
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV VERSION=${VERSION}
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    clang \
+    cmake \
+    pkg-config \
+    libasound2-dev \
+    libx11-dev \
+    libxi-dev \
+    libxtst-dev \
+    libgtk-3-dev \
+    libglib2.0-dev \
+    libappindicator3-dev \
+    libssl-dev \
+    protobuf-compiler \
+    libprotobuf-dev \
+    git \
+    binutils \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+WORKDIR /build
+
+# Copy source code
+COPY . .
+
+# ONNX Runtime CUDA 13 settings
+# ort-sys reads ORT_CUDA_VERSION at build time to choose the cu12 or cu13
+# prebuilt. The base image's NV_CUDA_CUDART_VERSION would also yield cu13,
+# but setting ORT_CUDA_VERSION explicitly is unambiguous and survives any
+# upstream changes to NVIDIA's image env vars.
+ENV ORT_STRATEGY=download
+ENV ORT_CUDA_VERSION=13
+
+# Build with all ONNX engines + CUDA 13 support for NVIDIA GPUs
+# Disable LTO for faster builds
+RUN cargo build --release --features parakeet-cuda,moonshine-cuda,sensevoice-cuda,paraformer-cuda,dolphin-cuda,omnilingual-cuda,cohere-cuda,ml-diarization \
+    --config 'profile.release.lto=false' \
+    --config 'profile.release.codegen-units=8' \
+    && cp target/release/voxtype /tmp/voxtype-onnx-cuda-13
+
+# Bundle the CUDA EP companion shared libs (see Dockerfile.onnx-cuda-12 for rationale)
+RUN mkdir -p /tmp/onnx-cuda-13-libs \
+    && find /build/target/release -maxdepth 2 -name 'libonnxruntime_providers_cuda.so' -exec cp -L {} /tmp/onnx-cuda-13-libs/ \; \
+    && find /build/target/release -maxdepth 2 -name 'libonnxruntime_providers_shared.so' -exec cp -L {} /tmp/onnx-cuda-13-libs/ \; \
+    && test -f /tmp/onnx-cuda-13-libs/libonnxruntime_providers_cuda.so \
+    && test -f /tmp/onnx-cuda-13-libs/libonnxruntime_providers_shared.so
+
+# Verify binary
+RUN echo "=== Verifying ONNX CUDA 13 binary ===" \
+    && /tmp/voxtype-onnx-cuda-13 --version \
+    && echo "=== Binary size ===" \
+    && ls -lh /tmp/voxtype-onnx-cuda-13 \
+    && echo "=== Companion .so files ===" \
+    && ls -lh /tmp/onnx-cuda-13-libs/
+
+# Output stage: copy binary and companion .so files
+CMD mkdir -p /output \
+    && cp /tmp/voxtype-onnx-cuda-13 /output/voxtype-${VERSION}-linux-x86_64-onnx-cuda-13 \
+    && cp /tmp/onnx-cuda-13-libs/libonnxruntime_providers_cuda.so /output/voxtype-${VERSION}-linux-x86_64-onnx-cuda-13.libonnxruntime_providers_cuda.so \
+    && cp /tmp/onnx-cuda-13-libs/libonnxruntime_providers_shared.so /output/voxtype-${VERSION}-linux-x86_64-onnx-cuda-13.libonnxruntime_providers_shared.so \
+    && echo "Output:" \
+    && ls -la /output/voxtype-${VERSION}-linux-x86_64-onnx-cuda-13*

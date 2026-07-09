@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div><h4>Customers</h4><div class="sub">{{ customers|length }} total</div></div>
+</div>
+
+<div class="card-dark p-0" style="overflow:hidden">
+<table class="table-dark-custom">
+  <thead>
+    <tr>
+      <th>Name</th><th>Discord</th><th>Channel</th>
+      <th>Orders</th><th>Lifetime</th><th>Outstanding</th><th>Status</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for c in customers %}
+  <tr>
+    <td style="color:#fff;font-weight:500">{{ c.name or '—' }}</td>
+    <td style="color:#5a8aaa;font-size:.82rem">{{ c.discord_id }}</td>
+    <td style="color:#7a9ab0;font-size:.8rem">{{ c.channel or 'discord' }}</td>
+    <td style="color:#d4e4f0">{{ c.total_jobs }}</td>
+    <td style="color:#e8a020;font-weight:600">${{ '%.2f'|format(c.lifetime_revenue) }}</td>
+    <td>
+      {% if c.outstanding_balance > 0 %}
+        <span style="color:#e06060;font-weight:600">${{ '%.2f'|format(c.outstanding_balance) }}</span>
+      {% else %}
+        <span style="color:#5a7a5a">$0.00</span>
+      {% endif %}
+    </td>
+    <td>
+      <span class="badge-status {% if c.status=='active' %}s-paid{% elif c.status=='blocked' %}s-failed{% else %}s-cancelled{% endif %}">
+        {{ c.status or 'active' }}
+      </span>
+    </td>
+    <td><a href="{{ url_for('customer_detail', customer_id=c.customer_id) }}"
+           style="color:#5a9abf;font-size:.8rem;text-decoration:none">View</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="8" style="text-align:center;color:#5a7a9a;padding:2rem">No customers yet</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

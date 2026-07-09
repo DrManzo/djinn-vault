@@ -1,0 +1,23 @@
+# Dockerfile for testing voxtype .deb packages on Ubuntu LTS
+#
+# Build: docker build -f Dockerfile.ubuntu -t voxtype-test-ubuntu .
+# Run:   docker run --rm -v ../releases:/packages voxtype-test-ubuntu
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    libasound2t64 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -s /bin/bash testuser
+
+COPY test-install.sh /test-install.sh
+RUN chmod +x /test-install.sh
+
+VOLUME /packages
+
+ENTRYPOINT ["/test-install.sh"]
+CMD ["debian"]

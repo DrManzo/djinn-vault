@@ -1,0 +1,35 @@
+Source: voxtype
+Section: sound
+Priority: optional
+Maintainer: Peter Jackson <pete@peteonrails.com>
+Build-Depends: debhelper-compat (= 13),
+               cargo,
+               rustc,
+               libclang-dev,
+               libasound2-dev,
+               pkg-config,
+               cmake
+Standards-Version: 4.6.0
+Homepage: https://github.com/peteonrails/voxtype
+Vcs-Git: https://github.com/peteonrails/voxtype.git
+Vcs-Browser: https://github.com/peteonrails/voxtype
+Rules-Requires-Root: no
+
+Package: voxtype
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, curl
+Recommends: wtype, wl-clipboard
+Suggests: ydotool, libnotify-bin, pipewire
+Description: Push-to-talk voice-to-text for Linux
+ Voxtype is a push-to-talk voice-to-text daemon for Linux.
+ Optimized for Wayland, works on X11 too.
+ Hold a hotkey while speaking, release to transcribe and output text at
+ your cursor position.
+ .
+ Features:
+  - Works on any Linux desktop using kernel-level input (evdev)
+  - Fully offline transcription using whisper.cpp
+  - Fallback chain: wtype (Wayland, CJK support), ydotool (X11), clipboard
+  - Configurable hotkeys, models, and output modes
+ .
+ Note: User must be in the 'input' group for hotkey detection.

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare Voxtype and Speech Note for Linux speech-to-text. Push-to-talk daemon vs GUI transcription suite.">
+    <title>Voxtype vs Speech Note | Linux Speech-to-Text Comparison</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/compare.css">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span>Voxtype</span>
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#demo">Demo</a>
+                <a href="../download/">Download</a>
+                <a href="./">Compare</a>
+                <a href="../news/">News</a>
+                <a href="https://github.com/peteonrails/voxtype/tree/main/docs">Docs</a>
+                <a href="https://github.com/peteonrails/voxtype" class="nav-github">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="compare-article container">
+        <a href="./" class="back-link">&larr; All Comparisons</a>
+
+        <h1>Voxtype vs Speech Note</h1>
+        <p class="lead">A daemon vs a GUI app. Push-to-talk dictation vs multi-purpose transcription tool.</p>
+
+        <h2>At a Glance</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Aspect</th>
+                <th>Voxtype</th>
+                <th>Speech Note</th>
+            </tr>
+            <tr>
+                <td>Interface</td>
+                <td>Daemon (CLI)</td>
+                <td>GUI application</td>
+            </tr>
+            <tr>
+                <td>Engines</td>
+                <td>Whisper, Parakeet, Moonshine</td>
+                <td>VOSK, Whisper, Coqui, more</td>
+            </tr>
+            <tr>
+                <td>Cursor Injection</td>
+                <td>Yes (ydotool)</td>
+                <td><strong>No (clipboard only)</strong></td>
+            </tr>
+            <tr>
+                <td>Recording Feedback</td>
+                <td>Audio + Notifications</td>
+                <td>Visual (in-app only)</td>
+            </tr>
+            <tr>
+                <td>GPU Acceleration</td>
+                <td>Vulkan, CUDA, Metal, ROCm</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Text Processing</td>
+                <td>Word replacements, spoken punctuation</td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h2>Critical Differences</h2>
+
+        <h3>Cursor Injection vs Clipboard</h3>
+        <p><strong>Voxtype</strong> types text directly at your cursor. Hold key, speak, release&mdash;text appears where you're working.</p>
+        <p><strong>Speech Note</strong> copies text to clipboard. You must <strong>switch to your target application and paste</strong> every time. For inline dictation while writing, this adds significant friction.</p>
+
+        <h3>Recording Feedback</h3>
+        <p><strong>Voxtype</strong> plays audio cues and sends desktop notifications. Works even when you're not looking.</p>
+        <p><strong>Speech Note</strong> shows recording status in its GUI window only. If minimized or behind other windows, you won't see it.</p>
+
+        <h2>Different Tools for Different Jobs</h2>
+
+        <h3>Voxtype: The Dictation Daemon</h3>
+        <p>Laser-focused on one thing: <strong>hold a key, speak, release, text appears at your cursor</strong>. Always running, always ready.</p>
+
+        <h3>Speech Note: The Transcription Suite</h3>
+        <p>A full-featured application for:</p>
+        <ul>
+            <li>Speech-to-text (multiple engines)</li>
+            <li>Text-to-speech</li>
+            <li>Translation</li>
+            <li>File transcription</li>
+            <li>Note-taking</li>
+        </ul>
+
+        <h2>When to Use Each</h2>
+        <table class="inline-table">
+            <tr>
+                <th>Use Case</th>
+                <th>Best Tool</th>
+            </tr>
+            <tr>
+                <td>Dictating emails while writing</td>
+                <td>Voxtype</td>
+            </tr>
+            <tr>
+                <td>Quick notes in any application</td>
+                <td>Voxtype</td>
+            </tr>
+            <tr>
+                <td>Transcribing audio files</td>
+                <td>Speech Note</td>
+            </tr>
+            <tr>
+                <td>Comparing STT engines</td>
+                <td>Speech Note</td>
+            </tr>
+            <tr>
+                <td>Text-to-speech needs</td>
+                <td>Speech Note</td>
+            </tr>
+            <tr>
+                <td>Translation workflows</td>
+                <td>Speech Note</td>
+            </tr>
+        </table>
+
+        <h2>Engine Options</h2>
+
+        <h3>Voxtype (Whisper, Parakeet, Moonshine)</h3>
+        <p>Three engines are available. Whisper via whisper.cpp for best accuracy, Parakeet via ONNX Runtime for fast CPU inference with punctuation, and Moonshine for ultra-fast CPU transcription with small models. All run offline.</p>
+
+        <h3>Speech Note (Multiple engines)</h3>
+        <ul>
+            <li><strong>VOSK:</strong> Lightweight, fast, lower accuracy</li>
+            <li><strong>Whisper:</strong> High accuracy, resource-intensive</li>
+            <li><strong>Faster Whisper:</strong> GPU-accelerated Whisper</li>
+            <li><strong>Coqui STT:</strong> Open source alternative</li>
+        </ul>
+        <p>Speech Note lets you experiment to find what works best for your voice and hardware.</p>
+
+        <h2>Workflow Comparison</h2>
+
+        <h3>Voxtype Workflow</h3>
+        <pre><code>[Hold Right Ctrl] &rarr; [Speak] &rarr; [Release] &rarr; Text appears at cursor</code></pre>
+        <p>Never leave your application. Never move your hands from keyboard.</p>
+
+        <h3>Speech Note Workflow</h3>
+        <pre><code>[Switch to Speech Note] &rarr; [Click Listen] &rarr; [Speak] &rarr; [Copy] &rarr; [Switch back] &rarr; [Paste]</code></pre>
+        <p>Or use global keyboard shortcuts (requires accessibility settings).</p>
+
+        <h2>Installation</h2>
+
+        <h3>Voxtype</h3>
+        <pre><code>curl -LO https://github.com/peteonrails/voxtype/releases/download/v0.6.0/voxtype_0.6.0-1_amd64.deb
+sudo dpkg -i voxtype_0.6.0-1_amd64.deb
+voxtype setup model
+voxtype setup systemd
+systemctl --user enable --now voxtype</code></pre>
+
+        <h3>Speech Note</h3>
+        <pre><code>flatpak install flathub net.mkiol.SpeechNote
+flatpak run net.mkiol.SpeechNote</code></pre>
+
+        <div class="verdict-box">
+            <h3>The Recommendation</h3>
+            <p><strong>Want inline dictation while you work?</strong> Voxtype</p>
+            <p><strong>Want a GUI for transcription, TTS, and translation?</strong> Speech Note</p>
+            <p><strong>Want both capabilities?</strong> Install both. They complement each other perfectly.</p>
+        </div>
+
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://voxtype.io">Voxtype</a></li>
+            <li><a href="https://github.com/mkiol/dsnote">Speech Note on GitHub</a></li>
+            <li><a href="https://flathub.org/apps/net.mkiol.SpeechNote">Speech Note on Flathub</a></li>
+        </ul>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024, 2025, 2026 Voxtype. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
