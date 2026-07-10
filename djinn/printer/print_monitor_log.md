@@ -1064,3 +1064,17 @@
 | 2026-07-10 16:43 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
 | 2026-07-10 16:44 UTC | printing | 0.0% | 220.1 | 220 | 65.1 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
 | 2026-07-10 16:45 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:46 UTC | printing | 0.0% | 219.4 | 220 | 64.9 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:47 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:48 UTC | printing | 0.0% | 220.1 | 220 | 65.2 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:49 UTC | printing | 0.0% | 219.8 | 220 | 64.8 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:50 UTC | printing | 0.0% | 219.6 | 220 | 65.1 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:51 UTC | printing | 0.0% | 220.1 | 220 | 65.1 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:52 UTC | printing | 0.0% | 220.1 | 220 | 64.9 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:53 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:54 UTC | printing | 0.0% | 219.5 | 220 | 64.9 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:55 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:57 UTC | printing | 0.0% | 220.6 | 220 | 65.1 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:58 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 16:59 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
+| 2026-07-10 17:00 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_2h51m44s.gcode |
