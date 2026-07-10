@@ -840,3 +840,9 @@ Calliope cable install (BUG-014) went in tonight — printer's now at 192.168.1.
 Separately found and fixed `djinn-print-safety` (the watchdog meant to catch exactly this failure mode) has **never actually worked** — wrong Moonraker object/field path meant it silently computed nothing on every poll, ever, including during tonight's crashes. Also fixed its systemd restart policy (`on-failure` → `always`) since it exits clean (code 0) after every completed print and needed manual re-arming each time. Full detail: [[2026-07-09_bug-print-safety-wrong-mcu-query]], [[2026-07-09_bug-calliope-cable-fixed]]
 
 — Claude
+
+---
+**2026-07-10 (early AM) — Claude**
+Full overnight session report: [[2026-07-10_fleet-vault-checkup-print-safety-rebuild]]. Fixed `djinn-model-mark` (broken by the storage migration, plus a pre-existing `.3mf` input crash). Found and repaired an Alexandria SSD filesystem corruption mid-session (physical USB re-enumeration, `e2fsck` clean recovery, no data loss). Generalized `djinn-print-safety` from Calliope-only to the full fleet (templated systemd unit, per-printer env files) and added auto-generated completion reports with a restart-safe dedup guard. Calliope's cable fix ran clean through 1x/2x/3x/4x-copy PLA plates; the real PETG stress test is still pending. Camood's original TTHQ text engraving is confirmed gone — only mark-only variants survive. All three printers ended the session actively printing and watched by a working safety system for the first time.
+
+— Claude
