@@ -204,3 +204,13 @@ Cable reseat performed by Javier — good slack restored. Camood (simple solid, 
 - **Root cause:** A1 profile's timelapse uses center-origin coordinates. Iris is corner-origin 0–215mm. Inherited without override.
 - **Fix:** `"time_lapse_gcode": ""` in `Iris.json`. Pattern: any Bambu Studio profile inheriting from a Bambu parent must override this field.
 - **Status:** Fixed
+
+## BUG-014 CLOSED — 2026-07-09 (cable replaced, confirmed fixed)
+
+Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back online — now at **192.168.1.113** (IP changed from .114, likely freed up by the Typhon Windows conversion). First post-install Benchy showed a squished bottom + merged fine details (nozzle sitting too close to the bed) — fixed live via `SET_GCODE_OFFSET Z_ADJUST=0.05 MOVE=0` over the Moonraker API. Javier confirmed the next print came out better.
+
+**Final root cause (confirmed):** broken wire inside the nozzle_mcu toolhead cable harness, as diagnosed 2026-06-29. Cable replacement was the correct and sufficient fix — no software workaround was ever needed.
+
+**Note:** the +0.05 Z_ADJUST is a runtime-only offset (resets on Klipper restart). Worth baking in permanently if it holds up over more prints.
+
+| 2026-07-09 | Claude | Calliope / nozzle_mcu cable | high | **fixed** | Cable replaced by Javier, Calliope back online at .113, Z offset live-tuned (+0.05) to fix post-install squish, confirmed better on next print. | [[2026-07-09_bug-calliope-cable-fixed]] |
