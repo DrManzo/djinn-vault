@@ -129,3 +129,63 @@
 | 2026-07-10 00:57 UTC | complete | 0.0% | 32.4 | 0 | 30.8 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
 | 2026-07-10 00:58 UTC | complete | 0.0% | 32.3 | 0 | 30.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
 | 2026-07-10 00:59 UTC | complete | 0.0% | 32.3 | 0 | 30.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:00 UTC | complete | 0.0% | 32.2 | 0 | 30.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:01 UTC | complete | 0.0% | 32.2 | 0 | 30.5 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:02 UTC | complete | 0.0% | 32.1 | 0 | 30.4 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:03 UTC | complete | 0.0% | 32.0 | 0 | 30.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:04 UTC | complete | 0.0% | 32.0 | 0 | 30.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:05 UTC | complete | 0.0% | 31.9 | 0 | 30.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:06 UTC | complete | 0.0% | 31.9 | 0 | 30.1 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:07 UTC | complete | 0.0% | 31.8 | 0 | 30.1 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:08 UTC | complete | 0.0% | 31.8 | 0 | 30.1 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:09 UTC | complete | 0.0% | 31.8 | 0 | 30.0 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:10 UTC | complete | 0.0% | 31.7 | 0 | 30.0 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:11 UTC | complete | 0.0% | 31.7 | 0 | 29.9 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:12 UTC | complete | 0.0% | 31.6 | 0 | 29.9 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:13 UTC | complete | 0.0% | 31.6 | 0 | 29.8 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:14 UTC | complete | 0.0% | 31.5 | 0 | 29.8 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:15 UTC | complete | 0.0% | 31.5 | 0 | 29.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:16 UTC | complete | 0.0% | 31.5 | 0 | 29.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:17 UTC | complete | 0.0% | 31.4 | 0 | 29.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:18 UTC | complete | 0.0% | 31.4 | 0 | 29.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:19 UTC | complete | 0.0% | 31.4 | 0 | 29.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:20 UTC | complete | 0.0% | 31.4 | 0 | 29.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:21 UTC | complete | 0.0% | 31.3 | 0 | 29.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:22 UTC | complete | 0.0% | 31.3 | 0 | 29.6 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:23 UTC | complete | 0.0% | 31.3 | 0 | 29.5 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:24 UTC | complete | 0.0% | 31.2 | 0 | 29.5 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:25 UTC | complete | 0.0% | 31.2 | 0 | 29.5 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:26 UTC | complete | 0.0% | 31.2 | 0 | 29.4 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:27 UTC | complete | 0.0% | 31.1 | 0 | 29.4 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:28 UTC | complete | 0.0% | 31.1 | 0 | 29.4 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:29 UTC | complete | 0.0% | 31.1 | 0 | 29.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:30 UTC | complete | 0.0% | 31.1 | 0 | 29.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:31 UTC | complete | 0.0% | 31.1 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:32 UTC | complete | 0.0% | 31.0 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:33 UTC | complete | 0.0% | 31.0 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:35 UTC | complete | 0.0% | 31.0 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:36 UTC | complete | 0.0% | 30.9 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:37 UTC | complete | 0.0% | 30.9 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:38 UTC | complete | 0.0% | 30.9 | 0 | 29.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:39 UTC | complete | 0.0% | 30.9 | 0 | 29.1 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:40 UTC | complete | 0.0% | 30.8 | 0 | 29.1 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:41 UTC | complete | 0.0% | 196.9 | 200 | 36.5 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:42 UTC | complete | 0.0% | 186.0 | 160 | 46.2 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:43 UTC | complete | 0.0% | 159.9 | 160 | 55.0 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:44 UTC | complete | 0.0% | 159.7 | 160 | 63.0 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:45 UTC | complete | 0.0% | 159.5 | 160 | 69.0 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:46 UTC | complete | 0.0% | 160.5 | 160 | 70.9 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:47 UTC | complete | 0.0% | 159.6 | 160 | 70.9 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:48 UTC | complete | 0.0% | 159.5 | 160 | 70.5 | 70 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-10 01:49 UTC | printing | 0.0% | 201.4 | 250 | 70.2 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:50 UTC | printing | 0.0% | 249.6 | 250 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:51 UTC | printing | 0.0% | 250.0 | 250 | 70.1 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:52 UTC | printing | 0.0% | 250.9 | 250 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:53 UTC | printing | 0.0% | 250.2 | 250 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:54 UTC | printing | 0.0% | 249.2 | 250 | 70.4 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:55 UTC | printing | 0.0% | 249.7 | 250 | 69.7 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:56 UTC | printing | 0.0% | 250.1 | 250 | 69.8 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:57 UTC | printing | 0.0% | 251.0 | 250 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:58 UTC | printing | 0.0% | 250.1 | 250 | 70.1 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 01:59 UTC | printing | 0.0% | 249.4 | 250 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:00 UTC | printing | 0.0% | 239.8 | 240 | 70.0 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |

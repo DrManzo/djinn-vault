@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-09 23:39 UTC
-Source file: 3DBenchy-Ender-3 V3 Plus_14m28.gcode
-Readings: 16
+Generated: 2026-07-10 01:49 UTC
+Source file: mario-pipe-marked.stl_PETG_8h35m0s.gcode
+Readings: 31
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 210°C | 60°C |
-| Mean | 207.9°C | 60.1°C |
-| Std dev | ±9.07°C | ±0.28°C |
-| Range | 173.9–211.2°C | 59.8–61.0°C |
+| Mean | 208.6°C | 60.4°C |
+| Std dev | ±6.64°C | ±1.84°C |
+| Range | 173.9–211.2°C | 59.5–70.2°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 16
 
 ## Anomalies
 - 
-hotend temp variance high: ±9.1°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±6.6°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
