@@ -832,3 +832,11 @@ Full storage migration complete. djinn-archive SSD renamed Alexandria, mounted s
 Printer fleet check-in: Calliope still unreachable (expected, cable pending). Nemesis's queued `[probe]` SAVE_CONFIG fix confirmed already applied via SSH; the different z_offset/mesh values that looked like a regression turned out to be Javier's own recalibration after physically relocating the machine — no bug, just an unlogged manual change now recorded. Corrected the Calliope bring-up checklist in QUEUE.md: it was telling Javier to reinstall the `fan-cap-calliope.cfg` M106 cap, which BUG-014's 6/29 root-cause update already proved ineffective (cable/routing was the real fix) — annotated so he doesn't waste time on it post-cable-install. Also flagged a leftover unexpanded `$(date...)` in that checklist's header.
 
 — Claude
+
+---
+**2026-07-09 (late) — Claude**
+Calliope cable install (BUG-014) went in tonight — printer's now at 192.168.1.113, not .114 (inherited Typhon's freed lease). First production PETG batch crashed twice more with the identical `key561`/nozzle_mcu signature even after a connector reseat + zip-tie. Root cause of the *repeat* crashes: the crashing gcode was sliced PETG (240–250°C) but PLA was physically loaded — sustained excess heat next to the connector board is a plausible way to push a marginal connection past a thermal threshold, independent of whether the new cable itself is sound. Re-sliced correctly as PLA: 1x, 2x, and 3x-copy plates all completed clean, zero comms errors. Real test of the physical fix is still an actual PETG run at correct temps — unconfirmed either way yet.
+
+Separately found and fixed `djinn-print-safety` (the watchdog meant to catch exactly this failure mode) has **never actually worked** — wrong Moonraker object/field path meant it silently computed nothing on every poll, ever, including during tonight's crashes. Also fixed its systemd restart policy (`on-failure` → `always`) since it exits clean (code 0) after every completed print and needed manual re-arming each time. Full detail: [[2026-07-09_bug-print-safety-wrong-mcu-query]], [[2026-07-09_bug-calliope-cable-fixed]]
+
+— Claude
