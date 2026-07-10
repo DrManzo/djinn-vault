@@ -203,3 +203,48 @@
 | 2026-07-10 02:12 UTC | standby | 0.0% | 134.8 | 0 | 63.1 | 0 | 0% | 0 |  |
 | 2026-07-10 02:13 UTC | standby | 0.0% | 111.4 | 0 | 60.9 | 0 | 0% | 0 |  |
 | 2026-07-10 02:14 UTC | standby | 0.0% | 93.7 | 0 | 58.8 | 0 | 0% | 0 |  |
+| 2026-07-10 02:15 UTC | printing | 0.0% | 128.6 | 240 | 57.5 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:16 UTC | printing | 0.0% | 240.4 | 240 | 64.1 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:17 UTC | printing | 0.0% | 240.2 | 240 | 69.1 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:18 UTC | standby | 0.0% | 194.8 | 0 | 68.8 | 0 | 0% | 0 |  |
+| 2026-07-10 02:19 UTC | standby | 0.0% | 156.1 | 0 | 66.0 | 0 | 0% | 0 |  |
+| 2026-07-10 02:20 UTC | standby | 0.0% | 126.6 | 0 | 61.2 | 0 | 0% | 0 |  |
+| 2026-07-10 02:21 UTC | standby | 0.0% | 105.0 | 0 | 58.9 | 0 | 0% | 0 |  |
+| 2026-07-10 02:22 UTC | standby | 0.0% | 88.6 | 0 | 57.0 | 0 | 0% | 0 |  |
+| 2026-07-10 02:23 UTC | standby | 0.0% | 76.1 | 0 | 55.1 | 0 | 0% | 0 |  |
+| 2026-07-10 02:24 UTC | standby | 0.0% | 66.5 | 0 | 53.5 | 0 | 0% | 0 |  |
+| 2026-07-10 02:25 UTC | standby | 0.0% | 59.3 | 0 | 51.9 | 0 | 0% | 0 |  |
+| 2026-07-10 02:26 UTC | standby | 0.0% | 53.7 | 0 | 50.4 | 0 | 0% | 0 |  |
+| 2026-07-10 02:27 UTC | standby | 0.0% | 49.5 | 0 | 49.1 | 0 | 0% | 0 |  |
+| 2026-07-10 02:28 UTC | standby | 0.0% | 46.9 | 0 | 47.9 | 0 | 0% | 0 |  |
+| 2026-07-10 02:29 UTC | standby | 0.0% | 45.2 | 0 | 46.9 | 0 | 0% | 0 |  |
+| 2026-07-10 02:30 UTC | standby | 0.0% | 43.9 | 0 | 45.8 | 0 | 0% | 0 |  |
+| 2026-07-10 02:31 UTC | standby | 0.0% | 42.7 | 0 | 44.9 | 0 | 0% | 0 |  |
+| 2026-07-10 02:32 UTC | standby | 0.0% | 41.8 | 0 | 44.0 | 0 | 0% | 0 |  |
+| 2026-07-10 02:33 UTC | standby | 0.0% | 41.1 | 0 | 43.1 | 0 | 0% | 0 |  |
+| 2026-07-10 02:34 UTC | standby | 0.0% | 40.4 | 0 | 42.4 | 0 | 0% | 0 |  |
+| 2026-07-10 02:35 UTC | standby | 0.0% | 39.8 | 0 | 41.7 | 0 | 0% | 0 |  |
+| 2026-07-10 02:36 UTC | standby | 0.0% | 39.3 | 0 | 41.0 | 0 | 0% | 0 |  |
+| 2026-07-10 02:37 UTC | standby | 0.0% | 38.8 | 0 | 40.3 | 0 | 0% | 0 |  |
+| 2026-07-10 02:38 UTC | standby | 0.0% | 38.3 | 0 | 39.7 | 0 | 0% | 0 |  |
+| 2026-07-10 02:39 UTC | standby | 0.0% | 37.9 | 0 | 39.2 | 0 | 0% | 0 |  |
+| 2026-07-10 02:40 UTC | standby | 0.0% | 179.9 | 200 | 44.6 | 70 | 0% | 0 |  |
+| 2026-07-10 02:41 UTC | standby | 0.0% | 194.9 | 160 | 53.4 | 70 | 0% | 0 |  |
+| 2026-07-10 02:42 UTC | standby | 0.0% | 160.0 | 160 | 61.3 | 70 | 0% | 0 |  |
+| 2026-07-10 02:43 UTC | standby | 0.0% | 160.4 | 160 | 67.8 | 70 | 0% | 0 |  |
+| 2026-07-10 02:44 UTC | printing | 0.0% | 160.7 | 250 | 70.4 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:45 UTC | printing | 0.0% | 249.9 | 250 | 70.8 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:46 UTC | printing | 0.0% | 250.9 | 250 | 70.6 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:47 UTC | printing | 0.0% | 249.8 | 250 | 70.2 | 70 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:48 UTC | cancelled | 0.0% | 240.4 | 0 | 69.7 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:49 UTC | cancelled | 0.0% | 240.4 | 0 | 67.0 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:50 UTC | cancelled | 0.0% | 240.4 | 0 | 64.3 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:51 UTC | cancelled | 0.0% | 240.4 | 0 | 61.9 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:52 UTC | cancelled | 0.0% | 240.4 | 0 | 59.6 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:53 UTC | cancelled | 0.0% | 240.4 | 0 | 57.5 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:54 UTC | cancelled | 0.0% | 240.4 | 0 | 55.6 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:55 UTC | cancelled | 0.0% | 240.4 | 0 | 53.8 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:56 UTC | cancelled | 0.0% | 240.4 | 0 | 52.2 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:57 UTC | cancelled | 0.0% | 240.4 | 0 | 50.7 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:58 UTC | cancelled | 0.0% | 240.4 | 0 | 49.4 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
+| 2026-07-10 02:59 UTC | cancelled | 0.0% | 240.4 | 0 | 48.1 | 0 | 0% | 0 | mario-pipe-marked.stl_PETG_8h35m0s.gcode |
