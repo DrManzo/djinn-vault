@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-09 23:17 UTC
+Generated: 2026-07-09 23:39 UTC
 Source file: 3DBenchy-Ender-3 V3 Plus_14m28.gcode
-Readings: 10
+Readings: 16
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 210°C | 60°C |
-| Mean | 206.4°C | 60.2°C |
-| Std dev | ±11.42°C | ±0.35°C |
-| Range | 173.9–210.6°C | 59.8–61.0°C |
+| Mean | 207.9°C | 60.1°C |
+| Std dev | ±9.07°C | ±0.28°C |
+| Range | 173.9–211.2°C | 59.8–61.0°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 10
 
 ## Anomalies
 - 
-hotend temp variance high: ±11.4°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±9.1°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
