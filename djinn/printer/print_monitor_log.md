@@ -35,3 +35,38 @@
 | 2026-07-09 23:22 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
 | 2026-07-09 23:23 UTC | complete | 0.0% | 187.1 | 0 | 59.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
 | 2026-07-09 23:24 UTC | complete | 0.0% | 137.2 | 0 | 58.4 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:25 UTC | complete | 0.0% | 104.7 | 0 | 56.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:26 UTC | standby | 0.0% | 82.6 | 0 | 55.0 | 0 | 0% | 0 |  |
+| 2026-07-09 23:27 UTC | standby | 0.0% | 67.5 | 0 | 53.5 | 0 | 0% | 0 |  |
+| 2026-07-09 23:28 UTC | standby | 0.0% | 57.1 | 0 | 52.1 | 0 | 0% | 0 |  |
+| 2026-07-09 23:29 UTC | standby | 0.0% | 49.9 | 0 | 50.8 | 0 | 0% | 0 |  |
+| 2026-07-09 23:30 UTC | standby | 0.0% | 45.1 | 0 | 49.6 | 0 | 0% | 0 |  |
+| 2026-07-09 23:31 UTC | standby | 0.0% | 42.0 | 0 | 48.5 | 0 | 0% | 0 |  |
+| 2026-07-09 23:32 UTC | standby | 0.0% | 121.8 | 160 | 51.4 | 60 | 0% | 0 |  |
+| 2026-07-09 23:33 UTC | standby | 0.0% | 174.3 | 120 | 58.5 | 60 | 0% | 0 |  |
+| 2026-07-09 23:34 UTC | standby | 0.0% | 119.3 | 120 | 61.0 | 60 | 0% | 0 |  |
+| 2026-07-09 23:35 UTC | standby | 0.0% | 120.0 | 120 | 61.2 | 60 | 0% | 0 |  |
+| 2026-07-09 23:36 UTC | standby | 0.0% | 120.8 | 120 | 60.7 | 60 | 0% | 0 |  |
+| 2026-07-09 23:37 UTC | standby | 0.0% | 119.5 | 120 | 60.2 | 60 | 0% | 0 |  |
+| 2026-07-09 23:38 UTC | standby | 0.0% | 120.2 | 120 | 60.0 | 60 | 0% | 0 |  |
+| 2026-07-09 23:39 UTC | printing | 0.0% | 211.2 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:40 UTC | printing | 0.0% | 210.5 | 210 | 59.5 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:41 UTC | printing | 0.0% | 210.2 | 210 | 59.6 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:42 UTC | printing | 0.0% | 209.5 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:43 UTC | printing | 0.0% | 210.0 | 210 | 60.1 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:44 UTC | printing | 0.0% | 210.1 | 210 | 60.1 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:45 UTC | printing | 0.0% | 209.7 | 210 | 60.1 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:46 UTC | printing | 0.0% | 210.5 | 210 | 60.1 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:47 UTC | printing | 0.0% | 210.1 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:48 UTC | printing | 0.0% | 209.6 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:49 UTC | printing | 0.0% | 210.5 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:50 UTC | printing | 0.0% | 210.0 | 210 | 60.1 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:51 UTC | printing | 0.0% | 209.8 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:52 UTC | printing | 0.0% | 209.9 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:53 UTC | printing | 0.0% | 209.6 | 210 | 60.0 | 60 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:54 UTC | complete | 0.0% | 166.8 | 0 | 59.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:55 UTC | complete | 0.0% | 124.0 | 0 | 57.8 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:56 UTC | complete | 0.0% | 95.6 | 0 | 56.0 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:57 UTC | complete | 0.0% | 76.0 | 0 | 54.3 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:58 UTC | complete | 0.0% | 62.6 | 0 | 52.7 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
+| 2026-07-09 23:59 UTC | complete | 0.0% | 53.5 | 0 | 51.2 | 0 | 0% | 0 | 3DBenchy-Ender-3 V3 Plus_14m28.gcode |
