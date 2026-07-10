@@ -214,3 +214,11 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 **Note:** the +0.05 Z_ADJUST is a runtime-only offset (resets on Klipper restart). Worth baking in permanently if it holds up over more prints.
 
 | 2026-07-09 | Claude | Calliope / nozzle_mcu cable | high | **fixed** | Cable replaced by Javier, Calliope back online at .113, Z offset live-tuned (+0.05) to fix post-install squish, confirmed better on next print. | [[2026-07-09_bug-calliope-cable-fixed]] |
+
+## 2026-07-09 — djinn-model-mark Broken by Storage Migration
+
+- **[MEDIUM]** `~/.config/forge/makers-mark.json` pointed at `/home/drmanzo/printer-files/library/originals/logos/tf_anvil_traced_15mm.stl` — that whole `printer-files` tree was moved off Salomon to Alexandria during the 2026-07-09 storage migration, breaking every future `djinn-model-mark` call with "mark STL not found."
+- **[LOW, separate issue]** Even after repointing to the migrated path, `tf_anvil_traced_15mm.stl` itself fails to load (`trimesh` returns an empty Scene, `bounds=None`) — the binary STL data looks corrupted/misaligned (no clean 80-byte header). The sibling `tf_anvil_traced_20mm.stl` in the same folder loads fine.
+- **Fix:** repointed `makers-mark.json` `path` to `/run/media/drmanzo/alexandria/printer-files/library/originals/logos/tf_anvil_traced_20mm.stl`. Since `djinn-model-mark` always rescales the external mark mesh to `size_mm` (15mm default), using the 20mm source produces an identical result to what the 15mm file would have if it weren't corrupted.
+- **Also fixed:** `djinn-model-mark` called `trimesh.load(args.stl, process=True)` with no `force='mesh'` — given a `.3mf` (or any multi-object container) it returned a `Scene`, and later boolean/repair steps (`trimesh.repair.fix_normals`) crashed with `AttributeError: 'Scene' object has no attribute 'is_winding_consistent'`. Patched `~/.local/bin/djinn-model-mark` to unwrap a `Scene` into a single `Trimesh` (`.dump(concatenate=True)` if multi-geometry, else the sole geometry) right after load. Verified: tool now runs directly on `.3mf` input with no manual STL extraction step, output geometry matches.
+- **Status:** Fixed (config path, corrupted 15mm source worked around via 20mm file, 3mf input now supported natively)
