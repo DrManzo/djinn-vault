@@ -315,3 +315,15 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** Configure udisks2 to force-mount dirty NTFS volumes rather than requiring manual sudo mount.
 **Why:** Typhon is Windows — every USB stick ejected from it will be dirty unless explicitly safe-ejected. Requiring sudo every time is friction. udisks2 mount_options.conf is the right layer (user-session context, UID/GID injection, no raw udev rule needed).
 **How to apply:** Config is in `/etc/udisks2/mount_options.conf`. Applies to all NTFS/ntfs3 volumes system-wide.
+
+## 2026-07-10 — Print-safety watchdog: templated systemd unit, one script for the whole fleet
+
+**Decision:** Generalize `djinn-print-safety` via environment variables (`DJINN_PRINTER_NAME`, `DJINN_MCU_OBJECT`) and a templated systemd unit (`djinn-print-safety@.service`) rather than forking the script per printer.
+**Why:** The script had exactly two Calliope-specific things (a hardcoded MCU object name, hardcoded strings in Telegram messages) once its actual bugs were fixed. Forking it three ways would have tripled the bug surface for zero benefit — Nemesis and Iris just needed different config, not different code.
+**How to apply:** Any future printer added to the fleet gets a new `~/.config/forge/djinn-<name>.env` and `systemctl --user enable --now djinn-print-safety@<name>`, no code change required, as long as it exposes an MCU object Moonraker can query (checked via `?mcu%20<name>=last_stats`).
+
+## 2026-07-10 — Completion-report dedup via persisted marker file, not in-memory state
+
+**Decision:** Track "have I already reported this completion" via a small JSON marker file per printer (`~/.local/share/djinn/print-safety-last-reported-<printer>.json`), not an in-memory flag inside the daemon.
+**Why:** `djinn-print-safety`'s systemd unit uses `Restart=always`, and the daemon deliberately exits after every print completion (that's how it avoids getting stuck watching a finished job). Any in-memory dedup state would be wiped on every one of those restarts, defeating the purpose — the guard has to outlive the process.
+**How to apply:** Any future daemon that (a) intentionally exits on a terminal event and (b) relies on `Restart=always` to come back for the next event needs this same pattern if it does anything non-idempotent on that terminal event.
