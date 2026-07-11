@@ -238,3 +238,7 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 - **Fix:** `sudo umount` (against the still-valid mount, which was pointing at the stale sdb1 handle but succeeded anyway) → `sudo e2fsck -y /dev/sdd1` (the *current* device node, found via `lsblk`) → journal recovered cleanly through all 5 fsck passes, one minor `orphan_present` flag cleared, no inodes relocated to `lost+found` (confirmed empty except pre-existing `.`/`..`). Remounted at the same `/run/media/drmanzo/alexandria` path (UUID-based, per the 2026-07-09 mount decision — survived the device-letter change with no fstab edit needed) and verified all top-level folders present and readable.
 - **Status:** Fixed, no data loss detected. Filesystem-level repair was straightforward once the correct current device node was identified — the confusing part was the stale device-node reference from before the physical reconnect.
 - **Rule/Lesson:** When `/dev/sdX` I/O errors show up on a drive that was working minutes earlier, check `lsblk`/kernel log for a re-enumeration event before assuming pure filesystem corruption — the device letter can silently change on a USB reconnect, and running fsck against the old (now-nonexistent) node just fails confusingly instead of pointing at the real issue.
+
+
+## 2026-07-11 — djinn-bughunter scan (1 finding(s))
+- **[MEDIUM]** `journald:djinn-telegram-gateway` — network error (3 occurrence(s)) _(type: errlog)_
