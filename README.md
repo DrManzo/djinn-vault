@@ -18,6 +18,7 @@ The goal is not to automate everything — it is to make the operator the decisi
 - **Typhon's Studio** — Media production stack for Shorts, long-form video, music, and social content.
 - **LBlack** — 8-stage AI-assisted video script pipeline (capture → draft → research → final).
 - **Home infrastructure** — Unified dashboard, device monitoring, vault sync, system health automation.
+- **Hellhound** — Security monitoring (2026-07-12). Deterministic detection (no model inference in the loop) for brute-force/reconnaissance against SSH and the Forge dashboard, auto-block via `ufw`, incident logging, Telegram alerts. AI is used only after the fact, for optional human-readable summaries — never for detection or blocking. See `hellhound/`.
 - **Knowledge suites** — Structured research libraries across Law, Psychology, and Finance — built by Marcus (Perplexity) and indexed for semantic search.
 
 ---
@@ -27,9 +28,12 @@ The goal is not to automate everything — it is to make the operator the decisi
 | Machine | Role | Specs |
 |---|---|---|
 | **Salomon** | Primary orchestration node | HP Omen · RTX 5060 Laptop · 29GB RAM · Fedora Linux |
-| **Typhon** | Storage + lightweight ops + streaming | MSI · GTX 1650 4GB · 14GB RAM · Fedora Linux |
+| **Typhon** | Shop machine (slicing/commissions/content/accounting) — reinstalled to Windows 2026-06-25, onboarding still incomplete | MSI · GTX 1650 4GB · 14GB RAM · Windows |
 | **Orin** | Large-model host + always-on storage | iMac · Intel i7 8-core · 40GB RAM · 1.7TB free · macOS |
-| **Calliope** | 3D printer | Ender-3 V3 Plus · Klipper + Moonraker · Nebula pad |
+| **Calliope** | 3D printer | Ender-3 V3 Plus · Klipper + Moonraker |
+| **Nemesis** | 3D printer | Flashforge AD5M Pro · Moonraker |
+| **Iris** | 3D printer | Flashforge AD5X · Moonraker, multi-color (bambufy) |
+| **Penelope** | 3D printer | Ender-3 Pro · OctoPrint (runs on Salomon, no independent IP) |
 
 All machines share a local subnet. Ollama runs on Salomon (primary inference), Typhon (lightweight/relay), and Orin (large model CPU inference). The vault syncs to GitHub and Google Drive continuously.
 
@@ -71,6 +75,8 @@ All agents coordinate through `djinn/communications/COMMS.md` — an append-only
 ---
 
 ## Vault Structure
+
+> **Note (2026-07-12):** the tree below predates a 2026-07-08 department restructure and is out of date — top-level layout is now `djinn/`, `forge/`, `media/`, `ai/`, `hellhound/`, `writing/`, `personal/`, `references/`, `RAW/`, `i notes/`. `djinn/GATEWAY.md` is the current authoritative structure reference; this section needs a full redraw, not attempted here since it wasn't part of today's change set.
 
 ```
 djinn-vault/
@@ -272,6 +278,7 @@ Activate dev mode: `djinn-gateway dev` (2h default) | Check: `djinn-gateway stat
 | Vault sync | Obsidian + git + rclone (GitHub + Google Drive) |
 | Agent framework | OpenClaw (local), Claude Code (premium lane) |
 | Notifications | systemd timers, Telegram bot |
+| Security monitoring | Hellhound — deterministic Python (no model inference in the detection/blocking path), `ufw` for auto-block |
 
 ---
 
@@ -328,4 +335,4 @@ The design principles that make this extensible: shared memory (the vault), lane
 ---
 
 *Djinn is built and maintained by its operator with Claude (Anthropic), Salomon (local Ollama), Typhon (local Ollama), Marcus (Perplexity AI), and Gemini (Google AI Studio).*  
-*— Updated 2026-06-10*
+*— Partially updated 2026-07-12 (Hellhound, hardware table, department-restructure flag). Most recent full session record: `djinn/logs/reports/`. This file predates the 2026-07-08 department restructure in several sections not touched today — see the note under Vault Structure.*
