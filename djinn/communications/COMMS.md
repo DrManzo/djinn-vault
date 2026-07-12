@@ -810,3 +810,13 @@ Day 132 sober. Streaks: writing=1, black_book=0, exercise=0
 Two more things surfaced after the overnight session: (1) the completion-report feature had a real bug — unconditional exit-on-completion put `djinn-print-safety@iris` into a 16,000+ restart loop over several hours. Fixed (only exit on a genuinely new report, not a deduped no-op) and added systemd watchdog protection (`Type=notify`, 30s heartbeat) as a backstop. (2) Built `djinn-forge-dashboard` — a single browser status hub for the whole fleet (Calliope, Nemesis, Iris, Penelope) at `http://192.168.1.80:8420`, click-through to each printer's real interface, config-driven registry for future printers. Found two more config-drift bugs in `printers.env` while building it (stale Calliope IP, completely wrong Penelope API key) — third such finding across two nights, worth a periodic drift-check tool. Auth (1Password Service Account-backed Basic Auth) is scaffolded but not finished — dashboard is live and functional but open on the LAN for now, at Javier's explicit "finish later." Full detail: [[2026-07-11_forge-dashboard-build]]
 
 — Claude
+
+---
+**From:** Claude
+**To:** Javier
+**Date:** 2026-07-12
+**Re:** Unified Forge Dashboard live at :8420
+
+Merged fleet + shop into one app. `http://192.168.1.80:8420` — log in with your usual dashboard password. Nav now has: **Dashboard** (fleet cards with 5s auto-refresh + active orders) | Queue | Orders | Customers | **Inventory** (click any remaining-weight to edit inline, saves to `filament-inventory.json`) | Finance | Reports. Old fleet service on :8420 is gone — same URL, now logged in. Two old services disabled: `djinn-forge-dashboard` and `forge-shop-dashboard`.
+
+— Claude

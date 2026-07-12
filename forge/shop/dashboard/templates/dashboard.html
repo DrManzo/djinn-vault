@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div>
+    <h4>Typhon's Forge</h4>
+    <div class="sub">Fleet status &amp; active orders</div>
+  </div>
+  <div id="fleet-updated" style="font-size:.75rem;color:var(--text-muted);">Loading fleet…</div>
+</div>
+
+<!-- Fleet strip -->
+<div id="fleet-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;">
+  <div class="card-dark" style="opacity:.5;text-align:center;padding:2rem;">Loading printers…</div>
+</div>
+
+<!-- Active orders -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
+  <h6 style="margin:0;color:#fff;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.8rem;">Active Queue</h6>
+  <a href="{{ url_for('queue') }}" style="font-size:.8rem;color:var(--accent);text-decoration:none;">View all →</a>
+</div>
+
+{% if active_orders %}
+<table class="table-dark-custom">
+  <thead><tr>
+    <th>Order</th><th>Customer</th><th>Items</th><th>Status</th><th>Created</th>
+  </tr></thead>
+  <tbody>
+  {% for o in active_orders %}
+  <tr>
+    <td><a href="{{ url_for('order_detail', order_id=o.id) }}" style="color:var(--accent);text-decoration:none;">{{ o.id }}</a></td>
+    <td>{{ o.customer.name if o.customer else '—' }}</td>
+    <td style="color:var(--text-muted);">
+      {% for item in o.line_items %}{{ item.description }}{% if not loop.last %}, {% endif %}{% endfor %}
+    </td>
+    <td><span class="badge-status s-{{ o.status }}">{{ o.status }}</span></td>
+    <td style="color:var(--text-muted);">{{ o.created_at[:10] if o.created_at else '—' }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="card-dark" style="text-align:center;padding:2.5rem;color:var(--text-muted);">
+  No active orders — queue is clear.
+</div>
+{% endif %}
+
+<style>
+  .fleet-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color .15s;
+  }
+  .fleet-card:hover { border-color: #4a6a8a; }
+  .fleet-card .p-name { font-size: 1rem; font-weight: 600; margin-bottom: .3rem; color: #fff; }
+  .fleet-card .p-state { font-size: .82rem; margin-bottom: .5rem; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: .35rem; }
+  .dot-printing { background: #3fb950; }
+  .dot-idle     { background: #58a6ff; }
+  .dot-offline  { background: #6e7681; }
+  .dot-error    { background: #f85149; }
+  .p-bar { height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; margin-bottom: .5rem; }
+  .p-bar-fill { height: 100%; background: #3fb950; transition: width .3s; }
+  .p-file  { font-size: .76rem; color: var(--text-muted); word-break: break-all; margin-bottom: .4rem; }
+  .p-temps { font-size: .76rem; color: var(--text-muted); }
+</style>
+
+<script>
+function dotCls(p) {
+  if (!p.reachable) return 'offline';
+  if (p.state === 'printing') return 'printing';
+  if (p.state === 'error' || p.state === 'cancelled') return 'error';
+  return 'idle';
+}
+function renderFleet(printers) {
+  const grid = document.getElementById('fleet-grid');
+  if (!printers.length) {
+    grid.innerHTML = '<div class="card-dark" style="opacity:.5;text-align:center;padding:2rem;">No printers in registry.</div>';
+    return;
+  }
+  grid.innerHTML = printers.map(p => {
+    const cls = dotCls(p);
+    let html = `<a class="fleet-card" href="${p.ui_url}" target="_blank" rel="noopener">`;
+    html += `<div class="p-name">${p.name}</div>`;
+    html += `<div class="p-state"><span class="dot dot-${cls}"></span>${p.reachable ? p.state : 'offline'}</div>`;
+    if (p.reachable && p.state === 'printing' && p.progress_pct !== null) {
+      html += `<div class="p-bar"><div class="p-bar-fill" style="width:${p.progress_pct}%"></div></div>`;
+      html += `<div class="p-file">${p.filename || ''} — ${p.progress_pct}%</div>`;
+    } else if (p.reachable && p.filename) {
+      html += `<div class="p-file">${p.filename}</div>`;
+    }
+    if (p.reachable && (p.nozzle_temp !== null || p.bed_temp !== null)) {
+      const nz = p.nozzle_temp != null ? p.nozzle_temp.toFixed(0) : '--';
+      const bd = p.bed_temp != null ? p.bed_temp.toFixed(0) : '--';
+      html += `<div class="p-temps">noz ${nz}°C · bed ${bd}°C</div>`;
+    }
+    html += '</a>';
+    return html;
+  }).join('');
+}
+async function pollFleet() {
+  try {
+    const res = await fetch('/api/status');
+    renderFleet(await res.json());
+    document.getElementById('fleet-updated').textContent = 'Fleet updated ' + new Date().toLocaleTimeString();
+  } catch (e) {
+    document.getElementById('fleet-updated').textContent = 'Fleet fetch failed — retrying…';
+  }
+}
+pollFleet();
+setInterval(pollFleet, 5000);
+</script>
+{% endblock %}

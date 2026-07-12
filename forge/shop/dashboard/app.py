@@ -1,18 +1,23 @@
 """
-dashboard/app.py — Typhon's Forge owner dashboard.
-Flask web app, localhost:5000, password-gated, single-operator.
+dashboard/app.py — Typhon's Forge unified dashboard.
 
-Run:  python3 app.py
-      or: FLASK_PORT=5001 python3 app.py
+Merges fleet status (printer cards + live polling) with the shop back-office
+(orders, customers, finance, reports) and a live-editable filament inventory.
+
+Port: 8420.  Auth: session password (DJINN_DASH_PASSWORD env, default "typhonsforge").
 """
 
 import os
 import sys
+import json
 import hashlib
 import datetime
 import pathlib
-import json
+import secrets
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import wraps
 
+import requests
 from flask import (Flask, render_template, redirect, url_for,
                    request, session, flash, jsonify, send_file)
 
@@ -39,47 +44,46 @@ from shop.accounting import (
 # ── config ─────────────────────────────────────────────────────────────────────
 DASHBOARD_PASSWORD = os.environ.get("DJINN_DASH_PASSWORD", "typhonsforge")
 SECRET_KEY         = os.environ.get("DJINN_SECRET_KEY",    "change-me-at-setup")
-PORT               = int(os.environ.get("FLASK_PORT", 5000))
+PORT               = int(os.environ.get("FLASK_PORT", 8420))
+
+REGISTRY_PATH   = pathlib.Path.home() / ".config/forge/fleet-registry.json"
+INVENTORY_PATH  = pathlib.Path.home() / "Obsidian/forge/inventory/filament-inventory.json"
+FETCH_TIMEOUT   = 3
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = SECRET_KEY
 
+_COLOR_HEX = {
+    "white":        "#e8e8e8",
+    "black":        "#333333",
+    "red":          "#cc3333",
+    "yellow":       "#e8c020",
+    "blue":         "#3060cc",
+    "grey":         "#7a8a9a",
+    "gray":         "#7a8a9a",
+    "orange":       "#e07020",
+    "green":        "#38a858",
+    "army green":   "#556b2f",
+    "silver":       "#aab8c0",
+    "gold":         "#c8a020",
+    "purple":       "#8040b0",
+    "pink":         "#d06090",
+    "cyan":         "#20a8c0",
+    "brown":        "#7a4828",
+    "transparent":  "#6a8aaa",
+    "natural":      "#d8cbb8",
+    "burnt titanium": "#7a6858",
+    "glow in the dark": "#a8e050",
+    "multi":        "#884488",
+    "ruby red":     "#a02040",
+}
 
-def _pw_hash(pw: str) -> str:
-    return hashlib.sha256(pw.encode()).hexdigest()
-
-
-def _logged_in() -> bool:
-    return session.get("auth") == _pw_hash(DASHBOARD_PASSWORD)
-
-
-def _require_login(fn):
-    from functools import wraps
-    @wraps(fn)
-    def wrapper(*args, **kwargs):
-        if not _logged_in():
-            return redirect(url_for("login"))
-        return fn(*args, **kwargs)
-    return wrapper
-
-
-def _today() -> str:
-    return datetime.date.today().isoformat()
-
-
-def _month_bounds(year=None, month=None):
-    now = datetime.date.today()
-    y = year  or now.year
-    m = month or now.month
-    start = f"{y:04d}-{m:02d}-01"
-    if m == 12:
-        end = f"{y}-12-31"
-    else:
-        end = (datetime.date(y, m+1, 1) - datetime.timedelta(days=1)).isoformat()
-    return start, end
+@app.template_filter("color_hex")
+def color_hex_filter(color_name: str) -> str:
+    return _COLOR_HEX.get(color_name.lower(), "#5a7a9a")
 
 
-# ── init ───────────────────────────────────────────────────────────────────────
+# ── init DB ────────────────────────────────────────────────────────────────────
 with app.app_context():
     init_db()
     conn = _connect()
@@ -88,16 +92,29 @@ with app.app_context():
 
 
 # ── auth ───────────────────────────────────────────────────────────────────────
+def _pw_hash(pw: str) -> str:
+    return hashlib.sha256(pw.encode()).hexdigest()
+
+def _logged_in() -> bool:
+    return session.get("auth") == _pw_hash(DASHBOARD_PASSWORD)
+
+def _require_login(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if not _logged_in():
+            return redirect(url_for("login"))
+        return fn(*args, **kwargs)
+    return wrapper
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         pw = request.form.get("password", "")
         if _pw_hash(pw) == _pw_hash(DASHBOARD_PASSWORD):
             session["auth"] = _pw_hash(DASHBOARD_PASSWORD)
-            return redirect(url_for("queue"))
+            return redirect(url_for("dashboard"))
         flash("Wrong password.")
     return render_template("login.html")
-
 
 @app.route("/logout")
 def logout():
@@ -105,8 +122,189 @@ def logout():
     return redirect(url_for("login"))
 
 
-# ── queue (home) ───────────────────────────────────────────────────────────────
+# ── fleet polling ──────────────────────────────────────────────────────────────
+def _load_registry():
+    try:
+        return json.loads(REGISTRY_PATH.read_text()).get("printers", [])
+    except Exception:
+        return []
+
+def _fetch_moonraker(printer):
+    r = {**printer, "reachable": False, "state": "offline",
+         "filename": None, "progress_pct": None, "bed_temp": None, "nozzle_temp": None}
+    try:
+        resp = requests.get(
+            f"{printer['api_url']}/printer/objects/query"
+            "?print_stats&virtual_sdcard&extruder&heater_bed",
+            timeout=FETCH_TIMEOUT,
+        )
+        resp.raise_for_status()
+        status = resp.json().get("result", {}).get("status", {})
+        ps = status.get("print_stats", {})
+        vs = status.get("virtual_sdcard", {})
+        r.update({
+            "reachable": True,
+            "state": ps.get("state", "unknown"),
+            "filename": ps.get("filename") or None,
+            "progress_pct": round((vs.get("progress") or 0) * 100, 1) if ps.get("state") == "printing" else None,
+            "bed_temp": status.get("heater_bed", {}).get("temperature"),
+            "nozzle_temp": status.get("extruder", {}).get("temperature"),
+        })
+    except Exception:
+        pass
+    return r
+
+def _fetch_octoprint(printer):
+    r = {**printer, "reachable": False, "state": "offline",
+         "filename": None, "progress_pct": None, "bed_temp": None, "nozzle_temp": None}
+    api_key = os.environ.get(printer.get("api_key_env", ""), "")
+    try:
+        headers = {"X-Api-Key": api_key}
+        resp = requests.get(f"{printer['api_url']}/api/job", headers=headers, timeout=FETCH_TIMEOUT)
+        resp.raise_for_status()
+        job = resp.json()
+        state = job.get("state", "Unknown")
+        progress = job.get("progress", {}).get("completion")
+        r.update({
+            "reachable": True,
+            "state": "printing" if state == "Printing" else state.lower(),
+            "filename": (job.get("job", {}) or {}).get("file", {}).get("name"),
+            "progress_pct": round(progress, 1) if progress is not None else None,
+        })
+        r2 = requests.get(f"{printer['api_url']}/api/printer", headers=headers, timeout=FETCH_TIMEOUT)
+        if r2.ok:
+            temps = r2.json().get("temperature", {})
+            r["nozzle_temp"] = (temps.get("tool0") or {}).get("actual")
+            r["bed_temp"] = (temps.get("bed") or {}).get("actual")
+    except Exception:
+        pass
+    return r
+
+_FETCHERS = {"moonraker": _fetch_moonraker, "octoprint": _fetch_octoprint}
+
+def fetch_all():
+    printers = _load_registry()
+    results = []
+    with ThreadPoolExecutor(max_workers=max(len(printers), 1)) as pool:
+        futures = {
+            pool.submit(_FETCHERS.get(p.get("backend"), _fetch_moonraker), p): p
+            for p in printers
+        }
+        for fut in as_completed(futures):
+            try:
+                results.append(fut.result())
+            except Exception:
+                p = futures[fut]
+                results.append({**p, "reachable": False, "state": "error",
+                                 "filename": None, "progress_pct": None,
+                                 "bed_temp": None, "nozzle_temp": None})
+    order = {p["id"]: i for i, p in enumerate(printers)}
+    results.sort(key=lambda r: order.get(r["id"], 999))
+    return results
+
+
+# ── filament inventory helpers ─────────────────────────────────────────────────
+def _load_inventory():
+    try:
+        return json.loads(INVENTORY_PATH.read_text())
+    except Exception:
+        return {"spools": [], "printers": {}}
+
+def _save_inventory(data: dict):
+    INVENTORY_PATH.write_text(json.dumps(data, indent=2))
+
+
+# ── helpers ────────────────────────────────────────────────────────────────────
+def _get_customer_by_id(customer_id: int) -> dict:
+    with get_db() as conn:
+        row = conn.execute("SELECT * FROM customers WHERE id=?", (customer_id,)).fetchone()
+    if not row:
+        return {"name": "Unknown", "discord_id": "—"}
+    d = dict(row)
+    d["name"]             = decrypt(d["name"]) or "—"
+    d["shipping_address"] = decrypt(d["shipping_address"]) or "—"
+    return d
+
+def _today() -> str:
+    return datetime.date.today().isoformat()
+
+def _month_bounds(year=None, month=None):
+    now = datetime.date.today()
+    y = year  or now.year
+    m = month or now.month
+    start = f"{y:04d}-{m:02d}-01"
+    end   = f"{y}-12-31" if m == 12 else (datetime.date(y, m+1, 1) - datetime.timedelta(days=1)).isoformat()
+    return start, end
+
+
+# ── context processor ─────────────────────────────────────────────────────────
+@app.context_processor
+def inject_globals():
+    queue_count = 0
+    try:
+        queue_count = len(get_pending_orders())
+    except Exception:
+        pass
+    now = datetime.date.today()
+    return {
+        "queue_count": queue_count,
+        "current_month": now.strftime("%B %Y"),
+    }
+
+
+# ── fleet API ──────────────────────────────────────────────────────────────────
+@app.route("/api/status")
+@_require_login
+def api_status():
+    return jsonify(fetch_all())
+
+
+# ── inventory API ──────────────────────────────────────────────────────────────
+@app.route("/api/inventory/<spool_id>", methods=["POST"])
+@_require_login
+def api_inventory_update(spool_id):
+    data = _load_inventory()
+    payload = request.get_json(force=True) or {}
+    updated = False
+    for spool in data.get("spools", []):
+        if spool["spool_id"] == spool_id:
+            if "remaining_g" in payload:
+                try:
+                    spool["remaining_g"] = max(0, int(payload["remaining_g"]))
+                except (ValueError, TypeError):
+                    return jsonify({"error": "invalid remaining_g"}), 400
+            if "notes" in payload:
+                spool["notes"] = str(payload["notes"])[:200]
+            if "loaded" in payload:
+                spool["loaded"] = bool(payload["loaded"])
+            if "loaded_printer" in payload:
+                spool["loaded_printer"] = str(payload["loaded_printer"])
+            spool["last_used"] = _today()
+            updated = True
+            break
+    if not updated:
+        return jsonify({"error": "spool not found"}), 404
+    data["last_updated"] = _today()
+    data["updated_by"] = "dashboard"
+    _save_inventory(data)
+    return jsonify({"ok": True})
+
+
+# ── dashboard (home) ───────────────────────────────────────────────────────────
 @app.route("/")
+@app.route("/dashboard")
+@_require_login
+def dashboard():
+    pending = get_pending_orders()
+    enriched = []
+    for o in pending:
+        full = get_order(o["id"])
+        c = _get_customer_by_id(o["customer_id"])
+        enriched.append({**o, "line_items": full["items"] if full else [], "customer": c})
+    return render_template("dashboard.html", active_orders=enriched, active="dashboard")
+
+
+# ── queue ──────────────────────────────────────────────────────────────────────
 @app.route("/queue")
 @_require_login
 def queue():
@@ -114,12 +312,8 @@ def queue():
     enriched = []
     for o in pending:
         full = get_order(o["id"])
-        c = get_customer_by_id(o["customer_id"])
-        enriched.append({
-            **o,
-            "line_items": full["items"] if full else [],
-            "customer":   c,
-        })
+        c = _get_customer_by_id(o["customer_id"])
+        enriched.append({**o, "line_items": full["items"] if full else [], "customer": c})
     return render_template("queue.html", orders=enriched, active="queue")
 
 
@@ -130,34 +324,25 @@ def orders():
     status_filter = request.args.get("status", "all")
     with get_db() as conn:
         if status_filter == "all":
-            rows = conn.execute(
-                "SELECT * FROM orders ORDER BY created_at DESC LIMIT 200"
-            ).fetchall()
+            rows = conn.execute("SELECT * FROM orders ORDER BY created_at DESC LIMIT 200").fetchall()
         else:
-            rows = conn.execute(
-                "SELECT * FROM orders WHERE status=? ORDER BY created_at DESC",
-                (status_filter,)
-            ).fetchall()
+            rows = conn.execute("SELECT * FROM orders WHERE status=? ORDER BY created_at DESC", (status_filter,)).fetchall()
     enriched = []
     for r in rows:
         o = dict(r)
-        c = get_customer_by_id(o["customer_id"])
+        c = _get_customer_by_id(o["customer_id"])
         with get_db() as conn:
-            items = conn.execute(
-                "SELECT * FROM order_items WHERE order_id=?", (o["id"],)
-            ).fetchall()
+            items = conn.execute("SELECT * FROM order_items WHERE order_id=?", (o["id"],)).fetchall()
         o["line_items"] = [dict(i) for i in items]
         o["customer"]   = c
         enriched.append(o)
-    return render_template("orders.html", orders=enriched,
-                           status_filter=status_filter, active="orders")
-
+    return render_template("orders.html", orders=enriched, status_filter=status_filter, active="orders")
 
 @app.route("/orders/<order_id>")
 @_require_login
 def order_detail(order_id):
-    o    = get_order(order_id)
-    c    = get_customer_by_id(o["customer_id"]) if o else None
+    o = get_order(order_id)
+    c = _get_customer_by_id(o["customer_id"]) if o else None
     with get_db() as conn:
         inv = conn.execute(
             "SELECT * FROM invoices WHERE order_id=? ORDER BY issued_date DESC LIMIT 1",
@@ -166,14 +351,12 @@ def order_detail(order_id):
     return render_template("order_detail.html", order=o, customer=c,
                            invoice=dict(inv) if inv else None, active="orders")
 
-
 @app.route("/orders/<order_id>/mark_paid", methods=["POST"])
 @_require_login
 def mark_paid(order_id):
     update_order_status(order_id, "paid")
     flash(f"{order_id} marked as paid.")
     return redirect(url_for("queue"))
-
 
 @app.route("/orders/<order_id>/mark_shipped", methods=["POST"])
 @_require_login
@@ -191,7 +374,6 @@ def customers():
     ledger = get_customer_ledger()
     return render_template("customers.html", customers=ledger, active="customers")
 
-
 @app.route("/customers/<int:customer_id>")
 @_require_login
 def customer_detail(customer_id):
@@ -199,8 +381,36 @@ def customer_detail(customer_id):
     if not ledger:
         flash("Customer not found.")
         return redirect(url_for("customers"))
-    return render_template("customer_detail.html",
-                           customer=ledger[0], active="customers")
+    return render_template("customer_detail.html", customer=ledger[0], active="customers")
+
+
+# ── inventory ──────────────────────────────────────────────────────────────────
+@app.route("/inventory")
+@_require_login
+def inventory():
+    data   = _load_inventory()
+    spools = data.get("spools", [])
+    printers_meta = data.get("printers", {})
+
+    # Group: loaded per-printer, then unloaded by material
+    loaded_by_printer = {}
+    unloaded = []
+    for s in spools:
+        if s.get("loaded") and s.get("loaded_printer"):
+            loaded_by_printer.setdefault(s["loaded_printer"], []).append(s)
+        else:
+            unloaded.append(s)
+
+    # Low stock warning
+    low_spools = [s for s in spools if s.get("remaining_g", 9999) <= s.get("low_threshold_g", 150)]
+
+    return render_template("inventory.html",
+                           loaded_by_printer=loaded_by_printer,
+                           unloaded=unloaded,
+                           low_spools=low_spools,
+                           all_spools=spools,
+                           last_updated=data.get("last_updated", "—"),
+                           active="inventory")
 
 
 # ── finance ────────────────────────────────────────────────────────────────────
@@ -210,12 +420,10 @@ def finance():
     start = request.args.get("start") or _month_bounds()[0]
     end   = request.args.get("end")   or _month_bounds()[1]
     stmt  = compute_income_statement(start, end, save=False)
-    bs    = compute_balance_sheet(
-        _today(),
-        cash=float(request.args.get("cash", 0)),
-        inventory_grams=float(request.args.get("inv_g", 0)),
-        save=False,
-    )
+    bs    = compute_balance_sheet(_today(),
+                cash=float(request.args.get("cash", 0)),
+                inventory_grams=float(request.args.get("inv_g", 0)),
+                save=False)
     return render_template("finance.html", stmt=stmt, bs=bs,
                            start=start, end=end, active="finance")
 
@@ -233,12 +441,10 @@ def reports():
             m += 12
             y -= 1
         try:
-            r = compute_monthly_report(y, m, save=False)
-            monthly.append(r)
+            monthly.append(compute_monthly_report(y, m, save=False))
         except Exception:
             pass
     return render_template("reports.html", monthly=monthly, active="reports")
-
 
 @app.route("/reports/export/csv")
 @_require_login
@@ -248,48 +454,16 @@ def export_csv_route():
     if not files:
         flash("No data for that period.")
         return redirect(url_for("reports"))
-    # Return first file; in practice, zip them
-    first = list(files.values())[0]
-    return send_file(first, as_attachment=True)
-
+    return send_file(list(files.values())[0], as_attachment=True)
 
 @app.route("/reports/export/xlsx")
 @_require_login
 def export_xlsx_route():
     period = request.args.get("period", datetime.date.today().strftime("%Y-%m"))
-    path   = export_xlsx(period)
-    return send_file(path, as_attachment=True)
+    return send_file(export_xlsx(period), as_attachment=True)
 
 
-# ── helpers ────────────────────────────────────────────────────────────────────
-def get_customer_by_id(customer_id: int) -> dict:
-    with get_db() as conn:
-        row = conn.execute(
-            "SELECT * FROM customers WHERE id=?", (customer_id,)
-        ).fetchone()
-    if not row:
-        return {"name": "Unknown", "discord_id": "—"}
-    d = dict(row)
-    d["name"]             = decrypt(d["name"]) or "—"
-    d["shipping_address"] = decrypt(d["shipping_address"]) or "—"
-    return d
-
-
-# ── context processor — queue badge ───────────────────────────────────────────
-@app.context_processor
-def inject_globals():
-    queue_count = 0
-    try:
-        queue_count = len(get_pending_orders())
-    except Exception:
-        pass
-    now = datetime.date.today()
-    return {
-        "queue_count": queue_count,
-        "current_month": now.strftime("%B %Y"),
-    }
-
-
+# ── entrypoint ─────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print(f"Typhon's Forge Dashboard → http://localhost:{PORT}")
     print(f"Password: {DASHBOARD_PASSWORD}")
