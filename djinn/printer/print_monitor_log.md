@@ -2367,3 +2367,45 @@
 | 2026-07-12 13:22 UTC | standby | 0.0% | 50.4 | 0 | 45.8 | 0 | 0% | 0 |  |
 | 2026-07-12 13:23 UTC | standby | 0.0% | 47.7 | 0 | 44.8 | 0 | 0% | 0 |  |
 | 2026-07-12 13:24 UTC | standby | 0.0% | 46.1 | 0 | 43.9 | 0 | 0% | 0 |  |
+| 2026-07-12 13:25 UTC | standby | 0.0% | 44.9 | 0 | 43.0 | 0 | 0% | 0 |  |
+| 2026-07-12 13:26 UTC | standby | 0.0% | 43.9 | 0 | 42.1 | 0 | 0% | 0 |  |
+| 2026-07-12 13:27 UTC | standby | 0.0% | 43.1 | 0 | 41.4 | 0 | 0% | 0 |  |
+| 2026-07-12 13:28 UTC | standby | 0.0% | 42.3 | 0 | 40.7 | 0 | 0% | 0 |  |
+| 2026-07-12 13:29 UTC | standby | 0.0% | 41.6 | 0 | 40.0 | 0 | 0% | 0 |  |
+| 2026-07-12 13:30 UTC | standby | 0.0% | 80.5 | 160 | 39.8 | 70 | 0% | 0 |  |
+| 2026-07-12 13:31 UTC | standby | 0.0% | 218.0 | 230 | 48.2 | 70 | 0% | 0 |  |
+| 2026-07-12 13:32 UTC | standby | 0.0% | 163.2 | 160 | 56.5 | 70 | 0% | 0 |  |
+| 2026-07-12 13:33 UTC | standby | 0.0% | 159.6 | 160 | 64.1 | 70 | 0% | 0 |  |
+| 2026-07-12 13:34 UTC | standby | 0.0% | 159.8 | 160 | 69.2 | 70 | 0% | 0 |  |
+| 2026-07-12 13:35 UTC | printing | 0.0% | 231.2 | 250 | 70.7 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:36 UTC | printing | 0.0% | 250.0 | 250 | 70.8 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:37 UTC | printing | 0.0% | 250.2 | 250 | 70.8 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:38 UTC | printing | 0.0% | 238.9 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:39 UTC | printing | 0.0% | 240.4 | 240 | 69.9 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:40 UTC | printing | 0.0% | 240.1 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:41 UTC | printing | 0.0% | 240.0 | 240 | 69.7 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:42 UTC | printing | 0.0% | 240.2 | 240 | 69.5 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:43 UTC | printing | 0.0% | 239.9 | 240 | 69.9 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:44 UTC | printing | 0.0% | 239.5 | 240 | 70.2 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:45 UTC | printing | 0.0% | 240.4 | 240 | 70.1 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:46 UTC | printing | 0.0% | 240.1 | 240 | 70.1 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:47 UTC | printing | 0.0% | 239.8 | 240 | 70.1 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:48 UTC | printing | 0.0% | 239.6 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:49 UTC | printing | 0.0% | 239.7 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:50 UTC | printing | 0.0% | 240.6 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:51 UTC | printing | 0.0% | 239.9 | 240 | 69.9 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:52 UTC | printing | 0.0% | 239.6 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:53 UTC | printing | 0.0% | 240.4 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:54 UTC | printing | 0.0% | 239.7 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:55 UTC | printing | 0.0% | 240.2 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:56 UTC | printing | 0.0% | 240.3 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:57 UTC | printing | 0.0% | 240.1 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:58 UTC | printing | 0.0% | 240.3 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 13:59 UTC | printing | 0.0% | 240.0 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:00 UTC | printing | 0.0% | 240.1 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:01 UTC | printing | 0.0% | 239.7 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:02 UTC | printing | 0.0% | 240.0 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:03 UTC | printing | 0.0% | 240.1 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:04 UTC | printing | 0.0% | 240.5 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:05 UTC | printing | 0.0% | 240.0 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
+| 2026-07-12 14:06 UTC | printing | 0.0% | 239.5 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_3h40m44s.gcode |
