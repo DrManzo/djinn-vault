@@ -339,3 +339,15 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** `vault-sync.timer` (git+gdrive, git-tracked content only) now fires at 00:00/06:00/12:00/18:00 instead of every 15 minutes. New `vault-backup-oroborus.timer` runs every 23 days, mirroring the *entire* `~/Obsidian` tree — including everything gitignored (personal/, forge/finance, forge/commissions, RAW/, all binaries) — to Oroborus's storage via rsync.
 **Why:** Javier's call to reduce sync frequency. The 23-day Oroborus job exists specifically to cover what the git-based sync structurally can never back up (gitignored-by-design content), giving a real disaster-recovery copy instead of just a partial one.
 **How to apply:** If gitignored content changes shape (new excluded department, new secrets path), check whether `djinn-vault-backup-oroborus`'s exclude list needs updating too — it currently only excludes `.git/`, `.claude/`, and two known-broken symlinks (`djinn/RAW`, `djinn/workspace` — destination volume doesn't support symlinks).
+
+## 2026-07-12 — Hellhound: reuse existing master-daemon infra instead of building parallel audit logging
+
+**Decision:** `audit_client.py` connects to the real hellhound master socket (`skull.sock`) using the same CONNECT/OBSERVE protocol every pup uses, rather than the separate Unix-socket-server + JSONL file Marcus's spec proposed.
+**Why:** the master daemon already provides JSONL logging, SQLite indexing, and vault timeline entries for every observation — that's the whole point of the pup/master architecture. Building a second, parallel audit-log system alongside it would duplicate infrastructure for no benefit, and Marcus's version was designed without visibility into the fact that this infra already existed and worked.
+**How to apply:** any future "log X activity" need in Hellhound should be a pup sending `pup.observe(...)`, not a new bespoke logging mechanism.
+
+## 2026-07-12 — Hellhound ufw policy: default-allow, block by exception
+
+**Decision:** Enabled ufw with `default allow incoming` / `default allow outgoing`, not a locked-down default-deny baseline.
+**Why:** Salomon serves the entire Djinn fleet's Ollama API (port 11434) plus netdata, prometheus/node-exporter, OctoPrint, and the forge dashboard — enumerating and allow-listing every port that legitimately needs to stay reachable from other machines risked breaking daily cross-machine automation. The security value Hellhound's auto-block provides (denying specific offending IPs) only requires ufw to be *active*, not for the default policy to be restrictive.
+**How to apply:** if Salomon's exposure surface is ever meant to be locked down properly (allow-list only), that's a distinct, deliberate project — don't conflate it with Hellhound's job, which is anomaly detection and targeted blocking, not perimeter firewalling.

@@ -819,3 +819,21 @@ Per your ask: `vault-sync.timer` is now 4x/day (00/06/12/18:00) instead of every
 Full report: [[2026-07-12_vault-audit-cleanup-sync-cadence-change]]
 
 — Claude
+
+---
+**From:** Claude
+**To:** Javier
+**Date:** 2026-07-12
+**Re:** Hellhound rebuilt — real detection live, not a stub anymore
+
+TASK-081 is built and running. `pup-inbound-probe` is live on Salomon watching SSH and the Forge dashboard for brute-force/recon patterns (5 rules), auto-blocking via ufw (your printer fleet's LAN is protected except for hard brute-force signals — nothing there should ever legitimately fail SSH auth or scan ports), writing incidents to `hellhound/incidents/`, and alerting via Telegram. Outbound audit is wired into `djinn-telegram-gateway` (both text and voice) since that's your actual control channel — confirmed Discord doesn't need this.
+
+Along the way found and fixed three real bugs that would've quietly broken this: `hellhound.py` itself had a stale path from the 7/8 restructure (writing nowhere, silently), the pup systemd template had a latent specifier bug that only a hyphenated pup name exposed, and the Telegram credential Marcus's spec assumed was wrong (401) — real one found and wired in. Also fixed the actual 27-day silent-death bug at the source: `pup.py`'s shared library now has a real systemd watchdog, so this protects every pup that exists now or gets added later, not just this one.
+
+Live-tested end to end before leaving it running — synthetic test IPs (never real traffic), confirmed real ufw block/unblock, a real incident file, and a real Telegram delivery (checked the HTTP response, not just the absence of a crash).
+
+Still open, not urgent: your own devices (phone/laptop/tablet) aren't in the trusted-IP list yet, so you'll get one alert per device until you add them to `hellhound/config/trusted-ips.txt` — deduped to once an hour so it won't spam you. Forge dashboard auth is still a separate queued task. Moonraker isn't watched — it runs on each printer's own board, Salomon has no visibility into it; a real fix there needs an agent on each printer, which is future work, not something I faked here.
+
+Full report: [[2026-07-12_hellhound-real-rebuild-outbound-inbound-gates]]
+
+— Claude

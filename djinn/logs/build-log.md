@@ -1845,3 +1845,16 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-hellhound-notify-path-assumed-wrong-telegram-credential-file.md`
 
 *— Claude*
+
+## 2026-07-12: Hellhound real rebuild — outbound audit + inbound probe + watchdog fix
+
+- Confirmed (via Marcus's TASK-081 audit + live verification): Hellhound's only pup ran a StubGateway that never connected to anything real, for its entire existence. Not a "died" bug — it never worked.
+- Built and deployed the first real gate: `pup-inbound-probe.py` — SSH + Forge-dashboard brute-force/recon detection (5 rules), auto-block via ufw (LAN protected except hard brute-force signals), incidents to the vault, Telegram alerts. Explicitly scoped out Moonraker (no visibility from Salomon) and Discord (shop-only, confirmed with Javier).
+- Added outbound audit: `hellhound/gates/audit_client.py` + two hook points in `djinn-telegram-gateway` (text + voice) logging Javier's own commands through hellhound's existing SQLite/timeline infra.
+- Fixed three real bugs found during integration: `hellhound.py`'s stale `VAULT_BASE` path (djinn/hellhound → hellhound), `pup@.service`'s `%I`/`%i` systemd specifier bug (latent since install, only surfaced by a hyphenated pup name), and a wrong Telegram credential source in the notify path (telegram.conf → ops-tg.env).
+- Added a dependency-free `sd_notify()` + watchdog loop to the shared `pup.py` library — fixes the 27-day silent-death class of bug for every pup, present and future, not just this one.
+- Enabled `ufw` (default-allow policy, to avoid breaking Salomon's fleet-wide Ollama API and other cross-machine services) — needed so the auto-block feature actually enforces anything.
+- Live-tested end-to-end with synthetic TEST-NET-3 IPs before leaving it running: real ufw block, real incident file, real Telegram delivery confirmed via HTTP 200.
+- Full report: [[2026-07-12_hellhound-real-rebuild-outbound-inbound-gates]]
+
+*— Claude*
