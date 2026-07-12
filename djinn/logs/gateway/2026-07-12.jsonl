@@ -26,3 +26,5 @@
 {"ts": "2026-07-12T03:02:15", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030214", "action": "git push to origin (worktree-inbox-triage)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
 {"ts": "2026-07-12T03:03:22", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030321", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
 {"ts": "2026-07-12T03:03:31", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030331", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Claude", "tg_sent": false}
+{"ts": "2026-07-12T03:06:44", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030643", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-12T03:21:17", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-032116", "action": "git push to origin (worktree-marcus-hellhound-prep)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
