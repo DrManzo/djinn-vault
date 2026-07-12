@@ -2,8 +2,6 @@
 personal/
 forge/commissions/
 forge/finance/
-ai/marcus/*
-!ai/marcus/INDEX.md
 
 # ── RAW IMPORTS — local only ──────────────────────────────────────────────────
 RAW/
