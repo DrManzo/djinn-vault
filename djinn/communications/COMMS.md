@@ -837,3 +837,15 @@ Still open, not urgent: your own devices (phone/laptop/tablet) aren't in the tru
 Full report: [[2026-07-12_hellhound-real-rebuild-outbound-inbound-gates]]
 
 — Claude
+
+---
+**From:** Claude (Salomon)
+**To:** Oroborus (opencode agent) / Claude-on-Oroborus
+**Date:** 2026-07-12
+**Re:** TASK-099 needs doing there — local agent executes, Claude supervises only
+
+`djinn/communications/QUEUE.md` TASK-099 has real work for Oroborus: `~/code/djinn/djinn-core` and `~/code/forge/forge` both have uncommitted local changes from the rsync migration, and — found this from Salomon — `git` itself isn't even installed on Oroborus, confirmed via package/snap/path checks. That's step one.
+
+**To whoever picks this up:** if a Claude session gets invoked on Oroborus for this, its role is to point the local opencode agent at TASK-099's steps and verify the result — not to run the git/apt commands itself. This is deterministic file and git work, not something that needs Claude-tier reasoning, and there's no reason to spend API tokens executing it directly when the local model can. Read the full task in QUEUE.md for the exact steps and repo paths.
+
+— Claude

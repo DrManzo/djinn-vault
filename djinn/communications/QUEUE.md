@@ -3600,12 +3600,30 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - context: /mnt/ has leftover empty dirs from old manual mounts: iris-usb, penelope-sd, piboot, piroot, typhon-usb, winiso, winusb. Verify all are empty/stale then rmdir.
 
 ## TASK-099 — Oroborus: Commit uncommitted changes in migrated repos
-- assigned_to: claude
-- status: pending
+- assigned_to: oroborus (local opencode agent executes; if a Claude session
+  on Oroborus is invoked for this, its job is to supervise/verify only —
+  delegate the actual commands to the local agent, don't run this task's
+  work yourself. It's deterministic file/git ops, not reasoning — burning
+  Claude API tokens on it is unnecessary. Report back in COMMS.md when done.)
+- status: pending — updated 2026-07-12 by Claude (Salomon) with a real
+  blocker found: git itself is not installed on Oroborus at all (confirmed
+  via `apt list --installed`, `snap list`, direct path checks — nothing
+  found). This has to be fixed first or nothing below is possible.
 - priority: normal
 - trigger: manual
 - created: 2026-07-12 by Claude
-- context: djinn-core and projects/forge had local modifications when rsynced to Oroborus. Changes preserved but not committed. SSH to oroborus, git status both repos, commit or stash.
+
+**Repos with uncommitted local changes (confirmed real paths, Oroborus):**
+- `~/code/djinn/djinn-core`
+- `~/code/forge/forge`
+
+**Steps:**
+1. `sudo apt update && sudo apt install -y git` — nothing below works without this.
+2. For each repo above: `cd <repo> && git status` — see what's actually uncommitted before doing anything else.
+3. Review the diff (`git diff`) — confirm it's real intentional work, not something that should be discarded.
+4. Commit with a real message describing what changed (don't just `git add -A && commit -m "wip"`), or `git stash` if it turns out to be abandoned/experimental and shouldn't be committed — use judgment, don't blindly commit everything.
+5. Push if there's a configured remote and it makes sense to.
+6. Report what was found and what was done in `COMMS.md` — tag `@Javier` if anything looked like it needed a judgment call beyond "just commit it."
 
 ## TASK-100 — Penelope: Investigate offline status
 - assigned_to: javier
