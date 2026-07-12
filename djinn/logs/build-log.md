@@ -1829,3 +1829,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-hellhound-py-vault-base-pointed-at-pre-restructure-path-djinn-hellhound.md`
 
 *— Claude*
+
+## 2026-07-12: BUG — pup@.service used %I instead of %i — broken for any hyphenated pup name
+- **System:** hellhound
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** The template unit's EnvironmentFile/Environment/Description/SyslogIdentifier all used systemd's %I specifier (unescaped — converts encoded dashes back to slashes) instead of %i (literal instance name). Invisible for the only pup ever run (name: gateway, no hyphen), fatal the moment a hyphenated name was used: EnvironmentFile resolved to hellhound-inbound/probe.env instead of hellhound-inbound-probe.env, a nonexistent nested path, causing the new pup@inbound-probe.service to fail to start every time with 'Failed to load environment files'. Fixed by replacing all %I with %i in the unit.
+- **Report:** `logs/reports/2026-07-12_bug-pup-service-used-i-instead-of-i-broken-for-any-hyphenated-pup-name.md`
+
+*— Claude*
