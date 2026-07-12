@@ -3582,3 +3582,51 @@ done
 cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index updated by idle agent" && git push
 ```
 **Note:** Write this as a proper djinn-marcus-index tool once TASK-008 confirms Oroborus is healthy.
+
+## TASK-010 — Salomon: Move ~/Games to Alexandria
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: ~/Games/epic-games-store/ (3.3GB) still on Salomon. Move to /run/media/drmanzo/alexandria/games/ to clear Salomon. Confirm games still launch after move (symlink if needed).
+
+## TASK-011 — Salomon: Clean stale /mnt/ subdirs
+- assigned_to: claude
+- status: pending
+- priority: low
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: /mnt/ has leftover empty dirs from old manual mounts: iris-usb, penelope-sd, piboot, piroot, typhon-usb, winiso, winusb. Verify all are empty/stale then rmdir.
+
+## TASK-012 — Oroborus: Commit uncommitted changes in migrated repos
+- assigned_to: claude
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: djinn-core and projects/forge had local modifications when rsynced to Oroborus. Changes preserved but not committed. SSH to oroborus, git status both repos, commit or stash.
+
+## TASK-013 — Penelope: Investigate offline status
+- assigned_to: javier
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: Penelope (E3 Pro, 192.168.1.150) not responding on network. May be powered down. Check physical power, then Moonraker status.
+
+## TASK-014 — Typhon: Power on + mount as network share
+- assigned_to: javier
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: Typhon (192.168.1.113) offline. Once powered on: mount SMB shares from Salomon at /run/media/drmanzo/typhon, configure Bambu Studio + OrcaSlicer for Iris/Nemesis access. Also run chkdsk on the USB stick (currently dirty NTFS).
+
+## TASK-015 — Filament: Update inventory to current stock
+- assigned_to: javier+claude
+- status: in-progress
+- priority: high
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: filament-inventory.json last updated 2026-06-08, only 3 spools (stale). Needs full physical count of current spools: material, color, brand, weight remaining, which printer loaded. Javier provides count, Claude updates file.

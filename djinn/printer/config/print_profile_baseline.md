@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-12 05:09 UTC
+Generated: 2026-07-12 06:10 UTC
 Source file: mario-pipe-marked.stl_PLA_1h1m19s.gcode
-Readings: 273
+Readings: 4
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 65°C |
-| Mean | 219.8°C | 65.0°C |
-| Std dev | ±2.98°C | ±0.11°C |
-| Range | 171.4–221.3°C | 64.5–66.0°C |
+| Mean | 219.9°C | 65.0°C |
+| Std dev | ±0.28°C | ±0.03°C |
+| Range | 219.7–220.3°C | 65.0–65.0°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,8 +21,7 @@ Readings: 273
 - Max: 0 mm/s
 
 ## Anomalies
-- 
-hotend dropped >15°C below target at least once
+None detected
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
