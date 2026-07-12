@@ -1,24 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="topbar">
-  <div>
-    <h4>Typhon's Forge</h4>
-    <div class="sub">Fleet status &amp; active orders</div>
-  </div>
-  <div id="fleet-updated" style="font-size:.75rem;color:var(--text-muted);">Loading fleet…</div>
-</div>
 
 <!-- Fleet strip -->
-<div id="fleet-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;">
-  <div class="card-dark" style="opacity:.5;text-align:center;padding:2rem;">Loading printers…</div>
-</div>
+<div id="fleet-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;"></div>
 
 <!-- Active orders -->
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
-  <h6 style="margin:0;color:#fff;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.8rem;">Active Queue</h6>
-  <a href="{{ url_for('queue') }}" style="font-size:.8rem;color:var(--accent);text-decoration:none;">View all →</a>
-</div>
-
 {% if active_orders %}
 <table class="table-dark-custom">
   <thead><tr>
@@ -38,10 +24,6 @@
   {% endfor %}
   </tbody>
 </table>
-{% else %}
-<div class="card-dark" style="text-align:center;padding:2.5rem;color:var(--text-muted);">
-  No active orders — queue is clear.
-</div>
 {% endif %}
 
 <style>
@@ -78,10 +60,6 @@ function dotCls(p) {
 }
 function renderFleet(printers) {
   const grid = document.getElementById('fleet-grid');
-  if (!printers.length) {
-    grid.innerHTML = '<div class="card-dark" style="opacity:.5;text-align:center;padding:2rem;">No printers in registry.</div>';
-    return;
-  }
   grid.innerHTML = printers.map(p => {
     const cls = dotCls(p);
     let html = `<a class="fleet-card" href="${p.ui_url}" target="_blank" rel="noopener">`;
@@ -106,10 +84,7 @@ async function pollFleet() {
   try {
     const res = await fetch('/api/status');
     renderFleet(await res.json());
-    document.getElementById('fleet-updated').textContent = 'Fleet updated ' + new Date().toLocaleTimeString();
-  } catch (e) {
-    document.getElementById('fleet-updated').textContent = 'Fleet fetch failed — retrying…';
-  }
+  } catch (e) {}
 }
 pollFleet();
 setInterval(pollFleet, 5000);
