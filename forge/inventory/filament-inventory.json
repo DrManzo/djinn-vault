@@ -214,7 +214,7 @@
     },
     {
       "spool_id": "SPOOL-016",
-      "material": "PETG",
+      "material": "PLA",
       "color": "Blue",
       "brand": "Creality",
       "initial_weight_g": 1000,
