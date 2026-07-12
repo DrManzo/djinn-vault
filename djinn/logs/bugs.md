@@ -44,7 +44,7 @@ Running index of all bugs discovered across Djinn systems. Each entry links to a
 
 ---
 
-### BUG-013 — PrusaSlicer ignores SupportBlocker for multi-instance 3MF
+### BUG-015 — PrusaSlicer ignores SupportBlocker for multi-instance 3MF
 
 **Date:** 2026-06-05
 **System:** 3D printing / PrusaSlicer 2.9.4

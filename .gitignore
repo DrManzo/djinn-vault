@@ -23,6 +23,17 @@ RAW/
 *.step
 *.f3d
 
+# ── MEDIA BINARIES — GATEWAY.md rule #2: logos only, and only if <200KB ──────
+# (gitignore can't enforce the size cap — that's a manual review rule)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp4
+*.mov
+!media/logos/**
+
 # ── ARCHIVES & LARGE FILES ────────────────────────────────────────────────────
 OLD/
 *.zip
