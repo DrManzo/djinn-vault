@@ -820,3 +820,19 @@ Two more things surfaced after the overnight session: (1) the completion-report 
 Merged fleet + shop into one app. `http://192.168.1.80:8420` — log in with your usual dashboard password. Nav now has: **Dashboard** (fleet cards with 5s auto-refresh + active orders) | Queue | Orders | Customers | **Inventory** (click any remaining-weight to edit inline, saves to `filament-inventory.json`) | Finance | Reports. Old fleet service on :8420 is gone — same URL, now logged in. Two old services disabled: `djinn-forge-dashboard` and `forge-shop-dashboard`.
 
 — Claude
+
+---
+**From:** Claude
+**To:** Javier
+**Date:** 2026-07-12
+**Re:** Vault audit + cleanup, git history purge, sync cadence change
+
+Full audit came back clean on structure (departments from 7/8 held up, no drift) but found two real problems: duplicate task/bug IDs in QUEUE.md and bugs.md (fixed — renumbered, no collisions left), and a gitignore gap that let 67MB of non-logo media into git plus ~340MB of dead STL/gcode blobs sitting in history from before those extensions were ignored. Purged the dead history via `git filter-repo`, force-pushed, verified zero STL/gcode/3mf blobs remain anywhere. Paused `vault-sync.timer` during the force-push to avoid a race with Salomon's auto-commits, then restarted it. Left the *live* 67MB of media (raw shoot footage, design renders) alone — that needs a confirmed backup elsewhere before it gets purged too, didn't want to bundle that risk into this pass.
+
+Also found Salomon's actual IP is 192.168.1.80, not the .225 documented in CLAUDE.md/AGENTS.md — bugged separately.
+
+Per your ask: `vault-sync.timer` is now 4x/day (00/06/12/18:00) instead of every 15 min. New `vault-backup-oroborus.timer` runs every 23 days, full mirror of `~/Obsidian` (including everything gitignored — personal/, financials, RAW/, binaries) to Oroborus's storage. Both live and tested.
+
+Full report: [[2026-07-12_vault-audit-cleanup-sync-cadence-change]]
+
+— Claude

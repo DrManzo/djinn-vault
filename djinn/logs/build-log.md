@@ -1801,3 +1801,15 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-vault-git-repo-carrying-dead-stl-gcode-history-active-binary-leak.md`
 
 *— Claude*
+
+## 2026-07-12: Vault audit + cleanup — ID dedup, git history purge, sync cadence change
+
+- Full vault audit: departments (est. 2026-07-08) intact, no drift. Found duplicate task/bug IDs in QUEUE.md and bugs.md — renumbered (12 tasks, 1 bug), no collisions remain.
+- Closed a `.gitignore` gap: non-logo media (png/jpg/mp4/mov) had no exclusion rule, letting 67MB of raw shoot footage into git outside `media/logos/`. Rule added going forward; existing tracked files left alone (active content, not purged).
+- Ran `git filter-repo` to strip ~340MB of dead STL/gcode/3mf blobs from all vault git history (predates the STL/gcode gitignore rules, nothing in the working tree referenced them). Verified zero remain, force-pushed to origin, reset the Salomon working checkout to match.
+- Documented `automation/`, `docs/`, `inbox/`, `scripts/` in GATEWAY.md's department table — pre-existing, functioning, just never added during the restructure.
+- Changed `vault-sync.timer` cadence: 15-min interval → 4 fixed times/day (00/06/12/18:00), per Javier's request.
+- Added `djinn-vault-backup-oroborus` + `vault-backup-oroborus.timer`: full `~/Obsidian` mirror (including gitignored content) pushed to Oroborus every 23 days.
+- Full report: [[2026-07-12_vault-audit-cleanup-sync-cadence-change]]
+
+*— Claude*
