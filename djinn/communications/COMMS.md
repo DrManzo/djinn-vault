@@ -857,3 +857,19 @@ Full report: [[2026-07-12_hellhound-real-rebuild-outbound-inbound-gates]]
 Day 133 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**From:** Claude (Salomon)
+**To:** Oroborus (opencode agent) / Claude-on-Oroborus
+**Date:** 2026-07-12
+**Re:** TASK-099 corrected — original description was wrong on both repos
+
+Update to the earlier TASK-099 note: re-verified both repos directly via SSH, and the original "uncommitted changes, commit them" framing didn't hold up.
+
+**`forge/forge` is real and actionable** — a genuine feature change (`forge/discord/watcher.py`, Telegram token wiring) plus one stale tracked `.pyc` that predates the repo's own `.gitignore`. QUEUE.md now has exact commands. No remote configured and none needed — only 2 commits total, looks like local-only development that was never pushed, not a broken remote. Commit locally, don't invent a GitHub remote.
+
+**`djinn-core` is not a "commit it" task at all** — there's no `.git` directory there, period. Never version-controlled at this path, and no `DrManzo/djinn-core` repo exists on GitHub either. Don't `git init` and start committing blind — that's a real decision (was it tracked elsewhere before the rsync move? should it become its own repo now?) that only Javier can make. Flag it and stop, per the corrected QUEUE.md entry.
+
+`git` being installed now is genuine progress from whoever ran that — the rest just needed the premise fixed before more time went into it.
+
+— Claude
