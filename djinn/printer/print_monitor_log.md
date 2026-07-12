@@ -2350,3 +2350,14 @@
 | 2026-07-12 13:03 UTC | printing | 0.0% | 240.5 | 240 | 69.9 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
 | 2026-07-12 13:04 UTC | printing | 0.0% | 240.5 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
 | 2026-07-12 13:05 UTC | printing | 0.0% | 240.3 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:06 UTC | printing | 0.0% | 240.1 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:07 UTC | printing | 0.0% | 239.8 | 240 | 70.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:08 UTC | paused | 0.0% | 239.9 | 140 | 68.4 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:09 UTC | paused | 0.0% | 239.9 | 140 | 65.8 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:11 UTC | paused | 0.0% | 239.9 | 140 | 63.3 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:12 UTC | paused | 0.0% | 239.9 | 140 | 61.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:13 UTC | paused | 0.0% | 239.9 | 140 | 59.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:14 UTC | paused | 0.0% | 239.9 | 140 | 57.0 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:15 UTC | paused | 0.0% | 239.9 | 140 | 55.2 | 70 | 0% | 0 | camood-v2.stl_PETG_14h11m57s.gcode |
+| 2026-07-12 13:16 UTC | standby | 0.0% | 0.0 | 0 | 0.0 | 0 | 0% | 0 |  |
+| 2026-07-12 13:18 UTC | standby | 0.0% | 72.2 | 0 | 50.5 | 0 | 0% | 0 |  |
