@@ -11,3 +11,5 @@
 {"ts": "2026-07-12T00:41:01", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-004055", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Salomon", "tg_sent": false}
 {"ts": "2026-07-12T00:47:38", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-004732", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
 {"ts": "2026-07-12T01:06:42", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-010642", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-12T01:20:03", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-012002", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Salomon", "tg_sent": false}
+{"ts": "2026-07-12T01:37:55", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-013754", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
