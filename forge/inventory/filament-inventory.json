@@ -57,11 +57,25 @@
       "notes": "Iris — staged, full spool",
       "added_at": "2026-07-12",
       "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-005",
+      "material": "PLA",
+      "color": "Black",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 200,
+      "loaded_printer": "Nemesis",
+      "loaded": true,
+      "low_threshold_g": 150,
+      "notes": "Nemesis — active, nearly depleted. Order more before next long run.",
+      "added_at": "2026-07-12",
+      "last_used": "2026-07-12"
     }
   ],
   "printers": {
     "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
-    "Nemesis": {"loaded_spool": null, "material": null, "color": null},
+    "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
     "Calliope": {"loaded_spool": null, "material": null, "color": null},
     "Penelope": {"loaded_spool": null, "material": null, "color": null}
   }
