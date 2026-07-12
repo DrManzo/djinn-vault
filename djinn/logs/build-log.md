@@ -1821,3 +1821,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-claude-worktree-dirs-committed-to-vault-git-as-gitlinks.md`
 
 *— Claude*
+
+## 2026-07-12: BUG — hellhound.py VAULT_BASE pointed at pre-restructure path (djinn/hellhound)
+- **System:** hellhound
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** Master daemon's VAULT_BASE constant was Path.home()/Obsidian/djinn/hellhound — the department restructure on 2026-07-08 moved hellhound to a top-level ~/Obsidian/hellhound/ department, but this constant (and hellhound.service's matching ReadWritePaths) were never updated. Timeline/incidents/reports would have silently started writing into a phantom stale directory tree the moment any real pup connected — previously invisible because no pup had produced real observations since 2026-06-15 (StubGateway). Fixed both the Python constant and the systemd ReadWritePaths.
+- **Report:** `logs/reports/2026-07-12_bug-hellhound-py-vault-base-pointed-at-pre-restructure-path-djinn-hellhound.md`
+
+*— Claude*

@@ -279,3 +279,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 | 2026-07-12 | Claude | docs/machine-topology | medium | open | Salomon machine-topology IP stale (.225 documented, actual .80) | [[2026-07-12_bug-salomon-machine-topology-ip-stale-225-documented-actual-80]] |
 | 2026-07-12 | Claude | vault git repo | medium | fixed | Vault git repo carrying dead STL/gcode history + active binary leak | [[2026-07-12_bug-vault-git-repo-carrying-dead-stl-gcode-history-active-binary-leak]] |
 | 2026-07-12 | Claude | vault git repo | low | fixed | `.claude/` worktree dirs committed to vault git as gitlinks | [[2026-07-12_bug-claude-worktree-dirs-committed-to-vault-git-as-gitlinks]] |
+| 2026-07-12 | Claude | hellhound | medium | fixed | hellhound.py VAULT_BASE pointed at pre-restructure path (djinn/hellhound) | [[2026-07-12_bug-hellhound-py-vault-base-pointed-at-pre-restructure-path-djinn-hellhound]] |
