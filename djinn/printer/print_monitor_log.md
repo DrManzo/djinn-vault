@@ -2017,3 +2017,14 @@
 | 2026-07-12 07:26 UTC | printing | 0.0% | 220.1 | 220 | 65.2 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
 | 2026-07-12 07:28 UTC | printing | 0.0% | 220.4 | 220 | 65.1 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
 | 2026-07-12 07:29 UTC | printing | 0.0% | 219.2 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:30 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:31 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:32 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:33 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:34 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:35 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:36 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:37 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:38 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:39 UTC | printing | 0.0% | 220.7 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 07:40 UTC | printing | 0.0% | 219.2 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
