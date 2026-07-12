@@ -22,3 +22,6 @@
 {"ts": "2026-07-12T02:53:24", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-025323", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Claude", "tg_sent": false}
 {"ts": "2026-07-12T02:56:41", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-025639", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
 {"ts": "2026-07-12T03:00:01", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030001", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-12T03:01:57", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030156", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Salomon", "tg_sent": false}
+{"ts": "2026-07-12T03:02:15", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030214", "action": "git push to origin (worktree-inbox-triage)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-12T03:03:22", "event": "checkpoint_pending", "id": "CHECKPOINT-20260712-030321", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}

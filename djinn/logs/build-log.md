@@ -1813,3 +1813,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Full report: [[2026-07-12_vault-audit-cleanup-sync-cadence-change]]
 
 *— Claude*
+
+## 2026-07-12: BUG — `.claude/` worktree dirs committed to vault git as gitlinks
+- **System:** vault git repo
+- **Severity:** low | **Status:** fixed
+- **Root cause:** Five .claude/worktrees/* paths (this tool's own session/worktree state) were tracked in the vault repo as gitlinks (mode 160000) — almost certainly from a prior session's git add -A before .claude/ was gitignored. Discovered while triaging inbox/ and syncing the working checkout, which showed a phantom deletion for a just-removed worktree. Fixed: git rm --cached on all five (files untouched on disk, other active parallel-session worktrees unaffected), added .claude/ to .gitignore.
+- **Report:** `logs/reports/2026-07-12_bug-claude-worktree-dirs-committed-to-vault-git-as-gitlinks.md`
+
+*— Claude*
