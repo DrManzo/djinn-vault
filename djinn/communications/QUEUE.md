@@ -3599,31 +3599,47 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: /mnt/ has leftover empty dirs from old manual mounts: iris-usb, penelope-sd, piboot, piroot, typhon-usb, winiso, winusb. Verify all are empty/stale then rmdir.
 
-## TASK-099 — Oroborus: Commit uncommitted changes in migrated repos
-- assigned_to: oroborus (local opencode agent executes; if a Claude session
-  on Oroborus is invoked for this, its job is to supervise/verify only —
-  delegate the actual commands to the local agent, don't run this task's
-  work yourself. It's deterministic file/git ops, not reasoning — burning
-  Claude API tokens on it is unnecessary. Report back in COMMS.md when done.)
-- status: pending — updated 2026-07-12 by Claude (Salomon) with a real
-  blocker found: git itself is not installed on Oroborus at all (confirmed
-  via `apt list --installed`, `snap list`, direct path checks — nothing
-  found). This has to be fixed first or nothing below is possible.
+## TASK-099 — Oroborus: forge/forge commit (actionable) + djinn-core status (Javier's call)
+- assigned_to: oroborus (local opencode agent executes the forge/forge part;
+  if a Claude session on Oroborus is invoked, its job is to supervise/verify
+  only, not run the commands itself — deterministic git ops don't need
+  Claude-tier reasoning or its token cost. Report back in COMMS.md when done.)
+- status: pending — corrected 2026-07-12 by Claude (Salomon). Original task
+  description was wrong on both repos; re-verified directly via SSH before
+  rewriting. `git` is now installed on Oroborus (wasn't earlier today —
+  confirmed progress from whoever/whatever ran `apt install git`).
 - priority: normal
 - trigger: manual
 - created: 2026-07-12 by Claude
 
-**Repos with uncommitted local changes (confirmed real paths, Oroborus):**
-- `~/code/djinn/djinn-core`
-- `~/code/forge/forge`
+**Part A — `~/code/forge/forge` (actionable now, do this):**
 
-**Steps:**
-1. `sudo apt update && sudo apt install -y git` — nothing below works without this.
-2. For each repo above: `cd <repo> && git status` — see what's actually uncommitted before doing anything else.
-3. Review the diff (`git diff`) — confirm it's real intentional work, not something that should be discarded.
-4. Commit with a real message describing what changed (don't just `git add -A && commit -m "wip"`), or `git stash` if it turns out to be abandoned/experimental and shouldn't be committed — use judgment, don't blindly commit everything.
-5. Push if there's a configured remote and it makes sense to.
-6. Report what was found and what was done in `COMMS.md` — tag `@Javier` if anything looked like it needed a judgment call beyond "just commit it."
+Confirmed real, legitimate uncommitted work — not noise. Two files:
+- `forge/discord/watcher.py` — real feature change: adds `JAVIER_CHAT_ID`
+  and `load_tg_token()` reading `~/.config/djinn/ops-tg.env`'s
+  `DJINN_TG_TOKEN` — looks like Telegram notification wiring for the
+  Discord watcher, same credential pattern used elsewhere in Djinn.
+- `forge/shop/__pycache__/customer_dm.cpython-311.pyc` — stale tracked
+  bytecode from before `.gitignore` (which already correctly excludes
+  `__pycache__/` and `*.pyc`) was added in a later commit. Never
+  retroactively untracked.
+
+Steps:
+1. `cd ~/code/forge/forge`
+2. `git rm --cached forge/shop/__pycache__/customer_dm.cpython-311.pyc` — stop tracking it (already gitignored, this just fixes the pre-existing leftover)
+3. `git add forge/discord/watcher.py`
+4. `git commit -m "discord watcher: wire Telegram notifications via ops-tg.env"` (or a better message once you've read the full diff — this is a summary from a partial diff view, verify before committing)
+5. No `git push` — this repo has **no remote configured at all** (checked: `git remote -v` returns nothing), only 2 commits total in its history. Looks like local-only development that was never meant to go to GitHub yet, not a broken/missing remote. Don't invent one — just commit locally and report.
+
+**Part B — `~/code/djinn/djinn-core` (NOT actionable — needs Javier, don't guess):**
+
+This is not a "commit uncommitted changes" situation. There is **no `.git` directory here at all** — confirmed directly. It has a `.gitignore` and `README.md` (files you'd expect in a repo) but no git metadata — it was never actually version-controlled at this location. There's also no `DrManzo/djinn-core` repository on GitHub (checked via `gh repo view` — doesn't exist).
+
+Do not `git init` this and start committing — that would create a brand-new, disconnected repo with no history, silently, which could be the wrong move depending on what Javier actually wants. Open questions only Javier can answer:
+- Was djinn-core previously version-controlled somewhere else (a different path on Salomon, or folded into another repo) before this rsync migration, and did the `.git` just fail to copy over?
+- Should this become its own real GitHub repo now, or is it meant to be untracked deployed code (like some other `~/.local/bin/` tools that were never in djinn-tools either)?
+
+Flag this in COMMS.md and stop there — don't take any git action on djinn-core until Javier weighs in.
 
 ## TASK-100 — Penelope: Investigate offline status
 - assigned_to: javier
