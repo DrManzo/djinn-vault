@@ -34,7 +34,7 @@ DB_FILE    = NEURALS / "index.db"
 CUR_LOG    = LOGS_DIR / "current.jsonl"
 ARCHIVE    = LOGS_DIR / "archive"
 
-VAULT_BASE = Path.home() / "Obsidian" / "djinn" / "hellhound"
+VAULT_BASE = Path.home() / "Obsidian" / "hellhound"
 
 MAX_LOG_LINES = 10_000
 

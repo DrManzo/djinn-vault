@@ -1,0 +1,23 @@
+# Hellhound trusted IP seed list
+#
+# One IP address per line. Blank lines and lines starting with # are ignored.
+# This file is intentionally human-editable — add your phone, laptop,
+# tablet, or restored nodes here any time, no code changes needed.
+#
+# Trust here only affects the new-source-ip-forge rule (an untrusted IP
+# hitting the forge dashboard gets a Telegram alert). It does NOT disable
+# detection for SSH auth failures, invalid users, or port scans — those
+# rules block on ANY IP, trusted list or not, since there's no legitimate
+# reason for repeated auth failures from a "known" device either.
+#
+# Current confirmed fleet / host IPs (from forge/config/fleet-registry.json):
+
+192.168.1.80   # Salomon (self)
+192.168.1.113  # Calliope (Ender-3 V3 Plus) — currently using Typhon's old lease
+192.168.1.51   # Nemesis (Flashforge AD5M Pro)
+192.168.1.50   # Iris (Flashforge AD5X)
+
+# Add more below as needed, one per line:
+# 192.168.1.123  # Javier phone
+# 192.168.1.124  # Javier laptop
+# 192.168.1.125  # Typhon (when back online)

@@ -17,7 +17,7 @@ SyslogIdentifier=hellhound
 # Security hardening
 NoNewPrivileges=true
 ProtectHome=read-only
-ReadWritePaths=%h/.local/share/hellhound %h/Obsidian/djinn/hellhound
+ReadWritePaths=%h/.local/share/hellhound %h/Obsidian/hellhound
 
 [Install]
 WantedBy=default.target
