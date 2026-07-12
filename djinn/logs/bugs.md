@@ -281,3 +281,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 | 2026-07-12 | Claude | vault git repo | low | fixed | `.claude/` worktree dirs committed to vault git as gitlinks | [[2026-07-12_bug-claude-worktree-dirs-committed-to-vault-git-as-gitlinks]] |
 | 2026-07-12 | Claude | hellhound | medium | fixed | hellhound.py VAULT_BASE pointed at pre-restructure path (djinn/hellhound) | [[2026-07-12_bug-hellhound-py-vault-base-pointed-at-pre-restructure-path-djinn-hellhound]] |
 | 2026-07-12 | Claude | hellhound | medium | fixed | pup@.service used %I instead of %i — broken for any hyphenated pup name | [[2026-07-12_bug-pup-service-used-i-instead-of-i-broken-for-any-hyphenated-pup-name]] |
+| 2026-07-12 | Claude | hellhound | medium | fixed | Hellhound notify path assumed wrong Telegram credential file | [[2026-07-12_bug-hellhound-notify-path-assumed-wrong-telegram-credential-file]] |
