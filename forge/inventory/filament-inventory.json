@@ -440,6 +440,77 @@
       "last_used": null
     }
   ],
+    {
+      "spool_id": "SPOOL-032",
+      "material": "PLA",
+      "color": "Glow in the Dark",
+      "brand": "Anycubic",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-033",
+      "material": "PLA",
+      "color": "White",
+      "brand": "Overture",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — high speed refill (no spool)",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-034",
+      "material": "PLA",
+      "color": "White",
+      "brand": "Overture",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — high speed refill (no spool)",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-035",
+      "material": "PLA",
+      "color": "White",
+      "brand": "Overture",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — high speed refill (no spool)",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-036",
+      "material": "PLA",
+      "color": "White",
+      "brand": "Overture",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — high speed refill (no spool)",
+      "added_at": "2026-07-12",
+      "last_used": null
+    }
+  ],
   "printers": {
     "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
     "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
