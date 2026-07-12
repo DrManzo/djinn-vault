@@ -16,10 +16,33 @@ import asyncio
 import json
 import logging
 import os
+import socket
 import time
 from pathlib import Path
 
+
+def sd_notify(state: str) -> None:
+    """
+    Minimal sd_notify(3) implementation — no systemd-python dependency.
+    Sends a datagram to the socket path in $NOTIFY_SOCKET, per the
+    documented protocol. No-op if the env var isn't set (e.g. running
+    outside systemd, or Type= isn't notify).
+    """
+    addr = os.environ.get("NOTIFY_SOCKET")
+    if not addr:
+        return
+    if addr.startswith("@"):
+        addr = "\0" + addr[1:]  # abstract socket namespace
+    try:
+        with socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM) as sock:
+            sock.connect(addr)
+            sock.sendall(state.encode())
+    except OSError as exc:
+        log.warning("sd_notify(%r) failed: %s", state, exc)
+
+
 SOCK_PATH = Path.home() / ".local" / "share" / "hellhound" / "skull" / "skull.sock"
+WATCHDOG_PING_SEC = 10  # comfortably under pup@.service's WatchdogSec=30
 
 log = logging.getLogger("pup")
 
@@ -67,6 +90,7 @@ class PupClient:
         self._hb_interval      = 30
         self._hb_task:  asyncio.Task | None = None
         self._recv_task: asyncio.Task | None = None
+        self._watchdog_task: asyncio.Task | None = None
 
     # ------------------------------------------------------------------
     # Context manager
@@ -106,9 +130,15 @@ class PupClient:
         # Start background tasks
         self._recv_task = asyncio.create_task(self._recv_loop(), name=f"{self.name}-recv")
         self._hb_task   = asyncio.create_task(self._heartbeat_loop(), name=f"{self.name}-hb")
+        self._watchdog_task = asyncio.create_task(self._watchdog_loop(), name=f"{self.name}-watchdog")
+
+        # First successful connect proves the process is alive and useful —
+        # tell systemd. Fixes the 27-day silent-death bug: Type=simple never
+        # asked the process to prove it was still healthy after this point.
+        sd_notify("READY=1")
 
     async def disconnect(self):
-        for task in (self._hb_task, self._recv_task):
+        for task in (self._hb_task, self._recv_task, self._watchdog_task):
             if task and not task.done():
                 task.cancel()
         if self._writer:
@@ -181,6 +211,21 @@ class PupClient:
                     "uptime":             round(uptime, 1),
                     "observations_sent": self._observations_sent,
                 })
+        except asyncio.CancelledError:
+            pass
+
+    async def _watchdog_loop(self):
+        """
+        Background task: tell systemd this process is still alive, more
+        frequently than the hellhound heartbeat. Independent of whether
+        the connection to hellhound itself is healthy — if this loop is
+        still running, the event loop isn't hung, which is what the
+        systemd watchdog actually needs to know.
+        """
+        try:
+            while True:
+                sd_notify("WATCHDOG=1")
+                await asyncio.sleep(WATCHDOG_PING_SEC)
         except asyncio.CancelledError:
             pass
 
