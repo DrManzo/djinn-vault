@@ -2067,3 +2067,49 @@
 | 2026-07-12 08:17 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
 | 2026-07-12 08:18 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
 | 2026-07-12 08:19 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:20 UTC | printing | 0.0% | 219.4 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:21 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:22 UTC | complete | 0.0% | 171.8 | 0 | 64.0 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:23 UTC | complete | 0.0% | 127.4 | 0 | 62.0 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:24 UTC | complete | 0.0% | 97.2 | 0 | 59.8 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:25 UTC | complete | 0.0% | 76.7 | 0 | 57.6 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:26 UTC | complete | 0.0% | 62.4 | 0 | 55.5 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:27 UTC | complete | 0.0% | 52.7 | 0 | 53.7 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:28 UTC | complete | 0.0% | 46.4 | 0 | 51.9 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:29 UTC | complete | 0.0% | 42.2 | 0 | 50.3 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:30 UTC | complete | 0.0% | 39.4 | 0 | 48.9 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:31 UTC | complete | 0.0% | 38.1 | 0 | 47.5 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:32 UTC | complete | 0.0% | 37.4 | 0 | 46.3 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:33 UTC | complete | 0.0% | 37.0 | 0 | 45.1 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:34 UTC | complete | 0.0% | 36.6 | 0 | 44.0 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:35 UTC | complete | 0.0% | 36.3 | 0 | 43.0 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:36 UTC | complete | 0.0% | 36.1 | 0 | 42.1 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:37 UTC | complete | 0.0% | 35.9 | 0 | 41.3 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:38 UTC | complete | 0.0% | 35.7 | 0 | 40.5 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:39 UTC | complete | 0.0% | 35.5 | 0 | 39.8 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:40 UTC | complete | 0.0% | 35.4 | 0 | 39.2 | 0 | 0% | 0 | mario-pipe-marked.stl_PLA_1h1m19s.gcode |
+| 2026-07-12 08:41 UTC | standby | 0.0% | 35.2 | 0 | 38.5 | 0 | 0% | 0 |  |
+| 2026-07-12 08:42 UTC | standby | 0.0% | 35.1 | 0 | 38.0 | 0 | 0% | 0 |  |
+| 2026-07-12 08:43 UTC | standby | 0.0% | 35.0 | 0 | 37.5 | 0 | 0% | 0 |  |
+| 2026-07-12 08:44 UTC | standby | 0.0% | 34.9 | 0 | 37.0 | 0 | 0% | 0 |  |
+| 2026-07-12 08:45 UTC | standby | 0.0% | 34.7 | 0 | 36.6 | 0 | 0% | 0 |  |
+| 2026-07-12 08:46 UTC | standby | 0.0% | 34.6 | 0 | 36.2 | 0 | 0% | 0 |  |
+| 2026-07-12 08:47 UTC | standby | 0.0% | 34.5 | 0 | 35.8 | 0 | 0% | 0 |  |
+| 2026-07-12 08:48 UTC | standby | 0.0% | 34.4 | 0 | 35.5 | 0 | 0% | 0 |  |
+| 2026-07-12 08:49 UTC | standby | 0.0% | 34.3 | 0 | 35.1 | 0 | 0% | 0 |  |
+| 2026-07-12 08:50 UTC | standby | 0.0% | 34.1 | 0 | 34.8 | 0 | 0% | 0 |  |
+| 2026-07-12 08:51 UTC | standby | 0.0% | 34.0 | 0 | 34.5 | 0 | 0% | 0 |  |
+| 2026-07-12 08:52 UTC | standby | 0.0% | 33.9 | 0 | 34.2 | 0 | 0% | 0 |  |
+| 2026-07-12 08:53 UTC | standby | 0.0% | 33.8 | 0 | 34.0 | 0 | 0% | 0 |  |
+| 2026-07-12 08:54 UTC | standby | 0.0% | 33.7 | 0 | 33.7 | 0 | 0% | 0 |  |
+| 2026-07-12 08:55 UTC | standby | 0.0% | 33.5 | 0 | 33.5 | 0 | 0% | 0 |  |
+| 2026-07-12 08:56 UTC | standby | 0.0% | 33.4 | 0 | 33.2 | 0 | 0% | 0 |  |
+| 2026-07-12 08:57 UTC | standby | 0.0% | 33.3 | 0 | 33.0 | 0 | 0% | 0 |  |
+| 2026-07-12 08:58 UTC | standby | 0.0% | 33.2 | 0 | 32.8 | 0 | 0% | 0 |  |
+| 2026-07-12 08:59 UTC | standby | 0.0% | 33.1 | 0 | 32.6 | 0 | 0% | 0 |  |
+| 2026-07-12 09:00 UTC | standby | 0.0% | 32.9 | 0 | 32.4 | 0 | 0% | 0 |  |
+| 2026-07-12 09:01 UTC | standby | 0.0% | 32.8 | 0 | 32.2 | 0 | 0% | 0 |  |
+| 2026-07-12 09:02 UTC | standby | 0.0% | 32.7 | 0 | 32.0 | 0 | 0% | 0 |  |
+| 2026-07-12 09:03 UTC | standby | 0.0% | 32.6 | 0 | 31.9 | 0 | 0% | 0 |  |
+| 2026-07-12 09:04 UTC | standby | 0.0% | 32.5 | 0 | 31.7 | 0 | 0% | 0 |  |
+| 2026-07-12 09:05 UTC | standby | 0.0% | 32.4 | 0 | 31.6 | 0 | 0% | 0 |  |
