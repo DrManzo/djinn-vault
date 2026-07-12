@@ -1866,3 +1866,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-gateway-md-s-agent-write-targets-table-described-7-agents-that-never-existed.md`
 
 *— Claude*
+
+## 2026-07-12: BUG — Hellhound auto-blocked Oroborus within minutes of going live
+- **System:** hellhound
+- **Severity:** high | **Status:** fixed
+- **Root cause:** ssh-new-user-attempt rule fired unconditionally on sshd's separate 'Invalid user X' log line via one of two SSH-detection code paths, ignoring ALLOWED_SSH_USERS (which deliberately includes 'javier' even though the real account is 'drmanzo', anticipating Javier might try his own name out of habit). Oroborus (192.168.1.154) attempted SSH into Salomon as 'javier', failed (no such account), and got auto-blocked via ufw within minutes of the detection pup going live — a real, live operational disruption on the very first day. Manually unblocked immediately upon discovery, then fixed the code so both SSH detection paths respect the same allowlist. rapid-auth-fail intentionally left unchanged (still fires regardless of username on 5+ rapid failures — that's still worth flagging even for known devices).
+- **Report:** `logs/reports/2026-07-12_bug-hellhound-auto-blocked-oroborus-within-minutes-of-going-live.md`
+
+*— Claude*
