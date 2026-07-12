@@ -3609,11 +3609,12 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 
 ## TASK-100 — Penelope: Investigate offline status
 - assigned_to: javier
-- status: pending
+- status: resolved — premise was wrong
 - priority: normal
 - trigger: manual
 - created: 2026-07-12 by Claude
-- context: Penelope (E3 Pro, 192.168.1.150) not responding on network. May be powered down. Check physical power, then Moonraker status.
+- closed: 2026-07-12 by Claude
+- context: RESOLVED — original task incorrectly described Penelope as a networked device at 192.168.1.150. Penelope has no independent IP — it's an Ender 3 Pro connected via USB, run through OctoPrint hosted on Salomon (`http://localhost:5001`, per `forge/config/fleet-registry.json`). Confirmed live 2026-07-12: OctoPrint is up and responding (HTTP 302 on :5001, real process listening). Nothing was actually offline; the task was chasing a network address that was never Penelope's in the first place.
 
 ## TASK-101 — Typhon: Power on + mount as network share
 - assigned_to: javier
