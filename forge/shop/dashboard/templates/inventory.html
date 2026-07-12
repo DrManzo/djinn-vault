@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div>
+    <h4>Filament Inventory</h4>
+    <div class="sub">{{ all_spools|length }} spools · last updated {{ last_updated }}</div>
+  </div>
+  <div style="font-size:.8rem;color:var(--text-muted);" id="save-status"></div>
+</div>
+
+{% if low_spools %}
+<div style="background:#2a1a0a;border:1px solid #6a3a10;border-radius:6px;padding:.75rem 1rem;margin-bottom:1.5rem;font-size:.84rem;color:#e09040;">
+  <strong>Low stock:</strong>
+  {% for s in low_spools %}
+    {{ s.brand }} {{ s.color }} {{ s.material }} ({{ s.remaining_g }}g / {{ s.spool_id }}){% if not loop.last %}, {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- Loaded per printer -->
+{% if loaded_by_printer %}
+{% for printer_name, spools in loaded_by_printer.items() %}
+<div style="margin-bottom:1.5rem;">
+  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">
+    <i class="bi bi-printer" style="margin-right:.3rem;"></i>{{ printer_name }} — loaded
+  </div>
+  <table class="table-dark-custom">
+    <thead><tr>
+      <th>ID</th><th>Material</th><th>Color</th><th>Brand</th>
+      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th>
+    </tr></thead>
+    <tbody>
+    {% for s in spools %}
+    <tr class="{{ 'low-spool' if s.remaining_g <= s.low_threshold_g }}">
+      <td style="color:var(--text-muted);font-size:.8rem;">{{ s.spool_id }}</td>
+      <td>{{ s.material }}</td>
+      <td><span class="color-dot" style="background:{{ s.color | color_hex }};"></span> {{ s.color }}</td>
+      <td style="color:var(--text-muted);">{{ s.brand }}</td>
+      <td>
+        <span class="editable-weight {% if s.remaining_g <= s.low_threshold_g %}low-val{% endif %}"
+              data-spool="{{ s.spool_id }}"
+              data-val="{{ s.remaining_g }}"
+              title="Click to edit">{{ s.remaining_g }}</span>
+      </td>
+      <td style="color:var(--text-muted);">{{ s.initial_weight_g }}</td>
+      <td style="color:var(--text-muted);font-size:.8rem;">{{ s.notes or '—' }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- Unloaded spools -->
+<div>
+  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">
+    <i class="bi bi-archive" style="margin-right:.3rem;"></i>Staged / unloaded ({{ unloaded|length }})
+  </div>
+  {% if unloaded %}
+  <table class="table-dark-custom">
+    <thead><tr>
+      <th>ID</th><th>Material</th><th>Color</th><th>Brand</th>
+      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th>
+    </tr></thead>
+    <tbody>
+    {% for s in unloaded %}
+    <tr class="{{ 'low-spool-row' if s.remaining_g <= s.low_threshold_g }}">
+      <td style="color:var(--text-muted);font-size:.8rem;">{{ s.spool_id }}</td>
+      <td>{{ s.material }}</td>
+      <td><span class="color-dot" style="background:{{ s.color | color_hex }};"></span> {{ s.color }}</td>
+      <td style="color:var(--text-muted);">{{ s.brand }}</td>
+      <td>
+        <span class="editable-weight {% if s.remaining_g <= s.low_threshold_g %}low-val{% endif %}"
+              data-spool="{{ s.spool_id }}"
+              data-val="{{ s.remaining_g }}"
+              title="Click to edit">{{ s.remaining_g }}</span>
+      </td>
+      <td style="color:var(--text-muted);">{{ s.initial_weight_g }}</td>
+      <td style="color:var(--text-muted);font-size:.8rem;">{{ s.notes or '—' }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="card-dark" style="text-align:center;padding:1.5rem;color:var(--text-muted);">All spools are loaded.</div>
+  {% endif %}
+</div>
+
+<style>
+  .editable-weight {
+    cursor: pointer;
+    padding: .2rem .45rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 3.5rem;
+  }
+  .editable-weight:hover { border-color: var(--border); background: #0f1923; }
+  .editable-weight.editing { border-color: var(--accent); background: #0f1923; outline: none; }
+  .low-val { color: #e09040; }
+  .low-spool-row td { background: #1a1208 !important; }
+  .color-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.2);
+    margin-right: .35rem;
+    vertical-align: middle;
+  }
+  input.weight-input {
+    background: #0f1923;
+    border: 1px solid var(--accent);
+    color: #d4e4f0;
+    border-radius: 4px;
+    padding: .15rem .4rem;
+    font-size: .88rem;
+    width: 5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  input.weight-input:focus { outline: none; }
+</style>
+
+<script>
+const saveStatus = document.getElementById('save-status');
+
+function showStatus(msg, ok = true) {
+  saveStatus.textContent = msg;
+  saveStatus.style.color = ok ? '#44c866' : '#e06060';
+  setTimeout(() => { saveStatus.textContent = ''; }, 2500);
+}
+
+async function saveWeight(spoolId, val) {
+  try {
+    const res = await fetch(`/api/inventory/${spoolId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ remaining_g: parseInt(val, 10) }),
+    });
+    if (!res.ok) throw new Error('server error');
+    showStatus(`${spoolId} saved — ${val}g`, true);
+  } catch (e) {
+    showStatus(`Save failed for ${spoolId}`, false);
+  }
+}
+
+document.querySelectorAll('.editable-weight').forEach(span => {
+  span.addEventListener('click', () => {
+    if (span.querySelector('input')) return;
+    const current = span.dataset.val;
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.min = '0';
+    input.max = '5000';
+    input.value = current;
+    input.className = 'weight-input';
+    span.textContent = '';
+    span.appendChild(input);
+    span.classList.add('editing');
+    input.focus();
+    input.select();
+
+    function commit() {
+      const newVal = Math.max(0, Math.min(5000, parseInt(input.value, 10) || 0));
+      span.dataset.val = newVal;
+      span.textContent = newVal;
+      span.classList.remove('editing');
+      if (newVal !== parseInt(current, 10)) {
+        saveWeight(span.dataset.spool, newVal);
+      }
+    }
+    input.addEventListener('blur', commit);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+      if (e.key === 'Escape') { span.textContent = current; span.classList.remove('editing'); }
+    });
+  });
+});
+</script>
+{% endblock %}
