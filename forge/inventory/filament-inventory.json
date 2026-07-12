@@ -368,6 +368,35 @@
       "last_used": null
     }
   ],
+    {
+      "spool_id": "SPOOL-027",
+      "material": "PLA",
+      "color": "Burnt Titanium",
+      "brand": "unknown",
+      "initial_weight_g": 1000,
+      "remaining_g": 600,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — partially used. brand TBD",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-028",
+      "material": "PETG",
+      "color": "Grey",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 700,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "shelf — partially used",
+      "added_at": "2026-07-12",
+      "last_used": null
+    }
+  ],
   "printers": {
     "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
     "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
