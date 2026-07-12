@@ -190,13 +190,13 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 700,
-      "loaded_printer": null,
-      "loaded": false,
+      "remaining_g": 600,
+      "loaded_printer": "Calliope",
+      "loaded": true,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "Calliope — active. Used for camood-v2 (1x completed job + 1x crashed job, ~95g combined per gcode extrusion estimate); ~600g per Javier's physical check 2026-07-12.",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": "2026-07-12"
     },
     {
       "spool_id": "SPOOL-015",
@@ -309,8 +309,7 @@
       "notes": "shelf",
       "added_at": "2026-07-12",
       "last_used": null
-    }
-  ],
+    },
     {
       "spool_id": "SPOOL-023",
       "material": "PLA",
@@ -366,8 +365,7 @@
       "notes": "shelf",
       "added_at": "2026-07-12",
       "last_used": null
-    }
-  ],
+    },
     {
       "spool_id": "SPOOL-027",
       "material": "PLA",
@@ -395,8 +393,7 @@
       "notes": "shelf — partially used",
       "added_at": "2026-07-12",
       "last_used": null
-    }
-  ],
+    },
     {
       "spool_id": "SPOOL-029",
       "material": "PLA",
@@ -438,8 +435,7 @@
       "notes": "INCOMING 2026-07-13 — Rapid PLA",
       "added_at": "2026-07-12",
       "last_used": null
-    }
-  ],
+    },
     {
       "spool_id": "SPOOL-032",
       "material": "PLA",
@@ -514,7 +510,7 @@
   "printers": {
     "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
     "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
-    "Calliope": {"loaded_spool": null, "material": null, "color": null},
+    "Calliope": {"loaded_spool": "SPOOL-014", "material": "PETG", "color": "White"},
     "Penelope": {"loaded_spool": null, "material": null, "color": null}
   }
 }
