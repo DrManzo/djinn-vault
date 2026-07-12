@@ -1,0 +1,68 @@
+{
+  "last_updated": "2026-07-12",
+  "updated_by": "Claude",
+  "spools": [
+    {
+      "spool_id": "SPOOL-001",
+      "material": "PETG",
+      "color": "White",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 900,
+      "loaded_printer": "Iris",
+      "loaded": true,
+      "low_threshold_g": 150,
+      "notes": "Iris — active spool. 2x white PETG ~1.5kg combined, this is spool A",
+      "added_at": "2026-07-12",
+      "last_used": "2026-07-12"
+    },
+    {
+      "spool_id": "SPOOL-002",
+      "material": "PETG",
+      "color": "White",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 600,
+      "loaded_printer": "Iris",
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "Iris — staged. 2x white PETG ~1.5kg combined, this is spool B",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-003",
+      "material": "PLA",
+      "color": "Red",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 800,
+      "loaded_printer": "Iris",
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "Iris — staged",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-004",
+      "material": "PLA",
+      "color": "Yellow",
+      "brand": "Anycubic",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": "Iris",
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "Iris — staged, full spool",
+      "added_at": "2026-07-12",
+      "last_used": null
+    }
+  ],
+  "printers": {
+    "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
+    "Nemesis": {"loaded_spool": null, "material": null, "color": null},
+    "Calliope": {"loaded_spool": null, "material": null, "color": null},
+    "Penelope": {"loaded_spool": null, "material": null, "color": null}
+  }
+}
