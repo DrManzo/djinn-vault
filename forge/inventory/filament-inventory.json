@@ -397,6 +397,49 @@
       "last_used": null
     }
   ],
+    {
+      "spool_id": "SPOOL-029",
+      "material": "PLA",
+      "color": "Tri-Color Silk",
+      "brand": "Landu",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "INCOMING 2026-07-13 — silk tri-color",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-030",
+      "material": "PLA",
+      "color": "Multi-Color",
+      "brand": "Creality",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "INCOMING 2026-07-13",
+      "added_at": "2026-07-12",
+      "last_used": null
+    },
+    {
+      "spool_id": "SPOOL-031",
+      "material": "PLA",
+      "color": "Ruby Red",
+      "brand": "FlashForge",
+      "initial_weight_g": 1000,
+      "remaining_g": 1000,
+      "loaded_printer": null,
+      "loaded": false,
+      "low_threshold_g": 150,
+      "notes": "INCOMING 2026-07-13 — Rapid PLA",
+      "added_at": "2026-07-12",
+      "last_used": null
+    }
+  ],
   "printers": {
     "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
     "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
