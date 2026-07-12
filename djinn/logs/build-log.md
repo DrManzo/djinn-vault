@@ -1785,3 +1785,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Auth deferred, flagged explicitly, not silently skipped:** Javier wants HTTP Basic Auth backed by a 1Password Service Account token (not personal `op signin` — confirmed during setup that interactive signin sessions don't persist across this agent's per-command shell invocations anyway, and wouldn't survive a systemd restart even if they did). Scaffolding is in place (`check_auth()` reads `DJINN_DASHBOARD_USER`/`DJINN_DASHBOARD_PASS` from environment, currently unset) but the dashboard is **open on the LAN with no auth right now** — explicitly acknowledged and deferred, not an oversight. Also added `Host * / IdentityAgent ~/.1password/agent.sock` to `~/.ssh/config` at Javier's request (1Password's SSH agent feature, separate from the CLI signin work).
 
 - **2026-07-12 — Unified Typhon's Forge Dashboard**: Merged fleet dashboard (djinn-forge-dashboard, port 8420) + shop dashboard (port 5000) into a single Flask app. One login, one nav: Dashboard (fleet cards + active orders), Queue, Orders, Customers, Inventory (live-editable filament JSON), Finance, Reports. Fleet polling via ThreadPoolExecutor, 5s JS auto-refresh. Inline click-to-edit for remaining_g on inventory page. Old djinn-forge-dashboard and forge-shop-dashboard services stopped/disabled. Unified service confirmed up, all routes 200, live fleet data confirmed. See [[2026-07-12_unified-forge-dashboard]].
+
+## 2026-07-12: BUG — Salomon machine-topology IP stale (.225 documented, actual .80)
+- **System:** docs/machine-topology
+- **Severity:** medium | **Status:** open
+- **Root cause:** CLAUDE.md and djinn/AGENTS.md list Salomon at 192.168.1.225, but Salomon's actual current LAN IP is 192.168.1.80 (confirmed live: this session's own Bash tool runs on Salomon, and 192.168.1.225 is unreachable/no-route while .80 matches the forge dashboard URL already in COMMS.md). Likely a DHCP lease change that was never back-filled into the docs — same class of drift as the prior Calliope-IP and Penelope-API-key findings.
+- **Report:** `logs/reports/2026-07-12_bug-salomon-machine-topology-ip-stale-225-documented-actual-80.md`
+
+*— Claude*

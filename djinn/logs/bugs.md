@@ -276,3 +276,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 - **Workaround:** Inject `M220 S60` at the layer before the transition zone and `M220 S100` after. Identify transition by finding the Z height where per-layer line counts drop by ≥30% from the local peak. Zone = 3mm before the peak through 3mm after the drop.
 - **Proper fix:** Sequential printing (finish each piece before starting next) or add chamfer to model at the transition ledge to remove the overhang.
 - **Rule/Lesson:** Any multi-piece Nemesis gcode must be analyzed for geometry transitions and have the warp fix injected before printing. Single-piece prints and Iris/Calliope plates are not affected by this (different layer times / different geometry profiles).
+| 2026-07-12 | Claude | docs/machine-topology | medium | open | Salomon machine-topology IP stale (.225 documented, actual .80) | [[2026-07-12_bug-salomon-machine-topology-ip-stale-225-documented-actual-80]] |
