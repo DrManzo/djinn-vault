@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="topbar">
-  <div><h4>Finance</h4><div class="sub">{{ start }} → {{ end }}</div></div>
+  <div><h4>Finance</h4></div>
   <form method="GET" class="d-flex gap-2 align-items-center">
     <input type="date" name="start" value="{{ start }}" class="form-ctrl-dark">
     <span style="color:#5a7a9a">to</span>
@@ -42,7 +42,6 @@
   <!-- Income Statement -->
   <div class="col-md-6">
     <div class="card-dark">
-      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem">Income Statement</div>
       {% set rows = [
         ('Gross Revenue',    stmt.gross_revenue,    '#e8a020'),
         ('Material COGS',    stmt.material_cogs,    '#d4e4f0'),
@@ -69,9 +68,6 @@
   <!-- Balance Sheet -->
   <div class="col-md-6">
     <div class="card-dark">
-      <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">
-        Balance Sheet <span style="font-weight:400;color:#5a7a9a">— today</span>
-      </div>
       <form method="GET" class="d-flex gap-2 mb-3 flex-wrap">
         <input type="hidden" name="start" value="{{ start }}">
         <input type="hidden" name="end"   value="{{ end }}">

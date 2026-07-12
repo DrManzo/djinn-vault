@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="topbar">
-  <div>
-    <h4>Filament Inventory</h4>
-    <div class="sub">{{ all_spools|length }} spools · last updated {{ last_updated }}</div>
-  </div>
+  <div><h4>Filament Inventory</h4></div>
   <div style="font-size:.8rem;color:var(--text-muted);" id="save-status"></div>
 </div>
 
@@ -21,9 +18,7 @@
 {% if loaded_by_printer %}
 {% for printer_name, spools in loaded_by_printer.items() %}
 <div style="margin-bottom:1.5rem;">
-  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">
-    <i class="bi bi-printer" style="margin-right:.3rem;"></i>{{ printer_name }} — loaded
-  </div>
+  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">{{ printer_name }}</div>
   <table class="table-dark-custom">
     <thead><tr>
       <th>ID</th><th>Material</th><th>Color</th><th>Brand</th>
@@ -54,9 +49,7 @@
 
 <!-- Unloaded spools -->
 <div>
-  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">
-    <i class="bi bi-archive" style="margin-right:.3rem;"></i>Staged / unloaded ({{ unloaded|length }})
-  </div>
+  <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem;font-weight:600;">Unloaded</div>
   {% if unloaded %}
   <table class="table-dark-custom">
     <thead><tr>
