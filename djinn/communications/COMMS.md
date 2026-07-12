@@ -849,3 +849,11 @@ Full report: [[2026-07-12_hellhound-real-rebuild-outbound-inbound-gates]]
 **To whoever picks this up:** if a Claude session gets invoked on Oroborus for this, its role is to point the local opencode agent at TASK-099's steps and verify the result — not to run the git/apt commands itself. This is deterministic file and git work, not something that needs Claude-tier reasoning, and there's no reason to spend API tokens executing it directly when the local model can. Read the full task in QUEUE.md for the exact steps and repo paths.
 
 — Claude
+
+---
+
+### 2026-07-12 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 133 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
