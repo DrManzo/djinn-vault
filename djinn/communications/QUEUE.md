@@ -2715,7 +2715,7 @@ Write the complete script to `djinn/research/marcus/TASK-080_kraken-pipe.md` as 
 
 ---
 
-## TASK-071
+## TASK-103
 - assigned_to: claude
 - status: backlog
 - priority: low
@@ -3392,7 +3392,7 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 
 ---
 
-## TASK-005 — Typhon: Unlock SSH + Import slicer profiles
+## TASK-092 — Typhon: Unlock SSH + Import slicer profiles
 - assigned_to: typhon (Javier — needs interactive session)
 - status: pending
 - priority: high
@@ -3407,7 +3407,7 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 
 ---
 
-## TASK-006 — Iris: Test first multi-color print
+## TASK-093 — Iris: Test first multi-color print
 - assigned_to: javier
 - status: pending
 - priority: high
@@ -3422,7 +3422,7 @@ djinn-blender-qa <input.stl> [--printer ender3_v3_plus] [--material PLA] [--out 
 
 ---
 
-## TASK-007 — Iris: Fix `_START_BAMBUFY` delayed gcode auto-init
+## TASK-094 — Iris: Fix `_START_BAMBUFY` delayed gcode auto-init
 - assigned_to: claude
 - status: pending
 - priority: normal
@@ -3534,7 +3534,7 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 
 **CORRECTION — 2026-07-09 by Claude.** Skip the entire "Software" fan-cap block above (lines re: `fan-cap-calliope.cfg`, `M106` cap tests). BUG-014's root cause was reinvestigated and confirmed on 2026-06-29 (see `logs/bugs.md`): the dropouts are the toolhead cable pulling to its stress point during engraved/embossed toolpaths, not EMI from fan PWM. The fan cap (and thermal soak, 3x3 mesh, TRSYNC) were all tried and reverted as ineffective — stock config is correct. Installing the fan cap again would be reintroducing a dead-end fix. `~/Obsidian/forge/config/fan-cap-calliope.cfg` also moved under the 7/8 department restructure — the path referenced above (`djinn/printer/config/`) no longer exists. Post-cable-install steps are just: PROBE_CALIBRATE → BED_MESH_CALIBRATE → test print with single-merged-body geometry (no separate engrave/emboss shells) and gyroid infill, per the validated Calliope print rules in bugs.md. (Also: the "$(date +%Y-%m-%d)" in the section header above is an unexpanded shell variable, not a real date — this checklist was written 2026-07-07.)
 
-## TASK-008 — Oroborus: Check /mnt/archive drive + create marcus structure
+## TASK-095 — Oroborus: Check /mnt/archive drive + create marcus structure
 - assigned_to: salomon
 - status: done
 - priority: high
@@ -3551,7 +3551,7 @@ Service loop 40–50mm at toolhead connector. Route nozzle_mcu cable separately 
 - Vault INDEX.md updated with correct path
 - No Oroborus action needed for marcus
 
-## TASK-009 — Salomon idle: Marcus research pass-through agent
+## TASK-096 — Salomon idle: Marcus research pass-through agent
 - assigned_to: salomon
 - status: pending
 - priority: low
@@ -3583,7 +3583,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 ```
 **Note:** Write this as a proper djinn-marcus-index tool once TASK-008 confirms Oroborus is healthy.
 
-## TASK-010 — Salomon: Move ~/Games to Alexandria
+## TASK-097 — Salomon: Move ~/Games to Alexandria
 - assigned_to: claude
 - status: pending
 - priority: normal
@@ -3591,7 +3591,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: ~/Games/epic-games-store/ (3.3GB) still on Salomon. Move to /run/media/drmanzo/alexandria/games/ to clear Salomon. Confirm games still launch after move (symlink if needed).
 
-## TASK-011 — Salomon: Clean stale /mnt/ subdirs
+## TASK-098 — Salomon: Clean stale /mnt/ subdirs
 - assigned_to: claude
 - status: pending
 - priority: low
@@ -3599,7 +3599,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: /mnt/ has leftover empty dirs from old manual mounts: iris-usb, penelope-sd, piboot, piroot, typhon-usb, winiso, winusb. Verify all are empty/stale then rmdir.
 
-## TASK-012 — Oroborus: Commit uncommitted changes in migrated repos
+## TASK-099 — Oroborus: Commit uncommitted changes in migrated repos
 - assigned_to: claude
 - status: pending
 - priority: normal
@@ -3607,7 +3607,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: djinn-core and projects/forge had local modifications when rsynced to Oroborus. Changes preserved but not committed. SSH to oroborus, git status both repos, commit or stash.
 
-## TASK-013 — Penelope: Investigate offline status
+## TASK-100 — Penelope: Investigate offline status
 - assigned_to: javier
 - status: pending
 - priority: normal
@@ -3615,7 +3615,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: Penelope (E3 Pro, 192.168.1.150) not responding on network. May be powered down. Check physical power, then Moonraker status.
 
-## TASK-014 — Typhon: Power on + mount as network share
+## TASK-101 — Typhon: Power on + mount as network share
 - assigned_to: javier
 - status: pending
 - priority: high
@@ -3623,7 +3623,7 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
 - created: 2026-07-12 by Claude
 - context: Typhon (192.168.1.113) offline. Once powered on: mount SMB shares from Salomon at /run/media/drmanzo/typhon, configure Bambu Studio + OrcaSlicer for Iris/Nemesis access. Also run chkdsk on the USB stick (currently dirty NTFS).
 
-## TASK-015 — Filament: Update inventory to current stock
+## TASK-102 — Filament: Update inventory to current stock
 - assigned_to: javier+claude
 - status: in-progress
 - priority: high
