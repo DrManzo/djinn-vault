@@ -8,6 +8,9 @@ ai/marcus/*
 # ── RAW IMPORTS — local only ──────────────────────────────────────────────────
 RAW/
 
+# ── CLAUDE CODE SESSION STATE — never vault content ──────────────────────────
+.claude/
+
 # ── OBSIDIAN CACHE ────────────────────────────────────────────────────────────
 .obsidian/workspace*
 .obsidian/cache/
