@@ -261,3 +261,18 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 - **Fix:** read the real key from `~/.octoprint-penelope/config.yaml` and updated `printers.env` to match. Verified against `/api/connection` (200, correct `"state": "Closed"` response) before trusting it further.
 - **Status:** Fixed.
 - **Rule/Lesson:** `printers.env` is the canonical fleet config file referenced by multiple tools (`djinn-print-quote`, now the dashboard, likely others) but nothing currently checks it against the live, ground-truth state of each printer/service. Given this is now the *third* stale-credential/stale-IP finding in `printers.env`-adjacent config across two nights, a periodic drift-check script (compare configured IPs/keys against actual reachability + actual OctoPrint/Moonraker config) would catch this class of bug before it silently breaks something, rather than after.
+
+---
+
+## BUG-NEMESIS-001 — Layer warp at geometry transition on multi-piece plates
+- **Printer:** Nemesis
+- **Date:** 2026-07-12
+- **Severity:** MEDIUM
+- **Status:** Workaround applied, under test
+- **Symptom:** 1-2 layer isolated warp ring appearing at the same Z height on all pieces in a multi-piece plate. Identical single-piece print of the same model prints clean.
+- **Root cause:** Layer time. Printing N pieces simultaneously means each spot on each object cools for N× longer between layers. At geometry transition zones (where cross-section complexity drops sharply — dense decorative features giving way to simpler walls), the unsupported edge at the step contracts and lifts before the next layer lands. All N pieces show the identical warp because they all hit the same geometry at the same Z.
+- **Confirmed on:** camood_marked (Z≈46-49mm transition), 6-puffco-710 (Z≈47-49mm transition)
+- **Single-piece reference:** puffco-710_marked_PETG_50m49s.gcode printed clean — same model, no warp.
+- **Workaround:** Inject `M220 S60` at the layer before the transition zone and `M220 S100` after. Identify transition by finding the Z height where per-layer line counts drop by ≥30% from the local peak. Zone = 3mm before the peak through 3mm after the drop.
+- **Proper fix:** Sequential printing (finish each piece before starting next) or add chamfer to model at the transition ledge to remove the overhang.
+- **Rule/Lesson:** Any multi-piece Nemesis gcode must be analyzed for geometry transitions and have the warp fix injected before printing. Single-piece prints and Iris/Calliope plates are not affected by this (different layer times / different geometry profiles).
