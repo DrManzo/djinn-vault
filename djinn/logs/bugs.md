@@ -277,3 +277,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 - **Proper fix:** Sequential printing (finish each piece before starting next) or add chamfer to model at the transition ledge to remove the overhang.
 - **Rule/Lesson:** Any multi-piece Nemesis gcode must be analyzed for geometry transitions and have the warp fix injected before printing. Single-piece prints and Iris/Calliope plates are not affected by this (different layer times / different geometry profiles).
 | 2026-07-12 | Claude | docs/machine-topology | medium | open | Salomon machine-topology IP stale (.225 documented, actual .80) | [[2026-07-12_bug-salomon-machine-topology-ip-stale-225-documented-actual-80]] |
+| 2026-07-12 | Claude | vault git repo | medium | fixed | Vault git repo carrying dead STL/gcode history + active binary leak | [[2026-07-12_bug-vault-git-repo-carrying-dead-stl-gcode-history-active-binary-leak]] |
