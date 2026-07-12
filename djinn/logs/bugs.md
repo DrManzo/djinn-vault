@@ -251,6 +251,13 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 - **Status:** Fixed and rolled out to all three fleet instances (Calliope, Nemesis, Iris), confirmed stable (0 restarts) for 20+ seconds post-rollout.
 - **Rule/Lesson:** Any code path that both (a) calls something with its own internal dedup/idempotency guard and (b) unconditionally logs/acts as if that call always does new work is a restart-storm waiting to happen the moment the guard actually fires. The log message and control-flow decision (break vs. continue) must be driven by the guard's actual outcome, not assumed from which branch was entered. Also: `Restart=always` without a bounded idle-state check is exactly the mechanism that turns "one silent bug" into "16,000 restarts before anyone notices" — a `Type=notify` + `WatchdogSec` pairing should be the default for any always-on daemon like this, not an afterthought.
 
-
 ## 2026-07-11 — djinn-bughunter scan (1 finding(s))
 - **[MEDIUM]** `journald:djinn-telegram-gateway` — network error (2 occurrence(s)) _(type: errlog)_
+
+## 2026-07-11 — Penelope's API Key in printers.env Was Stale (silent 403 on every call)
+
+- **[MEDIUM]** `~/.config/djinn/printers.env`'s `DJINN_PENELOPE_APIKEY` did not match the key actually configured in OctoPrint's own `~/.octoprint-penelope/config.yaml` (`api.key`) — every API call using the env-file key 403'd with "You don't have the permission to access the requested resource," including on basic endpoints like `/api/server`. The two values were completely different, suggesting the OctoPrint key was regenerated at some point and the env file was never updated to match — same class of drift as the Calliope `.114`→`.113` IP staleness found the previous night.
+- **Found while building** the fleet dashboard, which needed to actually query Penelope's API and immediately hit the 403.
+- **Fix:** read the real key from `~/.octoprint-penelope/config.yaml` and updated `printers.env` to match. Verified against `/api/connection` (200, correct `"state": "Closed"` response) before trusting it further.
+- **Status:** Fixed.
+- **Rule/Lesson:** `printers.env` is the canonical fleet config file referenced by multiple tools (`djinn-print-quote`, now the dashboard, likely others) but nothing currently checks it against the live, ground-truth state of each printer/service. Given this is now the *third* stale-credential/stale-IP finding in `printers.env`-adjacent config across two nights, a periodic drift-check script (compare configured IPs/keys against actual reachability + actual OctoPrint/Moonraker config) would catch this class of bug before it silently breaks something, rather than after.
