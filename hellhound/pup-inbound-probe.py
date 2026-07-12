@@ -195,7 +195,7 @@ class InboundProbeDetector:
                 )
             return
         m = SSH_INVALID_USER_RE.search(line)
-        if m:
+        if m and m.group("user") not in ALLOWED_SSH_USERS:
             await self._respond(
                 RULES["ssh-new-user-attempt"],
                 {"ip": m.group("ip"), "surface": "ssh", "event_type": "invalid_user",
