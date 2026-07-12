@@ -327,3 +327,15 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** Track "have I already reported this completion" via a small JSON marker file per printer (`~/.local/share/djinn/print-safety-last-reported-<printer>.json`), not an in-memory flag inside the daemon.
 **Why:** `djinn-print-safety`'s systemd unit uses `Restart=always`, and the daemon deliberately exits after every print completion (that's how it avoids getting stuck watching a finished job). Any in-memory dedup state would be wiped on every one of those restarts, defeating the purpose — the guard has to outlive the process.
 **How to apply:** Any future daemon that (a) intentionally exits on a terminal event and (b) relies on `Restart=always` to come back for the next event needs this same pattern if it does anything non-idempotent on that terminal event.
+
+## 2026-07-12 — Purge git history for dead binary blobs, not just gitignore going forward
+
+**Decision:** Ran `git filter-repo` to strip historical STL/gcode/3mf blobs from the vault's entire git history, rather than only adding forward-looking gitignore rules.
+**Why:** ~340MB of the repo's `.git` size was already-deleted STL/gcode content sitting in old commits from before those extensions were gitignored — a gitignore rule does nothing for content already committed. Left the *currently-tracked* 67MB of live media (raw shoot footage, design renders) untouched in the same pass — that's active content, and purging it needs a confirmed backup elsewhere first, which wasn't established yet.
+**How to apply:** Any future "vault is bloated" complaint should first check `git count-objects -v` / `du -sh .git` vs. what's actually in the current working tree — bloat from deleted files needs a history rewrite (filter-repo/BFG + force-push + reset all other checkouts), not just a gitignore fix.
+
+## 2026-07-12 — Vault sync moved from 15-min interval to 4x/day fixed times; new 23-day full backup to Oroborus
+
+**Decision:** `vault-sync.timer` (git+gdrive, git-tracked content only) now fires at 00:00/06:00/12:00/18:00 instead of every 15 minutes. New `vault-backup-oroborus.timer` runs every 23 days, mirroring the *entire* `~/Obsidian` tree — including everything gitignored (personal/, forge/finance, forge/commissions, RAW/, all binaries) — to Oroborus's storage via rsync.
+**Why:** Javier's call to reduce sync frequency. The 23-day Oroborus job exists specifically to cover what the git-based sync structurally can never back up (gitignored-by-design content), giving a real disaster-recovery copy instead of just a partial one.
+**How to apply:** If gitignored content changes shape (new excluded department, new secrets path), check whether `djinn-vault-backup-oroborus`'s exclude list needs updating too — it currently only excludes `.git/`, `.claude/`, and two known-broken symlinks (`djinn/RAW`, `djinn/workspace` — destination volume doesn't support symlinks).
