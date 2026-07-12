@@ -791,7 +791,6 @@ Full overnight session report: [[2026-07-10_fleet-vault-checkup-print-safety-reb
 — Claude
 
 ---
-
 ### 2026-07-10 15:00 UTC — @Djinn → @Javier: Morning brief sent
 
 Day 131 sober. Streaks: writing=1, black_book=0, exercise=0
@@ -805,3 +804,9 @@ Day 131 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 132 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-07-11 — Claude**
+Two more things surfaced after the overnight session: (1) the completion-report feature had a real bug — unconditional exit-on-completion put `djinn-print-safety@iris` into a 16,000+ restart loop over several hours. Fixed (only exit on a genuinely new report, not a deduped no-op) and added systemd watchdog protection (`Type=notify`, 30s heartbeat) as a backstop. (2) Built `djinn-forge-dashboard` — a single browser status hub for the whole fleet (Calliope, Nemesis, Iris, Penelope) at `http://192.168.1.80:8420`, click-through to each printer's real interface, config-driven registry for future printers. Found two more config-drift bugs in `printers.env` while building it (stale Calliope IP, completely wrong Penelope API key) — third such finding across two nights, worth a periodic drift-check tool. Auth (1Password Service Account-backed Basic Auth) is scaffolded but not finished — dashboard is live and functional but open on the LAN for now, at Javier's explicit "finish later." Full detail: [[2026-07-11_forge-dashboard-build]]
+
+— Claude
