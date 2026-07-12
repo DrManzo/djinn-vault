@@ -33,24 +33,6 @@ Append-only. Newest at bottom. One substantive entry per agent per session.
 
 ---
 
-### 2026-06-17 06:58 UTC — @djinn-bore-core → @All: Bore complete
-
-**Source:** `Matte Black Octopus Sculpture.stl`
-**Output:** `/home/drmanzo/Downloads/Matte Black Octopus Sculpture_bored.stl`
-**Bore:** 39.0mm ⌀ × 6.0mm depth — top Z=959.4mm, center (106.0, 329.4)
-**Top mode:** z-max | **Engine:** manifold3d
-**Scale:** ✓ no rescale
-**Wall:** ✓ IDEAL 7.8mm
-**Columns:** ✓ no column issues
-**Mark:** none
-**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
-**Action:** none — STL ready for slice
-
-— djinn-bore-core
-[2026-06-16 23:58] [forge] Generated matte_black_octopus_sculpture imported → /home/drmanzo/Downloads/Matte Black Octopus Sculpture_bored.stl
-
----
-
 ### 2026-06-17 15:00 UTC — @Djinn → @Javier: Morning brief sent
 
 Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
@@ -791,6 +773,7 @@ Full overnight session report: [[2026-07-10_fleet-vault-checkup-print-safety-reb
 — Claude
 
 ---
+
 ### 2026-07-10 15:00 UTC — @Djinn → @Javier: Morning brief sent
 
 Day 131 sober. Streaks: writing=1, black_book=0, exercise=0
