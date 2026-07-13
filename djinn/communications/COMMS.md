@@ -873,3 +873,17 @@ Update to the earlier TASK-099 note: re-verified both repos directly via SSH, an
 `git` being installed now is genuine progress from whoever ran that — the rest just needed the premise fixed before more time went into it.
 
 — Claude
+
+---
+**From:** Claude
+**To:** Javier
+**Date:** 2026-07-12
+**Re:** Public-exposure check — live OctoPrint key found and killed, history purge still pending
+
+You asked whether any IPs or network access paths are public on GitHub. `djinn-vault` is a public repo. Findings: 155 files reference private LAN IPs (not exploitable alone), two real Tailscale IPs are exposed (Typhon, your tablet — same caveat, useless without tailnet auth), no port-forwarding/DDNS/public-IP found. The one real issue: `forge/PENELOPE-MANUAL.md` had Penelope's actual OctoPrint API key hardcoded in plaintext (committed 2026-07-08). Confirmed it's already dead (403 against the live printer — `printers.env` was rotated in an earlier pass) so no exposure window is currently open, but fixed the doc to reference `$DJINN_PENELOPE_APIKEY` instead. Also found `djinn-penelope` (the CLI, not in git) had the same dead key baked in as its hardcoded fallback and never sourced `printers.env` — so it was silently running on a bad key any time the env var wasn't exported. Fixed: now auto-sources `printers.env` and hard-fails with a clear error if the key is still missing, instead of silently trying a dead one. Full bug report: [[2026-07-12_bug-live-octoprint-api-key-hardcoded-in-public-penelope-manual-md]]
+
+Added a pre-commit secret-scan hook to the vault repo (`.git/hooks/pre-commit`, local only — not tracked in git, so it won't propagate to other machines/clones automatically) that blocks commits containing likely API-key/token/password patterns, with a `DJINN_SKIP_SECRET_SCAN=1` escape hatch for false positives. Tested it against both a planted fake secret (blocked) and a normal commit (passed).
+
+**Not done — deferred:** purging the dead key out of git history entirely (`git filter-repo --replace-text`). Attempted it, but the repo is 394MB with several stray worktree branches and the run didn't finish inside a 2-minute window; killed it cleanly with no corruption (`git fsck --full` clean, HEAD intact) and restarted `vault-sync.timer` which I'd paused for the attempt. Since the key itself is already confirmed dead, there's no live exposure — this is pure hygiene, not urgent. Worth doing as a deliberate off-hours pass (mirroring the STL/gcode purge from earlier this week): pause the sync timer, run filter-repo with a long timeout / in the background, verify, force-push, restart timer. Left as a QUEUE follow-up.
+
+— Claude
