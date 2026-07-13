@@ -71,6 +71,13 @@ SSH_INVALID_USER_RE = re.compile(
 ALLOWED_SSH_USERS = {"drmanzo", "javier"}
 
 
+def _trusted_ips_mtime() -> float:
+    try:
+        return TRUSTED_IPS_PATH.stat().st_mtime
+    except FileNotFoundError:
+        return 0.0
+
+
 def _load_trusted_ips() -> set:
     ips = set()
     if not TRUSTED_IPS_PATH.exists():
@@ -123,10 +130,23 @@ class InboundProbeDetector:
     def __init__(self, pup: PupClient):
         self.pup = pup
         self.trusted_ips = _load_trusted_ips()
+        self._trusted_ips_mtime = _trusted_ips_mtime()
         self.auth_windows: Dict[Tuple[str, str], Deque[float]] = defaultdict(deque)
         self.request_windows: Dict[Tuple[str, str], Deque[float]] = defaultdict(deque)
         self.port_windows: Dict[str, Deque[Tuple[float, int]]] = defaultdict(deque)
         self.new_ip_last_alert: Dict[str, float] = {}
+
+    def _maybe_reload_trusted_ips(self) -> None:
+        """
+        hellhound-trust-add edits trusted-ips.txt live (e.g. from a Telegram
+        'trust <ip>' reply). Cheap mtime check so a newly-trusted device
+        stops alerting without needing a service restart.
+        """
+        mtime = _trusted_ips_mtime()
+        if mtime != self._trusted_ips_mtime:
+            self.trusted_ips = _load_trusted_ips()
+            self._trusted_ips_mtime = mtime
+            log.info("trusted-ips.txt changed — reloaded (%d entries)", len(self.trusted_ips))
 
     def _prune(self, dq: Deque, now: float, window_sec: float, is_tuple: bool = False) -> None:
         while dq:
@@ -136,7 +156,7 @@ class InboundProbeDetector:
             else:
                 break
 
-    async def _respond(self, rule: dict, event: dict) -> None:
+    async def _respond(self, rule: dict, event: dict, reply_hint: bool = False) -> None:
         blocked, note = block_ip(
             ip=event["ip"],
             rule_id=rule["id"],
@@ -145,7 +165,7 @@ class InboundProbeDetector:
         )
         incident_id = write_incident(event, rule, blocked, note)
         status = "BLOCKED" if blocked else "ALERT"
-        notify_telegram(
+        msg = (
             f"🐕 Hellhound [{status}]\n"
             f"Rule: {rule['id']}\n"
             f"IP: {event.get('ip', 'unknown')}\n"
@@ -153,6 +173,10 @@ class InboundProbeDetector:
             f"Incident: {incident_id}\n"
             f"Note: {note or 'n/a'}"
         )
+        if reply_hint:
+            ip = event.get("ip", "")
+            msg += f"\n\nReply: trust {ip}  or  deny {ip}"
+        notify_telegram(msg)
         log.warning(
             "TRIGGER rule=%s ip=%s surface=%s blocked=%s incident=%s",
             rule["id"], event.get("ip"), event.get("surface"), blocked, incident_id,
@@ -209,6 +233,8 @@ class InboundProbeDetector:
         ip = m.group("ip")
         now = time.time()
 
+        self._maybe_reload_trusted_ips()
+
         # new-source-ip-forge: fires for any untrusted IP, LAN or not —
         # block_ip() itself enforces the never-auto-block-LAN rule via
         # auto_block_lan=False on this rule, so no branching needed here.
@@ -222,7 +248,7 @@ class InboundProbeDetector:
                 await self._respond(rule, {
                     "ip": ip, "surface": "forge", "event_type": "request",
                     "raw_lines": [line],
-                })
+                }, reply_hint=True)
 
         # request-rate-spike
         rule = RULES["request-rate-spike"]
