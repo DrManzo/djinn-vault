@@ -1890,3 +1890,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-live-octoprint-api-key-hardcoded-in-public-penelope-manual-md.md`
 
 *— Claude*
+
+## 2026-07-12: Hellhound trusted-IP Telegram accept/deny workflow
+
+- Built `hellhound-trust-add`/`hellhound-trust-deny` wrapper scripts (installed to `~/.local/bin/`, source in `hellhound/bin/`) so trusted-ips.txt no longer needs hand-editing — idempotent, validates IP, updates both the vault source copy and the deployed runtime copy.
+- Wired matching `trust <ip>` / `deny <ip>` commands into `djinn-telegram-gateway` (owner-only, same `ALLOWED_IDS` gate as `confirm N`/`deny N`). Every `new-source-ip-forge` alert now ends with "Reply: trust <ip> or deny <ip>".
+- `pup-inbound-probe.py`'s detector previously cached `trusted_ips` once at startup — a Telegram accept would've silently done nothing until a service restart. Added an mtime-check live-reload in `handle_dashboard_line`; confirmed via journal log ("trusted-ips.txt changed — reloaded") that a `hellhound-trust-add` takes effect within seconds, no restart needed.
+- Deployed to runtime (`~/.local/share/hellhound/pup-inbound-probe.py`) and restarted `pup@inbound-probe.service` + `djinn-telegram-gateway.service`. Both confirmed active post-restart.
+- Live-tested end to end with synthetic TEST-NET IPs (203.0.113.x, 198.51.100.x — never real traffic): add, idempotent re-add, invalid-IP rejection, deny logging, and live-reload all verified before cleanup.
+
+*— Claude*
