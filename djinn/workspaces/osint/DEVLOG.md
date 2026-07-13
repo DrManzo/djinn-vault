@@ -61,3 +61,14 @@ Each entry records what was done, which agents were involved, which files were c
   - `djinn/workspaces/osint/reports/2026-07-12_javier-self-audit.md` (updated — Pinterest finding)
 - **Summary:** Operator supplied a specific Pinterest handle (`boxingking1`) to check directly. Fetched the page: `<title>` and meta description tags are fully public and search-indexed, directly attributing the account to the operator's real name — more discoverable by real-name search than `djinn-vault` currently is. Content is unrelated personal hobby boards (hairstyle/facial-hair history, general art references); no mention of Djinn, Forge, or the maker/cybersecurity persona anywhere, and the handle isn't reused on other platforms in a way that bridges either (checked X/Twitter, Roblox, YouTube — all unrelated third parties using similar handles). Net finding unchanged: real name and DrManzo/Djinn persona remain unlinked. Process note: initially drafted a line quoting the Pinterest page's exact title text (which contains the real name) directly into this public repo before catching it — corrected before commit to describe the finding without reproducing the name string, consistent with the PII Notice already in place. Worth remembering for any future pass: quoting evidence verbatim is not automatically safe just because the source itself is already public.
 - **Suggested commit:** `osint(javier-self-audit): check operator-supplied Pinterest handle — real-name-indexed, no persona crossover`
+
+---
+
+## 2026-07-13T00:25:00Z — Javier self-audit: two LinkedIn profiles confirmed
+
+- **Agents:** SOCIAL, SCRIBE (Claude)
+- **Files changed:**
+  - `djinn/workspaces/osint/targets/2026-07-12_javier-self-audit.md` (updated — LinkedIn finding)
+  - `djinn/workspaces/osint/reports/2026-07-12_javier-self-audit.md` (updated — LinkedIn finding)
+- **Summary:** Operator confirmed ownership of both LinkedIn profiles surfaced during Tier 2 name search. LinkedIn blocks unauthenticated access outright (HTTP 999 on curl and WebFetch alike) — no content beyond pre-indexed search-snippet headlines was retrievable (university-student era; home-improvement-company employment). Neither connects to the Djinn/Forge persona. Same PII handling as the Pinterest finding: profile IDs described but not reproduced as literal name-bearing URLs in this public repo, consistent with the earlier near-miss lesson. Overall self-audit conclusion holds across every identifier checked this operation (GitHub, Pinterest, 2x LinkedIn): real identity and DrManzo/Djinn persona remain unlinked.
+- **Suggested commit:** `osint(javier-self-audit): confirm 2 LinkedIn profiles — LinkedIn blocks scraping, no persona crossover`
