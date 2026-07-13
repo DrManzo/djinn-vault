@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# hellhound-trust-add <ip> [label...] — add an IP to hellhound's trusted list.
+# Idempotent: no-op if the IP is already present. Updates both the vault
+# copy (source of truth, git-tracked) and the runtime copy the running
+# pup-inbound-probe.py detector actually reads — the detector live-reloads
+# on mtime change, so no service restart is needed.
+set -euo pipefail
+
+IP="${1:?Usage: hellhound-trust-add <ip> [label...]}"
+shift || true
+LABEL="${*:-added $(date +%Y-%m-%d)}"
+
+python3 -c "import ipaddress; ipaddress.ip_address('${IP}')" 2>/dev/null || {
+    echo "ERROR: '${IP}' is not a valid IP address" >&2
+    exit 1
+}
+
+VAULT_FILE="${HOME}/Obsidian/hellhound/config/trusted-ips.txt"
+RUNTIME_FILE="${HOME}/.local/share/hellhound/config/trusted-ips.txt"
+
+add_if_missing() {
+    local file="$1"
+    [ -f "$file" ] || { echo "WARNING: $file not found, skipping" >&2; return; }
+    if grep -qE "^${IP}([[:space:]]|#|\$)" "$file"; then
+        echo "Already trusted in $file"
+    else
+        printf '%s  # %s\n' "$IP" "$LABEL" >> "$file"
+        echo "Added to $file"
+    fi
+}
+
+add_if_missing "$VAULT_FILE"
+add_if_missing "$RUNTIME_FILE"
+
+echo "✅ ${IP} trusted (${LABEL})"

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# hellhound-trust-deny <ip> [label...] — record that a "new source IP"
+# alert was reviewed and rejected. Doesn't change trusted-ips.txt (the
+# IP simply stays untrusted); this just logs the decision so there's an
+# audit trail of what Javier actually looked at and said no to.
+set -euo pipefail
+
+IP="${1:?Usage: hellhound-trust-deny <ip> [label...]}"
+shift || true
+LABEL="${*:-denied via telegram}"
+
+python3 -c "import ipaddress; ipaddress.ip_address('${IP}')" 2>/dev/null || {
+    echo "ERROR: '${IP}' is not a valid IP address" >&2
+    exit 1
+}
+
+LOG_FILE="${HOME}/.local/share/hellhound/config/trust-decisions.log"
+mkdir -p "$(dirname "$LOG_FILE")"
+printf '%s  deny  %s  %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$IP" "$LABEL" >> "$LOG_FILE"
+
+echo "❌ ${IP} denied — will keep alerting if it hits the dashboard again."
