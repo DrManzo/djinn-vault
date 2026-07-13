@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-First real operation run through the OSINT workspace since it was bootstrapped — a Tier 1 passive self-audit of Javier's public `DrManzo` GitHub identity, prompted by finding a live-but-dead API key hardcoded in the public `djinn-vault` repo earlier this session. Found one new piece of real exposure (a second real email, `djinnstudio@gmail.com`, leaked via git commit metadata — not visible on the GitHub profile itself), confirmed the already-fixed Penelope key is still physically present in git history, and confirmed the other 9 public repos on the account are clean of secret-pattern hits. Confidence: High. No action is urgent — everything found is low-severity — but two items are worth folding into the already-queued git-history purge (TASK-103).
+First real operation run through the OSINT workspace since it was bootstrapped — a self-audit of Javier's public `DrManzo` GitHub identity, prompted by finding a live-but-dead API key hardcoded in the public `djinn-vault` repo earlier this session. Ran Tier 1 (passive infrastructure/repo audit), then escalated to Tier 2 (social/real-name cross-reference) at the operator's request. Tier 1 found one new piece of real exposure (a second real email, `djinnstudio@gmail.com`, leaked via git commit metadata), confirmed the already-fixed Penelope key is still physically present in git history, and confirmed the other 9 public repos on the account are clean. Tier 2's headline result is a **negative** (the good kind): no public link found anywhere between the operator's real name and the DrManzo/Djinn/Forge persona. Confidence: High. No action is urgent — everything found is low-severity — but several items are worth folding into the already-queued git-history purge (TASK-103), and a documented-tool-vs-reality gap was found in the SOCIAL agent's own tool stack.
 
 ---
 
@@ -21,8 +21,9 @@ First real operation run through the OSINT workspace since it was bootstrapped �
 |---|---|---|
 | RECON | General web search, GitHub profile API | Google-indexed web, `api.github.com/users/DrManzo` |
 | NETPROBE | GitHub code search (secret-pattern sweep), local git log analysis | `search/code` API scoped to `user:DrManzo`, `git log --all` on djinn-vault |
+| SOCIAL | Real-name cross-reference search, Gravatar lookup (done manually — see tooling note below) | General web search, `gravatar.com/avatar/<md5>` |
 
-SOCIAL, ARCHIVE, and TREND were not run — no seed data beyond the GitHub handle was in scope for this pass.
+ARCHIVE and TREND were not run — no target keywords or historical-snapshot need identified for this pass.
 
 ---
 
@@ -44,7 +45,7 @@ Not applicable this pass — `djinn-vault` has no custom domain, DNS, or hosting
 
 ### Social Graph
 
-Not run — no other-platform handles were provided as seed data.
+Real name provided directly by the operator was cross-referenced against the DrManzo/Djinn/Forge/Hellhound persona — no public link found. The surname is common enough (dozens of unrelated "Manzo"/"Manzo-Ramos" people nationally, per aggregator sites) that name-only search is not a viable identification path either way; not pursued further to avoid misattributing strangers' data. Both known emails return 404 on Gravatar — no exposure there. The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
 
 ### Historical Record
 
@@ -70,6 +71,7 @@ Single entity (Javier / DrManzo) across two identifiers found: GitHub handle `Dr
 | Dead Penelope key still in git history | 2 (git log + `-S` pickaxe search) | High |
 | Other 9 public repos clean of secret patterns | 1 (GitHub code search, 6 query patterns) | Medium — code search isn't exhaustive; a targeted manual review would raise confidence |
 | Repo not yet indexed by general web search | 1 (WebSearch, 3 queries) | Medium — indexing lag, not a permanent property |
+| No public link between real name and DrManzo persona | 1 (WebSearch, targeted cross-reference query) | Medium — absence-of-evidence, not proof; a determined search with different terms could still surface something |
 
 ---
 
@@ -78,12 +80,13 @@ Single entity (Javier / DrManzo) across two identifiers found: GitHub handle `Dr
 1. Decide whether `djinnstudio@gmail.com` should be public. If not, future commits should use the GitHub noreply email (already used inconsistently — some commits use it, some don't).
 2. Fold the `djinnstudio@gmail.com` history exposure into TASK-103's git-history purge — same `filter-repo` operation would need to run either way, better to do both at once than run the heavy rewrite twice.
 3. Consider this the template for a recurring quarterly self-audit rather than a one-off — the workspace was built for exactly this and has sat unused since 2026-06-18.
+4. Fix `tools/README.md`/`TEAM.md`'s SOCIAL tool listing — `djinn-bore-core` and `djinn-social-analyst` are misattributed. Same class of drift as the VISUAL roster mismatch fixed earlier this session; worth a full pass over the tool inventory before it's trusted again.
 
 ---
 
 ## PII Notice
 
-Two real email addresses were identified and are recorded in plaintext in the linked target file, per the operator's own explicit self-audit request (Javier auditing Javier — no third-party PII collected). No other PII was found or stored.
+Two real email addresses were identified and are recorded in plaintext in the linked target file, per the operator's own explicit self-audit request (Javier auditing Javier — no third-party PII collected). The operator's real full name was used as a Tier 2 search seed but is **deliberately not recorded in plaintext** in this report or the target file — this repo is public, and writing it here would create the exact exposure the audit was checking for. No third-party PII was retained.
 
 ---
 
