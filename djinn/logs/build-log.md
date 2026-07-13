@@ -1882,3 +1882,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-12_bug-filament-inventory-json-had-4-corrupted-array-closures-dashboard-inventory-page-silently-showing-empty.md`
 
 *— Claude*
+
+## 2026-07-12: BUG — Live OctoPrint API key hardcoded in public PENELOPE-MANUAL.md
+- **System:** forge shop dashboard / penelope
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** A real Penelope OctoPrint API key was committed in plaintext to a public GitHub repo (djinn-vault) on 2026-07-08 instead of being referenced via env var. Verified the key is already dead (403 against live OctoPrint; printers.env has since been rotated to a different working key). Also found djinn-penelope CLI had the same dead key hardcoded as its default fallback and never sourced printers.env, so it silently ran with a bad key whenever DJINN_PENELOPE_APIKEY wasn't exported in the shell.
+- **Report:** `logs/reports/2026-07-12_bug-live-octoprint-api-key-hardcoded-in-public-penelope-manual-md.md`
+
+*— Claude*
