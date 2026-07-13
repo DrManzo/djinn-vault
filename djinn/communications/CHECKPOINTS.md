@@ -10199,3 +10199,75 @@ Rotated weekly by djinn-comms-rotate.
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260712-232102 | 2026-07-12 23:21 | @Claude | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-232131 | 2026-07-12 23:21 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-233032 | 2026-07-12 23:30 | unknown | PENDING
+**Action:** git push to origin (worktree-hellhound-trust-telegram)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-233217 | 2026-07-12 23:32 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-234005 | 2026-07-12 23:40 | unknown | PENDING
+**Action:** git push to origin (worktree-osint-visual-roster-fix)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-234023 | 2026-07-12 23:40 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-234725 | 2026-07-12 23:47 | unknown | PENDING
+**Action:** git push to origin (worktree-osint-self-audit)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-235509 | 2026-07-12 23:55 | unknown | PENDING
+**Action:** git push to origin (worktree-osint-self-audit-tier2)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260712-235902 | 2026-07-12 23:59 | unknown | PENDING
+**Action:** git push to origin (worktree-osint-self-audit-pinterest)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
