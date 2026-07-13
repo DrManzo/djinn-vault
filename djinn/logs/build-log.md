@@ -1900,3 +1900,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Live-tested end to end with synthetic TEST-NET IPs (203.0.113.x, 198.51.100.x — never real traffic): add, idempotent re-add, invalid-IP rejection, deny logging, and live-reload all verified before cleanup.
 
 *— Claude*
+
+## 2026-07-12: docs — OSINT VISUAL agent missing from manual/roster/runbook docs
+
+- VISUAL.md (agent #8, reverse image search + EXIF metadata) was fully written and already in TEAM.md, but OSINT-MANUAL.md's file tree/roster table/routing rules, QUICKSTART.md's run order, and all PERSON-OP/ORG-OP/runbooks-README routing chains still only listed the original 7 agents.
+- Fixed all of the above. Also gave ORG-OP.md an actual handoff step (logo/executive-photo capture → VISUAL in Phase 1) since it claimed that integration but never had one.
+- Left DEVLOG.md's 2026-06-18 bootstrap entry untouched — append-only historical record, correct for the date.
+
+*— Claude*
