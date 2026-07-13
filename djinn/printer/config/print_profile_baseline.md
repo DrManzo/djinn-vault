@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-13 15:48 UTC
+Generated: 2026-07-13 16:32 UTC
 Source file: camood-v2.stl_PETG_3h40m44s.gcode
-Readings: 10
+Readings: 52
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 243.4°C | 70.1°C |
-| Std dev | ±5.15°C | ±0.46°C |
-| Range | 239.6–251.8°C | 69.5–70.8°C |
+| Mean | 240.7°C | 70.0°C |
+| Std dev | ±2.58°C | ±0.37°C |
+| Range | 239.4–251.8°C | 68.3–70.8°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,8 +21,7 @@ Readings: 10
 - Max: 0 mm/s
 
 ## Anomalies
-- 
-hotend temp variance high: ±5.2°C (check nozzle_mcu cable)
+None detected
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
