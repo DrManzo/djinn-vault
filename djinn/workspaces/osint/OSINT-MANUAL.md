@@ -40,7 +40,8 @@ djinn/workspaces/osint/
     ├── ARCHIVE.md                  ← Cached data, Wayback, deleted content
     ├── TREND.md                    ← Trend surveillance and market intel
     ├── CORRELATOR.md               ← Cross-source correlation and synthesis
-    └── SCRIBE.md                   ← Operation logging and report assembly
+    ├── SCRIBE.md                   ← Operation logging and report assembly
+    └── VISUAL.md                   ← Reverse image search and EXIF metadata
 ```
 
 ---
@@ -56,6 +57,7 @@ djinn/workspaces/osint/
 | `TREND` | Trend Surveillance Agent | Market signals, community intel, keyword tracking | Medium |
 | `CORRELATOR` | Cross-Source Correlator | Multi-source synthesis, entity linking, deconfliction | Critical |
 | `SCRIBE` | OSINT Scribe | Operation logs, report assembly, vault entries | Always-on |
+| `VISUAL` | Reverse Image Intelligence Agent | Reverse image search, EXIF metadata, photo attribution | High |
 
 See `agents/` directory for full briefs.
 
@@ -86,6 +88,7 @@ All collected data routes through the existing encrypted SQLite pipeline. No raw
 - **Community signals, market trends, keyword monitoring** → `TREND`
 - **Linking entities across multiple sources** → `CORRELATOR`
 - **All logging, report writing, vault entries** → `SCRIBE` (runs after every operation)
+- **Photos, avatars, logos, reverse image search, EXIF metadata** → `VISUAL`
 
 ---
 

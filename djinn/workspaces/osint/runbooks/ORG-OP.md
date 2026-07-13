@@ -1,7 +1,7 @@
 # ORG-OP — Organization-Targeted OSINT Runbook
 
 > **Target type:** Company, nonprofit, government body, or other organizational entity
-> **Owned by:** RECON → NETPROBE → SOCIAL → ARCHIVE → TREND → CORRELATOR → SCRIBE
+> **Owned by:** RECON → VISUAL → NETPROBE → SOCIAL → ARCHIVE → TREND → CORRELATOR → SCRIBE
 > **Gateway entry tier:** Tier 1 (passive). Escalate to Tier 2 for employee PII aggregation. Tier 3 for active scanning.
 
 ---
@@ -53,6 +53,7 @@
    ```
 4. Search for public documents: whitepapers, SEC filings, court records, regulatory filings.
 5. Check Crunchbase, PitchBook (public tier), AngelList for funding history and investor list.
+6. Capture the official logo and any executive headshots surfaced → hand off to `VISUAL` for reverse image search (impersonator/counterfeit account detection) and EXIF extraction.
 
 **Record at this step:**
 - Primary and secondary domains confirmed
@@ -61,6 +62,7 @@
 - Tech stack hints from job postings
 - Key executive names surfaced
 - Funding stage and investors (if relevant)
+- Logo/photo assets handed to VISUAL, if any
 
 ---
 

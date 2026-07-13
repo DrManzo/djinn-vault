@@ -38,8 +38,8 @@
    - SCRIBE logs findings continuously — do not wait until the end
 
 7. **Run agents in order** (per the appropriate runbook)
-   - RECON → SOCIAL → NETPROBE → ARCHIVE → TREND → CORRELATOR → SCRIBE
-   - Skip agents that don't apply — do not run NETPROBE if there's no domain seed
+   - RECON → SOCIAL → VISUAL → NETPROBE → ARCHIVE → TREND → CORRELATOR → SCRIBE
+   - Skip agents that don't apply — do not run NETPROBE if there's no domain seed, skip VISUAL if there's no photo/logo seed
 
 8. **Checkpoint at 15 minutes**
    - If you have fewer than 3 confirmed data points: escalate to cold start protocol below

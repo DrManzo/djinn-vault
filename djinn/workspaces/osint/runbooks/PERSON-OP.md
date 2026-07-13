@@ -1,7 +1,7 @@
 # PERSON-OP — Person-Targeted OSINT Runbook
 
 > **Target type:** Individual (real name, handle, email, or partial identity)
-> **Owned by:** RECON → SOCIAL → NETPROBE → ARCHIVE → TREND → CORRELATOR → SCRIBE
+> **Owned by:** RECON → SOCIAL → VISUAL → NETPROBE → ARCHIVE → TREND → CORRELATOR → SCRIBE
 > **Gateway entry tier:** Tier 1 (passive). Escalate to Tier 2 if PII aggregation begins. Tier 3 for any active enumeration.
 
 ---
