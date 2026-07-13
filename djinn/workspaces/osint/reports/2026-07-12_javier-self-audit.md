@@ -49,6 +49,8 @@ Real name provided directly by the operator was cross-referenced against the DrM
 
 Operator also supplied a Pinterest handle (`boxingking1`) for a direct check. Its page title/meta description are fully public and search-indexed, and directly attribute the account to the operator's real name (more discoverable by real-name search than `djinn-vault` currently is). Content is unrelated hobby boards (hairstyle/facial-hair history, general art references) with no mention of Djinn, Forge, or the maker/cybersecurity persona; the handle isn't reused elsewhere in a way that bridges either. Net result stands: real-name and persona remain unlinked, but this account is a concrete example of how discoverable the real-name side already is.
 
+Operator additionally confirmed ownership of two LinkedIn profiles surfaced by earlier name search. LinkedIn actively blocks unauthenticated access (HTTP 999 on all fetch attempts), so only the pre-indexed search-snippet headlines were available: one references a university student era, the other employment at a home-improvement company — neither connects to the Djinn/Forge persona. Compared to Pinterest, LinkedIn's access controls meaningfully reduce what's actually scrapable even though the account is real-name-confirmed.
+
 The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
 
 ### Historical Record
