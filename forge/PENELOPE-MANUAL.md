@@ -117,7 +117,7 @@ A healthy idle printer shows: State = Operational.
 ```bash
 # If OctoPrint loses serial connection:
 curl -s -X POST \
-    -H "X-Api-Key: KOYv4Nj2nx7jvcxPnpCvxLqA9sF9IKCx8k5BueDc" \
+    -H "X-Api-Key: $DJINN_PENELOPE_APIKEY" \
     -H "Content-Type: application/json" \
     -d '{"command":"connect","port":"/dev/ttyUSB0","baudrate":115200}' \
     http://localhost:5001/api/connection
@@ -271,7 +271,7 @@ M503          # verify — look for "Z Probe Offset" line
 To adjust live during a print (babystepping):
 ```bash
 curl -s -X POST \
-    -H "X-Api-Key: KOYv4Nj2nx7jvcxPnpCvxLqA9sF9IKCx8k5BueDc" \
+    -H "X-Api-Key: $DJINN_PENELOPE_APIKEY" \
     -H "Content-Type: application/json" \
     -d '{"commands": ["M290 Z-0.1"]}' \
     http://localhost:5001/api/printer/command
