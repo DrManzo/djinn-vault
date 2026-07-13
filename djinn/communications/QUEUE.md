@@ -3665,3 +3665,22 @@ Flag this in COMMS.md and stop there — don't take any git action on djinn-core
 - trigger: manual
 - created: 2026-07-12 by Claude
 - context: filament-inventory.json last updated 2026-06-08, only 3 spools (stale). Needs full physical count of current spools: material, color, brand, weight remaining, which printer loaded. Javier provides count, Claude updates file.
+
+## TASK-103
+- assigned_to: claude
+- status: in_progress
+- priority: low
+- trigger: manual
+- created: 2026-07-12 by Claude
+- context: purge dead OctoPrint key (KOYv4Nj2...) from djinn-vault git history
+
+**Brief:**
+git filter-repo --replace-text run against ~/Obsidian timed out at 394MB repo size
+(2-min window, several stray worktree branches). No corruption (git fsck clean,
+vault-sync.timer restarted). Key is already confirmed dead so no live exposure —
+this is hygiene only, not urgent. Redo as a deliberate off-hours pass: pause
+vault-sync.timer, run filter-repo with a long/background timeout, verify with
+git fsck --full, force-push, restart timer. Consider pruning stray
+worktree-* branches first to speed up the rewrite.
+
+**Input:** [[2026-07-12_bug-live-octoprint-api-key-hardcoded-in-public-penelope-manual-md]]
