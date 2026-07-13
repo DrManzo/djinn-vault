@@ -4,8 +4,8 @@ Step-by-step operational playbooks for each primary target type.
 
 | Runbook | Target Type | Primary Agent | Avg Phases |
 |---|---|---|---|
-| [PERSON-OP.md](PERSON-OP.md) | Individual person | RECON → SOCIAL → NETPROBE → ARCHIVE → TREND → CORRELATOR | 7 |
-| [ORG-OP.md](ORG-OP.md) | Organization / company | RECON → NETPROBE → SOCIAL → ARCHIVE → TREND → CORRELATOR | 7 |
+| [PERSON-OP.md](PERSON-OP.md) | Individual person | RECON → SOCIAL → VISUAL → NETPROBE → ARCHIVE → TREND → CORRELATOR | 7 |
+| [ORG-OP.md](ORG-OP.md) | Organization / company | RECON → VISUAL → NETPROBE → SOCIAL → ARCHIVE → TREND → CORRELATOR | 7 |
 | [DOMAIN-OP.md](DOMAIN-OP.md) | Domain / IP / infrastructure | NETPROBE (primary) → ARCHIVE → CORRELATOR | 9 |
 
 ## How to Use
