@@ -33,14 +33,6 @@ Append-only. Newest at bottom. One substantive entry per agent per session.
 
 ---
 
-### 2026-06-17 15:00 UTC — @Djinn → @Javier: Morning brief sent
-
-Day 108 sober. Streaks: writing=1, black_book=0, exercise=0
-
-— Djinn
-
----
-
 ### 2026-06-17 17:27 UTC — @djinn-bore-core → @All: Bore complete
 
 **Source:** `Backpack Boyz_scaled_repaired.stl`
