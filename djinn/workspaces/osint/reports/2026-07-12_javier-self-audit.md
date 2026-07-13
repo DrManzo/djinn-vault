@@ -53,6 +53,8 @@ Operator additionally confirmed ownership of two LinkedIn profiles surfaced by e
 
 Operator also supplied 14 additional personal email addresses/aliases directly and confirmed all as their own. None of the 14 had any prior independent public exposure, so — unlike every other identifier in this report — the raw addresses are withheld entirely rather than redacted-but-described; recording them here would make this audit the source of a new leak. Gravatar-checked all 14 (public, non-destructive): 13 clean, one resolved to an art image (not a personal photo) thematically consistent with the `boxingking1` Pinterest boards. One address sits at a custom domain that returned NXDOMAIN — not currently registered/resolving. Per-address breach exposure (HaveIBeenPwned) could not be checked — the v3 API requires a paid key not currently configured in this workspace; flagged as a real capability gap, not a clean result.
 
+**Tier 3.** Operator confirmed escalation and supplied a headshot photo directly, requesting PimEyes facial recognition specifically. EXIF check (run first per protocol) came back clean — no GPS, device, or timestamp metadata. PimEyes itself, and even the lower-tier reverse-image engines (TinEye, Yandex, Google Images, Bing Visual), could not actually be executed — all require either public-hosting the photo first or an interactive anti-bot-protected browser session, neither of which was available/acceptable here. Confirmed via direct endpoint tests against TinEye and Yandex (405/400 rejections) rather than just assuming. The photo was used locally for the EXIF check only and was never uploaded or hosted anywhere.
+
 The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
 
 ### Historical Record
@@ -89,6 +91,9 @@ Single entity (Javier / DrManzo) across two identifiers found: GitHub handle `Dr
 2. Fold the `djinnstudio@gmail.com` history exposure into TASK-103's git-history purge — same `filter-repo` operation would need to run either way, better to do both at once than run the heavy rewrite twice.
 3. Consider this the template for a recurring quarterly self-audit rather than a one-off — the workspace was built for exactly this and has sat unused since 2026-06-18.
 4. Fix `tools/README.md`/`TEAM.md`'s SOCIAL tool listing — `djinn-bore-core` and `djinn-social-analyst` are misattributed. Same class of drift as the VISUAL roster mismatch fixed earlier this session; worth a full pass over the tool inventory before it's trusted again.
+5. `javier@typhonsforge.com`-pattern domain doesn't resolve — register it if it's meant to be live.
+6. A real HaveIBeenPwned integration would raise confidence on future passes; currently only the keyless "latest breach" feed is wired.
+7. VISUAL's Tier 3 (PimEyes/reverse-image) capability doesn't work autonomously from this environment — needs either operator-run manual searches or future tooling investment. `agents/VISUAL.md` should be updated to reflect this rather than presenting it as a straightforward escalation.
 
 ---
 
