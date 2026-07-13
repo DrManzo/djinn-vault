@@ -72,3 +72,14 @@ Each entry records what was done, which agents were involved, which files were c
   - `djinn/workspaces/osint/reports/2026-07-12_javier-self-audit.md` (updated — LinkedIn finding)
 - **Summary:** Operator confirmed ownership of both LinkedIn profiles surfaced during Tier 2 name search. LinkedIn blocks unauthenticated access outright (HTTP 999 on curl and WebFetch alike) — no content beyond pre-indexed search-snippet headlines was retrievable (university-student era; home-improvement-company employment). Neither connects to the Djinn/Forge persona. Same PII handling as the Pinterest finding: profile IDs described but not reproduced as literal name-bearing URLs in this public repo, consistent with the earlier near-miss lesson. Overall self-audit conclusion holds across every identifier checked this operation (GitHub, Pinterest, 2x LinkedIn): real identity and DrManzo/Djinn persona remain unlinked.
 - **Suggested commit:** `osint(javier-self-audit): confirm 2 LinkedIn profiles — LinkedIn blocks scraping, no persona crossover`
+
+---
+
+## 2026-07-13T00:40:00Z — Javier self-audit: 14 additional emails confirmed, none written to vault
+
+- **Agents:** SOCIAL, NETPROBE, SCRIBE (Claude)
+- **Files changed:**
+  - `djinn/workspaces/osint/targets/2026-07-12_javier-self-audit.md` (updated — batch email findings, PII policy tightened)
+  - `djinn/workspaces/osint/reports/2026-07-12_javier-self-audit.md` (updated — same)
+- **Summary:** Operator supplied 14 additional personal email addresses/aliases directly in chat and confirmed all as their own, including two that use different names than the operator's own (flagged and confirmed rather than assumed). Unlike every prior finding in this case, none of these 14 had independent prior public exposure — so, stricter than the redaction pattern used for the real name/Pinterest/LinkedIn, **none of the raw addresses are written anywhere in the vault**, not even partially. Checks run instead: Gravatar (public, non-destructive) on all 14 — 13 clean, one resolved to an art image thematically consistent with the `boxingking1` Pinterest persona (not a personal photo). One address's domain returned NXDOMAIN (not registered/resolving). Per-address breach checking (HaveIBeenPwned) was not possible — v3 API requires a paid key this workspace doesn't have configured; logged as a real capability gap for the department, not a pass. Overall self-audit conclusion unchanged: no public link found between operator's real identity (name, 14 emails, 2 LinkedIn, 1 Pinterest) and the DrManzo/Djinn/Forge persona.
+- **Suggested commit:** `osint(javier-self-audit): confirm 14 more emails, withhold all from vault — no persona crossover, HIBP gap flagged`

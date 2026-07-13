@@ -51,6 +51,8 @@ Operator also supplied a Pinterest handle (`boxingking1`) for a direct check. It
 
 Operator additionally confirmed ownership of two LinkedIn profiles surfaced by earlier name search. LinkedIn actively blocks unauthenticated access (HTTP 999 on all fetch attempts), so only the pre-indexed search-snippet headlines were available: one references a university student era, the other employment at a home-improvement company — neither connects to the Djinn/Forge persona. Compared to Pinterest, LinkedIn's access controls meaningfully reduce what's actually scrapable even though the account is real-name-confirmed.
 
+Operator also supplied 14 additional personal email addresses/aliases directly and confirmed all as their own. None of the 14 had any prior independent public exposure, so — unlike every other identifier in this report — the raw addresses are withheld entirely rather than redacted-but-described; recording them here would make this audit the source of a new leak. Gravatar-checked all 14 (public, non-destructive): 13 clean, one resolved to an art image (not a personal photo) thematically consistent with the `boxingking1` Pinterest boards. One address sits at a custom domain that returned NXDOMAIN — not currently registered/resolving. Per-address breach exposure (HaveIBeenPwned) could not be checked — the v3 API requires a paid key not currently configured in this workspace; flagged as a real capability gap, not a clean result.
+
 The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
 
 ### Historical Record
@@ -92,7 +94,7 @@ Single entity (Javier / DrManzo) across two identifiers found: GitHub handle `Dr
 
 ## PII Notice
 
-Two real email addresses were identified and are recorded in plaintext in the linked target file, per the operator's own explicit self-audit request (Javier auditing Javier — no third-party PII collected). The operator's real full name was used as a Tier 2 search seed but is **deliberately not recorded in plaintext** in this report or the target file — this repo is public, and writing it here would create the exact exposure the audit was checking for. No third-party PII was retained.
+Two real email addresses (`typhonscyberforge@gmail.com`, `djinnstudio@gmail.com`) are recorded in plaintext in the linked target file — both were already independently public before this audit (known public contact; git-history exposure respectively). A further 14 emails, two LinkedIn profile IDs, and the operator's real full name were all used as search inputs during this operation but are **deliberately withheld** from both this report and the target file, since none had independent prior exposure — writing them here, in a public repo, would make this audit the source of a new leak rather than a check against one. No third-party PII was retained.
 
 ---
 
