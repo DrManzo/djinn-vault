@@ -45,7 +45,11 @@ Not applicable this pass — `djinn-vault` has no custom domain, DNS, or hosting
 
 ### Social Graph
 
-Real name provided directly by the operator was cross-referenced against the DrManzo/Djinn/Forge/Hellhound persona — no public link found. The surname is common enough (dozens of unrelated "Manzo"/"Manzo-Ramos" people nationally, per aggregator sites) that name-only search is not a viable identification path either way; not pursued further to avoid misattributing strangers' data. Both known emails return 404 on Gravatar — no exposure there. The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
+Real name provided directly by the operator was cross-referenced against the DrManzo/Djinn/Forge/Hellhound persona — no public link found. The surname is common enough (dozens of unrelated "Manzo"/"Manzo-Ramos" people nationally, per aggregator sites) that name-only search is not a viable identification path either way; not pursued further to avoid misattributing strangers' data. Both known emails return 404 on Gravatar — no exposure there.
+
+Operator also supplied a Pinterest handle (`boxingking1`) for a direct check. Its page title/meta description are fully public and search-indexed, and directly attribute the account to the operator's real name (more discoverable by real-name search than `djinn-vault` currently is). Content is unrelated hobby boards (hairstyle/facial-hair history, general art references) with no mention of Djinn, Forge, or the maker/cybersecurity persona; the handle isn't reused elsewhere in a way that bridges either. Net result stands: real-name and persona remain unlinked, but this account is a concrete example of how discoverable the real-name side already is.
+
+The SOCIAL agent's documented tools (`djinn-bore-core`, `djinn-social-analyst`) turned out not to do handle enumeration at all — `djinn-bore-core` is a 3D-print geometry tool and `djinn-social-analyst` requires missing config; this pass substituted plain web search.
 
 ### Historical Record
 

@@ -16,7 +16,7 @@
 | Type | Person (self) |
 | Known Aliases | DrManzo |
 | Known Domains | github.com/DrManzo/djinn-vault (public) |
-| Known Social Handles | GitHub: DrManzo |
+| Known Social Handles | GitHub: DrManzo; Pinterest: boxingking1 (real-name-attributed, no persona crossover found) |
 | Known Email Patterns | typhonscyberforge@gmail.com (known); djinnstudio@gmail.com (found in commit history — see NETPROBE/RECON) |
 | Known Location | — (not searched, out of scope) |
 | Associated Entities | Djinn AI OS, Forge (3D print/commission shop), Hellhound |
@@ -68,6 +68,7 @@ Any active probing, any third party, PimEyes/facial recognition, anything beyond
 - Real name (surname shared with "Manzo-Ramos"/"Manzo") is common enough that name-only search returns dozens of unrelated people — LinkedIn profiles, a Spokeo aggregator page (86 matches nationally), a trucking company, an MLB player, none confirmably the operator. Deliberately did not pull any of these threads further — attributing a stranger's public records to the operator would be a real OSINT error, not a finding. If a positive link is ever needed, it requires operator-supplied disambiguators (city, employer, DOB range), not blind name search.
 - Gravatar lookup on both known emails (`typhonscyberforge@gmail.com`, `djinnstudio@gmail.com`): both return 404 (no avatar registered) — no exposure via Gravatar.
 - **Tooling note:** `djinn/workspaces/osint/tools/README.md` and `TEAM.md` list `djinn-bore-core` and `djinn-social-analyst` as "Active" tools used by SOCIAL for handle enumeration. Neither does that: `djinn-bore-core` is actually a 3D-print STL geometry tool (bores a proxy core seat — unrelated to OSINT), and `djinn-social-analyst` errors on a missing config file (`~/.config/djinn/meta.env`) and appears scoped to the Forge shop's own social analytics, not third-party handle enumeration. This SOCIAL pass was done manually via web search instead. Same class of doc/reality drift as the VISUAL roster mismatch fixed earlier — worth a follow-up audit of the whole `tools/README.md` inventory before trusting it again.
+- **Operator-supplied handle: Pinterest `boxingking1`.** The page's `<title>` and `og:description`/`twitter:description` meta tags publicly and directly attribute this account to the operator's real name (not reproduced here — see PII Notice), fully SEO-indexed (unlike `djinn-vault`, which isn't indexed yet — this account is more discoverable by real-name search than the persona is). Content is personal hobby boards (facial hair/hairstyle history, art/sketchbook references, one general "3d Shapes Drawing Shadows" art-tutorial board — not related to 3D printing as a craft) — no reference to Djinn, Forge, 3D-print commissions, or cybersecurity anywhere in board names, bio, or website field (bio/website both empty). Checked handle reuse: `boxingking1`/`theboxingking1` elsewhere (X/Twitter, Roblox, YouTube) all resolve to unrelated third-party boxing-media brands, not the operator. **Net: this specific account is real-name-attributed and genuinely search-indexed, but no content or cross-handle link bridges it to the DrManzo/Djinn/Forge persona.**
 
 ### ARCHIVE / TREND
 Not run — no target keywords or historical-snapshot need identified for this pass.
@@ -81,7 +82,7 @@ Tier 1: two real, low-severity findings and one confirmation of an already-known
 2. The dead Penelope OctoPrint key is still physically present in git history 5 commits deep — no live risk (key confirmed dead), but it's the kind of thing that should get cleaned up as part of TASK-103.
 3. The other 9 public repos on the account show no secret-pattern hits — clean.
 
-Tier 2 (real name provided by operator): the headline result is a **negative** — no public link found between the operator's real name and the DrManzo/Djinn/Forge persona. That's the good outcome for an OPSEC audit. Secondary finding: the SOCIAL agent's documented tool stack (`djinn-bore-core`, `djinn-social-analyst`) doesn't actually do what `tools/README.md` claims — this pass was done manually instead.
+Tier 2 (real name provided by operator): the headline result is still a **negative** — no public link found between the operator's real name and the DrManzo/Djinn/Forge persona, even after checking an operator-supplied account (Pinterest `boxingking1`) that turned out to be fully real-name-indexed. That account is discoverable by real-name search but its content doesn't reference the Djinn/Forge persona at all, and the handle isn't reused anywhere that does either. That's the good outcome for an OPSEC audit — the two identities are separate not because the real-name side is hidden, but because nothing bridges them. Secondary finding: the SOCIAL agent's documented tool stack (`djinn-bore-core`, `djinn-social-analyst`) doesn't actually do what `tools/README.md` claims — this pass was done manually instead.
 
 No PII beyond email addresses and a name-search (no third party data retained) was collected. Nothing here rises above Tier 2.
 
@@ -118,7 +119,7 @@ No PII beyond email addresses and a name-search (no third party data retained) w
 
 ## PII Notice
 
-Operator's real full name was provided verbally during this session and used as a search seed, but is **intentionally not recorded in plaintext** anywhere in this file or the linked report — this is a public repo, and writing the real name here would itself create the exact real-name-to-persona link this audit confirmed does not currently exist. No encrypted-DB pipeline was available to store it more safely, so the safest option was simply not writing it to the vault at all. Two real email addresses (already known to the operator) remain recorded in plaintext per the operator's own explicit self-audit request.
+Operator's real full name was provided verbally during this session and used as a search seed, but is **intentionally not recorded in plaintext** anywhere in this file or the linked report — this is a public repo, and writing the real name here would itself create the exact real-name-to-persona link this audit confirmed does not currently exist. No encrypted-DB pipeline was available to store it more safely, so the safest option was simply not writing it to the vault at all. This held even after finding the operator's real name already fully public elsewhere (the Pinterest account's page title) — that account being real-name-indexed doesn't make it safe to additionally pair the name with `djinn-vault`/DrManzo in this file. Two real email addresses (already known to the operator) remain recorded in plaintext per the operator's own explicit self-audit request.
 
 ---
 
