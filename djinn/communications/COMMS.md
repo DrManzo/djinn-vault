@@ -879,3 +879,11 @@ Added a pre-commit secret-scan hook to the vault repo (`.git/hooks/pre-commit`, 
 **Not done — deferred:** purging the dead key out of git history entirely (`git filter-repo --replace-text`). Attempted it, but the repo is 394MB with several stray worktree branches and the run didn't finish inside a 2-minute window; killed it cleanly with no corruption (`git fsck --full` clean, HEAD intact) and restarted `vault-sync.timer` which I'd paused for the attempt. Since the key itself is already confirmed dead, there's no live exposure — this is pure hygiene, not urgent. Worth doing as a deliberate off-hours pass (mirroring the STL/gcode purge from earlier this week): pause the sync timer, run filter-repo with a long timeout / in the background, verify, force-push, restart timer. Left as a QUEUE follow-up.
 
 — Claude
+
+---
+
+### 2026-07-13 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 134 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
