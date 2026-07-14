@@ -1,0 +1,215 @@
+#!/usr/bin/env python3
+"""
+djinn-doc-check — Deterministic doc/reality consistency checker.
+
+No LLM in the detection path. Built to catch two classes of drift found
+by hand during the 2026-07-12/13 OSINT self-audit and workspace review:
+
+  1. Roster drift — an agent exists in agents/*.md but is missing from
+     the department manual's file tree, roster table, or routing rules
+     (the manual claims to be the "canonical reference for every agent").
+     Found: VISUAL.md existed and was in TEAM.md, but OSINT-MANUAL.md's
+     file tree/roster/routing-rules still only listed 7 agents.
+
+  2. Tool drift — a tool the department's tools/README.md claims is
+     "Active" doesn't exist on PATH, or exists but errors immediately.
+     Found: djinn-bore-core (a 3D-print STL tool) and djinn-social-analyst
+     (errors on missing config) were both misattributed to OSINT/SOCIAL.
+
+Usage:
+  djinn-doc-check                    — run both checks (default workspace)
+  djinn-doc-check --roster           — roster check only
+  djinn-doc-check --tools            — tools check only
+  djinn-doc-check --workspace PATH   — point at a different department
+                                        (default: djinn/workspaces/osint)
+"""
+
+import argparse
+import re
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+VAULT = Path.home() / "Obsidian"
+DEFAULT_WORKSPACE = VAULT / "djinn/workspaces/osint"
+
+
+def fail(msg):
+    print(f"  \033[31m✗\033[0m {msg}")
+
+
+def ok(msg):
+    print(f"  \033[32m✓\033[0m {msg}")
+
+
+def info(msg):
+    print(f"  \033[33m·\033[0m {msg}")
+
+
+# ── Roster check ──────────────────────────────────────────────────────────────
+
+def check_roster(workspace: Path) -> int:
+    print("\n=== Roster consistency ===")
+    agents_dir = workspace / "agents"
+    manual = workspace / "OSINT-MANUAL.md"
+    team = workspace / "TEAM.md"
+
+    if not agents_dir.is_dir():
+        fail(f"No agents/ directory at {agents_dir}")
+        return 1
+
+    agent_files = {p.stem for p in agents_dir.glob("*.md")}
+    if not agent_files:
+        fail(f"No agent briefs found in {agents_dir}")
+        return 1
+    print(f"  Agent briefs on disk: {', '.join(sorted(agent_files))}")
+
+    issues = 0
+
+    if team.is_file():
+        team_text = team.read_text(encoding="utf-8")
+        team_codes = set(re.findall(r"^###\s+\d+\.\s+([A-Z][A-Z0-9_]*)\s+—", team_text, re.MULTILINE))
+        missing_from_team = agent_files - team_codes
+        extra_in_team = team_codes - agent_files
+        if missing_from_team:
+            fail(f"TEAM.md roster missing: {', '.join(sorted(missing_from_team))}")
+            issues += 1
+        if extra_in_team:
+            fail(f"TEAM.md lists agents with no brief file: {', '.join(sorted(extra_in_team))}")
+            issues += 1
+        if not missing_from_team and not extra_in_team:
+            ok("TEAM.md matches agents/ directory")
+    else:
+        info(f"No TEAM.md at {team} — skipping roster cross-check")
+
+    if manual.is_file():
+        manual_text = manual.read_text(encoding="utf-8")
+        manual_issues = 0
+        for code in sorted(agent_files):
+            # File tree lines wrap at "agents/" then list "CODE.md" on the same
+            # line with tree-drawing prefixes (├──/└──), so check the filename
+            # alone rather than the concatenated "agents/CODE.md" path.
+            in_tree = f"{code}.md" in manual_text
+            in_backticks = f"`{code}`" in manual_text
+            if not in_tree and not in_backticks:
+                fail(f"OSINT-MANUAL.md never mentions {code} (not in file tree, "
+                     f"roster table, or routing rules)")
+                manual_issues += 1
+            elif not in_tree:
+                fail(f"OSINT-MANUAL.md's file tree is missing {code}.md "
+                     f"(mentioned elsewhere, but tree is incomplete)")
+                manual_issues += 1
+            elif not in_backticks:
+                fail(f"OSINT-MANUAL.md's file tree lists {code} but roster "
+                     f"table/routing rules never reference `{code}`")
+                manual_issues += 1
+        issues += manual_issues
+        if manual_issues == 0:
+            ok(f"OSINT-MANUAL.md references all {len(agent_files)} agents")
+    else:
+        info(f"No manual file at {manual} — skipping manual completeness check")
+
+    return issues
+
+
+# ── Tools check ────────────────────────────────────────────────────────────────
+
+TOOL_ROW_RE = re.compile(
+    r"^\|\s*`([^`]+)`\s*\|[^|]*\|[^|]*\|\s*([^|]+?)\s*\|\s*$", re.MULTILINE
+)
+
+
+def check_tools(workspace: Path) -> int:
+    print("\n=== Tool inventory consistency ===")
+    info("This only checks that a claimed tool exists and runs — it cannot "
+         "tell whether the tool actually does what the department claims. "
+         "djinn-bore-core (a 3D-print STL tool misattributed to SOCIAL) will "
+         "pass this check cleanly; that class of mismatch still needs a human.")
+    tools_readme = workspace / "tools/README.md"
+    if not tools_readme.is_file():
+        info(f"No tools/README.md at {tools_readme} — skipping")
+        return 0
+
+    text = tools_readme.read_text(encoding="utf-8")
+    rows = TOOL_ROW_RE.findall(text)
+    active = [(name, status) for name, status in rows if "active" in status.lower()]
+
+    if not active:
+        info("No rows tagged 'Active' found in tools/README.md")
+        return 0
+
+    issues = 0
+    for name, _status in active:
+        path = shutil.which(name)
+        if not path:
+            fail(f"{name}: claimed Active, not found on $PATH")
+            issues += 1
+            continue
+
+        try:
+            proc = subprocess.run(
+                [name, "--help"], capture_output=True, text=True, timeout=5
+            )
+        except subprocess.TimeoutExpired:
+            # Not every internal tool implements --help; some are long-running
+            # daemons/watchers that ignore unrecognized args and start their
+            # main loop instead. That's not evidence of misattribution on its
+            # own, so this is reported separately rather than as a failure.
+            info(f"{name}: on PATH ({path}), but `--help` didn't return within "
+                 f"5s — likely a daemon/watcher with no --help support, not "
+                 f"necessarily broken. Inconclusive, not counted as an issue.")
+            continue
+        except Exception as exc:
+            fail(f"{name}: on PATH ({path}) but failed to execute: {exc}")
+            issues += 1
+            continue
+
+        if proc.returncode != 0:
+            first_line = (proc.stderr or proc.stdout or "").strip().splitlines()
+            first_line = first_line[0] if first_line else "(no output)"
+            # A non-zero exit on --help doesn't by itself prove departmental
+            # misattribution (plenty of small internal scripts never bothered
+            # implementing --help and just error on any unrecognized arg) —
+            # phrased as "needs a look", not a confirmed defect.
+            fail(f"{name}: on PATH but `--help` exits {proc.returncode} — "
+                 f"{first_line} (needs a manual look — may be a real config/"
+                 f"dependency problem, or just a script with no --help support)")
+            issues += 1
+        else:
+            ok(f"{name}: on PATH, --help runs clean ({path})")
+
+    return issues
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--roster", action="store_true", help="Roster check only")
+    parser.add_argument("--tools", action="store_true", help="Tools check only")
+    parser.add_argument("--workspace", type=Path, default=DEFAULT_WORKSPACE,
+                         help=f"Department workspace path (default: {DEFAULT_WORKSPACE})")
+    args = parser.parse_args()
+
+    run_roster = args.roster or not (args.roster or args.tools)
+    run_tools = args.tools or not (args.roster or args.tools)
+
+    total_issues = 0
+    print(f"djinn-doc-check — {args.workspace}")
+
+    if run_roster:
+        total_issues += check_roster(args.workspace)
+    if run_tools:
+        total_issues += check_tools(args.workspace)
+
+    print()
+    if total_issues == 0:
+        print("\033[32mAll checks passed.\033[0m")
+    else:
+        print(f"\033[31m{total_issues} issue(s) found.\033[0m")
+
+    sys.exit(1 if total_issues else 0)
+
+
+if __name__ == "__main__":
+    main()
