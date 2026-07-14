@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-07-12",
-  "updated_by": "Claude",
+  "last_updated": "2026-07-13",
+  "updated_by": "Marcus",
   "spools": [
     {
       "spool_id": "SPOOL-001",
@@ -370,13 +370,13 @@
       "spool_id": "SPOOL-027",
       "material": "PLA",
       "color": "Burnt Titanium",
-      "brand": "unknown",
+      "brand": "ForgeFlash",
       "initial_weight_g": 1000,
       "remaining_g": 600,
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used. brand TBD",
+      "notes": "shelf — partially used",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -404,8 +404,8 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "INCOMING 2026-07-13 — silk tri-color",
-      "added_at": "2026-07-12",
+      "notes": "shelf — arrived 2026-07-13, silk tri-color",
+      "added_at": "2026-07-13",
       "last_used": null
     },
     {
@@ -418,8 +418,8 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "INCOMING 2026-07-13",
-      "added_at": "2026-07-12",
+      "notes": "shelf — arrived 2026-07-13",
+      "added_at": "2026-07-13",
       "last_used": null
     },
     {
@@ -432,8 +432,8 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "INCOMING 2026-07-13 — Rapid PLA",
-      "added_at": "2026-07-12",
+      "notes": "shelf — arrived 2026-07-13, Rapid PLA",
+      "added_at": "2026-07-13",
       "last_used": null
     },
     {
