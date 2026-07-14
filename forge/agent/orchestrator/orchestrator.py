@@ -177,7 +177,16 @@ def run(
         try:
             state = makers_mark.run(state)
         except Exception as e:
-            print(f"  [MakersMarkAgent] WARNING: stamp failed ({e}) — proceeding without mark")
+            # Every plate must be marked, no exceptions — do NOT save or advance
+            # to pricing on a failed stamp. Previously this was caught, logged as
+            # a soft warning, and the pipeline continued anyway with the plate
+            # silently left unmarked; that's the believed cause of prior
+            # missed-maker's-mark incidents. Match ProtoOptAgent's render-failure
+            # pattern instead: halt, tell the operator exactly how to re-run.
+            print(f"\n  [MakersMarkAgent] STAMP FAILED:\n{e}")
+            print(f"\n  Plate is NOT marked — not proceeding to pricing/slicing.")
+            print(f"  Fix the issue, then re-run: djinn-design --job {state.id} --plate")
+            return state
         state.save()
         if not auto_advance:
             return state

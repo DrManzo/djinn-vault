@@ -15,18 +15,24 @@
 | ProtoOptAgent | Generates prototype-light and production-ready geometry variants |
 | DOEPrintOptAgent | Optimizes slicer/process settings to minimize time, energy, and material |
 | PlateNestAgent | Packs same or mixed models across one or more plates |
+| MakersMarkAgent | Stamps the TF anvil mark on the plate STL — mandatory, not optional (added after this spec; see below) |
+| EngravingAgent | Adds text/logo/marking to an existing STL on request — geometry + typography analysis, 3 ranked proposals for approval (added after this spec; see below) |
 | FairPrintAgent | Prices the finished printable jobs |
 
 Each agent owns a single step. The orchestrator routes between them and preserves shared project state.
+
+**Note (2026-07-13):** MakersMarkAgent and EngravingAgent were built and wired into the live orchestrator after this spec was written (2026-05-24) but were never added here or to `3D-SUITE-FULL-MAP.md` — found via `djinn-doc-check`-style audit of the actual orchestrator code vs. the docs. Both are real, currently-running pipeline stages.
 
 ---
 
 ## Unified Workflow
 
 ```
-DesignGenAgent → DesignEditAgent → ProtoOptAgent → PlateNestAgent → FairPrintAgent
-                                        ↕
-                                 DOEPrintOptAgent
+DesignGenAgent → DesignEditAgent → ProtoOptAgent → PlateNestAgent → MakersMarkAgent → FairPrintAgent
+                                        ↕                                  ↑
+                                 DOEPrintOptAgent                          |
+                                                                           |
+                        (on demand, any stage with an existing model) → EngravingAgent
 ```
 
 1. **DesignGenAgent** creates the initial model from description
@@ -34,7 +40,10 @@ DesignGenAgent → DesignEditAgent → ProtoOptAgent → PlateNestAgent → Fair
 3. **ProtoOptAgent** generates prototype-light and production variants
 4. **DOEPrintOptAgent** finds the optimal slicer settings for the chosen variant
 5. **PlateNestAgent** packs the final models onto plates
-6. **FairPrintAgent** prices the printable jobs
+6. **MakersMarkAgent** stamps the TF anvil mark on the plate — runs immediately after PlateNestAgent, before FairPrintAgent; the pipeline halts rather than proceeding unmarked if this fails (see Agent Spec below — this used to silently continue, which is believed to be the cause of prior missed-mark incidents)
+7. **FairPrintAgent** prices the printable jobs
+
+**EngravingAgent** is not part of the linear chain — it's routed directly by intent classification (`"engrave", "add text", "stamp", "label"`, etc.) whenever a model already exists, similar to DesignEditAgent. It always pauses for operator approval and never auto-advances past itself.
 
 ---
 
@@ -251,6 +260,35 @@ Packs same or mixed models across one or more plates. Already partially implemen
 
 ---
 
+### MakersMarkAgent
+
+*(Added after original spec — implemented in `orchestrator/agents/makers_mark.py`, wired into `orchestrator.py` immediately after PlateNestAgent.)*
+
+Stamps the TF anvil mark onto the bottom face of the plate STL via boolean subtraction (manifold3d, falls back to trimesh if the mesh isn't manifold). Mark size auto-scales down for small-footprint plates. Runs unconditionally in the plate step — every plate gets a mark, no per-job opt-out.
+
+**Failure handling:** if stamping fails for any reason (missing plate file, non-manifold mesh both boolean backends can't handle, export failure), the orchestrator **halts the pipeline and does not advance to pricing** — it prints the error and the exact command to re-run once fixed, the same pattern `ProtoOptAgent` uses on a render failure. This was fixed 2026-07-13: previously a failed stamp was caught, logged as a `print()` warning, and the pipeline proceeded to price/slice anyway with an **unmarked** plate — the plate STL was silently overwritten with the unmarked one under a false assumption of success. This silent-continue behavior is believed to be the root cause of prior "missed maker's mark" incidents (see memory: missed 3 times before this fix).
+
+---
+
+### EngravingAgent
+
+*(Added after original spec — implemented in `orchestrator/agents/engrave.py`, ~490 lines. Routed by intent, not part of the linear plate→price chain.)*
+
+Adds text, logos, or markings to an existing STL on request (triggered by intent words: "engrave", "add text", "stamp", "label", etc.). Pipeline:
+
+1. Load the source STL
+2. Run full geometry analysis (`geometry_utils.full_geometry_report()`) — surface curvature, flat regions, available area
+3. Run full typography analysis (`typography_utils.full_typography_report()`) — adapts letter height, depth, stroke width, spacing, arc wrap, and texture buffer to the actual surface the text will land on
+4. LLM generates 3 ranked placement proposals using the precomputed geometry/typography values — nothing touches the model at this stage
+5. Operator approves one of the 3 proposals (`approve(state, choice)`)
+6. `placement_resolver` converts the approved proposal into exact mm coordinates, stored in `state.engraving_placement`
+
+Machine-specific hard constraints baked into the system prompt (Ender-3 V3 Plus / Calliope, 0.4mm nozzle, 0.20mm standard / 0.12mm accuracy layer height): engraved strokes below 0.6mm are unreliable on a sidewall, below 0.5mm unreliable anywhere, due to FDM layer-line roughness.
+
+Always pauses for operator approval after generating proposals — never auto-advances, regardless of `auto_advance` flag.
+
+---
+
 ### FairPrintAgent
 
 Already live as `djinn-print-quote`. See `commissions/PRICING_SPEC.md`.
@@ -265,7 +303,7 @@ Full agent mode: weighted cost+market blend.
 
 | Component | Role |
 |-----------|------|
-| Intent parser | Classifies request as new design / edit / optimize / plate / price |
+| Intent parser | Classifies request as new design / edit / optimize / plate / price / engrave |
 | Geometry engine | CAD/mesh operations (OpenSCAD, FreeCAD, trimesh) |
 | Constraint engine | Dimensions, tolerances, loads, material, printer constraints |
 | Optimization engine | Lightweighting, topology optimization, lattice generation, printability checks |
@@ -281,7 +319,8 @@ Full agent mode: weighted cost+market blend.
 **Phase 3:** Implement DesignEditAgent (mesh inspection + parametric edit planning)  
 **Phase 4:** Implement ProtoOptAgent (two-variant geometry output)  
 **Phase 5:** Integrate DOEPrintOptAgent (slicer parameter matrix + Taguchi screening)  
-**Phase 6:** Wire PlateNestAgent and FairPrintAgent into the shared project state
+**Phase 6:** Wire PlateNestAgent and FairPrintAgent into the shared project state  
+**Phase 7 (post-spec, undated):** Add MakersMarkAgent (mandatory plate stamping) and EngravingAgent (on-demand text/logo placement) — built and live, added to this doc 2026-07-13
 
 Shared project state object carries: source file path, dimensions, material, constraints, active variant, plate STL, and quote through every step.
 
