@@ -1961,3 +1961,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-14_bug-order-detail-page-crashed-on-every-request-jinja-dict-attribute-shadowing.md`
 
 *— Claude*
+
+## 2026-07-14: BUG — Cherry Blossom cup job sliced for PETG temps but loaded spool was PLA Yellow on Calliope
+- **System:** Calliope / job-prep
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** Job was sliced with a PETG temperature profile (250C nozzle/70C bed) but the physical spool loaded on Calliope was PLA Yellow, not PETG. Caught live ~3 min into the print (245mm filament used, print cancelled) before real damage. Resliced correctly for PLA — 12.48g, 44m30s estimated. Root cause is a job-prep/slicer-profile mismatch, not a printer or model issue.
+- **Report:** `logs/reports/2026-07-14_bug-cherry-blossom-cup-job-sliced-for-petg-temps-but-loaded-spool-was-pla-yellow-on-calliope.md`
+
+*— Claude*
