@@ -161,6 +161,13 @@ also hit 2 mid-print errors, operator-recovered both times). Whether
 these are the same root cause with two symptoms or two separate issues
 isn't confirmed — still not re-investigated per Javier's original "leave
 it for now" call.
+
+**Cable physically replaced again, 2026-07-13** (second replacement — the
+2026-07-09 one only lasted 3 days before recurring). No test print run
+since this replacement yet, so **not confirmed fixed** — given how fast
+the last replacement also recurred, don't lift the one-copy-at-a-time
+rule just because the cable was swapped. Wait for multiple clean prints.
+
 Full history: `djinn/logs/bugs.md` (BUG-014), `forge/hardware/fleet-capability-matrix.md`.
 No such issue on Iris.
 
