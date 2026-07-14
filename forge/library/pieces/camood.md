@@ -168,6 +168,19 @@ since this replacement yet, so **not confirmed fixed** — given how fast
 the last replacement also recurred, don't lift the one-copy-at-a-time
 rule just because the cable was swapped. Wait for multiple clean prints.
 
+**Likely actual trigger found, 2026-07-13 evening:** Javier's hunch that
+it might be the model itself led to checking the real gcode. Camood-v2's
+Calliope-sliced files ran the cooling fan above the documented "hard cap
+S128" rule on 99.6–99.9% of all fan commands (peak S229) — that cap was
+never actually enforced anywhere, on any Calliope print, not just this
+model. Camood's geometry just needs constant cooling (thousands of fan
+commands vs. ~22 for an unrelated comparison print), so it's exposed to
+the un-capped, EMI-triggering fan speed far more than almost anything
+else on this machine. `forge/tools/djinn-gcode-fancap` now exists to
+clamp this before a gcode reaches the queue — recommend running it on
+the next camood-v2 attempt to start isolating whether this alone fixes
+it, independent of the cable.
+
 Full history: `djinn/logs/bugs.md` (BUG-014), `forge/hardware/fleet-capability-matrix.md`.
 No such issue on Iris.
 
