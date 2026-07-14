@@ -109,13 +109,16 @@ Every OSINT operation in this workspace follows this protocol:
 
 ## Tool Stack
 
+No OSINT-specific tools currently exist. All five previously listed
+(`djinn-bore-core`, `djinn-trend-agent`, `djinn-social-analyst`,
+`djinn-style-scrape`, `djinn-vault-enrich`) turned out to be real Djinn
+tools with unrelated actual purposes (3D-print STL prep, Djinn Media's
+own trend/analytics/Discord ops, vault knowledge-curation) — see
+`tools/README.md` for the full audit. Every agent currently runs on
+manual web search/API calls until one of the tools below is built.
+
 | Tool | Purpose | Status |
 |---|---|---|
-| `djinn-bore-core` | Username/handle enumeration across platforms | Existing (djinn-tools) |
-| `djinn-trend-agent` | Market and community trend scraping | Existing (djinn-tools) |
-| `djinn-social-analyst` | Social media analysis and graph mapping | Existing (djinn-tools) |
-| `djinn-style-scrape` | General-purpose web scraping infrastructure | Existing (djinn-tools) |
-| `djinn-vault-enrich` | Vault enrichment from external sources | Existing (djinn-tools) |
 | `djinn-net-probe` | Domain/IP/WHOIS/DNS/ASN footprinting | Planned — see tools/README.md |
 | `djinn-archive-fetch` | Wayback Machine and cached data recovery | Planned — see tools/README.md |
 | `djinn-social-map` | Cross-platform social graph builder | Planned — see tools/README.md |

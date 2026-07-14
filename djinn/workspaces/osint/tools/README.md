@@ -6,17 +6,18 @@ This directory tracks the OSINT tool build queue and existing tool inventory for
 
 ## Existing Tools (in djinn-tools)
 
-These tools already exist in the `djinn-tools` repo and are available to OSINT agents now:
-
-| Tool | Location | Used By | Status |
-|---|---|---|---|
-| `djinn-bore-core` | djinn-tools | SOCIAL | Active |
-| `djinn-trend-agent` | djinn-tools | TREND | Active |
-| `djinn-social-analyst` | djinn-tools | SOCIAL | Active |
-| `djinn-style-scrape` | djinn-tools | RECON | Active |
-| `djinn-vault-enrich` | djinn-tools | CORRELATOR, TREND | Active |
-| `djinn-discord-gateway` | djinn-tools | SOCIAL | Active |
-| `djinn-discord-watch` | djinn-tools | SOCIAL | Active |
+**None, as of 2026-07-13.** This table previously listed 7 tools (`djinn-bore-core`,
+`djinn-trend-agent`, `djinn-social-analyst`, `djinn-style-scrape`,
+`djinn-vault-enrich`, `djinn-discord-gateway`, `djinn-discord-watch`) as
+"Active" for OSINT use. Audited via `djinn-doc-check` + manual inspection —
+every one of them is a real, working tool elsewhere in Djinn (3D-print
+STL prep, Djinn Media's own trend/analytics/Discord ops, vault
+knowledge-curation), but none of them do third-party OSINT collection.
+They were cross-listed by loose name association (SOCIAL↔"social",
+TREND↔"trend") rather than actual capability review. Until one of the
+Planned tools below is built, every OSINT agent runs on manual web
+search/API calls — see `djinn/workspaces/osint/targets/2026-07-12_javier-self-audit.md`
+for what that actually looked like in practice.
 
 ---
 
