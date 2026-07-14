@@ -949,3 +949,33 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Revised-Summary-For-Chapter-3-With-Javelin's-Father.md`
 
 — Clerk
+
+---
+
+### 2026-07-14 08:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Interview-With-Marcus-On-Iris-Bambufy-And-Bambu.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:02 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Marcus-Session-Brief.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:03 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Wounded-Healer-And-The-Fool-Strategic-Integration-2026-07-14.md`
+
+— Clerk
