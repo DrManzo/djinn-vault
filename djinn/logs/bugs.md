@@ -290,3 +290,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-07-13 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (30 occurrence(s)) _(type: errlog)_
+| 2026-07-13 | Claude | forge print pipeline / orchestrator | high | fixed | Orchestrator silently continued after a failed maker's-mark stamp | [[2026-07-13_bug-orchestrator-silently-continued-after-a-failed-maker-s-mark-stamp]] |
