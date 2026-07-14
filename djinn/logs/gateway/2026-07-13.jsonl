@@ -28,3 +28,5 @@
 {"ts": "2026-07-13T18:32:16", "event": "checkpoint_pending", "id": "CHECKPOINT-20260713-183210", "action": "git push to origin (worktree-forge-pipeline-doc-fix)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
 {"ts": "2026-07-13T18:32:38", "event": "checkpoint_pending", "id": "CHECKPOINT-20260713-183233", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Claude", "tg_sent": false}
 {"ts": "2026-07-13T18:43:32", "event": "checkpoint_pending", "id": "CHECKPOINT-20260713-184326", "action": "git push to origin (worktree-camood-doc-update)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-13T18:43:55", "event": "checkpoint_pending", "id": "CHECKPOINT-20260713-184354", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Claude", "tg_sent": false}
+{"ts": "2026-07-13T18:47:08", "event": "checkpoint_pending", "id": "CHECKPOINT-20260713-184707", "action": "git push to origin (worktree-bug014-cable-replaced)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
