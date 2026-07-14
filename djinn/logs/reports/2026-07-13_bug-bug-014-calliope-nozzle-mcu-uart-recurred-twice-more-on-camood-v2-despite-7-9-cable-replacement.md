@@ -26,32 +26,33 @@ Closed 2026-07-09 after cable replacement, but recurred on camood-v2 PETG jobs i
 
 ## Symptom
 
-<!-- Fill in: what the user or system observed -->
+Two distinct failure timings on Calliope, both on camood-v2 PETG jobs, despite the 2026-07-09 cable replacement: a mid-print crash (4-copy plate, 21 min in on 2026-07-12; 2 more mid-print errors on 2026-07-13, operator-recovered both times) and a post-completion park-move crash (single-copy job on 2026-07-12, 6s after finishing; recurred again as the final error on 2026-07-13's job, after that print had already completed). Same key561/nozzle_mcu signature as the original BUG-014.
 
 ---
 
 ## Steps to Reproduce
 
-1. <!-- steps -->
+1. Slice/print a camood-v2 job on Calliope in PETG.
+2. Signature has appeared both mid-print and during the END_PRINT park move post-completion — no single confirmed trigger step.
 
 ---
 
 ## Fix Applied
 
-<!-- What was changed, where, and why -->
+**Physical: nozzle_mcu cable replaced again, 2026-07-13** (second replacement — first was 2026-07-09). Root cause of *why* the 07-09 cable also failed/degraded this fast is not established; no further diagnosis was done per Javier's "leave it for now" call, this is a hardware swap only.
 
 ---
 
 ## Verification
 
-<!-- How you confirmed the fix worked -->
+**Not yet confirmed.** No test print has been run since this replacement. Given the 07-09 replacement also initially looked fixed and then recurred within days, treat this as unconfirmed until camood-v2 has printed cleanly on Calliope multiple times. The one-copy-at-a-time operating rule (set 2026-07-12) stays in effect until then — do not lift it just because the cable was swapped again.
 
 ---
 
 ## Rule / Lesson
 
-> **Rule:** <!-- one sentence: what prevents this class of bug in the future -->
+> **Rule:** A physical cable replacement is not confirmation of a fix — BUG-014's 07-09 replacement recurred within 3 days despite looking clean initially. Don't close this bug or lift the one-copy-at-a-time rule until multiple clean camood-v2 prints on Calliope confirm it, not just the swap itself.
 
 ---
 
-*— Claude, 2026-07-13*
+*— Claude, 2026-07-13, updated same day: cable physically replaced, verification pending*
