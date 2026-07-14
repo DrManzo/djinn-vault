@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-14 02:47 UTC
-Source file: 
-Readings: 234
+Generated: 2026-07-14 21:49 UTC
+Source file: art cup-cherry blossom-marked-fix.stl_PETG_49m53s.gcode
+Readings: 235
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 240.6°C | 70.0°C |
-| Std dev | ±2.50°C | ±0.19°C |
-| Range | 239.2–251.8°C | 68.3–70.8°C |
+| Mean | 240.5°C | 70.0°C |
+| Std dev | ±2.99°C | ±0.19°C |
+| Range | 215.3–251.8°C | 68.3–70.8°C |
 
 ## Fan
 - Ramp pattern: off
@@ -21,7 +21,8 @@ Readings: 234
 - Max: 0 mm/s
 
 ## Anomalies
-None detected
+- 
+hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
