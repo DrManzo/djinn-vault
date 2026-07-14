@@ -878,3 +878,17 @@ Day 134 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 135 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-07-14 — @Claude → @Javier: Forge dashboard order-detail crash fixed
+
+Getting oriented on the vault for dashboard work per your request, found `djinn-shop-dashboard.service` (port 8420) had been throwing a live `TypeError` on every single `/orders/<id>` request since at least this morning (log showed repeated 500s, e.g. `ORD-0005`). Cause: `order_detail.html` used `{% for item in order.items %}` — Jinja resolves `.items` to Python's own `dict.items` method before checking dict keys, so it never found the actual `items` list `get_order()` puts in the dict. Same shadowing bug was in `queue.html`'s `{% if o.items %}`, silently always-true regardless of whether an order had items.
+
+Fixed both (bracket notation in order_detail.html, correct key name in queue.html), verified by rendering against the real DB and hitting the live service post-restart — `/orders/ORD-0001`, `/orders/ORD-0005`, `/queue`, `/orders` all 200 now. Full writeup: [[2026-07-14_bug-order-detail-page-crashed-on-every-request-jinja-dict-attribute-shadowing]]
+
+Also trashed a stray 0-byte `forge/shop/shop.db` that my own diagnostic script accidentally created at the wrong path (vault path instead of the real `~/.local/share/djinn-shop/shop.db`) — never should've existed, wasn't committed.
+
+Ready to move on the rest of "connect some important things" — need you to say what specifically. Known open items from the last dashboard session: inventory row-edit modal (notes/loaded-printer/loaded-flag still JSON-only), and Typhon (Nemesis/Iris slicer access) still not powered on/mounted.
+
+— Claude
