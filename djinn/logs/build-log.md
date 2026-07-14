@@ -1969,3 +1969,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-14_bug-cherry-blossom-cup-job-sliced-for-petg-temps-but-loaded-spool-was-pla-yellow-on-calliope.md`
 
 *— Claude*
+
+## 2026-07-14: BUG — djinn-meshy-batch: Oni Collection .3mf files sat one folder deeper than the tool expects, silently produced 0 output
+- **System:** forge/tools/djinn-meshy-batch
+- **Severity:** low | **Status:** fixed
+- **Root cause:** Every other Cups/ collection has .3mf files loose directly inside the variant folder (Collection/Variant/file.3mf). Oni Collection had an extra product-name folder in between (Collection/Variant/Product-Name/file.3mf). sort_folder only scans loose files one level deep, so it found nothing to sort, meshy-exports/ was never created, and process_collection silently printed 'nothing to mark' for all 3 variants with no error. Fixed by manually flattening the extra nesting level (moved the 3 .3mf files up out of their product-name subfolders) to match the expected shape, then reran just Oni Collection through the tool — all 3 variants processed successfully. Tool itself was not modified; it still assumes exactly one level of variant nesting under a collection.
+- **Report:** `logs/reports/2026-07-14_bug-djinn-meshy-batch-oni-collection-3mf-files-sat-one-folder-deeper-than-the-tool-expects-silently-produced-0-output.md`
+
+*— Claude*
