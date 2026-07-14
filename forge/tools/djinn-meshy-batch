@@ -1,0 +1,414 @@
+#!/home/drmanzo/.venvs/djinn-orchestrator/bin/python3.11
+"""
+djinn-meshy-batch — Batch-process a Meshy AI concept-export collection,
+readying it for Blender work.
+
+No LLM anywhere in this pipeline — every step is deterministic filename
+matching, mesh decimation, or shelling out to existing geometry tools.
+
+Pipeline per collection folder:
+  1. Sort loose files into reference/ (2D images — including any Meshy_AI
+     PNGs, which are concept art, not 3D geometry) and meshy-exports/
+     (the actual .3mf exports).
+  2. For each .3mf in meshy-exports/: classify cup vs. non-cup. A file is
+     a cup if its own filename says "cup" (case-insensitive), OR if the
+     whole collection folder is literally named "Cups" (see below).
+  3. Non-cup: stamp the maker's mark at the default placement via the
+     existing djinn-model-mark tool.
+  4. Cup: run djinn-bore-core, which does true-center detection, cuts a
+     real Proxy Core seat bore (38mm diameter, 51mm depth — the same
+     caliper-verified constant djinn-bore-core itself uses, matching
+     figures already recorded in applacrabus.md/tardis.md), and stamps
+     the maker's mark on the bore floor — all in one existing, proven
+     tool, not reimplemented here. Meshy exports are frequently very
+     high-poly (300k-800k faces) and often non-watertight, which makes
+     djinn-bore-core's mesh-repair step slow and occasionally unable to
+     find a working boolean backend at all — so every mesh is decimated
+     to a modest face count first (same pymeshlab pattern already used
+     elsewhere in this project for large STLs), and the bore-core call
+     runs under a timeout. If it fails or times out even after
+     decimation, this falls back to the same simple maker's-mark-only
+     stamp non-cups get — matching the original "if it's too
+     complicated, just stamp it" instruction.
+  5. Output goes to a new marked/ folder next to meshy-exports/ —
+     originals are never touched or overwritten.
+  6. Output naming: "{collection} {object-type}-{variant}-marked-fix"
+     (object-type is parsed from the source filename, e.g. "cup" from
+     "..._cup_concept..." — not guessed or collection-specific).
+
+Cups/ override folder: if the --collection argument's own name is
+literally "Cups" (case-insensitive), it's treated as a wrapper, not a
+collection itself — every subfolder inside it is its own collection
+(using ITS name for output naming), but every file inside is
+unconditionally treated as a cup, no filename check. The idea: you move
+a file's ORIGINAL into Cups/<theme>/... specifically because you've
+looked at it and know it's meant to be a cup.
+
+Both djinn-model-mark and djinn-bore-core have real side effects worth
+knowing about. djinn-model-mark archives a timestamped copy of its
+input into djinn/printer/originals/ and creates a job record in
+djinn/printer/prints/ on every call, regardless of --output — this tool
+deletes both immediately after each call rather than littering your
+real print-job history with concept-art stamps. djinn-bore-core appends
+a real entry to djinn/communications/COMMS.md on success — suppressed
+here via its own --no-comms flag. Neither tool is modified.
+
+Usage:
+  djinn-meshy-batch --collection "<path>" [--dry-run]
+
+  <path> should be a "grandparent" collection folder (e.g. "Oni
+  Collection", "gangar", "Catrina") — either loose/already-sorted files
+  directly in it, or variant subfolders (e.g. "Red", "Blue"), or both —
+  or a Cups/ wrapper folder containing several such collections.
+
+  --dry-run reports exactly what would happen — sorting, classification,
+  which path each file would take — without moving, marking, boring, or
+  writing anything.
+"""
+
+import argparse
+import re
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+import trimesh
+
+MODEL_MARK_BIN = "djinn-model-mark"
+BORE_CORE_BIN = "djinn-bore-core"
+
+# Caliper-verified Puffco Proxy Core seat bore — the same constant
+# djinn-bore-core itself defaults to, matching the 38.3mm figures already
+# recorded in existing piece docs (applacrabus.md, tardis.md).
+PROXY_CORE_DIAMETER_MM = 38.0
+PROXY_CORE_DEPTH_MM = 51.0
+
+# Meshy AI exports commonly run 300k-800k faces. djinn-bore-core's mesh
+# repair (Poisson reconstruction on non-watertight input) gets slow and can
+# fail outright above roughly this size — decimate first, same threshold
+# style already used elsewhere in this project for large STLs before plate
+# nesting (see forge/agent/AGENT_STACK_SPEC.md — PlateNestAgent).
+DECIMATE_ABOVE_FACES = 20000
+DECIMATE_TARGET_FACES = 15000
+BORE_CORE_TIMEOUT_SEC = 300
+
+OBJECT_TYPE_RE = re.compile(r"([a-z0-9]+)[-_]concept", re.IGNORECASE)
+EXPORT_ID_RE = re.compile(r"Meshy_AI_export_(\d+)", re.IGNORECASE)
+MANAGED_SUBDIRS = {"reference", "meshy-exports", "marked", "model"}
+
+PRINTS_DIR = Path.home() / "Obsidian/djinn/printer/prints"
+ORIGINALS_DIR = Path.home() / "Obsidian/djinn/printer/originals"
+
+
+def extract_object_type(filename: str) -> str:
+    """Parse the object-type word from a filename. Original Meshy exports
+    say "..._cup_concept..." (OBJECT_TYPE_RE). Renamed files (e.g. "Cherry
+    Blossom - Core Cup .3mf") drop "concept" entirely but still say "cup"
+    somewhere — checked directly as a fallback, matching is_cup()'s own
+    check, since that's the one word actually meaningful for naming here.
+    Generic untouched exports (Meshy_AI_export_<id>_...) have neither —
+    these fall back to "model", disambiguated by export ID since multiple
+    generic exports in the same folder would otherwise collide on the
+    same output name."""
+    m = OBJECT_TYPE_RE.search(filename)
+    if m:
+        return m.group(1).lower()
+    if "cup" in filename.lower():
+        return "cup"
+    id_m = EXPORT_ID_RE.search(filename)
+    return f"model-{id_m.group(1)}" if id_m else "model"
+
+
+def is_cup(filename: str) -> bool:
+    return "cup" in filename.lower()
+
+
+GEOMETRY_EXTENSIONS = {".3mf", ".stl"}
+
+
+def sort_folder(folder: Path, dry_run: bool) -> dict:
+    """Split loose files directly in `folder` into reference/ (2D images)
+    and meshy-exports/ (actual 3D geometry). Classified by file extension,
+    not filename prefix — files get renamed to descriptive names (e.g.
+    "Cherry Blossom - Core Cup.3mf") that no longer start with "Meshy_AI",
+    and extension is the one thing that doesn't change under renaming.
+    Safe to re-run: a folder that's already sorted (only subdirectories,
+    no loose files) is a no-op."""
+    files = [f for f in folder.iterdir() if f.is_file()]
+    if not files:
+        return {"reference": 0, "meshy_exports": 0}
+
+    meshy = [f for f in files if f.suffix.lower() in GEOMETRY_EXTENSIONS]
+    other = [f for f in files if f not in meshy]
+
+    if dry_run:
+        return {"reference": len(other), "meshy_exports": len(meshy)}
+
+    # Move each category independently — unlike the original manual tidy-up
+    # pass, this tool *depends* on finding geometry reliably in
+    # meshy-exports/, so a folder with only one category present still
+    # needs that category filed correctly, not left loose.
+    if other:
+        (folder / "reference").mkdir(exist_ok=True)
+        for f in other:
+            shutil.move(str(f), str(folder / "reference" / f.name))
+    if meshy:
+        (folder / "meshy-exports").mkdir(exist_ok=True)
+        for f in meshy:
+            shutil.move(str(f), str(folder / "meshy-exports" / f.name))
+    return {"reference": len(other), "meshy_exports": len(meshy)}
+
+
+def decimate_if_needed(input_path: Path, work_dir: Path) -> tuple:
+    """Returns (path_to_use, was_decimated, face_count_before). Decimates
+    to DECIMATE_TARGET_FACES via pymeshlab if the mesh is above
+    DECIMATE_ABOVE_FACES — same approach already used elsewhere in this
+    project for large STLs before plate nesting. Falls back to the
+    original path if decimation itself fails for any reason (better to
+    try bore-core on the original than to crash the whole file).
+
+    pymeshlab's own 3MF parser is stricter than trimesh's and rejects some
+    real Meshy exports outright ("Invalid Model Coordinate Indices") even
+    though trimesh loads them fine — so the mesh already loaded via
+    trimesh (to get the face count) is re-exported to a plain temp STL
+    first, and pymeshlab decimates that instead of the original 3MF."""
+    try:
+        mesh = trimesh.load(str(input_path), force="mesh")
+        face_count = len(mesh.faces)
+    except Exception:
+        return input_path, False, None
+
+    if face_count <= DECIMATE_ABOVE_FACES:
+        return input_path, False, face_count
+
+    try:
+        pre_stl = work_dir / f"{input_path.stem}_pre_decimate.stl"
+        mesh.export(str(pre_stl))
+
+        import pymeshlab
+        ms = pymeshlab.MeshSet()
+        ms.load_new_mesh(str(pre_stl))
+        ms.meshing_decimation_quadric_edge_collapse(targetfacenum=DECIMATE_TARGET_FACES)
+        decimated_path = work_dir / f"{input_path.stem}_decimated.stl"
+        ms.save_current_mesh(str(decimated_path))
+        return decimated_path, True, face_count
+    except Exception:
+        return input_path, False, face_count
+
+
+def run_model_mark(input_path: Path, output_path: Path, offset_x: float = 0.0, offset_y: float = 0.0):
+    """Call djinn-model-mark, then remove the job record + archived input
+    copy it unconditionally creates in real operational directories —
+    those are meant for actual print jobs, not concept-art batch stamps.
+    djinn-model-mark itself is not modified."""
+    before_prints = {p.name for p in PRINTS_DIR.iterdir()} if PRINTS_DIR.is_dir() else set()
+    before_originals = {p.name for p in ORIGINALS_DIR.iterdir()} if ORIGINALS_DIR.is_dir() else set()
+
+    cmd = [MODEL_MARK_BIN, str(input_path), "--output", str(output_path)]
+    if offset_x:
+        cmd += ["--x", str(offset_x)]
+    if offset_y:
+        cmd += ["--y", str(offset_y)]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    if PRINTS_DIR.is_dir():
+        for p in PRINTS_DIR.iterdir():
+            if p.name not in before_prints:
+                shutil.rmtree(p, ignore_errors=True)
+    if ORIGINALS_DIR.is_dir():
+        for p in ORIGINALS_DIR.iterdir():
+            if p.name not in before_originals:
+                p.unlink(missing_ok=True)
+
+    return result
+
+
+def run_bore_core(input_path: Path, output_path: Path, work_dir: Path) -> dict:
+    """Decimate if needed, then call djinn-bore-core (true-center + real
+    bore cut + maker's-mark-on-bore-floor, all built in) under a timeout.
+    --no-comms suppresses its normal write to djinn/communications/COMMS.md
+    — that log is for real operational events, not concept-art batch runs.
+    Returns a dict describing what happened; never raises."""
+    work_dir.mkdir(parents=True, exist_ok=True)
+    mesh_path, decimated, face_count = decimate_if_needed(input_path, work_dir)
+
+    cmd = [
+        BORE_CORE_BIN, str(mesh_path),
+        "--diameter", str(PROXY_CORE_DIAMETER_MM),
+        "--depth", str(PROXY_CORE_DEPTH_MM),
+        "--output", str(output_path),
+        "--no-comms",
+        "--quiet",
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=BORE_CORE_TIMEOUT_SEC)
+        return {
+            "success": result.returncode == 0 and output_path.is_file(),
+            "decimated": decimated,
+            "face_count_before": face_count,
+            "returncode": result.returncode,
+            "stderr_tail": result.stderr.strip()[-500:] if result.returncode != 0 else "",
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            "success": False,
+            "decimated": decimated,
+            "face_count_before": face_count,
+            "returncode": None,
+            "stderr_tail": f"timed out after {BORE_CORE_TIMEOUT_SEC}s",
+        }
+
+
+def build_output_name(collection: str, object_type: str, variant: str) -> str:
+    name = collection.strip().lower()
+    if object_type:
+        name += f" {object_type}"
+    if variant:
+        name += f"-{variant.lower()}"
+    name += "-marked-fix"
+    return name
+
+
+def process_file(f: Path, collection: str, variant: str, output_dir: Path,
+                  dry_run: bool, used_names: set, force_cup: bool = False) -> dict:
+    object_type = extract_object_type(f.name)
+    cup = force_cup or is_cup(f.name)
+    name = build_output_name(collection, object_type, variant)
+
+    # Defense-in-depth: even with export-ID disambiguation in
+    # extract_object_type, two distinct files could still land on the same
+    # name (e.g. two differently-worded "cup" concepts with no variant to
+    # tell them apart). Never silently let one overwrite the other.
+    base_name = name
+    n = 2
+    while name in used_names:
+        name = f"{base_name}-{n}"
+        n += 1
+    used_names.add(name)
+
+    out_path = output_dir / f"{name}.stl"
+    result = {"input": f.name, "output": out_path.name, "is_cup": cup, "object_type": object_type}
+
+    if dry_run:
+        result["path"] = "bore-core (cup)" if cup else "simple (not a cup)"
+        return result
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    if not cup:
+        result["path"] = "simple (not a cup)"
+        r = run_model_mark(f, out_path)
+        result["success"] = r.returncode == 0
+        if r.returncode != 0:
+            result["error"] = r.stderr.strip()[-500:]
+        return result
+
+    work_dir = output_dir / ".work"
+    bore_result = run_bore_core(f, out_path, work_dir)
+    result["bore_core"] = bore_result
+
+    if bore_result["success"]:
+        result["path"] = "bore-core (true-center + bore + mark)"
+        result["success"] = True
+    else:
+        result["path"] = f"simple (bore-core failed: {bore_result['stderr_tail'] or 'unknown error'})"
+        r = run_model_mark(f, out_path)
+        result["success"] = r.returncode == 0
+        if r.returncode != 0:
+            result["error"] = r.stderr.strip()[-500:]
+
+    shutil.rmtree(work_dir, ignore_errors=True)
+    return result
+
+
+def normalize_collection_name(folder_name: str) -> str:
+    name = re.sub(r"\s+collection$", "", folder_name, flags=re.IGNORECASE)
+    return name.strip()
+
+
+def process_collection(collection_path: Path, dry_run: bool, force_cup: bool = False) -> list:
+    """Process one collection folder: sort each variant (or the collection
+    itself if it has no variant subfolders) into reference/meshy-exports,
+    then mark/bore every .3mf found. force_cup, when set by the caller,
+    treats every file as a cup regardless of filename — used for the
+    Cups/ override folder (see main())."""
+    collection_name = normalize_collection_name(collection_path.name)
+
+    subitems = list(collection_path.iterdir())
+    variant_dirs = [d for d in subitems if d.is_dir() and d.name not in MANAGED_SUBDIRS]
+    own_loose_files = [f for f in subitems if f.is_file()]
+    own_meshy_dir_exists = (collection_path / "meshy-exports").is_dir()
+
+    targets = [(d, d.name) for d in variant_dirs]
+    if own_loose_files or own_meshy_dir_exists:
+        targets.append((collection_path, ""))
+
+    all_results = []
+    for folder, variant in targets:
+        print(f"\n=== {folder} (variant={variant or 'none'}) ===")
+        sort_stats = sort_folder(folder, dry_run)
+        print(f"  sort: {sort_stats}")
+
+        meshy_dir = folder / "meshy-exports"
+        if not meshy_dir.is_dir():
+            print("  no meshy-exports/ — nothing to mark")
+            continue
+
+        output_dir = folder / "marked"
+        threemfs = sorted(meshy_dir.glob("*.3mf"))
+        if not threemfs:
+            print("  meshy-exports/ has no .3mf files — nothing to mark")
+            continue
+
+        used_names = set()  # collision tracking is per output_dir, not global
+        for f in threemfs:
+            r = process_file(f, collection_name, variant, output_dir, dry_run, used_names, force_cup)
+            all_results.append(r)
+            bc = r.get("bore_core")
+            extra = ""
+            if bc:
+                extra = f" [decimated={bc['decimated']}, faces_before={bc['face_count_before']}]"
+            status = "" if dry_run else (" OK" if r.get("success") else " FAILED")
+            print(f"  {f.name} -> {r['path']} -> {r['output']}{extra}{status}")
+
+    return all_results
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--collection", required=True, type=Path,
+                         help="Grandparent collection folder, or a Cups/ "
+                              "wrapper folder containing several of them")
+    parser.add_argument("--dry-run", action="store_true",
+                         help="Report what would happen, change nothing")
+    args = parser.parse_args()
+
+    collection_path = args.collection
+    if not collection_path.is_dir():
+        print(f"ERROR: not a directory: {collection_path}", file=sys.stderr)
+        sys.exit(1)
+
+    if args.dry_run:
+        print("=== DRY RUN — nothing will be changed ===")
+
+    if collection_path.name.lower() == "cups":
+        sub_collections = [d for d in collection_path.iterdir() if d.is_dir()]
+        if not sub_collections:
+            print(f"  Cups/ wrapper has no sub-collection folders: {collection_path}")
+            sys.exit(0)
+        all_results = []
+        for sub in sorted(sub_collections):
+            print(f"\n--- Cups sub-collection: {sub.name} ---")
+            all_results += process_collection(sub, args.dry_run, force_cup=True)
+    else:
+        all_results = process_collection(collection_path, args.dry_run)
+
+    print(f"\n{len(all_results)} file(s) processed.")
+    if args.dry_run:
+        print("(dry run — no files were changed)")
+
+
+if __name__ == "__main__":
+    main()
