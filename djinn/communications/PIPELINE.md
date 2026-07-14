@@ -869,3 +869,83 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Powershell-Script-Execution-Troubleshooting.md`
 
 — Clerk
+
+---
+
+### 2026-07-14 07:58 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-Long-Can-I-Leave-Filament-In-A.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 07:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/How-To-Cut-A-Model-In-Blender.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 07:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Math-Behind-Djinn-Vault.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Typhon's-Forge-Agent-Reference-2026-07-14.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Final-Successful-Dimensions-For-Med-Core.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/So-Marcus-You-There.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/California-Llc-Formation-Guide-For-3d-Printing-Fabrication.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 08:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Revised-Summary-For-Chapter-3-With-Javelin's-Father.md`
+
+— Clerk

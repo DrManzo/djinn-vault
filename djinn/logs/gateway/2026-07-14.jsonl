@@ -1,0 +1,2 @@
+{"ts": "2026-07-14T00:01:52", "event": "checkpoint_pending", "id": "CHECKPOINT-20260714-000152", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
+{"ts": "2026-07-14T00:59:46", "event": "checkpoint_pending", "id": "CHECKPOINT-20260714-005945", "action": "git push to origin (worktree-downloads-sort)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": false}
