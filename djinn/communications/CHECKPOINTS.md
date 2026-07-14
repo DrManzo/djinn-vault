@@ -10527,3 +10527,27 @@ Rotated weekly by djinn-comms-rotate.
 **Tier:** 3 — Checkpoint
 → Waiting for Javier: Y to approve, N to deny
 
+
+
+### CHECKPOINT-20260713-190151 | 2026-07-13 19:01 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260713-190751 | 2026-07-13 19:07 | unknown | PENDING
+**Action:** git push to origin (worktree-gcode-fancap-tool)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260713-190959 | 2026-07-13 19:09 | unknown | PENDING
+**Action:** git push to origin (worktree-bug014-fancap-finding)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
