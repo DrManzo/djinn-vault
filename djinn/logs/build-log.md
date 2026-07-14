@@ -1927,3 +1927,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Fixed across 11 files: `tools/README.md`, `OSINT-MANUAL.md`, `TEAM.md`, `agents/{SOCIAL,TREND,VISUAL}.md`, `runbooks/{PERSON-OP,ORG-OP}.md`, `CHECKLIST.md`, `DORK-BOOK.md`, `feeds/feed-registry.md`. Re-ran `djinn-doc-check` after — both checks pass clean, correctly reporting zero "Active" tools remaining rather than a false clean bill of health.
 
 *— Claude*
+
+## 2026-07-13: forge — same drift found in the live manufacturing pipeline docs, worse this time
+
+- Asked "how does the rest look in forge" after the OSINT cleanup — checked whether the actual print-pipeline architecture docs (`AGENT_STACK_SPEC.md`, `3D-SUITE-FULL-MAP.md`) had the same class of drift. They did: `orchestrator.py` actually calls 8 pipeline stages, both docs only documented 6. `MakersMarkAgent` (mandatory plate stamping) and `EngravingAgent` (~490 lines, on-demand text/logo placement) were built and wired in after both docs were written and never added to either. Checked `placement_resolver.py`/`support_analysis.py` too — legitimate internal helpers of Engrave/ProtoOpt, not separately-undocumented agents.
+- Higher stakes than the OSINT version — this is the pipeline that runs real commissions, not a dormant workspace.
+- Documenting MakersMarkAgent's "no exceptions" claim against the actual code surfaced a real bug: `orchestrator.py` caught any stamp failure, printed a soft warning, and proceeded to pricing anyway with the plate silently left unmarked. Believed root cause of prior missed-maker's-mark incidents (memory: missed 3 times). Fixed to match `ProtoOptAgent`'s existing render-failure pattern — halt, don't save, print the exact re-run command. Verified by reproducing the actual failure path (missing `plate_stl` → `FileNotFoundError` → confirmed caught by the new handler) rather than trusting a syntax check alone.
+- Fixed both docs (agent map, workflow diagram, new agent-spec sections, routing table, status machine, deployed-vs-pending table, known-gaps section) plus `orchestrator.py`. Noted but did not fix in this pass: `3D-SUITE-FULL-MAP.md` still uses pre-restructure paths (`djinn/printer/...` instead of `forge/...`) throughout — separate staleness issue, bigger scope than this fix.
+- Filed as a dedicated bug report via `djinn-bugreport` (see `logs/bugs.md`).
+
+*— Claude*
