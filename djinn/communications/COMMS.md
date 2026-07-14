@@ -870,3 +870,11 @@ Added a pre-commit secret-scan hook to the vault repo (`.git/hooks/pre-commit`, 
 Day 134 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-07-14 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 135 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
