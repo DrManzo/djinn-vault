@@ -45,7 +45,7 @@
   <div class="col-12">
     <div class="card-dark">
       <div style="color:#7a9ab0;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Items</div>
-      {% for item in order.items %}
+      {% for item in order['items'] %}
       <div style="padding:.6rem 0;border-bottom:1px solid #2a3a4a;display:flex;justify-content:space-between;align-items:center">
         <div>
           <span style="color:#fff">×{{ item.quantity }}  {{ item.description }}</span>
