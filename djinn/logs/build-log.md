@@ -1918,3 +1918,12 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Note: the Typhon `typhon-full-setup.ps1` BOM/encoding bug from the third chat export was diagnosed but never confirmed fixed in that conversation, and the script isn't vault-tracked — flagging for awareness, not filed as a bug since there's nothing in-repo to point to.
 
 *— Claude*
+
+## 2026-07-13: djinn — built djinn-doc-check, then used it to find OSINT's entire "Active" tool list was fabricated
+
+- Built `djinn-doc-check` (`djinn/scripts/tools/djinn-doc-check`, installed to `~/.local/bin/`): deterministic, no-LLM checker for two classes of drift found by hand this session — agent roster completeness against a department manual, and claimed-tool PATH/exit-code verification. Self-tested and fixed two bugs in itself before trusting it (a file-tree substring false-positive, and daemon tools being flagged as broken just for timing out on `--help`).
+- Ran it against `djinn/workspaces/osint` — surfaced that **all 7** tools the department's docs claimed were "Active" (not just the 2 found earlier by hand) are real Djinn tools elsewhere (3D-print STL prep, Djinn Media's own trend/analytics/Discord ops, vault knowledge-curation) cross-listed by loose name association, none actually doing third-party OSINT.
+- Also found two fabricated CLI usages while fixing this: a `djinn-bore-core --username <handle>` example in `runbooks/PERSON-OP.md` (real tool takes `--input`/`--diameter` for STL geometry, no such flag exists) and a `djinn-style-scrape --images <url>` example in `agents/VISUAL.md` (real tool has no such flag, runs fixed aesthetic-photography searches). PERSON-OP.md also listed a local Sherlock install that isn't present anywhere on this machine.
+- Fixed across 11 files: `tools/README.md`, `OSINT-MANUAL.md`, `TEAM.md`, `agents/{SOCIAL,TREND,VISUAL}.md`, `runbooks/{PERSON-OP,ORG-OP}.md`, `CHECKLIST.md`, `DORK-BOOK.md`, `feeds/feed-registry.md`. Re-ran `djinn-doc-check` after — both checks pass clean, correctly reporting zero "Active" tools remaining rather than a false clean bill of health.
+
+*— Claude*
