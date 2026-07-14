@@ -1,0 +1,39 @@
+{
+  "last_updated": "2026-07-13",
+  "updated_by": "Claude",
+  "supplies": [
+    {
+      "item_id": "SUPPLY-001",
+      "name": "Acrylic Paint Markers — Black & White",
+      "brand": "Pagather",
+      "category": "finishing / paint",
+      "quantity": 1,
+      "unit": "12-pack (6 black, 6 white, dual fine+brush tip)",
+      "unit_cost": 6.98,
+      "purpose": "detail/finishing work on prints",
+      "added_at": "2026-07-13"
+    },
+    {
+      "item_id": "SUPPLY-002",
+      "name": "Acrylic Paint Markers — Metallic",
+      "brand": "ARTISTRO",
+      "category": "finishing / paint",
+      "quantity": 1,
+      "unit": "24-pack (dual fine+brush tip)",
+      "unit_cost": 15.99,
+      "purpose": "detail/finishing work on prints",
+      "added_at": "2026-07-13"
+    },
+    {
+      "item_id": "SUPPLY-003",
+      "name": "Acrylic Paint Markers — 120 Color",
+      "brand": "Pagather",
+      "category": "finishing / paint",
+      "quantity": 1,
+      "unit": "120-pack (dual fine+brush tip, incl. 24 metallic)",
+      "unit_cost": 39.98,
+      "purpose": "detail/finishing work on prints",
+      "added_at": "2026-07-13"
+    }
+  ]
+}
