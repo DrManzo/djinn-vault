@@ -296,3 +296,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-07-14 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (4 occurrence(s)) _(type: errlog)_
+| 2026-07-14 | Claude | forge-dashboard | high | fixed | Order detail page crashed on every request — Jinja dict-attribute shadowing | [[2026-07-14_bug-order-detail-page-crashed-on-every-request-jinja-dict-attribute-shadowing]] |

@@ -1953,3 +1953,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-13_bug-bug-014-calliope-nozzle-mcu-uart-recurred-twice-more-on-camood-v2-despite-7-9-cable-replacement.md`
 
 *— Claude*
+
+## 2026-07-14: BUG — Order detail page crashed on every request — Jinja dict-attribute shadowing
+- **System:** forge-dashboard
+- **Severity:** high | **Status:** fixed
+- **Root cause:** order_detail.html used {% for item in order.items %}. get_order() in db.py returns a plain dict with an 'items' key holding the line-item list, but Jinja's dot-access resolves order.items via getattr() first — which finds Python's own dict.items bound method before falling back to dict key lookup — so the template iterated over a non-iterable method object instead of the list, throwing TypeError on every /orders/<id> request. Same shadowing pattern found in queue.html's {% if o.items %}: since queue's order dicts never have an 'items' key (only 'line_items'), that check was silently always-truthy (a bound method is always truthy), unconditionally rendering the items block wrapper even for empty orders.
+- **Report:** `logs/reports/2026-07-14_bug-order-detail-page-crashed-on-every-request-jinja-dict-attribute-shadowing.md`
+
+*— Claude*
