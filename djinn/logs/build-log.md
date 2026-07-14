@@ -1977,3 +1977,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Report:** `logs/reports/2026-07-14_bug-djinn-meshy-batch-oni-collection-3mf-files-sat-one-folder-deeper-than-the-tool-expects-silently-produced-0-output.md`
 
 *— Claude*
+
+## 2026-07-14: BUG-014 (Calliope nozzle_mcu) recurred a 3rd time — first occurrence on a non-camood model
+- **System:** Calliope / nozzle_mcu
+- **Severity:** high | **Status:** open — Calliope pulled offline for physical maintenance
+- **Root cause:** Still unconfirmed. Same key561/nozzle_mcu signature recurred on the Cherry Blossom cup PLA reslice — the first confirmed BUG-014 hit on a model other than camood-v2, which weakens the "camood's heavy-bridging geometry is uniquely exposed to the un-capped fan" theory from 07-13. This is also the second failure since the 07-13 cable replacement, and djinn-gcode-fancap was never applied to this job's gcode, so neither open fix (cable, fan-cap) has been tested in isolation. Javier quit the print and is taking Calliope offline for physical maintenance before further diagnosis.
+- **Report:** `logs/reports/2026-07-13_bug-bug-014-calliope-nozzle-mcu-uart-recurred-twice-more-on-camood-v2-despite-7-9-cable-replacement.md` (updated, not a new report)
+
+*— Claude*
