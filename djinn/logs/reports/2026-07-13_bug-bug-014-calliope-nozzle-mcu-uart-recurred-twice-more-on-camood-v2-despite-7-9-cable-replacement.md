@@ -75,4 +75,14 @@ The cap is violated on **every Calliope print checked**, not just camood — thi
 
 ---
 
-*— Claude, 2026-07-13, updated twice same day: cable physically replaced (unconfirmed), fan-cap enforcement gap found and tooled (unconfirmed) — both open*
+## Update — 2026-07-14: recurred a third time, on a different model entirely (not camood-specific) — Javier pulled Calliope offline for physical maintenance
+
+Same key561/nozzle_mcu signature recurred again on Calliope, this time on a job that has nothing to do with camood-v2: the Cherry Blossom cup (`art cup-cherry blossom-marked-fix`), PETG-temp job that had already been aborted and resliced for PLA (see 2026-07-14 bug report on the PETG/PLA mismatch). The resliced PLA run kept failing with the same MCU error; Javier quit the print. This is the first confirmed BUG-014 recurrence on a model other than camood-v2 — meaningful because it weakens the "camood's heavy-bridging geometry exposes it to the un-capped fan more than other models" explanation from the evening-of-07-13 update. Cherry Blossom is a simpler, more solid cup shape, not a heavy-bridging/overhang piece, and it hit the same signature anyway. This is the second failure since the 07-13 cable replacement (also unconfirmed), and `djinn-gcode-fancap` was not applied to this job's gcode before printing — so neither open fix has actually been tested in isolation yet.
+
+**Javier is pulling Calliope offline for physical maintenance/TLC** (his words) before any further diagnosis or test prints. No further printing on Calliope until that's done and he says otherwise.
+
+Updated read: this is looking less like a camood-specific model/geometry issue and more like either (a) the fan-cap gap is a real system-wide contributor regardless of model, or (b) the second cable replacement (07-13) also didn't hold, or (c) both. Still unconfirmed which. Next diagnostic step, once Calliope is back up: run a `djinn-gcode-fancap`-capped job (any model) as a clean isolation test before reintroducing camood-v2 or anything with heavy cooling demand.
+
+---
+
+*— Claude, 2026-07-14: third recurrence confirmed, first on a non-camood model — cable replacement (07-13) and fan-cap tool (07-13) both still unconfirmed. Javier taking Calliope offline for physical maintenance.*
