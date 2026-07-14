@@ -3684,3 +3684,17 @@ git fsck --full, force-push, restart timer. Consider pruning stray
 worktree-* branches first to speed up the rewrite.
 
 **Input:** [[2026-07-12_bug-live-octoprint-api-key-hardcoded-in-public-penelope-manual-md]]
+
+## TASK-104
+- assigned_to: marcus
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-14 by Claude (per Javier)
+- context: Personal CFO cash-flow modeling. Javier provided 7 raw financial source documents (Chase checking/savings activity, J.P. Morgan brokerage positions/tax lots, EAI report, 2 brokerage statement PDFs) covering Mar 2025–Jul 2026. Raw documents contain account numbers and transaction-level detail and are intentionally kept out of git (archived locally, gitignored, at `personal/finance/raw/2026-07-14/`). Claude extracted and aggregated the numbers into a summary with no account numbers, no raw transaction rows, and no third-party full names.
+
+**Brief:** Read `ai/marcus/finance/briefs/2026-07-14_cashflow-summary.md` for income streams, categorized outflows, monthly net trend, and current cash/brokerage position. Section 5 of that file (risk tolerance, time horizon, hard rules) is intentionally blank — Javier will supply that context directly in the Perplexity session, it's not derivable from documents. Use this to build/refine the cash-flow model and stress-test discussed in TASK-039 (`ai/marcus/finance/TASK-039_djinn-cash-research-output.md`).
+
+**Output expected:** `ai/marcus/finance/TASK-104_cashflow-model.md`
+
+**Deliver to:** Javier (COMMS summary) + Claude (reads via GitHub, integrates if needed)
