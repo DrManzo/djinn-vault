@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-07-14 00:15 UTC
+Generated: 2026-07-14 02:47 UTC
 Source file: 
-Readings: 223
+Readings: 234
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 240.1°C | 70.0°C |
-| Std dev | ±1.31°C | ±0.18°C |
+| Mean | 240.6°C | 70.0°C |
+| Std dev | ±2.50°C | ±0.19°C |
 | Range | 239.2–251.8°C | 68.3–70.8°C |
 
 ## Fan
