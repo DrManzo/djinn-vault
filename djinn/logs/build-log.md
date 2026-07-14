@@ -1908,3 +1908,13 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Left DEVLOG.md's 2026-06-18 bootstrap entry untouched — append-only historical record, correct for the date.
 
 *— Claude*
+
+## 2026-07-13: forge — Modular Terrarium Base System project integrated from Claude Chat exports
+
+- New forge business line: mini terrariums with 3D-printed structural parts. Design work happened in a separate Claude Chat session (mobile), exported and handed off for vault integration.
+- Added `forge/projects/terrarium-base-system/`: `modular-terrarium-base-system.md` (design doc), `terrarium_base.scad` (parametric 3-part bayonet-connector base — shelf/riser/reservoir, one connector spec fits any container diameter/shape), two reference SVGs, and `djinn_terrarium_fit_agent.py` (fits arbitrary Meshy/Blender container meshes to the base ring via manifold3d — author-flagged as untested against real Meshy output, not wired into Telegram/pipeline automation per operator's explicit "hold off").
+- Verified before committing rather than trusting the export as-is: rendered all 3 SCAD parts via OpenSCAD 2021.01 (installed on Salomon) and confirmed watertight via trimesh.
+- Raw chat exports (3 files, including one unrelated general workflow/finishing conversation and one unresolved Typhon PowerShell encoding-bug troubleshooting thread) filed to `RAW/perplexity-exports/` per existing convention — not git-tracked.
+- Note: the Typhon `typhon-full-setup.ps1` BOM/encoding bug from the third chat export was diagnosed but never confirmed fixed in that conversation, and the script isn't vault-tracked — flagging for awareness, not filed as a bug since there's nothing in-repo to point to.
+
+*— Claude*
