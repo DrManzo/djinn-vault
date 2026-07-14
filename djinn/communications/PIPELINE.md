@@ -839,3 +839,33 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Typhon's-Forge-Agent-Reference-2026-06-29.md`
 
 — Clerk
+
+---
+
+### 2026-07-14 00:43 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Blender-Workflow-Scripts-For-3d-Printing-Business-Setup.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 00:43 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Mini-Terrariums-With-Sustainable-Plant-Choices.md`
+
+— Clerk
+
+---
+
+### 2026-07-14 00:44 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Powershell-Script-Execution-Troubleshooting.md`
+
+— Clerk
