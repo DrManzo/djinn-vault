@@ -5709,3 +5709,7 @@
 | 2026-07-14 21:55 UTC | cancelled | 0.0% | 184.0 | 210 | 65.1 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PETG_49m53s.gcode |
 | 2026-07-14 21:56 UTC | cancelled | 0.0% | 156.8 | 140 | 64.5 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PETG_49m53s.gcode |
 | 2026-07-14 21:57 UTC | cancelled | 0.0% | 140.1 | 140 | 64.7 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PETG_49m53s.gcode |
+| 2026-07-14 21:58 UTC | printing | 0.0% | 142.4 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 21:59 UTC | printing | 0.0% | 230.1 | 230 | 65.2 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:00 UTC | printing | 0.0% | 230.6 | 230 | 64.8 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:01 UTC | printing | 0.0% | 229.5 | 230 | 64.3 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
