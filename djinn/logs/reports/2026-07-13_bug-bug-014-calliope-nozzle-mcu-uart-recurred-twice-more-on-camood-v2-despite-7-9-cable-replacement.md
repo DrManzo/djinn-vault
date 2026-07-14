@@ -55,4 +55,24 @@ Two distinct failure timings on Calliope, both on camood-v2 PETG jobs, despite t
 
 ---
 
-*— Claude, 2026-07-13, updated same day: cable physically replaced, verification pending*
+## Update — 2026-07-13 (evening): likely actual trigger found — fan cap never enforced
+
+Javier's own hunch ("maybe it's the model") led to checking the real gcode, not just the docs. `fleet-capability-matrix.md` has documented a "hard cap at S128 (50%), system-wide" fan-speed rule since at least 2026-07-05, specifically because M106 above that threshold at bridge/overhang cooling moments generates enough EMI to trigger this exact key561 dropout. **That cap is not actually enforced anywhere.** Checked the real Calliope-sliced gcode for camood-v2's two crashed print attempts:
+
+| File | M106 commands | Over the S128 cap | Peak |
+|---|---|---|---|
+| camood-v2, Calliope run 1 (3h40m) | 1,097 | **99.6%** | S229 (90% duty) |
+| camood-v2, Calliope run 2 (14h11m) | 5,256 | **99.9%** | S229 (90% duty) |
+| camood-v2, Iris-sliced (for comparison — Iris has no BUG-014 issue) | 15,929 | 79.6% | S230 |
+| camood-v1, Calliope (for comparison) | 31,761 | 49.9% | S230 |
+| mario-pipe treesupport, Calliope, unrelated model (for comparison) | 22 | 54.5% | **S255 (100% duty)** |
+
+The cap is violated on **every Calliope print checked**, not just camood — this is a slicer-profile gap (Creality Print's Calliope profile, not inspectable from here), not something specific to one model. But camood's geometry (irregular organic shape, heavy bridging/overhangs) needs cooling constantly — thousands of M106 calls vs. 22 for mario-pipe — so it's exposed to the un-capped fan far more than almost anything else printed on this machine. That plausibly explains why camood specifically has been the recurring BUG-014 victim rather than the model itself being uniquely broken.
+
+**Built `forge/tools/djinn-gcode-fancap`** as a deterministic safety net: clamps any M106 above a cap (default 128) in a gcode file, `--check-only`/`--output`/`--in-place` modes, verified against real camood gcode (reproduces the violation percentages above, produces output that re-checks at 0% with only M106 lines touched). Recommend running this on every gcode before it reaches Calliope's queue until the actual slicer profile is fixed at the source.
+
+**This does not replace the cable-replacement tracking above** — both may be contributing (degraded EMI shielding + un-capped fan could compound each other) and neither is confirmed as *the* fix yet. Next camood-v2 Calliope print should be run with `djinn-gcode-fancap` applied first, to start isolating whether the fan cap alone resolves it.
+
+---
+
+*— Claude, 2026-07-13, updated twice same day: cable physically replaced (unconfirmed), fan-cap enforcement gap found and tooled (unconfirmed) — both open*
