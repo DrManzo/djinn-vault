@@ -1937,3 +1937,11 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - Filed as a dedicated bug report via `djinn-bugreport` (see `logs/bugs.md`).
 
 *— Claude*
+
+## 2026-07-13: BUG — Orchestrator silently continued after a failed maker's-mark stamp
+- **System:** forge print pipeline / orchestrator
+- **Severity:** high | **Status:** fixed
+- **Root cause:** orchestrator.py caught any exception from makers_mark.run() (missing plate file, non-manifold mesh both boolean backends can't fix, export failure), printed only a print() warning, and proceeded straight to state.save() then pricing — leaving the plate silently unmarked despite makers_mark.py's own docstring stating stamping is mandatory ('must run after plate_nest, before slicing. No exceptions.'). Found while documenting MakersMarkAgent into AGENT_STACK_SPEC.md and 3D-SUITE-FULL-MAP.md (both were missing it and EngravingAgent entirely — orchestrator.py actually calls 8 pipeline stages, docs only listed 6). Believed to be the root cause of prior missed-maker's-mark incidents (memory: missed 3 times). Fixed to match ProtoOptAgent's existing render-failure pattern: on any stamp failure, print the error + exact re-run command, return without saving, do not advance to pricing. Verified by reproducing the actual failure path directly (ProjectState with a nonexistent plate_stl -> confirmed FileNotFoundError -> confirmed now caught by the halting handler instead of the old silent one).
+- **Report:** `logs/reports/2026-07-13_bug-orchestrator-silently-continued-after-a-failed-maker-s-mark-stamp.md`
+
+*— Claude*
