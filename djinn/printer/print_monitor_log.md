@@ -5736,3 +5736,16 @@
 | 2026-07-14 22:22 UTC | cancelled | 0.0% | 139.8 | 140 | 65.3 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
 | 2026-07-14 22:23 UTC | printing | 0.0% | 221.2 | 230 | 65.1 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
 | 2026-07-14 22:24 UTC | printing | 0.0% | 229.7 | 230 | 65.3 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:25 UTC | printing | 0.0% | 230.7 | 230 | 64.4 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:26 UTC | printing | 0.0% | 229.7 | 230 | 64.5 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:27 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:28 UTC | printing | 0.0% | 230.6 | 230 | 65.2 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:29 UTC | printing | 0.0% | 230.3 | 230 | 65.2 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:30 UTC | printing | 0.0% | 229.8 | 230 | 65.1 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:31 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:32 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:33 UTC | printing | 0.0% | 230.2 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:34 UTC | printing | 0.0% | 229.7 | 230 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:35 UTC | paused | 0.0% | 229.7 | 140 | 65.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:36 UTC | paused | 0.0% | 229.7 | 140 | 63.8 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
+| 2026-07-14 22:37 UTC | paused | 0.0% | 229.7 | 140 | 62.0 | 65 | 0% | 0 | art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode |
