@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""
+djinn-gcode-fancap
+──────────────────
+Clamps M106 fan-speed commands to a safe maximum. Built for Calliope's
+nozzle_mcu EMI vulnerability (BUG-014): M106 above S128 (50% duty) at
+bridge/overhang cooling moments generates enough EMI to trigger key561
+UART dropouts. See forge/hardware/fleet-capability-matrix.md — the
+"hard cap S128, system-wide" rule has been documented there since at
+least 2026-07-05, but was never actually enforced anywhere.
+
+Found while investigating repeated camood-v2 crashes on Calliope: the
+real Calliope-sliced gcode for camood-v2 ran M106 above the cap 99.6%
+and 99.9% of the time across its two print attempts (peak S229, ~90%
+duty) despite the documented "hard cap" claim. A second, unrelated
+Calliope PETG print (mario-pipe treesupport) also hit S255 (100% duty)
+at least once — this is a slicer-profile gap affecting every job sent
+to Calliope, not something specific to one model. camood's geometry
+(irregular organic shape, heavy bridging/overhangs) just needs cooling
+far more often than most prints, so it's exposed to the un-capped fan
+far more than most jobs are.
+
+This does NOT explain or fix why the cap isn't applied in the slicer
+profile in the first place (Creality Print GUI config, not inspectable
+from here) — it's a deterministic safety net that runs on every gcode
+file regardless of what produced it, so the cap can't silently drift
+again.
+
+Usage:
+  djinn-gcode-fancap --input <path> --output <path> [--cap 128]
+  djinn-gcode-fancap --input <path> --in-place [--cap 128]
+  djinn-gcode-fancap --input <path> --check-only [--cap 128]
+
+  --check-only reports the violation rate without writing anything —
+  use this to audit a file before deciding whether to clamp it.
+"""
+
+import argparse
+import re
+import shutil
+import sys
+from pathlib import Path
+
+M106_RE = re.compile(r"^(M106\s+S)([\d.]+)(.*)$")
+
+
+def scan(path: Path, cap: float) -> dict:
+    total = 0
+    over_cap = 0
+    max_seen = 0.0
+    with path.open("r", errors="replace") as f:
+        for line in f:
+            m = M106_RE.match(line)
+            if not m:
+                continue
+            total += 1
+            value = float(m.group(2))
+            max_seen = max(max_seen, value)
+            if value > cap:
+                over_cap += 1
+    return {"total": total, "over_cap": over_cap, "max_seen": max_seen}
+
+
+def clamp(src: Path, dst: Path, cap: float) -> dict:
+    changed = 0
+    total = 0
+    with src.open("r", errors="replace") as fin, dst.open("w") as fout:
+        for line in fin:
+            m = M106_RE.match(line)
+            if m:
+                total += 1
+                value = float(m.group(2))
+                if value > cap:
+                    fout.write(f"{m.group(1)}{int(cap)}{m.group(3)}\n")
+                    changed += 1
+                    continue
+            fout.write(line)
+    return {"total": total, "changed": changed}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__,
+                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--input", required=True, type=Path, help="Source gcode file")
+    parser.add_argument("--output", type=Path, help="Write clamped gcode here")
+    parser.add_argument("--in-place", action="store_true",
+                         help="Overwrite --input directly (keeps a .bak copy)")
+    parser.add_argument("--check-only", action="store_true",
+                         help="Report the violation rate, write nothing")
+    parser.add_argument("--cap", type=float, default=128,
+                         help="Maximum allowed M106 S-value (default: 128, ~50%% duty)")
+    args = parser.parse_args()
+
+    if not args.input.is_file():
+        print(f"ERROR: input file not found: {args.input}", file=sys.stderr)
+        sys.exit(1)
+
+    if args.check_only:
+        stats = scan(args.input, args.cap)
+        if stats["total"] == 0:
+            print(f"{args.input.name}: no M106 commands found")
+            sys.exit(0)
+        pct = 100 * stats["over_cap"] / stats["total"]
+        print(f"{args.input.name}: {stats['total']} M106 commands, "
+              f"{stats['over_cap']} over cap ({pct:.1f}%), "
+              f"peak S{stats['max_seen']:.0f} ({100*stats['max_seen']/255:.0f}% duty)")
+        sys.exit(1 if stats["over_cap"] > 0 else 0)
+
+    if args.in_place:
+        backup = args.input.with_suffix(args.input.suffix + ".bak")
+        shutil.copy2(args.input, backup)
+        tmp = args.input.with_suffix(args.input.suffix + ".tmp")
+        result = clamp(args.input, tmp, args.cap)
+        tmp.replace(args.input)
+        print(f"Clamped in place (backup: {backup.name}): "
+              f"{result['changed']}/{result['total']} M106 commands reduced to S{int(args.cap)}")
+    elif args.output:
+        result = clamp(args.input, args.output, args.cap)
+        print(f"Wrote {args.output}: "
+              f"{result['changed']}/{result['total']} M106 commands reduced to S{int(args.cap)}")
+    else:
+        print("ERROR: specify --output, --in-place, or --check-only", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
