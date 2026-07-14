@@ -34,7 +34,7 @@
 - [ ] New seed data identified and added to target file before moving on
 
 ### SOCIAL Phase
-- [ ] Platforms enumerated via djinn-bore-core or manual check
+- [ ] Platforms enumerated via manual check (no OSINT enumeration tool exists yet — see `tools/README.md`)
 - [ ] Handle variations logged (spaces, underscores, dots, numbers)
 - [ ] All confirmed accounts tagged `[CONFIRMED]` in target file
 - [ ] All unconfirmed accounts tagged `[CANDIDATE]` — do not treat as confirmed

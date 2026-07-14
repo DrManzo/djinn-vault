@@ -9,7 +9,10 @@ All active passive intelligence feeds. Managed by TREND agent. Updated by operat
 
 ## How to Use This Registry
 
-- **Automated feeds** (RSS/API): pipe into `djinn-trend-agent` or poll via cron
+- **Automated feeds** (RSS/API): poll via cron (`djinn-trend-agent` was
+  previously suggested here but is Djinn Media's own hashtag/content poller,
+  not built for external-target feeds — audited and removed 2026-07-13,
+  see `tools/README.md`)
 - **Manual feeds**: operator checks on a schedule; no automation
 - **Keyword feeds**: replace `<KEYWORD>` with your target before querying
 - Add new feeds by appending a row — never delete, archive instead

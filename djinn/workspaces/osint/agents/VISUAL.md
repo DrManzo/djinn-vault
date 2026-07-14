@@ -118,10 +118,15 @@ BEFORE RUNNING PIMEYES:
 4. Do not run on any image without confirmed subject identity in seed data
 ```
 
-### djinn-style-scrape
-**Use for:** Harvesting image assets (avatars, profile photos, gallery images) from known profile URLs.
-**Usage:** Pass profile URL to `djinn-style-scrape` with `--images` flag to extract and download all image assets.
-**Then:** Run ExifTool on downloaded files for metadata extraction.
+### Profile image harvesting — no dedicated tool
+Previously listed `djinn-style-scrape` here with a `--images` flag for
+harvesting avatars/gallery images from profile URLs. Audited 2026-07-13:
+that flag doesn't exist — the real tool runs a fixed set of aesthetic-
+photography search queries for Typhon's Forge brand content, and takes
+no profile URL input at all. Removed; see `tools/README.md`. Until a
+real tool exists, download profile images manually (browser save, or
+`curl`/`wget` on a known direct image URL) into `targets/<slug>/images/`,
+then run ExifTool per the workflow below.
 
 ---
 

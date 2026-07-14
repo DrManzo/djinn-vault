@@ -67,14 +67,15 @@ Before any agent runs, collect what you already know. Record in `targets/<slug>.
 
 **Agent:** SOCIAL
 **Gateway tier:** Tier 1 → escalate to Tier 2 if cross-platform aggregation reveals PII not already in seed
-**Tools:** djinn-bore-core, Sherlock (local), WhatsMyName, manual platform checks
+**Tools:** WhatsMyName (public web tool), manual platform checks. `djinn-bore-core`
+(a 3D-print STL tool, not username enumeration) and a local Sherlock
+install were previously listed here — both fabricated/not present,
+audited and removed 2026-07-13, see `tools/README.md`.
 
 ### Steps
 
-1. Run `djinn-bore-core` on all known handles:
-   ```
-   djinn-bore-core --username <handle> --output targets/<slug>/social-map.json
-   ```
+1. Check known handles across platforms via [WhatsMyName](https://whatsmyname.app/)
+   or manual per-platform URL checks (`https://<platform>.com/<handle>`):
 2. For each confirmed platform, record:
    - Profile URL
    - Display name (may differ from handle)

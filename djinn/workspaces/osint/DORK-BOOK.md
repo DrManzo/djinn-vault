@@ -167,7 +167,11 @@ cache:DOMAIN
 # Common variation patterns across platforms
 ```
 
-> **Djinn tool**: Run `djinn-bore-core` for automated multi-platform username enumeration. Manual dorks above are for targeted spot-checks and platforms djinn-bore-core doesn't cover.
+> **No automated tool for this yet.** `djinn-bore-core` was previously
+> listed here for multi-platform username enumeration — it's actually a
+> 3D-print STL tool, not an OSINT tool. Audited and removed 2026-07-13,
+> see `tools/README.md`. Use [WhatsMyName](https://whatsmyname.app/) or
+> the manual dorks above until a real tool exists.
 
 ---
 

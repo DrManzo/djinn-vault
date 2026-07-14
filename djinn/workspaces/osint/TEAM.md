@@ -22,7 +22,9 @@
 **Key Tools:**
 - DuckDuckGo (already in Salomon's tool stack)
 - Google dorks via Salomon search lane
-- `djinn-style-scrape` for structured page extraction
+- No dedicated OSINT scraping tool yet — `djinn-style-scrape` was previously
+  listed here but is actually a Djinn Media aesthetic-reference finder, not
+  a target-recon tool; removed 2026-07-13, see `tools/README.md`
 
 **Escalation:** Domain/IP infrastructure hands off to `NETPROBE`. Social account enumeration hands off to `SOCIAL`. Visual assets (photos, avatars) hand off to `VISUAL`.
 
@@ -33,19 +35,21 @@
 **Role:** Cross-platform social media intelligence. Owns account enumeration, handle lookup, community monitoring, and social graph mapping.
 
 **Responsibilities:**
-- Username/handle enumeration across 200+ platforms via `djinn-bore-core`
+- Username/handle enumeration across 200+ platforms — currently manual (see note below)
 - Twitter/X, Reddit, Discord, Telegram, Instagram public profile harvesting
 - Community membership and group affiliation mapping
 - Post history analysis and keyword extraction
 - Follower/following graph analysis
 - Cross-platform identity linkage (same person across handles)
-- Real-time community signal monitoring via `djinn-social-analyst`
+- Real-time community signal monitoring — currently manual (see note below)
 
 **Key Tools:**
-- `djinn-bore-core` — handle enumeration
-- `djinn-social-analyst` — social media analysis
-- `djinn-discord-gateway` + `djinn-discord-watch` — Discord intel
-- `djinn-social-map` (planned) — graph builder
+- No dedicated OSINT tool yet. `djinn-bore-core`, `djinn-social-analyst`,
+  `djinn-discord-gateway`, and `djinn-discord-watch` were previously listed
+  here but are a 3D-print tool and Javier's own Discord/Meta-analytics ops
+  tools, respectively — none do third-party account enumeration or
+  monitoring. Removed 2026-07-13, see `tools/README.md`.
+- `djinn-social-map` (planned) — graph builder, not yet built
 
 **Escalation:** Social graph synthesis hands off to `CORRELATOR`. PII-level findings require operator Tier 3 confirm before storage. Profile photos hand off to `VISUAL`.
 
@@ -111,8 +115,10 @@
 - Job posting delta analysis (hiring surge = expansion signal)
 
 **Key Tools:**
-- `djinn-trend-agent` — existing tool
-- `djinn-vault-enrich` — vault enrichment from feed outputs
+- No dedicated OSINT tool yet. `djinn-trend-agent` and `djinn-vault-enrich`
+  were previously listed here but are Djinn Media's own hashtag/content-trend
+  poller and the vault knowledge-curation pipeline, respectively — neither
+  monitors external targets/keywords. Removed 2026-07-13, see `tools/README.md`.
 - Google Trends public API
 
 **Escalation:** Trend data requiring cross-source entity linking hands off to `CORRELATOR`.
@@ -135,7 +141,10 @@
 **Key Tools:**
 - Claude (correlation architecture — this is Claude's design lane)
 - Obsidian graph view for visualization
-- Custom correlation logic via `djinn-vault-enrich`
+- No dedicated correlation tool yet. `djinn-vault-enrich` was previously
+  listed here but is the general vault knowledge-curation pipeline (RAW →
+  `i notes/` → `references/`), not cross-source entity correlation.
+  Removed 2026-07-13, see `tools/README.md`.
 
 **Escalation:** Findings requiring legal or ethical review escalate to operator immediately. No autonomous action on flagged findings.
 
@@ -185,7 +194,10 @@
 - Bing Visual Search
 - ExifTool (local CLI) — full metadata extraction
 - PimEyes — Tier 3 facial recognition, operator confirm required
-- `djinn-style-scrape` — image asset harvesting from profile URLs
+- No dedicated tool for image harvesting from profile URLs. `djinn-style-scrape`
+  was previously listed here with a fabricated `--images` flag — audited
+  2026-07-13, see `tools/README.md`. Download images manually until a real
+  tool exists.
 
 **Gateway tier:** Entry at Tier 2. GPS EXIF → Tier 3 hard stop. Facial recognition → Tier 3 explicit confirm. Home address from visual → Tier 4 stop.
 

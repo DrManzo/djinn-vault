@@ -128,7 +128,9 @@
 
 **Agent:** SOCIAL
 **Gateway tier:** Tier 1 for official accounts. Tier 2 for employee PII aggregation.
-**Tools:** djinn-bore-core (org handle), LinkedIn public search, Twitter/X advanced search
+**Tools:** LinkedIn public search, Twitter/X advanced search. `djinn-bore-core`
+(a 3D-print STL tool, not handle enumeration) was previously listed here —
+audited and removed 2026-07-13, see `tools/README.md`.
 
 ### Steps
 
