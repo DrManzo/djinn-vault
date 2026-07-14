@@ -81,8 +81,9 @@ new_design   → design_gen.run()
 edit_design  → design_edit.run()
 optimize     → proto_opt.run()
 doe          → doe_opt.run()
-plate        → plate_nest.run()
+plate        → plate_nest.run() → makers_mark.run()   (both run in the same "plate" step; see Agent 6)
 price        → price.run()
+engrave      → engrave.run()   (on-demand, any stage with an existing model — see On-Demand Agent below)
 status       → _show_queue()
 ```
 
@@ -90,6 +91,9 @@ status       → _show_queue()
 ```
 design_gen → design_edit → proto_opt → doe_opt → plate_nest → priced → pending → printing
 ```
+*(MakersMarkAgent runs inside the `plate_nest` step, before the status advances to `priced` — it does not get its own status value. EngravingAgent is intent-routed on demand and does not participate in this linear progression at all.)*
+
+**Note (2026-07-13):** the routing table and status machine above were missing `makers_mark` and `engrave` entirely until this fix — both are real, currently-running pipeline stages, found via `djinn-doc-check`-style audit of the orchestrator code vs. this doc. See Agent 6 and the On-Demand Agent section below. This doc also still uses pre-restructure paths (`djinn/printer/...`) throughout, which is a separate staleness issue not addressed in this pass.
 
 ---
 
@@ -120,6 +124,30 @@ The spine of the pipeline. Every agent reads from it and writes back to it. One 
 **Path:** `djinn/printer/agent/orchestrator/llm.py`
 
 Handles model routing transparently. If `ANTHROPIC_API_KEY` is set in `~/.config/djinn/claude.env`, uses Claude Sonnet 4.6. Otherwise falls back to `phi4:14b` via local Ollama. Agents call `llm.chat(system, messages, max_tokens)` and don't know which backend ran.
+
+---
+
+### On-Demand Agent — EngravingAgent
+
+*(Missing from this map until 2026-07-13 — real, currently-running, ~490 lines. Not part of the numbered linear chain below — routed directly by intent classification, same tier as DesignEditAgent, callable at any stage where a model already exists.)*
+
+**Path:** `forge/agent/orchestrator/agents/engrave.py`
+**Triggered by:** intent classification on words like `"engrave", "add text", "put text", "write on", "mark", "stamp", "label"`
+**Input:** `state.source_stl` (or a path passed in the brief) + operator's engraving request text
+**Output:** 3 ranked placement proposals — nothing touches the model until one is approved
+**LLM:** yes
+
+Pipeline:
+1. Load the source STL
+2. Full geometry analysis (`geometry_utils.full_geometry_report()`) — surface curvature, flat regions, available area
+3. Full typography analysis (`typography_utils.full_typography_report()`) — adapts letter height, depth, stroke width, spacing, arc wrap, and texture buffer to the actual surface the text will land on
+4. LLM generates 3 ranked proposals using the precomputed geometry/typography values
+5. Operator approves one via `approve(state, choice)`
+6. `placement_resolver` converts the approved proposal into exact mm coordinates → `state.engraving_placement`
+
+**Hard physical constraints in the system prompt** (Ender-3 V3 Plus / Calliope, 0.4mm nozzle, 0.20mm standard / 0.12mm accuracy layer height): engraved strokes below 0.6mm are unreliable on a sidewall, below 0.5mm unreliable anywhere, due to FDM layer-line roughness (~0.1mm at 0.2mm layers).
+
+**Behavior:** always pauses for operator approval after generating proposals — never auto-advances, regardless of the `auto_advance` flag. This is deliberate: nothing is cut into the model without a human picking one of the 3 proposals first.
 
 ---
 
@@ -241,7 +269,26 @@ Packs STL files onto the bed. Handles the critical **>200MB STL bug** (large mes
 
 ---
 
-### Agent 6 — FairPrintAgent (price.py)
+### Agent 6 — MakersMarkAgent
+
+*(Missing from this map until 2026-07-13 — real, currently-running, added immediately after PlateNestAgent, before pricing/status advances.)*
+
+**Path:** `forge/agent/orchestrator/agents/makers_mark.py`
+**Input:** `state.plate_stl` (the merged plate STL PlateNestAgent just produced)
+**Output:** same plate STL with the TF anvil mark boolean-subtracted into its bottom face
+**LLM:** no — pure geometry (manifold3d, falls back to trimesh boolean if the mesh isn't manifold)
+
+Stamps every plate unconditionally — there is no per-job opt-out. Mark size auto-scales down for small-footprint plates (`MARK_SIZE_SM` below `MIN_FOOTPRINT * 2`).
+
+**Failure handling (fixed 2026-07-13):** on any failure (plate file missing, both boolean backends failing on a bad mesh, export failure), the orchestrator now halts and does **not** advance to pricing — same pattern as `ProtoOptAgent`'s render-failure handling: print the error, tell the operator the exact re-run command, `return state` without saving past the failure point. Previously, the failure was caught, printed as a soft warning, and the pipeline continued anyway with the **unmarked** plate silently written back to `state.plate_stl` — believed to be the actual cause of prior "missed maker's mark" incidents (memory: missed 3 times).
+
+**What it writes to ProjectState:**
+- `plate_stl` — overwritten with the marked version (`*_marked.stl`)
+- `status` — unchanged; still transitions to `"priced"` as part of the same "plate" step
+
+---
+
+### Agent 7 — FairPrintAgent (price.py)
 **Path:** `djinn/printer/agent/orchestrator/agents/price.py`  
 **Also available as:** `djinn-print-quote` (standalone CLI)  
 **Input:** ProjectState concept + DOE profile + brief  
@@ -454,6 +501,8 @@ print-queue.json (status=priced) ── Javier reviews ──→ djinn-confirm-p
 | ProtoOptAgent | ✅ Live |
 | DOEPrintOptAgent | ✅ Live |
 | PlateNestAgent | ✅ Live |
+| MakersMarkAgent | ✅ Live (missing from this doc until 2026-07-13; failure-handling bug fixed same day, see Known Gaps) |
+| EngravingAgent | ✅ Live (missing from this doc until 2026-07-13) |
 | FairPrintAgent / `djinn-print-quote` | ✅ Live |
 | `db.py` + SQLite schema | ✅ Built |
 | `intake_agent.py` | ✅ Built |
@@ -482,6 +531,9 @@ print-queue.json (status=priced) ── Javier reviews ──→ djinn-confirm-p
 
 **Shop deploy is in QUEUE.md, not yet triggered.** The dashboard, gateway wiring, and shipping agent are built but not running. All four shop deploy tasks are in QUEUE.md awaiting `trigger: manual` signals from Javier.
 
+**(Fixed 2026-07-13) MakersMarkAgent used to silently continue on stamp failure.** The orchestrator caught any exception from `makers_mark.run()`, printed a soft warning, and proceeded straight to pricing anyway — with the plate STL overwritten by the *unmarked* version under a false assumption of success. Believed to be the actual cause of prior missed-maker's-mark incidents (memory: missed 3 times). Now matches `ProtoOptAgent`'s render-failure pattern: on any stamp failure, the pipeline halts and does not advance to pricing until the operator fixes the issue and re-runs.
+
 ---
 
 *— Claude, 2026-05-31*
+*Amended 2026-07-13 — added MakersMarkAgent and EngravingAgent (both real, previously undocumented), fixed the MakersMark silent-failure bug above. See `djinn/logs/build-log.md` for the session that found this via `djinn-doc-check`-style audit.*
