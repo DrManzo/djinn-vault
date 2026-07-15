@@ -15,13 +15,18 @@ Pipeline per collection folder:
      whole collection folder is literally named "Cups" (see below).
   3. Non-cup: stamp the maker's mark at the default placement via the
      existing djinn-model-mark tool.
-  4. Cup: run djinn-bore-core, which does true-center detection, cuts a
-     real Proxy Core seat bore (38mm diameter, 51mm depth — the same
-     caliper-verified constant djinn-bore-core itself uses, matching
-     figures already recorded in applacrabus.md/tardis.md), and stamps
-     the maker's mark on the bore floor — all in one existing, proven
-     tool, not reimplemented here. Meshy exports are frequently very
-     high-poly (300k-800k faces) and often non-watertight, which makes
+  4. Cup: first uniformly scale the mesh (same factor on X/Y/Z) so its
+     height matches TARGET_HEIGHT_MM, the 710-PuffCo reference cup's
+     height — Meshy exports carry no consistent real-world scale, and
+     boring a fixed-size hole into an arbitrarily-scaled mesh produces
+     unusable walls (paper-thin or oversized). Then run djinn-bore-core,
+     which does true-center detection, cuts a real Proxy Core seat bore
+     (38mm diameter, 51mm depth — the same caliper-verified constant
+     djinn-bore-core itself uses, matching figures already recorded in
+     applacrabus.md/tardis.md), and stamps the maker's mark on the bore
+     floor — all in one existing, proven tool, not reimplemented here.
+     Meshy exports are frequently very high-poly (300k-800k faces) and
+     often non-watertight, which makes
      djinn-bore-core's mesh-repair step slow and occasionally unable to
      find a working boolean backend at all — so every mesh is decimated
      to a modest face count first (same pymeshlab pattern already used
@@ -83,6 +88,18 @@ BORE_CORE_BIN = "djinn-bore-core"
 # recorded in existing piece docs (applacrabus.md, tardis.md).
 PROXY_CORE_DIAMETER_MM = 38.0
 PROXY_CORE_DEPTH_MM = 51.0
+
+# Meshy AI exports carry no consistent real-world scale — two files that
+# look similarly sized in a viewer can differ by 2x in real mm. Boring the
+# fixed-size Proxy Core bore above into a mesh at its raw, arbitrary export
+# scale produces wildly inconsistent walls: too thin to print (near-zero
+# clearance around the bore) or way oversized versus every other piece in
+# a collection. Fix (Javier, 2026-07-14): scale every cup uniformly (same
+# factor on X/Y/Z, so the sculpt isn't distorted) so its height matches the
+# 710-PuffCo reference cup's height — that one already fits the Proxy Core
+# flush, confirmed by hand. 56.56mm measured via trimesh bounds on
+# puffco-710_marked.stl, the known-good reference file.
+TARGET_HEIGHT_MM = 56.56
 
 # Meshy AI exports commonly run 300k-800k faces. djinn-bore-core's mesh
 # repair (Poisson reconstruction on non-watertight input) gets slow and can
@@ -158,6 +175,29 @@ def sort_folder(folder: Path, dry_run: bool) -> dict:
         for f in meshy:
             shutil.move(str(f), str(folder / "meshy-exports" / f.name))
     return {"reference": len(other), "meshy_exports": len(meshy)}
+
+
+def scale_to_target_height(input_path: Path, work_dir: Path) -> tuple:
+    """Uniformly scale a mesh (same factor on X/Y/Z — preserves the sculpt's
+    proportions, doesn't stretch it) so its Z-axis bounding-box height
+    matches TARGET_HEIGHT_MM. Must run before decimation/boring/stamping
+    for every cup — see TARGET_HEIGHT_MM's comment for why. Returns
+    (path_to_use, scale_factor). Falls back to the original path+factor 1.0
+    on any failure (degenerate mesh, zero height, load error) rather than
+    block the rest of the pipeline."""
+    try:
+        work_dir.mkdir(parents=True, exist_ok=True)
+        mesh = trimesh.load(str(input_path), force="mesh")
+        height = float(mesh.bounds[1][2] - mesh.bounds[0][2])
+        if height <= 0:
+            return input_path, 1.0
+        factor = TARGET_HEIGHT_MM / height
+        mesh.apply_scale(factor)
+        scaled_path = work_dir / f"{input_path.stem}_scaled.stl"
+        mesh.export(str(scaled_path))
+        return scaled_path, factor
+    except Exception:
+        return input_path, 1.0
 
 
 def decimate_if_needed(input_path: Path, work_dir: Path) -> tuple:
@@ -237,18 +277,53 @@ def run_bore_core(input_path: Path, output_path: Path, work_dir: Path) -> dict:
         BORE_CORE_BIN, str(mesh_path),
         "--diameter", str(PROXY_CORE_DIAMETER_MM),
         "--depth", str(PROXY_CORE_DEPTH_MM),
+        # djinn-bore-core has its own independent auto-scale safety net
+        # (triggers when body-below-bore clearance is too thin) that
+        # defaults to depth+25mm and, left unpinned, silently overrides
+        # the height normalization scale_to_target_height() already
+        # applied above — confirmed live 2026-07-14 (a mesh pre-scaled to
+        # 56.56mm got blown up to 189mm/4.46x by this default). Pinning it
+        # to the same TARGET_HEIGHT_MM means if it ever fires, it stays
+        # anchored to the 710 reference instead of its own default.
+        "--target-height", str(TARGET_HEIGHT_MM),
         "--output", str(output_path),
         "--no-comms",
         "--quiet",
     ]
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=BORE_CORE_TIMEOUT_SEC)
+        success = result.returncode == 0 and output_path.is_file()
+        stderr_tail = result.stderr.strip()[-500:] if result.returncode != 0 else ""
+
+        # djinn-bore-core has a SECOND, independent auto-scale trigger
+        # (fires on a degenerate/too-small true-center top span, separate
+        # from the --target-height-controlled one above) with no CLI flag
+        # to pin or disable — confirmed live 2026-07-14 (Gengar v2 came out
+        # 534x277x597mm, a 10.5x blowup, from a mesh pre-scaled to 56.56mm).
+        # Sanity-check the actual output size rather than trust returncode
+        # 0 alone: if bore-core "succeeded" but the result is wildly bigger
+        # than the target, treat it as a failure and fall back to the plain
+        # stamp instead of shipping a corrupted-scale file.
+        if success:
+            try:
+                out_mesh = trimesh.load(str(output_path), force="mesh")
+                out_max_dim = float((out_mesh.bounds[1] - out_mesh.bounds[0]).max())
+                if out_max_dim > TARGET_HEIGHT_MM * 2:
+                    success = False
+                    stderr_tail = (f"bore-core succeeded but output is {out_max_dim:.1f}mm "
+                                    f"on its largest axis (target {TARGET_HEIGHT_MM}mm) — "
+                                    f"rejecting as a second auto-scale blowup, not the intended result")
+                    output_path.unlink(missing_ok=True)
+            except Exception as e:
+                success = False
+                stderr_tail = f"could not verify bore-core output size: {e}"
+
         return {
-            "success": result.returncode == 0 and output_path.is_file(),
+            "success": success,
             "decimated": decimated,
             "face_count_before": face_count,
             "returncode": result.returncode,
-            "stderr_tail": result.stderr.strip()[-500:] if result.returncode != 0 else "",
+            "stderr_tail": stderr_tail,
         }
     except subprocess.TimeoutExpired:
         return {
@@ -305,7 +380,10 @@ def process_file(f: Path, collection: str, variant: str, output_dir: Path,
         return result
 
     work_dir = output_dir / ".work"
-    bore_result = run_bore_core(f, out_path, work_dir)
+    scaled_path, scale_factor = scale_to_target_height(f, work_dir)
+    result["scale_factor"] = round(scale_factor, 4)
+
+    bore_result = run_bore_core(scaled_path, out_path, work_dir)
     result["bore_core"] = bore_result
 
     if bore_result["success"]:
@@ -313,7 +391,7 @@ def process_file(f: Path, collection: str, variant: str, output_dir: Path,
         result["success"] = True
     else:
         result["path"] = f"simple (bore-core failed: {bore_result['stderr_tail'] or 'unknown error'})"
-        r = run_model_mark(f, out_path)
+        r = run_model_mark(scaled_path, out_path)
         result["success"] = r.returncode == 0
         if r.returncode != 0:
             result["error"] = r.stderr.strip()[-500:]
@@ -368,7 +446,8 @@ def process_collection(collection_path: Path, dry_run: bool, force_cup: bool = F
             bc = r.get("bore_core")
             extra = ""
             if bc:
-                extra = f" [decimated={bc['decimated']}, faces_before={bc['face_count_before']}]"
+                extra = (f" [scale={r.get('scale_factor')}, decimated={bc['decimated']}, "
+                          f"faces_before={bc['face_count_before']}]")
             status = "" if dry_run else (" OK" if r.get("success") else " FAILED")
             print(f"  {f.name} -> {r['path']} -> {r['output']}{extra}{status}")
 
