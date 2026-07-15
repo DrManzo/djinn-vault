@@ -2,7 +2,10 @@
 {% block content %}
 <div class="topbar">
   <div><h4>Filament Inventory</h4></div>
-  <div style="font-size:.8rem;color:var(--text-muted);" id="save-status"></div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <span style="font-size:.8rem;color:var(--text-muted);" id="save-status"></span>
+    <button id="add-spool-open-btn" class="btn btn-accent btn-sm">+ Add Spool</button>
+  </div>
 </div>
 
 {% set printer_names = ['Calliope', 'Nemesis', 'Iris', 'Penelope'] %}
@@ -124,6 +127,41 @@
   </div>
 </div>
 
+<!-- Add-spool modal -->
+<div id="add-modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal-box">
+    <h4 style="margin-top:0;">Add Spool</h4>
+    <label class="modal-field">
+      <span>Material *</span>
+      <input type="text" id="add-material" placeholder="PLA, PETG, TPU…">
+    </label>
+    <label class="modal-field">
+      <span>Color *</span>
+      <input type="text" id="add-color" placeholder="Black, White, Blue…">
+    </label>
+    <label class="modal-field">
+      <span>Brand *</span>
+      <input type="text" id="add-brand" placeholder="Creality, Overture…">
+    </label>
+    <label class="modal-field">
+      <span>Initial weight (g)</span>
+      <input type="number" id="add-initial-weight" value="1000" min="1">
+    </label>
+    <label class="modal-field">
+      <span>Low-stock threshold (g)</span>
+      <input type="number" id="add-low-threshold" value="150" min="0">
+    </label>
+    <label class="modal-field">
+      <span>Notes</span>
+      <textarea id="add-notes" rows="2" maxlength="200"></textarea>
+    </label>
+    <div class="modal-actions">
+      <button id="add-cancel-btn" class="modal-btn-secondary">Cancel</button>
+      <button id="add-save-btn" class="modal-btn-primary">Add Spool</button>
+    </div>
+  </div>
+</div>
+
 <style>
   .editable-weight {
     cursor: pointer;
@@ -195,7 +233,7 @@
     text-transform: uppercase;
     letter-spacing: .05em;
   }
-  .modal-field textarea, .modal-field select {
+  .modal-field input, .modal-field textarea, .modal-field select {
     width: 100%;
     background: #0f1923;
     border: 1px solid var(--border);
@@ -327,6 +365,49 @@ document.getElementById('edit-save-btn').addEventListener('click', async () => {
     setTimeout(() => window.location.reload(), 500);
   } catch (e) {
     showStatus(`Save failed for ${currentSpoolId}`, false);
+  }
+});
+
+// ── Add-spool modal ──────────────────────────────────────────────────────────
+const addBackdrop = document.getElementById('add-modal-backdrop');
+
+document.getElementById('add-spool-open-btn').addEventListener('click', () => {
+  addBackdrop.style.display = 'flex';
+});
+document.getElementById('add-cancel-btn').addEventListener('click', () => {
+  addBackdrop.style.display = 'none';
+});
+addBackdrop.addEventListener('click', (e) => {
+  if (e.target === addBackdrop) addBackdrop.style.display = 'none';
+});
+
+document.getElementById('add-save-btn').addEventListener('click', async () => {
+  const material = document.getElementById('add-material').value.trim();
+  const color    = document.getElementById('add-color').value.trim();
+  const brand    = document.getElementById('add-brand').value.trim();
+  if (!material || !color || !brand) {
+    showStatus('Material, color, and brand are required', false);
+    return;
+  }
+  const payload = {
+    material, color, brand,
+    initial_weight_g: parseInt(document.getElementById('add-initial-weight').value, 10) || 1000,
+    low_threshold_g: parseInt(document.getElementById('add-low-threshold').value, 10) || 150,
+    notes: document.getElementById('add-notes').value,
+  };
+  try {
+    const res = await fetch('/api/inventory', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('server error');
+    const data = await res.json();
+    addBackdrop.style.display = 'none';
+    showStatus(`${data.spool_id} added — reloading…`, true);
+    setTimeout(() => window.location.reload(), 500);
+  } catch (e) {
+    showStatus('Failed to add spool', false);
   }
 });
 </script>

@@ -14,6 +14,7 @@
         <option value="shipped"        {% if status_filter=='shipped' %}selected{% endif %}>Shipped</option>
       </select>
     </form>
+    <a href="{{ url_for('order_new') }}" class="btn btn-accent btn-sm">+ New Order</a>
   </div>
 </div>
 
