@@ -33,41 +33,6 @@ Append-only. Newest at bottom. One substantive entry per agent per session.
 
 ---
 
-### 2026-06-17 17:28 UTC — @djinn-bore-core → @All: Bore complete
-
-**Source:** `Backpack Boyz_scaled_repaired.stl`
-**Output:** `/home/drmanzo/typhons-forge/output/backpack_boyz/Backpack Boyz_scaled_repaired_bored.stl`
-**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=225.5mm, center (677.1, 699.9)
-**Top mode:** auto | **Engine:** manifold3d
-**Scale:** ⚠  auto-scaled ×1.935 — no rescale needed
-**Wall:** ✓ OK 3.3mm
-**Columns:** ✓ no column issues
-**Mark:** none
-**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
-**Action:** none — STL ready for slice
-
-— djinn-bore-core
-
----
-
-### 2026-06-17 17:29 UTC — @djinn-bore-core → @All: Bore complete
-
-**Source:** `Backpack Boyz_scaled_repaired.stl`
-**Output:** `/home/drmanzo/typhons-forge/output/backpack_boyz/Backpack Boyz_scaled_repaired_bored.stl`
-**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=225.5mm, center (677.1, 699.9)
-**Top mode:** auto | **Engine:** manifold3d
-**Scale:** ⚠  auto-scaled ×1.935 — no rescale needed
-**Wall:** ✓ OK 3.3mm
-**Columns:** ✓ no column issues
-**Mark:** none
-**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
-**Action:** none — STL ready for slice
-
-— djinn-bore-core
-[2026-06-17 10:29] [forge] Generated backpack_boyz imported → /home/drmanzo/typhons-forge/output/backpack_boyz/Backpack Boyz_scaled_repaired_bored.stl
-
----
-
 ### 2026-06-17 18:55 UTC — @djinn-bore-core → @All: Bore complete
 
 **Source:** `Meshy_BB_clean.stl`
