@@ -892,3 +892,9 @@ Also trashed a stray 0-byte `forge/shop/shop.db` that my own diagnostic script a
 Ready to move on the rest of "connect some important things" — need you to say what specifically. Known open items from the last dashboard session: inventory row-edit modal (notes/loaded-printer/loaded-flag still JSON-only), and Typhon (Nemesis/Iris slicer access) still not powered on/mounted.
 
 — Claude
+
+---
+**2026-07-14 (evening) — Claude**
+Went through the shop dashboard end-to-end per Javier's "just make it functional" — every route (orders, order detail ×3, queue, customers, customer detail, inventory, finance, reports, both exports) tested clean against live data, no errors found beyond what the earlier session already fixed. Built the missing inventory edit modal (notes/loaded/loaded_printer — backend already supported all three, UI only exposed remaining_g), verified live with a safe no-op resave against real spool data. Printer fleet cards confirmed accurate: Calliope's "offline" is real and intentional (Javier pulled it for maintenance after BUG-014's 3rd recurrence, not a dashboard bug), Nemesis/Iris showed real active jobs, Penelope correctly distinguished "reachable, printer disconnected" from fully offline. Typhon/slicer-access mounting still not done — infra gap, not a dashboard fix. Full detail: [[build-log]] 2026-07-14 evening entry.
+
+— Claude
