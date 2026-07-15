@@ -351,3 +351,9 @@ the guard. Metrics represent meaningful system state change.
 **Decision:** Enabled ufw with `default allow incoming` / `default allow outgoing`, not a locked-down default-deny baseline.
 **Why:** Salomon serves the entire Djinn fleet's Ollama API (port 11434) plus netdata, prometheus/node-exporter, OctoPrint, and the forge dashboard — enumerating and allow-listing every port that legitimately needs to stay reachable from other machines risked breaking daily cross-machine automation. The security value Hellhound's auto-block provides (denying specific offending IPs) only requires ufw to be *active*, not for the default policy to be restrictive.
 **How to apply:** if Salomon's exposure surface is ever meant to be locked down properly (allow-list only), that's a distinct, deliberate project — don't conflate it with Hellhound's job, which is anomaly detection and targeted blocking, not perimeter firewalling.
+
+## 2026-07-14 — Wipe shop DB test data rather than migrate/filter it
+
+**Decision:** Delete all rows from every business table (orders, customers, inventory, ledger, etc.) and reset the inventory JSON to empty, rather than trying to identify and selectively keep any records.
+**Why:** Javier confirmed directly that the existing data (5 orders, 3 customers, 36 filament spools) was test/seed data, not real business records. A clean wipe with a backup taken first is simpler and safer than attempting to distinguish real from placeholder data row-by-row.
+**How to apply:** Backup exists at `~/.local/share/djinn-shop/backups/shop.db.pre-wipe-<timestamp>` if any of it turns out to have been needed after all. Equipment Value on the balance sheet was deliberately left untouched — it's a real fixed-asset figure independent of the wiped transactional data, not test data itself.

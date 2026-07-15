@@ -1997,3 +1997,16 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **Not touched:** Typhon/Nemesis/Iris slicer-access mounting (still not powered on per earlier notes) — infrastructure gap outside the dashboard's own code, not something fixable by editing the dashboard.
 
 *— Claude*
+
+## 2026-07-14 (late): Shop DB and Inventory Reset to Empty — Ready for Real Data
+
+- **Javier's call:** the dashboard's orders/customers/finance/reports and the filament inventory JSON were all test/seed data (5 test orders ORD-0001–0005, 3 test customers, 36 test filament spools) — confirmed explicitly this should be wiped clean, not kept.
+- **Backed up first:** `~/.local/share/djinn-shop/backups/shop.db.pre-wipe-<timestamp>` and `filament-inventory.json.pre-wipe-<timestamp>` before touching anything.
+- **Wiped every business table:** orders, customers, order_items, quotes, ledger, invoices, income_statements, balance_sheets, monthly_reports, dm_sessions, filament_inventory (a separate, older/unused legacy inventory table found in the DB — 5 rows, superseded by the JSON-based system the dashboard actually reads), filament_usage_log, shipments, tracking_events. Reset `sqlite_sequence` so autoincrement IDs (customers, order_items, etc.) start clean; `orders` uses a `COUNT(*)`-based ID generator (`next_order_id()`), so clearing rows alone was enough to make the next order `ORD-0001` again — verified.
+- **Reset `forge/inventory/filament-inventory.json`** to `{"spools": [], "printers": {four printers, all null}, ...}` — empty but structurally intact.
+- **Verified every page against the now-empty state** (new territory — all of today's earlier testing was against populated data): `/`, `/orders`, `/customers`, `/queue`, `/inventory`, `/finance`, `/reports` all 200, no crashes, no NaN/errors.
+- **Confirmed real empty-state UX exists already** — "No orders", "No customers yet", "Queue is empty" all render correctly, not blank/confusing tables.
+- **One figure stayed non-zero on purpose, not a bug:** Finance page's Balance Sheet still shows Equipment Value ($328.36, presumably printer depreciation book value) — that's a genuine fixed asset separate from the wiped transactional/inventory data, correctly independent of orders/customers/spools. Left alone; only clear it if Javier specifically wants equipment value reset too.
+- **No Marcus involvement needed** — the existing DB schema (`forge/shop/db.py`) is well-built and was already verified working end-to-end earlier today; this was a data-lifecycle reset, not a design task.
+
+*— Claude*
