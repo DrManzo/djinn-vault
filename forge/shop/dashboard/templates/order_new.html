@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topbar">
+  <div><h4>New Order</h4></div>
+  <div>
+    <a href="{{ url_for('orders') }}" class="btn btn-ghost btn-sm">Cancel</a>
+  </div>
+</div>
+
+<div class="card-dark" style="max-width:520px;padding:1.5rem;">
+  <form method="POST">
+    <label class="form-field">
+      <span>Customer name *</span>
+      <input type="text" name="customer_name" class="form-ctrl-dark" required>
+    </label>
+
+    <label class="form-field">
+      <span>Customer identifier (phone, email, Discord ID — optional)</span>
+      <input type="text" name="identifier" class="form-ctrl-dark" placeholder="leave blank to auto-generate">
+    </label>
+
+    <label class="form-field">
+      <span>Item description *</span>
+      <input type="text" name="description" class="form-ctrl-dark" required>
+    </label>
+
+    <div style="display:flex;gap:1rem;">
+      <label class="form-field" style="flex:1;">
+        <span>Quantity</span>
+        <input type="number" name="quantity" class="form-ctrl-dark" value="1" min="1" required>
+      </label>
+      <label class="form-field" style="flex:1;">
+        <span>Unit price (USD) *</span>
+        <input type="number" name="unit_price" class="form-ctrl-dark" step="0.01" min="0.01" required>
+      </label>
+    </div>
+
+    <label class="form-field">
+      <span>Material</span>
+      <input type="text" name="material" class="form-ctrl-dark" placeholder="e.g. PETG">
+    </label>
+
+    <label class="form-field">
+      <span>Payment method</span>
+      <select name="payment_method" class="form-ctrl-dark">
+        <option value="">—</option>
+        <option value="zelle">Zelle</option>
+        <option value="cash">Cash</option>
+        <option value="paypal">PayPal</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+
+    <label class="form-field-checkbox">
+      <input type="checkbox" name="express">
+      <span>Express</span>
+    </label>
+
+    <label class="form-field">
+      <span>Notes</span>
+      <textarea name="notes" class="form-ctrl-dark" rows="3"></textarea>
+    </label>
+
+    <button type="submit" class="btn btn-accent" style="margin-top:.5rem;">Create Order</button>
+  </form>
+</div>
+
+<style>
+  .form-field { display:block; margin-bottom:1rem; }
+  .form-field span {
+    display:block; font-size:.78rem; color:var(--text-muted);
+    margin-bottom:.3rem; text-transform:uppercase; letter-spacing:.05em;
+  }
+  .form-field input, .form-field select, .form-field textarea { width:100%; box-sizing:border-box; }
+  .form-field-checkbox { display:flex; align-items:center; gap:.5rem; margin-bottom:1rem; }
+  .form-field-checkbox input { width:auto; }
+</style>
+{% endblock %}

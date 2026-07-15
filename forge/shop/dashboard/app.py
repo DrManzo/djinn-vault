@@ -33,12 +33,13 @@ from shop.db import (
     init_db, _connect, get_db, decrypt,
     get_pending_orders, get_order, get_customer,
     update_order_status, SHOP_DIR,
+    upsert_customer, create_order, add_order_item,
 )
 from shop.accounting import (
     init_accounting, compute_income_statement,
     compute_balance_sheet, compute_monthly_report,
     get_customer_ledger, dashboard_summary,
-    export_csv, export_xlsx,
+    export_csv, export_xlsx, create_invoice,
 )
 
 # ── config ─────────────────────────────────────────────────────────────────────
@@ -290,6 +291,56 @@ def api_inventory_update(spool_id):
     return jsonify({"ok": True})
 
 
+@app.route("/api/inventory", methods=["POST"])
+@_require_login
+def api_inventory_add():
+    data = _load_inventory()
+    payload = request.get_json(force=True) or {}
+
+    material = str(payload.get("material", "")).strip()
+    color    = str(payload.get("color", "")).strip()
+    brand    = str(payload.get("brand", "")).strip()
+    if not material or not color or not brand:
+        return jsonify({"error": "material, color, and brand are required"}), 400
+
+    try:
+        initial_weight_g = max(1, int(payload.get("initial_weight_g", 1000)))
+    except (ValueError, TypeError):
+        return jsonify({"error": "invalid initial_weight_g"}), 400
+    try:
+        low_threshold_g = max(0, int(payload.get("low_threshold_g", 150)))
+    except (ValueError, TypeError):
+        low_threshold_g = 150
+
+    existing_nums = [
+        int(s["spool_id"].split("-")[1])
+        for s in data.get("spools", [])
+        if s.get("spool_id", "").startswith("SPOOL-") and s["spool_id"].split("-")[1].isdigit()
+    ]
+    next_num = (max(existing_nums) + 1) if existing_nums else 1
+    spool_id = f"SPOOL-{next_num:03d}"
+
+    spool = {
+        "spool_id": spool_id,
+        "material": material,
+        "color": color,
+        "brand": brand,
+        "initial_weight_g": initial_weight_g,
+        "remaining_g": initial_weight_g,
+        "loaded_printer": None,
+        "loaded": False,
+        "low_threshold_g": low_threshold_g,
+        "notes": str(payload.get("notes", ""))[:200],
+        "added_at": _today(),
+        "last_used": None,
+    }
+    data.setdefault("spools", []).append(spool)
+    data["last_updated"] = _today()
+    data["updated_by"] = "dashboard"
+    _save_inventory(data)
+    return jsonify({"ok": True, "spool_id": spool_id})
+
+
 # ── dashboard (home) ───────────────────────────────────────────────────────────
 @app.route("/")
 @app.route("/dashboard")
@@ -337,6 +388,44 @@ def orders():
         o["customer"]   = c
         enriched.append(o)
     return render_template("orders.html", orders=enriched, status_filter=status_filter, active="orders")
+
+@app.route("/orders/new", methods=["GET", "POST"])
+@_require_login
+def order_new():
+    if request.method == "GET":
+        return render_template("order_new.html", active="orders")
+
+    customer_name = request.form.get("customer_name", "").strip()
+    identifier    = request.form.get("identifier", "").strip()
+    description   = request.form.get("description", "").strip()
+    material      = request.form.get("material", "").strip() or None
+    notes         = request.form.get("notes", "").strip() or None
+    payment_method = request.form.get("payment_method", "").strip() or None
+    express       = request.form.get("express") == "on"
+
+    try:
+        quantity   = max(1, int(request.form.get("quantity", 1)))
+        unit_price = round(float(request.form.get("unit_price", 0)), 2)
+    except (ValueError, TypeError):
+        flash("Quantity and unit price must be numbers.")
+        return render_template("order_new.html", active="orders"), 400
+
+    if not customer_name or not description or unit_price <= 0:
+        flash("Customer name, item description, and a unit price above $0 are required.")
+        return render_template("order_new.html", active="orders"), 400
+
+    if not identifier:
+        identifier = f"manual-{secrets.token_hex(6)}"
+
+    total = round(unit_price * quantity, 2)
+    cid = upsert_customer(identifier, customer_name)
+    oid = create_order(cid, total, payment_method=payment_method, express=express, notes=notes)
+    add_order_item(oid, description, quantity, unit_price, material=material)
+    create_invoice(oid, cid, total, payment_method=payment_method)
+
+    flash(f"{oid} created for {customer_name}.")
+    return redirect(url_for("order_detail", order_id=oid))
+
 
 @app.route("/orders/<order_id>")
 @_require_login
