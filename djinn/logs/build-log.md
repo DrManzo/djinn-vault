@@ -2010,3 +2010,9 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 - **No Marcus involvement needed** — the existing DB schema (`forge/shop/db.py`) is well-built and was already verified working end-to-end earlier today; this was a data-lifecycle reset, not a design task.
 
 *— Claude*
+
+## 2026-07-14 (later): Inventory Restored — Was Real Data, Not Test Data Like Orders/Customers
+
+Javier clarified after the wipe: the filament inventory (36 spools) was real, accurate data — unlike the orders/customers/finance records, which genuinely were test/seed data. Restored `forge/inventory/filament-inventory.json` from the pre-wipe backup (`~/.local/share/djinn-shop/backups/filament-inventory.json.pre-wipe-20260714-183804`), which already had the corrected Nemesis Blue PLA state (858g, loaded) from earlier in the session. Verified live on the dashboard — 200 OK, all 36 spools present, edit buttons working, Nemesis section correct. Orders/customers/finance DB tables remain wiped as intended.
+
+*— Claude*
