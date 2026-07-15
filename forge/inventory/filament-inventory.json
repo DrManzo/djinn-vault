@@ -1,6 +1,6 @@
 {
   "last_updated": "2026-07-14",
-  "updated_by": "Claude",
+  "updated_by": "dashboard",
   "spools": [
     {
       "spool_id": "SPOOL-001",
@@ -12,9 +12,9 @@
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris — active. 2x white PETG ~1.5kg combined, spool A",
+      "notes": "Iris \u2014 active. 2x white PETG ~1.5kg combined, spool A",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-12"
+      "last_used": "2026-07-14"
     },
     {
       "spool_id": "SPOOL-002",
@@ -26,7 +26,7 @@
       "loaded_printer": "Iris",
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "Iris — staged. 2x white PETG ~1.5kg combined, spool B",
+      "notes": "Iris \u2014 staged. 2x white PETG ~1.5kg combined, spool B",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -40,7 +40,7 @@
       "loaded_printer": "Iris",
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "Iris — staged",
+      "notes": "Iris \u2014 staged",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -54,7 +54,7 @@
       "loaded_printer": "Calliope",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Calliope — active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report).",
+      "notes": "Calliope \u2014 active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report).",
       "added_at": "2026-07-12",
       "last_used": "2026-07-14"
     },
@@ -65,12 +65,12 @@
       "brand": "Creality",
       "initial_weight_g": 1000,
       "remaining_g": 200,
-      "loaded_printer": "Nemesis",
-      "loaded": true,
+      "loaded_printer": "",
+      "loaded": false,
       "low_threshold_g": 150,
-      "notes": "Nemesis — active, nearly depleted. Order more before next long run.",
+      "notes": "Nemesis \u2014 active, nearly depleted. Order more before next long run.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-12"
+      "last_used": "2026-07-14"
     },
     {
       "spool_id": "SPOOL-006",
@@ -82,7 +82,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -96,7 +96,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -110,7 +110,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -124,7 +124,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -138,7 +138,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -152,7 +152,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -166,7 +166,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -180,7 +180,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -208,7 +208,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -218,13 +218,13 @@
       "color": "Blue",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 900,
-      "loaded_printer": null,
-      "loaded": false,
+      "remaining_g": 858,
+      "loaded_printer": "Nemesis",
+      "loaded": true,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": "2026-07-14"
     },
     {
       "spool_id": "SPOOL-017",
@@ -236,7 +236,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -250,7 +250,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -264,7 +264,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — new",
+      "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -376,7 +376,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -390,7 +390,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — partially used",
+      "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -404,7 +404,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — arrived 2026-07-13, silk tri-color",
+      "notes": "shelf \u2014 arrived 2026-07-13, silk tri-color",
       "added_at": "2026-07-13",
       "last_used": null
     },
@@ -418,7 +418,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — arrived 2026-07-13",
+      "notes": "shelf \u2014 arrived 2026-07-13",
       "added_at": "2026-07-13",
       "last_used": null
     },
@@ -432,7 +432,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — arrived 2026-07-13, Rapid PLA",
+      "notes": "shelf \u2014 arrived 2026-07-13, Rapid PLA",
       "added_at": "2026-07-13",
       "last_used": null
     },
@@ -460,7 +460,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — high speed refill (no spool)",
+      "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -474,7 +474,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — high speed refill (no spool)",
+      "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -488,7 +488,7 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — high speed refill (no spool)",
+      "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
       "last_used": null
     },
@@ -502,15 +502,31 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "shelf — high speed refill (no spool)",
+      "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
       "last_used": null
     }
   ],
   "printers": {
-    "Iris": {"loaded_spool": "SPOOL-001", "material": "PETG", "color": "White"},
-    "Nemesis": {"loaded_spool": "SPOOL-005", "material": "PLA", "color": "Black"},
-    "Calliope": {"loaded_spool": "SPOOL-004", "material": "PLA", "color": "Yellow"},
-    "Penelope": {"loaded_spool": null, "material": null, "color": null}
+    "Iris": {
+      "loaded_spool": "SPOOL-001",
+      "material": "PETG",
+      "color": "White"
+    },
+    "Nemesis": {
+      "loaded_spool": "SPOOL-016",
+      "material": "PLA",
+      "color": "Blue"
+    },
+    "Calliope": {
+      "loaded_spool": "SPOOL-004",
+      "material": "PLA",
+      "color": "Yellow"
+    },
+    "Penelope": {
+      "loaded_spool": null,
+      "material": null,
+      "color": null
+    }
   }
 }
