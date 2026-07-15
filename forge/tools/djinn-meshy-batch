@@ -19,14 +19,18 @@ Pipeline per collection folder:
      height matches TARGET_HEIGHT_MM, the 710-PuffCo reference cup's
      height — Meshy exports carry no consistent real-world scale, and
      boring a fixed-size hole into an arbitrarily-scaled mesh produces
-     unusable walls (paper-thin or oversized). Then run djinn-bore-core,
-     which does true-center detection, cuts a real Proxy Core seat bore
-     (38mm diameter, 51mm depth — the same caliper-verified constant
-     djinn-bore-core itself uses, matching figures already recorded in
-     applacrabus.md/tardis.md), and stamps the maker's mark on the bore
-     floor — all in one existing, proven tool, not reimplemented here.
-     Meshy exports are frequently very high-poly (300k-800k faces) and
-     often non-watertight, which makes
+     unusable walls (paper-thin or oversized). Then run djinn-bore-core
+     (with --no-mark) for true-center detection and the real Proxy Core
+     seat bore (38mm diameter, 51mm depth — the same caliper-verified
+     constant djinn-bore-core itself uses, matching figures already
+     recorded in applacrabus.md/tardis.md). The maker's mark itself is
+     applied as its own separate djinn-model-mark pass on the bored
+     output, not via bore-core's built-in bore-floor mark — that internal
+     feature turned out to share the same unpredictable auto-scale
+     behavior as the bugs above, making it unverifiable and unreliable
+     even on runs bore-core itself reports as successful (confirmed live
+     2026-07-14). Meshy exports are frequently very high-poly (300k-800k
+     faces) and often non-watertight, which makes
      djinn-bore-core's mesh-repair step slow and occasionally unable to
      find a working boolean backend at all — so every mesh is decimated
      to a modest face count first (same pymeshlab pattern already used
@@ -287,6 +291,14 @@ def run_bore_core(input_path: Path, output_path: Path, work_dir: Path) -> dict:
         # anchored to the 710 reference instead of its own default.
         "--target-height", str(TARGET_HEIGHT_MM),
         "--output", str(output_path),
+        # Skip bore-core's own internal bore-floor mark entirely — its
+        # scale/placement is tied up in the same unpredictable internal
+        # auto-scale behavior as the bugs above, confirmed live 2026-07-14
+        # to make before/after verification unreliable even on a
+        # "successful" run. process_file() applies the maker's mark
+        # separately afterward via the same verified djinn-model-mark path
+        # every non-bore piece already uses.
+        "--no-mark",
         "--no-comms",
         "--quiet",
     ]
@@ -387,8 +399,23 @@ def process_file(f: Path, collection: str, variant: str, output_dir: Path,
     result["bore_core"] = bore_result
 
     if bore_result["success"]:
-        result["path"] = "bore-core (true-center + bore + mark)"
-        result["success"] = True
+        # Bore succeeded (with --no-mark) — apply the maker's mark now, as
+        # its own separate, verified step rather than trusting bore-core's
+        # internal one. Mark the bored output in place via a temp file so a
+        # mid-write failure can't leave out_path half-written.
+        mark_tmp = work_dir / f"{name}_marked_tmp.stl"
+        r = run_model_mark(out_path, mark_tmp)
+        if r.returncode == 0 and mark_tmp.is_file():
+            shutil.move(str(mark_tmp), str(out_path))
+            result["path"] = "bore-core + separate maker's-mark pass"
+            result["success"] = True
+        else:
+            # Bore succeeded but the mark pass on it failed — still ship
+            # the bored-but-unmarked piece rather than lose the bore, but
+            # flag it clearly instead of silently reporting success.
+            result["path"] = "bore-core (true-center + bore) — mark pass FAILED, unmarked"
+            result["success"] = True
+            result["mark_error"] = r.stderr.strip()[-500:]
     else:
         result["path"] = f"simple (bore-core failed: {bore_result['stderr_tail'] or 'unknown error'})"
         r = run_model_mark(scaled_path, out_path)
