@@ -2016,3 +2016,14 @@ Full pipeline: `djinn-design "small SD card holder, 4 slots, PLA, wall mount" --
 Javier clarified after the wipe: the filament inventory (36 spools) was real, accurate data — unlike the orders/customers/finance records, which genuinely were test/seed data. Restored `forge/inventory/filament-inventory.json` from the pre-wipe backup (`~/.local/share/djinn-shop/backups/filament-inventory.json.pre-wipe-20260714-183804`), which already had the corrected Nemesis Blue PLA state (858g, loaded) from earlier in the session. Verified live on the dashboard — 200 OK, all 36 spools present, edit buttons working, Nemesis section correct. Orders/customers/finance DB tables remain wiped as intended.
 
 *— Claude*
+
+## 2026-07-14 (night): Self-Service Data Entry — Add-Spool + Manual Order, Discord Pipeline Verified
+
+- **Context:** Javier asked for a way to add orders/customers/inventory when I'm not around. Before building anything new, checked what already existed.
+- **Found the Discord order pipeline already works**, and verified it: `djinn-discord-gateway` bridges a customer's quote request ("order"/"order express" in Discord) into a real `shop.db` record via `upsert_customer` → `create_order` → `add_order_item` → `create_invoice` (`forge/shop/customer_dm.py::handle_order`). Tested the underlying logic against a throwaway DB copy (not live data) — first attempt hit a `FOREIGN KEY constraint failed`, traced to my own test mixing two different module import paths (`forge.shop.db` vs `shop.db` — genuinely separate Python module objects, both resolving to the same file but each with its own `DB_PATH`); once both were patched consistently the full pipeline worked correctly. Not a production bug — the real app only ever uses the `shop.X` import style consistently.
+- **Built the two real gaps:**
+  - `POST /api/inventory` (no spool_id) — adds a brand-new spool, auto-assigns the next `SPOOL-NNN` id. "+ Add Spool" modal on the inventory page (`forge/shop/dashboard/app.py`, `templates/inventory.html`).
+  - `GET/POST /orders/new` — manual order form (customer name/identifier, item, qty, unit price, material, payment method, express, notes), runs the same `upsert_customer → create_order → add_order_item → create_invoice` pipeline the Discord bot uses. "+ New Order" button on `/orders` (`templates/order_new.html`, `templates/orders.html`).
+- **Verified both live**, end-to-end: added a real test spool (SPOOL-037) and a real test order (customer, order, line item, invoice all correct in the DB and rendering correctly on the order detail page) — then deleted both test artifacts afterward and reset `sqlite_sequence` so the next real order/customer starts clean (`ORD-0001`), keeping the just-cleaned production DB actually clean.
+
+*— Claude*
