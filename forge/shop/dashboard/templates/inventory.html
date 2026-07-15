@@ -5,6 +5,8 @@
   <div style="font-size:.8rem;color:var(--text-muted);" id="save-status"></div>
 </div>
 
+{% set printer_names = ['Calliope', 'Nemesis', 'Iris', 'Penelope'] %}
+
 {% if low_spools %}
 <div style="background:#2a1a0a;border:1px solid #6a3a10;border-radius:6px;padding:.75rem 1rem;margin-bottom:1.5rem;font-size:.84rem;color:#e09040;">
   <strong>Low stock:</strong>
@@ -22,7 +24,7 @@
   <table class="table-dark-custom">
     <thead><tr>
       <th>ID</th><th>Material</th><th>Color</th><th>Brand</th>
-      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th>
+      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th><th></th>
     </tr></thead>
     <tbody>
     {% for s in spools %}
@@ -39,6 +41,13 @@
       </td>
       <td style="color:var(--text-muted);">{{ s.initial_weight_g }}</td>
       <td style="color:var(--text-muted);font-size:.8rem;">{{ s.notes or '—' }}</td>
+      <td>
+        <button class="edit-spool-btn" title="Edit spool"
+                data-spool="{{ s.spool_id }}"
+                data-notes="{{ s.notes or '' }}"
+                data-loaded="{{ 'true' if s.loaded else 'false' }}"
+                data-loaded-printer="{{ s.loaded_printer or '' }}">✎</button>
+      </td>
     </tr>
     {% endfor %}
     </tbody>
@@ -54,7 +63,7 @@
   <table class="table-dark-custom">
     <thead><tr>
       <th>ID</th><th>Material</th><th>Color</th><th>Brand</th>
-      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th>
+      <th>Remaining (g)</th><th>Initial (g)</th><th>Notes</th><th></th>
     </tr></thead>
     <tbody>
     {% for s in unloaded %}
@@ -71,6 +80,13 @@
       </td>
       <td style="color:var(--text-muted);">{{ s.initial_weight_g }}</td>
       <td style="color:var(--text-muted);font-size:.8rem;">{{ s.notes or '—' }}</td>
+      <td>
+        <button class="edit-spool-btn" title="Edit spool"
+                data-spool="{{ s.spool_id }}"
+                data-notes="{{ s.notes or '' }}"
+                data-loaded="{{ 'true' if s.loaded else 'false' }}"
+                data-loaded-printer="{{ s.loaded_printer or '' }}">✎</button>
+      </td>
     </tr>
     {% endfor %}
     </tbody>
@@ -78,6 +94,34 @@
   {% else %}
   <div class="card-dark" style="text-align:center;padding:1.5rem;color:var(--text-muted);">All spools are loaded.</div>
   {% endif %}
+</div>
+
+<!-- Edit modal -->
+<div id="edit-modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal-box">
+    <h4 id="edit-modal-title" style="margin-top:0;">Edit Spool</h4>
+    <label class="modal-field">
+      <span>Notes</span>
+      <textarea id="edit-notes" rows="3" maxlength="200"></textarea>
+    </label>
+    <label class="modal-field modal-checkbox">
+      <input type="checkbox" id="edit-loaded">
+      <span>Loaded</span>
+    </label>
+    <label class="modal-field" id="edit-printer-field">
+      <span>Loaded on</span>
+      <select id="edit-loaded-printer">
+        <option value="">—</option>
+        {% for p in printer_names %}
+        <option value="{{ p }}">{{ p }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <div class="modal-actions">
+      <button id="edit-cancel-btn" class="modal-btn-secondary">Cancel</button>
+      <button id="edit-save-btn" class="modal-btn-primary">Save</button>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -113,6 +157,66 @@
     font-variant-numeric: tabular-nums;
   }
   input.weight-input:focus { outline: none; }
+
+  .edit-spool-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 4px;
+    padding: .1rem .4rem;
+    cursor: pointer;
+    font-size: .85rem;
+  }
+  .edit-spool-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.55);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+  }
+  .modal-box {
+    background: #10141a;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 320px;
+    max-width: 90vw;
+  }
+  .modal-field {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .modal-field span {
+    display: block;
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin-bottom: .3rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .modal-field textarea, .modal-field select {
+    width: 100%;
+    background: #0f1923;
+    border: 1px solid var(--border);
+    color: #d4e4f0;
+    border-radius: 4px;
+    padding: .4rem .5rem;
+    font-size: .88rem;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .modal-checkbox { display: flex; align-items: center; gap: .5rem; }
+  .modal-checkbox span { margin-bottom: 0; }
+  .modal-checkbox input { width: auto; }
+  .modal-actions {
+    display: flex; justify-content: flex-end; gap: .6rem; margin-top: 1.2rem;
+  }
+  .modal-btn-primary, .modal-btn-secondary {
+    border-radius: 6px; padding: .4rem 1rem; font-size: .85rem; cursor: pointer; border: 1px solid var(--border);
+  }
+  .modal-btn-primary { background: var(--accent); border-color: var(--accent); color: #0a0e13; font-weight: 600; }
+  .modal-btn-secondary { background: none; color: var(--text-muted); }
 </style>
 
 <script>
@@ -169,6 +273,61 @@ document.querySelectorAll('.editable-weight').forEach(span => {
       if (e.key === 'Escape') { span.textContent = current; span.classList.remove('editing'); }
     });
   });
+});
+
+// ── Edit modal (notes / loaded / loaded_printer) ────────────────────────────
+const backdrop      = document.getElementById('edit-modal-backdrop');
+const titleEl        = document.getElementById('edit-modal-title');
+const notesEl        = document.getElementById('edit-notes');
+const loadedEl       = document.getElementById('edit-loaded');
+const loadedPrinterEl = document.getElementById('edit-loaded-printer');
+const printerFieldEl = document.getElementById('edit-printer-field');
+let currentSpoolId = null;
+
+function togglePrinterField() {
+  printerFieldEl.style.display = loadedEl.checked ? 'block' : 'none';
+}
+loadedEl.addEventListener('change', togglePrinterField);
+
+document.querySelectorAll('.edit-spool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentSpoolId = btn.dataset.spool;
+    titleEl.textContent = `Edit ${currentSpoolId}`;
+    notesEl.value = btn.dataset.notes;
+    loadedEl.checked = btn.dataset.loaded === 'true';
+    loadedPrinterEl.value = btn.dataset.loadedPrinter;
+    togglePrinterField();
+    backdrop.style.display = 'flex';
+  });
+});
+
+document.getElementById('edit-cancel-btn').addEventListener('click', () => {
+  backdrop.style.display = 'none';
+});
+backdrop.addEventListener('click', (e) => {
+  if (e.target === backdrop) backdrop.style.display = 'none';
+});
+
+document.getElementById('edit-save-btn').addEventListener('click', async () => {
+  if (!currentSpoolId) return;
+  const payload = {
+    notes: notesEl.value,
+    loaded: loadedEl.checked,
+    loaded_printer: loadedEl.checked ? loadedPrinterEl.value : '',
+  };
+  try {
+    const res = await fetch(`/api/inventory/${currentSpoolId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('server error');
+    backdrop.style.display = 'none';
+    showStatus(`${currentSpoolId} saved — reloading…`, true);
+    setTimeout(() => window.location.reload(), 500);
+  } catch (e) {
+    showStatus(`Save failed for ${currentSpoolId}`, false);
+  }
 });
 </script>
 {% endblock %}
