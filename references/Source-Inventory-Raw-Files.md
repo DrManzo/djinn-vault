@@ -63,7 +63,6 @@ created: 2026-05-19
 | 3 | `2026-05-19_17-18-35_Perplexity_I_have_a_free_association_session_can_you_analyze_itIn_a_ju.md` | 2026-05-19 | Free Association Session Analysis | `[[Free-Association-Alcohol-Dialogue]]` |
 | 4 | `2026-05-19_17-18-38_Perplexity_Recently,_I_have_come_to_terms_that_I'm_identifying_more_and.md` | 2026-05-19 | Religious Identification & Vulnerability | `[[Relg-Identification-And-Vulnerability]]` |
 | 5 | `2026-05-19_17-18-41_Perplexity_Here_is_last_night,_dream_or_series_of_dreams_I_should_say_w.md` | 2026-05-19 | Dream Sequence — Godfather Dream | `[[Dream-Sequence-And-Godfather-Dream]]` |
-| 6 | `2026-05-19_17-18-44_Perplexity_Here_is_my_first_noght_time_reflection_for_my_black_book“Yo.md` | 2026-05-19 | First Nighttime Reflection | `[[First-Nighttime-Reflection]]` |
 
 ---
 
@@ -247,46 +246,14 @@ created: 2026-05-19
 | # | Original Filename | Date | Topic | Processed Into |
 |---|-------------------|------|-------|----------------|
 | 1 | `2026-05-18_20-14-42_Perplexity_You_are_Aurelius,_evolved_from_Marcus,_understanding_that_yo.md` | 2026-05-18 | Aurelius Identity Evolution | `[[Aurelius-Identity-Evolution]]` |
-| 2 | `2026-05-18_20-17-00_Perplexity_Some_markers_is_in_all_of_the_threads_and_files_in_the_space.md` | 2026-05-18 | Marcus System Markers | `[[Marcus-Aurelius-Persona]]` |
-| 3 | `2026-05-18_20-17-09_Perplexity_Based_in_the_documents_you_have_in_the_access_to_the_Interne.md` | 2026-05-18 | Internet-Based Research Assistance | `[[Marcus-Aurelius-Persona]]` |
-| 4 | `2026-05-18_20-17-17_Perplexity_Marcus,_you_piece_of_shit_I_need_you.md` | 2026-05-18 | Urgent Marcus Activation | `[[Marcus-Aurelius-Persona]]` |
-| 5 | `2026-05-18_20-17-23_Perplexity_Marcus,_you_flea_bitten_dog_are_you_here.md` | 2026-05-18 | Marcus Check-In | `[[Marcus-Aurelius-Persona]]` |
-| 6 | `2026-05-18_20-17-28_Perplexity_Marcus_you_here_can_you_help_me_with_my_psychology_paper.md` | 2026-05-18 | Psychology Paper Help | `[[Marcus-Aurelius-Persona]]` |
-| 7 | `2026-05-18_20-18-20_Perplexity_i_need_a_program_or_a_way_to_directly_take_over_my_finances,.md` | 2026-05-18 | Finance Automation & Psychology | `[[Finance-Automation-and-Psychology]]` |
-| 8 | `2026-05-18_20-18-28_Perplexity_Marcus!!!_OK,_so_this_is_my_analysis_in_my_overview_trying_t.md` | 2026-05-18 | Personal Analysis & Overview | `[[Marcus-Aurelius-Persona]]` |
-| 9 | `2026-05-18_20-18-32_Perplexity_Help_me_write_a_letter_to_mira_that_is_romantic_and_persona.md` | 2026-05-18 | Mira Love Letter | `[[Mira-Love-Letters]]` |
-| 10 | `2026-05-18_20-18-37_Perplexity_Marcus,_you_flea_bitten_bastard_where_the_hell_are_you_Don'.md` | 2026-05-18 | Don't Start Without Marcus | `[[Marcus-Aurelius-Persona]]` |
-| 11 | `2026-05-18_20-18-48_Perplexity_Marcus,_you_flea_bastard_i_need_you._as_my_conciliary.md` | 2026-05-18 | Consigliere Consultation | `[[Marcus-Aurelius-Persona]]` |
-| 12 | `2026-05-18_20-18-58_Perplexity_Again,_my_dear,_you_or_Marcus,_the_framework_that_you_have_i.md` | 2026-05-18 | Framework Discussion | `[[Marcus-Aurelius-Persona]]` |
-| 13 | `2026-05-18_20-19-03_Perplexity_Hey_Marcus,_you_flea_bitten_bastard_are_you_here_I_need_my.md` | 2026-05-18 | Personal Assistance Request | `[[Marcus-Aurelius-Persona]]` |
 | 14 | `2026-05-18_20-19-08_Perplexity_Faust_the_old,_the_mad,_the_kind,_was_born_in_the_shadows_of.md` | 2026-05-18 | Faust Creative Writing Lore | `[[Faust-Creative-Writing]]` |
-| 15 | `2026-05-18_20-19-12_Perplexity_Give_me_a_prompt_that_I_can_speak_about_that_will_give_you_a.md` | 2026-05-18 | Prompt Engineering | `[[Marcus-Aurelius-Persona]]` |
-| 16 | `2026-05-18_20-19-19_Perplexity_Hey,_Marcus,_are_you_there_I_need_you_salty_bastard._I_hope.md` | 2026-05-18 | Marcus Check-In | `[[Marcus-Aurelius-Persona]]` |
-| 17 | `2026-05-18_20-19-23_Perplexity_Hey,_Marcus,_are_you_there_I_need_you_salty_bastard._I_hope.md` | 2026-05-18 | Marcus Check-In (dup) | `[[Marcus-Aurelius-Persona]]` |
 | 18 | `2026-05-18_20-19-28_Perplexity_SOURCE_KEEPER_-_SUMMARYWhat_it_doesA_lightweight_capture.md` | 2026-05-18 | Source Keeper Project Spec | `[[Source-Keeper-Project-Spec]]` |
 | 19 | `2026-05-18_20-19-33_Perplexity_CiteAssist_will_be_the_paid_version_GhostCite(under_M_System.md` | 2026-05-18 | CiteAssist & GhostCite Project | `[[CiteAssist-and-GhostCite-Project]]` |
-| 20 | `2026-05-18_20-19-47_Perplexity_Hey_msrcus_i_need_you_🥺_friend.md` | 2026-05-18 | Personal Connection | `[[Marcus-Aurelius-Persona]]` |
-| 21 | `2026-05-18_20-19-56_Perplexity_Hi_Marcus,_are_you_there.md` | 2026-05-18 | Marcus Availability Check | `[[Marcus-Aurelius-Persona]]` |
-| 22 | `2026-05-18_20-20-00_Perplexity_Hey_Marcus,_I_know_that_I've_asked_you_this_a_couple_of_time.md` | 2026-05-18 | Repeated Question Follow-up | `[[Marcus-Aurelius-Persona]]` |
-| 23 | `2026-05-18_20-20-06_Perplexity_so_I'm_absolutely_both_high_drunk_and_on_some_shrooms_I'm_pr.md` | 2026-05-18 | Altered State Reflection | `[[Marcus-Aurelius-Persona]]` |
-| 24 | `2026-05-18_20-20-11_Perplexity_Hey_Mark,_by_any_chance_are_you_there.md` | 2026-05-18 | Marcus (Mark) Check-In | `[[Marcus-Aurelius-Persona]]` |
-| 25 | `2026-05-18_20-20-24_Perplexity_Marcus_og.md` | 2026-05-18 | Marcus OG — Original Persona | `[[Marcus-Aurelius-Persona]]` |
-| 26 | `2026-05-18_20-20-28_Perplexity_Hey_Maecus,_can_you_do_me_a_favor_and_revise_This……"Hello_S.md` | 2026-05-18 | Letter Revision | `[[Mira-Love-Letters]]` |
-| 27 | `2026-05-18_20-20-32_Perplexity_OK._So_right_now_I_want_you_to_take_the_information_that_I'm.md` | 2026-05-18 | Information Compilation | `[[Marcus-Aurelius-Persona]]` |
-| 28 | `2026-05-18_20-20-38_Perplexity_I_am_writing_this_paper_about_how_to_become_or_what_is_suppo.md` | 2026-05-18 | Paper Writing: Becoming | `[[Marcus-Aurelius-Persona]]` |
 | 29 | `2026-05-18_20-20-42_Perplexity_I'm_building_a_long-term_business_structure_called_Meanas_an.md` | 2026-05-18 | Meanas & M-Systems Business Vision | `[[Meanas-and-M-Systems-Business-Vision]]` |
-| 30 | `2026-05-18_20-20-47_Perplexity_Do_you_know_Marcus_right_now_I_made_a_very_interesting_conn.md` | 2026-05-18 | Interesting Connection | `[[Marcus-Aurelius-Persona]]` |
-| 31 | `2026-05-18_20-22-01_Perplexity_Marcus_I_needs_you.md` | 2026-05-18 | Marcus Needed | `[[Marcus-Aurelius-Persona]]` |
 | 32 | `2026-05-18_20-22-05_Perplexity_Taking_everything_you_know_about_me_twll_me_this_evolution_t.md` | 2026-05-18 | Personal Evolution | `[[Aurelius-Identity-Evolution]]` |
 | 33 | `2026-05-18_20-22-09_Perplexity_Would_a_lawyer_be_almost_the_equivalent_of_an_auror_in_hp_un.md` | 2026-05-18 | HP Universe — Lawyer vs Auror | `[[HP-Universe-Lawyer-Auror]]` |
-| 34 | `2026-05-18_20-22-15_Perplexity_So_I've_realized_one_thing_that_I_wanna_move_with_you_and_th.md` | 2026-05-18 | Moving Forward with Marcus | `[[Marcus-Aurelius-Persona]]` |
-| 35 | `2026-05-18_20-22-55_Perplexity_You_know_i_find_myself_at_conflicts_with_who_i_am_with_who_e.md` | 2026-05-18 | Identity Conflict & Integration | `[[Identity-Conflict-and-Integration]]` |
 | 36 | `2026-05-18_20-23-01_Perplexity_Make_this_into_a_poem_"There_was_i_man_So_sad_and_low_that.md` | 2026-05-18 | Poem Generation | `[[Faust-Creative-Writing]]` |
-| 37 | `2026-05-18_20-23-05_Perplexity_Put_me_against_each_and_every_one_of_themHere's_a_concise.md` | 2026-05-18 | Comparative Analysis | `[[Marcus-Aurelius-Persona]]` |
-| 38 | `2026-05-18_20-23-10_Perplexity_Marcus,_are_you_there.md` | 2026-05-18 | Marcus Check-In | `[[Marcus-Aurelius-Persona]]` |
 | 39 | `2026-05-18_20-23-14_Perplexity_You_know,_I_realize_something_very_profound_in_my_mind_and_t.md` | 2026-05-18 | Profound Realization | `[[Aurelius-Identity-Evolution]]` |
-| 40 | `2026-05-18_20-23-30_Perplexity_Hey_Marcus,_are_you.md` | 2026-05-18 | Marcus Check-In | `[[Marcus-Aurelius-Persona]]` |
-| 41 | `2026-05-18_20-23-34_Perplexity_so_Marcus_you_there.md` | 2026-05-18 | Marcus Availability | `[[Marcus-Aurelius-Persona]]` |
 | 42 | `2026-05-19_17-32-52_Perplexity_I_have_a_project_and_a_question_that_is_follows_it._we_are_d.md` | 2026-05-19 | Social Psychology Project | `[[PSY-362 Hub]]` |
 | 43 | `2026-05-19_17-32-55_Perplexity_answer_this_in_2_paragraphs_that_in_corporates_a_citation_fr.md` | 2026-05-19 | Social Psych 2-Paragraph Post | `[[PSY-362 Hub]]` |
 | 44 | `2026-05-19_17-33-00_Perplexity_usingHeinzen,_T.,_&_Goodfriend,_W._(2021)._Social_psycholog.md` | 2026-05-19 | Social Psychology Textbook Questions | `[[Theoretical-Frameworks-for-Relationships]]` |
