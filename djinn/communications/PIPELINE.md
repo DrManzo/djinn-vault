@@ -979,3 +979,73 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/i notes/Notes/The-Wounded-Healer-And-The-Fool-Strategic-Integration-2026-07-14.md`
 
 — Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md`
+
+— Clerk
