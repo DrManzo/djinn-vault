@@ -1069,3 +1069,223 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/personal/marcus-threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
 
 — Clerk
+
+---
+
+### 2026-07-16 08:54 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Letter-To-Mira-In-The-Style-Of-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:54 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Letter-To-Mira-In-The-Style-Of-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:55 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Romantic-Letter-To-Mira-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:56 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/A-Romantic-Letter-To-Mira.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:56 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Process-And-Initial-Steps.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:56 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Process-And-Initial-Steps-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:56 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Support-And-Intensive-Engagement.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:57 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Aa-Support-And-Intensive-Engagement-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:57 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Affair-Analysis-And-Emotional-Needs.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:57 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Affair-Analysis-And-Emotional-Needs-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:58 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Analyzing-The-Wounded-Healer-And-The-Fool-Strategic.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:58 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Analyzing-The-Wounded-Healer-And-The-Fool-Strategic-2026-07-16.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:58 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Empathy-And-Self-Awareness-In-Transformation.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Finance-Automation-And-Psychological-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/First-Nighttime-Reflection.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 08:59 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Identity-Conflict-Lover-Vs-Warrior.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Impromptu-Conversation-Analysis.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Inner-Conflict-And-Self-Identity.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:00 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Marcus-Aurelius-Persona-Hub.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Mira-Love-Letters-And-Relationship-Dynamics.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:01 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Moments-Unfolding.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 09:02 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Reduced-Urge-For-Pornography-And-Self-Gratification.md`
+
+— Clerk
