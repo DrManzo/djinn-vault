@@ -1289,3 +1289,13 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/personal/notes/Reduced-Urge-For-Pornography-And-Self-Gratification.md`
 
 — Clerk
+
+---
+
+### 2026-07-16 09:02 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Reflection-On-Personal-Growth-And-Health.md`
+
+— Clerk
