@@ -853,3 +853,11 @@ Went through the shop dashboard end-to-end per Javier's "just make it functional
 Day 136 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-07-16 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 137 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
