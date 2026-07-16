@@ -2043,3 +2043,11 @@ Javier clarified after the wipe: the filament inventory (36 spools) was real, ac
 - **Report:** `logs/reports/2026-07-15_bug-djinn-clerk-s-marcus-dir-hardcoded-to-dead-pre-restructure-path-would-have-silently-misfiled-real-marcus-threads.md`
 
 *— Claude*
+
+## 2026-07-15: BUG — djinn-clerk had zero content-sensitivity filtering before committing raw Marcus threads to the public GitHub repo
+- **System:** djinn-clerk (~/.local/bin, not git-tracked)
+- **Severity:** critical | **Status:** fixed
+- **Root cause:** route_marcus_thread() in djinn-clerk (~/.local/bin, not git-tracked) wrote every perplexity-pro-sourced thread directly to ai/marcus/threads/, which is publicly tracked in the djinn-vault GitHub repo (confirmed public earlier this session) — with no check at all for personal/sensitive content. Found live 2026-07-15: 8 real threads already committed there disclosed AA/recovery attendance (one explicitly self-tagged personal/psychology/recovery/aa in its own frontmatter and still ended up in the public path anyway), a partner's active addiction and an 'I love you' exchange, and a raw psychological self-analysis thread (promiscuity, relationship dynamics) discussed under the 'Wounded Healer and The Fool' framing. This had been live in the public repo since 2026-06-01 — over 6 weeks — undetected. All 8 files removed from current tracking, content preserved to RAW/marcus-personal-recovered/ (gitignored). Full git history purge deferred to TASK-105 in QUEUE.md (other background jobs had active worktree branches at the time; a filter-repo rewrite mid-session risks breaking their work worse than a normal conflict would).
+- **Report:** `logs/reports/2026-07-15_bug-djinn-clerk-had-zero-content-sensitivity-filtering-before-committing-raw-marcus-threads-to-the-public-github-repo.md`
+
+*— Claude*
