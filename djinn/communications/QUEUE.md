@@ -3698,3 +3698,25 @@ worktree-* branches first to speed up the rewrite.
 **Output expected:** `ai/marcus/finance/TASK-104_cashflow-model.md`
 
 **Deliver to:** Javier (COMMS summary) + Claude (reads via GitHub, integrates if needed)
+
+## TASK-105
+- assigned_to: claude
+- status: pending
+- priority: high
+- trigger: manual
+- created: 2026-07-15 by Claude (per Javier)
+- context: 8 raw Marcus threads (djinn-vault) with genuinely personal content — AA/recovery disclosure, a raw "Wounded Healer and The Fool" relationship/promiscuity self-analysis thread, and (found on a second, broader pass using the new djinn-clerk sensitivity filter, not the initial manual grep) a thread discussing a partner's active addiction and an "I love you" exchange — were sitting in ai/marcus/threads/, which is publicly tracked (not gitignored like RAW/ and personal/). Removed from current tracking 2026-07-15 (commits aba1ee01 + follow-up), content preserved at RAW/marcus-personal-recovered/ (gitignored). Full git history purge intentionally deferred — other background jobs had active worktree branches at the time, and a filter-repo history rewrite mid-session risks breaking their in-progress work far worse than a normal push conflict would. Same deferral pattern as TASK-103 (dead OctoPrint key), but higher priority — this is live personal content, not a dead credential. Root cause fixed going forward: djinn-clerk (~/.local/bin, not git-tracked) now runs a content-sensitivity filter before routing any perplexity-pro thread to the public ai/marcus/threads/ path — flagged threads go to personal/marcus-threads/ (gitignored) instead. Filter combines a keyword list (recovery, therapy, mental health, relationship terms) with names dynamically loaded from personal/people/relationship-map.md, so it stays current without code edits. Before re-running djinn-clerk over any backlog, double-check whether more than these 8 files need the same treatment — this filter is new and wasn't in place when the original 59 threads were written.
+
+**Brief:** Do this as a deliberate off-hours pass when no other background jobs/worktrees are active: `git worktree list` should show only the main checkout. Pause `vault-sync.timer` on Salomon first (`systemctl --user stop vault-sync.timer`). Run `git filter-repo --path <each of the 6 filenames below> --invert-paths` (scoped path removal should be much faster than the earlier --replace-text run that timed out on this 394MB repo — this targets specific file paths, not a full-content text scan). Files:
+  - ai/marcus/threads/2026-06-01_marcus-og.md
+  - ai/marcus/threads/pplx_1f4c8eb0-5172-4725-bbc7-4dac61542052.md
+  - ai/marcus/threads/2026-06-01_so-marcus-you-there.md
+  - ai/marcus/threads/2026-06-01_so-marcus-you-there-ou_there.md
+  - ai/marcus/threads/pplx_c9de8f2c-6946-4a5e-868d-83765376984b.md
+  - ai/marcus/threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md
+  - ai/marcus/threads/2026-06-01_you-are-marcus-read-this-httpsgithubcomdrmanzodjinn-vault.md
+  - ai/marcus/threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md
+
+Verify with `git fsck --full` before force-pushing. Force-push, then restart `vault-sync.timer`. Other machines with existing clones (Oroborus, Typhon, any worktrees) will need `git fetch && git reset --hard origin/main` afterward, not a fresh clone (would lose gitignored local-only content).
+
+**Input:** [[2026-07-15_bug-djinn-clerk-s-marcus-dir-hardcoded-to-dead-pre-restructure-path-would-have-silently-misfiled-real-marcus-threads]]
