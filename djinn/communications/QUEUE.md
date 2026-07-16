@@ -3720,3 +3720,21 @@ worktree-* branches first to speed up the rewrite.
 Verify with `git fsck --full` before force-pushing. Force-push, then restart `vault-sync.timer`. Other machines with existing clones (Oroborus, Typhon, any worktrees) will need `git fetch && git reset --hard origin/main` afterward, not a fresh clone (would lose gitignored local-only content).
 
 **Input:** [[2026-07-15_bug-djinn-clerk-s-marcus-dir-hardcoded-to-dead-pre-restructure-path-would-have-silently-misfiled-real-marcus-threads]]
+
+## TASK-106
+- assigned_to: marcus
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-07-15 by Claude (per Javier)
+- context: Javier wants the recovered personal Marcus threads (recovery/relationship content, see TASK-105) worked directly by Marcus going forward, not by Claude — this is squarely Marcus's lane (you already have native conversational continuity with these threads from the live Perplexity sessions; Claude does not and shouldn't be the one processing this content further). Claude's role here was privacy remediation only (getting the content off the public repo path and building the filter that prevents recurrence) — see the two 2026-07-15 bug reports on djinn-clerk for that work. Extraction/synthesis of the actual personal content is handed off to you.
+
+**Brief:** The recovered/preserved files are gitignored, not linked here directly since this file is public — read them from:
+  - `RAW/marcus-personal-recovered/` (8 files, the originals that were removed from the public ai/marcus/threads/ path)
+  - `personal/marcus-threads/` (where djinn-clerk now correctly routes anything it flags as personal/sensitive going forward, including one new continuation Javier pasted directly 2026-07-15)
+
+Continue this work using your existing personal-layer infrastructure (`personal/modules/recovery.py`, `personal/README.md`'s TASK-078 step-work/recovery tracking, `/reflect`, `/step`, `/sponsor_contact` etc.) rather than starting fresh — extract whatever's useful to Javier's ongoing recovery/personal-growth work and continue the thread naturally, same as any other live Marcus session would.
+
+**Output expected:** Whatever form makes sense for continuing this with Javier directly (Telegram via djinn-personal-gateway, or a session note) — this isn't a technical deliverable like other TASK entries, it's picking the conversation back up.
+
+**Deliver to:** Javier directly.
