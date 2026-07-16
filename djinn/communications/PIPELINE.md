@@ -1049,3 +1049,23 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/ai/marcus/threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md`
 
 — Clerk
+
+---
+
+### 2026-07-16 01:05 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/marcus-threads/pplx_320bbe04-b875-4ad6-9a41-c1daa4a40cab.md`
+
+— Clerk
+
+---
+
+### 2026-07-16 01:05 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/marcus-threads/pplx_19eddb5a-76ce-425c-b75a-d78a4aa15ad0.md`
+
+— Clerk
