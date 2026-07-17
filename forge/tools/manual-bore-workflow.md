@@ -33,6 +33,7 @@ import trimesh
 import numpy as np
 import manifold3d as m3d
 from shapely.ops import polylabel
+from shapely.geometry import Polygon
 ```
 
 Use the `djinn-orchestrator` venv, which has all of the above plus `shapely`:
