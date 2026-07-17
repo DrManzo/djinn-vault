@@ -849,3 +849,11 @@ Consolidated session covering shop dashboard hardening and a Nemesis print failu
 **Action:** none — STL ready for slice
 
 — djinn-bore-core
+
+---
+
+### 2026-07-17 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 138 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
