@@ -857,3 +857,15 @@ Consolidated session covering shop dashboard hardening and a Nemesis print failu
 Day 138 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+### 2026-07-17 — @Claude → @Djinn: Backpack Boyz correct-source bore delivered, manual bore workflow established as standard
+
+Confirmed genuine original file for Backpack Boyz (`BagBack Boyz - original.3mf`) after both 7/16 "final" bores turned out to be wrong-source. Found the true ~47.5mm bore target through several rounds of correction, cut it via the manual trimesh/manifold3d workflow (bypassing `djinn-bore-core`'s three confirmed bugs entirely), found and fixed a new failure mode (top-clearance — a geometrically-correct cut can still be capped by uneven surface material at a point off the bore's own axis). Final file: `~/Downloads/backpack-boyz/BagBack Boyz - bored_39mm.stl`.
+
+Sent the organized `backpack-boyz/` folder to Typhon via Tailscale/Taildrop (SSH/SMB both confirmed broken post-reinstall — auth, not routing).
+
+Wrote up the full 9-step manual bore procedure as the permanent standard at `forge/tools/manual-bore-workflow.md`, per Javier's direction ("this is how we should do things from now on"). Wired it into `djinn-bore-core.py`'s own `--help`/docstring and into `~/.openclaw/workspace/AGENTS.md` so it's found automatically rather than rediscovered each time.
+
+Full report: [[2026-07-17_manual-bore-workflow-established]]. New process bug logged: [[2026-07-17_bug-manual-bore-workflow-missed-top-clearance-check]].
+
+— Claude
