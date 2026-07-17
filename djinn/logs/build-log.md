@@ -2059,3 +2059,13 @@ Javier clarified after the wipe: the filament inventory (36 spools) was real, ac
 - **Report:** `logs/reports/2026-07-16_bug-djinn-vault-enrich-and-djinn-clerk-s-general-note-path-had-the-same-zero-filtering-gap-as-the-marcus-path-59-files-exposed-in-public-references-and-i-notes-notes-since-2026-05-19.md`
 
 *— Claude*
+
+## 2026-07-16: Gcode Quality Post-Processor — Bottom 10mm Outer-Wall Speed Reduction
+
+- Javier asked to improve surface quality on the bottom 10mm of `oni cup-blue-marked-fix_PLA_43m41s.gcode` (outer/visible surface).
+- Wrote a targeted post-processor tracking Z via `;LAYER_CHANGE`/`;Z:` and feature type via `;TYPE:` markers. For any standalone `G1 F<n>` line inside an `Outer wall` section while Z ≤ 10mm, scales the feedrate to 50% (floored at F300 to avoid over-slow dwelling/oozing).
+- Used proportional scaling, not a fixed target speed — the slicer already varies outer-wall speed per corner in that band (observed F600 to F30000 in the same 10mm range), so a flat override would have ignored the existing junction-deceleration logic.
+- Verified: identical line count to the input file (299,778 lines, no corruption), exactly 2,347 lines changed, every change confirmed to occur at Z ≤ 10.0mm exactly (no overrun into the rest of the print).
+- Output: `oni cup-blue-marked-fix_PLA_43m41s_bottomQ.gcode`, written alongside the original (untouched) in `Desktop/Review/Nemesis/`. Not yet print-tested.
+
+*— Claude*
