@@ -309,3 +309,14 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 **Why:** Typhon cleanup gives us clean storage infrastructure to build on. Marcus research defines what each suite (Law, Psyc, Cash) actually needs — features, depth, structure. Building without that means guessing and reworking. Research-first is always cheaper than rebuild-after.
 **Why:** Vault was 4.1 GB (98% binary blobs). vault-sync was rclone-copying 1.6 GB of model files every 15 min. ChromaDB was walking binary dirs. Every agent reading "the vault" was implicitly carrying gigabytes of irrelevant data.
 - **XY-only scaling for opening fix** — 1.45% XY scale chosen over isotropic because Z height (21mm) doesn't need changing. Opening grows from 41.4→42.0mm.
+
+## 2026-07-17: Marcus financial data — aggregate-only, no third-party credentials
+
+**Decision:** Raw financial source documents (bank/brokerage statements, tax lots, positions) stay local-only, gitignored, never committed to any git host. Only a redacted, no-account-number aggregate summary is committed to the git-tracked vault for Marcus to read.
+**Why:** Marcus's only read mechanism is an unauthenticated public `raw.githubusercontent.com` URL — anything committed there is genuinely public. This is a narrow, deliberate exception to the standing "Djinn gets read access to all personal domains except financial" rule (see the `**Decision:**` entry above it in this file) — aggregate-only, no raw data, no cloud AI ever sees an account number.
+
+**Decision:** A private GitHub repo (`djinn-fin`) created to hold raw unredacted docs was deleted the same session it was created.
+**Why:** Private repos aren't reachable by Marcus's unauthenticated access mechanism, so the repo added a fourth copy of sensitive data (on a third-party server) without accomplishing the stated goal of Marcus access. Once that mismatch was clear, Javier agreed to delete rather than keep unused exposure around.
+
+**Decision:** Declined to grant Perplexity/Marcus any GitHub write credentials (token, deploy key, or otherwise).
+**Why:** No supported integration exists for this. The only technical path — pasting a live PAT into the Perplexity chat — conflicts directly with the existing secrets rule (see [[feedback-secrets]]) and would give an external vendor a broad, hard-to-revoke credential reaching every private repo on the account, not just one.
