@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-14 21:58 UTC
+Generated: 2026-07-17 17:16 UTC
 Source file: art cup-cherry blossom-marked-fix.stl_PLA_44m30s.gcode
-Readings: 238
+Readings: 273
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 250°C | 70°C |
-| Mean | 240.1°C | 70.0°C |
-| Std dev | ±7.05°C | ±0.38°C |
-| Range | 142.4–251.8°C | 65.0–70.9°C |
+| Mean | 238.4°C | 69.2°C |
+| Std dev | ±9.60°C | ±2.94°C |
+| Range | 142.4–251.8°C | 30.5–70.9°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 238
 
 ## Anomalies
 - 
-hotend temp variance high: ±7.0°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±9.6°C (check nozzle_mcu cable)- bed temp variance high: ±2.9°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
