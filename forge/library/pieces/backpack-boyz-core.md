@@ -27,6 +27,26 @@ tags: [proxy-accessory, backpack-boyz, external, forge, core]
 
 Backpack Boyz branded proxy accessory core. Large organic form with straps and dangling charm elements at lower back corners. 447k verts / 894k faces — watertight. Support grid base added (1.2mm bars, 8mm spacing, 3mm tall) for bed adhesion without a solid slab base.
 
+**Correction, 2026-07-16:** the version referenced below under "Files" (`Backpack_Boyz_Core.stl` etc.) turned out to not exist anywhere anymore — the whole `~/printer-files/library/calliope/backpack-boyz/` path is gone (pre-migration path, never carried forward). The genuine original, provided directly by Javier, is a **much smaller piece** than this description implies: 42.9 × 43.8 × 50.0mm, 33.78 cm³, 897,668 faces (after removing 176 microscopic debris fragments left over from export — the real body was already watertight on its own).
+
+## Bore Location — Found by Cross-Section Scan, Confirmed by Javier
+
+The piece has a **free-standing cylindrical boss at the top** — not embedded in the solid mass, so `djinn-bore-core`'s standard wall-thickness safety check (designed for boring into bulk material) reads it as a false failure. Confirmed via Z-axis cross-section scan: cross-sectional area holds essentially constant (~418mm²) from **Z=37.5mm to Z=48.5mm** (an 11mm span), consistent with a true ~23mm-diameter cylinder — above Z=48.5 it necks into a small domed cap (113.7mm² at the very top, Z=49.5), which is what `--top-mode auto`'s "true center" detection kept incorrectly targeting instead of the real boss.
+
+**Correct bore command** (verified clean — no scale drift, watertight, sensible volume removed):
+
+```
+djinn-bore-core <clean_original.stl> \
+  --diameter 18.0 --depth 15.0 \
+  --top-mode manual --top-z 48.0 \
+  --target-height 50.0 --material pla \
+  --no-mark --output <out.stl>
+```
+
+Do **not** use `--top-mode auto` on this piece — it targets the wrong (dome-cap) location. Do **not** use `--strict` for the final run — the wall-thickness warning (1.7mm) is a legitimate false-positive for this free-standing-boss geometry, confirmed correct by Javier after reviewing the auto-detected location vs. the real cylinder. `--strict` is still worth using during *diagnosis* (it correctly refused two bad attempts before this one — see [[2026-07-16_shop-dashboard-hardening-nemesis-profile-fix]] region of build-log for the full diagnostic trail), just not on the final confirmed-correct run.
+
+Maker's mark must be applied as a **separate** `djinn-model-mark` call on a file whose name does *not* end in `_bored` — that tool has its own filename-heuristic bug, see [[2026-07-16_bug-djinn-model-mark-filename-heuristic-false-positive-skip]].
+
 ---
 
 ## Slicer Notes
