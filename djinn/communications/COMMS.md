@@ -33,41 +33,6 @@ Append-only. Newest at bottom. One substantive entry per agent per session.
 
 ---
 
-### 2026-06-17 18:59 UTC — @djinn-bore-core → @All: Bore complete
-
-**Source:** `Meshy_BB_clean.stl`
-**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
-**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
-**Top mode:** auto | **Engine:** manifold3d
-**Scale:** ✓ no rescale
-**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
-**Columns:** ✓ no column issues
-**Mark:** none
-**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
-**Action:** none — STL ready for slice
-
-— djinn-bore-core
-
----
-
-### 2026-06-17 19:00 UTC — @djinn-bore-core → @All: Bore complete
-
-**Source:** `Meshy_BB_clean.stl`
-**Output:** `/home/drmanzo/Downloads/Meshy_BB_clean_bored.stl`
-**Bore:** 39.0mm ⌀ × 44.6mm depth — top Z=105.0mm, center (124.9, 120.2)
-**Top mode:** auto | **Engine:** manifold3d
-**Scale:** ✓ no rescale
-**Wall:** ⚠  WARN 1.5mm — structurally marginal (< 3.0mm)
-**Columns:** ✓ no column issues
-**Mark:** none
-**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
-**Action:** none — STL ready for slice
-
-— djinn-bore-core
-[2026-06-17 12:00] [forge] Generated meshy_bb_clean imported → /home/drmanzo/Downloads/Meshy_BB_clean_bored.stl
-
----
-
 ### 2026-06-17 19:07 UTC — @djinn-bore-core → @All: Bore complete
 
 **Source:** `Meshy_BB_clean.stl`
