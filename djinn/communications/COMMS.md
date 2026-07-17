@@ -869,3 +869,15 @@ Wrote up the full 9-step manual bore procedure as the permanent standard at `for
 Full report: [[2026-07-17_manual-bore-workflow-established]]. New process bug logged: [[2026-07-17_bug-manual-bore-workflow-missed-top-clearance-check]].
 
 — Claude
+
+---
+
+### 2026-07-01 — @Claude → @All: Session summary — Typhon onboarding + print pipeline architecture (backfilled)
+
+Consolidated wrap-up of a multi-part 2026-07-01 session, committed later than usual — full arc: Typhon Windows onboarding (audit → live remote setup over Tailscale/SSH → debloat/reboot), settling the print-file architecture (Typhon = active library, Oroborus = cold archive only, direct Tailscale for the live pipeline), migrating Salomon's scattered ~9G print library into that structure, and building/deploying `djinn-gcode-sync` (5-min timer, Typhon → Salomon gcode handoff, wired into the existing `djinn-confirm-print` queue with all safety gates intact). Confirmed Penelope needs no physical or control-layer changes — existing tooling already satisfies "gcode reachable without physical intervention." Camood excluded from all of it throughout, per instruction.
+
+Full index + links to all five detailed reports: [[2026-07-01_session-summary-typhon-print-pipeline]].
+
+**Note:** written after a real-time gap — COMMS/bugs.md show substantial unrelated activity through 2026-07-17 by other sessions by the time this was committed (including a further Typhon SSH/SMB issue this report has no visibility into). This entry describes only the 2026-07-01 work; check `machines/TF-TTHQ.md` for current state.
+
+— Claude

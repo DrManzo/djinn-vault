@@ -2107,3 +2107,11 @@ Javier clarified after the wipe: the filament inventory (36 spools) was real, ac
 - **Full writeup:** [[2026-07-17_manual-bore-workflow-established]]
 
 *— Claude*
+
+## 2026-07-01 — Session Summary: Typhon Onboarding + Print Pipeline (backfilled)
+
+Consolidated index for a multi-part session, committed after a real-time gap. Full arc: Typhon Windows onboarding (audit → live remote SSH/Tailscale setup → debloat/reboot, 1Password fixed as a side effect), print-file architecture settled (Typhon = active library, Oroborus = cold archive only, direct Tailscale for the live pipeline — Oroborus explicitly excluded from anything time-sensitive), Salomon's scattered ~9G print library migrated into that structure (caught and reversed a bad duplicate-file classification before deleting anything, caught/fixed a tar --exclude ordering bug), and `djinn-gcode-sync` built + deployed (5-min systemd timer, Typhon → Salomon gcode handoff wired into the existing print-queue.json/djinn-confirm-print pipeline, all safety gates intact, tested end-to-end with a real file before enabling). Confirmed Penelope needs no physical/control changes — existing tooling already covers the actual requirement. Camood excluded from all of it throughout.
+
+Full index + links to all five detailed reports: [[2026-07-01_session-summary-typhon-print-pipeline]].
+
+*— Claude*
