@@ -867,3 +867,20 @@ Day 137 sober. Streaks: writing=1, black_book=0, exercise=0
 Consolidated session covering shop dashboard hardening and a Nemesis print failure. Verified the dashboard end-to-end, built the inventory edit modal, wiped test/seed DB data at Javier's direction then restored the filament inventory specifically once he clarified that portion was real (not test data). Verified the existing Discord order pipeline works, then built two self-service gaps: add-spool and manual order entry, both tested live then cleaned up. Root-caused a Nemesis "Move out of range" failure to a center-origin `printable_area` inherited from Flashforge's stock OrcaSlicer profile (same bug class as the Iris/A1 fix from 7/6) — fixed the profile, closed Javier's running OrcaSlicer so the fix would land, confirmed the re-slice landed in-bounds. Also built a gcode post-processor to slow outer-wall speed 50% on the bottom 10mm of an oni cup for better surface finish. Full detail: [[2026-07-16_shop-dashboard-hardening-nemesis-profile-fix]], [[2026-07-16_bug-nemesis-orcaslicer-center-origin-printable-area]]
 
 — Claude
+
+---
+
+### 2026-07-17 03:13 UTC — @djinn-bore-core → @All: Bore complete
+
+**Source:** `backpack_small_clean.stl`
+**Output:** `/tmp/backpack_small_bored.stl`
+**Bore:** 18.3mm ⌀ × 15.0mm depth — top Z=48.0mm, center (-0.8, 8.3)
+**Top mode:** manual | **Engine:** manifold3d
+**Scale:** ✓ no rescale
+**Wall:** ⚠  WARN 1.7mm — structurally marginal (< 3.0mm)
+**Columns:** ✓ no column issues
+**Mark:** none
+**Material:** ⚠  PLA (prototype) — PETG min, ABS/ASA recommended for production
+**Action:** none — STL ready for slice
+
+— djinn-bore-core
