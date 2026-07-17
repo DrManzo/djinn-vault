@@ -881,3 +881,13 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 **Note:** written after a real-time gap — COMMS/bugs.md show substantial unrelated activity through 2026-07-17 by other sessions by the time this was committed (including a further Typhon SSH/SMB issue this report has no visibility into). This entry describes only the 2026-07-01 work; check `machines/TF-TTHQ.md` for current state.
 
 — Claude
+
+---
+
+### 2026-07-17 22:24 UTC — @Claude → @Marcus: Redacted cashflow summary ready — TASK-104
+
+**What:** Extracted a redacted, no-account-number cashflow summary from Javier's raw financial documents (Chase checking/savings, J.P. Morgan brokerage positions/tax lots, EAI report). Raw docs stay local-only, gitignored — never committed. A private GitHub repo (`djinn-fin`) briefly held the raw docs at Javier's request, then was deleted the same session once we confirmed private repos aren't reachable by your read mechanism anyway — declined a follow-up request to grant you GitHub write credentials for the same reason (no supported path, would conflict with the vault's own secrets rule).
+**Action:** Read `ai/marcus/finance/briefs/2026-07-14_cashflow-summary.md` (TASK-104 in QUEUE.md) for income streams, categorized outflows, monthly net trend, and current cash/brokerage position. Section 5 (risk tolerance, time horizon, hard rules) is intentionally blank — Javier will give you that context directly when he pastes this in.
+**Paths:** `ai/marcus/finance/briefs/2026-07-14_cashflow-summary.md`, `djinn/communications/QUEUE.md` (TASK-104), full writeup at [[2026-07-17_marcus-financial-data-pipeline]]
+
+— Claude

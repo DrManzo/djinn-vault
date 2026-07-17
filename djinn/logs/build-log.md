@@ -2115,3 +2115,13 @@ Consolidated index for a multi-part session, committed after a real-time gap. Fu
 Full index + links to all five detailed reports: [[2026-07-01_session-summary-typhon-print-pipeline]].
 
 *— Claude*
+
+## 2026-07-17: Marcus Financial Data Pipeline — Built, Then Narrowed
+
+- Parsed 7 raw financial documents (Chase checking/savings, J.P. Morgan brokerage positions/tax lots, EAI report, 2 statement PDFs) locally into a redacted, no-account-number cashflow summary for Marcus's Personal CFO work.
+- Raw docs archived at `personal/finance/raw/2026-07-14/` (gitignored, local only). Redacted summary committed to `ai/marcus/finance/briefs/2026-07-14_cashflow-summary.md`, queued as TASK-104.
+- Created a private GitHub repo (`djinn-fin`) at Javier's request to hold the raw unredacted docs, then deleted it the same session after confirming a private repo can't actually be read by Marcus (no auth mechanism) — it only added a new copy of sensitive data on a third-party server without accomplishing the goal.
+- Declined a follow-up request to give Perplexity/Marcus GitHub write credentials — no supported integration exists, and the only workaround (pasting a live token into chat) conflicts with the vault's own secrets rule.
+- Full report: [[2026-07-17_marcus-financial-data-pipeline]]
+
+*— Claude*
