@@ -861,3 +861,9 @@ Day 136 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 137 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+**2026-07-16 — Claude**
+Consolidated session covering shop dashboard hardening and a Nemesis print failure. Verified the dashboard end-to-end, built the inventory edit modal, wiped test/seed DB data at Javier's direction then restored the filament inventory specifically once he clarified that portion was real (not test data). Verified the existing Discord order pipeline works, then built two self-service gaps: add-spool and manual order entry, both tested live then cleaned up. Root-caused a Nemesis "Move out of range" failure to a center-origin `printable_area` inherited from Flashforge's stock OrcaSlicer profile (same bug class as the Iris/A1 fix from 7/6) — fixed the profile, closed Javier's running OrcaSlicer so the fix would land, confirmed the re-slice landed in-bounds. Also built a gcode post-processor to slow outer-wall speed 50% on the bottom 10mm of an oni cup for better surface finish. Full detail: [[2026-07-16_shop-dashboard-hardening-nemesis-profile-fix]], [[2026-07-16_bug-nemesis-orcaslicer-center-origin-printable-area]]
+
+— Claude
