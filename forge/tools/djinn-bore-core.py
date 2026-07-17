@@ -14,6 +14,28 @@ Defaults (caliper-verified):
 
 Usage:
   djinn-bore-core <input.stl> [options]
+
+*** KNOWN-BAD ON IRREGULAR / ASYMMETRIC GEOMETRY — READ BEFORE USE ***
+Three confirmed, unpatched defects as of 2026-07-16 (source not fixed, only
+worked around at the call site each time):
+  1. Silent auto-scale corruption — two independent internal triggers can
+     rescale the WHOLE mesh with no warning (up to 10.5x seen). --target-height
+     only pins one of the two; the other has no override at all.
+  2. --top-mode auto's "true center" detection can target the wrong feature
+     entirely on irregular geometry (e.g. a decorative cap instead of the
+     real mounting boss).
+  3. --top-mode manual's own X/Y auto-centering can be off by 15mm+ from the
+     true optimal center, with no CLI flag to override X/Y directly.
+See bug reports: [[2026-07-14_bug-djinn-bore-core-has-two-independent-silent-auto-scale-triggers-...]],
+[[2026-07-16_bug-djinn-bore-core-manual-mode-xy-centering-off-by-15mm]].
+
+For any real piece (not a known-simple test cylinder), do NOT trust this
+tool's own target/center selection. Follow the manual workflow instead —
+full 9-step procedure with code at:
+  forge/tools/manual-bore-workflow.md
+This tool's manifold3d boolean-cutting engine is still fine to use directly
+(Step 5 of that doc) — only its own targeting/centering/scaling logic is not
+trustworthy on anything but simple, symmetric test geometry.
 """
 
 import argparse
@@ -683,7 +705,16 @@ def append_comms(input_path, output_path, diameter, depth,
 def main():
     parser = argparse.ArgumentParser(
         prog="djinn-bore-core",
-        description="Bore a proxy core seat into the top of an STL object."
+        description="Bore a proxy core seat into the top of an STL object.",
+        epilog=(
+            "WARNING: on irregular/asymmetric geometry, this tool's own auto/manual "
+            "targeting and centering has confirmed bugs (off by 15mm+, wrong-feature "
+            "detection, silent auto-scale). For any real piece, use the manual workflow "
+            "in forge/tools/manual-bore-workflow.md instead of trusting --top-mode auto/manual "
+            "as-is — this tool's manifold3d cutting engine is fine to call directly, just not "
+            "its own target/center selection. See module docstring for details."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("input",
                         help="Path to input STL")
