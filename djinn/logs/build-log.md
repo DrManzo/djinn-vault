@@ -6,6 +6,13 @@ created: 2026-05-19
 
 # Build Log
 
+## 2026-07-16: Master's thesis papers expanded — 3 skeleton → draft-in-progress
+- Paper 01 (The Drunk Who Built Djinn): full autoethnography methodology, 3-phase narrative structure with [INSERT] markers, Extended Mind + SDT analysis
+- Paper 02 (Cognitive Externalization and the Vault): parity principle applied to 5 vault features, Hutchins + Sweller frameworks, counter-argument section
+- Paper 03 (Identity Scaffolding and the Agent Lane): Goffman dramaturgical model, McAdams narrative identity, Campbell self-concept clarity applied to agent lane architecture
+- Step 6 AA work continued — Defect 3 confirmed ready; defects 1/2/4/5/6/7 pending next session
+- Full Freud/Jung/Peterson analysis conducted from vault sources
+
 ## 2026-06-27: Pyraxis grammar and flow pass complete — all 4 drafts
 - 57 total fixes: Prologue (9), Ch1 (6), Ch2 (9), Ch3 (33)
 - Verantus three-point arc documented in CONTINUITY.md

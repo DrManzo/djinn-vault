@@ -7,6 +7,19 @@ Record of architectural and technical decisions made during Djinn builds.
 
 ---
 
+## 2026-07-16 — Master's thesis: three-paper architecture confirmed, Paper 03 to journal first
+
+**Decision:** Confirm three-paper architecture for master's thesis (Papers 01/02/03). Submit Paper 03 to peer-reviewed journal first.
+
+**Context:** Papers are being developed in parallel toward both publication and master's with distinction. Paper 03 (Identity Scaffolding and the Agent Lane) contains the most novel argument — Goffman's dramaturgical model applied to named AI agent roles has no prior literature. Papers 01 and 02 enter established debates (autoethnography, extended mind theory) where the contribution is application rather than opening new territory.
+
+**Options considered:**
+1. Paper 02 first — extends an established, well-cited debate (Clark & Chalmers) — risk: expert reviewers, well-mapped territory
+2. Paper 03 first — genuinely novel argument, no direct prior literature — ✅ chosen: highest originality premium
+3. Paper 01 first — compelling human story but autoethnography journals have longer review cycles — defer until personal narrative [INSERT] sections are complete
+
+---
+
 ## 2026-07-03 — Bambu Studio over OrcaSlicer for Iris multi-color
 
 **Decision:** Use Bambu Studio as the primary slicer for Iris bambufy prints. OrcaSlicer profiles shipped as backup.
