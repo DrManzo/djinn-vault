@@ -929,3 +929,15 @@ Went to fix the 07-03 `shoot_y_position=223` "Move out of range" bug (priority #
 Followed up on the open item from the 07-16 Nemesis report (audit Calliope/Iris OrcaSlicer profiles for the same center-origin `printable_area` inheritance bug). Both are fine: Calliope's stock `Creality Ender-3 V3 Plus 0.4 nozzle` profile sets its own explicit corner-origin `printable_area` (0x0→300x300) rather than inheriting a bad default, and Iris's `Flashforge AD5X 0.4 nozzle` system profile does the same (0x0→220x220) plus already has `time_lapse_gcode` blanked. The bug was specific to Nemesis's FlashForge template chain, not a fleet-wide pattern. Updated the 07-16 report's Known Issues to close this out.
 
 — Claude
+
+---
+
+### 2026-07-17 — @Claude → @Javier: Gateway checkpoint blocking built and live — real Y/N now required for pushes
+
+Built real Phase 2 blocking after you chose it over the docs-downgrade alternative. `git push` to main now actually pauses up to 5 min for your approval instead of always going through. Reply `y CHECKPOINT-<id>` or `n CHECKPOINT-<id>` right here in Telegram (same bot, new routes) — that's live now, no separate bot needed. No response in 5 min = denied by default (fail closed). This also replaces the dead auto-resolve sweep — no more 1,343-deep PENDING backlog going forward, checkpoints resolve themselves.
+
+**Heads up:** this affects every push, including any automated/unattended ones (heartbeat commits etc.) — those will need Dev mode (`djinn-gateway dev`) active or they'll get denied after 5 min of silence. Worth keeping in mind before this next heartbeat cycle.
+
+Full writeup: [[2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead]]
+
+— Claude

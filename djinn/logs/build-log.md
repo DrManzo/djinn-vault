@@ -2148,3 +2148,12 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-07-03_bug-bambufy-shoot-y-position-out-of-range.md`
 
 *— Claude*
+
+## 2026-07-17: BUG FIXED — Gateway Tier 3 Checkpoint Now Actually Blocks (real approve/deny wired to Telegram)
+- **System:** djinn-gateway, djinn-telegram-gateway, pre-push hook
+- **Severity:** high | **Status:** fixed
+- **What changed:** `cmd_checkpoint()` now writes state to `~/.config/djinn/checkpoints/{id}.json` and blocks/polls up to 5 min instead of exiting immediately. New `djinn-gateway approve/deny <id>` commands, wired to new `y/n CHECKPOINT-...` Telegram routes on the already-running `djinn-telegram-gateway` bot. Pre-push hook now respects the checkpoint's exit code and actually fails the push on deny/timeout, instead of discarding it with `|| true; exit 0`. This replaces the dead auto-resolve sweep entirely — each checkpoint resolves its own lifecycle now.
+- **Tradeoff (Javier's call, made explicitly before build):** automated/unattended pushes need Dev mode active or they'll fail closed after 5 min with no response.
+- **Report:** `logs/reports/2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead.md`
+
+*— Claude*
