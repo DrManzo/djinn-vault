@@ -1,0 +1,16 @@
+{
+  "filename": "yellow+block+cup_marked.stl_PLA_2h22m41s.gcode",
+  "model_name": "yellow+block+cup_marked.stl_PLA_2h22m41s",
+  "order_id": "yellow+block+cup_marked.stl_PLA_2h22m41s",
+  "material": "",
+  "color": "",
+  "started_at": "2026-07-18T19:08:10.047621+00:00",
+  "completed_at": "2026-07-18T21:25:55.722241+00:00",
+  "duration_s": 8345.4,
+  "duration_min": 139.1,
+  "filament_mm": 21282.6,
+  "filament_grams": 63.48,
+  "outcome": "complete",
+  "max_progress_pct": 0.0,
+  "max_z_mm": 0.0
+}
