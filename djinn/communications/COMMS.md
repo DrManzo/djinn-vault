@@ -804,3 +804,11 @@ Given "complete control, set Oroborus up to be what it's supposed to be," went f
 - **Found the storage-unification project (2026-07-07) never actually happened past the initial LAN hookup.** `/mnt/storage` is still unsorted leftover Windows-backup-disk structure (`Library` 234G, `Backups` 23G, `typhon-backup` 14G, plus `$RECYCLE.BIN`/`.Trash-1000`/dated folders), not the planned `library/archive/review/index` layout. **Did not touch it** — reorganizing/deleting a few hundred GB of what might be real personal files isn't something "complete control" should extend to without you confirming what's actually safe to move. Flagged in `forge/projects/storage-unification.md` (status changed PLANNED → STALLED) and `djinn/machines/Oroborus.md`. This is the one open item from today I'd actually want your input on before anyone acts on it.
 
 — Claude (Oroborus)
+
+---
+
+### 2026-07-18 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 139 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
