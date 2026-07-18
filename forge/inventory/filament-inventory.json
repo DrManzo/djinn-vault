@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-07-14",
-  "updated_by": "dashboard",
+  "last_updated": "2026-07-17",
+  "updated_by": "Claude — manual reconciliation: Calliope yellow block cup deduction, Iris physical weigh-in (Javier, 2026-07-17: 4 IFS slots — 300g/200g white PETG, 500g red PLA, 1 empty)",
   "spools": [
     {
       "spool_id": "SPOOL-001",
@@ -8,13 +8,13 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 900,
+      "remaining_g": 300,
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 active. 2x white PETG ~1.5kg combined, spool A",
+      "notes": "Iris \u2014 IFS slot, spool A. Physical weigh-in 2026-07-17 (Javier): ~300g. Supersedes the same-day telemetry-based estimate (468g) and the earlier stale dashboard figure (900g) \u2014 both undercounted actual usage. IFS holds up to 4 spools simultaneously; Iris routes between them per job, so this isn't a single 'active' spool in the old loaded/staged sense.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-14"
+      "last_used": "2026-07-17"
     },
     {
       "spool_id": "SPOOL-002",
@@ -22,13 +22,13 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 600,
+      "remaining_g": 200,
       "loaded_printer": "Iris",
-      "loaded": false,
+      "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 staged. 2x white PETG ~1.5kg combined, spool B",
+      "notes": "Iris \u2014 IFS slot, spool B. Physical weigh-in 2026-07-17 (Javier): ~200g, superseding the stale 600g dashboard figure.",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": "2026-07-17"
     },
     {
       "spool_id": "SPOOL-003",
@@ -36,13 +36,13 @@
       "color": "Red",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 800,
+      "remaining_g": 500,
       "loaded_printer": "Iris",
-      "loaded": false,
+      "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 staged",
+      "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure.",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": "2026-07-17"
     },
     {
       "spool_id": "SPOOL-004",
@@ -50,13 +50,13 @@
       "color": "Yellow",
       "brand": "3D Soultech",
       "initial_weight_g": 1000,
-      "remaining_g": 987.52,
+      "remaining_g": 955.82,
       "loaded_printer": "Calliope",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Calliope \u2014 active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report).",
+      "notes": "Calliope \u2014 active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report). Yellow block cup (PLA_1h12m40s), 31.70g, printed clean 2026-07-17.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-14"
+      "last_used": "2026-07-17"
     },
     {
       "spool_id": "SPOOL-005",
@@ -190,13 +190,13 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 600,
+      "remaining_g": 0,
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "Swapped out of Calliope 2026-07-14 for SPOOL-004 (PLA Yellow, Cherry Blossom cup job). Used for camood-v2 (1x completed job + 1x crashed job, ~95g combined per gcode extrusion estimate); ~600g per Javier's physical check 2026-07-12.",
+      "notes": "Swapped out of Calliope 2026-07-14 for SPOOL-004 (PLA Yellow, Cherry Blossom cup job). Used for camood-v2 (1x completed job + 1x crashed job, ~95g combined per gcode extrusion estimate); ~600g per Javier's physical check 2026-07-12. Moved to Iris's IFS 4th slot afterward, fully used up, and removed from the printer — per Javier 2026-07-17. This is why Iris's 4th IFS slot is now empty. Spool depleted, no longer physically present.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-12"
+      "last_used": "2026-07-17"
     },
     {
       "spool_id": "SPOOL-015",
@@ -509,9 +509,8 @@
   ],
   "printers": {
     "Iris": {
-      "loaded_spool": "SPOOL-001",
-      "material": "PETG",
-      "color": "White"
+      "loaded_spools": ["SPOOL-001", "SPOOL-002", "SPOOL-003"],
+      "note": "IFS 4-slot system — 3 slots loaded (2x PETG White, 1x PLA Red), 1 slot empty. Iris routes between loaded spools per job; no single 'the' loaded spool."
     },
     "Nemesis": {
       "loaded_spool": "SPOOL-016",
