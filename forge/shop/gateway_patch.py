@@ -25,7 +25,7 @@ MARKER      = "# SHOP_PATCH_APPLIED"
 DISCORD_IMPORTS = '''
 # SHOP_PATCH_APPLIED
 import pathlib as _pl
-_PRINTER_SHOP = _pl.Path.home() / "Obsidian/djinn/printer"
+_PRINTER_SHOP = _pl.Path.home() / "Obsidian/forge"
 if str(_PRINTER_SHOP) not in sys.path:
     sys.path.insert(0, str(_PRINTER_SHOP))
 
@@ -199,7 +199,7 @@ DISCORD_ON_MESSAGE_PATCH = '''\
 TELEGRAM_IMPORTS = '''
 # SHOP_PATCH_APPLIED
 import pathlib as _pl
-_PRINTER_SHOP = _pl.Path.home() / "Obsidian/djinn/printer"
+_PRINTER_SHOP = _pl.Path.home() / "Obsidian/forge"
 if str(_PRINTER_SHOP) not in sys.path:
     sys.path.insert(0, str(_PRINTER_SHOP))
 

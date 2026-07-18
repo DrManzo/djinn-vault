@@ -41,6 +41,12 @@ from shop.accounting import (
     get_customer_ledger, dashboard_summary,
     export_csv, export_xlsx, create_invoice,
 )
+from shop.inventory import (
+    load_inventory as _load_inventory,
+    save_inventory as _save_inventory,
+    mark_physical_check, reweigh_due,
+)
+from shop import hound as _hound
 
 # ── config ─────────────────────────────────────────────────────────────────────
 DASHBOARD_PASSWORD = os.environ.get("DJINN_DASH_PASSWORD", "typhonsforge")
@@ -48,7 +54,6 @@ SECRET_KEY         = os.environ.get("DJINN_SECRET_KEY",    "change-me-at-setup")
 PORT               = int(os.environ.get("FLASK_PORT", 8420))
 
 REGISTRY_PATH   = pathlib.Path.home() / ".config/forge/fleet-registry.json"
-INVENTORY_PATH  = pathlib.Path.home() / "Obsidian/forge/inventory/filament-inventory.json"
 FETCH_TIMEOUT   = 3
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -193,7 +198,11 @@ def fetch_all():
         }
         for fut in as_completed(futures):
             try:
-                results.append(fut.result())
+                r = fut.result()
+                hs = _hound.status(r["id"])
+                r["hound_active"] = hs.get("active", False)
+                r["hound_watching"] = hs.get("watching")
+                results.append(r)
             except Exception:
                 p = futures[fut]
                 results.append({**p, "reachable": False, "state": "error",
@@ -202,17 +211,6 @@ def fetch_all():
     order = {p["id"]: i for i, p in enumerate(printers)}
     results.sort(key=lambda r: order.get(r["id"], 999))
     return results
-
-
-# ── filament inventory helpers ─────────────────────────────────────────────────
-def _load_inventory():
-    try:
-        return json.loads(INVENTORY_PATH.read_text())
-    except Exception:
-        return {"spools": [], "printers": {}}
-
-def _save_inventory(data: dict):
-    INVENTORY_PATH.write_text(json.dumps(data, indent=2))
 
 
 # ── helpers ────────────────────────────────────────────────────────────────────
@@ -260,6 +258,15 @@ def api_status():
     return jsonify(fetch_all())
 
 
+@app.route("/api/hound/<printer_id>", methods=["POST"])
+@_require_login
+def api_hound_toggle(printer_id):
+    payload = request.get_json(force=True) or {}
+    active = bool(payload.get("active"))
+    entry = _hound.set_active(printer_id, active)
+    return jsonify({"ok": True, "printer_id": printer_id, **entry})
+
+
 # ── inventory API ──────────────────────────────────────────────────────────────
 @app.route("/api/inventory/<spool_id>", methods=["POST"])
 @_require_login
@@ -272,6 +279,9 @@ def api_inventory_update(spool_id):
             if "remaining_g" in payload:
                 try:
                     spool["remaining_g"] = max(0, int(payload["remaining_g"]))
+                    # A human typing a weight in here is a physical reweigh —
+                    # this is the ground-truth signal the auto-deduction can't provide.
+                    spool["last_physical_check"] = _today()
                 except (ValueError, TypeError):
                     return jsonify({"error": "invalid remaining_g"}), 400
             if "notes" in payload:
@@ -333,6 +343,7 @@ def api_inventory_add():
         "notes": str(payload.get("notes", ""))[:200],
         "added_at": _today(),
         "last_used": None,
+        "last_physical_check": _today(),
     }
     data.setdefault("spools", []).append(spool)
     data["last_updated"] = _today()
@@ -493,10 +504,16 @@ def inventory():
     # Low stock warning
     low_spools = [s for s in spools if s.get("remaining_g", 9999) <= s.get("low_threshold_g", 150)]
 
+    # Loaded spools that haven't been physically reweighed in a while —
+    # gcode-estimated deductions drift from reality over time (see 2026-07-17
+    # weigh-in vs. telemetry-estimate mismatch), so flag rather than trust forever.
+    due_spools = reweigh_due(spools)
+
     return render_template("inventory.html",
                            loaded_by_printer=loaded_by_printer,
                            unloaded=unloaded,
                            low_spools=low_spools,
+                           due_spools=due_spools,
                            all_spools=spools,
                            last_updated=data.get("last_updated", "—"),
                            active="inventory")

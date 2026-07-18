@@ -163,7 +163,7 @@ ALL gcode passes through `djinn-gcode-safety` which caps M106 fan speed to S128 
 **Primary materials:** PLA, PETG, TPU 95A  
 **Extruder:** Direct drive, IFS 4-color system (T1–T4)  
 **Enclosure:** Yes — DIY, passive (no active filtration)  
-**Firmware:** zmod 1.7.1-49 / Klipper / Moonraker @ 192.168.1.50:7125  
+**Firmware:** zmod 1.7.1-49 / Klipper / Moonraker @ 192.168.1.132:7125  
 **Slicer:** Bambu Studio (multi-color jobs) / OrcaSlicer (single-color)
 
 > **Support superpower:** Iris can use PLA as interface material on PETG parts (and vice versa) via IFS — dissimilar materials = supports that pop off clean. See [[SUPPORT-SETTINGS#Iris]].

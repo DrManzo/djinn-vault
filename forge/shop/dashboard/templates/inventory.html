@@ -19,6 +19,15 @@
 </div>
 {% endif %}
 
+{% if due_spools %}
+<div style="background:#0a1a2a;border:1px solid #10456a;border-radius:6px;padding:.75rem 1rem;margin-bottom:1.5rem;font-size:.84rem;color:#4098e0;">
+  <strong>Needs reweigh</strong> — gcode-estimated usage drifts from actual over time, these loaded spools haven't been physically checked recently:
+  {% for s in due_spools %}
+    {{ s.brand }} {{ s.color }} {{ s.material }} on {{ s.loaded_printer }} ({{ s.spool_id }}, last checked: {{ s.last_physical_check or 'never' }}){% if not loop.last %}, {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
 <!-- Loaded per printer -->
 {% if loaded_by_printer %}
 {% for printer_name, spools in loaded_by_printer.items() %}

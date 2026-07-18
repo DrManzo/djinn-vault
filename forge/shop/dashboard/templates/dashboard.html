@@ -49,6 +49,11 @@
   .p-bar-fill { height: 100%; background: #3fb950; transition: width .3s; }
   .p-file  { font-size: .76rem; color: var(--text-muted); word-break: break-all; margin-bottom: .4rem; }
   .p-temps { font-size: .76rem; color: var(--text-muted); }
+  .hound-row { display:flex; align-items:center; justify-content:space-between; margin-top:.6rem; padding-top:.5rem; border-top:1px solid var(--border); }
+  .hound-label { font-size:.72rem; color:var(--text-muted); display:flex; align-items:center; gap:.3rem; }
+  .hound-watching { color:#e0a040; }
+  .hound-btn { font-size:.7rem; padding:.2rem .5rem; border-radius:4px; border:1px solid var(--border); background:transparent; color:var(--text-muted); cursor:pointer; }
+  .hound-btn.on { background:#1a3a2a; border-color:#2f6a4a; color:#5fd88f; }
 </style>
 
 <script>
@@ -57,6 +62,18 @@ function dotCls(p) {
   if (p.state === 'printing') return 'printing';
   if (p.state === 'error' || p.state === 'cancelled') return 'error';
   return 'idle';
+}
+async function toggleHound(ev, printerId, current) {
+  ev.preventDefault();
+  ev.stopPropagation();
+  try {
+    await fetch(`/api/hound/${printerId}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({active: !current}),
+    });
+  } catch (e) {}
+  pollFleet();
 }
 function renderFleet(printers) {
   const grid = document.getElementById('fleet-grid');
@@ -76,6 +93,12 @@ function renderFleet(printers) {
       const bd = p.bed_temp != null ? p.bed_temp.toFixed(0) : '--';
       html += `<div class="p-temps">noz ${nz}°C · bed ${bd}°C</div>`;
     }
+    const houndOn = !!p.hound_active;
+    const watching = p.hound_watching;
+    html += `<div class="hound-row">`;
+    html += `<span class="hound-label">${watching ? '<span class="hound-watching">● watching</span>' : (houndOn ? 'hound on' : 'hound off')}</span>`;
+    html += `<button class="hound-btn ${houndOn ? 'on' : ''}" onclick="toggleHound(event, '${p.id}', ${houndOn})">${houndOn ? 'ON' : 'OFF'}</button>`;
+    html += `</div>`;
     html += '</a>';
     return html;
   }).join('');
