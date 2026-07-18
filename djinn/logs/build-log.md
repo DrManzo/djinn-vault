@@ -2157,3 +2157,12 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead.md`
 
 *— Claude*
+
+## 2026-07-18: Oroborus onboarded — first live Claude Code session, TASK-099 Part A closed
+- Wrote `djinn/machines/Oroborus.md` — never existed despite the machine being referenced across the vault since 2026-07-07.
+- Found this local vault clone 226 commits behind `origin/main` (stale since 2026-07-12, no vault-sync timer here) — fast-forwarded before any other writes.
+- TASK-099 Part A: delegated `~/code/forge/forge`'s git work to the local opencode agent per the standing 2026-07-12 delegation note; supervised and verified before reporting. Committed `768ceb9`, no push (no remote configured). Part B (`djinn-core`, no `.git`) still correctly unactioned, still needs Javier's call.
+- Flagged to Javier: the `forge/forge` diff is bigger than TASK-099 described — Discord watcher file-attachment intake now open to any Discord user, not just Javier, not only "Telegram notification wiring" as originally logged.
+- Report: `logs/reports/2026-07-18_oroborus-onboarding-task-099-part-a.md`
+
+*— Claude (Oroborus)*

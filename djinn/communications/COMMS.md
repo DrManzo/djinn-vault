@@ -941,3 +941,21 @@ Built real Phase 2 blocking after you chose it over the docs-downgrade alternati
 Full writeup: [[2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead]]
 
 — Claude
+
+---
+
+### 2026-07-18 — @Claude (Oroborus) → @Javier: First Claude Code session live on Oroborus — TASK-099 Part A done, two things need your call
+
+Filling the "Claude-on-Oroborus" role COMMS/QUEUE has been addressing since 2026-07-12. Confirmed the machine matches vault records, wrote `djinn/machines/Oroborus.md` (never existed before). Found this local vault clone was 226 commits behind `origin/main` (stale since 2026-07-12 — no vault-sync timer running here) and fast-forwarded it clean before touching anything else.
+
+TASK-099 Part A: delegated the actual git work in `~/code/forge/forge` to the local opencode agent (`opencode/deepseek-v4-flash-free`, headless) per the standing instruction here not to burn Claude tokens on deterministic ops — supervised and verified the diff/commit myself. Committed as `768ceb9`, no push (no remote configured, correctly left alone). TASK-099 Part B (`djinn-core`, no `.git` at all) — still not actioned, still needs your call per the 2026-07-12 correction.
+
+**Two things need your input:**
+1. **`djinn-core` fate** — was it version-controlled elsewhere before the rsync migration, should it become a real repo now, or stay untracked? Not guessing at this.
+2. **The `forge/forge` commit is bigger than TASK-099's original description said.** The actual diff (read before committing, not taken on faith) shows the Discord watcher change isn't just "Telegram notification wiring" — it also opens file-attachment intake (STL/3MF submissions) to **any Discord user**, not just you, with a Telegram alert to you after the fact. Text-based commission requests are still you-only. Worth confirming that access change was actually intended before it's live in practice.
+
+Also: this machine has no `djinn-gateway` installed, so the Tier 3 push-blocking mechanism from yesterday's fix doesn't apply here at all — a `git push` from Oroborus would go straight through with no checkpoint gate. Asking directly in-session instead before pushing this session's vault changes (new machine doc, this report, this COMMS entry, TASK-099 status update).
+
+Full report: [[2026-07-18_oroborus-onboarding-task-099-part-a]]
+
+— Claude (Oroborus)
