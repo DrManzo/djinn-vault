@@ -88,3 +88,19 @@ However, testing *that* token directly (`curl .../getMe`) also returns `401 Unau
 **Net effect:** the checkpoint *notification* may not currently reach Telegram. The checkpoint *blocking mechanism itself is unaffected* — `djinn-gateway approve <id>` / `deny <id>` work directly from any terminal with vault access regardless of Telegram's state, and that path was fully verified end-to-end (see Verification above). Until the bot token is sorted, resolving a checkpoint requires checking `CHECKPOINTS.md` directly rather than waiting for a Telegram ping.
 
 Not logged as a separate bugs.md entry — folding it into this report since it was found while fixing the same subsystem, but flagging clearly: **the Telegram side of this fix is unverified as working end-to-end** until the token issue is resolved.
+
+---
+
+## Follow-on issue: RESOLVED (2026-07-17, same session)
+
+Root cause was worse than a bad token source — it was three different, genuinely different bot tokens scattered across config files, with the wrong one wired into the live path:
+
+- `8988070511` (**djinn_production_bot**) — the real, correct bot. Matches the token seen in the pre-reboot service logs actually polling `getUpdates` (with transient network errors, not auth errors) — this is the bot Javier has actually been talking to.
+- `7962428973` — **invalid/revoked**, yet was sitting in `~/.djinn.env`, `~/.config/forge/shop.env` (symlinked from `~/.config/djinn/shop.env`), and `~/.config/djinn/telegram.conf`'s `DJINN_TG_TOKEN`/`BOT_TOKEN`. Root cause of why it looked "different each test" is unclear (possibly an old bot token from a deleted/regenerated bot, never cleaned out of these three files) — not investigated further since the fix is a clean swap.
+- `8828844013` (djinn_bughunter_bot) — valid, but a different bot entirely, correctly scoped to bug-hunting use, not this checkpoint flow.
+
+**Fix:** updated `DJINN_TG_TOKEN`/`BOT_TOKEN` in all three files (`~/.djinn.env`, `~/.config/forge/shop.env`, `~/.config/djinn/telegram.conf`) from `7962428973` to `8988070511` (djinn_production_bot) — the value `~/.config/djinn/ops-tg.env` had already correctly. Restarted `djinn-telegram-gateway.service`.
+
+**Verification:** `getMe` on the new token confirms `djinn_production_bot`. `djinn-gateway`'s own `_tg_send()` now returns `True` (was silently failing before). Full checkpoint lifecycle re-verified live end-to-end afterward.
+
+The Telegram side of this fix is now fully closed — both the blocking mechanism and its notification channel are confirmed working.
