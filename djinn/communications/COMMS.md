@@ -921,3 +921,11 @@ Diagnosed while reconciling filament inventory and pushing the update. `djinn-ga
 Went to fix the 07-03 `shoot_y_position=223` "Move out of range" bug (priority #1 from today's list) and found it wasn't actually broken — queried Iris's Moonraker API directly and `bambufy_shoot_y_position` is already 210, below even the 218 the original report suggested. Someone corrected it live on the printer at some point after 07-03 and it never got written back to bugs.md, so it sat "open" for two weeks despite being fine. Closed it properly now with a backfilled report. No action needed on your end — just flagging so the tracker matches reality going forward.
 
 — Claude
+
+---
+
+### 2026-07-17 — @Claude → @Javier: Calliope/Iris profile audit complete — both clean, no fix needed
+
+Followed up on the open item from the 07-16 Nemesis report (audit Calliope/Iris OrcaSlicer profiles for the same center-origin `printable_area` inheritance bug). Both are fine: Calliope's stock `Creality Ender-3 V3 Plus 0.4 nozzle` profile sets its own explicit corner-origin `printable_area` (0x0→300x300) rather than inheriting a bad default, and Iris's `Flashforge AD5X 0.4 nozzle` system profile does the same (0x0→220x220) plus already has `time_lapse_gcode` blanked. The bug was specific to Nemesis's FlashForge template chain, not a fleet-wide pattern. Updated the 07-16 report's Known Issues to close this out.
+
+— Claude
