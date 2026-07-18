@@ -19,6 +19,7 @@ Inter-machine operational state. Read before acting. Update when state changes.
 | Salomon | ✅ Online | 192.168.1.225 | `drmanzo` | 2026-05-23 |
 | Typhon | ⚠️ Onboarding incomplete (Windows reinstall) | 192.168.1.113 | — (fresh Windows box) | 2026-07-01 |
 | Claude | ✅ Online | — (API) | — | 2026-05-23 |
+| Oroborus | ✅ Online — storage node, code host, Claude Code live | 192.168.1.154 | `drmanzo` | 2026-07-18 |
 
 **Network:** Both machines on same subnet (192.168.1.x). SSH Salomon→Typhon is **broken** — Typhon was wiped to Windows ~2026-06-25 and repurposed as a shop machine (slicing/commissions/content/accounting); old ed25519 key auth no longer applies. Full status and onboarding checklist: [[machines/TF-TTHQ]].
 

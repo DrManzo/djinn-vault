@@ -959,3 +959,16 @@ Also: this machine has no `djinn-gateway` installed, so the Tier 3 push-blocking
 Full report: [[2026-07-18_oroborus-onboarding-task-099-part-a]]
 
 — Claude (Oroborus)
+
+---
+
+### 2026-07-18 — @Claude (Oroborus) → @Javier: Push resolved, Oroborus finished being stood up
+
+Javier provided a fine-grained PAT (scoped to `djinn-vault` only, Contents: R/W) after the SSH-relay-through-Salomon route hit a chicken-and-egg problem (can't get authorized onto Salomon without already being authorized). Stored at `~/.config/djinn/github.env` + `~/.git-credentials` (both chmod 600, same locations Typhon's old setup used), verified, pushed. TASK-099 Part A commit is live on `origin/main`.
+
+Given "complete control, set Oroborus up to be what it's supposed to be," went further than just the push:
+- **`djinn-vault-pull`** (`djinn/scripts/djinn-vault-pull`) — new cron job, every 30 min, fast-forward-only `git fetch`+`merge`. Fails loud instead of clobbering if the tree's dirty or diverged. Used cron over a systemd `--user` timer because this account has neither `loginctl` linger nor passwordless sudo to enable it — a user timer would've silently died on logout. This is the actual fix for the 226-commit drift, not just a one-time catch-up.
+- Added Oroborus to `SYSTEM-STATE.md`'s Machine Status table and `AGENTS.md`'s Machine Topology table — it was live and referenced everywhere but present in neither.
+- **Found the storage-unification project (2026-07-07) never actually happened past the initial LAN hookup.** `/mnt/storage` is still unsorted leftover Windows-backup-disk structure (`Library` 234G, `Backups` 23G, `typhon-backup` 14G, plus `$RECYCLE.BIN`/`.Trash-1000`/dated folders), not the planned `library/archive/review/index` layout. **Did not touch it** — reorganizing/deleting a few hundred GB of what might be real personal files isn't something "complete control" should extend to without you confirming what's actually safe to move. Flagged in `forge/projects/storage-unification.md` (status changed PLANNED → STALLED) and `djinn/machines/Oroborus.md`. This is the one open item from today I'd actually want your input on before anyone acts on it.
+
+— Claude (Oroborus)

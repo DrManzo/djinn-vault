@@ -2166,3 +2166,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Report: `logs/reports/2026-07-18_oroborus-onboarding-task-099-part-a.md`
 
 *— Claude (Oroborus)*
+
+## 2026-07-18: Oroborus fully stood up — GitHub auth, sync cron, machine registration
+- GitHub PAT configured (`~/.config/djinn/github.env` + `~/.git-credentials`, chmod 600) after an SSH-relay-through-Salomon attempt hit a chicken-and-egg wall. Pushed `c924c94e`.
+- New `djinn-vault-pull` cron job (every 30 min, ff-only) — the actual fix for the 226-commit drift, not just a one-time catch-up. No systemd `--user` timer used — no linger, no passwordless sudo.
+- Oroborus added to `SYSTEM-STATE.md` and `AGENTS.md` machine tables — existed everywhere else in the vault, listed nowhere that enumerates machines.
+- Audited `/mnt/storage` against `forge/projects/storage-unification.md`'s 2026-07-07 plan — reorg never happened, drive still has raw Windows-backup-disk leftovers. Marked project STALLED, did not touch the data (real personal files, not mine to move without Javier's say).
+
+*— Claude (Oroborus)*

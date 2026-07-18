@@ -55,7 +55,19 @@ Status of the two repos flagged in TASK-099 as of 2026-07-18:
 
 ## Vault
 
-`~/djinn-vault` (not `~/Obsidian` — path differs from the convention documented in `Claude.md`/`GATEWAY.md`, noting the discrepancy rather than renaming anything). Clean clone of `origin/main` as of 2026-07-18.
+`~/djinn-vault` (not `~/Obsidian` — path differs from the convention documented in `Claude.md`/`GATEWAY.md`, noting the discrepancy rather than renaming anything). Was 226 commits behind `origin/main` as of 2026-07-18 (no sync mechanism existed on this machine) — fast-forwarded, then fixed at the root with `djinn-vault-pull` below.
+
+**Auto-sync:** `djinn/scripts/djinn-vault-pull` (symlinked to `~/.local/bin/`) runs via user crontab every 30 min — `git fetch` + `git merge --ff-only`. Fails loud (non-zero exit, logs to `~/.local/share/djinn-vault-pull.log`) rather than clobbering anything if the tree is dirty or has diverged. Chose cron over a systemd `--user` timer because this account has no `loginctl` linger enabled and no passwordless sudo to turn it on — a user-session timer would silently stop working on logout; cron doesn't have that dependency.
+
+**GitHub push access:** Oroborus had zero GitHub auth configured (no `gh`, no stored credential, no PAT) — same starting state Typhon was in pre-onboarding. Fixed 2026-07-18: fine-grained PAT (Javier-provided, scoped to `djinn-vault` only, Contents: Read/write) stored at `~/.config/djinn/github.env` (chmod 600) and `~/.git-credentials` (chmod 600, `git config --global credential.helper store`) — same storage locations documented for Typhon's old Ubuntu setup. Verified working (`git ls-remote`, then a real push).
+
+---
+
+## Storage — `/mnt/storage` does not match the plan
+
+`forge/projects/storage-unification.md` (2026-07-07) laid out a clean `library/archive/review/index` structure for this drive. As of 2026-07-18, `/mnt/storage` still has none of that — it's leftover structure from a prior life as a Windows backup disk (`$RECYCLE.BIN`, `.Trash-1000`, `System Volume Information`, date-named folders like `Aprl - 24`/`May - 24`), plus `Library` (234G), `Backups` (23G), `typhon-backup` (14G), `forge` (664M), `Linux` (1.4G). The Phase 1-6 reorg was apparently never executed past the initial LAN hookup.
+
+**Not touched in this session** — moving or deleting several hundred GB of what may be real personal files isn't a call to make without Javier confirming what's actually safe to reorganize vs. what's precious. Flagged, not actioned.
 
 ---
 
