@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
-# djinn-vault-sync — mirror ~/Obsidian to Alexandria SSD
+# djinn-vault-sync — mirror the vault clone to Alexandria SSD
 # Usage: djinn-vault-sync [--snapshot]
 #   --snapshot  also save a dated copy in vault-snapshots/YYYY-MM-DD/
+#
+# Host-independent: Alexandria's mount point/device letter and the vault's
+# clone path both differ by machine (was /mnt/alexandria + ~/Obsidian on
+# Salomon; is /run/media/drmanzo/Alexandria + ~/djinn-vault on Oroborus,
+# since the drive physically moved 2026-07-18 without anyone updating this).
 
 set -euo pipefail
 
-SSD="/run/media/drmanzo/alexandria"
-VAULT="$HOME/Obsidian"
+SSD="/run/media/drmanzo/Alexandria"
+if [[ -d "$HOME/Obsidian" ]]; then
+    VAULT="$HOME/Obsidian"
+elif [[ -d "$HOME/djinn-vault" ]]; then
+    VAULT="$HOME/djinn-vault"
+else
+    echo "ERROR: no vault clone found at ~/Obsidian or ~/djinn-vault"
+    exit 1
+fi
 MIRROR="$SSD/vault-snapshots/current"
 SNAP_DIR="$SSD/vault-snapshots"
 
