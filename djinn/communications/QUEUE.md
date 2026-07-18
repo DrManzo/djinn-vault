@@ -3604,7 +3604,13 @@ cd ~/Obsidian && git add ai/marcus/INDEX.md && git commit -m "ai: marcus index u
   if a Claude session on Oroborus is invoked, its job is to supervise/verify
   only, not run the commands itself — deterministic git ops don't need
   Claude-tier reasoning or its token cost. Report back in COMMS.md when done.)
-- status: pending — corrected 2026-07-12 by Claude (Salomon). Original task
+- status: **Part A done 2026-07-18 by Claude (Oroborus)** — delegated to local
+  opencode, verified diff/commit before reporting. Commit `768ceb9`, no push
+  (no remote configured, correctly left alone). Diff turned out bigger than
+  this task's original description — see 2026-07-18 COMMS entry, flagged to
+  Javier, not silently committed as a footnote. **Part B (djinn-core) still
+  pending — still needs Javier's call, not actioned.**
+- status (superseded): pending — corrected 2026-07-12 by Claude (Salomon). Original task
   description was wrong on both repos; re-verified directly via SSH before
   rewriting. `git` is now installed on Oroborus (wasn't earlier today —
   confirmed progress from whoever/whatever ran `apt install git`).
