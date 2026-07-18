@@ -1,8 +1,15 @@
 """
 inventory.py — Filament inventory tracking for Djinn Shop.
 
-Tracks spools by material + color + brand. Deducts grams after each print.
-Surfaces availability for quotes and dashboard.
+Single source of truth: ~/Obsidian/forge/inventory/filament-inventory.json
+(the same file the shop dashboard's /inventory page reads and writes).
+
+Previously this module was backed by its own SQLite table (filament_inventory
+in shop.db), completely disconnected from the JSON file the dashboard actually
+uses — that table was never populated, so the Discord/Telegram `inventory`
+command always reported empty stock while the dashboard showed the real
+36-spool picture. Consolidated onto the JSON file 2026-07-18 so there's one
+inventory, not two silently diverging ones.
 
 Commands wired into Discord/Telegram by Salomon:
   add filament petg black 1000g $28    → log new spool
@@ -12,245 +19,249 @@ Commands wired into Discord/Telegram by Salomon:
 — Claude
 """
 
-import sys
+import re
 import json
 import datetime
 import pathlib
-
-_SHOP    = pathlib.Path(__file__).parent
-_PRINTER = _SHOP.parent
-for p in [str(_PRINTER), str(_SHOP)]:
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from shop.db import get_db, init_db
+import threading
 
 # ── Config ────────────────────────────────────────────────────────────────────
-LOW_STOCK_G   = 150    # warn when spool drops below this
-EMPTY_G       = 20     # treat as empty
+LOW_STOCK_G     = 150    # warn when spool drops below this
+EMPTY_G         = 20     # treat as empty
+REWEIGH_DAYS    = 14     # flag a loaded spool for physical reweigh after this long
 
-# ── Schema ────────────────────────────────────────────────────────────────────
-INVENTORY_SCHEMA = """
-CREATE TABLE IF NOT EXISTS filament_inventory (
-    id               INTEGER PRIMARY KEY AUTOINCREMENT,
-    material         TEXT    NOT NULL,
-    color            TEXT    NOT NULL DEFAULT 'natural',
-    brand            TEXT    DEFAULT 'generic',
-    spool_weight_g   REAL    NOT NULL DEFAULT 1000.0,
-    grams_remaining  REAL    NOT NULL,
-    cost_per_gram    REAL    NOT NULL DEFAULT 0.022,
-    added_at         TEXT    NOT NULL,
-    notes            TEXT,
-    active           INTEGER DEFAULT 1
-);
+INVENTORY_PATH = pathlib.Path.home() / "Obsidian/forge/inventory/filament-inventory.json"
+_LOCK = threading.Lock()
 
-CREATE TABLE IF NOT EXISTS filament_usage_log (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    spool_id    INTEGER NOT NULL,
-    order_id    TEXT,
-    grams_used  REAL    NOT NULL,
-    logged_at   TEXT    NOT NULL,
-    FOREIGN KEY (spool_id) REFERENCES filament_inventory(id)
-);
-"""
+
+def _today() -> str:
+    return datetime.date.today().isoformat()
+
+
+# ── Load / save (shared with dashboard app.py) ──────────────────────────────────
+def load_inventory() -> dict:
+    try:
+        return json.loads(INVENTORY_PATH.read_text())
+    except Exception:
+        return {"spools": [], "printers": {}}
+
+
+def save_inventory(data: dict):
+    with _LOCK:
+        INVENTORY_PATH.write_text(json.dumps(data, indent=2))
 
 
 def init_inventory():
-    with get_db() as conn:
-        conn.executescript(INVENTORY_SCHEMA)
+    """No-op kept for call-site compatibility (old SQLite version created tables)."""
+    INVENTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    if not INVENTORY_PATH.exists():
+        save_inventory({"last_updated": _today(), "updated_by": "init", "spools": [], "printers": {}})
 
 
 # ── Spool CRUD ────────────────────────────────────────────────────────────────
 def add_spool(material: str, color: str = "natural", brand: str = "generic",
               weight_g: float = 1000.0, cost_usd: float = 22.0,
-              notes: str = None) -> int:
-    cost_per_gram = round(cost_usd / weight_g, 6)
-    now = datetime.datetime.utcnow().isoformat() + "Z"
-    with get_db() as conn:
-        cur = conn.execute(
-            """INSERT INTO filament_inventory
-               (material, color, brand, spool_weight_g, grams_remaining,
-                cost_per_gram, added_at, notes)
-               VALUES (?,?,?,?,?,?,?,?)""",
-            (material.lower(), color.lower(), brand, weight_g,
-             weight_g, cost_per_gram, now, notes)
-        )
-        return cur.lastrowid
+              notes: str = None) -> str:
+    data = load_inventory()
+    existing_nums = [
+        int(s["spool_id"].split("-")[1])
+        for s in data.get("spools", [])
+        if s.get("spool_id", "").startswith("SPOOL-") and s["spool_id"].split("-")[1].isdigit()
+    ]
+    next_num = (max(existing_nums) + 1) if existing_nums else 1
+    spool_id = f"SPOOL-{next_num:03d}"
 
-
-def deduct_grams(material: str, color: str, grams: float,
-                 order_id: str = None) -> tuple[bool, str]:
-    """
-    Deduct grams from the best matching active spool.
-    Returns (success, message).
-    Picks the spool with most grams remaining to avoid fragmentation.
-    """
-    with get_db() as conn:
-        spool = conn.execute(
-            """SELECT * FROM filament_inventory
-               WHERE material=? AND color=? AND active=1
-               AND grams_remaining >= ?
-               ORDER BY grams_remaining DESC LIMIT 1""",
-            (material.lower(), color.lower(), grams)
-        ).fetchone()
-
-        if not spool:
-            # Try any spool of that material (ignore color — maybe they'll swap)
-            any_spool = conn.execute(
-                """SELECT * FROM filament_inventory
-                   WHERE material=? AND active=1
-                   AND grams_remaining >= ?
-                   ORDER BY grams_remaining DESC LIMIT 1""",
-                (material.lower(), grams)
-            ).fetchone()
-            if any_spool:
-                return False, (f"No {color} {material} — "
-                               f"have {any_spool['color']} with "
-                               f"{any_spool['grams_remaining']:.0f}g remaining.")
-            return False, f"No {material} in stock with {grams:.0f}g available."
-
-        new_remaining = spool["grams_remaining"] - grams
-        conn.execute(
-            "UPDATE filament_inventory SET grams_remaining=? WHERE id=?",
-            (round(new_remaining, 1), spool["id"])
-        )
-        now = datetime.datetime.utcnow().isoformat() + "Z"
-        conn.execute(
-            "INSERT INTO filament_usage_log (spool_id, order_id, grams_used, logged_at) VALUES (?,?,?,?)",
-            (spool["id"], order_id, grams, now)
-        )
-
-    warning = ""
-    if new_remaining < LOW_STOCK_G:
-        warning = f" ⚠️ Low stock: {new_remaining:.0f}g remaining."
-
-    return True, f"Deducted {grams:.1f}g from {color} {material}.{warning}"
+    spool = {
+        "spool_id": spool_id,
+        "material": material.upper(),
+        "color": color.title(),
+        "brand": brand,
+        "initial_weight_g": weight_g,
+        "remaining_g": weight_g,
+        "cost_usd": cost_usd,
+        "loaded_printer": None,
+        "loaded": False,
+        "low_threshold_g": LOW_STOCK_G,
+        "notes": notes or "",
+        "added_at": _today(),
+        "last_used": None,
+        "last_physical_check": _today(),
+    }
+    data.setdefault("spools", []).append(spool)
+    data["last_updated"] = _today()
+    data["updated_by"] = "shop.inventory.add_spool"
+    save_inventory(data)
+    return spool_id
 
 
 def get_stock() -> list:
-    """Return all active spools with current levels."""
-    with get_db() as conn:
-        rows = conn.execute(
-            """SELECT * FROM filament_inventory
-               WHERE active=1 ORDER BY material, color"""
-        ).fetchall()
-    return [dict(r) for r in rows]
+    return sorted(load_inventory().get("spools", []),
+                  key=lambda s: (s.get("material", ""), s.get("color", "")))
 
 
-def get_available_colors(material: str) -> list:
-    """Return list of (color, grams_remaining) for a given material."""
-    with get_db() as conn:
-        rows = conn.execute(
-            """SELECT color, SUM(grams_remaining) as total_g
-               FROM filament_inventory
-               WHERE material=? AND active=1 AND grams_remaining > ?
-               GROUP BY color ORDER BY color""",
-            (material.lower(), EMPTY_G)
-        ).fetchall()
-    return [(r["color"], round(r["total_g"], 1)) for r in rows]
-
-
-def check_availability(material: str, color: str, grams_needed: float) -> dict:
+# ── Matching + deduction (used by the print-complete watcher) ───────────────────
+def find_loaded_spool(printer: str, material: str, color: str = None) -> dict | None:
     """
-    Check if a job can be fulfilled.
-    Returns {available: bool, grams_on_hand: float, message: str}
+    Find the best-matching loaded spool for a printer.
+    Matches by material always; by color when given (case-insensitive, both).
+    Among matches, prefers the one with the most remaining_g (least fragmentation).
     """
-    with get_db() as conn:
-        row = conn.execute(
-            """SELECT COALESCE(SUM(grams_remaining), 0) as total
-               FROM filament_inventory
-               WHERE material=? AND color=? AND active=1""",
-            (material.lower(), color.lower())
-        ).fetchone()
-
-    on_hand = row["total"] if row else 0
-
-    if on_hand >= grams_needed:
-        return {
-            "available": True,
-            "grams_on_hand": round(on_hand, 1),
-            "message": f"{color.title()} {material.upper()} in stock ({on_hand:.0f}g available).",
-        }
-    elif on_hand > 0:
-        return {
-            "available": False,
-            "grams_on_hand": round(on_hand, 1),
-            "message": (f"Only {on_hand:.0f}g of {color} {material.upper()} on hand "
-                        f"— need {grams_needed:.0f}g. Consider splitting the order."),
-        }
-    else:
-        colors = get_available_colors(material)
-        if colors:
-            alts = ", ".join(f"{c} ({g:.0f}g)" for c, g in colors[:4])
-            return {
-                "available": False,
-                "grams_on_hand": 0,
-                "message": f"No {color} {material.upper()} in stock. Available: {alts}.",
-            }
-        return {
-            "available": False,
-            "grams_on_hand": 0,
-            "message": f"No {material.upper()} in stock at all.",
-        }
+    data = load_inventory()
+    candidates = [
+        s for s in data.get("spools", [])
+        if s.get("loaded") and (s.get("loaded_printer") or "").lower() == printer.lower()
+        and (s.get("material") or "").lower() == material.lower()
+    ]
+    if color:
+        color_matches = [s for s in candidates if (s.get("color") or "").lower() == color.lower()]
+        if color_matches:
+            candidates = color_matches
+    if not candidates:
+        return None
+    candidates.sort(key=lambda s: s.get("remaining_g", 0), reverse=True)
+    return candidates[0]
 
 
+def deduct_filament(printer: str, material: str, grams: float,
+                     color: str = None, job_id=None, note: str = None) -> dict:
+    """
+    Deduct `grams` from the best-matching loaded spool for `printer`.
+    Does NOT touch last_physical_check — that's only set by a human-confirmed
+    reweigh (dashboard manual edit or add_spool). Automated deductions only
+    move last_used, so the reweigh-due flag reflects "genuinely eyeballed
+    recently," not "a job happened to run."
+
+    Returns {"ok": bool, "spool_id": str|None, "remaining_g": float|None, "message": str}
+    """
+    if not grams or grams <= 0:
+        return {"ok": False, "spool_id": None, "remaining_g": None,
+                "message": "no filament_g on job — nothing to deduct"}
+
+    data = load_inventory()
+    target = None
+    for s in data.get("spools", []):
+        if (s.get("loaded") and (s.get("loaded_printer") or "").lower() == printer.lower()
+                and (s.get("material") or "").lower() == material.lower()):
+            if color and (s.get("color") or "").lower() != color.lower():
+                continue
+            if target is None or s.get("remaining_g", 0) > target.get("remaining_g", 0):
+                target = s
+
+    if target is None:
+        return {"ok": False, "spool_id": None, "remaining_g": None,
+                "message": f"no loaded {color or ''} {material} spool found on {printer}"}
+
+    target["remaining_g"] = round(max(0, target.get("remaining_g", 0) - grams), 1)
+    target["last_used"] = _today()
+    tag = f"job {job_id}" if job_id else "print"
+    stamp = f"[{_today()}] auto-deducted {grams:.1f}g ({tag}{': ' + note if note else ''})"
+    target["notes"] = (stamp if not target.get("notes") else f"{target['notes']} | {stamp}")[:400]
+
+    data["last_updated"] = _today()
+    data["updated_by"] = "djinn-print-complete-watcher"
+    save_inventory(data)
+
+    warning = ""
+    if target["remaining_g"] <= target.get("low_threshold_g", LOW_STOCK_G):
+        warning = f" LOW STOCK: {target['remaining_g']:.0f}g remaining."
+
+    return {"ok": True, "spool_id": target["spool_id"], "remaining_g": target["remaining_g"],
+            "message": f"Deducted {grams:.1f}g from {target['spool_id']} "
+                       f"({target['color']} {target['material']}) — "
+                       f"{target['remaining_g']:.0f}g left.{warning}"}
+
+
+def mark_physical_check(spool_id: str) -> bool:
+    """Stamp a spool as physically reweighed today. Call this on any human-confirmed
+    remaining_g update (dashboard manual edit), not on automated deductions."""
+    data = load_inventory()
+    for s in data.get("spools", []):
+        if s["spool_id"] == spool_id:
+            s["last_physical_check"] = _today()
+            save_inventory(data)
+            return True
+    return False
+
+
+def reweigh_due(spools: list = None) -> list:
+    """Loaded spools that haven't been physically reweighed in REWEIGH_DAYS days
+    (or never have a check on record). Unloaded shelf spools aren't flagged —
+    only ones actively being drawn down matter for accuracy."""
+    spools = spools if spools is not None else load_inventory().get("spools", [])
+    today = datetime.date.today()
+    due = []
+    for s in spools:
+        if not s.get("loaded"):
+            continue
+        last = s.get("last_physical_check")
+        if not last:
+            due.append(s)
+            continue
+        try:
+            days = (today - datetime.date.fromisoformat(last)).days
+            if days >= REWEIGH_DAYS:
+                due.append(s)
+        except ValueError:
+            due.append(s)
+    return due
+
+
+# ── Discord/Telegram compatible views ────────────────────────────────────────
 def low_stock_alert() -> list:
-    """Return spools below LOW_STOCK_G threshold."""
-    with get_db() as conn:
-        rows = conn.execute(
-            """SELECT * FROM filament_inventory
-               WHERE active=1 AND grams_remaining < ? AND grams_remaining > ?
-               ORDER BY grams_remaining""",
-            (LOW_STOCK_G, EMPTY_G)
-        ).fetchall()
-    return [dict(r) for r in rows]
+    """Returns dicts shaped like the old SQLite rows (material/color/grams_remaining)
+    so the already-deployed Discord/Telegram handlers don't need edits."""
+    stock = load_inventory().get("spools", [])
+    return [
+        {"material": s.get("material", ""), "color": s.get("color", ""),
+         "grams_remaining": s.get("remaining_g", 0), "spool_id": s.get("spool_id")}
+        for s in stock
+        if EMPTY_G < s.get("remaining_g", 0) < s.get("low_threshold_g", LOW_STOCK_G)
+    ]
 
 
-# ── Inventory value for balance sheet ────────────────────────────────────────
-def total_inventory_value() -> tuple[float, float]:
-    """Returns (total_grams, total_value_usd) for balance sheet."""
-    with get_db() as conn:
-        row = conn.execute(
-            """SELECT COALESCE(SUM(grams_remaining), 0) as grams,
-                      COALESCE(SUM(grams_remaining * cost_per_gram), 0) as value
-               FROM filament_inventory WHERE active=1"""
-        ).fetchone()
-    return round(row["grams"], 1), round(row["value"], 2)
+def total_inventory_value() -> tuple:
+    stock = load_inventory().get("spools", [])
+    grams = sum(s.get("remaining_g", 0) for s in stock)
+    value = sum(s.get("remaining_g", 0) * (s.get("cost_usd", 22.0) / max(s.get("initial_weight_g", 1000), 1))
+                for s in stock)
+    return round(grams, 1), round(value, 2)
 
 
-# ── Formatted output for Discord/Telegram ────────────────────────────────────
 def format_stock_report() -> str:
     stock = get_stock()
     if not stock:
         return "No filament in inventory."
 
-    lines = ["🧵 *Filament Inventory*\n"]
+    lines = ["Filament Inventory\n"]
     current_mat = None
     for s in stock:
-        if s["material"] != current_mat:
-            current_mat = s["material"]
-            lines.append(f"\n*{current_mat.upper()}*")
-        pct = s["grams_remaining"] / s["spool_weight_g"] * 100
+        mat = s.get("material", "")
+        if mat != current_mat:
+            current_mat = mat
+            lines.append(f"\n{current_mat}")
+        remaining = s.get("remaining_g", 0)
+        initial = s.get("initial_weight_g", 1000) or 1000
+        pct = remaining / initial * 100
         bar = _pct_bar(pct)
-        warn = " ⚠️" if s["grams_remaining"] < LOW_STOCK_G else ""
-        lines.append(
-            f"  {s['color'].title():<12} {bar} {s['grams_remaining']:.0f}g{warn}"
-        )
+        warn = " LOW" if remaining < s.get("low_threshold_g", LOW_STOCK_G) else ""
+        loaded = f" [{s['loaded_printer']}]" if s.get("loaded") and s.get("loaded_printer") else ""
+        lines.append(f"  {s.get('color',''):<12} {bar} {remaining:.0f}g{loaded}{warn}")
 
     total_g, total_val = total_inventory_value()
-    lines.append(f"\nTotal: {total_g:.0f}g  ≈  ${total_val:.2f}")
+    due = reweigh_due(stock)
+    lines.append(f"\nTotal: {total_g:.0f}g  ~  ${total_val:.2f}")
+    if due:
+        lines.append(f"Needs reweigh: {', '.join(s['spool_id'] for s in due)}")
     return "\n".join(lines)
 
 
 def _pct_bar(pct: float, width: int = 8) -> str:
     filled = round(pct / 100 * width)
-    empty  = width - filled
-    return "█" * filled + "░" * empty
+    empty = width - filled
+    return "#" * filled + "-" * empty
 
 
 # ── Command parser for Discord/Telegram ──────────────────────────────────────
-import re
-
 ADD_PATTERN = re.compile(
     r'add\s+filament\s+(\w+)\s+(\w+)\s+(\d+(?:\.\d+)?)g?\s+\$?(\d+(?:\.\d+)?)',
     re.I
@@ -258,51 +269,13 @@ ADD_PATTERN = re.compile(
 
 
 def parse_add_command(text: str) -> dict:
-    """
-    Parse: add filament petg black 1000g $28
-    Returns dict with fields, or None if no match.
-    """
+    """Parse: add filament petg black 1000g $28"""
     m = ADD_PATTERN.search(text)
     if not m:
         return None
     return {
-        "material":  m.group(1).lower(),
-        "color":     m.group(2).lower(),
-        "weight_g":  float(m.group(3)),
-        "cost_usd":  float(m.group(4)),
+        "material": m.group(1).lower(),
+        "color": m.group(2).lower(),
+        "weight_g": float(m.group(3)),
+        "cost_usd": float(m.group(4)),
     }
-
-
-if __name__ == "__main__":
-    init_db()
-    init_inventory()
-
-    # Seed test spools
-    add_spool("pla",  "black",   weight_g=1000, cost_usd=22)
-    add_spool("pla",  "white",   weight_g=1000, cost_usd=22)
-    add_spool("petg", "black",   weight_g=1000, cost_usd=28)
-    add_spool("petg", "natural", weight_g=500,  cost_usd=14)
-    add_spool("tpu",  "black",   weight_g=500,  cost_usd=18)
-
-    # Simulate some usage
-    deduct_grams("petg", "black",   880, "ORD-0001")
-    deduct_grams("pla",  "black",   200, "ORD-0002")
-
-    print(format_stock_report())
-    print()
-
-    # Check availability
-    r = check_availability("petg", "black", 150)
-    print(f"PETG black 150g: {r['message']}")
-    r = check_availability("petg", "black", 50)
-    print(f"PETG black 50g:  {r['message']}")
-    r = check_availability("abs",  "red",   100)
-    print(f"ABS red 100g:    {r['message']}")
-
-    low = low_stock_alert()
-    print(f"\nLow stock alerts: {len(low)} spool(s)")
-    for s in low:
-        print(f"  {s['color']} {s['material']}: {s['grams_remaining']:.0f}g")
-
-    g, v = total_inventory_value()
-    print(f"\nInventory: {g:.0f}g  ≈  ${v:.2f}")
