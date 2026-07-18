@@ -7168,3 +7168,67 @@
 | 2026-07-18 17:02 UTC | cancelled | 0.0% | 59.7 | 0 | 54.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-18 17:03 UTC | cancelled | 0.0% | 50.7 | 0 | 52.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-18 17:04 UTC | cancelled | 0.0% | 44.6 | 0 | 50.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:05 UTC | cancelled | 0.0% | 40.5 | 0 | 49.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:06 UTC | cancelled | 0.0% | 38.2 | 0 | 48.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:07 UTC | cancelled | 0.0% | 37.1 | 0 | 46.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:08 UTC | cancelled | 0.0% | 36.4 | 0 | 45.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:09 UTC | cancelled | 0.0% | 35.8 | 0 | 44.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:10 UTC | cancelled | 0.0% | 35.3 | 0 | 43.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:11 UTC | cancelled | 0.0% | 34.9 | 0 | 42.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:12 UTC | cancelled | 0.0% | 34.6 | 0 | 41.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:13 UTC | cancelled | 0.0% | 34.3 | 0 | 40.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:14 UTC | cancelled | 0.0% | 34.0 | 0 | 40.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:15 UTC | cancelled | 0.0% | 33.7 | 0 | 39.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:16 UTC | cancelled | 0.0% | 33.4 | 0 | 38.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:17 UTC | cancelled | 0.0% | 33.2 | 0 | 37.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:18 UTC | cancelled | 0.0% | 32.9 | 0 | 37.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:19 UTC | cancelled | 0.0% | 32.7 | 0 | 36.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:20 UTC | cancelled | 0.0% | 32.5 | 0 | 36.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:21 UTC | cancelled | 0.0% | 32.3 | 0 | 35.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:22 UTC | cancelled | 0.0% | 32.1 | 0 | 35.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:23 UTC | cancelled | 0.0% | 32.0 | 0 | 34.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:24 UTC | cancelled | 0.0% | 31.8 | 0 | 34.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:25 UTC | cancelled | 0.0% | 31.7 | 0 | 33.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:26 UTC | cancelled | 0.0% | 31.6 | 0 | 33.4 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:27 UTC | cancelled | 0.0% | 31.4 | 0 | 33.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:28 UTC | cancelled | 0.0% | 31.3 | 0 | 32.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:29 UTC | cancelled | 0.0% | 31.2 | 0 | 32.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:30 UTC | cancelled | 0.0% | 31.1 | 0 | 32.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:31 UTC | cancelled | 0.0% | 30.9 | 0 | 31.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:32 UTC | cancelled | 0.0% | 30.8 | 0 | 31.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:33 UTC | cancelled | 0.0% | 30.7 | 0 | 31.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:34 UTC | cancelled | 0.0% | 30.6 | 0 | 31.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:35 UTC | cancelled | 0.0% | 30.5 | 0 | 30.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:36 UTC | cancelled | 0.0% | 30.4 | 0 | 30.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:37 UTC | cancelled | 0.0% | 30.3 | 0 | 30.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:38 UTC | cancelled | 0.0% | 30.2 | 0 | 30.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:39 UTC | cancelled | 0.0% | 30.1 | 0 | 29.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:40 UTC | cancelled | 0.0% | 30.0 | 0 | 29.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-18 17:40:31 UTC] [hound] started
+[2026-07-18 17:40:41 UTC] [complete-watcher] Moonraker unreachable — no action
+| 2026-07-18 17:41 UTC | cancelled | 0.0% | 29.9 | 0 | 29.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-18 17:41:42 UTC] [complete-watcher] Moonraker unreachable — no action
+| 2026-07-18 17:42 UTC | cancelled | 0.0% | 29.8 | 0 | 29.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-18 17:42:42 UTC] [complete-watcher] Moonraker unreachable — no action
+| 2026-07-18 17:43 UTC | cancelled | 0.0% | 29.8 | 0 | 29.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-18 17:43:44 UTC] [complete-watcher] Moonraker unreachable — no action
+| 2026-07-18 17:44 UTC | cancelled | 0.0% | 29.7 | 0 | 29.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:45 UTC | cancelled | 0.0% | 29.6 | 0 | 28.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:46 UTC | cancelled | 0.0% | 29.5 | 0 | 28.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:47 UTC | cancelled | 0.0% | 29.5 | 0 | 28.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:48 UTC | cancelled | 0.0% | 29.4 | 0 | 28.4 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:49 UTC | cancelled | 0.0% | 29.3 | 0 | 28.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:50 UTC | cancelled | 0.0% | 29.3 | 0 | 28.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:51 UTC | cancelled | 0.0% | 29.2 | 0 | 28.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:52 UTC | cancelled | 0.0% | 29.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:53 UTC | cancelled | 0.0% | 29.1 | 0 | 27.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:54 UTC | cancelled | 0.0% | 29.0 | 0 | 27.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:55 UTC | cancelled | 0.0% | 28.9 | 0 | 27.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:56 UTC | cancelled | 0.0% | 28.9 | 0 | 27.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:57 UTC | cancelled | 0.0% | 28.8 | 0 | 27.4 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:58 UTC | cancelled | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:59 UTC | cancelled | 0.0% | 28.7 | 0 | 27.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 18:00 UTC | cancelled | 0.0% | 28.6 | 0 | 27.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 18:01 UTC | cancelled | 0.0% | 28.6 | 0 | 27.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 18:02 UTC | cancelled | 0.0% | 28.6 | 0 | 27.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 18:03 UTC | cancelled | 0.0% | 28.5 | 0 | 26.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
