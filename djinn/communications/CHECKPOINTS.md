@@ -11704,3 +11704,74 @@ Rotated weekly by djinn-comms-rotate.
 → Waiting for Javier: Y to approve, N to deny
 
                                                                                                                                                                                                                                        
+
+### CHECKPOINT-20260717-192308 | 2026-07-17 19:23 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260717-193021 | 2026-07-17 19:30 | unknown | PENDING
+**Action:** git push to origin (worktree-bug-report-gateway-checkpoint)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260717-194043 | 2026-07-17 19:40 | unknown | PENDING
+**Action:** git push to origin (worktree-bug-report-gateway-checkpoint)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260717-194214 | 2026-07-17 19:42 | unknown | PENDING
+**Action:** git push to origin (worktree-bug-report-gateway-checkpoint)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: Y to approve, N to deny
+
+
+
+### CHECKPOINT-20260717-194815 | 2026-07-17 19:48 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** smoke test
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260717-194815` / `n CHECKPOINT-20260717-194815` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260717-194815`
+
+
+→ Resolved: CHECKPOINT-20260717-194815 → APPROVED by Javier
+
+
+### CHECKPOINT-20260717-194827 | 2026-07-17 19:48 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** smoke test deny
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260717-194827` / `n CHECKPOINT-20260717-194827` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260717-194827`
+
+
+→ Resolved: CHECKPOINT-20260717-194827 → DENIED by Javier
+
+
+### CHECKPOINT-20260717-200119 | 2026-07-17 20:01 | unknown | PENDING
+**Action:** git push to origin (worktree-bug-report-gateway-checkpoint)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260717-200119` / `n CHECKPOINT-20260717-200119` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260717-200119`
+
+
+→ Resolved: CHECKPOINT-20260717-200119 → APPROVED by Javier
+
+
+### CHECKPOINT-20260717-200347 | 2026-07-17 20:03 | unknown | PENDING
+**Action:** git push to origin (worktree-bug-report-gateway-checkpoint)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260717-200347` / `n CHECKPOINT-20260717-200347` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260717-200347`
+
+
+→ Resolved: CHECKPOINT-20260717-200347 → APPROVED by Javier
