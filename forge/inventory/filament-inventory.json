@@ -1,6 +1,6 @@
 {
   "last_updated": "2026-07-17",
-  "updated_by": "Claude — manual reconciliation: Calliope yellow block cup deduction, Iris physical weigh-in (Javier, 2026-07-17: 4 IFS slots — 300g/200g white PETG, 500g red PLA, 1 empty)",
+  "updated_by": "Claude \u2014 manual reconciliation: Calliope yellow block cup deduction, Iris physical weigh-in (Javier, 2026-07-17: 4 IFS slots \u2014 300g/200g white PETG, 500g red PLA, 1 empty)",
   "spools": [
     {
       "spool_id": "SPOOL-001",
@@ -14,7 +14,8 @@
       "low_threshold_g": 150,
       "notes": "Iris \u2014 IFS slot, spool A. Physical weigh-in 2026-07-17 (Javier): ~300g. Supersedes the same-day telemetry-based estimate (468g) and the earlier stale dashboard figure (900g) \u2014 both undercounted actual usage. IFS holds up to 4 spools simultaneously; Iris routes between them per job, so this isn't a single 'active' spool in the old loaded/staged sense.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17"
+      "last_used": "2026-07-17",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-002",
@@ -28,7 +29,8 @@
       "low_threshold_g": 150,
       "notes": "Iris \u2014 IFS slot, spool B. Physical weigh-in 2026-07-17 (Javier): ~200g, superseding the stale 600g dashboard figure.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17"
+      "last_used": "2026-07-17",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-003",
@@ -42,7 +44,8 @@
       "low_threshold_g": 150,
       "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17"
+      "last_used": "2026-07-17",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-004",
@@ -56,7 +59,8 @@
       "low_threshold_g": 150,
       "notes": "Calliope \u2014 active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report). Yellow block cup (PLA_1h12m40s), 31.70g, printed clean 2026-07-17.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17"
+      "last_used": "2026-07-17",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-005",
@@ -70,7 +74,8 @@
       "low_threshold_g": 150,
       "notes": "Nemesis \u2014 active, nearly depleted. Order more before next long run.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-14"
+      "last_used": "2026-07-14",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-006",
@@ -84,7 +89,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-007",
@@ -98,7 +104,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-008",
@@ -112,7 +119,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-009",
@@ -126,7 +134,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-010",
@@ -140,7 +149,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-011",
@@ -154,7 +164,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-012",
@@ -168,7 +179,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-013",
@@ -182,7 +194,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-014",
@@ -194,9 +207,10 @@
       "loaded_printer": null,
       "loaded": false,
       "low_threshold_g": 150,
-      "notes": "Swapped out of Calliope 2026-07-14 for SPOOL-004 (PLA Yellow, Cherry Blossom cup job). Used for camood-v2 (1x completed job + 1x crashed job, ~95g combined per gcode extrusion estimate); ~600g per Javier's physical check 2026-07-12. Moved to Iris's IFS 4th slot afterward, fully used up, and removed from the printer — per Javier 2026-07-17. This is why Iris's 4th IFS slot is now empty. Spool depleted, no longer physically present.",
+      "notes": "Swapped out of Calliope 2026-07-14 for SPOOL-004 (PLA Yellow, Cherry Blossom cup job). Used for camood-v2 (1x completed job + 1x crashed job, ~95g combined per gcode extrusion estimate); ~600g per Javier's physical check 2026-07-12. Moved to Iris's IFS 4th slot afterward, fully used up, and removed from the printer \u2014 per Javier 2026-07-17. This is why Iris's 4th IFS slot is now empty. Spool depleted, no longer physically present.",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17"
+      "last_used": "2026-07-17",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-015",
@@ -210,7 +224,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-016",
@@ -224,7 +239,8 @@
       "low_threshold_g": 150,
       "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-14"
+      "last_used": "2026-07-14",
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-017",
@@ -238,7 +254,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-018",
@@ -252,7 +269,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-019",
@@ -266,7 +284,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 new",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-020",
@@ -280,7 +299,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-021",
@@ -294,7 +314,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-022",
@@ -308,7 +329,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-023",
@@ -322,7 +344,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-024",
@@ -336,7 +359,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-025",
@@ -350,7 +374,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-026",
@@ -364,7 +389,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-027",
@@ -378,7 +404,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-028",
@@ -392,7 +419,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 partially used",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-029",
@@ -406,7 +434,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 arrived 2026-07-13, silk tri-color",
       "added_at": "2026-07-13",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-030",
@@ -420,7 +449,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 arrived 2026-07-13",
       "added_at": "2026-07-13",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-031",
@@ -434,7 +464,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 arrived 2026-07-13, Rapid PLA",
       "added_at": "2026-07-13",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-032",
@@ -448,7 +479,8 @@
       "low_threshold_g": 150,
       "notes": "shelf",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-033",
@@ -462,7 +494,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-034",
@@ -476,7 +509,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-035",
@@ -490,7 +524,8 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     },
     {
       "spool_id": "SPOOL-036",
@@ -504,13 +539,18 @@
       "low_threshold_g": 150,
       "notes": "shelf \u2014 high speed refill (no spool)",
       "added_at": "2026-07-12",
-      "last_used": null
+      "last_used": null,
+      "last_physical_check": null
     }
   ],
   "printers": {
     "Iris": {
-      "loaded_spools": ["SPOOL-001", "SPOOL-002", "SPOOL-003"],
-      "note": "IFS 4-slot system — 3 slots loaded (2x PETG White, 1x PLA Red), 1 slot empty. Iris routes between loaded spools per job; no single 'the' loaded spool."
+      "loaded_spools": [
+        "SPOOL-001",
+        "SPOOL-002",
+        "SPOOL-003"
+      ],
+      "note": "IFS 4-slot system \u2014 3 slots loaded (2x PETG White, 1x PLA Red), 1 slot empty. Iris routes between loaded spools per job; no single 'the' loaded spool."
     },
     "Nemesis": {
       "loaded_spool": "SPOOL-016",

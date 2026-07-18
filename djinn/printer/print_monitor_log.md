@@ -7108,3 +7108,63 @@
 | 2026-07-18 16:01 UTC | standby | 0.0% | 29.8 | 0 | 27.7 | 0 | 0% | 0 |  |
 | 2026-07-18 16:02 UTC | standby | 0.0% | 29.7 | 0 | 27.6 | 0 | 0% | 0 |  |
 | 2026-07-18 16:03 UTC | standby | 0.0% | 29.7 | 0 | 27.6 | 0 | 0% | 0 |  |
+| 2026-07-18 16:04 UTC | standby | 0.0% | 29.7 | 0 | 27.6 | 0 | 0% | 0 |  |
+| 2026-07-18 16:05 UTC | standby | 0.0% | 29.6 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-18 16:06 UTC | standby | 0.0% | 29.6 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-18 16:07 UTC | standby | 0.0% | 29.6 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-18 16:08 UTC | standby | 0.0% | 29.6 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-18 16:09 UTC | standby | 0.0% | 29.6 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-18 16:10 UTC | standby | 0.0% | 29.5 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-18 16:11 UTC | standby | 0.0% | 29.5 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-18 16:12 UTC | standby | 0.0% | 29.5 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-18 16:13 UTC | standby | 0.0% | 29.4 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-18 16:14 UTC | standby | 0.0% | 29.4 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-18 16:15 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:16 UTC | standby | 0.0% | 29.4 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-18 16:17 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:18 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:19 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:20 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:21 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:22 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:23 UTC | standby | 0.0% | 29.4 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:24 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:25 UTC | standby | 0.0% | 29.3 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-18 16:26 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:27 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:28 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:29 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:30 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:31 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:32 UTC | standby | 0.0% | 29.3 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-18 16:33 UTC | standby | 0.0% | 131.4 | 170 | 32.4 | 65 | 0% | 0 |  |
+| 2026-07-18 16:34 UTC | standby | 0.0% | 179.9 | 130 | 42.3 | 65 | 0% | 0 |  |
+| 2026-07-18 16:35 UTC | standby | 0.0% | 130.5 | 130 | 51.3 | 65 | 0% | 0 |  |
+| 2026-07-18 16:36 UTC | standby | 0.0% | 130.7 | 130 | 59.6 | 65 | 0% | 0 |  |
+| 2026-07-18 16:37 UTC | standby | 0.0% | 130.2 | 130 | 64.8 | 65 | 0% | 0 |  |
+| 2026-07-18 16:38 UTC | printing | 0.0% | 217.5 | 220 | 66.2 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:39 UTC | printing | 0.0% | 220.0 | 220 | 66.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:40 UTC | printing | 0.0% | 219.9 | 220 | 65.5 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:41 UTC | printing | 0.0% | 219.6 | 220 | 64.9 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:42 UTC | printing | 0.0% | 219.8 | 220 | 64.5 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:43 UTC | printing | 0.0% | 220.4 | 220 | 64.7 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:44 UTC | printing | 0.0% | 220.0 | 220 | 64.8 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:45 UTC | printing | 0.0% | 220.4 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:46 UTC | printing | 0.0% | 219.6 | 0 | 65.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:47 UTC | cancelled | 0.0% | 138.5 | 0 | 64.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:48 UTC | cancelled | 0.0% | 93.2 | 0 | 60.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:49 UTC | cancelled | 0.0% | 221.4 | 220 | 57.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:50 UTC | cancelled | 0.0% | 201.7 | 130 | 55.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:51 UTC | cancelled | 0.0% | 136.6 | 130 | 59.3 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:52 UTC | cancelled | 0.0% | 202.4 | 130 | 64.7 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:53 UTC | cancelled | 0.0% | 130.7 | 130 | 65.9 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:54 UTC | printing | 0.0% | 130.2 | 220 | 66.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:55 UTC | printing | 0.0% | 219.9 | 220 | 65.6 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:56 UTC | printing | 0.0% | 219.7 | 0 | 65.3 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:57 UTC | cancelled | 0.0% | 161.1 | 0 | 62.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 16:58 UTC | cancelled | 0.0% | 120.6 | 0 | 60.4 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:00 UTC | cancelled | 0.0% | 92.4 | 0 | 58.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:01 UTC | cancelled | 0.0% | 73.1 | 0 | 56.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:02 UTC | cancelled | 0.0% | 59.7 | 0 | 54.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:03 UTC | cancelled | 0.0% | 50.7 | 0 | 52.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-18 17:04 UTC | cancelled | 0.0% | 44.6 | 0 | 50.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
