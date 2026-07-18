@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# djinn-vault-pull — keep a secondary/read-mostly node's vault clone in sync
+# Usage: djinn-vault-pull
+#
+# Fast-forward only. Never overwrites local work — if the clone has diverged
+# (local commits not on origin, or uncommitted changes that conflict), this
+# logs the problem and exits non-zero instead of guessing. Designed for
+# machines like Oroborus that don't do primary vault editing but need to
+# stay current so a Claude/opencode session invoked there isn't working
+# from a stale tree.
+
+set -euo pipefail
+
+VAULT="$HOME/djinn-vault"
+LOG="$HOME/.local/share/djinn-vault-pull.log"
+mkdir -p "$(dirname "$LOG")"
+
+log() { echo "$(date -Iseconds) $*" >> "$LOG"; }
+
+cd "$VAULT"
+
+if [[ -n "$(git status --porcelain)" ]]; then
+    log "SKIP: working tree not clean, not pulling (avoid clobbering in-progress work)"
+    exit 1
+fi
+
+git fetch origin main >> "$LOG" 2>&1
+
+if ! git merge --ff-only origin/main >> "$LOG" 2>&1; then
+    log "FAIL: fast-forward merge failed — local and origin/main have diverged, needs a human"
+    exit 1
+fi
+
+log "OK: $(git log -1 --format='%H %s')"
