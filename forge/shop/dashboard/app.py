@@ -46,6 +46,7 @@ from shop.inventory import (
     save_inventory as _save_inventory,
     mark_physical_check, reweigh_due,
 )
+from shop import hound as _hound
 
 # ── config ─────────────────────────────────────────────────────────────────────
 DASHBOARD_PASSWORD = os.environ.get("DJINN_DASH_PASSWORD", "typhonsforge")
@@ -197,7 +198,11 @@ def fetch_all():
         }
         for fut in as_completed(futures):
             try:
-                results.append(fut.result())
+                r = fut.result()
+                hs = _hound.status(r["id"])
+                r["hound_active"] = hs.get("active", False)
+                r["hound_watching"] = hs.get("watching")
+                results.append(r)
             except Exception:
                 p = futures[fut]
                 results.append({**p, "reachable": False, "state": "error",
@@ -251,6 +256,15 @@ def inject_globals():
 @_require_login
 def api_status():
     return jsonify(fetch_all())
+
+
+@app.route("/api/hound/<printer_id>", methods=["POST"])
+@_require_login
+def api_hound_toggle(printer_id):
+    payload = request.get_json(force=True) or {}
+    active = bool(payload.get("active"))
+    entry = _hound.set_active(printer_id, active)
+    return jsonify({"ok": True, "printer_id": printer_id, **entry})
 
 
 # ── inventory API ──────────────────────────────────────────────────────────────
