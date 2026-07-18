@@ -1,10 +1,10 @@
 # Marcus Research Index
 
-**SSD path:** `/run/media/drmanzo/alexandria/marcus/`
-**Drive:** djinn-archive · /dev/sdb1 · 1.8TB · mounted on Salomon
+**SSD path:** `/run/media/drmanzo/Alexandria/marcus/` (was lowercase `alexandria` — corrected 2026-07-18, label is capital-A so udisks/GNOME auto-mount always produces `Alexandria`)
+**Drive:** djinn-archive (labeled Alexandria) · /dev/sdc1 · 1.8TB · **now physically on Oroborus (192.168.1.154), moved from Salomon at some point after 2026-07-09, never logged until 2026-07-18**
 **Git:** index only — exports never committed
 
-Drop new exports into `_inbox/YYYY-MM-DD_topic/`. Salomon idle agent processes and updates this table.
+Drop new exports into `_inbox/YYYY-MM-DD_topic/`. Doc still says "Salomon idle agent processes" below — that assumption is now stale since the drive isn't on Salomon anymore; whatever processes `_inbox/` needs to run against Oroborus instead, or the drive needs to move back. Not resolved in this pass — flagging only.
 
 ---
 

@@ -39,7 +39,8 @@ Note: earlier planning docs (`forge/projects/storage-unification.md`, 2026-07-07
 | Mount | Device | Size | Contents |
 |-------|--------|------|----------|
 | `/` | nvme0n1p2 | 468G | OS, apps, `~/code/`, `~/djinn-vault/` |
-| `/mnt/storage` | sdb1 | 4.5T | Cold archive per `forge/projects/storage-unification.md` |
+| `/mnt/storage` | sdb1 (exFAT, disk label "The Library") | 4.5T | Unsorted leftover from a prior life as a Windows backup disk — see below |
+| `/run/media/drmanzo/Alexandria` | sdc1 (ext4, USB SSD) | 1.8T | **Physically here as of 2026-07-18** — moved from Salomon at some unknown point after the 2026-07-09 setup report, never logged until discovered this session. Was unmounted when found; mounted manually (`udisksctl mount -b /dev/sdc1`), no fstab entry yet (needs root, this session has no passwordless sudo — flagging for someone with an interactive shell here). See `Alexandria/README.md` on the drive itself, corrected same session.
 
 ---
 
@@ -67,7 +68,11 @@ Status of the two repos flagged in TASK-099 as of 2026-07-18:
 
 `forge/projects/storage-unification.md` (2026-07-07) laid out a clean `library/archive/review/index` structure for this drive. As of 2026-07-18, `/mnt/storage` still has none of that — it's leftover structure from a prior life as a Windows backup disk (`$RECYCLE.BIN`, `.Trash-1000`, `System Volume Information`, date-named folders like `Aprl - 24`/`May - 24`), plus `Library` (234G), `Backups` (23G), `typhon-backup` (14G), `forge` (664M), `Linux` (1.4G). The Phase 1-6 reorg was apparently never executed past the initial LAN hookup.
 
-**Not touched in this session** — moving or deleting several hundred GB of what may be real personal files isn't a call to make without Javier confirming what's actually safe to reorganize vs. what's precious. Flagged, not actioned.
+**`Library` (234G) is not a print-model library — it's a pirated software/course stash** (cracked Adobe/Autodesk installers, ripped Udemy/Domestika courses, all sourced from `gfxfather.com`). Unrelated to the djinn/forge project, predates this drive's role as Oroborus's storage node. Per Javier's instruction 2026-07-18: relocating it to `Alexandria/library-rescue/` (staging, not organized — "will live there for now"), then clearing it off `/mnt/storage`. Not being cataloged or maintained as part of any real library structure.
+
+**`Backups/12-1`** (21G, inside the 23G `Backups` dir) — inspected one level deep: a genuine old personal backup (home-directory-style dump: `Sort`, `Work`, `Sophia`, `Yoshi`, a `usr`/`DEBIAN` pair, some PDFs, a couple `.deb` installers). Left alone — no reason to touch it.
+
+**Everything else in `/mnt/storage` not touched this session** — `Backups` (minus the Library move), `typhon-backup`, `Aprl - 24`/`May - 24`, `Linux`, `forge`, and the Windows-cruft folders are still unreviewed. Moving/deleting that is a call for Javier, not something to do speculatively.
 
 ---
 
