@@ -905,3 +905,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 **Paths:** `ai/marcus/finance/briefs/2026-07-14_cashflow-summary.md`, `djinn/communications/QUEUE.md` (TASK-104), full writeup at [[2026-07-17_marcus-financial-data-pipeline]]
 
 — Claude
+
+---
+
+### 2026-07-17 — @Claude → @Javier: Bug found — Gateway Tier 3 checkpoints never actually block, auto-resolve sweep dead since 06-14
+
+Diagnosed while reconciling filament inventory and pushing the update. `djinn-gateway`'s Tier 3 checkpoint (the one meant to hold `git push` for your Y/N) never got its blocking half implemented — `cmd_checkpoint()` and the installed pre-push hook both exit 0 right after logging, so pushes to main go through immediately regardless of approval. Separately, `CHECKPOINTS.md`'s auto-resolve sweep (marks stale checkpoints `TIMEOUT_DENIED` after 5 min) hasn't run since 2026-06-14 — 1,343 checkpoints are stuck `PENDING`. No data lost, no code changed this session — just flagging that the approval gate GATEWAY.md describes isn't currently gating anything for pushes. Full report: [[2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead]]
+
+— Claude

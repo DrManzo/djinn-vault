@@ -2132,3 +2132,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Full report: [[2026-07-17_marcus-financial-data-pipeline]]
 
 *— Claude*
+
+## 2026-07-17: BUG — Gateway Tier 3 Checkpoint Never Blocks Pushes, Auto-Resolve Sweep Dead Since 2026-06-14
+- **System:** djinn-gateway (pre-push hook, CHECKPOINTS.md)
+- **Severity:** high | **Status:** open
+- **Root cause:** `cmd_checkpoint()`'s Phase 2 (block + poll for Javier's Y/N) was never implemented — it's a dead comment after an unconditional `sys.exit(0)`. Separately, the passive sweep that used to mark stale checkpoints `TIMEOUT_DENIED` after 5 minutes stopped running after 2026-06-14; 1,343 checkpoints have piled up `PENDING` since. A regular `git push` to main currently requires zero actual approval — Tier 3 only logs and notifies.
+- **Report:** `logs/reports/2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead.md`
+
+*— Claude*
