@@ -85,14 +85,14 @@ Designed for AI agent ingestion. Covers topology, repos, services, tools, pipeli
 ### Iris (Flashforge AD5X) *(acquired 2026-07-03)*
 | Attribute | Value |
 |-----------|-------|
-| IP | **192.168.1.50** — Moonraker :7125, Fluidd :80, FlashOS :8899 |
+| IP | **192.168.1.132** — Moonraker :7125, Fluidd :80, FlashOS :8899 |
 | MAC | `dc:84:03:b2:d7:c0` |
 | Build volume | 220×220×220mm |
 | Color system | Multi-material (up to 4 colors, IFS) |
 | Speed | up to 600mm/s |
 | Firmware | zmod 1.7.1-49 (Klipper + Moonraker + Fluidd) — installed 2026-07-03 |
 | Slicer | OrcaSlicer (Octo/Klipper mode, host:7125) |
-| SSH | `root@192.168.1.50` (password: root) |
+| SSH | `root@192.168.1.132` (password: root) |
 | Status | ONLINE ✓ — Moonraker ready, Klipper ready |
 | Notes | Primary color/multi-material printer for commissions |
 
