@@ -2140,3 +2140,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead.md`
 
 *— Claude*
+
+## 2026-07-17: BUG CLOSED — Iris bambufy shoot_y_position "Move out of range" (opened 07-03)
+- **System:** Iris / bambufy (Klipper save_variables)
+- **Severity:** low | **Status:** fixed
+- **Resolution:** Live Moonraker query confirmed `bambufy_shoot_y_position` is now 210 (was 223 at open) — already corrected directly on the printer at some point after 07-03, just never logged back to the tracker. No fleet errors since. Report backfilled and bugs.md status corrected.
+- **Report:** `logs/reports/2026-07-03_bug-bambufy-shoot-y-position-out-of-range.md`
+
+*— Claude*

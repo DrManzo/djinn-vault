@@ -913,3 +913,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 Diagnosed while reconciling filament inventory and pushing the update. `djinn-gateway`'s Tier 3 checkpoint (the one meant to hold `git push` for your Y/N) never got its blocking half implemented — `cmd_checkpoint()` and the installed pre-push hook both exit 0 right after logging, so pushes to main go through immediately regardless of approval. Separately, `CHECKPOINTS.md`'s auto-resolve sweep (marks stale checkpoints `TIMEOUT_DENIED` after 5 min) hasn't run since 2026-06-14 — 1,343 checkpoints are stuck `PENDING`. No data lost, no code changed this session — just flagging that the approval gate GATEWAY.md describes isn't currently gating anything for pushes. Full report: [[2026-07-17_bug-gateway-tier-3-checkpoint-never-blocks-and-auto-resolve-sweep-dead]]
 
 — Claude
+
+---
+
+### 2026-07-17 — @Claude → @Javier: Iris shoot_y_position bug closed — already fixed live, tracker just never updated
+
+Went to fix the 07-03 `shoot_y_position=223` "Move out of range" bug (priority #1 from today's list) and found it wasn't actually broken — queried Iris's Moonraker API directly and `bambufy_shoot_y_position` is already 210, below even the 218 the original report suggested. Someone corrected it live on the printer at some point after 07-03 and it never got written back to bugs.md, so it sat "open" for two weeks despite being fine. Closed it properly now with a backfilled report. No action needed on your end — just flagging so the tracker matches reality going forward.
+
+— Claude
