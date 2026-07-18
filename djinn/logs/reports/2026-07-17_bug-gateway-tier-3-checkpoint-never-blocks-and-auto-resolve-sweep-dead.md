@@ -76,3 +76,15 @@ Javier chose real blocking (Phase 2) over downgrading the docs. Implemented same
 ---
 
 *— Claude, 2026-07-17*
+
+---
+
+## Follow-on issue found during verification (separate, not fixed here)
+
+While live-testing, `_tg_send()` failed with `HTTP Error 403: Forbidden`. Traced it to `djinn-gateway` using the wrong bot entirely — `DJINN_BUGHUNTER_TG_TOKEN` (a different bot, `djinn_bughunter_bot`) instead of the token the live, already-running `djinn-telegram-gateway` service actually holds (`DJINN_TG_TOKEN`, from `~/.djinn.env`) — the bot with the new approve/deny routes wired into it. Fixed `_load_tg_token()` to read the correct token source.
+
+However, testing *that* token directly (`curl .../getMe`) also returns `401 Unauthorized` right now, even though the running service's own logs show it successfully sending an unrelated alert (`"Sent Claude queue alert"`) minutes earlier with the identical token pulled live from `/proc/<pid>/environ`. This is inconsistent and not something further code changes can resolve — it needs Javier to check/regenerate the bot token via @BotFather.
+
+**Net effect:** the checkpoint *notification* may not currently reach Telegram. The checkpoint *blocking mechanism itself is unaffected* — `djinn-gateway approve <id>` / `deny <id>` work directly from any terminal with vault access regardless of Telegram's state, and that path was fully verified end-to-end (see Verification above). Until the bot token is sorted, resolving a checkpoint requires checking `CHECKPOINTS.md` directly rather than waiting for a Telegram ping.
+
+Not logged as a separate bugs.md entry — folding it into this report since it was found while fixing the same subsystem, but flagging clearly: **the Telegram side of this fix is unverified as working end-to-end** until the token issue is resolved.
