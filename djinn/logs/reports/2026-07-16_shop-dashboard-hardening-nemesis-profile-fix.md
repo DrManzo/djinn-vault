@@ -82,7 +82,7 @@ Desktop/Review/Nemesis/oni cup-blue-marked-fix_PLA_43m41s_bottomQ.gcode  ← new
 ## Known Issues / Caveats
 
 - **Dashboard auth still uses the default password** (`typhonsforge`) — not urgent (LAN-only, view-heavy not raw-DB-access), but worth rotating eventually.
-- **Calliope's and Iris's OrcaSlicer profiles haven't been audited** for the same unaudited-inheritance `printable_area`/`time_lapse_gcode` pattern that hit both Iris (7/6) and Nemesis (7/16) — neither has hit a fresh symptom, but the pattern is now 2-for-2 on this fleet.
+- ~~Calliope's and Iris's OrcaSlicer profiles haven't been audited for the same unaudited-inheritance pattern~~ **Audited 2026-07-17 — both clean.** Calliope's stock `Creality Ender-3 V3 Plus 0.4 nozzle` profile declares its own explicit corner-origin `printable_area` (0x0→300x300) directly rather than inheriting a bad default. Iris's `Flashforge AD5X 0.4 nozzle` system profile does the same (0x0→220x220) and already has `time_lapse_gcode` blanked. This bug class was specific to Nemesis's particular FlashForge template chain, not a fleet-wide 2-for-4 risk.
 - **The gcode quality fix hasn't been printed yet** — verified structurally (line count, Z boundary, no corruption) but not print-tested for actual visual improvement.
 - **Backpack Boyz and Camood-v1 file retrievals surfaced (again) that library notes reference file paths that don't survive migrations** — same pattern as Camood's lost TTHQ engraving. No action taken this session beyond finding working copies elsewhere (Oroborus archives).
 
