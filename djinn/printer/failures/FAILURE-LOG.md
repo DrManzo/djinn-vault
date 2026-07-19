@@ -18,3 +18,8 @@
   Progress: 0%
   Transition: printing → standby
   Time: 2026-07-19 15:08:20 UTC
+=== FAILURE DETECTED ===
+  File: yellow+block+cup_marked.stl_PLA_2h22m41s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-19 17:32:25 UTC

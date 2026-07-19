@@ -8610,3 +8610,69 @@
 | 2026-07-19 17:01 UTC | printing | 0.0% | 220.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 17:02 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 17:03 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:04 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:05 UTC | printing | 0.0% | 219.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:06 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:07 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:08 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:09 UTC | printing | 0.0% | 220.2 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:10 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:11 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:12 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 17:13:34 UTC] [complete-watcher:Iris] 'proxy_Med_Core_marked_FIXED_PETG_3h31m.gcode' ended as 'klippy_shutdown' — no deduction
+| 2026-07-19 17:13 UTC | printing | 0.0% | 220.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:14 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:15 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:16 UTC | printing | 0.0% | 219.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:17 UTC | printing | 0.0% | 220.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 17:18:35 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-19 17:18 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 17:19:37 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-19 17:19 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 17:20:38 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-19 17:20 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 17:20:58 UTC] [iris-addr-watch] Iris moved 192.168.1.132 -> 192.168.1.50 — repointing configs
+[2026-07-19 17:20:58 UTC] [iris-addr-watch]   restarted djinn-print-safety@iris.service
+| 2026-07-19 17:21 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:22 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:23 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:24 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:25 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:26 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:27 UTC | printing | 0.0% | 220.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:28 UTC | printing | 0.0% | 219.1 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:29 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:30 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:31 UTC | complete | 0.0% | 205.4 | 0 | 64.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 17:32 UTC | standby | 0.0% | 148.1 | 0 | 62.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:33 UTC | standby | 0.0% | 110.8 | 0 | 60.6 | 0 | 0% | 0 |  |
+| 2026-07-19 17:34 UTC | standby | 0.0% | 85.9 | 0 | 58.4 | 0 | 0% | 0 |  |
+| 2026-07-19 17:35 UTC | standby | 0.0% | 68.7 | 0 | 56.4 | 0 | 0% | 0 |  |
+| 2026-07-19 17:36 UTC | standby | 0.0% | 56.9 | 0 | 54.5 | 0 | 0% | 0 |  |
+| 2026-07-19 17:38 UTC | standby | 0.0% | 48.8 | 0 | 52.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:39 UTC | standby | 0.0% | 43.4 | 0 | 51.2 | 0 | 0% | 0 |  |
+| 2026-07-19 17:40 UTC | standby | 0.0% | 39.7 | 0 | 49.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:41 UTC | standby | 0.0% | 38.0 | 0 | 48.4 | 0 | 0% | 0 |  |
+| 2026-07-19 17:42 UTC | standby | 0.0% | 37.0 | 0 | 47.1 | 0 | 0% | 0 |  |
+| 2026-07-19 17:43 UTC | standby | 0.0% | 36.4 | 0 | 45.9 | 0 | 0% | 0 |  |
+| 2026-07-19 17:44 UTC | standby | 0.0% | 35.9 | 0 | 44.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:45 UTC | standby | 0.0% | 35.5 | 0 | 43.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:46 UTC | standby | 0.0% | 35.1 | 0 | 42.9 | 0 | 0% | 0 |  |
+| 2026-07-19 17:47 UTC | standby | 0.0% | 34.8 | 0 | 42.0 | 0 | 0% | 0 |  |
+| 2026-07-19 17:48 UTC | standby | 0.0% | 34.6 | 0 | 41.1 | 0 | 0% | 0 |  |
+| 2026-07-19 17:49 UTC | standby | 0.0% | 34.3 | 0 | 40.4 | 0 | 0% | 0 |  |
+| 2026-07-19 17:50 UTC | standby | 0.0% | 34.1 | 0 | 39.7 | 0 | 0% | 0 |  |
+| 2026-07-19 17:51 UTC | standby | 0.0% | 33.9 | 0 | 39.0 | 0 | 0% | 0 |  |
+| 2026-07-19 17:52 UTC | standby | 0.0% | 33.7 | 0 | 38.4 | 0 | 0% | 0 |  |
+| 2026-07-19 17:53 UTC | standby | 0.0% | 33.5 | 0 | 37.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:54 UTC | standby | 0.0% | 33.4 | 0 | 37.2 | 0 | 0% | 0 |  |
+| 2026-07-19 17:55 UTC | standby | 0.0% | 33.2 | 0 | 36.7 | 0 | 0% | 0 |  |
+| 2026-07-19 17:56 UTC | standby | 0.0% | 33.1 | 0 | 36.2 | 0 | 0% | 0 |  |
+| 2026-07-19 17:57 UTC | standby | 0.0% | 33.0 | 0 | 35.8 | 0 | 0% | 0 |  |
+| 2026-07-19 17:58 UTC | standby | 0.0% | 32.9 | 0 | 35.3 | 0 | 0% | 0 |  |
+| 2026-07-19 17:59 UTC | standby | 0.0% | 32.8 | 0 | 34.9 | 0 | 0% | 0 |  |
+| 2026-07-19 18:00 UTC | standby | 0.0% | 32.6 | 0 | 34.5 | 0 | 0% | 0 |  |
+| 2026-07-19 18:01 UTC | standby | 0.0% | 32.5 | 0 | 34.1 | 0 | 0% | 0 |  |
+| 2026-07-19 18:02 UTC | standby | 0.0% | 32.4 | 0 | 33.8 | 0 | 0% | 0 |  |
+| 2026-07-19 18:03 UTC | standby | 0.0% | 32.2 | 0 | 33.5 | 0 | 0% | 0 |  |
+| 2026-07-19 18:04 UTC | standby | 0.0% | 32.1 | 0 | 33.1 | 0 | 0% | 0 |  |
