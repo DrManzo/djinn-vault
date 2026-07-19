@@ -7831,3 +7831,62 @@
 | 2026-07-19 04:02 UTC | complete | 0.0% | 208.1 | 0 | 28.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 04:03 UTC | complete | 0.0% | 208.1 | 0 | 28.2 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 04:04 UTC | complete | 0.0% | 208.1 | 0 | 28.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:05 UTC | complete | 0.0% | 208.1 | 0 | 28.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:06 UTC | complete | 0.0% | 208.1 | 0 | 28.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:07 UTC | complete | 0.0% | 208.1 | 0 | 28.1 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:08 UTC | complete | 0.0% | 208.1 | 0 | 28.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:09 UTC | complete | 0.0% | 208.1 | 0 | 28.0 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:10 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:11 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:12 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:13 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:14 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:15 UTC | complete | 0.0% | 208.1 | 0 | 27.9 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:16 UTC | complete | 0.0% | 208.1 | 0 | 27.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:17 UTC | complete | 0.0% | 208.1 | 0 | 27.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:18 UTC | complete | 0.0% | 208.1 | 0 | 27.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:19 UTC | complete | 0.0% | 208.1 | 0 | 27.8 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:20 UTC | complete | 0.0% | 208.1 | 0 | 27.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:21 UTC | complete | 0.0% | 208.1 | 0 | 27.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:22 UTC | complete | 0.0% | 208.1 | 0 | 27.7 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:23 UTC | complete | 0.0% | 208.1 | 0 | 27.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:24 UTC | complete | 0.0% | 208.1 | 0 | 27.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:25 UTC | complete | 0.0% | 208.1 | 0 | 27.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:26 UTC | complete | 0.0% | 208.1 | 0 | 27.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:27 UTC | complete | 0.0% | 208.1 | 0 | 27.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:28 UTC | complete | 0.0% | 208.1 | 0 | 27.5 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 04:29 UTC | standby | 0.0% | 29.1 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-19 04:30 UTC | standby | 0.0% | 29.0 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-19 04:31 UTC | standby | 0.0% | 29.0 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-19 04:32 UTC | standby | 0.0% | 29.0 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-19 04:33 UTC | standby | 0.0% | 29.0 | 0 | 27.5 | 0 | 0% | 0 |  |
+| 2026-07-19 04:34 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-19 04:35 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-19 04:36 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-19 04:37 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+| 2026-07-19 04:38 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-19 04:39 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-19 04:40 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-19 04:41 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+| 2026-07-19 04:42 UTC | standby | 0.0% | 28.7 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-19 04:43 UTC | standby | 0.0% | 28.7 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-19 04:44 UTC | standby | 0.0% | 28.7 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-19 04:45 UTC | standby | 0.0% | 28.7 | 0 | 27.2 | 0 | 0% | 0 |  |
+| 2026-07-19 04:46 UTC | standby | 0.0% | 28.7 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-19 04:47 UTC | standby | 0.0% | 28.6 | 0 | 27.1 | 0 | 0% | 0 |  |
+| 2026-07-19 04:48 UTC | standby | 0.0% | 28.6 | 0 | 27.0 | 0 | 0% | 0 |  |
+| 2026-07-19 04:49 UTC | standby | 0.0% | 28.6 | 0 | 27.0 | 0 | 0% | 0 |  |
+| 2026-07-19 04:50 UTC | standby | 0.0% | 28.6 | 0 | 27.0 | 0 | 0% | 0 |  |
+| 2026-07-19 04:51 UTC | standby | 0.0% | 28.6 | 0 | 26.9 | 0 | 0% | 0 |  |
+| 2026-07-19 04:52 UTC | standby | 0.0% | 28.5 | 0 | 26.9 | 0 | 0% | 0 |  |
+| 2026-07-19 04:53 UTC | standby | 0.0% | 28.5 | 0 | 26.9 | 0 | 0% | 0 |  |
+| 2026-07-19 04:54 UTC | standby | 0.0% | 28.5 | 0 | 26.9 | 0 | 0% | 0 |  |
+| 2026-07-19 04:55 UTC | standby | 0.0% | 28.5 | 0 | 26.8 | 0 | 0% | 0 |  |
+| 2026-07-19 04:56 UTC | standby | 0.0% | 28.4 | 0 | 26.8 | 0 | 0% | 0 |  |
+| 2026-07-19 04:57 UTC | standby | 0.0% | 28.4 | 0 | 26.8 | 0 | 0% | 0 |  |
+| 2026-07-19 04:59 UTC | standby | 0.0% | 28.6 | 0 | 26.8 | 0 | 0% | 0 |  |
+| 2026-07-19 05:00 UTC | standby | 0.0% | 163.4 | 170 | 33.0 | 65 | 0% | 0 |  |
+| 2026-07-19 05:01 UTC | standby | 0.0% | 176.8 | 130 | 42.8 | 65 | 0% | 0 |  |
+| 2026-07-19 05:02 UTC | standby | 0.0% | 129.7 | 130 | 51.6 | 65 | 0% | 0 |  |
+| 2026-07-19 05:03 UTC | standby | 0.0% | 130.4 | 130 | 59.8 | 65 | 0% | 0 |  |
+| 2026-07-19 05:04 UTC | standby | 0.0% | 130.7 | 130 | 64.5 | 65 | 0% | 0 |  |
