@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-07-19 12:48 UTC
+Generated: 2026-07-19 15:13 UTC
 Source file: yellow+block+cup_marked.stl_PLA_2h22m41s.gcode
-Readings: 427
+Readings: 566
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 65°C |
-| Mean | 219.6°C | 65.0°C |
-| Std dev | ±6.17°C | ±0.16°C |
+| Mean | 219.7°C | 65.0°C |
+| Std dev | ±5.36°C | ±0.15°C |
 | Range | 130.1–221.4°C | 64.5–66.2°C |
 
 ## Fan
@@ -22,7 +22,7 @@ Readings: 427
 
 ## Anomalies
 - 
-hotend temp variance high: ±6.2°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±5.4°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)

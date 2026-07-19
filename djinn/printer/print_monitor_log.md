@@ -8487,3 +8487,63 @@
 | 2026-07-19 15:01 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 15:02 UTC | printing | 0.0% | 219.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
 | 2026-07-19 15:03 UTC | printing | 0.0% | 220.1 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:04 UTC | printing | 0.0% | 220.6 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:05 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:07 UTC | printing | 0.0% | 221.1 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:08 UTC | complete | 0.0% | 189.7 | 0 | 64.6 | 0 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+[2026-07-19 15:08:30 UTC] [complete-watcher] 'yellow+block+cup_marked.stl_PLA_2h22m41s.gcode' left printing state as 'standby' (not complete) — no deduction
+| 2026-07-19 15:09 UTC | standby | 0.0% | 138.1 | 130 | 64.3 | 65 | 0% | 0 |  |
+| 2026-07-19 15:10 UTC | standby | 0.0% | 201.9 | 200 | 65.5 | 65 | 0% | 0 |  |
+| 2026-07-19 15:11 UTC | standby | 0.0% | 140.0 | 130 | 65.2 | 65 | 0% | 0 |  |
+| 2026-07-19 15:12 UTC | standby | 0.0% | 129.6 | 130 | 65.2 | 65 | 0% | 0 |  |
+| 2026-07-19 15:13 UTC | printing | 0.0% | 219.6 | 220 | 65.2 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:14 UTC | printing | 0.0% | 219.5 | 220 | 65.2 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:15 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:16 UTC | printing | 0.0% | 219.4 | 220 | 64.6 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:17 UTC | printing | 0.0% | 219.6 | 220 | 64.7 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:18 UTC | printing | 0.0% | 220.4 | 220 | 64.7 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:19 UTC | printing | 0.0% | 219.5 | 220 | 64.8 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:20 UTC | printing | 0.0% | 219.5 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:21 UTC | printing | 0.0% | 219.5 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:22 UTC | printing | 0.0% | 219.7 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:23 UTC | printing | 0.0% | 220.3 | 220 | 65.1 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:24 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:25 UTC | printing | 0.0% | 220.0 | 220 | 64.9 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:26 UTC | printing | 0.0% | 219.8 | 220 | 65.2 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:27 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:28 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:29 UTC | printing | 0.0% | 220.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:30 UTC | printing | 0.0% | 220.2 | 220 | 64.9 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:31 UTC | printing | 0.0% | 220.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:32 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:33 UTC | printing | 0.0% | 219.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:34 UTC | printing | 0.0% | 219.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:35 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:36 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:37 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:38 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:39 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:40 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:41 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:42 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:43 UTC | printing | 0.0% | 219.9 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:44 UTC | printing | 0.0% | 220.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:45 UTC | printing | 0.0% | 219.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:46 UTC | printing | 0.0% | 219.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:47 UTC | printing | 0.0% | 220.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:48 UTC | printing | 0.0% | 220.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:49 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:50 UTC | printing | 0.0% | 220.4 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:51 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:52 UTC | printing | 0.0% | 219.2 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:53 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:54 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:55 UTC | printing | 0.0% | 220.7 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:56 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:57 UTC | printing | 0.0% | 220.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:58 UTC | printing | 0.0% | 219.3 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 15:59 UTC | printing | 0.0% | 220.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 16:00 UTC | printing | 0.0% | 220.5 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 16:01 UTC | printing | 0.0% | 219.0 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 16:02 UTC | printing | 0.0% | 220.6 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
+| 2026-07-19 16:03 UTC | printing | 0.0% | 219.8 | 220 | 65.0 | 65 | 0% | 0 | yellow+block+cup_marked.stl_PLA_2h22m41s.gcode |
