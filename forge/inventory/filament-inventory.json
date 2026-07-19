@@ -8,13 +8,13 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 300,
+      "remaining_g": 196.3,
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 IFS slot, spool A. Physical weigh-in 2026-07-17 (Javier): ~300g. Supersedes the same-day telemetry-based estimate (468g) and the earlier stale dashboard figure (900g) \u2014 both undercounted actual usage. IFS holds up to 4 spools simultaneously; Iris routes between them per job, so this isn't a single 'active' spool in the old loaded/staged sense.",
+      "notes": "Iris \u2014 IFS slot, spool A. Physical weigh-in 2026-07-17 (Javier): ~300g. Supersedes the same-day telemetry-based estimate (468g) and the earlier stale dashboard figure (900g) \u2014 both undercounted actual usage. IFS holds up to 4 spools simultaneously; Iris routes between them per job, so this isn't a single 'active' spool in the old loaded/staged sense. | [2026-07-19] auto-deducted 103.7g (print: pro",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17",
+      "last_used": "2026-07-19",
       "last_physical_check": null
     },
     {
