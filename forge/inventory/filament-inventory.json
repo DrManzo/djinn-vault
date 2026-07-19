@@ -23,14 +23,14 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 200,
+      "remaining_g": 0,
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 IFS slot, spool B. Physical weigh-in 2026-07-17 (Javier): ~200g, superseding the stale 600g dashboard figure.",
+      "notes": "Iris \u2014 IFS slot, spool B. Physical weigh-in 2026-07-17 (Javier): ~200g, superseding the stale 600g dashboard figure. | [2026-07-19] Javier: spool finished/depleted (physical).",
       "added_at": "2026-07-12",
       "last_used": "2026-07-17",
-      "last_physical_check": null
+      "last_physical_check": "2026-07-19"
     },
     {
       "spool_id": "SPOOL-003",
