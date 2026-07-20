@@ -1,74 +1,78 @@
 ---
-title: Bug Report — Nemesis Z-Offset Recalibration Too Aggressive, Nozzle Scraping Plate
+title: Bug Report — Nemesis Z-Offset / FlashOS Leveling Dialog Unfixable Remotely, Moonraker Outage Self-Inflicted and Recovered
 agent: Claude
-date: 2026-07-19
-tags: [djinn, bug, nemesis, z-offset, calibration, printer-safety]
+date: 2026-07-19 to 2026-07-20
+tags: [djinn, bug, nemesis, z-offset, calibration, printer-safety, moonraker, forge-x]
 related: [[build-log]] | [[bugs]]
 ---
 
-# Bug Report — Nemesis Z-Offset Recalibration Too Aggressive, Nozzle Scraping Plate
+# Bug Report — Nemesis Z-Offset / FlashOS Leveling Dialog, Moonraker Outage
 
-**Date:** 2026-07-19
-**System:** Nemesis (FlashForge AD5M Pro), Klipper `probe.z_offset`
-**Severity:** High (hardware risk — nozzle-to-bed contact)
-**Status:** Open, mitigated overnight (printer left in safe `shutdown` state)
-
----
-
-## What Happened
-
-Earlier the same session, Nemesis's bed leveling screws were adjusted (`SCREWS_TILT_CALCULATE`, converged from 1.73mm tilt down to 0.466mm range) and a fresh `BED_MESH_CALIBRATE` was saved over the newly-leveled bed.
-
-Javier reported a print ("fucked up the textured plate") that looked like an early-cancel with unusual Z-offset activity in the console log (`SET: Z-OFFSET: 0.905` then reset to `0.0` right before print start). Correctly inferred that leveling the screws changed the bed's physical height relative to the nozzle, staling out the previous Z-offset calibration — needed a fresh `PROBE_CALIBRATE`.
-
-Ran `PROBE_CALIBRATE`, walked Javier through the interactive paper-test via `TESTZ` commands over the Moonraker API (jogging in small steps, Javier reporting paper drag by feel). Javier then took over and completed the adjustment manually via the printer's own interface, landing well past where the guided steps had left off — my last `TESTZ` step was at `-0.098mm`; Javier's own final manual position was `-1.328mm` before accepting. Ran `SAVE_CONFIG`, confirmed the saved value: `probe.z_offset: -0.336` (Klipper reports the post-`ACCEPT` computed offset, not the raw TESTZ position — the two aren't directly the same number, which in hindsight should have been a signal to sanity-check the magnitude before trusting it).
-
-Next print attempt: nozzle scraped against the textured plate. Javier emergency-cancelled (`M112`-class stop) before it caused real damage. Klipper landed in `shutdown` state (`Shutdown due to webhooks request`).
+**System:** Nemesis (FlashForge AD5M Pro) — Klipper `probe.z_offset`, `forge-x` mod, stock FlashOS firmware
+**Severity:** High (hardware risk — nozzle-to-bed contact, twice) + self-inflicted Moonraker outage (fully recovered)
+**Status:** Klipper-side calibration fixed and verified. FlashOS-level leveling-before-print behavior identified but NOT fixable remotely — needs physical-screen intervention or further investigation with Javier present. Moonraker outage caused during investigation, fully recovered via reboot, no lasting damage.
 
 ---
 
-## Root Cause (assessed, not yet confirmed with a corrected recalibration)
+## Timeline
 
-Two candidate contributors, not mutually exclusive:
+**2026-07-19, first pass:** Bed screws leveled (`SCREWS_TILT_CALCULATE`, 1.73mm → 0.466mm tilt), then `BED_MESH_CALIBRATE` saved — in the wrong order, before Z-offset was recalibrated. `PROBE_CALIBRATE` run afterward; Javier completed the manual paper-test himself past where guided steps left off, landing at `probe.z_offset: -0.336`, saved. Next print scraped the plate; Javier emergency-cancelled. Printer left in Klipper `shutdown` state overnight.
 
-1. **The offset itself is too aggressive.** `-0.336mm` is a plausible but somewhat deep value for a fresh calibration; combined with Javier's manual TESTZ endpoint being over 1mm past my last guided step, there's a real chance the final "feel" was past the correct drag-not-stuck point.
-2. **Stale bed mesh compounding it.** The mesh saved after screw-leveling was calibrated *against the old Z-offset*, before this new offset existed. Bed mesh compensation is additive on top of the probe's Z reference — if the reference itself shifted after the mesh was captured, the mesh's per-point corrections no longer mean what they meant when captured, and could be pushing the effective nozzle height even lower in some regions than the raw offset alone would. This would explain scraping being inconsistent (worse in some spots) rather than uniform across the whole bed, which is what you'd expect from a pure offset problem.
+**2026-07-20, second pass:** Redid the process in the correct order — `PROBE_CALIBRATE` first (this time landing at a much more reasonable `-0.101`, verified via a clean 0.537mm bed mesh), *then* `BED_MESH_CALIBRATE` fresh against the corrected offset. This Klipper-side calibration is solid and was reverified after the reboot below — still `-0.101`, mesh profile `default` intact.
+
+**Print attempts kept scraping anyway.** Root-caused why: the actual print-start path (`NOLEVELING_PRINT_FILE` from the stock screen, and — critically — even Moonraker's *native* `/printer/print/start` and Klipper's own core `SDCARD_PRINT_FILE` command) all route through an M23-socket handshake to the stock FlashOS firmware (port 8899, closed-source), which runs its **own separate leveling-before-print dialog** — completely independent of Klipper's `probe.z_offset`. This dialog:
+- Prints console text nearly identical to Klipper's real `MANUAL_PROBE`/`TESTZ`/`ACCEPT` flow, but **does not accept `TESTZ` or `ACCEPT`** (`Unknown command`, confirmed twice) — it is not a real Klipper manual-probe session despite the matching text.
+- Computes a fresh offset each time (consistently ~`1.05`, watched across multiple attempts) but **discards it and applies `0.0`** right before the print actually starts (`SET: Z-OFFSET: 1.052` → `SET: Z-OFFSET: 0.0`, every single attempt).
+- Auto-cancels/times out (~30s) if nothing interacts with it, which nothing can from any API/gcode path found.
+- Has its own persistent value in `/opt/config/Adventurer5M.json`: `"zLevelOffset": -2.073...` — a **third, independent Z-offset system**, separate from both Klipper's `probe.z_offset` and the unrelated `mod_params.z_offset`/`load_zoffset` toggle (confirmed inactive/irrelevant — that one only applies to the `_START_PRINT` macro flow, which this gcode file never calls, since it's a raw macro-free start sequence).
+
+**Exhaustively confirmed no remote bypass exists**: stock screen macros (`LEVELING_PRINT_FILE`, `NOLEVELING_PRINT_FILE` — both call this same handshake via different shell scripts, `zprint.sh`/`zsend.sh` → `zsend.py` → raw socket to port 8899), Moonraker's native print-start API, and Klipper's own unwrapped `SDCARD_PRINT_FILE` core command all hit the identical FlashOS dialog. This is architectural — `virtual_sdcard` on this machine is integrated with the stock firmware's file-select mechanism at a level deeper than gcode macro wrapping.
+
+**Self-inflicted Moonraker outage:** Attempted to restart the Moonraker service after its HTTP API hung (stuck behind a blocking `SDCARD_PRINT_FILE` gcode request). The stock `S65moonraker` init script failed (`start-stop-daemon: command not found` — not available in this busybox environment) on both stop and start, which also tore down what turned out to be a **chroot-scoped bind mount** (`/root/moonraker-env`, sourced from `/data/.mod/.forge-x/root/moonraker-env`). Manual reconstruction attempts (direct invocation, PYTHONPATH tricks, copying `importlib_metadata`/dependency files across Python versions) failed with increasingly deep errors, eventually hitting a hard blocker: the packages in that venv require Python 3.11 syntax (`zipp`'s positional-only parameters, a 3.8+ feature) that the outer-namespace `/usr/bin/python3` (actually 3.7.2) cannot even parse. Root cause: `forge-x` runs as a **full chroot environment** at `/data/.mod/.forge-x/` (own `/proc`, `/dev`, `/tmp`, `/data`) — Moonraker is meant to run *inside* that chroot, where `/usr/bin/python3` correctly resolves to forge-x's own bundled 3.11 interpreter. Manually invoking paths from the outer filesystem namespace can never work correctly, no matter how many individual files/mounts are patched by hand.
+
+**Fix: a full reboot**, not manual mount reconstruction. The boot-time init sequence correctly re-established every mount and re-launched Moonraker inside its chroot exactly as designed (confirmed via `ps aux` showing PID 1462 — identical PID to before, consistent with a deterministic init sequence). Verified post-reboot: Klipper untouched throughout (`probe.z_offset` still `-0.101`, `bed_mesh` profile `default` still loaded, Klipper process never stopped), Moonraker fully responsive, `djinn-print-safety@nemesis` reconnected.
 
 ---
 
-## Current State / Mitigation
+## Current State (end of session)
 
-- Nemesis left in Klipper `shutdown` state overnight (heaters/motors cut via the emergency stop, not manually re-enabled) — deliberately not run `FIRMWARE_RESTART` to bring her back to `Ready`, so nothing can accidentally queue a print with the bad offset before this is fixed.
-- `probe.z_offset: -0.336` is still what's saved in config; not yet corrected.
-- Bed mesh from the screw-leveling pass is still the active saved profile; not yet recaptured.
+- Nemesis: `Ready`, idle, heaters off, `homed_axes` cleared (normal post-reboot, not homed until next command)
+- `probe.z_offset: -0.101` — good, Klipper-verified, survived the reboot
+- `bed_mesh` profile `default` — good, captured against the corrected offset
+- Moonraker: fully recovered, running correctly inside its chroot
+- **The actual scraping bug is NOT fixed.** Any print started through any path available to us (touchscreen, Moonraker API, raw Klipper command) still routes through the FlashOS dialog that discards its own fresh probe and applies `0.0` instead.
 
 ---
 
-## Plan For Next Session
+## What's Actually Needed Next (requires Javier physically present)
 
-1. `FIRMWARE_RESTART` to clear the shutdown state.
-2. Redo the paper-test Z-offset calibration more conservatively — smaller steps, more explicit confirmation before accepting, and sanity-check the final saved `probe.z_offset` magnitude against what's typical for this machine before moving on (don't just trust a single physical-feel judgment call for a value this consequential).
-3. Only *after* the offset is corrected and confirmed, re-run `BED_MESH_CALIBRATE` fresh — mesh must never be captured before the offset it depends on is settled, which is what went wrong the first time around (screws leveled → mesh captured → offset recalibrated after, invalidating the mesh's reference frame).
-4. Consider a supervised, low-risk verification print (e.g. a single-layer skirt/first-layer-only test) before trusting a full multi-hour job again.
+1. **Try the physical touchscreen's own Accept/Reject buttons** on that leveling dialog directly — it may only be operable that way, not via any gcode/API command. This is the most likely path to a real fix and hasn't been tried yet.
+2. If that also doesn't stick, the remaining option is directly editing `zLevelOffset` in `/opt/config/Adventurer5M.json` — **not attempted**, because the sign/reference-frame relationship between that value and Klipper's `probe.z_offset` is unverified, and guessing wrong on a value that directly controls nozzle-to-bed clearance is a real crash risk. This needs a supervised, low-stakes verification (e.g. checking clearance at a known Z height by eye) before trusting it for a real print — explicitly the kind of thing that should not be done unsupervised, which is why it wasn't attempted tonight.
+3. Do not attempt to hand-fix individual mounts/paths under `/data/.mod/.forge-x/` again if Moonraker ever goes down on this machine — reboot first, it's the correct recovery path for this chroot-based setup.
 
 ---
 
 ## Rule / Lesson
 
-**Order of operations matters for bed calibration: screws → Z-offset → mesh, in that order, every time — never mesh before offset.** Capturing a bed mesh compensates relative to whatever Z reference is active at that moment; if the reference (probe z_offset) changes afterward, the mesh's stored corrections are calibrated against a reference that no longer exists, and the two can compound into an effective height that's worse than either problem alone. This directly caused inconsistent (not uniform) scraping, which is a symptom of exactly this class of bug.
+**A console message that looks like a known interface (Klipper's `MANUAL_PROBE`/`TESTZ`/`ACCEPT`) is not proof it *is* that interface.** This FlashOS dialog mimicked Klipper's manual-probe text closely enough to cause two failed attempts before the mismatch (`Unknown command: "TESTZ"`) was actually noticed and taken seriously. When a command that should be registered (confirmed via `/printer/gcode/help`) is rejected as unknown in a live session, that's a signal the session itself isn't what it appears to be — worth checking before repeating the same command a second time expecting a different result.
 
-**A remotely-guided physical calibration should not be trusted at face value when the human takes over and finishes it themselves past where the guided portion left off.** The final result differed by over 1mm in raw TESTZ terms from the last jointly-confirmed step. Worth a sanity-check pause ("that's a bigger jump than I'd expect, are you sure?") before running `SAVE_CONFIG` on a value that directly controls whether the nozzle crashes into the bed.
+**On an unfamiliar embedded/chroot system, prefer reboot over manual reconstruction once you're patching individual mount points and copying files across incompatible Python versions.** Every manual fix attempted here (remounting one directory, copying one dependency, setting PYTHONPATH) fixed the symptom just in front of it and immediately exposed a deeper one, because the real structure (a full chroot with its own `/usr`) wasn't understood until several failed attempts in. A boot-time-managed mount tree should be restored by the mechanism that manages it (the boot sequence), not hand-reconstructed piece by piece under time pressure.
+
+**Bypassing a suspected bug by trying "the next API layer down" (macro → Moonraker API → raw Klipper command) is good instinct, but confirm each layer actually reaches a different code path before trusting it as a fix.** All three layers here funneled into the identical FlashOS handshake — the appearance of using a "more native" interface didn't guarantee it avoided the problem, because the integration was deeper than any of those layers.
 
 ---
 
 ## Files / State Touched
 
 ```
-Nemesis (192.168.1.51) — probe.z_offset: -0.336 (saved, config restart applied)
-Nemesis — bed_mesh profile "default" — stale relative to current offset, not yet recaptured
-Nemesis — left in Klipper shutdown state as of end of session 2026-07-19
+Nemesis (192.168.1.51):
+  probe.z_offset: -0.101 (Klipper-verified, correct, survived reboot)
+  bed_mesh profile "default": recaptured fresh against corrected offset, good
+  zLevelOffset (Adventurer5M.json, FlashOS): -2.073... — untouched, unverified, NOT the fix
+  /opt/config/mod/... : zprint.sh briefly edited then reverted to original (wrong script, not the actual bug)
+  Moonraker: went down (self-inflicted during investigation), fully recovered via reboot
 ```
 
 ---
 
-*— Claude, 2026-07-19*
+*— Claude, 2026-07-19/20*
