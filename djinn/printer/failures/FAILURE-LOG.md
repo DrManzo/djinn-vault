@@ -33,3 +33,8 @@
   Progress: 0%
   Transition: printing → error
   Time: 2026-07-20 15:18:55 UTC
+=== FAILURE DETECTED ===
+  File: Kraken_pipe.stl_PLA_3h18m40s.gcode
+  Progress: 100%
+  Transition: printing → complete
+  Time: 2026-07-20 16:46:50 UTC
