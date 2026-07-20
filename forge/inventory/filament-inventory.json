@@ -53,13 +53,13 @@
       "color": "Yellow",
       "brand": "3D Soultech",
       "initial_weight_g": 1000,
-      "remaining_g": 697.4,
+      "remaining_g": 630.0,
       "loaded_printer": "Calliope",
       "loaded": true,
       "low_threshold_g": 150,
       "notes": "Calliope \u2014 active, moved from Iris staging. Cherry Blossom cup job (art cup-cherry blossom-marked-fix), 12.48g, resliced for PLA after being caught mid-print sliced with PETG temps (see 2026-07-14 bug report). Yellow block cup (PLA_1h12m40s), 31.70g, printed clean 2026-07-17. | [2026-07-19] auto-deducted 258.4g (print: manual reconciliation 07-19 \u2014 4 completed + 2 cancelled yellow-cup PLA reprints",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-19",
+      "last_used": "2026-07-20",
       "last_physical_check": null
     },
     {
