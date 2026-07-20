@@ -9446,3 +9446,14 @@
 [2026-07-20 06:52:33 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
 | 2026-07-20 06:53 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
 | 2026-07-20 06:54 UTC | printing | 0.0% | 229.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:55 UTC | printing | 0.0% | 230.6 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:56 UTC | printing | 0.0% | 230.3 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:57 UTC | printing | 0.0% | 230.2 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:58 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:59 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+[2026-07-20 06:59:30 UTC] [complete-watcher:Nemesis] 'Kraken_pipe_PLA_4h40m.gcode' ended as 'klippy_shutdown' — no deduction
+| 2026-07-20 07:00 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 07:01 UTC | printing | 0.0% | 230.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 07:02 UTC | printing | 0.0% | 229.5 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 07:03 UTC | printing | 0.0% | 230.1 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 07:04 UTC | printing | 0.0% | 230.2 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
