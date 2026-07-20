@@ -9332,3 +9332,65 @@
 | 2026-07-20 05:02 UTC | standby | 0.0% | 30.9 | 0 | 29.6 | 0 | 0% | 0 |  |
 | 2026-07-20 05:03 UTC | standby | 0.0% | 31.0 | 0 | 29.6 | 0 | 0% | 0 |  |
 | 2026-07-20 05:04 UTC | standby | 0.0% | 31.0 | 0 | 29.6 | 0 | 0% | 0 |  |
+| 2026-07-20 05:05 UTC | standby | 0.0% | 50.7 | 140 | 29.8 | 65 | 0% | 0 |  |
+| 2026-07-20 05:06 UTC | standby | 0.0% | 198.3 | 210 | 38.7 | 65 | 0% | 0 |  |
+| 2026-07-20 05:07 UTC | standby | 0.0% | 149.1 | 140 | 48.2 | 65 | 0% | 0 |  |
+| 2026-07-20 05:08 UTC | standby | 0.0% | 139.8 | 140 | 56.8 | 65 | 0% | 0 |  |
+| 2026-07-20 05:09 UTC | standby | 0.0% | 140.7 | 140 | 63.6 | 65 | 0% | 0 |  |
+| 2026-07-20 05:10 UTC | printing | 0.0% | 148.0 | 230 | 66.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:11 UTC | printing | 0.0% | 230.3 | 230 | 66.2 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:12 UTC | printing | 0.0% | 230.2 | 230 | 65.7 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:13 UTC | printing | 0.0% | 230.5 | 230 | 65.2 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:14 UTC | printing | 0.0% | 229.6 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:15 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:16 UTC | printing | 0.0% | 230.0 | 230 | 64.5 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:17 UTC | printing | 0.0% | 230.1 | 230 | 64.5 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:18 UTC | printing | 0.0% | 229.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:19 UTC | printing | 0.0% | 230.6 | 230 | 64.8 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+[2026-07-20 05:19:26 UTC] [iris-addr-watch] Iris moved 192.168.1.50 -> 192.168.1.132 — repointing configs
+[2026-07-20 05:19:27 UTC] [iris-addr-watch]   restarted djinn-print-safety@iris.service
+[2026-07-20 05:19:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error timed out>
+| 2026-07-20 05:20 UTC | printing | 0.0% | 229.1 | 230 | 64.9 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:21 UTC | printing | 0.0% | 229.7 | 230 | 65.2 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:22 UTC | printing | 0.0% | 229.5 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:23 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:24 UTC | printing | 0.0% | 230.2 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:25 UTC | printing | 0.0% | 229.9 | 230 | 65.1 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:26 UTC | printing | 0.0% | 229.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:27 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:28 UTC | printing | 0.0% | 230.1 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:29 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:30 UTC | printing | 0.0% | 230.5 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:31 UTC | printing | 0.0% | 229.3 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:32 UTC | printing | 0.0% | 230.5 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:33 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:34 UTC | printing | 0.0% | 229.3 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:35 UTC | printing | 0.0% | 229.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:36 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:37 UTC | printing | 0.0% | 229.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:38 UTC | printing | 0.0% | 229.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:39 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:40 UTC | printing | 0.0% | 229.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:41 UTC | printing | 0.0% | 230.0 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:42 UTC | printing | 0.0% | 229.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:43 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:44 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:45 UTC | printing | 0.0% | 230.6 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:46 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:47 UTC | printing | 0.0% | 230.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:48 UTC | printing | 0.0% | 229.3 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:49 UTC | printing | 0.0% | 230.6 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:50 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:51 UTC | printing | 0.0% | 230.1 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:52 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:53 UTC | printing | 0.0% | 229.6 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:54 UTC | printing | 0.0% | 230.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:55 UTC | printing | 0.0% | 230.5 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:56 UTC | printing | 0.0% | 229.8 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:57 UTC | printing | 0.0% | 229.7 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:58 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 05:59 UTC | printing | 0.0% | 229.9 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:00 UTC | printing | 0.0% | 230.3 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:01 UTC | printing | 0.0% | 230.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:02 UTC | printing | 0.0% | 229.4 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
+| 2026-07-20 06:03 UTC | printing | 0.0% | 230.2 | 230 | 65.0 | 65 | 0% | 0 | Kraken_pipe.stl_PLA_3h18m40s.gcode |
