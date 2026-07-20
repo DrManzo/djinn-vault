@@ -8,7 +8,7 @@
       "color": "White",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 92.6,
+      "remaining_g": 0,
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
