@@ -1,14 +1,14 @@
 # Print Profile Baseline
-Generated: 2026-07-19 17:32 UTC
-Source file: 
-Readings: 703
+Generated: 2026-07-20 05:10 UTC
+Source file: Kraken_pipe.stl_PLA_3h18m40s.gcode
+Readings: 704
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
 | Target | 220°C | 65°C |
-| Mean | 219.7°C | 65.0°C |
-| Std dev | ±4.82°C | ±0.14°C |
+| Mean | 219.6°C | 65.0°C |
+| Std dev | ±5.52°C | ±0.15°C |
 | Range | 130.1–221.4°C | 64.5–66.2°C |
 
 ## Fan
@@ -22,7 +22,7 @@ Readings: 703
 
 ## Anomalies
 - 
-hotend temp variance high: ±4.8°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±5.5°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)
