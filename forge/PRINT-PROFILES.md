@@ -177,7 +177,7 @@ ALL gcode passes through `djinn-gcode-safety` which caps M106 fan speed to S128 
 | Walls | 2 |
 | Supports | Only if >60° |
 | Brim | yes (3mm) |
-| Bed temp | 55°C (PLA) / 70°C (PETG) |
+| Bed temp | 60°C (PLA) / 70°C (PETG) |
 | Hotend | 220°C (PLA) / 240°C (PETG) |
 | Multi-color | Single extruder (T1 only) for protos |
 
@@ -190,7 +190,7 @@ ALL gcode passes through `djinn-gcode-safety` which caps M106 fan speed to S128 
 | Walls | 3 |
 | Supports | If >40° — assign T2 as interface (see [[SUPPORT-SETTINGS#Iris]]) |
 | Brim | yes (5mm) |
-| Bed temp | 55°C (PLA) / 70°C (PETG) |
+| Bed temp | 60°C (PLA) / 70°C (PETG) |
 | Hotend T1 | 220°C (PLA) / 240°C (PETG) |
 | Hotend T2 | 210°C (PLA interface) |
 
@@ -217,6 +217,7 @@ T4 = Reserve / specialty (TPU, etc.)
 ```
 
 ## Iris Notes
+- **2026-07-20: PLA bed temp bumped 55°C → 60°C fleet-wide (proto/standard) after adhesion failures.** Checked Typhon's Bambu Studio (`user/default/filament|machine|process` all empty) — Iris has never had a saved user filament preset; every print has been going out on Bambu's stock PLA preset with no persistent override. This doc value was already stale relative to what's actually used. The real fix is in Bambu Studio's GUI on Typhon: open the PLA filament settings, bump Cool Plate/Bed Temperature to 60°C (both first-layer and other-layers fields), then **save it as a named preset ("Iris-PLA")** so it's no longer relying on an unmodified stock default each time.
 - bambufy is installed and operational — Bambu Studio is the slicer for multi-color jobs; OrcaSlicer for single-color
 - `shoot_y_position` bug: if "Move out of range" error during long multi-color retractions, lower `shoot_y_position` from 223 to 218 in bambufy config
 - Iris clock may show 1970 on cold boot — NTP resolves on internet connect, non-blocking
