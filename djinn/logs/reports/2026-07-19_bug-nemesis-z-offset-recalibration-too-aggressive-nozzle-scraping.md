@@ -10,7 +10,7 @@ related: [[build-log]] | [[bugs]]
 
 **System:** Nemesis (FlashForge AD5M Pro) — Klipper `probe.z_offset`, `forge-x` mod, stock FlashOS firmware
 **Severity:** High (hardware risk — nozzle-to-bed contact, twice) + self-inflicted Moonraker outage (fully recovered)
-**Status:** Klipper-side calibration fixed and verified. FlashOS-level leveling-before-print behavior identified but NOT fixable remotely — needs physical-screen intervention or further investigation with Javier present. Moonraker outage caused during investigation, fully recovered via reboot, no lasting damage.
+**Status:** RESOLVED (pending full-print confirmation). Klipper-side calibration fixed and verified. Root cause of the FlashOS Z-offset reset confirmed 2026-07-20: print-starts must route through the `LEVELING_PRINT_FILE` macro (real bed leveling), not `NOLEVELING_PRINT_FILE`/Moonraker's native `/printer/print/start` (skips leveling, discards computed offset to `0.0`). See Addendum 3. Moonraker outage caused during investigation, fully recovered via reboot, no lasting damage.
 
 ---
 
@@ -60,6 +60,29 @@ Flagged the risk before testing: the buggy dialog's own `SET: Z-OFFSET: 0.0` mes
 
 ---
 
+## Addendum 3 (2026-07-20, later): ROOT CAUSE CONFIRMED — every failed attempt used the no-leveling print-start path
+
+Javier ran a print manually from the touchscreen with the bed-leveling option explicitly enabled at the file-select screen. Result: full 17×17 `BED_MESH_CALIBRATE` captured live, saved to profile `default`, print started immediately after — and the print-start log has **no** `SET: Z-OFFSET` / `Global Z-Offset management` sequence at all, unlike every prior attempt. Live `gcode_move.homing_origin` confirmed `[0,0,0,0]` (no leftover garbage), webcam snapshot ~5min into the print showed a clean, well-adhered first layer with no scraping or scoring. Print continued normally.
+
+This lines up exactly with what's already in `stock.cfg` (see the earlier full-text capture of `mod/config/stock.cfg` above): there are **two separate print-start macros**, not one —
+
+- `NOLEVELING_PRINT_FILE` — "Print file from Stock screen", routes through `zsend` → the M23-socket handshake → the FlashOS dialog that computes-then-discards its offset (`0.0`). **This is what every attempt tonight actually hit**, including mine via Moonraker's native `/printer/print/start` (which does not distinguish leveling-on/off — it apparently defaults to the no-leveling behavior).
+- `LEVELING_PRINT_FILE` — "Printing a file **with bed leveling** from the printers Stock screen", routes through `zprint PRINT '<filename>'` instead, which actually runs and *keeps* a real `BED_MESH_CALIBRATE`.
+
+**Checked whether any djinn automation needs patching:** grepped all of `~/.local/bin` for both Nemesis's IP and `printer/print/start`. Neither `djinn-confirm-print` nor `djinn-print-recover` touch Nemesis at all (hardcoded to Calliope's IP). No dedicated Nemesis print-start script exists yet — every attempt tonight was an ad-hoc `curl` straight to Moonraker's native endpoint, which is exactly the no-leveling path. Nothing to patch today, but this is now the required pattern for any future Nemesis print-start tooling:
+
+```
+# WRONG — hits the no-leveling FlashOS dialog, forces Z-offset to 0.0:
+curl -X POST "$MOONRAKER/printer/print/start" -d '{"filename":"<name>"}'
+
+# RIGHT — routes through real bed leveling, offset stays correct:
+curl -X POST "$MOONRAKER/printer/gcode/script" -d '{"script":"LEVELING_PRINT_FILE FILENAME=<name>"}'
+```
+
+**Caveat — this is strong evidence, not yet fully closed.** The print in question was ~5 minutes into a 4h5m job when checked, first layer only. Treating this as confirmed given (a) it exactly matches macro source we already have in hand, not inference from symptoms, and (b) the print-start log difference is a clean binary (offset-reset sequence present vs. absent), not a fuzzy signal — but the print should be watched through to completion before fully closing this out.
+
+---
+
 ## Current State (end of session)
 
 - Nemesis: `Ready`, idle, heaters off, `homed_axes` cleared (normal post-reboot, not homed until next command)
@@ -74,12 +97,15 @@ Flagged the risk before testing: the buggy dialog's own `SET: Z-OFFSET: 0.0` mes
 
 ## What's Actually Needed Next
 
-1. **Non-destructive verification (no plate risk, no Javier-present requirement to prepare, but needs Javier to do the physical paper-check):** with the printer idle, `G28` to home, `SET_GCODE_OFFSET Z=0` (matching what the dialog forces at print time), then `G1 Z0.25` (the file's actual first-layer height) at bed center, and paper-drag test by hand. Crushed/dragging paper confirms `0.0` really is too low and quantifies by how much; a clean slide-through confirms the FlashOS dialog's reset is harmless and the Klipper-side fix from 2026-07-19/20 was already sufficient. This directly answers the open question in Addendum 2 without gambling a plate. Caveat: `G28` may not establish Z identically to whatever internal reference the FlashOS dialog itself uses, so this is strong evidence, not absolute proof.
-2. **If the paper check shows `0.0` is genuinely too low:** the durable fix is compensating at the *homing/endstop* level (e.g. `Z_OFFSET_APPLY_ENDSTOP` or equivalent), not the runtime gcode offset — because the FlashOS dialog only ever resets the runtime `SET_GCODE_OFFSET` value, not where home itself is defined. A fix baked into the endstop position survives the dialog's reset; a fix layered on top of it (as Addendum 2 proved) does not.
-   - Note this replaces the physically-adjust-leveling-screws idea Javier proposed 2026-07-20: the screws control bed tilt/planarity, already verified level via a clean 0.537mm mesh — they don't set the uniform nozzle-to-bed height that the FlashOS dialog is interfering with, so re-leveling them wouldn't address this even if the paper check comes back bad.
-3. If the paper check shows a real problem and the endstop-level fix doesn't stick either, the remaining option is directly editing `zLevelOffset` in `/opt/config/Adventurer5M.json` — still not attempted, sign/reference-frame relationship to Klipper's `probe.z_offset` still unverified. Verify with the same paper-check method before trusting it for a real print.
-4. Physical touchscreen Accept/Reject buttons on the FlashOS dialog itself remain untried and are still a candidate if the above doesn't pan out.
-5. Do not attempt to hand-fix individual mounts/paths under `/data/.mod/.forge-x/` again if Moonraker ever goes down on this machine — reboot first, it's the correct recovery path for this chroot-based setup.
+1. **Watch the current Kraken print through to completion** to fully close this out — clean first layer confirmed live via webcam at ~5min in, but the fix (Addendum 3) should be considered provisional until a full print finishes clean.
+2. **Any future Nemesis print-start automation must call `LEVELING_PRINT_FILE FILENAME=<name>` via `/printer/gcode/script`, never Moonraker's native `/printer/print/start`.** No existing djinn script needs patching (grepped — nothing currently targets Nemesis), but this is now the required pattern going forward. Worth adding a small wrapper script once the fix is fully confirmed, so this isn't reliant on remembering it each time.
+3. The earlier ideas below are now superseded by Addendum 3 but kept for the record in case the leveling-macro theory turns out incomplete:
+   - Non-destructive paper-check (`G28` + `SET_GCODE_OFFSET Z=0` + `G1 Z0.25` + paper drag) — still a valid fallback verification method if a future print scrapes again despite going through `LEVELING_PRINT_FILE`.
+   - Endstop-level offset compensation (`Z_OFFSET_APPLY_ENDSTOP`) — only relevant if the no-leveling path is ever used deliberately and needs to be made safe too.
+   - Direct edit to `zLevelOffset` in `/opt/config/Adventurer5M.json` — not attempted, not needed if Addendum 3 holds.
+   - Physical touchscreen Accept/Reject on the dialog — moot; the actual fix was enabling leveling at file-select, not interacting with the dialog itself.
+   - Javier's physically-re-level-the-screws proposal — not needed; screws control tilt (already verified level), the actual issue was which macro the print-start went through.
+4. Do not attempt to hand-fix individual mounts/paths under `/data/.mod/.forge-x/` again if Moonraker ever goes down on this machine — reboot first, it's the correct recovery path for this chroot-based setup.
 
 ---
 
