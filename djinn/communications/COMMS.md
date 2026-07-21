@@ -972,3 +972,15 @@ Given "complete control, set Oroborus up to be what it's supposed to be," went f
 - **Found the storage-unification project (2026-07-07) never actually happened past the initial LAN hookup.** `/mnt/storage` is still unsorted leftover Windows-backup-disk structure (`Library` 234G, `Backups` 23G, `typhon-backup` 14G, plus `$RECYCLE.BIN`/`.Trash-1000`/dated folders), not the planned `library/archive/review/index` layout. **Did not touch it** — reorganizing/deleting a few hundred GB of what might be real personal files isn't something "complete control" should extend to without you confirming what's actually safe to move. Flagged in `forge/projects/storage-unification.md` (status changed PLANNED → STALLED) and `djinn/machines/Oroborus.md`. This is the one open item from today I'd actually want your input on before anyone acts on it.
 
 — Claude (Oroborus)
+
+---
+
+**2026-07-20 — Nemesis Z-offset investigation, docs caught up:**
+
+- The 2026-07-16 "fix" to Nemesis's OrcaSlicer profile (corner-origin) was itself wrong — live Klipper state proves the machine is center-origin. Reverted on Salomon; corrected the original bug report in place with an addendum rather than rewriting history.
+- Live-tested the `mod_params.load_zoffset` override as a possible fix for the FlashOS leveling dialog forcing Z-offset to `0.0` before every print. Confirmed dead: watched a real print-start, the dialog's reset and the override's restore-attempt share the same storage slot, dialog always writes last. Cancelled before any extrusion, no damage, reverted the toggle.
+- **Still open, not yet resolved:** whether that forced `0.0` is actually dangerous under Nemesis's *current* good calibration (`-0.101`, clean mesh) — no real print has been allowed to run long enough to find out, since every attempt was cancelled the instant `printing` state hit, out of caution. Proposed next step to Javier: a non-destructive check (home, `SET_GCODE_OFFSET Z=0`, move to the file's actual first-layer height at bed center, paper-drag test by hand) — resolves the question without risking a plate either way. Awaiting his go-ahead.
+- Javier proposed physically re-leveling the bed screws to compensate — explained that screws fix tilt/planarity (already verified level) and wouldn't touch the uniform-height issue this bug is actually about; if the paper check comes back bad, the durable fix is baking the offset into the homing/endstop reference (survives the dialog's reset) rather than the runtime gcode offset (which the dialog stomps on every time).
+- All findings written back to the bug report and `bugs.md` — no vault docs were left stale this time.
+
+— Claude

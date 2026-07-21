@@ -2174,3 +2174,9 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Audited `/mnt/storage` against `forge/projects/storage-unification.md`'s 2026-07-07 plan — reorg never happened, drive still has raw Windows-backup-disk leftovers. Marked project STALLED, did not touch the data (real personal files, not mine to move without Javier's say).
 
 *— Claude (Oroborus)*
+
+- **Corrected the 2026-07-16 Nemesis OrcaSlicer profile bug report** — that fix (corner-origin `0x0`-`220x220`) was itself wrong; live Klipper state (`axis_minimum/maximum`, `mesh_min/max`, `SCREWS_TILT_CALCULATE` probe coords) confirms Nemesis is genuinely center-origin. Reverted Salomon's profile to `-110x-110`-`110x110`, matching Typhon's copy which had always been correct.
+- **Live-tested and disproved the `mod_params.load_zoffset` override** as a fix for Nemesis's FlashOS leveling-dialog Z-reset bug — watched a real print-start attempt, confirmed the dialog's `0.0` reset and `_START_PRINT_PREPARE`'s restore both write the same storage slot, dialog wins. Cancelled before any extrusion, reverted the toggle, no residual state left.
+- Both findings written back into `2026-07-19_bug-nemesis-z-offset-recalibration-too-aggressive-nozzle-scraping.md` (Addendums 1 & 2) and `bugs.md`. Whether the FlashOS `0.0` reset is actually dangerous is still open — next step is a non-destructive paper-drag clearance check, not a real print.
+
+*— Claude*

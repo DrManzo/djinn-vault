@@ -34,21 +34,52 @@ related: [[build-log]] | [[bugs]]
 
 ---
 
-## Current State (end of session)
+## Addendum 1 (2026-07-20): OrcaSlicer profile origin was ALSO wrong, independently
 
-- Nemesis: `Ready`, idle, heaters off, `homed_axes` cleared (normal post-reboot, not homed until next command)
-- `probe.z_offset: -0.101` — good, Klipper-verified, survived the reboot
-- `bed_mesh` profile `default` — good, captured against the corrected offset
-- Moonraker: fully recovered, running correctly inside its chroot
-- **The actual scraping bug is NOT fixed.** Any print started through any path available to us (touchscreen, Moonraker API, raw Klipper command) still routes through the FlashOS dialog that discards its own fresh probe and applies `0.0` instead.
+While chasing whether Salomon's re-sliced Kraken gcode might be a contributing factor, found that Salomon's `Flashforge Adventurer 5M Pro 0.4 Nozzle - Copy.json` had `printable_area` set to corner-origin (`0x0` to `220x220`) — the result of the 2026-07-16 bug fix ([[2026-07-16_bug-nemesis-orcaslicer-center-origin-printable-area]]). Live Klipper verification (`printer.base.cfg` mesh_min/max `-105/105`, live `axis_minimum/maximum` `-125/125`, `SCREWS_TILT_CALCULATE` probe coordinates) proved Nemesis is genuinely **center-origin** — the 2026-07-16 fix was itself wrong and had been silently mispositioning Salomon-sliced Nemesis jobs since that date. Typhon's independent copy of the profile was never "fixed" this way and was correct the whole time. Reverted Salomon's profile back to center-origin (`-110x-110` to `110x110`); that report has been corrected in place with a full addendum. This is a separate bug from the Z-offset/FlashOS issue below — it affects XY placement, not Z clearance — but was found during the same investigation and is unrelated to why prints were scraping.
+
+## Addendum 2 (2026-07-20): `mod_params.load_zoffset` override — tested live, confirmed does NOT work
+
+Hypothesis: `forge-x`'s `mod_params` layer exposes a `load_zoffset` toggle + `z_offset` value, read by `_START_PRINT_PREPARE`'s `LOAD_GCODE_OFFSET` call. If set (`load_zoffset=1`, `z_offset=-0.101`, matching Klipper's verified-good `probe.z_offset`), maybe `_START_PRINT_PREPARE` would apply the correct offset *after* the buggy FlashOS dialog resets it to `0.0`, since `_START_PRINT_PREPARE` fires later in the sequence.
+
+Flagged the risk before testing: the buggy dialog's own `SET: Z-OFFSET: 0.0` message uses the exact same `SET_MOD`-backed storage mechanism (confirmed via the `ModParamManagement.cmd_SET_MOD_PARAM` pycache string), so there was a real chance both paths write to the same slot and the dialog — firing later — would win regardless.
+
+**Test (2026-07-20, live, closely watched, run at Javier's explicit instruction — "run the test then stop it when you have what you need"):**
+1. Confirmed Nemesis idle/`standby`.
+2. Set `load_zoffset=1`, `z_offset=-0.101` via `SET_MOD`.
+3. Started `Kraken_pipe_PLA_4h5m.gcode` via Moonraker's `/printer/print/start`.
+4. Polled `mod_params.z_offset` + `print_stats.state` every 4s via a backgrounded watch loop.
+5. Observed: `z_offset` `-0.101` → `0.855` (FlashOS dialog's fresh probe reading) → held → **snapped to `0.0` at the exact same poll tick `print_stats.state` became `printing`.**
+6. Cancelled immediately (`/printer/print/cancel`) + `M104 S0`/`M140 S0`, before any real extrusion.
+7. Pulled `/server/gcode_store?count=25` — confirmed the mechanism fired as designed but read a value that was already clobbered: `Global Z-Offset management is used... Z-Offset set from global parameters: 0.0`.
+8. Reverted `load_zoffset` to `0` afterward (confirmed `load_zoffset: False`, `z_offset: 0.0`) to leave no half-applied state.
+
+**Verdict: this fix path is confirmed dead, empirically — not guessed.** The dialog's zero-reset and `_START_PRINT_PREPARE`'s restore-attempt share the same storage slot, and the dialog always writes last. No software-side override of the FlashOS dialog's `0.0` has been found through any of: stock macros, Moonraker API, raw Klipper commands, or the `mod_params`/`SET_MOD` layer.
+
+**Open question this addendum does NOT resolve:** whether that `0.0` is actually dangerous. All four FlashOS-dialog print-start attempts this session were cancelled within ~1 poll tick of reaching `printing` state, specifically *because* `0.0` was assumed unsafe — none were allowed to run long enough to observe a real nozzle-to-bed outcome under the *current* (`-0.101`, clean mesh) calibration. The original scraping incidents both predate this calibration (one under the bad `-0.336` offset, one before offset/mesh order was corrected). It's possible `SET_GCODE_OFFSET Z=0.0` is a harmless "clear any leftover manual babystep" no-op layered on top of an already-correctly-homed position (Klipper's `probe.z_offset` is read at `G28`/homing time, not overwritten by a runtime `SET_GCODE_OFFSET` call) — in which case the real scraping cause may already be fully fixed and this whole FlashOS-dialog thread is a red herring. But the dialog computing real values around `+0.85` to `+1.05` before discarding them for `0.0` is concrete evidence pointing the other way. This has NOT been resolved either way and should not be assumed safe without the verification in the next section.
 
 ---
 
-## What's Actually Needed Next (requires Javier physically present)
+## Current State (end of session)
 
-1. **Try the physical touchscreen's own Accept/Reject buttons** on that leveling dialog directly — it may only be operable that way, not via any gcode/API command. This is the most likely path to a real fix and hasn't been tried yet.
-2. If that also doesn't stick, the remaining option is directly editing `zLevelOffset` in `/opt/config/Adventurer5M.json` — **not attempted**, because the sign/reference-frame relationship between that value and Klipper's `probe.z_offset` is unverified, and guessing wrong on a value that directly controls nozzle-to-bed clearance is a real crash risk. This needs a supervised, low-stakes verification (e.g. checking clearance at a known Z height by eye) before trusting it for a real print — explicitly the kind of thing that should not be done unsupervised, which is why it wasn't attempted tonight.
-3. Do not attempt to hand-fix individual mounts/paths under `/data/.mod/.forge-x/` again if Moonraker ever goes down on this machine — reboot first, it's the correct recovery path for this chroot-based setup.
+- Nemesis: `Ready`, idle, heaters off, `homed_axes` cleared (normal post-reboot, not homed until next command)
+- `probe.z_offset: -0.101` — good, Klipper-verified, survived the reboot, confirmed intact 2026-07-20
+- `bed_mesh` profile `default` — good, captured against the corrected offset, 0.537mm range, confirmed intact 2026-07-20
+- OrcaSlicer profile on Salomon — corrected back to center-origin 2026-07-20 (see Addendum 1)
+- `mod_params.load_zoffset` — confirmed dead-end (see Addendum 2), reverted to off/0.0, no lingering state
+- Moonraker: fully recovered, running correctly inside its chroot
+- **Whether the scraping bug is actually still live is UNCONFIRMED.** The FlashOS dialog demonstrably discards a computed ~0.85–1.05mm offset for `0.0` on every print-start, which looks dangerous, but no real print has been allowed to run far enough under the *current* good calibration to prove it one way or the other.
+
+---
+
+## What's Actually Needed Next
+
+1. **Non-destructive verification (no plate risk, no Javier-present requirement to prepare, but needs Javier to do the physical paper-check):** with the printer idle, `G28` to home, `SET_GCODE_OFFSET Z=0` (matching what the dialog forces at print time), then `G1 Z0.25` (the file's actual first-layer height) at bed center, and paper-drag test by hand. Crushed/dragging paper confirms `0.0` really is too low and quantifies by how much; a clean slide-through confirms the FlashOS dialog's reset is harmless and the Klipper-side fix from 2026-07-19/20 was already sufficient. This directly answers the open question in Addendum 2 without gambling a plate. Caveat: `G28` may not establish Z identically to whatever internal reference the FlashOS dialog itself uses, so this is strong evidence, not absolute proof.
+2. **If the paper check shows `0.0` is genuinely too low:** the durable fix is compensating at the *homing/endstop* level (e.g. `Z_OFFSET_APPLY_ENDSTOP` or equivalent), not the runtime gcode offset — because the FlashOS dialog only ever resets the runtime `SET_GCODE_OFFSET` value, not where home itself is defined. A fix baked into the endstop position survives the dialog's reset; a fix layered on top of it (as Addendum 2 proved) does not.
+   - Note this replaces the physically-adjust-leveling-screws idea Javier proposed 2026-07-20: the screws control bed tilt/planarity, already verified level via a clean 0.537mm mesh — they don't set the uniform nozzle-to-bed height that the FlashOS dialog is interfering with, so re-leveling them wouldn't address this even if the paper check comes back bad.
+3. If the paper check shows a real problem and the endstop-level fix doesn't stick either, the remaining option is directly editing `zLevelOffset` in `/opt/config/Adventurer5M.json` — still not attempted, sign/reference-frame relationship to Klipper's `probe.z_offset` still unverified. Verify with the same paper-check method before trusting it for a real print.
+4. Physical touchscreen Accept/Reject buttons on the FlashOS dialog itself remain untried and are still a candidate if the above doesn't pan out.
+5. Do not attempt to hand-fix individual mounts/paths under `/data/.mod/.forge-x/` again if Moonraker ever goes down on this machine — reboot first, it's the correct recovery path for this chroot-based setup.
 
 ---
 

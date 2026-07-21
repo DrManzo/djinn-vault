@@ -11,7 +11,27 @@ related: [[bugs]] | [[build-log]] | [[decision-log]]
 **Date:** 2026-07-16
 **System:** Nemesis (Flashforge AD5M Pro) / OrcaSlicer machine profile
 **Severity:** High
-**Status:** Fixed
+**Status:** ⚠️ CORRECTED 2026-07-20 — original diagnosis was wrong, see addendum at bottom
+
+---
+
+## ⚠️ Correction (2026-07-20)
+
+**This report's root-cause diagnosis was backwards.** During the 2026-07-19/20 Z-offset recalibration investigation (see [[2026-07-19_bug-nemesis-z-offset-recalibration-too-aggressive-nozzle-scraping]]), live verification of Nemesis's actual Klipper config proved the opposite of what's written below:
+
+- `printer.base.cfg`: `mesh_min: -105,-105` / `mesh_max: 105,105`
+- Live `toolhead` object: `axis_minimum`/`axis_maximum`: `-125` to `125`
+- `SCREWS_TILT_CALCULATE`'s own probe coordinates: all in the -105..105 range
+
+**Nemesis is genuinely center-origin.** The `"0x0"→"220x220"` corner-origin fix applied below on 2026-07-16 was itself the bug — it silently broke correct positioning on Salomon's copy of the profile from that date forward. Typhon's independent copy of the same profile was never "fixed" this way and had been correct the whole time, which is how the discrepancy surfaced.
+
+**Re-fixed 2026-07-20:** `~/.config/OrcaSlicer/user/default/machine/Flashforge Adventurer 5M Pro 0.4 Nozzle - Copy.json` on Salomon reverted to center-origin:
+```json
+"printable_area": ["-110x-110", "110x-110", "110x110", "-110x110"]
+```
+Confirmed via direct Read against the live file — this is the value now in place.
+
+**Real lesson (supersedes the one below):** verify a firmware's coordinate convention against *live Klipper state* (`axis_minimum/maximum`, `mesh_min/max`, actual probe coordinates), not against inference from a "Move out of range" symptom plus a plausible-sounding stock-profile-inheritance story. The original diagnosis fit the symptom but was never checked against the printer's own reported geometry.
 
 ---
 
