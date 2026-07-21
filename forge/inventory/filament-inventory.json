@@ -233,13 +233,13 @@
       "color": "Blue",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 858,
+      "remaining_g": 785.0,
       "loaded_printer": "Nemesis",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active",
+      "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active | [2026-07-20] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly)))",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-14",
+      "last_used": "2026-07-20",
       "last_physical_check": null
     },
     {
