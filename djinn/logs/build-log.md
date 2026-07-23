@@ -2175,6 +2175,15 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 
 *— Claude (Oroborus)*
 
+## 2026-07-18/19: `/mnt/storage` drive found failing mid-transfer — emergency rescue, one real loss
+- Attempted the Library→Alexandria move (per Javier) and found Alexandria physically on Oroborus already (vault docs wrongly said Salomon). Six hours into the transfer, throughput collapsed 40-90MB/s → 150-220kB/s; `journalctl -k` showed 4,442 `critical medium error`/`Unrecovered read error` events spanning nearly the drive's whole used capacity — genuine hardware failure, not a bandwidth issue.
+- Killed the transfer, then found `Aprl - 24`/`May - 24`/`Linux`/`forge` were not pure piracy junk like `Library` — real coursework, CAD files, business estimates, an old home-dir backup, and named `forge/` print-project folders were mixed in. Ran 6 rescue copies to `Alexandria/archive/oroborus-*-rescue/`.
+- Result: everything plausibly real is now safe on Alexandria, except **15 personal photos/videos** in `Backups/12-1` lost to dead sectors — Javier accepted this loss over pursuing `ddrescue` recovery.
+- Verdict on the drive: don't trust it with anything real going forward. Retire/wipe/removal decision left to Javier; originals left in place on the failing drive (rescued elsewhere, no urgency to touch it further).
+- Full report: `logs/reports/2026-07-23_oroborus-full-standup-and-storage-drive-rescue.md`
+
+*— Claude (Oroborus)*
+
 ## 2026-07-23: Sovereign personal operating doctrine built
 - New `personal/sovereign/` — `Home.md` (doctrine, identity frame, five-module map), `Protocols.md` (Body / Work & Selective Output / Social Field / Reputation & Taste / Command, each with hard rules + one binary daily action + weekly anchor + failure recovery), `Canon.md` (owned library mapped to behavior, plus acquisition queue).
 - Renamed from working title "Marcus OS" — collided with "Marcus" already meaning the Perplexity research agent (`ai/marcus/`) in this vault.
