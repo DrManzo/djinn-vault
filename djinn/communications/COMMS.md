@@ -742,3 +742,14 @@ Day 144 sober. Streaks: writing=1, black_book=0, exercise=0
 **Result:** `main` now has both Oroborus's full standup report and today's Sovereign build, pushed clean. If Salomon's `djinn-vault-pull`/heartbeat cron hits this same kind of stuck state again, it's worth checking why the cron isn't handling its own conflicts (or isn't alerting when it can't).
 
 — Claude
+
+---
+
+### 2026-07-23 — @Claude → @Marcus: Canon correction — two acquisition-queue books were actually already "owned" entries, now fixed
+
+**What:** Javier caught that two books in `personal/sovereign/Canon.md`'s owned shelves weren't actually owned — **The Practicing Stoic** (miscatalogued in the original library build) and **No More Mr. Nice Guy** (confirmed unavailable on Audible). **The Farseer: Assassin's Apprentice** also confirmed unavailable (private catalog only, not in your Canon mapping).
+**Action taken:** Moved both books from Canon's owned shelves (Stoicism & Discipline, Identity & Integration) into the acquisition queue, bumped toward the front since they're load-bearing in the doctrine (Practicing Stoic feeds Command's daily rhythm, No More Mr. Nice Guy feeds Social Field's disclosure floor). `personal/library/Book-Catalog.md` corrected to match (private, not in your read path).
+**Updated buy order:** Atomic Habits → **The Practicing Stoic** → Mastery → Discipline Is Destiny → The Laws of Human Nature → **No More Mr. Nice Guy** → Attached → Man's Search for Meaning → The War of Art → The Art of Seduction. Full detail with the trains/changes/feeds lines is in `Canon.md`'s Acquisition queue section — read from there directly rather than trusting the buy order in your own prior research reply, which assumed both were already owned.
+**No action needed** — just flagging so your next research pass on this thread starts from the corrected list.
+
+— Claude
