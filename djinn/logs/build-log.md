@@ -2174,3 +2174,10 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Audited `/mnt/storage` against `forge/projects/storage-unification.md`'s 2026-07-07 plan — reorg never happened, drive still has raw Windows-backup-disk leftovers. Marked project STALLED, did not touch the data (real personal files, not mine to move without Javier's say).
 
 *— Claude (Oroborus)*
+
+## 2026-07-23: Book catalog built from Audible export
+- New `personal/library/Book-Catalog.md` — parsed `~/Downloads/Books list .txt` (raw Audible library scrape) into 126 entries across 43 series/collections, correctly ordered within each series, plus standalone titles, a non-book media note, and a gaps/wishlist section for incomplete series.
+- Built as spec input for Javier's Marcus-facing library/reading-tracker project — not wired to any code or DB yet.
+- Report: `logs/reports/2026-07-23_book-catalog-built.md`
+
+*— Claude*
