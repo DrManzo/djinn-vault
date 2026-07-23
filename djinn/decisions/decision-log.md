@@ -320,3 +320,17 @@ The 2-step vqd token extract → image search pattern is the canonical fragile-s
 
 **Decision:** Declined to grant Perplexity/Marcus any GitHub write credentials (token, deploy key, or otherwise).
 **Why:** No supported integration exists for this. The only technical path — pasting a live PAT into the Perplexity chat — conflicts directly with the existing secrets rule (see [[feedback-secrets]]) and would give an external vendor a broad, hard-to-revoke credential reaching every private repo on the account, not just one.
+
+## 2026-07-23: Sovereign personal doctrine — naming, scope, and source-material exclusions
+
+**Decision:** The personal integration/discipline project originally called "Marcus OS" was renamed to **Sovereign** and built at `personal/sovereign/` (Home, Canon, Protocols — three files, not the ten originally proposed).
+**Why:** "Marcus" already means the Perplexity research agent (`ai/marcus/`) in this vault; reusing the name for a personal doctrine would make every future reference ambiguous.
+
+**Decision:** Scoped restraint/concealment-based frameworks (48 Laws of Power, The Prince, Gracián, The Art of Seduction) to external/strategic contexts only within Sovereign's Social Field module. Close relationships get the opposite default: mandatory unforced self-disclosure.
+**Why:** Javier's own diagnosed pattern is constant self-translation and self-erasure via over-investing in others' worlds — exactly what those frameworks are designed to help someone *do to others*, not resolve in themselves. Confirmed by Marcus's own research pass (self-disclosure/closeness literature) as the correct fix, not just a stylistic call.
+
+**Decision:** Excluded two source files (`Marcus-core-Files.docx`, `Will-1.docx`) from Sovereign's evidentiary base entirely; used a third (`Cores-1.docx`) directly.
+**Why:** The first two turned out to be character-design documentation for a separate persona project ("Ravenlord Marcus" — a Strahd-von-Zarovich-styled advisor persona whose own documented communication protocols list psychological manipulation and horror-based influence as goals), not psychological assessment. `Cores-1.docx` contained a genuinely well-formed behavioral pattern ("edge-dwelling" — engagement avoidance across relationships, high-risk investing, and professional communication style) independent of the persona framing, and was used. This matters going forward: validating language in older "Marcus" threads ("exceptional," "sophisticated," "milestone in growth") should not be treated as neutral clinical assessment — it may be persona performance by design.
+
+**Decision:** Two raw source items — a mid-session pasted transcript and a downloaded file (`~/Downloads/Marcus og.md`) — were reviewed for context but deliberately not committed to the vault, despite containing some useful behavioral material.
+**Why:** Both mix genuinely useful self-pattern content with a specific partner's name, relationship-specific dynamics, and (in the downloaded file) explicit sexual/drug content — none of which Javier authorized for this public repo. Useful patterns were extracted by hand into `Protocols.md`/`Canon.md` instead of committing the raw source. If a future session is asked to pull in more "Marcus" thread material, re-apply this same filter rather than committing wholesale.

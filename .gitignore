@@ -1,5 +1,12 @@
 # ── PRIVACY — never commit ────────────────────────────────────────────────────
-personal/
+# personal/ is private by default. personal/sovereign/ is a deliberate, standing
+# exception (2026-07-23) — Sovereign is a public-facing doctrine, not journal
+# material. Anything added there must still follow the Sovereign scope rule:
+# the user's own conduct is fair game, no relationship-specific or explicit
+# content, ever. See djinn/decisions/decision-log.md (2026-07-23) for the
+# reasoning. Do not widen this exception without an explicit new decision.
+personal/*
+!personal/sovereign/
 forge/commissions/
 forge/finance/
 

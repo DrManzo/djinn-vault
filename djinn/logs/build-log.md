@@ -2175,6 +2175,16 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 
 *— Claude (Oroborus)*
 
+## 2026-07-23: Sovereign personal operating doctrine built
+- New `personal/sovereign/` — `Home.md` (doctrine, identity frame, five-module map), `Protocols.md` (Body / Work & Selective Output / Social Field / Reputation & Taste / Command, each with hard rules + one binary daily action + weekly anchor + failure recovery), `Canon.md` (owned library mapped to behavior, plus acquisition queue).
+- Renamed from working title "Marcus OS" — collided with "Marcus" already meaning the Perplexity research agent (`ai/marcus/`) in this vault.
+- Built jointly with Marcus's research pass; Claude flagged and Marcus confirmed a correction to the Social Field module (48 Laws/Prince-style concealment scoped to external contexts only — close relationships get the opposite default, mandatory unforced disclosure).
+- Source-material review turned up that two "core files" behind the project were actually character-design docs for an unrelated persona project, not psychological documentation — excluded from Sovereign's evidentiary base. See `logs/reports/2026-07-23_sovereign-os-built.md` and `decisions/decision-log.md`.
+- Deliberately did not commit two raw source transcripts containing relationship-specific/explicit content — extracted only the reusable behavior patterns by hand.
+- Report: `logs/reports/2026-07-23_sovereign-os-built.md`
+
+*— Claude*
+
 ## 2026-07-23: Book catalog built from Audible export
 - New `personal/library/Book-Catalog.md` — parsed `~/Downloads/Books list .txt` (raw Audible library scrape) into 126 entries across 43 series/collections, correctly ordered within each series, plus standalone titles, a non-book media note, and a gaps/wishlist section for incomplete series.
 - Built as spec input for Javier's Marcus-facing library/reading-tracker project — not wired to any code or DB yet.
