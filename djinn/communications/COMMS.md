@@ -662,6 +662,26 @@ Once it's on origin/main I'll pull on Typhon and reconcile the dashboard against
 
 ---
 
+### 2026-07-23 — @Claude (Oroborus) → @Javier: Full report — Oroborus standup + the storage drive rescue, wrapped
+
+Everything from first login (2026-07-18) through now, since you asked for the full picture once Oroborus was up and running.
+
+**Onboarding:** machine confirmed and documented (`djinn/machines/Oroborus.md`, was missing entirely), registered in `SYSTEM-STATE.md`/`AGENTS.md`, vault clone fixed from 226 commits stale to auto-syncing via `djinn-vault-pull` cron (verified working unattended across several real days now), GitHub push access provisioned (PAT, since the SSH-relay-through-Salomon route hit a chicken-and-egg wall). TASK-099 Part A closed (`768ceb9`) with the Discord watcher access-control finding still needing your confirmation; Part B (`djinn-core`) still needs your call.
+
+**The Library-move-to-Alexandria detour became an emergency:** Alexandria turned out to be physically on Oroborus already (docs were wrong, said Salomon), and six hours into the transfer the *source* drive — `/mnt/storage`, the 4.5TB "The Library" disk — revealed itself as failing: 4,442 unrecovered read errors spanning nearly its whole used capacity. Killed the transfer, then rescued everything else on that drive that turned out to actually matter (found real coursework/CAD files/business docs/an old home-dir backup mixed in with what I'd assumed was pure piracy junk). Result: all six rescue copies landed on `Alexandria/archive/oroborus-*-rescue/`, clean except 15 personal photos/videos lost to dead sectors in `Backups/12-1` — you accepted that loss over pursuing `ddrescue` recovery.
+
+**Open items, your call on each:**
+1. `djinn-core` — new repo, or something else? (TASK-099 Part B)
+2. The Discord watcher now accepts file submissions from any Discord user, not just you — intended?
+3. `/mnt/storage`'s failing drive — retire, wipe, or physically pull it? Originals are still sitting on it untouched (rescued copies exist elsewhere, so no rush, but it shouldn't be trusted with anything new).
+4. Alexandria has no fstab entry on Oroborus yet — needs a root session to persist across reboots.
+
+Full writeup: [[2026-07-23_oroborus-full-standup-and-storage-drive-rescue]]
+
+— Claude (Oroborus)
+
+---
+
 ### 2026-07-20 15:00 UTC — @Djinn → @Javier: Morning brief sent
 
 Day 141 sober. Streaks: writing=1, black_book=0, exercise=0
@@ -715,9 +735,10 @@ Day 144 sober. Streaks: writing=1, black_book=0, exercise=0
 
 ---
 
-### 2026-07-23 — @Claude → @Javier: 84 unpushed commits found ahead of origin/main
+### 2026-07-23 — @Claude → @Javier: Found and fixed a stuck auto-rebase, then pushed Sovereign
 
-**What:** Before pushing today's Sovereign build, found local `main` was already 84 commits ahead of `origin/main` — mostly Salomon heartbeat commits plus a Nemesis Z-offset bug log, going back to 2026-07-20. Spot-checked the range, nothing looked broken or WIP-flagged.
-**Action:** Pushed all of it along with today's Sovereign files, per the standing session-end protocol. Flagging in case the backlog wasn't expected — if Oroborus's `djinn-vault-pull` cron (30 min, ff-only) is meant to keep this synced, a 3-day gap may be worth a quick look.
+**What:** While pushing today's Sovereign build, found the vault's local `main` mid-way through a broken interactive rebase — Salomon's automated `git pull --rebase --autostash` had gotten stuck replaying a heartbeat commit against Oroborus's new push, leaving literal unresolved conflict markers baked into `COMMS.md` on disk. Not caused by today's work, just discovered while trying to commit.
+**Fix:** Confirmed both the pre-rebase local `main` tip and `origin/main` were clean (the corruption existed only inside the stuck rebase's in-progress state, not in real history), aborted the rebase, then merged `origin/main` in properly (a merge, not another rebase, to avoid repeating the same conflict). Resolved two straightforward append-append conflicts in this file and `build-log.md` by hand — both sides had just added new entries to the end of the file.
+**Result:** `main` now has both Oroborus's full standup report and today's Sovereign build, pushed clean. If Salomon's `djinn-vault-pull`/heartbeat cron hits this same kind of stuck state again, it's worth checking why the cron isn't handling its own conflicts (or isn't alerting when it can't).
 
 — Claude
