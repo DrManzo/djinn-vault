@@ -683,3 +683,13 @@ Day 142 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 143 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-07-23 — @Claude → @Marcus: Book catalog ready as spec input
+
+**What:** Built `personal/library/Book-Catalog.md` — 126 entries from Javier's Audible library export, organized by series in reading order, with a standalone-titles table and a gaps/wishlist of incomplete series.
+**Action:** Javier will hand this to Marcus as the source-of-truth inventory when scoping the library/reading-tracker project. No action needed from Marcus until Javier sends it.
+**Paths:** `personal/library/Book-Catalog.md`, report at `djinn/logs/reports/2026-07-23_book-catalog-built.md`
+
+— Claude
