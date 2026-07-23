@@ -40,11 +40,6 @@ Books tagged **[external strategy only]** are explicitly scoped away from close 
 - Changes: the nightly command mark audits your own action, not whether others understood it.
 - Feeds: Command.
 
-**The Practicing Stoic** (Farnsworth)
-- Trains: applied daily discipline structures, not just theory.
-- Changes: convert Stoic reading directly into the actual morning/evening rhythm in Protocols — not more reading about discipline.
-- Feeds: Command.
-
 **Letters from a Stoic** (Seneca)
 - Trains: long-view patience under real constraint (time, money, mortality).
 - Changes: use for the weekly review's "what became theater" question — this is Seneca's whole project.
@@ -72,11 +67,6 @@ Books tagged **[external strategy only]** are explicitly scoped away from close 
 - Changes: directly supports the Social Field split-rule — differentiation in strategic contexts, permeability in close ones.
 - Feeds: Social Field.
 
-**No More Mr. Nice Guy** (Glover)
-- Trains: naming approval-seeking and covert contracts.
-- Changes: the self-disclosure floor exists because of exactly this pattern — say the actual preference instead of managing the room.
-- Feeds: Social Field.
-
 **Emotional Intelligence** (Goleman)
 - Trains: naming and regulating internal state before acting on it.
 - Changes: feeds the morning claim — name the state, don't let it run the day unnamed.
@@ -100,11 +90,15 @@ Books tagged **[external strategy only]** are explicitly scoped away from close 
 
 Not yet owned. Order reflects what actually unblocks Sovereign fastest, not raw appeal.
 
+**The Practicing Stoic** and **No More Mr. Nice Guy** were both moved here 2026-07-23 — the first was mistakenly catalogued as owned in the original library build, the second turned out to be unavailable on Audible (confirmed not owned). Both bumped up in priority since they were already load-bearing in this doctrine's design (Command's daily rhythm, Social Field's disclosure floor) before the correction.
+
 1. **Atomic Habits** (Clear) — trains identity-linked habit architecture and tiny-scale behavior design; gives Command's daily binary-tracking design its actual theoretical backing. → Command, Body.
-2. **Mastery** (Greene) — trains long-horizon deliberate practice; supports the "one decisive move" discipline in Work without needing constant novelty. → Work & Selective Output.
-3. **Discipline Is Destiny** (Holiday) — readable daily-discipline framing across body and mind; reinforces Body's "no negotiation" rule with a citable frame. → Body, Command.
-4. **The Laws of Human Nature** (Greene) — *[external strategy only]* — trains reading others' patterns accurately; useful for Reputation/Work positioning, explicitly not for close relationships. → Reputation & Taste, Work (external contexts only).
-5. **Attached** (Levine & Heller) — trains attachment-style recognition; gives the self-disclosure floor a concrete mechanism by naming what "unforced disclosure" is actually resisting. → Social Field.
-6. **Man's Search for Meaning** (Frankl) — trains values-anchored action independent of circumstance; backs the "insight without a rule is indulgence" principle at its most serious register. → Home (core purpose), Command.
-7. **The War of Art** (Pressfield) — trains naming resistance as a force to move through, not negotiate with; reinforces Work's "execute or degrade gracefully, never skip" rule. → Work & Selective Output.
-8. **The Art of Seduction** (Greene) — *[external strategy only — hold]*. Of everything on this list, most likely to bleed strategic/concealment logic into close relationships, which is the exact pattern this doctrine exists to correct. Hold until the Social Field split-rule has been running cleanly for a few weeks. When it's read, tag it "external strategy only" the same as 48 Laws and The Laws of Human Nature.
+2. **The Practicing Stoic** (Farnsworth) — trains applied daily discipline structures, not just theory; directly informs converting Stoic reading into the actual morning/evening Command rhythm rather than more reading about discipline. → Command.
+3. **Mastery** (Greene) — trains long-horizon deliberate practice; supports the "one decisive move" discipline in Work without needing constant novelty. → Work & Selective Output.
+4. **Discipline Is Destiny** (Holiday) — readable daily-discipline framing across body and mind; reinforces Body's "no negotiation" rule with a citable frame. → Body, Command.
+5. **The Laws of Human Nature** (Greene) — *[external strategy only]* — trains reading others' patterns accurately; useful for Reputation/Work positioning, explicitly not for close relationships. → Reputation & Taste, Work (external contexts only).
+6. **No More Mr. Nice Guy** (Glover) — trains naming approval-seeking and covert contracts; the self-disclosure floor in Social Field exists because of exactly this pattern. → Social Field.
+7. **Attached** (Levine & Heller) — trains attachment-style recognition; gives the self-disclosure floor a concrete mechanism by naming what "unforced disclosure" is actually resisting. → Social Field.
+8. **Man's Search for Meaning** (Frankl) — trains values-anchored action independent of circumstance; backs the "insight without a rule is indulgence" principle at its most serious register. → Home (core purpose), Command.
+9. **The War of Art** (Pressfield) — trains naming resistance as a force to move through, not negotiate with; reinforces Work's "execute or degrade gracefully, never skip" rule. → Work & Selective Output.
+10. **The Art of Seduction** (Greene) — *[external strategy only — hold]*. Of everything on this list, most likely to bleed strategic/concealment logic into close relationships, which is the exact pattern this doctrine exists to correct. Hold until the Social Field split-rule has been running cleanly for a few weeks. When it's read, tag it "external strategy only" the same as 48 Laws and The Laws of Human Nature.
