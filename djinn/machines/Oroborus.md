@@ -2,7 +2,7 @@
 title: Machine — Oroborus
 tags: [djinn, machine, oroborus, hardware, storage, claude]
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-23
 ---
 
 # Machine: Oroborus
@@ -64,16 +64,26 @@ Status of the two repos flagged in TASK-099 as of 2026-07-18:
 
 ---
 
-## Storage — `/mnt/storage` does not match the plan
+## Storage — `/dev/sdb` ("The Library", `/mnt/storage`) is a failing drive — emergency rescue completed 2026-07-18/19
 
-`forge/projects/storage-unification.md` (2026-07-07) laid out a clean `library/archive/review/index` structure for this drive. As of 2026-07-18, `/mnt/storage` still has none of that — it's leftover structure from a prior life as a Windows backup disk (`$RECYCLE.BIN`, `.Trash-1000`, `System Volume Information`, date-named folders like `Aprl - 24`/`May - 24`), plus `Library` (234G), `Backups` (23G), `typhon-backup` (14G), `forge` (664M), `Linux` (1.4G). The Phase 1-6 reorg was apparently never executed past the initial LAN hookup.
+`forge/projects/storage-unification.md` (2026-07-07) laid out a clean `library/archive/review/index` structure for this drive. As of 2026-07-18, `/mnt/storage` had none of that — leftover structure from a prior life as a Windows backup disk (`$RECYCLE.BIN`, `.Trash-1000`, `System Volume Information`, date-named folders `Aprl - 24`/`May - 24`), plus `Library` (234G), `Backups` (23G), `typhon-backup` (14G), `forge` (664M), `Linux` (1.4G). The Phase 1-6 reorg was never executed past the initial LAN hookup.
 
-**`Library` (234G) is not a print-model library — it's a pirated software/course stash** (cracked Adobe/Autodesk installers, ripped Udemy/Domestika courses, all sourced from `gfxfather.com`). Unrelated to the djinn/forge project, predates this drive's role as Oroborus's storage node. Per Javier's instruction 2026-07-18: relocating it to `Alexandria/library-rescue/` (staging, not organized — "will live there for now"), then clearing it off `/mnt/storage`. Not being cataloged or maintained as part of any real library structure.
+**Mid-transfer, the drive itself turned out to be failing.** Started moving `Library` (confirmed pirated software/course stash from `gfxfather.com`, unrelated to the djinn/forge project) to `Alexandria/library-rescue/` per Javier's instruction. Six hours in, throughput had collapsed from ~40-90MB/s to 150-220**kB**/s. `journalctl -k` showed the root cause: **4,442 `critical medium error` / `Unrecovered read error` events**, spanning sectors ~313,088 to ~692,097,520 — scattered across nearly the entire used capacity, not one bad patch. No `smartctl` available (not installed, no root to install it) to get a real health verdict, but the symptom profile (widespread, not localized) reads as a drive whose reallocation pool is exhausted or with genuine broad media/head degradation. **Verdict: don't trust this drive with anything you'd be upset to lose, ever again.** Retire it, don't try to "fix" it.
 
-**`Backups/12-1`** (21G, inside the 23G `Backups` dir) — inspected one level deep: a genuine old personal backup (home-directory-style dump: `Sort`, `Work`, `Sophia`, `Yoshi`, a `usr`/`DEBIAN` pair, some PDFs, a couple `.deb` installers). Left alone — no reason to touch it.
+**Emergency response (2026-07-18/19):** Killed the stalled Library copy (already had 135G of the 234G — kept, since even partial piracy-stash salvage was free at that point) and pivoted to rescuing everything else on the drive that might be real, since digging in showed `Aprl - 24`/`May - 24`/`Linux`/`forge` were **not** just more junk as first assumed — they had genuine college coursework, CAD/SketchUp files, business estimates, an old home-directory backup (with an `Obsidian/` folder in it), and named `forge/` print-project folders (`applacrabus`, `kraken`, `med-core`, `tardis`, etc.) mixed in with more gfxfather piracy. Ran six parallel rsync jobs to `Alexandria/archive/oroborus-*-rescue/`:
 
-**Everything else in `/mnt/storage` not touched this session** — `Backups` (minus the Library move), `typhon-backup`, `Aprl - 24`/`May - 24`, `Linux`, `forge`, and the Windows-cruft folders are still unreviewed. Moving/deleting that is a call for Javier, not something to do speculatively.
+| Source | Rescued | Files lost to bad sectors | What was lost |
+|---|---|---|---|
+| `Library` | 135G/234G (stopped early, disposable) | many | pirated software, not tracked |
+| `Backups` | 22G/23G | 15 files | **real personal photos/video** (JPG/HEIC/MOV in `12-1/Sort`, `12-1/Work/Pics to post`, `12-1/Yoshi`) — Javier confirmed acceptable loss, not pursuing `ddrescue` recovery |
+| `typhon-backup` | 443M/14G | 33 files | all Ollama model blobs + Python venv site-packages — 100% re-downloadable/rebuildable, nothing real lost |
+| `Linux` | 489M/1.4G, 7,962/7,962 files processed | 1 file | a single Python tzdata file, trivial |
+| `forge` | 645M/664M | 0 | clean |
+| `Aprl - 24` | 21G/21G | 0 | clean |
+| `May - 24` | 42G/57G | 6 files | more gfxfather ISOs/rars, disposable |
+
+**Net result:** everything on this drive that was plausibly irreplaceable is now also on Alexandria (`archive/oroborus-*-rescue/`), except the 15 photos/videos in `Backups/12-1` — genuinely lost, Javier accepted this rather than attempt `ddrescue`. Original copies were **left in place on `/mnt/storage`** — not deleted, since there's no pressing need and further write/delete operations on a drive already dying isn't obviously worth doing. Javier hasn't yet said whether to wipe, retire, or physically pull this drive — open decision, not actioned further.
 
 ---
 
-*— Oroborus, 2026-07-18*
+*— Oroborus, 2026-07-23*
