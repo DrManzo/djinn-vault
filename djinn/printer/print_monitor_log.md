@@ -17815,3 +17815,123 @@
 [2026-07-23 13:03:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
 | 2026-07-23 13:04 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
 [2026-07-23 13:04:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:05 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:05:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:06 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:06:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:07 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:07:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:08 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:08:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:09 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:09:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:10 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:10:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:11 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:11:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:12 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:12:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:13 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:13:27 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:14 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:14:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:15 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:15:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:16 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:16:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:17 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:17:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:18 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:18:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:19 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:19:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:20 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:20:27 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:21 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:21:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:22 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:22:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:23 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:23:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:24 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:24:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:25 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:25:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:26 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:26:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:27 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:27:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:28 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:28:27 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:29 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:29:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:30 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:30:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:31 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:31:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:32 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:32:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:33 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:33:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:34 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:34:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:35 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:35:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:36 UTC | standby | 0.0% | 28.8 | 0 | 27.2 | 0 | 0% | 0 |  |
+[2026-07-23 13:36:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:37 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:37:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:38 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:38:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:39 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:39:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:40 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:40:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:41 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:41:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:42 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:42:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:43 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:43:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:44 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:44:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:45 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:45:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:46 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:46:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:47 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:47:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:48 UTC | standby | 0.0% | 28.9 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:48:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:49 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:49:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:50 UTC | standby | 0.0% | 28.8 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:50:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:51 UTC | standby | 0.0% | 28.9 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:51:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:52 UTC | standby | 0.0% | 28.9 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:52:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:53 UTC | standby | 0.0% | 28.9 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:53:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:54 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 13:54:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:55 UTC | standby | 0.0% | 28.9 | 0 | 27.3 | 0 | 0% | 0 |  |
+[2026-07-23 13:55:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:56 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 13:56:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:57 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 13:57:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:58 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 13:58:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 13:59 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 13:59:29 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 14:00 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 14:00:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 14:01 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 14:01:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 14:02 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 14:02:30 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 14:03 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
+[2026-07-23 14:03:31 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-07-23 14:04:28 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-07-23 14:04 UTC | standby | 0.0% | 28.9 | 0 | 27.4 | 0 | 0% | 0 |  |
