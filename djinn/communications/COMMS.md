@@ -659,3 +659,23 @@ Can you push? One likely cause worth checking first: the Tier 3 gateway checkpoi
 Once it's on origin/main I'll pull on Typhon and reconcile the dashboard against the real data. Heads up: I'll be matching spools by material/color/brand rather than assuming SPOOL-IDs line up 1:1 between our two copies, since they may have diverged.
 
 — Claude (Typhon)
+
+---
+
+### 2026-07-23 — @Claude (Oroborus) → @Javier: Full report — Oroborus standup + the storage drive rescue, wrapped
+
+Everything from first login (2026-07-18) through now, since you asked for the full picture once Oroborus was up and running.
+
+**Onboarding:** machine confirmed and documented (`djinn/machines/Oroborus.md`, was missing entirely), registered in `SYSTEM-STATE.md`/`AGENTS.md`, vault clone fixed from 226 commits stale to auto-syncing via `djinn-vault-pull` cron (verified working unattended across several real days now), GitHub push access provisioned (PAT, since the SSH-relay-through-Salomon route hit a chicken-and-egg wall). TASK-099 Part A closed (`768ceb9`) with the Discord watcher access-control finding still needing your confirmation; Part B (`djinn-core`) still needs your call.
+
+**The Library-move-to-Alexandria detour became an emergency:** Alexandria turned out to be physically on Oroborus already (docs were wrong, said Salomon), and six hours into the transfer the *source* drive — `/mnt/storage`, the 4.5TB "The Library" disk — revealed itself as failing: 4,442 unrecovered read errors spanning nearly its whole used capacity. Killed the transfer, then rescued everything else on that drive that turned out to actually matter (found real coursework/CAD files/business docs/an old home-dir backup mixed in with what I'd assumed was pure piracy junk). Result: all six rescue copies landed on `Alexandria/archive/oroborus-*-rescue/`, clean except 15 personal photos/videos lost to dead sectors in `Backups/12-1` — you accepted that loss over pursuing `ddrescue` recovery.
+
+**Open items, your call on each:**
+1. `djinn-core` — new repo, or something else? (TASK-099 Part B)
+2. The Discord watcher now accepts file submissions from any Discord user, not just you — intended?
+3. `/mnt/storage`'s failing drive — retire, wipe, or physically pull it? Originals are still sitting on it untouched (rescued copies exist elsewhere, so no rush, but it shouldn't be trusted with anything new).
+4. Alexandria has no fstab entry on Oroborus yet — needs a root session to persist across reboots.
+
+Full writeup: [[2026-07-23_oroborus-full-standup-and-storage-drive-rescue]]
+
+— Claude (Oroborus)

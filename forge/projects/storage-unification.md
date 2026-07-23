@@ -3,12 +3,14 @@ title: Project — Storage Unification
 agent: Claude
 date: 2026-07-07
 tags: [djinn, project, storage, infrastructure, typhon, library]
-status: STALLED — hardware connected since 2026-07-07, reorg (Phase 2+) never executed
+status: DEAD — the "Oroborus" storage node named in this plan is a failing drive, do not build the reorg on it
 ---
 
 # Project: Storage Unification
 
 **2026-07-18 update:** Hardware has been connected and reachable this whole time (confirmed live again this session, IP now `192.168.1.154`, consistent with Phase 1). Code repos got migrated here 2026-07-09 (separate from this plan — see `djinn/logs/reports/2026-07-09_alexandria-setup-storage-migration-cleanup.md`), but the actual `library/archive/review/index` reorg below (Phase 2 onward) was never done. `/mnt/storage` still holds unsorted leftover structure from the drive's prior life as a Windows backup disk. See `djinn/machines/Oroborus.md` for current state. Not resuming this without Javier confirming what on the drive is safe to move/reorganize — flagging the stall, not restarting the project unilaterally.
+
+**2026-07-23 update — this plan is dead, not just stalled.** The drive this whole project was designed around (`/mnt/storage`, the 4.5TB disk, machine IP `192.168.1.154`) turned out to be failing hardware — 4,442 unrecovered read errors spanning nearly its whole used capacity, discovered mid-transfer while trying to move `Library` off it. Everything plausibly real on that drive has been rescued to the Alexandria SSD instead (`Alexandria/archive/oroborus-*-rescue/`, `Alexandria/library-rescue/` — see `djinn/logs/reports/2026-07-23_oroborus-full-standup-and-storage-drive-rescue.md` for full detail). **Do not build the planned `library/archive/review/index` structure on this drive.** If storage unification happens at all going forward, it needs different (working) hardware — this plan's target disk is done.
 
 ## Goal
 
