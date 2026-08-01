@@ -2200,3 +2200,10 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Report: `logs/reports/2026-07-23_book-catalog-built.md`
 
 *— Claude*
+
+## 2026-08-01: New `airtight` profile tier added to Calliope's print profiles
+- Javier reported the printed Kraken/octopus pipe (Calliope, 2026-07-20 job) leaks air through general wall porosity. Confirmed the source STL is watertight/valid manifold — not a mesh defect. Root cause: none of Calliope's existing profile tiers (proto/standard/production) target airtightness; production tops out at 4 walls / 210°C, marginal for sealing PLA at 0.4mm nozzle, especially against the model's complex tentacle-wrap geometry (genus 23).
+- Added `## airtight — Sealed / Pressure-Bearing Part` to `forge/PRINT-PROFILES.md` under Calliope: 5 walls, 215°C hotend, 0.16mm layers, ~15% slower outer wall speed, 20% infill as structural backup only. Documents that complex wrap-around geometry can still locally starve wall count even at this tier, with interior CA/epoxy sealing as the fallback.
+- Not yet verified on a reprint — logged as workaround, not confirmed fix. See `logs/reports/2026-08-01_bug-kraken-pipe-wall-porosity-no-airtight-profile-tier.md` and `logs/bugs.md`.
+
+*— Claude*

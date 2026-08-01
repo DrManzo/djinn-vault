@@ -1,6 +1,6 @@
 ---
 title: Print Profiles — Djinn Fleet
-updated: 2026-07-07
+updated: 2026-08-01
 tags: [djinn, printer, profiles, calliope, penelope, iris, nemesis]
 related: [[SUPPORT-SETTINGS]] | [[MACHINE-ROLES]]
 ---
@@ -87,6 +87,26 @@ Profiles are suggestions, not law. Javier overrides any value at slice time.
 | Bed temp | 65°C | Best first-layer adhesion |
 | Hotend | 210°C | |
 
+## airtight — Sealed / Pressure-Bearing Part
+
+**Purpose:** Part must hold air or liquid without leaking — pipes, containers, anything with a sealed internal cavity. Airtightness beats strength, speed, and finish.
+**Priority:** Wall fusion and shell continuity. A structurally strong but porous wall still fails this job.
+
+| Setting | Value | Why |
+|---|---|---|
+| Infill | 20% | Backup structural support only — sealing is the walls' job, not infill's |
+| Infill pattern | Grid | Predictable, no gaps at the wall boundary |
+| Layer height | 0.16mm | More fusion surface between layers/walls than 0.20mm — lower porosity risk |
+| Supports | If >45° overhang | Standard threshold |
+| Brim | yes (8mm) | Max adhesion — no first-layer lift feeding a leak path at the base |
+| Raft | no | |
+| Walls | 5 | Minimum for a reliable seal at 0.4mm nozzle (2–4 walls is what actually leaked on the Kraken pipe, 2026-07-20 Calliope job) — go 6 on complex/thin-walled geometry |
+| Outer wall speed | ~15% slower than default | Slower = better interwall fusion, less micro-porosity |
+| Bed temp | 65°C | Best first-layer adhesion |
+| Hotend | 215°C | Hotter than the 210°C default — better layer/wall fusion, still safe for PLA |
+
+**Result:** Slower and heavier than production tier — that's the tradeoff for a part that has to hold pressure. Test the seal (submerge or blow test) before calling it done. Complex geometry with tight wrap-around features (tentacles, handles, anything where two surfaces pass close together) can still locally starve the wall count even at this tier — if it leaks anyway, seal the interior with thin CA glue or 2-part epoxy rather than pushing walls higher and higher.
+
 ## custom
 
 Javier specifies everything. The slicer uses exactly what was said.
@@ -96,7 +116,7 @@ No defaults applied. No substitutions.
 **Slicer:** Creality Print / OrcaSlicer  
 ALL gcode passes through `djinn-gcode-safety` which caps M106 fan speed to S128 max — hardware constraint on Calliope's nozzle_mcu UART.
 
-*— Updated 2026-07-07*
+*— Updated 2026-08-01: added `airtight` profile tier after the Kraken pipe leaked (2026-07-20 Calliope job, general wall porosity)*
 
 ---
 
