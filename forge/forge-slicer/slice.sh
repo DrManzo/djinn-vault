@@ -39,8 +39,9 @@ case "$PROFILE" in
     proto)      PROCESS_PROFILE="Calliope-Proto.json" ;;
     production) PROCESS_PROFILE="Calliope-Production.json" ;;
     quality)    PROCESS_PROFILE="Calliope-Quality.json" ;;
+    airtight)   PROCESS_PROFILE="Calliope-Airtight.json" ;;
     *)
-        echo "{\"success\":false,\"error\":\"Unknown profile: $PROFILE. Valid: proto, production, quality\"}"
+        echo "{\"success\":false,\"error\":\"Unknown profile: $PROFILE. Valid: proto, production, quality, airtight\"}"
         exit 1
         ;;
 esac
