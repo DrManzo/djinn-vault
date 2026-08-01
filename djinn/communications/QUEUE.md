@@ -3748,3 +3748,17 @@ Continue this work using your existing personal-layer infrastructure (`personal/
 **Output expected:** Whatever form makes sense for continuing this with Javier directly (Telegram via djinn-personal-gateway, or a session note) — this isn't a technical deliverable like other TASK entries, it's picking the conversation back up.
 
 **Deliver to:** Javier directly.
+
+## TASK-107 — Test new `airtight` profile tier on Calliope
+- assigned_to: salomon
+- status: pending
+- priority: normal
+- trigger: manual
+- created: 2026-08-01 by Claude (per Javier)
+- context: Kraken pipe (Calliope, 2026-07-20 job) leaked air through general wall porosity — see [[2026-08-01_bug-kraken-pipe-wall-porosity-no-airtight-profile-tier]]. New `airtight` profile tier added to `forge/PRINT-PROFILES.md` under Calliope (5 walls, 215°C hotend, 0.16mm layers, ~15% slower outer wall, 20% grid infill) but never verified on real hardware. Calliope confirmed back online 2026-08-01 (Moonraker reachable, Klipper ready, idle) after being pulled offline 7/14 for BUG-014 maintenance — this is also implicitly a smoke test that the maintenance held under a real print.
+
+**Brief:** Javier chose to validate with a small sealed test piece before committing to a full Kraken pipe reprint (~3hr). Slice and print a simple closed-cavity test object (a plain sealed tube or box, no drain hole, no Kraken-specific geometry needed) using Calliope's new `airtight` tier from `forge/PRINT-PROFILES.md`. Use `djinn-model-slice` with those exact settings (walls=5, hotend=215°C, layer_height=0.16mm, infill=20% grid, bed=65°C, outer wall speed ~15% under normal). After print completes, do a submerge or blow test on the sealed cavity before reporting back.
+
+**Output expected:** Pass/fail on the seal test. If it holds — reprint the actual Kraken pipe with the same tier and close out the report as confirmed. If it still leaks — flag back to Claude; the geometry-starvation theory (tight tentacle-wrap features locally reducing wall count) would need investigating directly rather than pushing wall count higher blind.
+
+**Input:** [[2026-08-01_bug-kraken-pipe-wall-porosity-no-airtight-profile-tier]]
