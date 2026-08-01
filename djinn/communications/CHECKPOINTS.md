@@ -15409,3 +15409,41 @@ Rotated weekly by djinn-comms-rotate.
 
 
 → Auto-resolved: CHECKPOINT-20260801-102640 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260801-112640 | 2026-08-01 11:26 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260801-112640` / `n CHECKPOINT-20260801-112640` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260801-112640`
+
+
+→ Auto-resolved: CHECKPOINT-20260801-112640 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260801-120203 | 2026-08-01 12:02 | unknown | PENDING
+**Action:** git push to origin (worktree-airtight-print-profile)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260801-120203` / `n CHECKPOINT-20260801-120203` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260801-120203`
+
+
+→ Resolved: CHECKPOINT-20260801-120203 → APPROVED by Javier
+
+
+### CHECKPOINT-20260801-120520 | 2026-08-01 12:05 | unknown | PENDING
+**Action:** git push to origin (worktree-airtight-print-profile)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260801-120520` / `n CHECKPOINT-20260801-120520` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260801-120520`
+
+
+
+### CHECKPOINT-20260801-120738 | 2026-08-01 12:07 | unknown | PENDING
+**Action:** git push to origin (worktree-airtight-print-profile)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260801-120738` / `n CHECKPOINT-20260801-120738` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260801-120738`
+
+
+→ Resolved: CHECKPOINT-20260801-120738 → APPROVED by Javier
