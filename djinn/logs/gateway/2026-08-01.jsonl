@@ -36,3 +36,5 @@
 {"ts": "2026-08-01T13:20:32", "event": "checkpoint_pending", "id": "CHECKPOINT-20260801-132030", "action": "git push to origin (worktree-airtight-print-profile)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
 {"ts": "2026-08-01T13:20:38", "event": "checkpoint_approve_cmd", "id": "CHECKPOINT-20260801-132030"}
 {"ts": "2026-08-01T13:20:42", "event": "checkpoint_approved", "id": "CHECKPOINT-20260801-132030", "action": "git push to origin (worktree-airtight-print-profile)"}
+{"ts": "2026-08-01T13:26:41", "event": "checkpoint_pending", "id": "CHECKPOINT-20260801-132640", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-08-01T13:31:41", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260801-132640", "action": "git push to origin (main)"}
