@@ -58233,3 +58233,183 @@
 | 2026-08-02 16:26 UTC | standby | 0.0% | 30.5 | 0 | 28.7 | 0 | 0% | 0 |  |
 [2026-08-02 16:26:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
 [2026-08-02 16:26:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:27 UTC | standby | 0.0% | 30.5 | 0 | 28.7 | 0 | 0% | 0 |  |
+[2026-08-02 16:27:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:27:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:28 UTC | standby | 0.0% | 30.5 | 0 | 28.7 | 0 | 0% | 0 |  |
+[2026-08-02 16:28:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:28:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:29 UTC | standby | 0.0% | 30.5 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:29:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:29:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:30 UTC | standby | 0.0% | 30.4 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:30:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:30:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:31 UTC | standby | 0.0% | 30.4 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:31:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:31:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:32 UTC | standby | 0.0% | 30.4 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:32:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:32:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:33 UTC | standby | 0.0% | 30.4 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:33:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:33:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:34 UTC | standby | 0.0% | 30.4 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:34:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:34:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:35 UTC | standby | 0.0% | 30.3 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:35:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:35:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:36 UTC | standby | 0.0% | 30.3 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:36:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:36:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:37 UTC | standby | 0.0% | 30.3 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:37:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:37:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:38 UTC | standby | 0.0% | 30.3 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:38:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:38:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:39 UTC | standby | 0.0% | 30.3 | 0 | 28.6 | 0 | 0% | 0 |  |
+[2026-08-02 16:39:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:39:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:40 UTC | standby | 0.0% | 30.3 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:40:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:40:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:41 UTC | standby | 0.0% | 30.3 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:41:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:41:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:42 UTC | standby | 0.0% | 30.3 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:42:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:42:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:43 UTC | standby | 0.0% | 30.2 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:43:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:43:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:44 UTC | standby | 0.0% | 30.2 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:44:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:44:22 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:45 UTC | standby | 0.0% | 30.2 | 0 | 28.5 | 0 | 0% | 0 |  |
+[2026-08-02 16:45:19 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:45:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:46 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:46:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:46:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:47 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:47:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:47:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:48 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:48:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:48:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:49 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:49:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:49:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:50 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:50:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:50:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:51 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:51:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:51:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:52 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:52:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:52:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:53 UTC | standby | 0.0% | 30.2 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:53:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:53:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:54 UTC | standby | 0.0% | 30.1 | 0 | 28.4 | 0 | 0% | 0 |  |
+[2026-08-02 16:54:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:54:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:55 UTC | standby | 0.0% | 30.1 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 16:55:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:55:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:56 UTC | standby | 0.0% | 30.1 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 16:56:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:56:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:57 UTC | standby | 0.0% | 30.1 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 16:57:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:57:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:58:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:58 UTC | standby | 0.0% | 30.1 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 16:58:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 16:59:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 16:59 UTC | standby | 0.0% | 30.0 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 16:59:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:00:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:00 UTC | standby | 0.0% | 30.0 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 17:00:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:01:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:01 UTC | standby | 0.0% | 30.0 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 17:01:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:02:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:02 UTC | standby | 0.0% | 30.0 | 0 | 28.3 | 0 | 0% | 0 |  |
+[2026-08-02 17:02:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:03:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:03 UTC | standby | 0.0% | 30.0 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:03:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:04:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:04 UTC | standby | 0.0% | 30.0 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:04:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:05:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:05 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:05:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:06:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:06 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:06:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:07:20 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:07 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:07:23 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:08:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:08 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:08:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:09:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:09 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:09:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:10:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:10:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:10 UTC | standby | 0.0% | 29.9 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:11:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:11:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:11 UTC | standby | 0.0% | 29.8 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:12:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:12:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:12 UTC | standby | 0.0% | 29.8 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:13:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:13:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:13 UTC | standby | 0.0% | 29.8 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:14:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:14:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:14 UTC | standby | 0.0% | 29.8 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:15:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:15:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:15 UTC | standby | 0.0% | 29.8 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:16:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:16:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:16 UTC | standby | 0.0% | 29.7 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:17:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:17:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:17 UTC | standby | 0.0% | 29.7 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:18:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:18:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:18 UTC | standby | 0.0% | 29.7 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:19:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:19:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:19 UTC | standby | 0.0% | 29.7 | 0 | 28.2 | 0 | 0% | 0 |  |
+[2026-08-02 17:20:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:20:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:20 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:21:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:21:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:21 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:22:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:22:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:22 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:23:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:23:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:23 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:24:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:24:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:24 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:25:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:25:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:25 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
+[2026-08-02 17:26:21 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-02 17:26:24 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-02 17:26 UTC | standby | 0.0% | 29.6 | 0 | 28.1 | 0 | 0% | 0 |  |
