@@ -15787,3 +15787,23 @@ Rotated weekly by djinn-comms-rotate.
 
 
 → Auto-resolved: CHECKPOINT-20260802-182649 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260802-192650 | 2026-08-02 19:26 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260802-192650` / `n CHECKPOINT-20260802-192650` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260802-192650`
+
+
+→ Auto-resolved: CHECKPOINT-20260802-192650 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260802-200039 | 2026-08-02 20:00 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260802-200039` / `n CHECKPOINT-20260802-200039` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260802-200039`
+
+
+→ Auto-resolved: CHECKPOINT-20260802-200039 → TIMEOUT_DENIED (no response within 5 min)
