@@ -18037,3 +18037,13 @@ Rotated weekly by djinn-comms-rotate.
 
 
 → Auto-resolved: CHECKPOINT-20260813-230241 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260814-000241 | 2026-08-14 00:02 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260814-000241` / `n CHECKPOINT-20260814-000241` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260814-000241`
+
+
+→ Auto-resolved: CHECKPOINT-20260814-000241 → TIMEOUT_DENIED (no response within 5 min)
