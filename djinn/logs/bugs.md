@@ -339,3 +339,6 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-08-11 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-telegram-gateway` — unhandled exception (28 occurrence(s)) _(type: errlog)_
+
+| 2026-08-16 | Claude | djinn-weekly (~/.local/bin) | medium | fixed | `ollama run deepseek-r1:7b \| grep -v "^<think>"` never matched — model emitted raw Thinking prose (sometimes Chinese) and TTY control codes instead of tagged output; corrupted `weekly/2026-W31.md` and `2026-W32.md` | [[2026-08-16_bug-djinn-weekly-review-leaked-raw-model-output]] |
+| 2026-08-16 | Claude | Iris (AD5X/bambufy, Klipper) | high | open | Both onboard MCUs (`mcu`, `eboard`) hit "Timer too close" and shut down simultaneously mid-print of `Proxy_Tornado_Recycler.gcode` at print_time≈11457.6s — host failed to service MCU scheduling in time; moonraker reports Unsafe Shutdown Count: 52 (no prior baseline logged). Printer left in Klipper shutdown, heaters off, untouched pending Javier's call | [[2026-08-16_bug-iris-mcu-timer-too-close-shutdown]] |

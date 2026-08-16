@@ -2200,3 +2200,16 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Report: `logs/reports/2026-07-23_book-catalog-built.md`
 
 *— Claude*
+
+## 2026-08-16: BUG FIXED — djinn-weekly leaked raw model reasoning + TTY control codes into vault
+- `djinn/weekly/2026-W31.md` and `2026-W32.md` were corrupted: `ollama run deepseek-r1:7b | grep -v "^<think>"` never matched because the model emitted raw "Thinking..." prose (sometimes in Chinese) plus live cursor-control escape sequences from `ollama run`'s TTY animation, not clean tagged output.
+- Fixed `~/.local/bin/djinn-weekly` to call Ollama's `/api/generate` with `think:false` directly instead of shelling out to the interactive `ollama run` command — no TTY, no leakage. Replaced both corrupted files by hand with accurate summaries from the same underlying data.
+- Report: `logs/reports/2026-08-16_bug-djinn-weekly-review-leaked-raw-model-output.md`
+
+## 2026-08-16: BUG — Iris MCU "Timer too close" shutdown mid-print, left open for Javier
+- While hunting for the Puffco Proxy Tornadocycler STL, found it was mid-print on Iris as `Proxy_Tornado_Recycler.gcode` — and that Iris had just hit a Klipper MCU shutdown. Both onboard MCUs (`mcu`, `eboard`) reported "Timer too close" within ~1ms of each other at print_time≈11457.6s and shut down, halting the print. Toolhead saved at (105.481, 122.725, Z=19.669mm), heaters off, nothing damaged.
+- Moonraker's Unsafe Shutdown Count sits at 52 — no prior baseline logged in the vault, so unknown whether this is a slow accumulation or a recent spike.
+- Deliberately did not touch the printer (no FIRMWARE_RESTART, no resume) — left for Javier's call per standing no-live-changes policy.
+- Report: `logs/reports/2026-08-16_bug-iris-mcu-timer-too-close-shutdown.md`
+
+*— Claude*
