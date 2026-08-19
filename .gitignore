@@ -7,6 +7,12 @@
 # reasoning. Do not widen this exception without an explicit new decision.
 personal/*
 !personal/sovereign/
+# BUG-FIX (2026-08-19): the pattern above only matches a root-level personal/
+# directory. A second, unrelated personal/ tree exists at djinn/personal/
+# (PA-layer dashboard sync output: recovery.md, sobriety.md, health.md, etc.)
+# and was NOT covered — it sat tracked and unpushed for weeks. Mirroring the
+# same rule here so both trees are private. See djinn/logs/bugs.md (2026-08-19).
+djinn/personal/*
 forge/commissions/
 forge/finance/
 

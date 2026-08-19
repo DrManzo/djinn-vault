@@ -2213,3 +2213,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - Report: `logs/reports/2026-08-16_bug-iris-mcu-timer-too-close-shutdown.md`
 
 *— Claude*
+
+## 2026-08-19: BUG — gitignore personal/* rule didn't cover djinn/personal/ dashboard sync tree
+- **System:** djinn vault / gitignore / PA-layer dashboard sync
+- **Severity:** high | **Status:** fixed
+- **Root cause:** personal/* in root .gitignore is anchored to the repo-root personal/ directory only; a second, unrelated personal/ tree at djinn/personal/ (PA-layer dashboard sync output: recovery.md, sobriety.md, health.md, habits.md, aethoria.md, academic/status.md) was never covered. Those files were tracked in git and sitting in 622 unpushed local commits on a PUBLIC GitHub repo (DrManzo/djinn-vault), one git push away from exposure. Discovered while adding sensitive recovery material to the vault. Fixed by adding an explicit djinn/personal/* rule to .gitignore and git rm --cached-ing the 6 already-tracked files (working-tree copies preserved). Nothing had reached origin/main yet (last fetch 2026-07-23), so no actual public exposure occurred. Root cause of *why* the sync job writes to djinn/personal/ instead of personal/ is unresolved -- likely a Salomon-side script path bug, not found in this vault checkout.
+- **Report:** `logs/reports/2026-08-19_bug-gitignore-personal-rule-didn-t-cover-djinn-personal-dashboard-sync-tree.md`
+
+*— Claude*
