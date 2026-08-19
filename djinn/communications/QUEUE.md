@@ -3748,3 +3748,15 @@ Continue this work using your existing personal-layer infrastructure (`personal/
 **Output expected:** Whatever form makes sense for continuing this with Javier directly (Telegram via djinn-personal-gateway, or a session note) — this isn't a technical deliverable like other TASK entries, it's picking the conversation back up.
 
 **Deliver to:** Javier directly.
+
+---
+
+## ~~Find and fix PA-layer dashboard sync writing to djinn/personal/ instead of personal/~~ — RESOLVED same session
+
+- status: resolved (2026-08-19, same session, by Claude — closing out before Salomon picked it up)
+- priority: was high
+- context: `djinn/personal/recovery.md`, `sobriety.md`, `health.md`, `habits.md`, `aethoria.md`, `academic/status.md` were dashboard-sync output with zero gitignore coverage, one push away from public exposure.
+- **Root cause found:** `/home/drmanzo/.local/bin/djinn-personal-db`, function `cmd_vault_sync()` (invoked via `djinn-personal-db sync`, and automatically after most commands), line 894, hardcoded `vault = Path.home() / "Obsidian/djinn/personal"` — should have been `Path.home() / "Obsidian/personal"` (the actual private, gitignored tree; see `personal/README.md`). Simple wrong-path typo, not a Salomon-side script — `~/.local/bin` isn't a git repo, so no vault commit needed for this file itself.
+- **Fix applied:** corrected the path, ran `djinn-personal-db sync` to regenerate the 6 mirror files at the correct `personal/` location, deleted the stale copies at `djinn/personal/` (now removed entirely, was DB-derived and gitignored anyway — no data loss, SQLite remains the source of truth).
+- **Verified:** `ls ~/Obsidian/personal/*.md` shows fresh `_Last synced_` timestamps at the new path; `djinn/personal/` no longer exists.
+- No further action needed. The earlier `.gitignore` `djinn/personal/*` safety-net rule is now moot (path doesn't exist) but harmless to leave in place.

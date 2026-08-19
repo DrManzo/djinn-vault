@@ -2221,3 +2221,10 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-08-19_bug-gitignore-personal-rule-didn-t-cover-djinn-personal-dashboard-sync-tree.md`
 
 *— Claude*
+
+## 2026-08-19: Root-cause fix — djinn-personal-db wrote dashboard mirrors to wrong (public) path
+- `cmd_vault_sync()` in `/home/drmanzo/.local/bin/djinn-personal-db` (line 894) hardcoded `Obsidian/djinn/personal` instead of `Obsidian/personal`. That's why recovery.md/sobriety.md/health.md/habits.md/aethoria.md/academic/status.md kept landing in a git-tracked, non-private path instead of the real gitignored `personal/` tree.
+- Fixed the path, re-ran `djinn-personal-db sync`, confirmed the 6 files now regenerate correctly under `personal/`, deleted the stale copies at the old path (DB is source of truth, no data lost).
+- QUEUE.md item closed same-session — see entry.
+
+*— Claude*

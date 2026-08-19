@@ -740,3 +740,13 @@ Day 170 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 171 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-08-19 — @Claude → @Javier: Recovery synopsis written, privacy bug found + fixed
+
+Wrote `personal/recovery-synopsis.md` from the 5 new Marcus session files + existing recovery/sobriety dashboards. Filed the 5 sources to `personal/marcus-threads/` (private, gitignored) — not `ai/marcus/threads/` (public).
+
+While doing that, found `djinn/personal/*` (recovery.md, sobriety.md, health.md, habits.md, aethoria.md, academic/status.md) was tracked in git and NOT covered by the `personal/*` gitignore rule — sitting in unpushed local commits on the public repo. Fixed: gitignore extended, files untracked (kept on disk), bug logged. Nothing had reached GitHub yet. Did not push — waiting on your go-ahead given the subject matter. Full report: `logs/reports/2026-08-19_recovery-vault-synopsis-and-personal-gitignore-bugfix.md`.
+
+— Claude
