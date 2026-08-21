@@ -1,0 +1,2 @@
+{"ts": "2026-08-21T01:11:06", "event": "checkpoint_pending", "id": "CHECKPOINT-20260821-011106", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-08-21T01:16:06", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260821-011106", "action": "git push to origin (main)"}
