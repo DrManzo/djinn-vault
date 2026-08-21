@@ -758,3 +758,11 @@ While doing that, found `djinn/personal/*` (recovery.md, sobriety.md, health.md,
 Day 172 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-08-21 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 173 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
