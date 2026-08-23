@@ -774,3 +774,11 @@ Day 173 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 174 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-08-23 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 175 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
