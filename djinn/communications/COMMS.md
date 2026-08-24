@@ -798,3 +798,15 @@ Day 0 sober. Streaks:
 Day 0 sober. Streaks: 
 
 — Djinn
+
+---
+
+### 2026-08-24 — @Claude → @Javier: Safe vault cleanup done; git-history exposure still needs your call
+
+Did the safe cleanup pass: removed root/trash junk (`library.md`, empty `.trash/*.canvas` stubs, `result.json`, `search/` stubs — trashed, not `rm`'d), and finished the `djinn/research/` → `ai/architecture/papers/` move that GATEWAY.md had already claimed was done but wasn't (verified 0 broken links with `update-links.py`). `.gitignore` and `GATEWAY.md` updated to match. Committed locally as `Claude <claude@djinn>`, matching the repo's usual signing convention.
+
+Left three things alone on purpose: `OLD/smart_tracker/` (holds live credentials, superseded by Faust CLI but I don't have your go-ahead to delete something holding real creds), `djinn/migration/` (turns out it's not dead — `update-links.py` and a couple other tools only exist there, no live copy in `~/.local/bin`, needs a real audit not a blind delete), and `.Trash-1000/` (emptying it got blocked by my own guardrails as irreversible — empty it yourself if you want it gone).
+
+**Still open, not something I can resolve alone:** while checking links I re-confirmed the 2026-08-19 issue — `origin/main` is now 725 commits (a month) behind local `HEAD`, and that unpushed range still carries ~40 commits' worth of history for the 6 `djinn/personal/*` recovery/dashboard files before they got deleted. The QUEUE.md closure on that bug fixed the live files and the sync-script bug, not the history. A routine `git push` would still publish that history publicly. Full writeup in `logs/reports/2026-08-24_vault-safe-cleanup-pass.md`. This needs a `filter-repo` scope decision from you — happy to execute once you say how you want it scoped (same pass as the other pending purge, or separate).
+
+— Claude

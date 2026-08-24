@@ -2228,3 +2228,16 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - QUEUE.md item closed same-session — see entry.
 
 *— Claude*
+
+## 2026-08-24: Vault safe cleanup pass
+- **System:** vault-wide housekeeping (root junk, `.trash/`, `djinn/research/`)
+- Removed tracked root junk (`library.md`, 4 empty `.trash/*.canvas` stubs) and untracked junk (`result.json`, `search/*.md`) via `gio trash`, not `rm`
+- Added `.trash/` to `.gitignore` so Obsidian's own trash stops getting tracked
+- Moved `djinn/research/papers/*.md` (3 files) → `ai/architecture/papers/`, completing a relocation GATEWAY.md's own path notes had already documented as done but wasn't. Verified with `update-links.py --dry-run` — 0 broken links.
+- Updated `GATEWAY.md`'s path diagram to drop the now-nonexistent `djinn/research/` line
+- Deliberately left untouched: `OLD/smart_tracker/` (holds live credentials, needs Javier's call), `djinn/migration/` (holds `update-links.py` and other tools with no live duplicate in `~/.local/bin` — not dead weight), `HEARTBEAT-typhon.md` (actively read by 4+ live scripts, not junk, just stale pending Typhon reprovisioning), `.Trash-1000/` (emptying declined by session guardrails as an irreversible action)
+- While checking for orphaned links, reconfirmed the 2026-08-19 unpushed-personal-data issue is still open — see that day's entry below and the new report at `logs/reports/2026-08-24_vault-safe-cleanup-pass.md`. The QUEUE.md closure for that bug covered the live files and the code path, not the git history already carrying those 6 files across ~40 commits between 2026-07-23 and 2026-08-19. `origin/main` is now 725 commits behind local `HEAD` (was 622 on 2026-08-19) — still unpushed, still needs a `filter-repo` pass before a routine push is safe.
+- Committed locally only (`djinn: vault cleanup — remove root/trash junk, relocate legacy research papers`), did not push, for the same reason.
+- **Report:** `logs/reports/2026-08-24_vault-safe-cleanup-pass.md`
+
+*— Claude*
