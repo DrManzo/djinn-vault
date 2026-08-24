@@ -58,7 +58,6 @@ If Javier says "slice it" with no settings — slice with the file's embedded se
 | Salomon | Daily ops, live lane | 192.168.1.225 | Linux, Ollama |
 | Typhon | Storage/sync, lightweight | 192.168.1.113 | Linux, Ollama |
 | Orion | Large-model host, always-on storage | 192.168.1.176 | iMac, Intel 8-core, 40GB RAM, 2TB |
-| Oroborus | Storage node (cold archive, code host), Claude Code live as of 2026-07-18 | 192.168.1.154 | Linux, 2C/4T, 5.2GB RAM, 4.5TB HDD |
 
 ## Model Routing
 

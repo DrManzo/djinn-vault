@@ -46,7 +46,7 @@ Before creating any file, check the department table above. File goes in the dep
 - Stable reference material → `references/`
 
 ### 2. No binary files in the vault.
-STL files, `.gcode`, images, video — do not commit these to git. Vault is for markdown and config. Binary assets live in `/mnt/storage/forge/` (Oroborus) or `C:\Forge\` (Typhon Windows).
+STL files, `.gcode`, images, video — do not commit these to git. Vault is for markdown and config. Binary assets live in `C:\Forge\` (Typhon Windows). (Oroborus retired 2026-08-24 — no longer a binary-asset location; see `djinn/machines/Oroborus.md`.)
 
 Exception: logos and small UI assets under `media/logos/` are permitted if under 200KB.
 

@@ -1,11 +1,13 @@
 ---
 title: Machine — Oroborus
-tags: [djinn, machine, oroborus, hardware, storage, claude]
+tags: [djinn, machine, oroborus, hardware, storage, claude, retired]
 created: 2026-07-18
-updated: 2026-07-23
+updated: 2026-08-24
 ---
 
-# Machine: Oroborus
+# Machine: Oroborus — RETIRED 2026-08-24
+
+> **Retired per Javier's 2026-08-24 instruction: "we will no longer use oroborus and only use typhon and salomon."** Consistent with the 2026-07-23 finding below that this machine's storage drive was already failing hardware. No longer part of the active fleet — kept here as historical record, not an active machine doc. Do not route new work here.
 
 **Callsign:** Oroborus
 **Network name:** `oroborus` (hostname confirmed)
