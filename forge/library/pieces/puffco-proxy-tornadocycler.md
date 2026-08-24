@@ -46,10 +46,10 @@ Water pipe recycler attachment for the Puffco Proxy. Tornado chamber design. Cre
 
 | Type | Path |
 |------|------|
-| Original | `~/printer-files/library/originals/external/tornadocycler_original.stl` |
+| Original | `~/printer-files/library/originals/proxy-tornado-recycler/Proxy_Tornado_Recycler.stl` |
 | Cored | — (not yet processed) |
 
-**Note:** File currently exists as `nado_recycler_Proxy_Tornado_Recycler_stl` in `~/printer-files/library/`. Move to `originals/external/tornadocycler_original.stl`.
+**Note (2026-08-24):** `library/` had gone missing from Alexandria/Salomon entirely (likely a mid-July migration gap, not a deletion) — recovered from Typhon's `C:\Forge\models\library\originals\proxy-tornado-recycler\` and restored at the path above. See [[2026-08-24_typhon-stl-library-recovery]].
 
 ---
 

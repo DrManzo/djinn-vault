@@ -2254,3 +2254,12 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-08-24_vault-history-purge-personal-and-task105.md`
 
 *— Claude*
+
+## 2026-08-24: Missing forge STL library recovered from Typhon
+- While tracking down the Puffco Proxy Tornadocycler STL for Javier, found `library/` and `review/` missing entirely from both Alexandria's `printer-files/` tree and `~/printer-files/` on Salomon — no deletion event in any log; looks like a leftover gap from the mid-July Library→Alexandria migration (same window as the already-logged Backpack Boyz/Camood TTHQ file losses), not something touched this session.
+- Real source was intact on Typhon (`C:\Forge\models\library\` — 148 files across originals + Penelope pieces; `C:\Forge\models\review\` — 35 files: Oni Collection, Demon Slayer, Catrina, Totoro, Pokemon Gengar cups, paracord jig, melted-candle pillars). Pulled all 455 `.stl` files on Typhon as a single verified `tar` (byte-exact match after transfer, per the standing Typhon-transfer rule against `scp -r`/glob truncation).
+- Filtered out `tools/OrcaSlicer/` (255 files — the slicer's own bundled build-plate models, not ours) and `queue/`/`utility/` (already current on Alexandria, `utility/` there is actually more complete with `.scad` sources Typhon's copy lacks).
+- Copied `library/` (1.1GB) + `review/` (493MB) into Alexandria purely additively (`cp -n`, nothing overwritten), symlinked `~/printer-files/library` and `~/printer-files/review` to the Alexandria copies so path references in existing piece notes resolve again. Nothing deleted from Typhon.
+- Report: `logs/reports/2026-08-24_typhon-stl-library-recovery.md`
+
+*— Claude*
