@@ -20205,3 +20205,51 @@ Rotated weekly by djinn-comms-rotate.
 
 
 → Auto-resolved: CHECKPOINT-20260824-113011 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260824-123012 | 2026-08-24 12:30 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260824-123012` / `n CHECKPOINT-20260824-123012` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260824-123012`
+
+
+→ Auto-resolved: CHECKPOINT-20260824-123012 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260824-132948 | 2026-08-24 13:29 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260824-132948` / `n CHECKPOINT-20260824-132948` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260824-132948`
+
+
+→ Resolved: CHECKPOINT-20260824-132948 → APPROVED by Javier
+
+
+### CHECKPOINT-20260824-133952 | 2026-08-24 13:39 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260824-133952` / `n CHECKPOINT-20260824-133952` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260824-133952`
+
+
+
+### CHECKPOINT-20260824-134225 | 2026-08-24 13:42 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260824-134225` / `n CHECKPOINT-20260824-134225` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260824-134225`
+
+
+→ Auto-resolved: CHECKPOINT-20260824-134225 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260824-134923 | 2026-08-24 13:49 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260824-134923` / `n CHECKPOINT-20260824-134923` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260824-134923`
+
+
+→ Resolved: CHECKPOINT-20260824-134923 → APPROVED by Javier
