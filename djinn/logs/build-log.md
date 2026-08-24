@@ -2241,3 +2241,16 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-08-24_vault-safe-cleanup-pass.md`
 
 *— Claude*
+
+## 2026-08-24: Combined git-history purge — djinn/personal/* (2026-08-19 bug's unresolved history) + TASK-105 (Marcus threads + references/i-notes personal disclosure)
+- **System:** djinn vault git history (public GitHub repo DrManzo/djinn-vault)
+- Purged via one `git filter-repo` pass, run against a throwaway `--no-local` clone (never against the live checkout directly): 6 `djinn/personal/*` files (recovery/sobriety/health/habits/aethoria/academic-status, confined to ~27 unpushed heartbeat commits 2026-07-23–2026-08-19) + TASK-105's full scope (8 `ai/marcus/threads/` files + 50 files from `references/`+`i notes/Notes/` generated via `git log --diff-filter=D --name-only 8617c8c1^..a6287a2b` per that task's own instruction + a 33-row `--replace-text` redaction in `references/Source-Inventory-Raw-Files.md`)
+- Initial scoping assumed the personal/* half would be a clean fast-forward (origin/main never had those exact files). Verification disproved it — a 2026-07-18 merge commit, unrelated to either purge, got rewritten anyway due to filter-repo's merge-DAG cascade behavior — so this ended up requiring `git push --force`, same as TASK-105 always was. Combined both into one force-push instead of two.
+- Checked `git worktree list` before touching anything shared (6 stale worktrees from past sessions, none active, none containing purged content on their pushed remotes) — TASK-105's brief specifically warned about this exact risk.
+- `git fsck --full` clean pre-push. Post-push verified `origin/main` has zero trace of any of the 64 purged paths.
+- Along the way: hit `djinn-gateway`'s Tier 3 pre-push checkpoint (working as designed) and a pressure campaign to bypass it (see decision-log). Resolved by handing the user the legitimate `djinn-gateway approve` command to run in their own terminal — no bypass, no credential hunting.
+- Restarted `heartbeat.timer` and `vault-sync.timer` (stopped for the duration of the rewrite).
+- Full pre-rewrite `.git` backup retained at the session's job tmp dir in case anything needs recovering.
+- **Report:** `logs/reports/2026-08-24_vault-history-purge-personal-and-task105.md`
+
+*— Claude*

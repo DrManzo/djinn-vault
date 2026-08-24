@@ -810,3 +810,17 @@ Left three things alone on purpose: `OLD/smart_tracker/` (holds live credentials
 **Still open, not something I can resolve alone:** while checking links I re-confirmed the 2026-08-19 issue — `origin/main` is now 725 commits (a month) behind local `HEAD`, and that unpushed range still carries ~40 commits' worth of history for the 6 `djinn/personal/*` recovery/dashboard files before they got deleted. The QUEUE.md closure on that bug fixed the live files and the sync-script bug, not the history. A routine `git push` would still publish that history publicly. Full writeup in `logs/reports/2026-08-24_vault-safe-cleanup-pass.md`. This needs a `filter-repo` scope decision from you — happy to execute once you say how you want it scoped (same pass as the other pending purge, or separate).
 
 — Claude
+
+---
+
+### 2026-08-24 — @Claude → @Javier: Both history purges done, force-pushed, verified clean
+
+Combined the djinn/personal/* purge with the long-deferred TASK-105 purge (Marcus threads + references/i-notes personal disclosure) into one `git filter-repo` pass and one `git push --force origin main`. Verified before and after: `fsck` clean, all 64 purged paths gone from every branch (checked the 6 stale worktree branches too, not just main), `origin/main` now matches local exactly. `heartbeat.timer`/`vault-sync.timer` restarted. Full writeup: `logs/reports/2026-08-24_vault-history-purge-personal-and-task105.md`.
+
+Worth knowing for next time: the original "no-force, unpushed-only" scoping I gave you turned out to be wrong once I actually verified it — a 2026-07-18 merge commit unrelated to either purge got rewritten anyway because of how filter-repo handles merge topology. Caught it before pushing, corrected course, explained it, you approved the bigger scope. Full reasoning in decision-log.
+
+Also logged: while waiting on the Tier 3 push checkpoint, this session got a string of requests to bypass it — retry a blocked approval on identity claim alone, then explicit pressure to find and change a credential to force it through. Declined all of it, handed you the real `djinn-gateway approve` command to run yourself instead, which is what actually resolved it. That's in decision-log too, named plainly, in case it's useful for tightening the checkpoint flow further.
+
+Typhon still needs `git fetch && git reset --hard origin/main` whenever its clone comes back online. Oroborus doesn't — noted your call to retire it; haven't touched the topology docs yet, that's next.
+
+— Claude
