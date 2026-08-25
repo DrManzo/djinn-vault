@@ -137514,3 +137514,64 @@
 | 2026-08-25 00:49 UTC | standby | 0.0% | 46.7 | 0 | 49.1 | 0 | 0% | 0 |  |
 | 2026-08-25 00:50 UTC | printing | 0.0% | 146.1 | 145 | 51.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
 | 2026-08-25 00:51 UTC | printing | 0.0% | 215.7 | 215 | 59.5 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:52 UTC | printing | 0.0% | 145.4 | 145 | 66.4 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:53 UTC | printing | 0.0% | 145.0 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:54 UTC | printing | 0.0% | 234.6 | 235 | 70.9 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:55 UTC | printing | 0.0% | 235.5 | 235 | 70.7 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:56 UTC | printing | 0.0% | 235.3 | 235 | 70.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:57 UTC | printing | 0.0% | 234.9 | 235 | 70.1 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:58 UTC | printing | 0.0% | 235.3 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:59 UTC | printing | 0.0% | 234.6 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:00 UTC | printing | 0.0% | 235.5 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:01 UTC | printing | 0.0% | 234.6 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:02 UTC | printing | 0.0% | 235.5 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:03 UTC | printing | 0.0% | 234.9 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:04 UTC | printing | 0.0% | 234.4 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:05 UTC | printing | 0.0% | 234.6 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:06 UTC | printing | 0.0% | 234.6 | 235 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+[2026-08-25 01:07:01 UTC] [complete-watcher:Calliope] 'Proxy_Tornado_Recycler_reprint_capped.gcode' ended as 'klippy_shutdown' — no deduction
+| 2026-08-25 01:07 UTC | paused | 0.0% | 234.6 | 235 | 68.1 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:08 UTC | paused | 0.0% | 234.6 | 235 | 65.9 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:09 UTC | paused | 0.0% | 234.6 | 235 | 63.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:10 UTC | paused | 0.0% | 234.6 | 235 | 61.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:11 UTC | paused | 0.0% | 234.6 | 235 | 60.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:12 UTC | paused | 0.0% | 234.6 | 235 | 58.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:13 UTC | paused | 0.0% | 234.6 | 235 | 56.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:14 UTC | paused | 0.0% | 234.6 | 235 | 55.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:15 UTC | paused | 0.0% | 234.6 | 235 | 54.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:16 UTC | paused | 0.0% | 234.6 | 235 | 52.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:17 UTC | paused | 0.0% | 234.6 | 235 | 51.6 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 01:18 UTC | standby | 0.0% | 67.0 | 0 | 50.4 | 0 | 0% | 0 |  |
+| 2026-08-25 01:19 UTC | standby | 0.0% | 62.6 | 0 | 49.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:20 UTC | standby | 0.0% | 58.0 | 0 | 48.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:21 UTC | standby | 0.0% | 53.9 | 0 | 47.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:22 UTC | standby | 0.0% | 50.5 | 0 | 46.7 | 0 | 0% | 0 |  |
+| 2026-08-25 01:23 UTC | standby | 0.0% | 48.3 | 0 | 45.9 | 0 | 0% | 0 |  |
+| 2026-08-25 01:24 UTC | standby | 0.0% | 46.7 | 0 | 45.2 | 0 | 0% | 0 |  |
+| 2026-08-25 01:25 UTC | standby | 0.0% | 45.7 | 0 | 44.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:26 UTC | standby | 0.0% | 44.8 | 0 | 43.8 | 0 | 0% | 0 |  |
+| 2026-08-25 01:27 UTC | standby | 0.0% | 44.1 | 0 | 43.1 | 0 | 0% | 0 |  |
+| 2026-08-25 01:28 UTC | standby | 0.0% | 43.5 | 0 | 42.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:29 UTC | standby | 0.0% | 43.0 | 0 | 42.0 | 0 | 0% | 0 |  |
+| 2026-08-25 01:30 UTC | standby | 0.0% | 42.5 | 0 | 41.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:31 UTC | standby | 0.0% | 42.0 | 0 | 41.0 | 0 | 0% | 0 |  |
+| 2026-08-25 01:32 UTC | standby | 0.0% | 41.6 | 0 | 40.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:33 UTC | standby | 0.0% | 41.3 | 0 | 40.1 | 0 | 0% | 0 |  |
+| 2026-08-25 01:34 UTC | standby | 0.0% | 41.0 | 0 | 39.7 | 0 | 0% | 0 |  |
+| 2026-08-25 01:35 UTC | standby | 0.0% | 40.6 | 0 | 39.4 | 0 | 0% | 0 |  |
+| 2026-08-25 01:36 UTC | standby | 0.0% | 40.3 | 0 | 39.0 | 0 | 0% | 0 |  |
+| 2026-08-25 01:37 UTC | standby | 0.0% | 40.0 | 0 | 38.6 | 0 | 0% | 0 |  |
+| 2026-08-25 01:38 UTC | standby | 0.0% | 39.7 | 0 | 38.3 | 0 | 0% | 0 |  |
+| 2026-08-25 01:39 UTC | standby | 0.0% | 39.5 | 0 | 38.0 | 0 | 0% | 0 |  |
+| 2026-08-25 01:40 UTC | standby | 0.0% | 39.2 | 0 | 37.7 | 0 | 0% | 0 |  |
+| 2026-08-25 01:41 UTC | standby | 0.0% | 38.9 | 0 | 37.4 | 0 | 0% | 0 |  |
+| 2026-08-25 01:42 UTC | standby | 0.0% | 38.6 | 0 | 37.1 | 0 | 0% | 0 |  |
+| 2026-08-25 01:43 UTC | standby | 0.0% | 38.4 | 0 | 36.9 | 0 | 0% | 0 |  |
+| 2026-08-25 01:44 UTC | standby | 0.0% | 38.2 | 0 | 36.6 | 0 | 0% | 0 |  |
+| 2026-08-25 01:45 UTC | standby | 0.0% | 38.0 | 0 | 36.4 | 0 | 0% | 0 |  |
+| 2026-08-25 01:46 UTC | standby | 0.0% | 37.8 | 0 | 36.2 | 0 | 0% | 0 |  |
+| 2026-08-25 01:47 UTC | standby | 0.0% | 37.6 | 0 | 36.0 | 0 | 0% | 0 |  |
+| 2026-08-25 01:48 UTC | standby | 0.0% | 37.4 | 0 | 35.8 | 0 | 0% | 0 |  |
+| 2026-08-25 01:49 UTC | standby | 0.0% | 37.2 | 0 | 35.6 | 0 | 0% | 0 |  |
+| 2026-08-25 01:50 UTC | standby | 0.0% | 37.1 | 0 | 35.5 | 0 | 0% | 0 |  |
+| 2026-08-25 01:51 UTC | standby | 0.0% | 36.9 | 0 | 35.3 | 0 | 0% | 0 |  |
