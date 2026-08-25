@@ -137694,3 +137694,63 @@
 | 2026-08-25 03:49 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
 | 2026-08-25 03:50 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
 | 2026-08-25 03:51 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:52 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:53 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:54 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:55 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:56 UTC | standby | 0.0% | 31.6 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 03:57 UTC | standby | 0.0% | 31.6 | 0 | 30.1 | 0 | 0% | 0 |  |
+[2026-08-25 03:58:12 UTC] [complete-watcher:Calliope] unreachable — <urlopen error timed out>
+[2026-08-25 03:59:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:00:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:01:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:02:05 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:03:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:04:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:05:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:06:04 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:07:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:08:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:09:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:10:05 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:11:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:12:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:13:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:14:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:15:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:16:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:17:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:18:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:19:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:20:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:21:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:22:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:23:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:24:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:25:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:26:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:27:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:28:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:29:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:30:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:31:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:32:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:33:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:34:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:35:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:36:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:37:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:38:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:39:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:40:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:41:06 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:42:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:43:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:44:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:45:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:46:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:47:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:48:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:49:09 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:50:07 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 04:51:08 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
