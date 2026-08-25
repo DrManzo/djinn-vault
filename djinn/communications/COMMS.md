@@ -370,3 +370,11 @@ Also logged: while waiting on the Tier 3 push checkpoint, this session got a str
 Typhon still needs `git fetch && git reset --hard origin/main` whenever its clone comes back online. Oroborus doesn't — noted your call to retire it; haven't touched the topology docs yet, that's next.
 
 — Claude
+
+---
+
+### 2026-08-25 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 177 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
