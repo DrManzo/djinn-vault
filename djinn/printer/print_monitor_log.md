@@ -137450,3 +137450,67 @@
 [2026-08-24 23:49:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
 [2026-08-24 23:50:01 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
 [2026-08-24 23:51:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:52:02 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:53:00 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:54:01 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:55:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:56:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:57:02 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:58:02 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-24 23:58:02 UTC] [complete-watcher:Nemesis] 'Proxy_Tornado_Recycler_PETG_6h53m.gcode' ended as 'cancelled' — no deduction
+[2026-08-24 23:59:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-08-25 00:00:03 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+| 2026-08-25 00:00 UTC | standby | 0.0% | 30.4 | 0 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:01 UTC | standby | 0.0% | 89.8 | 220 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:02 UTC | standby | 0.0% | 220.5 | 220 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:03 UTC | standby | 0.0% | 176.1 | 0 | 30.2 | 0 | 0% | 0 |  |
+[2026-08-25 00:04:00 UTC] [complete-watcher:Nemesis] 'Proxy_Tornado_Recycler_PETG_6h53m.gcode' ended as 'cancelled' — no deduction
+| 2026-08-25 00:04 UTC | standby | 0.0% | 148.8 | 220 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:05 UTC | standby | 0.0% | 219.3 | 220 | 30.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:06 UTC | standby | 0.0% | 219.6 | 220 | 30.3 | 0 | 0% | 0 |  |
+| 2026-08-25 00:07 UTC | standby | 0.0% | 195.9 | 0 | 30.3 | 0 | 0% | 0 |  |
+| 2026-08-25 00:08 UTC | standby | 0.0% | 153.4 | 0 | 30.4 | 0 | 0% | 0 |  |
+| 2026-08-25 00:09 UTC | standby | 0.0% | 123.8 | 0 | 30.4 | 0 | 0% | 0 |  |
+| 2026-08-25 00:10 UTC | standby | 0.0% | 102.0 | 0 | 30.4 | 0 | 0% | 0 |  |
+| 2026-08-25 00:11 UTC | standby | 0.0% | 85.4 | 0 | 30.4 | 0 | 0% | 0 |  |
+| 2026-08-25 00:12 UTC | standby | 0.0% | 172.0 | 200 | 36.1 | 70 | 0% | 0 |  |
+| 2026-08-25 00:13 UTC | standby | 0.0% | 197.9 | 160 | 45.8 | 70 | 0% | 0 |  |
+| 2026-08-25 00:14 UTC | standby | 0.0% | 160.6 | 160 | 54.6 | 70 | 0% | 0 |  |
+| 2026-08-25 00:15 UTC | standby | 0.0% | 160.2 | 160 | 62.8 | 70 | 0% | 0 |  |
+| 2026-08-25 00:16 UTC | standby | 0.0% | 160.5 | 160 | 68.6 | 70 | 0% | 0 |  |
+| 2026-08-25 00:17 UTC | printing | 0.0% | 192.1 | 250 | 70.6 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:18 UTC | printing | 0.0% | 250.1 | 250 | 70.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:19 UTC | printing | 0.0% | 250.3 | 250 | 70.6 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:20 UTC | printing | 0.0% | 250.0 | 250 | 70.2 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:21 UTC | printing | 0.0% | 250.3 | 250 | 70.0 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:22 UTC | printing | 0.0% | 249.9 | 250 | 70.2 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:23 UTC | printing | 0.0% | 249.9 | 250 | 69.9 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:24 UTC | printing | 0.0% | 240.1 | 240 | 69.7 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:25 UTC | printing | 0.0% | 240.2 | 240 | 70.1 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:26 UTC | printing | 0.0% | 240.1 | 240 | 70.2 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:27 UTC | paused | 0.0% | 239.4 | 240 | 69.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+[2026-08-25 00:28:00 UTC] [complete-watcher:Calliope] 'Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode' ended as 'klippy_shutdown' — no deduction
+| 2026-08-25 00:28 UTC | paused | 0.0% | 239.4 | 240 | 67.8 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:29 UTC | paused | 0.0% | 239.4 | 240 | 65.5 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:30 UTC | paused | 0.0% | 239.4 | 240 | 63.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:31 UTC | standby | 0.0% | 0.0 | 0 | 0.0 | 0 | 0% | 0 |  |
+| 2026-08-25 00:32 UTC | printing | 0.0% | 240.9 | 240 | 63.1 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+| 2026-08-25 00:33 UTC | paused | 0.0% | 239.8 | 140 | 68.5 | 70 | 0% | 0 | Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode |
+[2026-08-25 00:34:01 UTC] [complete-watcher:Calliope] 'Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode' ended as 'klippy_shutdown' — no deduction
+| 2026-08-25 00:34 UTC | standby | 0.0% | 188.0 | 0 | 67.7 | 0 | 0% | 0 |  |
+| 2026-08-25 00:35 UTC | standby | 0.0% | 147.5 | 130 | 64.8 | 65 | 0% | 0 |  |
+| 2026-08-25 00:36 UTC | standby | 0.0% | 169.7 | 200 | 64.6 | 65 | 0% | 0 |  |
+| 2026-08-25 00:37 UTC | standby | 0.0% | 154.1 | 130 | 64.6 | 65 | 0% | 0 |  |
+| 2026-08-25 00:38 UTC | standby | 0.0% | 0.0 | 0 | 0.0 | 0 | 0% | 0 |  |
+| 2026-08-25 00:39 UTC | standby | 0.0% | 102.4 | 0 | 62.9 | 0 | 0% | 0 |  |
+| 2026-08-25 00:40 UTC | standby | 0.0% | 87.4 | 0 | 61.0 | 0 | 0% | 0 |  |
+| 2026-08-25 00:41 UTC | standby | 0.0% | 76.3 | 0 | 59.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:43 UTC | standby | 0.0% | 65.3 | 0 | 56.8 | 0 | 0% | 0 |  |
+| 2026-08-25 00:44 UTC | standby | 0.0% | 60.2 | 0 | 55.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:45 UTC | standby | 0.0% | 55.8 | 0 | 53.8 | 0 | 0% | 0 |  |
+| 2026-08-25 00:46 UTC | standby | 0.0% | 52.2 | 0 | 52.5 | 0 | 0% | 0 |  |
+| 2026-08-25 00:47 UTC | standby | 0.0% | 49.4 | 0 | 51.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:48 UTC | standby | 0.0% | 47.7 | 0 | 50.2 | 0 | 0% | 0 |  |
+| 2026-08-25 00:49 UTC | standby | 0.0% | 46.7 | 0 | 49.1 | 0 | 0% | 0 |  |
+| 2026-08-25 00:50 UTC | printing | 0.0% | 146.1 | 145 | 51.3 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |
+| 2026-08-25 00:51 UTC | printing | 0.0% | 215.7 | 215 | 59.5 | 70 | 0% | 0 | Proxy_Tornado_Recycler_reprint_capped.gcode |

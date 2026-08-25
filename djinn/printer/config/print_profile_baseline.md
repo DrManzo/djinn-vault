@@ -1,15 +1,15 @@
 # Print Profile Baseline
-Generated: 2026-07-20 23:15 UTC
-Source file: 
-Readings: 1093
+Generated: 2026-08-25 00:50 UTC
+Source file: Proxy_Tornado_Recycler_reprint_capped.gcode
+Readings: 17
 
 ## Temperatures
 | | Hotend | Bed |
 |---|---|---|
-| Target | 220°C | 65°C |
-| Mean | 223.3°C | 65.0°C |
-| Std dev | ±6.67°C | ±0.14°C |
-| Range | 130.1–230.9°C | 64.4–66.2°C |
+| Target | 250°C | 70°C |
+| Mean | 235.1°C | 67.8°C |
+| Std dev | ±26.62°C | ±4.90°C |
+| Range | 146.1–250.3°C | 51.3–70.8°C |
 
 ## Fan
 - Ramp pattern: off
@@ -22,7 +22,7 @@ Readings: 1093
 
 ## Anomalies
 - 
-hotend temp variance high: ±6.7°C (check nozzle_mcu cable)- hotend dropped >15°C below target at least once
+hotend temp variance high: ±26.6°C (check nozzle_mcu cable)- bed temp variance high: ±4.9°C- hotend dropped >15°C below target at least once
 
 ## Notes
 - nozzle_mcu cable needs reseating (hardware fix pending)

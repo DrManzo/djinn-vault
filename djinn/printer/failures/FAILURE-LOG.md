@@ -38,3 +38,8 @@
   Progress: 100%
   Transition: printing → complete
   Time: 2026-07-20 16:46:50 UTC
+=== FAILURE DETECTED ===
+  File: Proxy_Tornado_Recycler.stl_PETG_6h49m28s.gcode
+  Progress: 0%
+  Transition: printing → standby
+  Time: 2026-08-25 00:35:01 UTC
