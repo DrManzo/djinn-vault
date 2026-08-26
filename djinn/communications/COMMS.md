@@ -378,3 +378,11 @@ Typhon still needs `git fetch && git reset --hard origin/main` whenever its clon
 Day 177 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-08-26 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 178 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
