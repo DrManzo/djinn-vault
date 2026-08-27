@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-26",
+  "last_updated": "2026-08-27",
   "updated_by": "djinn-print-complete-watcher",
   "spools": [
     {
@@ -233,13 +233,13 @@
       "color": "Blue",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 712.0,
+      "remaining_g": 557.4,
       "loaded_printer": "Nemesis",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active | [2026-07-20] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-07-21] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly)))",
+      "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active | [2026-07-20] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-07-21] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-08-27] auto-deducted 154.6g (print: Proxy_Tor",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-21",
+      "last_used": "2026-08-27",
       "last_physical_check": null
     },
     {
