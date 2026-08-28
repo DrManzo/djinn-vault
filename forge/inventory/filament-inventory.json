@@ -233,7 +233,7 @@
       "color": "Blue",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 557.4,
+      "remaining_g": 402.8,
       "loaded_printer": "Nemesis",
       "loaded": true,
       "low_threshold_g": 150,
