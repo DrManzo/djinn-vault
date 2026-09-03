@@ -162585,3 +162585,4 @@
 [2026-09-03 04:52:32 UTC] [complete-watcher:Nemesis] unreachable — <urlopen error [Errno 113] No route to host>
 [2026-09-03 04:52:35 UTC] [complete-watcher:Iris] unreachable — <urlopen error [Errno 113] No route to host>
 [2026-09-03 04:53:27 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
+[2026-09-03 05:53:28 UTC] [complete-watcher:Calliope] unreachable — <urlopen error [Errno 113] No route to host>
