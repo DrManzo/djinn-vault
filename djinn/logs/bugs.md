@@ -352,3 +352,7 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-08-27 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (6 occurrence(s)) _(type: errlog)_
+
+
+## 2026-09-03 — djinn-bughunter scan (1 finding(s))
+- **[MEDIUM]** `journald:djinn-telegram-gateway` — network error (4 occurrence(s)) _(type: errlog)_
