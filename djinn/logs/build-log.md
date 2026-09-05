@@ -2254,3 +2254,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-08-24_vault-history-purge-personal-and-task105.md`
 
 *— Claude*
+
+## 2026-09-04: BUG — Alexandria (SanDisk Extreme SSD) — flaky USB/UAS link produced transient ext4 root-inode corruption warnings
+- **System:** Alexandria (SanDisk Extreme SSD, /dev/sda1)
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** 439 uas_eh_abort_handler events accumulated over one mount session on Alexandria (/dev/sda1, SanDisk Extreme portable SSD, mounted via USB on Salomon) — the USB-Attached-SCSI link was repeatedly dropping/aborting commands mid-read. This triggered EXT4-fs errors against inode #2 (the filesystem root directory itself: 'checksumming directory block 0'), which read as filesystem corruption rather than a connection problem, and briefly made ls/du against archive/ fail with 'Bad message' I/O errors. Root cause confirmed as the USB connection, not the filesystem or the drive's own media: smartctl -d scsi identified the drive cleanly (SanDisk Extreme 55AE, 2TB) with no SMART data exposed (enclosure limitation, not a health signal), and a full read-only e2fsck -n (5 passes: inodes, directory structure, directory connectivity, reference counts, group summary) found zero actual inconsistencies once the physical USB connection was reseated/checked and the drive re-enumerated cleanly. A real e2fsck -f -y afterward also completed all 5 passes with no fixes applied, confirming the on-disk structure was never actually damaged -- it just needed the superblock error flag cleared. No data was lost or repaired because none was corrupted; this was pure USB-link instability being misread as filesystem damage.
+- **Report:** `logs/reports/2026-09-04_bug-alexandria-sandisk-extreme-ssd-flaky-usb-uas-link-produced-transient-ext4-root-inode-corruption-warnings.md`
+
+*— Claude*
