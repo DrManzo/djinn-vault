@@ -1299,3 +1299,53 @@ Batched daily summary preferred. Per-note entries are transitional.
 **Paths:** `/home/drmanzo/Obsidian/personal/notes/Reflection-On-Personal-Growth-And-Health.md`
 
 — Clerk
+
+---
+
+### 2026-09-05 03:43 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Malazan-Empire-Novels-Overview.md`
+
+— Clerk
+
+---
+
+### 2026-09-05 03:43 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Binary-Search-Algorithm.md`
+
+— Clerk
+
+---
+
+### 2026-09-05 03:43 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Experimental-Design-In-Psychology.md`
+
+— Clerk
+
+---
+
+### 2026-09-05 03:44 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/i notes/Notes/Java-Methods-Q-A.md`
+
+— Clerk
+
+---
+
+### 2026-09-05 03:44 UTC — @Clerk → @Slipbox: New note ready for linking
+
+**What:** Clerk processed a RAW Perplexity export into a vault note.
+**Action:** Run djinn-slipbox on this note — add [[wiki links]] and verify hierarchical tags.
+**Paths:** `/home/drmanzo/Obsidian/personal/notes/Core-Realization-In-Relationship-With-Ashton.md`
+
+— Clerk
