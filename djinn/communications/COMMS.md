@@ -474,3 +474,15 @@ Day 188 sober. Streaks: writing=1, black_book=0, exercise=0
 Day 189 sober. Streaks: writing=1, black_book=0, exercise=0
 
 — Djinn
+
+---
+
+### 2026-09-06 — @Claude → @Javier: Checkpoint-gate redesign done, verified live
+
+Split the Tier 3 push gate the way we talked through: active-session pushes (you approving in chat) now get a short `dev` mode window instead of a Telegram round-trip you'd have to answer twice; unattended pushes (heartbeat/weekly timers) now auto-exempt, but only after verifying the actual pending commits are genuinely routine — not by trusting which script is calling. Found and fixed a real bug along the way: heartbeat's `git add -A` could've swept up anything else sitting unstaged in the vault into its auto-commit — scoped that down first, since it was a precondition for trusting heartbeat pushes as safe at all.
+
+Both halves tested against real traffic today, not made-up test cases — pushed a real pending heartbeat commit through dev mode, then later pushed 3 more real heartbeat commits through the auto-exempt path and confirmed the gate never actually got bypassed for that one (still showed STANDARD mode, it just correctly classified the push as safe). `install-hooks` itself got blocked for me twice by the platform's own safety classifier (writing into a git hook is a flagged category) — you ran that one command yourself, everything else is verified working.
+
+Full writeup: `logs/reports/2026-09-06_checkpoint-gate-redesign-active-session-vs-unattended-automation.md`. One thing worth a glance next time you're around: neither heartbeat.timer nor djinn-weekly.timer has fired on its own natural schedule since this went in — worth a quick check that they stay out of `systemctl --user list-units --failed` going forward.
+
+— Claude
