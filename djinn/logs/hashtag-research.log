@@ -152,3 +152,14 @@ Calling phi4:14b for hashtag research...
 
 To add a proposed tag:
   djinn-hashtag-update --add "#tagname" --category category/name --tier micro
+
+Calling phi4:14b for hashtag research...
+
+--- Research Results ---
+
+[LLM unavailable: timed out]
+
+--- End Results ---
+
+To add a proposed tag:
+  djinn-hashtag-update --add "#tagname" --category category/name --tier micro
