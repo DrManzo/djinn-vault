@@ -357,3 +357,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 ## 2026-09-03 — djinn-bughunter scan (1 finding(s))
 - **[MEDIUM]** `journald:djinn-telegram-gateway` — network error (4 occurrence(s)) _(type: errlog)_
 | 2026-09-04 | Claude | Alexandria (SanDisk Extreme SSD, /dev/sda1) | medium | fixed | Alexandria (SanDisk Extreme SSD) — flaky USB/UAS link produced transient ext4 root-inode corruption warnings | [[2026-09-04_bug-alexandria-sandisk-extreme-ssd-flaky-usb-uas-link-produced-transient-ext4-root-inode-corruption-warnings]] |
+| 2026-09-06 | Claude | djinn-dm-cleanup.service / forge-dm-cleanup.service / Studio services (systemd --user, Salomon) | medium | fixed | djinn-dm-cleanup.service — stale pre-restructure path (djinn/printer instead of forge), duplicate broken twin disabled | [[2026-09-06_bug-djinn-dm-cleanup-service-stale-pre-restructure-path-djinn-printer-instead-of-forge-duplicate-broken-twin-disabled]] |
