@@ -2286,3 +2286,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-06_bug-djinn-checkpoints-rotate-service-literal-y-w-v-passed-as-filename-instead-of-a-computed-date-every-run-produced-a-garbage-named-archive.md`
 
 *— Claude*
+
+## 2026-09-06: BUG — gdrive-sync.service — remote backup-Salomon directory didn't exist on Drive, bisync had nothing to recover into
+- **System:** gdrive-sync.service (rclone bisync, systemd --user, Salomon)
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** gdrive-sync.service had been failing every hourly run with 'cannot find prior Path1 or Path2 listings, likely due to critical error on prior run -- Bisync aborted. Must run --resync to recover.' Investigated the actual remote target (gdrive:backup-Salomon) and found it did not exist on Drive at all -- rclone size returned 'directory not found'. Even running --resync directly failed the same way at first (rclone bisync's resync step still needs the destination directory to exist before it can list/populate it), so created the remote directory with rclone mkdir gdrive:backup-Salomon, then re-ran the full bisync --resync with the exact flags gdrive-sync uses (--filters-file, --remove-empty-dirs, --check-access, --check-filename RCLONE_TEST, --check-sync true). Resync completed successfully -- all 40 local files under ~/GoogleDrive (RCLONE_TEST + 39 dated _system_manifests/*.txt files) copied up cleanly, established a fresh baseline listing on both sides. Verified via a live systemctl --user start of the actual service: both ExecStart steps (gdrive-sync, gdrive-backup-manifest) completed status=0/SUCCESS. Root cause of why the remote directory was missing in the first place is unknown/unconfirmed -- could be manual deletion on the Drive side, could be the folder was never created before the sync first started failing. Not investigated further since the fix (recreate + resync) fully restored function regardless of the original cause.
+- **Report:** `logs/reports/2026-09-06_bug-gdrive-sync-service-remote-backup-salomon-directory-didn-t-exist-on-drive-bisync-had-nothing-to-recover-into.md`
+
+*— Claude*
