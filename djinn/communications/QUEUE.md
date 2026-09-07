@@ -3764,3 +3764,13 @@ Continue this work using your existing personal-layer infrastructure (`personal/
 - **Fix applied:** corrected the path, ran `djinn-personal-db sync` to regenerate the 6 mirror files at the correct `personal/` location, deleted the stale copies at `djinn/personal/` (now removed entirely, was DB-derived and gitignored anyway — no data loss, SQLite remains the source of truth).
 - **Verified:** `ls ~/Obsidian/personal/*.md` shows fresh `_Last synced_` timestamps at the new path; `djinn/personal/` no longer exists.
 - **Correction, 2026-08-24:** "No further action needed" was wrong — it covered the live files and the sync-script bug, not the git history. Those 6 files sat in ~27 unpushed local commits (2026-07-23 through 2026-08-19) on a public GitHub repo for a month before this was caught during an unrelated vault cleanup pass. Purged via `git filter-repo` + verified force-push on 2026-08-24, combined with the TASK-105 purge in the same operation. See that task's resolution note and `logs/reports/2026-08-24_vault-history-purge-personal-and-task105.md` for full detail. The `.gitignore` rule itself remains correct and harmless to leave in place.
+
+---
+
+## Check djinn-penelope-usbip-watch.service once Typhon is back online
+
+- status: pending — blocked on external dependency (Typhon), not a code bug
+- priority: low
+- created: 2026-09-06 by Claude (per Javier)
+- context: `djinn-penelope-usbip-watch.service` keeps Penelope's USB (shared from Typhon via usbipd-win) attached over Tailscale. It's been failing every 5-minute timer fire since Typhon's Windows reinstall (2026-06-25) left it unreachable for this purpose — confirmed again 2026-09-06 (`ssh typhon@100.69.41.74 usbip attach -r 100.69.41.74 -b 2-4` fails, `Active: failed` in `systemctl --user status`). This is expected/known, not something to fix on the Salomon side — see [[machines/TF-TTHQ]] for Typhon's onboarding status.
+- **Next step:** once Typhon's reprovisioning is far enough along that its usbipd-win share for Penelope's USB is actually live again, re-check this service: `systemctl --user status djinn-penelope-usbip-watch.service` and `systemctl --user list-units --failed`. If it still fails at that point, it's a real bug worth diagnosing properly rather than the expected external-dependency block it is right now.
