@@ -34,3 +34,18 @@
 {"ts": "2026-09-06T12:49:11", "event": "checkpoint_pending", "id": "CHECKPOINT-20260906-124910", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "@Claude", "tg_sent": true}
 {"ts": "2026-09-06T12:49:19", "event": "checkpoint_approve_cmd", "id": "CHECKPOINT-20260906-124910"}
 {"ts": "2026-09-06T12:49:21", "event": "checkpoint_approved", "id": "CHECKPOINT-20260906-124910", "action": "git push to origin (main)"}
+{"ts": "2026-09-06T12:54:09", "event": "checkpoint_pending", "id": "CHECKPOINT-20260906-125408", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-06T12:59:09", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260906-125408", "action": "git push to origin (main)"}
+{"ts": "2026-09-06T13:30:05", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-06T20:40:05+00:00", "by": "javier"}
+{"ts": "2026-09-06T13:31:29", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-09-06T13:54:08", "event": "checkpoint_pending", "id": "CHECKPOINT-20260906-135408", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-06T13:59:08", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260906-135408", "action": "git push to origin (main)"}
+{"ts": "2026-09-06T14:54:10", "event": "checkpoint_pending", "id": "CHECKPOINT-20260906-145409", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-06T14:59:10", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260906-145409", "action": "git push to origin (main)"}
+{"ts": "2026-09-06T15:54:10", "event": "checkpoint_pending", "id": "CHECKPOINT-20260906-155409", "action": "git push to origin (main)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-06T15:59:10", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260906-155409", "action": "git push to origin (main)"}
+{"ts": "2026-09-06T16:10:32", "event": "hooks_installed", "hook": "/home/drmanzo/Obsidian/.git/hooks/pre-push"}
+{"ts": "2026-09-06T16:20:45", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-06T23:30:45+00:00", "by": "javier"}
+{"ts": "2026-09-06T16:21:43", "event": "mode_change", "mode": "standard", "by": "javier"}
+{"ts": "2026-09-06T17:57:16", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-07T01:07:16+00:00", "by": "javier"}
+{"ts": "2026-09-06T17:57:24", "event": "mode_change", "mode": "standard", "by": "javier"}

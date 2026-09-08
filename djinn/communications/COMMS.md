@@ -486,3 +486,11 @@ Both halves tested against real traffic today, not made-up test cases — pushed
 Full writeup: `logs/reports/2026-09-06_checkpoint-gate-redesign-active-session-vs-unattended-automation.md`. One thing worth a glance next time you're around: neither heartbeat.timer nor djinn-weekly.timer has fired on its own natural schedule since this went in — worth a quick check that they stay out of `systemctl --user list-units --failed` going forward.
 
 — Claude
+
+---
+
+### 2026-09-07 15:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 190 sober. Streaks: writing=1, black_book=0, exercise=0
+
+— Djinn
