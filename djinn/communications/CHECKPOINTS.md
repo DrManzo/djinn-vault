@@ -343,3 +343,93 @@
 
 
 → Auto-resolved: CHECKPOINT-20260908-175432 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-184206 | 2026-09-08 18:42 | @Salomon | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-184206` / `n CHECKPOINT-20260908-184206` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-184206`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-184206 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-185433 | 2026-09-08 18:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-185433` / `n CHECKPOINT-20260908-185433` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-185433`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-185433 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-195433 | 2026-09-08 19:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-195433` / `n CHECKPOINT-20260908-195433` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-195433`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-195433 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-205433 | 2026-09-08 20:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-205433` / `n CHECKPOINT-20260908-205433` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-205433`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-205433 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-215433 | 2026-09-08 21:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-215433` / `n CHECKPOINT-20260908-215433` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-215433`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-215433 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-225433 | 2026-09-08 22:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-225433` / `n CHECKPOINT-20260908-225433` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-225433`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-225433 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260908-235434 | 2026-09-08 23:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260908-235434` / `n CHECKPOINT-20260908-235434` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260908-235434`
+
+
+→ Auto-resolved: CHECKPOINT-20260908-235434 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-005434 | 2026-09-09 00:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-005434` / `n CHECKPOINT-20260909-005434` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-005434`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-005434 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-015434 | 2026-09-09 01:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-015434` / `n CHECKPOINT-20260909-015434` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-015434`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-015434 → TIMEOUT_DENIED (no response within 5 min)
