@@ -623,3 +623,83 @@
 
 
 → Auto-resolved: CHECKPOINT-20260909-175439 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-184555 | 2026-09-09 18:45 | @Salomon | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-184555` / `n CHECKPOINT-20260909-184555` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-184555`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-184555 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-185439 | 2026-09-09 18:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-185439` / `n CHECKPOINT-20260909-185439` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-185439`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-185439 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-195439 | 2026-09-09 19:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-195439` / `n CHECKPOINT-20260909-195439` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-195439`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-195439 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-205440 | 2026-09-09 20:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-205440` / `n CHECKPOINT-20260909-205440` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-205440`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-205440 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-215440 | 2026-09-09 21:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-215440` / `n CHECKPOINT-20260909-215440` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-215440`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-215440 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-225440 | 2026-09-09 22:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-225440` / `n CHECKPOINT-20260909-225440` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-225440`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-225440 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260909-235440 | 2026-09-09 23:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260909-235440` / `n CHECKPOINT-20260909-235440` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260909-235440`
+
+
+→ Auto-resolved: CHECKPOINT-20260909-235440 → TIMEOUT_DENIED (no response within 5 min)
+
+
+### CHECKPOINT-20260910-005441 | 2026-09-10 00:54 | unknown | PENDING
+**Action:** git push to origin (main)
+**Reason:** Vault-sync push in standard mode
+**Tier:** 3 — Checkpoint
+→ Waiting for Javier: reply `y CHECKPOINT-20260910-005441` / `n CHECKPOINT-20260910-005441` in Telegram, or `djinn-gateway approve/deny CHECKPOINT-20260910-005441`
+
+
+→ Auto-resolved: CHECKPOINT-20260910-005441 → TIMEOUT_DENIED (no response within 5 min)
