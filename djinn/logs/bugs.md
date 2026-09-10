@@ -361,3 +361,7 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 | 2026-09-06 | Claude | djinn-printer-files-backup (~/.local/bin, systemd --user, Salomon) | low | fixed | djinn-printer-files-backup — Telegram alert used wrong env var names (BOT_TOKEN/CHAT_ID instead of TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID), crashing the graceful Typhon-unreachable path | [[2026-09-06_bug-djinn-printer-files-backup-telegram-alert-used-wrong-env-var-names-bot-token-chat-id-instead-of-telegram-bot-token-telegram-chat-id-crashing-the-graceful-typhon-unreachable-path]] |
 | 2026-09-06 | Claude | djinn-checkpoints-rotate.service (systemd --user, Salomon) | low | fixed | djinn-checkpoints-rotate.service — literal %Y-W%V passed as filename instead of a computed date, every run produced a garbage-named archive | [[2026-09-06_bug-djinn-checkpoints-rotate-service-literal-y-w-v-passed-as-filename-instead-of-a-computed-date-every-run-produced-a-garbage-named-archive]] |
 | 2026-09-06 | Claude | gdrive-sync.service (rclone bisync, systemd --user, Salomon) | medium | fixed | gdrive-sync.service — remote backup-Salomon directory didn't exist on Drive, bisync had nothing to recover into | [[2026-09-06_bug-gdrive-sync-service-remote-backup-salomon-directory-didn-t-exist-on-drive-bisync-had-nothing-to-recover-into]] |
+
+
+## 2026-09-10 — djinn-bughunter scan (1 finding(s))
+- **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (12 occurrence(s)) _(type: errlog)_
