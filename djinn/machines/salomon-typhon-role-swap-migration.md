@@ -140,7 +140,7 @@ Whichever machine gets wiped first, its current role goes dark, and the *other* 
 ### Phase 0 — Pre-flight (remote, before any physical step)
 
 - [ ] Resolve remaining open questions below that affect what gets rebuilt (Ollama's new home, the penelope-usbip-watch/gcode-sync topology rework, the duplicate morning timer)
-- [ ] Write a bootstrap script for new-Typhon: pyenv + Python 3.11.11, nvm + Node v22.22.3, Docker, rclone (NOT Ollama — pending its own decision)
+- [x] Bootstrap script written: `djinn/migration/scripts/typhon-bootstrap.sh` — pyenv 2.6.31 + Python 3.11.11, nvm v0.40.4 + Node v22.22.3, Docker CE (official repo, matching Salomon exactly, not Ubuntu's docker.io), rclone, openclaw pinned to @2026.5.22 (Salomon's actual running version, not latest @2026.9.3 — caught this discrepancy while writing it). All versions/methods checked live against Salomon, not assumed. Syntax-checked (`bash -n`), not yet run (Typhon doesn't exist as Linux yet). NOT installing Ollama — still an open decision.
 - [ ] Confirm Typhon's actual current state (online/offline, wiped or not) before Javier starts Phase 1 — don't assume from a stale note
 - [ ] Javier: pause new commission intake
 
