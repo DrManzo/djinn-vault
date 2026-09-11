@@ -2,13 +2,13 @@
 title: Migration Plan — Salomon/Typhon Role Swap
 tags: [djinn, machines, architecture, migration, in-progress]
 created: 2026-09-07
-status: scoping
+status: sequenced
 related: [[Salomon]] | [[TF-TTHQ]] | [[GATEWAY]]
 ---
 
 # Salomon/Typhon Role Swap — Migration Plan
 
-**Status: SCOPING — no destructive action taken yet. This document is the inventory phase.**
+**Status: SEQUENCED, awaiting Phase 1 — no destructive action taken yet. Inventory and sequencing plan complete; next step is Javier's physical wipe of Typhon.**
 
 ## The decision (2026-09-07, Javier + Claude)
 
@@ -23,12 +23,16 @@ Typhon's Windows reprovisioning has been incomplete since the 2026-06-25 wipe �
 ## Progress so far
 
 - [x] Ubuntu 26.04.1 Server ISO downloaded to `D:\iso\ubuntu-26.04.1-live-server-amd64.iso` on Typhon (2026-09-07). SHA256 verified: `cc8a95cde20f6ced61a322420de00f10cc3c90ced545daa46cb9c1a117f1d927` — matches `releases.ubuntu.com/26.04/SHA256SUMS` exactly.
-- [ ] Full inventory of what must migrate (this document, in progress)
-- [ ] Safe migration sequencing plan
+- [x] Full inventory of what must migrate (below)
+- [x] Safe migration sequencing plan + shop-downtime decision (below) — 2026-09-10
 - [ ] Javier: physically wipe Typhon, install Ubuntu Server
 - [ ] Rebuild the stack on new-Typhon
 - [ ] Decide + execute Salomon's Windows path (full wipe / dual-boot / VM)
 - [ ] Move the Alexandria software cluster to its final home
+
+**Note (2026-09-10):** As of this update, Typhon has been unreachable (Tailscale: offline, last seen ~1d ago, still tagged "windows") for about a day, for an unconfirmed reason — may or may not already be mid-wipe. Not assumed either way; confirm actual state before starting Phase 1 below.
+
+**2026-09-10 side-fix, unrelated to sequencing but found while checking current state:** the checkpoint-gate auto-exempt built 2026-09-06 never covered `vault-sync:` commits, only `heartbeat:`/`review: weekly review`. Since vault-sync interleaves with heartbeat constantly, this caused 3 days of accumulated unpushed commits (83 total, all verified clean) and `heartbeat.service`/`djinn-gcode-sync.service` showing failed. Backlog pushed, gap fixed — Javier explicitly chose to auto-exempt `vault-sync:` too, with the tradeoff (its `git add -A` is broad, message alone doesn't prove content-safety the way it does for heartbeat/weekly) documented inline in the hook source.
 
 ---
 
@@ -119,6 +123,62 @@ Typhon's Windows reprovisioning has been incomplete since the 2026-06-25 wipe �
 
 ### Machine-identity strings that need updating, not just copy-pasted
 Several scripts hardcode "Salomon" in their output/logic (`heartbeat`'s `**Machine:** Salomon (192.168.1.225)` line, `comms-processor`'s `DJINN_AGENT=Salomon` env, likely others not yet audited) — these need actual updates to reflect the new machine identity, not a blind file copy.
+
+---
+
+## Sequencing plan (decided 2026-09-10)
+
+### The core tension
+
+Whichever machine gets wiped first, its current role goes dark, and the *other* machine can't immediately absorb it — different OS, different software already installed. There's no zero-downtime path between exactly two machines swapping roles; some gap is unavoidable. The two candidate gaps aren't equally costly:
+
+- **Command-center gap** (heartbeat, gateways, checkpoint system, all Djinn automation) — already tolerating an informal version of this right now (Typhon's been offline a day with no ill effect beyond some failed timers). Low real-world cost.
+- **Shop-machine gap** (Typhon's *current* Windows job: slicing, commissions, content pipeline) — customer/business-facing. Neither machine can cover this mid-transition: new-Typhon-as-Linux can't run Windows slicers, and Salomon isn't Windows yet.
+
+**Decision: accept the shop-machine gap. Pause new commission intake for the duration.** This fixes the order: Typhon gets wiped and rebuilt as command center *first*; Salomon converts to Windows *after* new-Typhon is proven stable. Pausing commissions is Javier's own action (business-facing), not something Claude does.
+
+### Phase 0 — Pre-flight (remote, before any physical step)
+
+- [ ] Resolve remaining open questions below that affect what gets rebuilt (Ollama's new home, the penelope-usbip-watch/gcode-sync topology rework, the duplicate morning timer)
+- [ ] Write a bootstrap script for new-Typhon: pyenv + Python 3.11.11, nvm + Node v22.22.3, Docker, rclone (NOT Ollama — pending its own decision)
+- [ ] Confirm Typhon's actual current state (online/offline, wiped or not) before Javier starts Phase 1 — don't assume from a stale note
+- [ ] Javier: pause new commission intake
+
+### Phase 1 — Wipe Typhon, install Ubuntu Server (Javier physical + Claude remote once reachable)
+
+- [ ] Javier: boot from the already-staged USB (built from `D:\iso\ubuntu-26.04.1-live-server-amd64.iso`), wipe, install Ubuntu 26.04.1 Server, enable SSH, get it back on Tailscale
+- [ ] Claude: once reachable, verify base OS, run the Phase 0 bootstrap script
+
+### Phase 2 — Rebuild the command-center stack on new-Typhon (Claude remote, Javier available for secrets/decisions)
+
+- [ ] Transfer the 7 credential/secret files securely (see Cross-cutting dependencies above)
+- [ ] Recreate all 27 timers + 18 services from the inventory above — but not blindly: `djinn-penelope-usbip-watch` and `djinn-gcode-sync` need actual topology rework per the open questions, not a straight copy
+- [ ] Migrate real data: `shop.db`, hellhound state — take a final snapshot of each on old-Salomon right before cutover so nothing written in the gap is lost
+- [ ] Point the vault git checkout at new-Typhon, verify push/pull actually works (not just "installed")
+- [ ] Update hardcoded machine-identity strings (`heartbeat`'s "Salomon" line, `DJINN_AGENT=Salomon` env, any others found during rebuild)
+- [ ] Run new-Typhon's stack in parallel with old-Salomon's for a verification window — both alive, compare actual output — before treating any single unit as "migrated"
+
+### Phase 3 — Cutover
+
+- [ ] Stop + disable (not delete yet) each service/timer on Salomon only once its new-Typhon counterpart has been verified actually firing correctly on its own
+- [ ] Confirm nothing double-fires during the transition (e.g. both machines pushing heartbeats at once)
+- [ ] New-Typhon becomes sole command center
+
+### Phase 4 — Convert Salomon to Windows (Javier physical)
+
+- [ ] Resolve task #12 (full wipe / dual-boot / VM) — still open, needs Javier's call
+- [ ] Javier: physically execute whichever path is chosen
+- [ ] Move the needed Alexandria software cluster (task #13, the 81GB AutoCAD/Adobe/course set) to new-Salomon
+
+### Phase 5 — Resume shop operations
+
+- [ ] Once new-Salomon has the needed software working, Javier resumes commission intake
+- [ ] Decide Alexandria's final physical placement — likely stays attached to new-Typhon as "always on" per the original intent, separate from the software cluster itself (which should live on new-Salomon's own disk, not require Alexandria to stay plugged into whichever machine needs to run it)
+
+### Phase 6 — Cleanup
+
+- [ ] Once confident nothing needs rollback, remove the disabled-but-not-deleted Salomon-side command-center units from Phase 3
+- [ ] Update this doc's status to "complete" and close out the open tasks
 
 ---
 
