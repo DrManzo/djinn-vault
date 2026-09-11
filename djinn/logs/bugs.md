@@ -365,3 +365,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-09-10 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (12 occurrence(s)) _(type: errlog)_
+| 2026-09-10 | Claude | djinn-gateway pre-push hook (systemd --user, Salomon) | medium | fixed | djinn-gateway checkpoint auto-exempt missed vault-sync, causing 3 days of unpushed heartbeat/vault-sync commits | [[2026-09-10_bug-djinn-gateway-checkpoint-auto-exempt-missed-vault-sync-causing-3-days-of-unpushed-heartbeat-vault-sync-commits]] |

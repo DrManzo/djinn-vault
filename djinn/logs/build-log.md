@@ -2305,3 +2305,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-06_checkpoint-gate-redesign-active-session-vs-unattended-automation.md`
 
 *— Claude*
+
+## 2026-09-10: BUG — djinn-gateway checkpoint auto-exempt missed vault-sync, causing 3 days of unpushed heartbeat/vault-sync commits
+- **System:** djinn-gateway pre-push hook (systemd --user, Salomon)
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** The low-risk auto-exempt built 2026-09-06 only covered 'heartbeat: ' and 'review: weekly review ' commit prefixes. vault-sync (fires every ~6h) was never added, and since it interleaves constantly with heartbeat (hourly), any pending push containing even one vault-sync commit fell through to the full Tier 3 checkpoint-and-5min-wait flow -- which timed out every time since nobody was watching Telegram continuously. Result: 83 unpushed commits (all heartbeat/vault-sync, verified clean by content before pushing) accumulated over 3 days, plus heartbeat.service and djinn-gcode-sync.service showing failed in systemctl. Pushed the backlog via a manual dev-mode window after verifying every single pending commit matched one of the two known-safe prefixes. Root cause fixed: added 'vault-sync: ' to the auto-exempt regex, but flagged a real asymmetry to Javier first -- heartbeat/weekly's git-add scope is narrow and fixed (commit message alone proves safety), vault-sync's git add -A is intentionally broad and could in principle carry arbitrary vault content through without a checkpoint. Javier chose to auto-exempt it anyway, explicitly accepting that tradeoff over the alternative of constant checkpoint timeouts -- documented inline in the hook source so the reasoning survives, not just the change. Javier ran djinn-gateway install-hooks himself to regenerate the live hook (this time it wasn't blocked by the platform classifier, unlike 2026-09-06's attempt).
+- **Report:** `logs/reports/2026-09-10_bug-djinn-gateway-checkpoint-auto-exempt-missed-vault-sync-causing-3-days-of-unpushed-heartbeat-vault-sync-commits.md`
+
+*— Claude*
