@@ -1,15 +1,15 @@
 # Heartbeat — Salomon
 
-**Last beat:** 2026-09-12 20:54:57 UTC
+**Last beat:** 2026-09-12 21:54:58 UTC
 **Machine:** Salomon (192.168.1.225)
 **Status:** Alive
 
 ## System
 
-- **Uptime:** up 2 weeks, 5 days, 4 hours, 25 minutes
+- **Uptime:** up 2 weeks, 5 days, 5 hours, 25 minutes
 - **GPU:** Failed to initialize NVML: Driver/library version mismatch
 NVML library version: 580.178
 N/A
 - **Ollama:** 7 models loaded
 - **Disk:** 70% used (269G free)
-- **RAM:** 10Gi/29Gi used, 3.4Gi free
+- **RAM:** 10Gi/29Gi used, 3.1Gi free
