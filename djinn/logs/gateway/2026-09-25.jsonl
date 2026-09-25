@@ -5,3 +5,5 @@
 {"ts": "2026-09-25T09:19:08", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:39:08+00:00", "by": "javier"}
 {"ts": "2026-09-25T09:27:45", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:37:45+00:00", "by": "javier"}
 {"ts": "2026-09-25T09:38:19", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:53:19+00:00", "by": "javier"}
+{"ts": "2026-09-25T09:38:28", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:48:28+00:00", "by": "javier"}
+{"ts": "2026-09-25T09:49:06", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:59:06+00:00", "by": "javier"}
