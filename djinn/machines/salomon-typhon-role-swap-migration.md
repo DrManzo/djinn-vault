@@ -172,7 +172,8 @@ Whichever machine gets wiped first, its current role goes dark, and the *other* 
 - [x] **First real live-fire verification:** `djinn-virtual-printer.service` started successfully on new-Typhon after both fixes — `v3plus-virtual` container up, ports 7125/8110 bound, enabled for boot. This is the first migrated unit actually proven working end-to-end, not just "installed."
 - [ ] **Deliberately NOT started yet — real collision risk, not an oversight:** `heartbeat`, `vault-sync`, `comms-processor`, `djinn-weekly`, `djinn-checkpoints-rotate`, `djinn-dm-cleanup` all write to the shared vault git repo (commit/push) or shared state — enabling their timers on new-Typhon *right now*, while Salomon's identical copies are still live, would cause real double-fires (duplicate/conflicting heartbeat commits, competing pushes, possible push races) — exactly what Phase 3 already warns about, just discovered to apply earlier than expected (Phase 2 verification, not just cutover). Similarly, `djinn-telegram-gateway` and `djinn-discord-gateway` both long-poll the *same bot tokens* — running both machines' copies simultaneously would cause Telegram/Discord API conflicts (409-style errors) or duplicate message delivery, not a clean A/B comparison. **Recommendation:** verify these either one at a time with Salomon's matching timer briefly paused, or hold all of them for the actual Phase 3 cutover window where Salomon's copy gets disabled first by design anyway.
 - [ ] Migrate real data: `shop.db`, hellhound state — take a final snapshot of each on old-Salomon right before cutover so nothing written in the gap is lost. Not started — no urgency yet since old-Salomon is still the live system of record.
-- [ ] `djinn-penelope-usbip-watch` / `djinn-gcode-sync` — still blocked on the same open topology question as before, unchanged this session.
+- [ ] `djinn-penelope-usbip-watch` / `djinn-gcode-sync` — deliberately deferred to Phase 4 (Javier's call, 2026-09-25 — see Open Questions).
+- [x] Ollama installed on new-Typhon (2026-09-25, Javier confirmed it stays there) — service active+enabled, version drift flagged (see Open Questions). Models not pulled yet — next step.
 
 ### Phase 3 — Cutover
 
@@ -198,13 +199,13 @@ Whichever machine gets wiped first, its current role goes dark, and the *other* 
 
 ---
 
-## Open questions still needing a decision (not yet resolved)
+## Open questions
 
-1. **`djinn-penelope-usbip-watch` and `djinn-gcode-sync`** — both currently exist specifically because *old* Typhon does Windows slicing and Penelope's USB needed sharing from it. Once Typhon is Linux and Salomon is Windows, the actual topology these scripts assume may be inverted or obsolete. Needs fresh thinking, not a blind migrate.
-2. **Ollama / local LLM serving** — does new-Typhon keep this role, move to Salomon-as-Windows (awkward, Windows Ollama support exists but changes the automation model), or move somewhere else entirely (Orion already hosts larger models per existing fleet docs)?
-3. **Confirmed duplicate, not just a naming coincidence:** `djinn-daily` fires `~/.local/bin/djinn-morning` at 08:00, and `djinn-morning` fires the *same script* again at 08:30 — the exact same morning-briefing script running twice, 30 minutes apart, every day. This should almost certainly be one timer, not two, on new-Typhon. Worth asking Javier whether this was ever deliberate (e.g., a retry-safety-net pattern) before dropping one, but it reads as accidental duplication.
+1. **RESOLVED 2026-09-25 (Javier):** `djinn-penelope-usbip-watch` / `djinn-gcode-sync` topology — deferred deliberately, not decided. Revisit at Phase 4 once Salomon's actual Windows conversion happens; too early to commit to physical wiring now. Neither timer migrated yet.
+2. **RESOLVED 2026-09-25 (Javier):** Ollama stays on new-Typhon, as originally planned. Installed 2026-09-25 — official install script (matches how Salomon got it), systemd service active+enabled. **Version note:** the install script always grabs latest; new-Typhon got 0.34.4 vs Salomon's 0.24.0. Not pinned back down — Ollama's serving API has been stable across this range and nothing in the automation stack is version-sensitive to it the way `openclaw` was (that one's pin was deliberate because the gateway integration is genuinely tuned to a specific version; this isn't that situation). Flagging the drift here rather than silently ignoring it. **The 7 models themselves are NOT pulled yet** — `mistral:7b`, `qwen2.5:7b`, `phi4:14b`, `llama3.2-vision:11b-instruct-q4_K_M`, `nomic-embed-text`, `qwen2.5-coder:7b`, `deepseek-r1:7b` — ~35GB total, deliberately left as an explicit next step rather than a blind background download.
+3. **RESOLVED 2026-09-25 (Javier):** Duplicate morning timer — accidental, not deliberate. Keep only `djinn-daily.timer` (08:00). Do not enable `djinn-morning.timer` (08:30) on new-Typhon — file is copied for reference but stays disabled.
 4. **Alexandria's final resting place** — likely new-Typhon as "always on," per Javier's stated intent, but not yet physically decided/executed.
-5. **Salomon's Windows path** — full wipe vs dual-boot vs VM-for-just-the-heavy-software. Affects whether any of Salomon's current Linux capabilities (games, Ollama, dev tools) survive in any form.
+5. **Salomon's Windows path** — full wipe vs dual-boot vs VM-for-just-the-heavy-software. Affects whether any of Salomon's current Linux capabilities (games, Ollama, dev tools) survive in any form. Still open — task #12.
 
 ---
 
