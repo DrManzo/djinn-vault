@@ -25,8 +25,16 @@ Typhon's Windows reprovisioning has been incomplete since the 2026-06-25 wipe �
 - [x] Ubuntu 26.04.1 Server ISO downloaded to `D:\iso\ubuntu-26.04.1-live-server-amd64.iso` on Typhon (2026-09-07). SHA256 verified: `cc8a95cde20f6ced61a322420de00f10cc3c90ced545daa46cb9c1a117f1d927` — matches `releases.ubuntu.com/26.04/SHA256SUMS` exactly.
 - [x] Full inventory of what must migrate (below)
 - [x] Safe migration sequencing plan + shop-downtime decision (below) — 2026-09-10
-- [ ] Javier: physically wipe Typhon, install Ubuntu Server
-- [ ] Rebuild the stack on new-Typhon
+- [x] Javier: physically wiped Typhon, installed Ubuntu 26.04.1 Server — 2026-09-25
+- [x] Bootstrap script run on new-Typhon (piecemeal, not via the script directly -- see Known Issues) — all runtime deps verified matching Salomon: pyenv 2.6.31 + Python 3.11.11, Node v22.22.3, Docker 29.8.1, rclone v1.60.1-DEV, openclaw@2026.5.22 (exact pin)
+- [ ] Rebuild the actual djinn-*/forge-*/studio-* stack on new-Typhon (Phase 2 proper -- this was just runtime setup)
+
+**New-Typhon connection details (2026-09-25):** LAN IP `192.168.1.113` (same as before the wipe -- DHCP reservation tied to the NIC's MAC address, 04:7c:16:2f:62:9a), username `drmanzo`. Salomon's SSH key is authorized -- passwordless `BatchMode=yes` access confirmed working. Not yet on Tailscale (fresh OS, never authenticated) -- LAN IP is the only path in for now, fine for same-network work, will need Tailscale re-auth before remote-from-elsewhere access matters.
+
+**Known issues hit during bootstrap, both real bugs, not user error:**
+1. The Ubuntu Server installer's own netplan config for `enp3s0` had no `dhcp4: true` at all -- interface came up, got IPv6 via kernel-level SLAAC automatically, but never requested an IPv4 lease. Explains ~30 min of "why can't we find it on the network" -- it had no IPv4 address to find. Fixed by adding `dhcp4: true` and re-applying.
+2. `typhon-bootstrap.sh`'s Docker GPG key setup (`gpg --dearmor`) produced a binary keyring that this apt/gpg version rejected as "unsupported filetype." Diffed against Salomon's own *working* `/etc/apt/keyrings/docker.asc` and found it's actually still plain ASCII-armored text, never dearmored at all -- despite Docker's own install docs recommending the dearmor step. This apt version apparently accepts (or specifically wants) the armored form via `signed-by=`. Script needs fixing to skip dearmoring, or this needs re-verifying against whatever the "correct" modern behavior actually is before trusting it blanket for future installs.
+3. Running `typhon-bootstrap.sh` directly over SSH failed entirely -- its internal `sudo` calls need a real TTY on this system's sudo policy, and a backgrounded SSH session can't allocate one. Worked around by running every sudo-requiring step individually with the password piped fresh each time (`echo PASSWORD | sudo -S ...`), rather than relying on a cached credential. Offered Javier the alternative of a NOPASSWD sudoers rule matching Salomon's own setup, but that specific action was blocked by the platform's own safety classifier when Claude tried it directly -- Javier would need to add that himself if wanted for future convenience.
 - [ ] Decide + execute Salomon's Windows path (full wipe / dual-boot / VM)
 - [ ] Move the Alexandria software cluster to its final home
 

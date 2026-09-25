@@ -84,7 +84,14 @@ echo "--- Docker CE ---"
 if ! command -v docker >/dev/null 2>&1; then
     sudo install -m 0755 -d /etc/apt/keyrings
     if [ ! -f /etc/apt/keyrings/docker.asc ]; then
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.asc
+        # NOTE (2026-09-25, verified live on new-Typhon): do NOT pipe through
+        # `gpg --dearmor` here. On this apt/gpg version it produces a keyring
+        # apt rejects as "unsupported filetype" / NO_PUBKEY even though the
+        # file looks structurally fine. Salomon's own working
+        # /etc/apt/keyrings/docker.asc is still the raw ASCII-armored PGP
+        # block, never dearmored -- confirmed by direct byte comparison.
+        # Write the downloaded key straight through instead.
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/docker.asc > /dev/null
         sudo chmod a+r /etc/apt/keyrings/docker.asc
     fi
     ARCH="$(dpkg --print-architecture)"

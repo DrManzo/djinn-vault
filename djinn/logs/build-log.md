@@ -2313,3 +2313,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-10_bug-djinn-gateway-checkpoint-auto-exempt-missed-vault-sync-causing-3-days-of-unpushed-heartbeat-vault-sync-commits.md`
 
 *— Claude*
+
+## 2026-09-25: BUG — Ubuntu Server installer omits dhcp4:true from default netplan config
+- **System:** Typhon (Ubuntu Server install, netplan)
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** Fresh Ubuntu 26.04.1 Server install on new-Typhon brought up its ethernet interface with IPv6 SLAAC working automatically but no IPv4 lease at all -- the installer's generated netplan YAML for enp3s0 never set dhcp4: true. Cost ~30 min of troubleshooting before root cause was found (host was unreachable by LAN ping, reachable by nothing since it had no IPv4 to test with). Fixed by manually adding dhcp4: true and re-applying; Typhon then received its familiar DHCP-reserved 192.168.1.113 back.
+- **Report:** `logs/reports/2026-09-25_bug-ubuntu-server-installer-omits-dhcp4-true-from-default-netplan-config.md`
+
+*— Claude*

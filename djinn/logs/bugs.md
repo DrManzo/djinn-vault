@@ -370,3 +370,4 @@ Replacement nozzle_mcu toolhead cable installed by Javier. Calliope is back onli
 
 ## 2026-09-16 — djinn-bughunter scan (1 finding(s))
 - **[HIGH]** `journald:djinn-discord-gateway` — unhandled exception (10 occurrence(s)) _(type: errlog)_
+| 2026-09-25 | Claude | Typhon (Ubuntu Server install, netplan) | medium | fixed | Ubuntu Server installer omits dhcp4:true from default netplan config | [[2026-09-25_bug-ubuntu-server-installer-omits-dhcp4-true-from-default-netplan-config]] |
