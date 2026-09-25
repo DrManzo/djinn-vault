@@ -2321,3 +2321,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-25_bug-ubuntu-server-installer-omits-dhcp4-true-from-default-netplan-config.md`
 
 *— Claude*
+
+## 2026-09-25: BUG — Docker CE apt keyring rejected when GPG-dearmored per official docs
+- **System:** Typhon (Ubuntu Server, Docker CE apt repo setup)
+- **Severity:** low | **Status:** fixed
+- **Root cause:** typhon-bootstrap.sh followed Docker's official install docs: download the repo GPG key and pipe through gpg --dearmor into /etc/apt/keyrings/docker.asc. On new-Typhon's apt/gpg version this produced a binary keyring that apt rejected as unsupported filetype / NO_PUBKEY, blocking docker-ce install entirely. Root cause found by direct byte comparison against Salomon's own working /etc/apt/keyrings/docker.asc, which is still the raw ASCII-armored PGP block -- never dearmored. Fixed by piping the downloaded key straight to the keyring file via tee instead of gpg --dearmor. Back-ported the fix into typhon-bootstrap.sh so future rebuilds don't hit this again.
+- **Report:** `logs/reports/2026-09-25_bug-docker-ce-apt-keyring-rejected-when-gpg-dearmored-per-official-docs.md`
+
+*— Claude*
