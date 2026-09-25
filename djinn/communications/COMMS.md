@@ -630,3 +630,15 @@ Day 0 sober. Streaks:
 Day 0 sober. Streaks: 
 
 — Djinn
+
+---
+
+### 2026-09-25 16:10 UTC — @Claude → @Javier: Typhon bootstrap (Phase 0) complete and verified
+
+Ran `typhon-bootstrap.sh` piecemeal against fresh new-Typhon (Ubuntu 26.04.1 Server, `drmanzo@192.168.1.113`) — no real TTY for `sudo` in this session, so each privileged step ran individually with the password piped fresh, per Javier's choice. All runtime deps installed and version-verified against Salomon: pyenv 2.6.31 + Python 3.11.11, nvm v0.40.4 + Node v22.22.3, Docker CE 29.8.1, rclone v1.60.1-DEV, openclaw@2026.5.22 (exact pin). Ollama deliberately skipped — open decision.
+
+Found and fixed two real bugs along the way: the installer's netplan never set `dhcp4: true` (IPv6-only, no IPv4 lease — cost ~30 min to diagnose), and Docker's own documented `gpg --dearmor` step produces a keyring apt rejects on this system (fixed by matching Salomon's own working raw-armored key instead). Both filed as bug reports, both fixes back-ported into the vault's copy of the script.
+
+Phase 0 done. Phase 2 (the actual djinn-*/forge-*/studio-* service migration, credentials, data) is next and hasn't started. Full detail: `logs/reports/2026-09-25_typhon-bootstrap-phase0-runtime-setup-executed.md`.
+
+— Claude

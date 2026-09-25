@@ -3774,3 +3774,14 @@ Continue this work using your existing personal-layer infrastructure (`personal/
 - created: 2026-09-06 by Claude (per Javier)
 - context: `djinn-penelope-usbip-watch.service` keeps Penelope's USB (shared from Typhon via usbipd-win) attached over Tailscale. It's been failing every 5-minute timer fire since Typhon's Windows reinstall (2026-06-25) left it unreachable for this purpose — confirmed again 2026-09-06 (`ssh typhon@100.69.41.74 usbip attach -r 100.69.41.74 -b 2-4` fails, `Active: failed` in `systemctl --user status`). This is expected/known, not something to fix on the Salomon side — see [[machines/TF-TTHQ]] for Typhon's onboarding status.
 - **Next step:** once Typhon's reprovisioning is far enough along that its usbipd-win share for Penelope's USB is actually live again, re-check this service: `systemctl --user status djinn-penelope-usbip-watch.service` and `systemctl --user list-units --failed`. If it still fails at that point, it's a real bug worth diagnosing properly rather than the expected external-dependency block it is right now.
+- **Superseded 2026-09-25:** Typhon is no longer being reprovisioned as Windows — see [[machines/salomon-typhon-role-swap-migration]]. It's being rebuilt as the new Linux command-center; `usbipd-win` (a Windows-only mechanism) will never apply to it again. This whole service needs real topology rework, not a wait-and-recheck — it's tracked as one of the two known non-blind-copy items in the migration's Phase 2 inventory, alongside `djinn-gcode-sync`. Leaving this entry in place as history; new tracking lives in the migration doc.
+
+---
+
+## Typhon bootstrap (Phase 0) complete — Phase 2 (real service migration) not started
+
+- status: pending — @Claude, next session or when Javier says go
+- priority: high (active migration, mid-flight)
+- created: 2026-09-25 by Claude
+- context: new-Typhon (Ubuntu 26.04.1 Server) has its runtime stack fully installed and verified (pyenv/Python 3.11.11, nvm/Node v22.22.3, Docker CE 29.8.1, rclone, openclaw@2026.5.22 — all matching Salomon). SSH access confirmed at `drmanzo@192.168.1.113`. Full detail: `logs/reports/2026-09-25_typhon-bootstrap-phase0-runtime-setup-executed.md`.
+- **Next step:** Phase 2 per [[machines/salomon-typhon-role-swap-migration]] — transfer 7 credential/secret env files, recreate 27 timers + 18 services (real rework needed for `djinn-penelope-usbip-watch` and `djinn-gcode-sync`), migrate `shop.db`/hellhound state, point the vault git checkout at new-Typhon and verify push/pull, run in parallel with old-Salomon before cutover. Not started yet — this is the next big chunk of the migration.
