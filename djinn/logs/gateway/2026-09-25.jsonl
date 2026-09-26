@@ -7,3 +7,7 @@
 {"ts": "2026-09-25T09:38:19", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:53:19+00:00", "by": "javier"}
 {"ts": "2026-09-25T09:38:28", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:48:28+00:00", "by": "javier"}
 {"ts": "2026-09-25T09:49:06", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:59:06+00:00", "by": "javier"}
+{"ts": "2026-09-25T09:49:18", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T16:59:18+00:00", "by": "javier"}
+{"ts": "2026-09-25T12:27:45", "event": "checkpoint_pending", "id": "CHECKPOINT-20260925-122744", "action": "git push to origin (worktree-purring-gathering-hellman)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-25T12:29:59", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-25T19:39:59+00:00", "by": "javier"}
+{"ts": "2026-09-25T12:32:45", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260925-122744", "action": "git push to origin (worktree-purring-gathering-hellman)"}
