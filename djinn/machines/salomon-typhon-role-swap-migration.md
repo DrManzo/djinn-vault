@@ -241,4 +241,22 @@ Whichever machine gets wiped first, its current role goes dark, and the *other* 
 
 ---
 
+## Print-command-and-safety pipeline migration (2026-09-27, Javier: "go ahead and move the print pipeline too")
+
+This was flagged the same day as a distinct, careful next step given how safety-critical it is — Javier explicitly authorized moving it. Scope turned out to be much larger than the two scripts originally flagged (`djinn-gcode-sync`/`usbip-watch`), because this whole subsystem was **never in the original 36-unit inventory at all** — the very first systemd sweep at the start of Phase 2 only ever checked `systemctl --user list-unit-files`, and the actual print-control core is partly **system-level** units (`/etc/systemd/system/`), invisible to every `--user` sweep run all migration.
+
+**Found and migrated:**
+- `djinn-penelope.service` (system-level unit, `/etc/systemd/system/`) — OctoPrint 1.11.8 serving Penelope, its own dedicated venv (`~/.venvs/octoprint`, recreated fresh with matching package versions rather than copying binaries) and its full config/data directory (`~/.octoprint-penelope`, 68MB — printer profiles, users, plugins, uploads; excluded `logs/`/`generated/`, regeneratable). Real cutover: stopped Salomon's instance for a clean snapshot, copied, started Typhon's, verified HTTP 200/302 response, disabled Salomon's copy.
+- The CLI layer: `djinn-confirm-print`, `djinn-deny-print`, `djinn-force-cancel`, `djinn-print-safety`, `djinn-model-slice`, `djinn-job-add`, `djinn-print-note`, `djinn-print-feedback`, `djinn-set-print-key`, `djinn` (main dispatcher), `djinn-agent-doctor`, `forge`, `djinn-model-fetch`, `djinn-penelope`, `djinn-gcode-fancap` — all interpreters already present from earlier dependency work, no new packages needed except for `djinn-telegram-bot` (see below).
+- **The actual PIN file** (`~/.local/share/djinn/.force-cancel-pin`) — transferred via `scp` only, never read or displayed at any point, byte-size-verified (65 bytes both sides), `chmod 600`. Same treatment as every other secret this migration.
+- Real data, snapshotted like `shop.db`: `print-queue.json` (4 live historical jobs, June–August 2026 — note: two of them show stale `status: "printing"` from prints that finished long ago and never got marked done, a separate pre-existing data-hygiene issue, not touched today), `filament-inventory.json`, the symlink structure (`~/.local/share/djinn/print-queue.json` → `~/.local/share/forge/print-queue.json`), `fleet-registry.json`.
+- `djinn-print-safety@iris` and `@nemesis` (MCU failure predictors) — cut over the same way as everything else: stopped+disabled on Salomon, started+verified+enabled on Typhon, confirmed reaching their real Moonraker endpoints (`.132`, `.51` — no IP conflict, unlike Calliope).
+- **`djinn-print-safety@calliope` deliberately NOT migrated** — same IP conflict as everything else Calliope-related. Separately confirmed it's been failing continuously on Salomon all day too (`Moonraker unreachable`, since new-Typhon claimed `.113`) — **Calliope currently has zero working safety monitoring**, disclosed to Javier directly, not fixed (his call to leave alone stands).
+
+**Real bug found and fixed (not migration-induced, just never noticed):** `djinn queue` crashed with `KeyError: 'name'` — the display code read `j['name']` but every actual job in the queue uses `note` as its label field, always has. Crashed identically on Salomon, confirming it predates this migration. Fixed with a fallback chain, verified working on both machines. Bug report: `logs/reports/2026-09-27_bug-djinn-queue-crashes-with-keyerror-name-display-code-expects-a-field-the-actual-job-schema-never-uses.md`.
+
+**Deliberately not done:** no real print command was issued or simulated anywhere in this migration — `djinn-confirm-print` has no safe read-only mode (it always tries to actually start a print), so verification stopped at syntax/compile checks and the one safe read-only command (`djinn queue`), which is what surfaced the bug above. `djinn-telegram-bot` was copied for parity but is genuinely non-functional on **both** machines (`telegram`/python-telegram-bot was never installed, confirmed by trying the import on Salomon itself) — dead/unfinished code, not something this migration broke or needs to fix.
+
+---
+
 *— Claude, 2026-09-07, scoping phase, no destructive action taken*
