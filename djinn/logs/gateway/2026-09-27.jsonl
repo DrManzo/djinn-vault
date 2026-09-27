@@ -1,3 +1,8 @@
 {"ts": "2026-09-27T07:19:50", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T14:29:50+00:00", "by": "javier"}
 {"ts": "2026-09-27T07:19:57", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T14:29:57+00:00", "by": "javier"}
 {"ts": "2026-09-27T07:31:54", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T14:46:54+00:00", "by": "javier"}
+{"ts": "2026-09-27T07:31:59", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T14:41:59+00:00", "by": "javier"}
+{"ts": "2026-09-27T11:36:21", "event": "checkpoint_pending", "id": "CHECKPOINT-20260927-113615", "action": "git push to origin (worktree-purring-gathering-hellman)", "reason": "Vault-sync push in standard mode", "agent": "unknown", "tg_sent": true}
+{"ts": "2026-09-27T11:38:21", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T18:48:21+00:00", "by": "javier"}
+{"ts": "2026-09-27T11:41:21", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260927-113615", "action": "git push to origin (worktree-purring-gathering-hellman)"}
+{"ts": "2026-09-27T12:03:33", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T19:18:33+00:00", "by": "javier"}

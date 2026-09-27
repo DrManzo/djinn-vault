@@ -2369,3 +2369,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-27_bug-forge-webcam-monitor-service-missing-environmentfile-djinn-tg-token-djinn-discord-token-never-wired-in-crash-looping-silently-on-salomon.md`
 
 *— Claude*
+
+## 2026-09-27: BUG — djinn queue crashes with KeyError: 'name' -- display code expects a field the actual job schema never uses
+- **System:** djinn CLI (queue subcommand, Salomon + new-Typhon)
+- **Severity:** low | **Status:** fixed
+- **Root cause:** The 'djinn queue' command's inline Python formatter reads j['name'] for every job's display label, but every real job in print-queue.json uses 'note' as its label field instead -- 'name' has never actually been present in the schema, based on all 4 live jobs currently in the queue (dated June-August 2026). This crashed identically on both Salomon and new-Typhon (confirmed while verifying the print-pipeline migration landed correctly) -- a pre-existing bug, not something the migration introduced, just never noticed before because nobody had run 'djinn queue' recently enough to hit it. Fixed with a fallback chain: j.get('name', j.get('note', '(unnamed)')). Verified working on both machines afterward.
+- **Report:** `logs/reports/2026-09-27_bug-djinn-queue-crashes-with-keyerror-name-display-code-expects-a-field-the-actual-job-schema-never-uses.md`
+
+*— Claude*
