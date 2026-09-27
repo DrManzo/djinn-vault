@@ -2377,3 +2377,11 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-27_bug-djinn-queue-crashes-with-keyerror-name-display-code-expects-a-field-the-actual-job-schema-never-uses.md`
 
 *— Claude*
+
+## 2026-09-27: BUG — forge-printer-files-backup used stale Windows-era SSH username (tf-tthq), never rsync'd successfully since Typhon became Linux
+- **System:** djinn-printer-files-backup (Salomon)
+- **Severity:** medium | **Status:** fixed
+- **Root cause:** The script's TYPHON variable was hardcoded to tf-tthq@192.168.1.113 -- old-Typhon's Windows username, from before the wipe to Ubuntu Server. Every weekly run since the wipe would have failed the Typhon-reachable check and silently skipped (its own fallback behavior for an unreachable host), sending only a Telegram warning nobody flagged as a real problem. This is NOT a topology issue -- on closer inspection the actual backup direction (push ~/printer-files/ from wherever it lives, currently Salomon, to Typhon as the always-on archive target) is still architecturally correct post-swap, it just needed the username fixed to match Typhon's new Linux account (drmanzo). Fixed, tested live: 380 files / 284MB backed up successfully in 2 seconds. Re-enabled the weekly timer.
+- **Report:** `logs/reports/2026-09-27_bug-forge-printer-files-backup-used-stale-windows-era-ssh-username-tf-tthq-never-rsync-d-successfully-since-typhon-became-linux.md`
+
+*— Claude*

@@ -6,3 +6,5 @@
 {"ts": "2026-09-27T11:38:21", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T18:48:21+00:00", "by": "javier"}
 {"ts": "2026-09-27T11:41:21", "event": "checkpoint_timeout", "id": "CHECKPOINT-20260927-113615", "action": "git push to origin (worktree-purring-gathering-hellman)"}
 {"ts": "2026-09-27T12:03:33", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T19:18:33+00:00", "by": "javier"}
+{"ts": "2026-09-27T12:03:39", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T19:13:39+00:00", "by": "javier"}
+{"ts": "2026-09-27T12:55:51", "event": "mode_change", "mode": "dev", "expires_at": "2026-09-27T20:10:51+00:00", "by": "javier"}
