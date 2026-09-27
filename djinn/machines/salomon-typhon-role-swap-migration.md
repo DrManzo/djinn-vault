@@ -257,6 +257,20 @@ This was flagged the same day as a distinct, careful next step given how safety-
 
 **Deliberately not done:** no real print command was issued or simulated anywhere in this migration — `djinn-confirm-print` has no safe read-only mode (it always tries to actually start a print), so verification stopped at syntax/compile checks and the one safe read-only command (`djinn queue`), which is what surfaced the bug above. `djinn-telegram-bot` was copied for parity but is genuinely non-functional on **both** machines (`telegram`/python-telegram-bot was never installed, confirmed by trying the import on Salomon itself) — dead/unfinished code, not something this migration broke or needs to fix.
 
+### Penelope physically connected, 2026-09-27 same day — genuinely live, not just configured
+
+Javier physically moved Penelope's USB to the Typhon box. Found and fixed one real gap this surfaced: `drmanzo` wasn't in the `dialout` group on new-Typhon (the bootstrap never had reason to add it before), which would have silently blocked OctoPrint from opening `/dev/ttyUSB0` even with the cable connected. Fixed, restarted the service, confirmed from OctoPrint's own log — not a test I ran, just what it logged on its own: connected, `Marlin Creality 3D` firmware detected, `Ender-3 Pro`, state `Operational`. No commands were sent to the printer by Claude at any point (Javier explicitly said no testing) — this is OctoPrint's own automatic reconnect, observed via passive log read only.
+
+### Calliope / router — resolved as far as it can be without Javier's own account
+
+Checked the router directly (`192.168.1.1`) at Javier's request. It's a **Spectrum-provided gateway** (model SBE1V1K) — admin access is gated behind the My Spectrum app / spectrum.net login tied to Javier's ISP account, not a local router password. Confirmed there's no unauthenticated DHCP/device-list endpoint either (tried the obvious candidate paths, all 404) — the one unauthenticated page (`/cgi-bin/index.cgi`) only exposes basic WAN status (public IP, MAC, serial, firmware), nothing about local DHCP reservations. This isn't a case of "try harder" — it's genuinely account-gated, and guessing/brute-forcing someone's ISP account isn't something to attempt even for the account owner's own convenience. Left as Javier's own action if he wants to check the app himself; not pursued further.
+
+### Remaining cleanup items, done 2026-09-27 (Javier: "3-7 can be done just no actual printing")
+
+- [x] **`forge-printer-files-backup` — corrected earlier assessment.** This was wrongly flagged as needing a topology rework; on closer inspection the actual backup direction (push `~/printer-files/` from wherever it lives — currently Salomon — to Typhon as the always-on archive target) is still architecturally correct post-swap. The real bug was a stale Windows-era SSH username (`tf-tthq`, from before the wipe) that made every run since fail its reachability check and silently skip. Fixed (`tf-tthq` → `drmanzo`), tested live: 380 files / 284MB transferred successfully in 2 seconds, weekly timer re-enabled. Bug report: `logs/reports/2026-09-27_bug-forge-printer-files-backup-used-stale-windows-era-ssh-username-tf-tthq-never-rsync-d-successfully-since-typhon-became-linux.md`.
+- [x] **Stale `print-queue.json` statuses fixed.** Jobs #4 and #6 had been stuck at `status: "printing"` since June/August 2026 — long-finished prints that never got marked done. Corrected to `"completed"` (the actual value the rest of the pipeline checks for) on both machines, verified via `djinn queue`.
+- [x] **`djinn-telegram-bot` dependency installed** (`python-telegram-bot==22.5`) on both machines, confirmed it now imports and compiles cleanly. Still genuinely unused — no systemd unit, never was one — this only closes the "it can't even run" gap, it doesn't turn it into a live service. That would be a separate, real decision (does Javier actually want this bot running) not made today.
+
 ---
 
 *— Claude, 2026-09-07, scoping phase, no destructive action taken*
