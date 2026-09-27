@@ -1,13 +1,13 @@
-# Heartbeat — Salomon
+# Heartbeat — Typhon
 
-**Last beat:** 2026-09-25 19:02:25 UTC
-**Machine:** Salomon (192.168.1.225)
+**Last beat:** 2026-09-27 14:02:49 UTC
+**Machine:** Typhon (192.168.1.113)
 **Status:** Alive
 
 ## System
 
-- **Uptime:** up 5 hours, 1 minute
-- **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU, 52, 0, 110, 8151
+- **Uptime:** up 14 hours, 5 minutes
+- **GPU:** NVIDIA GeForce GTX 1650 with Max-Q Design, 47, 0, 0, 4096
 - **Ollama:** 7 models loaded
-- **Disk:** 70% used (274G free)
-- **RAM:** 10Gi/29Gi used, 4.4Gi free
+- **Disk:** 55% used (43G free)
+- **RAM:** 1.1Gi/14Gi used, 11Gi free
