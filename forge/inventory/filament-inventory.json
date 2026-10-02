@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-02",
   "updated_by": "djinn-print-complete-watcher",
   "spools": [
     {
@@ -38,13 +38,13 @@
       "color": "Red",
       "brand": "Creality",
       "initial_weight_g": 1000,
-      "remaining_g": 500,
+      "remaining_g": 351.9,
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure.",
+      "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure. | [2026-10-02] auto-deducted 148.1g (print: 4-yellow block cup_PLA_5h6m.gcode (history filament_used (no queue match \u2014 likely uploaded directly)))",
       "added_at": "2026-07-12",
-      "last_used": "2026-07-17",
+      "last_used": "2026-10-02",
       "last_physical_check": null
     },
     {
