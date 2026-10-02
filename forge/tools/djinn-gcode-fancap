@@ -2,125 +2,266 @@
 """
 djinn-gcode-fancap
 ──────────────────
-Clamps M106 fan-speed commands to a safe maximum. Built for Calliope's
-nozzle_mcu EMI vulnerability (BUG-014): M106 above S128 (50% duty) at
-bridge/overhang cooling moments generates enough EMI to trigger key561
-UART dropouts. See forge/hardware/fleet-capability-matrix.md — the
-"hard cap S128, system-wide" rule has been documented there since at
-least 2026-07-05, but was never actually enforced anywhere.
+Gcode part-fan safety net. Two independent guards:
 
-Found while investigating repeated camood-v2 crashes on Calliope: the
-real Calliope-sliced gcode for camood-v2 ran M106 above the cap 99.6%
-and 99.9% of the time across its two print attempts (peak S229, ~90%
-duty) despite the documented "hard cap" claim. A second, unrelated
-Calliope PETG print (mario-pipe treesupport) also hit S255 (100% duty)
-at least once — this is a slicer-profile gap affecting every job sent
-to Calliope, not something specific to one model. camood's geometry
-(irregular organic shape, heavy bridging/overhangs) just needs cooling
-far more often than most prints, so it's exposed to the un-capped fan
-far more than most jobs are.
+1. Speed cap (--cap, default S128) — built for Calliope's nozzle_mcu EMI
+   vulnerability (BUG-014): M106 above S128 (50% duty) at bridge/overhang
+   cooling moments generates enough EMI to trigger key561 UART dropouts.
+   See forge/hardware/fleet-capability-matrix.md — the "hard cap S128,
+   system-wide" rule has been documented there since at least 2026-07-05,
+   but was never actually enforced anywhere.
 
-This does NOT explain or fix why the cap isn't applied in the slicer
-profile in the first place (Creality Print GUI config, not inspectable
-from here) — it's a deterministic safety net that runs on every gcode
-file regardless of what produced it, so the cap can't silently drift
-again.
+   Found while investigating repeated camood-v2 crashes on Calliope: the
+   real Calliope-sliced gcode for camood-v2 ran M106 above the cap 99.6%
+   and 99.9% of the time across its two print attempts (peak S229, ~90%
+   duty) despite the documented "hard cap" claim. A second, unrelated
+   Calliope PETG print (mario-pipe treesupport) also hit S255 (100% duty)
+   at least once — this is a slicer-profile gap affecting every job sent
+   to Calliope, not something specific to one model.
+
+2. Change-rate throttle (--min-interval SECONDS) — built for Iris
+   (AD5X/zmod) "Timer too close" shutdowns (2026-08-16 bug). Bambu Studio's
+   overhang fan (overhang_fan_threshold 10%) flips M106 between overhang and
+   base speed on nearly every perimeter segment of organic geometry —
+   Proxy_Tornado_Recycler peaked at ~180 fan changes/sec. On Iris every M106
+   runs two zmod macros (M106 → SET_FAN_SPEED) on a 2-core host; the burst
+   pinned Klippy at 100% CPU and both MCUs shut down 30–60s later, at the
+   same spot on two separate attempts. A fan can't physically follow
+   changes that fast anyway, so throttling costs no cooling: while a change
+   is held back, the highest requested speed is kept (overhangs still get
+   their cooling) and the fan settles to the last requested speed after.
+
+   Timing is estimated from move length / feedrate (acceleration ignored),
+   which underestimates real print time — real spacing is always >= the
+   requested interval.
+
+Files with a zmod/Orca "; MD5:" first line get their checksum recomputed
+after modification. zmod verifies it before printing and DELETES the file
+on mismatch, so this is not optional for Iris.
+
+Only the part fan is touched: M106 with no P/T index or P0/P1, and M107.
+M106 P2 (Iris chamber fan) and other indices pass through unchanged.
 
 Usage:
-  djinn-gcode-fancap --input <path> --output <path> [--cap 128]
-  djinn-gcode-fancap --input <path> --in-place [--cap 128]
-  djinn-gcode-fancap --input <path> --check-only [--cap 128]
+  djinn-gcode-fancap --input <path> --output <path> [--cap 128 | --no-cap] [--min-interval 1.0]
+  djinn-gcode-fancap --input <path> --in-place      [--cap 128 | --no-cap] [--min-interval 1.0]
+  djinn-gcode-fancap --input <path> --check-only    [--cap 128 | --no-cap] [--min-interval 1.0]
 
-  --check-only reports the violation rate without writing anything —
-  use this to audit a file before deciding whether to clamp it.
+  Iris:     djinn-gcode-fancap --input X.gcode --in-place --no-cap --min-interval 1.0
+  Calliope: djinn-gcode-fancap --input X.gcode --in-place   (cap S128, as before)
+
+  --check-only reports cap violations and the worst fan-change burst
+  without writing anything. Exit 1 if either guard would change the file.
 """
 
 import argparse
+import hashlib
+import math
 import re
 import shutil
 import sys
+from collections import deque
 from pathlib import Path
 
-M106_RE = re.compile(r"^(M106\s+S)([\d.]+)(.*)$")
+FAN_RE  = re.compile(r"^(M106|M107)\b([^;]*)")
+PARAM_RE = re.compile(r"([A-Z])(-?[\d.]+)")
+MOVE_RE = re.compile(r"^(G0|G1|G2|G3)\s")
+DWELL_RE = re.compile(r"^G4\s")
+BURST_WINDOW_S = 5.0
 
 
-def scan(path: Path, cap: float) -> dict:
-    total = 0
-    over_cap = 0
+def part_fan_speed(line):
+    """Return requested part-fan S-value, or None if not a part-fan command."""
+    m = FAN_RE.match(line)
+    if not m:
+        return None
+    params = dict(PARAM_RE.findall(m.group(2)))
+    index = params.get("P", params.get("T"))
+    if index is not None and float(index) not in (0, 1):
+        return None
+    if m.group(1) == "M107":
+        return 0.0
+    return float(params.get("S", 255))
+
+
+class Clock:
+    """Estimated print time from move length / feedrate."""
+
+    def __init__(self):
+        self.t = 0.0
+        self.x = self.y = 0.0
+        self.feed = 1500.0
+
+    def advance(self, line):
+        if DWELL_RE.match(line):
+            p = dict(PARAM_RE.findall(line.split(";")[0]))
+            self.t += float(p.get("P", 0)) / 1000.0 + float(p.get("S", 0))
+            return
+        if not MOVE_RE.match(line):
+            return
+        p = dict(PARAM_RE.findall(line.split(";")[0][2:]))
+        if "F" in p:
+            self.feed = float(p["F"])
+        nx, ny = float(p.get("X", self.x)), float(p.get("Y", self.y))
+        dist = math.hypot(nx - self.x, ny - self.y)
+        if line.startswith(("G2", "G3")):
+            dist *= 1.3  # chord → rough arc length
+        if dist == 0 and "E" in p:
+            dist = abs(float(p["E"]))
+        self.t += dist / max(self.feed / 60.0, 1e-3)
+        self.x, self.y = nx, ny
+
+
+def fmt(speed):
+    return f"M106 S{speed:g}\n"
+
+
+def scan(path: Path, cap):
+    total = over_cap = 0
     max_seen = 0.0
+    clock = Clock()
+    window = deque()
+    peak = (0, 0.0)
     with path.open("r", errors="replace") as f:
         for line in f:
-            m = M106_RE.match(line)
-            if not m:
+            speed = part_fan_speed(line)
+            if speed is None:
+                clock.advance(line)
                 continue
             total += 1
-            value = float(m.group(2))
-            max_seen = max(max_seen, value)
-            if value > cap:
+            max_seen = max(max_seen, speed)
+            if cap is not None and speed > cap:
                 over_cap += 1
-    return {"total": total, "over_cap": over_cap, "max_seen": max_seen}
+            window.append(clock.t)
+            while clock.t - window[0] > BURST_WINDOW_S:
+                window.popleft()
+            if len(window) > peak[0]:
+                peak = (len(window), clock.t)
+    return {"total": total, "over_cap": over_cap, "max_seen": max_seen,
+            "peak_burst": peak[0], "peak_at_min": peak[1] / 60}
 
 
-def clamp(src: Path, dst: Path, cap: float) -> dict:
-    changed = 0
-    total = 0
+def process(src: Path, dst: Path, cap, min_interval):
+    stats = {"total": 0, "capped": 0, "dropped": 0, "inserted": 0}
+    clock = Clock()
+    current = None          # last speed actually emitted
+    last_emit = -math.inf   # estimated time of last emitted change
+    pend_max = pend_last = None
+
     with src.open("r", errors="replace") as fin, dst.open("w") as fout:
+        def flush():
+            nonlocal current, last_emit, pend_max, pend_last
+            if pend_max is None or clock.t - last_emit < min_interval:
+                return
+            if pend_max != current:
+                fout.write(fmt(pend_max))
+                stats["inserted"] += 1
+                current, last_emit = pend_max, clock.t
+            # settle to the last requested speed one interval later
+            pend_max = pend_last = (pend_last if pend_last != current else None)
+
         for line in fin:
-            m = M106_RE.match(line)
-            if m:
-                total += 1
-                value = float(m.group(2))
-                if value > cap:
-                    fout.write(f"{m.group(1)}{int(cap)}{m.group(3)}\n")
-                    changed += 1
-                    continue
-            fout.write(line)
-    return {"total": total, "changed": changed}
+            speed = part_fan_speed(line)
+            if speed is None:
+                if min_interval is not None and MOVE_RE.match(line):
+                    flush()
+                clock.advance(line)
+                fout.write(line)
+                continue
+
+            stats["total"] += 1
+            if cap is not None and speed > cap:
+                speed = cap
+                stats["capped"] += 1
+                out = fmt(speed)
+            else:
+                out = line
+
+            if min_interval is None:
+                fout.write(out)
+                continue
+
+            if clock.t - last_emit >= min_interval:
+                pend_max = pend_last = None
+                if speed != current:
+                    fout.write(out)
+                    current, last_emit = speed, clock.t
+                else:
+                    stats["dropped"] += 1
+            else:
+                pend_max = speed if pend_max is None else max(pend_max, speed)
+                pend_last = speed
+                stats["dropped"] += 1
+
+        if min_interval is not None and pend_last is not None and pend_last != current:
+            fout.write(fmt(pend_last))
+            stats["inserted"] += 1
+
+    fix_md5(dst)
+    return stats
+
+
+def fix_md5(path: Path):
+    """Recompute a zmod/Orca '; MD5:' header (md5 of everything after line 1)."""
+    data = path.read_bytes()
+    if not data.startswith(b"; MD5:"):
+        return
+    first, rest = data.split(b"\n", 1)
+    path.write_bytes(b"; MD5:" + hashlib.md5(rest).hexdigest().encode() + b"\n" + rest)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__,
-                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--input", required=True, type=Path, help="Source gcode file")
-    parser.add_argument("--output", type=Path, help="Write clamped gcode here")
+    parser.add_argument("--output", type=Path, help="Write processed gcode here")
     parser.add_argument("--in-place", action="store_true",
-                         help="Overwrite --input directly (keeps a .bak copy)")
+                        help="Overwrite --input directly (keeps a .bak copy)")
     parser.add_argument("--check-only", action="store_true",
-                         help="Report the violation rate, write nothing")
+                        help="Report cap violations and worst fan burst, write nothing")
     parser.add_argument("--cap", type=float, default=128,
-                         help="Maximum allowed M106 S-value (default: 128, ~50%% duty)")
+                        help="Maximum allowed M106 S-value (default: 128, ~50%% duty)")
+    parser.add_argument("--no-cap", action="store_true",
+                        help="Disable the speed cap (e.g. Iris, which has no EMI issue)")
+    parser.add_argument("--min-interval", type=float, default=None, metavar="SECONDS",
+                        help="Minimum estimated seconds between part-fan changes (Iris: 1.0)")
     args = parser.parse_args()
+    cap = None if args.no_cap else args.cap
 
     if not args.input.is_file():
         print(f"ERROR: input file not found: {args.input}", file=sys.stderr)
         sys.exit(1)
 
     if args.check_only:
-        stats = scan(args.input, args.cap)
-        if stats["total"] == 0:
-            print(f"{args.input.name}: no M106 commands found")
+        s = scan(args.input, cap)
+        if s["total"] == 0:
+            print(f"{args.input.name}: no part-fan commands found")
             sys.exit(0)
-        pct = 100 * stats["over_cap"] / stats["total"]
-        print(f"{args.input.name}: {stats['total']} M106 commands, "
-              f"{stats['over_cap']} over cap ({pct:.1f}%), "
-              f"peak S{stats['max_seen']:.0f} ({100*stats['max_seen']/255:.0f}% duty)")
-        sys.exit(1 if stats["over_cap"] > 0 else 0)
+        msg = f"{args.input.name}: {s['total']} part-fan commands, peak S{s['max_seen']:.0f} ({100*s['max_seen']/255:.0f}% duty)"
+        if cap is not None:
+            msg += f", {s['over_cap']} over cap S{cap:g} ({100*s['over_cap']/s['total']:.1f}%)"
+        msg += f", worst burst {s['peak_burst']} changes in {BURST_WINDOW_S:g}s ({s['peak_burst']/BURST_WINDOW_S:.0f}/s) at ~{s['peak_at_min']:.0f}min est"
+        print(msg)
+        # flag only bursts well past the target rate (2x), not ordinary layer-change fan steps
+        rate_bad = args.min_interval is not None and s["peak_burst"] > 2 * BURST_WINDOW_S / args.min_interval
+        sys.exit(1 if s["over_cap"] > 0 or rate_bad else 0)
 
     if args.in_place:
         backup = args.input.with_suffix(args.input.suffix + ".bak")
         shutil.copy2(args.input, backup)
         tmp = args.input.with_suffix(args.input.suffix + ".tmp")
-        result = clamp(args.input, tmp, args.cap)
+        r = process(args.input, tmp, cap, args.min_interval)
         tmp.replace(args.input)
-        print(f"Clamped in place (backup: {backup.name}): "
-              f"{result['changed']}/{result['total']} M106 commands reduced to S{int(args.cap)}")
+        where = f"in place (backup: {backup.name})"
     elif args.output:
-        result = clamp(args.input, args.output, args.cap)
-        print(f"Wrote {args.output}: "
-              f"{result['changed']}/{result['total']} M106 commands reduced to S{int(args.cap)}")
+        r = process(args.input, args.output, cap, args.min_interval)
+        where = str(args.output)
     else:
         print("ERROR: specify --output, --in-place, or --check-only", file=sys.stderr)
         sys.exit(1)
+
+    print(f"Wrote {where}: {r['total']} part-fan commands — "
+          f"{r['capped']} capped, {r['dropped']} throttled/redundant dropped, {r['inserted']} settle commands inserted")
 
 
 if __name__ == "__main__":

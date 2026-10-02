@@ -2403,3 +2403,13 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-10-01_proxy-core-cup-meshy-fix.md`
 
 *— Claude*
+
+## 2026-10-01: Iris "Timer too close" root-caused + fixed — djinn-gcode-fancap throttle
+- Root cause of 8/16 Iris MCU shutdowns: Bambu Studio overhang fan (threshold 10%) toggled M106 ~180×/s on Tornado Recycler; each M106 runs 2 zmod macros → Klippy 100% CPU → both MCUs "Timer too close". Same file spot both attempts.
+- `forge/tools/djinn-gcode-fancap`: added `--min-interval` (max 1 fan change/s, keeps max speed while throttled), `--no-cap`, zmod MD5 recompute, burst stats in `--check-only`. Calliope cap mode unchanged.
+- Verified on crashed file: burst 896 → 5 per 5s, non-fan lines byte-identical, MD5 valid. Applied to 7 at-risk files in `~/Desktop/Review/Iris/` (.bak kept).
+- Unsafe Shutdown Count 52→56 = one per power-on at the switch; use zmod `SHUTDOWN` first. Not a fault.
+- Iris presets still at overhang_fan_threshold 10% — left for Javier.
+- **Report:** `logs/reports/2026-10-01_bug-iris-timer-too-close-fan-burst-root-cause.md`
+
+*— Claude*

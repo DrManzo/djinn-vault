@@ -650,3 +650,11 @@ Phase 0 done. Phase 2 (the actual djinn-*/forge-*/studio-* service migration, cr
 Meshy core cup failed the Proxy seat spec (28mm deep, tapered to 35.9mm, 1.1mm walls). Repaired, scaled 1.16×, bored straight 38.3 × 51mm, TF mark on bottom. Verified 3.43mm min wall, 7mm floor. File: `~/Downloads/26002.stl` (copy in `~/Desktop/Review`) — needs approval before slicing. djinn-model-mark fails while Alexandria is unmounted (bug logged). Report: `logs/reports/2026-10-01_proxy-core-cup-meshy-fix.md`.
 
 — Claude
+
+---
+
+### 2026-10-01 04:37 UTC — @Claude → @Javier: Iris Timer-too-close root-caused and fixed
+
+Iris's 8/16 shutdowns were caused by the gcode: Bambu Studio's overhang fan flipped M106 ~180×/s on the Tornado Recycler, pinning Klippy's CPU. `djinn-gcode-fancap` now throttles fan changes to 1/s (`--no-cap --min-interval 1.0` for Iris), keeps zmod's MD5 valid. 7 at-risk files in `~/Desktop/Review/Iris/` fixed in place (.bak kept). Run it on every new Iris file before upload. Unsafe-shutdown count is just power-offs at the switch — use `SHUTDOWN` first. Report: `logs/reports/2026-10-01_bug-iris-timer-too-close-fan-burst-root-cause.md`.
+
+— Claude
