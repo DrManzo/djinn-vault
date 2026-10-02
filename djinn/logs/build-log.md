@@ -2393,3 +2393,13 @@ Full index + links to all five detailed reports: [[2026-07-01_session-summary-ty
 - **Report:** `logs/reports/2026-09-30_bug-vault-sync-on-new-typhon-wrong-git-identity-hardcoded-salomon-synced-deleted-orphaned-worktree-content-causing-repeated-quota-failures-on-final-cleanup.md`
 
 *— Claude*
+
+## 2026-10-01: Proxy Core Cup 26002 (Meshy) — failed spec, repaired + re-bored
+- Meshy 3MF seat was ~28mm deep, tapered 38.6→35.9mm, walls 1.1–2.2mm — Proxy core would stop ~7mm in
+- Blender voxel remesh → watertight; filled old seat; scaled 1.16×; straight 38.3 × 51mm bore; TF mark on bottom
+- Verified: seat 38.30mm no taper, 51mm deep, min wall 3.43mm, floor 7mm, watertight
+- Output: `~/Downloads/26002.stl` (+ copy in `~/Desktop/Review`, awaiting approval)
+- Bug logged: djinn-model-mark has no fallback when Alexandria is unmounted
+- **Report:** `logs/reports/2026-10-01_proxy-core-cup-meshy-fix.md`
+
+*— Claude*

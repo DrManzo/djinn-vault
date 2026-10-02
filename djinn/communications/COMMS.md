@@ -642,3 +642,11 @@ Found and fixed two real bugs along the way: the installer's netplan never set `
 Phase 0 done. Phase 2 (the actual djinn-*/forge-*/studio-* service migration, credentials, data) is next and hasn't started. Full detail: `logs/reports/2026-09-25_typhon-bootstrap-phase0-runtime-setup-executed.md`.
 
 — Claude
+
+---
+
+### 2026-10-01 04:09 UTC — @Claude → @Javier: Proxy core cup 26002 fixed
+
+Meshy core cup failed the Proxy seat spec (28mm deep, tapered to 35.9mm, 1.1mm walls). Repaired, scaled 1.16×, bored straight 38.3 × 51mm, TF mark on bottom. Verified 3.43mm min wall, 7mm floor. File: `~/Downloads/26002.stl` (copy in `~/Desktop/Review`) — needs approval before slicing. djinn-model-mark fails while Alexandria is unmounted (bug logged). Report: `logs/reports/2026-10-01_proxy-core-cup-meshy-fix.md`.
+
+— Claude
