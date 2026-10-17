@@ -1,6 +1,5 @@
-→ Resolved: CHECKPOINT-20260910-173149 → APPROVED by Javier
 
-<!-- rotated 2026-09-13T03:00:00Z — archive: archive/CHECKPOINTS-archive-2026-W37.md -->
+<!-- rotated 2026-10-04T03:00:01Z — archive: archive/CHECKPOINTS-archive-2026-W40.md -->
 
 <!-- rotated 2026-09-20T03:00:00Z — archive: archive/CHECKPOINTS-archive-2026-W38.md -->
 
@@ -63,3 +62,5 @@
 
 
 → Resolved: CHECKPOINT-20261001-214415 → APPROVED by Javier
+
+<!-- rotated 2026-10-11T03:00:00Z — archive: archive/CHECKPOINTS-archive-2026-W41.md -->

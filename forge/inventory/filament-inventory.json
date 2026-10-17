@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-10",
   "updated_by": "djinn-print-complete-watcher",
   "spools": [
     {
@@ -42,7 +42,7 @@
       "loaded_printer": "Iris",
       "loaded": true,
       "low_threshold_g": 150,
-      "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure. | [2026-10-02] auto-deducted 148.1g (print: 4-yellow block cup_PLA_5h6m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-10-02] auto-deducted 137.2g (print: 26002_PLA_5h10m_THROTTLED.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) ",
+      "notes": "Iris \u2014 IFS slot. Physical weigh-in 2026-07-17 (Javier): ~500g, superseding the stale 800g dashboard figure. | [2026-10-02] auto-deducted 148.1g (print: 4-yellow block cup_PLA_5h6m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-10-03] auto-deducted 137.2g (print: 26002_PLA_5h10m_THROTTLED.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) ",
       "added_at": "2026-07-12",
       "last_used": "2026-10-04",
       "last_physical_check": null
@@ -239,7 +239,7 @@
       "low_threshold_g": 150,
       "notes": "Nemesis \u2014 oni cup batch, 3 jobs (2 complete + 1 in progress), active | [2026-07-20] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-07-21] auto-deducted 73.0g (print: Kraken_pipe_PLA_4h5m.gcode (history filament_used (no queue match \u2014 likely uploaded directly))) | [2026-08-27] auto-deducted 154.6g (print: Proxy_Tor",
       "added_at": "2026-07-12",
-      "last_used": "2026-10-09",
+      "last_used": "2026-10-10",
       "last_physical_check": null
     },
     {
