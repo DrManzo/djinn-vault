@@ -674,3 +674,131 @@ Day 0 sober. Streaks:
 Day 0 sober. Streaks: 
 
 — Djinn
+
+---
+
+### 2026-10-02 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-03 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-04 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-05 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-06 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-07 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-08 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-09 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-10 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-11 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-12 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-13 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-14 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-15 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-16 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-17 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
