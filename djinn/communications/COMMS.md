@@ -642,3 +642,35 @@ Found and fixed two real bugs along the way: the installer's netplan never set `
 Phase 0 done. Phase 2 (the actual djinn-*/forge-*/studio-* service migration, credentials, data) is next and hasn't started. Full detail: `logs/reports/2026-09-25_typhon-bootstrap-phase0-runtime-setup-executed.md`.
 
 — Claude
+
+---
+
+### 2026-09-28 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-09-29 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-09-30 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
+
+---
+
+### 2026-10-01 08:00 UTC — @Djinn → @Javier: Morning brief sent
+
+Day 0 sober. Streaks: 
+
+— Djinn
